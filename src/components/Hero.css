@@ -1,0 +1,113 @@
+.hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: transparent;
+}
+
+.hero-bg-enso {
+  position: absolute;
+  top: 50%;
+  right: -5%;
+  transform: translateY(-50%);
+  width: 80vh;
+  height: 80vh;
+  border: 40px solid rgba(51, 51, 51, 0.05); /* 墨色の薄い円相 */
+  border-radius: 50%;
+  z-index: 0;
+  animation: rotateSlow 60s linear infinite;
+}
+
+.hero-bg-enso::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -60px;
+  right: -60px;
+  bottom: -60px;
+  border: 2px solid rgba(149, 192, 164, 0.3); /* アクセントカラーの細い円 */
+  border-radius: 50%;
+}
+
+@keyframes rotateSlow {
+  0% { transform: translateY(-50%) rotate(0deg); }
+  100% { transform: translateY(-50%) rotate(360deg); }
+}
+
+.hero-container {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  color: var(--color-primary);
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.title-line {
+  display: block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.title-line:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: var(--color-secondary);
+  margin-bottom: 50px;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.6s;
+  position: relative;
+  padding-left: 20px;
+}
+
+.hero-subtitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 100%;
+  width: 4px;
+  background-color: var(--color-accent);
+}
+
+.hero-action {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: 0.9s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  .hero-bg-enso {
+    width: 300px;
+    height: 300px;
+    right: -100px;
+  }
+}
