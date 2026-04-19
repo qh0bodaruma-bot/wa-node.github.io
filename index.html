@@ -1,13 +1,169 @@
 <!doctype html>
-<html lang="en">
+<html lang="ja">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="images/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>wa-node-lp</title>
+    <title>和-Node</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="app-container bg-seigaiha">
+      <!-- Background -->
+      <div 
+        class="landscape-bg" 
+        style="background-image: url('images/bg-landscape.png')" 
+      ></div>
+
+      <!-- Header -->
+      <header class="header">
+        <div class="container header-container">
+          <div class="logo">
+            <a href="#">
+              <span class="logo-text">和-Node</span>
+            </a>
+          </div>
+          <nav class="nav">
+            <ul class="nav-list">
+              <li><a href="#concept" class="nav-link">Concept</a></li>
+              <li><a href="#services" class="nav-link">Services</a></li>
+              <li><a href="mailto:contacts@wa-node.com" class="nav-link btn-header">お問い合わせ</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <!-- Hero -->
+        <section class="hero">
+          <div class="hero-bg-enso"></div>
+          <div class="container hero-container">
+            <div class="hero-content">
+              <h1 class="hero-title">
+                <span class="title-line">気持ちに寄り添いながら、</span>
+                <span class="title-line">根本から解決まで。</span>
+              </h1>
+              <p class="hero-subtitle">
+                分析と共感、両方できる心理カウンセラーです
+              </p>
+              <div class="hero-action">
+                <a href="#services" class="btn btn-primary">サービスを見る</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Concept -->
+        <section id="concept" class="section concept">
+          <div class="container">
+            <h2 class="section-title">Concept</h2>
+            <div class="concept-content">
+              <div class="concept-profile">
+                <img src="images/avatar.png" alt="和-Node 代表" class="profile-image" />
+              </div>
+              <div class="concept-text-area">
+                <p class="concept-text">
+                  痛みも、孤独も、ITも、ひとりで抱えてきた経験から
+                </p>
+                <h3 class="concept-highlight">
+                  「心とITの両方がわかる人間」として<br />
+                  関わりたいと思っています。
+                </h3>
+                <p class="concept-desc">
+                  私たちは、技術の力（IT）と心のケア（心理カウンセリング）という、
+                  一見異なる二つの領域を繋ぐ「Node（結節点）」でありたいと考えています。
+                  論理的な分析力と、深く寄り添う共感力。
+                  その両方を持ち合わせることで、企業が抱える複雑な課題から、
+                  個人が抱える心のモヤモヤまで、根本から解決へと導きます。
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Services -->
+        <section id="services" class="section services">
+          <div class="container">
+            <h2 class="section-title">Services</h2>
+            <div class="services-grid">
+              <!-- 心理カウンセラー -->
+              <div class="service-card accent-card">
+                <div class="service-icon">心</div>
+                <h3 class="service-title">心理カウンセリング</h3>
+                <div class="service-desc">
+                  <p>言葉にならなくても、上手くまとまらなくても大丈夫です。<br/>
+                  あなたが今抱えている痛みや孤独に、まずはそのままの形でそっと寄り添います。</p>
+                  <p style="margin-top: 10px;">どんな些細なことでも、まとまっていない悩みでも、どうかひとりで抱え込まずにご連絡ください。一緒に少しずつ紐解きながら、あなたが再び晴れやかな一歩を踏み出せるよう、心からサポートいたします。</p>
+                </div>
+                <a 
+                  href="https://docs.google.com/forms/d/1HPqd0Y25st3gqtj08oLHHymD0BRXSpWhUyZ76e9aqgY/edit" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="btn btn-accent"
+                >
+                  カウンセリングに申し込む
+                </a>
+              </div>
+
+              <!-- IT・企業コンサルティング -->
+              <div class="service-card">
+                <div class="service-icon">IT/企</div>
+                <h3 class="service-title">IT・企業コンサルティング</h3>
+                <div class="service-desc">
+                  <p>「従業員の離職が止まらない」「業績を上げるための仕組みづくりがわからない」「IT化を進めたいがどこから手をつければいいか…」</p>
+                  <p style="margin-top: 10px;">こうした企業のリアルな課題に対し、「人（心）」と「仕組み（IT）」の両面からアプローチし、根本的な解決へ導きます。現場の悩みに深く寄り添いながら、経営層の目標達成をサポートする、頼れる壁打ち相手・伴走者としてご活用ください。</p>
+                </div>
+                <a 
+                  href="https://coconala.com/services/4175615" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="btn btn-primary"
+                >
+                  詳細を見る (ココナラ)
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container footer-container">
+          <div class="footer-info">
+            <h2 class="footer-logo">和-Node</h2>
+            <p class="footer-desc">
+              ITコンサル・企業コンサル・心理カウンセリング<br />
+              心とITの両方がわかるパートナー<br />
+              <br />
+              お問い合わせ: <a href="mailto:contacts@wa-node.com" style="text-decoration: underline;">contacts@wa-node.com</a>
+            </p>
+          </div>
+          <div class="footer-links">
+            <ul>
+              <li><a href="#concept">Concept</a></li>
+              <li><a href="#services">Services</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 和-Node. All Rights Reserved.</p>
+        </div>
+      </footer>
+    </div>
+    
+    <!-- スクロール検知用スクリプト (Headerの透明・白背景切り替え用) -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const header = document.querySelector('.header');
+        window.addEventListener('scroll', () => {
+          if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+          } else {
+            header.classList.remove('scrolled');
+          }
+        });
+      });
+    </script>
   </body>
 </html>
