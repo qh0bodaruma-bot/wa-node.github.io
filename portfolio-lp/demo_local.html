@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【デモ】店舗集客サイト | ポートフォリオ</title>
+<style>
+  :root { --primary: #c19a6b; --bg: #faf8f5; --text: #3e3a35; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Yu Mincho', 'Shippori Mincho', serif; }
+  body { background: var(--bg); color: var(--text); }
+  
+  .hero { height: 80vh; background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1200&q=80') center/cover; display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; }
+  .hero h1 { font-size: 4em; letter-spacing: 0.2em; margin-bottom: 20px; }
+  .hero p { font-size: 1.2em; letter-spacing: 0.1em; }
+  
+  .section { padding: 80px 20px; max-width: 900px; margin: 0 auto; text-align: center; }
+  .section-title { font-size: 2em; margin-bottom: 40px; color: var(--primary); }
+  
+  .menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; text-align: left; }
+  .menu-item { border-bottom: 1px dashed #ccc; padding-bottom: 15px; }
+  .menu-name { display: flex; justify-content: space-between; font-size: 1.2em; margin-bottom: 5px; }
+  .menu-desc { font-size: 0.9em; color: #666; font-family: sans-serif; }
+  
+  .info-box { background: white; padding: 40px; border-radius: 4px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); text-align: left; font-family: sans-serif; }
+  
+  .fixed-btn { position: fixed; bottom: 0; left: 0; width: 100%; background: var(--primary); color: white; text-align: center; padding: 20px; font-size: 1.2em; text-decoration: none; font-weight: bold; font-family: sans-serif; letter-spacing: 2px; }
+  .fixed-btn:hover { background: #a68459; }
+  
+  .demo-badge { position: absolute; top: 20px; left: 20px; background: #ef4444; color: white; padding: 5px 10px; font-family: sans-serif; font-size: 12px; }
+</style>
+<script>
+  function dummyLink(e) { e.preventDefault(); alert('※ココナラの規約順守のため、デモサイトのリンクは無効化しています'); }
+</script>
+</head>
+<body style="padding-bottom: 70px;">
+  <div class="demo-badge">店舗集客デモサイト</div>
+
+  <div class="hero">
+    <h1>Cafe Lumiere</h1>
+    <p>日常を忘れる、一杯のコーヒーと静かな時間。</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Concept</h2>
+    <p style="line-height: 2; margin-bottom: 20px;">
+      厳選された自家焙煎のコーヒー豆と、<br>地元の旬の素材を活かした手作りスイーツ。<br>
+      木の温もりを感じる店内で、心休まるひとときをお過ごしください。
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="menu-name"><span>オリジナルブレンド</span><span>¥600</span></div>
+        <div class="menu-desc">深煎りのコクとフルーティーな香りのバランスが絶妙です。</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-name"><span>カフェラテ</span><span>¥650</span></div>
+        <div class="menu-desc">濃厚なエスプレッソと、きめ細やかなスチームミルク。</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-name"><span>季節のフルーツタルト</span><span>¥800</span></div>
+        <div class="menu-desc">農家から直接仕入れたフルーツを贅沢に使用。</div>
+      </div>
+      <div class="menu-item">
+        <div class="menu-name"><span>自家製クラシックプリン</span><span>¥500</span></div>
+        <div class="menu-desc">昔ながらの固めでほろ苦いカラメルが特徴です。</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title">Access</h2>
+    <div class="info-box">
+      <p><strong>営業時間：</strong> 10:00 - 19:00 (L.O 18:30)</p>
+      <p><strong>定休日：</strong> 毎週火曜日・水曜日</p>
+      <p><strong>住所：</strong> 〒000-0000 東京都デモ区架空町1-2-3</p>
+      <div style="margin-top: 20px; background: #eee; height: 200px; display: flex; align-items: center; justify-content: center; color: #999;">
+        [Google Map 埋め込みエリア]
+      </div>
+    </div>
+  </div>
+
+  <a href="#" onclick="dummyLink(event)" class="fixed-btn">席を予約する (WEB予約)</a>
+</body>
+</html>

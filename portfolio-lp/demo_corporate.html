@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【デモ】コーポレートサイト | ポートフォリオ</title>
+<style>
+  :root { --primary: #0f172a; --secondary: #334155; --accent: #0ea5e9; --bg: #ffffff; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans JP', sans-serif; }
+  body { color: var(--primary); background: var(--bg); }
+  a { text-decoration: none; color: inherit; }
+  
+  header { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+  .logo { font-size: 22px; font-weight: 900; letter-spacing: 2px; }
+  .nav-links { display: flex; gap: 30px; }
+  .nav-links a:hover { color: var(--accent); }
+  .btn-contact { background: var(--primary); color: white; padding: 10px 24px; border-radius: 4px; transition: 0.3s; }
+  .btn-contact:hover { background: var(--accent); }
+  
+  .hero { background: #f8fafc; padding: 120px 5%; display: flex; align-items: center; justify-content: center; text-align: center; min-height: 50vh; }
+  .hero h1 { font-size: 3em; margin-bottom: 20px; }
+  .hero p { font-size: 1.2em; color: var(--secondary); max-width: 600px; margin: 0 auto; }
+  
+  .section { padding: 80px 5%; max-width: 1200px; margin: 0 auto; }
+  .section-title { font-size: 2em; margin-bottom: 40px; text-align: center; position: relative; }
+  .section-title::after { content: ''; width: 60px; height: 3px; background: var(--accent); display: block; margin: 15px auto 0; }
+  
+  .services { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+  .service-card { border: 1px solid #eee; padding: 40px; border-radius: 8px; transition: 0.3s; }
+  .service-card:hover { border-color: var(--accent); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+  .service-card h3 { margin-bottom: 15px; font-size: 1.3em; }
+  
+  .company-info { display: grid; grid-template-columns: 1fr 2fr; gap: 20px; border-bottom: 1px solid #eee; padding: 20px 0; }
+  .company-label { font-weight: bold; color: var(--secondary); }
+  
+  footer { background: var(--primary); color: white; padding: 60px 5% 20px; text-align: center; }
+  .demo-badge { position: fixed; bottom: 20px; left: 20px; background: #ef4444; color: white; padding: 10px 20px; border-radius: 30px; font-size: 12px; font-weight: bold; z-index: 1000; }
+</style>
+<script>
+  function dummyLink(e) { e.preventDefault(); alert('※ココナラの規約順守のため、デモサイトのリンクは無効化しています'); }
+</script>
+</head>
+<body>
+  <div class="demo-badge">架空のコーポレートデモ</div>
+  <header>
+    <div class="logo">NEXT INNOVATION INC.</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#company">Company</a>
+      <a href="#" onclick="dummyLink(event)" class="btn-contact">お問い合わせ</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h1>テクノロジーで、次の当たり前を創る</h1>
+      <p>私たちは最先端のIT技術を活用し、社会の課題解決と持続可能なビジネスの発展に貢献するテクノロジーカンパニーです。</p>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <h2 class="section-title">事業内容</h2>
+    <div class="services">
+      <div class="service-card">
+        <h3>システム開発</h3>
+        <p>クライアントのビジネス課題を解決するための、オーダーメイドのWebシステム・アプリ開発を提供します。</p>
+      </div>
+      <div class="service-card">
+        <h3>ITコンサルティング</h3>
+        <p>DX推進からセキュリティ対策まで、企業のIT戦略を総合的にサポートし、成長を加速させます。</p>
+      </div>
+      <div class="service-card">
+        <h3>インフラ構築</h3>
+        <p>クラウド環境の設計・構築から運用保守まで、安全でスケーラブルな基盤を提供します。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="company" class="section" style="background: #f8fafc; max-width: 100%;">
+    <div style="max-width: 800px; margin: 0 auto;">
+      <h2 class="section-title">会社概要</h2>
+      <div class="company-info"><div class="company-label">会社名</div><div>株式会社NEXT INNOVATION (架空)</div></div>
+      <div class="company-info"><div class="company-label">設立</div><div>2026年4月</div></div>
+      <div class="company-info"><div class="company-label">代表取締役</div><div>山田 太郎</div></div>
+      <div class="company-info"><div class="company-label">事業内容</div><div>システム開発、ITコンサルティング</div></div>
+      <div class="company-info" style="border:none;"><div class="company-label">所在地</div><div>〒100-0000 東京都千代田区デモビル1F</div></div>
+    </div>
+  </section>
+
+  <footer>
+    <div style="margin-bottom: 30px;">
+      <h2 style="margin-bottom: 20px;">プロジェクトのご相談はこちら</h2>
+      <a href="#" onclick="dummyLink(event)" class="btn-contact" style="background: white; color: var(--primary); font-size: 1.1em; padding: 15px 40px;">お問い合わせフォーム</a>
+    </div>
+    <p style="opacity: 0.5;">&copy; 2026 NEXT INNOVATION INC. All Rights Reserved. (Demo)</p>
+  </footer>
+</body>
+</html>
