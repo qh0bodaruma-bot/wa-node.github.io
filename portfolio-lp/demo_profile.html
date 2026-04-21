@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【デモ】プロフィールサイト | ポートフォリオ</title>
+<style>
+  :root { --main: #4a5568; --accent: #8b5cf6; --bg: #fdfbf7; }
+  body { font-family: 'Hiragino Mincho ProN', 'Noto Serif JP', serif; background: var(--bg); color: var(--main); margin: 0; line-height: 1.8; }
+  a { text-decoration: none; color: var(--accent); }
+  .container { max-width: 800px; margin: 0 auto; padding: 60px 20px; }
+  
+  .header-profile { text-align: center; margin-bottom: 60px; }
+  .avatar { width: 150px; height: 150px; border-radius: 50%; background: #e2e8f0; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; font-size: 40px; color: #a0aec0; }
+  .name { font-size: 2em; margin-bottom: 5px; }
+  .job-title { color: #718096; letter-spacing: 2px; font-size: 0.9em; font-family: sans-serif; }
+  
+  .section { margin-bottom: 60px; background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); }
+  .section-title { font-size: 1.5em; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px; margin-bottom: 20px; }
+  
+  .works-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+  .work-item { background: #f7fafc; padding: 20px; border-radius: 8px; text-align: center; }
+  
+  .btn { display: inline-block; background: var(--accent); color: white; padding: 12px 30px; border-radius: 30px; font-family: sans-serif; transition: 0.3s; margin-top: 20px; }
+  .btn:hover { background: #7c3aed; box-shadow: 0 4px 12px rgba(139,92,246,0.3); color: white; }
+  
+  .demo-badge { position: fixed; top: 20px; right: 20px; background: #ef4444; color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-family: sans-serif; z-index: 100; }
+</style>
+<script>
+  function dummyLink(e) { e.preventDefault(); alert('※ココナラの規約順守のため、デモサイトのリンクは無効化しています'); }
+</script>
+</head>
+<body>
+  <div class="demo-badge">架空のプロフィールデモ</div>
+  
+  <div class="container">
+    <div class="header-profile">
+      <div class="avatar">👤</div>
+      <h1 class="name">佐藤 デザイン</h1>
+      <div class="job-title">UI/UX Designer & Web Consultant</div>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">About Me</h2>
+      <p>初めまして。フリーランスでWebデザイナー・コンサルタントをしております。<br>
+      「ユーザーの心を動かす体験」を第一に考え、見た目の美しさだけでなく、ビジネスの課題解決に直結するデザインを提供します。</p>
+      <p>得意分野：コーポレートサイト制作、LPデザイン、UI/UX改善、ブランディング</p>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Services</h2>
+      <ul style="padding-left: 20px; font-family: sans-serif;">
+        <li style="margin-bottom: 10px;"><strong>Webサイト制作一式</strong> (デザイン〜コーディング〜公開)</li>
+        <li style="margin-bottom: 10px;"><strong>ランディングページ(LP)制作</strong> (コンバージョン率を意識した設計)</li>
+        <li style="margin-bottom: 10px;"><strong>UI/UXコンサルティング</strong> (既存サイトの導線改善・レビュー)</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2 class="section-title">Contact</h2>
+      <p>お仕事のご相談、お見積もりなどお気軽にご連絡ください。<br>
+      通常、24時間以内にご返信いたします。</p>
+      <div style="text-align: center;">
+        <a href="#" onclick="dummyLink(event)" class="btn">お問い合わせフォームへ</a>
+      </div>
+    </div>
+    
+    <div style="text-align: center; color: #a0aec0; font-family: sans-serif; font-size: 0.8em;">
+      &copy; 2026 Sato Design. Demo Portfolio.
+    </div>
+  </div>
+</body>
+</html>

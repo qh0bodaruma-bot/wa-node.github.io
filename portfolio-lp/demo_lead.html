@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【デモ】リード獲得特化型LP | ポートフォリオ</title>
+<style>
+  :root { --primary: #2563eb; --primary-dark: #1e40af; --accent: #f59e0b; --text: #333; --bg: #f8fafc; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Helvetica Neue', Arial, sans-serif; }
+  body { color: var(--text); background: var(--bg); line-height: 1.6; }
+  .btn { display: inline-block; padding: 16px 32px; border-radius: 50px; font-weight: bold; text-decoration: none; text-align: center; cursor: pointer; transition: 0.3s; border: none; }
+  .btn-primary { background: var(--primary); color: white; box-shadow: 0 4px 6px rgba(37,99,235,0.2); }
+  .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+  .btn-accent { background: var(--accent); color: white; font-size: 1.1em; box-shadow: 0 4px 10px rgba(245,158,11,0.3); }
+  .btn-accent:hover { background: #d97706; transform: translateY(-2px); }
+  
+  header { background: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+  .logo { font-size: 24px; font-weight: bold; color: var(--primary); }
+  
+  .hero { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; padding: 100px 20px; text-align: center; }
+  .hero h1 { font-size: 2.5em; margin-bottom: 20px; line-height: 1.3; }
+  .hero p { font-size: 1.2em; margin-bottom: 40px; opacity: 0.9; }
+  
+  .features { padding: 80px 20px; text-align: center; max-width: 1000px; margin: 0 auto; }
+  .features h2 { margin-bottom: 40px; font-size: 2em; color: var(--primary-dark); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+  .card { background: white; padding: 40px 20px; border-radius: 10px; box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+  .card-icon { font-size: 40px; margin-bottom: 20px; }
+  .card h3 { margin-bottom: 15px; }
+  
+  .cta-section { background: white; padding: 80px 20px; text-align: center; margin-top: 40px; }
+  .cta-section h2 { font-size: 2.2em; margin-bottom: 20px; }
+  
+  footer { background: #1e293b; color: white; text-align: center; padding: 40px 20px; font-size: 0.9em; }
+  .demo-badge { position: fixed; bottom: 20px; right: 20px; background: #ef4444; color: white; padding: 10px 20px; border-radius: 30px; font-size: 12px; font-weight: bold; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+</style>
+<script>
+  function dummyLink(e) {
+    e.preventDefault();
+    alert('※ココナラの規約順守のため、デモサイトのリンクは無効化しています');
+  }
+</script>
+</head>
+<body>
+  <div class="demo-badge">架空のLPデモサイト</div>
+  <header>
+    <div class="logo">SaaS Demo</div>
+    <a href="#" onclick="dummyLink(event)" class="btn btn-primary" style="padding: 10px 20px;">無料で試す</a>
+  </header>
+
+  <section class="hero">
+    <h1>業務効率を劇的に改善する<br>クラウド型管理システム</h1>
+    <p>導入企業1,000社突破！初期費用0円で今日からスタートできます。</p>
+    <a href="#" onclick="dummyLink(event)" class="btn btn-accent">今すぐ無料トライアルを始める</a>
+  </section>
+
+  <section class="features">
+    <h2>選ばれる3つの理由</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="card-icon">🚀</div>
+        <h3>圧倒的なスピード</h3>
+        <p>直感的なUIで、誰でもすぐに使いこなせます。マニュアル不要の操作性が魅力です。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🔒</div>
+        <h3>強固なセキュリティ</h3>
+        <p>金融機関レベルの暗号化技術を採用。大切な顧客データを安全に守ります。</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">🤝</div>
+        <h3>充実のサポート</h3>
+        <p>専任の担当者が導入から運用までしっかりサポート。電話・チャット対応。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2>まずは無料で30日間お試しください</h2>
+    <p style="margin-bottom: 30px; color: #666;">クレジットカードの登録は不要です。</p>
+    <a href="#" onclick="dummyLink(event)" class="btn btn-accent" style="padding: 20px 60px; font-size: 1.3em;">無料トライアルに申し込む</a>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 SaaS Demo. All rights reserved. (デモ用架空サイト)</p>
+  </footer>
+</body>
+</html>

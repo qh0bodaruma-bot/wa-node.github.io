@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【ポートフォリオ】マネーマスタリー実践塾 | 投資スクール</title>
+<meta name="description" content="これはポートフォリオ作品です。架空の投資スクールのLPサンプルです。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--black:#080808;--dark:#111111;--red:#e63030;--yellow:#f5c400;--white:#f0f0f0;--gray:#888;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
+
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#00c853,#64dd17);color:#1a1a1a;font-size:12px;font-weight:700;text-align:center;padding:7px 16px;letter-spacing:0.04em;}
+.portfolio-banner span{background:#1a1a1a;color:#00c853;padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
+
+/* 追従CTA */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:998;background:linear-gradient(135deg,var(--red),#c02020);padding:13px 20px;display:flex;align-items:center;justify-content:center;gap:20px;transform:translateY(100%);transition:transform 0.4s;flex-wrap:wrap;}
+.sticky-cta.show{transform:translateY(0);}
+.sticky-cta p{font-size:13px;font-weight:700;}
+.sticky-cta p strong{color:var(--yellow);}
+.sticky-btn{background:var(--yellow);color:var(--black);padding:10px 32px;font-weight:900;font-size:14px;text-decoration:none;white-space:nowrap;transition:all 0.3s;}
+.sticky-btn:hover{background:#fff;}
+
+/* ナビ */
+nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:12px 44px;background:rgba(8,8,8,0.96);border-bottom:2px solid var(--red);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.08em;color:var(--yellow);}
+.nav-cta-desktop{background:var(--red);color:#fff;padding:9px 22px;font-weight:700;font-size:13px;text-decoration:none;transition:all 0.3s;}
+.nav-cta-desktop:hover{background:#c02020;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--yellow);}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(8,8,8,0.98);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--white);font-size:20px;text-decoration:none;font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em;}
+.mobile-menu-close{position:absolute;top:48px;right:22px;font-size:26px;color:var(--red);cursor:pointer;background:none;border:none;}
+
+/* ヒーロー */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:120px 44px 100px;position:relative;overflow:hidden;text-align:center;}
+.hero-bg-img{position:absolute;inset:0;background-image:url('images/hero_seminar.png');background-size:cover;background-position:center;filter:brightness(0.2);}
+.hero-bg-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at top,rgba(26,8,8,0.8) 0%,rgba(8,8,8,0.4) 100%);}
+.hero-lines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(230,48,48,0.03) 2px,rgba(230,48,48,0.03) 3px);background-size:100% 60px;}
+.hero-label{display:inline-block;background:var(--red);color:#fff;font-size:11px;font-weight:700;padding:5px 18px;letter-spacing:0.12em;margin-bottom:28px;position:relative;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,10vw,118px);letter-spacing:0.04em;line-height:1.0;margin-bottom:14px;position:relative;}
+.hero h1 .red{color:var(--red);}.hero h1 .yellow{color:var(--yellow);}
+.hero-catch{font-size:clamp(16px,2.5vw,24px);font-weight:700;margin-bottom:22px;color:var(--white);letter-spacing:0.04em;position:relative;}
+.hero-catch em{color:var(--yellow);font-style:normal;}
+.hero-sub{font-size:14px;color:var(--gray);line-height:2.0;max-width:580px;margin:0 auto 44px;position:relative;}
+.hero-limit{background:rgba(245,196,0,0.1);border:2px solid var(--yellow);padding:14px 36px;display:inline-block;margin-bottom:28px;position:relative;font-size:13px;color:var(--yellow);font-weight:700;letter-spacing:0.04em;}
+.timer{display:flex;gap:10px;justify-content:center;margin-bottom:14px;}
+.timer-unit{text-align:center;}
+.timer-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,8vw,56px);color:var(--red);line-height:1;}
+.timer-sep{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--red);line-height:1.1;}
+.timer-label{font-size:10px;color:var(--gray);}
+.hero-cta{background:linear-gradient(135deg,var(--red),#c02020);color:#fff;padding:18px 56px;font-size:16px;font-weight:900;text-decoration:none;display:inline-block;letter-spacing:0.04em;transition:all 0.3s;box-shadow:0 0 36px rgba(230,48,48,0.5);position:relative;}
+.hero-cta:hover{transform:scale(1.04);box-shadow:0 0 56px rgba(230,48,48,0.7);}
+.hero-note{font-size:11px;color:var(--gray);margin-top:14px;position:relative;}
+
+/* 共感 */
+.pain{padding:90px 44px;background:var(--dark);}
+.pain-inner{max-width:760px;margin:0 auto;text-align:center;}
+.section-label{font-size:11px;letter-spacing:0.2em;color:var(--red);border-bottom:1px solid var(--red);padding-bottom:3px;display:inline-block;margin-bottom:22px;}
+.pain h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,68px);margin-bottom:40px;letter-spacing:0.04em;}
+.pain h2 span{color:var(--red);}
+.pain-list{list-style:none;text-align:left;display:grid;gap:14px;max-width:560px;margin:0 auto 52px;}
+.pain-list li{padding:18px 22px;background:rgba(230,48,48,0.05);border-left:4px solid var(--red);font-size:14px;font-weight:700;display:flex;align-items:center;gap:10px;}
+.pain-list li::before{content:'✗';color:var(--red);font-size:17px;font-weight:900;flex-shrink:0;}
+.pain-arrow{font-size:44px;color:var(--red);text-align:center;margin-bottom:36px;}
+.pain-solution{background:linear-gradient(135deg,rgba(245,196,0,0.1),rgba(230,48,48,0.05));border:2px solid var(--yellow);padding:36px;font-size:16px;font-weight:700;color:var(--yellow);line-height:1.7;}
+
+/* 実績 */
+.results{padding:90px 44px;background:var(--black);}
+.results-inner{max-width:1100px;margin:0 auto;text-align:center;}
+.results h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,68px);margin-bottom:44px;}
+.results h2 span{color:var(--yellow);}
+.results-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:rgba(255,255,255,0.05);margin-bottom:52px;}
+.result-card{background:var(--dark);padding:44px 20px;text-align:center;}
+.result-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,5vw,60px);color:var(--yellow);line-height:1;}
+.result-unit{font-size:16px;color:var(--yellow);}
+.result-label{font-size:12px;color:var(--gray);margin-top:8px;line-height:1.6;}
+.voices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.voice-card{background:var(--dark);border:1px solid rgba(255,255,255,0.07);padding:28px;text-align:left;}
+.voice-tag{background:var(--red);color:#fff;font-size:10px;font-weight:700;padding:3px 10px;display:inline-block;margin-bottom:10px;letter-spacing:0.1em;}
+.voice-result{font-size:20px;font-weight:900;color:var(--yellow);margin-bottom:10px;}
+.voice-text{font-size:13px;color:var(--gray);line-height:1.8;margin-bottom:14px;}
+.voice-name{font-size:13px;font-weight:700;}
+.voice-profile{font-size:11px;color:var(--gray);}
+
+/* コース */
+.courses{padding:90px 44px;background:var(--dark);}
+.courses-inner{max-width:860px;margin:0 auto;text-align:center;}
+.courses h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,68px);margin-bottom:44px;}
+.course-card{background:var(--black);border:1px solid rgba(255,255,255,0.07);padding:44px;margin-bottom:22px;text-align:left;position:relative;transition:all 0.3s;cursor:default;}
+.course-card:hover{border-color:var(--red);transform:translateX(6px);}
+.course-card.featured{border:2px solid var(--yellow);}
+.course-badge{position:absolute;top:-11px;right:22px;background:var(--yellow);color:var(--black);font-size:11px;font-weight:900;padding:3px 14px;letter-spacing:0.1em;}
+.course-name{font-size:20px;font-weight:900;margin-bottom:6px;color:var(--yellow);}
+.course-target{font-size:13px;color:var(--gray);margin-bottom:18px;}
+.course-features{list-style:none;display:grid;gap:7px;margin-bottom:22px;}
+.course-features li{font-size:14px;padding-left:20px;position:relative;}
+.course-features li::before{content:'✓';color:var(--yellow);position:absolute;left:0;font-weight:700;}
+.course-price-wrap{display:flex;align-items:flex-end;gap:14px;margin-bottom:22px;}
+.course-price{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--red);}
+.course-price-unit{font-size:13px;color:var(--gray);padding-bottom:8px;}
+.course-cta{background:var(--red);color:#fff;padding:13px 38px;font-weight:700;font-size:13px;text-decoration:none;display:inline-block;transition:all 0.3s;}
+.course-cta:hover{background:#c02020;}
+.course-card.featured .course-cta{background:var(--yellow);color:var(--black);}
+.course-card.featured .course-cta:hover{background:#fff;}
+
+/* 保証バッジ */
+.guarantee{padding:64px 44px;background:linear-gradient(135deg,rgba(245,196,0,0.08),rgba(230,48,48,0.05));border-top:1px solid rgba(245,196,0,0.15);border-bottom:1px solid rgba(245,196,0,0.15);}
+.guarantee-inner{max-width:800px;margin:0 auto;display:flex;align-items:center;gap:40px;flex-wrap:wrap;}
+.guarantee-icon{font-size:80px;flex-shrink:0;}
+.guarantee-text h3{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--yellow);margin-bottom:8px;letter-spacing:0.06em;}
+.guarantee-text p{font-size:14px;color:var(--gray);line-height:1.9;}
+.guarantee-text strong{color:var(--white);}
+
+/* FAQ */
+.faq-sem{padding:80px 44px;background:var(--dark);}
+.faq-sem-inner{max-width:800px;margin:0 auto;}
+.faq-item-s{border-bottom:1px solid rgba(255,255,255,0.07);overflow:hidden;}
+.faq-q-s{display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;font-size:14px;font-weight:700;color:var(--white);transition:color 0.3s;gap:12px;}
+.faq-q-s:hover{color:var(--yellow);}
+.faq-icon-s{font-size:18px;color:var(--red);transition:transform 0.3s;flex-shrink:0;}
+.faq-item-s.open .faq-icon-s{transform:rotate(45deg);}
+.faq-a-s{font-size:13px;color:var(--gray);line-height:1.9;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;}
+.faq-item-s.open .faq-a-s{max-height:200px;padding-bottom:18px;}
+
+/* ページトップ */
+.back-top-s{position:fixed;bottom:80px;right:24px;z-index:499;width:44px;height:44px;background:var(--red);color:#fff;border:none;border-radius:50%;font-size:18px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
+.back-top-s.show{opacity:1;transform:translateY(0);}
+.back-top-s:hover{background:#c02020;transform:translateY(-3px);}
+
+/* フッター */
+footer{background:#040404;padding:52px 44px;border-top:2px solid rgba(230,48,48,0.25);}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--yellow);letter-spacing:0.08em;}
+.footer-copy{font-size:12px;color:var(--gray);text-align:right;}
+.footer-produce{font-size:13px;color:var(--yellow);font-weight:700;margin-top:5px;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:10px 20px;}
+  .nav-cta-desktop{display:none;}
+  .hamburger{display:flex;}
+  .results-grid{grid-template-columns:repeat(2,1fr);}
+  .voices-grid{grid-template-columns:1fr;}
+  .pain,.results,.courses,.faq-sem{padding:64px 20px;}
+  .guarantee{padding:44px 20px;}
+  .guarantee-inner{gap:20px;justify-content:center;text-align:center;}
+  footer{padding:40px 20px;}
+  .footer-inner{flex-direction:column;align-items:flex-start;}
+  .footer-copy{text-align:left;}
+  .back-top-s{bottom:80px;right:16px;width:38px;height:38px;font-size:16px;}
+}
+@media(max-width:480px){
+  .hero{padding:110px 16px 80px;}
+  .hero h1{font-size:52px;}
+  .results-grid{grid-template-columns:1fr 1fr;}
+  .result-card{padding:28px 12px;}
+  .sticky-cta{gap:10px;}
+  .sticky-cta p{font-size:11px;}
+}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空の投資スクールを題材にしたデザインサンプルです</div>
+
+<div class="sticky-cta" id="stickyCta">
+  <p><strong>⚡ 残り3名！</strong>今月の無料体験枠がまもなく終了</p>
+  <a href="#" class="sticky-btn">今すぐ無料で体験する</a>
+</div>
+
+<nav>
+  <div class="nav-logo">MONEY MASTERY</div>
+  <a href="#cta" class="nav-cta-desktop">▶ 無料体験に申し込む</a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose">✕</button>
+  <a href="#pain" onclick="closeMobileMenu()">あなたの悩み</a>
+  <a href="#results" onclick="closeMobileMenu()">実績</a>
+  <a href="#courses" onclick="closeMobileMenu()">コース</a>
+  <a href="#cta" onclick="closeMobileMenu()" style="color:var(--yellow)">無料体験に申し込む</a>
+</div>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-bg-overlay"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-label">受講生2,000名突破の実績塾</div>
+  <h1><span class="red">資産</span>を<br><span class="yellow">武器</span>にしろ。</h1>
+  <div class="hero-catch"><em>サラリーマンのまま</em>、年収の壁を超えた人たちがいる。</div>
+  <p class="hero-sub">マネーマスタリー実践塾は、投資初心者から月10万円以上の副収入を実現するための、実践的かつ再現性の高いメソッドを提供します。</p>
+  <div class="hero-limit">⚠️ 今月の無料体験セミナー申込〆切まで</div>
+  <div class="timer">
+    <div class="timer-unit"><div class="timer-num" id="tH">23</div><div class="timer-label">時間</div></div>
+    <div class="timer-sep">:</div>
+    <div class="timer-unit"><div class="timer-num" id="tM">59</div><div class="timer-label">分</div></div>
+    <div class="timer-sep">:</div>
+    <div class="timer-unit"><div class="timer-num" id="tS">00</div><div class="timer-label">秒</div></div>
+  </div>
+  <a href="#" class="hero-cta" id="cta">今すぐ無料体験に申し込む →</a>
+  <p class="hero-note">※ 費用は一切かかりません。メールアドレスのみで登録完了。</p>
+</section>
+
+<!-- 共感 -->
+<section class="pain" id="pain">
+  <div class="pain-inner">
+    <div class="section-label">ARE YOU...?</div>
+    <h2>あなたは今、<span>こんな悩み</span>を<br>抱えていませんか？</h2>
+    <ul class="pain-list">
+      <li class="reveal">給与が上がらず、将来の生活費が心配</li>
+      <li class="reveal">投資に興味はあるが、何から始めればいいかわからない</li>
+      <li class="reveal">副業を試みたが、時間を売るだけで疲弊している</li>
+      <li class="reveal">貯金はしているが、インフレに負け続けている</li>
+    </ul>
+    <div class="pain-arrow">↓</div>
+    <div class="pain-solution reveal">
+      「お金の仕組み」を正しく学んで実践すれば、<br>
+      <em style="color:var(--red)">サラリーマンでも資産は確実に増やせます。</em><br>
+      それを証明し続けているのが、マネーマスタリー実践塾です。
+    </div>
+  </div>
+</section>
+
+<!-- 実績 -->
+<section class="results" id="results">
+  <div class="results-inner">
+    <div class="section-label">REAL RESULTS</div>
+    <h2>これが<span>実績</span>だ。</h2>
+    <div class="results-grid">
+      <div class="result-card reveal"><div class="result-num">2,000<span class="result-unit">+</span></div><div class="result-label">受講生数</div></div>
+      <div class="result-card reveal"><div class="result-num">87<span class="result-unit">%</span></div><div class="result-label">6ヶ月以内に利益確定した受講生</div></div>
+      <div class="result-card reveal"><div class="result-num">¥18<span class="result-unit">万</span></div><div class="result-label">受講生の平均月間追加収入</div></div>
+      <div class="result-card reveal"><div class="result-num">4.8<span class="result-unit">/5</span></div><div class="result-label">受講生満足度</div></div>
+    </div>
+    <div class="voices-grid">
+      <div class="voice-card reveal"><div class="voice-tag">RESULT</div><div class="voice-result">月+22万円達成</div><p class="voice-text">「半年前は投資って怖いイメージでしたが、基礎から教えてもらい今は毎月安定した収益が出ています。」</p><div class="voice-name">田中 健一 様</div><div class="voice-profile">38歳・会社員（受講6ヶ月）</div></div>
+      <div class="voice-card reveal"><div class="voice-tag">RESULT</div><div class="voice-result">月+15万円達成</div><p class="voice-text">「子育て中でも夜に少し時間を作るだけで実践できました。家族の未来のために始めて本当によかった。」</p><div class="voice-name">佐藤 美穂 様</div><div class="voice-profile">35歳・主婦（受講4ヶ月）</div></div>
+      <div class="voice-card reveal"><div class="voice-tag">RESULT</div><div class="voice-result">月+38万円達成</div><p class="voice-text">「ITの知識とここで学んだ手法を組み合わせたら爆発的に伸びました。今では副業が本業を超えました。」</p><div class="voice-name">山本 諒 様</div><div class="voice-profile">42歳・エンジニア（受講8ヶ月）</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- コース -->
+<section class="courses" id="courses">
+  <div class="courses-inner">
+    <div class="section-label">COURSES</div>
+    <h2>コースを選ぶ</h2>
+    <div class="course-card reveal">
+      <div class="course-name">🔰 スタータープラン</div>
+      <div class="course-target">投資ゼロ知識から始めたい方向け</div>
+      <ul class="course-features"><li>投資基礎講座（全20動画）</li><li>月1回グループQ&Aセッション</li><li>専用コミュニティアクセス</li></ul>
+      <div class="course-price-wrap"><div class="course-price">¥29,800</div><div class="course-price-unit">/ 月</div></div>
+      <a href="#" class="course-cta">このプランで始める</a>
+    </div>
+    <div class="course-card featured reveal">
+      <div class="course-badge">🔥 最も人気</div>
+      <div class="course-name">⚡ マスタープラン</div>
+      <div class="course-target">本気で資産を増やしたい・月10万を目指す方</div>
+      <ul class="course-features"><li>全コンテンツ無制限アクセス（100講座以上）</li><li>月2回個別メンタリング（50分）</li><li>トレード実況ライブ配信（週3回）</li><li>専用チャットサポート（平日24h以内返信）</li><li>秘密のシグナルグループ招待</li></ul>
+      <div class="course-price-wrap"><div class="course-price">¥79,800</div><div class="course-price-unit">/ 月</div></div>
+      <a href="#" class="course-cta">このプランで始める</a>
+    </div>
+  </div>
+</section>
+
+<!-- 満足度保証 -->
+<div class="guarantee">
+  <div class="guarantee-inner">
+    <div class="guarantee-icon">🛡️</div>
+    <div class="guarantee-text">
+      <h3>30日間満足保証</h3>
+      <p>受講後<strong>30日以内に效果を実感できなければ、受講料を全額返金</strong>いたします。返金眠いなど一切ございません。プロのコンテンツが語るメソッドだからこそ、自信を持ってお届けできます。</p>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<section class="faq-sem">
+  <div class="faq-sem-inner">
+    <div class="section-label" style="text-align:center;">FAQ</div>
+    <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,64px);text-align:center;margin-bottom:40px;letter-spacing:0.04em;">よくある質問</h2>
+    <div class="faq-item-s">
+      <div class="faq-q-s">初心者でも大丈夫ですか？<span class="faq-icon-s">+</span></div>
+      <div class="faq-a-s">はい、投資の知識がゼロの方を導くからこそ、全カリキュラムを小学生でもわかる言葭で構成しています。まずは無料体験からお始めください。</div>
+    </div>
+    <div class="faq-item-s">
+      <div class="faq-q-s">副業でも実践できますか？<span class="faq-icon-s">+</span></div>
+      <div class="faq-a-s">もちろんです。本業を持ちながら実践した受講生が多数います。完全オンラインなので、曜日の隆や就寝前の時間に学べます。</div>
+    </div>
+    <div class="faq-item-s">
+      <div class="faq-q-s">成果が出るまでの期間は？<span class="faq-icon-s">+</span></div>
+      <div class="faq-a-s">学習法や全力度により異なりますが、平均〔6ヶ月以内に最初の利益を確定されています。のんびり安定的に収益が出るまでサポートします。</div>
+    </div>
+    <div class="faq-item-s">
+      <div class="faq-q-s">途中で退会できますか？<span class="faq-icon-s">+</span></div>
+      <div class="faq-a-s">はい、いつでも退会可能です。また、受講開始から30日以内は全額返金保証もご用意しています。「行ってみて違った」というリスクはゼロです。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ページトップ -->
+<button class="back-top-s" id="backTopS" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- フッター -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">MONEY MASTERY</div>
+      <div style="font-size:12px;color:var(--gray);margin-top:7px;">運営：マネーマスタリー株式会社（架空）<br>※ 投資は自己責任でお願いいたします。</div>
+    </div>
+    <div class="footer-copy">
+      <div>© 2024 Money Mastery Inc. All Rights Reserved.</div>
+      <div class="footer-produce">和-Node プロデュース</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+let total=23*3600+59*60;
+function tick(){total--;if(total<0)total=86399;const h=Math.floor(total/3600),m=Math.floor((total%3600)/60),s=total%60;document.getElementById('tH').textContent=String(h).padStart(2,'0');document.getElementById('tM').textContent=String(m).padStart(2,'0');document.getElementById('tS').textContent=String(s).padStart(2,'0');}
+setInterval(tick,1000);
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('stickyCta').classList.toggle('show',window.scrollY>600);
+  document.getElementById('backTopS').classList.toggle('show',window.scrollY>400);
+});
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('menuClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// FAQ
+document.querySelectorAll('.faq-q-s').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item-s').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
+<!-- 和-Node プロデュース -->

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【デモ】オウンドメディア | ポートフォリオ</title>
+<style>
+  :root { --primary: #10b981; --bg: #f3f4f6; --text: #1f2937; }
+  * { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+  body { background: var(--bg); color: var(--text); }
+  a { text-decoration: none; color: inherit; }
+  
+  header { background: white; padding: 20px 5%; box-shadow: 0 1px 3px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-size: 24px; font-weight: bold; color: var(--primary); }
+  .nav-menu a { margin-left: 20px; font-weight: 500; }
+  .nav-menu a:hover { color: var(--primary); }
+  
+  .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 40px; }
+  @media (max-width: 768px) { .container { grid-template-columns: 1fr; } }
+  
+  .article-card { background: white; border-radius: 8px; overflow: hidden; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); transition: 0.3s; display: flex; flex-direction: column; }
+  .article-card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+  .thumb { height: 200px; background: #e5e7eb; display: flex; align-items: center; justify-content: center; color: #9ca3af; }
+  .card-content { padding: 20px; }
+  .category { color: var(--primary); font-size: 12px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+  .card-title { font-size: 1.2em; margin-bottom: 10px; line-height: 1.4; }
+  .card-excerpt { color: #6b7280; font-size: 0.9em; margin-bottom: 15px; }
+  
+  .sidebar-widget { background: white; padding: 20px; border-radius: 8px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+  .widget-title { font-size: 1.1em; border-bottom: 2px solid var(--primary); padding-bottom: 10px; margin-bottom: 15px; }
+  .tag { display: inline-block; background: #e5e7eb; padding: 5px 10px; border-radius: 20px; font-size: 12px; margin: 0 5px 5px 0; }
+  
+  .demo-badge { position: fixed; bottom: 20px; right: 20px; background: #ef4444; color: white; padding: 8px 16px; border-radius: 20px; font-size: 12px; font-weight: bold; z-index: 100; }
+</style>
+<script>
+  function dummyLink(e) { e.preventDefault(); alert('※ココナラの規約順守のため、デモサイトのリンクは無効化しています'); }
+</script>
+</head>
+<body>
+  <div class="demo-badge">架空メディアデモ</div>
+  
+  <header>
+    <div class="logo">Tech & Life Web</div>
+    <div class="nav-menu">
+      <a href="#" onclick="dummyLink(event)">最新記事</a>
+      <a href="#" onclick="dummyLink(event)">テクノロジー</a>
+      <a href="#" onclick="dummyLink(event)">ライフスタイル</a>
+    </div>
+  </header>
+
+  <div class="container">
+    <main>
+      <div class="article-card">
+        <div class="thumb">Image Placeholder</div>
+        <div class="card-content">
+          <div class="category">Technology</div>
+          <h2 class="card-title"><a href="#" onclick="dummyLink(event)">2026年のWebデザイン・トレンドまとめ：AI時代のUIはどう変わる？</a></h2>
+          <p class="card-excerpt">AIツールの進化により、Webデザインの制作プロセスは劇的に変化しました。本記事では今年のデザイントレンドと実践的な手法を解説します。</p>
+          <div style="font-size: 12px; color: #9ca3af;">2026.04.21 / 山田 太郎</div>
+        </div>
+      </div>
+      
+      <div class="article-card">
+        <div class="thumb" style="background:#d1d5db;">Image Placeholder</div>
+        <div class="card-content">
+          <div class="category">Lifestyle</div>
+          <h2 class="card-title"><a href="#" onclick="dummyLink(event)">リモートワーク環境を劇的に改善するデスク周りのガジェット5選</a></h2>
+          <p class="card-excerpt">長時間のデスクワークでも疲れにくい環境づくりに必須のアイテムを厳選して紹介。生産性を上げるための小さな投資とは。</p>
+          <div style="font-size: 12px; color: #9ca3af;">2026.04.18 / 佐藤 花子</div>
+        </div>
+      </div>
+    </main>
+    
+    <aside>
+      <div class="sidebar-widget">
+        <h3 class="widget-title">About</h3>
+        <p style="font-size: 0.9em; color: #6b7280; line-height: 1.6;">
+          当メディアは架空のデモサイトです。WordPress等を用いたオウンドメディア構築のサンプルとして作成されています。
+        </p>
+      </div>
+      
+      <div class="sidebar-widget">
+        <h3 class="widget-title">Popular Tags</h3>
+        <a href="#" onclick="dummyLink(event)" class="tag">#Web制作</a>
+        <a href="#" onclick="dummyLink(event)" class="tag">#SEO対策</a>
+        <a href="#" onclick="dummyLink(event)" class="tag">#WordPress</a>
+        <a href="#" onclick="dummyLink(event)" class="tag">#リモートワーク</a>
+        <a href="#" onclick="dummyLink(event)" class="tag">#ガジェット</a>
+      </div>
+      
+      <div class="sidebar-widget" style="background: var(--primary); color: white;">
+        <h3 class="widget-title" style="border-color: rgba(255,255,255,0.3);">メルマガ登録</h3>
+        <p style="font-size: 0.9em; margin-bottom: 15px;">最新記事を週1回お届けします。</p>
+        <a href="#" onclick="dummyLink(event)" style="display:block; text-align:center; background:white; color:var(--primary); padding:10px; border-radius:4px; font-weight:bold;">登録する（無料）</a>
+      </div>
+    </aside>
+  </div>
+</body>
+</html>

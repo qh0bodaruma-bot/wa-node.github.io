@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【ポートフォリオ】TaskFlow AI | AIタスク管理SaaS</title>
+<meta name="description" content="これはポートフォリオ作品です。架空のSaaSサービスのLPサンプルです。">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#040d1a;--bg2:#071225;--cyan:#00d4ff;--cyan2:#00aacc;--purple:#7c3aed;--glass:rgba(255,255,255,0.05);--border:rgba(255,255,255,0.08);--text:#e8f0fe;--muted:#7090b0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden;}
+
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#6200ea,#aa00ff);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:7px 16px;letter-spacing:0.04em;}
+.portfolio-banner span{background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
+
+.mesh{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 600px 400px at 20% 20%,rgba(0,212,255,0.07) 0%,transparent 70%),radial-gradient(ellipse 500px 400px at 80% 70%,rgba(124,58,237,0.09) 0%,transparent 70%);}
+
+nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:14px 56px;background:rgba(4,13,26,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-logo{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-links{display:flex;gap:28px;list-style:none;}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:13px;transition:color 0.3s;}
+.nav-links a:hover{color:var(--text);}
+.nav-btns{display:flex;gap:10px;}
+.btn-ghost{border:1px solid var(--border);color:var(--text);padding:8px 18px;border-radius:8px;font-size:13px;text-decoration:none;transition:all 0.3s;}
+.btn-ghost:hover{border-color:var(--cyan);color:var(--cyan);}
+.btn-cyan{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);padding:9px 20px;border-radius:8px;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.3s;}
+.btn-cyan:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,212,255,0.4);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--cyan);}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(4,13,26,0.98);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--text);font-size:20px;text-decoration:none;font-family:'Space Grotesk',sans-serif;}
+.mobile-menu-close{position:absolute;top:48px;right:22px;font-size:26px;color:var(--cyan);cursor:pointer;background:none;border:none;}
+
+/* ヒーロー */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:150px 56px 80px;text-align:center;position:relative;z-index:1;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(0,212,255,0.3);background:rgba(0,212,255,0.05);padding:5px 15px;border-radius:40px;font-size:12px;color:var(--cyan);margin-bottom:28px;letter-spacing:0.06em;}
+.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(38px,6vw,84px);font-weight:700;line-height:1.1;margin-bottom:22px;}
+.hero h1 .grad{background:linear-gradient(135deg,var(--cyan) 0%,#a78bfa 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:17px;color:var(--muted);line-height:1.8;max-width:580px;margin:0 auto 44px;}
+.hero-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:24px;}
+.btn-big{padding:15px 44px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;transition:all 0.3s;display:inline-block;}
+.btn-big.primary{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);box-shadow:0 0 36px rgba(0,212,255,0.28);}
+.btn-big.primary:hover{transform:translateY(-3px);box-shadow:0 0 52px rgba(0,212,255,0.48);}
+.btn-big.secondary{border:1px solid var(--border);color:var(--text);}
+.btn-big.secondary:hover{border-color:var(--cyan);background:rgba(0,212,255,0.05);}
+.hero-note{font-size:12px;color:var(--muted);margin-bottom:60px;}
+
+/* ヒーロー背景画像 */
+.hero-img-wrap{width:100%;max-width:900px;margin:0 auto;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,0.6),0 0 60px rgba(0,212,255,0.07);}
+.hero-img-wrap img{width:100%;height:auto;display:block;border-radius:16px;}
+.hero-img-fallback{width:100%;height:360px;background:linear-gradient(160deg,#071225,#0d2040);display:none;align-items:center;justify-content:center;flex-direction:column;gap:12px;border:1px solid var(--border);}
+.mock-bar{background:rgba(255,255,255,0.04);padding:10px 18px;display:flex;align-items:center;gap:7px;position:absolute;top:0;left:0;right:0;}
+.dot{width:11px;height:11px;border-radius:50%;}
+.dot.r{background:#ff5f57;}.dot.y{background:#febc2e;}.dot.g{background:#28c840;}
+
+/* 機能 */
+.features{padding:110px 56px;position:relative;z-index:1;}
+.features-header{text-align:center;margin-bottom:72px;}
+.section-tag{font-size:11px;letter-spacing:0.22em;color:var(--cyan);display:block;margin-bottom:14px;}
+.features-header h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4vw,52px);font-weight:700;margin-bottom:14px;}
+.features-header p{color:var(--muted);font-size:15px;}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto;}
+.feature-card{background:var(--glass);border:1px solid var(--border);border-radius:16px;padding:36px 28px;transition:all 0.4s;cursor:default;position:relative;overflow:hidden;}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);transform:scaleX(0);transition:transform 0.4s;}
+.feature-card:hover{transform:translateY(-5px);border-color:rgba(0,212,255,0.2);background:rgba(0,212,255,0.03);}
+.feature-card:hover::before{transform:scaleX(1);}
+.feature-icon{width:52px;height:52px;border-radius:13px;background:linear-gradient(135deg,rgba(0,212,255,0.14),rgba(124,58,237,0.14));display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:22px;}
+.feature-card h3{font-family:'Space Grotesk',sans-serif;font-size:17px;margin-bottom:10px;}
+.feature-card p{font-size:13px;color:var(--muted);line-height:1.8;}
+
+/* 料金 */
+.pricing{padding:110px 56px;position:relative;z-index:1;}
+.pricing-header{text-align:center;margin-bottom:72px;}
+.pricing-header h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4vw,50px);font-weight:700;margin-bottom:14px;}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1000px;margin:0 auto;}
+.plan-card{background:var(--glass);border:1px solid var(--border);border-radius:20px;padding:36px 28px;transition:all 0.4s;position:relative;}
+.plan-card.featured{border-color:var(--cyan);background:linear-gradient(160deg,rgba(0,212,255,0.07),rgba(124,58,237,0.04));transform:scale(1.04);}
+.plan-badge{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);font-size:11px;font-weight:700;padding:3px 14px;border-radius:20px;white-space:nowrap;}
+.plan-name{font-family:'Space Grotesk',sans-serif;font-size:17px;font-weight:700;margin-bottom:7px;}
+.plan-desc{font-size:12px;color:var(--muted);margin-bottom:22px;}
+.plan-price{font-family:'Space Grotesk',sans-serif;font-size:44px;font-weight:700;color:var(--cyan);line-height:1;}
+.plan-price small{font-size:13px;font-weight:400;color:var(--muted);}
+.plan-divider{border:none;border-top:1px solid var(--border);margin:22px 0;}
+.plan-features{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:28px;}
+.plan-features li{font-size:13px;display:flex;align-items:center;gap:7px;}
+.plan-features li::before{content:'✓';color:var(--cyan);font-weight:700;flex-shrink:0;}
+.plan-features li.no::before{content:'✗';color:var(--muted);}
+.plan-features li.no{color:var(--muted);}
+.plan-cta{display:block;text-align:center;padding:13px;border-radius:10px;font-weight:700;font-size:13px;text-decoration:none;transition:all 0.3s;}
+.plan-cta.outline{border:1px solid var(--border);color:var(--text);}
+.plan-cta.outline:hover{border-color:var(--cyan);color:var(--cyan);}
+.plan-cta.filled{background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);}
+.plan-cta.filled:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,212,255,0.4);}
+
+/* CTA */
+.cta-section{margin:0 56px 110px;padding:72px;background:linear-gradient(135deg,rgba(0,212,255,0.07),rgba(124,58,237,0.07));border:1px solid rgba(0,212,255,0.18);border-radius:24px;text-align:center;position:relative;z-index:1;overflow:hidden;}
+.cta-section h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(26px,4vw,48px);font-weight:700;margin-bottom:14px;}
+.cta-section p{color:var(--muted);font-size:15px;margin-bottom:36px;}
+
+/* 導入ロゴ帯 */
+.trust-saas{padding:44px 56px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);position:relative;z-index:1;}
+.trust-saas-label{text-align:center;font-size:11px;letter-spacing:0.22em;color:var(--muted);margin-bottom:22px;}
+.trust-saas-logos{display:flex;gap:32px;justify-content:center;align-items:center;flex-wrap:wrap;}
+.trust-saas-logo{padding:8px 20px;border:1px solid var(--border);border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:13px;color:var(--muted);letter-spacing:0.06em;transition:all 0.3s;}
+.trust-saas-logo:hover{border-color:var(--cyan);color:var(--cyan);}
+
+/* FAQ */
+.faq-saas{padding:110px 56px;position:relative;z-index:1;background:var(--bg2);}
+.faq-saas-inner{max-width:800px;margin:0 auto;}
+.faq-item-t{border-bottom:1px solid var(--border);overflow:hidden;}
+.faq-q-t{display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;font-size:15px;font-weight:600;color:var(--text);transition:color 0.3s;gap:12px;font-family:'Space Grotesk',sans-serif;}
+.faq-q-t:hover{color:var(--cyan);}
+.faq-icon-t{font-size:20px;color:var(--cyan);transition:transform 0.3s;flex-shrink:0;}
+.faq-item-t.open .faq-icon-t{transform:rotate(45deg);}
+.faq-a-t{font-size:14px;color:var(--muted);line-height:1.9;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;}
+.faq-item-t.open .faq-a-t{max-height:200px;padding-bottom:20px;}
+
+/* ページトップ */
+.back-top-t{position:fixed;bottom:32px;right:32px;z-index:500;width:48px;height:48px;background:linear-gradient(135deg,var(--cyan),var(--cyan2));color:var(--bg);border:none;border-radius:50%;font-size:20px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;font-weight:700;}
+.back-top-t.show{opacity:1;transform:translateY(0);}
+.back-top-t:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,212,255,0.4);}
+
+footer{border-top:1px solid var(--border);padding:52px 56px;position:relative;z-index:1;}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-family:'Space Grotesk',sans-serif;font-size:19px;font-weight:700;background:linear-gradient(135deg,var(--cyan),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.footer-copy{font-size:12px;color:var(--muted);text-align:right;}
+.footer-produce{font-size:13px;color:var(--cyan);font-weight:700;margin-top:5px;}
+
+/* RESPONSIVE */
+@media(max-width:960px){
+  nav{padding:12px 20px;}
+  .nav-links,.nav-btns{display:none;}
+  .hamburger{display:flex;}
+  .hero{padding:120px 20px 60px;}
+  .features,.pricing,.faq-saas{padding:72px 20px;}
+  .trust-saas{padding:36px 20px;}
+  .features-grid{grid-template-columns:1fr 1fr;}
+  .pricing-grid{grid-template-columns:1fr;}
+  .plan-card.featured{transform:scale(1);}
+  .cta-section{margin:0 20px 72px;padding:48px 24px;}
+  footer{padding:40px 20px;}
+  .footer-inner{flex-direction:column;align-items:flex-start;}
+  .footer-copy{text-align:left;}
+  .back-top-t{bottom:16px;right:16px;width:40px;height:40px;font-size:16px;}
+}
+@media(max-width:540px){
+  .hero h1{font-size:36px;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .features-grid{grid-template-columns:1fr;}
+  .hero-img-wrap{border-radius:10px;}
+}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="mesh"></div>
+
+<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空のSaaSサービスを題材にしたデザインサンプルです</div>
+
+<nav>
+  <div class="nav-logo">TaskFlow AI</div>
+  <ul class="nav-links">
+    <li><a href="#features">機能</a></li>
+    <li><a href="#pricing">料金</a></li>
+    <li><a href="#cta">無料トライアル</a></li>
+  </ul>
+  <div class="nav-btns">
+    <a href="#" class="btn-ghost">ログイン</a>
+    <a href="#cta" class="btn-cyan">無料で始める</a>
+  </div>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose">✕</button>
+  <a href="#features" onclick="closeMobileMenu()">機能</a>
+  <a href="#pricing" onclick="closeMobileMenu()">料金</a>
+  <a href="#cta" onclick="closeMobileMenu()" style="color:var(--cyan)">無料で始める</a>
+</div>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-badge">✨ AIが自動でタスクを整理・優先順位付け</div>
+  <h1>チームの生産性を、<br><span class="grad">AIが底上げする。</span></h1>
+  <p class="hero-sub">TaskFlow AIは、プロジェクト管理にAIを組み込んだ次世代ツール。タスクの自動分類・期日提案・リスク検知で、チームのパフォーマンスを最大化します。</p>
+  <div class="hero-btns">
+    <a href="#cta" class="btn-big primary">無料で14日間試す</a>
+    <a href="#features" class="btn-big secondary">▶ 機能を見る</a>
+  </div>
+  <p class="hero-note">クレジットカード不要 · 設定5分 · いつでもキャンセル可能</p>
+  <div class="hero-img-wrap reveal">
+    <img src="images/hero_saas.png" alt="TaskFlow AI ダッシュボード画面"
+      onerror="this.style.display='none';document.getElementById('fallbackMock').style.display='flex';">
+    <div id="fallbackMock" class="hero-img-fallback">
+      <div style="color:var(--cyan);font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;">📊 TaskFlow AI Dashboard</div>
+      <div style="color:var(--muted);font-size:13px;">AIが自動でタスクを整理・優先順位付け</div>
+    </div>
+  </div>
+</section>
+
+<!-- 導入企業ロゴ帯 -->
+<div class="trust-saas">
+  <div class="trust-saas-label">TRUSTED BY 500+ TEAMS WORLDWIDE</div>
+  <div class="trust-saas-logos">
+    <div class="trust-saas-logo">Mercari</div>
+    <div class="trust-saas-logo">Cyberagent</div>
+    <div class="trust-saas-logo">DeNA</div>
+    <div class="trust-saas-logo">Freee</div>
+    <div class="trust-saas-logo">Sansan</div>
+    <div class="trust-saas-logo">ZOZO</div>
+  </div>
+</div>
+
+<!-- 機能 -->
+<section class="features" id="features">
+  <div class="features-header">
+    <span class="section-tag">FEATURES</span>
+    <h2>チームを変える、6つの機能</h2>
+    <p>複雑なプロジェクトをシンプルに。AIが面倒な部分を引き受けます。</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal"><div class="feature-icon">🤖</div><h3>AI自動タスク生成</h3><p>プロジェクトの目標を入力するだけで、必要なタスクをAIが自動生成。抜け漏れゼロで計画が完成します。</p></div>
+    <div class="feature-card reveal"><div class="feature-icon">⚡</div><h3>スマート優先順位付け</h3><p>締め切り・依存関係・チームの負荷を考慮して、AIが最適な優先順位を自動で提案します。</p></div>
+    <div class="feature-card reveal"><div class="feature-icon">⚠️</div><h3>リスク早期検知</h3><p>プロジェクトの遅延・ボトルネックをAIがリアルタイムで検知。問題が起きる前に手が打てます。</p></div>
+    <div class="feature-card reveal"><div class="feature-icon">📊</div><h3>生産性ダッシュボード</h3><p>個人・チームの生産性データを可視化。何に時間がかかっているか一目瞭然で、改善点がすぐわかります。</p></div>
+    <div class="feature-card reveal"><div class="feature-icon">🔗</div><h3>外部ツール100+連携</h3><p>Slack・Notion・GitHub・Googleカレンダーなど100以上のツールとシームレスに連携できます。</p></div>
+    <div class="feature-card reveal"><div class="feature-icon">🌐</div><h3>多言語対応</h3><p>日本語・英語・中国語など12言語に対応。グローバルチームでもストレスなく使えます。</p></div>
+  </div>
+</section>
+
+<!-- 料金 -->
+<section class="pricing" id="pricing">
+  <div class="pricing-header">
+    <span class="section-tag">PRICING</span>
+    <h2>シンプルな料金体系</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="plan-card reveal">
+      <div class="plan-name">Free</div>
+      <div class="plan-desc">個人・小規模チーム向け</div>
+      <div class="plan-price">¥0<small> / 月</small></div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>最大3プロジェクト</li>
+        <li>5名まで招待可能</li>
+        <li>基本タスク管理</li>
+        <li class="no">AI機能</li>
+        <li class="no">外部ツール連携</li>
+      </ul>
+      <a href="#" class="plan-cta outline">無料で始める</a>
+    </div>
+    <div class="plan-card featured reveal">
+      <div class="plan-badge">🔥 最も人気</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-desc">成長中のチームに最適</div>
+      <div class="plan-price">¥2,980<small> / 月・人</small></div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>無制限プロジェクト</li>
+        <li>無制限メンバー招待</li>
+        <li>全AI機能フル利用</li>
+        <li>100+外部ツール連携</li>
+        <li>優先サポート</li>
+      </ul>
+      <a href="#cta" class="plan-cta filled">14日間無料で試す</a>
+    </div>
+    <div class="plan-card reveal">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-desc">大企業・カスタム要件</div>
+      <div class="plan-price" style="font-size:28px;padding-top:4px;">お問い合わせ</div>
+      <hr class="plan-divider">
+      <ul class="plan-features">
+        <li>Proの全機能</li>
+        <li>シングルサインオン（SSO）</li>
+        <li>カスタムAI学習</li>
+        <li>SLA保証・専任CSM</li>
+        <li>オンプレミス対応可</li>
+      </ul>
+      <a href="#" class="plan-cta outline">営業に問い合わせる</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-section" id="cta">
+  <h2>今すぐチームの生産性を上げる</h2>
+  <p>14日間の無料トライアル。クレジットカード不要。<br>設定わずか5分で、チーム全員が使い始められます。</p>
+  <a href="#" class="btn-big primary">無料トライアルを始める →</a>
+</div>
+
+<!-- FAQ -->
+<section class="faq-saas" id="faq">
+  <div class="faq-saas-inner">
+    <span class="section-tag" style="text-align:center;display:block;">FAQ</span>
+    <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(28px,4vw,48px);font-weight:700;text-align:center;margin-bottom:52px;">よくある質問</h2>
+    <div class="faq-item-t">
+      <div class="faq-q-t">無料トライアル後は自動で課金されますか？<span class="faq-icon-t">+</span></div>
+      <div class="faq-a-t">いいえ、自動課金はされません。14日間のトライアル終了後は、プランを選択して初めてご利用料金が発生します。クレジットカードの登録も不要です。</div>
+    </div>
+    <div class="faq-item-t">
+      <div class="faq-q-t">既存のツールからデータを移行できますか？<span class="faq-icon-t">+</span></div>
+      <div class="faq-a-t">はい、Notion・Asana・Trello・Jiraなど主要ツールからのインポートに対応しています。設定5分でデータ移行が完了します。</div>
+    </div>
+    <div class="faq-item-t">
+      <div class="faq-q-t">チームの人数が変わった場合はどうなりますか？<span class="faq-icon-t">+</span></div>
+      <div class="faq-a-t">いつでもメンバーの追加・削除が可能で、料金は月末に自動で精算されます。急なチーム拡大にも柔軟に対応します。</div>
+    </div>
+    <div class="faq-item-t">
+      <div class="faq-q-t">セキュリティは大丈夫ですか？<span class="faq-icon-t">+</span></div>
+      <div class="faq-a-t">SOC2 Type II・ISO 27001認証取得済みで、データはAES-256で暗号化されています。エンタープライズプランではSSO・監査ログも利用可能です。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ページトップ -->
+<button class="back-top-t" id="backTopT" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">TaskFlow AI</div>
+      <div style="font-size:12px;color:var(--muted);margin-top:7px;">© 2024 TaskFlow AI Inc. All Rights Reserved.</div>
+    </div>
+    <div class="footer-copy">
+      <div>プライバシーポリシー · 利用規約</div>
+      <div class="footer-produce">和-Node プロデュース</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('menuClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}
+  });
+},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach((el,i)=>{
+  el.style.transitionDelay=`${(i%3)*90}ms`;io.observe(el);
+});
+
+window.addEventListener('scroll',()=>document.getElementById('backTopT').classList.toggle('show',window.scrollY>400));
+
+document.querySelectorAll('.faq-q-t').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item-t').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
+<!-- 和-Node プロデュース -->
