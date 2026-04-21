@@ -1,0 +1,240 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>【ポートフォリオ】なごみ整骨院 | 腰痛・肩こり専門</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--green:#3a7d5a;--green2:#4e9d72;--cream:#f8f6f0;--beige:#ede8de;--brown:#5c4a32;--text:#2a2218;--gray:#7a7060;--white:#fff;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+.pbanner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#2e7d32,#388e3c);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:7px;}
+.pbanner span{background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
+.tel-float{position:fixed;bottom:24px;right:24px;z-index:500;width:56px;height:56px;background:var(--green);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;text-decoration:none;box-shadow:0 4px 20px rgba(58,125,90,0.4);transition:all 0.3s;}
+.tel-float:hover{transform:scale(1.1);}
+.back-top{position:fixed;bottom:24px;right:90px;z-index:500;width:44px;height:44px;background:var(--brown);color:#fff;border:none;border-radius:50%;font-size:18px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
+.back-top.show{opacity:1;transform:translateY(0);}
+nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:12px 44px;background:rgba(248,246,240,0.96);backdrop-filter:blur(12px);border-bottom:1px solid rgba(58,125,90,0.15);}
+.nav-logo{font-family:'Noto Serif JP',serif;font-size:19px;color:var(--green);letter-spacing:0.08em;}
+.nav-tel-n{color:var(--green);font-weight:700;font-size:15px;text-decoration:none;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--green);}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(248,246,240,0.98);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--text);font-size:20px;text-decoration:none;font-family:'Noto Serif JP',serif;}
+.mmclose{position:absolute;top:48px;right:22px;font-size:26px;color:var(--green);cursor:pointer;background:none;border:none;}
+
+/* Hero */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:66px;}
+.hero-l{padding:80px 52px 80px 60px;display:flex;flex-direction:column;justify-content:center;background:var(--cream);}
+.hero-tag{display:inline-block;background:var(--green);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:40px;margin-bottom:20px;letter-spacing:0.08em;}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(30px,3.8vw,50px);line-height:1.45;margin-bottom:16px;}
+.hero h1 em{color:var(--green);font-style:normal;}
+.hero-sub{font-size:14px;color:var(--gray);line-height:2.1;margin-bottom:28px;font-weight:300;}
+.hero-points{display:flex;flex-direction:column;gap:10px;margin-bottom:28px;}
+.hp{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;}
+.hp::before{content:'✓';color:var(--green);font-size:16px;}
+.btn-g{background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:15px 36px;font-weight:700;font-size:14px;text-decoration:none;display:inline-block;border-radius:4px;transition:all 0.3s;letter-spacing:0.04em;}
+.btn-g:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(58,125,90,0.35);}
+.hero-tel-w{margin-top:16px;font-size:13px;color:var(--gray);}
+.hero-tel-w a{font-size:24px;font-weight:900;color:var(--green);text-decoration:none;}
+.hero-r{position:relative;overflow:hidden;min-height:500px;}
+.hero-r img{width:100%;height:100%;object-fit:cover;}
+
+/* 症状 */
+.symptoms{padding:80px 44px;background:var(--white);}
+.sec-ey{font-size:11px;letter-spacing:0.22em;color:var(--green);text-align:center;margin-bottom:10px;}
+.sec-h{font-family:'Noto Serif JP',serif;font-size:clamp(22px,3vw,36px);text-align:center;margin-bottom:8px;}
+.sec-line{width:36px;height:2px;background:var(--green);margin:0 auto 44px;}
+.symp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:860px;margin:0 auto 40px;}
+.symp-item{background:var(--cream);border:1px solid rgba(58,125,90,0.15);padding:22px 18px;text-align:center;border-radius:8px;transition:all 0.4s;}
+.symp-item:hover{border-color:var(--green);transform:translateY(-3px);}
+.symp-icon{font-size:36px;margin-bottom:10px;}
+.symp-name{font-size:14px;font-weight:700;color:var(--text);}
+.symp-note{font-size:12px;color:var(--gray);margin-top:5px;line-height:1.7;}
+
+/* 施術の流れ */
+.flow{padding:80px 44px;background:var(--beige);}
+.flow-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;max-width:920px;margin:0 auto;position:relative;}
+.flow-steps::before{content:'';position:absolute;top:36px;left:calc(100%/8);right:calc(100%/8);height:2px;background:linear-gradient(90deg,var(--green),var(--green2));z-index:0;}
+.flow-step{text-align:center;padding:0 16px;position:relative;z-index:1;}
+.flow-num{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;font-size:22px;font-weight:900;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 6px 20px rgba(58,125,90,0.3);}
+.flow-step h3{font-size:14px;font-weight:700;color:var(--text);margin-bottom:7px;}
+.flow-step p{font-size:12px;color:var(--gray);line-height:1.8;}
+
+/* 選ばれる理由 */
+.reasons{padding:80px 44px;background:var(--white);}
+.reasons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:960px;margin:0 auto;}
+.reason-card{border-left:4px solid var(--green);background:var(--cream);padding:28px 22px;border-radius:0 8px 8px 0;transition:all 0.3s;}
+.reason-card:hover{transform:translateX(4px);}
+.reason-num{font-family:'Noto Serif JP',serif;font-size:32px;color:var(--green);line-height:1;margin-bottom:10px;}
+.reason-card h3{font-size:16px;font-weight:700;margin-bottom:8px;}
+.reason-card p{font-size:13px;color:var(--gray);line-height:1.9;}
+
+/* FAQ */
+.faq{padding:80px 44px;background:var(--beige);}
+.faq-inner{max-width:760px;margin:0 auto;}
+.faq-item{border-bottom:1px solid rgba(58,125,90,0.15);overflow:hidden;}
+.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;font-size:14px;font-weight:700;transition:color 0.3s;gap:12px;}
+.faq-q:hover{color:var(--green);}
+.faq-icon{font-size:18px;color:var(--green);transition:transform 0.3s;flex-shrink:0;}
+.faq-item.open .faq-icon{transform:rotate(45deg);}
+.faq-a{font-size:13px;color:var(--gray);line-height:1.9;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;}
+.faq-item.open .faq-a{max-height:200px;padding-bottom:18px;}
+
+/* CTA */
+.cta{padding:90px 44px;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;text-align:center;}
+.cta h2{font-family:'Noto Serif JP',serif;font-size:clamp(24px,3.5vw,42px);margin-bottom:14px;}
+.cta p{font-size:14px;opacity:0.88;margin-bottom:32px;line-height:1.9;}
+.cta-box{background:#fff;border-radius:12px;padding:36px;max-width:480px;margin:0 auto;color:var(--text);}
+.cta-box .cta-tel{font-size:36px;font-weight:900;color:var(--green);text-decoration:none;display:block;margin-bottom:8px;}
+.cta-box .cta-hour{font-size:13px;color:var(--gray);margin-bottom:20px;}
+.btn-g-d{display:block;background:linear-gradient(135deg,var(--green),var(--green2));color:#fff;padding:15px;font-weight:700;font-size:15px;border-radius:6px;text-decoration:none;transition:all 0.3s;}
+.btn-g-d:hover{opacity:0.9;transform:translateY(-2px);}
+
+footer{background:var(--text);padding:44px;color:rgba(255,255,255,0.55);}
+.fi{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.fl{font-family:'Noto Serif JP',serif;font-size:18px;color:#fff;}
+.fc{font-size:12px;text-align:right;}
+.fp{font-size:13px;color:#8bc34a;font-weight:700;margin-top:5px;}
+
+@media(max-width:900px){
+  nav{padding:10px 18px;}.nav-tel-n{display:none;}.hamburger{display:flex;}
+  .hero{grid-template-columns:1fr;}.hero-r{display:none;}.hero-l{padding:70px 20px 60px;}
+  .symptoms,.flow,.reasons,.faq,.cta{padding:60px 20px;}
+  .symp-grid,.reasons-grid{grid-template-columns:1fr 1fr;}
+  .flow-steps{grid-template-columns:1fr 1fr;}.flow-steps::before{display:none;}
+  footer{padding:36px 20px;}.fi{flex-direction:column;align-items:flex-start;}.fc{text-align:left;}
+  .back-top{right:80px;}
+}
+@media(max-width:480px){.symp-grid,.reasons-grid{grid-template-columns:1fr;}}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s,transform 0.7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="pbanner"><span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空の整骨院を題材にしたデザインサンプルです</div>
+<a href="tel:03-XXXX-XXXX" class="tel-float">📞</a>
+<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<nav>
+  <div class="nav-logo">なごみ整骨院</div>
+  <a href="tel:03-XXXX-XXXX" class="nav-tel-n">📞 03-XXXX-XXXX</a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mmclose" id="mmclose">✕</button>
+  <a href="#symptoms" onclick="mm()">お悩み</a>
+  <a href="#flow" onclick="mm()">施術の流れ</a>
+  <a href="#reasons" onclick="mm()">選ばれる理由</a>
+  <a href="#cta" onclick="mm()" style="color:var(--green)">📞 予約する</a>
+</div>
+
+<section class="hero">
+  <div class="hero-l">
+    <div class="hero-tag">🌿 地域No.1の施術実績</div>
+    <h1>つらい<em>腰痛・肩こり</em>、<br>根本にアプローチへ。</h1>
+    <p class="hero-sub">痛みを一時的に和らげるだけでなく、なぜ痛みが起きているのかをお伺いし、再発しにくい体づくりをサポートをサポートします。</p>
+    <div class="hero-points">
+      <div class="hp">完全予約制・待ち時間ゼロ</div>
+      <div class="hp">国家資格保有の施術師が担当</div>
+      <div class="hp">交通事故・労災対応可</div>
+    </div>
+    <a href="#cta" class="btn-g">初回限定 ¥1,980で体験する →</a>
+    <div class="hero-tel-w">お電話でのご予約<br><a href="tel:03-XXXX-XXXX">03-XXXX-XXXX</a></div>
+  </div>
+  <div class="hero-r">
+    <img src="images/hero_sekkotsu.png" alt="なごみ整骨院の施術室" onerror="this.style.background='linear-gradient(160deg,#c8e6c9,#a5d6a7)';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.innerHTML='🌿';this.style.fontSize='100px';">
+  </div>
+</section>
+
+<section class="symptoms" id="symptoms">
+  <div class="sec-ey">SYMPTOMS</div>
+  <div class="sec-h">こんなお悩みはありませんか？</div>
+  <div class="sec-line"></div>
+  <div class="symp-grid">
+    <div class="symp-item reveal"><div class="symp-icon">😣</div><div class="symp-name">腰痛・ぎっくり腰</div><div class="symp-note">慢性的な腰の重さ、急性の激痛に対応</div></div>
+    <div class="symp-item reveal"><div class="symp-icon">🤕</div><div class="symp-name">肩こり・首こり</div><div class="symp-note">デスクワークや姿勢の悪さから来るこり</div></div>
+    <div class="symp-item reveal"><div class="symp-icon">⚡</div><div class="symp-name">坐骨神経痛</div><div class="symp-note">お尻〜足にかけてのしびれや痛み</div></div>
+    <div class="symp-item reveal"><div class="symp-icon">🦵</div><div class="symp-name">膝・関節の痛み</div><div class="symp-note">歩行時・階段昇降時の違和感・痛み</div></div>
+    <div class="symp-item reveal"><div class="symp-icon">🤸</div><div class="symp-name">スポーツ障害</div><div class="symp-note">捻挫・肉離れ・テニス肘など</div></div>
+    <div class="symp-item reveal"><div class="symp-icon">🚗</div><div class="symp-name">交通事故のむちうち</div><div class="symp-note">事故後の首・背中の痛みに対応</div></div>
+  </div>
+</section>
+
+<section class="flow" id="flow">
+  <div style="max-width:960px;margin:0 auto;">
+    <div class="sec-ey">FLOW</div>
+    <div class="sec-h">施術の流れ</div>
+    <div class="sec-line"></div>
+    <div class="flow-steps">
+      <div class="flow-step reveal"><div class="flow-num">1</div><h3>ご予約</h3><p>お電話またはWEBから24時間予約可能。初回は問診票のご記入をお願いします。</p></div>
+      <div class="flow-step reveal"><div class="flow-num">2</div><h3>問診・検査</h3><p>痛みの原因・生活習慣・姿勢などを詳しくお伺いし、身体の状態を検査します。</p></div>
+      <div class="flow-step reveal"><div class="flow-num">3</div><h3>施術</h3><p>根本原因に対してアプローチ。痛みを取るだけでなく再発しにくいようまで考えた施術を行います。</p></div>
+      <div class="flow-step reveal"><div class="flow-num">4</div><h3>アフターケア</h3><p>施術後のセルフケア指導・次回プランの提案で、日常生活からサポートします。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="reasons" id="reasons">
+  <div style="max-width:960px;margin:0 auto;">
+    <div class="sec-ey">WHY NAGOMI</div>
+    <div class="sec-h">選ばれる3つの理由</div>
+    <div class="sec-line"></div>
+    <div class="reasons-grid">
+      <div class="reason-card reveal"><div class="reason-num">01</div><h3>国家資格保持者のみが担当</h3><p>柔道整復師・鍼灸師などの国家資格を保有するスタッフのみが施術を担当。安心・安全な施術をお約束します。</p></div>
+      <div class="reason-card reveal"><div class="reason-num">02</div><h3>完全予約制で待ち時間ゼロ</h3><p>他の患者様と時間が重ならない完全予約制。プライバシーを守りながら、集中した施術を受けていただけます。</p></div>
+      <div class="reason-card reveal"><div class="reason-num">03</div><h3>根本へのアプローチにこだわった施術</h3><p>痛みの一時的緩和ではなく、姿勢・筋肉バランス・生活習慣を含めた根本的な原因にアプローチします。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="faq-inner">
+    <div class="sec-ey">FAQ</div>
+    <div class="sec-h">よくあるご質問</div>
+    <div class="sec-line"></div>
+    <div class="faq-item"><div class="faq-q">初めてでも大丈夫ですか？<span class="faq-icon">+</span></div><div class="faq-a">はい、もちろんです。初回は丁寧な問診・検査から始め、施術の内容や流れを説明した上で進めます。不安なことは何でもご質問ください。</div></div>
+    <div class="faq-item"><div class="faq-q">保険は使えますか？<span class="faq-icon">+</span></div><div class="faq-a">骨折・脱臼・捻挫・打撲・肉離れなどの急性外傷には健康保険が適用されます。慢性的な症状は自費診療となります。交通事故・労災も対応しています。</div></div>
+    <div class="faq-item"><div class="faq-q">何回通えば改善しますか？<span class="faq-icon">+</span></div><div class="faq-a">症状や程度により異なりますが、多くの方が3〜5回の施術で変化を実感されています。初回にお体の状態をみてから目安をお伝えします。</div></div>
+    <div class="faq-item"><div class="faq-q">駐車場はありますか？<span class="faq-icon">+</span></div><div class="faq-a">はい、院の隣に無料駐車場を3台分ご用意しています。満車の場合は近隣のコインパーキングをご利用ください。</div></div>
+  </div>
+</section>
+
+<section class="cta" id="cta">
+  <h2>まずは、初回体験から。</h2>
+  <p>初めての方限定の体験施術を実施中。<br>「続けなければいけない」はありません。まずは一度、お体の状態を確かめてください。</p>
+  <div class="cta-box">
+    <div style="font-size:13px;color:var(--gray);margin-bottom:4px;">お電話でのご予約</div>
+    <a href="tel:03-XXXX-XXXX" class="cta-tel">03-XXXX-XXXX</a>
+    <div class="cta-hour">受付時間：平日 9:00〜20:00 ／ 土日 9:00〜18:00</div>
+    <a href="#" class="btn-g-d">WEBから24時間予約する →</a>
+    <div style="font-size:12px;color:var(--gray);margin-top:12px;">初回体験 ¥1,980（通常 ¥5,500）</div>
+  </div>
+</section>
+
+<footer>
+  <div class="fi">
+    <div><div class="fl">なごみ整骨院</div><div style="font-size:12px;margin-top:7px;">〒XXX-XXXX 東京都XX区XX X-X-X（架空）／ 03-XXXX-XXXX</div></div>
+    <div class="fc"><div>© 2024 なごみ整骨院. All Rights Reserved.</div><div class="fp">和-Node プロデュース</div></div>
+  </div>
+</footer>
+<script>
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('mmclose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+function mm(){document.getElementById('mobileMenu').classList.remove('open');}
+window.addEventListener('scroll',()=>document.getElementById('backTop').classList.toggle('show',window.scrollY>400));
+document.querySelectorAll('.faq-q').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement,isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=`${(i%4)*80}ms`;io.observe(el);});
+</script>
+</body></html>
+<!-- 和-Node プロデュース -->
+

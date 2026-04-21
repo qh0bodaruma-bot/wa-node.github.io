@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【ポートフォリオ】NEON PULSE FESTIVAL 2024</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--bg:#06010f;--purple:#7c3aed;--pink:#ec4899;--cyan:#06b6d4;--yellow:#fbbf24;--white:#f0e8ff;--gray:#8878aa;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--white);overflow-x:hidden;}
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#4a148c,#6a1b9a);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:7px 16px;}
+.portfolio-banner span{background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
+.ticket-bar{position:fixed;bottom:0;left:0;right:0;z-index:998;background:linear-gradient(135deg,var(--purple),var(--pink));padding:14px 20px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;transform:translateY(100%);transition:transform 0.4s;box-shadow:0 -4px 30px rgba(124,58,237,0.5);}
+.ticket-bar.show{transform:translateY(0);}
+.ticket-bar p{font-size:14px;font-weight:700;}
+.ticket-bar-btn{background:#fff;color:var(--purple);padding:10px 28px;font-weight:900;font-size:14px;text-decoration:none;border-radius:4px;transition:all 0.3s;}
+.ticket-bar-btn:hover{transform:scale(1.05);}
+nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:12px 44px;background:rgba(6,1,15,0.92);backdrop-filter:blur(16px);border-bottom:1px solid rgba(124,58,237,0.3);}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.12em;background:linear-gradient(135deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.nav-cta{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:9px 20px;font-weight:700;font-size:13px;text-decoration:none;border-radius:4px;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--purple);}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(6,1,15,0.98);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--white);font-size:20px;text-decoration:none;font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em;}
+.mobile-menu-close{position:absolute;top:48px;right:22px;font-size:26px;color:var(--purple);cursor:pointer;background:none;border:none;}
+
+/* ヒーロー */
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background-image:url('images/hero_event.png');background-size:cover;background-position:center;filter:brightness(0.2);}
+.hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(124,58,237,0.3) 0%,rgba(6,1,15,0.8) 70%);}
+.glow{position:absolute;border-radius:50%;filter:blur(120px);pointer-events:none;}
+.glow-1{width:600px;height:600px;background:rgba(124,58,237,0.25);top:-100px;left:-200px;}
+.glow-2{width:500px;height:500px;background:rgba(236,72,153,0.2);bottom:-100px;right:-150px;}
+.hero-inner{position:relative;z-index:2;padding:120px 20px 80px;max-width:900px;}
+.hero-date{font-family:'Bebas Neue',sans-serif;font-size:16px;letter-spacing:0.4em;color:var(--cyan);margin-bottom:20px;}
+.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(60px,12vw,140px);line-height:0.95;margin-bottom:20px;letter-spacing:0.04em;}
+.hero h1 .line2{display:block;background:linear-gradient(135deg,var(--purple),var(--pink),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero-sub{font-size:16px;color:rgba(240,232,255,0.75);margin-bottom:44px;line-height:1.9;}
+.hero-artists{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
+.artist-chip{background:rgba(255,255,255,0.07);border:1px solid rgba(124,58,237,0.4);padding:8px 20px;border-radius:40px;font-size:13px;font-weight:700;}
+.timer-wrap{display:flex;gap:16px;justify-content:center;margin-bottom:44px;flex-wrap:wrap;}
+.timer-block{text-align:center;}
+.timer-num-e{font-family:'Bebas Neue',sans-serif;font-size:clamp(44px,8vw,72px);color:var(--yellow);line-height:1;text-shadow:0 0 24px rgba(251,191,36,0.6);}
+.timer-lbl-e{font-size:11px;color:var(--gray);letter-spacing:0.15em;}
+.timer-sep{font-family:'Bebas Neue',sans-serif;font-size:56px;color:var(--purple);line-height:1.2;align-self:flex-start;margin-top:8px;}
+.btn-ticket{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;padding:18px 52px;font-size:17px;font-weight:900;text-decoration:none;border-radius:6px;display:inline-block;transition:all 0.3s;letter-spacing:0.06em;box-shadow:0 0 40px rgba(124,58,237,0.5);}
+.btn-ticket:hover{transform:scale(1.05);box-shadow:0 0 64px rgba(236,72,153,0.6);}
+
+/* 出演者 */
+.lineup{padding:88px 44px;background:linear-gradient(180deg,var(--bg),rgba(124,58,237,0.05));}
+.sec-label{font-family:'Bebas Neue',sans-serif;font-size:12px;letter-spacing:0.4em;color:var(--cyan);text-align:center;margin-bottom:10px;}
+.sec-h-ev{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,7vw,88px);text-align:center;letter-spacing:0.04em;margin-bottom:52px;}
+.lineup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:1000px;margin:0 auto;}
+.lineup-card{position:relative;overflow:hidden;border:1px solid rgba(124,58,237,0.2);border-radius:8px;transition:all 0.4s;cursor:default;}
+.lineup-card:hover{border-color:rgba(124,58,237,0.6);transform:scale(1.03);}
+.lineup-img{height:240px;display:flex;align-items:center;justify-content:center;font-size:80px;}
+.lineup-img.a{background:linear-gradient(160deg,#1a0a3a,#3a1060);}
+.lineup-img.b{background:linear-gradient(160deg,#001a2a,#003060);}
+.lineup-img.c{background:linear-gradient(160deg,#2a001a,#600040);}
+.lineup-img.d{background:linear-gradient(160deg,#1a1a00,#404000);}
+.lineup-img.e{background:linear-gradient(160deg,#001a1a,#006060);}
+.lineup-img.f{background:linear-gradient(160deg,#0a0a2a,#202060);}
+.lineup-info{padding:18px;}
+.lineup-type{font-size:10px;letter-spacing:0.2em;color:var(--cyan);margin-bottom:4px;}
+.lineup-name-e{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:0.06em;}
+.lineup-genre{font-size:12px;color:var(--gray);}
+
+/* チケット */
+.tickets{padding:88px 44px;background:rgba(124,58,237,0.05);}
+.ticket-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto;}
+.ticket-card{border:1px solid rgba(124,58,237,0.25);border-radius:12px;padding:36px 24px;text-align:center;transition:all 0.4s;}
+.ticket-card.hot{border-color:var(--purple);background:rgba(124,58,237,0.08);position:relative;}
+.ticket-card.hot::before{content:'🔥 残りわずか';position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--purple);color:#fff;font-size:11px;font-weight:700;padding:3px 14px;white-space:nowrap;border-radius:40px;}
+.ticket-type{font-size:11px;letter-spacing:0.15em;color:var(--cyan);margin-bottom:8px;}
+.ticket-name-e{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.08em;color:var(--white);margin-bottom:14px;}
+.ticket-price-e{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--yellow);line-height:1;}
+.ticket-price-e span{font-size:14px;font-weight:400;color:var(--gray);}
+.ticket-features-e{list-style:none;margin:20px 0;display:grid;gap:8px;text-align:left;}
+.ticket-features-e li{font-size:13px;padding-left:18px;position:relative;color:rgba(240,232,255,0.8);}
+.ticket-features-e li::before{content:'✓';color:var(--cyan);position:absolute;left:0;}
+.ticket-btn-e{display:block;padding:12px;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;font-weight:700;text-decoration:none;border-radius:6px;margin-top:20px;transition:all 0.3s;}
+.ticket-btn-e:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(124,58,237,0.4);}
+.ticket-card:not(.hot) .ticket-btn-e{background:transparent;border:1px solid rgba(124,58,237,0.4);color:var(--purple);}
+.ticket-card:not(.hot) .ticket-btn-e:hover{background:rgba(124,58,237,0.1);}
+
+/* 会場 */
+.venue{padding:88px 44px;background:var(--bg);}
+.venue-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;}
+.venue-map{background:linear-gradient(160deg,#0d0520,#1a0840);height:320px;display:flex;align-items:center;justify-content:center;font-size:80px;border:1px solid rgba(124,58,237,0.2);border-radius:8px;}
+.venue-info h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(32px,4vw,52px);letter-spacing:0.04em;margin-bottom:20px;}
+.venue-table{width:100%;border-collapse:collapse;}
+.venue-table tr{border-bottom:1px solid rgba(124,58,237,0.12);}
+.venue-table th{padding:12px 0;font-size:12px;color:var(--gray);text-align:left;font-weight:400;width:30%;}
+.venue-table td{padding:12px 0;font-size:14px;}
+
+footer{background:#030008;padding:44px;border-top:1px solid rgba(124,58,237,0.2);}
+.footer-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;background:linear-gradient(135deg,var(--purple),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.footer-copy{font-size:12px;color:var(--gray);text-align:right;}
+.footer-produce{font-size:13px;color:var(--cyan);font-weight:700;margin-top:5px;}
+.back-top-ev{position:fixed;bottom:80px;right:24px;z-index:499;width:44px;height:44px;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;border:none;border-radius:50%;font-size:18px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
+.back-top-ev.show{opacity:1;transform:translateY(0);}
+.back-top-ev:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(124,58,237,0.5);}
+
+@media(max-width:900px){
+  nav{padding:10px 18px;}.nav-cta{display:none;}.hamburger{display:flex;}
+  .lineup,.tickets,.venue{padding:64px 20px;}
+  .lineup-grid{grid-template-columns:repeat(2,1fr);}
+  .ticket-grid{grid-template-columns:1fr;}
+  .venue-inner{grid-template-columns:1fr;}.venue-map{height:220px;}
+  footer{padding:36px 20px;}.footer-inner{flex-direction:column;align-items:flex-start;}.footer-copy{text-align:left;}
+}
+@media(max-width:480px){.hero h1{font-size:60px;}.lineup-grid{grid-template-columns:1fr;}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空のフェスイベントを題材にしたデザインサンプルです</div>
+<div class="ticket-bar" id="ticketBar">
+  <p>🎟️ 残席わずか！早期割引は<strong>あと3日</strong></p>
+  <a href="#tickets" class="ticket-bar-btn">チケットを購入する →</a>
+</div>
+<button class="back-top-ev" id="backTopEv" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<nav>
+  <div class="nav-logo">NEON PULSE</div>
+  <a href="#tickets" class="nav-cta">チケット購入</a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose">✕</button>
+  <a href="#lineup" onclick="closeMobileMenu()">ラインナップ</a>
+  <a href="#tickets" onclick="closeMobileMenu()">チケット</a>
+  <a href="#venue" onclick="closeMobileMenu()">会場</a>
+  <a href="#tickets" onclick="closeMobileMenu()" style="color:var(--pink)">チケット購入</a>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="glow glow-1"></div>
+  <div class="glow glow-2"></div>
+  <div class="hero-inner">
+    <div class="hero-date">2024.08.10 SAT — 11 SUN ／ 幕張メッセ（架空）</div>
+    <h1>NEON<span class="line2">PULSE</span>FESTIVAL</h1>
+    <p class="hero-sub">日本最大級の音楽フェス。30組以上のアーティストが2日間にわたり熱狂をお届け。</p>
+    <div class="hero-artists">
+      <span class="artist-chip">🎤 DJ PHANTOM</span>
+      <span class="artist-chip">🎸 SOLAR WAVE</span>
+      <span class="artist-chip">🎹 ECHO HORIZON</span>
+      <span class="artist-chip">💿 ULTRA NOVA</span>
+    </div>
+    <div style="margin-bottom:16px;font-size:13px;color:var(--cyan);letter-spacing:0.1em;">⏰ 早期割引終了まで</div>
+    <div class="timer-wrap">
+      <div class="timer-block"><div class="timer-num-e" id="tD">03</div><div class="timer-lbl-e">DAYS</div></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-block"><div class="timer-num-e" id="tH">14</div><div class="timer-lbl-e">HOURS</div></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-block"><div class="timer-num-e" id="tM">22</div><div class="timer-lbl-e">MINS</div></div>
+      <div class="timer-sep">:</div>
+      <div class="timer-block"><div class="timer-num-e" id="tS">00</div><div class="timer-lbl-e">SECS</div></div>
+    </div>
+    <a href="#tickets" class="btn-ticket">🎟️ チケットを購入する</a>
+  </div>
+</section>
+
+<section class="lineup" id="lineup">
+  <div class="sec-label">LINE UP 2024</div>
+  <div class="sec-h-ev">ARTISTS</div>
+  <div class="lineup-grid">
+    <div class="lineup-card reveal"><div class="lineup-img a">🎤</div><div class="lineup-info"><div class="lineup-type">HEADLINER</div><div class="lineup-name-e">DJ PHANTOM</div><div class="lineup-genre">Electronic / House</div></div></div>
+    <div class="lineup-card reveal"><div class="lineup-img b">🎸</div><div class="lineup-info"><div class="lineup-type">HEADLINER</div><div class="lineup-name-e">SOLAR WAVE</div><div class="lineup-genre">Alternative Rock</div></div></div>
+    <div class="lineup-card reveal"><div class="lineup-img c">🎹</div><div class="lineup-info"><div class="lineup-type">SPECIAL ACT</div><div class="lineup-name-e">ECHO HORIZON</div><div class="lineup-genre">Synth Pop</div></div></div>
+    <div class="lineup-card reveal"><div class="lineup-img d">💿</div><div class="lineup-info"><div class="lineup-type">SPECIAL ACT</div><div class="lineup-name-e">ULTRA NOVA</div><div class="lineup-genre">Hip Hop / Trap</div></div></div>
+    <div class="lineup-card reveal"><div class="lineup-img e">🎺</div><div class="lineup-info"><div class="lineup-type">SUPPORT</div><div class="lineup-name-e">NEON STREET</div><div class="lineup-genre">Jazz Fusion</div></div></div>
+    <div class="lineup-card reveal"><div class="lineup-img f">🥁</div><div class="lineup-info"><div class="lineup-type">SUPPORT</div><div class="lineup-name-e">STATIC BLOOM</div><div class="lineup-genre">Indie / Dream Pop</div></div></div>
+  </div>
+</section>
+
+<section class="tickets" id="tickets">
+  <div class="sec-label">TICKETS</div>
+  <div class="sec-h-ev">チケット</div>
+  <div class="ticket-grid">
+    <div class="ticket-card reveal">
+      <div class="ticket-type">1DAY</div>
+      <div class="ticket-name-e">デイパス</div>
+      <div class="ticket-price-e">¥9,800<span>（税込）</span></div>
+      <ul class="ticket-features-e"><li>1日入場券</li><li>全ステージ観覧可</li></ul>
+      <a href="#" class="ticket-btn-e">購入する</a>
+    </div>
+    <div class="ticket-card hot reveal">
+      <div class="ticket-type">2DAY</div>
+      <div class="ticket-name-e">2デイパス</div>
+      <div class="ticket-price-e">¥16,800<span>（税込）</span></div>
+      <ul class="ticket-features-e"><li>2日間入場券</li><li>全ステージ観覧可</li><li>限定グッズ1点プレゼント</li></ul>
+      <a href="#" class="ticket-btn-e">購入する</a>
+    </div>
+    <div class="ticket-card reveal">
+      <div class="ticket-type">VIP</div>
+      <div class="ticket-name-e">VIPパス</div>
+      <div class="ticket-price-e">¥38,000<span>（税込）</span></div>
+      <ul class="ticket-features-e"><li>2日間VIPエリア入場</li><li>アーティスト物販優先</li><li>VIPラウンジ利用可</li><li>限定グッズセット</li></ul>
+      <a href="#" class="ticket-btn-e">購入する</a>
+    </div>
+  </div>
+</section>
+
+<section class="venue" id="venue">
+  <div class="sec-label">VENUE</div>
+  <div class="sec-h-ev" style="text-align:center;margin-bottom:44px;">会場情報</div>
+  <div class="venue-inner">
+    <div class="venue-map">🗺️</div>
+    <div class="venue-info">
+      <h2>幕張メッセ<br>（架空）</h2>
+      <table class="venue-table">
+        <tr><th>会場</th><td>幕張メッセ 展示ホール1〜8（架空）</td></tr>
+        <tr><th>住所</th><td>千葉市美浜区中瀬X-X（架空）</td></tr>
+        <tr><th>アクセス</th><td>海浜幕張駅 徒歩5分</td></tr>
+        <tr><th>開場</th><td>10:00（予定）</td></tr>
+        <tr><th>終演</th><td>22:00（予定）</td></tr>
+        <tr><th>駐車場</th><td>なし（公共交通機関をご利用ください）</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div><div class="footer-logo">NEON PULSE FESTIVAL</div><div style="font-size:12px;color:var(--gray);margin-top:7px;">主催：ネオンパルス実行委員会（架空）</div></div>
+    <div class="footer-copy"><div>© 2024 NEON PULSE FESTIVAL. All Rights Reserved.</div><div class="footer-produce">和-Node プロデュース</div></div>
+  </div>
+</footer>
+<script>
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('menuClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+window.addEventListener('scroll',()=>{
+  document.getElementById('ticketBar').classList.toggle('show',window.scrollY>600);
+  document.getElementById('backTopEv').classList.toggle('show',window.scrollY>400);
+});
+// カウントダウン（3日後を目標日に設定）
+const target=new Date();target.setDate(target.getDate()+3);
+function tick(){
+  const now=new Date(),diff=target-now;
+  if(diff<0)return;
+  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  document.getElementById('tD').textContent=String(d).padStart(2,'0');
+  document.getElementById('tH').textContent=String(h).padStart(2,'0');
+  document.getElementById('tM').textContent=String(m).padStart(2,'0');
+  document.getElementById('tS').textContent=String(s).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=`${(i%3)*80}ms`;io.observe(el);});
+</script>
+</body></html>
+<!-- 和-Node プロデュース -->

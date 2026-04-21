@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【ポートフォリオ】Café Irodori | 地域密着カフェ</title>
+<meta name="description" content="これはポートフォリオ作品です。架空のカフェのLPサンプルです。">
+<link href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--terra:#c4693a;--terra2:#e07a4a;--cream:#fdf5ec;--beige:#f0e0cc;--brown:#5c3820;--darkbrown:#2e1a0e;--green:#5a7a4a;--gray:#9a8070;--white:#fffdf8;}
+html{scroll-behavior:smooth;}
+body{font-family:'Zen Kaku Gothic New',sans-serif;background:var(--cream);color:var(--brown);overflow-x:hidden;}
+
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#ff8f00,#ffc107);color:#3e2000;font-size:12px;font-weight:700;text-align:center;padding:7px 16px;letter-spacing:0.04em;}
+.portfolio-banner span{background:#3e2000;color:#ffc107;padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
+
+/* 電話フローティング */
+.tel-float{position:fixed;bottom:24px;right:24px;z-index:998;background:var(--terra);color:#fff;width:60px;height:60px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;text-decoration:none;box-shadow:0 6px 24px rgba(196,105,58,0.5);animation:telPulse 2s infinite;}
+@keyframes telPulse{0%,100%{box-shadow:0 6px 24px rgba(196,105,58,0.5);}50%{box-shadow:0 6px 44px rgba(196,105,58,0.8);}}
+
+/* ナビ */
+nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:14px 44px;background:rgba(253,245,236,0.93);backdrop-filter:blur(12px);border-bottom:1px solid rgba(196,105,58,0.18);}
+.nav-logo{display:flex;align-items:center;gap:8px;}
+.nav-logo-icon{font-size:24px;}
+.nav-logo-text{font-family:'Noto Serif JP',serif;font-size:18px;color:var(--brown);letter-spacing:0.07em;}
+.nav-links{display:flex;gap:24px;list-style:none;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:13px;transition:color 0.3s;}
+.nav-links a:hover{color:var(--terra);}
+.nav-tel{color:var(--terra);font-size:15px;font-weight:700;text-decoration:none;letter-spacing:0.04em;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--terra);}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(253,245,236,0.97);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--brown);font-size:20px;text-decoration:none;font-family:'Noto Serif JP',serif;}
+.mobile-menu-close{position:absolute;top:48px;right:22px;font-size:26px;color:var(--terra);cursor:pointer;background:none;border:none;}
+
+/* ヒーロー */
+.hero{min-height:100vh;position:relative;overflow:hidden;display:flex;align-items:flex-end;}
+.hero-bg-img{position:absolute;inset:0;background-image:url('images/hero_cafe.png');background-size:cover;background-position:center;}
+.hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(46,26,14,0.92) 0%,rgba(46,26,14,0.4) 50%,rgba(46,26,14,0.1) 100%);}
+.hero-content{position:relative;z-index:2;padding:0 60px 80px;color:#fff;max-width:700px;}
+.hero-eyebrow{font-size:11px;letter-spacing:0.26em;color:var(--terra2);margin-bottom:20px;display:block;}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(36px,5vw,64px);line-height:1.3;margin-bottom:18px;}
+.hero h1 em{color:var(--terra2);font-style:normal;}
+.hero-sub{font-size:15px;line-height:2.0;opacity:0.8;margin-bottom:36px;max-width:480px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:36px;}
+.btn-terra{background:var(--terra);color:#fff;padding:14px 36px;font-size:14px;font-weight:700;text-decoration:none;display:inline-block;letter-spacing:0.08em;transition:all 0.3s;border-radius:2px;}
+.btn-terra:hover{background:var(--terra2);transform:translateY(-2px);box-shadow:0 8px 20px rgba(196,105,58,0.4);}
+.btn-tel{background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.6);color:#fff;padding:12px 28px;font-size:14px;font-weight:700;text-decoration:none;display:inline-block;letter-spacing:0.06em;transition:all 0.3s;border-radius:2px;}
+.btn-tel:hover{background:rgba(255,255,255,0.25);}
+.hero-info-bar{display:flex;gap:32px;flex-wrap:wrap;}
+.info-item{display:flex;align-items:center;gap:8px;font-size:13px;opacity:0.85;}
+.info-item span{opacity:0.6;}
+
+/* セクション共通 */
+.section-eyebrow{font-size:11px;letter-spacing:0.2em;color:var(--terra);text-align:center;margin-bottom:10px;}
+.section-title{font-family:'Noto Serif JP',serif;font-size:clamp(26px,3vw,42px);text-align:center;color:var(--brown);margin-bottom:12px;}
+.section-line{width:38px;height:2px;background:var(--terra);margin:0 auto 52px;}
+
+/* 選ばれる理由 */
+.reasons{padding:90px 60px;background:var(--white);}
+.reasons-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;max-width:1000px;margin:0 auto;}
+.reason-card{text-align:center;padding:36px 24px;border:1px solid rgba(196,105,58,0.15);background:var(--cream);transition:all 0.4s;}
+.reason-card:hover{transform:translateY(-5px);box-shadow:0 14px 40px rgba(92,56,32,0.1);border-color:var(--terra);}
+.reason-num{font-family:'Noto Serif JP',serif;font-size:44px;color:var(--terra);line-height:1;margin-bottom:8px;}
+.reason-card h3{font-family:'Noto Serif JP',serif;font-size:17px;color:var(--brown);margin-bottom:10px;}
+.reason-card p{font-size:13px;color:var(--gray);line-height:1.9;}
+
+/* メニュー */
+.menu{padding:90px 60px;background:var(--cream);}
+.menu-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:1100px;margin:0 auto;}
+.menu-card{background:var(--white);overflow:hidden;border-radius:4px;transition:all 0.4s;cursor:default;}
+.menu-card:hover{transform:translateY(-5px);box-shadow:0 18px 44px rgba(92,56,32,0.14);}
+.menu-img{height:170px;display:flex;align-items:center;justify-content:center;font-size:64px;}
+.menu-img.a{background:linear-gradient(160deg,#e8c890,#d0a060);}
+.menu-img.b{background:linear-gradient(160deg,#c8d8a0,#a0b870);}
+.menu-img.c{background:linear-gradient(160deg,#f0d0c0,#e0b090);}
+.menu-img.d{background:linear-gradient(160deg,#d0c8e0,#b0a8c0);}
+.menu-info{padding:18px;}
+.menu-tag{font-size:10px;letter-spacing:0.15em;color:var(--terra);margin-bottom:4px;}
+.menu-name{font-family:'Noto Serif JP',serif;font-size:15px;color:var(--brown);margin-bottom:5px;}
+.menu-desc{font-size:12px;color:var(--gray);line-height:1.7;margin-bottom:8px;}
+.menu-price{font-size:17px;color:var(--terra);font-family:'Noto Serif JP',serif;}
+
+/* アクセス */
+.access{padding:90px 60px;background:var(--white);}
+.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:52px;max-width:1100px;margin:0 auto;align-items:center;}
+.access-info h2{font-family:'Noto Serif JP',serif;font-size:32px;color:var(--brown);margin-bottom:28px;}
+.access-table{width:100%;border-collapse:collapse;}
+.access-table tr{border-bottom:1px solid rgba(196,105,58,0.14);}
+.access-table th{padding:13px 0;text-align:left;font-size:13px;color:var(--gray);width:80px;font-weight:400;}
+.access-table td{padding:13px 0;font-size:14px;color:var(--brown);}
+.tel-btn{display:flex;align-items:center;gap:10px;margin-top:28px;background:var(--terra);color:#fff;padding:16px 32px;text-decoration:none;font-weight:700;font-size:14px;border-radius:2px;transition:all 0.3s;width:fit-content;}
+.tel-btn:hover{background:var(--terra2);transform:translateY(-2px);}
+.map-box{height:380px;background:linear-gradient(160deg,#d4c8b8,#c0b0a0);display:flex;align-items:center;justify-content:center;border-radius:4px;overflow:hidden;position:relative;}
+.map-pin{font-size:48px;animation:bounce 1.5s ease-in-out infinite;}
+@keyframes bounce{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+.map-label{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(255,255,255,0.9);padding:8px 16px;font-size:13px;color:var(--brown);font-weight:700;border-radius:2px;}
+
+/* Instagramグリッド */
+.insta{padding:80px 60px;background:var(--cream);}
+.insta-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;max-width:1100px;margin:0 auto;border-radius:4px;overflow:hidden;}
+.insta-item{aspect-ratio:1;overflow:hidden;position:relative;cursor:pointer;}
+.insta-item:nth-child(1){grid-column:span 2;grid-row:span 2;}
+.insta-bg{width:100%;height:100%;transition:transform 0.4s;}
+.insta-item:nth-child(1) .insta-bg{background:linear-gradient(135deg,#c8a060,#a06040);display:flex;align-items:center;justify-content:center;font-size:80px;}
+.insta-item:nth-child(2) .insta-bg{background:linear-gradient(135deg,#a0b870,#809050);display:flex;align-items:center;justify-content:center;font-size:44px;}
+.insta-item:nth-child(3) .insta-bg{background:linear-gradient(135deg,#f0d0c0,#d0a880);display:flex;align-items:center;justify-content:center;font-size:44px;}
+.insta-item:nth-child(4) .insta-bg{background:linear-gradient(135deg,#c8c8e0,#a0a0c0);display:flex;align-items:center;justify-content:center;font-size:44px;}
+.insta-item:nth-child(5) .insta-bg{background:linear-gradient(135deg,#e8c0a0,#c09070);display:flex;align-items:center;justify-content:center;font-size:44px;}
+.insta-item:nth-child(6) .insta-bg{background:linear-gradient(135deg,#b8d0b0,#90b080);display:flex;align-items:center;justify-content:center;font-size:44px;}
+.insta-item:hover .insta-bg{transform:scale(1.07);}
+.insta-overlay{position:absolute;inset:0;background:rgba(92,56,32,0.0);display:flex;align-items:center;justify-content:center;transition:background 0.3s;}
+.insta-item:hover .insta-overlay{background:rgba(92,56,32,0.35);}
+.insta-overlay span{color:#fff;font-size:12px;font-weight:700;letter-spacing:0.1em;opacity:0;transition:opacity 0.3s;}
+.insta-item:hover .insta-overlay span{opacity:1;}
+
+/* 口コミ */
+.reviews-cafe{padding:80px 60px;background:var(--white);}
+.reviews-cafe-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1000px;margin:0 auto;}
+.review-cafe-card{background:var(--cream);border:1px solid rgba(196,105,58,0.15);padding:28px;border-radius:4px;transition:all 0.4s;}
+.review-cafe-card:hover{transform:translateY(-4px);box-shadow:0 14px 36px rgba(92,56,32,0.1);}
+.review-stars-c{color:var(--terra);font-size:14px;margin-bottom:8px;}
+.review-text-c{font-size:13px;color:var(--gray);line-height:1.9;margin-bottom:14px;}
+.review-author-c{font-size:13px;font-weight:700;color:var(--brown);}
+.review-via{font-size:11px;color:var(--gray);margin-top:2px;}
+
+/* ページトップ */
+.back-top-l{position:fixed;bottom:90px;right:24px;z-index:497;width:44px;height:44px;background:var(--terra);color:#fff;border:none;border-radius:50%;font-size:18px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
+.back-top-l.show{opacity:1;transform:translateY(0);}
+.back-top-l:hover{background:var(--terra2);transform:translateY(-3px);}
+
+/* フッター */
+footer{background:var(--darkbrown);padding:52px 60px;color:rgba(255,255,255,0.6);}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-family:'Noto Serif JP',serif;font-size:24px;color:var(--terra2);}
+.footer-copy{font-size:12px;text-align:right;}
+.footer-produce{font-size:13px;color:var(--terra2);font-weight:700;margin-top:5px;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:10px 18px;}
+  .nav-links,.nav-tel{display:none;}
+  .hamburger{display:flex;}
+  .hero-content{padding:0 24px 64px;}
+  .reasons,.menu,.access,.insta,.reviews-cafe{padding:64px 20px;}
+  .reasons-grid{grid-template-columns:1fr;}
+  .menu-grid{grid-template-columns:repeat(2,1fr);}
+  .access-grid{grid-template-columns:1fr;}
+  .insta-grid{grid-template-columns:repeat(3,1fr);}
+  .insta-item:nth-child(1){grid-column:span 1;grid-row:span 1;}
+  .reviews-cafe-grid{grid-template-columns:1fr;}
+  footer{padding:40px 20px;}
+  .footer-inner{flex-direction:column;align-items:flex-start;}
+  .footer-copy{text-align:left;}
+  .tel-float{width:52px;height:52px;font-size:22px;bottom:16px;right:16px;}
+  .back-top-l{bottom:80px;right:16px;width:38px;height:38px;font-size:16px;}
+}
+@media(max-width:480px){
+  .hero h1{font-size:32px;}
+  .hero-btns{flex-direction:column;}
+  .menu-grid{grid-template-columns:1fr 1fr;}
+  .menu-img{height:130px;font-size:48px;}
+}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+
+<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空のカフェを題材にしたデザインサンプルです</div>
+
+<a href="tel:0x-xxxx-xxxx" class="tel-float" title="電話予約">📞</a>
+
+<nav>
+  <div class="nav-logo"><div class="nav-logo-icon">☕</div><div class="nav-logo-text">Café Irodori</div></div>
+  <ul class="nav-links">
+    <li><a href="#reasons">こだわり</a></li>
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#access">アクセス</a></li>
+  </ul>
+  <a href="tel:0x-xxxx-xxxx" class="nav-tel">📞 0X-XXXX-XXXX</a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose">✕</button>
+  <a href="#reasons" onclick="closeMobileMenu()">こだわり</a>
+  <a href="#menu" onclick="closeMobileMenu()">メニュー</a>
+  <a href="#access" onclick="closeMobileMenu()">アクセス</a>
+  <a href="tel:0x-xxxx-xxxx" onclick="closeMobileMenu()" style="color:var(--terra)">📞 電話で予約する</a>
+</div>
+
+<!-- ヒーロー -->
+<section class="hero" style="padding-top:33px;">
+  <div class="hero-bg-img"></div>
+  <div class="hero-bg-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">SINCE 2015 ｜ 地元で愛されて9年</span>
+    <h1>一杯に込める、<br><em>ぬくもりと</em><br><em>丁寧さ</em>。</h1>
+    <p class="hero-sub">自家焙煎コーヒーと、旬の食材にこだわったフードで、あなたの「いつもの場所」になる喫茶店を目指しています。</p>
+    <div class="hero-btns">
+      <a href="#access" class="btn-terra">席を予約する →</a>
+      <a href="tel:0x-xxxx-xxxx" class="btn-tel">📞 電話で予約</a>
+    </div>
+    <div class="hero-info-bar">
+      <div class="info-item">⏰ <span>営業時間:</span> 8:00〜21:00</div>
+      <div class="info-item">📍 <span>アクセス:</span> ○○駅 徒歩5分</div>
+      <div class="info-item">🚗 <span>駐車場:</span> 10台完備</div>
+    </div>
+  </div>
+</section>
+
+<!-- 選ばれる理由 -->
+<section class="reasons" id="reasons">
+  <div class="section-eyebrow">WHY IRODORI</div>
+  <div class="section-title">選ばれる3つの理由</div>
+  <div class="section-line"></div>
+  <div class="reasons-grid">
+    <div class="reason-card reveal"><div class="reason-num">01</div><h3>自家焙煎の香り高いコーヒー</h3><p>世界5カ国から厳選した生豆を、店舗内で毎日少量ずつ丁寧に焙煎。豆の鮮度と個性を最大限に引き出した一杯をお届けします。</p></div>
+    <div class="reason-card reveal"><div class="reason-num">02</div><h3>地元農家直送の旬の食材</h3><p>地元の農家さんと直接取引した新鮮な野菜・果物を使用。フードはすべて添加物なしの手作り。季節ごとに変わるメニューも魅力です。</p></div>
+    <div class="reason-card reveal"><div class="reason-num">03</div><h3>ゆっくりできる居心地の良さ</h3><p>木を基調としたあたたかみのある空間で、ゆっくりとした時間をお過ごしください。Wi-Fi・電源完備でリモートワークにも最適です。</p></div>
+  </div>
+</section>
+
+<!-- メニュー -->
+<section class="menu" id="menu">
+  <div class="section-eyebrow">OUR MENU</div>
+  <div class="section-title">人気メニュー</div>
+  <div class="section-line"></div>
+  <div class="menu-grid">
+    <div class="menu-card reveal"><div class="menu-img a">☕</div><div class="menu-info"><div class="menu-tag">DRINK</div><div class="menu-name">いろどりブレンド</div><p class="menu-desc">お店のイチオシ。3種のブレンドで生まれる深みとフルーティな余韻。</p><div class="menu-price">¥550</div></div></div>
+    <div class="menu-card reveal"><div class="menu-img b">🥗</div><div class="menu-info"><div class="menu-tag">FOOD</div><div class="menu-name">季節の野菜プレート</div><p class="menu-desc">地元農家直送の旬野菜を使ったヘルシーランチセット。</p><div class="menu-price">¥1,280</div></div></div>
+    <div class="menu-card reveal"><div class="menu-img c">🧇</div><div class="menu-info"><div class="menu-tag">SWEETS</div><div class="menu-name">ふわふわパンケーキ</div><p class="menu-desc">地元の卵を使ったフワフワ食感のパンケーキ。SNSで話題！</p><div class="menu-price">¥980</div></div></div>
+    <div class="menu-card reveal"><div class="menu-img d">🍵</div><div class="menu-info"><div class="menu-tag">DRINK</div><div class="menu-name">抹茶ラテ</div><p class="menu-desc">京都産一番摘み抹茶を使用したまろやかで香り高い一杯。</p><div class="menu-price">¥680</div></div></div>
+  </div>
+</section>
+
+<!-- アクセス -->
+<section class="access" id="access">
+  <div class="section-eyebrow">ACCESS</div>
+  <div class="section-title">アクセス</div>
+  <div class="section-line"></div>
+  <div class="access-grid">
+    <div class="reveal">
+      <h2>Café Irodori</h2>
+      <table class="access-table">
+        <tr><th>住所</th><td>〒XXX-XXXX<br>○○県○○市○○町1-2-3</td></tr>
+        <tr><th>TEL</th><td>0X-XXXX-XXXX</td></tr>
+        <tr><th>営業時間</th><td>8:00〜21:00（LO 20:30）</td></tr>
+        <tr><th>定休日</th><td>毎週火曜日・年末年始</td></tr>
+        <tr><th>アクセス</th><td>○○駅 徒歩5分<br>駐車場10台完備</td></tr>
+      </table>
+      <a href="tel:0x-xxxx-xxxx" class="tel-btn">📞 今すぐ電話で予約する</a>
+    </div>
+    <div class="map-box reveal">
+      <div class="map-pin">📍</div>
+      <div class="map-label">Café Irodori</div>
+    </div>
+  </div>
+</section>
+
+<!-- フッター -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">☕ Café Irodori</div>
+      <div style="font-size:12px;margin-top:7px;">〒XXX-XXXX ○○県○○市○○町1-2-3</div>
+    </div>
+    <div class="footer-copy">
+      <div>© 2024 Café Irodori. All Rights Reserved.</div>
+      <div class="footer-produce">和-Node プロデュース</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('menuClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=`${(i%4)*80}ms`;io.observe(el);});
+
+window.addEventListener('scroll',()=>document.getElementById('backTopL').classList.toggle('show',window.scrollY>400));
+</script>
+</body>
+</html>
+<!-- 和-Node プロデュース -->

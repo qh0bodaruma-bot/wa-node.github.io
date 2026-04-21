@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【ポートフォリオ】Lumière Skin | プレミアムスキンケアブランド</title>
+<meta name="description" content="これはポートフォリオ作品です。架空の美容スキンケアブランドのLPサンプルです。">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Serif+JP:wght@300;400;700&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --cream:#fdf8f2;--pink:#f0d5c8;--rose:#d4847a;--gold:#b8956a;
+  --brown:#6b4c3b;--text:#3a2a24;--gray:#9a8a82;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+/* ポートフォリオバナー */
+.portfolio-banner{
+  position:fixed;top:0;left:0;right:0;z-index:9999;
+  background:linear-gradient(135deg,#7c4dff,#e040fb);
+  color:#fff;font-size:12px;font-weight:700;
+  text-align:center;padding:7px 16px;letter-spacing:0.04em;
+}
+.portfolio-banner span{background:rgba(255,255,255,0.25);padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
+
+/* パーティクル */
+#particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1;}
+
+/* ナビ */
+nav{
+  position:fixed;top:33px;left:0;right:0;z-index:999;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:16px 60px;
+  background:rgba(253,248,242,0.88);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(184,149,106,0.15);
+  transition:all 0.3s;
+}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:0.12em;color:var(--brown);font-style:italic;}
+.nav-links{display:flex;gap:32px;list-style:none;}
+.nav-links a{color:var(--gray);text-decoration:none;font-size:13px;letter-spacing:0.08em;transition:color 0.3s;}
+.nav-links a:hover{color:var(--rose);}
+.nav-cta{border:1px solid var(--rose);color:var(--rose);padding:9px 26px;font-size:12px;letter-spacing:0.08em;text-decoration:none;transition:all 0.3s;}
+.nav-cta:hover{background:var(--rose);color:#fff;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{display:block;width:22px;height:2px;background:var(--rose);}
+.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(253,248,242,0.97);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:36px;}
+.mobile-menu.open{display:flex;}
+.mobile-menu a{color:var(--brown);font-size:20px;font-family:'Cormorant Garamond',serif;text-decoration:none;font-style:italic;}
+.mobile-menu-close{position:absolute;top:48px;right:24px;font-size:26px;color:var(--rose);cursor:pointer;background:none;border:none;}
+
+/* ヒーロー */
+.hero{
+  min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+  padding-top:66px;overflow:hidden;
+  background:linear-gradient(160deg,var(--cream) 0%,#fce8df 100%);
+  position:relative;z-index:2;
+}
+.hero-left{padding:80px 56px 80px 72px;display:flex;flex-direction:column;justify-content:center;}
+.hero-eyebrow{font-size:11px;letter-spacing:0.28em;color:var(--rose);border-bottom:1px solid var(--rose);padding-bottom:4px;display:inline-block;margin-bottom:28px;}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(44px,5vw,78px);line-height:1.15;margin-bottom:24px;color:var(--brown);}
+.hero h1 em{font-style:italic;color:var(--rose);}
+.hero-sub{font-size:15px;color:var(--gray);line-height:2.0;margin-bottom:44px;font-weight:300;max-width:420px;}
+.hero-btns{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+.btn-rose{background:linear-gradient(135deg,var(--rose),#c46a60);color:#fff;padding:15px 38px;font-size:13px;letter-spacing:0.08em;text-decoration:none;transition:all 0.4s;display:inline-block;}
+.btn-rose:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(212,132,122,0.4);}
+.btn-link{color:var(--gold);font-size:13px;text-decoration:none;letter-spacing:0.04em;border-bottom:1px solid var(--gold);padding-bottom:2px;}
+.hero-right{position:relative;overflow:hidden;min-height:500px;}
+.hero-img{
+  width:100%;height:100%;
+  object-fit:cover;display:block;
+}
+.hero-img-fallback{
+  width:100%;height:100%;
+  background:linear-gradient(160deg,#f5c9bc,#e8a08c,#c97d6d);
+  display:flex;align-items:center;justify-content:center;font-size:100px;
+}
+.hero-badge-float{
+  position:absolute;bottom:60px;left:-24px;
+  background:#fff;padding:18px 24px;
+  box-shadow:0 16px 48px rgba(106,76,59,0.15);
+  border-left:3px solid var(--rose);
+}
+.badge-num{font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--rose);}
+.badge-text{font-size:11px;color:var(--gray);line-height:1.5;}
+
+/* セクション共通 */
+.section-tag-c{font-size:11px;letter-spacing:0.22em;color:var(--rose);text-align:center;margin-bottom:10px;}
+.section-title-c{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,46px);text-align:center;color:var(--brown);font-style:italic;margin-bottom:12px;}
+.section-sub-c{text-align:center;color:var(--gray);font-size:13px;margin-bottom:60px;letter-spacing:0.1em;}
+
+/* こだわり */
+.features{padding:90px 60px;background:var(--cream);}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:44px;max-width:960px;margin:0 auto;}
+.feature-item{text-align:center;}
+.feature-icon{width:76px;height:76px;border-radius:50%;background:linear-gradient(135deg,var(--pink),#f9e0d5);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 22px;}
+.feature-item h3{font-family:'Noto Serif JP',serif;font-size:17px;color:var(--brown);margin-bottom:10px;}
+.feature-item p{font-size:13px;color:var(--gray);line-height:1.9;}
+
+/* ビフォーアフター */
+.before-after{padding:90px 60px;background:linear-gradient(135deg,#fce8df,var(--cream));}
+.ba-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;max-width:1100px;margin:0 auto;}
+.ba-label{display:inline-block;font-size:11px;letter-spacing:0.2em;color:var(--rose);border-bottom:1px solid var(--rose);padding-bottom:3px;margin-bottom:18px;}
+.ba-title{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,3.5vw,42px);color:var(--brown);line-height:1.35;margin-bottom:18px;font-style:italic;}
+.ba-text{font-size:14px;color:var(--gray);line-height:2.0;margin-bottom:28px;}
+.ba-visual{display:grid;grid-template-columns:1fr 1fr;gap:4px;border-radius:4px;overflow:hidden;}
+.ba-box{height:300px;display:flex;align-items:flex-end;justify-content:center;padding:14px;font-size:12px;font-weight:700;letter-spacing:0.1em;}
+.ba-box.before{background:linear-gradient(160deg,#d8c0b8,#c0a898);color:rgba(255,255,255,0.7);}
+.ba-box.after{background:linear-gradient(160deg,#f0c0b0,#e0988a);color:rgba(255,255,255,0.9);}
+
+/* お客様の声 */
+.reviews{padding:90px 60px;background:#fff8f4;}
+.reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:1100px;margin:0 auto;}
+.review-card{background:var(--cream);border:1px solid rgba(184,149,106,0.2);padding:32px 26px;transition:all 0.4s;}
+.review-card:hover{transform:translateY(-5px);box-shadow:0 18px 50px rgba(106,76,59,0.1);}
+.review-stars{color:var(--rose);font-size:15px;margin-bottom:10px;}
+.review-text{font-size:13px;color:var(--gray);line-height:1.9;margin-bottom:18px;}
+.review-author{font-size:13px;font-weight:700;color:var(--brown);}
+.review-age{font-size:12px;color:var(--gray);margin-top:2px;}
+
+/* ラインナップ */
+.lineup{padding:90px 60px;background:var(--cream);}
+.lineup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;max-width:1100px;margin:0 auto;}
+.lineup-card{border:1px solid rgba(184,149,106,0.2);background:#fff;overflow:hidden;transition:all 0.4s;cursor:default;}
+.lineup-card:hover{transform:translateY(-7px);box-shadow:0 22px 60px rgba(106,76,59,0.12);}
+.lineup-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:56px;}
+.lineup-img.a{background:linear-gradient(160deg,#f8e4dc,#f0c8b8);}
+.lineup-img.b{background:linear-gradient(160deg,#e8d4c8,#dcc0b0);}
+.lineup-img.c{background:linear-gradient(160deg,#f4e0f0,#e8c8e0);}
+.lineup-info{padding:26px;}
+.lineup-tag{font-size:10px;letter-spacing:0.2em;color:var(--rose);margin-bottom:6px;}
+.lineup-name{font-family:'Cormorant Garamond',serif;font-size:21px;color:var(--brown);margin-bottom:8px;}
+.lineup-desc{font-size:13px;color:var(--gray);line-height:1.7;margin-bottom:14px;}
+.lineup-price{font-size:20px;color:var(--rose);font-family:'Cormorant Garamond',serif;}
+
+/* 使い方3ステップ */
+.steps{padding:90px 60px;background:#fff8f4;}
+.steps-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;max-width:900px;margin:0 auto;position:relative;}
+.steps-grid::before{content:'';position:absolute;top:36px;left:calc(100%/6);right:calc(100%/6);height:2px;background:linear-gradient(90deg,var(--rose),var(--gold));z-index:0;}
+.step-item{text-align:center;padding:0 24px;position:relative;z-index:1;}
+.step-num{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--rose),#c46a60);color:#fff;font-family:'Cormorant Garamond',serif;font-size:28px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;box-shadow:0 8px 24px rgba(212,132,122,0.35);}
+.step-item h3{font-family:'Noto Serif JP',serif;font-size:16px;color:var(--brown);margin-bottom:10px;}
+.step-item p{font-size:13px;color:var(--gray);line-height:1.8;}
+
+/* FAQ */
+.faq-beauty{padding:90px 60px;background:var(--cream);}
+.faq-inner-b{max-width:760px;margin:0 auto;}
+.faq-item-b{border-bottom:1px solid rgba(184,149,106,0.2);overflow:hidden;}
+.faq-q-b{display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;font-size:14px;font-weight:700;color:var(--brown);transition:color 0.3s;gap:12px;}
+.faq-q-b:hover{color:var(--rose);}
+.faq-icon-b{font-size:18px;color:var(--rose);transition:transform 0.3s;flex-shrink:0;}
+.faq-item-b.open .faq-icon-b{transform:rotate(45deg);}
+.faq-a-b{font-size:13px;color:var(--gray);line-height:1.9;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;}
+.faq-item-b.open .faq-a-b{max-height:200px;padding-bottom:18px;}
+
+/* ページトップ */
+.back-top-b{position:fixed;bottom:32px;right:32px;z-index:500;width:48px;height:48px;background:var(--rose);color:#fff;border:none;border-radius:50%;font-size:20px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
+.back-top-b.show{opacity:1;transform:translateY(0);}
+.back-top-b:hover{background:#c46a60;transform:translateY(-3px);}
+
+/* CTA */
+.cta-section{padding:110px 60px;text-align:center;background:linear-gradient(160deg,var(--rose),#c46a60);color:#fff;position:relative;overflow:hidden;}
+.cta-section::before{content:'L';font-family:'Cormorant Garamond',serif;font-size:360px;font-style:italic;position:absolute;right:-40px;top:-60px;opacity:0.07;line-height:1;}
+.cta-section h2{font-family:'Cormorant Garamond',serif;font-size:clamp(32px,4vw,52px);margin-bottom:14px;font-style:italic;}
+.cta-section p{font-size:15px;opacity:0.85;margin-bottom:36px;line-height:1.9;}
+.btn-white{background:#fff;color:var(--rose);padding:16px 48px;font-size:13px;letter-spacing:0.08em;text-decoration:none;font-weight:700;transition:all 0.3s;display:inline-block;}
+.btn-white:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(0,0,0,0.15);}
+
+/* フッター */
+footer{background:var(--brown);padding:52px 60px;color:rgba(255,255,255,0.65);}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:26px;color:#fff;font-style:italic;}
+.footer-copy{font-size:12px;text-align:right;}
+.footer-produce{font-size:13px;color:var(--pink);font-weight:700;margin-top:5px;}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  nav{padding:12px 20px;}
+  .nav-links,.nav-cta{display:none;}
+  .hamburger{display:flex;}
+  .hero{grid-template-columns:1fr;padding-top:60px;}
+  .hero-right{display:none;}
+  .hero-left{padding:70px 24px 60px;}
+  .features,.before-after,.reviews,.lineup,.cta-section,.steps,.faq-beauty{padding:64px 24px;}
+  .features-grid,.reviews-grid,.lineup-grid{grid-template-columns:1fr;}
+  .ba-grid{grid-template-columns:1fr;}
+  .steps-grid{grid-template-columns:1fr;}
+  .steps-grid::before{display:none;}
+  footer{padding:40px 24px;}
+  .footer-inner{flex-direction:column;align-items:flex-start;}
+  .footer-copy{text-align:left;}
+  .back-top-b{bottom:16px;right:16px;width:40px;height:40px;font-size:16px;}
+}
+@media(max-width:480px){
+  .hero h1{font-size:40px;}
+  .hero-btns{flex-direction:column;align-items:flex-start;}
+}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+</head>
+<body>
+<canvas id="particles"></canvas>
+
+<div class="portfolio-banner">
+  <span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空のブランドを題材にしたデザインサンプルです
+</div>
+
+<nav>
+  <div class="nav-logo">Lumière Skin</div>
+  <ul class="nav-links">
+    <li><a href="#features">こだわり</a></li>
+    <li><a href="#lineup">商品一覧</a></li>
+    <li><a href="#reviews">お客様の声</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">今すぐ試す</a>
+  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-menu-close" id="menuClose">✕</button>
+  <a href="#features" onclick="closeMobileMenu()">こだわり</a>
+  <a href="#lineup" onclick="closeMobileMenu()">商品一覧</a>
+  <a href="#reviews" onclick="closeMobileMenu()">お客様の声</a>
+  <a href="#cta" onclick="closeMobileMenu()" style="color:var(--rose)">今すぐ試す</a>
+</div>
+
+<!-- ヒーロー -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">PREMIUM SKINCARE FROM JAPAN</div>
+    <h1>素肌が、<br><em>物語になる。</em></h1>
+    <p class="hero-sub">自然の恵みと最先端の美容科学を融合した、Lumière Skinの処方で、あなただけの輝きを。</p>
+    <div class="hero-btns">
+      <a href="#cta" class="btn-rose">初回限定セットを試す</a>
+      <a href="#features" class="btn-link">成分へのこだわり →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="images/hero_beauty.png" alt="Lumière Skinケア商品" class="hero-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+    <div class="hero-img-fallback" style="display:none;">🌸</div>
+    <div class="hero-badge-float">
+      <div class="badge-num">96%</div>
+      <div class="badge-text">使用者が肌変化を実感<br>（30日後アンケート）</div>
+    </div>
+  </div>
+</section>
+
+<!-- こだわり -->
+<section class="features" id="features">
+  <div class="section-tag-c">WHY LUMIÈRE</div>
+  <div class="section-title-c">Why Lumière?</div>
+  <div class="section-sub-c">— 3つのこだわり —</div>
+  <div class="features-grid">
+    <div class="feature-item reveal"><div class="feature-icon">🌿</div><h3>無添加・オーガニック処方</h3><p>合成着色料・パラベン・鉱物油は一切不使用。自然由来成分93%配合で、敏感肌でも安心して続けられます。</p></div>
+    <div class="feature-item reveal"><div class="feature-icon">🔬</div><h3>特許取得の独自技術</h3><p>独自ナノカプセル技術により美容有効成分を肌の奥深くまで届けます。通常比3.2倍の浸透速度を実現。</p></div>
+    <div class="feature-item reveal"><div class="feature-icon">♻️</div><h3>環境に優しいデザイン</h3><p>容器はリサイクル可能なガラス製。詰め替えプログラムで15%割引が受けられる、地球と肌に優しいブランド。</p></div>
+  </div>
+</section>
+
+<!-- ビフォーアフター -->
+<section class="before-after">
+  <div class="ba-grid">
+    <div class="reveal">
+      <div class="ba-label">REAL RESULTS</div>
+      <div class="ba-title">30日間で、<br>実感してください。</div>
+      <p class="ba-text">使い始めから1週間でしっとり感を実感、4週間後には透明感の変化を感じたとのお声を多くいただいています。毎日続けることで、素肌本来の輝きが引き出されます。</p>
+      <a href="#cta" class="btn-rose">試してみる（初回50%OFF）</a>
+    </div>
+    <div class="ba-visual reveal">
+      <div class="ba-box before">BEFORE</div>
+      <div class="ba-box after">AFTER</div>
+    </div>
+  </div>
+</section>
+
+<!-- お客様の声 -->
+<section class="reviews" id="reviews">
+  <div class="section-tag-c">REAL VOICES</div>
+  <div class="section-title-c">Real Voices</div>
+  <div class="section-sub-c">— お客様の声 —</div>
+  <div class="reviews-grid">
+    <div class="review-card reveal"><div class="review-stars">★★★★★</div><p class="review-text">「乾燥肌に悩んでいた私が、2週間で『お肌変わった？』と言われるようになりました。もう手放せません！」</p><div class="review-author">佐藤 るな 様</div><div class="review-age">28歳・会社員</div></div>
+    <div class="review-card reveal"><div class="review-stars">★★★★★</div><p class="review-text">「敏感肌で何を使っても赤みが出ていましたが、Lumièreは全然刺激がなく、スーッとなじむ感覚が心地よくて毎日使っています。」</p><div class="review-author">木村 まなか 様</div><div class="review-age">35歳・主婦</div></div>
+    <div class="review-card reveal"><div class="review-stars">★★★★★</div><p class="review-text">「40代になってくすみが気になり始めた頃に出会いました。朝のファンデーションのノリが明らかに違います！」</p><div class="review-author">中村 ひとみ 様</div><div class="review-age">43歳・フリーランス</div></div>
+  </div>
+</section>
+
+<!-- ラインナップ -->
+<section class="lineup" id="lineup">
+  <div class="section-tag-c">PRODUCT LINEUP</div>
+  <div class="section-title-c">Product Lineup</div>
+  <div class="section-sub-c">— 商品ラインナップ —</div>
+  <div class="lineup-grid">
+    <div class="lineup-card reveal"><div class="lineup-img a">💧</div><div class="lineup-info"><div class="lineup-tag">SERUM</div><div class="lineup-name">ルミエール美容液</div><p class="lineup-desc">濃密な美容成分が肌に溶け込む、ブランドの最高傑作。毎晩これ一本で翌朝の肌が変わります。</p><div class="lineup-price">¥9,800</div></div></div>
+    <div class="lineup-card reveal"><div class="lineup-img b">🌊</div><div class="lineup-info"><div class="lineup-tag">LOTION</div><div class="lineup-name">プレップ化粧水</div><p class="lineup-desc">美容液の効果を最大化する下地化粧水。肌を整え、美容成分の浸透をサポートします。</p><div class="lineup-price">¥5,800</div></div></div>
+    <div class="lineup-card reveal"><div class="lineup-img c">✨</div><div class="lineup-info"><div class="lineup-tag">CREAM</div><div class="lineup-name">リフト クリーム</div><p class="lineup-desc">ハリとツヤを与える夜間集中ケアクリーム。寝ている間に肌を深く潤し、明るく引き締めます。</p><div class="lineup-price">¥12,800</div></div></div>
+  </div>
+</section>
+
+<!-- 使い方3ステップ -->
+<section class="steps">
+  <div class="section-tag-c">HOW TO USE</div>
+  <div class="section-title-c">3ステップで始める</div>
+  <div class="section-sub-c">— 簡単な使い方 —</div>
+  <div class="steps-grid">
+    <div class="step-item reveal">
+      <div class="step-num">1</div>
+      <h3>プレップ化粧水を手に取る</h3>
+      <p>洗顔後、化粧水を手になじませて背面の肖内へ。蠲の元を整える大事な応用工程。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">2</div>
+      <h3>美容液を住ませる</h3>
+      <p>3円程度を手に取り、顔全体に優しくなじませます。万能肌への洸透を待ちましょう。</p>
+    </div>
+    <div class="step-item reveal">
+      <div class="step-num">3</div>
+      <h3>リフトクリームで詘める</h3>
+      <p>最後はリフトクリームを優しくなじませて伏つ前に。寝ている間に肌の高密度修復をします。</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-beauty">
+  <div class="faq-inner-b">
+    <div class="section-tag-c">FAQ</div>
+    <div class="section-title-c">よくあるご質問</div>
+    <div class="section-sub-c">— FAQ —</div>
+    <div class="faq-item-b">
+      <div class="faq-q-b">敏感肌でも使えますか？<span class="faq-icon-b">+</span></div>
+      <div class="faq-a-b">はい。合成着色料・パラベン・鉱物油・アルコールフリー処方なので、敝感肌の方や姓孕中・授乳中の方も安心してお使いいただけます。</div>
+    </div>
+    <div class="faq-item-b">
+      <div class="faq-q-b">最初に何から始めたらいいですか？<span class="faq-icon-b">+</span></div>
+      <div class="faq-a-b">まずは「スターターセット（化粧水＋美容液）」からお試しいただくのがおすすめです。初回50%OFFでトライアルできます。</div>
+    </div>
+    <div class="faq-item-b">
+      <div class="faq-q-b">成果はいつ頃から実感できますか？<span class="faq-icon-b">+</span></div>
+      <div class="faq-a-b">個人差はありますが、多くの方が1週間後にしっとり感、。2、4週間後に透明感の変化を実感されています。</div>
+    </div>
+    <div class="faq-item-b">
+      <div class="faq-q-b">定期購入を次回以降停止することはできますか？<span class="faq-icon-b">+</span></div>
+      <div class="faq-a-b">もちろん、いつでも停止可能です。マイページからお手続き1分で完了します。縛り恭田など一切ございません。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ページトップ -->
+<button class="back-top-b" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- CTA -->
+<section class="cta-section" id="cta">
+  <h2>今すぐ、始めてみませんか？</h2>
+  <p>初回限定！スターターセット（化粧水・美容液）が<br>通常価格より<strong>50%OFF</strong>の特別価格でお試しいただけます。</p>
+  <a href="#" class="btn-white">初回限定セットを申し込む →</a>
+</section>
+
+<!-- フッター -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">Lumière Skin</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.45);margin-top:8px;">〒107-0062 東京都港区南青山1-1-1</div>
+    </div>
+    <div class="footer-copy">
+      <div>© 2024 Lumière Skin. All Rights Reserved.</div>
+      <div class="footer-produce">和-Node プロデュース</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let particles=[];
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+resize();window.addEventListener('resize',resize);
+class Particle{
+  constructor(){this.reset();}
+  reset(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.r=Math.random()*2.5+1;this.vx=(Math.random()-0.5)*0.25;this.vy=-Math.random()*0.4-0.15;this.alpha=Math.random()*0.35+0.08;this.color=`hsl(${Math.random()*30+340},75%,80%)`;}
+  update(){this.x+=this.vx;this.y+=this.vy;this.alpha-=0.0008;if(this.y<-10||this.alpha<=0)this.reset();}
+  draw(){ctx.save();ctx.globalAlpha=this.alpha;ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();}
+}
+for(let i=0;i<50;i++)particles.push(new Particle());
+function animate(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.update();p.draw();});requestAnimationFrame(animate);}
+animate();
+
+// Reveal
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+// Hamburger
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
+document.getElementById('menuClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
+function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');}
+
+// Back to top
+window.addEventListener('scroll',()=>document.getElementById('backTop').classList.toggle('show',window.scrollY>400));
+
+// FAQ
+document.querySelectorAll('.faq-q-b').forEach(q=>{
+  q.addEventListener('click',()=>{
+    const item=q.parentElement;
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item-b').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>
+<!-- 和-Node プロデュース -->
