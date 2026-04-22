@@ -1,19 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Noto+Serif+JP:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 
 :root {
-  /* Colors */
-  --color-primary: #333333; /* 墨色 */
-  --color-secondary: #555555;
-  --color-bg: #FCFCFC; /* 極薄いグレー/白 */
-  --color-surface: #FFFFFF;
-  --color-accent: #95C0A4; /* くすんだミントグリーン（晴れやかさ） */
-  --color-accent-light: #E3EFE8; /* アクセントの薄い色（背景等に使用） */
-  --color-text-main: #2C2C2C;
-  --color-text-muted: #666666;
-  --color-border: #E0E0E0;
+  /* Colors - Business Card Theme */
+  --color-primary: #1a2a40; /* 藍色（メインテキスト・強調） */
+  --color-secondary: #364966; /* 少し明るい藍色 */
+  --color-bg: #f7f3e8; /* 生成り色（全体背景） */
+  --color-surface: #ffffff; /* 白（カード背景等） */
+  --color-accent: #c4a052; /* 金茶色（ボタン・アクセント） */
+  --color-accent-light: #f0e6cd; /* 薄い金茶色 */
+  --color-text-main: #1a2a40; /* 基本テキストカラーを藍色ベースに */
+  --color-text-muted: #5e6b7a; /* ミュートされた藍色系グレー */
+  --color-border: #dcd7c9; /* 生成り色に合うボーダー色 */
 
   /* Typography */
-  --font-heading: 'Noto Serif JP', serif;
+  --font-heading: 'Shippori Mincho', serif;
   --font-body: 'Noto Sans JP', sans-serif;
 
   /* Layout */
@@ -42,6 +42,16 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* 和紙風テクスチャのオーバーレイ */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -122,21 +132,21 @@ ul {
 .btn-accent {
   background-color: var(--color-accent);
   color: #FFF;
-  box-shadow: 0 4px 15px rgba(149, 192, 164, 0.3);
+  box-shadow: 0 4px 15px rgba(196, 160, 82, 0.3);
 }
 
 .btn-accent:hover {
-  background-color: #7BAF8C;
+  background-color: #a88846;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(149, 192, 164, 0.4);
+  box-shadow: 0 6px 20px rgba(196, 160, 82, 0.4);
 }
 
 /* 和柄背景ユーティリティ */
 .bg-seigaiha {
   /* 青海波のような半透明の円弧パターン */
   background-image: 
-    radial-gradient(circle at 100% 150%, transparent 20%, rgba(149, 192, 164, 0.03) 21%, rgba(149, 192, 164, 0.03) 34%, transparent 35%, transparent),
-    radial-gradient(circle at 0% 150%, transparent 20%, rgba(149, 192, 164, 0.03) 21%, rgba(149, 192, 164, 0.03) 34%, transparent 35%, transparent);
+    radial-gradient(circle at 100% 150%, transparent 20%, rgba(26, 42, 64, 0.04) 21%, rgba(26, 42, 64, 0.04) 34%, transparent 35%, transparent),
+    radial-gradient(circle at 0% 150%, transparent 20%, rgba(26, 42, 64, 0.04) 21%, rgba(26, 42, 64, 0.04) 34%, transparent 35%, transparent);
   background-size: 100px 50px;
   background-position: 0 0, 50px 0;
 }
@@ -232,7 +242,7 @@ ul {
 .btn-header:hover {
   background-color: var(--color-accent);
   color: #fff;
-  box-shadow: 0 4px 10px rgba(149, 192, 164, 0.3);
+  box-shadow: 0 4px 10px rgba(196, 160, 82, 0.3);
 }
 
 @media (max-width: 768px) {
@@ -274,7 +284,7 @@ ul {
   left: -60px;
   right: -60px;
   bottom: -60px;
-  border: 2px solid rgba(149, 192, 164, 0.3);
+  border: 2px solid rgba(196, 160, 82, 0.3);
   border-radius: 50%;
 }
 

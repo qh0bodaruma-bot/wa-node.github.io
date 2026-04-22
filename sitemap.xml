@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://wa-node.github.io/</loc>
+    <lastmod>2026-04-22</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://wa-node.github.io/portfolio-lp/demo_lead.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wa-node.github.io/portfolio-lp/demo_corporate.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wa-node.github.io/portfolio-lp/demo_profile.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wa-node.github.io/portfolio-lp/demo_local.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://wa-node.github.io/portfolio-lp/demo_media.html</loc>
+    <lastmod>2026-04-22</lastmod>
+    <priority>0.8</priority>
+  </url>
+</urlset>

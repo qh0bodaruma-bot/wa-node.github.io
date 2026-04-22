@@ -4,8 +4,36 @@
 <meta charset="UTF-8"/>
 <link rel="icon" type="image/png" href="images/favicon.png"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>和-Node | 車いすSE×心理カウンセラー</title>
-<meta name="description" content="車いすで起業したSE×心理カウンセラー マルだ← が、心もITも全部聴きます。IT・カウンセリング・コンテンツ制作・法人メンタルまでワンストップ対応。"/>
+<title>和-Node | 車いすSE×心理カウンセラー | Web制作・ITコンサル・メンタル支援</title>
+<meta name="description" content="車いすで起業したSE×心理カウンセラー「マルだ←」が、集客に直結するWeb制作・ITコンサルから個人・法人のメンタルケアまでワンストップでサポート。実務歴15年のITスキルとプロの傾聴力で、あなたのビジネスと心の悩みを解決します。"/>
+
+<!-- OGP & Twitter Card -->
+<meta property="og:title" content="和-Node | 車いすSE×心理カウンセラー | Web制作・ITコンサル・メンタル支援"/>
+<meta property="og:description" content="車いすで起業したSE×心理カウンセラー「マルだ←」が、集客に直結するWeb制作・ITコンサルから個人・法人のメンタルケアまでワンストップでサポート。実務歴15年のITスキルとプロの傾聴力で、あなたのビジネスと心の悩みを解決します。"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://wa-node.github.io/"/>
+<meta property="og:image" content="https://wa-node.github.io/images/avatar.png"/>
+<meta property="og:site_name" content="和-Node"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@wa_node"/>
+
+<!-- 構造化データ (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "和-Node",
+  "image": "https://wa-node.github.io/images/avatar.png",
+  "url": "https://wa-node.github.io/",
+  "telephone": "080-3599-5388",
+  "email": "contacts@wa-node.com",
+  "description": "車いすで起業したSE×心理カウンセラー「マルだ←」が、Web制作・ITコンサルから個人・法人のメンタルケアまでワンストップでサポートします。",
+  "founder": {
+    "@type": "Person",
+    "name": "マルだ←"
+  }
+}
+</script>
 <link rel="stylesheet" href="style.css"/>
 <style>
 .services-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
@@ -20,7 +48,7 @@
 .story{background:var(--color-surface);padding:100px 0;}
 .story-inner{max-width:900px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:200px 1fr;gap:56px;align-items:start;}
 .story-avatar{width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid var(--color-surface);box-shadow:0 8px 24px rgba(0,0,0,.08);}
-.story-avatar-placeholder{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#95C0A4,#7BAF8C);display:flex;align-items:center;justify-content:center;font-size:60px;box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.story-avatar-placeholder{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#1a2a40,#364966);display:flex;align-items:center;justify-content:center;font-size:60px;color:#f7f3e8;box-shadow:0 8px 24px rgba(0,0,0,.08);}
 .story-badge{display:inline-block;background:var(--color-accent-light);color:var(--color-accent);font-size:11px;font-weight:700;padding:4px 14px;border-radius:40px;letter-spacing:.08em;margin-bottom:16px;}
 .story-name{font-size:28px;color:var(--color-primary);margin-bottom:6px;}
 .story-title{font-size:13px;color:var(--color-accent);letter-spacing:.1em;margin-bottom:20px;}
@@ -45,7 +73,14 @@
 }
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s;}
 .reveal.visible{opacity:1;transform:translateY(0);}
-</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B4FD0GJGW5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B4FD0GJGW5');
+</script>
 </head>
 <body>
 <div class="app-container bg-seigaiha">
@@ -61,13 +96,14 @@
         <li><a href="#services" class="nav-link">Services</a></li>
         <li><a href="#targets" class="nav-link">こんな方へ</a></li>
         <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
-        <li><a href="mailto:contacts@wa-node.com" class="nav-link btn-header">お問い合わせ</a></li>
+        <li><a href="https://coconala.com/users/2598979" target="_blank" class="nav-link btn-header">ご相談・ご依頼</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
 <!-- Hero -->
+<main>
 <section class="hero">
   <div class="hero-bg-enso"></div>
   <div class="container hero-container">
@@ -122,33 +158,34 @@
     </div>
 
     <div id="tab-counseling" class="tab-panel active reveal">
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">🫂</div><div class="srv-item-title">3日間テキストで悩み・愚痴を聞き寄り添います</div><p class="srv-item-desc">まとまっていなくてOK！文字にすることで心を軽くしませんか？</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">💙</div><div class="srv-item-title">家族・孤独・痛みと生きる悩み、お聞きします</div><p class="srv-item-desc">【JADP認定/当事者経験あり】あなたの言葉にならない気持ちを一緒に紐解きます。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">🤝</div><div class="srv-item-title">孤独なフリーランスへメンタルケア＋事業の壁打ち</div><p class="srv-item-desc">IT・事業の悩みから心のモヤモヤまで、全部まとめて聴きます！</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">📄</div><div class="srv-item-title">休職・離職中の方へ。心の整理をし自己PRを作ります</div><p class="srv-item-desc">カウンセラーがあなたの魅力を言語化します。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">🏥</div><div class="srv-item-title">部下の精神不調に悩む方。対応と面談台本を作成</div><p class="srv-item-desc">腫れ物扱いはNG！上級心理カウンセラーがスクリプトを作ります。</p></a>
+      <a href="https://coconala.com/services/4181261" target="_blank" class="srv-item"><div class="srv-item-icon">🫂</div><div class="srv-item-title">テキストで悩みや愚痴をお聞きします</div><p class="srv-item-desc">まとまっていなくてOK。文字にすることで心を軽くしませんか？</p></a>
+      <a href="https://coconala.com/services/4005191" target="_blank" class="srv-item"><div class="srv-item-icon">💙</div><div class="srv-item-title">家族・孤独・痛みと生きる悩みのご相談</div><p class="srv-item-desc">当事者経験を持つ認定カウンセラーが、言葉にならない気持ちに寄り添います。</p></a>
+      <a href="https://coconala.com/services/4180551" target="_blank" class="srv-item"><div class="srv-item-icon">📄</div><div class="srv-item-title">休職・離職中の方の自己PR作成サポート</div><p class="srv-item-desc">カウンセリングを通じて心の整理を行い、あなたの魅力を言語化します。</p></a>
+      <a href="https://coconala.com/services/4182196" target="_blank" class="srv-item"><div class="srv-item-icon">🤝</div><div class="srv-item-title">孤独なフリーランス向け メンタルケア＆事業壁打ち</div><p class="srv-item-desc">IT・事業の悩みから心のモヤモヤまで、一人で抱え込まずにご相談ください。</p></a>
     </div>
 
     <div id="tab-it" class="tab-panel reveal">
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">⚡</div><div class="srv-item-title">WordPressの表示速度を改善します</div><p class="srv-item-desc">SEOの最重要課題！重いサイトを劇的に軽くし離脱率を防ぎます。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">🔍</div><div class="srv-item-title">WordPress SEO内部を丸ごと最適化します</div><p class="srv-item-desc">初回5件限定｜GSC連携・コード修正・AIツール付き。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">🤖</div><div class="srv-item-title">ChatGPT活用を個別60分でサポートします</div><p class="srv-item-desc">初心者OK！AI活用を実務レベルで解説します。</p></a>
+      <a href="https://coconala.com/services/4183139" target="_blank" class="srv-item"><div class="srv-item-icon">💻</div><div class="srv-item-title">集客に直結するLP・HP制作</div><p class="srv-item-desc">実務歴15年以上のITコンサルがビジネス課題をWebで解決します。</p></a>
+      <a href="https://coconala.com/services/4183144" target="_blank" class="srv-item"><div class="srv-item-icon">💎</div><div class="srv-item-title">事業戦略から入るWeb制作【プレミアム】</div><p class="srv-item-desc">ITコンサル×心理カウンセラーが完全オーダーメイドで構築します。</p></a>
+      <a href="https://coconala.com/services/4180544" target="_blank" class="srv-item"><div class="srv-item-icon">⚡</div><div class="srv-item-title">WordPressの表示速度改善</div><p class="srv-item-desc">離脱率を防ぐSEOの最重要課題。重いサイトを劇的に軽くします。</p></a>
+      <a href="https://coconala.com/services/4160127" target="_blank" class="srv-item"><div class="srv-item-icon">🔍</div><div class="srv-item-title">WordPress SEO内部の丸ごと最適化</div><p class="srv-item-desc">GSC連携やコード修正など、技術的な土台からしっかり最適化します。</p></a>
+      <a href="https://coconala.com/services/4160374" target="_blank" class="srv-item"><div class="srv-item-icon">🤖</div><div class="srv-item-title">ChatGPT活用 個別60分サポート</div><p class="srv-item-desc">初心者歓迎！実務レベルでのAI活用法を丁寧にお伝えします。</p></a>
     </div>
 
     <div id="tab-content" class="tab-panel reveal">
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">✉️</div><div class="srv-item-title">角が立たないビジネスメール・お断り文作ります</div><p class="srv-item-desc">悩む時間はゼロ。状況に合わせた最適な文章をチャットで最速納品。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">🐦</div><div class="srv-item-title">Xの2週間分（14個）のポスト案を作成します</div><p class="srv-item-desc">ネタ切れのストレスがゼロになり、運用が驚くほど楽になる。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">📝</div><div class="srv-item-title">ブログ・YouTubeのタイトル案20個作ります</div><p class="srv-item-desc">ターゲットの心に響く言葉選びで、魅力を最大限に引き出します。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">📋</div><div class="srv-item-title">SEO記事プロンプトテンプレートをお渡しします</div><p class="srv-item-desc">ChatGPTで記事構成を自動生成するテンプレートです。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">📚</div><div class="srv-item-title">Amazon KDP出版の始め方を丁寧に解説します</div><p class="srv-item-desc">KDP実績者が0→1の出版手順を解説。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">✍️</div><div class="srv-item-title">Kindle出版用AIで本を執筆するプロンプト作ります</div><p class="srv-item-desc">AIに指示を出すだけで書き上がる専用プロンプト！</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">🎨</div><div class="srv-item-title">KDPにて塗り絵販売</div><p class="srv-item-desc">Amazon Kindle Directで塗り絵コンテンツを販売中。</p></a>
+      <a href="https://coconala.com/services/4181257" target="_blank" class="srv-item"><div class="srv-item-icon">✉️</div><div class="srv-item-title">角が立たないビジネスメール・お断り文作成</div><p class="srv-item-desc">悩む時間をゼロに。状況に合わせた最適な文章を最速で納品します。</p></a>
+      <a href="https://coconala.com/services/4178240" target="_blank" class="srv-item"><div class="srv-item-icon">🐦</div><div class="srv-item-title">X(Twitter)の2週間分ポスト案作成</div><p class="srv-item-desc">ネタ切れのストレスを解消し、SNS運用を驚くほど楽にします。</p></a>
+      <a href="https://coconala.com/services/4178233" target="_blank" class="srv-item"><div class="srv-item-icon">📝</div><div class="srv-item-title">ブログ・YouTubeのタイトル案20個作成</div><p class="srv-item-desc">ターゲットの心に響く言葉選びで、コンテンツの魅力を最大限に引き出します。</p></a>
+      <a href="https://coconala.com/services/4160398" target="_blank" class="srv-item"><div class="srv-item-icon">📋</div><div class="srv-item-title">SEO記事構成 プロンプトテンプレート</div><p class="srv-item-desc">ChatGPTを使ってSEOに強い記事構成を自動生成するテンプレートをお渡しします。</p></a>
+      <a href="https://coconala.com/services/4180530" target="_blank" class="srv-item"><div class="srv-item-icon">✍️</div><div class="srv-item-title">Kindle出版用 AI執筆プロンプト作成</div><p class="srv-item-desc">KDP実績者が教える、AIに指示を出すだけで書き上がる専用プロンプト！</p></a>
     </div>
 
     <div id="tab-hojin" class="tab-panel reveal">
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">♿</div><div class="srv-item-title">住宅・建具メーカー様向け。製品にアドバイスします</div><p class="srv-item-desc">「当事者のリアルな声・使いにくさの盲点」を車いすユーザー視点でフィードバック！</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">🏢</div><div class="srv-item-title">法人向け 休職離職を防ぐ窓口・経営相談</div><p class="srv-item-desc">1名〜導入可。職場の悩みを可視化し、離職を防ぐ外部相談窓口。</p></a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="srv-item"><div class="srv-item-icon">🛡️</div><div class="srv-item-title">休職を防ぐ職場のメンタルヘルス課題整理</div><p class="srv-item-desc">社内の温度差による離職を防ぐ、最初の60分相談です。</p></a>
+      <a href="https://coconala.com/services/4183152" target="_blank" class="srv-item"><div class="srv-item-icon">💡</div><div class="srv-item-title">社内のIT化・集客の悩み 60分相談</div><p class="srv-item-desc">システム導入から事業の方向性まで。ITコンサルが壁打ち相手になります。</p></a>
+      <a href="https://coconala.com/services/4180418" target="_blank" class="srv-item"><div class="srv-item-icon">🏥</div><div class="srv-item-title">部下の精神不調対応・面談台本作成</div><p class="srv-item-desc">腫れ物扱いはNG。上級心理カウンセラーが最適なスクリプトを作成します。</p></a>
+      <a href="https://coconala.com/services/4175615" target="_blank" class="srv-item"><div class="srv-item-icon">🏢</div><div class="srv-item-title">休職離職を防ぐ窓口・経営相談（法人向け）</div><p class="srv-item-desc">1名から導入可能。職場の悩みを可視化し、離職を防ぐ外部相談窓口です。</p></a>
+      <a href="https://coconala.com/services/4177364" target="_blank" class="srv-item"><div class="srv-item-icon">🛡️</div><div class="srv-item-title">休職を防ぐ職場のメンタルヘルス課題整理</div><p class="srv-item-desc">社内の温度差による離職を防ぐための、最初の60分相談です。</p></a>
+      <a href="https://coconala.com/services/4180581" target="_blank" class="srv-item"><div class="srv-item-icon">♿</div><div class="srv-item-title">住宅・建具メーカー様向け 製品アドバイス</div><p class="srv-item-desc">当事者のリアルな声と使いにくさの盲点を、車いすユーザー視点でフィードバックします。</p></a>
     </div>
   </div>
 </section>
@@ -203,7 +240,7 @@
   <p style="color:var(--color-text-muted);font-size:14px;margin-bottom:32px;">ココナラにて多数のサービスを提供中。QRコードからもアクセスできます。</p>
   <div style="display:flex;gap:44px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:32px;">
     <div style="text-align:center;">
-      <img src="images/QR_coconala.png" alt="ココナラ QRコード" style="width:160px;height:160px;border:1px solid var(--color-border);border-radius:8px;padding:8px;background:#fff;"/>
+      <img src="images/QR_coconala.png" alt="ココナラ QRコード" loading="lazy" decoding="async" style="width:160px;height:160px;border:1px solid var(--color-border);border-radius:8px;padding:8px;background:#fff;"/>
       <p style="font-size:12px;color:var(--color-text-muted);margin-top:8px;">QRコードでアクセス</p>
     </div>
     <div style="text-align:left;">
@@ -211,6 +248,7 @@
     </div>
   </div>
 </section>
+</main>
 
 <!-- Footer -->
 <footer class="footer">
@@ -220,10 +258,10 @@
       <p class="footer-desc">
         ITコンサル・企業コンサル・心理カウンセリング<br/>
         心とITの両方がわかるパートナー<br/><br/>
-        お問い合わせ: <a href="mailto:contacts@wa-node.com" style="text-decoration:underline;">contacts@wa-node.com</a>
+        ご相談・お問い合わせ: <a href="https://coconala.com/users/2598979" target="_blank" style="text-decoration:underline;">ココナラよりご連絡ください</a>
       </p>
       <div style="margin-top: 20px;">
-        <img src="images/security_action.jpg" alt="SECURITY ACTION セキュリティ対策自己宣言" style="width: 120px; height: auto;"/>
+        <img src="images/security_action.jpg" alt="SECURITY ACTION セキュリティ対策自己宣言" loading="lazy" decoding="async" style="width: 120px; height: auto;"/>
       </div>
     </div>
     <div class="footer-links">
