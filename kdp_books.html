@@ -78,38 +78,12 @@
     position: relative;
     border-bottom: 1px solid var(--color-border);
 }
-.book-image-half {
-    width: 50%;
-    position: relative;
-    padding-top: 70%; /* Aspect ratio */
-}
-.book-image-half img {
-    position: absolute;
-    top: 0;
-    left: 0;
+.book-image-main {
     width: 100%;
-    height: 100%;
+    height: auto;
     object-fit: cover;
-}
-.book-image-half.en::after {
-    content: '🇺🇸';
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    background: rgba(255,255,255,0.9);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 14px;
-}
-.book-image-half.fr::after {
-    content: '🇫🇷';
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(255,255,255,0.9);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-size: 14px;
+    display: block;
+    aspect-ratio: 1 / 1.414; /* 約A4比率に近い形に揃える */
 }
 .book-info {
     padding: 20px;
@@ -188,8 +162,7 @@
     <div class="book-grid" style="grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));">
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/鳥獣戯画風 en_title.png" alt="オリジナル鳥獣戯画 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/鳥獣戯画風 fr_title.png" alt="オリジナル鳥獣戯画 フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/鳥獣戯画風 en_title.png" alt="オリジナル鳥獣戯画" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">オリジナル鳥獣戯画</div>
@@ -208,8 +181,7 @@
     <div class="book-grid">
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/かわいい浮世絵犬.png" alt="かわいい浮世絵犬 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/かわいい浮世絵犬.png" alt="かわいい浮世絵犬 フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/かわいい浮世絵犬.png" alt="かわいい浮世絵犬" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">かわいい浮世絵 犬</div>
@@ -221,8 +193,7 @@
         </div>
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/かわいい浮世絵猫.png" alt="かわいい浮世絵猫 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/かわいい浮世絵猫.png" alt="かわいい浮世絵猫 フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/かわいい浮世絵猫.png" alt="かわいい浮世絵猫" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">かわいい浮世絵 猫</div>
@@ -234,8 +205,7 @@
         </div>
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/かわいい浮世絵兎.png" alt="かわいい浮世絵兎 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/かわいい浮世絵兎.png" alt="かわいい浮世絵兎 フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/かわいい浮世絵兎.png" alt="かわいい浮世絵兎" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">かわいい浮世絵 兎</div>
@@ -247,8 +217,7 @@
         </div>
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/かわいい浮世絵動物園.png" alt="かわいい浮世絵動物園 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/かわいい浮世絵動物園.png" alt="かわいい浮世絵動物園 フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/かわいい浮世絵動物園.png" alt="かわいい浮世絵動物園" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">かわいい浮世絵 動物園</div>
@@ -260,8 +229,7 @@
         </div>
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/かわいい浮世絵爬虫類＆両生類.png" alt="かわいい浮世絵爬虫類＆両生類 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/かわいい浮世絵爬虫類＆両生類.png" alt="かわいい浮世絵爬虫類＆両生類 フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/かわいい浮世絵爬虫類＆両生類.png" alt="かわいい浮世絵爬虫類＆両生類" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">かわいい浮世絵 爬虫類＆両生類</div>
@@ -280,8 +248,7 @@
     <div class="book-grid">
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/江戸旅行記ラグドール.png" alt="江戸旅行記ラグドール 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/江戸旅行記ラグドール.png" alt="江戸旅行記ラグドール フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/江戸旅行記ラグドール.png" alt="江戸旅行記ラグドール" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">江戸旅行記 ラグドール</div>
@@ -293,8 +260,7 @@
         </div>
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/江戸旅行記フレンチブルドッグ.png" alt="江戸旅行記フレンチブルドッグ 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/江戸旅行記フレンチブルドッグ.png" alt="江戸旅行記フレンチブルドッグ フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/江戸旅行記フレンチブルドッグ.png" alt="江戸旅行記フレンチブルドッグ" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">江戸旅行記 フレンチブルドッグ</div>
@@ -306,8 +272,7 @@
         </div>
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/江戸旅行記シマエナガ.png" alt="江戸旅行記シマエナガ 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/江戸旅行記シマエナガ.png" alt="江戸旅行記シマエナガ フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/江戸旅行記シマエナガ.png" alt="江戸旅行記シマエナガ" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">江戸旅行記 シマエナガ</div>
@@ -319,8 +284,7 @@
         </div>
         <div class="book-card reveal">
             <div class="book-image-container">
-                <div class="book-image-half en"><img src="images/KDP/en_title/江戸旅行記たぬき.png" alt="江戸旅行記たぬき 英語版" loading="lazy"></div>
-                <div class="book-image-half fr"><img src="images/KDP/fr_title/江戸旅行記たぬき.png" alt="江戸旅行記たぬき フランス語版" loading="lazy"></div>
+                <img src="images/KDP/en_title/江戸旅行記たぬき.png" alt="江戸旅行記たぬき" class="book-image-main" loading="lazy">
             </div>
             <div class="book-info">
                 <div class="book-title">江戸旅行記 たぬき</div>
