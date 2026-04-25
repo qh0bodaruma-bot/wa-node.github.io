@@ -67,6 +67,23 @@
 .portfolio-btn{display:inline-block;background:var(--color-primary);color:#fff;padding:16px 44px;border-radius:40px;font-size:15px;font-weight:700;letter-spacing:.06em;transition:all .3s;text-decoration:none;}
 .portfolio-btn:hover{background:var(--color-accent);transform:translateY(-2px);}
 .portfolio-sub{font-size:13px;color:var(--color-text-muted);margin-top:12px;}
+
+/* FAQ Styles */
+.faq-section{padding:80px 0;background:var(--color-bg);}
+.faq-container{max-width:800px;margin:0 auto;padding:0 24px;}
+.faq-item{background:var(--color-surface);border:1px solid var(--color-border);border-radius:8px;margin-bottom:16px;overflow:hidden;transition:all .3s;}
+.faq-item:hover{border-color:var(--color-accent);box-shadow:0 4px 12px rgba(0,0,0,.05);}
+.faq-summary{display:flex;justify-content:space-between;align-items:center;padding:20px 24px;font-size:15px;font-weight:700;color:var(--color-primary);cursor:pointer;list-style:none;}
+.faq-summary::-webkit-details-marker{display:none;}
+.faq-icon{width:16px;height:16px;position:relative;flex-shrink:0;margin-left:16px;}
+.faq-icon::before,.faq-icon::after{content:'';position:absolute;background:var(--color-accent);transition:transform .3s ease;}
+.faq-icon::before{top:7px;left:0;width:16px;height:2px;}
+.faq-icon::after{top:0;left:7px;width:2px;height:16px;}
+.faq-item[open] .faq-icon::after{transform:rotate(90deg) scale(0);}
+.faq-item[open] .faq-summary{color:var(--color-accent);}
+.faq-content{padding:0 24px 24px;font-size:14px;color:var(--color-text-muted);line-height:1.8;}
+.faq-content-inner{border-top:1px dashed var(--color-border);padding-top:20px;margin-top:4px;}
+
 @media(max-width:768px){
   .story-inner{grid-template-columns:1fr;}.story-avatar,.story-avatar-placeholder{margin:0 auto;}
   .tab-panel.active{grid-template-columns:1fr;}
@@ -98,6 +115,7 @@
         <li><a href="#scope" class="nav-link">対応範囲</a></li>
         <li><a href="#targets" class="nav-link">こんな方へ</a></li>
         <li><a href="#flow" class="nav-link">ご依頼の流れ</a></li>
+        <li><a href="#faq" class="nav-link">FAQ</a></li>
         <li><a href="https://www.wa-node.com/index.html#portfolio" class="nav-link">Portfolio</a></li>
         <li><a href="https://www.wa-node.com/kdp_books.html" target="_blank" class="nav-link">Books</a></li>
         <li><a href="https://coconala.com/users/2598979" target="_blank" class="nav-link btn-header">ご相談・ご依頼</a></li>
@@ -566,6 +584,48 @@ function switchFlowTab(i) {
     <div class="tg-card"><div class="tg-icon">👩</div><h3 class="tg-title">50代のママさん・主婦の方</h3><p class="tg-desc" style="color:#222; font-size:14px; font-weight:500;">家族のこと、孤独感、将来への不安。まとまっていなくてOK。ただ話したい、そのニーズに寄り添います。</p></div>
     <div class="tg-card"><div class="tg-icon">♿</div><h3 class="tg-title">建具・住宅メーカー担当者</h3><p class="tg-desc" style="color:#222; font-size:14px; font-weight:500;">車いすユーザーの「本当の使いにくさ」を製品開発にフィードバック。当事者15年の視点は、マーケットにない情報です。</p></div>
     <div class="tg-card"><div class="tg-icon">💼</div><h3 class="tg-title">孤独なフリーランス・副業者</h3><p class="tg-desc" style="color:#222; font-size:14px; font-weight:500;">事業の悩み、心のモヤモヤ、ITの困りごと。全部まとめて聴ける場所がここにあります。</p></div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div style="text-align:center;margin-bottom:44px;">
+    <div style="font-size:13px;color:var(--color-accent);font-weight:700;letter-spacing:0.1em;margin-bottom:8px;">FAQ</div>
+    <h2 class="section-title" style="display:inline-block;">よくあるご質問</h2>
+  </div>
+  <div class="faq-container">
+    <details class="faq-item reveal">
+      <summary class="faq-summary">ホームページを持っていなくても依頼できますか？<span class="faq-icon"></span></summary>
+      <div class="faq-content"><div class="faq-content-inner">はい、可能です。サーバーの準備やドメインの取得など、ゼロからの立ち上げも丸ごとサポートいたします。</div></div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-summary">制作途中で内容を変更したい場合はどうなりますか？<span class="faq-icon"></span></summary>
+      <div class="faq-content"><div class="faq-content-inner">軽微なテキスト修正などは柔軟に対応いたしますが、デザインや構成の大きな変更が伴う場合は、別途お見積り・納期調整をお願いする場合がございます。</div></div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-summary">納品後のサポートはありますか？<span class="faq-icon"></span></summary>
+      <div class="faq-content"><div class="faq-content-inner">はい、納品後1ヶ月間の無料サポートを行っております。また、継続的な保守・運用プランのご用意もございます。</div></div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-summary">個人・法人どちらでも依頼できますか？<span class="faq-icon"></span></summary>
+      <div class="faq-content"><div class="faq-content-inner">はい、もちろんです。個人事業主様、フリーランスの方から中小企業・法人様まで幅広く対応しております。</div></div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-summary">AIやITに詳しくなくても相談できますか？<span class="faq-icon"></span></summary>
+      <div class="faq-content"><div class="faq-content-inner">全く問題ありません。専門用語はできるだけ使わず、わかりやすい言葉で丁寧にご説明・ご提案させていただきます。</div></div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-summary">カウンセリングは資格を持った方が対応しますか？<span class="faq-icon"></span></summary>
+      <div class="faq-content"><div class="faq-content-inner">はい、有資格の心理カウンセラーが専門的な知見と経験に基づき、しっかりと対応いたします。</div></div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-summary">急ぎの制作に対応できますか？<span class="faq-icon"></span></summary>
+      <div class="faq-content"><div class="faq-content-inner">スケジュール状況によりますが、可能な限り対応いたします。場合によっては特急料金にてお受けすることも可能ですので、まずはご相談ください。</div></div>
+    </details>
+    <details class="faq-item reveal">
+      <summary class="faq-summary">ココナラ以外の直接取引はできますか？<span class="faq-icon"></span></summary>
+      <div class="faq-content"><div class="faq-content-inner">はい、可能です。直接のご契約や、他のクラウドソーシング（クラウドワークス・ランサーズ等）経由でのご依頼にも対応しております。</div></div>
+    </details>
   </div>
 </section>
 
