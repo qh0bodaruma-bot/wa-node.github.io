@@ -58,11 +58,15 @@ body {
   font-family: var(--font-body);
   color: var(--color-text-main);
   background-color: var(--color-bg);
+  background-image: 
+    radial-gradient(circle at 100% 150%, transparent 20%, rgba(10, 17, 40, 0.03) 21%, rgba(10, 17, 40, 0.03) 34%, transparent 35%, transparent),
+    radial-gradient(circle at 0% 150%, transparent 20%, rgba(10, 17, 40, 0.03) 21%, rgba(10, 17, 40, 0.03) 34%, transparent 35%, transparent);
+  background-size: 100px 50px;
+  background-position: 0 0, 50px 0;
   line-height: 1.7;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-  cursor: none; /* For custom cursor */
 }
 
 /* Noise Overlay for premium texture */
@@ -90,7 +94,6 @@ body {
 
 @media (max-width: 768px) {
   .custom-cursor { display: none; }
-  body { cursor: auto; }
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -102,7 +105,6 @@ h1, h2, h3, h4, h5, h6 {
 a {
   text-decoration: none;
   color: inherit;
-  cursor: none; /* Delegate to custom cursor */
 }
 
 ul { list-style: none; }
