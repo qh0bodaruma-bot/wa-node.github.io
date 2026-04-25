@@ -96,6 +96,7 @@
         <li><a href="#story" class="nav-link">About</a></li>
         <li><a href="#services" class="nav-link">Services</a></li>
         <li><a href="#scope" class="nav-link">対応範囲</a></li>
+        <li><a href="#flow" class="nav-link">ご依頼の流れ</a></li>
         <li><a href="#targets" class="nav-link">こんな方へ</a></li>
         <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
         <li><a href="kdp_books.html" class="nav-link">Books</a></li>
@@ -303,6 +304,258 @@
   </div>
 </section>
 
+<!-- 依頼〜納品の流れ -->
+<section id="flow" style="padding: 80px 20px; background: #fff;">
+  <div style="max-width: 860px; margin: 0 auto; font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;">
+
+    <!-- セクションヘッダー -->
+    <div style="text-align: center; margin-bottom: 40px;">
+      <p style="font-size: 13px; letter-spacing: 0.1em; color: #888; margin-bottom: 8px;">FLOW</p>
+      <h2 style="font-size: 26px; font-weight: 600; color: #2c2c2a; margin: 0 0 12px;">依頼〜納品の流れ</h2>
+      <p style="font-size: 14px; color: #888; line-height: 1.7; margin: 0;">
+        サービスの種類によって流れが異なります。ご依頼前にご確認ください。
+      </p>
+    </div>
+
+    <!-- タブナビ -->
+    <div style="display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; margin-bottom: 32px;">
+      <button id="tab-0" onclick="switchFlowTab(0)"
+        style="font-size: 12px; padding: 7px 18px; border-radius: 999px; border: 1px solid #2c2c2a; background: #2c2c2a; color: #fff; cursor: pointer; white-space: nowrap;">
+        相談・セッション系
+      </button>
+      <button id="tab-1" onclick="switchFlowTab(1)"
+        style="font-size: 12px; padding: 7px 18px; border-radius: 999px; border: 1px solid #ddd; background: #fff; color: #888; cursor: pointer; white-space: nowrap;">
+        LP / HP 制作系
+      </button>
+      <button id="tab-2" onclick="switchFlowTab(2)"
+        style="font-size: 12px; padding: 7px 18px; border-radius: 999px; border: 1px solid #ddd; background: #fff; color: #888; cursor: pointer; white-space: nowrap;">
+        納品物系
+      </button>
+      <button id="tab-3" onclick="switchFlowTab(3)"
+        style="font-size: 12px; padding: 7px 18px; border-radius: 999px; border: 1px solid #ddd; background: #fff; color: #888; cursor: pointer; white-space: nowrap;">
+        法人向け
+      </button>
+    </div>
+
+    <!-- パネル共通ラッパー -->
+    <div style="max-width: 580px; margin: 0 auto;">
+
+      <!-- ① 相談・セッション系 -->
+      <div id="panel-0" style="display: block;">
+        <p style="font-size: 13px; color: #666; margin: 0 0 24px; padding: 12px 16px; background: #f9f7f4; border-radius: 8px; line-height: 1.7;">
+          <strong style="color: #2c2c2a;">対象：</strong>カウンセリング・ChatGPT活用相談・壁打ち・IT相談など<br>
+          短期完結型。お申し込みから最短当日〜数日でご対応します。
+        </p>
+        <!-- ステップ -->
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #EAF3DE; color: #3B6D11; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">1</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">ご申し込み <span style="font-size: 10px; background: #EAF3DE; color: #3B6D11; padding: 2px 8px; border-radius: 4px; font-weight: 600; margin-left: 6px;">ココナラ経由</span></p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">サービスページからご購入・ご連絡ください。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #EAF3DE; color: #3B6D11; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">2</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">事前ヒアリング</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">テキストにてお悩み・ご要望を簡単にお聞きします。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #EAF3DE; color: #3B6D11; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">3</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">セッション実施 <span style="font-size: 10px; background: #EAF3DE; color: #3B6D11; padding: 2px 8px; border-radius: 4px; font-weight: 600; margin-left: 6px;">60〜90分目安</span></p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">テキスト・チャット形式でじっくり対応します。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start;">
+          <div style="flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #EAF3DE; color: #3B6D11; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">4</div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">フォローアップ・完了</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">必要に応じて補足資料や追加アドバイスをお送りします。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ② LP/HP制作系 -->
+      <div id="panel-1" style="display: none;">
+        <p style="font-size: 13px; color: #666; margin: 0 0 24px; padding: 12px 16px; background: #f9f7f4; border-radius: 8px; line-height: 1.7;">
+          <strong style="color: #2c2c2a;">対象：</strong>LP制作・HP制作・WordPressカスタマイズ・SEO最適化など<br>
+          要件の複雑さにより、1〜3週間程度のお時間をいただきます。
+        </p>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #E6F1FB; color: #185FA5; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">1</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">ご申し込み・ヒアリングシート記入</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">目的・ターゲット・ご予算・参考サイトなどをお聞きします。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #E6F1FB; color: #185FA5; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">2</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">要件整理・お見積もり <span style="font-size: 10px; background: #E6F1FB; color: #185FA5; padding: 2px 8px; border-radius: 4px; font-weight: 600; margin-left: 6px;">2〜3営業日</span></p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">内容を確認後、構成案と納期・費用をご提案します。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #E6F1FB; color: #185FA5; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">3</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">制作開始</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">デザイン → コーディング → テスト環境での確認の順で進めます。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #E6F1FB; color: #185FA5; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">4</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">修正・調整 <span style="font-size: 10px; background: #E6F1FB; color: #185FA5; padding: 2px 8px; border-radius: 4px; font-weight: 600; margin-left: 6px;">修正2回まで</span></p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">ご確認いただき、ご要望に合わせて修正します。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start;">
+          <div style="flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #E6F1FB; color: #185FA5; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">5</div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">納品・公開サポート</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">本番環境への反映をサポートして完了です。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ③ 納品物系 -->
+      <div id="panel-2" style="display: none;">
+        <p style="font-size: 13px; color: #666; margin: 0 0 24px; padding: 12px 16px; background: #f9f7f4; border-radius: 8px; line-height: 1.7;">
+          <strong style="color: #2c2c2a;">対象：</strong>メール文・SNSポスト案・タイトル案・SEO構成案・プロンプト作成など<br>
+          情報をいただければ最短即日〜翌日納品が可能です。
+        </p>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #FAEEDA; color: #854F0B; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">1</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">ご申し込み・情報共有</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">目的・ターゲット・トーン等の必要情報をお送りください。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #FAEEDA; color: #854F0B; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">2</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">制作・納品 <span style="font-size: 10px; background: #FAEEDA; color: #854F0B; padding: 2px 8px; border-radius: 4px; font-weight: 600; margin-left: 6px;">最短即日</span></p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">テキストファイル等でご指定の形式にて納品します。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start;">
+          <div style="flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #FAEEDA; color: #854F0B; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">3</div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">修正対応・完了</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">軽微な修正は1回まで対応します。</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ④ 法人向け -->
+      <div id="panel-3" style="display: none;">
+        <p style="font-size: 13px; color: #666; margin: 0 0 24px; padding: 12px 16px; background: #f9f7f4; border-radius: 8px; line-height: 1.7;">
+          <strong style="color: #2c2c2a;">対象：</strong>外部相談窓口設置・部下の精神不調対応・経営相談・メンタルヘルス課題整理など<br>
+          まず無料相談にてご状況をお聞きします。
+        </p>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #EEEDFE; color: #534AB7; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">1</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">お問い合わせ・無料相談 <span style="font-size: 10px; background: #EEEDFE; color: #534AB7; padding: 2px 8px; border-radius: 4px; font-weight: 600; margin-left: 6px;">30分</span></p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">現状・課題・ご要望を整理します。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #EEEDFE; color: #534AB7; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">2</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">要件定義・ご提案</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">対応範囲・スケジュール・費用をご提案します。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start; padding-bottom: 24px;">
+          <div style="display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #EEEDFE; color: #534AB7; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">3</div>
+            <div style="width: 1px; height: 32px; background: #e5e2db; margin: 4px 0;"></div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">ご契約・実施</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">合意後、窓口設置・台本作成・研修などを実施します。</p>
+          </div>
+        </div>
+        <div style="display: flex; gap: 16px; align-items: flex-start;">
+          <div style="flex-shrink: 0;">
+            <div style="width: 32px; height: 32px; border-radius: 50%; background: #EEEDFE; color: #534AB7; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600;">4</div>
+          </div>
+          <div style="padding-top: 4px;">
+            <p style="font-size: 14px; font-weight: 600; color: #2c2c2a; margin: 0 0 4px;">報告・継続サポート</p>
+            <p style="font-size: 12px; color: #888; margin: 0; line-height: 1.6;">実施後の報告と、継続ご利用のご相談に応じます。</p>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /max-width wrapper -->
+  </div><!-- /section inner -->
+</section>
+
+<!-- タブ切り替えスクリプト -->
+<script>
+function switchFlowTab(i) {
+  var colors = ['#EAF3DE','#E6F1FB','#FAEEDA','#EEEDFE'];
+  var textColors = ['#3B6D11','#185FA5','#854F0B','#534AB7'];
+  for (var n = 0; n < 4; n++) {
+    var btn = document.getElementById('tab-' + n);
+    var panel = document.getElementById('panel-' + n);
+    if (n === i) {
+      btn.style.background = '#2c2c2a';
+      btn.style.color = '#fff';
+      btn.style.borderColor = '#2c2c2a';
+      panel.style.display = 'block';
+    } else {
+      btn.style.background = '#fff';
+      btn.style.color = '#888';
+      btn.style.borderColor = '#ddd';
+      panel.style.display = 'none';
+    }
+  }
+}
+</script>
+
 <!-- こんな方へ -->
 <section class="targets" id="targets">
   <div style="text-align:center;margin-bottom:44px;">
@@ -417,6 +670,7 @@
         <li><a href="#story">About</a></li>
         <li><a href="#services">Services</a></li>
         <li><a href="#scope">対応範囲</a></li>
+        <li><a href="#flow">ご依頼の流れ</a></li>
         <li><a href="#targets">こんな方へ</a></li>
         <li><a href="#portfolio">Portfolio</a></li>
         <li><a href="kdp_books.html">Books</a></li>
