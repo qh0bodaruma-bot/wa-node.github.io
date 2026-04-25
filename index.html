@@ -2,302 +2,273 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>和-Node | 車いすSE×心理カウンセラー | プレミアムWeb制作・メンタル支援</title>
-<meta name="description" content="車いすで起業したSE×心理カウンセラー「マルだ←」が、集客に直結するWeb制作・ITコンサルからメンタルケアまでワンストップでサポート。"/>
 <link rel="icon" type="image/png" href="images/favicon.png"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>和-Node | 車いすSE×心理カウンセラー | Web制作・ITコンサル・メンタル支援</title>
+<meta name="description" content="車いすで起業したSE×心理カウンセラー「マルだ←」が、集客に直結するWeb制作・ITコンサルから個人・法人のメンタルケアまでワンストップでサポート。実務歴15年のITスキルとプロの傾聴力で、あなたのビジネスと心の悩みを解決します。"/>
 
-<!-- OGP -->
-<meta property="og:title" content="和-Node | 車いすSE×心理カウンセラー"/>
-<meta property="og:description" content="車いすで起業したSE×心理カウンセラー「マルだ←」が、Web制作・ITコンサルから個人・法人のメンタルケアまでワンストップでサポート。"/>
+<!-- OGP & Twitter Card -->
+<meta property="og:title" content="和-Node | 車いすSE×心理カウンセラー | Web制作・ITコンサル・メンタル支援"/>
+<meta property="og:description" content="車いすで起業したSE×心理カウンセラー「マルだ←」が、集客に直結するWeb制作・ITコンサルから個人・法人のメンタルケアまでワンストップでサポート。実務歴15年のITスキルとプロの傾聴力で、あなたのビジネスと心の悩みを解決します。"/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://www.wa-node.com/"/>
 <meta property="og:image" content="https://www.wa-node.com/images/avatar.png"/>
-<meta name="twitter:card" content="summary_large_image"/>
+<meta property="og:site_name" content="和-Node"/>
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:site" content="@wa_node"/>
 
+<!-- 構造化データ (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "和-Node",
+  "image": "https://www.wa-node.com/images/avatar.png",
+  "url": "https://www.wa-node.com/",
+  "telephone": "080-3599-5388",
+  "email": "contacts@wa-node.com",
+  "description": "車いすで起業したSE×心理カウンセラー「マルだ←」が、Web制作・ITコンサルから個人・法人のメンタルケアまでワンストップでサポートします。",
+  "founder": {
+    "@type": "Person",
+    "name": "マルだ←"
+  }
+}
+</script>
 <link rel="stylesheet" href="style.css"/>
-
-<!-- GSAP & Lenis -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+.services-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
+.tab-btn{background:transparent;border:1px solid var(--color-border);color:var(--color-text-muted);padding:8px 22px;border-radius:40px;font-size:13px;cursor:pointer;font-family:var(--font-body);transition:all .3s;}
+.tab-btn:hover,.tab-btn.active{background:var(--color-accent);border-color:var(--color-accent);color:#fff;font-weight:700;}
+.tab-panel{display:none;}.tab-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
+.srv-item{background:var(--color-surface);border:1px solid var(--color-border);padding:20px;border-radius:4px;transition:all .3s;text-decoration:none;display:block;color:inherit;}
+.srv-item:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.07);border-color:var(--color-accent);}
+.srv-item-icon{font-size:24px;margin-bottom:10px;}
+.srv-item-title{font-size:14px;font-weight:700;color:var(--color-primary);margin-bottom:6px;line-height:1.5;}
+.srv-item-desc{font-size:12px;color:var(--color-text-muted);line-height:1.8;}
+.story{background:var(--color-surface);padding:100px 0;}
+.story-inner{max-width:900px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:200px 1fr;gap:56px;align-items:start;}
+.story-avatar{width:180px;height:180px;border-radius:50%;object-fit:cover;border:4px solid var(--color-surface);box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.story-avatar-placeholder{width:180px;height:180px;border-radius:50%;background:linear-gradient(135deg,#1a2a40,#364966);display:flex;align-items:center;justify-content:center;font-size:60px;color:#f7f3e8;box-shadow:0 8px 24px rgba(0,0,0,.08);}
+.story-badge{display:inline-block;background:var(--color-accent-light);color:var(--color-accent);font-size:11px;font-weight:700;padding:4px 14px;border-radius:40px;letter-spacing:.08em;margin-bottom:16px;}
+.story-name{font-size:28px;color:var(--color-primary);margin-bottom:6px;}
+.story-title{font-size:13px;color:var(--color-accent);letter-spacing:.1em;margin-bottom:20px;}
+.story-text{font-size:14px;color:var(--color-text-muted);line-height:2.1;margin-bottom:16px;}
+.creds{display:flex;flex-direction:column;gap:8px;margin-top:20px;}
+.cred{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--color-secondary);}
+.cred::before{content:'✓';color:var(--color-accent);font-weight:700;flex-shrink:0;}
+.targets{background:var(--color-accent-light);padding:80px 0;}
+.targets-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;max-width:1100px;margin:0 auto;padding:0 24px;}
+.tg-card{background:#fff;border-radius:4px;padding:28px 22px;border-left:4px solid var(--color-accent);transition:all .3s;}
+.tg-card:hover{transform:translateX(4px);}
+.tg-icon{font-size:32px;margin-bottom:10px;}
+.tg-title{font-size:15px;font-weight:700;color:var(--color-primary);margin-bottom:8px;}
+.tg-desc{font-size:13px;color:var(--color-text-muted);line-height:1.9;}
+.portfolio-section{padding:80px 0;text-align:center;background:var(--color-surface);}
+.portfolio-btn{display:inline-block;background:var(--color-primary);color:#fff;padding:16px 44px;border-radius:40px;font-size:15px;font-weight:700;letter-spacing:.06em;transition:all .3s;text-decoration:none;}
+.portfolio-btn:hover{background:var(--color-accent);transform:translateY(-2px);}
+.portfolio-sub{font-size:13px;color:var(--color-text-muted);margin-top:12px;}
+@media(max-width:768px){
+  .story-inner{grid-template-columns:1fr;}.story-avatar,.story-avatar-placeholder{margin:0 auto;}
+  .tab-panel.active{grid-template-columns:1fr;}
+}
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B4FD0GJGW5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B4FD0GJGW5');
+</script>
 </head>
 <body>
-<!-- Custom Cursor -->
-<div class="custom-cursor"></div>
-<div class="noise-overlay"></div>
+<div class="app-container bg-seigaiha">
+<div class="landscape-bg" style="background-image:url('images/bg-landscape.png')"></div>
 
 <!-- Header -->
 <header class="header">
   <div class="container header-container">
-    <div class="logo"><a href="#" class="magnetic"><span class="logo-text">和-Node</span></a></div>
+    <div class="logo"><a href="#"><span class="logo-text">和-Node</span></a></div>
     <nav class="nav">
       <ul class="nav-list">
-        <li><a href="#story" class="nav-link magnetic">About</a></li>
-        <li><a href="#services" class="nav-link magnetic">Services</a></li>
-        <li><a href="#portfolio" class="nav-link magnetic">Portfolio</a></li>
-        <li><a href="https://coconala.com/users/2598979" target="_blank" class="nav-link btn-header magnetic">ご相談・ご依頼</a></li>
+        <li><a href="#story" class="nav-link">About</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#targets" class="nav-link">こんな方へ</a></li>
+        <li><a href="#portfolio" class="nav-link">Portfolio</a></li>
+        <li><a href="kdp_books.html" class="nav-link">Books</a></li>
+        <li><a href="https://coconala.com/users/2598979" target="_blank" class="nav-link btn-header">ご相談・ご依頼</a></li>
       </ul>
     </nav>
   </div>
 </header>
 
+<!-- Hero -->
 <main>
-<!-- Hero Section -->
 <section class="hero">
-  <img src="images/bg-landscape.png" alt="Background" class="hero-bg-img" />
-  <div class="hero-gradient"></div>
   <div class="hero-bg-enso"></div>
-  
   <div class="container hero-container">
     <div class="hero-content">
       <h1 class="hero-title">
-        <span class="title-line">車いすで起業した</span>
-        <span class="title-line">SE×心理カウンセラーが、</span>
-        <span class="title-line">心もITも<span style="color:var(--color-accent);">全部</span>聴きます。</span>
+        <span class="title-line">車いすで起業したSE×心理カウンセラーが、</span>
+        <span class="title-line">心もITも全部聴きます。</span>
       </h1>
-      <p class="hero-subtitle">
-        30歳で線維筋痛症を発症し、車いす生活へ。<br>
-        それでも諦めなかった15年の経験が、あなたのビジネスと心の力になります。
-      </p>
+      <p class="hero-subtitle">30歳で線維筋痛症を発症し、車いす生活へ。それでも諦めなかった経験が、あなたの力になります。</p>
       <div class="hero-action">
-        <a href="#services" class="btn btn-primary magnetic">提供サービスを見る</a>
-        <a href="#story" class="btn btn-accent magnetic">代表ストーリー</a>
+        <a href="#services" class="btn btn-primary" style="margin-right:14px;">サービスを見る</a>
+        <a href="#story" class="btn btn-accent">マルだ←について</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Story Section -->
-<section class="section story" id="story">
-  <div class="container">
-    <div class="section-title-wrapper">
-      <span class="section-subtitle">Founder Story</span>
-      <h2 class="section-title">マルだ← について</h2>
+<!-- Story / Profile -->
+<section class="story" id="story">
+  <div class="story-inner">
+    <div style="text-align:center;">
+      <img src="images/avatar.png" alt="マルだ←" class="story-avatar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"/>
+      <div class="story-avatar-placeholder" style="display:none;">🌿</div>
     </div>
-    
-    <div class="story-inner">
-      <div class="story-image-col">
-        <div class="story-image-wrapper magnetic">
-          <!-- Fallback image, but with premium overlay -->
-          <img src="images/avatar.png" alt="マルだ←" onerror="this.src='https://images.unsplash.com/photo-1555212697-194d092e3b8f?q=80&w=1000&auto=format&fit=crop'"/>
-          <div class="story-image-overlay"></div>
-          <div class="story-name-badge">
-            <h3>マルだ←</h3>
-            <p>IT Consultant × Counselor</p>
-          </div>
-        </div>
+    <div>
+      <div class="story-badge">代表プロフィール</div>
+      <h2 class="story-name">マルだ←</h2>
+      <div class="story-title">産業カウンセラー / 心理カウンセラー / ITコンサルタント</div>
+      <p class="story-text">30歳のとき、線維筋痛症を発症。四肢の機能不全により車いす生活となり、身体障害者の道へ。それでも社会とのつながりを諦めず、リハビリを続けながら資格を取得。長いリハビリ生活に一区切りがついた2026年4月1日、ついに起業しました。</p>
+      <p class="story-text">「痛みも、孤独も、IT課題も——すべてを一人で抱えてきた」からこそ、あなたの言葉にならない悩みに寄り添えます。心理のプロとして、ITのプロとして、そして当事者として、あなたのそばに立ちます。</p>
+      <div class="creds">
+        <div class="cred">産業カウンセラー（2002年取得）</div>
+        <div class="cred">上級心理カウンセラー・メンタル心理カウンセラー（2025年取得）</div>
+        <div class="cred">社内SE→ITコンサルタント（2010年〜）</div>
+        <div class="cred">Web構築・保守・サーバー管理の実務経験15年以上</div>
+        <div class="cred">KDP（Amazon電子書籍）出版実績あり</div>
       </div>
-      
-      <div class="story-content-col">
-        <div class="story-content-item">
-          <p class="story-text">
-            30歳のとき、線維筋痛症を発症。四肢の機能不全により車いす生活となり、身体障害者の道へ。それでも社会とのつながりを諦めず、長いリハビリを続けながら資格を取得し、2026年ついに起業しました。
-          </p>
-        </div>
-        <div class="story-content-item">
-          <p class="story-text">
-            「痛みも、孤独も、IT課題も——すべてを一人で抱えてきた」からこそ、あなたの言葉にならない悩みに深く寄り添うことができます。心理のプロとして、ITのプロとして、あなたのビジネスに伴走します。
-          </p>
-        </div>
-        
-        <div class="story-content-item creds-list">
-          <div class="cred-item"><span class="cred-icon">✦</span> 産業カウンセラー（2002年取得）</div>
-          <div class="cred-item"><span class="cred-icon">✦</span> 上級心理カウンセラー（2025年取得）</div>
-          <div class="cred-item"><span class="cred-icon">✦</span> Web構築・保守・サーバー管理 実務歴15年</div>
-          <div class="cred-item"><span class="cred-icon">✦</span> 企業向けITコンサルタント</div>
-        </div>
+      <div style="margin-top: 30px;">
+        <a href="kdp_books.html" class="portfolio-btn" style="padding: 12px 30px; font-size: 14px;">📚 出版実績（Kindle本）を見る →</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Services Bento Grid -->
-<section class="section services" id="services">
+<!-- Services -->
+<section id="services" class="section services">
   <div class="container">
-    <div class="section-title-wrapper">
-      <span class="section-subtitle">Our Expertise</span>
-      <h2 class="section-title">提供サービス</h2>
-    </div>
-    
-    <div class="tab-nav-premium">
-      <button class="tab-btn-premium active magnetic" data-target="tab-counseling">🫂 メンタルケア</button>
-      <button class="tab-btn-premium magnetic" data-target="tab-it">💻 IT・Web制作</button>
-      <button class="tab-btn-premium magnetic" data-target="tab-content">✍️ ライティング</button>
-      <button class="tab-btn-premium magnetic" data-target="tab-hojin">🏢 法人支援</button>
-    </div>
-    
-    <!-- IT/Web -->
-    <div id="tab-it" class="bento-grid-panel active" style="display: grid;">
-      <div class="bento-card">
-        <span class="bento-icon">💎</span>
-        <h3 class="bento-title">事業戦略から入る<br>Web制作【プレミアム】</h3>
-        <p class="bento-desc">ITコンサル×心理カウンセラーが、あなたのビジネス課題を根本から解決する完全オーダーメイドのWebサイトを構築します。</p>
-        <a href="https://coconala.com/services/4183144" target="_blank" class="bento-link magnetic">詳細を見る <i>→</i></a>
-      </div>
-      <div class="bento-card">
-        <span class="bento-icon">⚡</span>
-        <h3 class="bento-title">WordPress<br>表示速度・SEO改善</h3>
-        <p class="bento-desc">離脱率を防ぐ最重要課題。重いサイトを劇的に軽くし、技術的な土台から内部SEOを丸ごと最適化します。</p>
-        <a href="https://coconala.com/services/4180544" target="_blank" class="bento-link magnetic">詳細を見る <i>→</i></a>
-      </div>
-      <div class="bento-card" style="grid-column: span 1 / span 2; @media(min-width:1024px){grid-column: span 2;}">
-        <span class="bento-icon">🤖</span>
-        <h3 class="bento-title">ChatGPT活用 個別サポート</h3>
-        <p class="bento-desc">実務レベルでのAI活用法を丁寧にお伝えします。プロンプトエンジニアリングから業務効率化まで、あなたのスキルに合わせて伴走します。</p>
-        <a href="https://coconala.com/services/4160374" target="_blank" class="bento-link magnetic">詳細を見る <i>→</i></a>
-      </div>
-    </div>
-    
-    <!-- Counseling -->
-    <div id="tab-counseling" class="bento-grid-panel">
-      <div class="bento-card">
-        <span class="bento-icon">🫂</span>
-        <h3 class="bento-title">テキストカウンセリング</h3>
-        <p class="bento-desc">まとまっていなくてOK。当事者経験を持つ認定カウンセラーが、言葉にならない気持ちに寄り添い、テキストでじっくりお話を伺います。</p>
-        <a href="https://coconala.com/services/4181261" target="_blank" class="bento-link magnetic">詳細を見る <i>→</i></a>
-      </div>
-      <div class="bento-card">
-        <span class="bento-icon">🤝</span>
-        <h3 class="bento-title">フリーランス向け<br>メンタル＆事業壁打ち</h3>
-        <p class="bento-desc">孤独な経営者・フリーランス特有の悩み。IT・事業の相談から心のモヤモヤまで、一人で抱え込まずにご相談ください。</p>
-        <a href="https://coconala.com/services/4182196" target="_blank" class="bento-link magnetic">詳細を見る <i>→</i></a>
-      </div>
-    </div>
-    
-    <!-- Content -->
-    <div id="tab-content" class="bento-grid-panel">
-      <div class="bento-card">
-        <span class="bento-icon">✉️</span>
-        <h3 class="bento-title">ビジネスメール・お断り文</h3>
-        <p class="bento-desc">角が立たない文章作成。悩む時間をゼロにし、状況に合わせた最適な文章を最速で納品します。</p>
-        <a href="https://coconala.com/services/4181257" target="_blank" class="bento-link magnetic">詳細を見る <i>→</i></a>
-      </div>
-      <div class="bento-card">
-        <span class="bento-icon">🐦</span>
-        <h3 class="bento-title">SNS・ブログコンテンツ案</h3>
-        <p class="bento-desc">X(Twitter)のポスト案やブログタイトル作成。ターゲットの心に響く言葉選びで、発信のストレスを軽減します。</p>
-        <a href="https://coconala.com/services/4178240" target="_blank" class="bento-link magnetic">詳細を見る <i>→</i></a>
-      </div>
-    </div>
-    
-    <!-- Hojin -->
-    <div id="tab-hojin" class="bento-grid-panel">
-      <div class="bento-card">
-        <span class="bento-icon">🏢</span>
-        <h3 class="bento-title">休職離職を防ぐ<br>外部相談窓口</h3>
-        <p class="bento-desc">職場の悩みを可視化し、離職を防ぐ経営者向けサポート。1名から導入可能なメンタルヘルス課題整理を行います。</p>
-        <a href="https://coconala.com/services/4175615" target="_blank" class="bento-link magnetic">詳細を見る <i>→</i></a>
-      </div>
-      <div class="bento-card">
-        <span class="bento-icon">♿</span>
-        <h3 class="bento-title">住宅メーカー様向け<br>製品アドバイス</h3>
-        <p class="bento-desc">当事者のリアルな声と使いにくさの盲点を、車いすユーザー視点でフィードバック。製品開発の価値を高めます。</p>
-        <a href="https://coconala.com/services/4180581" target="_blank" class="bento-link magnetic">詳細を見る <i>→</i></a>
-      </div>
-    </div>
-    
-  </div>
-</section>
+    <h2 class="section-title reveal">Services</h2>
 
-<!-- Targets Section -->
-<section class="section targets" id="targets">
-  <div class="container">
-    <div class="section-title-wrapper">
-      <span class="section-subtitle">For You</span>
-      <h2 class="section-title">こんな方へ</h2>
+    <div class="services-tabs">
+      <button class="tab-btn active" onclick="switchTab('counseling',this)">🫂 カウンセリング・メンタル</button>
+      <button class="tab-btn" onclick="switchTab('it',this)">💻 IT・Web</button>
+      <button class="tab-btn" onclick="switchTab('content',this)">✍️ コンテンツ・ライティング</button>
+      <button class="tab-btn" onclick="switchTab('hojin',this)">🏢 法人・当事者支援</button>
     </div>
-    
-    <div class="targets-grid">
-      <div class="tg-card">
-        <div class="tg-icon-large">👔</div>
-        <h3 class="tg-title">経営者・フリーランス</h3>
-        <p class="tg-desc">「誰にも相談できない」「ITも人も両方課題がある」。そんな経営者の壁打ち相手として、心とITの両面からサポートします。</p>
-      </div>
-      <div class="tg-card">
-        <div class="tg-icon-large">👩</div>
-        <h3 class="tg-title">悩みや孤独を抱える方</h3>
-        <p class="tg-desc">家族のこと、将来への不安。まとまっていなくてOK。ただ話したい、そのニーズに当事者経験を持つプロが寄り添います。</p>
-      </div>
-      <div class="tg-card">
-        <div class="tg-icon-large">♿</div>
-        <h3 class="tg-title">建具・住宅メーカー</h3>
-        <p class="tg-desc">車いすユーザーの「本当の使いにくさ」を製品開発にフィードバック。当事者15年の視点は、マーケットにない貴重な情報です。</p>
-      </div>
+
+    <div id="tab-counseling" class="tab-panel active reveal">
+      <a href="https://coconala.com/services/4181261" target="_blank" class="srv-item"><div class="srv-item-icon">🫂</div><div class="srv-item-title">テキストで悩みや愚痴をお聞きします</div><p class="srv-item-desc">まとまっていなくてOK。文字にすることで心を軽くしませんか？</p></a>
+      <a href="https://coconala.com/services/4005191" target="_blank" class="srv-item"><div class="srv-item-icon">💙</div><div class="srv-item-title">家族・孤独・痛みと生きる悩みのご相談</div><p class="srv-item-desc">当事者経験を持つ認定カウンセラーが、言葉にならない気持ちに寄り添います。</p></a>
+      <a href="https://coconala.com/services/4180551" target="_blank" class="srv-item"><div class="srv-item-icon">📄</div><div class="srv-item-title">休職・離職中の方の自己PR作成サポート</div><p class="srv-item-desc">カウンセリングを通じて心の整理を行い、あなたの魅力を言語化します。</p></a>
+      <a href="https://coconala.com/services/4182196" target="_blank" class="srv-item"><div class="srv-item-icon">🤝</div><div class="srv-item-title">孤独なフリーランス向け メンタルケア＆事業壁打ち</div><p class="srv-item-desc">IT・事業の悩みから心のモヤモヤまで、一人で抱え込まずにご相談ください。</p></a>
+    </div>
+
+    <div id="tab-it" class="tab-panel reveal">
+      <a href="https://coconala.com/services/4183139" target="_blank" class="srv-item"><div class="srv-item-icon">💻</div><div class="srv-item-title">集客に直結するLP・HP制作</div><p class="srv-item-desc">実務歴15年以上のITコンサルがビジネス課題をWebで解決します。</p></a>
+      <a href="https://coconala.com/services/4183144" target="_blank" class="srv-item"><div class="srv-item-icon">💎</div><div class="srv-item-title">事業戦略から入るWeb制作【プレミアム】</div><p class="srv-item-desc">ITコンサル×心理カウンセラーが完全オーダーメイドで構築します。</p></a>
+      <a href="https://coconala.com/services/4180544" target="_blank" class="srv-item"><div class="srv-item-icon">⚡</div><div class="srv-item-title">WordPressの表示速度改善</div><p class="srv-item-desc">離脱率を防ぐSEOの最重要課題。重いサイトを劇的に軽くします。</p></a>
+      <a href="https://coconala.com/services/4160127" target="_blank" class="srv-item"><div class="srv-item-icon">🔍</div><div class="srv-item-title">WordPress SEO内部の丸ごと最適化</div><p class="srv-item-desc">GSC連携やコード修正など、技術的な土台からしっかり最適化します。</p></a>
+      <a href="https://coconala.com/services/4160374" target="_blank" class="srv-item"><div class="srv-item-icon">🤖</div><div class="srv-item-title">ChatGPT活用 個別60分サポート</div><p class="srv-item-desc">初心者歓迎！実務レベルでのAI活用法を丁寧にお伝えします。</p></a>
+    </div>
+
+    <div id="tab-content" class="tab-panel reveal">
+      <a href="https://coconala.com/services/4181257" target="_blank" class="srv-item"><div class="srv-item-icon">✉️</div><div class="srv-item-title">角が立たないビジネスメール・お断り文作成</div><p class="srv-item-desc">悩む時間をゼロに。状況に合わせた最適な文章を最速で納品します。</p></a>
+      <a href="https://coconala.com/services/4178240" target="_blank" class="srv-item"><div class="srv-item-icon">🐦</div><div class="srv-item-title">X(Twitter)の2週間分ポスト案作成</div><p class="srv-item-desc">ネタ切れのストレスを解消し、SNS運用を驚くほど楽にします。</p></a>
+      <a href="https://coconala.com/services/4178233" target="_blank" class="srv-item"><div class="srv-item-icon">📝</div><div class="srv-item-title">ブログ・YouTubeのタイトル案20個作成</div><p class="srv-item-desc">ターゲットの心に響く言葉選びで、コンテンツの魅力を最大限に引き出します。</p></a>
+      <a href="https://coconala.com/services/4160398" target="_blank" class="srv-item"><div class="srv-item-icon">📋</div><div class="srv-item-title">SEO記事構成 プロンプトテンプレート</div><p class="srv-item-desc">ChatGPTを使ってSEOに強い記事構成を自動生成するテンプレートをお渡しします。</p></a>
+      <a href="https://coconala.com/services/4180530" target="_blank" class="srv-item"><div class="srv-item-icon">✍️</div><div class="srv-item-title">Kindle出版用 AI執筆プロンプト作成</div><p class="srv-item-desc">KDP実績者が教える、AIに指示を出すだけで書き上がる専用プロンプト！</p></a>
+    </div>
+
+    <div id="tab-hojin" class="tab-panel reveal">
+      <a href="https://coconala.com/services/4183152" target="_blank" class="srv-item"><div class="srv-item-icon">💡</div><div class="srv-item-title">社内のIT化・集客の悩み 60分相談</div><p class="srv-item-desc">システム導入から事業の方向性まで。ITコンサルが壁打ち相手になります。</p></a>
+      <a href="https://coconala.com/services/4180418" target="_blank" class="srv-item"><div class="srv-item-icon">🏥</div><div class="srv-item-title">部下の精神不調対応・面談台本作成</div><p class="srv-item-desc">腫れ物扱いはNG。上級心理カウンセラーが最適なスクリプトを作成します。</p></a>
+      <a href="https://coconala.com/services/4175615" target="_blank" class="srv-item"><div class="srv-item-icon">🏢</div><div class="srv-item-title">休職離職を防ぐ窓口・経営相談（法人向け）</div><p class="srv-item-desc">1名から導入可能。職場の悩みを可視化し、離職を防ぐ外部相談窓口です。</p></a>
+      <a href="https://coconala.com/services/4177364" target="_blank" class="srv-item"><div class="srv-item-icon">🛡️</div><div class="srv-item-title">休職を防ぐ職場のメンタルヘルス課題整理</div><p class="srv-item-desc">社内の温度差による離職を防ぐための、最初の60分相談です。</p></a>
+      <a href="https://coconala.com/services/4180581" target="_blank" class="srv-item"><div class="srv-item-icon">♿</div><div class="srv-item-title">住宅・建具メーカー様向け 製品アドバイス</div><p class="srv-item-desc">当事者のリアルな声と使いにくさの盲点を、車いすユーザー視点でフィードバックします。</p></a>
     </div>
   </div>
 </section>
 
-<!-- Portfolio & CTA -->
-<section class="section portfolio-section" id="portfolio">
-  <div class="container">
-    <div class="section-title-wrapper">
-      <span class="section-subtitle">Works</span>
-      <h2 class="section-title">制作デモ</h2>
-    </div>
-    
-    <div class="portfolio-grid">
-      <a href="https://www.wa-node.com/portfolio-lp/index.html" target="_blank" class="portfolio-item magnetic">
-        <div class="pf-icon">🌟</div>
-        <h3 class="pf-title">総合ポートフォリオ</h3>
-        <p class="pf-sub">LP制作パッケージ</p>
-      </a>
-      <a href="portfolio-lp/demo_lead.html" target="_blank" class="portfolio-item magnetic">
-        <div class="pf-icon">🚀</div>
-        <h3 class="pf-title">LP (リード獲得)</h3>
-        <p class="pf-sub">SaaS・BtoB向け</p>
-      </a>
-      <a href="portfolio-lp/demo_corporate.html" target="_blank" class="portfolio-item magnetic">
-        <div class="pf-icon">🏢</div>
-        <h3 class="pf-title">コーポレート</h3>
-        <p class="pf-sub">企業・IT向け</p>
-      </a>
-      <a href="portfolio-lp/demo_local.html" target="_blank" class="portfolio-item magnetic">
-        <div class="pf-icon">☕</div>
-        <h3 class="pf-title">店舗集客</h3>
-        <p class="pf-sub">カフェ・サロン向け</p>
-      </a>
-      <a href="portfolio-lp/demo_media.html" target="_blank" class="portfolio-item magnetic">
-        <div class="pf-icon">📰</div>
-        <h3 class="pf-title">メディア</h3>
-        <p class="pf-sub">情報発信・ブログ</p>
-      </a>
-    </div>
+<!-- こんな方へ -->
+<section class="targets" id="targets">
+  <div style="text-align:center;margin-bottom:44px;">
+    <h2 class="section-title reveal" style="display:inline-block;">こんな方へ</h2>
+  </div>
+  <div class="targets-grid">
+    <div class="tg-card reveal"><div class="tg-icon">👔</div><h3 class="tg-title">零細・中小企業の経営者</h3><p class="tg-desc">「誰にも相談できない」「ITも人も両方課題がある」。そんな経営者の壁打ち相手として、心とITの両面からサポートします。</p></div>
+    <div class="tg-card reveal"><div class="tg-icon">👩</div><h3 class="tg-title">50代のママさん・主婦の方</h3><p class="tg-desc">家族のこと、孤独感、将来への不安。まとまっていなくてOK。ただ話したい、そのニーズに寄り添います。</p></div>
+    <div class="tg-card reveal"><div class="tg-icon">♿</div><h3 class="tg-title">建具・住宅メーカー担当者</h3><p class="tg-desc">車いすユーザーの「本当の使いにくさ」を製品開発にフィードバック。当事者15年の視点は、マーケットにない情報です。</p></div>
+    <div class="tg-card reveal"><div class="tg-icon">💼</div><h3 class="tg-title">孤独なフリーランス・副業者</h3><p class="tg-desc">事業の悩み、心のモヤモヤ、ITの困りごと。全部まとめて聴ける場所がここにあります。</p></div>
+  </div>
+</section>
 
-    <!-- Contact CTA Box -->
-    <div class="cta-box">
-      <div class="cta-content">
-        <h2>ビジネスと心の課題を、<br>一緒に解決しませんか？</h2>
-        <p>各種クラウドソーシング、または直接取引にてご対応可能です。<br>お好みのプラットフォームからお気軽にご相談ください。</p>
-        <div style="display: flex; gap: 20px; margin-top: 30px; flex-wrap: wrap;">
-          <!-- QR Codes -->
-          <div style="text-align: center;">
-            <img src="images/QR_crowdworks.png" alt="クラウドワークス QR" onerror="this.style.display='none'" style="width: 100px; height: 100px; border-radius: 8px; background: #fff; padding: 5px;">
-            <p style="font-size: 0.8rem; margin-top: 5px; color: rgba(255,255,255,0.7);">クラウドワークス</p>
-          </div>
-          <div style="text-align: center;">
-            <img src="images/QR_lancers.png" alt="ランサーズ QR" onerror="this.style.display='none'" style="width: 100px; height: 100px; border-radius: 8px; background: #fff; padding: 5px;">
-            <p style="font-size: 0.8rem; margin-top: 5px; color: rgba(255,255,255,0.7);">ランサーズ</p>
-          </div>
-          <div style="text-align: center;">
-            <img src="images/QR_coconala.png" alt="ココナラ QR" onerror="this.style.display='none'" style="width: 100px; height: 100px; border-radius: 8px; background: #fff; padding: 5px;">
-            <p style="font-size: 0.8rem; margin-top: 5px; color: rgba(255,255,255,0.7);">ココナラ</p>
-          </div>
-        </div>
+<!-- Portfolio & Coconala CTA -->
+<section class="portfolio-section" id="portfolio">
+  <h2 class="section-title reveal" style="display:inline-block;margin-bottom:20px;">Web制作デモ・ポートフォリオ</h2>
+  <p style="color:var(--color-text-muted);font-size:14px;margin-bottom:40px;">ココナラでのHP制作・カスタマイズ販売向けのサンプルサイトです。<br><span style="color:#ef4444;font-weight:bold;">※直接取引誘導を防ぐココナラ規約順守のため、デモサイト内のリンクは無効化しています。</span></p>
+  
+  <div class="reveal" style="display:flex;flex-wrap:wrap;gap:20px;justify-content:center;max-width:1000px;margin:0 auto 60px;padding:0 24px;">
+    <a href="https://www.wa-node.com/portfolio-lp/index.html" target="_blank" style="background:#fff;border:1px solid var(--color-border);border-radius:8px;padding:24px 16px;text-align:center;width:160px;transition:all 0.3s;color:inherit;text-decoration:none;" onmouseover="this.style.borderColor='var(--color-accent)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.borderColor='var(--color-border)';this.style.transform='none';this.style.boxShadow='none'">
+      <div style="font-size:32px;margin-bottom:12px;">🌟</div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-primary);margin-bottom:6px;">総合ポートフォリオ</div>
+      <div style="font-size:11px;color:var(--color-text-muted);">LP制作パッケージ</div>
+    </a>
+    <a href="portfolio-lp/demo_lead.html" target="_blank" style="background:#fff;border:1px solid var(--color-border);border-radius:8px;padding:24px 16px;text-align:center;width:160px;transition:all 0.3s;color:inherit;text-decoration:none;" onmouseover="this.style.borderColor='var(--color-accent)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.borderColor='var(--color-border)';this.style.transform='none';this.style.boxShadow='none'">
+      <div style="font-size:32px;margin-bottom:12px;">🚀</div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-primary);margin-bottom:6px;">LP(リード獲得)</div>
+      <div style="font-size:11px;color:var(--color-text-muted);">SaaS・BtoB向け</div>
+    </a>
+    <a href="portfolio-lp/demo_corporate.html" target="_blank" style="background:#fff;border:1px solid var(--color-border);border-radius:8px;padding:24px 16px;text-align:center;width:160px;transition:all 0.3s;color:inherit;text-decoration:none;" onmouseover="this.style.borderColor='var(--color-accent)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.borderColor='var(--color-border)';this.style.transform='none';this.style.boxShadow='none'">
+      <div style="font-size:32px;margin-bottom:12px;">🏢</div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-primary);margin-bottom:6px;">コーポレート</div>
+      <div style="font-size:11px;color:var(--color-text-muted);">企業・IT向け</div>
+    </a>
+    <a href="portfolio-lp/demo_profile.html" target="_blank" style="background:#fff;border:1px solid var(--color-border);border-radius:8px;padding:24px 16px;text-align:center;width:160px;transition:all 0.3s;color:inherit;text-decoration:none;" onmouseover="this.style.borderColor='var(--color-accent)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.borderColor='var(--color-border)';this.style.transform='none';this.style.boxShadow='none'">
+      <div style="font-size:32px;margin-bottom:12px;">👤</div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-primary);margin-bottom:6px;">プロフィール</div>
+      <div style="font-size:11px;color:var(--color-text-muted);">個人・専門家向け</div>
+    </a>
+    <a href="portfolio-lp/demo_local.html" target="_blank" style="background:#fff;border:1px solid var(--color-border);border-radius:8px;padding:24px 16px;text-align:center;width:160px;transition:all 0.3s;color:inherit;text-decoration:none;" onmouseover="this.style.borderColor='var(--color-accent)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.borderColor='var(--color-border)';this.style.transform='none';this.style.boxShadow='none'">
+      <div style="font-size:32px;margin-bottom:12px;">☕</div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-primary);margin-bottom:6px;">店舗集客</div>
+      <div style="font-size:11px;color:var(--color-text-muted);">カフェ・サロン向け</div>
+    </a>
+    <a href="portfolio-lp/demo_media.html" target="_blank" style="background:#fff;border:1px solid var(--color-border);border-radius:8px;padding:24px 16px;text-align:center;width:160px;transition:all 0.3s;color:inherit;text-decoration:none;" onmouseover="this.style.borderColor='var(--color-accent)';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.08)'" onmouseout="this.style.borderColor='var(--color-border)';this.style.transform='none';this.style.boxShadow='none'">
+      <div style="font-size:32px;margin-bottom:12px;">📰</div>
+      <div style="font-size:14px;font-weight:700;color:var(--color-primary);margin-bottom:6px;">メディア・ブログ</div>
+      <div style="font-size:11px;color:var(--color-text-muted);">情報発信向け</div>
+    </a>
+  </div>
+
+  <h2 class="section-title reveal" style="display:inline-block;margin-bottom:20px;">ご依頼・ご相談はこちら</h2>
+  <p style="color:var(--color-text-muted);font-size:14px;margin-bottom:32px;">各種クラウドソーシング、または直接取引にてご対応可能です。</p>
+  <div style="display:flex;gap:44px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:32px;">
+    <div style="display:flex;gap:15px;text-align:center;flex-wrap:wrap;justify-content:center;">
+      <div>
+        <img src="images/QR_crowdworks.png" alt="クラウドワークス QR" onerror="this.style.display='none'" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:8px;padding:8px;background:#fff;"/>
+        <p style="font-size:11px;color:var(--color-text-muted);margin-top:8px;">クラウドワークス</p>
       </div>
-      <div class="cta-actions" style="min-width: 320px;">
-        <a href="https://crowdworks.jp/public/employees/6953669" target="_blank" class="cta-btn magnetic">
-          <span>クラウドワークスで依頼</span> <i>→</i>
-        </a>
-        <a href="https://www.lancers.jp/profile/daruma_3_h" target="_blank" class="cta-btn magnetic">
-          <span>ランサーズで依頼</span> <i>→</i>
-        </a>
-        <a href="https://coconala.com/users/2598979" target="_blank" class="cta-btn magnetic">
-          <span>ココナラで依頼</span> <i>→</i>
-        </a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" class="cta-btn accent magnetic">
-          <span>直接のお問い合わせ</span> <i>→</i>
-        </a>
+      <div>
+        <img src="images/QR_lancers.png" alt="ランサーズ QR" onerror="this.style.display='none'" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:8px;padding:8px;background:#fff;"/>
+        <p style="font-size:11px;color:var(--color-text-muted);margin-top:8px;">ランサーズ</p>
       </div>
+      <div>
+        <img src="images/QR_coconala.png" alt="ココナラ QRコード" loading="lazy" decoding="async" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:8px;padding:8px;background:#fff;"/>
+        <p style="font-size:11px;color:var(--color-text-muted);margin-top:8px;">ココナラ</p>
+      </div>
+    </div>
+    <div style="text-align:left; display:flex; flex-direction:column; gap:14px;">
+      <a href="https://crowdworks.jp/public/employees/6953669" target="_blank" class="portfolio-btn" style="display:block;text-align:center;">クラウドワークスで依頼 →</a>
+      <a href="https://www.lancers.jp/profile/daruma_3_h" target="_blank" class="portfolio-btn" style="display:block;text-align:center;">ランサーズで依頼 →</a>
+      <a href="https://coconala.com/users/2598979" target="_blank" class="portfolio-btn" style="display:block;text-align:center;">ココナラで依頼する →</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="portfolio-btn" style="display:block;text-align:center;background:var(--color-accent);padding:16px 20px;">直接取引のお問い合わせ →</a>
+      <p style="font-size:15px; font-weight:700; color:var(--color-primary); margin-top:10px; text-align:center;">ご依頼お待ちしております！</p>
     </div>
   </div>
 </section>
@@ -305,41 +276,58 @@
 
 <!-- Footer -->
 <footer class="footer">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <h2 class="footer-logo">和-Node</h2>
-        <p class="footer-desc">
-          ITコンサル・企業コンサル・心理カウンセリング<br>
-          心とITの両方がわかるパートナー
-        </p>
-        <img src="images/security_action.jpg" alt="SECURITY ACTION" style="height: 40px; border-radius: 4px;">
-      </div>
-      <div class="footer-links">
-        <h4>Navigation</h4>
-        <ul>
-          <li><a href="#story" class="magnetic">About</a></li>
-          <li><a href="#services" class="magnetic">Services</a></li>
-          <li><a href="#portfolio" class="magnetic">Portfolio</a></li>
-          <li><a href="kdp_books.html" class="magnetic">Books</a></li>
-        </ul>
-      </div>
-      <div class="footer-links">
-        <h4>Contact</h4>
-        <ul>
-          <li><a href="https://crowdworks.jp/public/employees/6953669" target="_blank" class="magnetic">クラウドワークス経由</a></li>
-          <li><a href="https://www.lancers.jp/profile/daruma_3_h" target="_blank" class="magnetic">ランサーズ経由</a></li>
-          <li><a href="https://coconala.com/users/2598979" target="_blank" class="magnetic">ココナラ経由</a></li>
-          <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" class="magnetic">直接のお問い合わせ</a></li>
-        </ul>
+  <div class="container footer-container">
+    <div class="footer-info">
+      <h2 class="footer-logo">和-Node</h2>
+      <p class="footer-desc">
+        ITコンサル・企業コンサル・心理カウンセリング<br/>
+        心とITの両方がわかるパートナー<br/><br/>
+        ご相談・お問い合わせ: <br/>
+        ・<a href="https://crowdworks.jp/public/employees/6953669" target="_blank" style="text-decoration:underline;">クラウドワークス経由のご依頼</a><br/>
+        ・<a href="https://www.lancers.jp/profile/daruma_3_h" target="_blank" style="text-decoration:underline;">ランサーズ経由のご依頼</a><br/>
+        ・<a href="https://coconala.com/users/2598979" target="_blank" style="text-decoration:underline;">ココナラ経由のご依頼</a><br/>
+        ・<a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="text-decoration:underline;">直接取引のご依頼・お問い合わせ</a>
+      </p>
+      <div style="margin-top: 20px;">
+        <img src="images/security_action.jpg" alt="SECURITY ACTION セキュリティ対策自己宣言" loading="lazy" decoding="async" style="width: 120px; height: auto;"/>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>© 2026 和-Node. All Rights Reserved.</p>
+    <div class="footer-links">
+      <ul>
+        <li><a href="#story">About</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#targets">こんな方へ</a></li>
+        <li><a href="#portfolio">Portfolio</a></li>
+        <li><a href="kdp_books.html">Books</a></li>
+      </ul>
     </div>
   </div>
+  <div class="footer-bottom">
+    <p>© 2026 和-Node. All Rights Reserved.</p>
+  </div>
 </footer>
+</div>
 
-<script src="js/main.js"></script>
+<script>
+// ヘッダースクロール
+document.addEventListener('DOMContentLoaded',function(){
+  const header=document.querySelector('.header');
+  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));
+});
+
+// タブ切り替え
+function switchTab(id,btn){
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Reveal
+const io=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});
+},{threshold:0.08});
+document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=`${(i%4)*80}ms`;io.observe(el);});
+</script>
 </body>
 </html>
