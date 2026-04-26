@@ -73,7 +73,10 @@
 <header class="header">
   <div class="container header-container">
     <div class="logo"><a href="index.html"><span class="logo-text">和-Node</span></a></div>
-    <nav class="nav">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
       <ul class="nav-list">
         <li><a href="index.html#story" class="nav-link">About</a></li>
         <li><a href="index.html#services" class="nav-link">Services</a></li>
@@ -190,6 +193,22 @@
 document.addEventListener('DOMContentLoaded', () => {
   const header=document.querySelector('.header');
   window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));
+
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  if(hamburger && nav) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+    // メニューリンククリック時に閉じる
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+  }
 });
 
 const questions = [
