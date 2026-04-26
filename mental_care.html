@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>こころの疲労度診断 | 和-Node</title>
+<meta name="description" content="心理カウンセラー資格を持つ車いすSEが提供する、こころの疲労度・モヤモヤ診断ツールです。"/>
+<link rel="icon" type="image/png" href="images/favicon.png"/>
+<link rel="stylesheet" href="style.css"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B4FD0GJGW5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B4FD0GJGW5');
+</script>
+<style>
+.quiz-container { max-width: 700px; margin: 120px auto 100px; padding: 0 20px; }
+.quiz-box { background: #fff; border: 1px solid var(--color-border); border-radius: 12px; padding: 40px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); position: relative; overflow: hidden; min-height: 450px; display: flex; flex-direction: column; justify-content: center; }
+.quiz-step { display: none; animation: fadeIn 0.4s ease forwards; }
+.quiz-step.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Welcome Screen */
+.welcome-title { color: var(--color-primary); font-size: 26px; margin-bottom: 16px; text-align: center; }
+.welcome-desc { color: var(--color-text-muted); font-size: 15px; line-height: 1.8; margin-bottom: 30px; text-align: center; }
+.start-btn { display: block; width: 100%; max-width: 300px; margin: 0 auto; text-align: center; background: var(--color-accent); color: #fff; padding: 18px 0; border-radius: 40px; font-weight: 700; font-size: 16px; cursor: pointer; border: none; transition: all 0.3s; box-shadow: 0 4px 15px rgba(200,168,75,0.4); }
+.start-btn:hover { background: var(--color-primary); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+
+/* Question Screen */
+.progress-bar { width: 100%; height: 6px; background: var(--color-border); border-radius: 3px; margin-bottom: 30px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--color-accent); width: 0%; transition: width 0.3s; }
+.q-number { font-size: 13px; color: var(--color-accent); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; }
+.q-title { font-size: 20px; color: var(--color-primary); font-weight: 700; margin-bottom: 24px; line-height: 1.5; }
+.q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.q-option { background: var(--color-surface); border: 2px solid var(--color-border); padding: 16px; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 15px; font-weight: 500; color: var(--color-secondary); text-align: center; }
+.q-option:hover { border-color: var(--color-accent); background: var(--color-accent-light); }
+
+/* Result Screen */
+.result-header { text-align: center; margin-bottom: 30px; }
+.eval-title { font-size: 24px; color: var(--color-primary); margin-bottom: 12px; font-weight: bold; }
+.eval-text { font-size: 15px; color: var(--color-text-muted); line-height: 1.8; margin-bottom: 30px; }
+
+/* Radar / Bars */
+.chart-box { background: var(--color-surface); padding: 24px; border-radius: 8px; border: 1px solid var(--color-border); margin-bottom: 30px; }
+.chart-title { font-size: 16px; font-weight: 700; color: var(--color-primary); margin-bottom: 20px; text-align: center; }
+.bar-row { margin-bottom: 16px; }
+.bar-label { display: flex; justify-content: space-between; font-size: 13px; color: var(--color-secondary); font-weight: bold; margin-bottom: 6px; }
+.bar-track { width: 100%; height: 10px; background: #e0e0e0; border-radius: 5px; overflow: hidden; }
+.bar-fill { height: 100%; border-radius: 5px; transition: width 1s ease-out; width: 0%; }
+.fill-body { background: #3498db; }
+.fill-mind { background: #e74c3c; }
+.fill-env { background: #f1c40f; }
+
+.cta-box { background: var(--color-accent-light); padding: 24px; border-radius: 8px; text-align: center; }
+.cta-box p { font-size: 14px; color: var(--color-secondary); line-height: 1.7; margin-bottom: 20px; }
+.cta-btn { display: inline-block; background: var(--color-primary); color: #fff; padding: 14px 32px; border-radius: 40px; font-weight: 700; font-size: 14px; text-decoration: none; transition: all 0.3s; }
+.cta-btn:hover { background: var(--color-accent); transform: translateY(-2px); }
+
+@media(max-width: 600px) {
+  .quiz-box { padding: 30px 20px; min-height: auto; }
+  .q-options { grid-template-columns: 1fr; }
+  .q-option { padding: 14px; font-size: 14px; }
+}
+</style>
+</head>
+<body>
+<div class="app-container bg-seigaiha">
+<div class="landscape-bg" style="background-image:url('images/bg-landscape.png'); opacity:0.3;"></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container header-container">
+    <div class="logo"><a href="index.html"><span class="logo-text">和-Node</span></a></div>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li><a href="index.html#story" class="nav-link">About</a></li>
+        <li><a href="index.html#services" class="nav-link">Services</a></li>
+        <li><a href="simulator.html" class="nav-link">自動お見積り</a></li>
+        <li><a href="barrier_free.html" class="nav-link">バリアフリー診断</a></li>
+        <li><a href="mental_care.html" class="nav-link active">こころの診断</a></li>
+        <li><a href="https://coconala.com/users/2598979" target="_blank" class="nav-link btn-header">ご相談・ご依頼</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="quiz-container">
+  <div class="quiz-box">
+    
+    <!-- Welcome -->
+    <div id="step-welcome" class="quiz-step active">
+      <div style="text-align:center; font-size:48px; margin-bottom:16px;">🌱</div>
+      <h1 class="welcome-title">こころの疲労度・モヤモヤ診断</h1>
+      <p class="welcome-desc">
+        経営者、フリーランス、毎日頑張っているあなたへ。<br>
+        「身体」「心」「環境（抱え込み度）」の3つの軸から、<br class="pc-only">
+        今のあなたのストレス状態を心理カウンセラー視点で分析します。<br><br>
+        直感で、今の状態に最も近いものを選んでください。（全10問）
+      </p>
+      <button class="start-btn" onclick="startQuiz()">診断をスタートする</button>
+    </div>
+
+    <!-- Question Container -->
+    <div id="step-question" class="quiz-step">
+      <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+      <div class="q-number" id="q-num">Q.1 / 10</div>
+      <h2 class="q-title" id="q-text">質問テキスト</h2>
+      <div class="q-options" id="q-opts">
+        <div class="q-option" onclick="selectOption(0)">全くあてはまらない</div>
+        <div class="q-option" onclick="selectOption(1)">たまにある</div>
+        <div class="q-option" onclick="selectOption(2)">よくある</div>
+        <div class="q-option" onclick="selectOption(3)">いつもそう感じる</div>
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="step-result" class="quiz-step">
+      <div class="result-header">
+        <div class="eval-title" id="res-title">評価タイトル</div>
+        <div class="eval-text" id="res-desc">評価の詳細テキスト</div>
+      </div>
+
+      <div class="chart-box">
+        <div class="chart-title">ストレス要因の分析</div>
+        
+        <div class="bar-row">
+          <div class="bar-label"><span>身体の疲労サイン</span> <span id="val-body">0/6</span></div>
+          <div class="bar-track"><div class="bar-fill fill-body" id="bar-body"></div></div>
+        </div>
+        
+        <div class="bar-row">
+          <div class="bar-label"><span>心の疲労サイン</span> <span id="val-mind">0/12</span></div>
+          <div class="bar-track"><div class="bar-fill fill-mind" id="bar-mind"></div></div>
+        </div>
+
+        <div class="bar-row">
+          <div class="bar-label"><span>環境・プレッシャー（抱え込み度）</span> <span id="val-env">0/12</span></div>
+          <div class="bar-track"><div class="bar-fill fill-env" id="bar-env"></div></div>
+        </div>
+      </div>
+      
+      <div class="cta-box">
+        <p>
+          <strong>システム開発もメンタルケアも、根本は「バグ（悩みの種）」を見つけて整理することです。</strong><br><br>
+          一人で抱え込まず、まずは言葉にして吐き出してみませんか？<br>
+          プロのカウンセラー資格を持つ車いすSEが、あなたの心の声をお聴きします。
+        </p>
+        <a href="https://coconala.com/users/2598979" target="_blank" class="cta-btn">心理カウンセリングを相談する</a>
+        <div style="margin-top:16px;">
+          <a href="mental_care.html" style="font-size:13px; color:var(--color-text-muted); text-decoration:underline;">もう一度診断する</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-container">
+    <div class="footer-info">
+      <h2 class="footer-logo">和-Node</h2>
+      <p class="footer-desc">
+        ITコンサル・企業コンサル・心理カウンセリング<br/>
+        心とITの両方がわかるパートナー<br/><br/>
+        ご相談・お問い合わせ: <br/>
+        ・<a href="https://coconala.com/users/2598979" target="_blank" style="text-decoration:underline;">ココナラ経由のご依頼はこちら</a><br/>
+        ・<a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="text-decoration:underline;">直接取引のご依頼・お問い合わせはこちら</a>
+      </p>
+    </div>
+    <div class="footer-links">
+      <ul>
+        <li><a href="index.html#story">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="simulator.html">自動お見積り</a></li>
+        <li><a href="barrier_free.html">バリアフリー診断</a></li>
+        <li><a href="mental_care.html">こころの診断</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 和-Node. All Rights Reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const header=document.querySelector('.header');
+  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));
+});
+
+const questions = [
+  { cat: "body", q: "最近、寝つきが悪い、または途中で目が覚めてしまう。" },
+  { cat: "body", q: "理由もなく体がだるい、休んでも疲れが取れないと感じる。" },
+  { cat: "mind", q: "ちょっとしたことでイライラしたり、感情的になりやすくなった。" },
+  { cat: "mind", q: "以前は楽しかったこと（趣味など）に対して、興味や喜びを感じない。" },
+  { cat: "mind", q: "仕事や日常の作業で、集中力が続かずミスが増えた気がする。" },
+  { cat: "mind", q: "理由もなく悲しくなったり、孤独や虚無感を感じることがある。" },
+  { cat: "env",  q: "自分の悩みや弱音を、見栄を張らずに素直に打ち明けられる相手がいない。" },
+  { cat: "env",  q: "「すべて自分がやらなければならない」という重圧に押しつぶされそうになる。" },
+  { cat: "env",  q: "自分のやっていることに価値がない、または自信が持てないと感じる。" },
+  { cat: "env",  q: "「誰にも会いたくない」「すべてを投げ出したい」とふと思う瞬間がある。" }
+];
+
+let currentQ = 0;
+let scores = { body: 0, mind: 0, env: 0 };
+
+function showStep(id) {
+  document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz() {
+  currentQ = 0;
+  scores = { body: 0, mind: 0, env: 0 };
+  showStep('step-question');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const qObj = questions[currentQ];
+  document.getElementById('q-num').textContent = `Q.${currentQ + 1} / ${questions.length}`;
+  document.getElementById('progress').style.width = `${((currentQ) / questions.length) * 100}%`;
+  document.getElementById('q-text').textContent = qObj.q;
+}
+
+function selectOption(score) {
+  const cat = questions[currentQ].cat;
+  scores[cat] += score;
+  currentQ++;
+  if (currentQ < questions.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  showStep('step-result');
+  document.getElementById('progress').style.width = `100%`;
+  
+  const totalScore = scores.body + scores.mind + scores.env;
+  const resTitle = document.getElementById('res-title');
+  const resDesc = document.getElementById('res-desc');
+  
+  if (totalScore >= 20) {
+    resTitle.textContent = "【危険信号】心が悲鳴を上げています";
+    resTitle.style.color = "#e74c3c";
+    resDesc.innerHTML = "かなり無理が重なっており、心身ともに限界に近い状態かもしれません。今は「頑張ること」よりも「休むこと」が一番の仕事です。一人で抱え込まず、まずは心の中のモヤモヤを誰かに話すことから始めてみましょう。";
+  } else if (totalScore >= 10) {
+    resTitle.textContent = "【要注意】少し無理が蓄積し始めています";
+    resTitle.style.color = "#f39c12";
+    resDesc.innerHTML = "「まだ頑張れる」と思っているかもしれませんが、確実にストレスが溜まってきています。限界を迎える前に、意識的に自分を甘やかす時間や、悩みを聞いてもらう時間を作りましょう。";
+  } else {
+    resTitle.textContent = "【良好】心身ともに安定しています";
+    resTitle.style.color = "var(--color-primary)";
+    resDesc.innerHTML = "今のところ、ストレスとうまく付き合えているようです。引き続きご自身のペースを大切にしながら、無理のない範囲で活動を続けてくださいね！";
+  }
+
+  // Update bars
+  setTimeout(() => {
+    document.getElementById('bar-body').style.width = `${(scores.body / 6) * 100}%`;
+    document.getElementById('val-body').textContent = `${scores.body}/6`;
+
+    document.getElementById('bar-mind').style.width = `${(scores.mind / 12) * 100}%`;
+    document.getElementById('val-mind').textContent = `${scores.mind}/12`;
+
+    document.getElementById('bar-env').style.width = `${(scores.env / 12) * 100}%`;
+    document.getElementById('val-env').textContent = `${scores.env}/12`;
+  }, 100);
+}
+</script>
+</body>
+</html>

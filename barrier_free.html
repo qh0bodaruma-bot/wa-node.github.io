@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>店舗・オフィスのバリアフリー度チェック | 和-Node</title>
+<meta name="description" content="車いすSE視点でチェック！あなたの店舗やオフィスのバリアフリー達成度を5つの簡単な質問で無料診断します。"/>
+<link rel="icon" type="image/png" href="images/favicon.png"/>
+<link rel="stylesheet" href="style.css"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B4FD0GJGW5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B4FD0GJGW5');
+</script>
+<style>
+.quiz-container { max-width: 700px; margin: 120px auto 100px; padding: 0 20px; }
+.quiz-box { background: #fff; border: 1px solid var(--color-border); border-radius: 12px; padding: 40px; box-shadow: 0 8px 30px rgba(0,0,0,0.04); position: relative; overflow: hidden; min-height: 400px; display: flex; flex-direction: column; justify-content: center; }
+.quiz-step { display: none; animation: fadeIn 0.4s ease forwards; }
+.quiz-step.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Welcome Screen */
+.welcome-title { color: var(--color-primary); font-size: 26px; margin-bottom: 16px; text-align: center; }
+.welcome-desc { color: var(--color-text-muted); font-size: 15px; line-height: 1.8; margin-bottom: 30px; text-align: center; }
+.start-btn { display: block; width: 100%; max-width: 300px; margin: 0 auto; text-align: center; background: var(--color-accent); color: #fff; padding: 18px 0; border-radius: 40px; font-weight: 700; font-size: 16px; cursor: pointer; border: none; transition: all 0.3s; box-shadow: 0 4px 15px rgba(200,168,75,0.4); }
+.start-btn:hover { background: var(--color-primary); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+
+/* Question Screen */
+.progress-bar { width: 100%; height: 6px; background: var(--color-border); border-radius: 3px; margin-bottom: 30px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--color-accent); width: 0%; transition: width 0.3s; }
+.q-number { font-size: 13px; color: var(--color-accent); font-weight: 700; letter-spacing: 0.1em; margin-bottom: 8px; }
+.q-title { font-size: 20px; color: var(--color-primary); font-weight: 700; margin-bottom: 24px; line-height: 1.5; }
+.q-options { display: flex; flex-direction: column; gap: 12px; }
+.q-option { background: var(--color-surface); border: 2px solid var(--color-border); padding: 18px 24px; border-radius: 8px; cursor: pointer; transition: all 0.2s; font-size: 15px; font-weight: 500; color: var(--color-secondary); display: flex; align-items: center; gap: 12px; }
+.q-option:hover { border-color: var(--color-accent); background: var(--color-accent-light); }
+.q-option::before { content: ''; width: 20px; height: 20px; border-radius: 50%; border: 2px solid #ccc; flex-shrink: 0; transition: all 0.2s; }
+.q-option:hover::before { border-color: var(--color-accent); }
+
+/* Result Screen */
+.result-header { text-align: center; margin-bottom: 30px; }
+.score-circle { width: 150px; height: 150px; border-radius: 50%; border: 8px solid var(--color-border); margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; position: relative; transition: border-color 1s ease-out; }
+.score-circle.high { border-color: var(--color-accent); }
+.score-circle.mid { border-color: #f39c12; }
+.score-circle.low { border-color: #e74c3c; }
+.score-number { font-size: 48px; font-weight: 700; color: var(--color-primary); }
+.score-label { font-size: 14px; color: var(--color-text-muted); font-weight: bold; }
+.eval-title { font-size: 22px; color: var(--color-primary); margin-bottom: 12px; font-weight: bold; }
+.eval-text { font-size: 15px; color: var(--color-text-muted); line-height: 1.8; padding: 20px; background: var(--color-surface); border-radius: 8px; border-left: 4px solid var(--color-accent); text-align: left; margin-bottom: 30px; }
+.cta-box { background: var(--color-accent-light); padding: 24px; border-radius: 8px; text-align: center; }
+.cta-box p { font-size: 14px; color: var(--color-secondary); line-height: 1.7; margin-bottom: 20px; }
+.cta-btn { display: inline-block; background: var(--color-primary); color: #fff; padding: 14px 32px; border-radius: 40px; font-weight: 700; font-size: 14px; text-decoration: none; transition: all 0.3s; }
+.cta-btn:hover { background: var(--color-accent); transform: translateY(-2px); }
+
+@media(max-width: 600px) {
+  .quiz-box { padding: 30px 20px; min-height: auto; }
+  .q-option { padding: 14px 16px; font-size: 14px; }
+  .score-circle { width: 120px; height: 120px; border-width: 6px; }
+  .score-number { font-size: 36px; }
+}
+</style>
+</head>
+<body>
+<div class="app-container bg-seigaiha">
+<div class="landscape-bg" style="background-image:url('images/bg-landscape.png'); opacity:0.3;"></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container header-container">
+    <div class="logo"><a href="index.html"><span class="logo-text">和-Node</span></a></div>
+    <nav class="nav">
+      <ul class="nav-list">
+        <li><a href="index.html#story" class="nav-link">About</a></li>
+        <li><a href="index.html#services" class="nav-link">Services</a></li>
+        <li><a href="kdp_books.html" class="nav-link">Books</a></li>
+        <li><a href="simulator.html" class="nav-link">自動お見積り</a></li>
+        <li><a href="barrier_free.html" class="nav-link active">バリアフリー診断</a></li>
+        <li><a href="https://coconala.com/users/2598979" target="_blank" class="nav-link btn-header">ご相談・ご依頼</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="quiz-container">
+  <div class="quiz-box">
+    
+    <!-- Welcome -->
+    <div id="step-welcome" class="quiz-step active">
+      <div style="text-align:center; font-size:48px; margin-bottom:16px;">♿️</div>
+      <h1 class="welcome-title">店舗・オフィスの<br>バリアフリー度チェック</h1>
+      <p class="welcome-desc">
+        車いすユーザーがあなたの店舗やオフィスを訪れたとき、<br class="pc-only">
+        どれくらい快適に過ごせるでしょうか？<br><br>
+        「車いすSE」ならではの当事者視点で厳選した5つの質問に答えて、<br class="pc-only">
+        あなたのビジネス空間のバリアフリー達成度を無料診断します！
+      </p>
+      <button class="start-btn" onclick="startQuiz()">診断をスタートする</button>
+    </div>
+
+    <!-- Question Container -->
+    <div id="step-question" class="quiz-step">
+      <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+      <div class="q-number" id="q-num">Q.1 / 5</div>
+      <h2 class="q-title" id="q-text">質問テキスト</h2>
+      <div class="q-options" id="q-opts">
+        <!-- Options injected by JS -->
+      </div>
+    </div>
+
+    <!-- Result -->
+    <div id="step-result" class="quiz-step">
+      <div class="result-header">
+        <div class="score-label">あなたの店舗のバリアフリー達成度は…</div>
+        <div class="score-circle" id="res-circle">
+          <div class="score-number"><span id="res-score">0</span>点</div>
+        </div>
+        <div class="eval-title" id="res-title">評価タイトル</div>
+      </div>
+      <div class="eval-text" id="res-desc">評価の詳細テキスト</div>
+      
+      <div class="cta-box">
+        <p>
+          <strong>ハード面（段差など）はすぐには変えられなくても、<br>
+          ソフト面（声かけ）や Web上での情報発信 は今日から変えられます！</strong><br><br>
+          和-Nodeでは、車いすSEの視点を活かし、誰もがアクセスしやすい「Webアクセシビリティ」に配慮したHP制作やIT化をサポートしています。
+        </p>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="cta-btn">車いすSEに無料相談する</a>
+        <div style="margin-top:16px;">
+          <a href="barrier_free.html" style="font-size:13px; color:var(--color-text-muted); text-decoration:underline;">もう一度診断する</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-container">
+    <div class="footer-info">
+      <h2 class="footer-logo">和-Node</h2>
+      <p class="footer-desc">
+        ITコンサル・企業コンサル・心理カウンセリング<br/>
+        心とITの両方がわかるパートナー<br/><br/>
+        ご相談・お問い合わせ: <br/>
+        ・<a href="https://coconala.com/users/2598979" target="_blank" style="text-decoration:underline;">ココナラ経由のご依頼はこちら</a><br/>
+        ・<a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="text-decoration:underline;">直接取引のご依頼・お問い合わせはこちら</a>
+      </p>
+    </div>
+    <div class="footer-links">
+      <ul>
+        <li><a href="index.html#story">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="index.html#portfolio">Portfolio</a></li>
+        <li><a href="kdp_books.html">Books</a></li>
+        <li><a href="simulator.html">自動お見積り</a></li>
+        <li><a href="barrier_free.html">バリアフリー診断</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 和-Node. All Rights Reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const header=document.querySelector('.header');
+  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));
+});
+
+const questions = [
+  {
+    q: "入り口の段差はどうなっていますか？",
+    opts: [
+      { text: "全くない（フラット・スロープあり）", score: 20 },
+      { text: "5cm以下のわずかな段差がある", score: 10 },
+      { text: "5cm以上の段差が1段ある", score: 5 },
+      { text: "階段しかない（スロープなし）", score: 0 }
+    ]
+  },
+  {
+    q: "出入り口のドアの種類は？",
+    opts: [
+      { text: "自動ドア", score: 20 },
+      { text: "引き戸（スライド式で軽め）", score: 15 },
+      { text: "開き戸（手前に引く・奥に押すタイプ）", score: 5 }
+    ]
+  },
+  {
+    q: "店内のメイン通路の幅は？",
+    opts: [
+      { text: "90cm以上（車いすが余裕で通れ、方向転換もできる）", score: 20 },
+      { text: "80cm程度（車いすがまっすぐならギリギリ通れる）", score: 10 },
+      { text: "80cm未満（車いすでの通行は厳しい）", score: 0 }
+    ]
+  },
+  {
+    q: "トイレの設備は？",
+    opts: [
+      { text: "車いす対応（多目的・だれでも）トイレがある", score: 20 },
+      { text: "一般的な洋式で、手すりがついている", score: 10 },
+      { text: "一般的な洋式トイレのみ", score: 5 },
+      { text: "和式のみ", score: 0 }
+    ]
+  },
+  {
+    q: "スタッフのサポート体制（ソフト面）は？",
+    opts: [
+      { text: "車いすや介助が必要な方への対応マニュアル・研修がある", score: 20 },
+      { text: "マニュアルはないが、スタッフが自主的に声かけや手伝いをしている", score: 15 },
+      { text: "特に決まりはなく、基本的にセルフサービス", score: 5 }
+    ]
+  }
+];
+
+let currentQ = 0;
+let totalScore = 0;
+
+function showStep(id) {
+  document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz() {
+  currentQ = 0;
+  totalScore = 0;
+  showStep('step-question');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const qObj = questions[currentQ];
+  document.getElementById('q-num').textContent = `Q.${currentQ + 1} / ${questions.length}`;
+  document.getElementById('progress').style.width = `${((currentQ) / questions.length) * 100}%`;
+  document.getElementById('q-text').textContent = qObj.q;
+  
+  const optsContainer = document.getElementById('q-opts');
+  optsContainer.innerHTML = '';
+  
+  qObj.opts.forEach((opt) => {
+    const btn = document.createElement('div');
+    btn.className = 'q-option';
+    btn.textContent = opt.text;
+    btn.onclick = () => selectOption(opt.score);
+    optsContainer.appendChild(btn);
+  });
+}
+
+function selectOption(score) {
+  totalScore += score;
+  currentQ++;
+  if (currentQ < questions.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  showStep('step-result');
+  document.getElementById('progress').style.width = `100%`;
+  
+  const resScore = document.getElementById('res-score');
+  const resTitle = document.getElementById('res-title');
+  const resDesc = document.getElementById('res-desc');
+  const circle = document.getElementById('res-circle');
+  
+  // Animation for score
+  let current = 0;
+  const interval = setInterval(() => {
+    if(current >= totalScore) {
+      clearInterval(interval);
+      resScore.textContent = totalScore;
+    } else {
+      current++;
+      resScore.textContent = current;
+    }
+  }, 15);
+
+  if(totalScore >= 80) {
+    circle.className = 'score-circle high';
+    resTitle.textContent = "素晴らしい！誰もが使いやすい空間です👏";
+    resDesc.innerHTML = "ハード面もソフト面も充実しており、車いすユーザーにとっても非常に安心できる空間です。<br>この素晴らしいバリアフリー環境を、ぜひホームページやSNSでも積極的にアピールしていきましょう！";
+  } else if (totalScore >= 50) {
+    circle.className = 'score-circle mid';
+    resTitle.textContent = "もう一歩！少しの工夫でさらに良くなります💡";
+    resDesc.innerHTML = "現状でも十分配慮されていますが、あと少しの工夫で劇的に使いやすくなります。<br>例えば、わずかな段差なら簡易スロープを置く、入り口でスタッフがドアを開ける声かけをするなど、ちょっとした「ソフト面」のカバーで満点に近づけます！";
+  } else {
+    circle.className = 'score-circle low';
+    resTitle.textContent = "改善の余地あり！まずは「ソフト面」から🌱";
+    resDesc.innerHTML = "建物の構造上、すぐに設備を改修するのは難しいかもしれません。<br>しかし「何かお手伝いしましょうか？」というスタッフの声かけや、事前にHPで『入り口に段差があります』と情報発信しておくこと（ソフト面でのバリアフリー）で、車いすユーザーの不安は大きく軽減されます。";
+  }
+}
+</script>
+</body>
+</html>
