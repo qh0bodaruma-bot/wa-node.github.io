@@ -128,6 +128,44 @@
     background: var(--color-primary);
     border-color: var(--color-primary);
 }
+
+/* Premium Section Styles */
+.premium-section {
+    background: linear-gradient(135deg, #1a1a18, #222);
+    padding: 80px 0;
+}
+.premium-section .kdp-section-title {
+    color: var(--color-accent);
+    margin-bottom: 24px;
+}
+.premium-section .kdp-section-title::before, 
+.premium-section .kdp-section-title::after {
+    background: var(--color-accent);
+}
+.premium-badge {
+    text-align: center;
+    color: var(--color-accent);
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.premium-section .book-card {
+    background: #2c2c2a;
+    border: 1px solid rgba(200,168,75,0.4);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.premium-section .book-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 12px 40px rgba(200,168,75,0.2);
+    transform: translateY(-6px);
+}
+.premium-section .book-title {
+    color: #fff;
+}
+.premium-section .book-image-container {
+    border-bottom: 1px solid rgba(200,168,75,0.3);
+}
 </style>
 </head>
 <body>
@@ -156,7 +194,75 @@
     </div>
 </div>
 
-<!-- セクション1: オリジナル鳥獣戯画 -->
+<!-- セクション1: 江戸旅行記シリーズ (Premium) -->
+<div class="kdp-section premium-section">
+    <div class="premium-badge">PREMIUM EDITION</div>
+    <h2 class="kdp-section-title">江戸旅行記シリーズ</h2>
+    <div class="book-grid">
+        <div class="book-card reveal">
+            <div class="book-image-container">
+                <img src="images/KDP/en_title/江戸旅行記ラグドール.png" alt="江戸旅行記ラグドール" class="book-image-main" loading="lazy">
+            </div>
+            <div class="book-info">
+                <div class="book-title">江戸旅行記 ラグドール</div>
+                <div class="book-links">
+                    <a href="https://www.amazon.com/dp/B0GWDRMFHJ" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
+                    <a href="https://www.amazon.fr/dp/B0GWDP7P5G" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
+                </div>
+            </div>
+        </div>
+        <div class="book-card reveal">
+            <div class="book-image-container">
+                <img src="images/KDP/en_title/江戸旅行記フレンチブルドッグ.png" alt="江戸旅行記フレンチブルドッグ" class="book-image-main" loading="lazy">
+            </div>
+            <div class="book-info">
+                <div class="book-title">江戸旅行記 フレンチブルドッグ</div>
+                <div class="book-links">
+                    <a href="https://www.amazon.com/dp/B0GWQ5VTWC" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
+                    <a href="https://www.amazon.fr/dp/B0GWQ56YDN" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
+                </div>
+            </div>
+        </div>
+        <div class="book-card reveal">
+            <div class="book-image-container">
+                <img src="images/KDP/en_title/江戸旅行記シマエナガ.png" alt="江戸旅行記シマエナガ" class="book-image-main" loading="lazy">
+            </div>
+            <div class="book-info">
+                <div class="book-title">江戸旅行記 シマエナガ</div>
+                <div class="book-links">
+                    <a href="https://www.amazon.com/dp/B0GXKYSTSY" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
+                    <a href="https://www.amazon.fr/dp/B0GXL5Z3ZR" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
+                </div>
+            </div>
+        </div>
+        <div class="book-card reveal">
+            <div class="book-image-container">
+                <img src="images/KDP/en_title/江戸旅行記たぬき.png" alt="江戸旅行記たぬき" class="book-image-main" loading="lazy">
+            </div>
+            <div class="book-info">
+                <div class="book-title">江戸旅行記 たぬき</div>
+                <div class="book-links">
+                    <a href="https://www.amazon.com/dp/B0GY95QR8G" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
+                    <a href="https://www.amazon.fr/dp/B0GY99F4HB" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
+                </div>
+            </div>
+        </div>
+        <div class="book-card reveal">
+            <div class="book-image-container">
+                <img src="images/KDP/en_title/江戸旅行記古代生物.png" alt="江戸旅行記古代生物" class="book-image-main" loading="lazy">
+            </div>
+            <div class="book-info">
+                <div class="book-title">江戸旅行記 古代生物</div>
+                <div class="book-links">
+                    <a href="https://www.amazon.com/dp/B0GYHTJRWK" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
+                    <a href="https://www.amazon.fr/dp/B0GYHR7ZSL" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- セクション2: オリジナル鳥獣戯画 -->
 <div class="kdp-section">
     <h2 class="kdp-section-title">オリジナル鳥獣戯画</h2>
     <div class="book-grid" style="grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));">
@@ -175,7 +281,7 @@
     </div>
 </div>
 
-<!-- セクション2: かわいい浮世絵シリーズ -->
+<!-- セクション3: かわいい浮世絵シリーズ -->
 <div class="kdp-section">
     <h2 class="kdp-section-title">かわいい浮世絵シリーズ</h2>
     <div class="book-grid">
@@ -236,73 +342,6 @@
                 <div class="book-links">
                     <a href="https://www.amazon.com/dp/B0GXJLMWCX" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
                     <a href="https://www.amazon.fr/dp/B0GXJP7HB7" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- セクション3: 江戸旅行記シリーズ -->
-<div class="kdp-section">
-    <h2 class="kdp-section-title">江戸旅行記シリーズ</h2>
-    <div class="book-grid">
-        <div class="book-card reveal">
-            <div class="book-image-container">
-                <img src="images/KDP/en_title/江戸旅行記ラグドール.png" alt="江戸旅行記ラグドール" class="book-image-main" loading="lazy">
-            </div>
-            <div class="book-info">
-                <div class="book-title">江戸旅行記 ラグドール</div>
-                <div class="book-links">
-                    <a href="https://www.amazon.com/dp/B0GWDRMFHJ" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
-                    <a href="https://www.amazon.fr/dp/B0GWDP7P5G" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
-                </div>
-            </div>
-        </div>
-        <div class="book-card reveal">
-            <div class="book-image-container">
-                <img src="images/KDP/en_title/江戸旅行記フレンチブルドッグ.png" alt="江戸旅行記フレンチブルドッグ" class="book-image-main" loading="lazy">
-            </div>
-            <div class="book-info">
-                <div class="book-title">江戸旅行記 フレンチブルドッグ</div>
-                <div class="book-links">
-                    <a href="https://www.amazon.com/dp/B0GWQ5VTWC" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
-                    <a href="https://www.amazon.fr/dp/B0GWQ56YDN" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
-                </div>
-            </div>
-        </div>
-        <div class="book-card reveal">
-            <div class="book-image-container">
-                <img src="images/KDP/en_title/江戸旅行記シマエナガ.png" alt="江戸旅行記シマエナガ" class="book-image-main" loading="lazy">
-            </div>
-            <div class="book-info">
-                <div class="book-title">江戸旅行記 シマエナガ</div>
-                <div class="book-links">
-                    <a href="https://www.amazon.com/dp/B0GXKYSTSY" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
-                    <a href="https://www.amazon.fr/dp/B0GXL5Z3ZR" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
-                </div>
-            </div>
-        </div>
-        <div class="book-card reveal">
-            <div class="book-image-container">
-                <img src="images/KDP/en_title/江戸旅行記たぬき.png" alt="江戸旅行記たぬき" class="book-image-main" loading="lazy">
-            </div>
-            <div class="book-info">
-                <div class="book-title">江戸旅行記 たぬき</div>
-                <div class="book-links">
-                    <a href="https://www.amazon.com/dp/B0GY95QR8G" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
-                    <a href="https://www.amazon.fr/dp/B0GY99F4HB" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
-                </div>
-            </div>
-        </div>
-        <div class="book-card reveal">
-            <div class="book-image-container">
-                <img src="images/KDP/en_title/江戸旅行記古代生物.png" alt="江戸旅行記古代生物" class="book-image-main" loading="lazy">
-            </div>
-            <div class="book-info">
-                <div class="book-title">江戸旅行記 古代生物</div>
-                <div class="book-links">
-                    <a href="https://www.amazon.com/dp/B0GYHTJRWK" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
-                    <a href="https://www.amazon.fr/dp/B0GYHR7ZSL" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
                 </div>
             </div>
         </div>
