@@ -168,6 +168,23 @@
 .premium-section .book-image-container {
     border-bottom: 1px solid rgba(200,168,75,0.3);
 }
+.coming-soon-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--color-accent);
+    color: #fff;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+.coming-soon .book-image-main {
+    filter: grayscale(0.2) brightness(0.8);
+}
 </style>
 </head>
 <body>
@@ -269,6 +286,20 @@
                 <div class="book-links">
                     <a href="https://www.amazon.com/dp/B0GYHTJRWK" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
                     <a href="https://www.amazon.fr/dp/B0GYHR7ZSL" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
+                </div>
+            </div>
+        </div>
+        <div class="book-card reveal coming-soon">
+            <div class="book-image-container">
+                <img src="images/KDP/en_title/江戸旅行記きつね.png" alt="江戸旅行記きつね" class="book-image-main" loading="lazy">
+                <div class="coming-soon-badge">COMING SOON</div>
+            </div>
+            <div class="book-info">
+                <div class="book-title">江戸旅行記 きつね</div>
+                <div class="book-price" style="text-align:center; color:var(--color-accent); font-size:13px; margin-bottom:12px; font-weight:700; letter-spacing:1px;">近日発売予定</div>
+                <div class="book-links">
+                    <span class="book-btn btn-en" style="opacity:0.6; cursor:not-allowed;">🇺🇸 英語版</span>
+                    <span class="book-btn btn-fr" style="opacity:0.6; cursor:not-allowed;">🇫🇷 仏語版</span>
                 </div>
             </div>
         </div>
