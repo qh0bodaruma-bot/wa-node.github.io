@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/png" href="images/favicon.png"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>WordPress SEO内部診断チェック | 和-Node</title>
+<meta name="description" content="25項目のチェックリストでWordPressサイトのSEO内部状態を無料診断。弱点を可視化して改善ポイントを把握できます。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--font:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;--bg:#f9f7f4;--surface:#fff;--primary:#2c2c2a;--accent:#639922;--accent-light:#EAF3DE;--muted:#888;--border:#e5e2db;--r:10px;--warn:#BA7517;--warn-bg:#FAEEDA;--bad:#c0392b;--bad-bg:#FCEBEB;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg);color:var(--primary);min-height:100vh;padding-bottom:60px;}
+
+.hdr{position:sticky;top:0;z-index:100;background:rgba(249,247,244,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.hdr-logo{font-size:16px;font-weight:700;color:var(--primary);text-decoration:none;}
+.hdr-back{font-size:13px;color:var(--muted);text-decoration:none;transition:color .2s;}
+.hdr-back:hover{color:var(--accent);}
+
+.hero{background:linear-gradient(135deg,#2c2c2a,#3d4a2a);color:#fff;padding:44px 20px 36px;text-align:center;}
+.hero-badge{display:inline-block;background:var(--accent-light);color:var(--accent);font-size:11px;font-weight:700;padding:3px 14px;border-radius:99px;letter-spacing:.1em;margin-bottom:14px;}
+.hero-title{font-size:22px;font-weight:700;margin-bottom:10px;line-height:1.45;}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.65);line-height:1.7;max-width:480px;margin:0 auto;}
+
+/* SCORE PANEL */
+.score-panel{max-width:720px;margin:-28px auto 0;padding:0 16px;position:relative;z-index:10;}
+.score-card{background:var(--surface);border-radius:14px;box-shadow:0 8px 28px rgba(0,0,0,.1);padding:24px 28px;display:flex;gap:20px;align-items:center;flex-wrap:wrap;}
+.score-ring-wrap{flex-shrink:0;text-align:center;}
+.score-ring{width:96px;height:96px;}
+.score-num{font-size:30px;font-weight:700;color:var(--primary);}
+.score-lbl{font-size:11px;color:var(--muted);margin-top:2px;}
+.score-grade{font-size:14px;font-weight:700;margin-top:6px;}
+.cats-wrap{flex:1;min-width:200px;display:flex;flex-direction:column;gap:10px;}
+.cat-row{display:flex;align-items:center;gap:10px;}
+.cat-name{font-size:12px;color:var(--muted);width:90px;flex-shrink:0;}
+.cat-bar-bg{flex:1;height:8px;background:var(--border);border-radius:99px;overflow:hidden;}
+.cat-bar{height:100%;border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+.cat-score-txt{font-size:12px;font-weight:700;width:32px;text-align:right;flex-shrink:0;}
+
+/* CHECKLIST */
+.main{max-width:720px;margin:24px auto 0;padding:0 16px;}
+.cat-section{background:var(--surface);border-radius:var(--r);margin-bottom:16px;overflow:hidden;border:1px solid var(--border);}
+.cat-head{display:flex;align-items:center;gap:10px;padding:16px 18px;cursor:pointer;user-select:none;border-bottom:1px solid var(--border);}
+.cat-head-em{font-size:20px;}
+.cat-head-title{font-weight:700;font-size:15px;flex:1;}
+.cat-head-progress{font-size:12px;color:var(--muted);white-space:nowrap;}
+.cat-chevron{font-size:12px;color:var(--muted);transition:transform .25s;}
+.cat-head.open .cat-chevron{transform:rotate(90deg);}
+.items{display:none;padding:8px 0;}
+.items.show{display:block;}
+
+.item{display:flex;align-items:flex-start;gap:12px;padding:12px 18px;border-bottom:1px solid #f5f3ef;transition:background .15s;}
+.item:last-child{border-bottom:none;}
+.item:hover{background:#fafaf8;}
+.item-text{flex:1;}
+.item-label{font-size:14px;font-weight:500;color:var(--primary);line-height:1.5;margin-bottom:3px;}
+.item-hint{font-size:12px;color:var(--muted);line-height:1.6;}
+.item-btns{display:flex;gap:6px;flex-shrink:0;margin-top:2px;}
+.chk-btn{width:36px;height:36px;border-radius:8px;border:2px solid var(--border);background:var(--bg);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .18s;}
+.chk-btn:hover{border-color:#aaa;}
+.chk-btn.active-ok{border-color:var(--accent);background:var(--accent-light);}
+.chk-btn.active-warn{border-color:var(--warn);background:var(--warn-bg);}
+.chk-btn.active-bad{border-color:var(--bad);background:var(--bad-bg);}
+
+/* RESULT */
+.result-section{max-width:720px;margin:24px auto 0;padding:0 16px;display:none;}
+.result-section.show{display:block;}
+.result-box{background:var(--surface);border-radius:var(--r);border:1px solid var(--border);overflow:hidden;}
+.result-top{padding:20px 24px;border-bottom:1px solid var(--border);}
+.result-top h2{font-size:17px;font-weight:700;margin-bottom:12px;}
+.rec-item{display:flex;gap:10px;padding:10px 0;border-bottom:1px dashed var(--border);}
+.rec-item:last-child{border-bottom:none;}
+.rec-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:6px;}
+.rec-text{font-size:13px;color:#444;line-height:1.7;}
+.result-cta{padding:20px 24px;}
+.cta-btn{display:block;text-align:center;padding:15px;background:var(--accent);color:#fff;font-size:14px;font-weight:700;text-decoration:none;border-radius:var(--r);transition:all .2s;margin-bottom:10px;}
+.cta-btn:hover{background:#4e7a1a;transform:translateY(-2px);box-shadow:0 6px 18px rgba(99,153,34,.3);}
+.cta-btn-sub{display:block;text-align:center;padding:13px;background:#fff;color:var(--primary);font-size:14px;font-weight:700;text-decoration:none;border-radius:var(--r);border:2px solid var(--border);transition:all .2s;}
+.cta-btn-sub:hover{border-color:var(--primary);}
+.res-note{font-size:11px;color:var(--muted);text-align:center;margin-top:10px;line-height:1.7;}
+.res-note a{color:var(--accent);}
+
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;background:rgba(249,247,244,.96);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:12px 16px;text-align:center;display:none;z-index:50;}
+.sticky-cta.show{display:block;}
+.sticky-cta-inner{max-width:480px;margin:0 auto;display:flex;align-items:center;gap:12px;}
+.sticky-score{font-size:20px;font-weight:700;}
+.sticky-lbl{font-size:12px;color:var(--muted);flex:1;text-align:left;}
+.sticky-btn{padding:11px 22px;border:none;border-radius:99px;background:var(--accent);color:#fff;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;}
+.sticky-btn:hover{background:#4e7a1a;}
+
+@media(max-width:480px){
+  .score-card{flex-direction:column;align-items:flex-start;}
+  .item-label{font-size:13px;}
+  .cat-head-title{font-size:14px;}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <a href="index.html" class="hdr-logo">和-Node</a>
+  <a href="index.html#demo" class="hdr-back">← 制作デモ一覧へ</a>
+</header>
+
+<div class="hero">
+  <div class="hero-badge">SEO CHECKLIST</div>
+  <h1 class="hero-title">WordPress SEO 内部診断チェック</h1>
+  <p class="hero-sub">25項目をチェックするだけで、サイトのSEO内部状態をリアルタイム採点。弱点を見える化して改善のヒントを得られます。</p>
+</div>
+
+<div class="score-panel">
+  <div class="score-card">
+    <div class="score-ring-wrap">
+      <svg class="score-ring" viewBox="0 0 96 96">
+        <circle cx="48" cy="48" r="40" fill="none" stroke="#e5e2db" stroke-width="8"/>
+        <circle id="ring-fill" cx="48" cy="48" r="40" fill="none" stroke="#639922" stroke-width="8"
+          stroke-dasharray="251.3" stroke-dashoffset="251.3" stroke-linecap="round"
+          transform="rotate(-90 48 48)" style="transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)"/>
+      </svg>
+      <div style="margin-top:-68px;margin-bottom:28px;">
+        <div class="score-num" id="total-score">0</div>
+        <div class="score-lbl">/ 50点</div>
+        <div class="score-grade" id="total-grade">—</div>
+      </div>
+    </div>
+    <div class="cats-wrap" id="cats-wrap"></div>
+  </div>
+</div>
+
+<div class="main" id="checklist"></div>
+
+<div class="result-section" id="result-section">
+  <div class="result-box">
+    <div class="result-top">
+      <h2>🔍 改善ポイント・おすすめサービス</h2>
+      <div id="recs"></div>
+    </div>
+    <div class="result-cta">
+      <a href="https://coconala.com/services/4160127" target="_blank" class="cta-btn">WordPress SEO最適化の相談をする（Coconala）→</a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="cta-btn-sub">直接お問い合わせフォームへ →</a>
+      <p class="res-note">診断結果は保存されません。気になる項目はスクリーンショットをお取りください。<br>ご相談は<a href="https://coconala.com/users/2598979" target="_blank">Coconala</a>または直接取引にて承ります。</p>
+    </div>
+  </div>
+</div>
+
+<div class="sticky-cta" id="sticky-cta">
+  <div class="sticky-cta-inner">
+    <div>
+      <div class="sticky-score" id="sticky-score-num">0点</div>
+      <div class="sticky-lbl" id="sticky-grade-lbl">— チェックを進めてください</div>
+    </div>
+    <button class="sticky-btn" onclick="showResult()">改善ポイントを見る</button>
+  </div>
+</div>
+
+<script>
+const categories = [
+  {
+    id:'basic', name:'基本設定', em:'⚙️',
+    items:[
+      {l:'タイトルタグに主要キーワードが含まれている', h:'各ページのtitleタグを確認。30〜35文字以内が目安。'},
+      {l:'メタディスクリプションが設定されている',    h:'120文字前後で各ページに個別設定されているか。'},
+      {l:'Googleサーチコンソール（GSC）に登録している',h:'プロパティを追加し、サイトマップも送信済みか。'},
+      {l:'Googleアナリティクス（GA4）が設定されている',h:'トラッキングコードが全ページに設置されているか。'},
+      {l:'robots.txtが適切に設定されている',          h:'不要なページのクロールをブロックしているか確認。'},
+    ]
+  },
+  {
+    id:'content', name:'コンテンツ品質', em:'📝',
+    items:[
+      {l:'各ページにh1タグが1つだけ存在する',        h:'h1が複数あったり、ゼロのページはSEO上不利。'},
+      {l:'画像にaltテキストが設定されている',         h:'すべての画像に説明文（alt属性）を設定する。'},
+      {l:'内部リンクが適切に設定されている',          h:'関連ページへのリンクがあり、孤立ページがない。'},
+      {l:'主要ページの文字数が1,000字以上ある',       h:'薄いコンテンツはGoogleに評価されにくい。'},
+      {l:'定期的にコンテンツを更新している',          h:'3〜6ヶ月以上更新がないサイトは評価が下がりやすい。'},
+    ]
+  },
+  {
+    id:'technical', name:'テクニカルSEO', em:'🔧',
+    items:[
+      {l:'HTTPSに対応している（SSL証明書）',          h:'http://のままのサイトはGoogleに低評価。必須対応。'},
+      {l:'canonicalタグが設定されている',             h:'重複コンテンツを防ぐためにcanonicalを設定する。'},
+      {l:'404ページが適切にカスタマイズされている',   h:'存在しないURLへのアクセスで適切なページを返す。'},
+      {l:'意図せずnoindexが設定されていない',         h:'WordPress設定の「検索エンジンによるインデックス」を確認。'},
+      {l:'構造化データ（JSON-LD）が実装されている',   h:'FAQやパンくずのリッチスニペットで検索結果を強化。'},
+    ]
+  },
+  {
+    id:'speed', name:'表示速度', em:'⚡',
+    items:[
+      {l:'画像が圧縮・最適化されている',              h:'WebP形式の使用や、TinyPNG等で圧縮しているか。'},
+      {l:'キャッシュプラグインを導入している',        h:'WP Super Cache、W3 Total Cache等を使用しているか。'},
+      {l:'不要なプラグインを削除している',            h:'使っていないプラグインは速度低下の原因になる。'},
+      {l:'PageSpeed Insightsのスコアが60以上',        h:'Googleが提供する速度測定ツールで確認できる。'},
+      {l:'外部フォントや重いCSSを最小化している',     h:'Google Fontsの読み込み最適化やCSS圧縮の実施。'},
+    ]
+  },
+  {
+    id:'ux', name:'ユーザー体験', em:'📱',
+    items:[
+      {l:'スマートフォンで問題なく表示される',        h:'Google Mobile-Friendly Testで確認できる。'},
+      {l:'CTAボタンが分かりやすい位置にある',         h:'問い合わせや購入ボタンがファーストビュー内にあるか。'},
+      {l:'パンくずリスト・ナビゲーションが整っている',h:'ユーザーが迷わず目的ページにたどり着けるか。'},
+      {l:'お問い合わせフォームが正常に機能している',  h:'送信テストを定期的に行っているか。'},
+      {l:'404ページからトップへの導線がある',         h:'迷子になったユーザーを適切に誘導できているか。'},
+    ]
+  }
+];
+
+// state: 0=未回答, 1=OK(2点), 2=一部(1点), 3=NG(0点)
+const state = {};
+categories.forEach(c => c.items.forEach((_,i) => { state[c.id+'_'+i] = 0; }));
+
+let answered = 0;
+const TOTAL_ITEMS = 25;
+const MAX_SCORE = 50;
+
+function getScore(cid) {
+  const cat = categories.find(c=>c.id===cid);
+  return cat.items.reduce((s,_,i)=>{
+    const v = state[cid+'_'+i];
+    return s + (v===1?2: v===2?1:0);
+  },0);
+}
+
+function getTotalScore() {
+  return categories.reduce((s,c)=>s+getScore(c.id),0);
+}
+
+function getAnswered() {
+  return Object.values(state).filter(v=>v!==0).length;
+}
+
+function getGrade(pct) {
+  if(pct>=85) return {label:'A：優秀', color:'#27ae60'};
+  if(pct>=65) return {label:'B：良好', color:'#639922'};
+  if(pct>=45) return {label:'C：要改善', color:'#BA7517'};
+  return {label:'D：要対策', color:'#c0392b'};
+}
+
+function updateScore() {
+  const total = getTotalScore();
+  const pct = (total / MAX_SCORE) * 100;
+  const grade = getGrade(pct);
+  const circumference = 251.3;
+  const offset = circumference - (circumference * pct / 100);
+
+  document.getElementById('ring-fill').style.strokeDashoffset = offset;
+  document.getElementById('ring-fill').style.stroke = grade.color;
+  document.getElementById('total-score').textContent = total;
+  document.getElementById('total-grade').textContent = grade.label;
+  document.getElementById('total-grade').style.color = grade.color;
+
+  // category bars
+  const wrap = document.getElementById('cats-wrap');
+  wrap.innerHTML = categories.map(c=>{
+    const s = getScore(c.id);
+    const max = c.items.length * 2;
+    const cp = (s/max)*100;
+    const col = cp>=70?'#639922':cp>=40?'#BA7517':'#c0392b';
+    return `<div class="cat-row">
+      <div class="cat-name">${c.em} ${c.name}</div>
+      <div class="cat-bar-bg"><div class="cat-bar" style="width:${cp}%;background:${col}"></div></div>
+      <div class="cat-score-txt" style="color:${col}">${s}/${max}</div>
+    </div>`;
+  }).join('');
+
+  // sticky CTA
+  const ans = getAnswered();
+  if(ans >= 5) {
+    document.getElementById('sticky-cta').classList.add('show');
+    document.getElementById('sticky-score-num').textContent = total + '点';
+    document.getElementById('sticky-grade-lbl').textContent = grade.label + '（' + ans + '/' + TOTAL_ITEMS + '項目回答済み）';
+  }
+
+  // result auto-show if all answered
+  if(ans >= TOTAL_ITEMS) {
+    document.getElementById('result-section').classList.add('show');
+    buildRecs();
+    document.getElementById('result-section').scrollIntoView({behavior:'smooth', block:'start'});
+  }
+}
+
+function toggle(cid, idx, val) {
+  const key = cid+'_'+idx;
+  state[key] = (state[key]===val) ? 0 : val;
+  renderItem(cid, idx);
+  updateScore();
+}
+
+function renderItem(cid, idx) {
+  const key = cid+'_'+idx;
+  const v = state[key];
+  ['ok','warn','bad'].forEach((t,ti)=>{
+    const btn = document.getElementById(`btn_${cid}_${idx}_${t}`);
+    if(!btn) return;
+    btn.className = 'chk-btn' + (v===(ti+1) ? ` active-${t}` : '');
+  });
+}
+
+function buildChecklist() {
+  const cl = document.getElementById('checklist');
+  cl.innerHTML = categories.map((c,ci)=>{
+    const items = c.items.map((it,i)=>`
+      <div class="item" id="item_${c.id}_${i}">
+        <div class="item-text">
+          <div class="item-label">${it.l}</div>
+          <div class="item-hint">${it.h}</div>
+        </div>
+        <div class="item-btns">
+          <button class="chk-btn" id="btn_${c.id}_${i}_ok"   onclick="toggle('${c.id}',${i},1)" title="対応済み">✅</button>
+          <button class="chk-btn" id="btn_${c.id}_${i}_warn" onclick="toggle('${c.id}',${i},2)" title="一部対応">⚠️</button>
+          <button class="chk-btn" id="btn_${c.id}_${i}_bad"  onclick="toggle('${c.id}',${i},3)" title="未対応">❌</button>
+        </div>
+      </div>`).join('');
+    const isFirst = ci===0;
+    return `<div class="cat-section">
+      <div class="cat-head ${isFirst?'open':''}" onclick="toggleCat(this)">
+        <span class="cat-head-em">${c.em}</span>
+        <span class="cat-head-title">${c.name}</span>
+        <span class="cat-head-progress" id="cat-prog-${c.id}">0 / ${c.items.length}</span>
+        <span class="cat-chevron">${isFirst?'▶':'▶'}</span>
+      </div>
+      <div class="items ${isFirst?'show':''}" id="items-${c.id}">${items}</div>
+    </div>`;
+  }).join('');
+}
+
+function toggleCat(head) {
+  const cid = head.closest('.cat-section').querySelector('.items').id.replace('items-','');
+  const items = document.getElementById('items-'+cid);
+  const isOpen = items.classList.toggle('show');
+  head.classList.toggle('open', isOpen);
+}
+
+function buildRecs() {
+  const recs = [];
+  categories.forEach(c=>{
+    const s = getScore(c.id);
+    const max = c.items.length*2;
+    const pct = (s/max)*100;
+    if(pct<50){
+      const msgs = {
+        basic:   {color:'#c0392b', text:'【基本設定】GSC登録やメタ情報の設定が不十分です。まずここを整えるだけで検索流入が改善しやすくなります。→「WordPress SEO内部の丸ごと最適化」サービスをご検討ください。'},
+        content: {color:'#c0392b', text:'【コンテンツ品質】h1タグ・altテキスト・内部リンクの見直しが必要です。コンテンツの薄さもGoogleからの評価を下げる要因になります。'},
+        technical:{color:'#c0392b', text:'【テクニカルSEO】HTTPS対応やcanonical設定など技術的な土台が不足しています。専門家による確認・修正をおすすめします。'},
+        speed:   {color:'#BA7517', text:'【表示速度】画像圧縮やキャッシュ設定が不十分な可能性があります。→「WordPressの表示速度改善」サービスで劇的に改善できます。'},
+        ux:      {color:'#BA7517', text:'【ユーザー体験】スマホ対応やCTAの配置など、訪問者が離脱しやすい状態です。集客に直結するため早めの対応をおすすめします。'},
+      };
+      recs.push(msgs[c.id]);
+    } else if(pct<80){
+      const msgs2 = {
+        basic:    {color:'#BA7517', text:'【基本設定】概ね整っていますが、まだ未対応の項目があります。細かい設定の見直しで更なる改善が見込めます。'},
+        content:  {color:'#BA7517', text:'【コンテンツ品質】あと一歩です。altテキストの設定漏れや内部リンクの整備で評価が上がります。'},
+        technical:{color:'#BA7517', text:'【テクニカルSEO】基本はできていますが、構造化データの実装で検索結果のリッチスニペットを狙えます。'},
+        speed:    {color:'#639922', text:'【表示速度】ある程度対応できています。PageSpeed Insightsで定期的にチェックしましょう。'},
+        ux:       {color:'#639922', text:'【ユーザー体験】概ね良好です。CTAの位置やフォームの動作確認を定期的に行いましょう。'},
+      };
+      recs.push(msgs2[c.id]);
+    }
+  });
+
+  if(!recs.length) recs.push({color:'#27ae60', text:'全カテゴリ優秀です！現状維持しながら定期的な監視を続けましょう。Googleアルゴリズムの変化にも注意が必要です。'});
+
+  document.getElementById('recs').innerHTML = recs.map(r=>`
+    <div class="rec-item">
+      <div class="rec-dot" style="background:${r.color}"></div>
+      <div class="rec-text">${r.text}</div>
+    </div>`).join('');
+}
+
+function showResult() {
+  document.getElementById('result-section').classList.add('show');
+  buildRecs();
+  document.getElementById('result-section').scrollIntoView({behavior:'smooth'});
+}
+
+buildChecklist();
+updateScore();
+</script>
+</body>
+</html>

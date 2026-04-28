@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/png" href="images/favicon.png"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>LP・HP制作 要件ヒアリング | 和-Node</title>
+<meta name="description" content="LP・ホームページ制作のご要件を会話形式で整理。最後に仕様サマリーカードを自動生成します。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<style>
+:root{--font:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;--bg:#f9f7f4;--surface:#fff;--primary:#2c2c2a;--accent:#639922;--accent-light:#EAF3DE;--muted:#888;--border:#e5e2db;--r:12px;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:var(--font);background:var(--bg);color:var(--primary);min-height:100vh;}
+
+/* HEADER */
+.hdr{position:sticky;top:0;z-index:100;background:rgba(249,247,244,.94);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;}
+.hdr-logo{font-size:16px;font-weight:700;color:var(--primary);text-decoration:none;}
+.hdr-back{font-size:13px;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:4px;transition:color .2s;}
+.hdr-back:hover{color:var(--accent);}
+
+/* PROGRESS */
+.prog-wrap{max-width:640px;margin:32px auto 0;padding:0 20px;}
+.prog-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-bottom:10px;}
+.prog-bg{height:4px;background:var(--border);border-radius:99px;overflow:hidden;}
+.prog-bar{height:100%;background:var(--accent);border-radius:99px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+
+/* STEP */
+.step-wrap{max-width:640px;margin:24px auto 60px;padding:0 20px;}
+.step-card{background:var(--surface);border-radius:16px;padding:36px 32px;box-shadow:0 4px 24px rgba(0,0,0,.07);animation:up .35s cubic-bezier(.4,0,.2,1);}
+@keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.badge{display:inline-block;background:var(--accent-light);color:var(--accent);font-size:11px;font-weight:700;padding:3px 12px;border-radius:99px;letter-spacing:.08em;margin-bottom:16px;}
+.q{font-size:19px;font-weight:700;line-height:1.5;margin-bottom:8px;}
+.qsub{font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:24px;}
+
+/* OPTIONS */
+.opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-bottom:24px;}
+.opt{display:flex;align-items:center;gap:10px;padding:14px 14px;border:2px solid var(--border);border-radius:var(--r);background:var(--bg);font-family:var(--font);font-size:13px;font-weight:500;color:var(--primary);cursor:pointer;text-align:left;transition:all .18s;line-height:1.45;}
+.opt:hover{border-color:var(--accent);background:var(--accent-light);}
+.opt.sel{border-color:var(--accent);background:var(--accent-light);color:var(--accent);font-weight:700;}
+.opt-em{font-size:20px;flex-shrink:0;}
+
+/* TEXTAREA */
+.txta{width:100%;min-height:110px;padding:14px;border:2px solid var(--border);border-radius:var(--r);font-family:var(--font);font-size:14px;color:var(--primary);background:var(--bg);resize:vertical;margin-bottom:24px;transition:border-color .2s;outline:none;line-height:1.7;}
+.txta:focus{border-color:var(--accent);}
+
+/* NAV */
+.nav{display:flex;align-items:center;gap:12px;}
+.btn-back{padding:11px 22px;border:2px solid var(--border);border-radius:99px;background:transparent;color:var(--muted);font-family:var(--font);font-size:13px;cursor:pointer;transition:all .2s;}
+.btn-back:hover{border-color:var(--primary);color:var(--primary);}
+.btn-next{padding:11px 30px;border:none;border-radius:99px;background:var(--accent);color:#fff;font-family:var(--font);font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;margin-left:auto;}
+.btn-next:hover{background:#4e7a1a;transform:translateY(-1px);}
+.btn-next:disabled{background:var(--border);color:var(--muted);cursor:not-allowed;transform:none;}
+
+/* RESULT */
+.res-header{text-align:center;padding:40px 20px 0;max-width:640px;margin:0 auto;}
+.res-title{font-size:24px;font-weight:700;margin-bottom:8px;}
+.res-sub{font-size:14px;color:var(--muted);line-height:1.7;}
+.res-wrap{max-width:640px;margin:24px auto 60px;padding:0 20px;}
+.res-inner{background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:0 8px 32px rgba(0,0,0,.09);animation:up .5s cubic-bezier(.4,0,.2,1);}
+.res-top{background:linear-gradient(135deg,#2c2c2a,#3d3d3a);padding:28px 32px;color:#fff;}
+.res-top-lbl{font-size:11px;letter-spacing:.15em;color:#c8a84b;font-weight:700;margin-bottom:10px;}
+.res-top-ttl{font-size:20px;font-weight:700;margin-bottom:4px;}
+.res-top-s{font-size:13px;color:rgba(255,255,255,.55);}
+.res-body{padding:28px 32px;}
+.res-tbl{width:100%;border-collapse:collapse;margin-bottom:24px;}
+.res-tbl tr{border-bottom:1px solid var(--border);}
+.res-tbl tr:last-child{border-bottom:none;}
+.res-tbl th{width:36%;padding:12px 0;font-size:12px;color:var(--muted);font-weight:600;text-align:left;vertical-align:top;}
+.res-tbl td{padding:12px 0 12px 10px;font-size:14px;font-weight:500;vertical-align:top;line-height:1.6;}
+.plan-box{background:var(--accent-light);border:2px solid var(--accent);border-radius:var(--r);padding:18px 20px;margin-bottom:22px;}
+.plan-lbl{font-size:11px;color:var(--accent);font-weight:700;letter-spacing:.1em;margin-bottom:6px;}
+.plan-name{font-size:17px;font-weight:700;color:var(--primary);margin-bottom:6px;}
+.plan-desc{font-size:13px;color:#555;line-height:1.7;}
+.cta-btn{display:block;text-align:center;padding:16px;background:var(--accent);color:#fff;font-size:15px;font-weight:700;text-decoration:none;border-radius:var(--r);transition:all .2s;margin-bottom:12px;}
+.cta-btn:hover{background:#4e7a1a;transform:translateY(-2px);box-shadow:0 8px 20px rgba(99,153,34,.3);}
+.res-note{font-size:12px;color:var(--muted);text-align:center;line-height:1.7;}
+.res-note a{color:var(--accent);}
+.retry-btn{display:block;text-align:center;margin:14px auto 0;font-size:13px;color:var(--muted);cursor:pointer;background:none;border:none;font-family:var(--font);text-decoration:underline;}
+.retry-btn:hover{color:var(--primary);}
+.hidden{display:none;}
+
+@media(max-width:480px){
+  .step-card{padding:22px 16px;}
+  .q{font-size:16px;}
+  .opts{grid-template-columns:1fr;}
+  .res-top,.res-body{padding:20px;}
+  .res-tbl th{width:38%;}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <a href="index.html" class="hdr-logo">和-Node</a>
+  <a href="index.html#demo" class="hdr-back">← 制作デモ一覧へ</a>
+</header>
+
+<!-- WIZARD -->
+<div id="wizard">
+  <div class="prog-wrap">
+    <div class="prog-meta">
+      <span id="prog-label">STEP 1 / 9</span>
+      <span id="prog-pct">11%</span>
+    </div>
+    <div class="prog-bg"><div class="prog-bar" id="prog-bar" style="width:11%"></div></div>
+  </div>
+  <div class="step-wrap">
+    <div class="step-card" id="step-card"></div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div id="result" class="hidden">
+  <div class="res-header">
+    <div class="badge">✅ ヒアリング完了</div>
+    <h1 class="res-title">要件サマリーカード</h1>
+    <p class="res-sub">ご回答をもとに仕様サマリーを自動生成しました。<br>このカードをご確認のうえ、お気軽にご相談ください。</p>
+  </div>
+  <div class="res-wrap">
+    <div class="res-inner">
+      <div class="res-top">
+        <div class="res-top-lbl">WEB PRODUCTION REQUIREMENTS</div>
+        <div class="res-top-ttl">LP・HP制作 ご要件サマリー</div>
+        <div class="res-top-s">和-Node へのご相談用</div>
+      </div>
+      <div class="res-body">
+        <table class="res-tbl">
+          <tr><th>業種・ビジネス</th><td id="r-industry">—</td></tr>
+          <tr><th>目的・ゴール</th><td id="r-purpose">—</td></tr>
+          <tr><th>現在のサイト</th><td id="r-current">—</td></tr>
+          <tr><th>ページ規模</th><td id="r-scale">—</td></tr>
+          <tr><th>デザインテイスト</th><td id="r-design">—</td></tr>
+          <tr><th>ご希望納期</th><td id="r-deadline">—</td></tr>
+          <tr><th>ご予算感</th><td id="r-budget">—</td></tr>
+          <tr><th>重視するポイント</th><td id="r-priority">—</td></tr>
+          <tr><th>ご要望・メッセージ</th><td id="r-message">—</td></tr>
+        </table>
+        <div class="plan-box">
+          <div class="plan-lbl">🎯 おすすめプラン（自動判定）</div>
+          <div class="plan-name" id="r-plan-name">—</div>
+          <div class="plan-desc" id="r-plan-desc">—</div>
+        </div>
+        <a href="https://coconala.com/users/2598979" target="_blank" class="cta-btn">このサマリーを持って、Coconalaで相談する →</a>
+        <p class="res-note">直接取引も歓迎です。<a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank">お問い合わせフォーム</a>からもどうぞ。</p>
+        <button class="retry-btn" onclick="restart()">← もう一度回答する</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const steps = [
+  {
+    id:'industry', q:'あなたのビジネス・業種を教えてください', sub:'最も近いものをお選びください', type:'single',
+    opts:[
+      {e:'👤',l:'個人事業主・フリーランス'},
+      {e:'🏢',l:'中小企業・法人'},
+      {e:'🏥',l:'医療・福祉・介護'},
+      {e:'🍽️',l:'飲食・小売・サービス業'},
+      {e:'📚',l:'教育・スクール・コーチング'},
+      {e:'🌐',l:'その他・未定'},
+    ]
+  },
+  {
+    id:'purpose', q:'Webページで実現したいことは？', sub:'最も優先度が高いものをお選びください', type:'single',
+    opts:[
+      {e:'📞',l:'問い合わせ・集客を増やしたい'},
+      {e:'🛒',l:'商品・サービスを販売したい'},
+      {e:'🤝',l:'採用・求人につなげたい'},
+      {e:'💎',l:'ブランディング・信頼を高めたい'},
+      {e:'📣',l:'イベント・セミナーを告知したい'},
+    ]
+  },
+  {
+    id:'current', q:'現在、Webサイトはお持ちですか？', sub:'現状に最も近いものをお選びください', type:'single',
+    opts:[
+      {e:'🆕',l:'まったくない（ゼロから作りたい）'},
+      {e:'🔄',l:'あるが、全面的に作り直したい'},
+      {e:'➕',l:'既存サイトに追加・改修したい'},
+    ]
+  },
+  {
+    id:'scale', q:'ご希望のページ規模は？', sub:'おおよその目安でOKです', type:'single',
+    opts:[
+      {e:'📄',l:'LP1枚（1ページにまとめたい）'},
+      {e:'📑',l:'5ページ以内（小規模サイト）'},
+      {e:'🗂️',l:'10ページ以上（中規模サイト）'},
+      {e:'❓',l:'未定・ご提案に任せたい'},
+    ]
+  },
+  {
+    id:'design', q:'デザインの方向性は？', sub:'イメージに近いものをお選びください', type:'single',
+    opts:[
+      {e:'⬜',l:'シンプル・ミニマル'},
+      {e:'🎋',l:'和風・上品・落ち着いた'},
+      {e:'🎨',l:'ポップ・カジュアル・明るい'},
+      {e:'💼',l:'プロフェッショナル・高級感'},
+      {e:'🌸',l:'温かみ・ナチュラル・親しみやすい'},
+    ]
+  },
+  {
+    id:'deadline', q:'納期のご希望は？', sub:'', type:'single',
+    opts:[
+      {e:'⚡',l:'急ぎ（2週間以内）'},
+      {e:'📅',l:'通常（1ヶ月前後）'},
+      {e:'🌿',l:'じっくり（2ヶ月以上）'},
+      {e:'❓',l:'未定・相談したい'},
+    ]
+  },
+  {
+    id:'budget', q:'ご予算の感覚を教えてください', sub:'目安としてお気軽にお選びください', type:'single',
+    opts:[
+      {e:'💴',l:'3万円以内'},
+      {e:'💴',l:'3〜10万円'},
+      {e:'💴',l:'10〜30万円'},
+      {e:'💴',l:'30万円以上'},
+      {e:'❓',l:'未定・まずは相談したい'},
+    ]
+  },
+  {
+    id:'priority', q:'特に重視したいことは？', sub:'当てはまるものをすべてお選びください（複数可）', type:'multi',
+    opts:[
+      {e:'🔍',l:'SEO・検索からの集客'},
+      {e:'✨',l:'デザインのクオリティ'},
+      {e:'📱',l:'スマホ対応・使いやすさ'},
+      {e:'✏️',l:'自分で更新・編集できること'},
+      {e:'🚀',l:'とにかく早く公開したい'},
+      {e:'💰',l:'コストを抑えたい'},
+    ]
+  },
+  {
+    id:'message', q:'気になっていること・特に伝えたいことがあれば', sub:'なくてもOKです。そのまま次へ進んでください', type:'textarea',
+    placeholder:'例：競合他社のサイトが気になっている、参考にしたいサイトがある、予算が厳しいが相談したい…など'
+  }
+];
+
+let cur = 0;
+const ans = {};
+const multiSel = {};
+
+function render() {
+  const s = steps[cur];
+  const total = steps.length;
+  const pct = Math.round(((cur + 1) / total) * 100);
+  document.getElementById('prog-label').textContent = `STEP ${cur+1} / ${total}`;
+  document.getElementById('prog-pct').textContent = pct + '%';
+  document.getElementById('prog-bar').style.width = pct + '%';
+
+  let html = `<div class="badge">STEP ${cur+1}</div><div class="q">${s.q}</div>`;
+  if (s.sub) html += `<div class="qsub">${s.sub}</div>`;
+
+  if (s.type === 'textarea') {
+    const val = ans[s.id] || '';
+    html += `<textarea class="txta" id="txta" placeholder="${s.placeholder}">${val}</textarea>`;
+  } else {
+    html += '<div class="opts">';
+    s.opts.forEach((o, i) => {
+      const isSel = s.type === 'multi'
+        ? (multiSel[s.id] || []).includes(i)
+        : ans[s.id] === i;
+      html += `<button class="opt${isSel ? ' sel' : ''}" onclick="pick(${i})"><span class="opt-em">${o.e}</span>${o.l}</button>`;
+    });
+    html += '</div>';
+  }
+
+  const isFirst = cur === 0;
+  const canNext = s.type === 'textarea' || ans[s.id] !== undefined || (s.type === 'multi' && (multiSel[s.id]||[]).length > 0);
+  html += `<div class="nav">
+    ${!isFirst ? '<button class="btn-back" onclick="goBack()">← 戻る</button>' : ''}
+    <button class="btn-next" id="btn-next" onclick="goNext()" ${canNext?'':'disabled'}>${cur===total-1 ? '✅ サマリーを生成する' : '次へ →'}</button>
+  </div>`;
+
+  const card = document.getElementById('step-card');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = '';
+  card.innerHTML = html;
+
+  if (s.type === 'textarea') {
+    document.getElementById('txta').addEventListener('input', function() {
+      ans[s.id] = this.value;
+      document.getElementById('btn-next').disabled = false;
+    });
+    // textarea always allow next (optional)
+    document.getElementById('btn-next').disabled = false;
+  }
+}
+
+function pick(i) {
+  const s = steps[cur];
+  if (s.type === 'multi') {
+    if (!multiSel[s.id]) multiSel[s.id] = [];
+    const idx = multiSel[s.id].indexOf(i);
+    if (idx >= 0) multiSel[s.id].splice(idx, 1);
+    else multiSel[s.id].push(i);
+    ans[s.id] = multiSel[s.id].length > 0 ? multiSel[s.id][0] : undefined;
+  } else {
+    ans[s.id] = i;
+  }
+  render();
+}
+
+function goNext() {
+  const s = steps[cur];
+  if (s.type === 'textarea') {
+    const el = document.getElementById('txta');
+    ans[s.id] = el ? el.value : '';
+  }
+  if (cur < steps.length - 1) {
+    cur++;
+    render();
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  } else {
+    showResult();
+  }
+}
+
+function goBack() {
+  if (cur > 0) { cur--; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+
+function getLabel(stepId, idx) {
+  const s = steps.find(x => x.id === stepId);
+  return s ? s.opts[idx].l : '—';
+}
+
+function getMultiLabels(stepId) {
+  const idxs = multiSel[stepId] || [];
+  if (!idxs.length) return '特になし';
+  return idxs.map(i => getLabel(stepId, i)).join('、');
+}
+
+function recommendPlan(budget, scale, current) {
+  const budgetLabel = ans.budget !== undefined ? getLabel('budget', ans.budget) : '';
+  const scaleLabel  = ans.scale  !== undefined ? getLabel('scale',  ans.scale)  : '';
+  if (budgetLabel.includes('30万')) {
+    return { name: '事業戦略から入るWeb制作【プレミアム】', desc: 'ビジネスゴールの整理から設計・デザイン・実装まで完全オーダーメイドで対応します。ITコンサル×心理カウンセラーの視点で、集客に直結するサイトを構築します。' };
+  }
+  if (budgetLabel.includes('10〜30') || scaleLabel.includes('10ページ')) {
+    return { name: '集客に直結するLP・HP制作', desc: '実務歴15年以上のITコンサルがビジネス課題をWebで解決。目的・ターゲット・構成を一緒に設計した上でお見積りします。' };
+  }
+  if (budgetLabel.includes('3〜10') || scaleLabel.includes('5ページ')) {
+    return { name: 'LP1枚〜小規模HP制作', desc: 'まずは最小構成でスタートし、反応を見ながら改善していくアプローチです。予算を抑えつつ集客効果を検証できます。' };
+  }
+  if (budgetLabel.includes('3万円以内') || scaleLabel.includes('LP1枚')) {
+    return { name: 'LP制作（シンプルプラン）', desc: '1ページ完結型のLPを短納期・低コストで制作します。まずは一歩踏み出したい方に最適なプランです。' };
+  }
+  return { name: 'まずは無料相談から', desc: '要件をお聞きしてから最適なプランをご提案します。予算・目的・スケジュールを一緒に整理しましょう。' };
+}
+
+function showResult() {
+  document.getElementById('wizard').classList.add('hidden');
+  document.getElementById('result').classList.remove('hidden');
+  window.scrollTo({top:0,behavior:'smooth'});
+
+  const get = (id) => ans[id] !== undefined ? getLabel(id, ans[id]) : '—';
+
+  document.getElementById('r-industry').textContent = get('industry');
+  document.getElementById('r-purpose').textContent  = get('purpose');
+  document.getElementById('r-current').textContent  = get('current');
+  document.getElementById('r-scale').textContent    = get('scale');
+  document.getElementById('r-design').textContent   = get('design');
+  document.getElementById('r-deadline').textContent = get('deadline');
+  document.getElementById('r-budget').textContent   = get('budget');
+  document.getElementById('r-priority').textContent = getMultiLabels('priority');
+  const msg = ans.message && ans.message.trim() ? ans.message.trim() : '特になし';
+  document.getElementById('r-message').textContent  = msg;
+
+  const plan = recommendPlan();
+  document.getElementById('r-plan-name').textContent = plan.name;
+  document.getElementById('r-plan-desc').textContent = plan.desc;
+}
+
+function restart() {
+  Object.keys(ans).forEach(k => delete ans[k]);
+  Object.keys(multiSel).forEach(k => delete multiSel[k]);
+  cur = 0;
+  document.getElementById('result').classList.add('hidden');
+  document.getElementById('wizard').classList.remove('hidden');
+  render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+render();
+</script>
+</body>
+</html>
