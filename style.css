@@ -641,3 +641,41 @@ ul {
   color: #888;
   font-size: 0.9rem;
 }
+
+/* =========================================
+   Demo Banner（制作例サンプル通知）
+========================================= */
+.demo-banner {
+  margin-top: var(--header-height); /* fixed headerの高さ分下にずらす */
+  background: var(--color-accent-light);
+  color: var(--color-primary);
+  text-align: center;
+  padding: 12px 20px;
+  font-size: 13px;
+  line-height: 1.7;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.demo-banner strong {
+  color: var(--color-accent);
+}
+
+.banner-cta {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s;
+}
+
+.banner-cta:hover {
+  color: var(--color-accent);
+}
+
+/* スマホでバナーが折り返しても収まるよう余白を確保 */
+@media (max-width: 600px) {
+  .demo-banner {
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+}
