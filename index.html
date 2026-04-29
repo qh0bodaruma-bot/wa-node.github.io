@@ -415,7 +415,10 @@
     <div style="text-align:center; padding:32px; background:linear-gradient(135deg,#f0faf0,#e8f5e8); border-radius:12px; border:1px solid #c6e8c6;">
       <p style="font-size:15px; font-weight:700; color:#2c2c2a; margin-bottom:8px;">LINE Mini Appの導入を検討していますか？</p>
       <p style="font-size:13px; color:#555; margin-bottom:24px; line-height:1.7;">まずは30分の無料相談から。要件・予算・スケジュールを一緒に整理します。</p>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="display:inline-block; padding:14px 32px; background:#06C755; color:#fff; font-size:14px; font-weight:700; border-radius:8px; text-decoration:none; transition:all .2s;" onmouseover="this.style.background='#05a849'" onmouseout="this.style.background='#06C755'">直接お問い合わせはこちら →</a>
+      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
+        <a href="https://lin.ee/o5QFPwc" target="_blank" style="display:inline-block; padding:14px 32px; background:#06C755; color:#fff; font-size:14px; font-weight:700; border-radius:8px; text-decoration:none; transition:all .2s;" onmouseover="this.style.background='#05a849'" onmouseout="this.style.background='#06C755'">LINEで相談する →</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="display:inline-block; padding:14px 32px; background:#fff; color:#2c2c2a; font-size:14px; font-weight:700; border-radius:8px; text-decoration:none; border:1px solid #06C755; transition:all .2s;" onmouseover="this.style.background='#f0faf0'" onmouseout="this.style.background='#fff'">直接お問い合わせ →</a>
+      </div>
     </div>
 
   </div>
@@ -919,8 +922,14 @@ function switchFlowTab(i) {
   <h2 class="section-title" style="display:inline-block;margin-bottom:20px;font-size:clamp(1.5rem, 5vw, 2.5rem);">ご依頼・ご相談はこちら</h2>
   <p style="color:#555;font-size:15px;margin-bottom:32px;">QRコードを読み取るか、下記よりお問い合わせください。</p>
   <div style="display:flex;flex-direction:column;align-items:center;gap:32px;margin-bottom:32px;">
-    <!-- QR コード 3枚 -->
-    <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;">
+    <!-- QR コード 4枚 -->
+    <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;align-items:flex-start;">
+      <div style="text-align:center;">
+        <a href="https://lin.ee/o5QFPwc" target="_blank" style="text-decoration:none; display:block; transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <img src="images/QR_LINE.png" alt="LINE公式アカウント QR" onerror="this.style.display='none'" style="width:120px;height:120px;border:2px solid #06C755;border-radius:4px;padding:8px;background:#fff;display:block;"/>
+        </a>
+        <p style="font-size:12px;font-weight:700;color:#06C755;margin-top:8px;">LINE公式アカウント</p>
+      </div>
       <div style="text-align:center;">
         <img src="images/QR_crowdworks.png" alt="クラウドワークス QR" onerror="this.style.display='none'" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:4px;padding:8px;background:#fff;display:block;"/>
         <p style="font-size:12px;font-weight:700;color:var(--color-primary);margin-top:8px;">クラウドワークス</p>
@@ -934,11 +943,19 @@ function switchFlowTab(i) {
         <p style="font-size:12px;font-weight:700;color:var(--color-primary);margin-top:8px;">ココナラ</p>
       </div>
     </div>
-    <!-- 直接お問い合わせボタン（正方形） -->
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:160px;height:160px;background:var(--color-primary);color:#fff;font-size:14px;font-weight:700;text-decoration:none;border-radius:8px;line-height:1.6;text-align:center;gap:8px;transition:all .2s;box-shadow:0 8px 24px rgba(0,0,0,.15);" onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();this.style.transform='translateY(-4px)'" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();this.style.transform='none'">
-      <span style="font-size:28px;">✉️</span>
-      <span>直接<br>お問い合わせ</span>
-    </a>
+    <!-- ボタンエリア -->
+    <div style="display:flex; gap:20px; flex-wrap:wrap; justify-content:center;">
+      <!-- LINEで相談ボタン -->
+      <a href="https://lin.ee/o5QFPwc" target="_blank" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:160px;height:160px;background:#06C755;color:#fff;font-size:14px;font-weight:700;text-decoration:none;border-radius:8px;line-height:1.6;text-align:center;gap:8px;transition:all .2s;box-shadow:0 8px 24px rgba(6,199,85,.25);" onmouseover="this.style.background='#05a849';this.style.transform='translateY(-4px)'" onmouseout="this.style.background='#06C755';this.style.transform='none'">
+        <span style="font-size:28px;">💬</span>
+        <span>LINEで<br>相談・依頼</span>
+      </a>
+      <!-- 直接お問い合わせボタン -->
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:160px;height:160px;background:var(--color-primary);color:#fff;font-size:14px;font-weight:700;text-decoration:none;border-radius:8px;line-height:1.6;text-align:center;gap:8px;transition:all .2s;box-shadow:0 8px 24px rgba(0,0,0,.15);" onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();this.style.transform='translateY(-4px)'" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();this.style.transform='none'">
+        <span style="font-size:28px;">✉️</span>
+        <span>直接<br>お問い合わせ</span>
+      </a>
+    </div>
     <p style="font-size:14px; font-weight:700; color:var(--color-primary);">ご依頼お待ちしております！</p>
   </div>
 </section>
