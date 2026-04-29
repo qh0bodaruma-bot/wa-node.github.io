@@ -415,10 +415,7 @@
     <div style="text-align:center; padding:32px; background:linear-gradient(135deg,#f0faf0,#e8f5e8); border-radius:12px; border:1px solid #c6e8c6;">
       <p style="font-size:15px; font-weight:700; color:#2c2c2a; margin-bottom:8px;">LINE Mini Appの導入を検討していますか？</p>
       <p style="font-size:13px; color:#555; margin-bottom:24px; line-height:1.7;">まずは30分の無料相談から。要件・予算・スケジュールを一緒に整理します。</p>
-      <div style="display:flex; gap:14px; justify-content:center; flex-wrap:wrap;">
-        <a href="https://coconala.com/users/2598979" target="_blank" style="display:inline-block; padding:13px 28px; background:#06C755; color:#fff; font-size:14px; font-weight:700; border-radius:99px; text-decoration:none; transition:all .2s;" onmouseover="this.style.background='#05a849'" onmouseout="this.style.background='#06C755'">Coconalaで相談する →</a>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="display:inline-block; padding:13px 28px; background:#fff; color:#2c2c2a; font-size:14px; font-weight:700; border-radius:99px; text-decoration:none; border:2px solid #c6e8c6; transition:all .2s;" onmouseover="this.style.borderColor='#06C755'" onmouseout="this.style.borderColor='#c6e8c6'">直接お問い合わせ →</a>
-      </div>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="display:inline-block; padding:14px 32px; background:#06C755; color:#fff; font-size:14px; font-weight:700; border-radius:8px; text-decoration:none; transition:all .2s;" onmouseover="this.style.background='#05a849'" onmouseout="this.style.background='#06C755'">直接お問い合わせはこちら →</a>
     </div>
 
   </div>
@@ -792,7 +789,11 @@ function switchFlowTab(i) {
       「ただ情報を載せるだけのHP」から「顧客が楽しめる・役立つHP」へ。和-Nodeでは、以下のようなインタラクティブなWebアプリ（診断ツール・計算シミュレーター）の企画・開発が可能です。あなたのビジネスに活用できるアイデアを、実際に触ってご体験ください。
     </p>
   </div>
-  <div class="targets-grid">
+  <!-- ジャンル：シミュレーター系 -->
+  <div style="grid-column:1/-1; margin-top:8px; margin-bottom:4px;">
+    <span style="font-size:12px; font-weight:700; color:#185FA5; background:#E6F1FB; padding:4px 14px; border-radius:99px; letter-spacing:.06em;">💻 シミュレーター系</span>
+  </div>
+  <div class="targets-grid" style="margin-bottom:0;">
     <div class="tg-card" style="display:flex; flex-direction:column; justify-content:space-between; border-left:4px solid #185FA5;">
       <div>
         <div class="tg-icon">💻</div>
@@ -802,6 +803,13 @@ function switchFlowTab(i) {
       </div>
       <a href="simulator.html" class="btn btn-primary" style="margin-top:24px; text-align:center; display:block; padding:12px 0; font-size:14px;">デモを体験する</a>
     </div>
+  </div>
+
+  <!-- ジャンル：診断ツール系 -->
+  <div style="max-width:1100px;margin:28px auto 4px;padding:0 24px;">
+    <span style="font-size:12px; font-weight:700; color:#e74c3c; background:rgba(231,76,60,0.08); padding:4px 14px; border-radius:99px; letter-spacing:.06em;">🩺 診断ツール系</span>
+  </div>
+  <div class="targets-grid" style="margin-bottom:0;">
     <div class="tg-card" style="display:flex; flex-direction:column; justify-content:space-between; border-left:4px solid #e74c3c;">
       <div>
         <div class="tg-icon">♿</div>
@@ -820,15 +828,6 @@ function switchFlowTab(i) {
       </div>
       <a href="mental_care.html" class="btn btn-primary" style="margin-top:24px; text-align:center; display:block; padding:12px 0; font-size:14px; background:#3B6D11;">アプリを試す</a>
     </div>
-    <div class="tg-card" style="display:flex; flex-direction:column; justify-content:space-between; border-left:4px solid #c8a84b;">
-      <div>
-        <div class="tg-icon">🧙</div>
-        <h3 class="tg-title">LP制作 ヒアリング体験ツール（デモ）</h3>
-        <p class="tg-desc" style="color:#222; font-size:13px;">実際のヒアリングと同じ流れを体験できるデモです。生成した要件カードはご相談時の参考資料にご利用いただけます。（こちらから直接発注はできません）</p>
-        <div style="margin-top:16px; font-size:13px; font-weight:700; color:#c8a84b; background:rgba(200,168,75,0.1); padding:8px 12px; border-radius:4px; display:inline-block; border: 1px solid rgba(200,168,75,0.3);">開発費用目安：約35,000円〜</div>
-      </div>
-      <a href="lp_wizard.html" class="btn btn-primary" style="margin-top:24px; text-align:center; display:block; padding:12px 0; font-size:14px; background:#c8a84b;">デモを体験する</a>
-    </div>
     <div class="tg-card" style="display:flex; flex-direction:column; justify-content:space-between; border-left:4px solid #185FA5;">
       <div>
         <div class="tg-icon">🔍</div>
@@ -837,6 +836,22 @@ function switchFlowTab(i) {
         <div style="margin-top:16px; font-size:13px; font-weight:700; color:#185FA5; background:#E6F1FB; padding:8px 12px; border-radius:4px; display:inline-block; border: 1px solid rgba(24,95,165,0.2);">開発費用目安：約35,000円〜</div>
       </div>
       <a href="seo_check.html" class="btn btn-primary" style="margin-top:24px; text-align:center; display:block; padding:12px 0; font-size:14px;">アプリを試す</a>
+    </div>
+  </div>
+
+  <!-- ジャンル：ヒアリング・ウィザード系 -->
+  <div style="max-width:1100px;margin:28px auto 4px;padding:0 24px;">
+    <span style="font-size:12px; font-weight:700; color:#c8a84b; background:rgba(200,168,75,0.1); padding:4px 14px; border-radius:99px; letter-spacing:.06em;">🧙 ヒアリング・ウィザード系</span>
+  </div>
+  <div class="targets-grid">
+    <div class="tg-card" style="display:flex; flex-direction:column; justify-content:space-between; border-left:4px solid #c8a84b;">
+      <div>
+        <div class="tg-icon">🧙</div>
+        <h3 class="tg-title">LP制作 ヒアリング体験ツール（デモ）</h3>
+        <p class="tg-desc" style="color:#222; font-size:13px;">実際のヒアリングと同じ流れを体験できるデモです。生成した要件カードはご相談時の参考資料にご利用いただけます。（こちらから直接発注はできません）</p>
+        <div style="margin-top:16px; font-size:13px; font-weight:700; color:#c8a84b; background:rgba(200,168,75,0.1); padding:8px 12px; border-radius:4px; display:inline-block; border: 1px solid rgba(200,168,75,0.3);">開発費用目安：約35,000円〜</div>
+      </div>
+      <a href="lp_wizard.html" class="btn btn-primary" style="margin-top:24px; text-align:center; display:block; padding:12px 0; font-size:14px; background:#c8a84b;">デモを体験する</a>
     </div>
   </div>
 </section>
@@ -902,29 +917,29 @@ function switchFlowTab(i) {
   </div>
 
   <h2 class="section-title" style="display:inline-block;margin-bottom:20px;font-size:clamp(1.5rem, 5vw, 2.5rem);">ご依頼・ご相談はこちら</h2>
-  <p style="color:#555;font-size:15px;margin-bottom:32px;">各種クラウドソーシング、または直接取引にてご対応可能です。</p>
-  <div style="display:flex;gap:44px;align-items:center;justify-content:center;flex-wrap:wrap;margin-bottom:32px;">
-    <div style="display:flex;gap:15px;text-align:center;flex-wrap:wrap;justify-content:center;">
-      <div>
-        <img src="images/QR_crowdworks.png" alt="クラウドワークス QR" onerror="this.style.display='none'" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:8px;padding:8px;background:#fff;"/>
-        <p style="font-size:13px;font-weight:700;color:var(--color-primary);margin-top:8px;">クラウドワークス</p>
+  <p style="color:#555;font-size:15px;margin-bottom:32px;">QRコードを読み取るか、下記よりお問い合わせください。</p>
+  <div style="display:flex;flex-direction:column;align-items:center;gap:32px;margin-bottom:32px;">
+    <!-- QR コード 3枚 -->
+    <div style="display:flex;gap:24px;flex-wrap:wrap;justify-content:center;">
+      <div style="text-align:center;">
+        <img src="images/QR_crowdworks.png" alt="クラウドワークス QR" onerror="this.style.display='none'" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:4px;padding:8px;background:#fff;display:block;"/>
+        <p style="font-size:12px;font-weight:700;color:var(--color-primary);margin-top:8px;">クラウドワークス</p>
       </div>
-      <div>
-        <img src="images/QR_lancers.png" alt="ランサーズ QR" onerror="this.style.display='none'" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:8px;padding:8px;background:#fff;"/>
-        <p style="font-size:13px;font-weight:700;color:var(--color-primary);margin-top:8px;">ランサーズ</p>
+      <div style="text-align:center;">
+        <img src="images/QR_lancers.png" alt="ランサーズ QR" onerror="this.style.display='none'" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:4px;padding:8px;background:#fff;display:block;"/>
+        <p style="font-size:12px;font-weight:700;color:var(--color-primary);margin-top:8px;">ランサーズ</p>
       </div>
-      <div>
-        <img src="images/QR_coconala.png" alt="ココナラ QRコード" loading="lazy" decoding="async" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:8px;padding:8px;background:#fff;"/>
-        <p style="font-size:13px;font-weight:700;color:var(--color-primary);margin-top:8px;">ココナラ</p>
+      <div style="text-align:center;">
+        <img src="images/QR_coconala.png" alt="ココナラ QR" loading="lazy" decoding="async" style="width:120px;height:120px;border:1px solid var(--color-border);border-radius:4px;padding:8px;background:#fff;display:block;"/>
+        <p style="font-size:12px;font-weight:700;color:var(--color-primary);margin-top:8px;">ココナラ</p>
       </div>
     </div>
-    <div style="text-align:left; display:flex; flex-direction:column; gap:14px;">
-      <a href="https://crowdworks.jp/public/employees/6953669" target="_blank" class="portfolio-btn" style="display:block;text-align:center;">クラウドワークスで依頼 →</a>
-      <a href="https://www.lancers.jp/profile/daruma_3_h" target="_blank" class="portfolio-btn" style="display:block;text-align:center;">ランサーズで依頼 →</a>
-      <a href="https://coconala.com/users/2598979" target="_blank" class="portfolio-btn" style="display:block;text-align:center;">ココナラで依頼する →</a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="portfolio-btn" style="display:block;text-align:center;background:var(--color-accent);padding:16px 20px;">直接取引のお問い合わせ →</a>
-      <p style="font-size:15px; font-weight:700; color:var(--color-primary); margin-top:10px; text-align:center;">ご依頼お待ちしております！</p>
-    </div>
+    <!-- 直接お問い合わせボタン（正方形） -->
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="display:flex;flex-direction:column;align-items:center;justify-content:center;width:160px;height:160px;background:var(--color-primary);color:#fff;font-size:14px;font-weight:700;text-decoration:none;border-radius:8px;line-height:1.6;text-align:center;gap:8px;transition:all .2s;box-shadow:0 8px 24px rgba(0,0,0,.15);" onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--color-accent').trim();this.style.transform='translateY(-4px)'" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--color-primary').trim();this.style.transform='none'">
+      <span style="font-size:28px;">✉️</span>
+      <span>直接<br>お問い合わせ</span>
+    </a>
+    <p style="font-size:14px; font-weight:700; color:var(--color-primary);">ご依頼お待ちしております！</p>
   </div>
 </section>
 </main>
