@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.hostname+location.pathname+location.search);</script>
+<meta charset="UTF-8"/>
+<link rel="icon" type="image/png" href="images/favicon.png"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>料金表 | 和-Node</title>
+<meta name="description" content="和-Nodeのサービス料金表です。Webサイト制作、保守管理、IT業務効率化サポートなどの目安金額を掲載しています。"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+.pricing-container {
+    max-width: 1000px;
+    margin: 120px auto 100px;
+    padding: 0 24px;
+}
+.pricing-title {
+    font-size: 2.2rem;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+    text-align: center;
+    font-family: var(--font-heading);
+}
+.pricing-subtitle {
+    text-align: center;
+    color: var(--color-text-muted);
+    font-size: 14px;
+    margin-bottom: 60px;
+}
+.price-section {
+    margin-bottom: 80px;
+    background: #fff;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+}
+.price-section-head {
+    background: var(--color-primary);
+    color: #fff;
+    padding: 30px 40px;
+}
+.price-section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+.price-section-msg {
+    font-size: 14px;
+    opacity: 0.9;
+}
+.price-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.price-table th, .price-table td {
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+}
+.price-table th {
+    background: #f9f7f4;
+    font-size: 13px;
+    color: var(--color-secondary);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.price-name {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-primary);
+    width: 30%;
+}
+.price-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-accent);
+    width: 25%;
+    white-space: nowrap;
+}
+.price-desc {
+    font-size: 14px;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+}
+
+@media(max-width: 768px) {
+    .pricing-container { margin-top: 100px; }
+    .price-table thead { display: none; }
+    .price-table tr { display: block; padding: 20px 0; border-bottom: 4px solid var(--color-border); }
+    .price-table td { display: block; padding: 8px 20px; border: none; width: 100% !important; }
+    .price-name { font-size: 17px; margin-bottom: 4px; }
+    .price-value { font-size: 17px; margin-bottom: 12px; }
+    .price-section-head { padding: 24px 20px; }
+}
+
+.price-cta {
+    text-align: center;
+    margin-top: 60px;
+    background: var(--color-accent-light);
+    padding: 60px 24px;
+    border-radius: 12px;
+}
+.price-cta-text {
+    font-size: 18px;
+    color: var(--color-primary);
+    font-weight: 700;
+    margin-bottom: 24px;
+}
+.price-cta-btn {
+    display: inline-block;
+    background: var(--color-primary);
+    color: #fff;
+    padding: 18px 50px;
+    border-radius: 40px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+.price-cta-btn:hover {
+    background: var(--color-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+</style>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-B4FD0GJGW5"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-B4FD0GJGW5');
+</script>
+</head>
+<body>
+<div class="app-container bg-seigaiha">
+<div class="landscape-bg" style="background-image:url('images/bg-landscape.png'); opacity: 0.3;"></div>
+
+<!-- Header -->
+<header class="header">
+  <div class="container header-container">
+    <div class="logo"><a href="index.html"><span class="logo-text">和-Node</span></a></div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="nav" id="nav">
+      <ul class="nav-list">
+        <li><a href="index.html#story" class="nav-link">About</a></li>
+        <li><a href="index.html#services" class="nav-link">Services</a></li>
+        <li><a href="pricing.html" class="nav-link active">Pricing</a></li>
+        <li><a href="kdp_books.html" class="nav-link">Books</a></li>
+        <li><a href="https://coconala.com/users/2598979" target="_blank" class="nav-link btn-header">ご相談・ご依頼</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="pricing-container">
+  <h1 class="pricing-title">サービス料金表</h1>
+  <p class="pricing-subtitle">お客様のご要望に合わせ、柔軟にご提案いたします。以下は目安の金額です。</p>
+
+  <!-- Slide 1: Backend / Maintenance -->
+  <section class="price-section">
+    <div class="price-section-head">
+      <h2 class="price-section-title">Webサイトの裏側設定・毎月の保守</h2>
+      <p class="price-section-msg">面倒な更新やバックアップはお任せ！安全にサイトを動かし続けます</p>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>サービス名</th>
+          <th>料金目安</th>
+          <th>提供内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="price-name">ドメイン・サーバー初期設定</td>
+          <td class="price-value">単発 15,000円〜</td>
+          <td class="price-desc">サイト公開に必要な「ネット上の住所と土地」の取得手続きを代行します</td>
+        </tr>
+        <tr>
+          <td class="price-name">Webサイト保守・管理サポート</td>
+          <td class="price-value">月額 5,000円〜</td>
+          <td class="price-desc">データの定期保存やシステムの更新、トラブル時の復旧作業を引き受けます</td>
+        </tr>
+        <tr>
+          <td class="price-name">サーバーのお引越し代行</td>
+          <td class="price-value">単発 30,000円〜</td>
+          <td class="price-desc">今あるサイトのデータを、より速くて安全な別のサーバーへそっくり移します</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Slide 2: IT Efficiency -->
+  <section class="price-section">
+    <div class="price-section-head">
+      <h2 class="price-section-title">IT・業務効率化サポート（単発・相談）</h2>
+      <p class="price-section-msg">面倒な作業は丸投げ！あなたの時間を増やす便利屋メニュー</p>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>サービス名</th>
+          <th>料金目安</th>
+          <th>提供内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="price-name">●スプシ・Excel便利ツール作成</td>
+          <td class="price-value">10,000円</td>
+          <td class="price-desc">丸投げOK！毎日の計算や管理を自動化するツールを作ります</td>
+        </tr>
+        <tr>
+          <td class="price-name">●ChatGPT個別サポート(60分)</td>
+          <td class="price-value">5,000円</td>
+          <td class="price-desc">あなたの業務に合わせたAIの活用方法を画面を見ながら一緒に教えます</td>
+        </tr>
+        <tr>
+          <td class="price-name">社内IT化・集客の悩み相談(60分)</td>
+          <td class="price-value">10,000円</td>
+          <td class="price-desc">「何から手をつければいいか分からない」状態からの整理をお手伝いします</td>
+        </tr>
+        <tr>
+          <td class="price-name">●ビジネスメール・お断り文作成</td>
+          <td class="price-value">3,000円</td>
+          <td class="price-desc">角が立たない、相手に配慮した丁寧な文章をサクッと代筆します</td>
+        </tr>
+        <tr>
+          <td class="price-name">●SEO記事プロンプトお渡し</td>
+          <td class="price-value">3,000円</td>
+          <td class="price-desc">AIで質の高いブログ記事を書くための指示書（テンプレート）を提供します</td>
+        </tr>
+        <tr>
+          <td class="price-name">住宅・建具メーカー様向け相談</td>
+          <td class="price-value">20,000円</td>
+          <td class="price-desc">専門知識を活かし、製品の魅せ方やアイデアにアドバイスします</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Slide 3: Web Production -->
+  <section class="price-section">
+    <div class="price-section-head">
+      <h2 class="price-section-title">Web制作・システム最適化</h2>
+      <p class="price-section-msg">集客の土台となるWebサイトやアプリをしっかり整える</p>
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th>サービス名</th>
+          <th>料金目安</th>
+          <th>提供内容</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="price-name">●心理学×Web集客戦略（LP/HP）</td>
+          <td class="price-value">20,000円〜</td>
+          <td class="price-desc">※戦略構築・お試し価格。本格的なサイト制作の前段階として</td>
+        </tr>
+        <tr>
+          <td class="price-name">WordPress 表示速度改善</td>
+          <td class="price-value">20,000円</td>
+          <td class="price-desc">サイトの読み込みを速くして、お客さんが離れていくのを防ぎます</td>
+        </tr>
+        <tr>
+          <td class="price-name">WordPress SEO内部最適化</td>
+          <td class="price-value">15,000円</td>
+          <td class="price-desc">検索で見つけてもらいやすくなるように、サイトの裏側を丸ごと整えます</td>
+        </tr>
+        <tr>
+          <td class="price-name">LINEミニアプリ・診断ツール制作</td>
+          <td class="price-value">150,000円</td>
+          <td class="price-desc">LINEで動く便利なアプリや、集客に繋がる独自の診断ツールを作ります</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <div class="price-cta">
+    <p class="price-cta-text">まずはあなたのお悩みをお聞かせください。<br>最適なプランをご提案します。</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="price-cta-btn">無料相談を申し込む</a>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container footer-container">
+    <div class="footer-info">
+      <h2 class="footer-logo">和-Node</h2>
+      <p class="footer-desc">
+        ITコンサル・企業コンサル・心理カウンセリング<br/>
+        心とITの両方がわかるパートナー<br/><br/>
+        ご相談・お問い合わせ: <br/>
+        ・<a href="https://coconala.com/users/2598979" target="_blank" style="text-decoration:underline;">ココナラ経由のご依頼はこちら</a><br/>
+        ・<a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="text-decoration:underline;">直接取引のご依頼・お問い合わせはこちら</a>
+      </p>
+    </div>
+    <div class="footer-links">
+      <ul>
+        <li><a href="index.html#story">About</a></li>
+        <li><a href="index.html#services">Services</a></li>
+        <li><a href="pricing.html">料金表</a></li>
+        <li><a href="terms_miniapp.html">LINE Mini App 利用規約</a></li>
+        <li><a href="privacy.html">プライバシーポリシー</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 和-Node. All Rights Reserved.</p>
+  </div>
+</footer>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded',function(){
+  const header=document.querySelector('.header');
+  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));
+
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  if(hamburger && nav) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+  }
+});
+</script>
+</body>
+</html>
