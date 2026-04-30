@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>和-Node | こころの相談室</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #f0f0f3;
+      --text-color: #2c2c2a;
+      --accent-color: #c8a84b;
+      --shadow-light: #ffffff;
+      --shadow-dark: #d1d1d6;
+      --line-green: #06C755;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ニューモーフィズムの基本スタイル */
+    .neu-raised {
+      background: var(--bg-color);
+      border-radius: 24px;
+      box-shadow: 9px 9px 16px var(--shadow-dark), 
+                  -9px -9px 16px var(--shadow-light);
+    }
+
+    .neu-pressed {
+      background: var(--bg-color);
+      border-radius: 20px;
+      box-shadow: inset 6px 6px 12px var(--shadow-dark), 
+                  inset -6px -6px 12px var(--shadow-light);
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .header-logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .header-sub {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      color: #666;
+    }
+
+    /* 画面セクション */
+    .screen {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* カード・メッセージ */
+    .message-card {
+      padding: 24px;
+      line-height: 1.8;
+      font-size: 15px;
+      text-align: center;
+    }
+
+    /* ボタン */
+    .btn {
+      width: 100%;
+      padding: 20px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-color);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn:active {
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), 
+                  inset -4px -4px 8px var(--shadow-light);
+      transform: scale(0.98);
+    }
+
+    .btn-icon {
+      font-size: 24px;
+    }
+
+    .btn-subtext {
+      font-family: 'Caveat', cursive;
+      font-size: 14px;
+      font-weight: 400;
+      color: #777;
+    }
+
+    /* クイズ進捗 */
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: var(--bg-color);
+      border-radius: 4px;
+      box-shadow: inset 2px 2px 4px var(--shadow-dark), 
+                  inset -2px -2px 4px var(--shadow-light);
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent-color);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* 診断結果 */
+    .result-score {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin: 12px 0;
+    }
+
+    .result-desc {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    /* LINEボタン専用 */
+    .btn-line {
+      background: var(--line-green);
+      color: #fff !important;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(6, 199, 85, 0.2);
+    }
+    .btn-line .btn-subtext { color: rgba(255,255,255,0.8); }
+
+    /* 装飾 */
+    .decoration-line {
+      width: 40px;
+      height: 2px;
+      background: var(--accent-color);
+      margin: 16px auto;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <header>
+      <div class="header-logo">和-Node</div>
+      <div class="header-sub">Counseling Room</div>
+    </header>
+
+    <!-- 1. HOME画面 -->
+    <section id="screen-home" class="screen active">
+      <div class="message-card neu-raised">
+        <p>誰にも言えない悩みや、<br>なんとなくの不安。<br>あなたの「こころの声」を<br>そっと整理してみませんか？</p>
+        <div class="decoration-line"></div>
+        <p style="font-size: 13px; color: #666;">今のあなたの状態をチェックして、<br>最適なケアを見つけましょう。</p>
+      </div>
+      
+      <button class="btn neu-raised" onclick="startQuiz()">
+        <span class="btn-icon">🔍</span>
+        <span>こころの健康チェック</span>
+        <span class="btn-subtext">Check up</span>
+      </button>
+
+      <button class="btn neu-raised" onclick="showScreen('screen-menu')">
+        <span class="btn-icon">💬</span>
+        <span>直接相談・予約</span>
+        <span class="btn-subtext">Contact</span>
+      </button>
+    </section>
+
+    <!-- 2. QUIZ画面 -->
+    <section id="screen-quiz" class="screen">
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+      
+      <div class="message-card neu-raised">
+        <p id="question-text" style="font-weight: 700;">質問を読み込んでいます...</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <button class="btn neu-raised" onclick="nextQuestion(3)">
+          <span>よくある / 当てはまる</span>
+        </button>
+        <button class="btn neu-raised" onclick="nextQuestion(2)">
+          <span>時々ある</span>
+        </button>
+        <button class="btn neu-raised" onclick="nextQuestion(1)">
+          <span>あまりない</span>
+        </button>
+        <button class="btn neu-raised" onclick="nextQuestion(0)">
+          <span>ほとんどない</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. RESULT画面 -->
+    <section id="screen-result" class="screen">
+      <div class="message-card neu-raised">
+        <p style="font-size: 13px;">診断結果</p>
+        <div id="result-score" class="result-score">0</div>
+        <p id="result-status" style="font-weight: 700; margin-bottom: 12px;">分析中...</p>
+        <div class="decoration-line"></div>
+        <p id="result-message" class="result-desc"></p>
+      </div>
+
+      <button class="btn neu-raised" onclick="showScreen('screen-menu')">
+        <span class="btn-icon">💬</span>
+        <span>ケアプランを見る</span>
+        <span class="btn-subtext">Plan</span>
+      </button>
+      
+      <button class="btn" style="box-shadow: none;" onclick="showScreen('screen-home')">
+        <span style="font-size: 13px; text-decoration: underline;">ホームに戻る</span>
+      </button>
+    </section>
+
+    <!-- 4. MENU画面 -->
+    <section id="screen-menu" class="screen">
+      <div class="message-card neu-raised" style="text-align: left; font-size: 14px;">
+        <p style="font-weight: 700; margin-bottom: 12px; text-align: center;">カウンセリングメニュー</p>
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px;">
+          <li>・LINEチャット相談（24時間受付）</li>
+          <li>・オンラインZoom相談（60分）</li>
+          <li>・継続メンタルサポート</li>
+        </ul>
+      </div>
+
+      <a href="https://lin.ee/o5QFPwc" target="_blank" style="text-decoration: none;">
+        <button class="btn btn-line">
+          <span class="btn-icon">💬</span>
+          <span>LINEでそのまま相談</span>
+          <span class="btn-subtext">Chat on LINE</span>
+        </button>
+      </a>
+
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="text-decoration: none;">
+        <button class="btn neu-raised">
+          <span class="btn-icon">📅</span>
+          <span>オンライン相談を予約</span>
+          <span class="btn-subtext">Booking</span>
+        </button>
+      </a>
+
+      <button class="btn" style="box-shadow: none;" onclick="showScreen('screen-home')">
+        <span style="font-size: 13px; text-decoration: underline;">ホームに戻る</span>
+      </button>
+    </section>
+
+  </div>
+
+  <script>
+    // 画面遷移
+    function showScreen(screenId) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(screenId).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    // 質問データ
+    const questions = [
+      "最近、夜ぐっすり眠れないことが多いですか？",
+      "何に対してもやる気が起きず、億劫に感じますか？",
+      "ちょっとしたことでイライラしたり、涙もろくなったりしますか？",
+      "将来のことや、今の状況に強い不安を感じますか？",
+      "誰にも相談できず、一人で抱え込んでいると感じますか？"
+    ];
+
+    let currentQuestionIndex = 0;
+    let totalScore = 0;
+
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      totalScore = 0;
+      updateQuestion();
+      showScreen('screen-quiz');
+    }
+
+    function updateQuestion() {
+      document.getElementById('question-text').innerText = questions[currentQuestionIndex];
+      const progress = ((currentQuestionIndex) / questions.length) * 100;
+      document.getElementById('progress-fill').style.width = progress + '%';
+    }
+
+    function nextQuestion(score) {
+      totalScore += score;
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < questions.length) {
+        updateQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById('progress-fill').style.width = '100%';
+      const scoreElement = document.getElementById('result-score');
+      const statusElement = document.getElementById('result-status');
+      const messageElement = document.getElementById('result-message');
+
+      scoreElement.innerText = totalScore;
+      
+      let status = "";
+      let message = "";
+
+      if (totalScore >= 12) {
+        status = "かなりお疲れのようです";
+        message = "心身ともに大きな負荷がかかっているかもしれません。まずは自分を責めず、ゆっくり休む時間を確保しましょう。プロの力を借りることで、少しずつ霧が晴れるかもしれません。";
+      } else if (totalScore >= 7) {
+        status = "少し疲れが溜まっています";
+        message = "日々の忙しさに心が追いついていない状態かもしれません。早めにガス抜きをすることが大切です。おしゃべり感覚で、今の気持ちを吐き出してみませんか？";
+      } else {
+        status = "落ち着いた状態です";
+        message = "今のところ心のバランスは保てているようです。この調子で自分を大切にしていきましょう。もし何かあった時は、いつでもここに立ち寄ってくださいね。";
+      }
+
+      statusElement.innerText = status;
+      messageElement.innerText = message;
+      
+      showScreen('screen-result');
+    }
+
+  </script>
+</body>
+</html>
