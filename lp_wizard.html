@@ -2,13 +2,15 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8"/>
-<link rel="icon" type="image/png" href="images/favicon.png"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>LP・HP制作 要件ヒアリング | 和-Node</title>
-<meta name="description" content="LP・ホームページ制作のご要件を会話形式で整理。最後に仕様サマリーカードを自動生成します。"/>
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet"/>
+<title>LP\u30fbHP\u5236\u4f5c \u8981\u4ef6\u30d2\u30a2\u30ea\u30f3\u30b0 | \u548c-Node</title>
+<meta name="description" content="LP\u30fb\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u5236\u4f5c\u306e\u3054\u8981\u4ef6\u3092\u4f1a\u8a71\u5f02\u5f0f\u3067\u6574\u7406\u3002\u6700\u5f8c\u306b\u4ed5\u69d8\u30b5\u30de\u30ea\u30fc\u30ab\u30fc\u30c9\u3092\u81ea\u52d5\u751f\u6210\u3057\u307e\u3059\u3002"/>
+<link rel=\"icon\" href=\"/favicon.ico\" />
+<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\" />
+<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"/>
+<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin/>
+<link href=\"https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap\" rel=\"stylesheet\"/>
+<link rel=\"stylesheet\" href=\"style.css\"/>
 <style>
 :root{--font:'Noto Sans JP','Hiragino Kaku Gothic ProN',sans-serif;--bg:#f9f7f4;--surface:#fff;--primary:#2c2c2a;--accent:#639922;--accent-light:#EAF3DE;--muted:#888;--border:#e5e2db;--r:12px;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -92,298 +94,61 @@ body{font-family:var(--font);background:var(--bg);color:var(--primary);min-heigh
 </head>
 <body>
 
-<header class="hdr">
-  <a href="index.html" class="hdr-logo">和-Node</a>
-  <a href="index.html#demo" class="hdr-back">← 制作デモ一覧へ</a>
-</header>
+<header class=\"site-header\">
+    <div class=\"container header-inner\">
+      <a href=\"index.html\" class=\"logo\" aria-label=\"\u548c-Node \u30c8\u30c3\u30d7\u30da\u30fc\u30b8\">\n        <span class=\"logo-main\">\u548c-Node</span>\n        <span class=\"logo-sub\">Web \u00d7 AI \u00d7 \u5fc3\u7406</span>\n      </a>\n\n      <nav class=\"global-nav\" aria-label=\"\u30b0\u30ed\u30fc\u30d0\u30eb\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3\">\n        <a href=\"index.html#about\">\u4ee3\u8868\u306b\u3064\u3044\u3066</a>\n        <a href=\"index.html#services\">\u30b5\u30fc\u30d3\u30b9</a>\n        <a href=\"index.html#line-miniapp\">LINE Mini App</a>\n        <a href=\"index.html#works\">\u5236\u4f5c\u4f8b</a>\n        <a href=\"pricing.html\">\u6599\u91d1</a>\n        <a href=\"index.html#contact\" class=\"nav-cta\">\u76f8\u8ac7\u3059\u308b</a>\n      </nav>\n    </div>\n  </header>
 
-<!-- WIZARD -->
-<div id="wizard">
-  <div class="prog-wrap">
-    <div class="prog-meta">
-      <span id="prog-label">STEP 1 / 9</span>
-      <span id="prog-pct">11%</span>
+<div id=\"wizard\">
+  <div class=\"prog-wrap\">
+    <div class=\"prog-meta\">
+      <span id=\"prog-label\">STEP 1 / 9</span>
+      <span id=\"prog-pct\">11%</span>
     </div>
-    <div class="prog-bg"><div class="prog-bar" id="prog-bar" style="width:11%"></div></div>
+    <div class=\"prog-bg\"><div class=\"prog-bar\" id=\"prog-bar\" style=\"width:11%\"></div></div>
   </div>
-  <div class="step-wrap">
-    <div class="step-card" id="step-card"></div>
+  <div class=\"step-wrap\">
+    <div class=\"step-card\" id=\"step-card\"></div>
   </div>
 </div>
 
-<!-- RESULT -->
-<div id="result" class="hidden">
-  <div class="res-header">
-    <div class="badge">✅ ヒアリング完了</div>
-    <h1 class="res-title">要件サマリーカード</h1>
-    <p class="res-sub">ご回答をもとに仕様サマリーを自動生成しました。<br>このカードをご確認のうえ、お気軽にご相談ください。</p>
+<div id=\"result\" class=\"hidden\">
+  <div class=\"res-header\">
+    <div class=\"badge\">\u2705 \u30d2\u30a2\u30ea\u30f3\u30b0\u5b8c\u4e86</div>
+    <h1 class=\"res-title\">\u8981\u4ef6\u30b5\u30de\u30ea\u30fc\u30ab\u30fc\u30c9</h1>
+    <p class=\"res-sub\">\u3054\u56de\u7b54\u3092\u3082\u3068\u306b\u4ed5\u69d8\u30b5\u30de\u30ea\u30fc\u3092\u81ea\u52d5\u751f\u6210\u3057\u307e\u3059\u3002\u003cbr\u003e\u3053\u306e\u30ab\u30fc\u30c9\u3092\u3054\u78ba\u8a8d\u306e\u3046\u3048\u3001\u304a\u6c17\u8efd\u306b\u3054\u76f8\u8ac7\u304f\u3060\u3055\u3044\u3002</p>
   </div>
-  <div class="res-wrap">
-    <div class="res-inner">
-      <div class="res-top">
-        <div class="res-top-lbl">WEB PRODUCTION REQUIREMENTS</div>
-        <div class="res-top-ttl">LP・HP制作 ご要件サマリー</div>
-        <div class="res-top-s">和-Node へのご相談用</div>
+  <div class=\"res-wrap\">
+    <div class=\"res-inner\">
+      <div class=\"res-top\">
+        <div class=\"res-top-lbl\">WEB PRODUCTION REQUIREMENTS</div>
+        <div class=\"res-top-ttl\">LP\u30fbHP\u5236\u4f5c \u3054\u8981\u4ef6\u30b5\u30de\u30ea\u30fc</div>
+        <div class=\"res-top-s\">\u548c-Node \u3078\u306e\u3054\u76f8\u8ac7\u7528</div>
       </div>
-      <div class="res-body">
-        <table class="res-tbl">
-          <tr><th>業種・ビジネス</th><td id="r-industry">—</td></tr>
-          <tr><th>目的・ゴール</th><td id="r-purpose">—</td></tr>
-          <tr><th>現在のサイト</th><td id="r-current">—</td></tr>
-          <tr><th>ページ規模</th><td id="r-scale">—</td></tr>
-          <tr><th>デザインテイスト</th><td id="r-design">—</td></tr>
-          <tr><th>ご希望納期</th><td id="r-deadline">—</td></tr>
-          <tr><th>ご予算感</th><td id="r-budget">—</td></tr>
-          <tr><th>重視するポイント</th><td id="r-priority">—</td></tr>
-          <tr><th>ご要望・メッセージ</th><td id="r-message">—</td></tr>
+      <div class=\"res-body\">
+        <table class=\"res-tbl\">
+          <tr><th>\u696d\u7a2e\u30fb\u30d3\u30b8\u30cd\u30b9</th><td id=\"r-industry\">\u2014</td></tr>
+          <tr><th>\u76ee\u7684\u30fb\u30b4\u30fc\u30eb</th><td id=\"r-purpose\">\u2014</td></tr>
+          <tr><th>\u73fe\u5728\u306e\u30b5\u30a4\u30c8</th><td id=\"r-current\">\u2014</td></tr>
+          <tr><th>\u30da\u30fc\u30b8\u898f\u6a21</th><td id=\"r-scale\">\u2014</td></tr>
+          <tr><th>\u30c7\u30b6\u30a4\u30f3\u30c6\u30a4\u30b9\u30c8</th><td id=\"r-design\">\u2014</td></tr>
+          <tr><th>\u3054\u5e0c\u671b\u7d0d\u671f</th><td id=\"r-deadline\">\u2014</td></tr>
+          <tr><th>\u3054\u4e88\u7b97\u611f</th><td id=\"r-budget\">\u2014</td></tr>
+          <tr><th>\u91cd\u8996\u3059\u308b\u30dd\u30a4\u30f3\u30c8</th><td id=\"r-priority\">\u2014</td></tr>
+          <tr><th>\u3054\u8981\u671b\u30fb\u30e1\u30c3\u30bb\u30fc\u30b8</th><td id=\"r-message\">\u2014</td></tr>
         </table>
-        <div class="plan-box">
-          <div class="plan-lbl">🎯 おすすめプラン（自動判定）</div>
-          <div class="plan-name" id="r-plan-name">—</div>
-          <div class="plan-desc" id="r-plan-desc">—</div>
+        <div class=\"plan-box\">
+          <div class=\"plan-lbl\">\ud83c\udfaf \u304a\u3059\u3059\u3081\u30d7\u30e9\u30f3\uff08\u81ea\u52d5\u5224\u5b9a\uff09</div>
+          <div class=\"plan-name\" id=\"r-plan-name\">\u2014</div>
+          <div class=\"plan-desc\" id=\"r-plan-desc\">\u2014</div>
         </div>
-        <a href="https://coconala.com/users/2598979" target="_blank" class="cta-btn">このサマリーを持って、Coconalaで相談する →</a>
-        <p class="res-note">直接取引も歓迎です。<a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank">お問い合わせフォーム</a>からもどうぞ。</p>
-        <button class="retry-btn" onclick="restart()">← もう一度回答する</button>
+        <a href=\"https://coconala.com/users/2598979\" target=\"_blank\" class=\"cta-btn\">\u3053\u306e\u30b5\u30de\u30ea\u30fc\u3092\u6301\u3063\u3066\u3001Coconala\u3067\u76f8\u8ac7\u3059\u308b \u2192</a>
+        <p class=\"res-note\">\u76f4\u63a5\u53d6\u5f15\u3082\u6b53\u8fce\u3067\u3059\u3002\u003ca href=\"https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor\" target=\"_blank\"\u003e\u304a\u554f\u3044\u5408\u308f\u305b\u30d5\u30a9\u30fc\u30e0\u003c/a\u003e\u304b\u3089\u3082\u3069\u3046\u305e\u3002</p>
+        <button class=\"retry-btn\" onclick=\"restart()\">\u2190 \u3082\u3046\u4e00\u5ea6\u56de\u7b54\u3059\u308b</button>
       </div>
     </div>
   </div>
 </div>
 
-<script>
-const steps = [
-  {
-    id:'industry', q:'あなたのビジネス・業種を教えてください', sub:'最も近いものをお選びください', type:'single',
-    opts:[
-      {e:'👤',l:'個人事業主・フリーランス'},
-      {e:'🏢',l:'中小企業・法人'},
-      {e:'🏥',l:'医療・福祉・介護'},
-      {e:'🍽️',l:'飲食・小売・サービス業'},
-      {e:'📚',l:'教育・スクール・コーチング'},
-      {e:'🌐',l:'その他・未定'},
-    ]
-  },
-  {
-    id:'purpose', q:'Webページで実現したいことは？', sub:'最も優先度が高いものをお選びください', type:'single',
-    opts:[
-      {e:'📞',l:'問い合わせ・集客を増やしたい'},
-      {e:'🛒',l:'商品・サービスを販売したい'},
-      {e:'🤝',l:'採用・求人につなげたい'},
-      {e:'💎',l:'ブランディング・信頼を高めたい'},
-      {e:'📣',l:'イベント・セミナーを告知したい'},
-    ]
-  },
-  {
-    id:'current', q:'現在、Webサイトはお持ちですか？', sub:'現状に最も近いものをお選びください', type:'single',
-    opts:[
-      {e:'🆕',l:'まったくない（ゼロから作りたい）'},
-      {e:'🔄',l:'あるが、全面的に作り直したい'},
-      {e:'➕',l:'既存サイトに追加・改修したい'},
-    ]
-  },
-  {
-    id:'scale', q:'ご希望のページ規模は？', sub:'おおよその目安でOKです', type:'single',
-    opts:[
-      {e:'📄',l:'LP1枚（1ページにまとめたい）'},
-      {e:'📑',l:'5ページ以内（小規模サイト）'},
-      {e:'🗂️',l:'10ページ以上（中規模サイト）'},
-      {e:'❓',l:'未定・ご提案に任せたい'},
-    ]
-  },
-  {
-    id:'design', q:'デザインの方向性は？', sub:'イメージに近いものをお選びください', type:'single',
-    opts:[
-      {e:'⬜',l:'シンプル・ミニマル'},
-      {e:'🎋',l:'和風・上品・落ち着いた'},
-      {e:'🎨',l:'ポップ・カジュアル・明るい'},
-      {e:'💼',l:'プロフェッショナル・高級感'},
-      {e:'🌸',l:'温かみ・ナチュラル・親しみやすい'},
-    ]
-  },
-  {
-    id:'deadline', q:'納期のご希望は？', sub:'', type:'single',
-    opts:[
-      {e:'⚡',l:'急ぎ（2週間以内）'},
-      {e:'📅',l:'通常（1ヶ月前後）'},
-      {e:'🌿',l:'じっくり（2ヶ月以上）'},
-      {e:'❓',l:'未定・相談したい'},
-    ]
-  },
-  {
-    id:'budget', q:'ご予算の感覚を教えてください', sub:'目安としてお気軽にお選びください', type:'single',
-    opts:[
-      {e:'💴',l:'3万円以内'},
-      {e:'💴',l:'3〜10万円'},
-      {e:'💴',l:'10〜30万円'},
-      {e:'💴',l:'30万円以上'},
-      {e:'❓',l:'未定・まずは相談したい'},
-    ]
-  },
-  {
-    id:'priority', q:'特に重視したいことは？', sub:'当てはまるものをすべてお選びください（複数可）', type:'multi',
-    opts:[
-      {e:'🔍',l:'SEO・検索からの集客'},
-      {e:'✨',l:'デザインのクオリティ'},
-      {e:'📱',l:'スマホ対応・使いやすさ'},
-      {e:'✏️',l:'自分で更新・編集できること'},
-      {e:'🚀',l:'とにかく早く公開したい'},
-      {e:'💰',l:'コストを抑えたい'},
-    ]
-  },
-  {
-    id:'message', q:'気になっていること・特に伝えたいことがあれば', sub:'なくてもOKです。そのまま次へ進んでください', type:'textarea',
-    placeholder:'例：競合他社のサイトが気になっている、参考にしたいサイトがある、予算が厳しいが相談したい…など'
-  }
-];
-
-let cur = 0;
-const ans = {};
-const multiSel = {};
-
-function render() {
-  const s = steps[cur];
-  const total = steps.length;
-  const pct = Math.round(((cur + 1) / total) * 100);
-  document.getElementById('prog-label').textContent = `STEP ${cur+1} / ${total}`;
-  document.getElementById('prog-pct').textContent = pct + '%';
-  document.getElementById('prog-bar').style.width = pct + '%';
-
-  let html = `<div class="badge">STEP ${cur+1}</div><div class="q">${s.q}</div>`;
-  if (s.sub) html += `<div class="qsub">${s.sub}</div>`;
-
-  if (s.type === 'textarea') {
-    const val = ans[s.id] || '';
-    html += `<textarea class="txta" id="txta" placeholder="${s.placeholder}">${val}</textarea>`;
-  } else {
-    html += '<div class="opts">';
-    s.opts.forEach((o, i) => {
-      const isSel = s.type === 'multi'
-        ? (multiSel[s.id] || []).includes(i)
-        : ans[s.id] === i;
-      html += `<button class="opt${isSel ? ' sel' : ''}" onclick="pick(${i})"><span class="opt-em">${o.e}</span>${o.l}</button>`;
-    });
-    html += '</div>';
-  }
-
-  const isFirst = cur === 0;
-  const canNext = s.type === 'textarea' || ans[s.id] !== undefined || (s.type === 'multi' && (multiSel[s.id]||[]).length > 0);
-  html += `<div class="nav">
-    ${!isFirst ? '<button class="btn-back" onclick="goBack()">← 戻る</button>' : ''}
-    <button class="btn-next" id="btn-next" onclick="goNext()" ${canNext?'':'disabled'}>${cur===total-1 ? '✅ サマリーを生成する' : '次へ →'}</button>
-  </div>`;
-
-  const card = document.getElementById('step-card');
-  card.style.animation = 'none';
-  card.offsetHeight;
-  card.style.animation = '';
-  card.innerHTML = html;
-
-  if (s.type === 'textarea') {
-    document.getElementById('txta').addEventListener('input', function() {
-      ans[s.id] = this.value;
-      document.getElementById('btn-next').disabled = false;
-    });
-    // textarea always allow next (optional)
-    document.getElementById('btn-next').disabled = false;
-  }
-}
-
-function pick(i) {
-  const s = steps[cur];
-  if (s.type === 'multi') {
-    if (!multiSel[s.id]) multiSel[s.id] = [];
-    const idx = multiSel[s.id].indexOf(i);
-    if (idx >= 0) multiSel[s.id].splice(idx, 1);
-    else multiSel[s.id].push(i);
-    ans[s.id] = multiSel[s.id].length > 0 ? multiSel[s.id][0] : undefined;
-  } else {
-    ans[s.id] = i;
-  }
-  render();
-}
-
-function goNext() {
-  const s = steps[cur];
-  if (s.type === 'textarea') {
-    const el = document.getElementById('txta');
-    ans[s.id] = el ? el.value : '';
-  }
-  if (cur < steps.length - 1) {
-    cur++;
-    render();
-    window.scrollTo({top: 0, behavior: 'smooth'});
-  } else {
-    showResult();
-  }
-}
-
-function goBack() {
-  if (cur > 0) { cur--; render(); window.scrollTo({top:0,behavior:'smooth'}); }
-}
-
-function getLabel(stepId, idx) {
-  const s = steps.find(x => x.id === stepId);
-  return s ? s.opts[idx].l : '—';
-}
-
-function getMultiLabels(stepId) {
-  const idxs = multiSel[stepId] || [];
-  if (!idxs.length) return '特になし';
-  return idxs.map(i => getLabel(stepId, i)).join('、');
-}
-
-function recommendPlan(budget, scale, current) {
-  const budgetLabel = ans.budget !== undefined ? getLabel('budget', ans.budget) : '';
-  const scaleLabel  = ans.scale  !== undefined ? getLabel('scale',  ans.scale)  : '';
-  if (budgetLabel.includes('30万')) {
-    return { name: '事業戦略から入るWeb制作【プレミアム】', desc: 'ビジネスゴールの整理から設計・デザイン・実装まで完全オーダーメイドで対応します。ITコンサル×心理カウンセラーの視点で、集客に直結するサイトを構築します。' };
-  }
-  if (budgetLabel.includes('10〜30') || scaleLabel.includes('10ページ')) {
-    return { name: '集客に直結するLP・HP制作', desc: '実務歴15年以上のITコンサルがビジネス課題をWebで解決。目的・ターゲット・構成を一緒に設計した上でお見積りします。' };
-  }
-  if (budgetLabel.includes('3〜10') || scaleLabel.includes('5ページ')) {
-    return { name: 'LP1枚〜小規模HP制作', desc: 'まずは最小構成でスタートし、反応を見ながら改善していくアプローチです。予算を抑えつつ集客効果を検証できます。' };
-  }
-  if (budgetLabel.includes('3万円以内') || scaleLabel.includes('LP1枚')) {
-    return { name: 'LP制作（シンプルプラン）', desc: '1ページ完結型のLPを短納期・低コストで制作します。まずは一歩踏み出したい方に最適なプランです。' };
-  }
-  return { name: 'まずは無料相談から', desc: '要件をお聞きしてから最適なプランをご提案します。予算・目的・スケジュールを一緒に整理しましょう。' };
-}
-
-function showResult() {
-  document.getElementById('wizard').classList.add('hidden');
-  document.getElementById('result').classList.remove('hidden');
-  window.scrollTo({top:0,behavior:'smooth'});
-
-  const get = (id) => ans[id] !== undefined ? getLabel(id, ans[id]) : '—';
-
-  document.getElementById('r-industry').textContent = get('industry');
-  document.getElementById('r-purpose').textContent  = get('purpose');
-  document.getElementById('r-current').textContent  = get('current');
-  document.getElementById('r-scale').textContent    = get('scale');
-  document.getElementById('r-design').textContent   = get('design');
-  document.getElementById('r-deadline').textContent = get('deadline');
-  document.getElementById('r-budget').textContent   = get('budget');
-  document.getElementById('r-priority').textContent = getMultiLabels('priority');
-  const msg = ans.message && ans.message.trim() ? ans.message.trim() : '特になし';
-  document.getElementById('r-message').textContent  = msg;
-
-  const plan = recommendPlan();
-  document.getElementById('r-plan-name').textContent = plan.name;
-  document.getElementById('r-plan-desc').textContent = plan.desc;
-}
-
-function restart() {
-  Object.keys(ans).forEach(k => delete ans[k]);
-  Object.keys(multiSel).forEach(k => delete multiSel[k]);
-  cur = 0;
-  document.getElementById('result').classList.add('hidden');
-  document.getElementById('wizard').classList.remove('hidden');
-  render();
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-
-render();
-</script>
-</body>
-</html>
+<footer class=\"site-footer\">
+    <div class=\"container\">
+      <div class=\"footer-info\">\n        <div class=\"logo\">\n          <span class=\"logo-main\">\u548c-Node</span>\n          <span class=\"logo-sub\">Web \u00d7 AI \u00d7 \u5fc3\u7406</span>\n        </div>\n        <p class=\"footer-address\">\n          \u55b6\u696d\u6240\u5728\u5730\uff1a\u3012509-0207 \u5c90\u961c\u770c\u53ef\u5150\u5e02\u4eca\u6e212347\u756a\u57301\u003cbr /\u003e\n          \u4ee3\u8868\uff1a\u9ad8\u91ce\u7d18\u7d14\n        </p>\n      </div>\n\n      <nav class=\"footer-nav\" aria-label=\"\u30d5\u30c3\u30bf\u30fc\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3\">\n        \u003ca href=\"index.html#about\">\u4ee3\u8868\u306b\u3064\u3044\u3066\u003c/a\u003e\n        \u003ca href=\"index.html#services\">\u30b5\u30fc\u30d3\u30b9\u003c/a\u003e\n        \u003ca href=\"index.html#line-miniapp\">LINE Mini App\u003c/a\u003e\n        \u003ca href=\"index.html#works\">\u5236\u4f5c\u4f8b\u003c/a\u003e\n        \u003ca href=\"portfolio-lp/index.html\">LP\u5236\u4f5c\u30dd\u30fc\u30c8\u30d5\u30a9\u30ea\u30aa\u003c/a\u003e\n        \u003ca href=\"kdp_books.html\">KDP\u51fa\u7248\u5b9f\u7e3e\u003c/a\u003e\n        \u003ca href=\"pricing.html\">\u6599\u91d1\u30da\u30fc\u30b8\u003c/a\u003e\n        \u003ca href=\"corporate-mental.html\">\u6cd5\u4eba\u30e1\u30f3\u30bf\u30eb\u7a93\u53e3\u003c/a\u003e\n        \u003ca href=\"counseling-notes.html\">\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u5229\u7528\u6642\u306e\u6ce8\u610f\u4e8b\u9805\u003c/a\u003e\n        \u003ca href=\"tokutei.html\">\u7279\u5b9a\u5546\u53d6\u5f15\u6cd5\u306b\u57fa\u3065\u304f\u8868\u8a18\u003c/a\u003e\n        \u003ca href=\"cancel-policy.html\">\u30ad\u30e3\u30f3\u30bb\u30eb\u30fb\u8fd4\u91d1\u30dd\u30ea\u30b7\u30fc\u003c/a\u003e\n        \u003ca href=\"privacy.html\">\u30d7\u30e9\u30a4\u30d0\u30b7\u30fc\u30dd\u30ea\u30b7\u30fc\u003c/a\u003e\n        \u003ca href=\"terms.html\">\u5229\u7528\u898f\u7d04\u003c/a\u003e\n        \u003ca href=\"terms_miniapp.html\">LINE Mini App \u5229\u7528\u898f\u7d04\u003c/a\u003e\n      \u003c/nav\u003e\n    \u003c/div\u003e\n\n    \u003cp class=\"copyright\">\u00a9 2026 \u548c-Node. All Rights Reserved.\u003c/p\u003e\n  </footer>\n\n<script>\nconst steps = [\n  {\n    id:'industry', q:'\u3042\u306a\u305f\u306e\u30d3\u30b8\u30cd\u30b9\u30fb\u696d\u7a2e\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044', sub:'\u6700\u3082\u8fd1\u3044\u3082\u306e\u3092\u304a\u9078\u3073\u304f\u3060\u3055\u3044', type:'single',\n    opts:[\n      {e:'\ud83d\udc64',l:'\u500b\u4eba\u4e8b\u696d\u4e3b\u30fb\u30d5\u30ea\u30fc\u30e9\u30f3\u30b9'},\n      {e:'\ud83c\udfe2',l:'\u4e2d\u5c0f\u4f01\u696d\u30fb\u6cd5\u4eba'},\n      {e:'\ud83c\udfe5',l:'\u533b\u7642\u30fb\u798f\u7949\u30fb\u4ecb\u8b77'},\n      {e:'\ud83c\udf7d\ufe0f',l:'\u9832\u98df\u30fb\u5c0f\u58f2\u30fb\u30b5\u30fc\u30d3\u30b9\u696d'},\n      {e:'\ud83d\udcd3',l:'\u6559\u80b2\u30fb\u30b9\u30af\u30fc\u30eb\u30fb\u30b3\u30fc\u30c1\u30f3\u30b0'},\n      {e:'\ud83c\udf10',l:'\u305d\u306e\u4ed6\u30fb\u672a\u5b9a'},\n    ]\n  },\n  {\n    id:'purpose', q:'Web\u30da\u30fc\u30b8\u3067\u5b9f\u73fe\u3057\u305f\u3044\u3053\u3068\u306f\uff1f', sub:'\u6700\u3082\u512a\u5148\u5ea6\u304c\u9ad8\u3044\u3082\u306e\u3092\u304a\u9078\u3073\u304f\u3060\u3055\u3044', type:'single',\n    opts:[\n      {e:'\ud83d\udcde',l:'\u554f\u3044\u5408\u308f\u305b\u30fb\u96c6\u5ba2\u3092\u5897\u3084\u3057\u305f\u3044'},\n      {e:'\ud83d\uded2',l:'\u5546\u54c1\u30fb\u30b5\u30fc\u30d3\u30b9\u3092\u8ca9\u58f2\u3057\u305f\u3044'},\n      {e:'\ud83e\udd1d',l:'\u63a1\u7528\u30fb\u6c42\u4eba\u306b\u3064\u306a\u3052\u305f\u3044'},\n      {e:'\ud83d\udc8e',l:'\u30d6\u30e9\u30f3\u30c7\u30a3\u30f3\u30b0\u30fb\u4fe1\u983c\u3092\u9ad8\u3081\u305f\u3044'},\n      {e:'\ud83d\udce3',l:'\u30a4\u30d9\u30f3\u30c8\u30fb\u30bb\u30df\u30ca\u30fc\u3092\u544a\u77e5\u3057\u305f\u3044'},\n    ]\n  },\n  {\n    id:'current', q:'\u73fe\u5728\u3001Web\u30b5\u30a4\u30c8\u306f\u304a\u6301\u3061\u3067\u3059\u304b\uff1f', sub:'\u73fe\u72b6\u306b\u6700\u3082\u8fd1\u3044\u3082\u306e\u3092\u304a\u9078\u3073\u304f\u3060\u3055\u3044', type:'single',\n    opts:[\n      {e:'\ud83c\udd95',l:'\u307e\u3063\u305f\u304f\u306a\u3044\uff08\u30bc\u30ed\u304b\u3089\u4f5c\u308a\u305f\u3044\uff09'},\n      {e:'\ud83d\udd04',l:'\u3042\u308b\u304c\u3001\u5168\u9762\u7684\u306b\u4f5c\u308a\u76f4\u3057\u305f\u3044'},\n      {e:'\u2795',l:'\u65e2\u5b58\u30b5\u30a4\u30c8\u306b\u8ffd\u52a0\u30fb\u6539\u4fee\u3057\u305f\u3044'},\n    ]\n  },\n  {\n    id:'scale', q:'\u3054\u5e0c\u671b\u306e\u30da\u30fc\u30b8\u898f\u6a21\u306f\uff1f', sub:'\u304a\u304a\u3088\u305d\u306e\u76ee\u5b89\u3067OK\u3067\u3059', type:'single',\n    opts:[\n      {e:'\ud83d\udcc4',l:'LP1\u679a\uff081\u30da\u30fc\u30b8\u306b\u307e\u3068\u3081\u305f\u3044\uff09'},\n      {e:'\ud83d\udcd1',l:'5\u30da\u30fc\u30b8\u4ee5\u5185\uff08\u5c0f\u898f\u6a21\u30b5\u30a4\u30c8\uff09'},\n      {e:'\ud83d\udcc2',l:'10\u30da\u30fc\u30b8\u4ee5\u4e0a\uff08\u4e2d\u898f\u6a21\u30b5\u30a4\u30c8\uff09'},\n      {e:'\u2753',l:'\u672a\u5b9a\u30fb\u3054\u63d0\u6848\u306b\u4efb\u305b\u305f\u3044'},\n    ]\n  },\n  {\n    id:'design', q:'\u30c7\u30b6\u30a4\u30f3\u306e\u65b9\u5411\u6027\u306f\uff1f', sub:'\u30a4\u30e1\u30fc\u30b8\u306b\u8fd1\u3044\u3082\u306e\u3092\u304a\u9078\u3073\u304f\u3060\u3055\u3044', type:'single',\n    opts:[\n      {e:'\u2b1c',l:'\u30b7\u30f3\u30d7\u30eb\u30fb\u30df\u30cb\u30de\u30eb'},\n      {e:'\ud83c\udf8b',l:'\u548c\u98a8\u30fb\u4e0a\u54c1\u30fb\u843d\u3061\u7740\u3044\u305f'},\n      {e:'\ud83c\udfa8',l:'\u30dd\u30c3\u30d7\u30fb\u30ab\u30b8\u30e5\u30a2\u30eb\u30fb\u660e\u308b\u3044'},\n      {e:'\ud83d\udcbc',l:'\u30d7\u30ed\u30d5\u30a7\u30c3\u30b7\u30e7\u30ca\u30eb\u30fb\u9ad8\u7d1a\u611f'},\n      {e:'\ud83c\udf38',l:'\u6e29\u304b\u307f\u30fb\u30ca\u30c1\u30e5\u30e3\u30e3\u30eb\u30fb\u89aa\u3057\u307f\u3084\u3059\u3044'},\n    ]\n  },\n  {\n    id:'deadline', q:'\u7d0d\u671f\u306e\u3054\u5e0c\u671b\u306f\uff1f', sub:'', type:'single',\n    opts:[\n      {e:'\u26a1',l:'\u6025\u304e\uff082\u9031\u9593\u4ee5\u5185\uff09'},\n      {e:'\ud83d\udcc5',l:'\u901a\u5e38\uff081\u30f6\u6708\u524d\u5f8c\uff09'},\n      {e:'\ud83c\udf3f',l:'\u3058\u3063\u304f\u308a\uff082\u30f6\u6708\u4ee5\u4e0a\uff09'},\n      {e:'\u2753',l:'\u672a\u5b9a\u30fb\u76f8\u8ac7\u3057\u305f\u3044'},\n    ]\n  },\n  {\n    id:'budget', q:'\u3054\u4e88\u7b97\u306e\u611f\u899a\u3092\u6559\u3048\u3066\u304f\u3060\u3055\u3044', sub:'\u76ee\u5b89\u3068\u3057\u3066\u304a\u6c17\u8efd\u306b\u304a\u9078\u3073\u304f\u3060\u3055\u3044', type:'single',\n    opts:[\n      {e:'\ud83d\udcb4',l:'3\u4e07\u5186\u4ee5\u5185'},\n      {e:'\ud83d\udcb4',l:'3\u301c10\u4e07\u5186'},\n      {e:'\ud83d\udcb4',l:'10\u301c30\u4e07\u5186'},\n      {e:'\ud83d\udcb4',l:'30\u4e07\u5186\u4ee5\u4e0a'},\n      {e:'\u2753',l:'\u672a\u5b9a\u30fb\u307e\u305a\u306f\u76f8\u8ac7\u3057\u305f\u3044'},\n    ]\n  },\n  {\n    id:'priority', q:'\u7279\u306b\u91cd\u8996\u3059\u308b\u30dd\u30a4\u30f3\u30c8\u306f\uff1f', sub:'\u5f53\u3066\u306f\u307e\u308b\u3082\u306e\u3092\u3059\u3079\u3066\u304a\u9078\u3073\u304f\u3060\u3055\u3044\uff08\u8907\u6570\u53ef\uff09', type:'multi',\n    opts:[\n      {e:'\ud83d\udd0d',l:'SEO\u30fb\u691c\u7d22\u304b\u3089\u306e\u96c6\u5ba2'},\n      {e:'\u2728',l:'\u30c7\u30b6\u30a4\u30f3\u306e\u30af\u30aa\u30ea\u30c6\u30a3'},\n      {e:'\ud83d\udcf1',l:'\u30b9\u30de\u30db\u5bfe\u5fdc\u30fb\u4f7f\u3044\u3084\u3059\u3055'},\n      {e:'\u270f\ufe0f',l:'\u81ea\u5206\u3067\u66f4\u65b0\u30fb\u7de8\u96c6\u3067\u304d\u308b\u3053\u3068'},\n      {e:'\ud83d\ude80',l:'\u3068\u306b\u304b\u304f\u65e9\u304f\u516c\u958b\u3057\u305f\u3044'},\n      {e:'\ud83d\udcb0',l:'\u30b3\u30b9\u30c8\u3092\u6291\u3048\u305f\u3044'},\n    ]\n  },\n  {\n    id:'message', q:'\u6c17\u306b\u306a\u3063\u3066\u3044\u308b\u3053\u3068\u30fb\u7279\u306b\u4f1d\u3048\u305f\u3044\u3053\u3068\u304c\u3042\u308b\u3070', sub:'\u306a\u304f\u3066\u3082OK\u3067\u3059\u3002\u305d\u306e\u307e\u307e\u6b21\u3078\u9032\u3093\u3067\u304f\u3060\u3055\u3044', type:'textarea',\n    placeholder:'\u4f8b\uff1a\u7af6\u5408\u4ed6\u793e\u306e\u30b5\u30a4\u30c8\u304c\u6c17\u306b\u306a\u3063\u3066\u3044\u308b\u3001\u53c2\u8003\u306b\u3057\u305f\u3044\u30b5\u30a4\u30c8\u304c\u3042\u308b\u3001\u4e88\u7b97\u304c\u53b3\u3057\u3044\u304c\u76f8\u8ac7\u3057\u305f\u3044\u2026\u306a\u3069'\n  }\n];\n\nlet cur = 0;\nconst ans = {};\nconst multiSel = {};\n\nfunction render() {\n  const s = steps[cur];\n  const total = steps.length;\n  const pct = Math.round(((cur + 1) / total) * 100);\n  document.getElementById('prog-label').textContent = `STEP ${cur+1} / ${total}`;\n  document.getElementById('prog-pct').textContent = pct + '%';\n  document.getElementById('prog-bar').style.width = pct + '%';\n\n  let html = `<div class=\"badge\">STEP ${cur+1}</div><div class=\"q\">${s.q}</div>`;\n  if (s.sub) html += `<div class=\"qsub\">${s.sub}</div>`;\n\n  if (s.type === 'textarea') {\n    const val = ans[s.id] || '';\n    html += `<textarea class=\"txta\" id=\"txta\" placeholder=\"${s.placeholder}\">${val}</textarea>`;\n  } else {\n    html += '<div class=\"opts\">';\n    s.opts.forEach((o, i) => {\n      const isSel = s.type === 'multi'\n        ? (multiSel[s.id] || []).includes(i)\n        : ans[s.id] === i;\n      html += `<button class=\"opt${isSel ? ' sel' : ''}\" onclick=\"pick(${i})\"><span class=\"opt-em\">${o.e}</span>${o.l}</button>`;\n    });\n    html += '</div>';\n  }\n\n  const isFirst = cur === 0;\n  const canNext = s.type === 'textarea' || ans[s.id] !== undefined || (s.type === 'multi' && (multiSel[s.id]||[]).length > 0);\n  html += `<div class=\"nav\">\n    ${!isFirst ? '<button class=\"btn-back\" onclick=\"goBack()\">\u2190 \u623b\u308b</button>' : ''}\n    <button class=\"btn-next\" id=\"btn-next\" onclick=\"goNext()\" ${canNext?'':'disabled'}>${cur===total-1 ? '\u2705 \u30b5\u30de\u30ea\u30fc\u3092\u751f\u6210\u3059\u308b' : '\u6b21\u3078 \u2192'}</button>\n  </div>`;\n\n  const card = document.getElementById('step-card');\n  card.style.animation = 'none';\n  card.offsetHeight;\n  card.style.animation = '';\n  card.innerHTML = html;\n\n  if (s.type === 'textarea') {\n    document.getElementById('txta').addEventListener('input', function() {\n      ans[s.id] = this.value;\n      document.getElementById('btn-next').disabled = false;\n    });\n    document.getElementById('btn-next').disabled = false;\n  }\n}\n\nfunction pick(i) {\n  const s = steps[cur];\n  if (s.type === 'multi') {\n    if (!multiSel[s.id]) multiSel[s.id] = [];\n    const idx = multiSel[s.id].indexOf(i);\n    if (idx >= 0) multiSel[s.id].splice(idx, 1);\n    else multiSel[s.id].push(i);\n    ans[s.id] = multiSel[s.id].length > 0 ? multiSel[s.id][0] : undefined;\n  } else {\n    ans[s.id] = i;\n  }\n  render();\n}\n\nfunction goNext() {\n  const s = steps[cur];\n  if (s.type === 'textarea') {\n    const el = document.getElementById('txta');\n    ans[s.id] = el ? el.value : '';\n  }\n  if (cur < steps.length - 1) {\n    cur++;\n    render();\n    window.scrollTo({top: 0, behavior: 'smooth'});\n  } else {\n    showResult();\n  }\n}\n\nfunction goBack() {\n  if (cur > 0) { cur--; render(); window.scrollTo({top:0,behavior:'smooth'}); }\n}\n\nfunction getLabel(stepId, idx) {\n  const s = steps.find(x => x.id === stepId);\n  return s ? s.opts[idx].l : '\u2014';\n}\n\nfunction getMultiLabels(stepId) {\n  const idxs = multiSel[stepId] || [];\n  if (!idxs.length) return '\u7279\u306b\u306a\u3057';\n  return idxs.map(i => getLabel(stepId, i)).join('\u3001');\n}\n\nfunction recommendPlan(budget, scale, current) {\n  const budgetLabel = ans.budget !== undefined ? getLabel('budget', ans.budget) : '';\n  const scaleLabel  = ans.scale  !== undefined ? getLabel('scale',  ans.scale)  : '';\n  if (budgetLabel.includes('30\u4e07')) {\n    return { name: '\u4e8b\u696d\u6226\u7565\u304b\u3089\u5165\u308bWeb\u5236\u4f5c\u3010\u30d7\u30ec\u30df\u30a2\u30e2\u3011', desc: '\u30d3\u30b8\u30cd\u30b9\u30b4\u30fc\u30eb\u306e\u6574\u7406\u304b\u3089\u8a2d\u8a08\u30fb\u30c7\u30b6\u30a4\u30f3\u30fb\u5b9f\u88c5\u307e\u3067\u5b8c\u5168\u30aa\u30fc\u30c0\u30fc\u30e1\u30a4\u30c9\u3067\u5bfe\u5fdc\u3057\u307e\u3059\u3002IT\u30b3\u30f3\u30b5\u30eb\u00d7\u5fc3\u7406\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u306e\u8996\u70b9\u3067\u3001\u96c6\u5ba2\u306b\u76f4\u7d50\u3059\u308b\u30b5\u30a4\u30c8\u3092\u69cb\u7bc9\u3057\u307e\u3059\u3002' };\n  }\n  if (budgetLabel.includes('10\u301c30') || scaleLabel.includes('10\u30da\u30fc\u30b8')) {\n    return { name: '\u96c6\u5ba2\u306b\u76f4\u7d50\u3059\u308bLP\u30fbHP\u5236\u4f5c', desc: '\u5b9f\u52d9\u6b7415\u5e74\u4ee5\u4e0a\u306eIT\u30b3\u30f3\u30b5\u30eb\u304c\u30d3\u30b8\u30cd\u30b9\u8ab2\u984c\u3092Web\u3067\u89e3\u6c7a\u3002\u76ee\u7684\u30fb\u30bf\u30fc\u30b2\u30c3\u30c8\u30fb\u69cb\u6210\u3092\u4e00\u7dd2\u306b\u8a2d\u8a08\u3057\u305f\u4e0a\u3067\u304a\u898b\u7a4d\u308a\u3057\u307e\u3059\u3002' };\n  }\n  if (budgetLabel.includes('3\u301c10') || scaleLabel.includes('5\u30da\u30fc\u30b8')) {\n    return { name: 'LP1\u679a\u301c\u5c0f\u898f\u6a21HP\u5236\u4f5c', desc: '\u307e\u305a\u306f\u6700\u5c0f\u69cb\u6210\u3067\u30b9\u30bf\u30fc\u30c8\u3057\u3001\u53cd\u5fdc\u3092\u898b\u306a\u304c\u3089\u6539\u5584\u3057\u3066\u3044\u304f\u30a2\u30d7\u30ed\u30fc\u30c1\u3067\u3059\u3002\u4e88\u7b97\u3092\u6291\u3048\u3064\u3064\u96c6\u5ba2\u52b9\u679c\u3092\u691c\u8a3c\u3067\u304d\u307e\u3059\u3002' };\n  }\n  if (budgetLabel.includes('3\u4e07\u5186\u4ee5\u5185') || scaleLabel.includes('LP1\u679a')) {\n    return { name: 'LP\u5236\u4f5c\uff08\u30b7\u30f3\u30d7\u30eb\u30d7\u30e9\u30f3\uff09', desc: '1\u30da\u30fc\u30b8\u5b8c\u7d50\u578b\u306eLP\u3092\u77ed\u7d0d\u671f\u30fb\u4f4e\u30b3\u30b9\u30c8\u3067\u5236\u4f5c\u3057\u307e\u3059\u3002\u307e\u305a\u306f\u4e00\u6b69\u8e0f\u307f\u51fa\u3057\u305f\u3044\u65b9\u306b\u6700\u9069\u306a\u30d7\u30e9\u30f3\u3067\u3059\u3002' };\n  }\n  return { name: '\u307e\u305a\u306f\u7121\u6599\u76f8\u8ac7\u304b\u3089', desc: '\u8981\u4ef6\u3092\u304a\u805e\u304d\u3057\u3066\u304b\u3089\u6700\u9069\u306a\u30d7\u30e9\u30f3\u3092\u3054\u63d0\u6848\u3057\u307e\u3059\u3002\u4e88\u7b97\u30fb\u76ee\u7684\u30fb\u30b9\u30b1\u30b8\u30e5\u30fc\u30eb\u3092\u4e00\u7dd2\u306b\u6574\u7406\u3057\u307e\u3057\u3087\u3046\u3002' };\n}\n\nfunction showResult() {\n  document.getElementById('wizard').classList.add('hidden');\n  document.getElementById('result').classList.remove('hidden');\n  window.scrollTo({top:0,behavior:'smooth'});\n\n  const get = (id) => ans[id] !== undefined ? getLabel(id, ans[id]) : '\u2014';\n\n  document.getElementById('r-industry').textContent = get('industry');\n  document.getElementById('r-purpose').textContent  = get('purpose');\n  document.getElementById('r-current').textContent  = get('current');\n  document.getElementById('r-scale').textContent    = get('scale');\n  document.getElementById('r-design').textContent   = get('design');\n  document.getElementById('r-deadline').textContent = get('deadline');\n  document.getElementById('r-budget').textContent   = get('budget');\n  document.getElementById('r-priority').textContent = getMultiLabels('priority');\n  const msg = ans.message && ans.message.trim() ? ans.message.trim() : '\u7279\u306b\u306a\u3057';\n  document.getElementById('r-message').textContent  = msg;\n\n  const plan = recommendPlan();\n  document.getElementById('r-plan-name').textContent = plan.name;\n  document.getElementById('r-plan-desc').textContent = plan.desc;\n}\n\nfunction restart() {\n  Object.keys(ans).forEach(k => delete ans[k]);\n  Object.keys(multiSel).forEach(k => delete multiSel[k]);\n  cur = 0;\n  document.getElementById('result').classList.add('hidden');\n  document.getElementById('wizard').classList.remove('hidden');\n  render();\n  window.scrollTo({top:0,behavior:'smooth'});\n}\n\nrender();\n</script>\n</body>\n</html>\n

@@ -3,12 +3,13 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>自動お見積りシミュレーター | 和-Node</title>
-<meta name="description" content="和-NodeのWeb制作・IT導入の概算費用と納期がすぐにわかる自動お見積りシミュレーターです。"/>
-<link rel="icon" type="image/png" href="images/favicon.png"/>
-<link rel="stylesheet" href="style.css"/>
+<title>\u81ea\u52d5\u304a\u898b\u7a4d\u308a\u30b7\u30df\u30e5\u30ec\u30fc\u30bf\u30fc | \u548c-Node</title>
+<meta name="description" content="\u548c-Node\u306eWeb\u5236\u4f5c\u30fbIT\u520e\u5165\u306e\u6982\u7b97\u8cbb\u7528\u3068\u7d0d\u671f\u304c\u3059\u3050\u306b\u308f\u304b\u308b\u81ea\u52d5\u304a\u898b\u7a4d\u308a\u30b7\u30df\u30e5\u30ec\u30fc\u30bf\u30fc\u3067\u3059\u3002"/>
+<link rel=\"icon\" href=\"/favicon.ico\" />
+<link rel=\"apple-touch-icon\" href=\"/apple-touch-icon.png\" />
+<link rel=\"stylesheet\" href=\"style.css\"/>
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B4FD0GJGW5"></script>
+<script async src=\"https://www.googletagmanager.com/gtag/js?id=G-B4FD0GJGW5\"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -30,8 +31,8 @@
 .sim-check-icon { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--color-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: #fff; }
 .sim-option.active .sim-check-icon { border-color: var(--color-accent); background: var(--color-accent); }
 .sim-option.active .sim-check-icon::after { content: ''; width: 6px; height: 10px; border-bottom: 2px solid #fff; border-right: 2px solid #fff; transform: rotate(45deg); margin-bottom: 2px; }
-.sim-option input[type="radio"] + div .sim-check-icon { border-radius: 50%; }
-.sim-option input[type="checkbox"] + div .sim-check-icon { border-radius: 4px; }
+.sim-option input[type=\"radio\"] + div .sim-check-icon { border-radius: 50%; }
+.sim-option input[type=\"checkbox\"] + div .sim-check-icon { border-radius: 4px; }
 .sim-opt-title { font-size: 15px; font-weight: 700; color: var(--color-secondary); }
 .sim-opt-desc { font-size: 12px; color: var(--color-text-muted); margin-top: 4px; }
 .sim-opt-price { font-size: 14px; font-weight: bold; color: var(--color-accent); }
@@ -51,340 +52,173 @@
 </style>
 </head>
 <body>
-<div class="demo-banner">
-  <strong>【制作例サンプル】</strong> これは和-Nodeの技術を体験できるデモアプリです。このようなカスタムツールの導入をご検討中の方は <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">こちらから無料相談</a>
+<div class=\"demo-banner\">
+  <strong>\u3010\u5236\u4f5c\u4f8b\u30b5\u30f3\u30d7\u30eb\u3011</strong> \u3053\u308c\u306f\u548c-Node\u306e\u6280\u8853\u3092\u4f53\u9a13\u3067\u304d\u308b\u30c7\u30e2\u30a2\u30d7\u30ea\u3067\u3059\u3002\u3053\u306e\u3088\u3046\u306a\u30ab\u30b9\u30bf\u30e0\u30c4\u30fc\u30eb\u306e\u5c0e\u5165\u3092\u3054\u691c\u8a0e\u4e2d\u306e\u65b9\u306f <a href=\"https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor\" target=\"_blank\" class=\"banner-cta\">\u3053\u3061\u3089\u304b\u3089\u7121\u6599\u76f8\u8ac7</a>
 </div>
-<div class="app-container bg-seigaiha">
-<div class="landscape-bg" style="background-image:url('images/bg-landscape.png'); opacity:0.3;"></div>
+<div class=\"app-container bg-seigaiha\">
+<div class=\"landscape-bg\" style=\"background-image:url('images/bg-landscape.png'); opacity:0.3;\"></div>
 
-<!-- Header -->
-<header class="header">
-  <div class="container header-container">
-    <div class="logo"><a href="index.html"><span class="logo-text">和-Node</span></a></div>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="nav" id="nav">
-      <ul class="nav-list">
-        <li><a href="index.html#story" class="nav-link">About</a></li>
-        <li><a href="index.html#services" class="nav-link">Services</a></li>
-        <li><a href="index.html#portfolio" class="nav-link">Portfolio</a></li>
-        <li><a href="kdp_books.html" class="nav-link">Books</a></li>
-        <li><a href="pricing.html" class="nav-link">Pricing</a></li>
-        <li><a href="simulator.html" class="nav-link active"><span class="demo-badge">制作例</span> お見積りシミュレーター</a></li>
-        <li><a href="barrier_free.html" class="nav-link"><span class="demo-badge">制作例</span> バリアフリー診断アプリ</a></li>
-        <li><a href="mental_care.html" class="nav-link"><span class="demo-badge">制作例</span> こころの疲労度診断</a></li>
-        <li><a href="https://coconala.com/users/2598979" target="_blank" class="nav-link btn-header">ご相談・ご依頼</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+<header class=\"site-header\">
+    <div class=\"container header-inner\">
+      <a href=\"index.html\" class=\"logo\" aria-label=\"\u548c-Node \u30c8\u30c3\u30d7\u30da\u30fc\u30b8\">\n        <span class=\"logo-main\">\u548c-Node</span>\n        <span class=\"logo-sub\">Web \u00d7 AI \u00d7 \u5fc3\u7406</span>\n      </a>\n\n      <nav class=\"global-nav\" aria-label=\"\u30b0\u30ed\u30fc\u30d0\u30eb\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3\">\n        <a href=\"index.html#about\">\u4ee3\u8868\u306b\u3064\u3044\u3066</a>\n        <a href=\"index.html#services\">\u30b5\u30fc\u30d3\u30b9</a>\n        <a href=\"index.html#line-miniapp\">LINE Mini App</a>\n        <a href=\"index.html#works\">\u5236\u4f5c\u4f8b</a>\n        <a href=\"pricing.html\">\u6599\u91d1</a>\n        <a href=\"index.html#contact\" class=\"nav-cta\">\u76f8\u8ac7\u3059\u308b</a>\n      </nav>\n    </div>\n  </header>
 
-<main class="sim-container">
-  <h1 class="sim-title">自動お見積りシミュレーター</h1>
+<main class=\"sim-container\">
+  <h1 class=\"sim-title\">\u81ea\u52d5\u304a\u898b\u7a4d\u308a\u30b7\u30df\u30e5\u30ec\u30fc\u30bf\u30fc</h1>
   
-  <div class="sim-section">
-    <h2 class="sim-section-title">1. 作りご希望のサイトの種類</h2>
-    <div class="sim-options" id="opt-type">
-      <label class="sim-option active">
-        <input type="radio" name="siteType" value="basic" checked data-price="50000" data-days="3">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
+  <div class=\"sim-section\">
+    <h2 class=\"sim-section-title\">1. \u4f5c\u308a\u3054\u5e0c\u671b\u306e\u30b5\u30a4\u30c8\u306e\u7a2e\u985e</h2>
+    <div class=\"sim-options\" id=\"opt-type\">
+      <label class=\"sim-option active\">
+        <input type=\"radio\" name=\"siteType\" value=\"basic\" checked data-price=\"50000\" data-days=\"3\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
           <div>
-            <div class="sim-opt-title">名刺代わりのシンプルなHP</div>
-            <div class="sim-opt-desc">会社概要やアクセス情報など、必要最低限の情報を掲載したい方</div>
+            <div class=\"sim-opt-title\">\u540d\u523a\u4ee3\u308f\u308a\u306e\u30b7\u30f3\u30d7\u30eb\u306aHP</div>
+            <div class=\"sim-opt-desc\">\u4f1a\u793e\u6982\u8981\u3084\u30a2\u30af\u30bb\u30b9\u60c5\u5831\u306a\u3069\u3001\u5fc5\u8981\u6700\u4f4e\u9650\u306e\u60c5\u5831\u3092\u63b2\u8f09\u3057\u305f\u3044\u65b9</div>
           </div>
         </div>
-        <div class="sim-opt-price">¥50,000〜</div>
+        <div class=\"sim-opt-price\">\u00a550,000\u301c</div>
       </label>
-      <label class="sim-option">
-        <input type="radio" name="siteType" value="lp" data-price="80000" data-days="4">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
+      <label class=\"sim-option\">
+        <input type=\"radio\" name=\"siteType\" value=\"lp\" data-price=\"80000\" data-days=\"4\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
           <div>
-            <div class="sim-opt-title">集客用ランディングページ(LP)</div>
-            <div class="sim-opt-desc">商品販売やお問い合わせ獲得に特化した、縦長の訴求ページ</div>
+            <div class=\"sim-opt-title\">\u96c6\u5ba2\u7528\u30e9\u30f3\u30c7\u30a3\u30f3\u30b0\u30da\u30fc\u30b8(LP)</div>
+            <div class=\"sim-opt-desc\">\u5546\u54c1\u8ca9\u58f2\u3084\u304a\u554f\u3044\u5408\u308f\u305b\u7372\u5f97\u306b\u7279\u5316\u3057\u305f\u3001\u7e26\u9577\u306e\u8a34\u6c42\u30da\u30fc\u30b8</div>
           </div>
         </div>
-        <div class="sim-opt-price">¥80,000〜</div>
+        <div class=\"sim-opt-price\">\u00a580,000\u301c</div>
       </label>
-      <label class="sim-option">
-        <input type="radio" name="siteType" value="corp" data-price="120000" data-days="6">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
+      <label class=\"sim-option\">
+        <input type=\"radio\" name=\"siteType\" value=\"corp\" data-price=\"120000\" data-days=\"6\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
           <div>
-            <div class="sim-opt-title">本格的なコーポレートサイト</div>
-            <div class="sim-opt-desc">複数ページ構成で、事業内容や採用情報などをしっかり伝えたい方</div>
+            <div class=\"sim-opt-title\">\u672c\u683c\u7684\u306a\u30b3\u30fc\u30dd\u30ec\u30fc\u30c8\u30b5\u30a4\u30c8</div>
+            <div class=\"sim-opt-desc\">\u8907\u6570\u30da\u30fc\u30b8\u69cb\u6210\u3067\u3001\u4e8b\u696d\u5185\u5bb9\u3084\u63a1\u7528\u60c5\u5831\u306a\u3069\u3092\u3057\u3063\u304b\u308a\u4f1d\u3048\u305f\u3044\u65b9</div>
           </div>
         </div>
-        <div class="sim-opt-price">¥120,000〜</div>
-      </label>
-    </div>
-  </div>
-
-  <div class="sim-section" id="section-pages">
-    <h2 class="sim-section-title">2. 想定されるページ数</h2>
-    <div class="sim-options" id="opt-pages">
-      <label class="sim-option active">
-        <input type="radio" name="sitePages" value="1" checked data-price="0" data-days="0">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
-          <div>
-            <div class="sim-opt-title">1ページ構成（LP・ペライチ）</div>
-          </div>
-        </div>
-        <div class="sim-opt-price">+¥0</div>
-      </label>
-      <label class="sim-option">
-        <input type="radio" name="sitePages" value="2-5" data-price="30000" data-days="2">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
-          <div>
-            <div class="sim-opt-title">2〜5ページ（標準的）</div>
-          </div>
-        </div>
-        <div class="sim-opt-price">+¥30,000</div>
-      </label>
-      <label class="sim-option">
-        <input type="radio" name="sitePages" value="6+" data-price="80000" data-days="4">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
-          <div>
-            <div class="sim-opt-title">6ページ以上（ボリューム多め）</div>
-          </div>
-        </div>
-        <div class="sim-opt-price">+¥80,000</div>
+        <div class=\"sim-opt-price\">\u00a5120,000\u301c</div>
       </label>
     </div>
   </div>
 
-  <div class="sim-section">
-    <h2 class="sim-section-title">3. 必要な追加機能（複数選択可）</h2>
-    <div class="sim-options" id="opt-features">
-      <label class="sim-option">
-        <input type="checkbox" name="feature" value="contact" data-price="10000" data-days="1">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
+  <div class=\"sim-section\" id=\"section-pages\">
+    <h2 class=\"sim-section-title\">2. \u60f3\u5b9a\u3055\u308c\u308b\u30da\u30fc\u30b8\u6570</h2>
+    <div class=\"sim-options\" id=\"opt-pages\">
+      <label class=\"sim-option active\">
+        <input type=\"radio\" name=\"sitePages\" value=\"1\" checked data-price=\"0\" data-days=\"0\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
           <div>
-            <div class="sim-opt-title">お問い合わせフォームの設置</div>
+            <div class=\"sim-opt-title\">1\u30da\u30fc\u30b8\u69cb\u6210\uff08LP\u30fb\u30da\u30e9\u30a4\u30c1\uff09</div>
           </div>
         </div>
-        <div class="sim-opt-price">+¥10,000</div>
+        <div class=\"sim-opt-price\">+\u00a50</div>
       </label>
-      <label class="sim-option">
-        <input type="checkbox" name="feature" value="wp" data-price="30000" data-days="2">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
+      <label class=\"sim-option\">
+        <input type=\"radio\" name=\"sitePages\" value=\"2-5\" data-price=\"30000\" data-days=\"2\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
           <div>
-            <div class="sim-opt-title">お知らせ・ブログ機能（WordPress等）</div>
+            <div class=\"sim-opt-title\">2\u301c5\u30da\u30fc\u30b8\uff08\u6a19\u6e96\u7684\uff09</div>
           </div>
         </div>
-        <div class="sim-opt-price">+¥30,000</div>
+        <div class=\"sim-opt-price\">+\u00a530,000</div>
       </label>
-      <label class="sim-option">
-        <input type="checkbox" name="feature" value="reserve" data-price="30000" data-days="2">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
+      <label class=\"sim-option\">
+        <input type=\"radio\" name=\"sitePages\" value=\"6+\" data-price=\"80000\" data-days=\"4\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
           <div>
-            <div class="sim-opt-title">予約システムの導入</div>
+            <div class=\"sim-opt-title\">6\u30da\u30fc\u30b8\u4ee5\u4e0a\uff08\u30dc\u30ea\u30e5\u30fc\u30e0\u591a\u3081\uff09</div>
           </div>
         </div>
-        <div class="sim-opt-price">+¥30,000</div>
+        <div class=\"sim-opt-price\">+\u00a580,000</div>
       </label>
-      <label class="sim-option">
-        <input type="checkbox" name="feature" value="domain" data-price="10000" data-days="1">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
+    </div>
+  </div>
+
+  <div class=\"sim-section\">
+    <h2 class=\"sim-section-title\">3. \u5fc5\u8981\u306a\u8ffd\u52a0\u6a5f\u80fd\uff08\u8907\u6570\u9078\u629e\u53ef\uff09</h2>
+    <div class=\"sim-options\" id=\"opt-features\">
+      <label class=\"sim-option\">
+        <input type=\"checkbox\" name=\"feature\" value=\"contact\" data-price=\"10000\" data-days=\"1\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
           <div>
-            <div class="sim-opt-title">サーバー・ドメイン取得の代行</div>
+            <div class=\"sim-opt-title\">\u304a\u554f\u3044\u5408\u308f\u305b\u30d5\u30a9\u30fc\u30e0\u306e\u8a2d\u7f6e</div>
           </div>
         </div>
-        <div class="sim-opt-price">+¥10,000</div>
+        <div class=\"sim-opt-price\">+\u00a510,000</div>
       </label>
-      <label class="sim-option">
-        <input type="checkbox" name="feature" value="copy" data-price="30000" data-days="3">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
+      <label class=\"sim-option\">
+        <input type=\"checkbox\" name=\"feature\" value=\"wp\" data-price=\"30000\" data-days=\"2\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
           <div>
-            <div class="sim-opt-title">コピーライティング（文章作成）の代行</div>
+            <div class=\"sim-opt-title\">\u304a\u77e5\u3089\u305b\u30fb\u30d6\u30ed\u30b0\u6a5f\u80fd\uff08WordPress\u7b49\uff09</div>
           </div>
         </div>
-        <div class="sim-opt-price">+¥30,000</div>
+        <div class=\"sim-opt-price\">+\u00a530,000</div>
       </label>
-      <label class="sim-option">
-        <input type="checkbox" name="feature" value="rush" data-price="0" data-days="0" data-multiplier="1.5" data-days-mult="0.7">
-        <div class="sim-opt-content">
-          <div class="sim-check-icon"></div>
+      <label class=\"sim-option\">
+        <input type=\"checkbox\" name=\"feature\" value=\"reserve\" data-price=\"30000\" data-days=\"2\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
           <div>
-            <div class="sim-opt-title">【特急対応】なるべく早く納品してほしい</div>
-            <div class="sim-opt-desc">費用1.5倍 / 期間を約30%短縮</div>
+            <div class=\"sim-opt-title\">\u4e88\u7d04\u30b7\u30b9\u30c6\u30e0\u306e\u5c0e\u5165</div>
           </div>
         </div>
-        <div class="sim-opt-price">要相談</div>
+        <div class=\"sim-opt-price\">+\u00a530,000</div>
+      </label>
+      <label class=\"sim-option\">
+        <input type=\"checkbox\" name=\"feature\" value=\"domain\" data-price=\"10000\" data-days=\"1\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
+          <div>
+            <div class=\"sim-opt-title\">\u30b5\u30fc\u30d2\u30fc\u30fb\u30c9\u30e1\u30a4\u30f3\u53d6\u5f97\u306e\u4ee3\u884c</div>
+          </div>
+        </div>
+        <div class=\"sim-opt-price\">+\u00a510,000</div>
+      </label>
+      <label class=\"sim-option\">
+        <input type=\"checkbox\" name=\"feature\" value=\"copy\" data-price=\"30000\" data-days=\"3\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
+          <div>
+            <div class=\"sim-opt-title\">\u30b3\u30d4\u30fc\u30e9\u30a4\u30c6\u30a3\u30f3\u30b0\uff08\u6587\u7ae0\u4f5c\u6210\uff09\u306e\u4ee3\u884c</div>
+          </div>
+        </div>
+        <div class=\"sim-opt-price\">+\u00a530,000</div>
+      </label>
+      <label class=\"sim-option\">
+        <input type=\"checkbox\" name=\"feature\" value=\"rush\" data-price=\"0\" data-days=\"0\" data-multiplier=\"1.5\" data-days-mult=\"0.7\">
+        <div class=\"sim-opt-content\">
+          <div class=\"sim-check-icon\"></div>
+          <div>
+            <div class=\"sim-opt-title\">\u3010\u7279\u6025\u5bfe\u5fdc\u3011\u306a\u308b\u3079\u304f\u65e9\u304f\u7d0d\u54c1\u3057\u3066\u307b\u3057\u3044</div>
+            <div class=\"sim-opt-desc\">\u8cbb\u75281.5\u500d / \u671f\u9593\u3092\u7d0430%\u77ed\u7e2e</div>
+          </div>
+        </div>
+        <div class=\"sim-opt-price\">\u8981\u76f8\u8ac7</div>
       </label>
     </div>
   </div>
 </main>
 
-<div class="sim-result-bar">
-  <div class="sim-result-inner">
-    <div class="sim-total-box">
-      <div class="sim-total-label">概算費用</div>
-      <div class="sim-total-price">¥<span id="res-price">50,000</span><span style="font-size:16px;">〜</span></div>
-      <div class="sim-total-duration">目安納期：約<span id="res-days">3</span>営業日</div>
+<div class=\"sim-result-bar\">
+  <div class=\"sim-result-inner\">
+    <div class=\"sim-total-box\">
+      <div class=\"sim-total-label\">\u6982\u7b97\u8cbb\u7528</div>
+      <div class=\"sim-total-price\">\u00a5<span id=\"res-price\">50,000</span><span style=\"font-size:16px;\">\u301c</span></div>
+      <div class=\"sim-total-duration\">\u76ee\u5b89\u7d0d\u671f\uff1a\u7d04<span id=\"res-days\">3</span>\u55b6\u696d\u65e5</div>
     </div>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="sim-submit-btn">このようなツールを自社に導入する（無料相談）</a>
+    <a href=\"https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor\" target=\"_blank\" class=\"sim-submit-btn\">\u3053\u306e\u3088\u3046\u306a\u30c4\u30fc\u30eb\u3092\u81ea\u793e\u306b\u5c0e\u5165\u3059\u308b\uff08\u7121\u6599\u76f8\u8ac7\uff09</a>
   </div>
 </div>
 
-<!-- Footer -->
-<footer class="footer">
-  <div class="container footer-container" style="padding-bottom: 80px;"> <!-- Padding for fixed bar -->
-    <div class="footer-info">
-      <h2 class="footer-logo">和-Node</h2>
-      <p class="footer-desc">
-        IT・経営コンサル/個人・法人カウンセリング<br/>
-        心とITの両方がわかるパートナー<br/><br/>
-        ご相談・お問い合わせ: <br/>
-        ・<a href="https://coconala.com/users/2598979" target="_blank" style="text-decoration:underline;">ココナラ経由のご依頼はこちら</a><br/>
-        ・<a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="text-decoration:underline;">直接取引のご依頼・お問い合わせはこちら</a>
-      </p>
-    </div>
-    <div class="footer-links">
-      <ul>
-        <li><a href="index.html#story">About</a></li>
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="pricing.html" style="font-weight:700; color:var(--color-accent);">料金表</a></li>
-        <li><a href="index.html#portfolio">Portfolio</a></li>
-        <li><a href="kdp_books.html">Books</a></li>
-        <li><a href="simulator.html">制作例：お見積り</a></li>
-        <li><a href="barrier_free.html">制作例：バリアフリー診断</a></li>
-        <li><a href="mental_care.html">制作例：こころの診断</a></li>
-        <li><a href="privacy.html" style="margin-top: 10px; display: inline-block; font-weight: 700; color: var(--color-accent);">プライバシーポリシー</a></li>
-        <li><a href="terms_miniapp.html" style="margin-top: 4px; display: inline-block; font-size: 13px; color: var(--color-accent);">LINE Mini App 利用規約</a></li>
-        <li><a href="tokutei.html" style="margin-top: 4px; display: inline-block; font-size: 13px; color: var(--color-accent);">特定商取引法に基づく表記</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 和-Node. All Rights Reserved.</p>
-  </div>
-</footer>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const header=document.querySelector('.header');
-  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));
-
-  const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('nav');
-  if(hamburger && nav) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      nav.classList.toggle('active');
-    });
-    // メニューリンククリック時に閉じる
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        hamburger.classList.remove('active');
-        nav.classList.remove('active');
-      });
-    });
-  }
-
-  const options = document.querySelectorAll('.sim-option');
-  const features = document.querySelectorAll('input[name="feature"]');
-  const resPrice = document.getElementById('res-price');
-  const resDays = document.getElementById('res-days');
-  const sectionPages = document.getElementById('section-pages');
-
-  function update() {
-    let price = 0;
-    let days = 0;
-    let multiplier = 1;
-    let daysMult = 1;
-
-    // Type
-    let selectedType = document.querySelector('input[name="siteType"]:checked');
-    if(selectedType) {
-      price += parseInt(selectedType.dataset.price);
-      days += parseInt(selectedType.dataset.days);
-      
-      // LPの場合はページ数選択をグレーアウト
-      if(selectedType.value === 'lp') {
-        sectionPages.style.opacity = '0.4';
-        sectionPages.style.pointerEvents = 'none';
-        // LPを選んだらページ数のラジオボタンは1ページ構成を強制
-        document.querySelector('input[name="sitePages"][value="1"]').checked = true;
-      } else {
-        sectionPages.style.opacity = '1';
-        sectionPages.style.pointerEvents = 'auto';
-        let selectedPages = document.querySelector('input[name="sitePages"]:checked');
-        if(selectedPages) {
-          price += parseInt(selectedPages.dataset.price);
-          days += parseInt(selectedPages.dataset.days);
-        }
-      }
-    }
-
-    // Features
-    features.forEach(f => {
-      if(f.checked) {
-        price += parseInt(f.dataset.price);
-        days += parseInt(f.dataset.days);
-        if(f.dataset.multiplier) {
-          multiplier = parseFloat(f.dataset.multiplier);
-        }
-        if(f.dataset.daysMult) {
-          daysMult = parseFloat(f.dataset.daysMult);
-        }
-      }
-    });
-
-    price = Math.floor(price * multiplier);
-    days = Math.max(1, Math.floor(days * daysMult));
-
-    // Animation for price
-    animateValue(resPrice, parseInt(resPrice.textContent.replace(/,/g, '')), price, 300);
-    resDays.textContent = days;
-
-    // Update active classes
-    options.forEach(opt => {
-      const input = opt.querySelector('input');
-      if(input.checked) {
-        opt.classList.add('active');
-      } else {
-        opt.classList.remove('active');
-      }
-    });
-  }
-
-  function animateValue(obj, start, end, duration) {
-    if (start === end) return;
-    let startTimestamp = null;
-    const step = (timestamp) => {
-      if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-      const current = Math.floor(progress * (end - start) + start);
-      obj.innerHTML = current.toLocaleString();
-      if (progress < 1) {
-        window.requestAnimationFrame(step);
-      } else {
-        obj.innerHTML = end.toLocaleString();
-      }
-    };
-    window.requestAnimationFrame(step);
-  }
-
-  options.forEach(opt => {
-    opt.addEventListener('change', (e) => {
-      update();
-    });
-  });
-
-  update();
-});
-</script>
-</body>
-</html>
+<footer class=\"site-footer\">
+    <div class=\"container\">
+      <div class=\"footer-info\">\n        <div class=\"logo\">\n          <span class=\"logo-main\">\u548c-Node</span>\n          <span class=\"logo-sub\">Web \u00d7 AI \u00d7 \u5fc3\u7406</span>\n        </div>\n        <p class=\"footer-address\">\n          \u55b6\u696d\u6240\u5728\u5730\uff1a\u3012509-0207 \u5c90\u961c\u770c\u53ef\u5150\u5e02\u4eca\u6e212347\u756a\u57301\u003cbr /\u003e\n          \u4ee3\u8868\uff1a\u9ad8\u91ce\u7d18\u7d14\n        </p>\n      </div>\n\n      <nav class=\"footer-nav\" aria-label=\"\u30d5\u30c3\u30bf\u30fc\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3\">\n        \u003ca href=\"index.html#about\">\u4ee3\u8868\u306b\u3064\u3044\u3066\u003c/a\u003e\n        \u003ca href=\"index.html#services\">\u30b5\u30fc\u30d3\u30b9\u003c/a\u003e\n        \u003ca href=\"index.html#line-miniapp\">LINE Mini App\u003c/a\u003e\n        \u003ca href=\"index.html#works\">\u5236\u4f5c\u4f8b\u003c/a\u003e\n        \u003ca href=\"portfolio-lp/index.html\">LP\u5236\u4f5c\u30dd\u30fc\u30c8\u30d5\u30a9\u30ea\u30aa\u003c/a\u003e\n        \u003ca href=\"kdp_books.html\">KDP\u51fa\u7248\u5b9f\u7e3e\u003c/a\u003e\n        \u003ca href=\"pricing.html\">\u6599\u91d1\u30da\u30fc\u30b8\u003c/a\u003e\n        \u003ca href=\"corporate-mental.html\">\u6cd5\u4eba\u30e1\u30f3\u30bf\u30eb\u7a93\u53e3\u003c/a\u003e\n        \u003ca href=\"counseling-notes.html\">\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u5229\u7528\u6642\u306e\u6ce8\u610f\u4e8b\u9805\u003c/a\u003e\n        \u003ca href=\"tokutei.html\">\u7279\u5b9a\u5546\u53d6\u5f15\u6cd5\u306b\u57fa\u3065\u304f\u8868\u8a18\u003c/a\u003e\n        \u003ca href=\"cancel-policy.html\">\u30ad\u30e3\u30f3\u30bb\u30eb\u30fb\u8fd4\u91d1\u30dd\u30ea\u30b7\u30fc\u003c/a\u003e\n        \u003ca href=\"privacy.html\">\u30d7\u30e9\u30a4\u30d0\u30b7\u30fc\u30dd\u30ea\u30b7\u30fc\u003c/a\u003e\n        \u003ca href=\"terms.html\">\u5229\u7528\u898f\u7d04\u003c/a\u003e\n        \u003ca href=\"terms_miniapp.html\">LINE Mini App \u5229\u7528\u898f\u7d04\u003c/a\u003e\n      \u003c/nav\u003e\n    \u003c/div\u003e\n\n    \u003cp class=\"copyright\">\u00a9 2026 \u548c-Node. All Rights Reserved.\u003c/p\u003e\n  </footer>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', () => {\n  const header=document.querySelector('.header');\n  if(header) window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));\n\n  const hamburger = document.getElementById('hamburger');\n  const nav = document.getElementById('nav');\n  if(hamburger && nav) {\n    hamburger.addEventListener('click', () => {\n      hamburger.classList.toggle('active');\n      nav.classList.toggle('active');\n    });\n    document.querySelectorAll('.nav-link').forEach(link => {\n      link.addEventListener('click', () => {\n        hamburger.classList.remove('active');\n        nav.classList.remove('active');\n      });\n    });\n  }\n\n  const options = document.querySelectorAll('.sim-option');\n  const features = document.querySelectorAll('input[name=\"feature\"]');\n  const resPrice = document.getElementById('res-price');\n  const resDays = document.getElementById('res-days');\n  const sectionPages = document.getElementById('section-pages');\n\n  function update() {\n    let price = 0;\n    let days = 0;\n    let multiplier = 1;\n    let daysMult = 1;\n\n    let selectedType = document.querySelector('input[name=\"siteType\"]:checked');\n    if(selectedType) {\n      price += parseInt(selectedType.dataset.price);\n      days += parseInt(selectedType.dataset.days);\n      \n      if(selectedType.value === 'lp') {\n        sectionPages.style.opacity = '0.4';\n        sectionPages.style.pointerEvents = 'none';\n        document.querySelector('input[name=\"sitePages\"][value=\"1\"]').checked = true;\n      } else {\n        sectionPages.style.opacity = '1';\n        sectionPages.style.pointerEvents = 'auto';\n        let selectedPages = document.querySelector('input[name=\"sitePages\"]:checked');\n        if(selectedPages) {\n          price += parseInt(selectedPages.dataset.price);\n          days += parseInt(selectedPages.dataset.days);\n        }\n      }\n    }\n\n    features.forEach(f => {\n      if(f.checked) {\n        price += parseInt(f.dataset.price);\n        days += parseInt(f.dataset.days);\n        if(f.dataset.multiplier) {\n          multiplier = parseFloat(f.dataset.multiplier);\n        }\n        if(f.dataset.daysMult) {\n          daysMult = parseFloat(f.dataset.daysMult);\n        }\n      }\n    });\n\n    price = Math.floor(price * multiplier);\n    days = Math.max(1, Math.floor(days * daysMult));\n\n    animateValue(resPrice, parseInt(resPrice.textContent.replace(/,/g, '')), price, 300);\n    resDays.textContent = days;\n\n    options.forEach(opt => {\n      const input = opt.querySelector('input');\n      if(input.checked) {\n        opt.classList.add('active');\n      } else {\n        opt.classList.remove('active');\n      }\n    });\n  }\n\n  function animateValue(obj, start, end, duration) {\n    if (start === end) return;\n    let startTimestamp = null;\n    const step = (timestamp) => {\n      if (!startTimestamp) startTimestamp = timestamp;\n      const progress = Math.min((timestamp - startTimestamp) / duration, 1);\n      const current = Math.floor(progress * (end - start) + start);\n      obj.innerHTML = current.toLocaleString();\n      if (progress < 1) {\n        window.requestAnimationFrame(step);\n      } else {\n        obj.innerHTML = end.toLocaleString();\n      }\n    };\n    window.requestAnimationFrame(step);\n  }\n\n  options.forEach(opt => {\n    opt.addEventListener('change', (e) => {\n      update();\n    });\n  });\n\n  update();\n});\n</script>\n</body>\n</html>\n
