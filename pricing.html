@@ -1,521 +1,293 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-<script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.hostname+location.pathname+location.search);</script>
-<meta charset="UTF-8"/>
-<link rel="icon" type="image/png" href="images/favicon.png"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>料金表 | 和-Node</title>
-<meta name="description" content="和-Nodeのサービス料金表です。Webサイト制作、保守管理、IT業務効率化サポートなどの目安金額を掲載しています。"/>
-<link rel="stylesheet" href="style.css"/>
-<style>
-.pricing-container {
-    max-width: 1000px;
-    margin: 120px auto 100px;
-    padding: 0 24px;
-}
-.pricing-title {
-    font-size: 2.2rem;
-    color: var(--color-primary);
-    margin-bottom: 12px;
-    text-align: center;
-    font-family: var(--font-heading);
-}
-.pricing-subtitle {
-    text-align: center;
-    color: var(--color-text-muted);
-    font-size: 14px;
-    margin-bottom: 60px;
-}
-.price-section {
-    margin-bottom: 80px;
-    background: #fff;
-    border-radius: 8px;
-    border: 1px solid var(--color-border);
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
-}
-.price-section-head {
-    background: var(--color-primary);
-    color: #fff;
-    padding: 30px 40px;
-}
-.price-section-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-}
-.price-section-msg {
-    font-size: 14px;
-    opacity: 0.9;
-}
-.price-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-.price-table th, .price-table td {
-    padding: 24px 40px;
-    border-bottom: 1px solid var(--color-border);
-    text-align: left;
-}
-.price-table th {
-    background: #f9f7f4;
-    font-size: 13px;
-    color: var(--color-secondary);
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-}
-.price-name {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--color-primary);
-    width: 30%;
-}
-.price-value {
-    font-size: 18px;
-    font-weight: 700;
-    color: var(--color-accent);
-    width: 25%;
-    white-space: nowrap;
-}
-.price-desc {
-    font-size: 14px;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-@media(max-width: 768px) {
-    .pricing-container { margin-top: 100px; }
-    .price-table thead { display: none; }
-    .price-table tr { display: block; padding: 20px 0; border-bottom: 4px solid var(--color-border); }
-    .price-table td { display: block; padding: 8px 20px; border: none; width: 100% !important; }
-    .price-name { font-size: 17px; margin-bottom: 4px; }
-    .price-value { font-size: 17px; margin-bottom: 12px; }
-    .price-section-head { padding: 24px 20px; }
-}
+  <title>料金一覧｜Web制作・AI相談・カウンセリング・法人メンタル窓口｜和-Node</title>
+  <meta name="description" content="和-Nodeの料金一覧です。LP制作、ホームページ制作、LINE Mini App制作、AI相談、個人カウンセリング、法人メンタル窓口の税込料金を掲載しています。" />
 
-.price-cta {
-    text-align: center;
-    margin-top: 60px;
-    background: var(--color-accent-light);
-    padding: 60px 24px;
-    border-radius: 12px;
-}
-.price-cta-text {
-    font-size: 18px;
-    color: var(--color-primary);
-    font-weight: 700;
-    margin-bottom: 24px;
-}
-.price-cta-btn {
-    display: inline-block;
-    background: var(--color-primary);
-    color: #fff;
-    padding: 18px 50px;
-    border-radius: 40px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-.price-cta-btn:hover {
-    background: var(--color-accent);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-}
-</style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-B4FD0GJGW5"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-B4FD0GJGW5');
-</script>
+  <link rel="canonical" href="https://www.wa-node.com/pricing.html" />
+  <link rel="stylesheet" href="style.css" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="料金一覧｜和-Node" />
+  <meta property="og:description" content="Web制作、AI相談、カウンセリング、法人メンタル窓口の料金一覧です。" />
+  <meta property="og:url" content="https://www.wa-node.com/pricing.html" />
+  <meta property="og:site_name" content="和-Node" />
+  <meta property="og:image" content="https://www.wa-node.com/ogp.png" />
 </head>
+
 <body>
-<div class="app-container bg-seigaiha">
-<div class="landscape-bg" style="background-image:url('images/bg-landscape.png'); opacity: 0.3;"></div>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="logo">
+        和-Node
+        <span>Web × AI × 心理</span>
+      </a>
 
-<!-- Header -->
-<header class="header">
-  <div class="container header-container">
-    <div class="logo"><a href="index.html"><span class="logo-text">和-Node</span></a></div>
-    <button class="hamburger" id="hamburger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-    <nav class="nav" id="nav">
-      <ul class="nav-list">
-        <li><a href="index.html#story" class="nav-link">About</a></li>
-        <li><a href="index.html#services" class="nav-link">Services</a></li>
-        <li><a href="pricing.html" class="nav-link active">Pricing</a></li>
-        <li><a href="kdp_books.html" class="nav-link">Books</a></li>
-        <li><a href="https://coconala.com/users/2598979" target="_blank" class="nav-link btn-header">ご相談・ご依頼</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
-
-<main class="pricing-container">
-  <h1 class="pricing-title">サービス料金表</h1>
-  <p class="pricing-subtitle">お客様のご要望に合わせ、柔軟にご提案いたします。以下は目安の金額です。</p>
-
-  <!-- Slide 0: Main Services -->
-  <section class="price-section">
-    <div class="price-section-head" style="background: var(--color-accent);">
-      <h2 class="price-section-title">メインサービス（HP/LP制作・コンサル）</h2>
-      <p class="price-section-msg">ビジネスの土台を作るWeb制作と、継続的なITパートナーシップ</p>
+      <nav class="global-nav">
+        <a href="index.html#services">サービス</a>
+        <a href="corporate-mental.html">法人向け</a>
+        <a href="tokutei.html">特商法表記</a>
+        <a href="index.html#contact" class="nav-cta">相談する</a>
+      </nav>
     </div>
-    <table class="price-table">
-      <thead>
-        <tr>
-          <th>サービス名</th>
-          <th>料金目安</th>
-          <th>備考</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="price-name">Web制作（ホームページ / LP）</td>
-          <td class="price-value">15万〜50万円</td>
-          <td class="price-desc">
-            企画・構成・デザイン・コーディング込<br>
-            <span style="font-size:11px; color:var(--color-secondary);">※基本セット：スマホ対応、基本デザイン、基本の5ページ分を含む</span>
-          </td>
-        </tr>
-        <tr>
-          <td class="price-name">LP制作（標準実績）</td>
-          <td class="price-value">8万〜15万円程度</td>
-          <td class="price-desc">セールスライティング・デザイン特化型</td>
-        </tr>
-        <tr>
-          <td class="price-name">オンラインIT顧問</td>
-          <td class="price-value">月額 10,000円〜</td>
-          <td class="price-desc">チャットでの継続相談、壁打ち相手</td>
-        </tr>
-        <tr>
-          <td class="price-name">定期オンライン面談</td>
-          <td class="price-value">1回 10,000円</td>
-          <td class="price-desc">Google Meetを使用した個別相談 (60分)</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+  </header>
 
-  <!-- Slide 0.3: Production Options -->
-  <section class="price-section">
-    <div class="price-section-head" style="background: #e5e2db; color: var(--color-primary);">
-      <h2 class="price-section-title">HP/LP制作 オプション料金（目安）</h2>
-      <p class="price-section-msg">さらにこだわりたい方へ、機能やコンテンツを自由に追加できます</p>
+  <main>
+    <section class="section page-hero">
+      <div class="container narrow">
+        <p class="eyebrow">Pricing</p>
+        <h1>料金一覧</h1>
+        <p>
+          掲載料金はすべて税込です。
+          ご依頼内容、制作範囲、機能数、外部サービス連携の有無により料金が変動する場合があります。
+          正式な金額はヒアリング後にお見積りします。
+        </p>
+      </div>
+    </section>
+
+    <section class="section pricing-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Web</p>
+          <h2>Web制作料金</h2>
+        </div>
+
+        <div class="pricing-table-wrap">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>サービス</th>
+                <th>料金</th>
+                <th>内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>LP制作</td>
+                <td>20,000円〜</td>
+                <td>1ページ構成のランディングページ制作</td>
+              </tr>
+              <tr>
+                <td>ホームページ制作</td>
+                <td>120,000円〜</td>
+                <td>複数ページ構成、サービスサイト、事業者サイトなど</td>
+              </tr>
+              <tr>
+                <td>WordPress制作</td>
+                <td>要見積り</td>
+                <td>更新しやすいWordPressサイトの構築</td>
+              </tr>
+              <tr>
+                <td>サーバー・ドメイン取得代行</td>
+                <td>要相談</td>
+                <td>取得・設定・初期導入をサポート</td>
+              </tr>
+              <tr>
+                <td>原稿作成</td>
+                <td>簡単な整文のみ含む</td>
+                <td>新規ライティングや大幅な構成作成は別途見積り</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-heading">
+          <p class="eyebrow">LINE</p>
+          <h2>LINE Mini App制作</h2>
+        </div>
+
+        <div class="pricing-table-wrap">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>サービス</th>
+                <th>料金</th>
+                <th>内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>LINE Mini App制作</td>
+                <td>150,000円〜</td>
+                <td>予約、問診、アンケート、初回ヒアリング等</td>
+              </tr>
+              <tr>
+                <td>LINE公式アカウント設定代行</td>
+                <td>要相談</td>
+                <td>対応可能な範囲でサポート</td>
+              </tr>
+              <tr>
+                <td>決済導線</td>
+                <td>要相談</td>
+                <td>Stripeの支払いリンクを活用する形で対応可能</td>
+              </tr>
+              <tr>
+                <td>外部サービス連携</td>
+                <td>別途見積り</td>
+                <td>予約・決済・会員機能などの追加連携</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-heading">
+          <p class="eyebrow">AI / Counseling</p>
+          <h2>AI相談・カウンセリング</h2>
+        </div>
+
+        <div class="pricing-table-wrap">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>サービス</th>
+                <th>料金</th>
+                <th>内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>AI・IT相談</td>
+                <td>60分 5,000円</td>
+                <td>ChatGPT活用、業務効率化、ツール選定</td>
+              </tr>
+              <tr>
+                <td>法人向けAI研修</td>
+                <td>要見積り</td>
+                <td>業務に合わせたAI活用研修</td>
+              </tr>
+              <tr>
+                <td>GAS・AI連携・業務効率化</td>
+                <td>要見積り</td>
+                <td>スプレッドシート、GAS、AI連携など</td>
+              </tr>
+              <tr>
+                <td>個人カウンセリング</td>
+                <td>60分 5,000円</td>
+                <td>オンライン相談、Google Meet中心</td>
+              </tr>
+              <tr>
+                <td>チャット相談</td>
+                <td>要相談</td>
+                <td>単発・継続どちらも対応可能</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="section-heading">
+          <p class="eyebrow">Corporate</p>
+          <h2>法人メンタル窓口</h2>
+        </div>
+
+        <div class="pricing-table-wrap">
+          <table class="pricing-table">
+            <thead>
+              <tr>
+                <th>プラン</th>
+                <th>料金</th>
+                <th>内容</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ライト</td>
+                <td>月額30,000円</td>
+                <td>面談1回、月次レポート、相談窓口維持</td>
+              </tr>
+              <tr>
+                <td>スタンダード</td>
+                <td>月額50,000円</td>
+                <td>面談3回、月次レポート、担当者相談</td>
+              </tr>
+              <tr>
+                <td>プレミアム</td>
+                <td>要相談</td>
+                <td>面談回数追加、詳細レポート、管理職向けレクチャー、改善提案</td>
+              </tr>
+              <tr>
+                <td>超過面談</td>
+                <td>1回10,000円</td>
+                <td>月額プランに含まれる面談回数を超える場合</td>
+              </tr>
+              <tr>
+                <td>管理職向けレクチャー</td>
+                <td>60分20,000円</td>
+                <td>部下の不調対応、相談の受け方など</td>
+              </tr>
+              <tr>
+                <td>相談窓口案内ページ制作</td>
+                <td>30,000円〜</td>
+                <td>従業員向け相談窓口の案内ページ制作</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="note">
+          法人向け月額契約は、原則として最低契約期間を3ヶ月とします。
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container narrow">
+        <article class="policy-box">
+          <h2>お支払いについて</h2>
+          <ul>
+            <li>掲載料金はすべて税込です。</li>
+            <li>Stripe決済手数料は表示価格に含まれます。</li>
+            <li>銀行振込の場合、振込手数料はお客様負担となります。</li>
+            <li>見積書・請求書・領収書の発行に対応します。</li>
+          </ul>
+
+          <h2>お支払いタイミング</h2>
+          <ul>
+            <li>制作系サービス：着手金50%、納品前50%</li>
+            <li>相談・カウンセリング：予約確定時に前払い</li>
+            <li>法人月額契約：月初前払い、または請求書払い</li>
+            <li>文章作成・プロンプト作成：着手前全額</li>
+          </ul>
+
+          <h2>別途費用になるもの</h2>
+          <ul>
+            <li>サーバー代</li>
+            <li>ドメイン代</li>
+            <li>有料素材費</li>
+            <li>外部サービス利用料</li>
+            <li>追加機能</li>
+            <li>大幅な仕様変更</li>
+            <li>予約・決済・会員機能などの追加</li>
+          </ul>
+        </article>
+
+        <div class="center-actions">
+          <a href="https://lin.ee/o5QFPwc" class="btn btn-primary" target="_blank" rel="noopener">LINEで相談する</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" class="btn btn-secondary" target="_blank" rel="noopener">フォームで問い合わせ</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <p class="footer-logo">和-Node</p>
+        <p>Web制作・AI活用・心理カウンセリング・法人メンタル窓口</p>
+      </div>
+
+      <nav class="footer-nav">
+        <a href="index.html">トップページ</a>
+        <a href="corporate-mental.html">法人メンタル窓口</a>
+        <a href="tokutei.html">特定商取引法に基づく表記</a>
+        <a href="cancel-policy.html">キャンセル・返金ポリシー</a>
+        <a href="terms.html">利用規約</a>
+      </nav>
     </div>
-    <table class="price-table">
-      <thead>
-        <tr>
-          <th>オプション名</th>
-          <th>料金目安</th>
-          <th>提供内容</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="price-name">ページの追加（1Pあたり）</td>
-          <td class="price-value">10,000円〜</td>
-          <td class="price-desc">会社概要や事業詳細など、基本セット（5P）を超える場合の追加費用</td>
-        </tr>
-        <tr>
-          <td class="price-name">お知らせ・ブログ更新機能</td>
-          <td class="price-value">30,000円〜</td>
-          <td class="price-desc">WordPress等を組み込み、お客様自身でニュースや記事を簡単に更新できる機能</td>
-        </tr>
-        <tr>
-          <td class="price-name">心理学特化のコピーライティング</td>
-          <td class="price-value">30,000円〜</td>
-          <td class="price-desc">心理カウンセラーの視点で、ターゲットの心に刺さる文章の構成・執筆を代行</td>
-        </tr>
-        <tr>
-          <td class="price-name">診断ツール・組み込み</td>
-          <td class="price-value">30,000円〜</td>
-          <td class="price-desc">サイト内に「お見積り計算」等を組み込み、離脱を防ぐ（※アプリ制作と連動）</td>
-        </tr>
-        <tr>
-          <td class="price-name">オリジナル図解・イラスト作成</td>
-          <td class="price-value">5,000円〜</td>
-          <td class="price-desc">1点から対応。サービス内容を直感的にわかりやすく伝える専用の図解を作成</td>
-        </tr>
-        <tr>
-          <td class="price-name">特急納品（お急ぎ便）</td>
-          <td class="price-value">合計の20%増</td>
-          <td class="price-desc">通常1〜1.5ヶ月の制作期間を、優先的にスケジュールを確保して短縮</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
 
-  <!-- Slide 0.5: Web App Examples -->
-  <section class="price-section">
-    <div class="price-section-head" style="background: #185FA5;">
-      <h2 class="price-section-title">Webアプリケーション制作例（開発費用目安）</h2>
-      <p class="price-section-msg">「体験」を通じて集客・ファン化を促進する独自ツール開発</p>
-    </div>
-    <table class="price-table">
-      <thead>
-        <tr>
-          <th>サービス名</th>
-          <th>料金目安</th>
-          <th>備考</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="price-name">お見積りシミュレーター</td>
-          <td class="price-value">約50,000円〜</td>
-          <td class="price-desc">条件分岐によるリアルタイム見積機能</td>
-        </tr>
-        <tr>
-          <td class="price-name">こころの疲労度・モヤモヤ診断</td>
-          <td class="price-value">約40,000円〜</td>
-          <td class="price-desc">複数軸の分析とグラフ生成機能</td>
-        </tr>
-        <tr>
-          <td class="price-name">LPヒアリング・ウィザード</td>
-          <td class="price-value">約35,000円〜</td>
-          <td class="price-desc">対話形式の要件定義サポートツール</td>
-        </tr>
-        <tr>
-          <td class="price-name">SEO内部対策チェックリスト</td>
-          <td class="price-value">約35,000円〜</td>
-          <td class="price-desc">20項目以上の自動採点・アドバイス機能</td>
-        </tr>
-        <tr>
-          <td class="price-name">バリアフリー診断アプリ</td>
-          <td class="price-value">約30,000円〜</td>
-          <td class="price-desc">専門知識を凝縮した簡易診断ツール</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- Slide 1: Backend / Maintenance -->
-  <section class="price-section">
-    <div class="price-section-head">
-      <h2 class="price-section-title">Webサイトの裏側設定・毎月の保守</h2>
-      <p class="price-section-msg">面倒な更新やバックアップはお任せ！安全にサイトを動かし続けます</p>
-    </div>
-    <table class="price-table">
-      <thead>
-        <tr>
-          <th>サービス名</th>
-          <th>料金目安</th>
-          <th>提供内容</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="price-name">ドメイン・サーバー初期設定</td>
-          <td class="price-value">単発 15,000円〜30,000円</td>
-          <td class="price-desc">サイト公開に必要な手続き代行</td>
-        </tr>
-        <tr>
-          <td class="price-name">Webサイト保守・管理サポート</td>
-          <td class="price-value">月額 5,000円〜15,000円</td>
-          <td class="price-desc">定期バックアップ、システム更新、障害対応</td>
-        </tr>
-        <tr>
-          <td class="price-name">サーバーのお引越し代行</td>
-          <td class="price-value">単発 30,000円〜50,000円</td>
-          <td class="price-desc">より安全・高速なサーバーへの移行作業</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- Slide 2: IT Efficiency -->
-  <section class="price-section">
-    <div class="price-section-head">
-      <h2 class="price-section-title">IT・業務効率化サポート（単発・相談）</h2>
-      <p class="price-section-msg">面倒な作業は丸投げ！あなたの時間を増やす便利屋メニュー</p>
-    </div>
-    <table class="price-table">
-      <thead>
-        <tr>
-          <th>サービス名</th>
-          <th>料金目安</th>
-          <th>提供内容</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="price-name">●スプシ・Excel便利ツール作成</td>
-          <td class="price-value">10,000円</td>
-          <td class="price-desc">毎日の計算や管理を自動化するツール作成</td>
-        </tr>
-        <tr>
-          <td class="price-name">●ChatGPT個別サポート(60分)</td>
-          <td class="price-value">5,000円</td>
-          <td class="price-desc">実務に合わせたAI活用法の画面共有サポート</td>
-        </tr>
-        <tr>
-          <td class="price-name">社内IT化・集客の悩み相談(60分)</td>
-          <td class="price-value">10,000円</td>
-          <td class="price-desc">課題整理の単発相談（※顧問契約の前段として）</td>
-        </tr>
-        <tr>
-          <td class="price-name">●ビジネスメール・お断り文作成</td>
-          <td class="price-value">3,000円</td>
-          <td class="price-desc">配慮ある丁寧な文章の代筆</td>
-        </tr>
-        <tr>
-          <td class="price-name">●SEO記事プロンプトお渡し</td>
-          <td class="price-value">3,000円</td>
-          <td class="price-desc">高品質な記事を書くための AI指示書提供</td>
-        </tr>
-        <tr>
-          <td class="price-name">住宅・建具メーカー様向け相談</td>
-          <td class="price-value">20,000円</td>
-          <td class="price-desc">専門知識を活かした製品アピールの助言</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- Slide 3: Web Production -->
-  <section class="price-section">
-    <div class="price-section-head">
-      <h2 class="price-section-title">Web制作・システム最適化</h2>
-      <p class="price-section-msg">集客の土台となるWebサイトやアプリをしっかり整える</p>
-    </div>
-    <table class="price-table">
-      <thead>
-        <tr>
-          <th>サービス名</th>
-          <th>料金目安</th>
-          <th>提供内容</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="price-name">●心理学×Web集客戦略（LP/HP）</td>
-          <td class="price-value">20,000円〜</td>
-          <td class="price-desc">戦略構築のみのお試し価格</td>
-        </tr>
-        <tr>
-          <td class="price-name">WordPress 表示速度改善</td>
-          <td class="price-value">20,000円</td>
-          <td class="price-desc">サイトの読み込み速度改善</td>
-        </tr>
-        <tr>
-          <td class="price-name">WordPress SEO内部最適化</td>
-          <td class="price-value">15,000円</td>
-          <td class="price-desc">検索順位向上のための裏側設定</td>
-        </tr>
-        <tr>
-          <td class="price-name">LINEミニアプリ・診断ツール制作</td>
-          <td class="price-value">150,000円</td>
-          <td class="price-desc">LINE内で動く独自ツールの制作（※詳細はトップページの「Webアプリケーション制作例」をご覧ください）</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <!-- Slide 4: Counseling & Mental Health -->
-  <section class="price-section">
-    <div class="price-section-head" style="background: #3B6D11;">
-      <h2 class="price-section-title">カウンセリング・メンタルヘルスサポート</h2>
-      <p class="price-section-msg">心と組織の健康を守り、次の一歩を支えます</p>
-    </div>
-    <table class="price-table">
-      <thead>
-        <tr>
-          <th>サービス名</th>
-          <th>料金目安</th>
-          <th>提供内容</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td class="price-name">法人：休職を防ぐ職場の課題整理</td>
-          <td class="price-value">15,000円</td>
-          <td class="price-desc">組織内のストレス原因洗い出しと解決策提案</td>
-        </tr>
-        <tr>
-          <td class="price-name">法人：部下の不調対応・面談台本作成</td>
-          <td class="price-value">15,000円</td>
-          <td class="price-desc">具体的な声かけのセリフ（台本）作成</td>
-        </tr>
-        <tr>
-          <td class="price-name">法人：メンタル窓口・経営相談</td>
-          <td class="price-value">月額 30,000円〜</td>
-          <td class="price-desc">社外の保健室としての継続顧問</td>
-        </tr>
-        <tr>
-          <td class="price-name">個人：心の整理と自己PR作成</td>
-          <td class="price-value">15,000円</td>
-          <td class="price-desc">休職・離職中の方の次の一歩支援</td>
-        </tr>
-        <tr>
-          <td class="price-name">個人：オンラインカウンセリング</td>
-          <td class="price-value">6,000円(50分)</td>
-          <td class="price-desc">Google Meetを使った通話相談</td>
-        </tr>
-        <tr>
-          <td class="price-name">個人：テキストカウンセリング</td>
-          <td class="price-value">月額 8,000円</td>
-          <td class="price-desc">チャットでの定額相談</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
-
-  <div class="price-cta">
-    <p class="price-cta-text">まずはあなたのお悩みをお聞かせください。<br>最適なプランをご提案します。</p>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="price-cta-btn">無料相談を申し込む</a>
-  </div>
-</main>
-
-<!-- Footer -->
-<footer class="footer">
-  <div class="container footer-container">
-    <div class="footer-info">
-      <h2 class="footer-logo">和-Node</h2>
-      <p class="footer-desc">
-        ITコンサル・企業コンサル・心理カウンセリング<br/>
-        心とITの両方がわかるパートナー<br/><br/>
-        ご相談・お問い合わせ: <br/>
-        ・<a href="https://coconala.com/users/2598979" target="_blank" style="text-decoration:underline;">ココナラ経由のご依頼はこちら</a><br/>
-        ・<a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" style="text-decoration:underline;">直接取引のご依頼・お問い合わせはこちら</a>
-      </p>
-    </div>
-    <div class="footer-links">
-      <ul>
-        <li><a href="index.html#story">About</a></li>
-        <li><a href="index.html#services">Services</a></li>
-        <li><a href="pricing.html">料金表</a></li>
-        <li><a href="terms_miniapp.html">LINE Mini App 利用規約</a></li>
-        <li><a href="privacy.html">プライバシーポリシー</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p>© 2026 和-Node. All Rights Reserved.</p>
-  </div>
-</footer>
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded',function(){
-  const header=document.querySelector('.header');
-  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));
-
-  const hamburger = document.getElementById('hamburger');
-  const nav = document.getElementById('nav');
-  if(hamburger && nav) {
-    hamburger.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      nav.classList.toggle('active');
-    });
-  }
-});
-</script>
+    <p class="copyright">© 2026 和-Node. All Rights Reserved.</p>
+  </footer>
 </body>
 </html>

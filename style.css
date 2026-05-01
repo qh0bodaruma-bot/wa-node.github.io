@@ -1,33 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
-
 :root {
-  /* Colors - Business Card Theme */
-  --color-primary: #1a2a40; /* 藍色（メインテキスト・強調） */
-  --color-secondary: #364966; /* 少し明るい藍色 */
-  --color-bg: #f7f3e8; /* 生成り色（全体背景） */
-  --color-surface: #ffffff; /* 白（カード背景等） */
-  --color-accent: #c4a052; /* 金茶色（ボタン・アクセント） */
-  --color-accent-light: #f0e6cd; /* 薄い金茶色 */
-  --color-text-main: #1a2a40; /* 基本テキストカラーを藍色ベースに */
-  --color-text-muted: #5e6b7a; /* ミュートされた藍色系グレー */
-  --color-border: #dcd7c9; /* 生成り色に合うボーダー色 */
-
-  /* Typography */
-  --font-heading: 'Shippori Mincho', serif;
-  --font-body: 'Noto Sans JP', sans-serif;
-
-  /* Layout */
-  --max-width: 1100px;
-  --header-height: 80px;
-
-  /* Transitions */
-  --transition-normal: 0.3s ease;
-  --transition-slow: 0.5s ease;
+  --color-bg: #f4efe6;
+  --color-surface: #fffaf2;
+  --color-primary: #2f3a2f;
+  --color-primary-dark: #1f2a22;
+  --color-accent: #7f9252;
+  --color-accent-dark: #66763f;
+  --color-accent-soft: #d9cdbb;
+  --color-text: #2f2a24;
+  --color-muted: #7d7063;
+  --color-border: #d8cdbc;
+  --color-soft: #ede5d7;
+  --color-white: #ffffff;
+  --shadow: 0 18px 42px rgba(47, 42, 36, 0.10);
+  --radius: 20px;
+  --max-width: 1120px;
 }
 
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -36,646 +25,1109 @@ html {
 }
 
 body {
-  font-family: var(--font-body);
-  font-weight: 400;
-  color: var(--color-text-main);
-  background-color: transparent;
-  line-height: 1.6;
+  margin: 0;
+  font-family:
+    "Hiragino Sans",
+    "Hiragino Kaku Gothic ProN",
+    "Yu Gothic",
+    "Meiryo",
+    sans-serif;
+  color: var(--color-text);
+  background:
+    radial-gradient(circle at top left, rgba(127, 146, 82, 0.08), transparent 32%),
+    var(--color-bg);
+  line-height: 1.8;
 }
 
-/* 和紙風テクスチャのオーバーレイ */
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 9999;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  font-weight: 500;
-  line-height: 1.3;
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 a {
-  text-decoration: none;
   color: inherit;
+  text-decoration: none;
 }
 
-ul {
-  list-style: none;
-}
-
-/* 共通コンテナ */
 .container {
-  width: 100%;
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 24px;
+  width: min(100% - 32px, var(--max-width));
+  margin-inline: auto;
 }
 
-/* 共通セクション */
-.section {
-  padding: 100px 0;
+.narrow {
+  max-width: 860px;
 }
 
-.section-title {
-  text-align: center;
-  font-size: clamp(1.5rem, 5vw, 2.5rem);
-  color: var(--color-primary);
-  margin-bottom: 60px;
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(244, 239, 230, 0.92);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(216, 205, 188, 0.9);
+}
+
+.header-inner {
+  min-height: 74px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.logo {
+  display: inline-flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.logo-main {
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    "YuMincho",
+    serif;
+  font-weight: 800;
+  font-size: 1.55rem;
+  color: var(--color-primary-dark);
+  letter-spacing: 0.02em;
+}
+
+.logo-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--color-muted);
+  font-weight: 700;
+  margin-top: 2px;
+  letter-spacing: 0.08em;
+}
+
+.global-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.global-nav a {
+  color: #4a4037;
+}
+
+.global-nav a:hover {
+  color: var(--color-accent-dark);
+}
+
+.nav-cta {
+  background: var(--color-primary);
+  color: #fff !important;
+  padding: 9px 16px;
+  border-radius: 999px;
+}
+
+.hero {
   position: relative;
-  letter-spacing: 0.05em;
+  overflow: hidden;
+  padding: 92px 0 76px;
+  background:
+    radial-gradient(circle at top left, rgba(127, 146, 82, 0.18), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(216, 205, 188, 0.55), transparent 34%),
+    linear-gradient(135deg, #f4efe6 0%, #ede5d7 100%);
 }
 
-.section-title::after {
-  content: '';
+.hero::before {
+  content: "和";
   position: absolute;
-  bottom: -15px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 60px;
-  height: 2px;
-  background-color: var(--color-accent);
+  right: 5%;
+  top: 4%;
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    "YuMincho",
+    serif;
+  font-size: clamp(8rem, 18vw, 16rem);
+  font-weight: 700;
+  color: rgba(47, 58, 47, 0.06);
+  line-height: 1;
+  pointer-events: none;
 }
 
-/* 共通ボタン */
+.bamboo-bg {
+  position: absolute;
+  left: -90px;
+  bottom: -160px;
+  width: 420px;
+  height: 520px;
+  opacity: 0.14;
+  transform: rotate(-18deg);
+  pointer-events: none;
+}
+
+.bamboo-bg::before,
+.bamboo-bg::after {
+  content: "";
+  position: absolute;
+  background: var(--color-accent);
+  border-radius: 999px;
+}
+
+.bamboo-bg::before {
+  width: 34px;
+  height: 520px;
+  left: 160px;
+  top: 0;
+  box-shadow:
+    58px -20px 0 rgba(127, 146, 82, 0.9),
+    116px 40px 0 rgba(127, 146, 82, 0.75);
+}
+
+.bamboo-bg::after {
+  width: 220px;
+  height: 220px;
+  left: 140px;
+  top: 80px;
+  background:
+    radial-gradient(ellipse at center, rgba(127, 146, 82, 0.95) 0 20%, transparent 21%),
+    conic-gradient(from 10deg, transparent 0 8%, rgba(127, 146, 82, 0.95) 8% 12%, transparent 12% 20%, rgba(127, 146, 82, 0.8) 20% 24%, transparent 24% 100%);
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1.18fr 0.82fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  color: var(--color-accent-dark);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 30px;
+  height: 2px;
+  background: var(--color-accent);
+  border-radius: 999px;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    "YuMincho",
+    serif;
+  font-size: clamp(2.25rem, 5vw, 4.2rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+  color: var(--color-primary-dark);
+}
+
+h1 span {
+  color: var(--color-primary);
+  background: linear-gradient(transparent 62%, rgba(127, 146, 82, 0.24) 62%);
+}
+
+.hero-lead {
+  font-size: 1.05rem;
+  color: #4c433a;
+  max-width: 700px;
+}
+
+.brand-subcopy {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-left: 4px solid var(--color-accent);
+  background: rgba(255, 250, 242, 0.62);
+  color: #5e5247;
+  border-radius: 0 14px 14px 0;
+}
+
+.hero-actions,
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 16px 40px;
-  border-radius: 40px;
-  font-size: 1.1rem;
-  font-weight: 500;
-  letter-spacing: 0.05em;
-  cursor: pointer;
-  transition: all var(--transition-normal);
-  border: none;
+  min-height: 48px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-weight: 800;
+  transition: 0.2s ease;
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
-  color: #FFF;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background: var(--color-primary);
+  color: #fff;
+  box-shadow: 0 14px 30px rgba(31, 42, 34, 0.22);
 }
 
 .btn-primary:hover {
-  background-color: #222;
+  background: var(--color-primary-dark);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
-.btn-accent {
-  background-color: var(--color-accent);
-  color: #FFF;
-  box-shadow: 0 4px 15px rgba(196, 160, 82, 0.3);
+.btn-secondary {
+  background: rgba(255, 250, 242, 0.86);
+  color: var(--color-primary-dark);
+  border: 1px solid var(--color-border);
 }
 
-.btn-accent:hover {
-  background-color: #a88846;
+.btn-secondary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(196, 160, 82, 0.4);
+  box-shadow: var(--shadow);
 }
 
-/* 和柄背景ユーティリティ */
-.bg-seigaiha {
-  /* 青海波のような半透明の円弧パターン */
-  background-image: 
-    radial-gradient(circle at 100% 150%, transparent 20%, rgba(26, 42, 64, 0.04) 21%, rgba(26, 42, 64, 0.04) 34%, transparent 35%, transparent),
-    radial-gradient(circle at 0% 150%, transparent 20%, rgba(26, 42, 64, 0.04) 21%, rgba(26, 42, 64, 0.04) 34%, transparent 35%, transparent);
-  background-size: 100px 50px;
-  background-position: 0 0, 50px 0;
+.sub-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 18px;
 }
 
-/* 風景背景のレイヤー */
-.landscape-bg {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0.4; /* 透明度40%程度 */
-  z-index: -1;
-  pointer-events: none;
+.sub-actions a {
+  font-size: 0.9rem;
+  color: var(--color-primary-dark);
+  font-weight: 800;
+  background: rgba(255, 250, 242, 0.76);
+  border: 1px solid var(--color-border);
+  padding: 7px 12px;
+  border-radius: 999px;
 }
 
-/* =========================================
-   Header 
-========================================= */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: var(--header-height);
-  z-index: 1000;
-  transition: all var(--transition-normal);
-  background-color: transparent;
+.sub-actions a:hover {
+  background: var(--color-accent);
+  color: #fff;
 }
 
-.header.scrolled {
-  background-color: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+.hero-trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 0;
+  margin: 24px 0 0;
+  list-style: none;
 }
 
-.header-container {
+.hero-trust li {
+  background: rgba(255, 250, 242, 0.8);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.86rem;
+  color: #5e5247;
+  font-weight: 700;
+}
+
+.hero-card {
+  background: rgba(255, 250, 242, 0.88);
+  border: 1px dashed rgba(47, 58, 47, 0.28);
+  border-radius: 32px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+}
+
+.profile-badge {
+  display: inline-block;
+  background: var(--color-soft);
+  color: var(--color-primary-dark);
+  font-weight: 800;
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 0.86rem;
+  margin-bottom: 18px;
+}
+
+.hero-card h2 {
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    "YuMincho",
+    serif;
+  font-size: 1.45rem;
+  line-height: 1.45;
+}
+
+.hero-card p {
+  color: var(--color-muted);
+}
+
+.hero-card dl {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0 0;
+}
+
+.hero-card dl div {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  height: 100%;
+  gap: 16px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 12px;
 }
 
-.logo-text {
-  font-family: var(--font-heading);
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--color-primary);
-  letter-spacing: 0.1em;
+.hero-card dt {
+  font-weight: 800;
 }
 
-.hamburger {
-  display: block;
-  width: 30px;
-  height: 24px;
-  position: relative;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  z-index: 1000;
-  margin-left: auto;
-}
-.hamburger span {
-  display: block;
-  width: 100%;
-  height: 2px;
-  background-color: var(--color-primary);
-  position: absolute;
-  transition: all 0.3s;
-}
-.hamburger span:nth-child(1) { top: 0; }
-.hamburger span:nth-child(2) { top: 11px; }
-.hamburger span:nth-child(3) { bottom: 0; }
-.hamburger.active span:nth-child(1) { transform: translateY(11px) rotate(45deg); }
-.hamburger.active span:nth-child(2) { opacity: 0; }
-.hamburger.active span:nth-child(3) { transform: translateY(-11px) rotate(-45deg); }
-
-.nav {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 300px;
-  max-width: 100vw;
-  height: 100vh;
-  background-color: rgba(255,255,255,0.98);
-  backdrop-filter: blur(10px);
-  box-shadow: -5px 0 20px rgba(0,0,0,0.1);
-  padding: 100px 40px;
-  transition: right 0.4s ease;
-  z-index: 999;
-}
-.nav.active {
-  right: 0;
+.hero-card dd {
+  margin: 0;
+  color: var(--color-accent-dark);
+  font-weight: 900;
 }
 
-.nav-list {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: flex-start;
+.section {
+  padding: 84px 0;
 }
 
-.nav-link {
-  font-size: 1rem;
-  font-weight: 500;
-  color: var(--color-primary);
-  transition: color var(--transition-normal);
-  position: relative;
-  text-decoration: none;
+.section-heading {
+  max-width: 760px;
+  margin-bottom: 38px;
 }
 
-.nav-link:not(.btn-header)::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: -4px;
-  left: 50%;
-  background-color: var(--color-accent);
-  transition: all var(--transition-normal);
-  transform: translateX(-50%);
+.section-heading h2,
+.split h2 {
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    "YuMincho",
+    serif;
+  font-size: clamp(1.8rem, 3vw, 2.65rem);
+  line-height: 1.36;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
+  color: var(--color-primary-dark);
 }
 
-.nav-link:not(.btn-header):hover::after {
-  width: 100%;
+.section-heading p,
+.split p {
+  color: var(--color-muted);
 }
 
-.btn-header {
-  background-color: var(--color-primary);
-  color: #fff;
-  padding: 10px 24px;
-  border-radius: 30px;
-  transition: all var(--transition-normal);
-  text-decoration: none;
-}
-
-.btn-header:hover {
-  background-color: var(--color-accent);
-  color: #fff;
-  box-shadow: 0 4px 10px rgba(196, 160, 82, 0.3);
-}
-
-/* =========================================
-   Hero 
-========================================= */
-.hero {
-  position: relative;
-  height: 100vh;
-  min-height: 600px;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-  background-color: transparent;
-}
-
-.hero-bg-enso {
-  position: absolute;
-  top: 50%;
-  right: -5%;
-  transform: translateY(-50%);
-  width: 80vh;
-  height: 80vh;
-  border: 40px solid rgba(51, 51, 51, 0.05);
-  border-radius: 50%;
-  z-index: 0;
-  animation: rotateSlow 60s linear infinite;
-}
-
-.hero-bg-enso::after {
-  content: '';
-  position: absolute;
-  top: -60px;
-  left: -60px;
-  right: -60px;
-  bottom: -60px;
-  border: 2px solid rgba(196, 160, 82, 0.3);
-  border-radius: 50%;
-}
-
-@keyframes rotateSlow {
-  0% { transform: translateY(-50%) rotate(0deg); }
-  100% { transform: translateY(-50%) rotate(360deg); }
-}
-
-.hero-container {
-  position: relative;
-  z-index: 1;
-}
-
-.hero-content {
-  max-width: 800px;
-}
-
-.hero-title {
-  font-size: 3.5rem;
-  color: var(--color-primary);
-  margin-bottom: 30px;
-  line-height: 1.4;
-}
-
-.title-line {
-  display: block;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-}
-
-.title-line:nth-child(2) {
-  animation-delay: 0.3s;
-}
-
-.hero-subtitle {
-  font-size: 1.1rem;
-  color: var(--color-primary);
-  font-weight: 500;
-  background: rgba(255, 255, 255, 0.92);
-  padding: 20px 24px 20px 36px;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-  display: inline-block;
-  backdrop-filter: blur(8px);
-  margin-bottom: 50px;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  animation-delay: 0.6s;
-  position: relative;
-}
-
-.hero-subtitle::before {
-  content: '';
-  position: absolute;
-  left: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  height: calc(100% - 32px);
-  width: 4px;
-  background-color: var(--color-accent);
-}
-
-.hero-action {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeUp 1s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  animation-delay: 0.9s;
-}
-
-@keyframes fadeUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-title {
-    font-size: 2rem;
-  }
-  .hero-bg-enso {
-    width: 300px;
-    height: 300px;
-    right: -100px;
-  }
-}
-
-/* =========================================
-   Concept 
-========================================= */
-.concept {
-  background-color: var(--color-surface);
-  position: relative;
-}
-
-.concept-content {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 60px;
-  background: var(--color-bg);
-  border-radius: 2px;
-  position: relative;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  text-align: center;
-}
-
-@media (min-width: 769px) {
-  .concept-content {
-    flex-direction: row;
-    text-align: left;
-    align-items: center;
-  }
-}
-
-.concept-profile {
-  flex-shrink: 0;
-}
-
-.profile-image {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 4px solid var(--color-surface);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
-}
-
-.concept-text-area {
-  flex-grow: 1;
-}
-
-/* 四隅の和風な装飾 */
-.concept-content::before,
-.concept-content::after {
-  content: '';
-  position: absolute;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--color-accent);
-}
-
-.concept-content::before {
-  top: 20px;
-  left: 20px;
-  border-right: none;
-  border-bottom: none;
-}
-
-.concept-content::after {
-  bottom: 20px;
-  right: 20px;
-  border-left: none;
-  border-top: none;
-}
-
-.concept-text {
-  font-size: 1.2rem;
-  color: var(--color-secondary);
-  margin-bottom: 20px;
-}
-
-.concept-highlight {
-  font-size: 2rem;
-  color: var(--color-primary);
-  margin-bottom: 40px;
-  line-height: 1.6;
-}
-
-.concept-desc {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  line-height: 2;
-}
-
-@media (max-width: 768px) {
-  .concept-content {
-    padding: 40px 20px;
-  }
-  .concept-highlight {
-    font-size: 1.5rem;
-  }
-  .concept-desc {
-    text-align: left;
-  }
-}
-
-/* =========================================
-   Services 
-========================================= */
-.services {
-  background-color: transparent;
-}
-
-.services-grid {
+.cards,
+.service-grid,
+.plan-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+  gap: 22px;
 }
 
-.service-card {
+.three-columns {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.four-columns {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.two-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.card,
+.service-card,
+.plan-card,
+.policy-box,
+.credential-box,
+.work-card {
   background: var(--color-surface);
-  padding: 40px 30px;
-  border-radius: 4px;
-  text-align: center;
-  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-  border-top: 4px solid var(--color-primary);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 26px;
+  box-shadow: 0 12px 32px rgba(47, 42, 36, 0.055);
+}
+
+.card h3,
+.service-card h3,
+.plan-card h3,
+.work-card h3 {
+  font-size: 1.18rem;
+  line-height: 1.5;
+  margin-bottom: 10px;
+  color: var(--color-primary-dark);
+}
+
+.card p,
+.service-card p,
+.plan-card p,
+.work-card p {
+  color: var(--color-muted);
+}
+
+.problem-section {
+  background: #fffaf2;
+}
+
+.about-section {
+  background: #fffaf2;
+}
+
+.split {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.credential-box h3 {
+  margin-bottom: 16px;
+}
+
+.credential-box ul {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.credential-box li {
+  margin-bottom: 8px;
+}
+
+.about-links,
+.card-links,
+.policy-links,
+.platform-links,
+.center-actions {
   display: flex;
-  flex-direction: column;
-  height: 100%;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
 }
 
-.service-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+.text-link {
+  display: inline-flex;
+  margin-top: 18px;
+  font-weight: 900;
+  color: var(--color-accent-dark);
 }
 
-.service-card.accent-card {
-  border-top-color: var(--color-accent);
+.text-link:hover {
+  color: var(--color-primary-dark);
 }
 
-.service-icon {
-  width: 60px;
-  height: 60px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background-color: rgba(51, 51, 51, 0.05);
-  color: var(--color-primary);
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  display: flex;
+.card-links a,
+.policy-links a,
+.platform-links a {
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
+  min-height: 38px;
+  padding: 8px 13px;
+  border-radius: 999px;
+  background: var(--color-soft);
+  color: var(--color-primary-dark);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.card-links a:hover,
+.policy-links a:hover,
+.platform-links a:hover {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.services-section {
+  background:
+    radial-gradient(circle at top right, rgba(127, 146, 82, 0.12), transparent 30%),
+    var(--color-bg);
+}
+
+.service-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.service-label {
+  display: inline-flex;
+  background: var(--color-soft);
+  color: var(--color-accent-dark);
+  font-weight: 900;
+  border-radius: 999px;
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  margin-bottom: 14px;
+}
+
+.service-card ul,
+.plan-card ul,
+.policy-box ul,
+.card ul,
+.work-card ul {
+  padding-left: 1.2em;
+  margin-bottom: 0;
+}
+
+.service-card li,
+.plan-card li,
+.policy-box li,
+.card li,
+.work-card li {
+  margin-bottom: 6px;
+}
+
+.accent-card {
+  background:
+    linear-gradient(135deg, rgba(47, 58, 47, 0.98), rgba(31, 42, 34, 0.98));
+  color: #fff;
+}
+
+.accent-card h3 {
+  color: #fff;
+}
+
+.accent-card p,
+.accent-card li {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.accent-card .service-label {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.accent-card .text-link {
+  color: #fff;
+}
+
+.line-section {
+  background:
+    radial-gradient(circle at top right, rgba(127, 146, 82, 0.15), transparent 34%),
+    #fffaf2;
+}
+
+.scope-section {
+  background: var(--color-bg);
+}
+
+.works-section {
+  background: #fffaf2;
+}
+
+.work-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.work-card.featured {
+  grid-column: span 2;
+  background:
+    linear-gradient(135deg, rgba(47, 58, 47, 0.96), rgba(31, 42, 34, 0.96));
+  color: #fff;
+}
+
+.work-card.featured h3 {
+  color: #fff;
+}
+
+.work-card.featured p {
+  color: rgba(255, 255, 255, 0.84);
+}
+
+.work-card.featured .text-link {
+  color: #fff;
+}
+
+.flow-section {
+  background: #fffaf2;
+}
+
+.flow-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+.flow-list li {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 22px;
+  position: relative;
+}
+
+.flow-list span {
+  display: inline-flex;
+  color: var(--color-accent-dark);
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+
+.flow-list h3 {
+  font-size: 1rem;
+  margin-bottom: 8px;
+}
+
+.flow-list p {
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.pricing-section {
+  background: var(--color-soft);
+}
+
+.pricing-table-wrap {
+  overflow-x: auto;
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  margin-bottom: 42px;
+}
+
+.pricing-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 720px;
+}
+
+.pricing-table th,
+.pricing-table td {
+  padding: 18px;
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.pricing-table thead th {
+  background: var(--color-primary-dark);
+  color: #fff;
+}
+
+.pricing-table tbody th {
+  width: 28%;
+  background: var(--color-soft);
+  color: var(--color-primary-dark);
+  vertical-align: top;
+}
+
+.pricing-table td:nth-child(2) {
+  font-weight: 900;
+  color: var(--color-accent-dark);
+  white-space: nowrap;
+}
+
+.note {
+  margin-top: 18px;
+  color: var(--color-muted);
+  font-size: 0.92rem;
+}
+
+.policy-preview {
+  background: #fffaf2;
+}
+
+.policy-box h2 {
+  font-size: 1.45rem;
+  margin-top: 36px;
+  margin-bottom: 14px;
+  color: var(--color-primary-dark);
+}
+
+.policy-box h2:first-child {
+  margin-top: 0;
+}
+
+.policy-box h3:not(:first-child) {
+  margin-top: 24px;
+}
+
+.policy-box p {
+  color: var(--color-muted);
+}
+
+.policy-box a {
+  color: var(--color-accent-dark);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.corporate-section {
+  background:
+    radial-gradient(circle at top left, rgba(127, 146, 82, 0.12), transparent 30%),
+    linear-gradient(180deg, #f4efe6 0%, #ede5d7 100%);
+}
+
+.plan-grid {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.plan-card {
+  position: relative;
+}
+
+.plan-card.recommended {
+  border: 2px solid var(--color-accent);
+  transform: translateY(-8px);
+}
+
+.badge {
+  position: absolute;
+  top: -14px;
+  right: 22px;
+  background: var(--color-accent);
+  color: #fff;
+  border-radius: 999px;
+  font-weight: 900;
+  padding: 6px 12px;
+  font-size: 0.82rem;
+}
+
+.price {
+  color: var(--color-accent-dark) !important;
+  font-weight: 900;
+  font-size: 1.6rem;
+  margin-bottom: 18px;
+}
+
+.safety-section {
+  background: #fffaf2;
+}
+
+.security-note {
+  margin-top: 28px;
+  background: var(--color-soft);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 22px 26px;
+}
+
+.security-note p {
+  margin-bottom: 0;
+  color: var(--color-muted);
+}
+
+.faq-section {
+  background: var(--color-bg);
+}
+
+.faq-section details {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 18px 22px;
+  margin-bottom: 12px;
+}
+
+.faq-section summary {
+  cursor: pointer;
+  font-weight: 900;
+  color: var(--color-primary-dark);
+}
+
+.faq-section details p {
+  color: var(--color-muted);
+  margin: 14px 0 0;
+}
+
+.cta-section {
+  background:
+    radial-gradient(circle at top right, rgba(127, 146, 82, 0.26), transparent 34%),
+    var(--color-primary-dark);
+  color: #fff;
+}
+
+.cta-box {
+  text-align: center;
+  max-width: 850px;
+}
+
+.cta-box .eyebrow {
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.cta-box h2 {
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    "YuMincho",
+    serif;
+  font-size: clamp(1.8rem, 3vw, 2.7rem);
+  line-height: 1.35;
+  color: #fff;
+}
+
+.cta-box p {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.cta-actions {
   justify-content: center;
 }
 
-.accent-card .service-icon {
-  background-color: var(--color-accent-light);
-  color: var(--color-accent);
-}
-
-.service-title {
-  font-size: 1.4rem;
-  margin-bottom: 20px;
-  color: var(--color-primary);
-}
-
-.service-desc {
-  color: var(--color-text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 30px;
-  flex-grow: 1;
-}
-
-@media (max-width: 768px) {
-  .services-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* =========================================
-   Footer 
-========================================= */
-.footer {
-  background-color: var(--color-primary);
+.cta-box .btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  padding: 80px 0 20px;
+  border-color: rgba(255, 255, 255, 0.28);
 }
 
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 60px;
-  flex-wrap: wrap;
-  gap: 40px;
+.contact-info {
+  margin-top: 24px;
+  font-size: 0.95rem;
+}
+
+.page-hero {
+  background:
+    radial-gradient(circle at top right, rgba(127, 146, 82, 0.16), transparent 34%),
+    linear-gradient(135deg, #f4efe6 0%, #ede5d7 100%);
+  padding: 72px 0 56px;
+}
+
+.page-hero h1 {
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    "YuMincho",
+    serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  margin-bottom: 18px;
+  color: var(--color-primary-dark);
+}
+
+.page-hero p {
+  color: var(--color-muted);
+}
+
+.site-footer {
+  background: #1f2a22;
+  color: rgba(255, 255, 255, 0.78);
+  padding: 48px 0 22px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 32px;
 }
 
 .footer-logo {
-  font-family: var(--font-heading);
-  font-size: 2rem;
-  margin-bottom: 15px;
-  letter-spacing: 0.1em;
+  color: #fff;
+  font-family:
+    "Yu Mincho",
+    "Hiragino Mincho ProN",
+    "YuMincho",
+    serif;
+  font-weight: 900;
+  font-size: 1.55rem;
+  margin-bottom: 8px;
 }
 
-.footer-desc {
-  color: #ccc;
-  line-height: 1.8;
+.footer-small {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.62);
+  margin-top: 14px;
 }
 
-.footer-links ul {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
+.footer-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
 }
 
-.footer-links a {
-  color: #ccc;
-  transition: color var(--transition-normal);
+.footer-nav a:hover {
+  color: #fff;
 }
 
-.footer-links a:hover {
-  color: var(--color-accent);
-}
-
-.footer-bottom {
+.copyright {
   text-align: center;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 20px;
-  color: #888;
-  font-size: 0.9rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 32px auto 0;
+  padding-top: 18px;
+  font-size: 0.84rem;
 }
 
+@media (max-width: 960px) {
+  .global-nav {
+    display: none;
+  }
+
+  .hero-grid,
+  .split,
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .three-columns,
+  .four-columns,
+  .service-grid,
+  .plan-grid,
+  .work-grid,
+  .two-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .flow-list {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .plan-card.recommended {
+    transform: none;
+  }
+
+  .work-card.featured {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 64px 0 52px;
+  }
+
+  .section {
+    padding: 64px 0;
+  }
+
+  .three-columns,
+  .four-columns,
+  .service-grid,
+  .plan-grid,
+  .work-grid,
+  .flow-list,
+  .two-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .work-card.featured {
+    grid-column: span 1;
+  }
+
+  .hero-card,
+  .card,
+  .service-card,
+  .plan-card,
+  .policy-box,
+  .credential-box,
+  .work-card {
+    padding: 22px;
+  }
+
+  .footer-nav {
+    grid-template-columns: 1fr;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .hero-actions,
+  .cta-actions,
+  .sub-actions,
+  .about-links,
+  .card-links,
+  .policy-links,
+  .platform-links,
+  .center-actions {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .card-links a,
+  .policy-links a,
+  .platform-links a,
+  .sub-actions a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-card dl div {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .pricing-table {
+    min-width: 640px;
+  }
+}
 /* =========================================
-   Demo Banner（制作例サンプル通知）
+   Hero background image version
+   bg-landscape.png を使う場合
 ========================================= */
-.demo-banner {
-  margin-top: var(--header-height); /* fixed headerの高さ分下にずらす */
-  background: var(--color-accent-light);
-  color: var(--color-primary);
-  text-align: center;
-  padding: 12px 20px;
-  font-size: 13px;
-  line-height: 1.7;
-  border-bottom: 1px solid var(--color-border);
+
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 92px 0 76px;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(244, 239, 230, 0.95) 0%,
+      rgba(244, 239, 230, 0.90) 42%,
+      rgba(244, 239, 230, 0.76) 72%,
+      rgba(244, 239, 230, 0.62) 100%
+    ),
+    url("images/bg-landscape.png") center center / cover no-repeat;
 }
 
-.demo-banner strong {
-  color: var(--color-accent);
+/* 画像背景と重なるため、CSS装飾の大きな「和」は非表示 */
+.hero::before {
+  content: none;
 }
 
-.banner-cta {
-  color: var(--color-primary);
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.2s;
+/* 画像内に竹があるため、CSSで作った竹装飾は非表示 */
+.bamboo-bg {
+  display: none;
 }
 
-.banner-cta:hover {
-  color: var(--color-accent);
+.hero-content {
+  background: rgba(255, 250, 242, 0.66);
+  border: 1px solid rgba(216, 205, 188, 0.72);
+  border-radius: 28px;
+  padding: 30px;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 18px 42px rgba(47, 42, 36, 0.08);
 }
 
-/* スマホでバナーが折り返しても収まるよう余白を確保 */
-@media (max-width: 600px) {
-  .demo-banner {
-    font-size: 12px;
-    padding: 10px 14px;
+.hero-card {
+  background: rgba(255, 250, 242, 0.92);
+  border: 1px dashed rgba(47, 58, 47, 0.32);
+  border-radius: 32px;
+  padding: 32px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(6px);
+}
+
+@media (max-width: 640px) {
+  .hero {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(244, 239, 230, 0.96) 0%,
+        rgba(244, 239, 230, 0.92) 52%,
+        rgba(244, 239, 230, 0.84) 100%
+      ),
+      url("images/bg-landscape.png") center top / cover no-repeat;
+  }
+
+  .hero-content {
+    padding: 24px;
+    border-radius: 24px;
   }
 }
