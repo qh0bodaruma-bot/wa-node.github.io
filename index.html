@@ -249,7 +249,10 @@
         </div>
 
         <div class="credential-box">
-          <h3>代表プロフィール</h3>
+          <div class="avatar-wrap">
+            <img src="images/avatar.png" alt="代表 高野紘純のイラスト" class="avatar-img" />
+          </div>
+          <h3>代表プロフィール<br><span style="font-size: 0.85em; font-weight: 700; color: var(--color-muted);">高野 紘純</span></h3>
           <ul>
             <li>産業カウンセラー</li>
             <li>上級心理カウンセラー</li>
@@ -262,6 +265,7 @@
         </div>
       </div>
     </section>
+
 
     <!-- TARGET -->
     <section class="section problem-section">
@@ -911,53 +915,72 @@
           <h2>よくある質問</h2>
         </div>
 
-        <details>
-          <summary>ホームページを持っていなくても依頼できますか？</summary>
-          <p>
-            はい。サーバーの準備やドメイン取得からサポートできます。
-          </p>
-        </details>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>ホームページを持っていなくても依頼できますか？</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>はい。サーバーの準備やドメイン取得からサポートできます。</p>
+            </div>
+          </div>
 
-        <details>
-          <summary>相談だけでも可能ですか？</summary>
-          <p>
-            はい。制作前提でなくても、60分相談からご利用いただけます。
-          </p>
-        </details>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>相談だけでも可能ですか？</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>はい。制作前提でなくても、60分相談からご利用いただけます。</p>
+            </div>
+          </div>
 
-        <details>
-          <summary>ココナラ以外の直接取引はできますか？</summary>
-          <p>
-            はい。直接契約、クラウドワークス、ランサーズ経由にも対応しています。
-          </p>
-        </details>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>ココナラ以外の直接取引はできますか？</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>はい。直接契約、クラウドワークス、ランサーズ経由にも対応しています。</p>
+            </div>
+          </div>
 
-        <details>
-          <summary>支払い方法は何がありますか？</summary>
-          <p>
-            Stripe決済、銀行振込、請求書払いに対応しています。
-            銀行振込手数料はお客様負担です。
-          </p>
-        </details>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>支払い方法は何がありますか？</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>Stripe決済、銀行振込、請求書払いに対応しています。銀行振込手数料はお客様負担です。</p>
+            </div>
+          </div>
 
-        <details>
-          <summary>カウンセリングは医療行為ですか？</summary>
-          <p>
-            いいえ。医療行為、診断、治療、投薬指示、診断書作成は行っていません。
-          </p>
-        </details>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>カウンセリングは医療行為ですか？</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>いいえ。医療行為、診断、治療、投薬指示、診断書作成は行っていません。</p>
+            </div>
+          </div>
 
-        <details>
-          <summary>法人相談の内容は会社に共有されますか？</summary>
-          <p>
-            個人が特定される内容は本人の同意なく共有しません。
-            企業様には件数・傾向・改善提案などを匿名化して報告します。
-          </p>
-        </details>
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>法人相談の内容は会社に共有されますか？</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </button>
+            <div class="faq-answer">
+              <p>個人が特定される内容は本人の同意なく共有しません。企業様には件数・傾向・改善提案などを匿名化して報告します。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
     <!-- CONTACT -->
+
     <section id="contact" class="section cta-section">
       <div class="container cta-box">
         <p class="eyebrow">Contact</p>
@@ -1036,5 +1059,21 @@
 
     <p class="copyright">© 2026 和-Node. All Rights Reserved.</p>
   </footer>
+<script>
+document.querySelectorAll('.faq-question').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var isOpen = btn.getAttribute('aria-expanded') === 'true';
+    var answer = btn.nextElementSibling;
+    document.querySelectorAll('.faq-question').forEach(function(b) {
+      b.setAttribute('aria-expanded', 'false');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.setAttribute('aria-expanded', 'true');
+      answer.classList.add('open');
+    }
+  });
+});
+</script>
 </body>
 </html>
