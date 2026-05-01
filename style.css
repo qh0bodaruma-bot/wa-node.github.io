@@ -450,8 +450,8 @@ h1 span {
 .service-card,
 .plan-card,
 .policy-box,
-.credential-box,
-.work-card {
+.work-card,
+.credential-box {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius);
@@ -491,17 +491,40 @@ h1 span {
   align-items: start;
 }
 
+.credential-box {
+  text-align: center;
+  padding: 32px 28px;
+}
+
 .credential-box h3 {
-  margin-bottom: 16px;
+  margin-bottom: 20px !important;
+  text-align: center;
+  line-height: 1.5;
 }
 
 .credential-box ul {
-  margin: 0;
-  padding-left: 1.2em;
+  display: inline-block;
+  text-align: left;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none !important;
 }
 
 .credential-box li {
-  margin-bottom: 8px;
+  position: relative;
+  padding-left: 1.2em;
+  margin-bottom: 10px;
+  font-size: 0.94rem;
+  color: var(--color-text);
+  line-height: 1.6;
+}
+
+.credential-box li::before {
+  content: "\2022";
+  position: absolute;
+  left: 0;
+  color: var(--color-accent);
+  font-weight: 900;
 }
 
 .about-links,
@@ -927,9 +950,9 @@ h1 span {
   height: 120px;
   border-radius: 50%;
   overflow: hidden;
-  margin: 0 auto 18px;
-  border: 3px solid var(--color-border);
-  box-shadow: 0 4px 18px rgba(47, 58, 47, 0.12);
+  margin: 0 auto 20px;
+  border: 4px solid var(--color-white);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 }
 
 .avatar-img {
@@ -939,14 +962,7 @@ h1 span {
   object-position: top center;
 }
 
-.credential-box {
-  text-align: center;
-}
 
-.credential-box h3 {
-  text-align: center;
-  margin-bottom: 18px;
-}
 
 
 
