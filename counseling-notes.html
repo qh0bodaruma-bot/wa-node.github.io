@@ -1,196 +1,312 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <title>\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u5229\u7528\u6642\u306e\u6ce8\u610f\u4e8b\u9805\uff5c\u30aa\u30f3\u30e9\u30a4\u30f3\u76f8\u8ac7\u30fb\u5b88\u79d8\u7fa9\u52d9\u30fb\u5bfe\u5fdc\u7bc4\u56f2\uff5c\u548c-Node</title>
-  <meta name="description" content="\u548c-Node\u306e\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u5229\u7528\u6642\u306e\u6ce8\u610f\u4e8b\u9805\u3067\u3059\u3002\u533b\u7642\u884c\u70ba\u3067\u306f\u306a\u3044\u3053\u3068\u3001\u5bfe\u5fdc\u5916\u30b1\u30fc\u30b9\u3001\u5b88\u79d8\u7fa9\u52d9\u3001\u7dca\u6025\u6642\u5bfe\u5fdc\u3001\u672a\u6210\u5e74\u306e\u76f8\u8ac7\u306b\u3064\u3044\u3066\u63b2\u8f09\u3057\u3066\u3044\u307e\u3059\u3002" />
-
-  <link rel="canonical" href="https://www.wa-node.com/counseling-notes.html" />
-  <link rel="icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-  <link rel="stylesheet" href="style.css" />
-
-  <meta property="og:type" content="article" />
-  <meta property="og:title" content="\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u5229\u7528\u6642\u306e\u6ce8\u610f\u4e8b\u9805\uff5c\u548c-Node" />
-  <meta property="og:description" content="\u30aa\u30f3\u30e9\u30a4\u30f3\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u306e\u5bfe\u5fdc\u7bc4\u56f2\u3001\u5b88\u79d8\u7fa9\u52d9\u3001\u533b\u7642\u884c\u70ba\u3067\u306f\u306a\u3044\u65e8\u3092\u63b2\u8f09\u3057\u3066\u3044\u307e\u3059\u3002" />
-  <meta property="og:url" content="https://www.wa-node.com/counseling-notes.html" />
-  <meta property="og:site_name" content="\u548c-Node" />
-  <meta property="og:image" content="https://www.wa-node.com/ogp.png" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>カウンセリング利用時の注意事項｜オンライン相談・守秘義務・対応範囲｜和-Node</title>
+  <meta name="description" content="和-Nodeのカウンセリング利用時の注意事項。医療行為ではないこと、守秘義務、対応外ケース、キャンセル条件を説明します。">
+  <style>
+:root{
+  --bg:#f7f2e9;
+  --paper:#fffdf8;
+  --ink:#2f2a24;
+  --muted:#6f665c;
+  --line:#e7dccd;
+  --accent:#9a6b3f;
+  --accent2:#2f6f68;
+  --soft:#efe4d4;
+  --danger:#8a3a3a;
+  --shadow:0 18px 45px rgba(62,45,28,.12);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(180deg,#fffaf2 0%,var(--bg) 100%);
+  line-height:1.85;
+}
+a{color:inherit}
+.wrap{width:min(1120px, calc(100% - 32px)); margin:0 auto}
+header{
+  position:sticky; top:0; z-index:10;
+  backdrop-filter:blur(14px);
+  background:rgba(255,253,248,.88);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:18px; padding:14px 0;
+}
+.logo{font-weight:800; letter-spacing:.04em; text-decoration:none}
+.logo span{color:var(--accent2)}
+.navlinks{display:flex; gap:16px; flex-wrap:wrap; font-size:.92rem}
+.navlinks a{text-decoration:none; color:var(--muted)}
+.navlinks a:hover{color:var(--accent)}
+.hero{padding:76px 0 48px}
+.kicker{color:var(--accent2); font-weight:700; letter-spacing:.08em; text-transform:uppercase}
+h1,h2,h3{line-height:1.35; margin:0 0 16px}
+h1{font-size:clamp(2rem,5vw,4.2rem); letter-spacing:.02em}
+h2{font-size:clamp(1.55rem,3vw,2.55rem)}
+h3{font-size:1.2rem}
+.lead{font-size:1.12rem; color:#4d463e; max-width:820px}
+.btns{display:flex; gap:12px; flex-wrap:wrap; margin-top:28px}
+.btn{
+  display:inline-flex; align-items:center; justify-content:center;
+  padding:12px 18px; border-radius:999px;
+  text-decoration:none; font-weight:700;
+  border:1px solid var(--line); background:var(--paper);
+}
+.btn.primary{background:var(--accent2); color:white; border-color:var(--accent2)}
+.btn.secondary{background:#fff; color:var(--accent2)}
+.grid{display:grid; gap:18px}
+.grid.three{grid-template-columns:repeat(3,1fr)}
+.grid.two{grid-template-columns:repeat(2,1fr)}
+.card{
+  background:rgba(255,253,248,.94);
+  border:1px solid var(--line);
+  border-radius:24px;
+  padding:24px;
+  box-shadow:var(--shadow);
+}
+.card.soft{background:linear-gradient(135deg,#fffdf8,#f4eadc)}
+.badge{
+  display:inline-block; padding:4px 10px; border-radius:999px;
+  background:var(--soft); color:var(--accent); font-size:.82rem; font-weight:700;
+}
+section{padding:54px 0}
+.section-head{margin-bottom:24px}
+.muted{color:var(--muted)}
+ul.clean{padding-left:1.2em; margin:12px 0 0}
+ul.clean li{margin:.35em 0}
+table{
+  width:100%; border-collapse:separate; border-spacing:0;
+  overflow:hidden; border-radius:20px; border:1px solid var(--line);
+  background:white;
+}
+th,td{padding:16px; border-bottom:1px solid var(--line); vertical-align:top}
+th{background:#f3eadc; text-align:left}
+tr:last-child td{border-bottom:none}
+.notice{
+  border-left:5px solid var(--accent2);
+  background:#eef7f5;
+  padding:18px 20px;
+  border-radius:16px;
+}
+.warning{
+  border-left:5px solid var(--danger);
+  background:#fff1ef;
+  padding:18px 20px;
+  border-radius:16px;
+}
+.flow{counter-reset:step}
+.flow .card{position:relative}
+.flow .card::before{
+  counter-increment:step; content:"0" counter(step);
+  display:inline-block; margin-bottom:10px;
+  color:var(--accent2); font-weight:800; letter-spacing:.08em;
+}
+footer{
+  margin-top:40px; padding:34px 0;
+  border-top:1px solid var(--line);
+  background:#fffdf8;
+  color:var(--muted);
+}
+.footerlinks{display:flex; flex-wrap:wrap; gap:12px; font-size:.9rem}
+.footerlinks a{color:var(--muted); text-decoration:none}
+@media (max-width:800px){
+  .grid.three,.grid.two{grid-template-columns:1fr}
+  .nav{align-items:flex-start; flex-direction:column}
+  .navlinks{gap:10px}
+  th,td{display:block; width:100%}
+  th{display:none}
+  tr{display:block; border-bottom:1px solid var(--line)}
+}
+</style>
 </head>
-
 <body>
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="index.html" class="logo" aria-label="\u548c-Node \u30c8\u30c3\u30d7\u30da\u30fc\u30b8">
-        <span class="logo-main">\u548c-Node</span>
-        <span class="logo-sub">Web \u00d7 AI \u00d7 \u5fc3\u7406</span>
-      </a>
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="./index.html">和-Node <span>Web × AI × 心理</span></a>
+    <nav class="navlinks" aria-label="主要ナビゲーション">
+      <a href="./index.html#about">代表について</a>
+      <a href="./index.html#services">サービス</a>
+      <a href="./index.html#line-mini-app">LINE Mini App</a>
+      <a href="./portfolio-lp/index.html">制作例</a>
+      <a href="./pricing.html">料金</a>
+      <a href="./index.html#contact">相談する</a>
+    </nav>
+  </div>
+</header>
 
-      <nav class="global-nav" aria-label="\u30b0\u30ed\u30fc\u30d0\u30eb\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3">
-        <a href="index.html#about">\u4ee3\u8868\u306b\u3064\u3044\u3066</a>
-        <a href="index.html#services">\u30b5\u30fc\u30d3\u30b9</a>
-        <a href="index.html#line-miniapp">LINE Mini App</a>
-        <a href="index.html#works\">\u5236\u4f5c\u4f8b</a>
-        <a href="pricing.html\">\u6599\u91d1</a>
-        <a href="index.html#contact" class="nav-cta">\u76f8\u8ac7\u3059\u308b</a>
-      </nav>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker">Counseling</p>
+      <h1>カウンセリング利用時の注意事項</h1>
+      <p class="lead">
+        安心してご相談いただくために、和-Nodeのカウンセリングの目的、対応範囲、
+        守秘義務、対応外となるケース、キャンセル条件を事前にご確認ください。
+      </p>
+      <div class="btns">
+        <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener">相談する</a>
+        <a class="btn secondary" href="./pricing.html">料金を見る</a>
+      </div>
     </div>
-  </header>
+  </section>
 
-  <main>
-    <section class="section page-hero">
-      <div class="container narrow">
-        <p class="eyebrow">Counseling</p>
-        <h1>\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u5229\u7528\u6642\u306e\u6ce8\u610f\u4e8b\u9805</h1>
+  <section>
+    <div class="wrap grid two">
+      <div class="card">
+        <h2>サービスの目的</h2>
         <p>
-          \u5b89\u5fc3\u3057\u3066\u3054\u76f8\u8ac7\u3044\u305f\u3060\u304f\u305f\u3081\u306b\u3001\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u306e\u76ee\u7684\u3001\u5bfe\u5fdc\u7bc4\u56f2\u3001
-          \u5b88\u79d8\u7fa9\u52d9\u3001\u5bfe\u5fdc\u5916\u3068\u306a\u308b\u30b1\u30fc\u30b9\u3092\u4e8b\u524d\u306b\u3054\u78ba\u8a8d\u304f\u3060\u3055\u3044\u3002
+          和-Nodeのカウンセリングは、気持ちの整理、悩みの言語化、
+          日常生活や仕事上の課題整理、意思決定の補助を目的とした対話支援です。
+          まとまっていない気持ちのままでも、今ある言葉から一緒に整理していきます。
         </p>
       </div>
-    </section>
-
-    <section class="section">
-      <div class="container narrow">
-        <article class="policy-box">
-          <h2>\u30b5\u30fc\u30d3\u30b9\u306e\u76ee\u7684</h2>
-          <p>
-            \u548c-Node\u306e\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u306f\u3001\u6c17\u6301\u3061\u306e\u6574\u7406\u3001\u60a9\u307f\u306e\u8a00\u8a9e\u5316\u3001
-            \u65e5\u5e38\u751f\u6d3b\u3084\u4ed5\u4e8b\u4e0a\u306e\u8ab2\u984c\u6574\u7406\u3001\u610f\u601d\u6c7a\u5b9a\u306e\u88dc\u52a9\u3092\u76ee\u7684\u3068\u3057\u305f\u5bfe\u8a71\u652f\u63f4\u3067\u3059\u3002
-          </p>
-
-          <h2>\u533b\u7642\u884c\u70ba\u3067\u306f\u306a\u3044\u304b\u3068\u3057\u3066</h2>
-          <p>
-            \u5f53\u30b5\u30fc\u30d3\u30b9\u306f\u3001\u533b\u7642\u884c\u70ba\u3001\u8a3a\u65ad\u3001\u6cbb\u7642\u3001\u6295\u85ac\u6307\u793a\u3001\u8a3a\u65ad\u66f8\u30fb\u610f\u898b\u66f8\u306e\u4f5c\u6210\u3092\u884c\u3046\u3082\u306e\u3067\u306f\u3042\u308a\u307e\u305b\u3093\u3002
-            \u533b\u7642\u7684\u5224\u65ad\u304c\u5fc5\u8981\u306a\u544\u5408\u306f\u3001\u533b\u7642\u6a5f\u95a2\u3084\u5c02\u9580\u6a5f\u95a2\u3078\u306e\u76f8\u8ac7\u3092\u304a\u3059\u3059\u3081\u3057\u307e\u3059\u3002
-          </p>
-
-          <h2>\u5bfe\u5fdc\u5f62\u5f0f</h2>
-          <ul>
-            <li>\u30aa\u30f3\u30e9\u30a4\u30f3\u306e\u307f\u5bfe\u5fdc</li>
-            <li>\u57fa\u672c\u306fGoogle Meet\u3092\u4f7f\u7528</li>
-            <li>Zoom\u3001LINE\u3001\u30d1\u30e3\u30c3\u30c8\u3067\u306e\u5bfe\u5fdc\u306f\u5fdc\u76f8\u8ac7</li>
-            <li>\u96fb\u8a71\u5bfe\u5fdc\u306f\u884c\u3063\u3066\u304a\u308a\u307e\u305b\u3093</li>
-          </ul>
-
-          <h2>\u6599\u91d1</h2>
-          <p>
-            \u500b\u4eba\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u306f60\u52065,000\u5186\u3067\u3059\u3002
-            \u30d1\u30e3\u30c3\u30c8\u76f8\u8ac7\u306f\u3001\u5358\u767a\u30fb\u7d99\u7d9a\u3069\u3061\u3089\u3082\u5185\u5bb9\u306b\u5fdc\u3058\u3066\u5bfe\u5fdc\u3057\u307e\u3059\u3002
-          </p>
-
-          <h2>\u672a\u6210\u5e74\u306e\u76f8\u8ac7</h2>
-          <p>
-            \u672a\u6210\u5e74\u306e\u65b9\u304b\u3089\u306e\u3054\u76f8\u8ac7\u306f\u3001\u4fdd\u8b77\u8005\u306e\u540c\u610f\u304c\u3042\u308b\u544\u5408\u306b\u9650\u308a\u5bfe\u5fdc\u3057\u307e\u3059\u3002
-            \u5185\u5bb9\u306b\u3088\u3063\u3066\u306f\u3001\u4fdd\u8b77\u8005\u306e\u65b9\u3084\u5c02\u9580\u6a5f\u95a2\u3078\u306e\u76f8\u8ac7\u3092\u304a\u9858\u3044\u3059\u308b\u544\u5408\u304c\u3042\u308b\u307e\u3059\u3002
-          </p>
-
-          <h2>\u5bfe\u5fdc\u5916\u3068\u306a\u308b\u30b1\u30fc\u30b9</h2>
-          <p>
-            \u4ee5\u4e0b\u306b\u8a72\u5f53\u3059\u308b\u544\u5408\u306f\u3001\u5f53\u30b5\u30fc\u30d3\u30b9\u306e\u3067\u306f\u5bfe\u5fdc\u3067\u304d\u306a\u3044\u544\u5408\u304c\u3042\u308b\u307e\u3059\u3002
-          </p>
-          <ul>
-            <li>\u5e0c\u6b7b\u5ff5\u616e\u304c\u5f37\u3044\u544\u5408</li>
-            <li>\u81ea\u50b7\u4ed6\u5bb3\u306e\u304a\u305d\u308c\u304c\u3042\u308b\u544\u5408</li>
-            <li>\u533f\u7642\u7684\u5224\u65ad\u304c\u5fc5\u8981\u306a\u544\u5408</li>
-            <li>\u7dca\u6025\u6027\u304c\u9ad8\u3044\u544\u5408</li>
-            <li>\u8a3a\u65ad\u66f8\u30fb\u610f\u898b\u66f8\u306e\u4f5c\u6210\u3092\u5e0c\u671b\u3055\u308c\u308b\u544\u5408</li>
-            <li>\u6295\u85ac\u3084\u6cbb\u7642\u65b9\u91dd\u3078\u306e\u52a9\u8a00\u3092\u6c42\u3081\u308b\u544\u5408</li>
-          </ul>
-
-          <h2>\u7dca\u6025\u6642\u306e\u5bfe\u5fdc\u306b\u3064\u3044\u3066</h2>
-          <p>
-            \u81ea\u50b7\u4ed6\u5bb3\u306e\u304a\u305d\u308c\u304c\u3042\u308b\u544\u5408\u3001\u5f37\u3044\u5e0c\u6b7b\u5ff5\u616e\u304c\u3042\u308b\u544\u5408\u3001\u751f\u547d\u30fb\u8eab\u4f53\u306b\u5371\u967a\u304c\u3042\u308b\u544\u5408\u306f\u3001
-            \u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u3067\u306f\u306a\u304f\u3001\u533b\u7642\u6a5f\u95a2\u3001\u6551\u6025\u3001\u516c\u7684\u76f8\u8ac7\u7a93\u53e3\u7b49\u3078\u3054\u76f8\u8ac7\u304f\u3060\u3055\u3044\u3002
-          </p>
-
-          <h2>\u5b88\u79d8\u7fa9\u52d9</h2>
-          <p>
-            \u3054\u76f8\u8ac7\u5185\u5bb9\u306f\u3001\u539f\u5247\u3068\u3057\u3066\u7b2c\u4e09\u8005\u3078\u5171\u6709\u3057\u307e\u305b\u3093\u3002
-            \u5b89\u5fc3\u3057\u3066\u304a\u8a71\u3057\u3044\u305f\u3060\u3051\u308b\u3088\u3046\u3001\u76f8\u8ac7\u5185\u5bb9\u306e\u53d6\u308a\u6271\u3044\u306b\u306f\u5341\u5206\u914d\u616e\u3057\u307e\u3059\u3002
-          </p>
-
-          <h2>\u5b88\u79d8\u7fa9\u52d9\u306e\u4f8b\u5916</h2>
-          <p>
-            \u4ee5\u4e0b\u306e\u544\u5408\u306f\u3001\u672c\u4eba\u306e\u5b89\u5168\u78ba\u4fdd\u3084\u6cd5\u4ee4\u4e0a\u5fc5\u8981\u306a\u7bc4\u56f2\u3067\u3001\u95a2\u4fc2\u6a5f\u95a2\u3084\u4fdd\u8b77\u8005\u7b49\u3068\u9023\u643a\u3059\u308b\u544\u5408\u304c\u3042\u308b\u307e\u3059\u3002
-          </p>
-          <ul>
-            <li>\u81ea\u50b7\u4ed6\u5bb3\u306e\u304a\u305d\u308c\u304c\u3042\u308b\u544\u5408</li>
-            <li>\u751f\u547d\u30fb\u8eab\u4f53\u306e\u5b89\u5168\u306b\u95a2\u308f\u308b\u544\u5408</li>
-            <li>\u6cd5\u4ee4\u4e0a\u5fc5\u8981\u306a\u544\u5408</li>
-            <li>\u672a\u6210\u5e74\u8005\u306e\u5b89\u5168\u78ba\u4fdd\u304c\u5fc5\u8981\u306a\u544\u5408</li>
-          </ul>
-
-          <h2>\u76f8\u8ac7\u8a18\u9332</h2>
-          <p>
-            \u76f8\u8ac7\u8a18\u9332\u306f\u3001\u76f8\u8ac7\u7d42\u4e86\u5f8c\u306b\u5fc5\u8981\u6700\u5c0f\u9650\u306e\u307f\u4fdd\u5b58\u3057\u307e\u3059\u3002
-            \u4fdd\u5b58\u671f\u9593\u306f\u539f\u5247\u3068\u3057\u3066\u6700\u7d42\u76f8\u8ac7\u65e5\u304b\u30891\u5e74\u3068\u3057\u3001\u671f\u9593\u7d4c\u904e\u5f8c\u306f\u524a\u9664\u307e\u305f\u306f\u533f\u540d\u5316\u3057\u307e\u3059\u3002
-          </p>
-
-          <h2>\u30ad\u30e3\u30f3\u30bb\u30eb\u30fb\u65e5\u7a0b\u5909\u66f4</h2>
-          <table class="pricing-table">
-            <tbody>
-              <tr>
-                <th>2\u65e5\u524d\u307e\u3067</th>
-                <td>\u7121\u6599</td>
-              </tr>
-              <tr>
-                <th>\u524d\u65e5</th>
-                <td>50%</td>
-              </tr>
-              <tr>
-                <th>\u5f53\u65e5\u30fb\u7121\u65ad\u30ad\u30e3\u30f3\u30bb\u30eb</th>
-                <td>100%</td>
-              </tr>
-              <tr>
-                <th>\u65e5\u7a0b\u5909\u66f4</th>
-                <td>\u539f\u52471\u56de\u307e\u3067\u7121\u6599\u30022\u56de\u76ee\u4ee5\u964d\u307e\u305f\u306f\u5f53\u65e5\u5909\u66f4\u306f\u30ad\u30e3\u30f3\u30bb\u30eb\u6271\u3044\u3068\u306a\u308b\u544\u5408\u304c\u3042\u308b\u307e\u3059\u3002</td>
-              </tr>
-            </tbody>
-          </table>
-        </article>
-
-        <div class="center-actions">
-          <a href="pricing.html" class="btn btn-secondary">\u6599\u91d1\u3092\u898b\u308b</a>
-          <a href="index.html#contact" class="btn btn-primary">\u76f8\u8ac7\u3059\u308b</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container">
-      <div class="footer-info">
-        <div class="logo">
-          <span class="logo-main">\u548c-Node</span>
-          <span class="logo-sub">Web \u00d7 AI \u00d7 \u5fc3\u7406</span>
-        </div>
-        <p class="footer-address">
-          \u55b6\u696d\u6240\u5728\u5730\uff1a\u3012509-0207 \u5c90\u961c\u770c\u53ef\u5150\u5e02\u4eca\u6e212347\u756a\u57301<br />
-          \u4ee3\u8868\uff1a\u9ad8\u91ce\u7d18\u7d14
+      <div class="card">
+        <h2>医療行為ではありません</h2>
+        <p>
+          当サービスは、医療行為、診断、治療、投薬指示、
+          診断書・意見書の作成を行うものではありません。
+          医療的判断が必要な場合は、医療機関や専門機関への相談をおすすめします。
         </p>
       </div>
-
-      <nav class="footer-nav" aria-label="\u30d5\u30c3\u30bf\u30fc\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3">
-        <a href="index.html#about">\u4ee3\u8868\u306b\u3064\u3044\u3066</a>
-        <a href="index.html#services">\u30b5\u30fc\u30d3\u30b9</a>
-        <a href="index.html#line-miniapp">LINE Mini App</a>
-        <a href="index.html#works\">\u5236\u4f5c\u4f8b</a>
-        <a href="portfolio-lp/index.html">LP\u5236\u4f5c\u30dd\u30fc\u30c8\u30d5\u30a9\u30ea\u30aa</a>
-        <a href="kdp_books.html">KDP\u51fa\u7248\u5b9f\u7e3e</a>
-        <a href="pricing.html\">\u6599\u91d1\u30da\u30fc\u30b8</a>
-        <a href="corporate-mental.html\">\u6cd5\u4eba\u30e1\u30f3\u30bf\u30eb\u7a93\u53e3</a>
-        <a href="counseling-notes.html\">\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u5229\u7528\u6642\u306e\u6ce8\u610f\u4e8b\u9805</a>
-        <a href="tokutei.html\">\u7279\u5b9a\u5546\u53d6\u5f15\u6cd5\u306b\u57fa\u3065\u304f\u8868\u8a18</a>
-        <a href="cancel-policy.html\">\u30ad\u30e3\u30f3\u30bb\u30eb\u30fb\u8fd4\u91d1\u30dd\u30ea\u30b7\u30fc</a>
-        <a href="privacy.html\">\u30d7\u30e9\u30a4\u30d0\u30b7\u30fc\u30dd\u30ea\u30b7\u30fc</a>
-        <a href="terms.html\">\u5229\u7528\u898f\u7d04</a>
-        <a href="terms_miniapp.html">LINE Mini App \u5229\u7528\u898f\u7d04</a>
-      </nav>
     </div>
+  </section>
 
-    <p class="copyright">\u00a9 2026 \u548c-Node. All Rights Reserved.</p>
-  </footer>
+  <section>
+    <div class="wrap">
+      <div class="section-head">
+        <p class="kicker">Style & Fee</p>
+        <h2>対応形式と料金</h2>
+      </div>
+      <table>
+        <thead><tr><th>項目</th><th>内容</th></tr></thead>
+        <tbody>
+          <tr><td>対応形式</td><td>オンラインのみ対応。基本はGoogle Meetを使用します。</td></tr>
+          <tr><td>その他の形式</td><td>Zoom、LINE、チャットでの対応は応相談です。</td></tr>
+          <tr><td>電話対応</td><td>電話対応は行っておりません。</td></tr>
+          <tr><td>料金</td><td>個人カウンセリングは60分5,000円です。チャット相談は、単発・継続どちらも内容に応じて対応します。</td></tr>
+          <tr><td>未成年の相談</td><td>未成年の方からのご相談は、保護者の同意がある場合に限り対応します。</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid two">
+      <div class="warning">
+        <h2>対応外となるケース</h2>
+        <p>以下に該当する場合は、当サービスでは対応できない場合があります。</p>
+        <ul class="clean">
+          <li>希死念慮が強い場合</li>
+          <li>自傷他害のおそれがある場合</li>
+          <li>医療的判断が必要な場合</li>
+          <li>緊急性が高い場合</li>
+          <li>診断書・意見書の作成を希望される場合</li>
+          <li>投薬や治療方針への助言を求める場合</li>
+        </ul>
+      </div>
+      <div class="notice">
+        <h2>緊急時の対応について</h2>
+        <p>
+          自傷他害のおそれがある場合、強い希死念慮がある場合、
+          生命・身体に危険がある場合は、カウンセリングではなく、
+          医療機関、救急、公的相談窓口等へご相談ください。
+        </p>
+        <p>
+          緊急時には、本人の安全確保や法令上必要な範囲で、
+          関係機関や保護者等と連携する場合があります。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid two">
+      <div class="card">
+        <h2>守秘義務</h2>
+        <p>
+          ご相談内容は、原則として第三者へ共有しません。
+          安心してお話しいただけるよう、相談内容の取り扱いには十分配慮します。
+        </p>
+      </div>
+      <div class="card">
+        <h2>守秘義務の例外</h2>
+        <p>以下の場合は、本人の安全確保や法令上必要な範囲で、関係機関や保護者等と連携する場合があります。</p>
+        <ul class="clean">
+          <li>自傷他害のおそれがある場合</li>
+          <li>生命・身体の安全に関わる場合</li>
+          <li>法令上必要な場合</li>
+          <li>未成年者の安全確保が必要な場合</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap grid two">
+      <div class="card">
+        <h2>相談記録</h2>
+        <p>
+          相談記録は、相談終了後に必要最小限のみ保存します。
+          保存期間は原則として最終相談日から1年とし、
+          期間経過後は削除または匿名化します。
+        </p>
+      </div>
+      <div class="card">
+        <h2>キャンセル・日程変更</h2>
+        <table>
+          <tbody>
+            <tr><td>2日前まで</td><td>無料</td></tr>
+            <tr><td>前日</td><td>50%</td></tr>
+            <tr><td>当日・無断キャンセル</td><td>100%</td></tr>
+            <tr><td>日程変更</td><td>原則1回まで無料。2回目以降または当日変更はキャンセル扱いとなる場合があります。</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap card soft">
+      <p class="kicker">Before Contact</p>
+      <h2>話す内容がまとまっていなくても大丈夫です。</h2>
+      <p>
+        仕事、家庭、孤独感、将来への不安など、うまく言葉にできない状態からでもご相談いただけます。
+        ただし、緊急性が高い場合や医療的判断が必要な場合は、医療機関・公的窓口を優先してください。
+      </p>
+      <div class="btns">
+        <a class="btn primary" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener">相談する</a>
+        <a class="btn secondary" href="./pricing.html">料金を見る</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+
+<footer>
+  <div class="wrap">
+    <p><strong>和-Node Web × AI × 心理</strong></p>
+    <p>営業所在地：〒509-0207 岐阜県可児市今渡2347番地1<br>代表：高野 紘純</p>
+    <div class="footerlinks">
+      <a href="./index.html#about">代表について</a>
+      <a href="./index.html#services">サービス</a>
+      <a href="./index.html#line-mini-app">LINE Mini App</a>
+      <a href="./portfolio-lp/index.html">LP制作ポートフォリオ</a>
+      <a href="./pricing.html">料金ページ</a>
+      <a href="./corporate-mental.html">法人メンタル窓口</a>
+      <a href="./counseling-notes.html">カウンセリング利用時の注意事項</a>
+      <a href="./privacy.html">プライバシーポリシー</a>
+      <a href="./terms.html">利用規約</a>
+      <a href="./terms_miniapp.html">LINE Mini App 利用規約</a>
+    </div>
+    <p>© 2026 和-Node. All Rights Reserved.</p>
+  </div>
+</footer>
 </body>
 </html>

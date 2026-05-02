@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>和-Node | お悩み整理LINEミニアプリ（体験デモ）</title>
   <!-- SEO & Meta -->
-  <meta name="description" content="LINE内で動くビジネスツールを体験。こころの悩みからITの課題まで、あなたに寄り添う診断ツールです。">
+  <meta name="description" content="LINE内で動くビジネスツールを体験。こころの悩みからICTの課題まで、あなたに寄り添う診断ツールです。">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -294,7 +294,7 @@
         <div class="avatar">🎋</div>
         <div class="bubble">
           はじめまして！和-Node公式LINEへようこそ。代表のマルだです。<br><br>
-          ここでは、あなたの「こころの悩み」や「ビジネス・ITの課題」を整理するお手伝いをします。
+          ここでは、あなたの「こころの悩み」や「ビジネス・ICTの課題」を整理するお手伝いをします。
         </div>
       </div>
 
@@ -305,7 +305,7 @@
           
           <div class="options-container">
             <button class="option-btn" onclick="selectGenre('こころの悩み・ストレス', 'mental')">🧠 こころの悩み・ストレス</button>
-            <button class="option-btn" onclick="selectGenre('会社のIT化・業務効率化', 'it')">💻 会社のIT化・業務効率化</button>
+            <button class="option-btn" onclick="selectGenre('会社のICT化・業務効率化', 'it')">💻 会社のICT化・業務効率化</button>
             <button class="option-btn" onclick="selectGenre('バリアフリー・車いす視点', 'barrier')">♿ バリアフリー・車いす視点</button>
           </div>
         </div>
@@ -376,11 +376,11 @@
             <button class="option-btn" onclick="selectMental('漠然とした不安がある')">💭 漠然とした不安がある</button>
           `;
         } else if (genreKey === 'it') {
-          responseText = 'ありがとうございます。IT・業務効率化ですね。現在の課題は何でしょうか？';
+          responseText = 'ありがとうございます。ICT・業務効率化ですね。現在の課題は何でしょうか？';
           options = `
             <button class="option-btn" onclick="selectIT('手作業が多く、自動化（GAS等）したい')">⚙️ 手作業が多く、自動化したい</button>
             <button class="option-btn" onclick="selectIT('集客のためにHPやLPを作りたい')">🌐 集客のためにHP/LPを作りたい</button>
-            <button class="option-btn" onclick="selectIT('何からIT化していいか分からない')">❓ 何から手をつけていいか不明</button>
+            <button class="option-btn" onclick="selectIT('何からICT化していいか分からない')">❓ 何から手をつけていいか不明</button>
           `;
         } else if (genreKey === 'barrier') {
           responseText = 'ありがとうございます。当事者視点のアドバイスですね。どのようなご相談ですか？';
@@ -420,7 +420,7 @@
 
       setTimeout(() => {
         removeBotTyping();
-        showResult('IT・経営コンサルティング', '現状の業務フローを丁寧にお聞きし、本当に必要なツール（GASや簡易システム）をご提案します。');
+        showResult('ICT・経営コンサルティング', '現状の業務フローを丁寧にお聞きし、本当に必要なツール（GASや簡易システム）をご提案します。');
       }, 1000);
     }
 

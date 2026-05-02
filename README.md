@@ -1,73 +1,43 @@
-# React + TypeScript + Vite
+# 差し替え推奨ファイルセット
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+前回の総ざらいで見つかった、公開前に直した方がよい点を反映した差し替え版です。
 
-Currently, two official plugins are available:
+## 主な修正
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- `line-mini-app-terms.html` へのリンクを `terms_miniapp.html` に統一
+- `sitemap.xml` から `404.html` を削除
+- 汎用外部リンクを確認できた実URLへ差し替え
+  - LINE: `https://lin.ee/o5QFPwc`
+  - ココナラプロフィール: `https://coconala.com/users/2598979`
+  - ココナラ Web制作: `https://coconala.com/services/4183139`
+  - ココナラ AI・ICT相談: `https://coconala.com/services/4183152`
+  - クラウドワークス: `https://crowdworks.jp/public/employees/6953669`
+  - ランサーズ: `https://www.lancers.jp/profile/daruma_3_h`
+- OGP画像 `ogp.png` を追加
+- `components/head-meta.html` の `og:image` / `twitter:image` が実ファイル `ogp.png` を参照するように整理
 
-## React Compiler
+## 差し替え対象
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```txt
+/index.html
+/pricing.html
+/privacy.html
+/terms.html
+/portfolio-lp/index.html
+/lp_wizard.html
+/corporate-mental.html
+/counseling-notes.html
+/terms_miniapp.html
+/sitemap.xml
+/robots.txt
+/404.html
+/ogp.png
+/components/head-meta.html
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 注意
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `line-mini-app-terms.html` は新規で置かず、正規ページは `terms_miniapp.html` に寄せています。
+- サーバー上に古い `line-mini-app-terms.html` がある場合は、削除するか、`terms_miniapp.html` へリダイレクトしてください。
+- `sitemap.xml` は主要ページのみです。ポートフォリオ個別LPや診断ツールを検索に出したい場合は、実在ページを追加してください。
+- 既存の `kdp.html`、`tokutei.html`、`cancel-policy.html`、診断ツール、個別LPは削除しないでください。

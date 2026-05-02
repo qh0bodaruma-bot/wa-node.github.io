@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ページが見つかりません | 和-Node</title>
+  <meta name="description" content="お探しのページは見つかりませんでした。和-Nodeのトップページ、サービス、料金、問い合わせページへご案内します。">
+  <style>
+    :root {
+      --bg: #fbf7f0;
+      --card: #ffffff;
+      --text: #352c23;
+      --muted: #6d6258;
+      --accent: #6f8f72;
+      --accent-soft: #edf5ee;
+      --line: rgba(80, 60, 40, 0.14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 28px 18px;
+      background:
+        radial-gradient(circle at top left, #fff6e6 0, transparent 34%),
+        radial-gradient(circle at bottom right, #eaf5ed 0, transparent 35%),
+        var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+      line-height: 1.8;
+    }
+    main {
+      width: min(920px, 100%);
+      padding: clamp(28px, 6vw, 56px);
+      background: rgba(255,255,255,0.9);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 20px 55px rgba(70, 52, 32, 0.10);
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #4f7353;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.86rem;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 7vw, 4.2rem);
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+    }
+    h2 {
+      margin: 0 0 16px;
+      font-size: clamp(1.35rem, 4vw, 2rem);
+      line-height: 1.45;
+    }
+    p {
+      margin: 0 auto 22px;
+      max-width: 700px;
+      color: var(--muted);
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 170px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 10px 22px rgba(111, 143, 114, 0.22);
+    }
+    .secondary {
+      background: #fff;
+      color: #5d4c35;
+      border: 1px solid var(--line);
+    }
+    .small {
+      margin-top: 24px;
+      font-size: 0.9rem;
+      color: #8a7c70;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <span class="eyebrow">404 Not Found</span>
+    <h1>ページが見つかりませんでした。</h1>
+    <h2>でも、ここで行き止まりではありません。</h2>
+    <p>
+      URLが変更されたか、ページが移動した可能性があります。
+      和-Nodeでは、心理導線Web制作・AI/ICT活用相談・メンタル支援まで、
+      状況に合わせて一緒に整理できます。
+    </p>
+
+    <div class="buttons">
+      <a class="primary" href="/">トップへ戻る</a>
+      <a class="secondary" href="/pricing.html">料金を見る</a>
+      <a class="secondary" href="/#contact">相談する</a>
+    </div>
+
+    <p class="small">
+      和-Node｜人の心に届くWebと、無理なく使えるICTを。
+    </p>
+  </main>
+</body>
+</html>
