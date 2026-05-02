@@ -244,16 +244,23 @@
     .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin: 30px 0; font-size: 0.85rem; opacity: 0.7; }
     .footer-links a { color: #fff; }
 
-    @media (max-width: 768px) {
-      .header-inner { flex-direction: column; align-items: flex-start; }
-      .hero { padding: 60px 0; }
-      .nav { gap: 12px; }
-      .logo span { display: none; }
+      .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1000px; margin: 0 auto; }
+      .about-image img { width: 100%; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); border: 8px solid var(--white); background: var(--white); object-fit: cover; aspect-ratio: 1/1; }
 
-      .price-strip { grid-template-columns: 1fr; margin: -20px 20px 0; }
-      .consult-grid, .ba-grid { grid-template-columns: 1fr; }
-      .section-lead { margin-top: -24px; }
-    }
+      @media (max-width: 768px) {
+        .header-inner { flex-direction: column; align-items: flex-start; }
+        .hero { padding: 60px 0; }
+        .nav { gap: 12px; }
+        .logo span { display: none; }
+        .price-strip { grid-template-columns: 1fr; margin: -20px 20px 0; }
+        .consult-grid, .ba-grid { grid-template-columns: 1fr; }
+        .section-lead { margin-top: -24px; }
+        
+        .about-grid { grid-template-columns: 1fr; gap: 40px; }
+        .about-content { order: 2; }
+        .about-image { order: 1; }
+      }
+
   </style>
 </head>
 <body>
@@ -425,18 +432,26 @@
 
     <section class="section" id="about">
       <div class="section-inner">
-        <div class="section-title">
-          <span class="eyebrow">About</span>
-          <h2>痛みも、孤独も、ICTの課題も。<br>抱えてきたからこそ、聴けることがあります。</h2>
-        </div>
-        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
-          <p>30歳で線維筋痛症を発症し、車いす生活へ。それでも社会とのつながりを諦めず、リハビリを続けながらICTと心理の両面から人を支える仕事を始めました。</p>
-          <p>和-Nodeは、人と人、心と技術、仕事と暮らしをつなぐ接点（Node）でありたいと考えています。</p>
-          <div class="btns">
-            <a class="btn secondary" href="barrier_free.html">バリアフリー度を診断する</a>
+        <div class="about-grid">
+          <div class="about-content">
+            <div class="section-title" style="text-align: left; margin-bottom: 24px;">
+              <span class="eyebrow">About</span>
+              <h2>痛みも、孤独も、ICTの課題も。<br>抱えてきたからこそ、聴けることがあります。</h2>
+            </div>
+            <p>30歳で線維筋痛症を発症し、車いす生活へ。それでも社会とのつながりを諦めず、リハビリを続けながらICTと心理の両面から人を支える仕事を始めました。</p>
+            <p>和-Nodeは、人と人、心と技術、仕事と暮らしをつなぐ接点（Node）でありたいと考えています。</p>
+            <div class="btns" style="justify-content: flex-start; margin-top: 32px;">
+              <a class="btn secondary" href="barrier_free.html">バリアフリー度を診断する</a>
+            </div>
           </div>
+          <div class="about-image">
+            <img src="images/panda-zen.png" alt="和-Nodeのテーマを象徴する和風庭園とパンダ" width="600" height="600" loading="lazy">
+          </div>
+
+
         </div>
       </div>
+
     </section>
 
     <section class="section" id="pricing">
