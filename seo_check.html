@@ -90,7 +90,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--primary);min-heigh
 .sticky-btn{padding:11px 22px;border:none;border-radius:99px;background:var(--accent);color:#fff;font-family:var(--font);font-size:13px;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s;}
 .sticky-btn:hover{background:#4e7a1a;}
 
+
+.site-header{position:sticky;top:0;z-index:10;background:rgba(255,253,249,.94);backdrop-filter:blur(10px);border-bottom:1px solid #eadfd4}.header-inner{max-width:1120px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}.logo{font-weight:800;color:#2b241f;font-size:1.1rem;}.nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.92rem}.nav a{color:#8a5a32;font-weight:700;}
+.footer{background:#2b241f;color:#fff;margin-top:40px;font-family:sans-serif;}.footer a{color:#fff}.footer-inner{max-width:1120px;margin:0 auto;padding:36px 20px}.footer-links{display:flex;gap:12px;flex-wrap:wrap;font-size:.9rem}.footer .small{font-size:.9rem;color:#e9ded2;margin-top:10px;}
+
 @media(max-width:480px){
+  .header-inner{align-items:flex-start;flex-direction:column}.nav{gap:10px}
   .score-card{flex-direction:column;align-items:flex-start;}
   .item-label{font-size:13px;}
   .cat-head-title{font-size:14px;}
@@ -99,10 +104,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--primary);min-heigh
 </head>
 <body>
 
-<header class="hdr">
-  <a href="index.html" class="hdr-logo">和-Node</a>
-  <a href="index.html#demo" class="hdr-back">← 制作デモ一覧へ</a>
-</header>
+<header class="site-header"><div class="header-inner"><a class="logo" href="index.html">和-Node Web × AI × 心理</a><nav class="nav"><a href="index.html#about">代表について</a><a href="index.html#services">サービス</a><a href="index.html#line-mini-app">LINE Mini App</a><a href="index.html#works">制作例</a><a href="pricing.html">料金</a><a href="index.html#contact">相談する</a></nav></div></header>
 
 <div class="hero">
   <div class="hero-badge">SEO CHECKLIST</div>
@@ -389,5 +391,4 @@ function showResult() {
 buildChecklist();
 updateScore();
 </script>
-</body>
-</html>
+<footer class="footer"><div class="footer-inner"><h2>和-Node</h2><p>Web制作・AI活用・心理カウンセリング・法人メンタル窓口</p><p class="small">営業所在地：〒509-0207 岐阜県可児市今渡2347番地1<br>代表：高野紘純</p><div class="footer-links"><a href="index.html#about">代表について</a><a href="index.html#services">サービス</a><a href="index.html#line-mini-app">LINE Mini App</a><a href="index.html#works">制作例</a><a href="portfolio-lp/index.html">LP制作ポートフォリオ</a><a href="kdp_books.html">KDP出版実績</a><a href="pricing.html">料金ページ</a><a href="corporate-mental.html">法人メンタル窓口</a><a href="counseling-notes.html">カウンセリング利用時の注意事項</a><a href="tokutei.html">特定商取引法に基づく表記</a><a href="cancel-policy.html">キャンセル・返金ポリシー</a><a href="privacy.html">プライバシーポリシー</a><a href="terms.html">利用規約</a><a href="terms_miniapp.html">LINE Mini App 利用規約</a></div><p class="small">© 2026 和-Node. All Rights Reserved.</p></div></footer>

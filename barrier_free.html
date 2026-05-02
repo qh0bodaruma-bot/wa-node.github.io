@@ -55,7 +55,12 @@
 .cta-btn { display: inline-block; background: var(--color-primary); color: #fff; padding: 14px 32px; border-radius: 40px; font-weight: 700; font-size: 14px; text-decoration: none; transition: all 0.3s; }
 .cta-btn:hover { background: var(--color-accent); transform: translateY(-2px); }
 
+
+.site-header{position:sticky;top:0;z-index:10;background:rgba(255,253,249,.94);backdrop-filter:blur(10px);border-bottom:1px solid #eadfd4}.header-inner{max-width:1120px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}.logo{font-weight:800;color:#2b241f;font-size:1.1rem;}.nav{display:flex;gap:18px;flex-wrap:wrap;font-size:.92rem}.nav a{color:#8a5a32;font-weight:700;}
+.footer{background:#2b241f;color:#fff;margin-top:40px;font-family:sans-serif;}.footer a{color:#fff}.footer-inner{max-width:1120px;margin:0 auto;padding:36px 20px}.footer-links{display:flex;gap:12px;flex-wrap:wrap;font-size:.9rem}.footer .small{font-size:.9rem;color:#e9ded2;margin-top:10px;}
+
 @media(max-width: 600px) {
+  .header-inner{align-items:flex-start;flex-direction:column}.nav{gap:10px}
   .quiz-box { padding: 30px 20px; min-height: auto; }
   .q-option { padding: 14px 16px; font-size: 14px; }
   .score-circle { width: 120px; height: 120px; border-width: 6px; }
@@ -70,8 +75,7 @@
 <div class=\"app-container bg-seigaiha\">
 <div class=\"landscape-bg\" style=\"background-image:url('images/bg-landscape.png'); opacity:0.3;\"></div>
 
-<header class=\"site-header\">
-  <div class=\"container header-inner\">\n      <a href=\"index.html\" class=\"logo\" aria-label=\"\u548c-Node \u30c8\u30c3\u30d7\u30da\u30fc\u30b8\">\n        <span class=\"logo-main\">\u548c-Node</span>\n        <span class=\"logo-sub\">Web \u00d7 AI \u00d7 \u5fc3\u7406</span>\n      </a>\n\n      <nav class=\"global-nav\" aria-label=\"\u30b0\u30ed\u30fc\u30d0\u30eb\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3\">\n        <a href=\"index.html#about\">\u4ee3\u8868\u306b\u3064\u3044\u3066</a>\n        <a href=\"index.html#services\">\u30b5\u30fc\u30d3\u30b9</a>\n        <a href=\"index.html#line-miniapp\">LINE Mini App</a>\n        <a href=\"index.html#works\">\u5236\u4f5c\u4f8b</a>\n        <a href=\"pricing.html\">\u6599\u91d1</a>\n        <a href=\"index.html#contact\" class=\"nav-cta\">\u76f8\u8ac7\u3059\u308b</a>\n      </nav>\n    </div>\n  </header>
+<header class="site-header"><div class="header-inner"><a class="logo" href="index.html">和-Node Web × AI × 心理</a><nav class="nav"><a href="index.html#about">代表について</a><a href="index.html#services">サービス</a><a href="index.html#line-mini-app">LINE Mini App</a><a href="index.html#works">制作例</a><a href="pricing.html">料金</a><a href="index.html#contact">相談する</a></nav></div></header>
 
 <main class=\"quiz-container\">
   <div class=\"quiz-box\">
@@ -87,12 +91,165 @@
           ハード面（段差など）はすぐには変えられなくても、ソフト面（声かけ）やWeb上での情報発信は今日から変えられます。<br>
           車いすユーザーの実体験をふまえて、誰もが利用しやすい環境づくりをサポートします。
         </p>
-        <div class=\"cta-buttons\">
-          <a href=\"mailto:contacts@wa-node.com\" class=\"btn-cta\">メールで相談する</a>
-          <a href=\"https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor\" target=\"_blank\" rel=\"noopener\" class=\"btn-cta secondary\">フォームで相談する</a>
+        <div class="cta-buttons">
+          <a href="mailto:contacts@wa-node.com" class="btn-cta">メールで相談する</a>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="btn-cta secondary">フォームで相談する</a>
         </div>
-        <div style=\"margin-top:24px;\">
-          <a href=\"barrier_free.html\" style=\"font-size:14px; color:var(--color-text-muted); text-decoration:underline;\">もう一度診断する</a>
+        <div style="margin-top:24px;">
+          <a href="barrier_free.html" style="font-size:14px; color:var(--color-text-muted); text-decoration:underline;">もう一度診断する</a>
         </div>
       </section>
-\n    </div>\n\n  </div>\n</main>\n\n<footer class=\"site-footer\">\n    <div class=\"container\">\n      <div class=\"footer-info\">\n        <div class=\"logo\">\n          <span class=\"logo-main\">\u548c-Node</span>\n          <span class=\"logo-sub\">Web \u00d7 AI \u00d7 \u5fc3\u7406</span>\n        </div>\n        <p class=\"footer-address\">\n          \u55b6\u696d\u6240\u5728\u5730\uff1a\u3012509-0207 \u5c90\u961c\u770c\u53ef\u5150\u5e02\u4eca\u6e212347\u756a\u57301<br />\n          \u4ee3\u8868\uff1a\u9ad8\u91ce\u7d18\u7d14\n        </p>\n      </div>\n\n      <nav class=\"footer-nav\" aria-label=\"\u30d5\u30c3\u30bf\u30fc\u30ca\u30d3\u30b2\u30fc\u30b7\u30e7\u30f3\">\n        <a href=\"index.html#about\">\u4ee3\u8868\u306b\u3064\u3044\u3066</a>\n        <a href=\"index.html#services\">\u30b5\u30fc\u30d3\u30b9</a>\n        <a href=\"index.html#line-miniapp\">LINE Mini App</a>\n        <a href=\"index.html#works\">\u5236\u4f5c\u4f8b</a>\n        <a href=\"portfolio-lp/index.html\">LP\u5236\u4f5c\u30dd\u30fc\u30c8\u30d5\u30a9\u30ea\u30aa</a>\n        <a href=\"kdp_books.html\">KDP\u51fa\u7248\u5b9f\u7e3e</a>\n        <a href=\"pricing.html\">\u6599\u91d1\u30da\u30fc\u30b8</a>\n        <a href=\"corporate-mental.html\">\u6cd5\u4eba\u30e1\u30f3\u30bf\u30eb\u7a93\u53e3</a>\n        <a href=\"counseling-notes.html\">\u30ab\u30a6\u30f3\u30bb\u30ea\u30f3\u30b0\u5229\u7528\u6642\u306e\u6ce8\u610f\u4e8b\u9805</a>\n        <a href=\"tokutei.html\">\u7279\u5b9a\u5546\u53d6\u5f15\u6cd5\u306b\u57fa\u3065\u304f\u8868\u8a18</a>\n        <a href=\"cancel-policy.html\">\u30ad\u30e3\u30f3\u30bb\u30eb\u30fb\u8fd4\u91d1\u30dd\u30ea\u30b7\u30fc</a>\n        <a href=\"privacy.html\">\u30d7\u30e9\u30a4\u30d0\u30b7\u30fc\u30dd\u30ea\u30b7\u30fc</a>\n        <a href=\"terms.html\">\u5229\u7528\u898f\u7d04</a>\n        <a href=\"terms_miniapp.html\">LINE Mini App \u5229\u7528\u898f\u7d04</a>\n      </nav>\n    </div>\n\n    <p class=\"copyright\">\u00a9 2026 \u548c-Node. All Rights Reserved.</p>\n  </footer>\n\n<script>\ndocument.addEventListener('DOMContentLoaded', () => {\n  const header=document.querySelector('.header');\n  if(header) window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));\n\n  const hamburger = document.getElementById('hamburger');\n  const nav = document.getElementById('nav');\n  if(hamburger && nav) {\n    hamburger.addEventListener('click', () => {\n      hamburger.classList.toggle('active');\n      nav.classList.toggle('active');\n    });\n    document.querySelectorAll('.nav-link').forEach(link => {\n      link.addEventListener('click', () => {\n        hamburger.classList.remove('active');\n        nav.classList.remove('active');\n      });\n    });\n  }\n});\n\nconst questions = [\n  {\n    q: \"\u5165\u308a\u53e3\u306e\u6bb5\u5dee\u306f\u3069\u3046\u306a\u3063\u3066\u3044\u307e\u3059\u304b\uff1f\",\n    opts: [\n      { text: \"\u5168\u304f\u306a\u3044\uff08\u30d5\u30e9\u30c3\u30c8\u30fb\u30b9\u30ed\u30fc\u30d7\u3042\u308a\uff09\", score: 20 },\n      { text: \"5cm\u4ee5\u4e0b\u306e\u308f\u305a\u304b\u306a\u6bb5\u5dee\u304c\u3042\u308b\", score: 10 },\n      { text: \"5cm\u4ee5\u4e0a\u306e\u6bb5\u5dee\u304c1\u6bb5\u3042\u308b\", score: 5 },\n      { text: \"\u968e\u6bb5\u3057\u304b\u306a\u3044\uff08\u30b9\u30ed\u30fc\u30d7\u306a\u3057\uff09\", score: 0 }\n    ]\n  },\n  {\n    q: \"\u51fa\u5165\u308a\u53e3\u306e\u30c9\u30a2\u306e\u7a2e\u985e\u306f\uff1f\",\n    opts: [\n      { text: \"\u81ea\u52d5\u30c9\u30a2\", score: 20 },\n      { text: \"\u5f15\u304d\u6238\uff08\u30b9\u30e9\u30a4\u30c9\u5f0f\u3067\u8efd\u3081\uff09\", score: 15 },\n      { text: \"\u958b\u304d\u6238\uff08\u624b\u524d\u306b\u5f15\u304f\u30fb\u5965\u306b\u62bc\u3059\u30bf\u30a4\u30d7\uff09\", score: 5 }\n    ]\n  },\n  {\n    q: \"\u5e97\u5185\u306e\u30e1\u30a4\u30f3\u901a\u8def\u306e\u5e45\u306f\uff1f\",\n    opts: [\n      { text: \"90cm\u4ee5\u4e0a\uff08\u8eca\u3044\u3059\u304c\u4e59\u88d5\u3067\u901a\u308c\u3001\u65b9\u5411\u8ee2\u63db\u3082\u3067\u304d\u308b\uff09\", score: 20 },\n      { text: \"80cm\u7a0b\u5ea6\uff08\u8eca\u3044\u3059\u304c\u307e\u3063\u3059\u3050\u306a\u3089\u30ae\u30ae\u30ae\u30ea\u901a\u308c\u308b\uff09\", score: 10 },\n      { text: \"80cm\u672a\u6e80\uff08\u8eca\u3044\u3059\u3067\u306e\u901a\u884c\u306f\u53b3\u3057\u3044\uff09\", score: 0 }\n    ]\n  },\n  {\n    q: \"\u30c8\u30a4\u30ec\u306e\u8a2d\u5099\u306f\uff1f\",\n    opts: [\n      { text: \"\u8eca\u3044\u3059\u5bfe\u5fdc\uff08\u591a\u76ee\u7684\u30fb\u3060\u308c\u3067\u3082\uff09\u30c8\u30a4\u30ec\u304c\u3042\u308b\", score: 20 },\n      { text: \"\u4e00\u822c\u7684\u306a\u6d0b\u5f0f\u3067\u3001\u624b\u3059\u308a\u304c\u3064\u3044\u3066\u3044\u308b\", score: 10 },\n      { text: \"\u4e00\u822c\u7684\u306a\u6d0b\u5f0f\u30c8\u30a4\u30ec\u306e\u307f\", score: 5 },\n      { text: \"\u548c\u5f0f\u306e\u307f\", score: 0 }\n    ]\n  },\n  {\n    q: \"\u30b9\u30bf\u30c3\u30d5\u306e\u30b5\u30dd\u30fc\u30c8\u4f53\u5236\uff08\u30bd\u30d5\u30c8\u9762\uff09\u306f\uff1f\",\n    opts: [\n      { text: \"\u8eca\u3044\u3059\u3084\u4ecb\u52a9\u304c\u5fc5\u8981\u306a\u65b9\u3078\u306e\u5bfe\u5fdc\u30de\u30cb\u30e5\u30a2\u30eb\u30fb\u7814\u4fee\u304c\u3042\u308b\", score: 20 },\n      { text: \"\u30de\u30cb\u30e5\u30a2\u30eb\u306f\u306a\u3044\u304c\u3001\u30b9\u30bf\u30c3\u30d5\u304c\u81ea\u4e3b\u7684\u306b\u58f0\u304b\u3051\u3084\u624b\u4f1d\u3044\u3092\u3057\u3066\u3044\u308b\", score: 15 },\n      { text: \"\u7279\u306b\u6c7a\u307e\u308a\u306f\u306a\u304f\u3001\u57fa\u672c\u7684\u306b\u30bb\u30eb\u30d5\u30b5\u30fc\u30d3\u30b9\", score: 5 }\n    ]\n  }\n];\n\nlet currentQ = 0;\nlet totalScore = 0;\n\nfunction showStep(id) {\n  document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));\n  document.getElementById(id).classList.add('active');\n}\n\nfunction startQuiz() {\n  currentQ = 0;\n  totalScore = 0;\n  showStep('step-question');\n  renderQuestion();\n}\n\nfunction renderQuestion() {\n  const qObj = questions[currentQ];\n  document.getElementById('q-num').textContent = `Q.${currentQ + 1} / ${questions.length}`;\n  document.getElementById('progress').style.width = `${((currentQ) / questions.length) * 100}%`;\n  document.getElementById('q-text').textContent = qObj.q;\n  \n  const optsContainer = document.getElementById('q-opts');\n  optsContainer.innerHTML = '';\n  \n  qObj.opts.forEach((opt) => {\n    const btn = document.createElement('div');\n    btn.className = 'q-option';\n    btn.textContent = opt.text;\n    btn.onclick = () => selectOption(opt.score);\n    optsContainer.appendChild(btn);\n  });\n}\n\nfunction selectOption(score) {\n  totalScore += score;\n  currentQ++;\n  if (currentQ < questions.length) {\n    renderQuestion();\n  } else {\n    showResult();\n  }\n}\n\nfunction showResult() {\n  showStep('step-result');\n  document.getElementById('progress').style.width = `100%`;\n  \n  const resScore = document.getElementById('res-score');\n  const resTitle = document.getElementById('res-title');\n  const resDesc = document.getElementById('res-desc');\n  const circle = document.getElementById('res-circle');\n  \n  let current = 0;\n  const interval = setInterval(() => {\n    if(current >= totalScore) {\n      clearInterval(interval);\n      resScore.textContent = totalScore;\n    } else {\n      current++;\n      resScore.textContent = current;\n    }\n  }, 15);\n\n  if(totalScore >= 80) {\n    circle.className = 'score-circle high';\n    resTitle.textContent = \"\u7d20\u6674\u3089\u3057\u3044\uff01\u8abc\u3082\u304c\u4f7f\u3044\u3084\u3059\u3044\u7a7a\u9593\u3067\u3059\ud83d\udc4f\";\n    resDesc.innerHTML = \"\u30cf\u30fc\u30c9\u9762\u3082\u30bd\u30d5\u30c8\u9762\u3082\u5145\u5b9f\u3057\u3066\u304a\u308a\u3001\u8eca\u3044\u3059\u30e6\u30fc\u30b6\u30fc\u306b\u3068\u3063\u3066\u3082\u975e\u5e38\u306b\u5b89\u5fc3\u3067\u304d\u308b\u7a7a\u9593\u3067\u3059\u3002\u003cbr\u003e\u3053\u306e\u7d20\u6674\u3089\u3057\u3044\u30d0\u30ea\u30a2\u30d5\u30ea\u30fc\u74b0\u5883\u3092\u3001\u305c\u3072\u30db\u30fc\u30e0\u30da\u30fc\u30b8\u3084SNS\u3067\u3082\u7a4d\u6240\u7684\u306b\u30a2\u30d4\u30fc\u30eb\u3057\u3066\u3044\u304d\u307e\u3057\u3087\u3046\uff01\";\n  } else if (totalScore >= 50) {\n    circle.className = 'score-circle mid';\n    resTitle.textContent = \"\u3082\u3046\u4e00\u6b69\uff01\u5c11\u3057\u306e\u5de5\u592b\u3067\u3055\u3089\u306b\u826f\u304f\u306a\u308a\u307e\u3059\ud83d\udca1\";\n    resDesc.innerHTML = \"\u73fe\u72b6\u3067\u3082\u5341\u5206\u914d\u616e\u3055\u308c\u3066\u3044\u307e\u3059\u304c\u3001\u3042\u3068\u5c11\u3057\u306e\u5de5\u592b\u3067\u5287\u7684\u306b\u4f7f\u3044\u3084\u3059\u304f\u306a\u308a\u307e\u3059\u3002\u003cbr\u003e\u4f8b\u3048\u3070\u3001\u308f\u305a\u304b\u306a\u6bb5\u5dee\u306a\u3089\u7c21\u6613\u30b9\u30ed\u30fc\u30d7\u3092\u7f6e\u304f\u3001\u5165\u308a\u53e3\u3067\u30b9\u30bf\u30c3\u30d5\u304c\u30c9\u30a2\u3092\u958b\u3051\u308b\u58f0\u304b\u3051\u3092\u3059\u308b\u306a\u3069\u3001\u3061\u3087\u3063\u3068\u3057\u305f\u300c\u30bd\u30d5\u30c8\u9762\u300d\u306e\u30ab\u30d0\u30fc\u3067\u6e80\u70b9\u306b\u8fd1\u3065\u3051\u307e\u3059\uff01\";\n  } else {\n    circle.className = 'score-circle low';\n    resTitle.textContent = \"\u6539\u5584\u306e\u4f59\u5730\u3042\u308a\uff01\u307e\u305a\u306f\u300c\u30bd\u30d5\u30c8\u9762\u300d\u304b\u3089\ud83c\udf31\";\n    resDesc.innerHTML = \"\u5efa\u7269\u306e\u69cb\u9020\u4e0a\u3001\u3059\u3050\u306b\u8a2d\u5099\u3092\u6539\u4fee\u3059\u308b\u306e\u306f\u96e3\u3057\u3044\u304b\u3082\u3057\u308c\u307e\u305b\u3093\u3002\u003cbr\u003e\u3057\u304b\u3057\u300c\u4f55\u304b\u304a\u624b\u4f1d\u3044\u3057\u307e\u3057\u3087\u3046\u304b\uff1f\u300d\u3068\u3044\u3046\u30b9\u30bf\u30c3\u30d5\u306e\u58f0\u304b\u3051\u3084\u3001\u4e8b\u524d\u306bHP\u3067\u300e\u5165\u308a\u53e3\u306b\u6bb5\u5dee\u304c\u3042\u308a\u307e\u3059\u300f\u3068\u60c5\u5831\u767a\u4fe1\u3057\u3066\u304a\u304f\u3053\u3068\uff08\u30bd\u30d5\u30c8\u9762\u3067\u306e\u30d0\u30ea\u30a2\u30d5\u30ea\u30fc\uff09\u3067\u3001\u8eca\u3044\u3059\u30e6\u30fc\u30b6\u30fc\u306e\u4e0d\u5b89\u306f\u5927\u304d\u304f\u8efd\u6e1b\u3055\u308c\u307e\u3059\u3002\";\n  }\n}\n\u003c/script\u003e\n\n\u003c/body\u003e\n\u003c/html\u003e\n
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer"><div class="footer-inner"><h2>和-Node</h2><p>Web制作・AI活用・心理カウンセリング・法人メンタル窓口</p><p class="small">営業所在地：〒509-0207 岐阜県可児市今渡2347番地1<br>代表：高野紘純</p><div class="footer-links"><a href="index.html#about">代表について</a><a href="index.html#services">サービス</a><a href="index.html#line-mini-app">LINE Mini App</a><a href="index.html#works">制作例</a><a href="portfolio-lp/index.html">LP制作ポートフォリオ</a><a href="kdp_books.html">KDP出版実績</a><a href="pricing.html">料金ページ</a><a href="corporate-mental.html">法人メンタル窓口</a><a href="counseling-notes.html">カウンセリング利用時の注意事項</a><a href="tokutei.html">特定商取引法に基づく表記</a><a href="cancel-policy.html">キャンセル・返金ポリシー</a><a href="privacy.html">プライバシーポリシー</a><a href="terms.html">利用規約</a><a href="terms_miniapp.html">LINE Mini App 利用規約</a></div><p class="small">© 2026 和-Node. All Rights Reserved.</p></div></footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const header=document.querySelector('.header');
+  if(header) window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>50));
+
+  const hamburger = document.getElementById('hamburger');
+  const nav = document.getElementById('nav');
+  if(hamburger && nav) {
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      nav.classList.toggle('active');
+    });
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        nav.classList.remove('active');
+      });
+    });
+  }
+});
+
+const questions = [
+  {
+    q: "入り口の段差はどうなっていますか？",
+    opts: [
+      { text: "全くない（フラット・スロープあり）", score: 20 },
+      { text: "5cm以下のわずかな段差がある", score: 10 },
+      { text: "5cm以上の段差が1段ある", score: 5 },
+      { text: "階段しかない（スロープなし）", score: 0 }
+    ]
+  },
+  {
+    q: "出入り口のドアの種類は？",
+    opts: [
+      { text: "自動ドア", score: 20 },
+      { text: "引き戸（スライド式で軽め）", score: 15 },
+      { text: "開き戸（手前に引く・奥に押すタイプ）", score: 5 }
+    ]
+  },
+  {
+    q: "店内のメイン通路の幅は？",
+    opts: [
+      { text: "90cm以上（車いすが乙裕で通れ、方向転換もできる）", score: 20 },
+      { text: "80cm程度（車いすがまっすぐならギリギリ通れる）", score: 10 },
+      { text: "80cm未満（車いすでの通行は厳しい）", score: 0 }
+    ]
+  },
+  {
+    q: "トイレの設備は？",
+    opts: [
+      { text: "車いす対応（多目的・だれでも）トイレがある", score: 20 },
+      { text: "一般的な洋式で、手すりがついている", score: 10 },
+      { text: "一般的な洋式トイレのみ", score: 5 },
+      { text: "和式のみ", score: 0 }
+    ]
+  },
+  {
+    q: "スタッフのサポート体制（ソフト面）は？",
+    opts: [
+      { text: "車いすや介助が必要な方への対応マニュアル・研修がある", score: 20 },
+      { text: "マニュアルはないが、スタッフが自主的に声かけや手伝いをしている", score: 15 },
+      { text: "特に決まりはなく、基本的にセルフサービス", score: 5 }
+    ]
+  }
+];
+
+let currentQ = 0;
+let totalScore = 0;
+
+function showStep(id) {
+  document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function startQuiz() {
+  currentQ = 0;
+  totalScore = 0;
+  showStep('step-question');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const qObj = questions[currentQ];
+  document.getElementById('q-num').textContent = `Q.${currentQ + 1} / ${questions.length}`;
+  document.getElementById('progress').style.width = `${((currentQ) / questions.length) * 100}%`;
+  document.getElementById('q-text').textContent = qObj.q;
+  
+  const optsContainer = document.getElementById('q-opts');
+  optsContainer.innerHTML = '';
+  
+  qObj.opts.forEach((opt) => {
+    const btn = document.createElement('div');
+    btn.className = 'q-option';
+    btn.textContent = opt.text;
+    btn.onclick = () => selectOption(opt.score);
+    optsContainer.appendChild(btn);
+  });
+}
+
+function selectOption(score) {
+  totalScore += score;
+  currentQ++;
+  if (currentQ < questions.length) {
+    renderQuestion();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  showStep('step-result');
+  document.getElementById('progress').style.width = `100%`;
+  
+  const resScore = document.getElementById('res-score');
+  const resTitle = document.getElementById('res-title');
+  const resDesc = document.getElementById('res-desc');
+  const circle = document.getElementById('res-circle');
+  
+  let current = 0;
+  const interval = setInterval(() => {
+    if(current >= totalScore) {
+      clearInterval(interval);
+      resScore.textContent = totalScore;
+    } else {
+      current++;
+      resScore.textContent = current;
+    }
+  }, 15);
+
+  if(totalScore >= 80) {
+    circle.className = 'score-circle high';
+    resTitle.textContent = "素晴らしい！誰もが使いやすい空間です👏";
+    resDesc.innerHTML = "ハード面もソフト面も充実しており、車いすユーザーにとっても非常に安心できる空間です。<br>この素晴らしいバリアフリー環境を、ぜひホームページやSNSでも積極的にアピールしていきましょう！";
+  } else if (totalScore >= 50) {
+    circle.className = 'score-circle mid';
+    resTitle.textContent = "もう一歩！少しの工夫でさらによくなります💡";
+    resDesc.innerHTML = "現状でも十分配慮されていますが、あと少しの工夫で劇的に使いやすくなります。<br>例えば、わずかな段差なら簡易スロープを置く、入り口でスタッフがドアを開ける声かけをするなど、ちょっとした「ソフト面」のカバーで満点に近づけます！";
+  } else {
+    circle.className = 'score-circle low';
+    resTitle.textContent = "改善の余地あり！まずは「ソフト面」から🌱";
+    resDesc.innerHTML = "建物の構造上、すぐに設備を改修するのは難しいかもしれません。<br>しかし「何かお手伝いしましょうか？」というスタッフの声かけや、事前にHPで『入り口に段差があります』と情報発信しておくこと（ソフト面でのバリアフリー）で、車いすユーザーの不安は大きく軽減されます。";
+  }
+}
+</script>
+
+</body>
+</html>
