@@ -6,49 +6,510 @@
   <title>心理導線Web制作 要件ヒアリング｜和-Node</title>
   <meta name="description" content="LP・ホームページ制作の要件を整理できるヒアリング体験。目的・予算・重視ポイントから、和-Nodeへの相談用サマリーを自動生成します。">
   <style>
-    :root{--bg:#f7f4ee;--paper:#fffdf8;--ink:#25211b;--muted:#746b5e;--line:#e6dccd;--accent:#8a6f45;--accent2:#304b3c;--soft:#efe7d9;--shadow:0 18px 45px rgba(54,43,26,.10);--radius:22px}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;color:var(--ink);background:linear-gradient(180deg,#fbf8f1 0%,var(--bg) 100%);line-height:1.75}a{color:inherit;text-decoration:none}.wrap{max-width:980px;margin:auto;padding:0 22px}.header{position:sticky;top:0;z-index:20;background:rgba(255,253,248,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--line)}.nav{height:72px;display:flex;align-items:center;justify-content:space-between}.brand{font-weight:800}.brand span{display:block;font-size:12px;color:var(--muted)}.links{display:flex;gap:18px;font-size:14px;color:var(--muted);flex-wrap:wrap}.hero{padding:62px 0 22px}.eyebrow{font-size:13px;letter-spacing:.16em;color:var(--accent);font-weight:800;text-transform:uppercase}.hero h1{font-size:clamp(34px,6vw,62px);line-height:1.1;margin:14px 0 18px;letter-spacing:-.04em}.lead{font-size:18px;max-width:760px;color:#443c33}.wizard{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin:26px 0 70px}.progress{height:10px;background:#eee3d5;border-radius:999px;overflow:hidden}.bar{height:100%;width:11%;background:var(--accent2);transition:.25s}.step-label{margin:16px 0;color:var(--muted);font-weight:700}.question{display:none}.question.active{display:block}.question h2{font-size:28px;line-height:1.3;margin:12px 0 18px}.choices{display:grid;gap:12px}.choice{display:block;border:1px solid var(--line);border-radius:18px;background:#fff;padding:16px;cursor:pointer}.choice input{margin-right:10px}.choice strong{display:block}.choice span{display:block;color:var(--muted);font-size:14px;margin-left:28px}.textarea,input[type="text"]{width:100%;border:1px solid var(--line);border-radius:16px;background:#fff;padding:15px;font:inherit}.textarea{min-height:140px;resize:vertical}.actions{display:flex;justify-content:space-between;gap:12px;margin-top:24px;flex-wrap:wrap}.btn{border:0;border-radius:999px;padding:13px 20px;background:var(--accent2);color:#fff;font-weight:800;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}.btn.secondary{background:transparent;color:var(--accent2);border:1px solid var(--accent2)}.summary{display:none;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-top:24px}.summary.show{display:block}.summary h2{margin-top:0}.card{border:1px solid var(--line);border-radius:18px;background:#fffdf8;padding:18px}.line{display:grid;grid-template-columns:180px 1fr;gap:16px;border-bottom:1px solid var(--line);padding:10px 0}.line:last-child{border-bottom:0}.line b{color:#4b4035}.line span{color:#5b5146}.recommend{margin-top:18px;background:#eef4ef;border:1px solid #d5e1d7;border-radius:18px;padding:18px}.copybox{width:100%;min-height:220px;border:1px solid var(--line);border-radius:16px;padding:14px;font:inherit;margin-top:14px}.footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:14px}
-.site-header{position:sticky;top:0;z-index:30;background:rgba(255,253,249,.94);backdrop-filter:blur(10px);border-bottom:1px solid #eadfd4}.header-inner{max-width:1120px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}.logo{font-weight:800;color:#2b241f;font-size:1.1rem;}.nav-links{display:flex;gap:18px;flex-wrap:wrap;font-size:.92rem}.nav-links a{color:#8a5a32;font-weight:700;}
-.footer{background:#2b241f;color:#fff;margin-top:40px;font-family:sans-serif;border:none;padding:0;}.footer a{color:#fff}.footer-inner{max-width:1120px;margin:0 auto;padding:36px 20px}.footer-links{display:flex;gap:12px;flex-wrap:wrap;font-size:.9rem}.footer .small{font-size:.9rem;color:#e9ded2;margin-top:10px;}
+    :root {
+      --bg: #f8f4ed;
+      --paper: rgba(255, 253, 249, 0.94);
+      --text: #2b241f;
+      --muted: #6d6259;
+      --line: #eadfd4;
+      --accent: #8a5a32;
+      --accent-soft: #f1e6da;
+      --accent2: #4a6741;
+      --white: #fff;
+      --shadow: 0 12px 40px rgba(70, 52, 32, 0.08);
+      --radius: 24px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 0% 0%, #fffbf2 0%, transparent 40%),
+        radial-gradient(circle at 100% 100%, #f1e6da 0%, transparent 40%);
+      color: var(--text);
+      line-height: 1.8;
+    }
+    .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 
-@media(max-width:760px){
-  .header-inner{align-items:flex-start;flex-direction:column}.nav-links{gap:10px}
-  .line{grid-template-columns:1fr}.wizard{padding:20px}.hero{padding-top:44px}}
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 253, 249, 0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo { font-weight: 800; color: var(--text); font-size: 1.1rem; text-decoration: none; }
+    .nav { display: flex; gap: 18px; flex-wrap: wrap; font-size: 0.92rem; }
+    .nav a { color: var(--text); font-weight: 700; text-decoration: none; }
+
+    .hero { padding: 50px 0 30px; text-align: center; }
+    .eyebrow {
+      display: inline-block;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 800;
+      background: var(--accent-soft);
+      padding: 4px 12px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    .hero h1 { font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.2; margin: 0 0 16px; }
+    .lead { font-size: 1rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
+
+    .wizard-container {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 40px;
+      box-shadow: var(--shadow);
+      margin-bottom: 80px;
+      min-height: 500px;
+      position: relative;
+    }
+
+    /* Stepper */
+    .stepper {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 40px;
+      position: relative;
+    }
+    .stepper::before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--line);
+      z-index: 1;
+    }
+    .step-node {
+      position: relative;
+      z-index: 2;
+      width: 32px;
+      height: 32px;
+      background: var(--white);
+      border: 2px solid var(--line);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--muted);
+      transition: 0.3s;
+    }
+    .step-node.active {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--white);
+      transform: scale(1.2);
+    }
+    .step-node.done {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    .question-block {
+      display: none;
+      animation: fadeIn .4s ease;
+    }
+    .question-block.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .question-block h2 { font-size: 1.6rem; margin-bottom: 24px; line-height: 1.3; }
+
+    .choices { display: grid; gap: 14px; }
+    .choice-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--white);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .choice-card:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .choice-card input { margin-top: 6px; accent-color: var(--accent); }
+    .choice-text strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
+    .choice-text span { display: block; font-size: 0.88rem; color: var(--muted); }
+
+    .input-text, .textarea {
+      width: 100%;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: 0.2s;
+    }
+    .input-text:focus, .textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+    .textarea { min-height: 150px; resize: vertical; }
+
+    .actions {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 40px;
+      gap: 16px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: 0.3s;
+      border: none;
+      font-size: 1rem;
+    }
+    .btn-prev { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+    .btn-prev:hover { background: var(--accent-soft); }
+    .btn-next { background: var(--accent); color: var(--white); flex: 1; }
+    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(138, 90, 50, 0.3); }
+
+    /* Result */
+    .summary-wrap { display: none; margin-top: 40px; }
+    .summary-wrap.show { display: block; animation: fadeIn .6s ease; }
+    .result-doc {
+      background: #fff;
+      border: 2px solid var(--line);
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.05);
+    }
+    .result-doc::after {
+      content: "CONFIDENTIAL";
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 0.7rem;
+      font-weight: 900;
+      color: var(--line);
+      letter-spacing: 0.2em;
+    }
+    .doc-header { border-bottom: 2px solid var(--text); padding-bottom: 16px; margin-bottom: 30px; }
+    .doc-header h3 { margin: 0; font-size: 1.4rem; letter-spacing: 0.05em; }
+    
+    .data-grid { display: grid; gap: 16px; margin-bottom: 30px; }
+    .data-row { display: grid; grid-template-columns: 180px 1fr; gap: 20px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+    .data-row b { font-size: 0.9rem; color: var(--muted); }
+    .data-row span { font-weight: 700; color: var(--text); }
+
+    .recommend-box {
+      background: var(--accent-soft);
+      border-left: 4px solid var(--accent);
+      padding: 20px;
+      border-radius: 0 12px 12px 0;
+      margin-bottom: 30px;
+    }
+    .recommend-box h4 { margin: 0 0 8px; color: var(--accent); }
+
+    .copy-area {
+      width: 100%;
+      background: #fdfaf7;
+      border: 1px dashed var(--accent);
+      border-radius: 12px;
+      padding: 16px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      margin-bottom: 24px;
+      color: var(--muted);
+      white-space: pre-wrap;
+    }
+
+    .footer { background: var(--text); color: var(--white); padding: 40px 0; text-align: center; }
+    .footer-links { display: flex; justify-content: center; gap: 20px; margin-top: 20px; font-size: 0.85rem; opacity: 0.7; }
+    .footer-links a { color: var(--white); text-decoration: none; }
+
+    @media (max-width: 600px) {
+      .wizard-container { padding: 24px; }
+      .data-row { grid-template-columns: 1fr; gap: 4px; }
+      .actions { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
-<header class="site-header"><div class="header-inner"><a class="logo" href="index.html">和-Node Web × AI × 心理</a><nav class="nav-links"><a href="index.html#about">代表について</a><a href="index.html#services">サービス</a><a href="index.html#line-mini-app">LINE Mini App</a><a href="index.html#works">制作例</a><a href="pricing.html">料金</a><a href="simulator.html">料金診断</a></nav></div></header>
-<main><section class="hero"><div class="wrap"><div class="eyebrow">Web Production Requirements</div><h1>心理導線Web制作<br>要件ヒアリング</h1><p class="lead">LP・ホームページ制作の相談前に、目的・予算・重視したい導線を整理できます。回答後に、和-Nodeへの相談用サマリーを自動生成します。</p></div></section>
-<section class="wrap"><div class="wizard"><div class="progress"><div class="bar" id="bar"></div></div><div class="step-label" id="stepLabel">STEP 1 / 9</div>
-<form id="form">
-  <div class="question active" data-step="1"><h2>1. 業種・ビジネスを教えてください</h2><input type="text" name="industry" placeholder="例：整体院、士業、個人カウンセラー、SaaS、カフェなど"></div>
-  <div class="question" data-step="2"><h2>2. 制作の目的・ゴール</h2><div class="choices"><label class="choice"><input type="radio" name="goal" value="問い合わせを増やしたい"><strong>問い合わせを増やしたい</strong><span>相談・見積り・予約につなげたい。</span></label><label class="choice"><input type="radio" name="goal" value="サービスの信頼感を高めたい"><strong>サービスの信頼感を高めたい</strong><span>名刺代わり・紹介後の受け皿として整えたい。</span></label><label class="choice"><input type="radio" name="goal" value="商品・講座・イベントを販売したい"><strong>商品・講座・イベントを販売したい</strong><span>内容説明から申込までの流れを作りたい。</span></label><label class="choice"><input type="radio" name="goal" value="採用・活動紹介を強化したい"><strong>採用・活動紹介を強化したい</strong><span>人柄・活動内容・文化を伝えたい。</span></label></div></div>
-  <div class="question" data-step="3"><h2>3. 現在のサイト状況</h2><div class="choices"><label class="choice"><input type="radio" name="current" value="まだサイトがない"><strong>まだサイトがない</strong></label><label class="choice"><input type="radio" name="current" value="既存サイトをリニューアルしたい"><strong>既存サイトをリニューアルしたい</strong></label><label class="choice"><input type="radio" name="current" value="LPだけ追加したい"><strong>LPだけ追加したい</strong></label><label class="choice"><input type="radio" name="current" value="相談しながら決めたい"><strong>相談しながら決めたい</strong></label></div></div>
-  <div class="question" data-step="4"><h2>4. ページ規模</h2><div class="choices"><label class="choice"><input type="radio" name="scale" value="1ページのLP"><strong>1ページのLP</strong><span>商品・サービスを1ページで訴求。</span></label><label class="choice"><input type="radio" name="scale" value="2〜5ページの小規模サイト"><strong>2〜5ページの小規模サイト</strong><span>トップ、サービス、料金、プロフィール、問い合わせなど。</span></label><label class="choice"><input type="radio" name="scale" value="6ページ以上のサイト"><strong>6ページ以上のサイト</strong><span>複数サービス・実績・採用・記事など。</span></label></div></div>
-  <div class="question" data-step="5"><h2>5. デザインテイスト</h2><div class="choices"><label class="choice"><input type="radio" name="taste" value="やさしい・安心感"><strong>やさしい・安心感</strong></label><label class="choice"><input type="radio" name="taste" value="信頼感・専門性"><strong>信頼感・専門性</strong></label><label class="choice"><input type="radio" name="taste" value="高級感・上質"><strong>高級感・上質</strong></label><label class="choice"><input type="radio" name="taste" value="シンプル・実用的"><strong>シンプル・実用的</strong></label><label class="choice"><input type="radio" name="taste" value="まだ決まっていない"><strong>まだ決まっていない</strong></label></div></div>
-  <div class="question" data-step="6"><h2>6. ご希望納期</h2><div class="choices"><label class="choice"><input type="radio" name="deadline" value="急ぎ・できるだけ早く"><strong>急ぎ・できるだけ早く</strong></label><label class="choice"><input type="radio" name="deadline" value="1ヶ月以内"><strong>1ヶ月以内</strong></label><label class="choice"><input type="radio" name="deadline" value="1〜2ヶ月程度"><strong>1〜2ヶ月程度</strong></label><label class="choice"><input type="radio" name="deadline" value="相談して決めたい"><strong>相談して決めたい</strong></label></div></div>
-  <div class="question" data-step="7"><h2>7. ご予算感</h2><div class="choices"><label class="choice"><input type="radio" name="budget" value="5万円未満"><strong>5万円未満</strong></label><label class="choice"><input type="radio" name="budget" value="5〜10万円"><strong>5〜10万円</strong></label><label class="choice"><input type="radio" name="budget" value="10〜20万円"><strong>10〜20万円</strong></label><label class="choice"><input type="radio" name="budget" value="20万円以上"><strong>20万円以上</strong></label><label class="choice"><input type="radio" name="budget" value="まず相談したい"><strong>まず相談したい</strong></label></div></div>
-  <div class="question" data-step="8"><h2>8. 重視するポイント</h2><div class="choices"><label class="choice"><input type="checkbox" name="points" value="問い合わせ導線"><strong>問い合わせ導線</strong></label><label class="choice"><input type="checkbox" name="points" value="信頼感・実績の見せ方"><strong>信頼感・実績の見せ方</strong></label><label class="choice"><input type="checkbox" name="points" value="読みやすい文章"><strong>読みやすい文章</strong></label><label class="choice"><input type="checkbox" name="points" value="スマホでの見やすさ"><strong>スマホでの見やすさ</strong></label><label class="choice"><input type="checkbox" name="points" value="SEO・検索対策"><strong>SEO・検索対策</strong></label><label class="choice"><input type="checkbox" name="points" value="予約・フォーム・診断ツール"><strong>予約・フォーム・診断ツール</strong></label></div></div>
-  <div class="question" data-step="9"><h2>9. ご要望・メッセージ</h2><textarea class="textarea" name="message" placeholder="例：原稿はまだありません。やさしい雰囲気で、初めての方が相談しやすいページにしたいです。"></textarea></div>
-  <div class="actions"><button type="button" class="btn secondary" id="prev">← 戻る</button><button type="button" class="btn" id="next">次へ →</button><button type="submit" class="btn" id="finish" style="display:none">サマリーを作成する</button></div>
-</form>
-<div class="summary" id="summary"><h2>✅ ヒアリング完了</h2><p>ご回答をもとに、和-Nodeへの相談用サマリーを作成しました。この内容をコピーして、フォームやココナラのメッセージに貼り付けてください。</p><div class="card" id="summaryCard"></div><div class="recommend" id="recommend"></div><textarea class="copybox" id="copyText" readonly></textarea><div class="actions"><button class="btn" id="copyBtn">サマリーをコピー</button><a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener">問い合わせフォームへ</a><a class="btn secondary" href="https://coconala.com/services/4183139" target="_blank" rel="noopener">Coconalaで相談する</a><button class="btn secondary" id="reset" type="button">← もう一度回答する</button></div>
-<section class="wanode-cta">
-  <p class="label">ヒアリング後のネクストステップ</p>
-  <h2>サマリーの内容をもとに、具体的な構成を一緒に考えませんか？</h2>
-  <p>
-    ヒアリング結果はいかがでしたか？<br>
-    和-Nodeでは、このサマリーをもとに、より深くお客様の事業やターゲット心理を掘り下げ、成果につながるWebサイトの構成をご提案します。
-  </p>
-  <div class="cta-buttons">
-    <a href="mailto:contacts@wa-node.com" class="btn-cta">メールでサマリーを送る</a>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="btn-cta secondary">フォームで相談する</a>
-  </div>
-</section>
-</div>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="logo" href="index.html">和-Node Web × AI × 心理</a>
+      <nav class="nav">
+        <a href="index.html#about">代表について</a>
+        <a href="index.html#services">サービス</a>
+        <a href="pricing.html">料金</a>
+        <a href="simulator.html">料金シミュレーター</a>
+      </nav>
+    </div>
+  </header>
 
-</div></section></main>
-<footer class="footer"><div class="footer-inner"><h2>和-Node</h2><p>Web制作・AI活用・心理カウンセリング・法人メンタル窓口</p><p class="small">営業所在地：〒509-0207 岐阜県可児市今渡2347番地1<br>代表：高野紘純</p><div class="footer-links"><a href="index.html#about">代表について</a><a href="index.html#services">サービス</a><a href="index.html#line-mini-app">LINE Mini App</a><a href="index.html#works">制作例</a><a href="portfolio-lp/index.html">LP制作ポートフォリオ</a><a href="kdp_books.html">KDP出版実績</a><a href="pricing.html">料金ページ</a><a href="corporate-mental.html">法人メンタル窓口</a><a href="counseling-notes.html">カウンセリング利用時の注意事項</a><a href="tokutei.html">特定商取引法に基づく表記</a><a href="cancel-policy.html">キャンセル・返金ポリシー</a><a href="privacy.html">プライバシーポリシー</a><a href="terms.html">利用規約</a><a href="terms_miniapp.html">LINE Mini App 利用規約</a></div><p class="small">© 2026 和-Node. All Rights Reserved.</p></div></footer>
-<script>
-const max=9;let step=1;const qs=[...document.querySelectorAll('.question')];const bar=document.getElementById('bar');const stepLabel=document.getElementById('stepLabel');const prev=document.getElementById('prev');const next=document.getElementById('next');const finish=document.getElementById('finish');function show(){qs.forEach(q=>q.classList.toggle('active',+q.dataset.step===step));bar.style.width=(step/max*100)+'%';stepLabel.textContent='STEP '+step+' / '+max+'　'+Math.round(step/max*100)+'%';prev.style.visibility=step===1?'hidden':'visible';next.style.display=step===max?'none':'inline-flex';finish.style.display=step===max?'inline-flex':'none';}prev.onclick=()=>{if(step>1){step--;show();}};next.onclick=()=>{if(step<max){step++;show();}};function val(name){const el=document.querySelector(`[name="${name}"]:checked`)||document.querySelector(`[name="${name}"]`);return el?el.value||'—':'—';}function checks(name){return [...document.querySelectorAll(`[name="${name}"]:checked`)].map(e=>e.value).join('、')||'—';}function recommend(scale,budget,points){if(scale.includes('LP'))return 'おすすめプラン：心理導線LP制作。1つの商品・サービスを、認知→信頼→不安解消→問い合わせの流れで整理するプランが合いそうです。';if(scale.includes('2〜5'))return 'おすすめプラン：心理導線ホームページ制作。サービス内容・プロフィール・料金・問い合わせ導線を整え、紹介後の受け皿として使いやすい構成が合いそうです。';if(points.includes('診断ツール'))return 'おすすめプラン：Web制作＋診断/フォームツール。見るだけでなく体験できる導線を組み込むと、問い合わせ前の心理的ハードルを下げやすくなります。';return 'おすすめプラン：まず60分相談。目的・予算・優先順位を整理してから、LPかホームページかを決める進め方が安全です。';}
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <span class="eyebrow">Requirements Interview</span>
+        <h1>Web制作要件ヒアリング</h1>
+        <p class="lead">
+          「どんなサイトにしたいか」を整理するためのステップです。<br>
+          回答後に相談用サマリーを自動生成します。
+        </p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="wizard-container">
+        <div class="stepper" id="stepper">
+          <!-- JS dynamic -->
+        </div>
+
+        <form id="wizardForm">
+          <div class="question-block active" data-step="1">
+            <h2>1. 業種・ビジネスを教えてください</h2>
+            <input type="text" name="industry" class="input-text" placeholder="例：個人カウンセラー、カフェ、整体院など">
+          </div>
+
+          <div class="question-block" data-step="2">
+            <h2>2. 制作の主な目的は何ですか？</h2>
+            <div class="choices">
+              <label class="choice-card"><input type="radio" name="goal" value="問い合わせ・予約を増やしたい">
+                <div class="choice-text"><strong>問い合わせ・予約の獲得</strong><span>新規のお客様からのアクションを重視します。</span></div>
+              </label>
+              <label class="choice-card"><input type="radio" name="goal" value="信頼感・専門性を伝えたい">
+                <div class="choice-text"><strong>信頼感の構築</strong><span>名刺代わりや、実績紹介としての役割を重視します。</span></div>
+              </label>
+              <label class="choice-card"><input type="radio" name="goal" value="商品・サービスを直接販売したい">
+                <div class="choice-text"><strong>直接販売・決済</strong><span>LPから購入や申し込みまで繋げたい場合に。</span></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="question-block" data-step="3">
+            <h2>3. 現在のサイト状況は？</h2>
+            <div class="choices">
+              <label class="choice-card"><input type="radio" name="current" value="新規立ち上げ">
+                <div class="choice-text"><strong>新規立ち上げ</strong><span>新しくドメインを取得して作成します。</span></div>
+              </label>
+              <label class="choice-card"><input type="radio" name="current" value="既存サイトのリニューアル">
+                <div class="choice-text"><strong>リニューアル</strong><span>今のサイトの課題を解決したい場合に。</span></div>
+              </label>
+              <label class="choice-card"><input type="radio" name="current" value="LPのみ追加">
+                <div class="choice-text"><strong>LPのみ追加</strong><span>既存サイトはそのまま、特定の集客ページを作りたい。</span></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="question-block" data-step="4">
+            <h2>4. 制作するページ規模のイメージ</h2>
+            <div class="choices">
+              <label class="choice-card"><input type="radio" name="scale" value="1ページのLP">
+                <div class="choice-text"><strong>1ページのLP</strong><span>縦に長い1枚のページ。訴求力重視。</span></div>
+              </label>
+              <label class="choice-card"><input type="radio" name="scale" value="2〜5ページ程度">
+                <div class="choice-text"><strong>小規模サイト（2〜5ページ）</strong><span>トップ、サービス、料金、プロフィール、問い合わせ。</span></div>
+              </label>
+              <label class="choice-card"><input type="radio" name="scale" value="6ページ以上">
+                <div class="choice-text"><strong>中規模以上（6ページ〜）</strong><span>事業内容が多い、実績を細かく載せたい場合など。</span></div>
+              </label>
+            </div>
+          </div>
+
+          <div class="question-block" data-step="5">
+            <h2>5. 理想のデザインイメージは？</h2>
+            <div class="choices">
+              <label class="choice-card"><input type="radio" name="taste" value="やさしい・安心感"><strong>やさしい・安心感</strong></label>
+              <label class="choice-card"><input type="radio" name="taste" value="誠実・プロフェッショナル"><strong>誠実・プロフェッショナル</strong></label>
+              <label class="choice-card"><input type="radio" name="taste" value="シンプル・ミニマル"><strong>シンプル・ミニマル</strong></label>
+              <label class="choice-card"><input type="radio" name="taste" value="高級感・モダン"><strong>高級感・モダン</strong></label>
+            </div>
+          </div>
+
+          <div class="question-block" data-step="6">
+            <h2>6. ご希望の納期目安</h2>
+            <div class="choices">
+              <label class="choice-card"><input type="radio" name="deadline" value="できるだけ早く（特急希望）"><strong>できるだけ早く</strong></label>
+              <label class="choice-card"><input type="radio" name="deadline" value="1ヶ月以内"><strong>1ヶ月以内</strong></label>
+              <label class="choice-card"><input type="radio" name="deadline" value="2ヶ月程度"><strong>2ヶ月程度</strong></label>
+              <label class="choice-card"><input type="radio" name="deadline" value="特に決まっていない"><strong>特に決まっていない</strong></label>
+            </div>
+          </div>
+
+          <div class="question-block" data-step="7">
+            <h2>7. 制作予算の目安</h2>
+            <div class="choices">
+              <label class="choice-card"><input type="radio" name="budget" value="〜10万円"><strong>〜10万円</strong></label>
+              <label class="choice-card"><input type="radio" name="budget" value="10〜20万円"><strong>10〜20万円</strong></label>
+              <label class="choice-card"><input type="radio" name="budget" value="20万円〜"><strong>20万円〜</strong></label>
+              <label class="choice-card"><input type="radio" name="budget" value="相談して決めたい"><strong>相談して決めたい</strong></label>
+            </div>
+          </div>
+
+          <div class="question-block" data-step="8">
+            <h2>8. 重視したいポイント（複数可）</h2>
+            <div class="choices">
+              <label class="choice-card"><input type="checkbox" name="points" value="問い合わせ導線"><strong>問い合わせ導線</strong></label>
+              <label class="choice-card"><input type="checkbox" name="points" value="読みやすい文章・コピー"><strong>読みやすい文章・コピー</strong></label>
+              <label class="choice-card"><input type="checkbox" name="points" value="スマホでの使いやすさ"><strong>スマホでの使いやすさ</strong></label>
+              <label class="choice-card"><input type="checkbox" name="points" value="SEO（検索対策）"><strong>SEO（検索対策）</strong></label>
+              <label class="choice-card"><input type="checkbox" name="points" value="予約・診断機能などのシステム"><strong>システム連携（予約・診断）</strong></label>
+            </div>
+          </div>
+
+          <div class="question-block" data-step="9">
+            <h2>9. その他、気になる点やメッセージ</h2>
+            <textarea name="message" class="textarea" placeholder="例：原稿の準備が不安です。車いすユーザー視点でのアドバイスも欲しいです。"></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="button" class="btn btn-prev" id="btnPrev">← 戻る</button>
+            <button type="button" class="btn btn-next" id="btnNext">次へ進む →</button>
+            <button type="submit" class="btn btn-next" id="btnSubmit" style="display:none">ヒアリングを完了する</button>
+          </div>
+        </form>
+
+        <div class="summary-wrap" id="summaryWrap">
+          <div class="result-doc">
+            <div class="doc-header">
+              <h3>Web Production Strategy Summary</h3>
+            </div>
+            <div class="data-grid" id="summaryGrid">
+              <!-- JS Dynamic -->
+            </div>
+            <div class="recommend-box">
+              <h4>🎯 和-Nodeからの初期提案</h4>
+              <p id="recommendText"></p>
+            </div>
+            <div class="copy-area" id="copyArea"></div>
+            <div class="actions">
+              <button class="btn btn-next" id="btnCopy">サマリーをコピーする</button>
+              <a class="btn btn-prev" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank">問い合わせフォームへ</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p>© 2026 和-Node. All Rights Reserved.</p>
+      <div class="footer-links">
+        <a href="index.html">トップ</a>
+        <a href="pricing.html">料金</a>
+        <a href="privacy.html">プライバシーポリシー</a>
+        <a href="tokutei.html">特定商取引</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    let step = 1;
+    const maxStep = 9;
+    const form = document.getElementById('wizardForm');
+    const blocks = document.querySelectorAll('.question-block');
+    const stepper = document.getElementById('stepper');
+    const btnNext = document.getElementById('btnNext');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnSubmit = document.getElementById('btnSubmit');
+
+    function initStepper() {
+      stepper.innerHTML = Array.from({length: maxStep}, (_, i) => `
+        <div class="step-node" data-s="${i+1}">${i+1}</div>
+      `).join('');
+    }
+
+    function updateUI() {
+      blocks.forEach(b => b.classList.toggle('active', +b.dataset.step === step));
+      document.querySelectorAll('.step-node').forEach(node => {
+        const s = +node.dataset.s;
+        node.classList.toggle('active', s === step);
+        node.classList.toggle('done', s < step);
+      });
+      btnPrev.style.visibility = step === 1 ? 'hidden' : 'visible';
+      btnNext.style.display = step === maxStep ? 'none' : 'inline-flex';
+      btnSubmit.style.display = step === maxStep ? 'inline-flex' : 'none';
+      window.scrollTo({top: 200, behavior: 'smooth'});
+    }
+
+    btnNext.onclick = () => { if(step < maxStep) { step++; updateUI(); } };
+    btnPrev.onclick = () => { if(step > 1) { step--; updateUI(); } };
+
+    function getVal(name) {
+      const el = form.querySelector(`[name="${name}"]:checked`) || form.querySelector(`[name="${name}"]`);
+      return el ? el.value || '—' : '—';
+    }
+    function getChecks(name) {
+      return [...form.querySelectorAll(`[name="${name}"]:checked`)].map(e => e.value).join('、') || '—';
+    }
+
+    form.onsubmit = (e) => {
+      e.preventDefault();
+      const data = {
+        industry: getVal('industry'),
+        goal: getVal('goal'),
+        current: getVal('current'),
+        scale: getVal('scale'),
+        taste: getVal('taste'),
+        deadline: getVal('deadline'),
+        budget: getVal('budget'),
+        points: getChecks('points'),
+        message: getVal('message')
+      };
+
+      let rec = "まずは、心理導線LP制作から始めて、最も重要な「問い合わせ導線」を固めるのが良さそうです。";
+      if(data.scale.includes('6ページ')) rec = "複数ページにわたる心理導線ホームページ制作が適しています。各ページから最終的なゴールへの導線を統合的に設計しましょう。";
+      if(data.points.includes('システム')) rec = "Web制作に加え、LINE Mini Appや外部予約システムとの連携を視野に入れた設計をご提案します。";
+
+      document.getElementById('summaryGrid').innerHTML = Object.entries({
+        '業種・ビジネス': data.industry,
+        '目的': data.goal,
+        '現状': data.current,
+        '規模': data.scale,
+        'デザイン': data.taste,
+        '納期': data.deadline,
+        '予算': data.budget,
+        '重視点': data.points,
+        'メッセージ': data.message
+      }).map(([k, v]) => `
+        <div class="data-row"><b>${k}</b><span>${v}</span></div>
+      `).join('');
+
+      document.getElementById('recommendText').textContent = rec;
+      
+      const copyStr = `【Web制作ヒアリングサマリー】\n業種：${data.industry}\n目的：${data.goal}\n現状：${data.current}\n規模：${data.scale}\nデザイン：${data.taste}\n納期：${data.deadline}\n予算：${data.budget}\n重視：${data.points}\n備考：${data.message}\n\n提案：${rec}`;
+      document.getElementById('copyArea').textContent = copyStr;
+
+      form.style.display = 'none';
+      stepper.style.display = 'none';
+      document.getElementById('summaryWrap').classList.add('show');
+    };
+
+    document.getElementById('btnCopy').onclick = async () => {
+      await navigator.clipboard.writeText(document.getElementById('copyArea').textContent);
+      document.getElementById('btnCopy').textContent = 'コピー完了！';
+    };
+
+    initStepper();
+    updateUI();
+  </script>
+</body>
+</html>
+function show(){qs.forEach(q=>q.classList.toggle('active',+q.dataset.step===step));bar.style.width=(step/max*100)+'%';stepLabel.textContent='STEP '+step+' / '+max+'　'+Math.round(step/max*100)+'%';prev.style.visibility=step===1?'hidden':'visible';next.style.display=step===max?'none':'inline-flex';finish.style.display=step===max?'inline-flex':'none';}prev.onclick=()=>{if(step>1){step--;show();}};next.onclick=()=>{if(step<max){step++;show();}};function val(name){const el=document.querySelector(`[name="${name}"]:checked`)||document.querySelector(`[name="${name}"]`);return el?el.value||'—':'—';}function checks(name){return [...document.querySelectorAll(`[name="${name}"]:checked`)].map(e=>e.value).join('、')||'—';}function recommend(scale,budget,points){if(scale.includes('LP'))return 'おすすめプラン：心理導線LP制作。1つの商品・サービスを、認知→信頼→不安解消→問い合わせの流れで整理するプランが合いそうです。';if(scale.includes('2〜5'))return 'おすすめプラン：心理導線ホームページ制作。サービス内容・プロフィール・料金・問い合わせ導線を整え、紹介後の受け皿として使いやすい構成が合いそうです。';if(points.includes('診断ツール'))return 'おすすめプラン：Web制作＋診断/フォームツール。見るだけでなく体験できる導線を組み込むと、問い合わせ前の心理的ハードルを下げやすくなります。';return 'おすすめプラン：まず60分相談。目的・予算・優先順位を整理してから、LPかホームページかを決める進め方が安全です。';}
 document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();const data={industry:val('industry'),goal:val('goal'),current:val('current'),scale:val('scale'),taste:val('taste'),deadline:val('deadline'),budget:val('budget'),points:checks('points'),message:document.querySelector('[name="message"]').value||'—'};const rec=recommend(data.scale,data.budget,data.points);document.getElementById('summaryCard').innerHTML=Object.entries({'業種・ビジネス':data.industry,'目的・ゴール':data.goal,'現在のサイト':data.current,'ページ規模':data.scale,'デザインテイスト':data.taste,'ご希望納期':data.deadline,'ご予算感':data.budget,'重視するポイント':data.points,'ご要望・メッセージ':data.message}).map(([k,v])=>`<div class="line"><b>${k}</b><span>${v}</span></div>`).join('');document.getElementById('recommend').textContent='🎯 '+rec;const text=`【心理導線Web制作 ご相談サマリー】\n業種・ビジネス：${data.industry}\n目的・ゴール：${data.goal}\n現在のサイト：${data.current}\nページ規模：${data.scale}\nデザインテイスト：${data.taste}\nご希望納期：${data.deadline}\nご予算感：${data.budget}\n重視するポイント：${data.points}\nご要望・メッセージ：${data.message}\n\n${rec}`;document.getElementById('copyText').value=text;document.getElementById('summary').classList.add('show');document.getElementById('summary').scrollIntoView({behavior:'smooth'});});document.getElementById('copyBtn').onclick=async()=>{const t=document.getElementById('copyText');t.select();try{await navigator.clipboard.writeText(t.value);document.getElementById('copyBtn').textContent='コピーしました';}catch(e){document.execCommand('copy');}};document.getElementById('reset').onclick=()=>location.reload();show();
 </script></body></html>
