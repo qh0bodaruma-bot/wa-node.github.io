@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>和-Node | ビジネスDX診断</title>
+  
+  <!-- LINE LIFF SDK -->
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #f0f0f3;
+      --text-color: #2c2c2a;
+      --accent-color: #c8a84b;
+      --tech-blue: #4a90e2;
+      --shadow-light: #ffffff;
+      --shadow-dark: #d1d1d6;
+      --line-green: #06C755;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .app-container.loaded {
+      opacity: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .header-logo {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .header-sub {
+      font-family: 'Caveat', cursive;
+      font-size: 18px;
+      color: #666;
+    }
+
+    /* ニューモーフィズム・コンポーネント */
+    .neu-pressed {
+      background: var(--bg-color);
+      border-radius: 24px;
+      box-shadow: inset 6px 6px 12px var(--shadow-dark), 
+                  inset -6px -6px 12px var(--shadow-light);
+      border: 1px solid rgba(255,255,255,0.4);
+    }
+
+    .neu-raised {
+      background: var(--bg-color);
+      border-radius: 24px;
+      box-shadow: 8px 8px 16px var(--shadow-dark), 
+                  -8px -8px 16px var(--shadow-light);
+      border: none;
+    }
+
+    /* 画面セクション */
+    .screen {
+      display: none;
+      flex-direction: column;
+      gap: 20px;
+      animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* カード */
+    .welcome-card {
+      padding: 32px 24px;
+      text-align: center;
+    }
+
+    .user-name {
+      font-family: 'Caveat', cursive;
+      font-size: 24px;
+      color: var(--tech-blue);
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+
+    /* ボタン */
+    .btn {
+      width: 100%;
+      padding: 20px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-color);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+      -webkit-appearance: none;
+    }
+
+    .btn:active {
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), 
+                  inset -4px -4px 8px var(--shadow-light);
+      transform: scale(0.97);
+    }
+
+    .btn-subtext {
+      font-family: 'Caveat', cursive;
+      font-size: 14px;
+      font-weight: 400;
+      color: #777;
+    }
+
+    /* 診断結果ビジュアル */
+    .gauge-container {
+      width: 160px;
+      height: 160px;
+      margin: 20px auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      box-shadow: 8px 8px 16px var(--shadow-dark), 
+                  -8px -8px 16px var(--shadow-light);
+    }
+
+    .gauge-inner {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: inset 6px 6px 12px var(--shadow-dark), 
+                  inset -6px -6px 12px var(--shadow-light);
+    }
+
+    .gauge-value {
+      font-size: 36px;
+      font-weight: 700;
+      color: var(--tech-blue);
+    }
+
+    .saving-card {
+      padding: 20px;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    .saving-value {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--accent-color);
+      margin: 8px 0;
+    }
+
+    /* 進捗バー */
+    .progress-wrap { padding: 0 10px; }
+    .progress-bg {
+      height: 6px;
+      width: 100%;
+      background: var(--bg-color);
+      border-radius: 3px;
+      box-shadow: inset 2px 2px 4px var(--shadow-dark), 
+                  inset -2px -2px 4px var(--shadow-light);
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 100%;
+      background: var(--tech-blue);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    /* LINEボタン */
+    .btn-line {
+      background: var(--line-green);
+      color: #fff !important;
+      border-radius: 20px;
+      box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3);
+    }
+
+    /* ローディング */
+    .loading-overlay {
+      position: fixed; inset: 0; background: var(--bg-color);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      z-index: 100; transition: opacity 0.5s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loading" class="loading-overlay">
+    <div class="header-logo" style="margin-bottom: 20px;">和-Node</div>
+    <div class="header-sub">ICT Accelerator...</div>
+  </div>
+
+  <div class="app-container" id="app">
+    <header>
+      <div class="header-logo">和-Node</div>
+      <div class="header-sub">ICT & DX Solutions</div>
+    </header>
+
+    <!-- 1. HOME画面 -->
+    <section id="screen-home" class="screen active">
+      <div class="welcome-card neu-pressed">
+        <div><span id="display-name" class="user-name">Partner</span> 様</div>
+        <p style="font-size: 15px; margin-top: 8px;">
+          あなたのビジネス、<br>
+          もっと楽に、もっと速くなる。<br>
+          「DXの伸び代」を診断してみませんか？
+        </p>
+      </div>
+      
+      <button class="btn neu-raised" onclick="startQuiz()">
+        <span style="font-size: 24px;">🚀</span>
+        <span>ビジネスDX診断を始める</span>
+        <span class="btn-subtext">Start Diagnosis</span>
+      </button>
+
+      <button class="btn neu-raised" onclick="showScreen('screen-menu')">
+        <span style="font-size: 24px;">⚙️</span>
+        <span>ICT・効率化メニュー</span>
+        <span class="btn-subtext">ICT Solutions</span>
+      </button>
+    </section>
+
+    <!-- 2. QUIZ画面 -->
+    <section id="screen-quiz" class="screen">
+      <div class="progress-wrap">
+        <div class="progress-bg"><div id="progress-bar" class="progress-bar"></div></div>
+      </div>
+      
+      <div class="welcome-card neu-pressed" style="min-height: 160px; display: flex; align-items: center; justify-content: center;">
+        <p id="question-text" style="font-weight: 700;">読み込み中...</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 16px;">
+        <button class="btn neu-raised" onclick="nextQuestion(0)">
+          <span>すべてデジタル/自動化している</span>
+        </button>
+        <button class="btn neu-raised" onclick="nextQuestion(1)">
+          <span>一部ツールを使っている</span>
+        </button>
+        <button class="btn neu-raised" onclick="nextQuestion(2)">
+          <span>ほとんど手書き・アナログ作業</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- 3. RESULT画面 -->
+    <section id="screen-result" class="screen">
+      <div class="welcome-card neu-pressed">
+        <p style="font-size: 13px; font-weight: 700;">診断結果：あなたのDX潜在力</p>
+        
+        <div class="gauge-container">
+          <div class="gauge-inner">
+            <div id="result-score" class="gauge-value">0</div>
+            <div style="font-size: 11px; opacity: 0.6;">Potential %</div>
+          </div>
+        </div>
+
+        <div class="saving-card neu-pressed">
+          <p style="font-size: 12px; opacity: 0.7;">IT化で削減できる推定時間</p>
+          <div id="saving-time" class="saving-value">0</div>
+          <p style="font-size: 11px; color: #666;">（年間換算 / 1人あたり）</p>
+        </div>
+
+        <p id="result-message" style="font-size: 13px; color: #555; line-height: 1.6; margin-top: 20px;"></p>
+      </div>
+
+      <button class="btn btn-line" onclick="sendResultToChat()">
+        <span style="font-size: 20px;">💬</span>
+        <span>診断結果を相談に活かす</span>
+        <span class="btn-subtext">Contact with result</span>
+      </button>
+
+      <button class="btn neu-raised" onclick="showScreen('screen-menu')">
+        <span style="font-size: 20px;">💡</span>
+        <span>おすすめの自動化ツールを見る</span>
+        <span class="btn-subtext">Solution</span>
+      </button>
+
+      <button class="btn" style="box-shadow: none;" onclick="showScreen('screen-home')">
+        <span style="font-size: 13px; text-decoration: underline; opacity: 0.6;">ホームに戻る</span>
+      </button>
+    </section>
+
+    <!-- 4. MENU画面 -->
+    <section id="screen-menu" class="screen">
+      <div class="welcome-card neu-pressed" style="text-align: left;">
+        <p style="font-weight: 700; margin-bottom: 12px; text-align: center;">ICT・業務効率化メニュー</p>
+        <div style="font-size: 13px; line-height: 2;">
+          ・Google Apps Script (GAS) 自動化<br>
+          ・LINE公式アカウント連携・ミニアプリ<br>
+          ・社内業務フロー・DXコンサルティング<br>
+          ・ホームページ/LP制作（SEO対策）
+        </div>
+      </div>
+
+      <a href="https://lin.ee/o5QFPwc" style="text-decoration: none;">
+        <button class="btn btn-line">
+          <span style="font-size: 20px;">💬</span>
+          <span>無料ICT相談（LINE）</span>
+          <span class="btn-subtext">Direct Inquiry</span>
+        </button>
+      </a>
+
+      <button class="btn" style="box-shadow: none;" onclick="showScreen('screen-home')">
+        <span style="font-size: 13px; text-decoration: underline; opacity: 0.6;">ホームに戻る</span>
+      </button>
+    </section>
+  </div>
+
+  <script>
+    let userName = "Partner";
+    const questions = [
+      "顧客情報や名簿の管理はどうしていますか？",
+      "予約やお問い合わせの受付方法は？",
+      "請求書や伝票の作成・管理はどうしていますか？",
+      "社内やチームでの連絡ツールは何ですか？",
+      "同じ作業の繰り返し（ルーチン）は多いですか？"
+    ];
+
+    let currentIdx = 0;
+    let score = 0;
+
+    liff.init({
+      liffId: "2009957459-rbQKLd6W" // ここを後で差し替え
+    }).then(() => {
+      if (liff.isLoggedIn()) {
+        liff.getProfile().then(p => {
+          userName = p.displayName;
+          document.getElementById('display-name').innerText = userName;
+          hideLoading();
+        });
+      } else { hideLoading(); }
+    }).catch((err) => { hideLoading(); });
+
+    function hideLoading() {
+      document.getElementById('loading').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('app').classList.add('loaded');
+      }, 500);
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function startQuiz() {
+      currentIdx = 0; score = 0;
+      updateQuiz(); showScreen('screen-quiz');
+    }
+
+    function updateQuiz() {
+      document.getElementById('question-text').innerText = questions[currentIdx];
+      document.getElementById('progress-bar').style.width = (currentIdx / questions.length * 100) + '%';
+    }
+
+    function nextQuestion(s) {
+      score += s; currentIdx++;
+      if (currentIdx < questions.length) { updateQuiz(); }
+      else { showResult(); }
+    }
+
+    function showResult() {
+      const potential = Math.round((score / (questions.length * 2)) * 100);
+      const hoursSaved = score * 48; // 適当な計算式（年間削減時間の推計）
+
+      document.getElementById('result-score').innerText = potential;
+      document.getElementById('saving-time').innerText = `約 ${hoursSaved} 時間`;
+      
+      let msg = "";
+      if (potential >= 80) {
+        msg = "素晴らしい「伸び代」があります！アナログな部分を自動化するだけで、年間で膨大な時間を創出できる可能性があります。";
+      } else if (potential >= 40) {
+        msg = "IT化の第一歩を踏み出しています。さらにツール同士を連携（自動化）させることで、今の業務はもっと身軽になります。";
+      } else {
+        msg = "既に高い水準でデジタル活用されています。現在は「仕組みの維持」や「AI活用」によるさらなる高みを目指すフェーズです。";
+      }
+
+      document.getElementById('result-message').innerText = msg;
+      showScreen('screen-result');
+    }
+
+    function sendResultToChat() {
+      if (!liff.isInClient()) { alert("LINEアプリ内で実行してください。"); return; }
+      const potential = document.getElementById('result-score').innerText;
+      const saving = document.getElementById('saving-time').innerText;
+
+      liff.sendMessages([{
+        type: 'text',
+        text: `【ビジネスDX診断結果】\nDX潜在力：${potential}%\n年間削減可能時間：${saving}\n\n今の業務の効率化について相談したいです。`
+      }]).then(() => { alert("トーク画面に結果を送信しました。相談を開始してください。"); })
+      .catch((err) => { alert("送信に失敗しました。"); });
+    }
+  </script>
+</body>
+</html>
