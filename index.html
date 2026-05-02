@@ -170,6 +170,63 @@
     .price-card h3 { font-size: 1rem; color: var(--muted); margin-bottom: 8px; }
     .price-card .price { display: block; font-size: 1.6rem; font-weight: 800; color: var(--accent); }
 
+
+    .section-lead {
+      color: var(--muted);
+      max-width: 760px;
+      margin: -28px auto 40px;
+      text-align: center;
+    }
+
+    .price-strip {
+      max-width: 980px;
+      margin: -42px auto 0;
+      padding: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      position: relative;
+      z-index: 2;
+    }
+    .price-strip div {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 14px 12px;
+      text-align: center;
+    }
+    .price-strip strong { display: block; font-size: 0.9rem; color: var(--muted); }
+    .price-strip span { display: block; font-size: 1.15rem; font-weight: 800; color: var(--accent); }
+
+    .consult-grid,
+    .ba-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .ba-grid { grid-template-columns: repeat(2, 1fr); }
+    .consult-card,
+    .ba-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+      box-shadow: 0 10px 28px rgba(70, 52, 32, 0.05);
+    }
+    .consult-card h3,
+    .ba-card h3 { margin-top: 0; font-size: 1.25rem; }
+    .consult-card p { color: var(--muted); margin-bottom: 0; }
+    .ba-card ul { margin: 0; padding-left: 1.25em; color: var(--muted); }
+    .ba-card li { margin-bottom: 8px; }
+    .ba-card.after {
+      background: linear-gradient(135deg, #fffdf9 0%, #f1e6da 100%);
+      border-color: var(--accent2);
+    }
+
     .faq details {
       background: var(--paper);
       border: 1px solid var(--line);
@@ -192,6 +249,10 @@
       .hero { padding: 60px 0; }
       .nav { gap: 12px; }
       .logo span { display: none; }
+
+      .price-strip { grid-template-columns: 1fr; margin: 20px 20px 0; }
+      .consult-grid, .ba-grid { grid-template-columns: 1fr; }
+      .section-lead { margin-top: -24px; }
     }
   </style>
 </head>
@@ -213,11 +274,45 @@
     <section class="hero">
       <div class="hero-inner">
         <span class="eyebrow">車いすSE × 心理カウンセラー</span>
-        <h1>人の心に届くWebと、<br>無理なく使えるICTを。</h1>
-        <p class="lead">和-Nodeは、ICT実務15年以上のSEであり、心理カウンセラーでもある代表が運営する小さな相談窓口です。Web制作、AI活用、メンタル支援まで、状況を整理するところから伴走します。</p>
+        <h1>Web・AI・心の悩みを、<br>ひとつの窓口で整理します。</h1>
+        <p class="lead">和-Nodeは、ICT実務15年以上のSEであり、心理カウンセラーでもある代表が運営する小さな相談窓口です。Web制作、AI活用、メンタル支援まで、今困っていることを一緒に整理し、必要な一歩へつなげます。</p>
         <div class="btns">
-          <a class="btn" href="#contact">まずは相談する</a>
-          <a class="btn secondary" href="simulator.html">Web制作費をシミュレート</a>
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">まずは60分相談する</a>
+          <a class="btn secondary" href="simulator.html">制作費をシミュレート</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="price-strip" aria-label="主な料金">
+      <div><strong>60分相談</strong><span>5,000円</span></div>
+      <div><strong>LP制作</strong><span>30,000円〜</span></div>
+      <div><strong>HP制作</strong><span>120,000円〜</span></div>
+      <div><strong>法人メンタル窓口</strong><span>月額30,000円〜</span></div>
+    </div>
+
+    <section class="section first-consult" id="first-consult">
+      <div class="section-inner">
+        <div class="section-title">
+          <span class="eyebrow">First Step</span>
+          <h2>何を相談できますか？</h2>
+        </div>
+        <p class="section-lead">依頼内容がまとまっていなくても大丈夫です。まずは、今困っていることをそのままお聞かせください。</p>
+        <div class="consult-grid">
+          <article class="consult-card">
+            <h3>Webを作りたい・直したい</h3>
+            <p>LP、ホームページ、問い合わせ導線、SEO内部改善などを整理します。</p>
+          </article>
+          <article class="consult-card">
+            <h3>AIやITを仕事に使いたい</h3>
+            <p>ChatGPT活用、業務効率化、GAS、LINE Botなどを現場に合わせて考えます。</p>
+          </article>
+          <article class="consult-card">
+            <h3>心や人間関係の悩みを整理したい</h3>
+            <p>個人相談、職場の悩み、法人の外部相談窓口まで対応します。</p>
+          </article>
+        </div>
+        <div class="btns">
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">まずは相談する</a>
         </div>
       </div>
     </section>
@@ -250,6 +345,38 @@
             <div style="font-weight:bold; margin-bottom:10px;">個人 60分 5,000円</div>
             <a href="mental_care.html">疲労度をセルフチェック →</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section before-after" id="before-after">
+      <div class="section-inner">
+        <div class="section-title">
+          <span class="eyebrow">Before / After</span>
+          <h2>相談すると、何が変わるのか</h2>
+        </div>
+        <div class="ba-grid">
+          <div class="ba-card">
+            <h3>相談前</h3>
+            <ul>
+              <li>何から手をつければいいか分からない</li>
+              <li>Web、AI、心の悩みを別々に抱えている</li>
+              <li>誰に相談すればいいか分からない</li>
+              <li>必要なものと不要なものの判断がつかない</li>
+            </ul>
+          </div>
+          <div class="ba-card after">
+            <h3>相談後</h3>
+            <ul>
+              <li>今やるべきことの優先順位が見える</li>
+              <li>必要な制作物・改善策が整理できる</li>
+              <li>一人で抱え込まなくてよくなる</li>
+              <li>無理のない一歩目から始められる</li>
+            </ul>
+          </div>
+        </div>
+        <div class="btns">
+          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">まずは相談する</a>
         </div>
       </div>
     </section>
@@ -326,6 +453,7 @@
           <div class="price-card"><h3>LINE Mini App</h3><span class="price">150,000円〜</span></div>
           <div class="price-card"><h3>法人メンタル窓口</h3><span class="price">30,000円〜</span></div>
         </div>
+        <div class="btns"><a class="btn" href="pricing.html">料金一覧を詳しく見る</a></div>
       </div>
     </section>
 
@@ -349,7 +477,7 @@
         <p>文章がまとまっていなくても大丈夫です。今の状態から一緒に整理しましょう。</p>
         <div class="btns">
           <a class="btn" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">LINEで相談する</a>
-          <a class="btn secondary" href="mailto:contacts@wa-node.com">メールで相談する</a>
+          <a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">フォームで問い合わせる</a>
         </div>
       </div>
     </section>
