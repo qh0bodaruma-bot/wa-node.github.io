@@ -409,11 +409,15 @@
   <footer class="footer">
     <div class="wrap">
       <p>© 2026 和-Node. All Rights Reserved.</p>
+      <div class="footer-badges" style="margin-bottom: 20px;">
+        <a href="security-policy.html"><img src="images/security_action_hitotsuboshi-large_color.jpg" alt="SECURITY ACTION 一つ星" style="width: 80px; height: auto; border-radius: 4px;"></a>
+      </div>
       <div class="footer-links">
         <a href="index.html">トップ</a>
         <a href="pricing.html">料金</a>
         <a href="https://x.com/wa_node" target="_blank" rel="noopener">X（旧Twitter）</a>
         <a href="privacy.html">プライバシーポリシー</a>
+        <a href="security-policy.html">情報セキュリティ方針</a>
         <a href="tokutei.html">特定商取引</a>
       </div>
     </div>
@@ -511,6 +515,3 @@
   </script>
 </body>
 </html>
-function show(){qs.forEach(q=>q.classList.toggle('active',+q.dataset.step===step));bar.style.width=(step/max*100)+'%';stepLabel.textContent='STEP '+step+' / '+max+'　'+Math.round(step/max*100)+'%';prev.style.visibility=step===1?'hidden':'visible';next.style.display=step===max?'none':'inline-flex';finish.style.display=step===max?'inline-flex':'none';}prev.onclick=()=>{if(step>1){step--;show();}};next.onclick=()=>{if(step<max){step++;show();}};function val(name){const el=document.querySelector(`[name="${name}"]:checked`)||document.querySelector(`[name="${name}"]`);return el?el.value||'—':'—';}function checks(name){return [...document.querySelectorAll(`[name="${name}"]:checked`)].map(e=>e.value).join('、')||'—';}function recommend(scale,budget,points){if(scale.includes('LP'))return 'おすすめプラン：心理導線LP制作。1つの商品・サービスを、認知→信頼→不安解消→問い合わせの流れで整理するプランが合いそうです。';if(scale.includes('2〜5'))return 'おすすめプラン：心理導線ホームページ制作。サービス内容・プロフィール・料金・問い合わせ導線を整え、紹介後の受け皿として使いやすい構成が合いそうです。';if(points.includes('診断ツール'))return 'おすすめプラン：Web制作＋診断/フォームツール。見るだけでなく体験できる導線を組み込むと、問い合わせ前の心理的ハードルを下げやすくなります。';return 'おすすめプラン：まず60分相談。目的・予算・優先順位を整理してから、LPかホームページかを決める進め方が安全です。';}
-document.getElementById('form').addEventListener('submit',e=>{e.preventDefault();const data={industry:val('industry'),goal:val('goal'),current:val('current'),scale:val('scale'),taste:val('taste'),deadline:val('deadline'),budget:val('budget'),points:checks('points'),message:document.querySelector('[name="message"]').value||'—'};const rec=recommend(data.scale,data.budget,data.points);document.getElementById('summaryCard').innerHTML=Object.entries({'業種・ビジネス':data.industry,'目的・ゴール':data.goal,'現在のサイト':data.current,'ページ規模':data.scale,'デザインテイスト':data.taste,'ご希望納期':data.deadline,'ご予算感':data.budget,'重視するポイント':data.points,'ご要望・メッセージ':data.message}).map(([k,v])=>`<div class="line"><b>${k}</b><span>${v}</span></div>`).join('');document.getElementById('recommend').textContent='🎯 '+rec;const text=`【心理導線Web制作 ご相談サマリー】\n業種・ビジネス：${data.industry}\n目的・ゴール：${data.goal}\n現在のサイト：${data.current}\nページ規模：${data.scale}\nデザインテイスト：${data.taste}\nご希望納期：${data.deadline}\nご予算感：${data.budget}\n重視するポイント：${data.points}\nご要望・メッセージ：${data.message}\n\n${rec}`;document.getElementById('copyText').value=text;document.getElementById('summary').classList.add('show');document.getElementById('summary').scrollIntoView({behavior:'smooth'});});document.getElementById('copyBtn').onclick=async()=>{const t=document.getElementById('copyText');t.select();try{await navigator.clipboard.writeText(t.value);document.getElementById('copyBtn').textContent='コピーしました';}catch(e){document.execCommand('copy');}};document.getElementById('reset').onclick=()=>location.reload();show();
-</script></body></html>
