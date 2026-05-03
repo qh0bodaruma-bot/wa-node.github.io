@@ -64,14 +64,44 @@
     .nav a { color: var(--text); font-weight: 700; }
 
     .hero {
-      padding: 100px 0;
-      text-align: center;
+      padding: 80px 0;
+      text-align: left;
       position: relative;
     }
     .hero-inner {
-      max-width: 900px;
+      max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+    .hero-content { flex: 1; }
+    .hero-visual {
+      flex: 0 0 320px;
+      position: relative;
+    }
+    .hero-avatar {
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 8px solid var(--white);
+      box-shadow: var(--shadow);
+      background: var(--white);
+    }
+    .hero-badge {
+      position: absolute;
+      bottom: 10px;
+      right: 0;
+      background: var(--accent);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 800;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     .eyebrow {
       display: inline-block;
@@ -86,18 +116,27 @@
       margin-bottom: 24px;
     }
     .hero h1 {
-      font-size: clamp(2.2rem, 6vw, 4.5rem);
+      font-size: clamp(2rem, 5vw, 3.8rem);
       line-height: 1.2;
       margin: 0 0 24px;
       font-weight: 800;
       letter-spacing: -0.02em;
     }
     .lead {
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--muted);
-      max-width: 760px;
-      margin: 0 auto 32px;
+      max-width: 680px;
+      margin: 0 0 32px;
     }
+    .hero-stats {
+      display: flex;
+      gap: 20px;
+      margin-bottom: 32px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .hero-stats span { border-left: 3px solid var(--accent); padding-left: 10px; }
 
     .section { padding: 80px 0; }
     .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
@@ -249,12 +288,24 @@
 
       @media (max-width: 768px) {
         .header-inner { flex-direction: column; align-items: flex-start; }
-        .hero { padding: 60px 0; }
+        .hero { padding: 60px 0; text-align: center; }
+      .hero-inner { flex-direction: column; gap: 32px; }
+      .hero-visual { order: -1; flex: 0 0 auto; }
+      .hero-avatar { width: 200px; height: 200px; }
+      .lead { margin-inline: auto; }
+      .hero-stats { justify-content: center; flex-wrap: wrap; }
         .nav { gap: 12px; }
         .logo span { display: none; }
         .price-strip { grid-template-columns: 1fr; margin: -20px 20px 0; }
         .consult-grid, .ba-grid { grid-template-columns: 1fr; }
         .section-lead { margin-top: -24px; }
+        .philosophy-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); padding: 48px; box-shadow: var(--shadow); position: relative; overflow: hidden; }
+        .philosophy-card::before { content: "“"; position: absolute; top: -10px; left: 20px; font-size: 8rem; color: var(--soft); font-family: serif; line-height: 1; z-index: 0; }
+        .philosophy-content { position: relative; z-index: 1; }
+        .philosophy-content p { font-size: 1.05rem; line-height: 1.8; margin-bottom: 1.5rem; }
+        .philosophy-content strong { color: var(--accent); }
+        .sp-only { display: none; }
+        @media (max-width: 768px) { .sp-only { display: block; } .philosophy-card { padding: 32px 20px; } }
         
         .about-grid { grid-template-columns: 1fr; gap: 40px; }
         .about-content { order: 2; }
@@ -268,11 +319,12 @@
     <div class="header-inner">
       <a class="logo" href="index.html">和-Node<span>心理 × AI × ICT</span></a>
       <nav class="nav">
-        <a href="#about">代表について</a>
+        <a href="#philosophy">和-Nodeの想い</a>
         <a href="#services">サービス</a>
         <a href="#works">制作例・ツール</a>
         <a href="pricing.html">料金</a>
         <a href="simulator.html">料金シミュレーター</a>
+        <a href="#about">代表プロフィール</a>
         <a href="#contact">相談する</a>
       </nav>
     </div>
@@ -281,12 +333,23 @@
   <main>
     <section class="hero">
       <div class="hero-inner">
-        <span class="eyebrow">車いすSE × 心理カウンセラー</span>
-        <h1>Web・AI・心の悩みを、<br>ひとつの窓口で整理します。</h1>
-        <p class="lead">和-Nodeは、ICT実務15年以上のSEであり、心理カウンセラーでもある代表が運営する小さな相談窓口です。Web制作、AI活用、メンタル支援まで、今困っていることを一緒に整理し、必要な一歩へつなげます。</p>
-        <div class="btns">
-          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">まずは60分相談する</a>
-          <a class="btn secondary" href="simulator.html">制作費をシミュレート</a>
+        <div class="hero-content">
+          <span class="eyebrow">JADP認定メンタル心理カウンセラー × 車いすSE</span>
+          <h1>Web・AI・心の悩みを、<br>ひとつの窓口で整理します。</h1>
+          <p class="lead">和-Nodeは、ICT実務15年以上のSEであり、心理カウンセラーでもある代表が運営する小さな相談窓口です。今困っていることを一緒に整理し、必要な一歩へつなげます。</p>
+          <div class="hero-stats">
+            <span>ICT実務 15年以上</span>
+            <span>制作実績 100件超</span>
+            <span>JADP認定資格保有</span>
+          </div>
+          <div class="btns" style="justify-content: flex-start;">
+            <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">まずは60分相談する</a>
+            <a class="btn secondary" href="simulator.html">制作費をシミュレート</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="images/avatar.png" alt="代表 高野紘純" class="hero-avatar">
+          <div class="hero-badge">代表 高野紘純</div>
         </div>
       </div>
     </section>
@@ -321,6 +384,23 @@
         </div>
         <div class="btns">
           <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">まずは60分相談する</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section philosophy" id="philosophy" style="background: linear-gradient(to bottom, var(--bg), var(--paper));">
+      <div class="section-inner">
+        <div class="section-title">
+          <span class="eyebrow">Philosophy</span>
+          <h2>なぜ、技術と心理を<br class="sp-only">同じ窓口で扱うのか</h2>
+        </div>
+        <div class="philosophy-card">
+          <div class="philosophy-content">
+            <p><strong>「技術は人のためにある」というのが、私の15年のSE経験から辿り着いた結論です。</strong></p>
+            <p>どんなに優れたシステムやWebサイトも、使う人の「心」や「状況」が置いてけぼりでは意味がありません。ボタンひとつ、文章一行の配置であっても、そこには必ず「人の心理」が働いています。</p>
+            <p>私自身、線維筋痛症で車いす生活を送る中で、技術がいかに人を救い、また設計が不親切であればいかに人を傷つけるかを身をもって経験しました。だからこそ、<strong>「最新の技術」に「人の心への理解」を掛け合わせる</strong>ことの重要性を誰よりも確信しています。</p>
+            <p>和-Nodeは、Web制作に「心理導線」を、AI活用に「現場の安心」を。技術を単なる道具ではなく、あなたの可能性を広げるための「パートナー」として届けるために、この3つの領域をひとつの窓口で整理しています。</p>
+          </div>
         </div>
       </div>
     </section>
@@ -438,7 +518,7 @@
               <span class="eyebrow">About</span>
               <h2 style="font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.4;">痛みも、孤独も、ICTの課題も。<br>抱えてきたからこそ、聴けることがあります。</h2>
             </div>
-            <p>30歳で線維筋痛症を発症し、車いす生活へ。それでも社会とのつながりを諦めず、リハビリを続けながらICTと心理の両面から人を支える仕事を始めました。</p>
+            <p>JADP認定メンタル心理カウンセラーとして、またICT実務15年以上のシステムエンジニアとして、100件を超えるプロジェクトに携わってきました。30歳で線維筋痛症を発症し、車いす生活へ。それでも社会とのつながりを諦めず、リハビリを続けながらICTと心理の両面から人を支える仕事を始めました。</p>
             <p>和-Nodeは、人と人、心と技術、仕事と暮らしをつなぐ接点（Node）でありたいと考えています。</p>
             <div class="btns" style="justify-content: flex-start; margin-top: 32px;">
               <a class="btn secondary" href="barrier_free.html">バリアフリー度を診断する</a>
@@ -478,6 +558,9 @@
         <div class="section-title"><h2>よくある質問</h2></div>
         <div style="max-width: 800px; margin: 0 auto;">
           <details><summary>何から相談すればいいか分かりません。</summary><p>「何を頼めばいいか整理したい」という段階でも大丈夫です。60分の相談から始めて、必要なサービスを一緒に考えましょう。</p></details>
+          <details><summary>車いすでの活動ということで、制作実務に影響はありますか？</summary><p>実務への影響は全くありません。15年以上のエンジニア経験があり、最新のITツールを駆使して円滑に業務を遂行します。むしろ、車いすユーザーとしての視点を活かした、使い勝手の良い「バリアフリーなWeb設計」が私の強みでもあります。</p></details>
+          <details><summary>相談した内容や機密情報は守られますか？</summary><p>厳守いたします。エンジニアとしての職業倫理に加え、カウンセラーとしての「守秘義務」を何よりも大切にしております。ご要望があれば機密保持契約（NDA）の締結も可能ですので、安心して本音でお話しください。</p></details>
+          <details><summary>予算が限られているのですが、相談だけでもいいですか？</summary><p>もちろんです。まずは問題を「整理」することが解決への近道です。ご予算に合わせて、無理のない範囲で始められる最小限のステップを一緒に考えましょう。</p></details>
           <details><summary>心理導線Web制作とは何ですか？</summary><p>見た目だけでなく、訪問者の不安・迷い・行動心理をふまえて、読み進めやすく、問い合わせにつながりやすい流れを設計するWeb制作です。</p></details>
           <details><summary>全国対応していますか？</summary><p>はい、すべてのサービスがオンライン（Google Meet, Zoom, LINE等）で全国対応可能です。</p></details>
         </div>
