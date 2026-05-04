@@ -7,7 +7,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-content">
-          <span class="eyebrow">産業カウンセラー × 車いすSE</span>
+          <span class="eyebrow">車いすカウンセラー × ICTコンサル</span>
           <h1>Web・AI・心の悩みを、<br />ひとつの窓口で整理します。</h1>
           <p class="lead">和-Nodeは、IT・Web業界で20年以上の実績を持つエンジニアであり、心理カウンセラーでもある代表が運営する小さな相談窓口です。今困っていることを一緒に整理し、必要な一歩へつなげます。</p>
           <div class="hero-stats">
@@ -192,19 +192,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <section class="section" id="about">
       <div class="section-inner">
-        <div class="about-grid">
-          <div class="about-content">
-            <div class="section-title" style="text-align: left; margin-bottom: 24px;">
-              <span class="eyebrow">About</span>
-              <h2 style="font-size: clamp(1.5rem, 3vw, 2.2rem); line-height: 1.4;">技術と、心理と、当事者の視点を。</h2>
-            </div>
+        <div class="about-content">
+          <div class="section-title" style="text-align: center; margin-bottom: 32px;">
+            <span class="eyebrow">About</span>
+            <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.3;">技術と、心理と、当事者の視点を。</h2>
+          </div>
+          
+          <div class="about-text-wrap">
             <p>IT・Web業界に携わって20年以上。システム開発・Web制作・LP設計から、AIツール活用支援まで、一貫して「人が使いやすいものを作る」ことを軸にしてきました。</p>
             <p>現在は線維筋痛症の治療・リハビリを継続しながら、車いすユーザーとして活動しています。障壁は、知識として知っているのではなく、毎日の生活の中で身体で知っています。バリアフリー住環境のアドバイスや、福祉・医療領域でのWeb制作に携わる際、この視点は資格や経験では補えない根拠になっています。</p>
             <p>また、JADP認定のメンタル心理カウンセラー・上級心理カウンセラーとして、心理的なアプローチも提供しています。「なぜ伝わらないのか」「なぜ動けないのか」という問いに、技術面と心理面の両軸から向き合えることが、私の最大の強みです。</p>
-            
+          </div>
+          
+          <div class="qual-box-wrapper">
             <div class="qual-box">
               <h3>資格・スキル</h3>
-              <ul>
+              <ul class="qual-list">
                 <li>IT・Web制作歴 20年以上</li>
                 <li>産業カウンセラー</li>
                 <li>JADP認定 メンタル心理カウンセラー</li>
@@ -213,13 +216,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <li>車いすユーザー（バリアフリー住環境アドバイザー）</li>
               </ul>
             </div>
-
-            <div class="btns" style="justify-content: flex-start; margin-top: 32px;">
-              <a class="btn secondary" href="/barrier_free">バリアフリー度を診断する</a>
-            </div>
           </div>
-          <div class="about-image">
-            <img src="/images/panda-zen.png" alt="和-Nodeのテーマを象徴する和風庭園とパンダ" width="600" height="600" loading="lazy" />
+
+          <div class="btns" style="justify-content: center; margin-top: 40px;">
+            <a class="btn secondary" href="/barrier_free">バリアフリー度を診断する</a>
           </div>
         </div>
       </div>
@@ -429,18 +429,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     border-color: var(--accent2);
   }
 
-  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; max-width: 1000px; margin: 0 auto; }
-  .about-image img { width: 100%; height: auto; border-radius: var(--radius); box-shadow: var(--shadow); border: 8px solid var(--white); background: var(--white); object-fit: cover; aspect-ratio: 1/1; }
+  .about-content { max-width: 840px; margin: 0 auto; }
+  .about-text-wrap { font-size: 1.05rem; line-height: 1.8; color: var(--text); text-align: left; margin-bottom: 32px; }
+  .about-text-wrap p { margin-bottom: 1.5rem; }
 
+  .qual-box-wrapper { display: flex; justify-content: center; }
   .qual-box {
-    margin-top: 32px;
+    width: 100%;
+    max-width: 600px;
     background: var(--white);
     border: 1px solid var(--line);
-    border-radius: 16px;
-    padding: 24px;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
   }
-  .qual-box h3 { font-size: 1.1rem; margin-top: 0; margin-bottom: 16px; color: var(--accent); }
-  .qual-box ul { margin: 0; padding-left: 1.2rem; font-size: 0.95rem; line-height: 1.8; list-style: disc; }
+  .qual-box h3 { font-size: 1.2rem; margin-top: 0; margin-bottom: 20px; color: var(--accent); text-align: center; border-bottom: 2px solid var(--soft); display: inline-block; width: 100%; padding-bottom: 10px; }
+  .qual-list { margin: 0; padding: 0; font-size: 1rem; line-height: 2; list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 20px; }
+  .qual-list li { position: relative; padding-left: 24px; }
+  .qual-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: bold; }
 
   .price-grid {
     display: grid;
