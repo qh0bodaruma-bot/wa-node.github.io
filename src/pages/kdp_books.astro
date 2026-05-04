@@ -1,0 +1,160 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="KDP出版実績｜和-Node" description="和-Node代表「マルだ←」によるAmazon Kindle (KDP) の出版実績一覧。オリジナル鳥獣戯画や浮世絵風デザインの書籍など。">
+  <main>
+    <div class="kdp-header">
+      <div class="container">
+        <h1 class="kdp-title">出版実績 (KDP)</h1>
+        <p class="kdp-desc">Amazon Kindleにて、海外向け（英語版・フランス語版）に浮世絵や鳥獣戯画をモチーフにした作品を多数出版しております。<br />表紙デザインから内部コンテンツまで一貫して制作しています。</p>
+      </div>
+    </div>
+
+    <!-- セクション1: 江戸旅行記シリーズ (Premium) -->
+    <div class="kdp-section premium-section">
+      <div class="premium-badge">PREMIUM EDITION</div>
+      <h2 class="kdp-section-title">江戸旅行記シリーズ</h2>
+      <div class="book-grid">
+        <div class="book-card reveal">
+          <div class="book-image-container">
+            <img src="/images/KDP/en_title/江戸旅行記ラグドール.png" alt="江戸旅行記ラグドール" class="book-image-main" loading="lazy" />
+          </div>
+          <div class="book-info">
+            <div class="book-title">江戸旅行記 ラグドール</div>
+            <div class="book-price">$14.99 / €14.99</div>
+            <div class="book-links">
+              <a href="https://www.amazon.com/dp/B0GWDRMFHJ" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
+              <a href="https://www.amazon.fr/dp/B0GWDP7P5G" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
+            </div>
+          </div>
+        </div>
+        <div class="book-card reveal">
+          <div class="book-image-container">
+            <img src="/images/KDP/en_title/江戸旅行記フレンチブルドッグ.png" alt="江戸旅行記フレンチブルドッグ" class="book-image-main" loading="lazy" />
+          </div>
+          <div class="book-info">
+            <div class="book-title">江戸旅行記 フレンチブルドッグ</div>
+            <div class="book-price">$14.99 / €14.99</div>
+            <div class="book-links">
+              <a href="https://www.amazon.com/dp/B0GWQ5VTWC" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
+              <a href="https://www.amazon.fr/dp/B0GWQ56YDN" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
+            </div>
+          </div>
+        </div>
+        <div class="book-card reveal">
+          <div class="book-image-container">
+            <img src="/images/KDP/en_title/江戸旅行記シマエナガ.png" alt="江戸旅行記シマエナガ" class="book-image-main" loading="lazy" />
+          </div>
+          <div class="book-info">
+            <div class="book-title">江戸旅行記 シマエナガ</div>
+            <div class="book-price">$14.99 / €14.99</div>
+            <div class="book-links">
+              <a href="https://www.amazon.com/dp/B0GXKYSTSY" target="_blank" class="book-btn btn-en">🇺🇸 英語版</a>
+              <a href="https://www.amazon.fr/dp/B0GXL5Z3ZR" target="_blank" class="book-btn btn-fr">🇫🇷 仏語版</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- セクション2: オリジナル鳥獣戯画 -->
+    <div class="kdp-section">
+      <h2 class="kdp-section-title">オリジナル鳥獣戯画</h2>
+      <div class="book-grid single-book">
+        <div class="book-card reveal">
+          <div class="book-image-container">
+            <img src="/images/KDP/en_title/鳥獣戯画風 en_title.png" alt="オリジナル鳥獣戯画" class="book-image-main" loading="lazy" />
+          </div>
+          <div class="book-info">
+            <div class="book-title">オリジナル鳥獣戯画</div>
+            <div class="book-price-standard">$7.99 / €7.49</div>
+            <div class="book-links">
+              <a href="https://www.amazon.com/dp/B0GJZY49SH" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
+              <a href="https://www.amazon.fr/dp/B0GW8N8HQP" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="back-to-top">
+      <a href="/" class="btn-back">← ページトップへ戻る</a>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+    .kdp-header { background: var(--bg); padding: 80px 0 48px; text-align: center; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    .kdp-title { font-size: 2.5rem; color: var(--text); margin-bottom: 16px; font-weight: 800; }
+    .kdp-desc { color: var(--muted); font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+
+    .kdp-section { padding: 80px 0; }
+    .kdp-section:nth-child(even) { background: #faf8f5; }
+
+    .kdp-section-title {
+        font-size: 1.8rem; color: var(--accent); text-align: center; margin-bottom: 48px;
+        display: flex; align-items: center; justify-content: center; gap: 16px; font-weight: 800;
+    }
+    .kdp-section-title::before, .kdp-section-title::after { content: ''; height: 1px; width: 60px; background: var(--accent2); opacity: 0.3; }
+
+    .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    .book-grid.single-book { grid-template-columns: minmax(300px, 400px); justify-content: center; }
+
+    .book-card {
+        background: #fff; border: 1px solid var(--line); border-radius: 16px;
+        overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .book-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--accent); }
+
+    .book-image-container { display: flex; position: relative; border-bottom: 1px solid var(--line); }
+    .book-image-main { width: 100%; height: auto; object-fit: cover; display: block; aspect-ratio: 1 / 1.414; }
+
+    .book-info { padding: 24px; }
+    .book-title { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 16px; text-align: center; }
+    .book-price { text-align: center; color: var(--accent); font-size: 0.9rem; margin-bottom: 16px; font-weight: 700; letter-spacing: 1px; }
+    .book-price-standard { text-align: center; color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; font-weight: 700; letter-spacing: 1px; }
+
+    .book-links { display: flex; gap: 12px; }
+    .book-btn {
+        flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
+        padding: 12px; border-radius: 999px; text-decoration: none; font-size: 0.85rem; font-weight: 800;
+        transition: 0.3s; border: 1px solid var(--accent);
+    }
+    .btn-en { background: #fff; color: var(--accent); }
+    .btn-en:hover { background: var(--soft); }
+    .btn-fr { background: var(--accent); color: #fff; }
+    .btn-fr:hover { background: var(--text); border-color: var(--text); }
+
+    .premium-section { background: linear-gradient(135deg, #1a1a18, #2c2c2a); color: #fff; }
+    .premium-badge { text-align: center; color: var(--accent2); font-size: 0.8rem; letter-spacing: 0.2em; font-weight: 800; margin-bottom: 8px; }
+    .premium-section .kdp-section-title { color: #fff; }
+    .premium-section .book-card { background: #333330; border-color: rgba(216, 185, 140, 0.2); }
+    .premium-section .book-title { color: #fff; }
+
+    .back-to-top { text-align: center; padding: 64px 0; }
+    .btn-back { display: inline-block; padding: 12px 32px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); text-decoration: none; font-weight: 700; transition: 0.3s; }
+    .btn-back:hover { background: var(--soft); color: var(--accent); }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+        .kdp-title { font-size: 2rem; }
+        .book-grid { grid-template-columns: 1fr; }
+    }
+</style>
+
+<script is:inline>
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>

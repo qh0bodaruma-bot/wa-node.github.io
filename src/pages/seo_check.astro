@@ -1,0 +1,407 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="WordPress SEO内部診断チェック | 和-Node" description="25項目のチェックリストでWordPressサイトのSEO内部状態を無料診断。弱点を可視化して改善ポイントを把握できます。">
+  <main>
+    <div class="hero">
+      <div class="hero-badge">SEO CHECKLIST</div>
+      <h1 class="hero-title">WordPress SEO 内部診断チェック</h1>
+      <p class="hero-sub">25項目をチェックするだけで、サイトのSEO内部状態をリアルタイム採点。弱点を見える化して改善のヒントを得られます。</p>
+    </div>
+
+    <div class="score-panel">
+      <div class="score-card">
+        <div class="score-ring-wrap">
+          <svg class="score-ring" viewBox="0 0 96 96">
+            <circle cx="48" cy="48" r="40" fill="none" stroke="#e5e2db" stroke-width="8"></circle>
+            <circle id="ring-fill" cx="48" cy="48" r="40" fill="none" stroke="#639922" stroke-width="8"
+              stroke-dasharray="251.3" stroke-dashoffset="251.3" stroke-linecap="round"
+              transform="rotate(-90 48 48)" style="transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)"></circle>
+          </svg>
+          <div class="score-display">
+            <div class="score-num" id="total-score">0</div>
+            <div class="score-lbl">/ 50点</div>
+            <div class="score-grade" id="total-grade">—</div>
+          </div>
+        </div>
+        <div class="cats-wrap" id="cats-wrap"></div>
+      </div>
+    </div>
+
+    <div class="main-content" id="checklist"></div>
+
+    <div class="result-section" id="result-section">
+      <div class="result-box">
+        <div class="result-top">
+          <h2>🔍 改善ポイント・おすすめサービス</h2>
+          <div id="recs"></div>
+        </div>
+        <section class="wanode-cta">
+          <p class="label">SEO改善・WordPress相談</p>
+          <h2>WordPressのSEO内部状態、プロの視点で最適化しませんか？</h2>
+          <p>
+            診断結果はいかがでしたか？<br />
+            GSC登録やメタ情報、表示速度の改善など、SEOの土台をプロが丸ごと最適化します。<br />
+            弱点を強みに変えて、検索流入を最大化しましょう。
+          </p>
+          <div class="cta-buttons">
+            <a href="mailto:contacts@wa-node.com" class="btn-cta">メールで相談する</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="btn-cta secondary">フォームで相談する</a>
+          </div>
+          <p class="res-note">診断結果は保存されません。気になる項目はスクリーンショットをお取りください。</p>
+        </section>
+      </div>
+    </div>
+
+    <div class="sticky-cta" id="sticky-cta">
+      <div class="sticky-cta-inner">
+        <div class="sticky-info">
+          <div class="sticky-score" id="sticky-score-num">0点</div>
+          <div class="sticky-lbl" id="sticky-grade-lbl">— チェックを進めてください</div>
+        </div>
+        <button class="sticky-btn" id="showResultBtn">改善ポイントを見る</button>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+    :root {
+      --warn: #BA7517;
+      --bad: #c0392b;
+    }
+    .hero {
+      background: #1a1c1e; color: #fff; padding: 100px 20px 80px; text-align: center;
+      background-image: radial-gradient(circle at center, #2c2c2a 0%, #1a1c1e 100%);
+    }
+    .hero-badge {
+      display: inline-block; background: var(--accent2); color: #fff;
+      font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 999px;
+      letter-spacing: 0.1em; margin-bottom: 20px; text-transform: uppercase;
+    }
+    .hero-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 16px; line-height: 1.3; }
+    .hero-sub { font-size: 1rem; color: rgba(255, 255, 255, 0.7); max-width: 700px; margin: 0 auto; }
+
+    .score-panel { max-width: 800px; margin: -40px auto 0; padding: 0 20px; position: relative; z-index: 10; }
+    .score-card {
+      background: var(--paper); border: 1px solid var(--line); border-radius: 24px;
+      padding: 32px; box-shadow: var(--shadow); display: flex; gap: 32px; align-items: center;
+      backdrop-filter: blur(12px);
+    }
+    .score-ring-wrap { flex-shrink: 0; text-align: center; position: relative; }
+    .score-ring { width: 120px; height: 120px; }
+    .score-display { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; }
+    .score-num { font-size: 2.2rem; font-weight: 800; color: var(--text); line-height: 1; }
+    .score-lbl { font-size: 0.75rem; color: var(--muted); font-weight: 700; margin-top: 2px; }
+    .score-grade { font-size: 0.95rem; font-weight: 800; margin-top: 4px; }
+
+    .cats-wrap { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    
+    .main-content { max-width: 800px; margin: 60px auto 0; padding: 0 20px; }
+    
+    .result-section { max-width: 800px; margin: 40px auto 100px; padding: 0 20px; display: none; }
+    .result-section.show { display: block; animation: fadeIn 0.6s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .result-box { background: var(--white); border-radius: 24px; border: 1px solid var(--line); padding: 40px; box-shadow: var(--shadow); }
+    .result-top h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 24px; }
+    
+    .wanode-cta { background: var(--accent-soft); padding: 40px; border-radius: 20px; border: 1px solid var(--line); text-align: center; margin-top: 40px; }
+    .wanode-cta .label { color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 12px; }
+    .wanode-cta h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 16px; line-height: 1.4; }
+    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
+    .btn-cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: 0.3s; }
+    .btn-cta.secondary { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
+    .res-note { font-size: 0.85rem; color: var(--muted); margin-top: 20px; }
+
+    .sticky-cta {
+      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px);
+      width: min(760px, calc(100% - 40px)); background: var(--paper); border: 1px solid var(--line);
+      border-radius: 999px; padding: 12px 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+      z-index: 100; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(12px);
+    }
+    .sticky-cta.show { transform: translateX(-50%) translateY(0); }
+    .sticky-cta-inner { display: flex; align-items: center; justify-content: space-between; }
+    .sticky-score { font-size: 1.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
+    .sticky-lbl { font-size: 0.8rem; color: var(--muted); font-weight: 700; }
+    .sticky-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 999px; font-weight: 800; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
+
+    @media(max-width: 600px) {
+      .score-card { flex-direction: column; text-align: center; }
+      .sticky-lbl { display: none; }
+      .sticky-score { font-size: 1.2rem; }
+    }
+</style>
+
+<script is:inline>
+    const categories = [
+      {
+        id:'basic', name:'基本設定', em:'⚙️',
+        items:[
+          {l:'タイトルタグに主要キーワードが含まれている', h:'各ページのtitleタグを確認。30〜35文字以内が目安。'},
+          {l:'メタディスクリプションが設定されている',    h:'120文字前後で各ページに個別設定されているか。'},
+          {l:'Googleサーチコンソール（GSC）に登録している',h:'プロパティを追加し、サイトマップも送信済みか。'},
+          {l:'Googleアナリティクス（GA4）が設定されている',h:'トラッキングコードが全ページに設置されているか。'},
+          {l:'robots.txtが適切に設定されている',          h:'不要なページのクロールをブロックしているか確認。'},
+        ]
+      },
+      {
+        id:'content', name:'コンテンツ品質', em:'📝',
+        items:[
+          {l:'各ページにh1タグが1つだけ存在する',        h:'h1が複数あったり、ゼロのページはSEO上不利。'},
+          {l:'画像にaltテキストが設定されている',         h:'すべての画像に説明文（alt属性）を設定する。'},
+          {l:'内部リンクが適切に設定されている',          h:'関連ページへのリンクがあり、孤立ページがない。'},
+          {l:'主要ページの文字数が1,000字以上ある',       h:'薄いコンテンツはGoogleに評価されにくい。'},
+          {l:'定期的にコンテンツを更新している',          h:'3〜6ヶ月以上更新がないサイトは評価が下がりやすい。'},
+        ]
+      },
+      {
+        id:'technical', name:'テクニカルSEO', em:'🔧',
+        items:[
+          {l:'HTTPSに対応している（SSL証明書）',          h:'http://のままのサイトはGoogleに低評価。必須対応。'},
+          {l:'canonicalタグが設定されている',             h:'重複コンテンツを防ぐためにcanonicalを設定する。'},
+          {l:'404ページが適切にカスタマイズされている',   h:'存在しないURLへのアクセスで適切なページを返す。'},
+          {l:'意図せずnoindexが設定されていない',         h:'WordPress設定の「検索エンジンによるインデックス」を確認。'},
+          {l:'構造化データ（JSON-LD）が実装されている',   h:'FAQやパンくずのリッチスニペットで検索結果を強化。'},
+        ]
+      },
+      {
+        id:'speed', name:'表示速度', em:'⚡',
+        items:[
+          {l:'画像が圧縮・最適化されている',              h:'WebP形式の使用や、TinyPNG等で圧縮しているか。'},
+          {l:'キャッシュプラグインを導入している',        h:'WP Super Cache、W3 Total Cache等を使用しているか。'},
+          {l:'不要なプラグインを削除している',            h:'使っていないプラグインは速度低下の原因になる。'},
+          {l:'PageSpeed Insightsのスコアが60以上',        h:'Googleが提供する速度測定ツールで確認できる。'},
+          {l:'外部フォントや重いCSSを最小化している',     h:'Google Fontsの読み込み最適化やCSS圧縮の実施。'},
+        ]
+      },
+      {
+        id:'ux', name:'ユーザー体験', em:'📱',
+        items:[
+          {l:'スマートフォンで問題なく表示される',        h:'Google Mobile-Friendly Testで確認できる。'},
+          {l:'CTAボタンが分かりやすい位置にある',         h:'問い合わせや購入ボタンがファーストビュー内にあるか。'},
+          {l:'パンくずリスト・ナビゲーションが整っている',h:'ユーザーが迷わず目的ページにたどり着けるか。'},
+          {l:'お問い合わせフォームが正常に機能している',  h:'送信テストを定期的に行っているか。'},
+          {l:'404ページからトップへの導線がある',         h:'迷子になったユーザーを適切に誘導できているか。'},
+        ]
+      }
+    ];
+
+    const state = {};
+    categories.forEach(c => c.items.forEach((_,i) => { state[c.id+'_'+i] = 0; }));
+
+    const TOTAL_ITEMS = 25;
+    const MAX_SCORE = 50;
+
+    function getScore(cid) {
+      const cat = categories.find(c=>c.id===cid);
+      return cat.items.reduce((s,_,i)=>{
+        const v = state[cid+'_'+i];
+        return s + (v===1?2: v===2?1:0);
+      },0);
+    }
+
+    function getTotalScore() {
+      return categories.reduce((s,c)=>s+getScore(c.id),0);
+    }
+
+    function getAnswered() {
+      return Object.values(state).filter(v=>v!==0).length;
+    }
+
+    function getGrade(pct) {
+      if(pct>=85) return {label:'A：優秀', color:'#27ae60'};
+      if(pct>=65) return {label:'B：良好', color:'#639922'};
+      if(pct>=45) return {label:'C：要改善', color:'#BA7517'};
+      return {label:'D：要対策', color:'#c0392b'};
+    }
+
+    function updateScore() {
+      const total = getTotalScore();
+      const pct = (total / MAX_SCORE) * 100;
+      const grade = getGrade(pct);
+      const circumference = 251.3;
+      const offset = circumference - (circumference * pct / 100);
+
+      const ringFill = document.getElementById('ring-fill');
+      if (ringFill) {
+          ringFill.style.strokeDashoffset = offset;
+          ringFill.style.stroke = grade.color;
+      }
+      
+      const totalScoreEl = document.getElementById('total-score');
+      const totalGradeEl = document.getElementById('total-grade');
+      if (totalScoreEl) totalScoreEl.textContent = total;
+      if (totalGradeEl) {
+          totalGradeEl.textContent = grade.label;
+          totalGradeEl.style.color = grade.color;
+      }
+
+      const wrap = document.getElementById('cats-wrap');
+      if (wrap) {
+          wrap.innerHTML = categories.map(c=>{
+            const s = getScore(c.id);
+            const max = c.items.length * 2;
+            const cp = (s/max)*100;
+            const col = cp>=70?'#639922':cp>=40?'#BA7517':'#c0392b';
+            return `<div style="display:flex; align-items:center; gap:12px;">
+              <div style="font-size:0.85rem; color:var(--muted); width:100px; font-weight:700;">${c.em} ${c.name}</div>
+              <div style="flex:1; height:8px; background:var(--line); border-radius:999px; overflow:hidden;">
+                <div style="height:100%; width:${cp}%; background:${col}; border-radius:999px; transition:width 0.8s;"></div>
+              </div>
+              <div style="font-size:0.85rem; font-weight:800; width:40px; text-align:right; color:${col}">${s}/${max}</div>
+            </div>`;
+          }).join('');
+      }
+
+      const ans = getAnswered();
+      const stickyCta = document.getElementById('sticky-cta');
+      if(ans >= 5 && stickyCta) {
+        stickyCta.classList.add('show');
+        document.getElementById('sticky-score-num').textContent = total + '点';
+        document.getElementById('sticky-grade-lbl').textContent = grade.label + '（' + ans + '/' + TOTAL_ITEMS + '項目回答済み）';
+      }
+
+      if(ans >= TOTAL_ITEMS) {
+        const resultSection = document.getElementById('result-section');
+        if (resultSection) {
+            resultSection.classList.add('show');
+            buildRecs();
+        }
+      }
+    }
+
+    function toggleItem(cid, idx, val) {
+      const key = cid+'_'+idx;
+      state[key] = (state[key]===val) ? 0 : val;
+      
+      // Update buttons visually
+      ['ok','warn','bad'].forEach((t,ti)=>{
+        const btn = document.getElementById(`btn_${cid}_${idx}_${t}`);
+        if(!btn) return;
+        const isActive = state[key] === (ti+1);
+        btn.style.borderColor = isActive ? (t==='ok'?'var(--accent)':t==='warn'?'var(--warn)':'var(--bad)') : 'var(--line)';
+        btn.style.background = isActive ? (t==='ok'?'var(--accent-soft)':t==='warn'?'#fff8ee':'#fff5f5') : '#fff';
+      });
+      
+      const prog = document.getElementById(`cat-prog-${cid}`);
+      if (prog) {
+          const cat = categories.find(c => c.id === cid);
+          const answeredInCat = cat.items.filter((_, i) => state[cid+'_'+i] !== 0).length;
+          prog.textContent = `${answeredInCat} / ${cat.items.length}`;
+      }
+
+      updateScore();
+    }
+
+    function buildChecklist() {
+      const cl = document.getElementById('checklist');
+      if (!cl) return;
+      cl.innerHTML = categories.map((c,ci)=>{
+        const items = c.items.map((it,i)=>`
+          <div style="display:flex; align-items:flex-start; gap:16px; padding:18px 24px; border-bottom:1px solid #f8f9fa;">
+            <div style="flex:1;">
+              <div style="font-size:1rem; font-weight:700; color:var(--text); margin-bottom:4px;">${it.l}</div>
+              <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">${it.h}</div>
+            </div>
+            <div style="display:flex; gap:8px;">
+              <button class="chk-btn-core" id="btn_${c.id}_${i}_ok" data-c="${c.id}" data-i="${i}" data-v="1" title="対応済み" style="width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:0.2s;">✅</button>
+              <button class="chk-btn-core" id="btn_${c.id}_${i}_warn" data-c="${c.id}" data-i="${i}" data-v="2" title="一部対応" style="width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:0.2s;">⚠️</button>
+              <button class="chk-btn-core" id="btn_${c.id}_${i}_bad" data-c="${c.id}" data-i="${i}" data-v="3" title="未対応" style="width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:0.2s;">❌</button>
+            </div>
+          </div>`).join('');
+        const isFirst = ci===0;
+        return `<div style="background:#fff; border-radius:20px; margin-bottom:20px; overflow:hidden; border:1px solid var(--line); box-shadow:0 4px 15px rgba(0,0,0,0.02);">
+          <div class="cat-head" data-cid="${c.id}" style="display:flex; align-items:center; gap:12px; padding:20px 24px; cursor:pointer; transition:0.2s; ${isFirst?'border-bottom:1px solid var(--line);':''}">
+            <span style="font-size:1.5rem;">${c.em}</span>
+            <span style="font-weight:800; font-size:1.1rem; flex:1;">${c.name}</span>
+            <span style="font-size:0.85rem; color:var(--muted); font-weight:700;" id="cat-prog-${c.id}">0 / ${c.items.length}</span>
+            <span class="chevron" style="font-size:0.8rem; color:var(--muted); transition:0.3s; transform:${isFirst?'rotate(90deg)':'rotate(0)'};">▶</span>
+          </div>
+          <div class="items-list" id="items-${c.id}" style="display:${isFirst?'block':'none'}; padding:10px 0;">${items}</div>
+        </div>`;
+      }).join('');
+
+      // Add click listeners for categories
+      document.querySelectorAll('.cat-head').forEach(head => {
+          head.addEventListener('click', () => {
+              const cid = head.getAttribute('data-cid');
+              const list = document.getElementById(`items-${cid}`);
+              const chevron = head.querySelector('.chevron');
+              if (list) {
+                  const isOpen = list.style.display === 'block';
+                  list.style.display = isOpen ? 'none' : 'block';
+                  head.style.borderBottom = isOpen ? 'none' : '1px solid var(--line)';
+                  if (chevron) chevron.style.transform = isOpen ? 'rotate(0)' : 'rotate(90deg)';
+              }
+          });
+      });
+
+      // Add click listeners for check buttons
+      document.querySelectorAll('.chk-btn-core').forEach(btn => {
+          btn.addEventListener('click', () => {
+              const cid = btn.getAttribute('data-c');
+              const idx = parseInt(btn.getAttribute('data-i'));
+              const val = parseInt(btn.getAttribute('data-v'));
+              toggleItem(cid, idx, val);
+          });
+      });
+    }
+
+    function buildRecs() {
+      const recs = [];
+      categories.forEach(c=>{
+        const s = getScore(c.id);
+        const max = c.items.length*2;
+        const pct = (s/max)*100;
+        if(pct<50){
+          const msgs = {
+            basic:   {color:'#c0392b', text:'【基本設定】GSC登録やメタ情報の設定が不十分です。まずここを整えるだけで検索流入が改善しやすくなります。→「WordPress SEO内部の丸ごと最適化」サービスをご検討ください。'},
+            content: {color:'#c0392b', text:'【コンテンツ品質】h1タグ・altテキスト・内部リンクの見直しが必要です。コンテンツの薄さもGoogleからの評価を下げる要因になります。'},
+            technical:{color:'#c0392b', text:'【テクニカルSEO】HTTPS対応やcanonical設定など技術的な土台が不足しています。専門家による確認・修正をおすすめします。'},
+            speed:   {color:'#BA7517', text:'【表示速度】画像圧縮やキャッシュ設定が不十分な可能性があります。→「WordPressの表示速度改善」サービスで劇的に改善できます。'},
+            ux:      {color:'#BA7517', text:'【ユーザー体験】スマホ対応やCTAの配置など、訪問者が離脱しやすい状態です。集客に直結するため早めの対応をおすすめします。'},
+          };
+          if (msgs[c.id]) recs.push(msgs[c.id]);
+        } else if(pct<80){
+          const msgs2 = {
+            basic:    {color:'#BA7517', text:'【基本設定】概ね整っていますが、まだ未対応の項目があります。細かい設定の見直しで更なる改善が見込めます。'},
+            content:  {color:'#BA7517', text:'【コンテンツ品質】あと一歩です。altテキストの設定漏れや内部リンクの整備で評価が上がります。'},
+            technical:{color:'#BA7517', text:'【テクニカルSEO】基本はできていますが、構造化データの実装で検索結果のリッチスニペットを狙えます。'},
+            speed:    {color:'#639922', text:'【表示速度】ある程度対応できています。PageSpeed Insightsで定期的にチェックしましょう。'},
+            ux:       {color:'#639922', text:'【ユーザー体験】概ね良好です。CTAの位置やフォームの動作確認を定期的に行いましょう。'},
+          };
+          if (msgs2[c.id]) recs.push(msgs2[c.id]);
+        }
+      });
+
+      if(!recs.length) recs.push({color:'#27ae60', text:'全カテゴリ優秀です！現状維持しながら定期的な監視を続けましょう。Googleアルゴリズムの変化にも注意が必要です。'});
+
+      const recsEl = document.getElementById('recs');
+      if (recsEl) {
+          recsEl.innerHTML = recs.map(r=>`
+            <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
+              <div style="width:8px; height:8px; border-radius:50%; background:${r.color}; margin-top:8px; flex-shrink:0;"></div>
+              <div style="font-size:0.95rem; line-height:1.6;">${r.text}</div>
+            </div>`).join('');
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        buildChecklist();
+        updateScore();
+        
+        const showResultBtn = document.getElementById('showResultBtn');
+        if (showResultBtn) {
+            showResultBtn.onclick = () => {
+                const resultSection = document.getElementById('result-section');
+                if (resultSection) {
+                    resultSection.classList.add('show');
+                    buildRecs();
+                    resultSection.scrollIntoView({behavior:'smooth'});
+                }
+            };
+        }
+    });
+</script>

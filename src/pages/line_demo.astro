@@ -1,0 +1,267 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="お悩み整理LINEミニアプリ（体験デモ）｜和-Node" description="LINE内で動くビジネスツールを体験。こころの悩みからICTの課題まで、あなたに寄り添う診断ツールです。">
+  <div class="demo-notice">
+    ⚠️ これはLINE Mini Appの動作デモ画面です。<a href="/">サイトに戻る</a>
+  </div>
+
+  <main class="demo-main">
+    <div class="phone-container">
+      <!-- ヘッダー -->
+      <div class="chat-header">
+        <div class="avatar">🎋</div>
+        <div>
+          <div class="bot-name">和-Node</div>
+          <div class="status">● 応答時間: 通常1時間以内</div>
+        </div>
+      </div>
+
+      <!-- チャットエリア -->
+      <div class="chat-messages" id="chat-messages">
+        
+        <!-- Botの最初のメッセージ -->
+        <div class="message bot">
+          <div class="avatar">🎋</div>
+          <div class="bubble">
+            はじめまして！和-Node公式LINEへようこそ。代表のマルだです。<br /><br />
+            ここでは、あなたの「こころの悩み」や「ビジネス・ICTの課題」を整理するお手伝いをします。
+          </div>
+        </div>
+
+        <div class="message bot">
+          <div class="avatar">🎋</div>
+          <div class="bubble">
+            まずは、今一番気になっているジャンルを以下から選んでください👇
+            
+            <div class="options-container">
+              <button class="option-btn" data-genre="mental" data-label="こころの悩み・ストレス">🧠 こころの悩み・ストレス</button>
+              <button class="option-btn" data-genre="it" data-label="会社のICT化・業務効率化">💻 会社のICT化・業務効率化</button>
+              <button class="option-btn" data-genre="barrier" data-label="バリアフリー・車いす視点">♿ バリアフリー・車いす視点</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- フッター -->
+      <div class="chat-footer">
+        <input type="text" placeholder="選択肢からお選びください..." disabled />
+        <button class="send-btn">➤</button>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+    :root {
+      --line-green: #06C755;
+      --line-bg: #8CABD2;
+      --bubble-white: #FFFFFF;
+      --bubble-green: #E2F2D5;
+    }
+
+    .demo-notice {
+      background: #fff3cd; color: #856404; text-align: center; padding: 12px; font-size: 0.9rem; font-weight: 700; border-bottom: 1px solid #ffeeba;
+    }
+    .demo-notice a { color: #856404; text-decoration: underline; margin-left: 8px; }
+
+    .demo-main {
+      display: flex; justify-content: center; align-items: center; min-height: 80vh; padding: 40px 20px; background-color: var(--line-bg);
+    }
+
+    /* スマホ画面を模したコンテナ */
+    .phone-container {
+      width: 100%; max-width: 414px; height: 800px; background-color: #7494C0; display: flex; flex-direction: column;
+      position: relative; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-radius: 40px; border: 12px solid #2c2c2a; overflow: hidden;
+    }
+
+    /* ヘッダー */
+    .chat-header {
+      background-color: #2c2c2a; color: #fff; padding: 16px; display: flex; align-items: center; gap: 12px; font-weight: 700; z-index: 10;
+    }
+    .chat-header .avatar { width: 36px; height: 36px; border-radius: 50%; background: var(--line-green); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .chat-header .status { font-size: 12px; font-weight: 400; color: #aaa; margin-top: 2px; }
+
+    /* チャットエリア */
+    .chat-messages { flex: 1; padding: 20px 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
+
+    /* 吹き出し */
+    .message { display: flex; align-items: flex-start; gap: 8px; max-width: 85%; animation: fadeInUp 0.3s ease forwards; }
+    @keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    .message.bot { align-self: flex-start; }
+    .message.user { align-self: flex-end; flex-direction: row-reverse; }
+
+    .message .avatar { width: 32px; height: 32px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .message .bubble { padding: 10px 14px; border-radius: 16px; font-size: 14px; line-height: 1.6; position: relative; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+
+    .message.bot .bubble { background-color: var(--bubble-white); border-top-left-radius: 4px; color: #2c2c2a; }
+    .message.user .bubble { background-color: var(--bubble-green); border-top-right-radius: 4px; color: #2c2c2a; }
+
+    /* 選択肢・アクション */
+    .options-container { display: flex; flex-direction: column; gap: 10px; width: 100%; margin-top: 12px; }
+    .option-btn {
+      background-color: #fff; border: 1px solid #ddd; padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 500;
+      text-align: left; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: space-between; color: #2c2c2a;
+    }
+    .option-btn:hover { background-color: #f0f9f0; border-color: var(--line-green); color: var(--line-green); }
+    .option-btn::after { content: '➔'; font-size: 12px; opacity: 0.5; }
+
+    /* 下部フッター */
+    .chat-footer { background-color: #fff; padding: 12px 16px; display: flex; align-items: center; gap: 12px; border-top: 1px solid #eee; }
+    .chat-footer input { flex: 1; padding: 10px 14px; border: 1px solid #ddd; border-radius: 20px; font-size: 14px; background-color: #f8f8f8; }
+    .chat-footer .send-btn { width: 36px; height: 36px; border-radius: 50%; background-color: var(--line-green); color: #fff; display: flex; align-items: center; justify-content: center; border: none; font-size: 18px; cursor: not-allowed; opacity: 0.7; }
+
+    /* ローディングアニメーション */
+    .typing-indicator { display: flex; gap: 4px; padding: 10px 14px; background: #fff; border-radius: 16px; width: fit-content; }
+    .typing-indicator span { width: 6px; height: 6px; background: #aaa; border-radius: 50%; animation: bounce 1s infinite alternate; }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes bounce { to { transform: translateY(-4px); opacity: 0.4; } }
+
+    @media (max-width: 480px) {
+      .demo-main { padding: 0; }
+      .phone-container { height: 100vh; border-radius: 0; border: none; }
+    }
+</style>
+
+<script is:inline>
+    const chatMessages = document.getElementById('chat-messages');
+
+    function appendUserMessage(text) {
+      const msg = document.createElement('div');
+      msg.className = 'message user';
+      msg.innerHTML = `<div class="bubble">${text}</div>`;
+      chatMessages.appendChild(msg);
+      scrollToBottom();
+    }
+
+    function appendBotTyping() {
+      const msg = document.createElement('div');
+      msg.className = 'message bot';
+      msg.id = 'typing';
+      msg.innerHTML = `
+        <div class="avatar">🎋</div>
+        <div class="typing-indicator">
+          <span></span><span></span><span></span>
+        </div>
+      `;
+      chatMessages.appendChild(msg);
+      scrollToBottom();
+      return msg;
+    }
+
+    function removeBotTyping() {
+      const typing = document.getElementById('typing');
+      if (typing) typing.remove();
+    }
+
+    function scrollToBottom() {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    function selectGenre(genreName, genreKey) {
+      appendUserMessage(genreName);
+      appendBotTyping();
+
+      setTimeout(() => {
+        removeBotTyping();
+        let responseText = '';
+        let optionsHtml = '';
+
+        if (genreKey === 'mental') {
+          responseText = 'ありがとうございます。こころのケアですね。現在、どのような状態に最も近いですか？';
+          optionsHtml = `
+            <button class="option-btn final-opt" data-type="mental" data-label="人間関係">😓 仕事の人間関係で疲れている</button>
+            <button class="option-btn final-opt" data-type="mental" data-label="休職">🛏️ やる気が出ず、休職を考えている</button>
+            <button class="option-btn final-opt" data-type="mental" data-label="不安">💭 漠然とした不安がある</button>
+          `;
+        } else if (genreKey === 'it') {
+          responseText = 'ありがとうございます。ICT・業務効率化ですね。現在の課題は何でしょうか？';
+          optionsHtml = `
+            <button class="option-btn final-opt" data-type="it" data-label="自動化">⚙️ 手作業が多く、自動化したい</button>
+            <button class="option-btn final-opt" data-type="it" data-label="集客">🌐 集客のためにHP/LPを作りたい</button>
+            <button class="option-btn final-opt" data-type="it" data-label="不明">❓ 何から手をつけていいか不明</button>
+          `;
+        } else if (genreKey === 'barrier') {
+          responseText = 'ありがとうございます。当事者視点のアドバイスですね。どのようなご相談ですか？';
+          optionsHtml = `
+            <button class="option-btn final-opt" data-type="barrier" data-label="店舗">🏢 店舗・オフィスのバリアフリー化</button>
+            <button class="option-btn final-opt" data-type="barrier" data-label="製品">🪟 製品への当事者レビュー</button>
+          `;
+        }
+
+        const botMsg = document.createElement('div');
+        botMsg.className = 'message bot';
+        botMsg.innerHTML = `
+          <div class="avatar">🎋</div>
+          <div class="bubble">
+            ${responseText}
+            <div class="options-container">${optionsHtml}</div>
+          </div>
+        `;
+        chatMessages.appendChild(botMsg);
+        scrollToBottom();
+
+        // Bind new buttons
+        botMsg.querySelectorAll('.final-opt').forEach(btn => {
+            btn.onclick = () => {
+                const label = btn.getAttribute('data-label');
+                const type = btn.getAttribute('data-type');
+                appendUserMessage(btn.innerText);
+                appendBotTyping();
+                setTimeout(() => {
+                    removeBotTyping();
+                    showFinalResult(type);
+                }, 1000);
+            };
+        });
+      }, 1000);
+    }
+
+    function showFinalResult(type) {
+        let recommendation = "";
+        let description = "";
+        if (type === 'mental') {
+            recommendation = "心理カウンセリング";
+            description = "「話す」ことで、心が軽くなることがあります。上級心理カウンセラーであるマルだが、あなたのペースに合わせてお話を伺います。";
+        } else if (type === 'it') {
+            recommendation = "ICT・経営コンサルティング";
+            description = "現状の業務フローを丁寧にお聞きし、本当に必要なツール（GASや簡易システム）をご提案します。";
+        } else {
+            recommendation = "アクセシビリティ相談";
+            description = "車いすユーザーであり、エンジニアでもある視点から、図面や写真ベースでの具体的な改善案を提示します。";
+        }
+
+        const botMsg = document.createElement('div');
+        botMsg.className = 'message bot';
+        botMsg.innerHTML = `
+          <div class="avatar">🎋</div>
+          <div class="bubble">
+            課題が見えてきました。<br />
+            あなたにおすすめのプランは **【${recommendation}】** です。<br /><br />
+            ${description}<br /><br />
+            まずは **30分の無料相談（LINEまたはZoom）** で、詳しくお話ししてみませんか？
+            
+            <div class="options-container" style="margin-top:14px;">
+              <a href="https://lin.ee/o5QFPwc" target="_blank" class="option-btn" style="background:#06C755; color:#fff; text-decoration:none; border:none; justify-content:center;">💬 そのままLINEで相談する</a>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="option-btn" style="background:#2c2c2a; color:#fff; text-decoration:none; border:none; justify-content:center;">✉️ フォームから予約する</a>
+            </div>
+          </div>
+        `;
+        chatMessages.appendChild(botMsg);
+        scrollToBottom();
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.option-btn').forEach(btn => {
+            btn.onclick = () => {
+                const genre = btn.getAttribute('data-genre');
+                const label = btn.getAttribute('data-label');
+                if (genre) selectGenre(label, genre);
+            };
+        });
+    });
+</script>

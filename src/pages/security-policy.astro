@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="情報セキュリティ方針｜和-Node" description="和-Nodeの情報セキュリティ方針。SECURITY ACTIONに基づき、お客様の大切な情報資産を保護するための取り組みを宣言します。">
+  <main>
+    <section class="hero">
+      <div class="hero-inner legal">
+        <p class="eyebrow">Security</p>
+        <h1>情報セキュリティ方針</h1>
+        <p class="lead">和-Nodeは、Web制作、AI活用相談、カウンセリング、法人メンタル窓口等のサービス提供にあたり、お客様からお預かりする情報資産を事故・災害・犯罪などの脅威から守り、社会の信頼に応えるべく、以下の通り情報セキュリティ方針を定め、遵守することを宣言します。</p>
+      </div>
+    </section>
+
+    <section class="section legal">
+      <div class="section-inner">
+        <h2>1. 経営者の責任</h2>
+        <p>代表は、情報セキュリティの重要性を認識し、自ら情報セキュリティの維持・向上に努めます。</p>
+
+        <h2>2. 社内体制の整備</h2>
+        <p>情報セキュリティを維持するためのルールを定め、情報資産の適切な管理を行います。</p>
+
+        <h2>3. 従業員の取組（自己啓発・教育）</h2>
+        <p>情報セキュリティの重要性を理解し、適切な取り扱いを徹底するための教育・啓発を継続的に行います。</p>
+
+        <h2>4. 法令及び契約上の遵守</h2>
+        <p>情報セキュリティに関わる法令、規制、規範、及びお客様との契約上の義務を遵守します。</p>
+
+        <h2>5. 違反及び事故への対応</h2>
+        <p>情報セキュリティに関わる法令違反、契約違反及び事故が発生した場合には適切に対処し、再発防止に努めます。</p>
+
+        <div class="security-action-box">
+          <img src="/images/security_action_hitotsuboshi-large_color.jpg" alt="SECURITY ACTION 一つ星" />
+          <div>
+            <p>和-Nodeは、IPA（独立行政法人情報処理推進機構）が実施する「SECURITY ACTION」を宣言し、情報セキュリティ対策に取り組んでいます。</p>
+          </div>
+        </div>
+
+        <div class="btns">
+          <a class="btn secondary" href="/privacy">プライバシーポリシーを見る</a>
+          <a class="btn" href="/#contact">相談する</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .hero { background: linear-gradient(135deg, #fffdf9 0%, #f1e6da 55%, #ead7c0 100%); border-bottom: 1px solid var(--line); }
+  .hero-inner, .section { max-width: 1120px; margin: 0 auto; padding: 72px 20px; }
+  .hero h1 { font-size: clamp(2rem, 5vw, 4.4rem); line-height: 1.25; margin: 12px 0 22px; font-weight: 800; }
+  .lead { font-size: 1.12rem; max-width: 760px; }
+
+  .legal h2 { font-size: 1.5rem; margin-top: 40px; margin-bottom: 20px; font-weight: 800; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+  .legal h2:first-of-type { margin-top: 0; }
+
+  .security-action-box {
+    margin-top: 40px;
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+  .security-action-box img {
+    width: 100px;
+    height: auto;
+    border-radius: 4px;
+  }
+  .security-action-box p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 600px) {
+    .security-action-box {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

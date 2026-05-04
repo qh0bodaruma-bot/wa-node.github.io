@@ -1,0 +1,140 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { 
+  title = "和-Node｜車いすSE×心理カウンセラーの心理導線Web制作・AI活用・メンタル支援", 
+  description = "和-Nodeは、車いすSE×心理カウンセラーが運営する、心理導線Web制作・AI活用相談・ICT支援・カウンセリング・法人メンタル窓口の相談窓口です。" 
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet" />
+    
+    <style is:global>
+      :root {
+        --bg: #f8f4ee;
+        --paper: rgba(255, 253, 249, 0.94);
+        --text: #2b241f;
+        --muted: #6d6259;
+        --line: #eadfd4;
+        --accent: #8a5a32;
+        --accent2: #d8b98c;
+        --soft: #f1e6da;
+        --white: #fff;
+        --shadow: 0 12px 40px rgba(70, 52, 32, 0.08);
+        --radius: 24px;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+        background-color: var(--bg);
+        background-image: 
+          radial-gradient(circle at 0% 0%, #fffbf2 0%, transparent 40%),
+          radial-gradient(circle at 100% 100%, #f1e6da 0%, transparent 40%);
+        color: var(--text);
+        line-height: 1.8;
+        overflow-x: hidden;
+      }
+
+      a { color: var(--accent); text-decoration: none; transition: 0.3s; }
+      a:hover { opacity: 0.7; }
+
+      .section { padding: 80px 0; }
+      .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+      .section-title { text-align: center; margin-bottom: 50px; }
+      .section-title h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 12px; }
+
+      .eyebrow {
+        display: inline-block;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--accent);
+        font-size: 0.82rem;
+        font-weight: 800;
+        background: var(--soft);
+        padding: 4px 14px;
+        border-radius: 999px;
+        margin-bottom: 24px;
+      }
+
+      .btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 40px; }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 16px 32px;
+        border-radius: 999px;
+        background: var(--accent);
+        color: #fff;
+        font-weight: 800;
+        transition: 0.3s;
+        box-shadow: 0 8px 25px rgba(138, 90, 50, 0.2);
+        cursor: pointer;
+      }
+      .btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(138, 90, 50, 0.3); color: #fff; opacity: 1; }
+      .btn.secondary {
+        background: var(--white);
+        color: var(--accent);
+        border: 1px solid var(--line);
+      }
+
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+      }
+      .card {
+        background: var(--paper);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 32px;
+        transition: 0.3s;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      }
+      .card:hover { transform: translateY(-10px); box-shadow: var(--shadow); }
+      .card-tag {
+        display: inline-block;
+        background: var(--soft);
+        color: var(--accent);
+        padding: 4px 12px;
+        border-radius: 999px;
+        font-size: 0.75rem;
+        font-weight: 800;
+        margin-bottom: 16px;
+      }
+      .card h3 { font-size: 1.4rem; margin-bottom: 12px; font-weight: 800; margin-top: 0; }
+      .card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; flex: 1; }
+
+      @media (max-width: 768px) {
+        .section { padding: 60px 0; }
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
+</html>

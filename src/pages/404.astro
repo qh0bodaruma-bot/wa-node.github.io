@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="ページが見つかりません | 和-Node" description="お探しのページは見つかりませんでした。和-Nodeのトップページ、サービス、料金、問い合わせページへご案内します。">
+  <main class="not-found-main">
+    <div class="content-box">
+      <span class="eyebrow">404 Not Found</span>
+      <h1>ページが見つかりませんでした。</h1>
+      <h2>でも、ここで行き止まりではありません。</h2>
+      <p>
+        URLが変更されたか、ページが移動した可能性があります。<br />
+        和-Nodeでは、心理導線Web制作・AI/ICT活用相談・メンタル支援まで、<br />
+        状況に合わせて一緒に整理できます。
+      </p>
+
+      <div class="buttons">
+        <a class="btn" href="/">トップへ戻る</a>
+        <a class="btn secondary" href="/pricing">料金を見る</a>
+        <a class="btn secondary" href="/#contact">相談する</a>
+      </div>
+
+      <p class="small">
+        和-Node｜人の心に届くWebと、無理なく使えるICTを。
+      </p>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+    .not-found-main {
+      min-height: 70vh;
+      display: grid;
+      place-items: center;
+      padding: 60px 20px;
+    }
+    .content-box {
+      width: min(920px, 100%);
+      padding: clamp(28px, 6vw, 56px);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--accent);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      font-size: 0.86rem;
+    }
+    h1 {
+      margin: 0 0 16px;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      line-height: 1.15;
+      letter-spacing: 0.02em;
+      font-weight: 800;
+    }
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(1.35rem, 3vw, 1.8rem);
+      line-height: 1.45;
+      color: var(--text);
+    }
+    p {
+      margin: 0 auto 32px;
+      max-width: 700px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 40px;
+    }
+    .small {
+      margin-top: 24px;
+      font-size: 0.9rem;
+      color: var(--muted);
+      opacity: 0.8;
+    }
+</style>
