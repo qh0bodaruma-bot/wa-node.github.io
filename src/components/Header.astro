@@ -7,9 +7,11 @@
     </a>
 
     <button class="menu-toggle" id="menu-toggle" aria-label="メニューを開く">
-      <span class="bar"></span>
-      <span class="bar"></span>
-      <span class="bar"></span>
+      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect class="bar-top" x="5" y="7" width="20" height="2" rx="1" fill="#2b241f"/>
+        <rect class="bar-mid" x="5" y="14" width="20" height="2" rx="1" fill="#2b241f"/>
+        <rect class="bar-bot" x="5" y="21" width="20" height="2" rx="1" fill="#2b241f"/>
+      </svg>
     </button>
 
     <nav class="nav" id="site-nav">
@@ -33,7 +35,7 @@
     left: 0;
     width: 100%;
     z-index: 1000;
-    background: rgba(255, 253, 249, 0.8);
+    background: rgba(255, 253, 249, 0.88);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(234, 223, 212, 0.5);
@@ -41,37 +43,33 @@
   }
 
   .site-header.scrolled {
-    background: rgba(255, 253, 249, 0.95);
+    background: rgba(255, 253, 249, 0.98);
     box-shadow: 0 10px 30px rgba(70, 52, 32, 0.08);
-    padding: 2px 0;
   }
 
   .header-inner {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 18px 20px;
+    padding: 14px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    transition: padding 0.4s ease;
   }
 
   .logo {
     font-weight: 800;
-    color: var(--text);
+    color: #2b241f;
     font-size: 1.25rem;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     text-decoration: none;
   }
 
   .logo-sub {
-    font-size: 0.75rem;
-    color: var(--muted);
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    background: var(--soft);
+    font-size: 0.72rem;
+    color: #6d6259;
+    background: #f1e6da;
     padding: 2px 10px;
     border-radius: 999px;
   }
@@ -79,88 +77,61 @@
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 28px;
+    gap: 24px;
   }
 
   .nav-links a {
-    color: var(--text);
+    color: #2b241f;
     font-weight: 700;
-    font-size: 0.92rem;
+    font-size: 0.9rem;
     text-decoration: none;
     transition: 0.3s;
-    position: relative;
-  }
-
-  .nav-links a:not(.nav-cta)::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--accent);
-    transition: 0.3s;
-  }
-
-  .nav-links a:not(.nav-cta):hover::after {
-    width: 100%;
   }
 
   .nav-links a:hover {
-    color: var(--accent);
+    color: #8a5a32;
   }
 
   .nav-cta {
-    background: var(--accent);
+    background: #8a5a32;
     color: #fff !important;
-    padding: 10px 24px;
+    padding: 8px 22px;
     border-radius: 999px;
     box-shadow: 0 4px 15px rgba(138, 90, 50, 0.2);
-  }
-
-  .nav-cta:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(138, 90, 50, 0.3);
   }
 
   /* Hamburger Menu */
   .menu-toggle {
     display: none;
-    flex-direction: column;
-    gap: 6px;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 8px;
+    padding: 5px;
     z-index: 1100;
   }
 
-  .bar {
-    width: 24px;
-    height: 2px;
-    background: var(--text);
+  .menu-toggle svg rect {
     transition: 0.3s;
-    border-radius: 2px;
+    transform-origin: center;
   }
 
-  @media (max-width: 960px) {
-    .logo-sub { display: none; }
-    .nav-links { gap: 20px; }
-  }
+  .menu-toggle.active .bar-top { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle.active .bar-mid { opacity: 0; }
+  .menu-toggle.active .bar-bot { transform: translateY(-7px) rotate(-45deg); }
 
   @media (max-width: 820px) {
-    .menu-toggle { display: flex; }
+    .menu-toggle { display: block; }
     
     .nav {
       position: fixed;
       top: 0;
       right: -100%;
       width: 80%;
-      max-width: 320px;
+      max-width: 300px;
       height: 100vh;
-      background: var(--white);
-      padding: 100px 40px;
-      box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+      background: #fff;
+      padding: 80px 30px;
+      box-shadow: -10px 0 30px rgba(0,0,0,0.05);
       transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 1050;
     }
@@ -172,62 +143,45 @@
     .nav-links {
       flex-direction: column;
       align-items: flex-start;
-      gap: 32px;
+      gap: 24px;
     }
-
-    .nav-links a {
-      font-size: 1.1rem;
-    }
-
-    /* Animation */
-    .menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-    .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
-    .menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
   }
 </style>
 
-<script>
-  function initHeader() {
-    const header = document.getElementById('site-header');
-    const toggle = document.getElementById('menu-toggle');
-    const nav = document.getElementById('site-nav');
-    const links = document.querySelectorAll('.nav-links a');
+<script is:inline>
+  (function() {
+    function initHeader() {
+      const toggle = document.getElementById('menu-toggle');
+      const nav = document.getElementById('site-nav');
+      const header = document.getElementById('site-header');
+      if (!toggle || !nav || !header) return;
 
-    if (!toggle || !nav || !header) return;
+      // 二重イベント登録防止
+      const newToggle = toggle.cloneNode(true);
+      toggle.parentNode.replaceChild(newToggle, toggle);
 
-    // Scroll Effect
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        header.classList.add('scrolled');
-      } else {
-        header.classList.remove('scrolled');
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-
-    // Mobile Menu Toggle
-    const handleToggle = () => {
-      toggle.classList.toggle('active');
-      nav.classList.toggle('active');
-      document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
-    };
-    toggle.addEventListener('click', handleToggle);
-
-    // Close menu on link click
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        toggle.classList.remove('active');
-        nav.classList.remove('active');
-        document.body.style.overflow = '';
+      newToggle.addEventListener('click', () => {
+        newToggle.classList.toggle('active');
+        nav.classList.toggle('active');
+        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
       });
-    });
-  }
 
-  // DOMが読み込まれたら実行
-  document.addEventListener('DOMContentLoaded', initHeader);
-  
-  // 万が一すでに読み込まれている場合用
-  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) header.classList.add('scrolled');
+        else header.classList.remove('scrolled');
+      });
+
+      nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          newToggle.classList.remove('active');
+          nav.classList.remove('active');
+          document.body.style.overflow = '';
+        });
+      });
+    }
+
     initHeader();
-  }
+    document.addEventListener('DOMContentLoaded', initHeader);
+    document.addEventListener('astro:after-swap', initHeader);
+  })();
 </script>
