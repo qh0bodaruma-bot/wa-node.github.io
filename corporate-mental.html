@@ -107,14 +107,19 @@ tr:last-child td{border-bottom:none}
   display:inline-block; margin-bottom:10px;
   color:var(--accent2); font-weight:800; letter-spacing:.08em;
 }
-footer{
-  margin-top:40px; padding:34px 0;
-  border-top:1px solid var(--line);
-  background:#fffdf8;
-  color:var(--muted);
-}
-.footerlinks{display:flex; flex-wrap:wrap; gap:12px; font-size:.9rem}
-.footerlinks a{color:var(--muted); text-decoration:none}
+.footer { background: #1a1c1e; color: #fff; padding: 80px 0 60px; text-align: left; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-bottom: 60px; }
+.footer-col h3 { font-size: 0.85rem; color: #fff; margin-bottom: 20px; letter-spacing: 0.05em; opacity: 0.9; }
+.footer-col ul { list-style: none; padding: 0; margin: 0; }
+.footer-col li { margin-bottom: 12px; }
+.footer-col a { color: #aaa; text-decoration: none; font-size: 0.8rem; transition: 0.2s; }
+.footer-col a:hover { color: #fff; }
+.footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; }
+.footer-badges { display: flex; gap: 15px; }
+.footer-badges img { height: 40px; width: auto; border-radius: 4px; }
+.copyright { font-size: 0.75rem; color: #666; margin: 0; }
+@media (max-width: 900px) { .footer-grid { grid-template-columns: repeat(2, 1fr); gap: 30px; } }
+@media (max-width: 600px) { .footer-grid { grid-template-columns: 1fr; gap: 40px; } .footer { text-align: center; } .footer-bottom { justify-content: center; flex-direction: column; text-align: center; } .footer-qualifications ul { justify-content: center; } }
 @media (max-width:800px){
   .grid.three,.grid.two{grid-template-columns:1fr}
   .nav{align-items:flex-start; flex-direction:column}
@@ -325,9 +330,69 @@ footer{
 </main>
 
 
-<footer class="footer"><div class="footer-inner"><h2>和-Node</h2><p>Web制作・AI活用・心理カウンセリング・法人メンタル窓口</p><p class="small">営業所在地：〒509-0207 岐阜県可児市今渡2347番地1<br>代表：高野紘純</p><div class="footer-badges" style="margin-bottom: 20px;">
-<a href="security-policy.html"><img src="images/security_action_hitotsuboshi-large_color.jpg" alt="SECURITY ACTION 一つ星" style="width: 80px; height: auto; border-radius: 4px;"></a>
-</div>
-<div class="footer-links"><a href="index.html#about">代表について</a><a href="index.html#services">サービス</a><a href="index.html#line-mini-app">LINE Mini App</a><a href="index.html#works">制作例</a><a href="portfolio-lp/index.html">LP制作ポートフォリオ</a><a href="kdp_books.html">KDP出版実績</a><a href="pricing.html">料金ページ</a><a href="corporate-mental.html">法人メンタル窓口</a><a href="https://x.com/wa_node" target="_blank" rel="noopener">X（旧Twitter）</a><a href="counseling-notes.html">カウンセリング利用時の注意事項</a><a href="tokutei.html">特定商取引法に基づく表記</a><a href="cancel-policy.html">キャンセル・返金ポリシー</a><a href="privacy.html">プライバシーポリシー</a><a href="security-policy.html">情報セキュリティ方針</a><a href="terms.html">利用規約</a><a href="terms_miniapp.html">LINE Mini App 利用規約</a></div><p class="small">© 2026 和-Node. All Rights Reserved.</p></div></footer>
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-qualifications" style="font-size: 0.85rem; opacity: 0.8; margin-bottom: 50px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.05);">
+      <div style="font-weight: 800; margin-bottom: 15px; color: #d8b98c; font-size: 0.95rem;">保有資格・実績</div>
+      <ul style="list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 30px; line-height: 1.6;">
+        <li style="color: #fff;">IT・Web制作歴 20年以上</li>
+        <li style="color: #fff;">JADP認定 メンタル心理カウンセラー</li>
+        <li style="color: #fff;">JADP認定 上級心理カウンセラー</li>
+        <li style="color: #fff;">日商簿記2級 / 全商・全経簿記1級</li>
+        <li style="color: #fff;">バリアフリー住環境アドバイザー（車いすユーザー）</li>
+      </ul>
+    </div>
+
+    <div class="footer-grid">
+      <div class="footer-col">
+        <h3>制作・サービス</h3>
+        <ul>
+          <li><a href="portfolio-lp/index.html">LP制作ポートフォリオ</a></li>
+          <li><a href="kdp_books.html">KDP出版実績</a></li>
+          <li><a href="pricing.html">料金プラン一覧</a></li>
+          <li><a href="corporate-mental.html">法人メンタル窓口</a></li>
+          <li><a href="index.html#line-mini-app">LINE Mini App制作</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>診断・ツール</h3>
+        <ul>
+          <li><a href="barrier_free.html">バリアフリー診断</a></li>
+          <li><a href="mental_care.html">こころの疲労度診断</a></li>
+          <li><a href="seo_check.html">SEO内部対策診断</a></li>
+          <li><a href="lp_wizard.html">制作ヒアリング体験</a></li>
+          <li><a href="simulator.html">料金シミュレーター</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>規約・ポリシー</h3>
+        <ul>
+          <li><a href="terms.html">利用規約</a></li>
+          <li><a href="privacy.html">プライバシーポリシー</a></li>
+          <li><a href="security-policy.html">情報セキュリティ方針</a></li>
+          <li><a href="tokutei.html">特定商取引法に基づく表記</a></li>
+          <li><a href="cancel-policy.html">キャンセル・返金ポリシー</a></li>
+          <li><a href="terms_miniapp.html">LINE Mini App 利用規約</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>和-Nodeについて</h3>
+        <ul>
+          <li><a href="index.html">トップページ</a></li>
+          <li><a href="index.html#about">代表プロフィール</a></li>
+          <li><a href="https://x.com/wa_node" target="_blank" rel="noopener">X（旧Twitter）</a></li>
+          <li><a href="counseling-notes.html">カウンセリング利用時の注意事項</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-badges">
+        <a href="security-policy.html"><img src="images/security_action_hitotsuboshi-large_color.jpg" alt="SECURITY ACTION 一つ星"></a>
+      </div>
+      <p class="copyright">© 2026 和-Node. All Rights Reserved.</p>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
