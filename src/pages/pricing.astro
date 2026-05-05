@@ -3,12 +3,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="料金プラン・制作費用｜心理導線Web制作・AI・心理｜和-Node" description="和-Nodeの各サービス料金プラン。心理導線Web制作（LP・HP）、LINE Mini App制作、AI活用相談、法人メンタル窓口、個人カウンセリング等の費用目安をご案内します。">
-  <main>
+  <main class="pricing-container">
     <section class="hero">
       <div class="hero-inner">
+        <div class="anniversary-banner reveal">
+          <span class="anniversary-badge">ANNIVERSARY</span>
+          <p><strong>起業記念キャンペーン実施中！</strong> 先着10名様限定で制作メニュー <strong>20% OFF</strong></p>
+        </div>
         <p class="eyebrow">Pricing</p>
         <h1>料金一覧</h1>
-        <p class="lead">掲載料金はすべて税込です。ご依頼内容、制作範囲、機能数、外部サービス連携の有無により料金が変動する場合があります。正式な金額は、目的・内容・必要な機能をヒアリングしたうえでお見積りします。</p>
+        <p class="lead">制作・コンサルティングの料金目安です。ご予算に合わせた柔軟な提案も可能ですので、まずはお気軽にご相談ください。</p>
         <p class="note">Web制作では、見た目だけでなく、訪問者の心理や問い合わせまでの導線も含めて設計します。</p>
         <div class="btns">
           <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">まずは相談する</a>
@@ -18,23 +22,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <section class="section">
-      <p class="eyebrow">Web</p>
-      <h2>心理導線Web制作料金</h2>
+      <p class="eyebrow">Web / Systems</p>
+      <h2>Webサイト・システム制作</h2>
+      <div class="campaign-note">
+        <strong>【起業記念キャンペーン】先着10名様まで制作費 20% OFF！</strong>（以下は通常価格です）
+      </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>サービス</th><th>料金</th><th>内容</th></tr>
+            <tr><th>サービス</th><th>料金 (通常)</th><th>内容</th></tr>
           </thead>
           <tbody>
-            <tr><td>シンプルLP制作</td><td>30,000円〜</td><td>1ページ構成。まずは低コストでWeb広告やSNSの受け皿を作りたい方に。</td></tr>
-            <tr><td>心理導線LP制作</td><td>60,000円〜</td><td>訪問者の不安・迷い・行動心理をふまえた1ページ構成のランディングページ制作。商品・サービスの魅力を整理し、問い合わせにつながりやすい流れを設計します。</td></tr>
-            <tr><td>心理導線ホームページ制作</td><td>120,000円〜</td><td>複数ページ構成、サービスサイト、事業者サイトなど。伝わり方・読みやすさ・相談しやすさを重視したWeb制作です。</td></tr>
-            <tr><td>WordPress制作</td><td>要見積り</td><td>更新しやすいWordPressサイトの構築。ブログ・お知らせ機能なども相談可能です。</td></tr>
-            <tr><td>サーバー・ドメイン取得代行</td><td>要相談</td><td>取得・設定・初期導入をサポートします。</td></tr>
+            <tr><td>シンプルLP制作</td><td>30,000円〜</td><td>1ページの簡易的なランディングページ</td></tr>
+            <tr><td>心理導線LP制作</td><td>60,000円〜</td><td>行動心理をふまえた高品質LP</td></tr>
+            <tr><td>心理導線HP制作</td><td>120,000円〜</td><td>5ページ程度の標準的なホームページ</td></tr>
+            <tr><td>LINE Mini App開発</td><td>150,000円〜</td><td>予約・診断・会員証などのLINE内アプリ</td></tr>
+            <tr><td>会員制サイト・EC構築</td><td>要見積り</td><td>ログイン機能、決済連携など</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="small">※ホームページ制作の基本セット：スマホ対応、基本デザイン、基本の5ページ分を含む</p>
     </section>
 
     <section class="section">
@@ -75,37 +81,20 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
 
     <section class="section">
-      <p class="eyebrow">LINE</p>
-      <h2>LINE Mini App制作</h2>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>サービス</th><th>料金</th><th>内容</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>LINE Mini App制作</td><td>150,000円〜</td><td>予約、問診、アンケート、初回ヒアリング等</td></tr>
-            <tr><td>LINE公式アカウント設定代行</td><td>要相談</td><td>対応可能な範囲でサポート</td></tr>
-            <tr><td>決済導線</td><td>要相談</td><td>Stripeの支払いリンクを活用する形で対応可能</td></tr>
-            <tr><td>外部サービス連携</td><td>別途見積り</td><td>予約・決済・会員機能などの追加連携</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <section class="section">
       <p class="eyebrow">Examples</p>
       <h2>Webアプリケーション制作例</h2>
+      <div class="campaign-note">
+        <strong>【起業記念キャンペーン】これらのカスタムツール制作も 20% OFF！</strong>
+      </div>
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th>ツール名</th><th>開発費用目安</th><th>主な機能</th></tr>
+            <tr><th>ツール名</th><th>通常価格</th><th>キャンペーン価格</th><th>内容</th></tr>
           </thead>
           <tbody>
-            <tr><td>お見積りシミュレーター</td><td>約50,000円〜</td><td>条件分岐によるリアルタイム見積機能</td></tr>
-            <tr><td>こころの疲労度・モヤモヤ診断</td><td>約40,000円〜</td><td>複数軸の分析とグラフ生成機能</td></tr>
-            <tr><td>LPヒアリング・ウィザード</td><td>約35,000円〜</td><td>対話形式の要件定義サポートツール</td></tr>
-            <tr><td>SEO内部対策チェックリスト</td><td>約35,000円〜</td><td>自動採点・改善アドバイス機能</td></tr>
-            <tr><td>バリアフリー診断アプリ</td><td>約30,000円〜</td><td>専門知識を凝縮した簡易診断ツール</td></tr>
+            <tr><td>バリアフリー度チェック</td><td>30,000円〜</td><td><strong>24,000円〜</strong></td><td>質問に答えてスコアとアドバイスを表示。</td></tr>
+            <tr><td>こころの疲労度診断</td><td>50,000円〜</td><td><strong>40,000円〜</strong></td><td>心理視点の多角的なセルフ診断ツール。</td></tr>
+            <tr><td>LP要件ヒアリングウィザード</td><td>80,000円〜</td><td><strong>64,000円〜</strong></td><td>制作の目的を整理し、サマリーを自動生成。</td></tr>
           </tbody>
         </table>
       </div>
@@ -146,36 +135,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
-    <section class="section"><p class="eyebrow">Corporate</p><h2>法人メンタル窓口</h2><div class="table-wrap"><table><thead><tr><th>プラン</th><th>料金</th><th>内容</th></tr></thead><tbody><tr><td>ライト</td><td>月額15,000円</td><td>面談1回、月次レポート、相談窓口維持</td></tr><tr><td>スタンダード</td><td>月額30,000円</td><td>面談3回、月次レポート、担当者相談</td></tr><tr><td>プレミアム</td><td>要相談</td><td>面談回数追加、詳細レポート、管理職向けレクチャー、改善提案</td></tr><tr><td>超過面談</td><td>1回10,000円</td><td>月額プランに含まれる面談回数を超える場合</td></tr><tr><td>管理職向けレクチャー</td><td>60分20,000円</td><td>部下の不調対応、相談の受け方など</td></tr><tr><td>相談窓口案内ページ制作</td><td>30,000円〜</td><td>従業員向け相談窓口の案内ページ制作</td></tr></tbody></table></div><p>法人向け月額契約は、原則として最低契約期間を3ヶ月とします。</p></section>
-
     <section class="section">
-      <h2>お支払いについて</h2>
-      <ul>
-        <li>掲載料金はすべて税込です。</li>
-        <li>Stripe決済手数料は表示価格に含まれます。</li>
-        <li>銀行振込の場合、振込手数料はお客様負担となります。</li>
-        <li>見積書・請求書・領収書の発行に対応します。</li>
-      </ul>
-      <h2>お支払いタイミング</h2>
-      <ul>
-        <li>制作系サービス：着手金50%、納品前50%</li>
-        <li>相談・カウンセリング：予約確定時に前払い</li>
-        <li>法人月額契約：月初前払い、または請求書払い</li>
-        <li>文章作成・プロンプト作成：着手前全額</li>
-      </ul>
-      <h2>別途費用になるもの</h2>
-      <ul>
-        <li>サーバー代</li>
-        <li>ドメイン代</li>
-        <li>有料素材費</li>
-        <li>外部サービス利用料</li>
-        <li>追加機能</li>
-        <li>大幅な仕様変更</li>
-        <li>予約・決済・会員機能などの追加</li>
-      </ul>
+      <p class="eyebrow">Payment / Contract</p>
+      <h2>お支払い・ご契約について</h2>
       <div class="box">
+        <ul class="list-style">
+          <li><strong>電子契約（クラウドサイン）対応</strong>：
+            契約締結はクラウドサインを利用し、オンラインで完結します。郵送や印紙代の手間がなく、スピーディーに開始可能です。</li>
+          <li><strong>お支払い方法</strong>：銀行振込、またはStripe（クレジットカード）に対応しております。</li>
+          <li><strong>見積書・請求書・領収書</strong>：インボイス制度に対応した書類の発行が可能です。</li>
+          <li><strong>制作着手金</strong>：Web制作等の高額案件については、原則として着手時に50%をお支払いいただき、納品後に残金をお支払いいただく形式となります。</li>
+          <li><strong>別途費用になるもの</strong>：サーバー代、ドメイン代、有料素材費、外部サービス利用料などは別途実費となります。</li>
+        </ul>
+      </div>
+
+      <div class="box" style="margin-top: 40px;">
         <h2>どのサービスを選べばいいか分からない方へ</h2>
-        <p>Web制作、AI・ICT活用、カウンセリング、法人メンタル窓口のうち、どれが必要か分からない段階でも大丈夫です。まずは60分相談で、事業の目的・伝えたいこと・現場の負担・心の整理を一緒に行います。</p>
+        <p>Web制作、AI・ICT活用、カウンセリング、法人メンタル窓口のうち、どれが必要か分からない段階でも大丈夫です。まずは無料カウンセリングで、事業の目的・伝えたいこと・現場の負担・心の整理を一緒に行います。</p>
         <div class="btns">
           <a class="btn" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">LINEで相談する</a>
           <a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">フォームで問い合わせる</a>
@@ -192,7 +168,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .lead { font-size: 1.12rem; max-width: 760px; }
   .note, .box { background: rgba(255, 255, 255, 0.78); border: 1px solid var(--line); border-radius: 18px; padding: 18px 20px; }
   
-  .table-wrap { overflow: auto; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; margin-bottom: 24px; }
+  .table-wrap { overflow-x: auto; margin-top: 20px; background: var(--paper); border: 1px solid var(--line); border-radius: 20px; margin-bottom: 24px; }
   table { width: 100%; border-collapse: collapse; min-width: 760px; }
   th, td { padding: 14px 16px; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
   th { background: var(--soft); white-space: nowrap; font-weight: 800; }
