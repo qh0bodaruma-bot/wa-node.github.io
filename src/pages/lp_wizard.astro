@@ -137,6 +137,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <h4>🎯 和-Nodeからの初期提案</h4>
               <p id="recommendText"></p>
             </div>
+
+            <div class="bonus-notice">
+              <div class="bonus-badge">🎁 ヒアリング完了特典</div>
+              <p>
+                このサマリーをコピーして公式LINEにお送りいただくか、お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br />
+                <strong>初回無料カウンセリングを30分延長（計60分無料）</strong> させていただきます。
+              </p>
+            </div>
+
             <div class="copy-area" id="copyArea"></div>
             <div class="actions">
               <button class="btn btn-next" id="btnCopy">サマリーをコピーする</button>
@@ -221,6 +230,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       width: 100%; background: #fdfaf7; border: 1px dashed var(--accent); border-radius: 12px;
       padding: 16px; font-family: monospace; font-size: 0.85rem; margin-bottom: 24px; color: var(--muted); white-space: pre-wrap;
     }
+
+    .bonus-notice {
+      background: #fff;
+      border: 2px dashed var(--accent);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0 32px;
+      text-align: center;
+      position: relative;
+    }
+    .bonus-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .bonus-notice p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text); }
+    .bonus-notice strong { color: var(--accent); }
 
     @media (max-width: 600px) {
       .wizard-container { padding: 24px; }

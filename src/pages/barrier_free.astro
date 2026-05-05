@@ -47,6 +47,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <section class="wanode-cta">
           <p class="label">バリアフリー改善相談</p>
           <h2>店舗・オフィス・Web導線の使いやすさを、一緒に整理しませんか？</h2>
+          
+          <div class="bonus-notice">
+            <div class="bonus-badge">🎁 診断完了特典</div>
+            <p>
+              この結果をスクリーンショットして公式LINEにお送りいただくか、お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br />
+              <strong>初回無料カウンセリングを30分延長（計60分無料）</strong> させていただきます。
+            </p>
+          </div>
+
           <p>
             ハード面（段差など）はすぐには変えられなくても、ソフト面（声かけ）やWeb上での情報発信は今日から変えられます。<br />
             車いすユーザーの実体験をふまえて、誰もが利用しやすい環境づくりをサポートします。
@@ -122,6 +131,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
     .btn-cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: 0.3s; display: inline-block; }
     .btn-cta.secondary { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
+
+    .bonus-notice {
+      background: #fff;
+      border: 2px dashed var(--accent);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+      text-align: center;
+      position: relative;
+    }
+    .bonus-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .bonus-notice p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text); }
+    .bonus-notice strong { color: var(--accent); }
 
     @media(max-width: 600px) {
       .quiz-box { padding: 30px 20px; }

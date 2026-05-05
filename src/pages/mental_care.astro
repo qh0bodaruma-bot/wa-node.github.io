@@ -65,6 +65,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <section class="wanode-cta">
           <p class="label">メンタルヘルス相談</p>
           <h2>結果が気になった方は、一人で抱え込まずに相談してみませんか？</h2>
+          
+          <div class="bonus-notice">
+            <div class="bonus-badge">🎁 診断完了特典</div>
+            <p>
+              この結果をスクリーンショットして公式LINEにお送りいただくか、お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br />
+              <strong>初回無料カウンセリングを30分延長（計60分無料）</strong> させていただきます。
+            </p>
+          </div>
+
           <p>
             システム開発もメンタルケアも、根本は「バグ（悩みの種）」を見つけて整理することです。<br />
             個人カウンセリングまたは法人メンタル相談窓口で、今の状況を一緒に整理し、無理のない一歩を見つけましょう。
@@ -142,6 +151,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
     .btn-cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: 0.3s; }
     .btn-cta.secondary { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
+
+    .bonus-notice {
+      background: #fff;
+      border: 2px dashed var(--accent);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+      text-align: center;
+      position: relative;
+    }
+    .bonus-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .bonus-notice p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text); font-weight: 400; }
+    .bonus-notice strong { color: var(--accent); font-weight: 800; }
 
     .retry-box { margin-top: 24px; text-align: center; }
     .retry-link { background: none; border: none; color: var(--muted); text-decoration: underline; font-size: 0.9rem; cursor: pointer; padding: 0; font-family: inherit; }

@@ -40,6 +40,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <section class="wanode-cta">
           <p class="label">SEO改善・WordPress相談</p>
           <h2>WordPressのSEO内部状態、プロの視点で最適化しませんか？</h2>
+          
+          <div class="bonus-notice">
+            <div class="bonus-badge">🎁 診断完了特典</div>
+            <p>
+              この結果をスクリーンショットして公式LINEにお送りいただくか、お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br />
+              <strong>初回無料カウンセリングを30分延長（計60分無料）</strong> させていただきます。
+            </p>
+          </div>
+
           <p>
             診断結果はいかがでしたか？<br />
             GSC登録やメタ情報、表示速度の改善など、SEOの土台をプロが丸ごと最適化します。<br />
@@ -114,6 +123,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .btn-cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: 0.3s; }
     .btn-cta.secondary { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
     .res-note { font-size: 0.85rem; color: var(--muted); margin-top: 20px; }
+
+    .bonus-notice {
+      background: #fff;
+      border: 2px dashed var(--accent);
+      border-radius: 16px;
+      padding: 24px;
+      margin: 24px 0;
+      text-align: center;
+      position: relative;
+    }
+    .bonus-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent);
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+    }
+    .bonus-notice p { margin: 0 !important; font-size: 0.95rem; line-height: 1.6; color: var(--text); text-align: center !important; }
+    .bonus-notice strong { color: var(--accent); }
 
     .sticky-cta {
       position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px);
