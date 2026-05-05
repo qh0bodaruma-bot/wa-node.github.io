@@ -242,14 +242,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     }
 
     function update() {
-      let total = 0;
+      let subtotal = 0;
       let days = 0;
       let rows = [];
 
       // Type
       const type = document.querySelector('input[name="type"]:checked');
       if (type) {
-          total += parseInt(type.value);
+          subtotal += parseInt(type.value);
           days += parseInt(type.dataset.days);
           rows.push({ label: type.dataset.label, price: parseInt(type.value) });
       }
@@ -264,7 +264,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       // Features
       document.querySelectorAll('input[name="feature"]:checked').forEach(f => {
-        total += parseInt(f.value);
+        subtotal += parseInt(f.value);
         days += parseInt(f.dataset.days);
         rows.push({ label: f.dataset.label, price: parseInt(f.value) });
       });
@@ -272,10 +272,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       // Rush
       const rush = document.getElementById('rushCheck');
       if (rush && rush.checked) {
-        total *= 1.5;
+        subtotal *= 1.5;
         days = Math.max(2, Math.ceil(days * 0.7));
         rows.push({ label: '特急対応', price: '×1.5' });
       }
+
+      // Campaign Discount (20% OFF)
+      const discount = Math.round(subtotal * 0.2);
+      const total = subtotal - discount;
+      rows.push({ label: '起業記念キャンペーン', price: `-${yen(discount)}` });
 
       // Selection Visuals
       document.querySelectorAll('.choice-item').forEach(item => {
