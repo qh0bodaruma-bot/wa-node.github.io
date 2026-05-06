@@ -7,83 +7,150 @@
   <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Caveat:wght@400;700&family=Shippori+Mincho:wght@400;700&display=swap" rel="stylesheet">
   <style>
     :root { 
-      /* アースカラー・パレット（リッチメニューに調和） */
-      --bg-color: #c0c294; /* 柔らかいセージグリーン */
+      --bg-color: #c0c294; /* 抹茶セージ */
       --text-color: #2c2c2a; 
-      --accent-color: #c8a84b; /* 和-Nodeゴールド */
-      --shadow-light: #dcdfb0; /* 背景より少し明るい色 */
-      --shadow-dark: #a4a678;  /* 背景より少し暗い色 */
-      --line-green: #06C755; 
+      --accent-color: #c8a84b; /* 金 */
+      --shadow-light: #dcdfb0; 
+      --shadow-dark: #a4a678;
+      --hanko-red: #b22d15;
     }
+    
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body { font-family: 'Noto Sans JP', sans-serif; background-color: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
-    .app-container { width: 100%; max-width: 480px; padding: 24px; display: flex; flex-direction: column; gap: 24px; opacity: 0; transition: opacity 0.5s ease; }
+    
+    body { 
+      font-family: 'Noto Sans JP', sans-serif; 
+      background-color: var(--bg-color); 
+      color: var(--text-color); 
+      display: flex; 
+      justify-content: center; 
+      min-height: 100vh; 
+      overflow-x: hidden;
+      /* 青海波の地紋を薄く背景に重ねる */
+      background-image: radial-gradient(circle at 100% 150%, transparent 24%, var(--shadow-dark) 24%, var(--shadow-dark) 28%, transparent 28%, transparent 52%, var(--shadow-dark) 52%, var(--shadow-dark) 56%, transparent 56%);
+      background-size: 40px 20px;
+      background-attachment: fixed;
+    }
+
+    /* 全体を包む和紙のような質感のオーバーレイ */
+    body::after {
+      content: "";
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png');
+      opacity: 0.05; pointer-events: none; z-index: 99;
+    }
+
+    .app-container { width: 100%; max-width: 480px; padding: 24px; display: flex; flex-direction: column; gap: 24px; opacity: 0; transition: opacity 0.5s ease; z-index: 1; }
     .app-container.loaded { opacity: 1; }
+
     header { text-align: center; margin-bottom: 8px; }
-    .header-logo { font-size: 24px; font-weight: 700; letter-spacing: 0.1em; color: var(--text-color); }
+    .header-logo { font-family: 'Shippori Mincho', serif; font-size: 26px; font-weight: 700; letter-spacing: 0.2em; color: var(--text-color); }
     .header-sub { font-family: 'Caveat', cursive; font-size: 18px; color: #5a6a51; }
     
-    /* アースカラー・ニューモーフィズム */
+    /* 和の額縁のようなカード */
     .neu-pressed { 
       background: var(--bg-color); 
-      border-radius: 24px; 
-      box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light); 
-      border: 1px solid rgba(255,255,255,0.2); 
-      padding: 24px; 
+      border-radius: 12px; 
+      box-shadow: inset 4px 4px 10px var(--shadow-dark), inset -4px -4px 10px var(--shadow-light); 
+      border: 1px solid rgba(0,0,0,0.05);
+      padding: 30px 24px;
+      position: relative;
     }
+    /* 角の装飾 */
+    .neu-pressed::before {
+      content: ""; position: absolute; top: 10px; left: 10px; width: 20px; height: 20px;
+      border-top: 1px solid var(--accent-color); border-left: 1px solid var(--accent-color);
+      opacity: 0.5;
+    }
+
     .neu-raised { 
       background: var(--bg-color); 
-      border-radius: 24px; 
-      box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light); 
-      border: none; 
+      border-radius: 12px; 
+      box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light); 
+      border: 1px solid rgba(255,255,255,0.2); 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
     
-    .screen { display: none; flex-direction: column; gap: 20px; animation: fadeIn 0.4s ease forwards; }
+    .screen { display: none; flex-direction: column; gap: 24px; animation: fadeIn 0.5s ease forwards; }
     .screen.active { display: flex; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    .btn { width: 100%; padding: 20px; font-size: 16px; font-weight: 700; color: var(--text-color); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; }
-    .btn:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); transform: scale(0.97); }
+    @keyframes fadeIn { from { opacity: 0; transform: scale(0.98); } to { opacity: 1; transform: scale(1); } }
     
+    .btn { 
+      width: 100%; padding: 22px; font-family: 'Shippori Mincho', serif; font-size: 16px; font-weight: 700; 
+      color: var(--text-color); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+    }
+    .btn:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); transform: scale(0.98); }
+    
+    /* 判子アイコン */
+    .hanko {
+      width: 32px; height: 32px; border: 2px solid var(--hanko-red); border-radius: 6px;
+      color: var(--hanko-red); font-size: 14px; display: flex; align-items: center; justify-content: center;
+      font-weight: 900; writing-mode: vertical-rl; padding: 2px; line-height: 1;
+      box-shadow: 1px 1px 0 rgba(0,0,0,0.1);
+    }
+
     .gauge-container { width: 180px; height: 180px; margin: 20px auto; position: relative; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light); }
     .gauge-inner { width: 140px; height: 140px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light); }
-    .gauge-value { font-size: 42px; font-weight: 700; color: var(--accent-color); }
+    .gauge-value { font-size: 42px; font-weight: 700; color: var(--accent-color); font-family: 'Shippori Mincho', serif; }
     .gauge-svg { position: absolute; top: 0; left: 0; width: 180px; height: 180px; transform: rotate(-90deg); }
-    .gauge-circle { fill: none; stroke: var(--accent-color); stroke-width: 12; stroke-linecap: round; stroke-dasharray: 527.7; stroke-dashoffset: 527.7; transition: stroke-dashoffset 1.5s ease-out; }
+    .gauge-circle { fill: none; stroke: var(--accent-color); stroke-width: 8; stroke-linecap: round; stroke-dasharray: 527.7; stroke-dashoffset: 527.7; transition: stroke-dashoffset 1.5s ease-out; }
     
-    .btn-line { background: #5a6a51; color: #fff !important; border-radius: 20px; box-shadow: 4px 4px 10px rgba(0,0,0,0.1); }
-    .loading-overlay { position: fixed; inset: 0; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: opacity 0.5s ease; }
+    .btn-dark { background: #5a6a51; color: #fff !important; border-radius: 12px; box-shadow: 4px 4px 10px rgba(0,0,0,0.15); border: none; }
+    .loading-overlay { position: fixed; inset: 0; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 1000; }
   </style>
 </head>
 <body>
-  <div id="loading" class="loading-overlay"><div class="header-logo" style="color:var(--text-color)">和-Node</div></div>
+  <div id="loading" class="loading-overlay"><div class="header-logo">和-Node</div></div>
   <div class="app-container" id="app">
     <header><div class="header-logo">和-Node</div><div class="header-sub">Counseling Room</div></header>
+    
     <section id="screen-home" class="screen active">
-      <div class="neu-pressed"><div><span id="display-name" class="header-sub" style="font-size:24px; color:var(--accent-color);">Guest</span> さん</div><p style="margin-top:8px;">あなたの「こころの声」を<br>そっと整理してみませんか？</p></div>
-      <button class="btn neu-raised" onclick="startQuiz()">🔍 こころの健康チェック</button>
-      <button class="btn neu-raised" onclick="showScreen('screen-menu')">📅 ご相談・予約メニュー</button>
+      <div class="neu-pressed">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+          <div><span id="display-name" style="font-size:20px; font-family:'Shippori Mincho',serif; color:var(--accent-color);">Guest</span> 様</div>
+          <div class="hanko">和心</div>
+        </div>
+        <p style="margin-top:16px; line-height:2; font-size:15px;">あなたの「こころの声」を<br>そっと整理してみませんか？</p>
+      </div>
+      <button class="btn neu-raised" onclick="startQuiz()">
+        <span style="font-size: 20px;">🔍</span> こころの健康チェック
+      </button>
+      <button class="btn neu-raised" onclick="showScreen('screen-menu')">
+        <span style="font-size: 20px;">📅</span> ご相談・予約メニュー
+      </button>
     </section>
+
     <section id="screen-quiz" class="screen">
-      <div class="neu-pressed" style="min-height:160px; display:flex; align-items:center; justify-content:center; text-align:center;"><p id="question-text" style="font-weight:700; line-height:1.8;"></p></div>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-        <button class="btn neu-raised" onclick="nextQuestion(3)">よくある</button><button class="btn neu-raised" onclick="nextQuestion(2)">時々ある</button>
-        <button class="btn neu-raised" onclick="nextQuestion(1)">あまりない</button><button class="btn neu-raised" onclick="nextQuestion(0)">全くない</button>
+      <div class="neu-pressed" style="min-height:180px; display:flex; align-items:center; justify-content:center; text-align:center; padding:40px 20px;">
+        <p id="question-text" style="font-weight:700; line-height:2; font-family:'Shippori Mincho',serif;"></p>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr; gap:16px;">
+        <button class="btn neu-raised" onclick="nextQuestion(3)">よくある</button>
+        <button class="btn neu-raised" onclick="nextQuestion(2)">時々ある</button>
+        <button class="btn neu-raised" onclick="nextQuestion(1)">あまりない</button>
+        <button class="btn neu-raised" onclick="nextQuestion(0)">全くない</button>
       </div>
     </section>
+
     <section id="screen-result" class="screen">
       <div class="neu-pressed" style="text-align:center;">
-        <p style="font-size:13px; font-weight:700;">診断結果</p>
+        <p style="font-size:14px; font-family:'Shippori Mincho',serif; margin-bottom:10px;">診断結果</p>
         <div class="gauge-container"><svg class="gauge-svg"><circle class="gauge-circle" id="gauge-circle" cx="90" cy="90" r="84"></circle></svg><div class="gauge-inner"><div id="result-score" class="gauge-value">0</div></div></div>
-        <p id="result-status" style="font-weight:700; margin-bottom:8px;"></p><p id="result-message" style="font-size:13px; color:#444; line-height:1.6;"></p>
+        <p id="result-status" style="font-weight:700; margin:15px 0 8px; font-family:'Shippori Mincho',serif;"></p>
+        <p id="result-message" style="font-size:13px; color:#444; line-height:1.8;"></p>
       </div>
-      <button class="btn btn-line" onclick="sendResultToChat()">💬 診断結果をトークに送る</button>
+      <button class="btn btn-dark" onclick="sendResultToChat()">💬 診断結果をトークに送る</button>
       <button class="btn neu-raised" onclick="showScreen('screen-menu')">🌿 最適なケアを相談する</button>
     </section>
+
     <section id="screen-menu" class="screen">
-      <a href="https://lin.ee/o5QFPwc" style="text-decoration:none;"><button class="btn btn-line">💬 チャットで相談する</button></a>
+      <div class="neu-pressed" style="text-align:center;">
+        <div class="hanko" style="margin:0 auto 15px;">予約</div>
+        <p style="font-size:14px;">LINEやオンラインでの相談を承ります</p>
+      </div>
+      <a href="https://lin.ee/o5QFPwc" style="text-decoration:none;"><button class="btn btn-dark">💬 チャットで相談する</button></a>
       <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" style="text-decoration:none;"><button class="btn neu-raised">📅 オンライン予約をする</button></a>
       <button class="btn" style="box-shadow:none;" onclick="showScreen('screen-home')">ホームに戻る</button>
     </section>
