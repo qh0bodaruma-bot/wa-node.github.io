@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DX SOLUTIONS | Enterprise 15+ パッケージ | 和-Node</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../premium_upgrade.css">
+<link rel="stylesheet" href="enterprise-layout.css">
+<style>
+/* App Simulation Styles (Neumorphism / Glassmorphism) */
+.app-card {
+  background: #f0f3f7;
+  border-radius: 30px;
+  box-shadow: 20px 20px 60px #d9dbdf, -20px -20px 60px #ffffff;
+  padding: 40px;
+  max-width: 500px;
+  margin: 40px auto;
+  text-align: center;
+}
+.diag-btn {
+  background: var(--ent-navy);
+  color: #fff;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 50px;
+  font-weight: 700;
+  margin: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+.diag-btn:hover { background: var(--ent-blue); transform: scale(1.05); }
+#diagResult {
+  margin-top: 30px;
+  padding: 20px;
+  border-radius: 20px;
+  background: #fff;
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<header class="ent-header">
+  <a href="index.html" class="ent-logo">GLOBAL HOLDINGS</a>
+  <button class="ent-burger-btn" onclick="toggleDrawer()">
+    <span>MENU</span>
+  </button>
+</header>
+
+<!-- Drawer assumes updated with dx link -->
+<div class="ent-drawer" id="entDrawer">
+  <button class="drawer-close" onclick="toggleDrawer()">×</button>
+  <div class="drawer-nav">
+    <div class="drawer-nav-group">
+      <h4>DX & INNOVATION</h4>
+      <ul>
+        <li><a href="dx-solutions.html" style="color:var(--ent-blue); font-weight:900;">DXソリューション・アプリ連携</a></li>
+      </ul>
+      <h4>COMPANY</h4>
+      <ul>
+        <li><a href="index.html">TOP</a></li>
+        <li><a href="philosophy.html">理念・パーパス</a></li>
+        <li><a href="company.html">会社概要</a></li>
+      </ul>
+    </div>
+    <div class="drawer-nav-group">
+      <h4>BUSINESS</h4>
+      <ul>
+        <li><a href="business-domain.html">事業領域一覧</a></li>
+        <li><a href="service1.html">事業詳細</a></li>
+      </ul>
+    </div>
+    <div class="drawer-nav-group">
+      <h4>CONTACT</h4>
+      <ul>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<main class="ent-container">
+  <div class="reveal">
+    <span style="color:var(--ent-blue); font-weight:900; letter-spacing:0.2em;">BEYOND THE WEBSITE</span>
+    <h1 style="font-family:'Noto Serif JP',serif; font-size:48px; color:var(--ent-navy); margin-top:10px; margin-bottom:40px;">Webアプリ・DX連携 あああああ</h1>
+    <p style="font-size:18px; color:#666; margin-bottom:60px;">エンタープライズプランでは、単なる情報発信に留まらず、貴社独自のビジネスロジックを統合した「Webアプリ」の実装が可能です。</p>
+    
+    <div class="app-card">
+      <h3>【DEMO】経営診断シミュレーター</h3>
+      <p style="font-size:14px; color:#888; margin-bottom:30px;">質問に答えるだけで貴社の現状を可視化します。</p>
+      
+      <div id="qArea">
+        <p style="font-weight:700;">Q. 現在の業務効率に課題を感じますか？</p>
+        <button class="diag-btn" onclick="nextDiag()">はい</button>
+        <button class="diag-btn" onclick="nextDiag()">いいえ</button>
+      </div>
+      
+      <div id="diagResult">
+        <h4 style="color:var(--ent-blue);">診断結果：DX化の余地 90%</h4>
+        <p style="font-size:13px;">和-Nodeのソリューションを導入することで、年間約0,000時間の削減が見込めます。</p>
+        <a href="contact.html" style="display:inline-block; margin-top:20px; color:var(--ent-navy); font-weight:700;">専門家に相談する →</a>
+      </div>
+    </div>
+
+    <div style="margin-top:100px; display:grid; grid-template-columns:1fr 1fr; gap:60px;">
+      <div>
+        <h3 style="font-size:24px; color:var(--ent-navy); margin-bottom:20px;">LINE連携・予約管理</h3>
+        <p>公式LINEと連携した予約システムや、顧客管理（CRM）とのリアルタイム同期を実装。ユーザー体験を最大化します。</p>
+      </div>
+      <div>
+        <h3 style="font-size:24px; color:var(--ent-navy); margin-bottom:20px;">AI・データ解析統合</h3>
+        <p>収集したデータをAIで解析し、ダッシュボード化。経営判断を加速させる高度なWebプラットフォームを構築します。</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+function toggleDrawer(){document.getElementById('entDrawer').classList.toggle('active');}
+function nextDiag(){
+  document.getElementById('qArea').style.display = 'none';
+  document.getElementById('diagResult').style.display = 'block';
+}
+</script>
+<script src="../premium_upgrade.js"></script>
+</body>
+</html>

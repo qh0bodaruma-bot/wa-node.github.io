@@ -4,6 +4,12 @@
 */
 
 document.addEventListener('DOMContentLoaded', () => {
+  // Inject Showroom Bar
+  const bar = document.createElement('div');
+  bar.className = 'showroom-bar';
+  bar.innerHTML = `<span>和-Node Digital Showroom</span><a href="/demos">← パッケージ一覧に戻る</a>`;
+  document.body.prepend(bar);
+
   // Reveal Animation Logic
   const observerOptions = {
     threshold: 0.1,

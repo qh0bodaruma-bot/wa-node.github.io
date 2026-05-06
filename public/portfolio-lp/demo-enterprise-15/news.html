@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEWS | Enterprise 15+ パッケージ | 和-Node</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../premium_upgrade.css">
+<link rel="stylesheet" href="enterprise-layout.css">
+<style>
+.ent-news-item{display:flex; gap:30px; padding:25px 0; border-bottom:1px solid #eee; align-items:center;}
+.ent-news-date{font-weight:700; color:var(--ent-blue); min-width:100px;}
+</style>
+</head>
+<body>
+
+<header class="ent-header">
+  <a href="index.html" class="ent-logo">GLOBAL HOLDINGS</a>
+  <button class="ent-burger-btn" onclick="toggleDrawer()">
+    <span>MENU</span>
+  </button>
+</header>
+
+<div class="ent-drawer" id="entDrawer">
+  <button class="drawer-close" onclick="toggleDrawer()">×</button>
+  <div class="drawer-nav">
+    <div class="drawer-nav-group">
+      <h4>COMPANY</h4>
+      <ul>
+        <li><a href="index.html">TOP</a></li>
+        <li><a href="philosophy.html">理念・パーパス</a></li>
+        <li><a href="message.html">代表メッセージ</a></li>
+        <li><a href="history.html">沿革・ヒストリー</a></li>
+        <li><a href="company.html">会社概要</a></li>
+      </ul>
+    </div>
+    <div class="drawer-nav-group">
+      <h4>BUSINESS</h4>
+      <ul>
+        <li><a href="business-domain.html">事業領域一覧</a></li>
+        <li><a href="service1.html">事業A あああああ</a></li>
+        <li><a href="service2.html">事業B いいいいい</a></li>
+        <li><a href="service3.html">事業C ううううう</a></li>
+        <li><a href="service4.html">事業D えええええ</a></li>
+      </ul>
+    </div>
+    <div class="drawer-nav-group">
+      <h4>SOCIAL & CAREER</h4>
+      <ul>
+        <li><a href="sustainability.html">サステナビリティ</a></li>
+        <li><a href="recruit.html">採用情報</a></li>
+        <li><a href="news.html">お知らせ</a></li>
+        <li><a href="faq.html">よくある質問</a></li>
+        <li><a href="contact.html">お問い合わせ</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<main class="ent-container">
+  <div class="reveal">
+    <h1 style="font-family:'Noto Serif JP',serif; font-size:48px; color:var(--ent-navy); margin-bottom:60px;">お知らせ あああああ</h1>
+    <div class="ent-news-list">
+      <div class="ent-news-item"><span class="ent-news-date">20XX.12.01</span><p>あああああ株式会社との業務提携に関するお知らせ</p></div>
+      <div class="ent-news-item"><span class="ent-news-date">20XX.11.15</span><p>いいいいい事業における新サービスの提供開始について</p></div>
+      <div class="ent-news-item"><span class="ent-news-date">20XX.10.20</span><p>サステナビリティレポート20XXを公開いたしました</p></div>
+    </div>
+  </div>
+</main>
+
+<script>function toggleDrawer(){document.getElementById('entDrawer').classList.toggle('active');}</script>
+<script src="../premium_upgrade.js"></script>
+</body>
+</html>
