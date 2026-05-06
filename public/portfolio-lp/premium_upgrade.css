@@ -50,12 +50,13 @@ body {
   background-attachment: fixed;
 }
 
-/* Glassmorphism Navigation Upgrade */
-nav, header.nav-header {
-  background: var(--p-glass) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  border-bottom: 1px solid var(--p-border) !important;
-  box-shadow: 0 4px 30px rgba(0,0,0,0.03) !important;
+/* Glassmorphism Navigation Upgrade (Targeting standard LPs, not custom demo packages) */
+nav:not(.side-nav):not(.prem-header):not(.ent-header), 
+header.nav-header:not(.ent-header) {
+  background: var(--p-glass);
+  backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid var(--p-border);
+  box-shadow: 0 4px 30px rgba(0,0,0,0.03);
 }
 
 /* Card & Section Polish */

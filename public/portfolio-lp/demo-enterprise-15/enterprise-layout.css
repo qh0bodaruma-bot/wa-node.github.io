@@ -57,18 +57,21 @@ body {
 .ent-drawer {
   position: fixed;
   top: 32px;
-  right: -100%;
+  left: 0;
   width: 100%;
   height: calc(100vh - 32px);
   background: var(--ent-navy);
-  z-index: 4000;
-  transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+  z-index: 9000; /* Just below showroom bar */
+  transform: translateX(100%);
+  transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1);
   display: flex;
-  padding: 100px;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
 }
 
 .ent-drawer.active {
-  right: 0;
+  transform: translateX(0);
 }
 
 .drawer-close {
@@ -85,8 +88,9 @@ body {
 .drawer-nav {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
+  gap: 60px;
   width: 100%;
+  max-width: 1000px; /* Constrain width for visibility */
 }
 
 .drawer-nav-group h4 {

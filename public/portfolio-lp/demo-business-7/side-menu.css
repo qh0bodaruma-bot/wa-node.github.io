@@ -6,8 +6,8 @@
 }
 
 body {
-  display: flex;
-  min-height: 100vh;
+  margin: 0;
+  padding: 0;
   background: #fdfdfd;
 }
 
@@ -22,7 +22,7 @@ body {
   padding: 40px 0;
   display: flex;
   flex-direction: column;
-  z-index: 1000;
+  z-index: 5000; /* Increased to be below bar but above content */
 }
 
 .side-logo {

@@ -1,0 +1,283 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="LP制作実績ギャラリー｜和-Node" description="和-Nodeが手掛けた全13職種・高品質なランディングページ（LP）制作実績の一覧です。心理学に基づいた導線設計と、最新技術を駆使したプレミアムなデザイン。">
+  <!-- Background Decor -->
+  <div class="bg-decoration">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <main class="lp-portfolio-page">
+    <header class="page-header reveal">
+      <div class="container">
+        <span class="eyebrow">LP Production Gallery</span>
+        <h1 class="page-title">和-Nodeが贈る、<br/><span class="accent-text">最高峰のLP制作実績集</span></h1>
+        <p class="page-desc">
+          「2.4万円〜」という価格の常識を覆す、圧倒的なデザインと戦略性。<br />
+          医療、美容、IT、不動産、教育など、多岐にわたる全13種類の制作サンプルをご覧ください。
+        </p>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Category Filter -->
+      <nav class="filter-nav">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="medical">医療・美容</button>
+        <button class="filter-btn" data-filter="business">ビジネス・IT</button>
+        <button class="filter-btn" data-filter="lifestyle">ライフスタイル</button>
+      </nav>
+
+      <div class="lp-grid">
+        <!-- 1. Medical -->
+        <article class="lp-card reveal" data-category="medical">
+          <div class="lp-visual clinic-bg">
+            <span class="lp-tag">Medical</span>
+            <div class="lp-icon">🏥</div>
+          </div>
+          <div class="lp-info">
+            <h3>美容クリニック・歯科LP</h3>
+            <p>清潔感と信頼感を両立。心理導線に基づいた予約率向上のための設計。</p>
+            <a href="/portfolio-lp/lp_clinic.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 2. Beauty -->
+        <article class="lp-card reveal" data-category="medical">
+          <div class="lp-visual beauty-bg">
+            <span class="lp-tag">Beauty</span>
+            <div class="lp-icon">✨</div>
+          </div>
+          <div class="lp-info">
+            <h3>エステ・脱毛・サロン系LP</h3>
+            <p>高級感溢れるビジュアル。ユーザーの憧れを刺激し、来店意欲を高めます。</p>
+            <a href="/portfolio-lp/lp_beauty.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 3. Gym -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual gym-bg">
+            <span class="lp-tag">Fitness</span>
+            <div class="lp-icon">🏋️‍♂️</div>
+          </div>
+          <div class="lp-info">
+            <h3>パーソナルジム・フィットネスLP</h3>
+            <p>力強さとモチベーション。ビフォーアフターを効果的に見せる導線。</p>
+            <a href="/portfolio-lp/lp_gym.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 4. EC -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual ec-bg">
+            <span class="lp-tag">E-Commerce</span>
+            <div class="lp-icon">📦</div>
+          </div>
+          <div class="lp-info">
+            <h3>商品販売・EC特化LP</h3>
+            <p>購買心理を徹底追求。商品の魅力を引き出し、即座の注文へ繋げます。</p>
+            <a href="/portfolio-lp/lp_ec.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 5. SaaS -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual saas-bg">
+            <span class="lp-tag">IT / SaaS</span>
+            <div class="lp-icon">💻</div>
+          </div>
+          <div class="lp-info">
+            <h3>ITツール・SaaSサービスLP</h3>
+            <p>先進性と機能性。複雑なサービス内容をチャートとアニメーションで簡潔に。</p>
+            <a href="/portfolio-lp/lp_saas.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 6. Real Estate -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual estate-bg">
+            <span class="lp-tag">Real Estate</span>
+            <div class="lp-icon">🏠</div>
+          </div>
+          <div class="lp-info">
+            <h3>不動産・戸建・マンションLP</h3>
+            <p>一生の買い物を支える安心感。物件の魅力を高精細なレイアウトで表現。</p>
+            <a href="/portfolio-lp/lp_realestate.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 7. Professional -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual law-bg">
+            <span class="lp-tag">Consulting</span>
+            <div class="lp-icon">💼</div>
+          </div>
+          <div class="lp-info">
+            <h3>士業・コンサル・スクールLP</h3>
+            <p>権威性と専門性。読み手の信頼を勝ち取る情報の整理とライティング支援。</p>
+            <a href="/portfolio-lp/lp_lawyer.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 8. Seminar -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual seminar-bg">
+            <span class="lp-tag">Education</span>
+            <div class="lp-icon">📈</div>
+          </div>
+          <div class="lp-info">
+            <h3>投資・教育セミナーLP</h3>
+            <p>期待感を最大化。成功イメージを共有し、申込へのステップを最適化。</p>
+            <a href="/portfolio-lp/lp_seminar.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 9. Recruit -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual recruit-bg">
+            <span class="lp-tag">Recruit</span>
+            <div class="lp-icon">🤝</div>
+          </div>
+          <div class="lp-info">
+            <h3>採用・リクルーティングLP</h3>
+            <p>企業の想いを届ける。未来の仲間へ、共感と憧れを生むブランディング。</p>
+            <a href="/portfolio-lp/lp_recruit.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 10. Local -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual local-bg">
+            <span class="lp-tag">Regional</span>
+            <div class="lp-icon">☕</div>
+          </div>
+          <div class="lp-info">
+            <h3>地域振興・カフェ・店舗LP</h3>
+            <p>温かみと独自性。その場所、その店にしかない空気感をデジタルで再現。</p>
+            <a href="/portfolio-lp/lp_local.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 11. Event -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual event-bg">
+            <span class="lp-tag">Event</span>
+            <div class="lp-icon">🚀</div>
+          </div>
+          <div class="lp-info">
+            <h3>イベント・フェス・期間限定LP</h3>
+            <p>ワクワク感と勢い。開催への期待を煽るエネルギッシュなデザイン。</p>
+            <a href="/portfolio-lp/lp_event.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 12. Corporate -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual corporate-bg">
+            <span class="lp-tag">Corporate</span>
+            <div class="lp-icon">🏢</div>
+          </div>
+          <div class="lp-info">
+            <h3>企業紹介・ブランドLP</h3>
+            <p>揺るぎない信頼。コーポレートアイデンティティを尊重した誠実な設計。</p>
+            <a href="/portfolio-lp/lp_corporate.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 13. Osteopathy -->
+        <article class="lp-card reveal" data-category="medical">
+          <div class="lp-visual clinic-bg" style="filter: hue-rotate(45deg);">
+            <span class="lp-tag">Therapy</span>
+            <div class="lp-icon">💆‍♂️</div>
+          </div>
+          <div class="lp-info">
+            <h3>整骨院・鍼灸・整体院LP</h3>
+            <p>安心感と技術力。痛みからの解放をイメージさせる優しいトーン。</p>
+            <a href="/portfolio-lp/lp_sekkotsu.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .lp-portfolio-page { padding-bottom: 120px; }
+  .page-header { padding: 120px 0 80px; text-align: center; position: relative; }
+  .eyebrow { font-size: 0.85rem; font-weight: 900; color: #639922; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .page-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 24px; color: #333; }
+  .accent-text { color: #639922; position: relative; }
+  .page-desc { font-size: 1.1rem; color: #666; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+
+  .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
+  .filter-btn { padding: 10px 24px; border-radius: 999px; border: 1px solid #ddd; background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+  .filter-btn.active, .filter-btn:hover { background: #639922; color: #fff; border-color: #639922; }
+
+  .lp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 40px; }
+  .lp-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); border: 1px solid #eee; }
+  .lp-card:hover { transform: translateY(-12px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-color: #639922; }
+
+  .lp-visual { height: 200px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .lp-tag { position: absolute; top: 20px; left: 20px; font-size: 10px; font-weight: 900; background: #fff; padding: 4px 12px; border-radius: 999px; color: #639922; }
+  .lp-icon { font-size: 80px; opacity: 0.8; transition: 0.4s; }
+  .lp-card:hover .lp-icon { transform: scale(1.2); }
+
+  .lp-info { padding: 32px; }
+  .lp-info h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 12px; color: #333; }
+  .lp-info p { font-size: 0.95rem; color: #666; line-height: 1.6; margin-bottom: 24px; min-height: 3.2em; }
+  .lp-link { font-size: 0.95rem; font-weight: 900; color: #639922; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
+  .lp-link:hover { border-bottom-color: #639922; }
+
+  /* Visual BG Colors */
+  .clinic-bg { background: linear-gradient(135deg, #f0f7ff, #e6efff); }
+  .beauty-bg { background: linear-gradient(135deg, #fff0f5, #ffe4e1); }
+  .gym-bg { background: linear-gradient(135deg, #f5f5f5, #e0e0e0); }
+  .ec-bg { background: linear-gradient(135deg, #fffaf0, #fdf5e6); }
+  .saas-bg { background: linear-gradient(135deg, #f4faff, #eef7ff); }
+  .estate-bg { background: linear-gradient(135deg, #f5f5f5, #ebebeb); }
+  .law-bg { background: linear-gradient(135deg, #f0f2f5, #e8eaed); }
+  .seminar-bg { background: linear-gradient(135deg, #fafff0, #f4ffe6); }
+  .recruit-bg { background: linear-gradient(135deg, #f0f7ff, #e6f2ff); }
+  .local-bg { background: linear-gradient(135deg, #fffdf0, #fff9e6); }
+  .event-bg { background: linear-gradient(135deg, #f5f0ff, #eee6ff); }
+  .corporate-bg { background: linear-gradient(135deg, #f8f9fa, #f1f3f5); }
+
+  .bg-decoration { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #fdfaf7; overflow: hidden; }
+  .grid-overlay { position: absolute; width: 100%; height: 100%; background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 30px 30px; }
+  .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; }
+  .glow-1 { width: 500px; height: 500px; background: #e8f0e5; top: -10%; right: -10%; }
+  .glow-2 { width: 400px; height: 400px; background: #f3e9d2; bottom: -10%; left: -10%; }
+
+  @media (max-width: 600px) {
+    .page-header { padding: 80px 20px 40px; }
+    .lp-grid { grid-template-columns: 1fr; gap: 24px; }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const lpCards = document.querySelectorAll('.lp-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        lpCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>
