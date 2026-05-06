@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>和-Node | こころの相談室</title>
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg-color: #f0f0f3; --text-color: #2c2c2a; --accent-color: #c8a84b; --shadow-light: #ffffff; --shadow-dark: #d1d1d6; --line-green: #06C755; }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Noto Sans JP', sans-serif; background-color: var(--bg-color); color: var(--text-color); display: flex; justify-content: center; min-height: 100vh; overflow-x: hidden; }
+    .app-container { width: 100%; max-width: 480px; padding: 24px; display: flex; flex-direction: column; gap: 24px; opacity: 0; transition: opacity 0.5s ease; }
+    .app-container.loaded { opacity: 1; }
+    header { text-align: center; margin-bottom: 8px; }
+    .header-logo { font-size: 24px; font-weight: 700; letter-spacing: 0.1em; }
+    .header-sub { font-family: 'Caveat', cursive; font-size: 18px; color: #666; }
+    .neu-pressed { background: var(--bg-color); border-radius: 24px; box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light); border: 1px solid rgba(255,255,255,0.4); padding: 24px; }
+    .neu-raised { background: var(--bg-color); border-radius: 24px; box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light); border: none; }
+    .screen { display: none; flex-direction: column; gap: 20px; animation: fadeIn 0.4s ease forwards; }
+    .screen.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .btn { width: 100%; padding: 20px; font-size: 16px; font-weight: 700; color: var(--text-color); cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; transition: all 0.2s; }
+    .btn:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); transform: scale(0.97); }
+    .gauge-container { width: 180px; height: 180px; margin: 20px auto; position: relative; display: flex; align-items: center; justify-content: center; border-radius: 50%; box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light); }
+    .gauge-inner { width: 140px; height: 140px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light); }
+    .gauge-value { font-size: 42px; font-weight: 700; color: var(--accent-color); }
+    .gauge-svg { position: absolute; top: 0; left: 0; width: 180px; height: 180px; transform: rotate(-90deg); }
+    .gauge-circle { fill: none; stroke: var(--accent-color); stroke-width: 12; stroke-linecap: round; stroke-dasharray: 527.7; stroke-dashoffset: 527.7; transition: stroke-dashoffset 1.5s ease-out; }
+    .btn-line { background: var(--line-green); color: #fff !important; border-radius: 20px; box-shadow: 0 10px 20px rgba(6, 199, 85, 0.3); }
+    .loading-overlay { position: fixed; inset: 0; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: opacity 0.5s ease; }
+  </style>
+</head>
+<body>
+  <div id="loading" class="loading-overlay"><div class="header-logo">和-Node</div></div>
+  <div class="app-container" id="app">
+    <header><div class="header-logo">和-Node</div><div class="header-sub">Counseling Room</div></header>
+    <section id="screen-home" class="screen active">
+      <div class="neu-pressed"><div><span id="display-name" class="header-sub" style="font-size:24px; color:var(--accent-color);">Guest</span> さん</div><p style="margin-top:8px;">あなたの「こころの声」を<br>そっと整理してみませんか？</p></div>
+      <button class="btn neu-raised" onclick="startQuiz()">🔍 こころの健康チェック</button>
+      <button class="btn neu-raised" onclick="showScreen('screen-menu')">📅 ご相談・予約メニュー</button>
+    </section>
+    <section id="screen-quiz" class="screen">
+      <div class="neu-pressed" style="min-height:160px; display:flex; align-items:center; justify-content:center; text-align:center;"><p id="question-text" style="font-weight:700; line-height:1.8;"></p></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
+        <button class="btn neu-raised" onclick="nextQuestion(3)">よくある</button><button class="btn neu-raised" onclick="nextQuestion(2)">時々ある</button>
+        <button class="btn neu-raised" onclick="nextQuestion(1)">あまりない</button><button class="btn neu-raised" onclick="nextQuestion(0)">全くない</button>
+      </div>
+    </section>
+    <section id="screen-result" class="screen">
+      <div class="neu-pressed" style="text-align:center;">
+        <p style="font-size:13px; font-weight:700;">診断結果</p>
+        <div class="gauge-container"><svg class="gauge-svg"><circle class="gauge-circle" id="gauge-circle" cx="90" cy="90" r="84"></circle></svg><div class="gauge-inner"><div id="result-score" class="gauge-value">0</div></div></div>
+        <p id="result-status" style="font-weight:700; margin-bottom:8px;"></p><p id="result-message" style="font-size:13px; color:#555; line-height:1.6;"></p>
+      </div>
+      <button class="btn btn-line" onclick="sendResultToChat()">💬 診断結果をトークに送る</button>
+      <button class="btn neu-raised" onclick="showScreen('screen-menu')">🌿 最適なケアを相談する</button>
+    </section>
+    <section id="screen-menu" class="screen">
+      <a href="https://lin.ee/o5QFPwc" style="text-decoration:none;"><button class="btn btn-line">💬 チャットで相談する</button></a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" style="text-decoration:none;"><button class="btn neu-raised">📅 オンライン予約をする</button></a>
+      <button class="btn" style="box-shadow:none;" onclick="showScreen('screen-home')">ホームに戻る</button>
+    </section>
+  </div>
+  <script>
+    let userName = "Guest";
+    const questions = ["最近、夜ぐっすり眠れないことが多いですか？", "何に対してもやる気が起きず、億劫に感じますか？", "ちょっとしたことでイライラしたり、涙もろくなったりしますか？", "将来のことや、今の状況に強い不安を感じますか？", "誰にも相談できず、一人で抱え込んでいると感じますか？"];
+    let currentIdx = 0, score = 0;
+    liff.init({ liffId: "2009938117-WSVcVSdL" }).then(() => {
+      if (liff.isLoggedIn()) { liff.getProfile().then(p => { document.getElementById('display-name').innerText = p.displayName; hideLoading(); }); }
+      else { hideLoading(); }
+    }).catch(hideLoading);
+    function hideLoading() { document.getElementById('loading').style.opacity = '0'; setTimeout(() => { document.getElementById('loading').style.display = 'none'; document.getElementById('app').classList.add('loaded'); }, 500); }
+    function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); window.scrollTo(0,0); }
+    function startQuiz() { currentIdx = 0; score = 0; updateQuiz(); showScreen('screen-quiz'); }
+    function updateQuiz() { document.getElementById('question-text').innerText = questions[currentIdx]; }
+    function nextQuestion(s) { score += s; currentIdx++; if (currentIdx < questions.length) updateQuiz(); else showResult(); }
+    function showResult() {
+      const offset = 527.7 - (527.7 * (score / 15));
+      document.getElementById('result-score').innerText = score;
+      setTimeout(() => { document.getElementById('gauge-circle').style.strokeDashoffset = offset; }, 100);
+      let status = score >= 12 ? "かなりお疲れのようです" : (score >= 7 ? "少し疲れが溜まっています" : "落ち着いた状態です");
+      document.getElementById('result-status').innerText = status;
+      showScreen('screen-result');
+    }
+    function sendResultToChat() {
+      const status = document.getElementById('result-status').innerText;
+      liff.sendMessages([{ type: 'text', text: `【こころの診断結果】\n判定：${status}\nスコア：${score} / 15\n\n相談の際はよろしくお願いします。` }]).then(() => alert("トークに送信しました。")).catch(() => alert("失敗しました。"));
+    }
+  </script>
+</body>
+</html>
