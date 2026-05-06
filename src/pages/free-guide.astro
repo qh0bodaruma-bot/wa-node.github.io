@@ -225,7 +225,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 </style>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
+  function setupReveal() {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -235,5 +235,15 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-  });
+  }
+
+  // Handle both initial load and Astro page transitions
+  document.addEventListener('DOMContentLoaded', setupReveal);
+  document.addEventListener('astro:page-load', setupReveal);
 </script>
+
+<noscript>
+  <style>
+    .reveal { opacity: 1 !important; transform: none !important; }
+  </style>
+</noscript>
