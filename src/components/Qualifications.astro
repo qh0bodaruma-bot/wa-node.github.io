@@ -36,5 +36,13 @@
   }
   .qual-list li {
     color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .qual-list li::before {
+    content: "✓";
+    color: var(--accent2);
+    font-weight: 900;
   }
 </style>

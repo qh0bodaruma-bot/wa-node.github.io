@@ -3,6 +3,11 @@ import Qualifications from './Qualifications.astro';
 ---
 <footer class="footer">
   <div class="section-inner">
+    <div class="footer-brand">
+      <div class="logo">和-Node</div>
+      <p class="tagline">心と、技術と、当事者の視点を結ぶ窓口。</p>
+    </div>
+
     <Qualifications />
 
     <div class="footer-grid">
@@ -60,9 +65,25 @@ import Qualifications from './Qualifications.astro';
 
 <style>
   .footer {
-    background-color: var(--color-primary-dark, #1f2a22);
+    background-color: #0a0a0a;
     color: #fff;
-    padding: 80px 0 40px;
+    padding: 100px 0 40px;
+  }
+  .footer-brand {
+    margin-bottom: 60px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .footer-brand .logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
+  }
+  .footer-brand .tagline {
+    font-size: 0.9rem;
+    color: var(--accent2);
+    font-weight: 700;
   }
   .section-inner {
     max-width: 1200px;
@@ -95,6 +116,17 @@ import Qualifications from './Qualifications.astro';
   }
   .footer-col a:hover {
     color: #fff;
+  }
+  .footer-col .qual-list li {
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .qual-list li::before {
+    content: "✓";
+    color: var(--accent2);
+    font-weight: 900;
   }
   .footer-bottom {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
