@@ -14,7 +14,7 @@ body {
 /* Corporate Header */
 .ent-header {
   position: fixed;
-  top: 0;
+  top: 32px;
   left: 0;
   width: 100%;
   height: 80px;
@@ -56,10 +56,10 @@ body {
 /* Full Screen Drawer */
 .ent-drawer {
   position: fixed;
-  top: 0;
+  top: 32px;
   right: -100%;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 32px);
   background: var(--ent-navy);
   z-index: 4000;
   transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -73,7 +73,7 @@ body {
 
 .drawer-close {
   position: absolute;
-  top: 40px;
+  top: 20px;
   right: 60px;
   color: #fff;
   font-size: 40px;

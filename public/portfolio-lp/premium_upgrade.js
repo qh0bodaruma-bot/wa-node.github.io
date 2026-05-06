@@ -49,9 +49,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Portfolio Banner Dynamic text (Optional)
-  const banner = document.querySelector('.portfolio-banner');
-  if (banner) {
-    banner.style.transition = 'all 0.5s';
-  }
 });

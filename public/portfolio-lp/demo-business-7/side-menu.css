@@ -13,10 +13,10 @@ body {
 
 .side-nav {
   width: var(--side-width);
-  height: 100vh;
+  height: calc(100vh - 32px);
   position: fixed;
   left: 0;
-  top: 0;
+  top: 32px;
   background: var(--main-dark);
   color: #fff;
   padding: 40px 0;

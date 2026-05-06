@@ -99,14 +99,3 @@ nav, header.nav-header {
   transform: translateY(0);
 }
 
-/* Portfolio Banner Polish */
-.portfolio-banner {
-  background: rgba(0,0,0,0.85) !important;
-  backdrop-filter: blur(10px) !important;
-  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
-}
-
-.portfolio-banner span {
-  background: var(--p-accent) !important;
-  border-radius: 4px !important;
-}

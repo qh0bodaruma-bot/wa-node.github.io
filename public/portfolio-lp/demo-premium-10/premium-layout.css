@@ -14,7 +14,7 @@ body {
 /* Floating Glass Header */
 .prem-header {
   position: fixed;
-  top: 20px;
+  top: 52px;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
