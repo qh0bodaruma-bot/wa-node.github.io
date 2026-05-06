@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ConsultationFlow from '../components/ConsultationFlow.astro';
 ---
 
 <BaseLayout title="法人メンタル相談窓口｜従業員50名以下の小規模法人向け外部相談窓口｜和-Node" description="従業員50名以下の小規模法人・中小企業向け外部メンタル相談窓口。匿名性に配慮した面談、月次レポート、担当者相談で職場を支えます。">
@@ -15,7 +16,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </p>
         <div class="btns">
           <a class="btn primary" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">LINEで相談する</a>
-          <a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener">フォームで問い合わせ</a>
+          <a class="btn secondary" href="#consultation-flow">無料相談のステップを確認</a>
         </div>
       </div>
     </section>
@@ -182,20 +183,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
-    <section>
-      <div class="wrap card soft-cta">
-        <p class="kicker">Contact</p>
-        <h2>外部相談窓口の導入について相談する</h2>
-        <p>
-          「まだ本格導入するか分からない」という段階でも大丈夫です。
-          現在の状況をお聞きし、必要な事項を一緒に整理します。
-        </p>
-        <div class="btns">
-          <a class="btn primary" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">LINEで相談する</a>
-          <a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener">フォームで問い合わせ</a>
-        </div>
-      </div>
-    </section>
+    <ConsultationFlow />
   </main>
 </BaseLayout>
 

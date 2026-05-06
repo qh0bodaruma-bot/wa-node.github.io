@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ConsultationFlow from '../components/ConsultationFlow.astro';
 ---
 
 <BaseLayout title="LP制作実績ギャラリー｜和-Node" description="和-Nodeが手掛けた全13職種・高品質なランディングページ（LP）制作実績の一覧です。心理学に基づいた導線設計と、最新技術を駆使したプレミアムなデザイン。">
@@ -34,9 +35,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="lp-grid">
         <!-- 1. Medical -->
         <article class="lp-card reveal" data-category="medical">
-          <div class="lp-visual clinic-bg">
+          <div class="lp-visual">
+            <img src="/lp_medical_natural_1778044719266.png" alt="美容クリニック・歯科LP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Medical</span>
-            <div class="lp-icon">🏥</div>
           </div>
           <div class="lp-info">
             <h3>美容クリニック・歯科LP</h3>
@@ -47,9 +48,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 2. Beauty -->
         <article class="lp-card reveal" data-category="medical">
-          <div class="lp-visual beauty-bg">
+          <div class="lp-visual">
+            <img src="/premium_hero_1778044991189.png" alt="エステ・脱毛・サロン系LP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Beauty</span>
-            <div class="lp-icon">✨</div>
           </div>
           <div class="lp-info">
             <h3>エステ・脱毛・サロン系LP</h3>
@@ -60,9 +61,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 3. Gym -->
         <article class="lp-card reveal" data-category="lifestyle">
-          <div class="lp-visual gym-bg">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_gym.png" alt="パーソナルジム・フィットネスLP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Fitness</span>
-            <div class="lp-icon">🏋️‍♂️</div>
           </div>
           <div class="lp-info">
             <h3>パーソナルジム・フィットネスLP</h3>
@@ -73,9 +74,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 4. EC -->
         <article class="lp-card reveal" data-category="lifestyle">
-          <div class="lp-visual ec-bg">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_ec.png" alt="商品販売・EC特化LP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">E-Commerce</span>
-            <div class="lp-icon">📦</div>
           </div>
           <div class="lp-info">
             <h3>商品販売・EC特化LP</h3>
@@ -86,9 +87,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 5. SaaS -->
         <article class="lp-card reveal" data-category="business">
-          <div class="lp-visual saas-bg">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_saas.png" alt="ITツール・SaaSサービスLP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">IT / SaaS</span>
-            <div class="lp-icon">💻</div>
           </div>
           <div class="lp-info">
             <h3>ITツール・SaaSサービスLP</h3>
@@ -99,9 +100,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 6. Real Estate -->
         <article class="lp-card reveal" data-category="business">
-          <div class="lp-visual estate-bg">
+          <div class="lp-visual">
+            <img src="/ent_hero_1778045100067.png" alt="不動産・戸建・マンションLP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Real Estate</span>
-            <div class="lp-icon">🏠</div>
           </div>
           <div class="lp-info">
             <h3>不動産・戸建・マンションLP</h3>
@@ -112,9 +113,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 7. Professional -->
         <article class="lp-card reveal" data-category="business">
-          <div class="lp-visual law-bg">
+          <div class="lp-visual">
+            <img src="/lp_business_natural_1778045618296.png" alt="士業・コンサル・スクールLP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Consulting</span>
-            <div class="lp-icon">💼</div>
           </div>
           <div class="lp-info">
             <h3>士業・コンサル・スクールLP</h3>
@@ -125,9 +126,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 8. Seminar -->
         <article class="lp-card reveal" data-category="lifestyle">
-          <div class="lp-visual seminar-bg">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_seminar.png" alt="投資・教育セミナーLP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Education</span>
-            <div class="lp-icon">📈</div>
           </div>
           <div class="lp-info">
             <h3>投資・教育セミナーLP</h3>
@@ -138,9 +139,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 9. Recruit -->
         <article class="lp-card reveal" data-category="business">
-          <div class="lp-visual recruit-bg">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_recruit.png" alt="採用・リクルーティングLP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Recruit</span>
-            <div class="lp-icon">🤝</div>
           </div>
           <div class="lp-info">
             <h3>採用・リクルーティングLP</h3>
@@ -151,9 +152,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 10. Local -->
         <article class="lp-card reveal" data-category="lifestyle">
-          <div class="lp-visual local-bg">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_cafe.png" alt="地域振興・カフェ・店舗LP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Regional</span>
-            <div class="lp-icon">☕</div>
           </div>
           <div class="lp-info">
             <h3>地域振興・カフェ・店舗LP</h3>
@@ -164,9 +165,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 11. Event -->
         <article class="lp-card reveal" data-category="lifestyle">
-          <div class="lp-visual event-bg">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_event.png" alt="イベント・フェス・期間限定LP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Event</span>
-            <div class="lp-icon">🚀</div>
           </div>
           <div class="lp-info">
             <h3>イベント・フェス・期間限定LP</h3>
@@ -177,9 +178,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 12. Corporate -->
         <article class="lp-card reveal" data-category="business">
-          <div class="lp-visual corporate-bg">
+          <div class="lp-visual">
+            <img src="/lp_lifestyle_natural_1778045763592.png" alt="企業紹介・ブランドLP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Corporate</span>
-            <div class="lp-icon">🏢</div>
           </div>
           <div class="lp-info">
             <h3>企業紹介・ブランドLP</h3>
@@ -190,9 +191,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <!-- 13. Osteopathy -->
         <article class="lp-card reveal" data-category="medical">
-          <div class="lp-visual clinic-bg" style="filter: hue-rotate(45deg);">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_sekkotsu.png" alt="整骨院・鍼灸・整体院LP" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Therapy</span>
-            <div class="lp-icon">💆‍♂️</div>
           </div>
           <div class="lp-info">
             <h3>整骨院・鍼灸・整体院LP</h3>
@@ -200,18 +201,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <a href="/portfolio-lp/lp_sekkotsu.html" class="lp-link">デモを見る →</a>
           </div>
         </article>
-
       </div>
 
-      <!-- Final CTA Section -->
-      <section class="portfolio-cta reveal">
+      <ConsultationFlow />
+
+      <!-- Final CTA Section (Rerouted) -->
+      <section class="portfolio-cta reveal" style="margin-top: 80px;">
         <div class="cta-inner">
           <span class="cta-eyebrow">Ready to Launch?</span>
           <h2>あなたのビジネスを加速させる、<br/>最高の一枚を。</h2>
-          <p>制作のご相談や、どのパッケージが最適かのアドバイスも承っております。</p>
+          <p>まずは無料相談から、最適なプランをご提案します。</p>
           <div class="cta-btns">
-            <a href="/demos" class="btn-secondary">料金・パッケージを見る</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" class="btn-primary" target="_blank">無料相談・見積もり</a>
+            <a href="/demos" class="btn-secondary">パッケージ一覧を見る</a>
+            <a href="#consultation-flow" class="btn-primary">無料相談のステップを確認</a>
           </div>
         </div>
       </section>
@@ -220,7 +222,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-  /* ... existing styles ... */
+  .lp-portfolio-page { padding-bottom: 120px; }
+  .page-header { padding: 120px 0 80px; text-align: center; position: relative; }
+  .eyebrow { font-size: 0.85rem; font-weight: 900; color: #639922; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .page-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 24px; color: #333; }
+  .accent-text { color: #639922; position: relative; }
+  .page-desc { font-size: 1.1rem; color: #666; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+
+  .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
+  .filter-btn { padding: 10px 24px; border-radius: 999px; border: 1px solid #ddd; background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+  .filter-btn.active, .filter-btn:hover { background: #639922; color: #fff; border-color: #639922; }
+
+  .lp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 40px; }
+  .lp-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); border: 1px solid #eee; }
+  .lp-card:hover { transform: translateY(-12px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-color: #639922; }
+
+  .lp-visual { height: 200px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .lp-tag { position: absolute; top: 20px; left: 20px; font-size: 10px; font-weight: 900; background: #fff; padding: 4px 12px; border-radius: 999px; color: #639922; z-index: 2; }
+
+  .lp-info { padding: 32px; }
+  .lp-info h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 12px; color: #333; }
+  .lp-info p { font-size: 0.95rem; color: #666; line-height: 1.6; margin-bottom: 24px; min-height: 3.2em; }
+  .lp-link { font-size: 0.95rem; font-weight: 900; color: #639922; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
+  .lp-link:hover { border-bottom-color: #639922; }
+
   .portfolio-cta { margin-top: 100px; text-align: center; }
   .cta-inner {
     padding: 80px 40px;
@@ -241,57 +266,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     font-size: 15px;
     text-decoration: none;
     transition: 0.3s;
+    display: inline-block;
   }
-  .btn-primary { background: #639922; color: #fff; box-shadow: 0 10px 30px rgba(99, 153, 34, 0.3); }
+  .btn-primary { background: #639922 !important; color: #fff !important; box-shadow: 0 10px 30px rgba(99, 153, 34, 0.3); }
   .btn-secondary { background: #fff; color: #333; border: 1px solid #ddd; }
   
   .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(99, 153, 34, 0.4); }
   .btn-secondary:hover { background: #f9f9f9; transform: translateY(-3px); }
-
-  @media (max-width: 600px) {
-    .cta-inner h2 { font-size: 1.8rem; }
-    .cta-btns { flex-direction: column; }
-    .btn-primary, .btn-secondary { width: 100%; }
-  }
-  .lp-portfolio-page { padding-bottom: 120px; }
-  .page-header { padding: 120px 0 80px; text-align: center; position: relative; }
-  .eyebrow { font-size: 0.85rem; font-weight: 900; color: #639922; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
-  .page-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 24px; color: #333; }
-  .accent-text { color: #639922; position: relative; }
-  .page-desc { font-size: 1.1rem; color: #666; line-height: 1.8; max-width: 800px; margin: 0 auto; }
-
-  .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
-  .filter-btn { padding: 10px 24px; border-radius: 999px; border: 1px solid #ddd; background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; }
-  .filter-btn.active, .filter-btn:hover { background: #639922; color: #fff; border-color: #639922; }
-
-  .lp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 40px; }
-  .lp-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); border: 1px solid #eee; }
-  .lp-card:hover { transform: translateY(-12px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-color: #639922; }
-
-  .lp-visual { height: 200px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .lp-tag { position: absolute; top: 20px; left: 20px; font-size: 10px; font-weight: 900; background: #fff; padding: 4px 12px; border-radius: 999px; color: #639922; }
-  .lp-icon { font-size: 80px; opacity: 0.8; transition: 0.4s; }
-  .lp-card:hover .lp-icon { transform: scale(1.2); }
-
-  .lp-info { padding: 32px; }
-  .lp-info h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 12px; color: #333; }
-  .lp-info p { font-size: 0.95rem; color: #666; line-height: 1.6; margin-bottom: 24px; min-height: 3.2em; }
-  .lp-link { font-size: 0.95rem; font-weight: 900; color: #639922; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
-  .lp-link:hover { border-bottom-color: #639922; }
-
-  /* Visual BG Colors */
-  .clinic-bg { background: linear-gradient(135deg, #f0f7ff, #e6efff); }
-  .beauty-bg { background: linear-gradient(135deg, #fff0f5, #ffe4e1); }
-  .gym-bg { background: linear-gradient(135deg, #f5f5f5, #e0e0e0); }
-  .ec-bg { background: linear-gradient(135deg, #fffaf0, #fdf5e6); }
-  .saas-bg { background: linear-gradient(135deg, #f4faff, #eef7ff); }
-  .estate-bg { background: linear-gradient(135deg, #f5f5f5, #ebebeb); }
-  .law-bg { background: linear-gradient(135deg, #f0f2f5, #e8eaed); }
-  .seminar-bg { background: linear-gradient(135deg, #fafff0, #f4ffe6); }
-  .recruit-bg { background: linear-gradient(135deg, #f0f7ff, #e6f2ff); }
-  .local-bg { background: linear-gradient(135deg, #fffdf0, #fff9e6); }
-  .event-bg { background: linear-gradient(135deg, #f5f0ff, #eee6ff); }
-  .corporate-bg { background: linear-gradient(135deg, #f8f9fa, #f1f3f5); }
 
   .bg-decoration { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #fdfaf7; overflow: hidden; }
   .grid-overlay { position: absolute; width: 100%; height: 100%; background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 30px 30px; }
@@ -299,9 +280,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .glow-1 { width: 500px; height: 500px; background: #e8f0e5; top: -10%; right: -10%; }
   .glow-2 { width: 400px; height: 400px; background: #f3e9d2; bottom: -10%; left: -10%; }
 
+  .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
   @media (max-width: 600px) {
     .page-header { padding: 80px 20px 40px; }
     .lp-grid { grid-template-columns: 1fr; gap: 24px; }
+    .cta-inner h2 { font-size: 1.8rem; }
+    .cta-btns { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; box-sizing: border-box; }
   }
 </style>
 
@@ -319,11 +306,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         lpCards.forEach(card => {
           if (filter === 'all' || card.dataset.category === filter) {
             card.style.display = 'block';
+            setTimeout(() => card.classList.add('visible'), 50);
           } else {
             card.style.display = 'none';
+            card.classList.remove('visible');
           }
         });
       });
     });
+
+    // Reveal Logic
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   });
 </script>

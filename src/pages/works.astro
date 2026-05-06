@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ConsultationFlow from '../components/ConsultationFlow.astro';
 ---
 
 <BaseLayout title="制作実績・デモ｜和-Node" description="心理導線Web制作、診断ツール開発、KDP出版、LINEミニアプリなど、和-Nodeの幅広い制作実績とインタラクティブなデモアプリを紹介します。">
@@ -40,9 +41,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Category: Tool -->
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
-            <div class="card-visual tool-bg">
+            <div class="card-visual tool-bg" style="overflow: hidden;">
+              <img src="/works_diagnosis_real_1778051416753.png" alt="こころの疲労度診断" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Diagnostic Tool</span>
-              <div class="card-icon">🧠</div>
             </div>
           </div>
           <div class="card-body">
@@ -59,9 +60,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
-            <div class="card-visual tool-bg">
+            <div class="card-visual tool-bg" style="overflow: hidden;">
+              <img src="/works_accessibility_real_1778051441045.png" alt="バリアフリー診断" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Diagnostic Tool</span>
-              <div class="card-icon">♿</div>
             </div>
           </div>
           <div class="card-body">
@@ -78,9 +79,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
-            <div class="card-visual tool-bg">
+            <div class="card-visual tool-bg" style="overflow: hidden;">
+              <img src="/works_seo_real_1778051460597.png" alt="SEO内部対策診断" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Diagnostic Tool</span>
-              <div class="card-icon">🔍</div>
             </div>
           </div>
           <div class="card-body">
@@ -97,9 +98,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
-            <div class="card-visual tool-bg">
+            <div class="card-visual tool-bg" style="overflow: hidden;">
+              <img src="/lp_business_natural_1778045618296.png" alt="LP構成案作成ウィザード" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Direction Tool</span>
-              <div class="card-icon">✍️</div>
             </div>
           </div>
           <div class="card-body">
@@ -116,9 +117,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
-            <div class="card-visual pricing-bg">
+            <div class="card-visual pricing-bg" style="overflow: hidden;">
+              <img src="/works_seo_real_1778051460597.png" alt="料金シミュレーター" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Pricing Tool</span>
-              <div class="card-icon">⚖️</div>
             </div>
           </div>
           <div class="card-body">
@@ -136,15 +137,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Category: Web (Expanded Premium Gallery) -->
         <article class="work-card reveal" data-category="web">
           <div class="card-visual-wrap">
-            <div class="card-visual clinic-bg">
+            <div class="card-visual">
+              <img src="/lp_medical_natural_1778044719266.png" alt="クリニック・医療系LP" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Medical / Clinic</span>
-              <div class="card-icon">🏥</div>
             </div>
           </div>
           <div class="card-body">
             <div class="expert-label">Expert Opinion</div>
             <h3>クリニック・医療系LP</h3>
-            <p class="card-text">あああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+            <p class="card-text">美容クリニック、歯科医院、心療内科など、医療・福祉領域に特化した信頼感のあるLP。法的遵守（薬機法等）と患者様の安心を両立した設計です。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
               <a href="/portfolio-lp/lp_clinic.html" class="premium-link">作品を見る</a>
@@ -154,15 +155,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <article class="work-card reveal" data-category="web">
           <div class="card-visual-wrap">
-            <div class="card-visual beauty-bg">
+            <div class="card-visual">
+              <img src="/premium_hero_1778044991189.png" alt="美容・エステ・サロン系LP" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Beauty / Salon</span>
-              <div class="card-icon">✨</div>
             </div>
           </div>
           <div class="card-body">
             <div class="expert-label">Expert Opinion</div>
             <h3>美容・エステ・サロン系LP</h3>
-            <p class="card-text">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+            <p class="card-text">エステ、ネイル、美容室。憧れと親しみやすさを視覚的に表現し、初回来店への心理的ハードルを下げる導線を構築します。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#Visual Art</span><span>#CVR</span></div>
               <a href="/portfolio-lp/lp_beauty.html" class="premium-link">作品を見る</a>
@@ -172,15 +173,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <article class="work-card reveal" data-category="web">
           <div class="card-visual-wrap">
-            <div class="card-visual estate-bg">
+            <div class="card-visual">
+              <img src="/ent_hero_1778045100067.png" alt="不動産・建設・リフォームLP" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Real Estate</span>
-              <div class="card-icon">🏠</div>
             </div>
           </div>
           <div class="card-body">
             <div class="expert-label">Expert Opinion</div>
             <h3>不動産・建設・リフォームLP</h3>
-            <p class="card-text">ううううううううううううううううううううううううううううううううううううううううううううううううううう。</p>
+            <p class="card-text">不動産、リフォーム、建築。大きな決断を支える安心感と、清潔感のある洗練されたレイアウトで、資料請求・成約へと導きます。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#Architecture</span><span>#Safety</span></div>
               <a href="/portfolio-lp/lp_realestate.html" class="premium-link">作品を見る</a>
@@ -190,15 +191,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <article class="work-card reveal" data-category="web">
           <div class="card-visual-wrap">
-            <div class="card-visual law-bg">
+            <div class="card-visual">
+              <img src="/lp_business_natural_1778045618296.png" alt="士業・コンサル・教育系LP" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Professional Services</span>
-              <div class="card-icon">💼</div>
             </div>
           </div>
           <div class="card-body">
             <div class="expert-label">Expert Opinion</div>
             <h3>士業・コンサル・教育系LP</h3>
-            <p class="card-text">えええええええええええええええええええええええええええええええええええええええええええええええええええ。</p>
+            <p class="card-text">士業、コンサルタント、教育。専門性と権威性を明確に伝えつつ、相談しやすさを感じさせる心理学的配色と構成を採用しています。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#Identity</span><span>#Strategy</span></div>
               <a href="/portfolio-lp/lp_lawyer.html" class="premium-link">作品を見る</a>
@@ -208,15 +209,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <article class="work-card reveal" data-category="web">
           <div class="card-visual-wrap">
-            <div class="card-visual corporate-bg">
+            <div class="card-visual">
+              <img src="/lp_lifestyle_natural_1778045763592.png" alt="コーポレート・企業サイトLP" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag">Corporate</span>
-              <div class="card-icon">🏢</div>
             </div>
           </div>
           <div class="card-body">
             <div class="expert-label">Expert Opinion</div>
             <h3>コーポレート・企業サイトLP</h3>
-            <p class="card-text">おおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおお。</p>
+            <p class="card-text">企業サイトの信頼性を高めるブランディングLP。CI（企業理念）を尊重しつつ、見やすく使いやすいモダンなUIを提供します。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#Branding</span><span>#Corporate</span></div>
               <a href="/portfolio-lp/lp_corporate.html" class="premium-link">作品を見る</a>
@@ -227,15 +228,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Category: KDP -->
         <article class="work-card reveal" data-category="kdp">
           <div class="card-visual-wrap">
-            <div class="card-visual kdp-bg">
-              <span class="category-tag">Kindle KDP</span>
-              <div class="card-icon">📚</div>
-            </div>
+              <img src="/works_kdp_real_1778051483386.png" alt="Amazon KDP 出版実績" style="width: 100%; height: 100%; object-fit: cover; opacity: 1;" />
           </div>
           <div class="card-body">
             <div class="expert-label">Global Design</div>
             <h3>Amazon KDP 出版実績</h3>
-            <p class="card-text">浮世絵や鳥獣戯画をモチーフにした、海外市場向け（US/FR）の書籍制作。表紙から内部構成まで、和の美しさを世界へ届けています。</p>
+            <p class="card-text">浮世絵や鳥獣戯画をモチーフにした、海外市場向け（US/FR）の書籍制作。表紙から内部構成まで、和の美しさを世界へ届けています。価格改定：$12.99 / €12.99 対応済み。</p>
             <div class="card-footer">
               <span class="tech-tag">Global</span>
               <span class="tech-tag">Publishing</span>
@@ -247,10 +245,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Category: System -->
         <article class="work-card reveal" data-category="system">
           <div class="card-visual-wrap">
-            <div class="card-visual">
-              <span class="category-tag">LINE Mini App</span>
-              <div class="card-icon">💬</div>
-            </div>
+              <img src="/works_system_real_1778051504514.png" alt="LINE カウンセリング予約システム" style="width: 100%; height: 100%; object-fit: cover;" />
           </div>
           <div class="card-body">
             <div class="expert-label">System Build</div>
@@ -265,10 +260,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
         <article class="work-card reveal" data-category="system">
           <div class="card-visual-wrap">
-            <div class="card-visual">
-              <span class="category-tag">Business Tool</span>
-              <div class="card-icon">🤖</div>
-            </div>
+              <img src="/works_system_real_1778051504514.png" alt="AI・GAS 業務自動化事例" style="width: 100%; height: 100%; object-fit: cover;" />
           </div>
           <div class="card-body">
             <div class="expert-label">System Build</div>
@@ -284,18 +276,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
 
-    <!-- CTA Section -->
-    <section class="works-cta">
-      <div class="container glass-card">
-        <div class="cta-decoration"></div>
-        <h2>あなたのビジョンを、<br/>確かな形に。</h2>
-        <p>診断ツールから大規模サイトまで、幅広く対応可能です。<br/>まずは今の想いをお聞かせください。</p>
-        <div class="btns">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="primary-btn">無料で相談する</a>
-          <a href="/simulator" class="secondary-btn">費用を計算する</a>
-        </div>
-      </div>
-    </section>
+    <ConsultationFlow />
 
     <!-- Standard Packages CTA -->
     <section class="packages-cta reveal">

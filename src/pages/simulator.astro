@@ -11,7 +11,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 
   <div class="demo-banner">
-    <strong>【制作例サンプル】</strong> このような診断・見積ツールを、あなたのサイトに導入できます。 <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">無料相談はこちら</a>
+    <strong class="banner-title">【制作例サンプル】</strong> このような診断・見積ツールを、あなたのサイトに導入できます。 <a href="/#consultation-flow" class="banner-cta">無料相談はこちら</a>
   </div>
 
   <main class="sim-container">
@@ -37,7 +37,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <label class="choice-card">
               <input type="radio" name="type" value="30000" data-days="2" data-label="シンプルLP" />
               <div class="card-inner">
-                <div class="icon">📄</div>
+                <div class="icon-wrap" style="height: 80px; margin-bottom: 15px; border-radius: 12px; overflow: hidden;">
+                  <img src="/portfolio-lp/images/hero_event.png" alt="Simple LP" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
                 <div class="info">
                   <b>シンプルLP</b>
                   <span>1ページ構成の基本LP</span>
@@ -48,7 +50,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <label class="choice-card selected">
               <input type="radio" name="type" value="50000" data-days="3" data-label="シンプルHP" checked />
               <div class="card-inner">
-                <div class="icon">🏢</div>
+                <div class="icon-wrap" style="height: 80px; margin-bottom: 15px; border-radius: 12px; overflow: hidden;">
+                  <img src="/portfolio-lp/images/hero_corporate.png" alt="Simple HP" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
                 <div class="info">
                   <b>シンプルHP</b>
                   <span>名刺代わりの標準サイト</span>
@@ -59,7 +63,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <label class="choice-card">
               <input type="radio" name="type" value="60000" data-days="5" data-label="心理導線LP" />
               <div class="card-inner">
-                <div class="icon">🧠</div>
+                <div class="icon-wrap" style="height: 80px; margin-bottom: 15px; border-radius: 12px; overflow: hidden;">
+                  <img src="/portfolio-lp/images/hero_clinic.png" alt="Psychology LP" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
                 <div class="info">
                   <b>心理導線LP</b>
                   <span>獲得を最大化する構成</span>
@@ -70,7 +76,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <label class="choice-card">
               <input type="radio" name="type" value="120000" data-days="8" data-label="心理導線HP" />
               <div class="card-inner">
-                <div class="icon">💎</div>
+                <div class="icon-wrap" style="height: 80px; margin-bottom: 15px; border-radius: 12px; overflow: hidden;">
+                  <img src="/portfolio-lp/images/hero_beauty.png" alt="Psychology HP" style="width: 100%; height: 100%; object-fit: cover;" />
+                </div>
                 <div class="info">
                   <b>心理導線HP</b>
                   <span>信頼を構築する複数P</span>
@@ -198,7 +206,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <div class="cta-actions">
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="primary-btn">この内容で無料相談</a>
+            <a href="#consultation-flow" class="primary-btn">無料相談のステップを確認</a>
             <a href="/lp_wizard" class="text-btn">さらに詳細な構成案を作成 →</a>
           </div>
           
@@ -206,6 +214,35 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </aside>
     </div>
+
+    <!-- Consultation Flow Section -->
+    <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 80px; scroll-margin-top: 40px; padding: 40px; background: rgba(255,255,255,0.8); border: 1px solid var(--sim-accent); border-radius: 32px;">
+      <div class="bonus-tag" style="background: var(--sim-accent); color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 900; margin-bottom: 20px; display: inline-block;">🎁 シミュレーター利用特典</div>
+      <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; color: var(--text);">試算結果を元に、最適なプランを具体化します</h3>
+      <p style="font-size: 1rem; color: #555; line-height: 1.8; margin-bottom: 30px;">
+        シミュレーションお疲れ様でした。算出された概算を元に、実際の制作内容や優先順位を整理し、より正確な見積もりを提示させていただきます。<br/>
+        通常の30分無料相談を、<strong>「60分無料」</strong> に拡大させていただきます。
+      </p>
+
+      <div style="background: rgba(255,255,255,0.6); border: 1px solid var(--sim-accent); border-radius: 20px; padding: 30px; margin-bottom: 30px; text-align: left;">
+        <h4 style="margin-top: 0; color: var(--sim-accent); font-size: 1.1rem; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 10px; margin-bottom: 15px;">無料相談のステップ</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; color: #444;">
+          <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+            <span style="background: var(--sim-accent); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem; font-weight: 800;">1</span>
+            <span><strong>初回30分無料：</strong> 現状のヒアリングと課題の整理（どなたでも）</span>
+          </li>
+          <li style="display: flex; align-items: flex-start; gap: 10px;">
+            <span style="background: var(--sim-accent); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem; font-weight: 800;">2</span>
+            <span><strong>シミュレーター特典＋30分：</strong> 試算結果に基づいた具体的なプラン構築アドバイス（1回限り）</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cta-btns" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+        <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="primary-btn" style="text-decoration: none; width: fit-content; padding-left: 40px; padding-right: 40px;">LINEで60分相談を予約する</a>
+        <a href="/#consultation-flow" rel="noopener" class="primary-btn" style="background: none; border: 2px solid var(--sim-accent); color: var(--sim-accent); width: fit-content; padding-left: 40px; padding-right: 40px; text-decoration: none;">無料相談のステップを確認</a>
+      </div>
+    </section>
   </main>
 </BaseLayout>
 

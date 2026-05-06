@@ -18,6 +18,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </div>
 
+    <!-- Why Coloring? Art Therapy Section -->
+    <section class="kdp-concept-section reveal">
+      <div class="section-container">
+        <div class="concept-grid">
+          <div class="concept-text">
+            <span class="concept-badge">Why Coloring?</span>
+            <h2>なぜ「塗り絵」なのか。</h2>
+            <p class="concept-lead">
+              塗り絵は、単なる趣味の枠を超えた「アートセラピー（芸術療法）」の一種として、世界中でその効果が認められています。
+            </p>
+            <div class="benefit-cards">
+              <div class="benefit-card">
+                <span class="icon">🧘</span>
+                <h4>マインドフルネスの促進</h4>
+                <p>色を選び、塗るという行為に没頭することで、脳が「今、ここ」に集中する瞑想に近い状態となり、不安やストレスを和らげます。</p>
+              </div>
+              <div class="benefit-card">
+                <span class="icon">🧠</span>
+                <h4>右脳の活性化と感情の整理</h4>
+                <p>言葉にできない感情を「色」として表現することで、心の奥底にあるストレスが解放（カタルシス）されます。</p>
+              </div>
+            </div>
+            <p class="concept-final">
+              心理カウンセラーとして活動する私が塗り絵を手がけるのは、日本の伝統美に触れながら、誰もが手軽に「心の静寂」を取り戻せる時間を届けるため。和-NodeのKDP出版は、デザインと心理学の融合から生まれています。
+            </p>
+          </div>
+          <div class="concept-visual">
+            <div class="visual-accent"></div>
+            <img src="/works_mental_real_1778051421272.png" alt="アートセラピーのイメージ" class="concept-img" />
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Section 1: 江戸旅行記シリーズ (The Premium Collection) -->
     <section class="kdp-section premium-dark">
       <div class="section-container">
@@ -252,6 +286,17 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
+    <section class="kdp-cta reveal" style="text-align: center; padding: 100px 20px; background: rgba(255,255,255,0.5);">
+      <div class="section-container" style="max-width: 800px; margin: 0 auto;">
+        <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 24px;">あなたのコンテンツを、<br/>世界へ届けるお手伝いを。</h2>
+        <p style="font-size: 1.1rem; color: var(--muted); margin-bottom: 40px; line-height: 1.8;">
+          表紙デザインから出版手続きのサポートまで、KDP出版に関するご相談を承ります。<br/>
+          まずは最大60分の無料相談（特典利用時）で、あなたの出版計画をお聞かせください。
+        </p>
+        <a href="/#consultation-flow" class="store-link" style="padding: 20px 60px; font-size: 1.1rem; border-width: 2px;">無料相談のステップを確認</a>
+      </div>
+    </section>
+
     <div class="back-to-top">
       <a href="/" class="btn-back">← ページトップへ戻る</a>
     </div>
@@ -282,7 +327,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     .kdp-section { padding: 100px 0; overflow: hidden; }
     .section-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+    /* Concept Section Styling */
+    .kdp-concept-section { padding: 80px 0; background: #fff; position: relative; }
+    .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .concept-badge { font-size: 0.7rem; font-weight: 900; color: #fff; background: var(--gold-dark); padding: 4px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.2em; display: inline-block; margin-bottom: 20px; }
+    .concept-text h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 24px; color: var(--ink); }
+    .concept-lead { font-size: 1.25rem; font-weight: 700; color: var(--gold-dark); line-height: 1.6; margin-bottom: 40px; }
+    .benefit-cards { display: grid; gap: 24px; margin-bottom: 40px; }
+    .benefit-card { background: var(--paper); padding: 24px; border-radius: 20px; border-left: 4px solid var(--gold); }
+    .benefit-card h4 { font-size: 1.1rem; font-weight: 900; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--ink); }
+    .benefit-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin: 0; }
+    .concept-final { font-size: 1rem; color: var(--muted); line-height: 1.8; font-style: italic; }
     
+    .concept-visual { position: relative; }
+    .concept-img { width: 100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); position: relative; z-index: 2; }
+    .visual-accent { position: absolute; width: 80%; height: 80%; background: var(--gold); border-radius: 30px; top: -10%; right: -10%; z-index: 1; opacity: 0.2; }
+
     .section-title { font-size: 2.2rem; font-weight: 900; text-align: center; margin-bottom: 15px; position: relative; }
     .section-concept { text-align: center; font-size: 1rem; color: var(--muted); margin-bottom: 60px; }
 

@@ -10,7 +10,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 
   <div class="demo-banner">
-    <strong>【制作例サンプル】</strong> これは和-Nodeの技術を体験できるデモアプリです。このようなカスタムツールの導入をご検討中の方は <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">こちらから無料相談</a>
+    <strong class="banner-title">【制作例サンプル】</strong> これは和-Nodeの技術を体験できるデモアプリです。このようなカスタムツールの導入をご検討中の方は <a href="/#consultation-flow" class="banner-cta">こちらから無料相談</a>
   </div>
 
   <main class="quiz-container">
@@ -118,18 +118,33 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </div>
         
-        <section class="wanode-cta-box glass-card">
+        <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px;">
           <div class="bonus-tag">🎁 診断完了特典</div>
           <h3>初回カウンセリングを30分延長いたします</h3>
           <p>
             診断お疲れ様でした。この結果画面をスクリーンショットして公式LINEへ送るか、合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br/>
             通常の30分無料相談を、<strong>「60分無料」</strong> に拡大させていただきます。
           </p>
-          <div class="cta-btns">
-            <a href="mailto:contacts@wa-node.com" class="primary-btn">メールで相談する</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="secondary-btn">フォームで相談する</a>
+          
+          <div style="background: rgba(255,255,255,0.5); border: 1px solid var(--accent); border-radius: 20px; padding: 30px; margin: 30px 0; text-align: left;">
+            <h4 style="margin-top: 0; color: var(--accent);">無料相談のステップ</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem;">
+              <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                <span style="background: var(--accent); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; font-weight: 800;">1</span>
+                <span><strong>初回30分無料：</strong> 現状のヒアリングと整理（どなたでも）</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 10px;">
+                <span style="background: var(--accent); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; font-weight: 800;">2</span>
+                <span><strong>診断特典＋30分：</strong> 診断結果を元にした具体的なアドバイス（お一人様1回限り）</span>
+              </li>
+            </ul>
           </div>
-          <button class="retry-btn" id="retryBtn">もう一度診断する</button>
+
+          <div class="cta-btns">
+            <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="primary-btn" style="text-decoration: none;">LINEで60分相談を予約する</a>
+            <a href="/#consultation-flow" class="secondary-btn">無料相談のステップを確認</a>
+          </div>
+          <button class="retry-btn" id="retryBtn" style="margin-top: 20px;">もう一度診断する</button>
         </section>
       </div>
 

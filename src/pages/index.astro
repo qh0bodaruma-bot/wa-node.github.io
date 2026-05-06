@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ConsultationFlow from '../components/ConsultationFlow.astro';
 ---
 
 <BaseLayout>
@@ -20,7 +21,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <span>JADP認定資格保有</span>
           </div>
           <div class="btns" style="justify-content: flex-start;">
-            <a class="btn" href="#consultation-flow">まずは60分相談する</a>
+            <a class="btn" href="/contact">まずは60分相談する</a>
             <a class="btn secondary" href="/simulator">制作費をシミュレート</a>
           </div>
         </div>
@@ -110,7 +111,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <p>仕事・家庭の悩みから、企業の外部相談窓口まで。カウンセリング視点で現状を整理し、一歩目を支援します。</p>
             <div style="font-weight:bold; margin-bottom:10px; color:var(--accent);">個人 初回 30分無料</div>
             <p class="small" style="margin-bottom:15px;">診断ツール利用でさらに30分無料プレゼント</p>
-            <a href="/mental_care">疲労度をセルフチェック →</a>
+            <a href="/contact" class="nav-cta">相談する</a>
           </div>
           <div class="card">
             <span class="card-tag">Maintenance</span>
@@ -224,34 +225,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
-    <section class="section" id="consultation-flow">
-      <div class="section-inner">
-        <div class="section-title">
-          <span class="eyebrow">Consultation Flow</span>
-          <h2>無料相談を最大限に活用するために</h2>
-        </div>
-        <div class="philosophy-card">
-          <div class="philosophy-content">
-            <p>和-Nodeでは、初めての方でも安心してご相談いただけるよう、最大60分の無料相談枠をご用意しています。</p>
-            <div class="ba-grid">
-              <div class="ba-card">
-                <h3>① 初回30分無料</h3>
-                <p>すべての方に、最初の30分間を無料でご提供。現状の整理や解決の方向性をアドバイスします。</p>
-              </div>
-              <div class="ba-card after">
-                <h3>② 診断利用で＋30分</h3>
-                <p>事前にいずれかの診断アプリをご利用いただくと、さらに30分延長（計60分）が無料になります。</p>
-                <a href="/works" class="inline-link" style="display:inline-block; margin-top:10px; font-weight:800; color:var(--accent); text-decoration:underline;">→ 診断アプリを試して特典を受ける</a>
-                <p class="small" style="font-size: 0.8rem; margin-top: 10px; color: var(--accent);">※診断アプリ利用による30分延長特典は、お一人様1回限りの適用となります。</p>
-              </div>
-            </div>
-            <div class="btns" style="margin-top: 40px; justify-content: center;">
-              <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">内容を理解して相談を申し込む</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    <ConsultationFlow id="contact" />
 
     <section class="section" id="pricing">
       <div class="section-inner">
@@ -308,19 +282,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
     </section>
 
-    <section class="section" id="contact">
-      <div class="section-inner" style="text-align: center;">
-        <div class="section-title">
-          <span class="eyebrow">Contact</span>
-          <h2>今困っていることを、そのまま送ってください。</h2>
-        </div>
-        <p>文章がまとまっていなくても大丈夫です。今の状態から一緒に整理しましょう。</p>
-        <div class="btns">
-          <a class="btn" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">LINEで相談する</a>
-          <a class="btn secondary" href="#consultation-flow">フォームから60分相談する</a>
-        </div>
-      </div>
-    </section>
   </main>
 </BaseLayout>
 

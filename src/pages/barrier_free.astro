@@ -10,7 +10,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 
   <div class="demo-banner">
-    <strong>【制作例サンプル】</strong> これは和-Nodeの技術を体験できるデモアプリです。このようなカスタムツールの導入をご検討中の方は <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">こちらから無料相談</a>
+    <strong class="banner-title">【制作例サンプル】</strong> これは和-Nodeの技術を体験できるデモアプリです。このようなカスタムツールの導入をご検討中の方は <a href="/#consultation-flow" class="banner-cta">こちらから無料相談</a>
   </div>
 
   <main class="quiz-container">
@@ -77,17 +77,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
           <div class="wanode-cta-box glass-card">
             <div class="bonus-tag">🎁 診断完了特典</div>
-            <h3>バリアフリー改善相談を承ります</h3>
-            <p>
-              ハード面（段差等）の改修が難しくても、ソフト面（情報発信や声かけ）で解決できることはたくさんあります。<br/>
-              お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えいただくと、<br/>
-              <strong>通常の初回30分無料相談を「60分」に拡大</strong> してアドバイスさせていただきます。
+          <div id="consultation-flow" class="result-cta slide-in" style="scroll-margin-top: 40px;">
+            <div class="bonus-tag" style="display:inline-block; background: var(--accent-grad); color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px;">🎁 診断完了特典</div>
+            <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 20px;">「60分無料」の個別アドバイスを承ります</h3>
+            <p style="font-size: 1rem; color: #555; line-height: 1.8; margin-bottom: 30px;">
+              診断お疲れ様でした。ハード面（段差等）の改修が難しくても、ソフト面（情報発信や声かけ）で解決できることはたくさんあります。<br/>
+              この結果を元にした具体的な改善策のご相談を、<strong>通常の30分から「60分無料」に拡大</strong>して承ります。
             </p>
-            <div class="cta-btns">
-              <a href="mailto:contacts@wa-node.com" class="primary-btn">メールで相談する</a>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="secondary-btn">フォームで相談する</a>
+
+            <div style="background: rgba(255,255,255,0.6); border: 1px solid rgba(74, 103, 65, 0.2); border-radius: 20px; padding: 30px; margin-bottom: 30px; text-align: left;">
+              <h4 style="margin-top: 0; color: #4a6741; font-size: 1.1rem; border-bottom: 1px solid rgba(74, 103, 65, 0.1); padding-bottom: 10px; margin-bottom: 15px;">無料相談のステップ</h4>
+              <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; color: #444;">
+                <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                  <span style="background: #4a6741; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem; font-weight: 800;">1</span>
+                  <span><strong>初回30分無料：</strong> 現状のヒアリングと課題の整理</span>
+                </li>
+                <li style="display: flex; align-items: flex-start; gap: 10px;">
+                  <span style="background: #4a6741; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem; font-weight: 800;">2</span>
+                  <span><strong>診断特典＋30分：</strong> 診断結果を深掘りした具体的な対策案（1回限り）</span>
+                </li>
+              </ul>
             </div>
-            <button class="retry-btn" id="retryBtn">もう一度診断する</button>
+
+            <div class="cta-btns" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+              <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="primary-btn" style="padding: 16px 32px; background: var(--accent-grad); color: #fff; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: 0.95rem; box-shadow: 0 10px 20px rgba(74, 103, 65, 0.2);">LINEで60分相談を予約する</a>
+              <a href="/#consultation-flow" class="secondary-btn" style="padding: 16px 32px; border: 1px solid #4a6741; color: #4a6741; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: 0.95rem;">無料相談のステップを確認</a>
+            </div>
+            <button class="retry-btn" id="retryBtn" style="margin-top: 30px; background: none; border: none; color: #888; font-size: 0.9rem; cursor: pointer; text-decoration: underline;">もう一度診断する</button>
+          </div>
           </div>
         </div>
       </div>

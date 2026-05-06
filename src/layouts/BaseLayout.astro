@@ -1,16 +1,21 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import '../styles/global.css';
 
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  url?: string;
 }
 
 const { 
   title = "和-Node｜車いすSE×心理カウンセラーの心理導線Web制作・AI活用・メンタル支援", 
-  description = "和-Nodeは、車いすSE×心理カウンセラーが運営する、心理導線Web制作・AI活用相談・ICT支援・カウンセリング・法人メンタル窓口の相談窓口です。" 
+  description = "和-Nodeは、車いすSE×心理カウンセラーが運営する、心理導線Web制作・AI活用相談・ICT支援・カウンセリング・法人メンタル窓口の相談窓口です。",
+  image = "/images/ogp-main.png",
+  url = "https://wa-node.com"
 } = Astro.props;
 ---
 
@@ -23,9 +28,24 @@ const {
     <meta name="description" content={description} />
     <link rel="icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.url)} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.url)} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet" />
+    <GoogleAnalytics />
   </head>
   <body>
     <Header />

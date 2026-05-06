@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="お問い合わせ・無料相談｜和-Node" description="心理導線Web制作、AI活用、カウンセリングに関するお問い合わせ・無料相談はこちらから。お客様の課題に寄り添い、最適な解決策をご提案します。">
+  <main class="contact-page">
+    <header class="contact-header">
+      <div class="container">
+        <span class="eyebrow">Contact</span>
+        <h1>心と技術を、<br/><span class="accent-text">結ぶ窓口。</span></h1>
+        <p class="lead">制作のご依頼、AI活用の相談、法人メンタル支援など、<br/>どのような内容でもお気軽にお聞かせください。</p>
+      </div>
+    </header>
+
+    <div class="container">
+      <div class="contact-grid">
+        <!-- Info Column -->
+        <aside class="contact-info">
+          <div class="info-card">
+            <h3>ご相談の前に</h3>
+            <p>和-Nodeでは、単なる制作作業ではなく、お客様の「想い」と「ビジネスの成果」を繋ぐことを大切にしています。</p>
+            <ul class="benefit-list">
+              <li><span>初回最大60分の無料相談（特典利用時）</span></li>
+              <li><span>心理学的知見に基づくお悩み整理</span></li>
+              <li><span>強引な勧誘は一切ありません</span></li>
+            </ul>
+          </div>
+
+          <div class="line-card">
+            <h3>LINEでのご相談</h3>
+            <p>「まずはチャットで軽く聞きたい」という方は、公式LINEもご利用いただけます。</p>
+            <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="line-btn">
+              <img src="https://vignette.wikia.nocookie.net/line/images/b/bb/Line_logo.png/revision/latest?cb=20150524021545" alt="LINE" class="line-icon" style="filter: brightness(0) invert(1); width: 24px; height: 24px;" />
+              LINEで相談する
+            </a>
+          </div>
+        </aside>
+
+        <!-- Form Column -->
+        <section class="form-section">
+          <div class="glass-panel">
+            <form action="https://formspree.io/f/mqakvjge" method="POST" class="contact-form">
+              <input type="hidden" name="_next" value="https://wa-node.com/thanks" />
+              <div class="form-group">
+                <label for="name">お名前 <span class="required">必須</span></label>
+                <input type="text" id="name" name="name" required placeholder="和 太郎" />
+              </div>
+
+              <div class="form-group">
+                <label for="email">メールアドレス <span class="required">必須</span></label>
+                <input type="email" id="email" name="email" required placeholder="example@wa-node.com" />
+              </div>
+
+              <div class="form-group">
+                <label for="category">ご相談内容 <span class="required">必須</span></label>
+                <select id="category" name="category" required>
+                  <option value="" disabled selected>選択してください</option>
+                  <option value="web">心理導線Web・LP制作</option>
+                  <option value="ai">AI活用・業務効率化</option>
+                  <option value="counseling">カウンセリング・メンタル支援</option>
+                  <option value="corporate">法人向けメンタル窓口</option>
+                  <option value="other">その他のお問い合わせ</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="message">メッセージ内容 <span class="required">必須</span></label>
+                <textarea id="message" name="message" rows="6" required placeholder="ご相談内容の詳細や、現状の課題などをご記入ください。"></textarea>
+              </div>
+
+              <div class="form-consent">
+                <p class="privacy-note">
+                  送信前に<a href="/privacy" target="_blank">プライバシーポリシー</a>をご確認ください。
+                </p>
+                <label class="checkbox-label">
+                  <input type="checkbox" required />
+                  <span>プライバシーポリシーに同意する</span>
+                </label>
+              </div>
+
+              <button type="submit" class="submit-btn">
+                <span>この内容で送信する</span>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              </button>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .contact-page { padding-bottom: 120px; }
+  .contact-header { padding: 120px 0 60px; text-align: center; }
+  .eyebrow { font-size: 0.85rem; font-weight: 900; color: var(--accent2); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .contact-header h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; line-height: 1.15; margin-bottom: 24px; }
+  .accent-text { color: var(--accent2); }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin: 0 auto; line-height: 1.8; }
+
+  .contact-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 60px; margin-top: 40px; }
+
+  /* Info Column */
+  .info-card, .line-card { background: rgba(255, 255, 255, 0.5); border: 1px solid var(--line); border-radius: 32px; padding: 40px; margin-bottom: 30px; backdrop-filter: blur(10px); }
+  .info-card h3, .line-card h3 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; color: var(--text); }
+  .info-card p, .line-card p { font-size: 1rem; line-height: 1.7; color: var(--muted); margin-bottom: 24px; }
+  
+  .benefit-list { list-style: none; padding: 0; }
+  .benefit-list li { position: relative; padding-left: 28px; margin-bottom: 16px; font-weight: 700; font-size: 0.95rem; color: var(--text); }
+  .benefit-list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent2); font-weight: 900; }
+
+  .line-btn {
+    display: flex; align-items: center; justify-content: center; gap: 12px;
+    background: #06C755; color: #fff; text-decoration: none; padding: 18px; border-radius: 999px;
+    font-weight: 800; transition: 0.3s;
+  }
+  .line-btn:hover { background: #05b34c; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(6, 199, 85, 0.2); }
+
+  /* Form Column */
+  .glass-panel { background: #fff; border: 1px solid var(--line); border-radius: 40px; padding: 50px; box-shadow: var(--shadow); }
+  .form-group { margin-bottom: 30px; }
+  .form-group label { display: block; font-weight: 800; font-size: 0.95rem; margin-bottom: 10px; color: var(--text); }
+  .required { color: #e53e3e; font-size: 0.75rem; margin-left: 4px; vertical-align: middle; background: #fff5f5; padding: 2px 6px; border-radius: 4px; }
+  
+  input, select, textarea {
+    width: 100%; padding: 16px 20px; border-radius: 12px; border: 1px solid var(--line);
+    background: #fdfaf7; font-size: 1rem; font-family: inherit; transition: 0.3s; box-sizing: border-box;
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent2); background: #fff; box-shadow: 0 0 0 4px rgba(216, 185, 140, 0.1); }
+
+  .form-consent { margin: 40px 0; text-align: center; }
+  .privacy-note { font-size: 0.85rem; color: var(--muted); margin-bottom: 15px; }
+  .privacy-note a { color: var(--accent2); text-decoration: underline; }
+  
+  .checkbox-label { display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer; font-size: 0.95rem; font-weight: 700; }
+  .checkbox-label input { width: 20px; height: 20px; cursor: pointer; }
+
+  .submit-btn {
+    width: 100%; padding: 22px; border-radius: 999px; border: none;
+    background: var(--accent); color: #fff; font-size: 1.1rem; font-weight: 900;
+    cursor: pointer; transition: 0.4s; display: flex; align-items: center; justify-content: center; gap: 12px;
+  }
+  .submit-btn:hover { background: var(--text); transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+
+  @media (max-width: 900px) {
+    .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+    .contact-header { padding: 80px 20px 40px; }
+    .glass-panel { padding: 30px 20px; }
+  }
+</style>

@@ -1,0 +1,248 @@
+---
+// src/components/ConsultationFlow.astro
+interface Props {
+  id?: string;
+  background?: string;
+  border?: boolean;
+}
+
+const { 
+  id = "consultation-flow", 
+  background = "rgba(255, 253, 248, 0.9)", 
+  border = true 
+} = Astro.props;
+---
+
+<section id={id} class="consultation-section" style={border ? 'border-top: 1px solid var(--line);' : ''}>
+  <div class="consultation-wrap">
+    <div class="section-head">
+      <p class="kicker">Consultation Flow</p>
+      <h2>無料相談のステップ</h2>
+      <p class="muted">和-Nodeでは、初めての方でも安心してご相談いただけるよう、最大60分の無料相談枠をご用意しています。</p>
+    </div>
+    
+    <div class="consultation-card" style={`background: ${background};`}>
+      <p class="intro-text">
+        「何から手をつけていいか分からない」「自分の課題を整理したい」といった状態でも大丈夫です。専門のカウンセラーが、あなたの想いを形にするお手伝いをします。
+      </p>
+      
+      <div class="step-grid">
+        <div class="step-item">
+          <h3>① 初回30分無料</h3>
+          <p>現状のヒアリングと、お悩みの整理を行います。これだけでも「進むべき方向が見えた」とご好評いただいています。</p>
+        </div>
+        <div class="step-item bonus">
+          <h3>② 診断利用で＋30分</h3>
+          <p>事前にいずれかの診断アプリをご利用いただくと、さらに30分延長（計60分）が無料になります。</p>
+          <a href="/works" class="inline-link" data-ga-event="click_bonus_diagnosis">→ 診断アプリを試して特典を受ける</a>
+        </div>
+      </div>
+
+      <!-- FAQ Section for Conversion Push -->
+      <div class="faq-box">
+        <h4 class="faq-title">無料相談に関するよくある質問</h4>
+        <div class="faq-grid">
+          <div class="faq-item">
+            <p class="question">Q. まだ具体的なプランが決まっていないのですが相談できますか？</p>
+            <p class="answer">A. もちろんです。何から手をつけていいか分からない状態こそ、私たちの強みである「お悩み整理」が活きます。</p>
+          </div>
+          <div class="faq-item">
+            <p class="question">Q. 60分無料（30分+特典30分）は、本当に費用はかかりませんか？</p>
+            <p class="answer">A. はい、費用は一切発生しません。無理な勧誘も行いませんので、まずは壁打ち相手としてお気軽にご利用ください。</p>
+          </div>
+          <div class="faq-item">
+            <p class="question">Q. ZoomではなくLINEチャットでの相談も可能ですか？</p>
+            <p class="answer">A. 可能です。お好みのスタイル（LINE / Google Meet / Zoom）を予約時にご指定いただけます。</p>
+          </div>
+        </div>
+      </div>
+      
+      <p class="disclaimer">※診断アプリ利用による30分延長特典は、お一人様1回限りの適用となります。法人様の導入相談時も同様です。</p>
+      
+      <div class="cta-btns">
+        <a class="btn-primary" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" data-ga-event="click_consultation_line">LINEで相談（60分）を予約</a>
+        <a class="btn-secondary" href="/contact" data-ga-event="click_consultation_form">内容を理解して相談を申し込む</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .consultation-section {
+    padding: 100px 0;
+    background: #fff;
+    scroll-margin-top: 80px; /* Backup for older browsers */
+  }
+  .consultation-wrap {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+  .kicker {
+    color: var(--accent);
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+  .muted {
+    color: #666;
+    font-size: 1.05rem;
+  }
+  .consultation-card {
+    padding: 60px;
+    border: 1px solid var(--line);
+    border-radius: 40px;
+    box-shadow: var(--shadow);
+  }
+  .intro-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #4d463e;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+  .step-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+  }
+  .step-item {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 30px;
+  }
+  .step-item.bonus {
+    background: linear-gradient(135deg, #fffdf9 0%, #f4eadc 100%);
+    border-color: var(--accent2);
+  }
+  .step-item h3 {
+    font-size: 1.25rem;
+    color: var(--accent);
+    margin-bottom: 15px;
+    font-weight: 800;
+  }
+  .step-item p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .inline-link {
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: 800;
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  /* FAQ Box */
+  .faq-box {
+    background: rgba(255,255,255,0.7);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 32px;
+    margin-bottom: 40px;
+  }
+  .faq-title {
+    margin-top: 0;
+    color: var(--accent);
+    font-size: 1.1rem;
+    font-weight: 800;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+  }
+  .faq-grid {
+    display: grid;
+    gap: 20px;
+  }
+  .faq-item .question {
+    font-weight: 800;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-size: 0.95rem;
+  }
+  .faq-item .answer {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .disclaimer {
+    text-align: center;
+    color: var(--accent);
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 40px;
+  }
+  .cta-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .btn-primary, .btn-secondary {
+    padding: 18px 40px;
+    border-radius: 999px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: 0.3s;
+    text-align: center;
+    min-width: 280px;
+  }
+  .btn-primary {
+    background: var(--accent2);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(99, 153, 34, 0.3);
+  }
+  .btn-secondary {
+    background: #fff;
+    color: var(--accent2);
+    border: 2px solid var(--accent2);
+  }
+  .btn-secondary:hover {
+    background: var(--accent2);
+    color: #fff;
+  }
+
+  @media (max-width: 768px) {
+    .consultation-card { padding: 30px 20px; }
+    .step-grid { grid-template-columns: 1fr; }
+    .btn-primary, .btn-secondary { width: 100%; min-width: 0; }
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const gaButtons = document.querySelectorAll('[data-ga-event]');
+    gaButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const eventName = button.getAttribute('data-ga-event');
+        if (typeof gtag === 'function') {
+          gtag('event', eventName, {
+            'event_category': 'conversion',
+            'event_label': window.location.pathname
+          });
+        }
+      });
+    });
+  });
+</script>
