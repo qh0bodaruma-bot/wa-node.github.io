@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.hostname+location.pathname+location.search);</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【デモHP】Premium 10 パッケージ | 和-Node</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#d4af37;--dark:#0a0a0c;--glass:rgba(255,255,255,0.03);--glass-border:rgba(255,255,255,0.1);--white:#ffffff;--text:#e2e2e7;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--dark);color:var(--text);line-height:1.8;overflow-x:hidden;}
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--gold);color:#000;font-size:12px;text-align:center;padding:10px 0;font-weight:900;}
+
+nav{position:fixed;top:32px;left:0;right:0;z-index:999;display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:rgba(10,10,12,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);}
+.logo{font-family:'Cormorant Garamond',serif;font-weight:400;font-size:26px;color:var(--gold);font-style:italic;letter-spacing:0.1em;}
+
+.hero-premium{height:100vh;background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=2000');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;}
+.hero-premium h1{font-family:'Noto Serif JP',serif;font-size:clamp(40px,6vw,80px);margin-bottom:30px;background:linear-gradient(135deg, #fff 0%, var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+
+.section{padding:120px 60px;max-width:1200px;margin:0 auto;}
+.sec-label{color:var(--gold);font-weight:700;letter-spacing:0.3em;text-align:center;display:block;margin-bottom:15px;font-size:12px;}
+.sec-h2{text-align:center;font-family:'Noto Serif JP',serif;font-size:42px;margin-bottom:80px;color:var(--white);}
+
+.glass-card{background:var(--glass);border:1px solid var(--glass-border);backdrop-filter:blur(10px);padding:50px;border-radius:40px;margin-bottom:40px;transition:0.4s;}
+.glass-card:hover{border-color:var(--gold);transform:translateY(-10px);}
+
+.feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;}
+.feature-box{background:rgba(255,255,255,0.02);padding:40px;border-radius:24px;border:1px solid var(--glass-border);text-align:center;}
+.feature-icon{font-size:50px;margin-bottom:20px;display:block;}
+
+.news-item{display:flex;gap:30px;padding:30px 0;border-bottom:1px solid var(--glass-border);align-items:center;}
+.news-date{font-family:'Cormorant Garamond',serif;color:var(--gold);font-weight:700;}
+
+@media(max-width:900px){
+  nav{padding:10px 20px;}.section{padding:80px 20px;}
+  .feature-grid{grid-template-columns:1fr;}
+  .news-item{flex-direction:column;align-items:flex-start;gap:10px;}
+}
+.reveal{opacity:0;transform:translateY(30px);transition:1.2s cubic-bezier(0.22, 1, 0.36, 1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+<link rel="stylesheet" href="premium_upgrade.css">
+</head>
+<body>
+<div class="portfolio-banner"><span>DEMO: Premium 10</span>🎨 ああああああああああああああああああああ</div>
+<nav>
+  <div class="logo">EXECUTIVE PREMIA</div>
+  <a href="#contact" style="background:var(--gold);color:#000;padding:12px 30px;text-decoration:none;border-radius:50px;font-weight:900;font-size:13px;">INQUIRY</a>
+</nav>
+
+<section class="hero-premium">
+  <div class="reveal">
+    <span class="sec-label">ESTABLISHED SINCE 20XX</span>
+    <h1>価値を、<br>芸術の域へ。</h1>
+    <p style="margin-top:40px; font-size:20px; color:#aaa;">ああああああああああああああああああああああああ</p>
+  </div>
+</section>
+
+<section class="section" id="concept">
+  <span class="sec-label">OUR CONCEPT</span>
+  <h2 class="sec-h2">コンセプト あああああ</h2>
+  <div class="glass-card reveal">
+    <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:60px; align-items:center;">
+      <div>
+        <p style="font-size:28px; color:var(--gold); font-family:'Noto Serif JP',serif; margin-bottom:30px;">ああああああああああああああああ</p>
+        <p style="color:#aaa; line-height:2.2;">あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+      </div>
+      <div style="height:400px; background:rgba(255,255,255,0.05); border-radius:30px; display:flex; align-items:center; justify-content:center; font-size:120px;">💎</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="background:rgba(255,255,255,0.01);" id="services">
+  <span class="sec-label">SERVICES</span>
+  <h2 class="sec-h2">事業内容 あああああ</h2>
+  <div class="feature-grid">
+    <div class="feature-box reveal"><span class="feature-icon">✨</span><h3>あああああ</h3><p style="color:#888; font-size:14px; margin-top:15px;">あああああああああああああああああああああ。</p></div>
+    <div class="feature-box reveal"><span class="feature-icon">🏅</span><h3>いいいいい</h3><p style="color:#888; font-size:14px; margin-top:15px;">いいいいいいいいいいいいいいいいいいいいい。</p></div>
+    <div class="feature-box reveal"><span class="feature-icon">🌐</span><h3>ううううう</h3><p style="color:#888; font-size:14px; margin-top:15px;">ううううううううううううううううううううう。</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <span class="sec-label">LATEST NEWS</span>
+  <h2 class="sec-h2">お知らせ あああああ</h2>
+  <div style="max-width:900px; margin:0 auto;" class="reveal">
+    <div class="news-item"><span class="news-date">20XX.12.01</span><p>あああああああああああああああああああああああああああ</p></div>
+    <div class="news-item"><span class="news-date">20XX.11.15</span><p>いいいいいいいいいいいいいいいいいいいいいいいいいいい</p></div>
+    <div class="news-item"><span class="news-date">20XX.10.20</span><p>ううううううううううううううううううううううううううう</p></div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--gold); color:#000; text-align:center;" id="contact">
+  <h2 class="sec-h2" style="color:#000; margin-bottom:30px;">Contact Us</h2>
+  <p style="margin-bottom:60px; font-weight:700; opacity:0.8;">あああああああああああああああああああああああああああああ</p>
+  <a href="#" style="background:#000; color:var(--gold); padding:25px 80px; font-weight:900; text-decoration:none; display:inline-block; border-radius:100px; letter-spacing:0.1em;">お問い合わせフォームへ</a>
+</section>
+
+<footer style="padding:100px 60px; text-align:center; border-top:1px solid var(--glass-border);">
+  <div class="logo" style="margin-bottom:30px;">EXECUTIVE PREMIA</div>
+  <p>© 2024 Executive Premia. All Rights Reserved.</p>
+  <p style="margin-top:15px; color:var(--gold); font-weight:700; letter-spacing:0.2em;">和-Node プロデュース</p>
+</footer>
+
+<script>
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script src="premium_upgrade.js"></script>
+</body>
+</html>

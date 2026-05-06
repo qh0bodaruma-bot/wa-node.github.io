@@ -1,0 +1,80 @@
+/* 
+  Wa-Node Premium Upgrade Engine v1.0
+  This CSS upgrades standard LPs into high-end interactive samples.
+*/
+
+:root {
+  --p-accent: #639922;
+  --p-glass: rgba(255, 255, 255, 0.75);
+  --p-glass-dark: rgba(255, 255, 255, 0.1);
+  --p-border: rgba(255, 255, 255, 0.4);
+  --p-shadow: 0 20px 50px rgba(0, 0, 0, 0.05);
+}
+
+/* Base Body Polish */
+body {
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: antialiased;
+  background-attachment: fixed;
+}
+
+/* Glassmorphism Navigation Upgrade */
+nav, header.nav-header {
+  background: var(--p-glass) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  border-bottom: 1px solid var(--p-border) !important;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.03) !important;
+}
+
+/* Card & Section Polish */
+.card, .item, .feature, .service-card, .menu-card, .price-card, .reason-card {
+  border-radius: 24px !important;
+  background: var(--p-glass) !important;
+  backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--p-border) !important;
+  box-shadow: var(--p-shadow) !important;
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s !important;
+}
+
+.card:hover, .item:hover, .feature:hover, .service-card:hover, .menu-card:hover {
+  transform: translateY(-10px) !important;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.1) !important;
+}
+
+/* Button Premium Finish */
+.btn, .button, .cta-button, .btn-pink, .btn-white {
+  border-radius: 999px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.1em !important;
+  transition: all 0.4s !important;
+  text-transform: uppercase;
+}
+
+.btn:hover, .button:hover {
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+/* Animation Engine */
+.reveal, [data-reveal] {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(0.23, 1, 0.32, 1), transform 1.2s cubic-bezier(0.23, 1, 0.32, 1) !important;
+}
+
+.reveal.visible, [data-reveal].visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Portfolio Banner Polish */
+.portfolio-banner {
+  background: rgba(0,0,0,0.85) !important;
+  backdrop-filter: blur(10px) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.portfolio-banner span {
+  background: var(--p-accent) !important;
+  border-radius: 4px !important;
+}

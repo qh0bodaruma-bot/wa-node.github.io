@@ -3,191 +3,254 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="KDP出版実績｜和-Node" description="和-Node代表「マルだ←」によるAmazon Kindle (KDP) の出版実績一覧。オリジナル鳥獣戯画や浮世絵風デザインの書籍など。">
+  <!-- Decorative background for the whole page -->
+  <div class="kdp-bg-overlay"></div>
+
   <main>
     <div class="kdp-header">
-      <div class="container">
-        <h1 class="kdp-title">出版実績 (KDP)</h1>
-        <p class="kdp-desc">Amazon Kindleにて、海外向け（英語版・フランス語版）に浮世絵や鳥獣戯画をモチーフにした作品を多数出版しております。<br />表紙デザインから内部コンテンツまで一貫して制作しています。</p>
+      <div class="container fade-in">
+        <span class="eyebrow">Design Strategy & Publishing</span>
+        <h1 class="kdp-title">KDP 出版実績</h1>
+        <p class="kdp-desc">
+          Amazon Kindle (KDP) を通じて、日本の伝統美（浮世絵・鳥獣戯画）を世界へ発信。<br />
+          ターゲット市場に合わせた「売れる表紙」と「心地よい読書体験」を一貫して設計しています。
+        </p>
       </div>
     </div>
 
-    <!-- セクション1: 江戸旅行記シリーズ (Premium) -->
-    <div class="kdp-section premium-section">
-      <div class="premium-badge">PREMIUM EDITION</div>
-      <h2 class="kdp-section-title">江戸旅行記シリーズ</h2>
-      <div class="book-grid">
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/江戸旅行記ラグドール.png" alt="江戸旅行記ラグドール" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">江戸旅行記 ラグドール</div>
-            <div class="book-price">$14.99 / €14.99</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GWDRMFHJ" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GWDP7P5G" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
+    <!-- Section 1: 江戸旅行記シリーズ (The Premium Collection) -->
+    <section class="kdp-section premium-dark">
+      <div class="section-container">
+        <div class="premium-header fade-in">
+          <span class="badge">PREMIUM EDITION</span>
+          <h2 class="section-title">江戸旅行記シリーズ</h2>
+          <p class="section-concept">「伝統の再解釈」をテーマに、AI技術と浮世絵の技法を融合させた旗艦シリーズ。</p>
         </div>
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/江戸旅行記フレンチブルドッグ.png" alt="江戸旅行記フレンチブルドッグ" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">江戸旅行記 フレンチブルドッグ</div>
-            <div class="book-price">$14.99 / €14.99</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GWQ5VTWC" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GWQ56YDN" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
-        </div>
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/江戸旅行記シマエナガ.png" alt="江戸旅行記シマエナガ" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">江戸旅行記 シマエナガ</div>
-            <div class="book-price">$14.99 / €14.99</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GXKYSTSY" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GXL5Z3ZR" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
-        </div>
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/江戸旅行記たぬき.png" alt="江戸旅行記たぬき" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">江戸旅行記 たぬき</div>
-            <div class="book-price">$14.99 / €15.81</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GY95QR8G" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GY99F4HB" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
-        </div>
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/江戸旅行記古代生物.png" alt="江戸旅行記古代生物" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">江戸旅行記 古代生物</div>
-            <div class="book-price">$14.99 / €15.81</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GYHTJRWK" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GYHR7ZSL" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
-        </div>
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/江戸旅行記きつね.png" alt="江戸旅行記きつね" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">江戸旅行記 きつね</div>
-            <div class="book-price">$14.99 / €15.81</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GZ2Z1QY1" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GZ2ZZKXG" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- セクション2: かわいい浮世絵シリーズ -->
-    <div class="kdp-section">
-      <h2 class="kdp-section-title">かわいい浮世絵シリーズ</h2>
-      <div class="book-grid">
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/かわいい浮世絵犬.png" alt="かわいい浮世絵 犬" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">かわいい浮世絵 犬・イヌ科</div>
-            <div class="book-price-standard">$7.99 / €7.90</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GJZFH8P4" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GMCLLZYX" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
+        <div class="book-showcase">
+          {/* Item 1 */}
+          <div class="book-item reveal" data-concept="気品と落ち着きを表現する、藍色とベージュの対比。">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記ラグドール.png" alt="江戸旅行記ラグドール" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">江戸旅行記 ラグドール</h3>
+              <p class="price">$14.99 / €14.99</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GWDRMFHJ" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
+                <a href="https://www.amazon.fr/dp/B0GWDP7P5G" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/かわいい浮世絵猫.png" alt="かわいい浮世絵 猫" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">かわいい浮世絵 猫・ネコ科</div>
-            <div class="book-price-standard">$7.99 / €8.99</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GYYFY4FP" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GMCLT7CM" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
-        </div>
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/かわいい浮世絵兎.png" alt="かわいい浮世絵 兎" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">かわいい浮世絵 兎・ウサギ</div>
-            <div class="book-price-standard">$7.99 / €8.99</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GYYPBYPF" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GMCLKHT5" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
-        </div>
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/かわいい浮世絵動物園.png" alt="かわいい浮世絵 動物園" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">かわいい浮世絵 動物園</div>
-            <div class="book-price-standard">$7.99 / €8.99</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GKDGFTVS" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GMCNWNW7" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
-        </div>
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/かわいい浮世絵爬虫類＆両生類.png" alt="かわいい浮世絵 爬虫類＆両生類" class="book-image-main" loading="lazy" />
-          </div>
-          <div class="book-info">
-            <div class="book-title">かわいい浮世絵 爬虫類＆両生類</div>
-            <div class="book-price-standard">$7.99 / €8.99</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GXJLMWCX" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GXJP7HB7" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- セクション3: オリジナル鳥獣戯画 -->
-    <div class="kdp-section">
-      <h2 class="kdp-section-title">オリジナル鳥獣戯画</h2>
-      <div class="book-grid single-book">
-        <div class="book-card reveal">
-          <div class="book-image-container">
-            <img src="/images/KDP/en_title/鳥獣戯画風 en_title.png" alt="オリジナル鳥獣戯画" class="book-image-main" loading="lazy" />
+          {/* Item 2 */}
+          <div class="book-item reveal" data-concept="エネルギッシュな構図と、親しみやすさを両立。">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記フレンチブルドッグ.png" alt="江戸旅行記フレンチブルドッグ" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">江戸旅行記 フレンチブルドッグ</h3>
+              <p class="price">$14.99 / €14.99</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GWQ5VTWC" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
+                <a href="https://www.amazon.fr/dp/B0GWQ56YDN" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
+              </div>
+            </div>
           </div>
-          <div class="book-info">
-            <div class="book-title">オリジナル鳥獣戯画</div>
-            <div class="book-price-standard">$7.99 / €7.49</div>
-            <div class="book-links">
-              <a href="https://www.amazon.com/dp/B0GJZY49SH" target="_blank" class="book-btn btn-en">🇺🇸 Amazon US</a>
-              <a href="https://www.amazon.fr/dp/B0GW8N8HQP" target="_blank" class="book-btn btn-fr">🇫🇷 Amazon FR</a>
+
+          {/* Item 3 */}
+          <div class="book-item reveal" data-concept="静寂と可愛らしさが同居する、冬の江戸をイメージ。">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記シマエナガ.png" alt="江戸旅行記シマエナガ" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">江戸旅行記 シマエナガ</h3>
+              <p class="price">$14.99 / €14.99</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GXKYSTSY" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
+                <a href="https://www.amazon.fr/dp/B0GXL5Z3ZR" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Item 4 */}
+          <div class="book-item reveal" data-concept="茶屋の温かみを、暖色系のグラデーションで表現。">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記たぬき.png" alt="江戸旅行記たぬき" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">江戸旅行記 たぬき</h3>
+              <p class="price">$14.99 / €15.81</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GY95QR8G" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
+                <a href="https://www.amazon.fr/dp/B0GY99F4HB" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Item 5 */}
+          <div class="book-item reveal" data-concept="太古のロマンを、力強い筆致と彩度で可視化。">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記古代生物.png" alt="江戸旅行記古代生物" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">江戸旅行記 古代生物</h3>
+              <p class="price">$14.99 / €15.81</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GYHTJRWK" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
+                <a href="https://www.amazon.fr/dp/B0GYHR7ZSL" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
+              </div>
+            </div>
+          </div>
+
+          {/* Item 6 */}
+          <div class="book-item reveal" data-concept="ミステリアスな雰囲気を、紫と黒の調和で演出。">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記きつね.png" alt="江戸旅行記きつね" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">江戸旅行記 きつね</h3>
+              <p class="price">$14.99 / €15.81</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GZ2Z1QY1" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
+                <a href="https://www.amazon.fr/dp/B0GZ2ZZKXG" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Section 2: かわいい浮世絵シリーズ (Modern pop) -->
+    <section class="kdp-section">
+      <div class="section-container">
+        <h2 class="section-title">かわいい浮世絵シリーズ</h2>
+        <div class="book-showcase">
+          {/* Repeat for Kawaii series */}
+          <div class="book-item reveal" data-concept="動物本来の愛らしさを、江戸の画風に落とし込む。">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/かわいい浮世絵犬.png" alt="かわいい浮世絵犬" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">かわいい浮世絵 犬</h3>
+              <p class="price">$7.99 / €7.90</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GJZFH8P4" target="_blank" class="store-link">🇺🇸 US</a>
+                <a href="https://www.amazon.fr/dp/B0GMCLLZYX" target="_blank" class="store-link">🇫🇷 FR</a>
+              </div>
+            </div>
+          </div>
+          <div class="book-item reveal" data-concept="気ままな猫たちの日常を、色鮮やかに描写。">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/かわいい浮世絵猫.png" alt="かわいい浮世絵猫" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">かわいい浮世絵 猫</h3>
+              <p class="price">$7.99 / €8.99</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GYYFY4FP" target="_blank" class="store-link">🇺🇸 US</a>
+                <a href="https://www.amazon.fr/dp/B0GMCLT7CM" target="_blank" class="store-link">🇫🇷 FR</a>
+              </div>
+            </div>
+          </div>
+          <div class="book-item reveal">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/かわいい浮世絵兎.png" alt="かわいい浮世絵兎" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">かわいい浮世絵 兎</h3>
+              <p class="price">$7.99 / €8.99</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GYYPBYPF" target="_blank" class="store-link">🇺🇸 US</a>
+                <a href="https://www.amazon.fr/dp/B0GMCLKHT5" target="_blank" class="store-link">🇫🇷 FR</a>
+              </div>
+            </div>
+          </div>
+          <div class="book-item reveal">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/かわいい浮世絵動物園.png" alt="かわいい浮世絵動物園" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">かわいい浮世絵 動物園</h3>
+              <p class="price">$7.99 / €8.99</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GKDGFTVS" target="_blank" class="store-link">🇺🇸 US</a>
+                <a href="https://www.amazon.fr/dp/B0GMCNWNW7" target="_blank" class="store-link">🇫🇷 FR</a>
+              </div>
+            </div>
+          </div>
+          <div class="book-item reveal">
+            <div class="book-3d-wrap">
+              <div class="book-3d">
+                <div class="book-cover"><img src="/images/KDP/en_title/かわいい浮世絵爬虫類＆両生類.png" alt="かわいい浮世絵爬虫類＆両生類" /></div>
+                <div class="book-spine"></div>
+              </div>
+            </div>
+            <div class="book-meta">
+              <h3 class="title">かわいい浮世絵 爬虫類</h3>
+              <p class="price">$7.99 / €8.99</p>
+              <div class="links">
+                <a href="https://www.amazon.com/dp/B0GXJLMWCX" target="_blank" class="store-link">🇺🇸 US</a>
+                <a href="https://www.amazon.fr/dp/B0GXJP7HB7" target="_blank" class="store-link">🇫🇷 FR</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Choju-giga -->
+    <section class="kdp-section bg-paper">
+      <div class="section-container">
+        <h2 class="section-title">オリジナル鳥獣戯画</h2>
+        <div class="book-item reveal single-focus" data-concept="国宝「鳥獣戯画」をリスペクトし、独自のユーモアを注入。">
+          <div class="book-3d-wrap">
+            <div class="book-3d">
+              <div class="book-cover"><img src="/images/KDP/en_title/鳥獣戯画風 en_title.png" alt="オリジナル鳥獣戯画" /></div>
+              <div class="book-spine"></div>
+            </div>
+          </div>
+          <div class="book-meta">
+            <h3 class="title">オリジナル鳥獣戯画</h3>
+            <p class="price">$7.99 / €7.49</p>
+            <div class="links">
+              <a href="https://www.amazon.com/dp/B0GJZY49SH" target="_blank" class="store-link">🇺🇸 Amazon US</a>
+              <a href="https://www.amazon.fr/dp/B0GW8N8HQP" target="_blank" class="store-link">🇫🇷 Amazon FR</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <div class="back-to-top">
       <a href="/" class="btn-back">← ページトップへ戻る</a>
@@ -196,65 +259,121 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-    .kdp-header { background: var(--bg); padding: 80px 0 48px; text-align: center; }
-    .container { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
-    .kdp-title { font-size: 2.5rem; color: var(--text); margin-bottom: 16px; font-weight: 800; }
-    .kdp-desc { color: var(--muted); font-size: 1.1rem; line-height: 1.8; max-width: 800px; margin: 0 auto; }
-
-    .kdp-section { padding: 80px 0; }
-    .kdp-section:nth-child(even) { background: #faf8f5; }
-
-    .kdp-section-title {
-        font-size: 1.8rem; color: var(--accent); text-align: center; margin-bottom: 48px;
-        display: flex; align-items: center; justify-content: center; gap: 16px; font-weight: 800;
+    /* Design Variables */
+    :root {
+      --gold: #d8b98c;
+      --gold-dark: #8a5a32;
+      --paper: #fdfaf7;
+      --ink: #2c241e;
     }
-    .kdp-section-title::before, .kdp-section-title::after { content: ''; height: 1px; width: 60px; background: var(--accent2); opacity: 0.3; }
 
-    .book-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 32px; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
-    .book-grid.single-book { grid-template-columns: minmax(300px, 400px); justify-content: center; }
-
-    .book-card {
-        background: #fff; border: 1px solid var(--line); border-radius: 16px;
-        overflow: hidden; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    /* Overall Layout */
+    .kdp-bg-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; background: var(--paper); opacity: 0.5;
+      background-image: radial-gradient(var(--gold) 0.5px, transparent 0.5px);
+      background-size: 50px 50px;
     }
-    .book-card:hover { transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-color: var(--accent); }
 
-    .book-image-container { display: flex; position: relative; border-bottom: 1px solid var(--line); }
-    .book-image-main { width: 100%; height: auto; object-fit: cover; display: block; aspect-ratio: 1 / 1.414; }
+    .kdp-header { padding: 120px 0 60px; text-align: center; }
+    .eyebrow { font-size: 0.8rem; font-weight: 900; color: var(--gold-dark); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 12px; display: block; }
+    .kdp-title { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: var(--ink); margin-bottom: 24px; line-height: 1; }
+    .kdp-desc { font-size: 1.15rem; color: var(--muted); line-height: 1.8; max-width: 800px; margin: 0 auto; }
 
-    .book-info { padding: 24px; }
-    .book-title { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 16px; text-align: center; height: 3em; display: flex; align-items: center; justify-content: center; }
-    .book-price { text-align: center; color: var(--accent); font-size: 0.9rem; margin-bottom: 16px; font-weight: 700; letter-spacing: 1px; }
-    .book-price-standard { text-align: center; color: var(--muted); font-size: 0.9rem; margin-bottom: 16px; font-weight: 700; letter-spacing: 1px; }
+    .kdp-section { padding: 100px 0; overflow: hidden; }
+    .section-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+    
+    .section-title { font-size: 2.2rem; font-weight: 900; text-align: center; margin-bottom: 15px; position: relative; }
+    .section-concept { text-align: center; font-size: 1rem; color: var(--muted); margin-bottom: 60px; }
 
-    .book-links { display: flex; gap: 12px; }
-    .book-btn {
-        flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px;
-        padding: 12px; border-radius: 999px; text-decoration: none; font-size: 0.85rem; font-weight: 800;
-        transition: 0.3s; border: 1px solid var(--accent);
+    /* Premium Dark Section */
+    .premium-dark { background: #1a1c1e; color: #fff; }
+    .premium-dark .section-title { color: #fff; }
+    .premium-dark .badge { background: var(--gold); color: #1a1c1e; padding: 4px 16px; border-radius: 999px; font-weight: 900; font-size: 0.75rem; letter-spacing: 0.1em; display: inline-block; margin-bottom: 15px; }
+    .premium-header { text-align: center; margin-bottom: 80px; }
+
+    /* Book Grid / Showcase */
+    .book-showcase {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 60px 40px;
     }
-    .btn-en { background: #fff; color: var(--accent); }
-    .btn-en:hover { background: var(--soft); }
-    .btn-fr { background: var(--accent); color: #fff; }
-    .btn-fr:hover { background: var(--text); border-color: var(--text); }
+    .single-focus { max-width: 400px; margin: 0 auto; }
 
-    .premium-section { background: linear-gradient(135deg, #1a1a18, #2c2c2a); color: #fff; }
-    .premium-badge { text-align: center; color: var(--accent2); font-size: 0.8rem; letter-spacing: 0.2em; font-weight: 800; margin-bottom: 8px; }
-    .premium-section .kdp-section-title { color: #fff; }
-    .premium-section .book-card { background: #333330; border-color: rgba(216, 185, 140, 0.2); }
-    .premium-section .book-title { color: #fff; }
+    /* 3D Book Animation */
+    .book-item {
+      display: flex; flex-direction: column; align-items: center;
+      transition: 0.5s;
+    }
+    .book-3d-wrap {
+      perspective: 1200px; width: 220px; height: 310px; margin-bottom: 30px;
+      cursor: pointer;
+    }
+    .book-3d {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 10px 10px 20px rgba(0,0,0,0.15);
+    }
+    .book-item:hover .book-3d { transform: rotateY(-25deg) rotateX(5deg) scale(1.05); box-shadow: 25px 25px 50px rgba(0,0,0,0.3); }
 
-    .back-to-top { text-align: center; padding: 64px 0; }
-    .btn-back { display: inline-block; padding: 12px 32px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); text-decoration: none; font-weight: 700; transition: 0.3s; }
-    .btn-back:hover { background: var(--soft); color: var(--accent); }
+    .book-cover {
+      position: absolute; width: 100%; height: 100%; z-index: 2;
+      background: #eee; border-radius: 2px 4px 4px 2px; overflow: hidden;
+    }
+    .book-cover img { width: 100%; height: 100%; object-fit: cover; }
+    
+    .book-spine {
+      position: absolute; width: 40px; height: 100%; left: -20px;
+      background: #333; transform: rotateY(-90deg); transform-origin: right;
+      z-index: 1; border-radius: 4px 0 0 4px;
+      background-image: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
+    }
 
-    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1); }
+    /* Meta Info */
+    .book-meta { text-align: center; width: 100%; }
+    .book-meta .title { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; height: 2.8em; line-height: 1.4; display: flex; align-items: center; justify-content: center; }
+    .book-meta .price { font-size: 0.9rem; color: var(--gold-dark); font-weight: 800; margin-bottom: 20px; letter-spacing: 0.1em; }
+    
+    /* Concept Tooltip/Blurb */
+    .book-item::after {
+      content: attr(data-concept);
+      display: block; width: 90%; max-width: 280px; font-size: 0.8rem; line-height: 1.6;
+      color: var(--muted); background: rgba(0,0,0,0.03); padding: 12px; border-radius: 12px;
+      opacity: 0; transform: translateY(10px); transition: 0.4s;
+    }
+    .book-item:hover::after { opacity: 1; transform: translateY(0); }
+    .premium-dark .book-item::after { color: #aaa; background: rgba(255,255,255,0.05); }
+
+    /* Links */
+    .links { display: flex; gap: 10px; justify-content: center; }
+    .store-link {
+      padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--gold);
+      color: var(--gold-dark); font-size: 0.8rem; font-weight: 900; text-decoration: none;
+      transition: 0.3s;
+    }
+    .store-link:hover { background: var(--gold); color: #fff; transform: scale(1.05); }
+    .premium-dark .store-link { border-color: var(--gold); color: var(--gold); }
+    .premium-dark .store-link:hover { background: var(--gold); color: #1a1c1e; }
+
+    /* Utils */
+    .bg-paper { background: #fdfaf7; background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png"); }
+    .btn-back { display: inline-block; padding: 16px 40px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--muted); font-weight: 800; text-decoration: none; transition: 0.3s; }
+    .btn-back:hover { color: var(--gold-dark); border-color: var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+    
+    .fade-in { animation: fadeIn 1.2s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 600px) {
-        .kdp-title { font-size: 2rem; }
-        .book-grid { grid-template-columns: 1fr; }
+    @media (max-width: 768px) {
+      .book-showcase { grid-template-columns: 1fr 1fr; gap: 40px 20px; }
+      .book-3d-wrap { width: 160px; height: 230px; }
+      .book-meta .title { font-size: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .book-showcase { grid-template-columns: 1fr; }
     }
 </style>
 
@@ -268,4 +387,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // Mouse Tilt Effect
+    document.querySelectorAll('.book-3d-wrap').forEach(wrap => {
+      const book = wrap.querySelector('.book-3d');
+      wrap.addEventListener('mousemove', (e) => {
+        const rect = wrap.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = ((y - centerY) / centerY) * -10;
+        const rotateY = ((x - centerX) / centerX) * 20;
+        book.style.transform = `rotateY(${rotateY - 25}deg) rotateX(${rotateX}deg) scale(1.05)`;
+      });
+      wrap.addEventListener('mouseleave', () => {
+        book.style.transform = `rotateY(-25deg) rotateX(0deg) scale(1)`;
+      });
+    });
 </script>

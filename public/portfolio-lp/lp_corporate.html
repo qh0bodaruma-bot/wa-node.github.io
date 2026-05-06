@@ -5,432 +5,121 @@
 <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.hostname+location.pathname+location.search);</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>【ポートフォリオ】株式会社 Nexus Strategy | 経営コンサルティング</title>
-<meta name="description" content="これはポートフォリオ作品です。架空の経営コンサルティング会社のLPサンプルです。">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+<title>【ポートフォリオ】コーポレート・企業サイトLPサンプル | 高品質デザイン</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;1,600&family=Noto+Sans+JP:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{
-  --navy:#0a1628;--navy2:#112244;--gold:#c8a96e;--gold2:#e8c98e;
-  --white:#f8f6f0;--gray:#8a9ab5;
-}
+:root{--main:#004080;--sub:#e6f0fa;--text:#333;--white:#ffffff;--gray:#888;}
 html{scroll-behavior:smooth;}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--navy);color:var(--white);overflow-x:hidden;}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.8;}
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--main);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:10px 0;}
 
-/* ポートフォリオバナー */
-.portfolio-banner{
-  position:fixed;top:0;left:0;right:0;z-index:9999;
-  background:linear-gradient(135deg,#ff6b35,#f7c59f);
-  color:#1a1a1a;font-size:12px;font-weight:700;
-  text-align:center;padding:7px 16px;letter-spacing:0.04em;
-}
-.portfolio-banner span{background:#1a1a1a;color:#ff6b35;padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
+nav{position:fixed;top:32px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:15px 60px;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #eee;}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;color:var(--main);font-weight:700;}
 
-/* ナビ */
-nav{
-  position:fixed;top:35px;left:0;right:0;z-index:999;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:14px 60px;
-  background:rgba(10,22,40,0.9);
-  backdrop-filter:blur(12px);
-  border-bottom:1px solid rgba(200,169,110,0.2);
-  transition:all 0.3s;
-}
-.nav-logo{font-family:'Noto Serif JP',serif;font-size:18px;color:var(--gold);letter-spacing:0.1em;}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{color:var(--gray);text-decoration:none;font-size:13px;letter-spacing:0.04em;transition:color 0.3s;}
-.nav-links a:hover{color:var(--gold);}
-.nav-cta{background:var(--gold);color:var(--navy);padding:9px 22px;border-radius:4px;font-size:13px;font-weight:700;text-decoration:none;transition:all 0.3s;}
-.nav-cta:hover{background:var(--gold2);transform:translateY(-1px);}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;}
-.hamburger span{display:block;width:24px;height:2px;background:var(--gold);transition:all 0.3s;}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,22,40,0.98);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{color:var(--white);font-size:20px;text-decoration:none;letter-spacing:0.1em;}
-.mobile-menu-close{position:absolute;top:52px;right:24px;font-size:28px;color:var(--gold);cursor:pointer;background:none;border:none;}
+.hero{height:100vh;background:linear-gradient(rgba(0,64,128,0.7),rgba(0,64,128,0.7)),url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;}
+.hero h1{font-size:clamp(32px,5vw,56px);margin-bottom:20px;letter-spacing:0.05em;}
+.hero p{font-size:18px;opacity:0.8;}
 
-/* ヒーロー */
-.hero{
-  min-height:100vh;display:flex;align-items:center;
-  padding:120px 60px 80px;position:relative;overflow:hidden;
-}
-.hero-bg-img{
-  position:absolute;inset:0;
-  background-image:url('images/hero_corporate.png');
-  background-size:cover;background-position:center;
-  filter:brightness(0.25);
-}
-.hero-bg-overlay{
-  position:absolute;inset:0;
-  background:linear-gradient(90deg,rgba(10,22,40,0.95) 40%,transparent 100%);
-}
-.hero-grid{
-  position:absolute;inset:0;
-  background-image:linear-gradient(rgba(200,169,110,0.04) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(200,169,110,0.04) 1px,transparent 1px);
-  background-size:60px 60px;
-}
-.hero-content{position:relative;z-index:2;max-width:680px;}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  border:1px solid rgba(200,169,110,0.4);
-  padding:6px 16px;border-radius:40px;
-  font-size:12px;color:var(--gold);letter-spacing:0.1em;margin-bottom:28px;
-}
-.hero-badge::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--gold);animation:pulse 2s infinite;}
-@keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.3;}}
-.hero h1{
-  font-family:'Noto Serif JP',serif;
-  font-size:clamp(32px,4.5vw,62px);line-height:1.35;margin-bottom:22px;
-}
-.hero h1 em{color:var(--gold);font-style:normal;}
-.hero-sub{font-size:15px;color:var(--gray);line-height:1.9;margin-bottom:44px;max-width:500px;}
-.hero-btns{display:flex;gap:14px;flex-wrap:wrap;}
-.btn-primary{
-  background:linear-gradient(135deg,var(--gold),var(--gold2));
-  color:var(--navy);padding:15px 38px;border-radius:4px;
-  font-weight:700;font-size:14px;text-decoration:none;
-  transition:all 0.3s;display:inline-block;
-}
-.btn-primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(200,169,110,0.4);}
-.btn-outline{
-  border:2px solid var(--gold);color:var(--gold);
-  padding:13px 34px;border-radius:4px;font-size:14px;
-  text-decoration:none;transition:all 0.3s;display:inline-block;
-}
-.btn-outline:hover{background:rgba(200,169,110,0.1);}
-.hero-stats{
-  display:flex;gap:40px;flex-wrap:wrap;margin-top:56px;padding-top:40px;
-  border-top:1px solid rgba(200,169,110,0.2);
-}
-.stat-item{text-align:center;}
-.stat-num{font-size:38px;font-weight:900;color:var(--gold);font-family:'Noto Serif JP',serif;}
-.stat-label{font-size:11px;color:var(--gray);margin-top:4px;}
+.section{padding:100px 60px;max-width:1100px;margin:0 auto;}
+.sec-h2{text-align:center;font-size:36px;margin-bottom:15px;color:var(--main);font-weight:700;}
+.sec-sub{text-align:center;color:var(--gray);font-size:14px;margin-bottom:60px;letter-spacing:0.2em;text-transform:uppercase;}
 
-/* 実績数字 */
-.metrics{background:var(--navy2);}
-.metrics-inner{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(200,169,110,0.1);}
-.metric-card{background:var(--navy2);padding:52px 32px;text-align:center;}
-.metric-num{font-size:48px;font-weight:900;color:var(--gold);font-family:'Noto Serif JP',serif;line-height:1;}
-.metric-unit{font-size:16px;color:var(--gold);}
-.metric-label{font-size:12px;color:var(--gray);margin-top:10px;line-height:1.6;}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;}
+.service-card{padding:40px;background:var(--sub);border-radius:10px;transition:0.3s;}
+.service-card:hover{transform:translateY(-5px);box-shadow:0 10px 30px rgba(0,0,0,0.05);}
+.service-card h3{margin-bottom:15px;color:var(--main);}
 
-/* セクション共通 */
-section.inner{padding:90px 60px;}
-.section-tag{font-size:11px;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;margin-bottom:14px;}
-.section-title{font-family:'Noto Serif JP',serif;font-size:clamp(26px,3vw,42px);line-height:1.4;margin-bottom:20px;}
-.section-line{width:44px;height:2px;background:var(--gold);margin-bottom:40px;}
+.message-box{background:var(--sub);padding:80px 60px;display:grid;grid-template-columns:1fr 1.5fr;gap:60px;align-items:center;}
+.message-img{height:350px;background:var(--white);display:flex;align-items:center;justify-content:center;font-size:100px;}
 
-/* サービス */
-.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto;}
-.service-card{
-  border:1px solid rgba(200,169,110,0.2);padding:44px 32px;
-  position:relative;overflow:hidden;transition:all 0.4s;cursor:default;
-}
-.service-card::before{
-  content:'';position:absolute;top:0;left:0;right:0;height:2px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  transform:scaleX(0);transition:transform 0.4s;
-}
-.service-card:hover{background:rgba(200,169,110,0.05);transform:translateY(-4px);}
-.service-card:hover::before{transform:scaleX(1);}
-.service-icon{font-size:36px;margin-bottom:20px;}
-.service-card h3{font-family:'Noto Serif JP',serif;font-size:19px;color:var(--gold);margin-bottom:14px;}
-.service-card p{font-size:13px;color:var(--gray);line-height:1.85;}
+.profile-table{width:100%;border-collapse:collapse;}
+.profile-table th,.profile-table td{padding:20px;border-bottom:1px solid #eee;text-align:left;}
+.profile-table th{width:30%;color:var(--main);font-weight:700;}
 
-/* 顧客の声 */
-.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto;}
-.testimonial-card{
-  background:rgba(255,255,255,0.03);
-  border:1px solid rgba(200,169,110,0.15);
-  padding:36px 28px;
-}
-.stars{color:var(--gold);font-size:16px;margin-bottom:14px;}
-.testimonial-text{font-size:13px;color:var(--gray);line-height:1.9;margin-bottom:22px;}
-.testimonial-author{display:flex;align-items:center;gap:12px;}
-.author-avatar{width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--navy),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:var(--navy);}
-.author-name{font-size:13px;font-weight:700;}
-.author-company{font-size:12px;color:var(--gray);}
+.cta-corp{background:var(--main);color:#fff;padding:100px 60px;text-align:center;}
+.btn-white-corp{background:#fff;color:var(--main);padding:20px 60px;text-decoration:none;display:inline-block;font-weight:700;margin-top:30px;}
 
-/* CTA */
-.cta-wrap{
-  text-align:center;padding:90px 60px;
-  background:linear-gradient(135deg,var(--navy2),#1a3060);
-  border-top:1px solid rgba(200,169,110,0.2);
-  border-bottom:1px solid rgba(200,169,110,0.2);
-}
-.cta-wrap h2{font-family:'Noto Serif JP',serif;font-size:clamp(26px,3vw,40px);margin-bottom:14px;}
-.cta-wrap p{color:var(--gray);margin-bottom:36px;font-size:15px;}
-
-/* 導入企業ロゴ帯 */
-.trust-band{padding:52px 60px;background:rgba(17,34,68,0.6);border-top:1px solid rgba(200,169,110,0.1);border-bottom:1px solid rgba(200,169,110,0.1);}
-.trust-band-label{text-align:center;font-size:11px;letter-spacing:0.2em;color:var(--gray);margin-bottom:28px;}
-.trust-logos{display:flex;gap:40px;justify-content:center;align-items:center;flex-wrap:wrap;}
-.trust-logo{padding:10px 24px;border:1px solid rgba(200,169,110,0.15);font-family:'Noto Serif JP',serif;font-size:13px;color:var(--gray);letter-spacing:0.1em;transition:all 0.3s;}
-.trust-logo:hover{border-color:rgba(200,169,110,0.4);color:var(--gold);}
-
-/* FAQ */
-.faq-section{padding:90px 60px;background:var(--navy);}
-.faq-inner{max-width:800px;margin:0 auto;}
-.faq-item{border-bottom:1px solid rgba(200,169,110,0.15);overflow:hidden;}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:22px 0;cursor:pointer;font-size:15px;font-weight:700;color:var(--white);transition:color 0.3s;gap:12px;}
-.faq-q:hover{color:var(--gold);}
-.faq-icon{font-size:20px;color:var(--gold);transition:transform 0.3s;flex-shrink:0;}
-.faq-item.open .faq-icon{transform:rotate(45deg);}
-.faq-a{font-size:14px;color:var(--gray);line-height:1.9;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;}
-.faq-item.open .faq-a{max-height:200px;padding-bottom:20px;}
-
-/* ページトップ */
-.back-top{position:fixed;bottom:32px;right:32px;z-index:500;width:48px;height:48px;background:var(--gold);color:var(--navy);border:none;border-radius:50%;font-size:20px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
-.back-top.show{opacity:1;transform:translateY(0);}
-.back-top:hover{background:var(--gold2);transform:translateY(-3px);}
-
-/* ボタンシマー */
-.btn-primary{position:relative;overflow:hidden;}
-.btn-primary::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.25),transparent);transform:skewX(-20deg);transition:left 0.5s;}
-.btn-primary:hover::after{left:150%;}
-
-/* フッター */
-footer{background:#060e1c;padding:52px 60px;border-top:1px solid rgba(200,169,110,0.1);}
-.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
-.footer-logo{font-family:'Noto Serif JP',serif;font-size:20px;color:var(--gold);}
-.footer-copy{font-size:12px;color:var(--gray);text-align:right;}
-.footer-produce{font-size:13px;color:var(--gold);font-weight:700;margin-top:5px;}
-
-/* ===== RESPONSIVE ===== */
 @media(max-width:900px){
-  nav{padding:12px 24px;}
-  .nav-links,.nav-cta{display:none;}
-  .hamburger{display:flex;}
-  .hero{padding:110px 24px 60px;}
-  .hero-stats{gap:24px;}
-  .stat-num{font-size:28px;}
-  .metrics-inner{grid-template-columns:repeat(2,1fr);}
-  section.inner{padding:64px 24px;}
-  .services-grid,.testimonials-grid{grid-template-columns:1fr;}
-  .cta-wrap{padding:64px 24px;}
-  .trust-band,.faq-section{padding:52px 20px;}
-  .trust-logos{gap:16px;}
-  footer{padding:40px 24px;}
-  .footer-inner{flex-direction:column;align-items:flex-start;}
-  .footer-copy{text-align:left;}
-  .back-top{bottom:16px;right:16px;width:40px;height:40px;font-size:16px;}
+  nav{padding:10px 20px;}.service-grid{grid-template-columns:1fr;}
+  .message-box{grid-template-columns:1fr;}
+  .section{padding:80px 20px;}
 }
-@media(max-width:480px){
-  .hero h1{font-size:28px;}
-  .hero-btns{flex-direction:column;}
-  .btn-primary,.btn-outline{text-align:center;}
-  .metrics-inner{grid-template-columns:1fr 1fr;}
-  .metric-num{font-size:36px;}
-  .metric-card{padding:32px 16px;}
-}
-
-/* フェードイン */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal{opacity:0;transform:translateY(30px);transition:1s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 </style>
+<link rel="stylesheet" href="premium_upgrade.css">
 </head>
 <body>
-
-<div class="portfolio-banner">
-  <span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空のサービスを題材にしたデザインサンプルです
-</div>
-
-<nav id="mainNav">
-  <div class="nav-logo">NEXUS STRATEGY</div>
-  <ul class="nav-links">
-    <li><a href="#services">サービス</a></li>
-    <li><a href="#metrics">実績</a></li>
-    <li><a href="#voice">お客様の声</a></li>
-  </ul>
-  <a href="#cta" class="nav-cta">無料相談を予約する</a>
-  <div class="hamburger" id="hamburger">
-    <span></span><span></span><span></span>
-  </div>
+<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ああああああああああああああああああああ</div>
+<nav>
+  <div class="nav-logo">CORPORATE SAMPLE</div>
+  <a href="#contact" style="color:var(--main); font-size:14px; text-decoration:none; font-weight:700;">CONTACT</a>
 </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" id="menuClose">✕</button>
-  <a href="#services" onclick="closeMobileMenu()">サービス</a>
-  <a href="#metrics" onclick="closeMobileMenu()">実績</a>
-  <a href="#voice" onclick="closeMobileMenu()">お客様の声</a>
-  <a href="#cta" onclick="closeMobileMenu()" style="color:var(--gold)">無料相談を予約する</a>
-</div>
-
-<!-- ヒーロー -->
 <section class="hero">
-  <div class="hero-bg-img"></div>
-  <div class="hero-bg-overlay"></div>
-  <div class="hero-grid"></div>
   <div class="hero-content">
-    <div class="hero-badge">創業15年 ｜ 支援企業数 800社突破</div>
-    <h1>貴社の<em>未来戦略</em>を、<br>確信に変える。</h1>
-    <p class="hero-sub">Nexus Strategyは、データドリブンな分析と現場に根ざした実行支援を組み合わせ、中堅・大企業の持続的な成長をコミットします。</p>
-    <div class="hero-btns">
-      <a href="#cta" class="btn-primary">無料戦略診断を申し込む</a>
-      <a href="#metrics" class="btn-outline">支援実績を見る</a>
-    </div>
-    <div class="hero-stats">
-      <div class="stat-item"><div class="stat-num" data-target="800">0</div><div class="stat-label">支援企業数</div></div>
-      <div class="stat-item"><div class="stat-num" data-target="93">0</div><div class="stat-label">顧客満足度（%）</div></div>
-      <div class="stat-item"><div class="stat-num" data-target="15">0</div><div class="stat-label">創業年数</div></div>
-    </div>
+    <h1>未来を創る、確かな技術。<br>AAAAA BBBBB</h1>
+    <p>あああああああああああああああああああ</p>
   </div>
 </section>
 
-<!-- 実績数字 -->
-<div id="metrics" class="metrics">
-  <div class="metrics-inner">
-    <div class="metric-card reveal"><div class="metric-num">¥<span data-target="2400">0</span><span class="metric-unit">億+</span></div><div class="metric-label">累計売上改善額</div></div>
-    <div class="metric-card reveal"><div class="metric-num"><span data-target="38">0</span><span class="metric-unit">名</span></div><div class="metric-label">MBA保有プロフェッショナル</div></div>
-    <div class="metric-card reveal"><div class="metric-num"><span data-target="4.9">0</span><span class="metric-unit">/5</span></div><div class="metric-label">Google平均レビュー</div></div>
-    <div class="metric-card reveal"><div class="metric-num"><span data-target="96">0</span><span class="metric-unit">%</span></div><div class="metric-label">プロジェクト継続率</div></div>
-  </div>
-</div>
-
-<!-- サービス -->
-<section class="inner" id="services" style="background:var(--navy);">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div class="section-tag">OUR SERVICES</div>
-    <div class="section-title reveal">3つのコアソリューション</div>
-    <div class="section-line"></div>
-    <div class="services-grid">
-      <div class="service-card reveal"><div class="service-icon">🎯</div><h3>経営戦略策定</h3><p>市場分析・競合調査・自社ケイパビリティ評価を統合し、3〜5年の中期経営計画を科学的に策定。絵に描いた餅で終わらせない実行計画まで一貫サポートします。</p></div>
-      <div class="service-card reveal"><div class="service-icon">📊</div><h3>組織・人材変革</h3><p>組織診断から評価制度設計・人材育成・採用戦略まで、「強い組織」を作るための全プロセスを包括的に支援します。</p></div>
-      <div class="service-card reveal"><div class="service-icon">🚀</div><h3>新規事業開発</h3><p>市場機会の発掘から事業モデル検証・PoC・グロースまで、新規事業を「0→1→100」へと加速させる伴走支援を提供します。</p></div>
-    </div>
+<section class="section" id="vision">
+  <h2 class="sec-h2">Corporate Vision</h2>
+  <p class="sec-sub">あああああ</p>
+  <div style="text-align:center; max-width:800px; margin:0 auto;" class="reveal">
+    <p style="font-size:24px; color:var(--main); font-weight:700; margin-bottom:30px;">ああああああああああああああああああああ</p>
+    <p>あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
   </div>
 </section>
 
-<!-- お客様の声 -->
-<section class="inner" id="voice" style="background:var(--navy2);">
-  <div style="max-width:1100px;margin:0 auto;">
-    <div class="section-tag">TESTIMONIALS</div>
-    <div class="section-title reveal">クライアントの声</div>
-    <div class="section-line"></div>
-    <div class="testimonials-grid">
-      <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-text">「データに基づく戦略と現場への落とし込み力を両立するファームはここだけ。3年間で売上が1.8倍になりました。」</p><div class="testimonial-author"><div class="author-avatar">T</div><div><div class="author-name">田中 誠一郎 様</div><div class="author-company">製造業 代表取締役</div></div></div></div>
-      <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-text">「新規事業の立ち上げで悩んでいましたが、市場調査から事業計画まで圧倒的なスピードと質で支援いただきました。」</p><div class="testimonial-author"><div class="author-avatar">S</div><div><div class="author-name">鈴木 あゆみ 様</div><div class="author-company">ICT企業 事業部長</div></div></div></div>
-      <div class="testimonial-card reveal"><div class="stars">★★★★★</div><p class="testimonial-text">「離職率が高まる課題に対して根本から施策を実行いただき、1年で離職率を半分以下に改善できました。」</p><div class="testimonial-author"><div class="author-avatar">Y</div><div><div class="author-name">山本 健太 様</div><div class="author-company">小売業 人事部長</div></div></div></div>
-    </div>
+<section class="section" style="background:#f9f9f9;" id="services">
+  <h2 class="sec-h2">Our Services</h2>
+  <p class="sec-sub">事業内容 あああああ</p>
+  <div class="service-grid">
+    <div class="service-card reveal"><h3>あああああ</h3><p>あああああああああああああああああああああああああああああああああああああああ。</p></div>
+    <div class="service-card reveal"><h3>いいいいい</h3><p>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p></div>
+    <div class="service-card reveal"><h3>ううううう</h3><p>ううううううううううううううううううううううううううううううううううううううう。</p></div>
   </div>
 </section>
 
-<!-- 導入企業ロゴ帯 -->
-<div class="trust-band">
-  <div class="trust-band-label">TRUSTED BY LEADING COMPANIES</div>
-  <div class="trust-logos">
-    <div class="trust-logo">TOYOTA GROUP</div>
-    <div class="trust-logo">SONY VENTURES</div>
-    <div class="trust-logo">SOFTBANK</div>
-    <div class="trust-logo">RECRUIT HD</div>
-    <div class="trust-logo">FUJIFILM</div>
-  </div>
-</div>
-
-<!-- FAQ -->
-<section class="faq-section">
-  <div class="faq-inner">
-    <div class="section-tag" style="text-align:center;">FAQ</div>
-    <div class="section-title reveal" style="text-align:center;margin-bottom:8px;">よくあるご質問</div>
-    <div class="section-line" style="margin:0 auto 40px;"></div>
-    <div class="faq-item">
-      <div class="faq-q">初回の無料診断では何をするのですか？<span class="faq-icon">+</span></div>
-      <div class="faq-a">初回60分のセッションでは、貴社の現状・課題・目標をヒアリングし、弊社のアプローチと最適な支援プランをご提案します。費用は一切かかりません。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">支援期間はどのくらいですか？<span class="faq-icon">+</span></div>
-      <div class="faq-a">課題の規模により異なりますが、短期集中（3ヶ月〜）から長期伴走（2〜3年）まで柔軟に対応しています。まずはご相談ください。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">中小企業でも依頼できますか？<span class="faq-icon">+</span></div>
-      <div class="faq-a">はい、可能です。売上規模よりも「本気で変わりたい」という意思を重視しています。売上10億〜数百億円規模のクライアントを中心にご支援しております。</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q">費用の目安を教えてください。<span class="faq-icon">+</span></div>
-      <div class="faq-a">プロジェクトの規模・期間・チーム構成により異なります。月50万円〜のリテイナー型から、プロジェクト型まで複数の形態をご用意しています。</div>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<div class="cta-wrap" id="cta">
-  <div style="max-width:640px;margin:0 auto;">
-    <div class="section-tag" style="text-align:center;">FREE CONSULTATION</div>
-    <h2>まず、無料で話してみませんか？</h2>
-    <p>初回60分の戦略診断セッションは完全無料。貴社の課題を丁寧にヒアリングし、最適な打ち手をご提案します。</p>
-    <a href="#" class="btn-primary" style="font-size:15px;padding:16px 48px;">無料戦略診断を申し込む →</a>
-  </div>
-</div>
-
-<!-- ページトップ -->
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-
-<!-- フッター -->
-<footer>
-  <div class="footer-inner">
+<section class="section">
+  <div class="message-box reveal">
+    <div class="message-img">🙋‍♂️</div>
     <div>
-      <div class="footer-logo">NEXUS STRATEGY</div>
-      <div style="font-size:12px;color:var(--gray);margin-top:8px;">〒100-0001 東京都千代田区千代田1-1-1<br>TEL: 03-XXXX-XXXX｜info@nexus-strategy.jp</div>
-    </div>
-    <div class="footer-copy">
-      <div>© 2024 Nexus Strategy Inc. All Rights Reserved.</div>
-      <div class="footer-produce">和-Node プロデュース</div>
+      <h2 class="sec-h2" style="text-align:left; margin-bottom:20px;">Top Message</h2>
+      <p style="font-weight:700; margin-bottom:20px;">代表メッセージ あああああ</p>
+      <p>あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
     </div>
   </div>
+</section>
+
+<section class="section">
+  <h2 class="sec-h2">Company Profile</h2>
+  <p class="sec-sub">会社概要 あああああ</p>
+  <table class="profile-table reveal">
+    <tr><th>社名</th><td>あああああ株式会社</td></tr>
+    <tr><th>設立</th><td>20XX年 あああ月</td></tr>
+    <tr><th>所在地</th><td>東京都あああああ区いいいいい</td></tr>
+    <tr><th>事業内容</th><td>あああああ、いいいいい、ううううう</td></tr>
+  </table>
+</section>
+
+<section class="cta-corp" id="contact">
+  <h2 class="sec-h2" style="color:#fff;">Contact Us</h2>
+  <p>あああああああああああああああああああああああああああああ</p>
+  <a href="#" class="btn-white-corp">お問い合わせはこちら</a>
+</section>
+
+<footer style="padding:60px; text-align:center; background:#eee; color:#888;">
+  <p>© 2024 Sample Corporate Site. All Rights Reserved.</p>
+  <p style="margin-top:10px; color:var(--main); font-weight:700;">和-Node プロデュース</p>
 </footer>
 
 <script>
-// ハンバーガーメニュー
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
-document.getElementById('menuClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
-function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');}
-
-// カウントアップ
-function countUp(el){
-  const target=parseFloat(el.dataset.target);
-  const isFloat=target%1!==0;
-  const duration=2000,step=target/duration*16;
-  let current=0;
-  const t=setInterval(()=>{
-    current+=step;if(current>=target){current=target;clearInterval(t);}
-    el.textContent=isFloat?current.toFixed(1):Math.floor(current).toLocaleString();
-  },16);
-}
-
-// スクロール監視（reveal + カウントアップ）
-const io=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      e.target.classList.add('visible');
-      e.target.querySelectorAll('[data-target]').forEach(el=>countUp(el));
-      io.unobserve(e.target);
-    }
-  });
-},{threshold:0.15});
-document.querySelectorAll('.reveal,[data-target]').forEach(el=>io.observe(el));
-// ヒーローのカウントアップは即時
-document.querySelectorAll('.hero [data-target]').forEach(el=>{
-  setTimeout(()=>countUp(el),800);
-});
-
-// スクロール時ナビ + トップボタン
-window.addEventListener('scroll',()=>{
-  document.getElementById('mainNav').style.background=
-    window.scrollY>50?'rgba(10,22,40,0.98)':'rgba(10,22,40,0.9)';
-  document.getElementById('backTop').classList.toggle('show',window.scrollY>400);
-});
-
-// FAQアコーディオン
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    const item=q.parentElement;
-    const isOpen=item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!isOpen)item.classList.add('open');
-  });
-});
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
+<script src="premium_upgrade.js"></script>
 </body>
 </html>
-<!-- 和-Node プロデュース -->

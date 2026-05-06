@@ -4,255 +4,153 @@
 <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.hostname+location.pathname+location.search);</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>【ポートフォリオ】山田法律税務事務所 | 士業LP</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700;900&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【ポートフォリオ】法律事務所・士業サンプル | 高品質LP</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&family=Cormorant+Garamond:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{--navy:#0d1e3a;--navy2:#152a50;--gold:#b8922a;--gold2:#d4aa48;--cream:#f8f6f0;--beige:#ede8de;--text:#1a1a2a;--gray:#6a7080;--white:#fff;}
+:root{--main:#1a2a3a;--accent:#c0a060;--bg:#f8f9fa;--text:#2c3e50;--white:#ffffff;}
 html{scroll-behavior:smooth;}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
-.pbanner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#1a237e,#283593);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:7px;}
-.pbanner span{background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
-.back-top{position:fixed;bottom:24px;right:24px;z-index:500;width:44px;height:44px;background:var(--gold);color:var(--navy);border:none;border-radius:50%;font-size:18px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;font-weight:700;}
-.back-top.show{opacity:1;transform:translateY(0);}
-nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:13px 52px;background:rgba(13,30,58,0.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,146,42,0.25);}
-.nav-logo{font-family:'Noto Serif JP',serif;font-size:17px;color:var(--gold);letter-spacing:0.08em;}
-.nav-links{display:flex;gap:28px;list-style:none;}
-.nav-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:13px;transition:color 0.3s;}
-.nav-links a:hover{color:var(--gold);}
-.nav-cta{border:1px solid var(--gold);color:var(--gold);padding:8px 20px;font-size:13px;text-decoration:none;letter-spacing:0.04em;transition:all 0.3s;}
-.nav-cta:hover{background:var(--gold);color:var(--navy);}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--gold);}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(13,30,58,0.98);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:28px;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{color:var(--white);font-size:20px;text-decoration:none;font-family:'Noto Serif JP',serif;}
-.mmclose{position:absolute;top:48px;right:22px;font-size:26px;color:var(--gold);cursor:pointer;background:none;border:none;}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.8;background:#fff;}
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--main);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:10px 0;letter-spacing:0.04em;}
+nav{position:fixed;top:32px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:15px 60px;background:rgba(255,255,255,0.95);backdrop-filter:blur(10px);border-bottom:1px solid #eee;}
+.nav-logo{font-family:'Noto Serif JP',serif;font-weight:700;font-size:20px;color:var(--main);}
+.nav-links{display:flex;gap:30px;list-style:none;}
+.nav-links a{color:var(--text);text-decoration:none;font-size:14px;font-weight:500;}
+.btn-cta{background:var(--accent);color:#fff;padding:12px 30px;font-weight:700;text-decoration:none;border-radius:4px;transition:0.3s;}
 
-/* Hero */
-.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;background-image:url('images/hero_lawyer.png');background-size:cover;background-position:center;filter:brightness(0.2);}
-.hero-ov{position:absolute;inset:0;background:linear-gradient(135deg,rgba(13,30,58,0.97) 50%,rgba(13,30,58,0.7) 100%);}
-.hero-c{position:relative;z-index:2;padding:130px 72px 80px;max-width:760px;}
-.hero-ey{font-family:'Noto Serif JP',serif;font-size:11px;letter-spacing:0.28em;color:var(--gold);margin-bottom:22px;}
-.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(30px,4vw,54px);color:var(--white);line-height:1.4;margin-bottom:18px;}
-.hero h1 em{color:var(--gold);font-style:normal;}
-.hero-sub{font-size:15px;color:rgba(255,255,255,0.7);line-height:2.1;margin-bottom:36px;font-weight:300;max-width:520px;}
-.hero-areas{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px;}
-.area-tag{border:1px solid rgba(184,146,42,0.4);color:var(--gold);padding:6px 16px;font-size:12px;letter-spacing:0.06em;}
-.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);padding:15px 40px;font-weight:700;font-size:14px;letter-spacing:0.06em;text-decoration:none;display:inline-block;transition:all 0.3s;}
-.btn-gold:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(184,146,42,0.4);}
-.hero-note{font-size:12px;color:rgba(255,255,255,0.45);margin-top:14px;}
+.hero{height:100vh;background:linear-gradient(rgba(26,42,58,0.8),rgba(26,42,58,0.8)),url('https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&q=80&w=2000');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;padding:0 20px;}
+.hero-content h1{font-family:'Noto Serif JP',serif;font-size:clamp(32px,5vw,60px);line-height:1.3;margin-bottom:20px;}
+.hero-content p{font-size:18px;margin-bottom:40px;opacity:0.9;}
 
-/* 実績バー */
-.metrics{background:var(--navy2);display:flex;justify-content:center;flex-wrap:wrap;border-top:1px solid rgba(184,146,42,0.2);border-bottom:1px solid rgba(184,146,42,0.2);}
-.met{padding:28px 44px;text-align:center;border-right:1px solid rgba(184,146,42,0.15);}
-.met:last-child{border-right:none;}
-.met-num{font-family:'Noto Serif JP',serif;font-size:34px;color:var(--gold);line-height:1;}
-.met-lbl{font-size:11px;color:rgba(255,255,255,0.5);margin-top:5px;}
+.section{padding:100px 60px;}
+.sec-h2{text-align:center;font-family:'Noto Serif JP',serif;font-size:36px;margin-bottom:15px;color:var(--main);}
+.sec-sub{text-align:center;color:var(--accent);font-weight:700;margin-bottom:60px;letter-spacing:0.1em;}
 
-/* 業務内容 */
-.services{padding:84px 52px;background:var(--white);}
-.sec-ey{font-size:11px;letter-spacing:0.22em;color:var(--gold);text-align:center;margin-bottom:10px;}
-.sec-h{font-family:'Noto Serif JP',serif;font-size:clamp(22px,3vw,38px);text-align:center;color:var(--navy);margin-bottom:8px;}
-.sec-line{width:36px;height:1px;background:var(--gold);margin:0 auto 52px;}
-.srv-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1000px;margin:0 auto;}
-.srv-card{border:1px solid rgba(13,30,58,0.1);padding:36px 26px;position:relative;overflow:hidden;transition:all 0.4s;}
-.srv-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),var(--gold2));transform:scaleX(0);transition:transform 0.4s;}
-.srv-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(13,30,58,0.08);}
-.srv-card:hover::before{transform:scaleX(1);}
-.srv-icon{font-size:38px;margin-bottom:16px;}
-.srv-card h3{font-family:'Noto Serif JP',serif;font-size:17px;color:var(--navy);margin-bottom:10px;}
-.srv-card p{font-size:13px;color:var(--gray);line-height:1.9;}
-.srv-fee{font-size:13px;color:var(--gold);font-weight:700;margin-top:12px;}
+.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1200px;margin:0 auto;}
+.service-card{padding:40px;border:1px solid #eee;transition:0.3s;background:var(--bg);}
+.service-card:hover{border-color:var(--accent);transform:translateY(-5px);}
+.service-card h3{margin-bottom:15px;font-family:'Noto Serif JP',serif;}
 
-/* 弁護士プロフィール */
-.profile{padding:84px 52px;background:var(--beige);}
-.profile-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:200px 1fr;gap:56px;align-items:start;}
-.prof-img{background:linear-gradient(160deg,var(--navy),var(--navy2));height:260px;display:flex;align-items:center;justify-content:center;font-size:80px;border:3px solid rgba(184,146,42,0.3);}
-.prof-info h2{font-family:'Noto Serif JP',serif;font-size:26px;color:var(--navy);margin-bottom:6px;}
-.prof-title{font-size:13px;color:var(--gold);margin-bottom:18px;letter-spacing:0.06em;}
-.prof-bio{font-size:14px;color:var(--gray);line-height:2.0;margin-bottom:18px;}
-.prof-career{list-style:none;display:flex;flex-direction:column;gap:8px;}
-.prof-career li{font-size:13px;padding-left:16px;position:relative;color:var(--text);}
-.prof-career li::before{content:'▸';color:var(--gold);position:absolute;left:0;}
+.philosophy{background:var(--main);color:#fff;}
+.philosophy-inner{max-width:900px;margin:0 auto;text-align:center;}
 
-/* FAQ */
-.faq{padding:84px 52px;background:var(--white);}
-.faq-inner{max-width:760px;margin:0 auto;}
-.faq-item{border-bottom:1px solid rgba(13,30,58,0.1);overflow:hidden;}
-.faq-q{display:flex;justify-content:space-between;align-items:center;padding:20px 0;cursor:pointer;font-size:14px;font-weight:700;transition:color 0.3s;gap:12px;}
-.faq-q:hover{color:var(--gold);}
-.faq-icon{font-size:18px;color:var(--gold);transition:transform 0.3s;flex-shrink:0;}
-.faq-item.open .faq-icon{transform:rotate(45deg);}
-.faq-a{font-size:13px;color:var(--gray);line-height:1.9;max-height:0;overflow:hidden;transition:max-height 0.4s ease,padding 0.3s;}
-.faq-item.open .faq-a{max-height:200px;padding-bottom:18px;}
+.price-table{max-width:1000px;margin:0 auto;width:100%;border-collapse:collapse;}
+.price-table th,.price-table td{padding:25px;border-bottom:1px solid #eee;text-align:left;}
+.price-table th{background:#fcfcfc;font-family:'Noto Serif JP',serif;width:40%;}
 
-/* CTA */
-.cta{padding:90px 52px;background:var(--navy);color:var(--white);text-align:center;}
-.cta h2{font-family:'Noto Serif JP',serif;font-size:clamp(24px,3.5vw,40px);margin-bottom:14px;}
-.cta p{font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:36px;line-height:1.9;}
-.cta-box{background:var(--white);border-radius:4px;padding:40px;max-width:520px;margin:0 auto;color:var(--text);}
-.cta-label{font-size:11px;letter-spacing:0.18em;color:var(--gold);margin-bottom:8px;}
-.cta-title{font-family:'Noto Serif JP',serif;font-size:20px;color:var(--navy);margin-bottom:18px;}
-.cta-list{list-style:none;display:grid;gap:8px;text-align:left;margin-bottom:24px;}
-.cta-list li{font-size:13px;padding-left:18px;position:relative;}
-.cta-list li::before{content:'✓';color:var(--gold);font-weight:700;position:absolute;left:0;}
-.btn-gold-d{display:block;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);padding:15px;font-weight:700;font-size:15px;letter-spacing:0.06em;text-decoration:none;text-align:center;transition:all 0.3s;}
-.btn-gold-d:hover{opacity:0.9;transform:translateY(-2px);}
-
-footer{background:#070f1e;padding:44px 52px;border-top:1px solid rgba(184,146,42,0.15);}
-.fi{max-width:960px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
-.fl{font-family:'Noto Serif JP',serif;font-size:18px;color:var(--gold);}
-.fc{font-size:12px;color:rgba(255,255,255,0.4);text-align:right;}
-.fp{font-size:13px;color:var(--gold2);font-weight:700;margin-top:5px;}
+.faq-list{max-width:800px;margin:0 auto;}
+.faq-item{margin-bottom:30px;padding:30px;background:var(--bg);border-radius:8px;}
+.faq-q{font-weight:700;color:var(--accent);margin-bottom:10px;font-size:18px;}
 
 @media(max-width:900px){
-  nav{padding:10px 18px;}.nav-links,.nav-cta{display:none;}.hamburger{display:flex;}
-  .hero-c{padding:110px 20px 60px;}
-  .services,.profile,.faq,.cta{padding:60px 20px;}
-  .srv-grid{grid-template-columns:1fr;}
-  .profile-inner{grid-template-columns:1fr;}.prof-img{height:200px;}
-  .met{padding:20px 22px;}
-  footer{padding:36px 20px;}.fi{flex-direction:column;align-items:flex-start;}.fc{text-align:left;}
+  nav{padding:10px 20px;}.nav-links{display:none;}
+  .section{padding:80px 20px;}
+  .service-grid{grid-template-columns:1fr;}
 }
-.reveal{opacity:0;transform:translateY(20px);transition:opacity 0.7s,transform 0.7s;}
+.reveal{opacity:0;transform:translateY(30px);transition:1s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 </style>
+<link rel="stylesheet" href="premium_upgrade.css">
 </head>
 <body>
-<div class="pbanner"><span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空の士業事務所を題材にしたデザインサンプルです</div>
-<button class="back-top" id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ああああああああああああああああああああ</div>
 <nav>
-  <div class="nav-logo">山田法律税務事務所</div>
+  <div class="nav-logo">AAAAA BBBBB</div>
   <ul class="nav-links">
-    <li><a href="#services">業務内容</a></li>
-    <li><a href="#profile">プロフィール</a></li>
-    <li><a href="#cta">無料相談</a></li>
+    <li><a href="#services">あああああ</a></li>
+    <li><a href="#price">いいいいい</a></li>
+    <li><a href="#faq">ううううう</a></li>
   </ul>
-  <a href="#cta" class="nav-cta">無料相談を予約</a>
-  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  <a href="#contact" class="btn-cta">お問い合わせ</a>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mmclose" id="mmclose">✕</button>
-  <a href="#services" onclick="mm()">業務内容</a>
-  <a href="#profile" onclick="mm()">プロフィール</a>
-  <a href="#faq" onclick="mm()">よくある質問</a>
-  <a href="#cta" onclick="mm()" style="color:var(--gold)">無料相談を予約</a>
-</div>
 
 <section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-ov"></div>
-  <div class="hero-c">
-    <div class="hero-ey">YAMADA LAW & TAX OFFICE — SINCE 2005</div>
-    <h1>あなたのビジネスと<br>資産を、<em>法律と数字</em>で<br>守りぬく。</h1>
-    <p class="hero-sub">弁護士・税理士・社会保険労務士が在籍する総合事務所。スタートアップから中小企業のオーナーまで、法律・税務・労務の悩みをワンストップで解決します。</p>
-    <div class="hero-areas">
-      <span class="area-tag">法律相談</span>
-      <span class="area-tag">税務顧問</span>
-      <span class="area-tag">労務管理</span>
-      <span class="area-tag">相続・遺言</span>
-      <span class="area-tag">企業法務</span>
+  <div class="hero-content">
+    <h1>あなたの正義を、<br>確かな未来へ。</h1>
+    <p>あああああああああああああああああああああああああああああああ</p>
+    <a href="#contact" class="btn-cta" style="font-size:18px; padding:15px 50px;">あああああ</a>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <h2 class="sec-h2">解決実績 あああああ</h2>
+  <p class="sec-sub">SOLUTIONS</p>
+  <div class="service-grid">
+    <div class="service-card reveal"><h3>あああああ</h3><p>ああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p></div>
+    <div class="service-card reveal"><h3>いいいいい</h3><p>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p></div>
+    <div class="service-card reveal"><h3>ううううう</h3><p>ううううううううううううううううううううううううううううううううううううううううううううううううううううううう。</p></div>
+  </div>
+</section>
+
+<section class="section philosophy">
+  <div class="philosophy-inner reveal">
+    <h2 class="sec-h2" style="color:var(--accent);">AAAAA BBBBB CCCCC</h2>
+    <p style="font-size:20px; margin-bottom:30px;">ああああああああああああああああああああ</p>
+    <p>あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+  </div>
+</section>
+
+<section class="section" id="price">
+  <h2 class="sec-h2">料金プラン あああああ</h2>
+  <p class="sec-sub">PRICE PLAN</p>
+  <table class="price-table reveal">
+    <tr><th>プランあああああ</th><td>¥00,000〜</td></tr>
+    <tr><th>プランいいいいい</th><td>¥00,000〜</td></tr>
+    <tr><th>プランううううう</th><td>¥00,000〜</td></tr>
+    <tr><th>プランえええええ</th><td>要お見積もり</td></tr>
+  </table>
+</section>
+
+<section class="section" style="background:var(--bg);">
+  <h2 class="sec-h2">相談の流れ あああああ</h2>
+  <p class="sec-sub">FLOW</p>
+  <div style="max-width:800px; margin:0 auto; display:grid; gap:40px;">
+    <div style="display:flex; gap:30px; align-items:center;">
+      <div style="font-size:40px; color:var(--accent); font-weight:700;">01</div>
+      <div><h3>ステップあああああ</h3><p>あああああああああああああああああああああああああ。</p></div>
     </div>
-    <a href="#cta" class="btn-gold">初回無料相談を予約する →</a>
-    <div class="hero-note">※ 初回60分の相談は完全無料です</div>
-  </div>
-</section>
-
-<div class="metrics">
-  <div class="met"><div class="met-num">19年</div><div class="met-lbl">開業実績</div></div>
-  <div class="met"><div class="met-num">1,200件+</div><div class="met-lbl">相談実績</div></div>
-  <div class="met"><div class="met-num">98%</div><div class="met-lbl">顧問継続率</div></div>
-  <div class="met"><div class="met-num">3士業</div><div class="met-lbl">ワンストップ対応</div></div>
-</div>
-
-<section class="services" id="services">
-  <div class="sec-ey">PRACTICE AREAS</div>
-  <div class="sec-h">業務内容</div>
-  <div class="sec-line"></div>
-  <div class="srv-grid">
-    <div class="srv-card reveal"><div class="srv-icon">⚖️</div><h3>企業法務・契約書作成</h3><p>取引先との契約書レビュー、規約・利用規約の整備、トラブル予防のための法的整備をサポートします。</p><div class="srv-fee">顧問：月3万円〜</div></div>
-    <div class="srv-card reveal"><div class="srv-icon">🧾</div><h3>税務顧問・決算申告</h3><p>法人・個人の税務申告、節税対策のご提案、資金繰り改善のコンサルティングを行います。</p><div class="srv-fee">顧問：月2万円〜</div></div>
-    <div class="srv-card reveal"><div class="srv-icon">👥</div><h3>労務管理・就業規則</h3><p>就業規則の整備、雇用契約書作成、労働保険・社会保険の手続き代行を行います。</p><div class="srv-fee">顧問：月1.5万円〜</div></div>
-    <div class="srv-card reveal"><div class="srv-icon">🏠</div><h3>相続・遺産分割</h3><p>遺言書の作成、相続税申告、遺産分割協議書の作成など、相続に関わる手続きを全面サポート。</p><div class="srv-fee">相談：初回無料</div></div>
-    <div class="srv-card reveal"><div class="srv-icon">🚀</div><h3>会社設立・起業支援</h3><p>会社設立の登記手続き、定款作成、各種許認可申請、ビジネスモデルの法的リスク検討を行います。</p><div class="srv-fee">設立：9.8万円〜</div></div>
-    <div class="srv-card reveal"><div class="srv-icon">🛡️</div><h3>トラブル・紛争対応</h3><p>未払い報酬の回収、クレーム対応、内容証明郵便の作成、交渉・調停など紛争解決を支援します。</p><div class="srv-fee">相談：初回無料</div></div>
-  </div>
-</section>
-
-<section class="profile" id="profile">
-  <div style="max-width:960px;margin:0 auto;">
-    <div class="sec-ey">PROFILE</div>
-    <div class="sec-h">代表プロフィール</div>
-    <div class="sec-line"></div>
-    <div class="profile-inner">
-      <div class="prof-img">👨‍⚖️</div>
-      <div class="prof-info">
-        <h2>山田 一郎（仮名）</h2>
-        <div class="prof-title">弁護士 ／ 税理士 ／ 所長</div>
-        <p class="prof-bio">東京大学法学部卒業後、大手法律事務所を経て独立。企業法務・税務を軸に、スタートアップから上場企業まで幅広くサポート。「法律と数字は経営者の羅針盤」をモットーに、わかりやすい言葉で丁寧な助言を心がけています。</p>
-        <ul class="prof-career">
-          <li>東京弁護士会 所属</li>
-          <li>東京税理士会 所属</li>
-          <li>日本商工会議所 登録専門家</li>
-          <li>中小企業診断士（架空）</li>
-        </ul>
-      </div>
+    <div style="display:flex; gap:30px; align-items:center;">
+      <div style="font-size:40px; color:var(--accent); font-weight:700;">02</div>
+      <div><h3>ステップいいいいい</h3><p>いいいいいいいいいいいいいいいいいいいいいいいいい。</p></div>
+    </div>
+    <div style="display:flex; gap:30px; align-items:center;">
+      <div style="font-size:40px; color:var(--accent); font-weight:700;">03</div>
+      <div><h3>ステップううううう</h3><p>ううううううううううううううううううううううううう。</p></div>
     </div>
   </div>
 </section>
 
-<section class="faq" id="faq">
-  <div class="faq-inner">
-    <div class="sec-ey">FAQ</div>
-    <div class="sec-h">よくあるご質問</div>
-    <div class="sec-line"></div>
-    <div class="faq-item"><div class="faq-q">初回相談は本当に無料ですか？<span class="faq-icon">+</span></div><div class="faq-a">はい、初回60分の相談は完全無料です。相談後に顧問契約等を強制することは一切ありません。まずはお気軽にご相談ください。</div></div>
-    <div class="faq-item"><div class="faq-q">どんな相談でも対応できますか？<span class="faq-icon">+</span></div><div class="faq-a">弁護士・税理士・社労士が在籍しているため、法律・税務・労務のご相談をワンストップで対応できます。対応が難しい専門分野については、信頼できる専門家をご紹介することも可能です。</div></div>
-    <div class="faq-item"><div class="faq-q">顧問契約は最低期間がありますか？<span class="faq-icon">+</span></div><div class="faq-a">最低契約期間はございません。1ヶ月単位で柔軟にご利用いただけます。まずはスポット（単発）でのご依頼も歓迎しています。</div></div>
-    <div class="faq-item"><div class="faq-q">オンラインでの相談は可能ですか？<span class="faq-icon">+</span></div><div class="faq-a">はい、Zoom・Google Meetでのオンライン相談に対応しています。全国どこからでもご相談いただけます。</div></div>
+<section class="section" id="faq">
+  <h2 class="sec-h2">よくある質問 あああああ</h2>
+  <p class="sec-sub">FAQ</p>
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <p class="faq-q">Q. あああああああああああああああああ？</p>
+      <p>A. ああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+    </div>
+    <div class="faq-item reveal">
+      <p class="faq-q">Q. いいいいいいいいいいいいいいいいいいい？</p>
+      <p>A. いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+    </div>
   </div>
 </section>
 
-<section class="cta" id="cta">
-  <h2>まずは、無料でご相談ください。</h2>
-  <p>法律・税務・労務の悩みを一人で抱えないでください。<br>初回60分の相談は完全無料。秘密厳守でお話を伺います。</p>
-  <div class="cta-box">
-    <div class="cta-label">FREE CONSULTATION</div>
-    <div class="cta-title">初回無料相談のご予約</div>
-    <ul class="cta-list">
-      <li>相談時間：60分</li>
-      <li>完全秘密厳守・個人情報保護</li>
-      <li>Zoom・来所どちらでも対応</li>
-      <li>勧誘・強引な営業は一切なし</li>
-    </ul>
-    <a href="#" class="btn-gold-d">無料相談を予約する →</a>
-    <div style="font-size:12px;color:var(--gray);margin-top:12px;text-align:center;">受付時間：平日 9:00〜18:00 ／ 土曜 応相談</div>
-  </div>
+<section class="section" style="text-align:center; background:var(--main); color:#fff;" id="contact">
+  <h2 class="sec-h2" style="color:#fff;">初回相談 60分無料</h2>
+  <p style="margin-bottom:40px; opacity:0.8;">あああああああああああああああああああああああああああああ</p>
+  <a href="#" class="btn-cta" style="font-size:20px; padding:20px 60px;">お問い合わせはこちら</a>
 </section>
 
-<footer>
-  <div class="fi">
-    <div><div class="fl">山田法律税務事務所</div><div style="font-size:12px;color:rgba(255,255,255,0.4);margin-top:7px;">〒100-XXXX 東京都千代田区XX X-X-X（架空）／ 弁護士法人登録番号：XXXX</div></div>
-    <div class="fc"><div>© 2024 山田法律税務事務所. All Rights Reserved.</div><div class="fp">和-Node プロデュース</div></div>
-  </div>
+<footer style="padding:60px; background:#111; color:rgba(255,255,255,0.4); text-align:center;">
+  <p>© 2024 Sample Law Office. All Rights Reserved.</p>
+  <p style="margin-top:10px; color:var(--accent);">和-Node プロデュース</p>
 </footer>
+
 <script>
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
-document.getElementById('mmclose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
-function mm(){document.getElementById('mobileMenu').classList.remove('open');}
-window.addEventListener('scroll',()=>document.getElementById('backTop').classList.toggle('show',window.scrollY>400));
-document.querySelectorAll('.faq-q').forEach(q=>{
-  q.addEventListener('click',()=>{
-    const item=q.parentElement,isOpen=item.classList.contains('open');
-    document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
-    if(!isOpen)item.classList.add('open');
-  });
-});
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=`${(i%3)*90}ms`;io.observe(el);});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
-</body></html>
-<!-- 和-Node プロデュース -->
+<script src="premium_upgrade.js"></script>
+</body>
+</html>

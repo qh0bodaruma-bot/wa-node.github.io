@@ -3,88 +3,133 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
 <BaseLayout title="こころの疲労度診断 | 和-Node" description="心理カウンセリング資格を持つ車いすSEが提供する、こころの疲労度・モヤモヤ診断ツールです。">
+  <!-- Background Decoration -->
+  <div class="bg-decoration">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
   <div class="demo-banner">
     <strong>【制作例サンプル】</strong> これは和-Nodeの技術を体験できるデモアプリです。このようなカスタムツールの導入をご検討中の方は <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">こちらから無料相談</a>
   </div>
 
   <main class="quiz-container">
-    <div class="quiz-box">
+    <div class="quiz-box glass-card">
       
-      <!-- Welcome -->
+      <!-- Welcome Step -->
       <div id="step-welcome" class="quiz-step active">
-        <div class="welcome-icon">🌱</div>
-        <h1 class="welcome-title">こころの疲労度・モヤモヤ診断</h1>
+        <div class="welcome-visual">
+          <div class="pulse-icon">🌱</div>
+        </div>
+        <h1 class="welcome-title">こころの疲労度<br/><span class="accent-text">モヤモヤ診断</span></h1>
         <p class="welcome-desc">
-          経営者、フリーランス、毎日頑張っているあなたへ。<br />
-          「身体」「心」「環境（抱え込み度）」の3つの軸から、<br />
-          今のあなたのストレス状態を心理カウンセリング視点で分析します。<br /><br />
-          直感で、今の状態に最も近いものを選んでください。（全10問）
+          「身体」「心」「環境」の3つの軸から、<br />
+          今のあなたのストレス状態を心理学的視点で可視化します。<br />
+          <span class="small-info">所要時間：約2分（全10問）</span>
         </p>
-        <button class="start-btn" id="startBtn">診断をスタートする</button>
+        <button class="primary-btn pulse" id="startBtn">診断をスタートする</button>
       </div>
 
-      <!-- Question Container -->
+      <!-- Question Step -->
       <div id="step-question" class="quiz-step">
-        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
-        <div class="q-number" id="q-num">Q.1 / 10</div>
-        <h2 class="q-title" id="q-text">質問テキスト</h2>
-        <div class="q-options" id="q-opts">
-          <button class="q-option" data-score="0">全くあてはまらない</button>
-          <button class="q-option" data-score="1">たまにある</button>
-          <button class="q-option" data-score="2">よくある</button>
-          <button class="q-option" data-score="3">いつもそう感じる</button>
+        <div class="quiz-header">
+          <div class="progress-container">
+            <div class="progress-text">
+              <span id="q-num">Q.1 / 10</span>
+              <span id="q-cat" class="cat-badge">身体のサイン</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+          </div>
+        </div>
+
+        <div class="question-content" id="q-container">
+          <h2 class="q-title" id="q-text">質問テキスト</h2>
+          <div class="q-options" id="q-opts">
+            <button class="q-option neumorphic" data-score="0">
+              <span class="opt-label">全くあてはまらない</span>
+              <span class="opt-key">1</span>
+            </button>
+            <button class="q-option neumorphic" data-score="1">
+              <span class="opt-label">たまにある</span>
+              <span class="opt-key">2</span>
+            </button>
+            <button class="q-option neumorphic" data-score="2">
+              <span class="opt-label">よくある</span>
+              <span class="opt-key">3</span>
+            </button>
+            <button class="q-option neumorphic" data-score="3">
+              <span class="opt-label">いつもそう感じる</span>
+              <span class="opt-key">4</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <button id="backBtn" class="text-btn">← 前の質問に戻る</button>
         </div>
       </div>
 
-      <!-- Result -->
+      <!-- Result Step -->
       <div id="step-result" class="quiz-step">
-        <div class="result-header">
-          <div class="eval-title" id="res-title">評価タイトル</div>
-          <div class="eval-text" id="res-desc">評価の詳細テキスト</div>
-        </div>
-
-        <div class="chart-box">
-          <div class="chart-title">ストレス要因の分析</div>
-          
-          <div class="bar-row">
-            <div class="bar-label"><span>身体の疲労サイン</span> <span id="val-body">0/6</span></div>
-            <div class="bar-track"><div class="bar-fill fill-body" id="bar-body"></div></div>
-          </div>
-          
-          <div class="bar-row">
-            <div class="bar-label"><span>心の疲労サイン</span> <span id="val-mind">0/12</span></div>
-            <div class="bar-track"><div class="bar-fill fill-mind" id="bar-mind"></div></div>
+        <div class="result-layout">
+          <div class="result-main">
+            <div class="gauge-container">
+              <svg class="gauge-svg" viewBox="0 0 100 100">
+                <circle class="gauge-bg" cx="50" cy="50" r="45"></circle>
+                <circle class="gauge-fill" id="gauge-circle" cx="50" cy="50" r="45"></circle>
+              </svg>
+              <div class="gauge-content">
+                <span class="gauge-label">疲労度</span>
+                <span class="gauge-value" id="res-score">0%</span>
+              </div>
+            </div>
+            <h2 class="eval-title" id="res-title">評価タイトル</h2>
+            <p class="eval-text" id="res-desc">評価の詳細テキスト</p>
           </div>
 
-          <div class="bar-row">
-            <div class="bar-label"><span>環境・プレッシャー（抱え込み度）</span> <span id="val-env">0/12</span></div>
-            <div class="bar-track"><div class="bar-fill fill-env" id="bar-env"></div></div>
+          <div class="result-analysis">
+            <h3>要因別の分析結果</h3>
+            <div class="analysis-grid">
+              <div class="analysis-item">
+                <div class="item-header">
+                  <span class="icon">🏃‍♂️</span>
+                  <span class="label">身体の疲労</span>
+                  <span class="score" id="val-body">0/6</span>
+                </div>
+                <div class="mini-track"><div class="mini-fill body" id="bar-body"></div></div>
+              </div>
+              <div class="analysis-item">
+                <div class="item-header">
+                  <span class="icon">💭</span>
+                  <span class="label">心の疲労</span>
+                  <span class="score" id="val-mind">0/12</span>
+                </div>
+                <div class="mini-track"><div class="mini-fill mind" id="bar-mind"></div></div>
+              </div>
+              <div class="analysis-item">
+                <div class="item-header">
+                  <span class="icon">🏢</span>
+                  <span class="label">抱え込み度</span>
+                  <span class="score" id="val-env">0/12</span>
+                </div>
+                <div class="mini-track"><div class="mini-fill env" id="bar-env"></div></div>
+              </div>
+            </div>
           </div>
         </div>
         
-        <section class="wanode-cta">
-          <p class="label">メンタルヘルス相談</p>
-          <h2>結果が気になった方は、一人で抱え込まずに相談してみませんか？</h2>
-          
-          <div class="bonus-notice">
-            <div class="bonus-badge">🎁 診断完了特典</div>
-            <p>
-              この結果をスクリーンショットして公式LINEにお送りいただくか、お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br />
-              <strong>初回無料カウンセリングを30分延長（計60分無料）</strong> させていただきます。
-            </p>
-          </div>
-
+        <section class="wanode-cta-box glass-card">
+          <div class="bonus-tag">🎁 診断完了特典</div>
+          <h3>初回カウンセリングを30分延長いたします</h3>
           <p>
-            システム開発もメンタルケアも、根本は「バグ（悩みの種）」を見つけて整理することです。<br />
-            個人カウンセリングまたは法人メンタル相談窓口で、今の状況を一緒に整理し、無理のない一歩を見つけましょう。
+            診断お疲れ様でした。この結果画面をスクリーンショットして公式LINEへ送るか、合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br/>
+            通常の30分無料相談を、<strong>「60分無料」</strong> に拡大させていただきます。
           </p>
-          <div class="cta-buttons">
-            <a href="mailto:contacts@wa-node.com" class="btn-cta">メールで相談する</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="btn-cta secondary">フォームで相談する</a>
+          <div class="cta-btns">
+            <a href="mailto:contacts@wa-node.com" class="primary-btn">メールで相談する</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="secondary-btn">フォームで相談する</a>
           </div>
-          <div class="retry-box">
-            <button class="retry-link" id="retryBtn">もう一度診断する</button>
-          </div>
+          <button class="retry-btn" id="retryBtn">もう一度診断する</button>
         </section>
       </div>
 
@@ -93,212 +138,317 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-    .demo-banner { background: #fdfaf7; border-bottom: 1px solid var(--line); padding: 12px; text-align: center; font-size: 0.9rem; }
-    .banner-cta { color: var(--accent); font-weight: 800; text-decoration: underline; margin-left: 10px; }
-
-    .quiz-container { max-width: 800px; margin: 40px auto 100px; padding: 0 20px; }
-    .quiz-box {
-      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 40px; box-shadow: var(--shadow); position: relative; overflow: hidden;
-      min-height: 500px; display: flex; flex-direction: column; justify-content: center;
-      backdrop-filter: blur(12px);
+    /* Premium Design System */
+    :root {
+      --accent-grad: linear-gradient(135deg, #8a5a32 0%, #d8b98c 100%);
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --neu-shadow: 8px 8px 16px #d1cdc7, -8px -8px 16px #ffffff;
+      --neu-inner: inset 2px 2px 5px rgba(0,0,0,0.05), inset -5px -5px 10px rgba(255,255,255,0.8);
     }
-    .quiz-step { display: none; animation: fadeIn 0.5s ease forwards; }
-    .quiz-step.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    .welcome-icon { text-align: center; font-size: 48px; margin-bottom: 16px; }
-    .welcome-title { font-size: 2.2rem; color: var(--text); margin-bottom: 16px; text-align: center; font-weight: 800; line-height: 1.2; }
-    .welcome-desc { color: var(--muted); font-size: 1rem; line-height: 1.8; margin-bottom: 36px; text-align: center; }
+    /* Background Decoration */
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; overflow: hidden; background: #fdfaf7;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.4;
+      animation: move 20s infinite alternate;
+    }
+    .blob-1 { width: 500px; height: 500px; background: #e9d5c1; top: -10%; left: -10%; }
+    .blob-2 { width: 400px; height: 400px; background: #d2e4d8; bottom: -10%; right: -10%; animation-delay: -5s; }
+    @keyframes move { from { transform: translate(0, 0); } to { transform: translate(50px, 100px); } }
+
+    .demo-banner { background: rgba(138, 90, 50, 0.05); border-bottom: 1px solid var(--line); padding: 12px; text-align: center; font-size: 0.85rem; backdrop-filter: blur(5px); }
+    .banner-cta { color: var(--accent); font-weight: 800; text-decoration: underline; margin-left: 8px; }
+
+    .quiz-container { max-width: 900px; margin: 40px auto 100px; padding: 0 20px; perspective: 1000px; }
     
-    .start-btn {
-      display: block; width: 100%; max-width: 320px; margin: 0 auto; text-align: center;
-      background: var(--accent); color: #fff; padding: 18px 0; border-radius: 999px;
-      font-weight: 800; font-size: 1.1rem; cursor: pointer; border: none; transition: 0.3s;
-      box-shadow: 0 8px 25px rgba(138, 90, 50, 0.2);
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.03);
     }
-    .start-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(138, 90, 50, 0.3); }
 
-    .progress-bar { width: 100%; height: 8px; background: var(--line); border-radius: 999px; margin-bottom: 40px; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .q-number { font-size: 0.9rem; color: var(--accent); font-weight: 800; letter-spacing: 0.1em; margin-bottom: 12px; }
-    .q-title { font-size: 1.5rem; color: var(--text); font-weight: 800; margin-bottom: 32px; line-height: 1.4; }
-    .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .quiz-box {
+      padding: 60px 40px; min-height: 600px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+
+    .quiz-step { display: none; width: 100%; }
+    .quiz-step.active { display: block; }
+
+    /* Animations */
+    .slide-in { animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    .slide-out { animation: slideOut 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-50px); } }
+    
+    .fade-in { animation: fadeIn 0.8s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Welcome Step */
+    .welcome-visual { margin-bottom: 30px; text-align: center; }
+    .pulse-icon {
+      font-size: 64px; display: inline-block;
+      animation: pulse 3s infinite ease-in-out;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .welcome-title { font-size: 3rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; text-align: center; }
+    .accent-text { color: var(--accent); position: relative; display: inline-block; }
+    .accent-text::after { content: ""; position: absolute; bottom: 5px; left: 0; width: 100%; height: 8px; background: rgba(138, 90, 50, 0.1); z-index: -1; }
+    .welcome-desc { font-size: 1.1rem; color: var(--muted); margin-bottom: 40px; text-align: center; line-height: 1.8; }
+    .small-info { display: block; font-size: 0.85rem; margin-top: 15px; opacity: 0.7; }
+
+    .primary-btn {
+      display: block; width: fit-content; margin: 0 auto; padding: 20px 60px;
+      background: var(--accent-grad); color: #fff; border-radius: 999px;
+      font-weight: 800; font-size: 1.2rem; border: none; cursor: pointer;
+      box-shadow: 0 10px 30px rgba(138, 90, 50, 0.2); transition: 0.4s;
+    }
+    .primary-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(138, 90, 50, 0.3); }
+
+    /* Question Step */
+    .quiz-header { margin-bottom: 50px; }
+    .progress-text { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+    #q-num { font-size: 0.9rem; font-weight: 900; color: var(--accent); letter-spacing: 0.1em; }
+    .cat-badge { background: #fff; padding: 4px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 800; color: var(--muted); border: 1px solid var(--line); }
+    .progress-track { width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent-grad); width: 0%; transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+
+    .q-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 40px; line-height: 1.4; color: var(--text); }
+    .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .q-option {
-      background: var(--white); border: 1px solid var(--line); padding: 18px; border-radius: 18px;
-      cursor: pointer; transition: 0.2s; font-size: 1rem; font-weight: 700; color: var(--text); text-align: center;
-      border: none; outline: none; border: 1px solid var(--line); font-family: inherit;
+      background: #fdfaf7; border-radius: 20px; padding: 24px; border: 1px solid transparent;
+      cursor: pointer; transition: 0.3s; text-align: left; position: relative;
+      display: flex; justify-content: space-between; align-items: center;
     }
-    .q-option:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    . neumorphic { box-shadow: var(--neu-shadow); }
+    .q-option:hover { transform: translateY(-4px); border-color: var(--accent); background: #fff; }
+    .opt-label { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .opt-key { font-size: 0.7rem; font-weight: 900; color: var(--accent); opacity: 0.3; border: 1px solid var(--accent); width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
 
-    .result-header { text-align: center; margin-bottom: 40px; }
-    .eval-title { font-size: 1.8rem; color: var(--text); margin-bottom: 16px; font-weight: 800; }
-    .eval-text { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 40px; }
+    .quiz-footer { margin-top: 50px; }
+    .text-btn { background: none; border: none; color: var(--muted); font-weight: 700; cursor: pointer; font-size: 0.9rem; opacity: 0.6; transition: 0.3s; }
+    .text-btn:hover { opacity: 1; color: var(--accent); }
 
-    .chart-box { background: #faf8f5; padding: 32px; border-radius: var(--radius); border: 1px solid var(--line); margin-bottom: 40px; }
-    .chart-title { font-size: 1.1rem; font-weight: 800; color: var(--text); margin-bottom: 24px; text-align: center; }
-    .bar-row { margin-bottom: 20px; }
-    .bar-label { display: flex; justify-content: space-between; font-size: 0.9rem; color: var(--text); font-weight: 800; margin-bottom: 8px; }
-    .bar-track { width: 100%; height: 12px; background: var(--line); border-radius: 999px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 999px; transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1); width: 0%; }
-    .fill-body { background: #3498db; }
-    .fill-mind { background: #e74c3c; }
-    .fill-env { background: #f1c40f; }
-
-    .wanode-cta { background: var(--accent-soft); padding: 40px; border-radius: var(--radius); border: 1px solid var(--line); text-align: center; }
-    .wanode-cta .label { color: var(--accent); font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 12px; }
-    .wanode-cta h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 16px; line-height: 1.3; }
-    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-    .btn-cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: 0.3s; }
-    .btn-cta.secondary { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
-
-    .bonus-notice {
-      background: #fff;
-      border: 2px dashed var(--accent);
-      border-radius: 16px;
-      padding: 24px;
-      margin: 24px 0;
-      text-align: center;
-      position: relative;
+    /* Result Step */
+    .result-layout { display: grid; grid-template-columns: 1fr 340px; gap: 40px; margin-bottom: 60px; }
+    .result-main { text-align: center; background: #fff; padding: 40px; border-radius: 24px; box-shadow: var(--shadow); }
+    
+    .gauge-container { position: relative; width: 160px; height: 160px; margin: 0 auto 30px; }
+    .gauge-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+    .gauge-bg { fill: none; stroke: #f0f0f0; stroke-width: 8; }
+    .gauge-fill {
+      fill: none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round;
+      stroke-dasharray: 283; stroke-dashoffset: 283;
+      transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .bonus-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
-      color: #fff;
-      padding: 4px 16px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 800;
+    .gauge-content {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center;
     }
-    .bonus-notice p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text); font-weight: 400; }
-    .bonus-notice strong { color: var(--accent); font-weight: 800; }
+    .gauge-label { font-size: 0.75rem; font-weight: 800; color: var(--muted); }
+    .gauge-value { font-size: 2.2rem; font-weight: 900; color: var(--text); }
 
-    .retry-box { margin-top: 24px; text-align: center; }
-    .retry-link { background: none; border: none; color: var(--muted); text-decoration: underline; font-size: 0.9rem; cursor: pointer; padding: 0; font-family: inherit; }
+    .eval-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 15px; }
+    .eval-text { font-size: 1rem; line-height: 1.8; color: var(--muted); text-align: left; }
 
-    @media(max-width: 600px) {
-      .quiz-box { padding: 30px 20px; }
+    .result-analysis { background: rgba(255,255,255,0.5); padding: 30px; border-radius: 24px; }
+    .result-analysis h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 25px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+    .analysis-item { margin-bottom: 20px; }
+    .item-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: 800; font-size: 0.9rem; }
+    .item-header .score { margin-left: auto; color: var(--accent); }
+    .mini-track { width: 100%; height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
+    .mini-fill { height: 100%; width: 0%; transition: width 1.5s cubic-bezier(0.23, 1, 0.32, 1); border-radius: 999px; }
+    .mini-fill.body { background: #3498db; }
+    .mini-fill.mind { background: #e74c3c; }
+    .mini-fill.env { background: #f1c40f; }
+
+    .wanode-cta-box { margin-top: 40px; padding: 50px; text-align: center; border: 2px solid var(--accent); position: relative; }
+    .bonus-tag { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 5px 25px; border-radius: 999px; font-weight: 900; font-size: 0.9rem; }
+    .wanode-cta-box h3 { font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; }
+    .wanode-cta-box p { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 30px; }
+    .cta-btns { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; }
+    .secondary-btn { padding: 18px 40px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font-weight: 800; text-decoration: none; transition: 0.3s; }
+    .secondary-btn:hover { background: var(--accent-soft); }
+    .retry-btn { background: none; border: none; color: var(--muted); text-decoration: underline; font-weight: 700; cursor: pointer; }
+
+    @media (max-width: 820px) {
+      .result-layout { grid-template-columns: 1fr; }
+      .quiz-box { padding: 40px 20px; }
+      .welcome-title { font-size: 2.2rem; }
       .q-options { grid-template-columns: 1fr; }
-      .eval-title { font-size: 1.5rem; }
+      .q-title { font-size: 1.4rem; }
     }
 </style>
 
 <script is:inline>
     const questions = [
-      { cat: "body", q: "最近、寝つきが悪い、または途中で目が覚めてしまう。" },
-      { cat: "body", q: "理由もなく体がだるい、休んでも疲れが取れないと感じる。" },
-      { cat: "mind", q: "ちょっとしたことでイライラしたり、感情的になりやすくなった。" },
-      { cat: "mind", q: "以前は楽しかったこと（趣味など）に対して、興味や喜びを感じない。" },
-      { cat: "mind", q: "仕事や日常の作業で、集中力が続かずミスが増えた気がする。" },
-      { cat: "mind", q: "理由もなく悲しくなったり、孤独や虚無感を感じることがある。" },
-      { cat: "env",  q: "自分の悩みや弱音を、見栄を張らずに素直に打ち明けられる相手がいない。" },
-      { cat: "env",  q: "「すべて自分がやらなければならない」という重圧に押しつぶされそうになる。" },
-      { cat: "env",  q: "自分のやっていることに価値がない、または自信が持てないと感じる。" },
-      { cat: "env",  q: "「誰にも会いたくない」「すべてを投げ出したい」とふと想う瞬間がある。" }
+      { cat: "body", catLabel: "身体のサイン", q: "最近、寝つきが悪い、または途中で目が覚めてしまう。" },
+      { cat: "body", catLabel: "身体のサイン", q: "理由もなく体がだるい、休んでも疲れが取れないと感じる。" },
+      { cat: "mind", catLabel: "心のサイン", q: "ちょっとしたことでイライラしたり、感情的になりやすくなった。" },
+      { cat: "mind", catLabel: "心のサイン", q: "以前は楽しかったこと（趣味など）に対して、興味や喜びを感じない。" },
+      { cat: "mind", catLabel: "心のサイン", q: "仕事や日常の作業で、集中力が続かずミスが増えた気がする。" },
+      { cat: "mind", catLabel: "心のサイン", q: "理由もなく悲しくなったり、孤独や虚無感を感じることがある。" },
+      { cat: "env",  catLabel: "環境・プレッシャー", q: "自分の悩みや弱音を、見栄を張らずに素直に打ち明けられる相手がいない。" },
+      { cat: "env",  catLabel: "環境・プレッシャー", q: "「すべて自分がやらなければならない」という重圧に押しつぶされそうになる。" },
+      { cat: "env",  catLabel: "環境・プレッシャー", q: "自分のやっていることに価値がない、または自信が持てないと感じる。" },
+      { cat: "env",  catLabel: "環境・プレッシャー", q: "「誰にも会いたくない」「すべてを投げ出したい」とふと想う瞬間がある。" }
     ];
 
     let currentQ = 0;
     let scores = { body: 0, mind: 0, env: 0 };
+    let history = []; // To support "Back" button
 
     function showStep(id) {
-      document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
+      const steps = document.querySelectorAll('.quiz-step');
+      const target = document.getElementById(id);
+      
+      steps.forEach(el => {
+        if (el.classList.contains('active')) {
+          el.classList.add('slide-out');
+          setTimeout(() => {
+            el.classList.remove('active', 'slide-out');
+            target.classList.add('active', 'slide-in');
+          }, 300);
+        }
+      });
+      
+      if (!Array.from(steps).some(el => el.classList.contains('active'))) {
+         target.classList.add('active', 'fade-in');
+      }
     }
 
     function renderQuestion() {
       const qObj = questions[currentQ];
       const qNum = document.getElementById('q-num');
+      const qCat = document.getElementById('q-cat');
       const qText = document.getElementById('q-text');
       const progress = document.getElementById('progress');
+      const qContainer = document.getElementById('q-container');
       
-      if (qNum) qNum.textContent = `Q.${currentQ + 1} / ${questions.length}`;
-      if (progress) progress.style.width = `${((currentQ) / questions.length) * 100}%`;
-      if (qText) qText.textContent = qObj.q;
+      // Update data
+      qNum.textContent = `Q.${currentQ + 1} / ${questions.length}`;
+      qCat.textContent = qObj.catLabel;
+      qText.textContent = qObj.q;
+      progress.style.width = `${((currentQ) / questions.length) * 100}%`;
+      
+      // Animation
+      qContainer.classList.remove('fade-in');
+      void qContainer.offsetWidth; // Trigger reflow
+      qContainer.classList.add('fade-in');
+
+      // Back button visibility
+      document.getElementById('backBtn').style.visibility = currentQ > 0 ? 'visible' : 'hidden';
     }
 
     function selectOption(score) {
       const cat = questions[currentQ].cat;
+      history.push({ cat, score });
       scores[cat] += score;
-      currentQ++;
-      if (currentQ < questions.length) {
+      
+      if (currentQ < questions.length - 1) {
+        currentQ++;
         renderQuestion();
       } else {
         showResult();
       }
     }
 
+    function prevQuestion() {
+      if (currentQ > 0) {
+        currentQ--;
+        const last = history.pop();
+        scores[last.cat] -= last.score;
+        renderQuestion();
+      }
+    }
+
     function showResult() {
       showStep('step-result');
-      const progress = document.getElementById('progress');
-      if (progress) progress.style.width = `100%`;
-      
       const totalScore = scores.body + scores.mind + scores.env;
+      const maxScore = questions.length * 3;
+      const scorePercent = Math.round((totalScore / maxScore) * 100);
+      
+      document.getElementById('res-score').textContent = `${scorePercent}%`;
+      
+      // Gauge Animation
+      const circle = document.getElementById('gauge-circle');
+      const radius = 45;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference - (scorePercent / 100) * circumference;
+      setTimeout(() => {
+        circle.style.strokeDashoffset = offset;
+      }, 500);
+
       const resTitle = document.getElementById('res-title');
       const resDesc = document.getElementById('res-desc');
       
-      if (resTitle && resDesc) {
-          if (totalScore >= 20) {
-            resTitle.textContent = "【危険信号】心が悲鳴を上げています";
-            resTitle.style.color = "#e74c3c";
-            resDesc.innerHTML = "かなり無理が重なっており、心身ともに限界に近い状態かもしれません。今は「頑張ること」よりも「休むこと」が一番の仕事です。一人で抱え込まず、まずは心の中のモヤモヤを誰かに話すことから始めてみましょう。";
-          } else if (totalScore >= 10) {
-            resTitle.textContent = "【要注意】少し無理が蓄積し始めています";
-            resTitle.style.color = "#f39c12";
-            resDesc.innerHTML = "「まだ頑張れる」と思っているかもしれませんが、確実にストレスが溜まってきています。限界を迎える前に、意識的に自分を甘やかす時間や、悩みを聴いてもらう時間を作りましょう。";
-          } else {
-            resTitle.textContent = "【良好】心身ともに安定しています";
-            resTitle.style.color = "var(--accent)";
-            resDesc.innerHTML = "今のところ、ストレスとうまく付き合えているようです。引き続きご自分のペースを大切にしながら、無理のない範囲で活動を続けてくださいね！";
-          }
+      if (totalScore >= 20) {
+        resTitle.textContent = "【危険信号】心が悲鳴を上げています";
+        resTitle.style.color = "#e74c3c";
+        resDesc.innerHTML = "かなり無理が重なっており、心身ともに限界に近い状態かもしれません。今は「頑張ること」よりも「休むこと」が一番の仕事です。一人で抱え込まず、まずは心の中のモヤモヤを誰かに話すことから始めてみましょう。";
+      } else if (totalScore >= 10) {
+        resTitle.textContent = "【要注意】少し無理が蓄積し始めています";
+        resTitle.style.color = "#f39c12";
+        resDesc.innerHTML = "「まだ頑張れる」と思っているかもしれませんが、確実にストレスが溜まってきています。限界を迎える前に、意識的に自分を甘やかす時間や、悩みを聴いてもらう時間を作りましょう。";
+      } else {
+        resTitle.textContent = "【良好】心身ともに安定しています";
+        resTitle.style.color = "var(--accent)";
+        resDesc.innerHTML = "今のところ、ストレスとうまく付き合えているようです。引き続きご自分のペースを大切にしながら、無理のない範囲で活動を続けてくださいね！";
       }
 
+      // Mini bars
       setTimeout(() => {
-        const barBody = document.getElementById('bar-body');
-        const valBody = document.getElementById('val-body');
-        const barMind = document.getElementById('bar-mind');
-        const valMind = document.getElementById('val-mind');
-        const barEnv = document.getElementById('bar-env');
-        const valEnv = document.getElementById('val-env');
-
-        if (barBody) barBody.style.width = `${(scores.body / 6) * 100}%`;
-        if (valBody) valBody.textContent = `${scores.body}/6`;
-        if (barMind) barMind.style.width = `${(scores.mind / 12) * 100}%`;
-        if (valMind) valMind.textContent = `${scores.mind}/12`;
-        if (barEnv) barEnv.style.width = `${(scores.env / 12) * 100}%`;
-        if (valEnv) valEnv.textContent = `${scores.env}/12`;
-      }, 100);
+        document.getElementById('bar-body').style.width = `${(scores.body / 6) * 100}%`;
+        document.getElementById('val-body').textContent = `${scores.body}/6`;
+        document.getElementById('bar-mind').style.width = `${(scores.mind / 12) * 100}%`;
+        document.getElementById('val-mind').textContent = `${scores.mind}/12`;
+        document.getElementById('bar-env').style.width = `${(scores.env / 12) * 100}%`;
+        document.getElementById('val-env').textContent = `${scores.env}/12`;
+      }, 600);
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        const startBtn = document.getElementById('startBtn');
-        const retryBtn = document.getElementById('retryBtn');
-        const qOptions = document.querySelectorAll('.q-option');
+      document.getElementById('startBtn').addEventListener('click', () => {
+        currentQ = 0;
+        scores = { body: 0, mind: 0, env: 0 };
+        history = [];
+        showStep('step-question');
+        renderQuestion();
+      });
 
-        if (startBtn) {
-            startBtn.addEventListener('click', () => {
-                currentQ = 0;
-                scores = { body: 0, mind: 0, env: 0 };
-                showStep('step-question');
-                renderQuestion();
-            });
-        }
+      document.getElementById('backBtn').addEventListener('click', prevQuestion);
 
-        if (retryBtn) {
-            retryBtn.addEventListener('click', () => {
-                currentQ = 0;
-                scores = { body: 0, mind: 0, env: 0 };
-                showStep('step-welcome');
-            });
-        }
+      document.getElementById('retryBtn').addEventListener('click', () => {
+        location.reload();
+      });
 
-        qOptions.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const score = parseInt(btn.getAttribute('data-score'));
-                selectOption(score);
-            });
+      document.querySelectorAll('.q-option').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const score = parseInt(btn.getAttribute('data-score'));
+          selectOption(score);
         });
+      });
+
+      // Keyboard Shortcuts
+      document.addEventListener('keydown', (e) => {
+        const stepQuestion = document.getElementById('step-question');
+        if (!stepQuestion.classList.contains('active')) return;
+
+        if (e.key >= '1' && e.key <= '4') {
+          const index = parseInt(e.key) - 1;
+          const options = document.querySelectorAll('.q-option');
+          if (options[index]) options[index].click();
+        }
+        if (e.key === 'Backspace' || e.key === 'ArrowLeft') {
+          prevQuestion();
+        }
+      });
     });
 </script>

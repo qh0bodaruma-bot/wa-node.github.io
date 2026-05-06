@@ -2,379 +2,424 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="心理導線Web制作 要件ヒアリング｜和-Node" description="LP・ホームページ制作の要件を整理できるヒアリング体験。目的・予算・重視ポイントから、和-Nodeへの相談用サマリーを自動生成します。">
-  <main>
-    <section class="hero">
-      <div class="wrap">
-        <span class="eyebrow">Requirements Interview</span>
-        <h1>Web制作要件ヒアリング</h1>
-        <p class="lead">
-          「どんなサイトにしたいか」を整理するためのステップです。<br />
-          回答後に相談用サマリーを自動生成します。
-        </p>
-      </div>
-    </section>
+<BaseLayout title="LP制作・要件ヒアリング | 和-Node" description="理想のWebサイト・LP制作への第一歩。構成案作成ウィザードで、あなたのビジネスの強みをプロの視点で整理します。">
+  <!-- Background Decoration -->
+  <div class="bg-decoration">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="pattern-overlay"></div>
+  </div>
 
-    <div class="wrap">
-      <div class="wizard-container">
-        <div class="stepper" id="stepper">
-          <!-- JS dynamic -->
+  <div class="demo-banner">
+    <strong>【制作例サンプル】</strong> これは和-Nodeの技術を体験できるデモアプリです。このようなカスタムツールの導入をご検討中の方は <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">こちらから無料相談</a>
+  </div>
+
+  <main class="wizard-page">
+    <div class="wizard-card glass-card">
+      
+      <!-- Step 0: Welcome -->
+      <div id="step-welcome" class="wizard-step active">
+        <div class="welcome-visual">
+          <div class="float-icon">✍️</div>
+        </div>
+        <span class="eyebrow">Creative Direction</span>
+        <h1 class="welcome-title">LP・構成案作成<br/><span class="accent-text">ウィザード</span></h1>
+        <p class="welcome-desc">
+          あなたのビジネスの想いや目的を、整理された「要件定義」へと変換します。<br />
+          回答後に、和-Nodeへの相談にそのまま使えるサマリーを自動生成します。<br />
+          <span class="small-info">所要時間：約3分</span>
+        </p>
+        <button class="primary-btn pulse" id="startBtn">ヒアリングを開始する</button>
+      </div>
+
+      <!-- Steps 1-9: Wizard Steps -->
+      <div id="step-quiz" class="wizard-step">
+        <div class="wizard-header">
+          <div class="stepper-wrap">
+            <div class="stepper-line">
+              <div class="stepper-progress" id="stepper-progress"></div>
+            </div>
+            <div class="stepper-nodes" id="stepper-nodes">
+              <!-- JS dynamic nodes -->
+            </div>
+          </div>
+          <div class="step-info">
+            <span id="step-label">Step 1</span>
+            <span id="step-count">1 / 9</span>
+          </div>
         </div>
 
-        <form id="wizardForm">
-          <div class="question-block active" data-step="1">
-            <h2>1. 業種・ビジネスを教えてください</h2>
-            <input type="text" name="industry" class="input-text" placeholder="例：個人カウンセラー、カフェ、整体院など" />
-          </div>
-
-          <div class="question-block" data-step="2">
-            <h2>2. 制作の主な目的は何ですか？</h2>
-            <div class="choices">
-              <label class="choice-card"><input type="radio" name="goal" value="問い合わせ・予約を増やしたい" />
-                <div class="choice-text"><strong>問い合わせ・予約の獲得</strong><span>新規のお客様からのアクションを重視します。</span></div>
-              </label>
-              <label class="choice-card"><input type="radio" name="goal" value="信頼感・専門性を伝えたい" />
-                <div class="choice-text"><strong>信頼感の構築</strong><span>名刺代わりや、実績紹介としての役割を重視します。</span></div>
-              </label>
-              <label class="choice-card"><input type="radio" name="goal" value="商品・サービスを直接販売したい" />
-                <div class="choice-text"><strong>直接販売・決済</strong><span>LPから購入や申し込みまで繋げたい場合に。</span></div>
-              </label>
-            </div>
-          </div>
-
-          <div class="question-block" data-step="3">
-            <h2>3. 現在のサイト状況は？</h2>
-            <div class="choices">
-              <label class="choice-card"><input type="radio" name="current" value="新規立ち上げ" />
-                <div class="choice-text"><strong>新規立ち上げ</strong><span>新しくドメインを取得して作成します。</span></div>
-              </label>
-              <label class="choice-card"><input type="radio" name="current" value="既存サイトのリニューアル" />
-                <div class="choice-text"><strong>リニューアル</strong><span>今のサイトの課題を解決したい場合に。</span></div>
-              </label>
-              <label class="choice-card"><input type="radio" name="current" value="LPのみ追加" />
-                <div class="choice-text"><strong>LPのみ追加</strong><span>既存サイトはそのまま、特定の集客ページを作りたい。</span></div>
-              </label>
-            </div>
-          </div>
-
-          <div class="question-block" data-step="4">
-            <h2>4. 制作するページ規模のイメージ</h2>
-            <div class="choices">
-              <label class="choice-card"><input type="radio" name="scale" value="1ページのLP" />
-                <div class="choice-text"><strong>1ページのLP</strong><span>縦に長い1枚のページ。訴求力重視。</span></div>
-              </label>
-              <label class="choice-card"><input type="radio" name="scale" value="2〜5ページ程度" />
-                <div class="choice-text"><strong>小規模サイト（2〜5ページ）</strong><span>トップ、サービス、料金、プロフィール、問い合わせ。</span></div>
-              </label>
-              <label class="choice-card"><input type="radio" name="scale" value="6ページ以上" />
-                <div class="choice-text"><strong>中規模以上（6ページ〜）</strong><span>事業内容が多い、実績を細かく載せたい場合など。</span></div>
-              </label>
-            </div>
-          </div>
-
-          <div class="question-block" data-step="5">
-            <h2>5. 理想のデザインイメージは？</h2>
-            <div class="choices">
-              <label class="choice-card"><input type="radio" name="taste" value="やさしい・安心感" /><strong>やさしい・安心感</strong></label>
-              <label class="choice-card"><input type="radio" name="taste" value="誠実・プロフェッショナル" /><strong>誠実・プロフェッショナル</strong></label>
-              <label class="choice-card"><input type="radio" name="taste" value="シンプル・ミニマル" /><strong>シンプル・ミニマル</strong></label>
-              <label class="choice-card"><input type="radio" name="taste" value="高級感・モダン" /><strong>高級感・モダン</strong></label>
-            </div>
-          </div>
-
-          <div class="question-block" data-step="6">
-            <h2>6. ご希望の納期目安</h2>
-            <div class="choices">
-              <label class="choice-card"><input type="radio" name="deadline" value="できるだけ早く（特急希望）" /><strong>できるだけ早く</strong></label>
-              <label class="choice-card"><input type="radio" name="deadline" value="1ヶ月以内" /><strong>1ヶ月以内</strong></label>
-              <label class="choice-card"><input type="radio" name="deadline" value="2ヶ月程度" /><strong>2ヶ月程度</strong></label>
-              <label class="choice-card"><input type="radio" name="deadline" value="特に決まっていない" /><strong>特に決まっていない</strong></label>
-            </div>
-          </div>
-
-          <div class="question-block" data-step="7">
-            <h2>7. 制作予算の目安</h2>
-            <div class="choices">
-              <label class="choice-card"><input type="radio" name="budget" value="〜10万円" /><strong>〜10万円</strong></label>
-              <label class="choice-card"><input type="radio" name="budget" value="10〜20万円" /><strong>10〜20万円</strong></label>
-              <label class="choice-card"><input type="radio" name="budget" value="20万円〜" /><strong>20万円〜</strong></label>
-              <label class="choice-card"><input type="radio" name="budget" value="相談して決めたい" /><strong>相談して決めたい</strong></label>
-            </div>
-          </div>
-
-          <div class="question-block" data-step="8">
-            <h2>8. 重視したいポイント（複数可）</h2>
-            <div class="choices">
-              <label class="choice-card"><input type="checkbox" name="points" value="問い合わせ導線" /><strong>問い合わせ導線</strong></label>
-              <label class="choice-card"><input type="checkbox" name="points" value="読みやすい文章・コピー" /><strong>読みやすい文章・コピー</strong></label>
-              <label class="choice-card"><input type="checkbox" name="points" value="スマホでの使いやすさ" /><strong>スマホでの使いやすさ</strong></label>
-              <label class="choice-card"><input type="checkbox" name="points" value="SEO（検索対策）" /><strong>SEO（検索対策）</strong></label>
-              <label class="choice-card"><input type="checkbox" name="points" value="予約・診断機能などのシステム" /><strong>システム連携（予約・診断）</strong></label>
-            </div>
-          </div>
-
-          <div class="question-block" data-step="9">
-            <h2>9. その他、気になる点やメッセージ</h2>
-            <textarea name="message" class="textarea" placeholder="例：原稿の準備が不安です。車いすユーザー視点でのアドバイスも欲しいです。"></textarea>
-          </div>
-
-          <div class="actions">
-            <button type="button" class="btn btn-prev" id="btnPrev">← 戻る</button>
-            <button type="button" class="btn btn-next" id="btnNext">次へ進む →</button>
-            <button type="submit" class="btn btn-next" id="btnSubmit" style="display:none">ヒアリングを完了する</button>
+        <form id="wizardForm" class="quiz-form">
+          <div id="q-content" class="q-content">
+            <!-- Questions will be injected here -->
           </div>
         </form>
 
-        <div class="summary-wrap" id="summaryWrap">
-          <div class="result-doc">
+        <div class="wizard-footer">
+          <button id="backBtn" class="text-btn">← 戻る</button>
+          <button id="nextBtn" class="primary-btn-sm">次へ進む →</button>
+        </div>
+      </div>
+
+      <!-- Step 10: Result Summary -->
+      <div id="step-result" class="wizard-step">
+        <div class="result-container">
+          <div class="doc-view glass-card">
+            <div class="doc-ribbon">SUMMARY</div>
             <div class="doc-header">
-              <h3>Web Production Strategy Summary</h3>
+              <h2>Web Production Strategy Brief</h2>
+              <p>ヒアリングに基づいた構成要件のまとめ</p>
             </div>
-            <div class="data-grid" id="summaryGrid">
-              <!-- JS Dynamic -->
+            <div class="doc-body" id="summaryGrid">
+              <!-- JS dynamic data -->
             </div>
-            <div class="recommend-box">
-              <h4>🎯 和-Nodeからの初期提案</h4>
+            <div class="doc-ai-box">
+              <div class="ai-label">💡 和-Nodeからの初期提案</div>
               <p id="recommendText"></p>
             </div>
+          </div>
 
-            <div class="bonus-notice">
-              <div class="bonus-badge">🎁 ヒアリング完了特典</div>
+          <div class="result-actions">
+            <div class="bonus-notice-box glass-card">
+              <div class="bonus-tag">🎁 相談延長特典</div>
               <p>
-                このサマリーをコピーして公式LINEにお送りいただくか、お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br />
-                <strong>初回無料カウンセリングを30分延長（計60分無料）</strong> させていただきます。
+                この要件サマリーをコピーして公式LINEにお送りください。<br/>
+                合言葉 <strong>「わのーど診断」</strong> とともに、初回無料相談を <strong>「60分」</strong> に延長します。
               </p>
+              <div class="summary-code-block" id="copyArea"></div>
+              <button class="copy-btn" id="btnCopy">サマリーをコピーする</button>
             </div>
 
-            <div class="copy-area" id="copyArea"></div>
-            <div class="actions">
-              <button class="btn btn-next" id="btnCopy">サマリーをコピーする</button>
-              <a class="btn btn-prev" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank">問い合わせフォームへ</a>
+            <div class="final-cta">
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="primary-btn">正式な制作相談に進む</a>
+              <button class="retry-btn" id="retryBtn">もう一度入力する</button>
             </div>
           </div>
         </div>
       </div>
+
     </div>
   </main>
 </BaseLayout>
 
 <style>
-    .wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
-    .hero { padding: 50px 0 30px; text-align: center; }
-    .eyebrow {
-      display: inline-block; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); font-size: 0.82rem; font-weight: 800; background: var(--accent-soft);
-      padding: 4px 12px; border-radius: 999px; margin-bottom: 16px;
-    }
-    .hero h1 { font-size: clamp(1.8rem, 4vw, 3rem); line-height: 1.2; margin: 0 0 16px; font-weight: 800; }
-    .lead { font-size: 1rem; color: var(--muted); max-width: 700px; margin: 0 auto; }
-
-    .wizard-container {
-      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 40px; box-shadow: var(--shadow); margin-bottom: 80px; min-height: 500px; position: relative;
+    :root {
+      --wiz-accent: #8a5a32;
+      --wiz-accent-light: #d8b98c;
+      --wiz-text: #2c241e;
+      --wiz-bg: #fdfaf7;
+      --glass-bg: rgba(255, 255, 255, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.4);
     }
 
-    .stepper { display: flex; justify-content: space-between; margin-bottom: 40px; position: relative; }
-    .stepper::before { content: ""; position: absolute; top: 15px; left: 0; right: 0; height: 2px; background: var(--line); z-index: 1; }
+    /* Background Decoration */
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; background: var(--wiz-bg); overflow: hidden;
+    }
+    .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; animation: float 20s infinite alternate; }
+    .glow-1 { width: 600px; height: 600px; background: #ebd5b3; top: -10%; left: -10%; }
+    .glow-2 { width: 500px; height: 500px; background: #d2e4d8; bottom: -10%; right: -10%; animation-delay: -5s; }
+    .pattern-overlay {
+      position: absolute; width: 100%; height: 100%;
+      background-image: radial-gradient(var(--wiz-accent) 0.5px, transparent 0.5px);
+      background-size: 40px 40px; opacity: 0.05;
+    }
+    @keyframes float { from { transform: translate(0,0); } to { transform: translate(40px, 80px); } }
+
+    .demo-banner { background: rgba(0,0,0,0.02); border-bottom: 1px solid var(--line); padding: 12px; text-align: center; font-size: 0.85rem; backdrop-filter: blur(5px); }
+    .banner-cta { color: var(--wiz-accent); font-weight: 800; text-decoration: underline; margin-left: 8px; }
+
+    .wizard-page { max-width: 1000px; margin: 40px auto 100px; padding: 0 20px; }
     
-    .question-block { display: none; animation: fadeIn .4s ease; }
-    .question-block.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    .glass-card { background: var(--glass-bg); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.05); }
 
-    .question-block h2 { font-size: 1.6rem; margin-bottom: 24px; line-height: 1.3; font-weight: 800; }
+    .wizard-card { padding: 60px 50px; min-height: 650px; display: flex; flex-direction: column; justify-content: center; position: relative; }
 
-    .choices { display: grid; gap: 14px; }
-    .choice-card {
-      display: flex; align-items: flex-start; gap: 14px; padding: 18px;
-      border: 1px solid var(--line); border-radius: 18px; background: var(--white); cursor: pointer; transition: 0.2s;
-    }
-    .choice-card:hover { border-color: var(--accent); background: var(--accent-soft); }
-    .choice-card input { margin-top: 6px; accent-color: var(--accent); }
-    .choice-text strong { display: block; font-size: 1.05rem; margin-bottom: 4px; }
-    .choice-text span { display: block; font-size: 0.88rem; color: var(--muted); }
+    .wizard-step { display: none; width: 100%; }
+    .wizard-step.active { display: block; }
 
-    .input-text, .textarea {
-      width: 100%; padding: 16px; border: 1px solid var(--line); border-radius: 16px; font-size: 1rem; font-family: inherit; transition: 0.2s;
-    }
-    .input-text:focus, .textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
-    .textarea { min-height: 150px; resize: vertical; }
+    /* Transitions */
+    .fade-slide-in { animation: fadeSlideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    .fade-slide-out { animation: fadeSlideOut 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeSlideOut { from { opacity: 1; transform: translateY(0); } to { opacity: 0; transform: translateY(-20px); } }
 
-    .actions { display: flex; justify-content: space-between; margin-top: 40px; gap: 16px; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; padding: 14px 28px;
-      border-radius: 999px; font-weight: 800; cursor: pointer; transition: 0.3s; border: none; font-size: 1rem;
-    }
-    .btn-prev { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
-    .btn-prev:hover { background: var(--accent-soft); }
-    .btn-next { background: var(--accent); color: var(--white); flex: 1; }
-    .btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(138, 90, 50, 0.3); }
+    /* Welcome */
+    .float-icon { font-size: 72px; text-align: center; margin-bottom: 24px; animation: floatIcon 4s infinite ease-in-out; }
+    @keyframes floatIcon { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+    .eyebrow { display: block; text-align: center; font-size: 0.8rem; font-weight: 900; color: var(--wiz-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 10px; }
+    .welcome-title { font-size: 3.5rem; font-weight: 900; line-height: 1.1; margin-bottom: 24px; text-align: center; color: var(--wiz-text); }
+    .accent-text { color: var(--wiz-accent); }
+    .welcome-desc { font-size: 1.1rem; color: var(--muted); text-align: center; margin-bottom: 48px; line-height: 1.8; }
+    .small-info { display: block; font-size: 0.85rem; margin-top: 15px; opacity: 0.6; }
 
-    .summary-wrap { display: none; margin-top: 40px; }
-    .summary-wrap.show { display: block; animation: fadeIn .6s ease; }
-    .result-doc {
-      background: #fff; border: 2px solid var(--line); border-radius: 20px; padding: 40px;
-      position: relative; box-shadow: 0 30px 80px rgba(0,0,0,0.05);
-    }
-    .doc-header { border-bottom: 2px solid var(--text); padding-bottom: 16px; margin-bottom: 30px; }
-    .doc-header h3 { margin: 0; font-size: 1.4rem; letter-spacing: 0.05em; font-weight: 800; }
+    .primary-btn { display: block; width: fit-content; margin: 0 auto; padding: 20px 64px; background: var(--wiz-accent); color: #fff; border-radius: 999px; font-weight: 800; font-size: 1.2rem; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(138, 90, 50, 0.2); transition: 0.4s; text-decoration: none; }
+    .primary-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(138, 90, 50, 0.3); }
+
+    /* Wizard UI */
+    .wizard-header { margin-bottom: 50px; }
+    .stepper-wrap { position: relative; margin-bottom: 20px; padding: 0 10px; }
+    .stepper-line { position: absolute; top: 50%; left: 0; width: 100%; height: 2px; background: rgba(0,0,0,0.05); transform: translateY(-50%); z-index: 1; }
+    .stepper-progress { position: absolute; top: 0; left: 0; height: 100%; background: var(--wiz-accent); width: 0%; transition: width 0.5s ease; }
+    .stepper-nodes { display: flex; justify-content: space-between; position: relative; z-index: 2; }
+    .step-node { width: 12px; height: 12px; background: #fff; border: 2px solid rgba(0,0,0,0.1); border-radius: 50%; transition: 0.4s; }
+    .step-node.active { border-color: var(--wiz-accent); background: var(--wiz-accent); transform: scale(1.4); }
+    .step-node.done { border-color: var(--wiz-accent); background: var(--wiz-accent-light); }
+
+    .step-info { display: flex; justify-content: space-between; align-items: baseline; }
+    #step-label { font-size: 1.2rem; font-weight: 900; color: var(--wiz-accent); }
+    #step-count { font-size: 0.8rem; font-weight: 800; color: var(--muted); }
+
+    /* Quiz Body */
+    .q-content h2 { font-size: 1.8rem; font-weight: 900; margin-bottom: 30px; line-height: 1.3; color: var(--wiz-text); }
     
-    .data-grid { display: grid; gap: 16px; margin-bottom: 30px; }
-    .data-row { display: grid; grid-template-columns: 180px 1fr; gap: 20px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
-    .data-row b { font-size: 0.9rem; color: var(--muted); }
-    .data-row span { font-weight: 700; color: var(--text); }
-
-    .recommend-box { background: var(--accent-soft); border-left: 4px solid var(--accent); padding: 20px; border-radius: 0 12px 12px 0; margin-bottom: 30px; }
-    .recommend-box h4 { margin: 0 0 8px; color: var(--accent); font-weight: 800; }
-
-    .copy-area {
-      width: 100%; background: #fdfaf7; border: 1px dashed var(--accent); border-radius: 12px;
-      padding: 16px; font-family: monospace; font-size: 0.85rem; margin-bottom: 24px; color: var(--muted); white-space: pre-wrap;
+    .choices-grid { display: grid; grid-template-columns: 1fr; gap: 15px; }
+    .choice-item {
+      display: flex; align-items: center; gap: 20px; padding: 25px;
+      background: #fff; border-radius: 20px; border: 2px solid transparent;
+      cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
     }
+    .choice-item:hover { border-color: var(--wiz-accent-light); transform: translateX(5px); }
+    .choice-item.selected { border-color: var(--wiz-accent); background: #fdfaf7; box-shadow: 0 8px 25px rgba(138, 90, 50, 0.08); }
+    .choice-icon { font-size: 2rem; width: 40px; text-align: center; }
+    .choice-text b { display: block; font-size: 1.1rem; margin-bottom: 4px; color: var(--wiz-text); }
+    .choice-text span { font-size: 0.85rem; color: var(--muted); line-height: 1.4; }
 
-    .bonus-notice {
-      background: #fff;
-      border: 2px dashed var(--accent);
-      border-radius: 16px;
-      padding: 24px;
-      margin: 24px 0 32px;
-      text-align: center;
-      position: relative;
-    }
-    .bonus-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
-      color: #fff;
-      padding: 4px 16px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 800;
-    }
-    .bonus-notice p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text); }
-    .bonus-notice strong { color: var(--accent); }
+    .input-field { width: 100%; padding: 24px; border: 2px solid rgba(0,0,0,0.05); border-radius: 20px; font-size: 1.1rem; font-family: inherit; background: #fff; transition: 0.3s; }
+    .input-field:focus { outline: none; border-color: var(--wiz-accent); box-shadow: 0 0 0 5px rgba(138, 90, 50, 0.1); }
+    .textarea-field { min-height: 180px; resize: vertical; }
 
-    @media (max-width: 600px) {
-      .wizard-container { padding: 24px; }
-      .data-row { grid-template-columns: 1fr; gap: 4px; }
-      .actions { flex-direction: column; }
+    .wizard-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 50px; }
+    .text-btn { background: none; border: none; color: var(--muted); font-weight: 800; cursor: pointer; opacity: 0.6; transition: 0.3s; font-size: 1rem; }
+    .text-btn:hover { opacity: 1; color: var(--wiz-accent); }
+    .primary-btn-sm { padding: 16px 40px; background: var(--wiz-accent); color: #fff; border-radius: 999px; font-weight: 800; border: none; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
+    .primary-btn-sm:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(138, 90, 50, 0.2); }
+
+    /* Result Result */
+    .result-container { display: grid; grid-template-columns: 1fr 380px; gap: 40px; }
+    .doc-view { background: #fff; padding: 60px 40px; position: relative; border-radius: 12px; }
+    .doc-ribbon { position: absolute; top: 20px; right: -10px; background: var(--wiz-accent); color: #fff; padding: 4px 20px; font-weight: 900; font-size: 0.75rem; letter-spacing: 0.2em; transform: rotate(5deg); box-shadow: 2px 2px 5px rgba(0,0,0,0.1); }
+    .doc-header { border-bottom: 3px solid var(--wiz-text); padding-bottom: 20px; margin-bottom: 40px; }
+    .doc-header h2 { font-size: 1.6rem; font-weight: 900; color: var(--wiz-text); margin-bottom: 5px; font-family: "Playfair Display", serif; }
+    .doc-header p { font-size: 0.85rem; color: var(--muted); font-weight: 700; margin: 0; }
+    
+    .doc-body { display: grid; gap: 20px; }
+    .doc-row { display: grid; grid-template-columns: 140px 1fr; gap: 20px; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 12px; }
+    .doc-row label { font-size: 0.8rem; font-weight: 900; color: var(--muted); text-transform: uppercase; }
+    .doc-row span { font-size: 1rem; font-weight: 800; color: var(--wiz-text); }
+
+    .doc-ai-box { margin-top: 40px; padding: 25px; background: #fdfaf7; border-radius: 16px; border: 1px solid var(--wiz-accent-light); }
+    .ai-label { font-size: 0.9rem; font-weight: 900; color: var(--wiz-accent); margin-bottom: 10px; }
+    .doc-ai-box p { font-size: 1rem; line-height: 1.7; color: var(--wiz-text); font-weight: 700; margin: 0; }
+
+    .bonus-notice-box { padding: 30px; text-align: center; border: 2px dashed var(--wiz-accent); margin-bottom: 30px; }
+    .bonus-tag { background: var(--wiz-accent); color: #fff; display: inline-block; padding: 4px 16px; border-radius: 999px; font-size: 0.75rem; font-weight: 900; margin-bottom: 15px; }
+    .bonus-notice-box p { font-size: 0.9rem; color: var(--muted); line-height: 1.6; margin-bottom: 20px; }
+    .summary-code-block { background: #f8f8f8; padding: 15px; border-radius: 12px; font-family: monospace; font-size: 0.75rem; text-align: left; white-space: pre-wrap; color: #666; margin-bottom: 15px; max-height: 150px; overflow-y: auto; }
+    .copy-btn { width: 100%; padding: 14px; background: var(--wiz-text); color: #fff; border: none; border-radius: 999px; font-weight: 800; cursor: pointer; transition: 0.3s; }
+    .copy-btn:hover { background: #000; }
+
+    .final-cta { display: flex; flex-direction: column; gap: 15px; }
+    .retry-btn { background: none; border: none; color: var(--muted); text-decoration: underline; font-weight: 700; cursor: pointer; }
+
+    @media (max-width: 850px) {
+      .result-container { grid-template-columns: 1fr; }
+      .doc-row { grid-template-columns: 1fr; gap: 5px; }
+      .welcome-title { font-size: 2.4rem; }
+      .wizard-card { padding: 40px 20px; }
     }
 </style>
 
 <script is:inline>
-    let step = 1;
-    const maxStep = 9;
-    
-    function initStepper() {
-      const stepper = document.getElementById('stepper');
-      if (!stepper) return;
-      stepper.innerHTML = Array.from({length: maxStep}, (_, i) => `
-        <div class="step-node" data-s="${i+1}" style="position:relative; z-index:2; width:32px; height:32px; background:#fff; border:2px solid var(--line); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.8rem; font-weight:800; color:var(--muted); transition:0.3s;">${i+1}</div>
-      `).join('');
+    const questions = [
+      { id: 'industry', title: '1. 業種・ビジネス内容', type: 'text', placeholder: '例：心理カウンセラー、士業、店舗経営など' },
+      { id: 'goal', title: '2. 制作の主な目的', type: 'choice', options: [
+        { label: '問い合わせ・予約獲得', val: 'リード獲得', icon: '📈', desc: '新規顧客からのアクションを最大化します。' },
+        { label: '信頼感・専門性の向上', val: 'ブランディング', icon: '💎', desc: '実績紹介や名刺代わりとしての質を重視。' },
+        { label: '商品・サービスの直接販売', val: '直接販売', icon: '🛒', desc: 'LP上での決済や申し込み完了までを設計。' }
+      ]},
+      { id: 'current', title: '3. 現在のサイト状況', type: 'choice', options: [
+        { label: '新規立ち上げ', val: '新規', icon: '🌱', desc: '新ドメインでゼロから構築します。' },
+        { label: '既存のリニューアル', val: 'リニューアル', icon: '🔄', desc: '今の課題を解決し、価値を高めます。' },
+        { label: 'LPのみ追加制作', val: 'LP追加', icon: '📑', desc: '既存サイトとは別に集客特化ページを作成。' }
+      ]},
+      { id: 'scale', title: '4. 制作規模のイメージ', type: 'choice', options: [
+        { label: '1ページのLP', val: 'LP (1枚)', icon: '📄', desc: '縦に長い一枚完結の強力な訴求。' },
+        { label: '小規模サイト(2〜5P)', val: '2-5ページ', icon: '📁', desc: '主要ページを網羅した基本セット。' },
+        { label: '中規模サイト(6P〜)', val: '6ページ以上', icon: '🗂', desc: 'サービス数が多い、ブログを併用したい場合。' }
+      ]},
+      { id: 'taste', title: '5. 理想のデザインイメージ', type: 'choice', options: [
+        { label: 'やさしい・安心感', val: 'ソフト', icon: '🌿', desc: 'カウンセリングや教育系に最適。' },
+        { label: '誠実・プロフェッショナル', val: 'トラスト', icon: '🤝', desc: '士業やコンサルティング業に。' },
+        { label: 'シンプル・ミニマル', val: 'ミニマル', icon: '⚪️', desc: '本質を伝え、迷わせないデザイン。' },
+        { label: '高級感・モダン', val: 'プレミアム', icon: '✨', desc: '高単価サービスやブランド訴求に。' }
+      ]},
+      { id: 'deadline', title: '6. ご希望の納期', type: 'choice', options: [
+        { label: 'できるだけ早く(特急)', val: '特急希望', icon: '🚀', desc: '1.5倍速での制作（要相談）。' },
+        { label: '1ヶ月以内', val: '1ヶ月', icon: '📅', desc: '標準的なスピード。' },
+        { label: '2ヶ月程度', val: '2ヶ月', icon: '🗓', desc: 'じっくり作り込みたい場合。' },
+        { label: '特に決まっていない', val: '未定', icon: '⌛️', desc: '相談しながら進めたい。' }
+      ]},
+      { id: 'budget', title: '7. 制作予算の目安', type: 'choice', options: [
+        { label: '〜10万円', val: '10万以下', icon: '🥉', desc: 'シンプルな1枚もの。' },
+        { label: '10〜20万円', val: '10-20万', icon: '🥈', desc: '標準的なLP制作。' },
+        { label: '20万円〜', val: '20万以上', icon: '🥇', desc: '構成・コピー含めフルオーダー。' },
+        { label: '相談して決めたい', val: '相談', icon: '💬', desc: '必要な機能から算出。' }
+      ]},
+      { id: 'points', title: '8. 特に重視したい点', type: 'choice', multi: true, options: [
+        { label: '問い合わせ導線', val: 'CV導線', icon: '🎯' },
+        { label: '読みやすいコピー', val: 'ライティング', icon: '✒️' },
+        { label: 'スマホの使いやすさ', val: 'モバイル最適化', icon: '📱' },
+        { label: 'SEO（検索対策）', val: 'SEO', icon: '🔍' },
+        { label: '独自システム(診断等)', val: 'システム', icon: '🛠' }
+      ]},
+      { id: 'message', title: '9. その他・メッセージ', type: 'textarea', placeholder: '例：原稿準備も手伝ってほしい、車いすユーザー視点の意見が欲しい、など' }
+    ];
+
+    let currentIdx = -1; // -1: welcome
+    let answers = {};
+
+    function showStep(idx) {
+      const welcome = document.getElementById('step-welcome');
+      const quiz = document.getElementById('step-quiz');
+      const result = document.getElementById('step-result');
+
+      // Transitions
+      [welcome, quiz, result].forEach(s => s.classList.remove('active', 'fade-slide-in'));
+      
+      if (idx === -1) {
+        welcome.classList.add('active', 'fade-slide-in');
+      } else if (idx === questions.length) {
+        renderResult();
+        result.classList.add('active', 'fade-slide-in');
+      } else {
+        quiz.classList.add('active', 'fade-slide-in');
+        renderQuestion(idx);
+      }
+      currentIdx = idx;
     }
 
-    function updateUI() {
-      const blocks = document.querySelectorAll('.question-block');
-      const btnNext = document.getElementById('btnNext');
-      const btnPrev = document.getElementById('btnPrev');
-      const btnSubmit = document.getElementById('btnSubmit');
+    function renderQuestion(idx) {
+      const q = questions[idx];
+      const qContent = document.getElementById('q-content');
+      const stepLabel = document.getElementById('step-label');
+      const stepCount = document.getElementById('step-count');
+      const progress = document.getElementById('stepper-progress');
+      const nodes = document.getElementById('stepper-nodes');
 
-      blocks.forEach(b => b.classList.toggle('active', +b.dataset.step === step));
-      document.querySelectorAll('.step-node').forEach(node => {
-        const s = +node.dataset.s;
-        if (s === step) {
-            node.style.borderColor = 'var(--accent)';
-            node.style.background = 'var(--accent)';
-            node.style.color = '#fff';
-            node.style.transform = 'scale(1.2)';
-        } else if (s < step) {
-            node.style.borderColor = 'var(--accent)';
-            node.style.background = 'var(--accent-soft)';
-            node.style.color = 'var(--accent)';
-            node.style.transform = 'scale(1)';
-        } else {
-            node.style.borderColor = 'var(--line)';
-            node.style.background = '#fff';
-            node.style.color = 'var(--muted)';
-            node.style.transform = 'scale(1)';
+      stepLabel.textContent = `Step ${idx + 1}`;
+      stepCount.textContent = `${idx + 1} / ${questions.length}`;
+      progress.style.width = `${(idx / (questions.length - 1)) * 100}%`;
+
+      // Stepper nodes
+      nodes.innerHTML = questions.map((_, i) => `
+        <div class="step-node ${i === idx ? 'active' : i < idx ? 'done' : ''}"></div>
+      `).join('');
+
+      let html = `<h2>${q.title}</h2>`;
+      if (q.type === 'text') {
+        html += `<input type="text" class="input-field" placeholder="${q.placeholder}" value="${answers[q.id] || ''}" id="input-${q.id}">`;
+      } else if (q.type === 'textarea') {
+        html += `<textarea class="input-field textarea-field" placeholder="${q.placeholder}" id="input-${q.id}">${answers[q.id] || ''}</textarea>`;
+      } else if (q.type === 'choice') {
+        html += `<div class="choices-grid">`;
+        q.options.forEach(opt => {
+          const isSelected = q.multi ? (answers[q.id] || []).includes(opt.val) : answers[q.id] === opt.val;
+          html += `
+            <div class="choice-item ${isSelected ? 'selected' : ''}" onclick="selectChoice('${q.id}', '${opt.val}', ${q.multi || false})">
+              <div class="choice-icon">${opt.icon}</div>
+              <div class="choice-text">
+                <b>${opt.label}</b>
+                ${opt.desc ? `<span>${opt.desc}</span>` : ''}
+              </div>
+            </div>
+          `;
+        });
+        html += `</div>`;
+      }
+      qContent.innerHTML = html;
+
+      document.getElementById('backBtn').style.visibility = idx >= 0 ? 'visible' : 'hidden';
+      document.getElementById('nextBtn').textContent = idx === questions.length - 1 ? 'サマリーを生成する' : '次へ進む →';
+    }
+
+    window.selectChoice = (id, val, multi) => {
+      if (multi) {
+        if (!answers[id]) answers[id] = [];
+        const idx = answers[id].indexOf(val);
+        if (idx > -1) answers[id].splice(idx, 1);
+        else answers[id].push(val);
+      } else {
+        answers[id] = val;
+        // Auto next for single choices if it's not the last step
+        if (currentIdx < questions.length - 1) {
+           setTimeout(() => { document.getElementById('nextBtn').click(); }, 300);
         }
-      });
-      if (btnPrev) btnPrev.style.visibility = step === 1 ? 'hidden' : 'visible';
-      if (btnNext) btnNext.style.display = step === maxStep ? 'none' : 'inline-flex';
-      if (btnSubmit) btnSubmit.style.display = step === maxStep ? 'inline-flex' : 'none';
-      window.scrollTo({top: 200, behavior: 'smooth'});
+      }
+      renderQuestion(currentIdx);
+    };
+
+    function renderResult() {
+      const grid = document.getElementById('summaryGrid');
+      const recText = document.getElementById('recommendText');
+      const copyArea = document.getElementById('copyArea');
+
+      const data = {
+        '業種': answers.industry || '—',
+        '主要目的': answers.goal || '—',
+        '現状': answers.current || '—',
+        '規模感': answers.scale || '—',
+        'デザイン': answers.taste || '—',
+        '納期': answers.deadline || '—',
+        '予算': answers.budget || '—',
+        '重視ポイント': (answers.points || []).join('、') || '—',
+        '備考': answers.message || '—'
+      };
+
+      grid.innerHTML = Object.entries(data).map(([k, v]) => `
+        <div class="doc-row"><label>${k}</label><span>${v}</span></div>
+      `).join('');
+
+      let rec = "まずは、心理導線LP制作から始めて、最も重要な「問い合わせ導線」を固めるのが良さそうです。";
+      if(answers.scale === '6ページ以上') rec = "複数ページにわたる心理導線ホームページ制作が適しています。各ページから最終的なゴールへの導線を統合的に設計しましょう。";
+      if((answers.points || []).includes('システム')) rec = "Web制作に加え、LINE Mini Appや外部診断システムとの連携を視野に入れた「ICT活用プラン」をご提案します。";
+
+      recText.textContent = rec;
+      
+      const copyStr = `【制作要件ヒアリングサマリー】\n業種：${data['業種']}\n目的：${data['主要目的']}\n現状：${data['現状']}\n規模：${data['規模感']}\nデザイン：${data['デザイン']}\n納期：${data['納期']}\n予算：${data['予算']}\n重視：${data['重視ポイント']}\n備考：${data['備考']}\n\n【初期提案】\n${rec}`;
+      copyArea.textContent = copyStr;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        initStepper();
-        updateUI();
-
-        const btnNext = document.getElementById('btnNext');
-        const btnPrev = document.getElementById('btnPrev');
-        const form = document.getElementById('wizardForm');
-
-        if (btnNext) btnNext.onclick = () => { if(step < maxStep) { step++; updateUI(); } };
-        if (btnPrev) btnPrev.onclick = () => { if(step > 1) { step--; updateUI(); } };
-
-        if (form) {
-            form.onsubmit = (e) => {
-                e.preventDefault();
-                const getVal = (name) => {
-                    const el = form.querySelector(`[name="${name}"]:checked`) || form.querySelector(`[name="${name}"]`);
-                    return el ? el.value || '—' : '—';
-                };
-                const getChecks = (name) => {
-                    return [...form.querySelectorAll(`[name="${name}"]:checked`)].map(e => e.value).join('、') || '—';
-                };
-
-                const data = {
-                    industry: getVal('industry'),
-                    goal: getVal('goal'),
-                    current: getVal('current'),
-                    scale: getVal('scale'),
-                    taste: getVal('taste'),
-                    deadline: getVal('deadline'),
-                    budget: getVal('budget'),
-                    points: getChecks('points'),
-                    message: getVal('message')
-                };
-
-                let rec = "まずは、心理導線LP制作から始めて、最も重要な「問い合わせ導線」を固めるのが良さそうです。";
-                if(data.scale.includes('6ページ')) rec = "複数ページにわたる心理導線ホームページ制作が適しています。各ページから最終的なゴールへの導線を統合的に設計しましょう。";
-                if(data.points.includes('システム')) rec = "Web制作に加え、LINE Mini Appや外部予約システムとの連携を視野に入れた設計をご提案します。";
-
-                document.getElementById('summaryGrid').innerHTML = Object.entries({
-                    '業種・ビジネス': data.industry,
-                    '目的': data.goal,
-                    '現状': data.current,
-                    '規模': data.scale,
-                    'デザイン': data.taste,
-                    '納期': data.deadline,
-                    '予算': data.budget,
-                    '重視点': data.points,
-                    'メッセージ': data.message
-                }).map(([k, v]) => `
-                    <div class="data-row"><b>${k}</b><span>${v}</span></div>
-                `).join('');
-
-                document.getElementById('recommendText').textContent = rec;
-                
-                const copyStr = `【Web制作ヒアリングサマリー】\n業種：${data.industry}\n目的：${data.goal}\n現状：${data.current}\n規模：${data.scale}\nデザイン：${data.taste}\n納期：${data.deadline}\n予算：${data.budget}\n重視：${data.points}\n備考：${data.message}\n\n提案：${rec}`;
-                document.getElementById('copyArea').textContent = copyStr;
-
-                form.style.display = 'none';
-                document.getElementById('stepper').style.display = 'none';
-                document.getElementById('summaryWrap').classList.add('show');
-            };
+      document.getElementById('startBtn').addEventListener('click', () => showStep(0));
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        // Save text values before moving
+        const q = questions[currentIdx];
+        if (q.type === 'text' || q.type === 'textarea') {
+          answers[q.id] = document.getElementById(`input-${q.id}`).value;
         }
+        showStep(currentIdx + 1);
+      });
+      document.getElementById('backBtn').addEventListener('click', () => {
+        if (currentIdx === 0) showStep(-1);
+        else showStep(currentIdx - 1);
+      });
+      document.getElementById('retryBtn').addEventListener('click', () => location.reload());
 
-        const btnCopy = document.getElementById('btnCopy');
-        if (btnCopy) {
-            btnCopy.onclick = async () => {
-                await navigator.clipboard.writeText(document.getElementById('copyArea').textContent);
-                btnCopy.textContent = 'コピー完了！';
-            };
+      document.getElementById('btnCopy').addEventListener('click', async () => {
+        await navigator.clipboard.writeText(document.getElementById('copyArea').textContent);
+        document.getElementById('btnCopy').textContent = 'コピーしました！';
+        setTimeout(() => { document.getElementById('btnCopy').textContent = 'サマリーをコピーする'; }, 2000);
+      });
+
+      // Keyboard support
+      document.addEventListener('keydown', (e) => {
+        if (currentIdx >= 0 && currentIdx < questions.length) {
+          if (e.key === 'Enter' && e.ctrlKey) document.getElementById('nextBtn').click();
+          if (e.key === 'ArrowRight' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') document.getElementById('nextBtn').click();
+          if (e.key === 'ArrowLeft' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') document.getElementById('backBtn').click();
         }
+      });
     });
 </script>

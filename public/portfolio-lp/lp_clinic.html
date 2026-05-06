@@ -10,12 +10,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{--pink:#e8a4b0;--pink2:#d4788a;--powder:#fdf0f2;--beige:#f8f2ee;--charcoal:#2a2228;--warm:#6a5058;--gold:#b89870;--white:#ffffff;--gray:#9a8888;}
+:root {
+  --pink:#e8a4b0;--pink2:#d4788a;--powder:#fdf0f2;--beige:#f8f2ee;--charcoal:#2a2228;--warm:#6a5058;--gold:#b89870;--white:#ffffff;--gray:#9a8888;
+  --accent: #d4788a;
+  --bg-gradient: linear-gradient(135deg, #fdf0f2 0%, #f8f2ee 100%);
+  --glass: rgba(255, 255, 255, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
 html{scroll-behavior:smooth;}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--powder);color:var(--charcoal);overflow-x:hidden;}
-.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#ad1457,#d81b60);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:7px 16px;letter-spacing:0.04em;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg-gradient);color:var(--charcoal);overflow-x:hidden;line-height: 1.8;}
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(42, 34, 40, 0.9);backdrop-filter: blur(10px);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:10px 0;letter-spacing:0.04em;border-bottom: 1px solid rgba(255,255,255,0.1);}
 .portfolio-banner span{background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
-nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:14px 56px;background:rgba(253,240,242,0.93);backdrop-filter:blur(16px);border-bottom:1px solid rgba(212,120,138,0.15);}
+nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:14px 56px;background:var(--glass);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border);box-shadow: 0 4px 30px rgba(0,0,0,0.03);}
 .nav-logo{font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:0.12em;color:var(--charcoal);font-style:italic;}
 .nav-links{display:flex;gap:28px;list-style:none;}
 .nav-links a{color:var(--gray);text-decoration:none;font-size:13px;transition:color 0.3s;}
@@ -28,168 +34,219 @@ nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:
 .mobile-menu a{color:var(--charcoal);font-size:20px;text-decoration:none;font-family:'Cormorant Garamond',serif;font-style:italic;}
 .mobile-menu-close{position:absolute;top:48px;right:22px;font-size:26px;color:var(--pink2);cursor:pointer;background:none;border:none;}
 
-/* ヒーロー */
-.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:66px;}
-.hero-left{padding:80px 56px 80px 72px;display:flex;flex-direction:column;justify-content:center;background:var(--powder);}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:66px;position: relative; overflow: hidden;}
+.hero-left{padding:80px 56px 80px 72px;display:flex;flex-direction:column;justify-content:center;}
 .hero-eyebrow{font-family:'Cormorant Garamond',serif;font-size:12px;letter-spacing:0.3em;color:var(--pink2);margin-bottom:24px;font-style:italic;}
 .hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,4.5vw,66px);line-height:1.25;margin-bottom:22px;color:var(--charcoal);}
 .hero h1 em{color:var(--pink2);font-style:italic;}
 .hero-sub{font-size:14px;color:var(--gray);line-height:2.1;margin-bottom:36px;font-weight:300;max-width:400px;}
-.hero-notice{background:rgba(232,164,176,0.1);border:1px solid rgba(212,120,138,0.2);border-radius:8px;padding:16px 20px;font-size:12px;color:var(--warm);line-height:1.8;margin-bottom:28px;}
-.btn-pink{background:linear-gradient(135deg,var(--pink2),#c06070);color:#fff;padding:15px 38px;font-size:13px;letter-spacing:0.1em;text-decoration:none;display:inline-block;transition:all 0.3s;}
+.btn-pink{background:linear-gradient(135deg,var(--pink2),#c06070);color:#fff;padding:15px 38px;font-size:13px;letter-spacing:0.1em;text-decoration:none;display:inline-block;transition:all 0.3s;border-radius: 4px;}
 .btn-pink:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(212,120,138,0.35);}
-.hero-tel{margin-top:18px;font-size:13px;color:var(--gray);}
-.hero-tel a{color:var(--pink2);font-size:22px;font-weight:700;text-decoration:none;}
 .hero-right{position:relative;overflow:hidden;}
 .hero-right img{width:100%;height:100%;object-fit:cover;}
 
-/* 注意書き */
 .med-notice{background:var(--beige);padding:18px 56px;border-top:1px solid rgba(212,120,138,0.1);border-bottom:1px solid rgba(212,120,138,0.1);}
 .med-notice p{font-size:11px;color:var(--gray);text-align:center;line-height:1.8;}
 
-/* 治療メニュー */
-.menu{padding:88px 56px;background:var(--white);}
+.menu{padding:100px 56px;background:var(--white);}
 .sec-eyebrow{font-size:11px;letter-spacing:0.22em;color:var(--pink2);text-align:center;margin-bottom:10px;}
 .sec-h{font-family:'Cormorant Garamond',serif;font-size:clamp(26px,3.5vw,46px);text-align:center;color:var(--charcoal);font-style:italic;margin-bottom:8px;}
 .sec-line{width:36px;height:1px;background:var(--pink2);margin:0 auto 52px;}
-.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1100px;margin:0 auto;}
-.menu-card{border:1px solid rgba(212,120,138,0.15);background:var(--powder);padding:0;overflow:hidden;transition:all 0.4s;cursor:default;}
+.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;max-width:1100px;margin:0 auto;}
+.menu-card{border:1px solid var(--glass-border);background:var(--white);padding:0;overflow:hidden;transition:all 0.4s;border-radius: 24px;box-shadow: 0 10px 40px rgba(0,0,0,0.02);}
 .menu-card:hover{transform:translateY(-5px);box-shadow:0 16px 44px rgba(212,120,138,0.12);}
-.menu-img-c{height:180px;display:flex;align-items:center;justify-content:center;font-size:56px;}
+.menu-img-c{height:200px;display:flex;align-items:center;justify-content:center;font-size:56px;}
 .menu-img-c.a{background:linear-gradient(160deg,#fce4ec,#f8bbd9);}
 .menu-img-c.b{background:linear-gradient(160deg,#f3e5f5,#e1bee7);}
 .menu-img-c.c{background:linear-gradient(160deg,#e8eaf6,#c5cae9);}
-.menu-img-c.d{background:linear-gradient(160deg,#fff3e0,#ffe0b2);}
-.menu-img-c.e{background:linear-gradient(160deg,#e0f7fa,#b2ebf2);}
-.menu-img-c.f{background:linear-gradient(160deg,#f1f8e9,#dcedc8);}
-.menu-info-c{padding:22px;}
+.menu-info-c{padding:28px;}
 .menu-category{font-size:10px;letter-spacing:0.2em;color:var(--pink2);margin-bottom:6px;}
-.menu-name-c{font-family:'Noto Serif JP',serif;font-size:16px;color:var(--charcoal);margin-bottom:8px;}
-.menu-desc-c{font-size:12px;color:var(--gray);line-height:1.8;margin-bottom:12px;}
-.menu-price-c{font-size:16px;color:var(--pink2);font-family:'Cormorant Garamond',serif;}
+.menu-name-c{font-family:'Noto Serif JP',serif;font-size:18px;color:var(--charcoal);margin-bottom:12px;}
+.menu-desc-c{font-size:13px;color:var(--gray);line-height:1.8;margin-bottom:16px;}
+.menu-price-c{font-size:18px;color:var(--pink2);font-family:'Cormorant Garamond',serif;font-weight:700;}
 
-/* 選ばれる理由 */
-.reasons{padding:88px 56px;background:var(--beige);}
+.reasons{padding:100px 56px;background:var(--beige);}
 .reasons-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;max-width:1100px;margin:0 auto;}
 .reason-c{text-align:center;padding:28px 16px;}
 .reason-num-c{font-family:'Cormorant Garamond',serif;font-size:52px;color:var(--pink2);line-height:1;margin-bottom:10px;font-style:italic;}
-.reason-c h3{font-family:'Noto Serif JP',serif;font-size:15px;color:var(--charcoal);margin-bottom:8px;}
-.reason-c p{font-size:12px;color:var(--gray);line-height:1.8;}
+.reason-c h3{font-family:'Noto Serif JP',serif;font-size:16px;color:var(--charcoal);margin-bottom:10px;}
+.reason-c p{font-size:13px;color:var(--gray);line-height:1.8;}
 
-/* カウンセリング */
-.counseling{padding:88px 56px;background:linear-gradient(135deg,var(--pink2),#c06070);color:#fff;text-align:center;}
-.counseling h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);margin-bottom:14px;font-style:italic;}
-.counseling p{font-size:14px;opacity:0.88;margin-bottom:36px;line-height:1.9;}
-.counseling .notice{font-size:12px;opacity:0.7;margin-top:16px;}
-.btn-white-c{background:#fff;color:var(--pink2);padding:15px 44px;font-size:14px;font-weight:700;text-decoration:none;display:inline-block;letter-spacing:0.08em;transition:all 0.3s;}
+.counseling{padding:100px 56px;background:linear-gradient(135deg,var(--pink2),#c06070);color:#fff;text-align:center;}
+.counseling h2{font-family:'Cormorant Garamond',serif;font-size:clamp(28px,4vw,48px);margin-bottom:20px;font-style:italic;}
+.counseling p{font-size:15px;opacity:0.9;margin-bottom:40px;line-height:2.0;}
+.btn-white-c{background:#fff;color:var(--pink2);padding:18px 56px;font-size:15px;font-weight:700;text-decoration:none;display:inline-block;letter-spacing:0.1em;transition:all 0.3s;border-radius: 4px;}
 .btn-white-c:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,0,0,0.15);}
 
-footer{background:var(--charcoal);padding:48px 56px;color:rgba(255,255,255,0.55);}
-.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
-.footer-logo{font-family:'Cormorant Garamond',serif;font-size:22px;color:#fff;font-style:italic;}
-.footer-copy{font-size:12px;text-align:right;}
-.footer-produce{font-size:13px;color:var(--pink);font-weight:700;margin-top:5px;}
-.back-top-cl{position:fixed;bottom:32px;right:24px;z-index:499;width:44px;height:44px;background:var(--pink2);color:#fff;border:none;border-radius:50%;font-size:18px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
-.back-top-cl.show{opacity:1;transform:translateY(0);}
-.back-top-cl:hover{background:#c06070;transform:translateY(-3px);}
+footer{background:var(--charcoal);padding:60px 56px;color:rgba(255,255,255,0.5);}
+.footer-inner{max-width:1100px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:30px;}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:24px;color:#fff;font-style:italic;}
+.footer-copy{font-size:12px;}
+.footer-produce{font-size:13px;color:var(--pink);font-weight:700;margin-top:8px;}
 
 @media(max-width:900px){
-  nav{padding:10px 18px;}.nav-links,.nav-tel{display:none;}.hamburger{display:flex;}
-  .hero{grid-template-columns:1fr;}.hero-right{display:none;}.hero-left{padding:70px 20px 60px;}
-  .menu,.reasons,.counseling{padding:64px 20px;}
-  .menu-grid{grid-template-columns:1fr 1fr;}
-  .reasons-grid{grid-template-columns:repeat(2,1fr);}
-  .med-notice{padding:16px 20px;}
-  footer{padding:36px 20px;}.footer-inner{flex-direction:column;align-items:flex-start;}.footer-copy{text-align:left;}
+  nav{padding:10px 20px;}.nav-links,.nav-tel{display:none;}.hamburger{display:flex;}
+  .hero{grid-template-columns:1fr;}.hero-right{display:none;}.hero-left{padding:100px 20px 80px;}
+  .menu,.reasons,.counseling,.profile,.facility,.flow,.faq{padding:80px 20px;}
+  .menu-grid{grid-template-columns:1fr;}.reasons-grid{grid-template-columns:repeat(2,1fr);}
+  .profile div{grid-template-columns:1fr !important; gap:40px !important;}
+  .facility div{grid-template-columns:1fr !important;}
 }
-@media(max-width:480px){.menu-grid{grid-template-columns:1fr;}.reasons-grid{grid-template-columns:1fr;}}
-.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal{opacity:0;transform:translateY(30px);transition: 1s cubic-bezier(0.23, 1, 0.32, 1);}
 .reveal.visible{opacity:1;transform:translateY(0);}
 </style>
+<link rel="stylesheet" href="premium_upgrade.css">
 </head>
 <body>
-<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空の美容クリニックを題材にしたデザインサンプルです</div>
-<button class="back-top-cl" id="backTopCl" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ポートフォリオ作品 — ああああああああああああああああああ</div>
 <nav>
   <div class="nav-logo">LUMINOS CLINIC</div>
   <ul class="nav-links">
-    <li><a href="#menu">治療メニュー</a></li>
-    <li><a href="#reasons">選ばれる理由</a></li>
-    <li><a href="#counseling">カウンセリング</a></li>
+    <li><a href="#menu">AAAAA</a></li>
+    <li><a href="#reasons">BBBBB</a></li>
+    <li><a href="#contact">CCCCC</a></li>
   </ul>
-  <a href="tel:03-XXXX-XXXX" class="nav-tel">📞 03-XXXX-XXXX</a>
+  <a href="#" class="nav-tel">📞 03-XXXX-XXXX</a>
   <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
 </nav>
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" id="menuClose">✕</button>
-  <a href="#menu" onclick="closeMobileMenu()">治療メニュー</a>
-  <a href="#reasons" onclick="closeMobileMenu()">選ばれる理由</a>
-  <a href="#counseling" onclick="closeMobileMenu()">カウンセリング</a>
-  <a href="tel:03-XXXX-XXXX" onclick="closeMobileMenu()" style="color:var(--pink2)">📞 電話で予約</a>
-</div>
 
 <section class="hero">
   <div class="hero-left">
     <div class="hero-eyebrow">Premium Beauty Medical Clinic</div>
     <h1>素肌の美しさを、<br><em>科学で</em><br>引き出す。</h1>
-    <p class="hero-sub">美容医療の最先端技術と、丁寧なカウンセリングで、あなたの「なりたい自分」を実現します。</p>
-    <div class="hero-notice">⚕️ 当院は医師による診察・施術を行う保健機関です。すべての施術は医師の判断のもと行われます。</div>
-    <a href="#counseling" class="btn-pink">無料カウンセリングを予約する</a>
-    <div class="hero-tel">お電話でのご予約 <br><a href="tel:03-XXXX-XXXX">03-XXXX-XXXX</a></div>
+    <p class="hero-sub">あああああああああああああああああああああああああああああああああああああああああああああ。</p>
+    <a href="#contact" class="btn-pink">お問い合わせはこちら</a>
   </div>
   <div class="hero-right">
-    <img src="images/hero_clinic.png" alt="LUMINOS CLINICの院内" onerror="this.style.background='linear-gradient(160deg,#fce4ec,#f8bbd9)';this.innerHTML='🏥';this.style.display='flex';this.style.alignItems='center';this.style.justifyContent='center';this.style.fontSize='100px';">
+    <div style="width:100%; height:100%; background:linear-gradient(160deg,#fce4ec,#f8bbd9); display:flex; align-items:center; justify-content:center; font-size:120px;">🏥</div>
   </div>
 </section>
 
-<div class="med-notice"><p>※ 本ページは架空のクリニックのポートフォリオ作品です。実際の医療行為・効果・効能を示すものではありません。美容医療広告ガイドラインを意識した構成でデザインしています。</p></div>
+<div class="med-notice"><p>※ 本ページはポートフォリオ用のデモページです。あああああああああああああああああああああああああああ。</p></div>
 
 <section class="menu" id="menu">
   <div class="sec-eyebrow">TREATMENT MENU</div>
-  <div class="sec-h">治療メニュー</div>
+  <div class="sec-h">治療メニュー あああああ</div>
   <div class="sec-line"></div>
   <div class="menu-grid">
-    <div class="menu-card reveal"><div class="menu-img-c a">✨</div><div class="menu-info-c"><div class="menu-category">SKIN</div><div class="menu-name-c">ハイフ（HIFU）</div><p class="menu-desc-c">超音波で真皮・SMAS筋膜にアプローチし、リフトアップ・小顔効果を実感できる人気施術。</p><div class="menu-price-c">¥29,800〜</div></div></div>
-    <div class="menu-card reveal"><div class="menu-img-c b">💉</div><div class="menu-info-c"><div class="menu-category">INJECTION</div><div class="menu-name-c">ヒアルロン酸注射</div><p class="menu-desc-c">ほうれい線・涙袋・鼻・唇などへの注入で、自然なボリュームアップを実現します。</p><div class="menu-price-c">¥38,000〜</div></div></div>
-    <div class="menu-card reveal"><div class="menu-img-c c">🔬</div><div class="menu-info-c"><div class="menu-category">LASER</div><div class="menu-name-c">フォトフェイシャル</div><p class="menu-desc-c">IPL光治療でシミ・そばかす・赤みを改善。ダウンタイムが少なく人気の定番治療。</p><div class="menu-price-c">¥18,000〜</div></div></div>
-    <div class="menu-card reveal"><div class="menu-img-c d">🌟</div><div class="menu-info-c"><div class="menu-category">BODY</div><div class="menu-name-c">医療痩身（クールスカルプ）</div><p class="menu-desc-c">脂肪細胞を冷却で破壊する非侵襲的な医療痩身。部分痩せに特化した施術。</p><div class="menu-price-c">¥58,000〜</div></div></div>
-    <div class="menu-card reveal"><div class="menu-img-c e">💊</div><div class="menu-info-c"><div class="menu-category">HAIR</div><div class="menu-name-c">AGA・薄毛治療</div><p class="menu-desc-c">内服薬・外用薬・メソセラピーを組み合わせた個別最適なAGA治療プログラム。</p><div class="menu-price-c">¥8,000〜/月</div></div></div>
-    <div class="menu-card reveal"><div class="menu-img-c f">🌿</div><div class="menu-info-c"><div class="menu-category">SKIN</div><div class="menu-name-c">美白・スキンケア点滴</div><p class="menu-desc-c">高濃度ビタミンC・グルタチオン点滴で内側から透明感とハリを実感。</p><div class="menu-price-c">¥12,000〜</div></div></div>
+    <div class="menu-card reveal"><div class="menu-img-c a">✨</div><div class="menu-info-c"><div class="menu-category">AAAAA</div><div class="menu-name-c">メニューあああああ</div><p class="menu-desc-c">あああああああああああああああああああああああああああああああああああああああああああああああああああ。</p><div class="menu-price-c">¥00,000〜</div></div></div>
+    <div class="menu-card reveal"><div class="menu-img-c b">💉</div><div class="menu-info-c"><div class="menu-category">BBBBB</div><div class="menu-name-c">メニューいいいいい</div><p class="menu-desc-c">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p><div class="menu-price-c">¥00,000〜</div></div></div>
+    <div class="menu-card reveal"><div class="menu-img-c c">🔬</div><div class="menu-info-c"><div class="menu-category">CCCCC</div><div class="menu-name-c">メニューううううう</div><p class="menu-desc-c">ううううううううううううううううううううううううううううううううううううううううううううううううううう。</p><div class="menu-price-c">¥00,000〜</div></div></div>
+  </div>
+</section>
+
+<section class="profile reveal" style="padding:100px 56px; background:#fff;">
+  <div style="display:grid; grid-template-columns:1fr 1.2fr; gap:60px; max-width:1100px; margin:0 auto; align-items:center;">
+    <div style="background:#f8f2ee; height:450px; border-radius:40px; display:flex; align-items:center; justify-content:center; font-size:120px; border:1px solid var(--glass-border);">👨‍⚕️</div>
+    <div>
+      <div class="sec-eyebrow" style="text-align:left;">DIRECTOR</div>
+      <h2 style="font-family:'Noto Serif JP',serif; font-size:36px; margin-bottom:24px; color:var(--charcoal);">院長 ああああああ</h2>
+      <p style="margin-bottom:24px; color:var(--gray); line-height:2.2;">あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+      <div style="font-size:14px; color:var(--gray); border-top:1px solid #eee; padding-top:24px;">
+        <p style="margin-bottom:10px;">・20XX年 ああああああああ卒業</p>
+        <p style="margin-bottom:10px;">・20XX年 いいいいいいいい入職</p>
+        <p>・20XX年 当院開設 ああああああ</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="facility reveal" style="padding:100px 56px; background:var(--beige);">
+  <div class="sec-eyebrow">FACILITY</div>
+  <div class="sec-h">院内設備 あああああ</div>
+  <div class="sec-line"></div>
+  <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:40px; max-width:1100px; margin:0 auto;">
+    <div class="menu-card" style="padding:40px; background:#fff;">
+      <div style="height:240px; background:#eee; border-radius:24px; margin-bottom:24px; display:flex; align-items:center; justify-content:center; color:#bbb; font-weight:900;">IMAGE あああああ</div>
+      <h3 style="margin-bottom:15px; font-family:'Noto Serif JP',serif;">設備あああああ</h3>
+      <p style="font-size:14px; color:var(--gray);">あああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+    </div>
+    <div class="menu-card" style="padding:40px; background:#fff;">
+      <div style="height:240px; background:#eee; border-radius:24px; margin-bottom:24px; display:flex; align-items:center; justify-content:center; color:#bbb; font-weight:900;">IMAGE いいいいい</div>
+      <h3 style="margin-bottom:15px; font-family:'Noto Serif JP',serif;">設備いいいいい</h3>
+      <p style="font-size:14px; color:var(--gray);">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+    </div>
+  </div>
+</section>
+
+<section class="flow reveal" style="padding:100px 56px; background:#fff;">
+  <div class="sec-eyebrow">STEP FLOW</div>
+  <div class="sec-h">施術の流れ あああああ</div>
+  <div class="sec-line"></div>
+  <div style="max-width:800px; margin:0 auto; display:grid; gap:44px;">
+    <div style="display:flex; gap:44px; align-items:flex-start; border-bottom:1px solid #f8f8f8; padding-bottom:36px;">
+      <div style="font-size:52px; font-weight:900; color:var(--pink2); opacity:0.3; font-family:'Cormorant Garamond',serif; line-height:1;">01</div>
+      <div>
+        <h3 style="font-size:20px; margin-bottom:12px; font-family:'Noto Serif JP',serif;">ステップあああああ</h3>
+        <p style="color:var(--gray);">あああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+      </div>
+    </div>
+    <div style="display:flex; gap:44px; align-items:flex-start; border-bottom:1px solid #f8f8f8; padding-bottom:36px;">
+      <div style="font-size:52px; font-weight:900; color:var(--pink2); opacity:0.3; font-family:'Cormorant Garamond',serif; line-height:1;">02</div>
+      <div>
+        <h3 style="font-size:20px; margin-bottom:12px; font-family:'Noto Serif JP',serif;">ステップいいいいい</h3>
+        <p style="color:var(--gray);">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+      </div>
+    </div>
+    <div style="display:flex; gap:44px; align-items:flex-start;">
+      <div style="font-size:52px; font-weight:900; color:var(--pink2); opacity:0.3; font-family:'Cormorant Garamond',serif; line-height:1;">03</div>
+      <div>
+        <h3 style="font-size:20px; margin-bottom:12px; font-family:'Noto Serif JP',serif;">ステップううううう</h3>
+        <p style="color:var(--gray);">ううううううううううううううううううううううううううううううううううううううううううううううううううう。</p>
+      </div>
+    </div>
   </div>
 </section>
 
 <section class="reasons" id="reasons">
   <div class="sec-eyebrow">WHY LUMINOS</div>
-  <div class="sec-h" style="margin-bottom:8px;">選ばれる理由</div>
+  <div class="sec-h">選ばれる理由 あああああ</div>
   <div class="sec-line"></div>
   <div class="reasons-grid">
-    <div class="reason-c reveal"><div class="reason-num-c">01</div><h3>院長直診制</h3><p>カウンセリングから施術まで、すべて院長が対応。ドクターショッピングに疲れた方にも安心。</p></div>
-    <div class="reason-c reveal"><div class="reason-num-c">02</div><h3>完全個室・予約制</h3><p>待合室での他患者との接触ゼロ。プライバシーを徹底保護した完全個室対応。</p></div>
-    <div class="reason-c reveal"><div class="reason-num-c">03</div><h3>明確な料金提示</h3><p>カウンセリング時にすべての料金を明示。隠れたオプション料金・追加費用は一切なし。</p></div>
-    <div class="reason-c reveal"><div class="reason-num-c">04</div><h3>アフターケア充実</h3><p>施術後のLINE相談無料。気になることがあればいつでもサポートします。</p></div>
+    <div class="reason-c reveal"><div class="reason-num-c">01</div><h3>理由あああああ</h3><p>あああああああああああああああああああああああああああああああああああああああああああああ。</p></div>
+    <div class="reason-c reveal"><div class="reason-num-c">02</div><h3>理由いいいいい</h3><p>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p></div>
+    <div class="reason-c reveal"><div class="reason-num-c">03</div><h3>理由ううううう</h3><p>うううううううううううううううううううううううううううううううううううううううううううう。</p></div>
+    <div class="reason-c reveal"><div class="reason-num-c">04</div><h3>理由えええええ</h3><p>ええええええええええええええええええええええええええええええええええええええええええええ。</p></div>
   </div>
 </section>
 
-<section class="counseling" id="counseling">
-  <h2>まずは、無料カウンセリングへ。</h2>
-  <p>施術を決める必要は一切ありません。まずはお気軽にご相談ください。<br>医師がていねいに現状とご要望をお伺いします。</p>
-  <a href="#" class="btn-white-c">無料カウンセリングを予約する →</a>
-  <div class="notice">※ カウンセリングは完全無料・完全予約制です。勧誘・押し売りは一切行いません。</div>
+<section class="faq reveal" style="padding:100px 56px; background:var(--white);">
+  <div class="sec-eyebrow">FAQ</div>
+  <div class="sec-h">よくある質問 あああああ</div>
+  <div class="sec-line"></div>
+  <div style="max-width:850px; margin:0 auto; display:grid; gap:20px;">
+    <div class="menu-card" style="padding:32px; border:1px solid #f5f5f5;">
+      <p style="font-weight:700; color:var(--pink2); margin-bottom:12px; font-size:18px;">Q. ああああああああああああああああ？</p>
+      <p style="font-size:15px; color:var(--gray); line-height:2;">A. あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+    </div>
+    <div class="menu-card" style="padding:32px; border:1px solid #f5f5f5;">
+      <p style="font-weight:700; color:var(--pink2); margin-bottom:12px; font-size:18px;">Q. いいいいいいいいいいいいいいいいいい？</p>
+      <p style="font-size:15px; color:var(--gray); line-height:2;">A. いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+    </div>
+  </div>
+</section>
+
+<section class="counseling" id="contact">
+  <h2>AAAAA BBBBB CCCCC</h2>
+  <p>あああああああああああああああああああああああああああああああああああああああああああああ。<br>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+  <a href="#" class="btn-white-c">お問い合わせはこちら</a>
 </section>
 
 <footer>
   <div class="footer-inner">
-    <div><div class="footer-logo">LUMINOS CLINIC</div><div style="font-size:12px;margin-top:7px;">〒107-XXXX 東京都港区南青山X-X-X（架空）／ 03-XXXX-XXXX</div></div>
-    <div class="footer-copy"><div>© 2024 LUMINOS CLINIC. All Rights Reserved.</div><div class="footer-produce">和-Node プロデュース</div></div>
+    <div class="footer-logo">LUMINOS CLINIC</div>
+    <div class="footer-copy">
+      <div>© 2024 LUMINOS CLINIC. All Rights Reserved.</div>
+      <div class="footer-produce">和-Node プロデュース</div>
+    </div>
   </div>
 </footer>
+
 <script>
 document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
-document.getElementById('menuClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
-function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');}
-window.addEventListener('scroll',()=>document.getElementById('backTopCl').classList.toggle('show',window.scrollY>400));
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=`${(i%4)*80}ms`;io.observe(el);});
 </script>
-</body></html>
-<!-- 和-Node プロデュース -->
+<script src="premium_upgrade.js"></script>
+</body>
+</html>

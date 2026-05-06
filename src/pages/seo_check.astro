@@ -2,439 +2,426 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="WordPress SEO内部診断チェック | 和-Node" description="25項目のチェックリストでWordPressサイトのSEO内部状態を無料診断。弱点を可視化して改善ポイントを把握できます。">
-  <main>
-    <div class="hero">
-      <div class="hero-badge">SEO CHECKLIST</div>
-      <h1 class="hero-title">WordPress SEO 内部診断チェック</h1>
-      <p class="hero-sub">25項目をチェックするだけで、サイトのSEO内部状態をリアルタイム採点。弱点を見える化して改善のヒントを得られます。</p>
-    </div>
+<BaseLayout title="WordPress SEO内部診断 | 和-Node" description="25項目のテクニカルチェックで、あなたのWordPressサイトのSEO内部状態を可視化。改善ポイントをプロの視点で特定します。">
+  <!-- Background Decoration -->
+  <div class="bg-decoration">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
 
-    <div class="score-panel">
-      <div class="score-card">
-        <div class="score-ring-wrap">
-          <svg class="score-ring" viewBox="0 0 96 96">
-            <circle cx="48" cy="48" r="40" fill="none" stroke="#e5e2db" stroke-width="8"></circle>
-            <circle id="ring-fill" cx="48" cy="48" r="40" fill="none" stroke="#639922" stroke-width="8"
-              stroke-dasharray="251.3" stroke-dashoffset="251.3" stroke-linecap="round"
-              transform="rotate(-90 48 48)" style="transition:stroke-dashoffset .6s cubic-bezier(.4,0,.2,1)"></circle>
-          </svg>
-          <div class="score-display">
-            <div class="score-num" id="total-score">0</div>
-            <div class="score-lbl">/ 50点</div>
-            <div class="score-grade" id="total-grade">—</div>
-          </div>
+  <div class="demo-banner">
+    <strong>【制作例サンプル】</strong> これは和-Nodeの技術を体験できるデモアプリです。このようなカスタムツールの導入をご検討中の方は <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">こちらから無料相談</a>
+  </div>
+
+  <main class="diagnosis-container">
+    <div class="diagnosis-card glass-card">
+      
+      <!-- Step 0: Welcome -->
+      <div id="step-welcome" class="diag-step active">
+        <div class="step-visual">
+          <div class="scanner-icon">🔍</div>
         </div>
-        <div class="cats-wrap" id="cats-wrap"></div>
+        <h1 class="welcome-title">WordPress<br/><span class="accent-text">SEO内部診断</span></h1>
+        <p class="welcome-desc">
+          25項目の専門的なチェックリストを通して、<br />
+          あなたのサイトが持つ「検索に強いポテンシャル」を可視化します。<br />
+          <span class="small-info">専門知識がなくても、直感で回答可能です。</span>
+        </p>
+        <button class="primary-btn pulse" id="startBtn">診断を開始する</button>
       </div>
-    </div>
 
-    <div class="main-content" id="checklist"></div>
-
-    <div class="result-section" id="result-section">
-      <div class="result-box">
-        <div class="result-top">
-          <h2>🔍 改善ポイント・おすすめサービス</h2>
-          <div id="recs"></div>
+      <!-- Step 1-5: Category Steps -->
+      <div id="step-quiz" class="diag-step">
+        <div class="quiz-header">
+          <div class="diag-progress">
+            <div class="progress-info">
+              <span id="cat-title">基本設定</span>
+              <span id="step-indicator">Step 1 / 5</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="overall-progress"></div>
+            </div>
+          </div>
         </div>
-        <section class="wanode-cta">
-          <p class="label">SEO改善・WordPress相談</p>
-          <h2>WordPressのSEO内部状態、プロの視点で最適化しませんか？</h2>
-          
-          <div class="bonus-notice">
-            <div class="bonus-badge">🎁 診断完了特典</div>
-            <p>
-              この結果をスクリーンショットして公式LINEにお送りいただくか、お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br />
-              <strong>初回無料カウンセリングを30分延長（計60分無料）</strong> させていただきます。
-            </p>
+
+        <div class="quiz-body" id="quiz-body">
+          <!-- Category questions will be injected here -->
+        </div>
+
+        <div class="quiz-footer">
+          <button id="backBtn" class="text-btn">← 前のステップへ</button>
+          <button id="nextBtn" class="primary-btn-sm">次のステップへ</button>
+        </div>
+      </div>
+
+      <!-- Step 6: Result -->
+      <div id="step-result" class="diag-step">
+        <div class="result-layout">
+          <div class="result-summary glass-card-dark">
+            <div class="score-visualization">
+              <div class="gauge-wrap">
+                <svg viewBox="0 0 100 100">
+                  <circle cx="50" cy="50" r="45" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="6"></circle>
+                  <circle id="score-ring" cx="50" cy="50" r="45" fill="none" stroke="#639922" stroke-width="6" stroke-dasharray="283" stroke-dashoffset="283" stroke-linecap="round"></circle>
+                </svg>
+                <div class="score-text">
+                  <span class="score-num" id="total-score">0</span>
+                  <span class="score-total">/ 50</span>
+                </div>
+              </div>
+              <div class="grade-badge" id="res-grade">Grade: B</div>
+            </div>
+            <h2 class="res-title" id="res-title">良好な状態です</h2>
+            <p class="res-desc" id="res-desc">診断結果の概略がここに入ります。</p>
           </div>
 
-          <p>
-            診断結果はいかがでしたか？<br />
-            GSC登録やメタ情報、表示速度の改善など、SEOの土台をプロが丸ごと最適化します。<br />
-            弱点を強みに変えて、検索流入を最大化しましょう。
-          </p>
-          <div class="cta-buttons">
-            <a href="mailto:contacts@wa-node.com" class="btn-cta">メールで相談する</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="btn-cta secondary">フォームで相談する</a>
+          <div class="analysis-panel">
+            <h3>カテゴリ別の分析結果</h3>
+            <div class="radar-chart-placeholder" id="category-analysis">
+              <!-- Category bars with icons -->
+            </div>
           </div>
-          <p class="res-note">診断結果は保存されません。気になる項目はスクリーンショットをお取りください。</p>
+        </div>
+
+        <div class="improvement-section glass-card">
+          <h3>🔍 改善ポイントのアドバイス</h3>
+          <div id="recs-list" class="recs-list"></div>
+        </div>
+        
+        <section class="wanode-cta-box glass-card">
+          <div class="bonus-tag">🎁 診断完了特典</div>
+          <h3>プロの目による「サイト全体最適化」を体験しませんか？</h3>
+          <p>
+            診断結果を元に、具体的にどこから手をつけるべきか一緒に整理しましょう。<br/>
+            お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> をお伝えいただくと、<br/>
+            <strong>初回無料コンサルを30分から「60分」に拡大</strong> します。
+          </p>
+          <div class="cta-btns">
+            <a href="mailto:contacts@wa-node.com" class="primary-btn">メールで相談する</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="secondary-btn">フォームで相談する</a>
+          </div>
+          <button class="retry-btn" id="retryBtn">もう一度診断する</button>
         </section>
       </div>
-    </div>
 
-    <div class="sticky-cta" id="sticky-cta">
-      <div class="sticky-cta-inner">
-        <div class="sticky-info">
-          <div class="sticky-score" id="sticky-score-num">0点</div>
-          <div class="sticky-lbl" id="sticky-grade-lbl">— チェックを進めてください</div>
-        </div>
-        <button class="sticky-btn" id="showResultBtn">改善ポイントを見る</button>
-      </div>
     </div>
   </main>
 </BaseLayout>
 
 <style>
     :root {
-      --warn: #BA7517;
-      --bad: #c0392b;
+      --tech-accent: #639922;
+      --tech-accent-dark: #4d7a1a;
+      --tech-bg: #1a1c1e;
+      --glass-dark: rgba(26, 28, 30, 0.85);
+      --glass-light: rgba(255, 255, 255, 0.7);
     }
-    .hero {
-      background: #1a1c1e; color: #fff; padding: 100px 20px 80px; text-align: center;
-      background-image: radial-gradient(circle at center, #2c2c2a 0%, #1a1c1e 100%);
-    }
-    .hero-badge {
-      display: inline-block; background: var(--accent2); color: #fff;
-      font-size: 0.75rem; font-weight: 800; padding: 4px 14px; border-radius: 999px;
-      letter-spacing: 0.1em; margin-bottom: 20px; text-transform: uppercase;
-    }
-    .hero-title { font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin-bottom: 16px; line-height: 1.3; }
-    .hero-sub { font-size: 1rem; color: rgba(255, 255, 255, 0.7); max-width: 700px; margin: 0 auto; }
 
-    .score-panel { max-width: 800px; margin: -40px auto 0; padding: 0 20px; position: relative; z-index: 10; }
-    .score-card {
-      background: var(--paper); border: 1px solid var(--line); border-radius: 24px;
-      padding: 32px; box-shadow: var(--shadow); display: flex; gap: 32px; align-items: center;
-      backdrop-filter: blur(12px);
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; background: #fdfaf7; overflow: hidden;
     }
-    .score-ring-wrap { flex-shrink: 0; text-align: center; position: relative; }
-    .score-ring { width: 120px; height: 120px; }
-    .score-display { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100%; }
-    .score-num { font-size: 2.2rem; font-weight: 800; color: var(--text); line-height: 1; }
-    .score-lbl { font-size: 0.75rem; color: var(--muted); font-weight: 700; margin-top: 2px; }
-    .score-grade { font-size: 0.95rem; font-weight: 800; margin-top: 4px; }
+    .grid-overlay {
+      position: absolute; width: 100%; height: 100%;
+      background-image: radial-gradient(rgba(0,0,0,0.05) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .glow { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.4; animation: float 20s infinite alternate; }
+    .glow-1 { width: 600px; height: 600px; background: #e8f0e5; top: -10%; right: -10%; }
+    .glow-2 { width: 500px; height: 500px; background: #d6e8f3; bottom: -10%; left: -10%; animation-delay: -5s; }
+    @keyframes float { from { transform: translate(0,0); } to { transform: translate(40px, 80px); } }
 
-    .cats-wrap { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+    .demo-banner { background: rgba(0,0,0,0.02); border-bottom: 1px solid var(--line); padding: 12px; text-align: center; font-size: 0.85rem; backdrop-filter: blur(5px); }
+    .banner-cta { color: var(--tech-accent); font-weight: 800; text-decoration: underline; margin-left: 8px; }
+
+    .diagnosis-container { max-width: 960px; margin: 40px auto 100px; padding: 0 20px; }
     
-    .main-content { max-width: 800px; margin: 60px auto 0; padding: 0 20px; }
-    
-    .result-section { max-width: 800px; margin: 40px auto 100px; padding: 0 20px; display: none; }
-    .result-section.show { display: block; animation: fadeIn 0.6s ease; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-    
-    .result-box { background: var(--white); border-radius: 24px; border: 1px solid var(--line); padding: 40px; box-shadow: var(--shadow); }
-    .result-top h2 { font-size: 1.5rem; font-weight: 800; margin-bottom: 24px; }
-    
-    .wanode-cta { background: var(--accent-soft); padding: 40px; border-radius: 20px; border: 1px solid var(--line); text-align: center; margin-top: 40px; }
-    .wanode-cta .label { color: var(--accent); font-weight: 800; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 12px; }
-    .wanode-cta h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 16px; line-height: 1.4; }
-    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-    .btn-cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: 0.3s; }
-    .btn-cta.secondary { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
-    .res-note { font-size: 0.85rem; color: var(--muted); margin-top: 20px; }
+    .glass-card { background: var(--glass-light); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.5); border-radius: 32px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
+    .glass-card-dark { background: var(--tech-bg); color: #fff; border-radius: 24px; padding: 40px; }
 
-    .bonus-notice {
-      background: #fff;
-      border: 2px dashed var(--accent);
-      border-radius: 16px;
-      padding: 24px;
-      margin: 24px 0;
-      text-align: center;
-      position: relative;
-    }
-    .bonus-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
-      color: #fff;
-      padding: 4px 16px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 800;
-    }
-    .bonus-notice p { margin: 0 !important; font-size: 0.95rem; line-height: 1.6; color: var(--text); text-align: center !important; }
-    .bonus-notice strong { color: var(--accent); }
+    .diagnosis-card { padding: 60px 40px; min-height: 650px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
 
-    .sticky-cta {
-      position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%) translateY(100px);
-      width: min(760px, calc(100% - 40px)); background: var(--paper); border: 1px solid var(--line);
-      border-radius: 999px; padding: 12px 24px; box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-      z-index: 100; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(12px);
-    }
-    .sticky-cta.show { transform: translateX(-50%) translateY(0); }
-    .sticky-cta-inner { display: flex; align-items: center; justify-content: space-between; }
-    .sticky-score { font-size: 1.4rem; font-weight: 800; color: var(--accent); line-height: 1; }
-    .sticky-lbl { font-size: 0.8rem; color: var(--muted); font-weight: 700; }
-    .sticky-btn { background: var(--accent); color: #fff; border: none; padding: 10px 20px; border-radius: 999px; font-weight: 800; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
+    .diag-step { display: none; width: 100%; }
+    .diag-step.active { display: block; }
 
-    @media(max-width: 600px) {
-      .score-card { flex-direction: column; text-align: center; }
-      .sticky-lbl { display: none; }
-      .sticky-score { font-size: 1.2rem; }
+    /* Transitions */
+    .slide-in { animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    .slide-out { animation: slideOut 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-30px); } }
+
+    /* Welcome */
+    .scanner-icon { font-size: 80px; text-align: center; margin-bottom: 30px; animation: scan 3s infinite ease-in-out; }
+    @keyframes scan { 0%, 100% { opacity: 0.6; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); } }
+    .welcome-title { font-size: 3.2rem; font-weight: 900; line-height: 1.1; margin-bottom: 24px; text-align: center; }
+    .accent-text { color: var(--tech-accent); }
+    .welcome-desc { font-size: 1.1rem; color: var(--muted); text-align: center; margin-bottom: 40px; line-height: 1.8; }
+    .small-info { display: block; font-size: 0.85rem; margin-top: 15px; opacity: 0.6; }
+
+    .primary-btn { display: block; width: fit-content; margin: 0 auto; padding: 20px 60px; background: var(--tech-accent); color: #fff; border-radius: 999px; font-weight: 800; font-size: 1.2rem; border: none; cursor: pointer; box-shadow: 0 10px 30px rgba(99, 153, 34, 0.3); transition: 0.3s; }
+    .primary-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(99, 153, 34, 0.4); }
+
+    /* Quiz */
+    .quiz-header { margin-bottom: 40px; }
+    .progress-info { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+    #cat-title { font-size: 1.2rem; font-weight: 900; color: var(--tech-accent); }
+    #step-indicator { font-size: 0.85rem; font-weight: 800; color: var(--muted); }
+    .progress-bar-wrap { width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 999px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: var(--tech-accent); width: 0%; transition: width 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+
+    .quiz-item { display: flex; align-items: flex-start; gap: 20px; padding: 24px; background: #fff; border-radius: 20px; margin-bottom: 16px; transition: 0.3s; border: 1px solid var(--line); }
+    .quiz-item:hover { border-color: var(--tech-accent); transform: translateX(5px); }
+    .item-q-box { flex: 1; }
+    .item-label { font-size: 1.05rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+    .item-hint { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
+    .opt-btns { display: flex; gap: 8px; }
+    .opt-btn { width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--line); background: #fff; cursor: pointer; transition: 0.2s; font-size: 1rem; display: flex; align-items: center; justify-content: center; }
+    .opt-btn.active.ok { background: var(--tech-accent); color: #fff; border-color: var(--tech-accent); }
+    .opt-btn.active.warn { background: #f39c12; color: #fff; border-color: #f39c12; }
+    .opt-btn.active.bad { background: #e74c3c; color: #fff; border-color: #e74c3c; }
+
+    .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+    .text-btn { background: none; border: none; color: var(--muted); font-weight: 700; cursor: pointer; }
+    .primary-btn-sm { padding: 14px 32px; background: var(--tech-accent); color: #fff; border-radius: 999px; font-weight: 800; border: none; cursor: pointer; }
+
+    /* Result */
+    .result-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 40px; }
+    .gauge-wrap { position: relative; width: 140px; height: 140px; margin: 0 auto 20px; }
+    .score-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+    .score-num { font-size: 2.5rem; font-weight: 900; color: #fff; display: block; line-height: 1; }
+    .score-total { font-size: 0.9rem; opacity: 0.5; }
+    .grade-badge { display: inline-block; padding: 6px 20px; border-radius: 999px; background: var(--tech-accent); font-weight: 900; font-size: 0.9rem; letter-spacing: 0.1em; }
+    .res-title { font-size: 1.6rem; font-weight: 900; margin: 20px 0 10px; }
+    .res-desc { font-size: 0.95rem; opacity: 0.8; line-height: 1.6; }
+
+    .analysis-panel { background: #fff; padding: 40px; border-radius: 24px; }
+    .analysis-panel h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 25px; }
+    .cat-result-row { display: flex; align-items: center; gap: 15px; margin-bottom: 18px; }
+    .cat-icon { font-size: 1.4rem; width: 30px; }
+    .cat-info { flex: 1; }
+    .cat-name { font-size: 0.85rem; font-weight: 800; color: var(--muted); display: block; margin-bottom: 5px; }
+    .cat-bar-track { width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 999px; overflow: hidden; }
+    .cat-bar-fill { height: 100%; width: 0%; border-radius: 999px; transition: width 1.5s ease-out; }
+
+    .improvement-section { padding: 40px; margin-bottom: 40px; border-left: 6px solid var(--tech-accent); }
+    .improvement-section h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 25px; display: flex; align-items: center; gap: 10px; }
+    .recs-list { display: grid; gap: 15px; }
+    .rec-item { display: flex; gap: 12px; font-size: 0.95rem; line-height: 1.7; background: rgba(255,255,255,0.5); padding: 15px; border-radius: 12px; }
+    .rec-dot { width: 8px; height: 8px; border-radius: 50%; margin-top: 8px; flex-shrink: 0; }
+
+    .wanode-cta-box { padding: 50px; text-align: center; border: 3px solid var(--tech-accent); position: relative; margin-top: 20px; }
+    .bonus-tag { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); background: var(--tech-accent); color: #fff; padding: 6px 30px; border-radius: 999px; font-weight: 900; font-size: 1rem; box-shadow: 0 4px 15px rgba(99, 153, 34, 0.3); }
+    .cta-btns { display: flex; gap: 15px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+    .secondary-btn { padding: 18px 40px; border-radius: 999px; border: 2px solid var(--tech-accent); color: var(--tech-accent); font-weight: 800; text-decoration: none; transition: 0.3s; }
+    .retry-btn { background: none; border: none; color: var(--muted); text-decoration: underline; font-weight: 700; cursor: pointer; margin-top: 30px; }
+
+    @media (max-width: 820px) {
+      .result-layout { grid-template-columns: 1fr; }
+      .diagnosis-card { padding: 40px 20px; }
+      .welcome-title { font-size: 2.2rem; }
+      .quiz-item { flex-direction: column; gap: 15px; }
+      .opt-btns { width: 100%; justify-content: center; }
     }
 </style>
 
 <script is:inline>
     const categories = [
       {
-        id:'basic', name:'基本設定', em:'⚙️',
+        id:'basic', name:'基本設定', icon:'⚙️',
         items:[
-          {l:'タイトルタグに主要キーワードが含まれている', h:'各ページのtitleタグを確認。30〜35文字以内が目安。'},
-          {l:'メタディスクリプションが設定されている',    h:'120文字前後で各ページに個別設定されているか。'},
-          {l:'Googleサーチコンソール（GSC）に登録している',h:'プロパティを追加し、サイトマップも送信済みか。'},
-          {l:'Googleアナリティクス（GA4）が設定されている',h:'トラッキングコードが全ページに設置されているか。'},
-          {l:'robots.txtが適切に設定されている',          h:'不要なページのクロールをブロックしているか確認。'},
+          {l:'タイトルタグの最適化', h:'各ページに主要キーワードが含まれ、35文字以内に収まっているか。'},
+          {l:'メタディスクリプション', h:'クリックを誘う120文字前後の要約が各ページに設定されているか。'},
+          {l:'Googleサーチコンソール',h:'GSCに登録され、サイトマップが正常に送信されているか。'},
+          {l:'Googleアナリティクス',h:'GA4が全ページで正常にトラッキングできているか。'},
+          {l:'robots.txtの設定', h:'クロールを最適化し、不要なページへのアクセスを制限しているか。'},
         ]
       },
       {
-        id:'content', name:'コンテンツ品質', em:'📝',
+        id:'content', name:'コンテンツ品質', icon:'📝',
         items:[
-          {l:'各ページにh1タグが1つだけ存在する',        h:'h1が複数あったり、ゼロのページはSEO上不利。'},
-          {l:'画像にaltテキストが設定されている',         h:'すべての画像に説明文（alt属性）を設定する。'},
-          {l:'内部リンクが適切に設定されている',          h:'関連ページへのリンクがあり、孤立ページがない。'},
-          {l:'主要ページの文字数が1,000字以上ある',       h:'薄いコンテンツはGoogleに評価されにくい。'},
-          {l:'定期的にコンテンツを更新している',          h:'3〜6ヶ月以上更新がないサイトは評価が下がりやすい。'},
+          {l:'h1タグの単一使用', h:'見出し1が全ページで1つだけ適切に設定されているか。'},
+          {l:'画像altテキスト', h:'すべての重要画像に内容を説明する代替テキストがあるか。'},
+          {l:'内部リンク構造', h:'関連ページ同士が適切に繋がり、孤立したページがないか。'},
+          {l:'十分な文字数と価値', h:'主要な情報ページがユーザーの意図を満たす十分な量（目安1000字以上）か。'},
+          {l:'定期的な更新', h:'数ヶ月以上の放置がなく、情報の鮮度が保たれているか。'},
         ]
       },
       {
-        id:'technical', name:'テクニカルSEO', em:'🔧',
+        id:'technical', name:'テクニカルSEO', icon:'🔧',
         items:[
-          {l:'HTTPSに対応している（SSL証明書）',          h:'http://のままのサイトはGoogleに低評価。必須対応。'},
-          {l:'canonicalタグが設定されている',             h:'重複コンテンツを防ぐためにcanonicalを設定する。'},
-          {l:'404ページが適切にカスタマイズされている',   h:'存在しないURLへのアクセスで適切なページを返す。'},
-          {l:'意図せずnoindexが設定されていない',         h:'WordPress設定の「検索エンジンによるインデックス」を確認。'},
-          {l:'構造化データ（JSON-LD）が実装されている',   h:'FAQやパンくずのリッチスニペットで検索結果を強化。'},
+          {l:'HTTPS（SSL対応）', h:'サイト全体が暗号化され、安全な通信が確保されているか。'},
+          {l:'canonicalタグ', h:'重複コンテンツを避け、評価を一つのURLに集約させているか。'},
+          {l:'404ページの最適化', h:'エラーページから他ページへの導線が確保されているか。'},
+          {l:'インデックス制御', h:'noindexタグが意図せず設定され、検索を阻害していないか。'},
+          {l:'構造化データ', h:'リッチスニペット表示のためのJSON-LD等が実装されているか。'},
         ]
       },
       {
-        id:'speed', name:'表示速度', em:'⚡',
+        id:'speed', name:'表示速度', icon:'⚡',
         items:[
-          {l:'画像が圧縮・最適化されている',              h:'WebP形式の使用や、TinyPNG等で圧縮しているか。'},
-          {l:'キャッシュプラグインを導入している',        h:'WP Super Cache、W3 Total Cache等を使用しているか。'},
-          {l:'不要なプラグインを削除している',            h:'使っていないプラグインは速度低下の原因になる。'},
-          {l:'PageSpeed Insightsのスコアが60以上',        h:'Googleが提供する速度測定ツールで確認できる。'},
-          {l:'外部フォントや重いCSSを最小化している',     h:'Google Fontsの読み込み最適化やCSS圧縮の実施。'},
+          {l:'画像の軽量化', h:'WebP形式や圧縮により、ファイルサイズが最適化されているか。'},
+          {l:'キャッシュの活用', h:'サーバーやプラグインによる高速化設定が行われているか。'},
+          {l:'プラグインの整理', h:'不要なプラグインを排除し、読み込み負荷を下げているか。'},
+          {l:'PSIスコア', h:'Googleの速度測定ツールでモバイル・デスクトップ共に良好か。'},
+          {l:'リソースの最小化', h:'CSSやJSの圧縮、外部フォント読み込みが最適化されているか。'},
         ]
       },
       {
-        id:'ux', name:'ユーザー体験', em:'📱',
+        id:'ux', name:'ユーザー体験', icon:'📱',
         items:[
-          {l:'スマートフォンで問題なく表示される',        h:'Google Mobile-Friendly Testで確認できる。'},
-          {l:'CTAボタンが分かりやすい位置にある',         h:'問い合わせや購入ボタンがファーストビュー内にあるか。'},
-          {l:'パンくずリスト・ナビゲーションが整っている',h:'ユーザーが迷わず目的ページにたどり着けるか。'},
-          {l:'お問い合わせフォームが正常に機能している',  h:'送信テストを定期的に行っているか。'},
-          {l:'404ページからトップへの導線がある',         h:'迷子になったユーザーを適切に誘導できているか。'},
+          {l:'モバイルフレンドリー', h:'スマホで文字が小さすぎたり、崩れたりしていないか。'},
+          {l:'CTAの視認性', h:'問い合わせや購入ボタンが押しやすく、目立つ位置にあるか。'},
+          {l:'サイト内回遊性', h:'パンくずリスト等により、現在地と移動経路が明確か。'},
+          {l:'フォームの機能性', h:'入力項目が最小限で、スマホからでも送信しやすいか。'},
+          {l:'レイアウトの安定性', h:'読み込み中にガクッと画面が動く(CLS)ことがないか。'},
         ]
       }
     ];
 
-    const state = {};
-    categories.forEach(c => c.items.forEach((_,i) => { state[c.id+'_'+i] = 0; }));
+    let currentStep = 0; // 0 is welcome, 1-5 categories, 6 result
+    let state = {}; // Stores cid_idx: value (0=none, 1=ok, 2=warn, 3=bad)
 
-    const TOTAL_ITEMS = 25;
-    const MAX_SCORE = 50;
-
-    function getScore(cid) {
-      const cat = categories.find(c=>c.id===cid);
-      return cat.items.reduce((s,_,i)=>{
-        const v = state[cid+'_'+i];
-        return s + (v===1?2: v===2?1:0);
-      },0);
-    }
-
-    function getTotalScore() {
-      return categories.reduce((s,c)=>s+getScore(c.id),0);
-    }
-
-    function getAnswered() {
-      return Object.values(state).filter(v=>v!==0).length;
-    }
-
-    function getGrade(pct) {
-      if(pct>=85) return {label:'A：優秀', color:'#27ae60'};
-      if(pct>=65) return {label:'B：良好', color:'#639922'};
-      if(pct>=45) return {label:'C：要改善', color:'#BA7517'};
-      return {label:'D：要対策', color:'#c0392b'};
-    }
-
-    function updateScore() {
-      const total = getTotalScore();
-      const pct = (total / MAX_SCORE) * 100;
-      const grade = getGrade(pct);
-      const circumference = 251.3;
-      const offset = circumference - (circumference * pct / 100);
-
-      const ringFill = document.getElementById('ring-fill');
-      if (ringFill) {
-          ringFill.style.strokeDashoffset = offset;
-          ringFill.style.stroke = grade.color;
-      }
+    function showStep(idx) {
+      const steps = document.querySelectorAll('.diag-step');
+      const target = steps[idx];
       
-      const totalScoreEl = document.getElementById('total-score');
-      const totalGradeEl = document.getElementById('total-grade');
-      if (totalScoreEl) totalScoreEl.textContent = total;
-      if (totalGradeEl) {
-          totalGradeEl.textContent = grade.label;
-          totalGradeEl.style.color = grade.color;
+      const active = document.querySelector('.diag-step.active');
+      if (active) {
+        active.classList.add('slide-out');
+        setTimeout(() => {
+          active.classList.remove('active', 'slide-out');
+          target.classList.add('active', 'slide-in');
+        }, 300);
+      } else {
+        target.classList.add('active', 'fade-in');
       }
-
-      const wrap = document.getElementById('cats-wrap');
-      if (wrap) {
-          wrap.innerHTML = categories.map(c=>{
-            const s = getScore(c.id);
-            const max = c.items.length * 2;
-            const cp = (s/max)*100;
-            const col = cp>=70?'#639922':cp>=40?'#BA7517':'#c0392b';
-            return `<div style="display:flex; align-items:center; gap:12px;">
-              <div style="font-size:0.85rem; color:var(--muted); width:100px; font-weight:700;">${c.em} ${c.name}</div>
-              <div style="flex:1; height:8px; background:var(--line); border-radius:999px; overflow:hidden;">
-                <div style="height:100%; width:${cp}%; background:${col}; border-radius:999px; transition:width 0.8s;"></div>
-              </div>
-              <div style="font-size:0.85rem; font-weight:800; width:40px; text-align:right; color:${col}">${s}/${max}</div>
-            </div>`;
-          }).join('');
-      }
-
-      const ans = getAnswered();
-      const stickyCta = document.getElementById('sticky-cta');
-      if(ans >= 5 && stickyCta) {
-        stickyCta.classList.add('show');
-        document.getElementById('sticky-score-num').textContent = total + '点';
-        document.getElementById('sticky-grade-lbl').textContent = grade.label + '（' + ans + '/' + TOTAL_ITEMS + '項目回答済み）';
-      }
-
-      if(ans >= TOTAL_ITEMS) {
-        const resultSection = document.getElementById('result-section');
-        if (resultSection) {
-            resultSection.classList.add('show');
-            buildRecs();
-        }
-      }
+      currentStep = idx;
+      
+      if (idx > 0 && idx <= 5) renderCategory(idx - 1);
+      if (idx === 6) renderResult();
     }
 
-    function toggleItem(cid, idx, val) {
-      const key = cid+'_'+idx;
-      state[key] = (state[key]===val) ? 0 : val;
-      
-      // Update buttons visually
-      ['ok','warn','bad'].forEach((t,ti)=>{
-        const btn = document.getElementById(`btn_${cid}_${idx}_${t}`);
-        if(!btn) return;
-        const isActive = state[key] === (ti+1);
-        btn.style.borderColor = isActive ? (t==='ok'?'var(--accent)':t==='warn'?'var(--warn)':'var(--bad)') : 'var(--line)';
-        btn.style.background = isActive ? (t==='ok'?'var(--accent-soft)':t==='warn'?'#fff8ee':'#fff5f5') : '#fff';
-      });
-      
-      const prog = document.getElementById(`cat-prog-${cid}`);
-      if (prog) {
-          const cat = categories.find(c => c.id === cid);
-          const answeredInCat = cat.items.filter((_, i) => state[cid+'_'+i] !== 0).length;
-          prog.textContent = `${answeredInCat} / ${cat.items.length}`;
-      }
+    function renderCategory(catIdx) {
+      const cat = categories[catIdx];
+      const quizBody = document.getElementById('quiz-body');
+      const catTitle = document.getElementById('cat-title');
+      const stepIndicator = document.getElementById('step-indicator');
+      const progressFill = document.getElementById('overall-progress');
 
-      updateScore();
-    }
+      catTitle.textContent = `${cat.icon} ${cat.name}`;
+      stepIndicator.textContent = `Phase ${catIdx + 1} / 5`;
+      progressFill.style.width = `${((catIdx + 1) / 5) * 100}%`;
 
-    function buildChecklist() {
-      const cl = document.getElementById('checklist');
-      if (!cl) return;
-      cl.innerHTML = categories.map((c,ci)=>{
-        const items = c.items.map((it,i)=>`
-          <div style="display:flex; align-items:flex-start; gap:16px; padding:18px 24px; border-bottom:1px solid #f8f9fa;">
-            <div style="flex:1;">
-              <div style="font-size:1rem; font-weight:700; color:var(--text); margin-bottom:4px;">${it.l}</div>
-              <div style="font-size:0.85rem; color:var(--muted); line-height:1.6;">${it.h}</div>
+      quizBody.innerHTML = cat.items.map((it, i) => {
+        const val = state[`${cat.id}_${i}`] || 0;
+        return `
+          <div class="quiz-item fade-in">
+            <div class="item-q-box">
+              <div class="item-label">${it.l}</div>
+              <div class="item-hint">${it.h}</div>
             </div>
-            <div style="display:flex; gap:8px;">
-              <button class="chk-btn-core" id="btn_${c.id}_${i}_ok" data-c="${c.id}" data-i="${i}" data-v="1" title="対応済み" style="width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:0.2s;">✅</button>
-              <button class="chk-btn-core" id="btn_${c.id}_${i}_warn" data-c="${c.id}" data-i="${i}" data-v="2" title="一部対応" style="width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:0.2s;">⚠️</button>
-              <button class="chk-btn-core" id="btn_${c.id}_${i}_bad" data-c="${c.id}" data-i="${i}" data-v="3" title="未対応" style="width:40px; height:40px; border-radius:12px; border:1px solid var(--line); background:#fff; cursor:pointer; font-size:1rem; display:flex; align-items:center; justify-content:center; transition:0.2s;">❌</button>
+            <div class="opt-btns">
+              <button class="opt-btn ${val===1?'active ok':''}" onclick="setVal('${cat.id}', ${i}, 1)" title="OK">✅</button>
+              <button class="opt-btn ${val===2?'active warn':''}" onclick="setVal('${cat.id}', ${i}, 2)" title="一部不安">⚠️</button>
+              <button class="opt-btn ${val===3?'active bad':''}" onclick="setVal('${cat.id}', ${i}, 3)" title="未対応">❌</button>
             </div>
-          </div>`).join('');
-        const isFirst = ci===0;
-        return `<div style="background:#fff; border-radius:20px; margin-bottom:20px; overflow:hidden; border:1px solid var(--line); box-shadow:0 4px 15px rgba(0,0,0,0.02);">
-          <div class="cat-head" data-cid="${c.id}" style="display:flex; align-items:center; gap:12px; padding:20px 24px; cursor:pointer; transition:0.2s; ${isFirst?'border-bottom:1px solid var(--line);':''}">
-            <span style="font-size:1.5rem;">${c.em}</span>
-            <span style="font-weight:800; font-size:1.1rem; flex:1;">${c.name}</span>
-            <span style="font-size:0.85rem; color:var(--muted); font-weight:700;" id="cat-prog-${c.id}">0 / ${c.items.length}</span>
-            <span class="chevron" style="font-size:0.8rem; color:var(--muted); transition:0.3s; transform:${isFirst?'rotate(90deg)':'rotate(0)'};">▶</span>
           </div>
-          <div class="items-list" id="items-${c.id}" style="display:${isFirst?'block':'none'}; padding:10px 0;">${items}</div>
-        </div>`;
+        `;
+      }).join('');
+      
+      document.getElementById('backBtn').style.visibility = catIdx > 0 ? 'visible' : 'hidden';
+      document.getElementById('nextBtn').textContent = catIdx === 4 ? '診断を完了する' : '次のステップへ';
+    }
+
+    window.setVal = (cid, i, val) => {
+      const key = `${cid}_${i}`;
+      state[key] = state[key] === val ? 0 : val;
+      renderCategory(currentStep - 1);
+    };
+
+    function renderResult() {
+      let total = 0;
+      const catScores = {};
+      
+      categories.forEach(c => {
+        let cs = 0;
+        c.items.forEach((_, i) => {
+          const v = state[`${c.id}_${i}`] || 0;
+          cs += v === 1 ? 2 : v === 2 ? 1 : 0;
+        });
+        catScores[c.id] = cs;
+        total += cs;
+      });
+
+      const scorePercent = Math.round((total / 50) * 100);
+      document.getElementById('total-score').textContent = total;
+      
+      // Ring Animation
+      const ring = document.getElementById('score-ring');
+      const circumference = 283;
+      const offset = circumference - (total / 50) * circumference;
+      setTimeout(() => { ring.style.strokeDashoffset = offset; }, 500);
+
+      // Grade
+      const gradeEl = document.getElementById('res-grade');
+      const titleEl = document.getElementById('res-title');
+      const descEl = document.getElementById('res-desc');
+      if (scorePercent >= 85) { gradeEl.textContent = 'A+ : Expert'; gradeEl.style.background = '#27ae60'; titleEl.textContent = '素晴らしいSEO最適化状態です'; descEl.textContent = '内部SEOの主要なポイントを完璧に抑えられています。この状態を維持しつつ、今後は被リンク獲得やコンテンツの深掘りに注力しましょう。'; }
+      else if (scorePercent >= 65) { gradeEl.textContent = 'B : Good'; gradeEl.style.background = '#639922'; titleEl.textContent = '良好なサイト構造です'; descEl.textContent = '基本的なSEO対策はできていますが、細かいタグ設定や速度面で改善の余地があります。これらを修正することでさらなる上位表示が狙えます。'; }
+      else if (scorePercent >= 45) { gradeEl.textContent = 'C : Need Work'; gradeEl.style.background = '#f39c12'; titleEl.textContent = '改善の余地が多くあります'; descEl.textContent = '主要なキーワード設定や表示速度など、いくつかの致命的な弱点が見受けられます。まずは基本設定の見直しから着手することをおすすめします。'; }
+      else { gradeEl.textContent = 'D : Poor'; gradeEl.style.background = '#e74c3c'; titleEl.textContent = '早急な対策が必要です'; descEl.textContent = '現在のサイト構造は検索エンジンに正しく評価されにくい状態です。プロの視点による全面的な内部対策の見直しをおすすめします。'; }
+
+      // Analysis Grid
+      const analysisEl = document.getElementById('category-analysis');
+      analysisEl.innerHTML = categories.map(c => {
+        const s = catScores[c.id];
+        const pct = (s / 10) * 100;
+        const col = pct >= 80 ? '#27ae60' : pct >= 50 ? '#f39c12' : '#e74c3c';
+        return `
+          <div class="cat-result-row">
+            <div class="cat-icon">${c.icon}</div>
+            <div class="cat-info">
+              <span class="cat-name">${c.name} (${s}/10)</span>
+              <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${pct}%; background:${col}"></div></div>
+            </div>
+          </div>
+        `;
       }).join('');
 
-      // Add click listeners for categories
-      document.querySelectorAll('.cat-head').forEach(head => {
-          head.addEventListener('click', () => {
-              const cid = head.getAttribute('data-cid');
-              const list = document.getElementById(`items-${cid}`);
-              const chevron = head.querySelector('.chevron');
-              if (list) {
-                  const isOpen = list.style.display === 'block';
-                  list.style.display = isOpen ? 'none' : 'block';
-                  head.style.borderBottom = isOpen ? 'none' : '1px solid var(--line)';
-                  if (chevron) chevron.style.transform = isOpen ? 'rotate(0)' : 'rotate(90deg)';
-              }
-          });
-      });
-
-      // Add click listeners for check buttons
-      document.querySelectorAll('.chk-btn-core').forEach(btn => {
-          btn.addEventListener('click', () => {
-              const cid = btn.getAttribute('data-c');
-              const idx = parseInt(btn.getAttribute('data-i'));
-              const val = parseInt(btn.getAttribute('data-v'));
-              toggleItem(cid, idx, val);
-          });
-      });
-    }
-
-    function buildRecs() {
+      // Recommendations
+      const recsList = document.getElementById('recs-list');
       const recs = [];
-      categories.forEach(c=>{
-        const s = getScore(c.id);
-        const max = c.items.length*2;
-        const pct = (s/max)*100;
-        if(pct<50){
-          const msgs = {
-            basic:   {color:'#c0392b', text:'【基本設定】GSC登録やメタ情報の設定が不十分です。まずここを整えるだけで検索流入が改善しやすくなります。→「WordPress SEO内部の丸ごと最適化」サービスをご検討ください。'},
-            content: {color:'#c0392b', text:'【コンテンツ品質】h1タグ・altテキスト・内部リンクの見直しが必要です。コンテンツの薄さもGoogleからの評価を下げる要因になります。'},
-            technical:{color:'#c0392b', text:'【テクニカルSEO】HTTPS対応やcanonical設定など技術的な土台が不足しています。専門家による確認・修正をおすすめします。'},
-            speed:   {color:'#BA7517', text:'【表示速度】画像圧縮やキャッシュ設定が不十分な可能性があります。→「WordPressの表示速度改善」サービスで劇的に改善できます。'},
-            ux:      {color:'#BA7517', text:'【ユーザー体験】スマホ対応やCTAの配置など、訪問者が離脱しやすい状態です。集客に直結するため早めの対応をおすすめします。'},
-          };
-          if (msgs[c.id]) recs.push(msgs[c.id]);
-        } else if(pct<80){
-          const msgs2 = {
-            basic:    {color:'#BA7517', text:'【基本設定】概ね整っていますが、まだ未対応の項目があります。細かい設定の見直しで更なる改善が見込めます。'},
-            content:  {color:'#BA7517', text:'【コンテンツ品質】あと一歩です。altテキストの設定漏れや内部リンクの整備で評価が上がります。'},
-            technical:{color:'#BA7517', text:'【テクニカルSEO】基本はできていますが、構造化データの実装で検索結果のリッチスニペットを狙えます。'},
-            speed:    {color:'#639922', text:'【表示速度】ある程度対応できています。PageSpeed Insightsで定期的にチェックしましょう。'},
-            ux:       {color:'#639922', text:'【ユーザー体験】概ね良好です。CTAの位置やフォームの動作確認を定期的に行いましょう。'},
-          };
-          if (msgs2[c.id]) recs.push(msgs2[c.id]);
-        }
-      });
-
-      if(!recs.length) recs.push({color:'#27ae60', text:'全カテゴリ優秀です！現状維持しながら定期的な監視を続けましょう。Googleアルゴリズムの変化にも注意が必要です。'});
-
-      const recsEl = document.getElementById('recs');
-      if (recsEl) {
-          recsEl.innerHTML = recs.map(r=>`
-            <div style="display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;">
-              <div style="width:8px; height:8px; border-radius:50%; background:${r.color}; margin-top:8px; flex-shrink:0;"></div>
-              <div style="font-size:0.95rem; line-height:1.6;">${r.text}</div>
-            </div>`).join('');
-      }
+      if (catScores.basic < 7) recs.push({ col:'#e74c3c', txt:'【基本設定】メタ情報やGSC連携が不十分です。ここを整えるだけで順位が安定しやすくなります。' });
+      if (catScores.speed < 7) recs.push({ col:'#f39c12', txt:'【表示速度】画像の重さやキャッシュ設定がネックです。高速化によりユーザーの離脱を防げます。' });
+      if (catScores.technical < 7) recs.push({ col:'#e74c3c', txt:'【テクニカル】canonicalや構造化データの設定を推奨します。Googleに正確な情報を伝える土台が不足しています。' });
+      if (recs.length === 0) recs.push({ col:'#27ae60', txt:'全体的に良好です！定期的なキーワードの見直しと継続的なコンテンツ配信を続けましょう。' });
+      
+      recsList.innerHTML = recs.map(r => `
+        <div class="rec-item">
+          <div class="rec-dot" style="background:${r.col}"></div>
+          <div>${r.txt}</div>
+        </div>
+      `).join('');
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        buildChecklist();
-        updateScore();
-        
-        const showResultBtn = document.getElementById('showResultBtn');
-        if (showResultBtn) {
-            showResultBtn.onclick = () => {
-                const resultSection = document.getElementById('result-section');
-                if (resultSection) {
-                    resultSection.classList.add('show');
-                    buildRecs();
-                    resultSection.scrollIntoView({behavior:'smooth'});
-                }
-            };
+      document.getElementById('startBtn').addEventListener('click', () => showStep(1));
+      document.getElementById('nextBtn').addEventListener('click', () => {
+        if (currentStep < 5) showStep(currentStep + 1);
+        else showStep(6);
+      });
+      document.getElementById('backBtn').addEventListener('click', () => {
+        if (currentStep > 1) showStep(currentStep - 1);
+      });
+      document.getElementById('retryBtn').addEventListener('click', () => location.reload());
+
+      // Keyboard support
+      document.addEventListener('keydown', (e) => {
+        if (currentStep > 0 && currentStep <= 5) {
+          if (e.key === 'ArrowRight' || e.key === 'Enter') document.getElementById('nextBtn').click();
+          if (e.key === 'ArrowLeft') document.getElementById('backBtn').click();
         }
+      });
     });
 </script>

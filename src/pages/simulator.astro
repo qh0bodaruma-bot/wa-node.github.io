@@ -2,159 +2,207 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="心理導線Web制作 料金シミュレーター｜和-Node" description="心理導線Web制作の概算費用を確認できる自動お見積りシミュレーター。LP、ホームページ、機能追加、心理導線コピーなどの目安を確認できます。">
-  <div class="sample-banner">
-    【制作例デモ】このような診断・見積ツールを、あなたのサイトに導入できます。 
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank">無料相談はこちら</a>
+<BaseLayout title="料金シミュレーター | 和-Node" description="心理導線Web制作の概算費用をリアルタイムで算出。起業記念キャンペーン実施中。">
+  <!-- Background Decoration -->
+  <div class="bg-decoration">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="grid-overlay"></div>
   </div>
 
-  <main>
-    <section class="hero">
-      <div class="wrap">
-        <span class="eyebrow">Psychology Driven Web Estimate</span>
-        <h1>料金シミュレーター</h1>
-        <p class="lead">
-          見た目だけでなく、訪問者の心理導線まで考えたWeb制作を。<br />
-          プランやオプションを選ぶだけで、概算の費用と納期をリアルタイムで確認できます。
-        </p>
-      </div>
-    </section>
+  <div class="demo-banner">
+    <strong>【制作例サンプル】</strong> このような診断・見積ツールを、あなたのサイトに導入できます。 <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">無料相談はこちら</a>
+  </div>
 
-    <div class="wrap main-layout">
-      <section class="form-section">
-        <div class="card-panel">
-          <h2>1. 制作プランを選択</h2>
-          <div class="choices">
-            <label class="choice-item">
+  <main class="sim-container">
+    <header class="sim-header fade-in">
+      <span class="eyebrow">Interactive Pricing</span>
+      <h1 class="sim-title">料金シミュレーター</h1>
+      <p class="sim-desc">
+        プランやオプションを自由に組み合わせて、概算の費用と納期を算出できます。<br />
+        <span class="campaign-text">現在、<strong>起業記念キャンペーン（20% OFF）</strong> を自動適用中！</span>
+      </p>
+    </header>
+
+    <div class="sim-grid">
+      <!-- Left: Form Section -->
+      <div class="sim-form">
+        
+        <section class="sim-section glass-card">
+          <div class="sec-head">
+            <span class="sec-num">01</span>
+            <h2>制作プランを選択</h2>
+          </div>
+          <div class="choices-grid">
+            <label class="choice-card">
               <input type="radio" name="type" value="30000" data-days="2" data-label="シンプルLP" />
-              <div class="choice-content">
-                <strong>シンプルLP制作</strong>
-                <p>1ページ構成。まずは低コストでWeb広告やSNSの受け皿を作りたい方に。</p>
+              <div class="card-inner">
+                <div class="icon">📄</div>
+                <div class="info">
+                  <b>シンプルLP</b>
+                  <span>1ページ構成の基本LP</span>
+                </div>
+                <div class="price">¥30,000〜</div>
               </div>
-              <div class="choice-price">¥30,000〜</div>
             </label>
-            <label class="choice-item selected">
+            <label class="choice-card selected">
               <input type="radio" name="type" value="50000" data-days="3" data-label="シンプルHP" checked />
-              <div class="choice-content">
-                <strong>名刺代わりのシンプルHP</strong>
-                <p>必要最低限の情報を美しくまとめたい方向け。</p>
+              <div class="card-inner">
+                <div class="icon">🏢</div>
+                <div class="info">
+                  <b>シンプルHP</b>
+                  <span>名刺代わりの標準サイト</span>
+                </div>
+                <div class="price">¥50,000〜</div>
               </div>
-              <div class="choice-price">¥50,000〜</div>
             </label>
-            <label class="choice-item">
+            <label class="choice-card">
               <input type="radio" name="type" value="60000" data-days="5" data-label="心理導線LP" />
-              <div class="choice-content">
-                <strong>心理導線LP制作</strong>
-                <p>1つの商品・サービスを、行動心理に基づいて訴求し獲得を最大化します。</p>
+              <div class="card-inner">
+                <div class="icon">🧠</div>
+                <div class="info">
+                  <b>心理導線LP</b>
+                  <span>獲得を最大化する構成</span>
+                </div>
+                <div class="price">¥60,000〜</div>
               </div>
-              <div class="choice-price">¥60,000〜</div>
             </label>
-            <label class="choice-item">
+            <label class="choice-card">
               <input type="radio" name="type" value="120000" data-days="8" data-label="心理導線HP" />
-              <div class="choice-content">
-                <strong>心理導線ホームページ制作</strong>
-                <p>複数ページ構成。事業の全体像と信頼をしっかり伝える標準的なサイトです。</p>
+              <div class="card-inner">
+                <div class="icon">💎</div>
+                <div class="info">
+                  <b>心理導線HP</b>
+                  <span>信頼を構築する複数P</span>
+                </div>
+                <div class="price">¥120,000〜</div>
               </div>
-              <div class="choice-price">¥120,000〜</div>
             </label>
           </div>
-        </div>
+        </section>
 
-        <div class="card-panel">
-          <h2>2. ページ構成の規模</h2>
-          <div class="choices">
-            <label class="choice-item selected">
-              <input type="radio" name="pages" value="0" data-days="0" data-label="1ページ構成" checked />
-              <div class="choice-content">
-                <strong>1ページ構成（LP・ペライチ）</strong>
-                <p>まずは特定の目的に絞って公開したい場合に。</p>
+        <section class="sim-section glass-card">
+          <div class="sec-head">
+            <span class="sec-num">02</span>
+            <h2>ページ規模の調整</h2>
+          </div>
+          <div class="choices-grid">
+            <label class="choice-card selected">
+              <input type="radio" name="pages" value="0" data-days="0" data-label="1P構成" checked />
+              <div class="card-inner">
+                <div class="icon">1️⃣</div>
+                <div class="info"><b>1ページ構成</b><span>LP、ペライチ</span></div>
+                <div class="price">+¥0</div>
               </div>
-              <div class="choice-price">+¥0</div>
             </label>
-            <label class="choice-item">
-              <input type="radio" name="pages" value="30000" data-days="3" data-label="2〜5ページ" />
-              <div class="choice-content">
-                <strong>2〜5ページ（標準的）</strong>
-                <p>トップ、サービス、料金、プロフィール、問い合わせ等。</p>
+            <label class="choice-card">
+              <input type="radio" name="pages" value="30000" data-days="3" data-label="2〜5P構成" />
+              <div class="card-inner">
+                <div class="icon">🔢</div>
+                <div class="info"><b>2〜5ページ</b><span>標準的な規模</span></div>
+                <div class="price">+¥30,000</div>
               </div>
-              <div class="choice-price">+¥30,000</div>
             </label>
-            <label class="choice-item">
-              <input type="radio" name="pages" value="80000" data-days="6" data-label="6ページ以上" />
-              <div class="choice-content">
-                <strong>6ページ以上（多め）</strong>
-                <p>実績紹介、採用、複数事業などボリュームがある場合。</p>
+            <label class="choice-card">
+              <input type="radio" name="pages" value="80000" data-days="6" data-label="6P以上" />
+              <div class="card-inner">
+                <div class="icon">📑</div>
+                <div class="info"><b>6ページ以上</b><span>大規模な構成</span></div>
+                <div class="price">+¥80,000</div>
               </div>
-              <div class="choice-price">+¥80,000</div>
             </label>
           </div>
-        </div>
+        </section>
 
-        <div class="card-panel">
-          <h2>3. 追加機能・オプション</h2>
-          <div class="choices">
-            <label class="choice-item">
-              <input type="checkbox" name="feature" value="10000" data-days="1" data-label="フォーム設置" />
-              <div class="choice-content">
-                <strong>お問い合わせフォームの設置</strong>
-                <p>基本のコンタクト導線を作成します。</p>
+        <section class="sim-section glass-card">
+          <div class="sec-head">
+            <span class="sec-num">03</span>
+            <h2>オプション機能</h2>
+          </div>
+          <div class="choices-grid">
+            <label class="choice-card">
+              <input type="checkbox" name="feature" value="10000" data-days="1" data-label="フォーム" />
+              <div class="card-inner">
+                <div class="icon">✉️</div>
+                <div class="info"><b>フォーム設置</b></div>
+                <div class="price">+¥10,000</div>
               </div>
-              <div class="choice-price">+¥10,000</div>
             </label>
-            <label class="choice-item">
+            <label class="choice-card">
               <input type="checkbox" name="feature" value="30000" data-days="3" data-label="ブログ機能" />
-              <div class="choice-content">
-                <strong>お知らせ・ブログ機能（WordPress等）</strong>
-                <p>お客様自身で簡単に更新できる環境を構築します。</p>
+              <div class="card-inner">
+                <div class="icon">📝</div>
+                <div class="info"><b>ブログ機能</b></div>
+                <div class="price">+¥30,000</div>
               </div>
-              <div class="choice-price">+¥30,000</div>
             </label>
-            <label class="choice-item">
+            <label class="choice-card">
               <input type="checkbox" name="feature" value="30000" data-days="3" data-label="予約システム" />
-              <div class="choice-content">
-                <strong>予約システムの導入</strong>
-                <p>来店や面談の予約導線をスムーズにします。</p>
+              <div class="card-inner">
+                <div class="icon">📅</div>
+                <div class="info"><b>予約連携</b></div>
+                <div class="price">+¥30,000</div>
               </div>
-              <div class="choice-price">+¥30,000</div>
             </label>
-            <label class="choice-item">
+            <label class="choice-card">
               <input type="checkbox" name="feature" value="10000" data-days="1" data-label="代行サポート" />
-              <div class="choice-content">
-                <strong>サーバー・ドメイン取得の代行</strong>
-                <p>複雑な初期設定をすべてお任せいただけます。</p>
+              <div class="card-inner">
+                <div class="icon">🛠</div>
+                <div class="info"><b>ドメイン代行</b></div>
+                <div class="price">+¥10,000</div>
               </div>
-              <div class="choice-price">+¥10,000</div>
             </label>
-            <label class="choice-item">
+            <label class="choice-card rush-card">
               <input type="checkbox" id="rushCheck" name="rush" value="1.5" data-days="-2" data-label="特急対応" />
-              <div class="choice-content">
-                <strong>【特急対応】なるべく早く納品</strong>
-                <p>費用1.5倍 / 期間を約30%短縮（内容により要相談）。</p>
+              <div class="card-inner">
+                <div class="icon">🚀</div>
+                <div class="info"><b>【特急】特急納品</b></div>
+                <div class="price">×1.5</div>
               </div>
-              <div class="choice-price">×1.5</div>
             </label>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <aside class="sticky-sidebar">
-        <div class="result-card" id="resultCard">
-          <h2>ESTIMATED TOTAL</h2>
-          <div class="total-price" id="totalPrice">¥0<span>〜</span></div>
-          <div class="delivery-days" id="deliveryDays">目安納期：約0営業日</div>
+      </div>
+
+      <!-- Right: Summary Sidebar -->
+      <aside class="sim-sidebar">
+        <div class="result-card glass-card-dark">
+          <div class="gauge-section">
+            <svg class="price-gauge" viewBox="0 0 100 50">
+              <path class="gauge-bg" d="M 10 45 A 40 40 0 0 1 90 45" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="6" />
+              <path id="gauge-fill" class="gauge-fill" d="M 10 45 A 40 40 0 0 1 90 45" fill="none" stroke="#639922" stroke-width="6" stroke-dasharray="125.6" stroke-dashoffset="125.6" />
+            </svg>
+            <div class="price-display">
+              <div class="price-val" id="totalPrice">¥0</div>
+              <div class="price-label">ESTIMATED TOTAL</div>
+            </div>
+          </div>
+
+          <div class="delivery-info">
+            <div class="info-item">
+              <span class="lbl">概算納期</span>
+              <span class="val" id="deliveryDays">約0営業日</span>
+            </div>
+            <div class="info-item campaign-row" id="campaignRow">
+              <span class="lbl">🎁 起業記念 20% OFF</span>
+              <span class="val" id="discountVal">-¥0</span>
+            </div>
+          </div>
+
+          <div class="receipt-breakdown">
+            <h3>見積明細</h3>
+            <div id="breakdownList">
+              <!-- Dynamic rows -->
+            </div>
+          </div>
+
+          <div class="cta-actions">
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="primary-btn">この内容で無料相談</a>
+            <a href="/lp_wizard" class="text-btn">さらに詳細な構成案を作成 →</a>
+          </div>
           
-          <div class="breakdown" id="breakdownList">
-            <!-- Dynamic list -->
-          </div>
-
-          <div class="action-btns">
-            <a class="btn-main btn-primary" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank">この内容で無料相談する</a>
-            <a class="btn-main btn-secondary" href="/lp_wizard">もっと詳しくヒアリングする</a>
-          </div>
-
-          <p class="disclaimer">
-            ※表示価格は税込の概算です。正確なお見積りは、詳細要件を確認後にご提示いたします。
-          </p>
+          <p class="disclaimer">※表示価格は税込の概算です。要件により変動する場合があります。</p>
         </div>
       </aside>
     </div>
@@ -162,111 +210,138 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-    .sample-banner { background: var(--accent2); color: #fff; padding: 10px 20px; text-align: center; font-size: 0.88rem; font-weight: 700; }
-    .sample-banner a { color: #fff; text-decoration: underline; }
-
-    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    .hero { padding: 60px 0 40px; text-align: center; }
-    .eyebrow {
-      display: inline-block; letter-spacing: 0.1em; text-transform: uppercase;
-      color: var(--accent); font-size: 0.82rem; font-weight: 800; background: var(--accent-soft);
-      padding: 4px 12px; border-radius: 999px; margin-bottom: 16px;
+    :root {
+      --sim-accent: #639922;
+      --sim-accent-dark: #4d7a1a;
+      --sim-bg: #1a1c1e;
+      --glass-light: rgba(255, 255, 255, 0.7);
+      --glass-dark: rgba(26, 28, 30, 0.9);
     }
-    .hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; margin: 0 0 20px; font-weight: 800; }
-    .lead { font-size: 1.1rem; max-width: 800px; margin: 0 auto; color: var(--muted); }
 
-    .main-layout { display: grid; grid-template-columns: 1fr 380px; gap: 32px; padding-bottom: 80px; }
-
-    .form-section { display: flex; flex-direction: column; gap: 32px; }
-    .card-panel { background: var(--paper); border: 1px solid var(--line); border-radius: 24px; padding: 32px; box-shadow: var(--shadow); }
-    .card-panel h2 { font-size: 1.5rem; margin: 0 0 24px; display: flex; align-items: center; gap: 12px; font-weight: 800; }
-    .card-panel h2::before { content: ""; width: 4px; height: 24px; background: var(--accent); border-radius: 2px; }
-
-    .choices { display: grid; gap: 16px; }
-    .choice-item {
-      position: relative; display: flex; align-items: flex-start; gap: 16px; padding: 20px;
-      border: 1px solid var(--line); border-radius: 20px; background: #fff; cursor: pointer; transition: 0.3s;
+    /* Background Decoration */
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; background: #fdfaf7; overflow: hidden;
     }
-    .choice-item:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(138, 90, 50, 0.08); }
-    .choice-item input { margin-top: 6px; width: 20px; height: 20px; accent-color: var(--accent); }
-    .choice-item.selected { border-color: var(--accent); background: var(--accent-soft); }
-    .choice-content { flex: 1; }
-    .choice-content strong { display: block; font-size: 1.1rem; margin-bottom: 4px; font-weight: 800; }
-    .choice-content p { margin: 0; font-size: 0.92rem; color: var(--muted); line-height: 1.6; }
-    .choice-price { font-weight: 800; color: var(--accent); font-size: 1rem; white-space: nowrap; margin-top: 2px; }
+    .grid-overlay {
+      position: absolute; width: 100%; height: 100%;
+      background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; }
+    .glow-1 { width: 500px; height: 500px; background: #e8f0e5; top: -10%; right: -10%; }
+    .glow-2 { width: 400px; height: 400px; background: #f3e9d2; bottom: -10%; left: -10%; }
 
-    .sticky-sidebar { position: sticky; top: 100px; align-self: start; }
-    .result-card { background: #1a1c1e; color: #fff; border-radius: 24px; padding: 32px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.2); }
-    .result-card h2 { margin: 0 0 8px; font-size: 0.8rem; color: var(--accent2); opacity: 0.9; letter-spacing: 0.1em; font-weight: 800; }
-    .total-price { font-size: 3.5rem; font-weight: 900; line-height: 1; margin-bottom: 8px; }
-    .total-price span { font-size: 1.2rem; font-weight: 700; margin-left: 4px; }
-    .delivery-days { font-size: 1rem; font-weight: 700; color: #d8b98c; margin-bottom: 24px; }
+    .demo-banner { background: rgba(0,0,0,0.02); border-bottom: 1px solid var(--line); padding: 12px; text-align: center; font-size: 0.85rem; backdrop-filter: blur(5px); }
+    .banner-cta { color: var(--sim-accent); font-weight: 800; text-decoration: underline; margin-left: 8px; }
+
+    .sim-container { max-width: 1200px; margin: 40px auto 100px; padding: 0 20px; }
     
-    .breakdown { border-top: 1px solid rgba(255, 255, 255, 0.1); margin-top: 24px; padding-top: 24px; }
-    .breakdown-row { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 10px; opacity: 0.85; }
-    .breakdown-row span:last-child { font-weight: 800; color: #fff; }
+    .sim-header { text-align: center; margin-bottom: 60px; }
+    .eyebrow { font-size: 0.8rem; font-weight: 900; color: var(--sim-accent); letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 12px; display: block; }
+    .sim-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; color: var(--text); margin-bottom: 20px; }
+    .sim-desc { font-size: 1.1rem; color: var(--muted); line-height: 1.8; }
+    .campaign-text { color: var(--sim-accent); font-weight: 800; }
 
-    .action-btns { display: flex; flex-direction: column; gap: 12px; margin-top: 32px; }
-    .btn-main {
-      display: flex; align-items: center; justify-content: center; padding: 16px 24px;
-      border-radius: 999px; font-weight: 800; font-size: 1rem; text-align: center;
-      transition: 0.3s; cursor: pointer; text-decoration: none; border: none;
+    .sim-grid { display: grid; grid-template-columns: 1fr 400px; gap: 40px; align-items: start; }
+
+    /* Form Section */
+    .sim-form { display: flex; flex-direction: column; gap: 30px; }
+    .glass-card { background: var(--glass-light); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.5); border-radius: 32px; padding: 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.05); }
+
+    .sec-head { display: flex; align-items: center; gap: 15px; margin-bottom: 30px; }
+    .sec-num { font-size: 0.9rem; font-weight: 900; color: var(--sim-accent); background: rgba(99, 153, 34, 0.1); padding: 4px 12px; border-radius: 999px; }
+    .sec-head h2 { font-size: 1.4rem; font-weight: 800; color: var(--text); }
+
+    .choices-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; }
+    
+    .choice-card { cursor: pointer; position: relative; }
+    .choice-card input { position: absolute; opacity: 0; cursor: pointer; }
+    
+    .card-inner {
+      padding: 24px; background: #fff; border: 2px solid transparent; border-radius: 20px;
+      display: flex; flex-direction: column; height: 100%; transition: 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
     }
-    .btn-primary { background: var(--accent); color: #fff; box-shadow: 0 8px 20px rgba(138, 90, 50, 0.3); }
-    .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); }
+    .choice-card:hover .card-inner { border-color: rgba(99, 153, 34, 0.3); transform: translateY(-3px); }
+    .choice-card.selected .card-inner { border-color: var(--sim-accent); background: #fdfaf7; box-shadow: 0 10px 30px rgba(99, 153, 34, 0.1); }
 
-    .disclaimer { font-size: 0.82rem; color: #b7a99c; margin-top: 20px; line-height: 1.6; }
+    .icon { font-size: 2rem; margin-bottom: 15px; }
+    .info b { display: block; font-size: 1.05rem; font-weight: 800; margin-bottom: 4px; }
+    .info span { font-size: 0.8rem; color: var(--muted); line-height: 1.4; display: block; margin-bottom: 15px; }
+    .price { margin-top: auto; font-size: 0.95rem; font-weight: 900; color: var(--sim-accent); }
+
+    .rush-card .price { color: #e74c3c; }
+
+    /* Sidebar */
+    .sim-sidebar { position: sticky; top: 100px; }
+    .glass-card-dark { background: var(--sim-bg); color: #fff; border-radius: 32px; padding: 40px; box-shadow: 0 30px 70px rgba(0,0,0,0.2); }
+
+    .gauge-section { position: relative; text-align: center; margin-bottom: 40px; }
+    .price-gauge { width: 100%; height: auto; }
+    .gauge-fill { transition: stroke-dashoffset 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+    .price-display { position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; }
+    .price-val { font-size: 2.8rem; font-weight: 900; line-height: 1; margin-bottom: 4px; color: #fff; }
+    .price-label { font-size: 0.7rem; font-weight: 900; color: var(--sim-accent); letter-spacing: 0.1em; }
+
+    .delivery-info { border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 1px solid rgba(255,255,255,0.1); padding: 20px 0; margin-bottom: 30px; }
+    .info-item { display: flex; justify-content: space-between; margin-bottom: 10px; font-size: 0.9rem; }
+    .info-item .lbl { color: #aaa; font-weight: 700; }
+    .info-item .val { font-weight: 900; }
+    .campaign-row { color: var(--sim-accent); }
+
+    .receipt-breakdown h3 { font-size: 0.8rem; font-weight: 900; color: #555; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 0.1em; }
+    .breakdown-row { display: flex; justify-content: space-between; font-size: 0.85rem; margin-bottom: 8px; opacity: 0.8; }
+    .breakdown-row .r-price { font-weight: 800; color: #fff; }
+
+    .cta-actions { display: flex; flex-direction: column; gap: 15px; margin-top: 35px; }
+    .primary-btn { display: block; width: 100%; padding: 18px; background: var(--sim-accent); color: #fff; border-radius: 999px; font-weight: 800; font-size: 1.1rem; text-align: center; border: none; cursor: pointer; transition: 0.3s; text-decoration: none; }
+    .primary-btn:hover { background: var(--sim-accent-dark); transform: translateY(-2px); }
+    .text-btn { font-size: 0.9rem; color: #aaa; text-align: center; text-decoration: none; font-weight: 700; transition: 0.3s; }
+    .text-btn:hover { color: #fff; }
+
+    .disclaimer { font-size: 0.75rem; color: #555; text-align: center; margin-top: 25px; line-height: 1.5; }
 
     @media (max-width: 960px) {
-      .main-layout { grid-template-columns: 1fr; }
-      .sticky-sidebar { position: static; margin-top: 32px; }
+      .sim-grid { grid-template-columns: 1fr; }
+      .sim-sidebar { position: static; }
+      .sim-header { margin-bottom: 40px; }
     }
 </style>
 
 <script is:inline>
     const yen = (n) => '¥' + Math.round(n).toLocaleString('ja-JP');
-    let currentDisplayPrice = 0;
-
-    function animateValue(obj, start, end, duration) {
-      let startTimestamp = null;
-      const step = (timestamp) => {
-        if (!startTimestamp) startTimestamp = timestamp;
-        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-        const value = Math.floor(progress * (end - start) + start);
-        obj.innerHTML = yen(value) + '<span>〜</span>';
-        if (progress < 1) {
-          window.requestAnimationFrame(step);
-        }
-      };
-      window.requestAnimationFrame(step);
-    }
+    let currentTotal = 0;
 
     function update() {
       let subtotal = 0;
       let days = 0;
       let rows = [];
 
-      // Type
+      // Plan
       const type = document.querySelector('input[name="type"]:checked');
       if (type) {
-          subtotal += parseInt(type.value);
-          days += parseInt(type.dataset.days);
-          rows.push({ label: type.dataset.label, price: parseInt(type.value) });
+        const v = parseInt(type.value);
+        subtotal += v;
+        days += parseInt(type.dataset.days);
+        rows.push({ label: type.dataset.label, price: v });
       }
 
       // Pages
       const pages = document.querySelector('input[name="pages"]:checked');
       if (pages) {
-          total += parseInt(pages.value);
-          days += parseInt(pages.dataset.days);
-          if (parseInt(pages.value) > 0) rows.push({ label: pages.dataset.label, price: parseInt(pages.value) });
+        const v = parseInt(pages.value);
+        subtotal += v;
+        days += parseInt(pages.dataset.days);
+        if (v > 0) rows.push({ label: pages.dataset.label, price: v });
       }
 
       // Features
       document.querySelectorAll('input[name="feature"]:checked').forEach(f => {
-        subtotal += parseInt(f.value);
+        const v = parseInt(f.value);
+        subtotal += v;
         days += parseInt(f.dataset.days);
-        rows.push({ label: f.dataset.label, price: parseInt(f.value) });
+        rows.push({ label: f.dataset.label, price: v });
       });
 
       // Rush
@@ -274,43 +349,61 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (rush && rush.checked) {
         subtotal *= 1.5;
         days = Math.max(2, Math.ceil(days * 0.7));
-        rows.push({ label: '特急対応', price: '×1.5' });
+        rows.push({ label: '特急納品(×1.5)', price: 'Rush' });
       }
 
-      // Campaign Discount (20% OFF)
+      // Campaign
       const discount = Math.round(subtotal * 0.2);
       const total = subtotal - discount;
-      rows.push({ label: '起業記念キャンペーン', price: `-${yen(discount)}` });
 
-      // Selection Visuals
-      document.querySelectorAll('.choice-item').forEach(item => {
-        const input = item.querySelector('input');
-        item.classList.toggle('selected', input.checked);
+      // Update Visuals
+      document.querySelectorAll('.choice-card').forEach(card => {
+        card.classList.toggle('selected', card.querySelector('input').checked);
       });
 
-      // Update UI
+      // Total Price Animation
       const priceEl = document.getElementById('totalPrice');
       if (priceEl) {
-          animateValue(priceEl, currentDisplayPrice, total, 400);
-          currentDisplayPrice = total;
+        // Simple counter
+        let start = currentTotal;
+        let end = total;
+        let duration = 400;
+        let startTime = null;
+        function animate(now) {
+          if(!startTime) startTime = now;
+          let progress = Math.min((now - startTime) / duration, 1);
+          let current = Math.floor(progress * (end - start) + start);
+          priceEl.textContent = yen(current);
+          if(progress < 1) requestAnimationFrame(animate);
+        }
+        requestAnimationFrame(animate);
+        currentTotal = total;
       }
 
-      const daysEl = document.getElementById('deliveryDays');
-      if (daysEl) daysEl.textContent = `目安納期：約${days}営業日`;
+      // Gauge Animation
+      const gauge = document.getElementById('gauge-fill');
+      const maxPossible = 300000; // For scale
+      const pct = Math.min(total / maxPossible, 1);
+      const circumference = 125.6;
+      const offset = circumference - (pct * circumference);
+      if(gauge) gauge.style.strokeDashoffset = offset;
 
-      const breakdownEl = document.getElementById('breakdownList');
-      if (breakdownEl) {
-          breakdownEl.innerHTML = rows.map(r => `
-            <div class="breakdown-row">
-              <span>${r.label}</span>
-              <span>${typeof r.price === 'number' ? yen(r.price) : r.price}</span>
-            </div>
-          `).join('');
+      document.getElementById('deliveryDays').textContent = `約${days}営業日`;
+      document.getElementById('discountVal').textContent = `-${yen(discount)}`;
+      
+      const list = document.getElementById('breakdownList');
+      if(list) {
+        list.innerHTML = rows.map(r => `
+          <div class="breakdown-row">
+            <span class="r-label">${r.label}</span>
+            <span class="r-price">${typeof r.price === 'number' ? yen(r.price) : r.price}</span>
+          </div>
+        `).join('');
       }
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('input').forEach(i => i.addEventListener('change', update));
-        update();
+      document.querySelectorAll('input').forEach(i => i.addEventListener('change', update));
+      update();
     });
 </script>

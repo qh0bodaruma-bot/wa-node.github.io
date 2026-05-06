@@ -1,0 +1,459 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="制作実績・デモ｜和-Node" description="心理導線Web制作、診断ツール開発、KDP出版、LINEミニアプリなど、和-Nodeの幅広い制作実績とインタラクティブなデモアプリを紹介します。">
+  <!-- Background -->
+  <div class="bg-decoration">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <main class="works-page">
+    <header class="works-header fade-in">
+      <div class="container">
+        <div class="header-visual">
+          <div class="orb"></div>
+        </div>
+        <span class="eyebrow">Portfolio Showcase</span>
+        <h1 class="works-title">Design Excellence &<br/><span class="accent-text">Strategic Solutions</span></h1>
+        <p class="works-desc">
+          心理学と最先端技術を融合させた、和-Nodeのクリエイティブ・ショーケース。<br />
+          「2.4万円〜」という価格概念を覆す、圧倒的なクオリティと成果へのこだわりを体感してください。
+        </p>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Filter Tabs -->
+      <nav class="filter-nav" id="filter-nav">
+        <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="web">Web & LP</button>
+        <button class="filter-btn" data-filter="tool">診断・ツール</button>
+        <button class="filter-btn" data-filter="kdp">KDP出版</button>
+        <button class="filter-btn" data-filter="system">システム・AI</button>
+      </nav>
+
+      <div class="works-grid" id="works-grid">
+        
+        <!-- Category: Tool -->
+        <article class="work-card reveal" data-category="tool">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg">
+              <span class="category-tag">Diagnostic Tool</span>
+              <div class="card-icon">🧠</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Strategic Tool</div>
+            <h3>こころの疲労度診断</h3>
+            <p class="card-text">心理カウンセラーの知見を活かし、現在のストレス要因を可視化。グラスモーフィズムを用いたモダンなUIで、回答者の心理的ハードルを下げています。</p>
+            <div class="card-footer">
+              <span class="tech-tag">JavaScript</span>
+              <span class="tech-tag">Astro</span>
+              <a href="/mental_care" class="card-link">診断を体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="tool">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg">
+              <span class="category-tag">Diagnostic Tool</span>
+              <div class="card-icon">♿</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Accessibility</div>
+            <h3>バリアフリー診断</h3>
+            <p class="card-text">車いすユーザー視点の25項目によるセルフチェック。物理的な障壁を「自分事」として捉え直すための、アクセシビリティに配慮した設計です。</p>
+            <div class="card-footer">
+              <span class="tech-tag">UI/UX</span>
+              <span class="tech-tag">SVG Gauge</span>
+              <a href="/barrier_free" class="card-link">診断を体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="tool">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg">
+              <span class="category-tag">Diagnostic Tool</span>
+              <div class="card-icon">🔍</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">SEO Logic</div>
+            <h3>SEO内部対策診断</h3>
+            <p class="card-text">WordPressサイトのSEO状態を25項目でリアルタイム採点。テクニカルな情報を、段階的なステップとチャートで分かりやすく提示します。</p>
+            <div class="card-footer">
+              <span class="tech-tag">SEO</span>
+              <span class="tech-tag">Logic</span>
+              <a href="/seo_check" class="card-link">診断を体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="tool">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg">
+              <span class="category-tag">Direction Tool</span>
+              <div class="card-icon">✍️</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Strategic Planning</div>
+            <h3>LP構成案作成ウィザード</h3>
+            <p class="card-text">制作前の要件定義をインタラクティブに自動化。回答後にプロフェッショナルな要件定義サマリーを生成し、スムーズな相談を実現します。</p>
+            <div class="card-footer">
+              <span class="tech-tag">Planning</span>
+              <span class="tech-tag">Automation</span>
+              <a href="/lp_wizard" class="card-link">体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="tool">
+          <div class="card-visual-wrap">
+            <div class="card-visual pricing-bg">
+              <span class="category-tag">Pricing Tool</span>
+              <div class="card-icon">⚖️</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">UX Simulation</div>
+            <h3>料金シミュレーター</h3>
+            <p class="card-text">プランやオプションをリアルタイムで試算。金額に連動するメーターやレシート形式の明細で、透明性と納得感のある見積もりを提供します。</p>
+            <div class="card-footer">
+              <span class="tech-tag">Dashboard</span>
+              <span class="tech-tag">JS Animation</span>
+              <a href="/simulator" class="card-link">体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: Web (Expanded Premium Gallery) -->
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual clinic-bg">
+              <span class="category-tag">Medical / Clinic</span>
+              <div class="card-icon">🏥</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Expert Opinion</div>
+            <h3>クリニック・医療系LP</h3>
+            <p class="card-text">あああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+            <div class="card-footer">
+              <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
+              <a href="/portfolio-lp/lp_clinic.html" class="premium-link">作品を見る</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual beauty-bg">
+              <span class="category-tag">Beauty / Salon</span>
+              <div class="card-icon">✨</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Expert Opinion</div>
+            <h3>美容・エステ・サロン系LP</h3>
+            <p class="card-text">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+            <div class="card-footer">
+              <div class="tech-stack"><span>#Visual Art</span><span>#CVR</span></div>
+              <a href="/portfolio-lp/lp_beauty.html" class="premium-link">作品を見る</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual estate-bg">
+              <span class="category-tag">Real Estate</span>
+              <div class="card-icon">🏠</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Expert Opinion</div>
+            <h3>不動産・建設・リフォームLP</h3>
+            <p class="card-text">ううううううううううううううううううううううううううううううううううううううううううううううううううう。</p>
+            <div class="card-footer">
+              <div class="tech-stack"><span>#Architecture</span><span>#Safety</span></div>
+              <a href="/portfolio-lp/lp_realestate.html" class="premium-link">作品を見る</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual law-bg">
+              <span class="category-tag">Professional Services</span>
+              <div class="card-icon">💼</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Expert Opinion</div>
+            <h3>士業・コンサル・教育系LP</h3>
+            <p class="card-text">えええええええええええええええええええええええええええええええええええええええええええええええええええ。</p>
+            <div class="card-footer">
+              <div class="tech-stack"><span>#Identity</span><span>#Strategy</span></div>
+              <a href="/portfolio-lp/lp_lawyer.html" class="premium-link">作品を見る</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual corporate-bg">
+              <span class="category-tag">Corporate</span>
+              <div class="card-icon">🏢</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Expert Opinion</div>
+            <h3>コーポレート・企業サイトLP</h3>
+            <p class="card-text">おおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおおお。</p>
+            <div class="card-footer">
+              <div class="tech-stack"><span>#Branding</span><span>#Corporate</span></div>
+              <a href="/portfolio-lp/lp_corporate.html" class="premium-link">作品を見る</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: KDP -->
+        <article class="work-card reveal" data-category="kdp">
+          <div class="card-visual-wrap">
+            <div class="card-visual kdp-bg">
+              <span class="category-tag">Kindle KDP</span>
+              <div class="card-icon">📚</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Global Design</div>
+            <h3>Amazon KDP 出版実績</h3>
+            <p class="card-text">浮世絵や鳥獣戯画をモチーフにした、海外市場向け（US/FR）の書籍制作。表紙から内部構成まで、和の美しさを世界へ届けています。</p>
+            <div class="card-footer">
+              <span class="tech-tag">Global</span>
+              <span class="tech-tag">Publishing</span>
+              <a href="/kdp_books" class="card-link">作品一覧を見る →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: System -->
+        <article class="work-card reveal" data-category="system">
+          <div class="card-visual-wrap">
+            <div class="card-visual">
+              <span class="category-tag">LINE Mini App</span>
+              <div class="card-icon">💬</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">System Build</div>
+            <h3>LINE カウンセリング予約システム</h3>
+            <p class="card-text">LINEアプリ内で完結する予約・決済・診断システム。ユーザーの日常的なツールを窓口にすることで、利用のハードルを劇的に下げます。</p>
+            <div class="card-footer">
+              <div class="tech-stack"><span>#LIFF</span><span>#Node.js</span></div>
+              <a href="/line_demo" class="premium-link">デモを見る</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="work-card reveal" data-category="system">
+          <div class="card-visual-wrap">
+            <div class="card-visual">
+              <span class="category-tag">Business Tool</span>
+              <div class="card-icon">🤖</div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">System Build</div>
+            <h3>AI・GAS 業務自動化事例</h3>
+            <p class="card-text">ChatGPT APIやGoogle Apps Scriptを用いた業務効率化。現場の「手作業」を「自動」に変え、より価値のある仕事へ時間を創出します。</p>
+            <div class="card-footer">
+              <div class="tech-stack"><span>#OpenAI</span><span>#GAS</span></div>
+              <span class="card-link-placeholder">詳細相談はお問い合わせまで</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <section class="works-cta">
+      <div class="container glass-card">
+        <div class="cta-decoration"></div>
+        <h2>あなたのビジョンを、<br/>確かな形に。</h2>
+        <p>診断ツールから大規模サイトまで、幅広く対応可能です。<br/>まずは今の想いをお聞かせください。</p>
+        <div class="btns">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="primary-btn">無料で相談する</a>
+          <a href="/simulator" class="secondary-btn">費用を計算する</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Standard Packages CTA -->
+    <section class="packages-cta reveal">
+      <div class="container glass-panel">
+        <div class="cta-label">NEW ARRIVAL</div>
+        <h2>標準HPパッケージのご案内</h2>
+        <p>「何が必要か」を迷わせない。7ページ、10ページ、15ページ〜など、<br/>事業規模に合わせた最適な構成をパッケージ化しました。</p>
+        <div class="cta-btns">
+          <a href="/demos" class="premium-link">パッケージ一覧を見る</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>&copy; 2024 和-Node. All rights reserved.</p>
+    </footer>
+
+  </main>
+</BaseLayout>
+
+<style>
+    :root {
+      --accent: #639922;
+      --accent-dark: #4d7a1a;
+      --glass: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Background Decoration */
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; background: #fdfaf7; overflow: hidden;
+    }
+    .grid-overlay {
+      position: absolute; width: 100%; height: 100%;
+      background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; }
+    .glow-1 { width: 500px; height: 500px; background: #e8f0e5; top: -10%; right: -10%; }
+    .glow-2 { width: 400px; height: 400px; background: #f3e9d2; bottom: -10%; left: -10%; }
+
+    .works-page { padding-bottom: 100px; }
+    
+    .works-header { padding: 120px 0 80px; text-align: center; position: relative; }
+    .header-visual { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+    .orb { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(99, 153, 34, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(50px); }
+    
+    .accent-text { color: var(--accent); position: relative; }
+    .accent-text::after { content: ""; position: absolute; bottom: 8px; left: 0; width: 100%; height: 12px; background: rgba(99, 153, 34, 0.1); z-index: -1; }
+
+    .eyebrow { font-size: 0.85rem; font-weight: 900; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+    .works-title { font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 900; color: var(--text); margin-bottom: 24px; line-height: 1.1; letter-spacing: -0.02em; }
+    .works-desc { font-size: 1.2rem; color: var(--muted); line-height: 1.8; max-width: 800px; margin: 0 auto; }
+
+    /* Filter Nav */
+    .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 80px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 12px 28px; border-radius: 999px; background: var(--glass);
+      border: 1px solid var(--glass-border); color: var(--muted); font-weight: 800;
+      cursor: pointer; transition: 0.3s; backdrop-filter: blur(10px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 8px 25px rgba(99, 153, 34, 0.3); }
+
+    /* Works Grid */
+    .works-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 40px;
+    }
+
+    .work-card {
+      background: var(--glass); backdrop-filter: blur(30px);
+      border: 1px solid var(--glass-border); border-radius: 40px;
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    }
+    .work-card:hover { transform: translateY(-12px); border-color: var(--accent); box-shadow: 0 30px 60px rgba(0,0,0,0.08); }
+
+    .card-visual-wrap { padding: 12px; }
+    .card-visual {
+      height: 160px; background: rgba(99, 153, 34, 0.05);
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .category-tag {
+      position: absolute; top: 20px; left: 20px;
+      font-size: 0.65rem; font-weight: 900; color: var(--accent);
+      background: #fff; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.1em;
+    }
+    .card-icon { font-size: 4rem; opacity: 0.8; }
+
+    .card-body { padding: 32px; flex: 1; display: flex; flex-direction: column; }
+    .card-body h3 { font-size: 1.4rem; font-weight: 900; color: var(--text); margin-bottom: 15px; }
+    .card-text { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; flex: 1; }
+
+    .card-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+    .tech-tag { font-size: 0.75rem; font-weight: 700; color: #888; background: rgba(0,0,0,0.03); padding: 4px 10px; border-radius: 4px; }
+    .card-link { margin-left: auto; font-size: 0.9rem; font-weight: 800; color: var(--accent); text-decoration: none; transition: 0.2s; }
+    .card-link:hover { text-decoration: underline; }
+    .card-link-placeholder { margin-left: auto; font-size: 0.85rem; color: #bbb; font-weight: 700; }
+
+    /* CTA Section */
+    .works-cta { margin-top: 100px; text-align: center; }
+    .glass-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 40px; padding: 60px 40px; }
+    .works-cta h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; color: var(--text); }
+    .works-cta p { font-size: 1.1rem; color: var(--muted); margin-bottom: 40px; }
+    .btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+    .primary-btn { padding: 18px 48px; background: var(--accent); color: #fff; border-radius: 999px; font-weight: 800; border: none; cursor: pointer; text-decoration: none; transition: 0.3s; }
+    .secondary-btn { padding: 18px 48px; border: 2px solid var(--accent); color: var(--accent); border-radius: 999px; font-weight: 800; text-decoration: none; transition: 0.3s; }
+    .primary-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(99, 153, 34, 0.2); }
+
+    .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 600px) {
+      .works-header { padding: 80px 0 40px; }
+      .works-grid { grid-template-columns: 1fr; }
+      .works-cta h2 { font-size: 1.8rem; }
+    }
+</style>
+
+<script is:inline>
+    // Filter Logic
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const workCards = document.querySelectorAll('.work-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        
+        // Update active btn
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter cards
+        workCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'flex';
+            setTimeout(() => card.classList.add('visible'), 50);
+          } else {
+            card.style.display = 'none';
+            card.classList.remove('visible');
+          }
+        });
+      });
+    });
+
+    // Reveal Logic
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>

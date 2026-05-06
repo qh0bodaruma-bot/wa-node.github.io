@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.hostname+location.pathname+location.search);</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【デモHP】Business 7 パッケージ | 和-Node</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&family=Cormorant+Garamond:ital,wght@0,600&display=swap" rel="stylesheet">
+<style>
+:root{--main:#1c2431;--accent:#c0a060;--white:#ffffff;--text:#333;--bg:#f9f9f9;}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Noto Sans JP',sans-serif;color:var(--text);line-height:1.8;background:#fff;overflow-x:hidden;}
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:var(--main);color:#fff;font-size:12px;text-align:center;padding:10px 0;font-weight:700;}
+nav{position:fixed;top:32px;left:0;right:0;z-index:999;display:flex;justify-content:space-between;align-items:center;padding:20px 60px;background:rgba(255,255,255,0.9);backdrop-filter:blur(10px);border-bottom:1px solid #eee;}
+.logo{font-family:'Noto Serif JP',serif;font-weight:700;font-size:22px;color:var(--main);}
+
+.hero{height:100vh;background:linear-gradient(rgba(28,36,49,0.7),rgba(28,36,49,0.7)),url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&q=80&w=2000');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(32px,5vw,60px);margin-bottom:20px;}
+
+.section{padding:100px 60px;max-width:1200px;margin:0 auto;}
+.sec-h2{text-align:center;font-family:'Noto Serif JP',serif;font-size:36px;margin-bottom:60px;position:relative;padding-bottom:20px;}
+.sec-h2::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40px;height:2px;background:var(--accent);}
+
+.service-item{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;margin-bottom:80px;}
+.service-img{height:350px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:100px;border-radius:20px;}
+
+.profile-table{width:100%;border-collapse:collapse;margin-top:40px;}
+.profile-table th,.profile-table td{padding:25px;border-bottom:1px solid #eee;text-align:left;}
+.profile-table th{background:#fcfcfc;width:30%;color:var(--main);}
+
+@media(max-width:900px){
+  nav{padding:10px 20px;}.section{padding:80px 20px;}
+  .service-item{grid-template-columns:1fr;}
+}
+.reveal{opacity:0;transform:translateY(30px);transition:1s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+</style>
+<link rel="stylesheet" href="premium_upgrade.css">
+</head>
+<body>
+<div class="portfolio-banner"><span>DEMO: Business 7</span>🎨 ああああああああああああああああああああ</div>
+<nav>
+  <div class="logo">DEMO CORP</div>
+  <a href="#contact" style="background:var(--accent);color:#fff;padding:10px 25px;text-decoration:none;border-radius:4px;font-weight:700;font-size:14px;">お問い合わせ</a>
+</nav>
+
+<section class="hero">
+  <div>
+    <p style="letter-spacing:0.3em; margin-bottom:10px; font-weight:700;">AAAAA BBBBB CCCCC</p>
+    <h1>確かな技術と、<br>信頼のパートナーシップ。</h1>
+    <p style="margin-top:30px; opacity:0.8;">ああああああああああああああああああああああああ</p>
+  </div>
+</section>
+
+<section class="section" id="about">
+  <h2 class="sec-h2">会社について あああああ</h2>
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;">
+    <div class="reveal">
+      <p style="font-size:24px; font-weight:700; color:var(--accent); margin-bottom:20px;">ああああああああああああああああ</p>
+      <p>あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+    </div>
+    <div class="service-img reveal">🏢</div>
+  </div>
+</section>
+
+<section class="section" style="background:var(--bg);" id="services">
+  <h2 class="sec-h2">事業内容 あああああ</h2>
+  <div class="service-item reveal">
+    <div class="service-img">⚙️</div>
+    <div><h3>サービスあああああ</h3><p>あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p></div>
+  </div>
+  <div class="service-item reveal" style="direction:rtl;">
+    <div class="service-img">🌐</div>
+    <div style="direction:ltr;"><h3>サービスいいいいい</h3><p>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p></div>
+  </div>
+  <div class="service-item reveal">
+    <div class="service-img">📈</div>
+    <div><h3>サービスううううう</h3><p>うううううううううううううううううううううううううううううううううううううううううううううううううううううううううう。</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="sec-h2">会社概要 あああああ</h2>
+  <table class="profile-table reveal">
+    <tr><th>社名</th><td>あああああ株式会社</td></tr>
+    <tr><th>代表者</th><td>あああああ あああ</td></tr>
+    <tr><th>所在地</th><td>東京都あああああ区いいいいい ううううう</td></tr>
+    <tr><th>設立</th><td>20XX年 あああ月</td></tr>
+  </table>
+</section>
+
+<section class="section" style="background:var(--main); color:#fff; text-align:center;" id="contact">
+  <h2 class="sec-h2" style="color:#fff;">Contact</h2>
+  <p style="margin-bottom:40px;">あああああああああああああああああああああああああああああ</p>
+  <a href="#" style="background:var(--accent); color:#fff; padding:20px 60px; font-weight:700; text-decoration:none; display:inline-block; border-radius:50px;">お問い合わせフォームへ</a>
+</section>
+
+<footer style="padding:60px; text-align:center; background:#111; color:rgba(255,255,255,0.3);">
+  <p>© 2024 Demo Corp. All Rights Reserved.</p>
+  <p style="margin-top:10px; color:var(--accent);">和-Node プロデュース</p>
+</footer>
+
+<script>
+const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+<script src="premium_upgrade.js"></script>
+</body>
+</html>

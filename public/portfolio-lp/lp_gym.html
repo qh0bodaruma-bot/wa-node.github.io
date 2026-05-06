@@ -5,234 +5,130 @@
 <script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.hostname+location.pathname+location.search);</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>【ポートフォリオ】BEAST FIT | パーソナルジム</title>
-<meta name="description" content="これはポートフォリオ作品です。架空のパーソナルジムのLPサンプルです。">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<title>【ポートフォリオ】パーソナルジムLPサンプル | 高品質デザイン</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
-:root{--black:#0a0a0a;--dark:#111;--orange:#ff6b00;--orange2:#ff8c35;--white:#f5f5f0;--gray:#888;--gold:#c8960a;}
+:root{--accent:#ffcc00;--bg:#000;--text:#fff;--sub:#222;}
 html{scroll-behavior:smooth;}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--black);color:var(--white);overflow-x:hidden;}
-.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(135deg,#bf360c,#e64a19);color:#fff;font-size:12px;font-weight:700;text-align:center;padding:7px 16px;letter-spacing:0.04em;}
-.portfolio-banner span{background:rgba(255,255,255,0.2);padding:2px 8px;border-radius:4px;margin-right:8px;font-size:10px;}
-nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:12px 44px;background:rgba(10,10,10,0.95);border-bottom:2px solid var(--orange);}
-.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:0.1em;color:var(--orange);}
-.nav-cta{background:var(--orange);color:#fff;padding:9px 22px;font-weight:700;font-size:13px;text-decoration:none;transition:all 0.3s;}
-.nav-cta:hover{background:var(--orange2);}
-.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
-.hamburger span{display:block;width:22px;height:2px;background:var(--orange);}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(10,10,10,0.98);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{color:var(--white);font-size:20px;text-decoration:none;font-family:'Bebas Neue',sans-serif;letter-spacing:0.1em;}
-.mobile-menu-close{position:absolute;top:48px;right:22px;font-size:26px;color:var(--orange);cursor:pointer;background:none;border:none;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--text);line-height:1.7;}
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:#333;color:#fff;font-size:12px;font-weight:700;text-align:center;padding:10px 0;}
 
-/* ヒーロー */
-.hero{min-height:100vh;position:relative;display:flex;align-items:center;overflow:hidden;}
-.hero-bg{position:absolute;inset:0;background-image:url('images/hero_gym.png');background-size:cover;background-position:center;filter:brightness(0.22);}
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,10,10,0.97) 50%,transparent 100%);}
-.hero-noise{position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");opacity:0.4;}
-.hero-content{position:relative;z-index:2;padding:120px 44px 80px 72px;max-width:780px;}
-.hero-eyebrow{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:0.3em;color:var(--orange);margin-bottom:18px;}
-.hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,10vw,120px);line-height:1.0;margin-bottom:18px;letter-spacing:0.02em;}
-.hero h1 .or{color:var(--orange);}
-.hero-sub{font-size:16px;color:var(--gray);line-height:2.0;margin-bottom:36px;max-width:480px;}
-.hero-numbers{display:flex;gap:36px;margin-bottom:44px;flex-wrap:wrap;}
-.hero-num-item{text-align:center;}
-.hero-num{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,54px);color:var(--orange);line-height:1;}
-.hero-num-label{font-size:11px;color:var(--gray);}
-.btn-orange{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff;padding:18px 48px;font-size:16px;font-weight:900;text-decoration:none;display:inline-block;letter-spacing:0.06em;transition:all 0.3s;box-shadow:0 0 36px rgba(255,107,0,0.4);}
-.btn-orange:hover{transform:scale(1.04);box-shadow:0 0 56px rgba(255,107,0,0.6);}
-.hero-note{font-size:12px;color:var(--gray);margin-top:14px;}
+.hero-gym{height:100vh;background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&q=80&w=2000');background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;}
+.hero-gym h1{font-size:clamp(32px,7vw,80px);font-weight:900;line-height:1.1;margin-bottom:20px;letter-spacing:-0.02em;}
+.hero-gym em{color:var(--accent);font-style:normal;}
 
-/* 実績ライン */
-.metrics-bar{background:var(--orange);display:flex;justify-content:center;gap:0;flex-wrap:wrap;}
-.metric-b{padding:24px 40px;text-align:center;border-right:1px solid rgba(255,255,255,0.2);}
-.metric-b:last-child{border-right:none;}
-.metric-b .num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:#fff;line-height:1;}
-.metric-b .lbl{font-size:11px;color:rgba(255,255,255,0.75);}
+.section{padding:100px 20px;max-width:1100px;margin:0 auto;}
+.sec-h2{text-align:center;font-size:40px;font-weight:900;margin-bottom:10px;color:var(--accent);}
+.sec-sub{text-align:center;font-size:14px;margin-bottom:60px;opacity:0.6;letter-spacing:0.3em;}
 
-/* 特徴 */
-.features{padding:88px 44px;background:var(--dark);}
-.features h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,68px);text-align:center;margin-bottom:52px;letter-spacing:0.04em;}
-.features h2 span{color:var(--orange);}
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1000px;margin:0 auto;}
-.feat-card{border:1px solid rgba(255,107,0,0.2);padding:36px 28px;position:relative;overflow:hidden;transition:all 0.4s;}
-.feat-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);transform:scaleX(0);transition:transform 0.4s;}
-.feat-card:hover{background:rgba(255,107,0,0.04);transform:translateY(-4px);}
-.feat-card:hover::before{transform:scaleX(1);}
-.feat-num{font-family:'Bebas Neue',sans-serif;font-size:52px;color:rgba(255,107,0,0.15);line-height:1;margin-bottom:10px;}
-.feat-title{font-size:17px;font-weight:900;color:var(--white);margin-bottom:10px;}
-.feat-text{font-size:13px;color:var(--gray);line-height:1.9;}
+.program-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.program-card{background:var(--sub);border:1px solid #333;overflow:hidden;transition:0.3s;}
+.program-card:hover{border-color:var(--accent);transform:scale(1.02);}
+.program-img{height:250px;background:#444;display:flex;align-items:center;justify-content:center;font-size:80px;}
+.program-info{padding:30px;}
 
-/* プラン */
-.plans{padding:88px 44px;background:var(--black);}
-.plans h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,68px);text-align:center;margin-bottom:52px;letter-spacing:0.04em;}
-.plan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;max-width:1000px;margin:0 auto;}
-.plan-b{background:var(--dark);padding:44px 28px;text-align:center;position:relative;transition:all 0.4s;}
-.plan-b.featured{background:linear-gradient(160deg,rgba(255,107,0,0.12),var(--dark));border:2px solid var(--orange);}
-.plan-b.featured .plan-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--orange);color:#fff;font-size:11px;font-weight:900;padding:3px 14px;white-space:nowrap;}
-.plan-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:0.08em;margin-bottom:8px;color:var(--orange);}
-.plan-period{font-size:12px;color:var(--gray);margin-bottom:22px;}
-.plan-price{font-family:'Bebas Neue',sans-serif;font-size:52px;color:var(--white);line-height:1;}
-.plan-price span{font-size:16px;font-weight:400;color:var(--gray);}
-.plan-features-b{list-style:none;margin:22px 0;display:grid;gap:8px;text-align:left;}
-.plan-features-b li{font-size:13px;padding-left:18px;position:relative;}
-.plan-features-b li::before{content:'✓';color:var(--orange);position:absolute;left:0;font-weight:700;}
-.plan-cta-b{display:block;padding:13px;background:var(--orange);color:#fff;font-weight:900;font-size:13px;text-decoration:none;letter-spacing:0.04em;transition:all 0.3s;margin-top:22px;}
-.plan-cta-b:hover{background:var(--orange2);}
-.plan-b:not(.featured) .plan-cta-b{background:transparent;border:2px solid rgba(255,107,0,0.4);color:var(--orange);}
-.plan-b:not(.featured) .plan-cta-b:hover{background:rgba(255,107,0,0.1);}
+.trainer-box{background:var(--sub);padding:60px;display:grid;grid-template-columns:1fr 1.5fr;gap:60px;align-items:center;border:1px solid #333;}
+.trainer-img{height:400px;background:#444;display:flex;align-items:center;justify-content:center;font-size:120px;}
 
-/* 声 */
-.voices{padding:88px 44px;background:var(--dark);}
-.voices h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,5vw,68px);text-align:center;margin-bottom:52px;letter-spacing:0.04em;}
-.voice-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto;}
-.voice-b{background:var(--black);border:1px solid rgba(255,255,255,0.06);padding:28px;}
-.voice-change{font-family:'Bebas Neue',sans-serif;font-size:32px;color:var(--orange);}
-.voice-period{font-size:12px;color:var(--gray);margin-bottom:12px;}
-.voice-text{font-size:13px;color:var(--gray);line-height:1.9;margin-bottom:12px;}
-.voice-name{font-size:13px;font-weight:700;}
-.voice-profile{font-size:11px;color:var(--gray);}
+.btn-gym{background:var(--accent);color:var(--bg);padding:25px 60px;font-size:20px;font-weight:900;text-decoration:none;display:inline-block;transition:0.3s;}
+.btn-gym:hover{background:#fff;transform:translateY(-5px);}
 
-/* CTA */
-.cta-gym{padding:100px 44px;background:linear-gradient(135deg,var(--orange),#cc5500);text-align:center;position:relative;overflow:hidden;}
-.cta-gym::before{content:'FIT';font-family:'Bebas Neue',sans-serif;font-size:400px;position:absolute;right:-60px;top:-60px;opacity:0.06;line-height:1;}
-.cta-gym h2{font-family:'Bebas Neue',sans-serif;font-size:clamp(36px,6vw,80px);margin-bottom:14px;letter-spacing:0.04em;}
-.cta-gym p{font-size:15px;opacity:0.88;margin-bottom:36px;}
-.btn-white-g{background:#fff;color:var(--orange);padding:18px 52px;font-weight:900;font-size:16px;text-decoration:none;display:inline-block;transition:all 0.3s;letter-spacing:0.04em;}
-.btn-white-g:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,0,0,0.2);}
-
-footer{background:#050505;padding:48px 44px;border-top:2px solid rgba(255,107,0,0.2);}
-.footer-inner{max-width:1000px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;}
-.footer-logo{font-family:'Bebas Neue',sans-serif;font-size:26px;color:var(--orange);letter-spacing:0.1em;}
-.footer-copy{font-size:12px;color:var(--gray);text-align:right;}
-.footer-produce{font-size:13px;color:var(--orange2);font-weight:700;margin-top:5px;}
-.back-top-g{position:fixed;bottom:32px;right:24px;z-index:499;width:44px;height:44px;background:var(--orange);color:#fff;border:none;border-radius:50%;font-size:18px;cursor:pointer;opacity:0;transform:translateY(10px);transition:all 0.3s;display:flex;align-items:center;justify-content:center;}
-.back-top-g.show{opacity:1;transform:translateY(0);}
-.back-top-g:hover{background:var(--orange2);transform:translateY(-3px);}
+.faq-gym{max-width:800px;margin:0 auto;}
+.faq-item{border-bottom:1px solid #333;padding:30px 0;}
+.faq-q{font-weight:700;color:var(--accent);margin-bottom:10px;}
 
 @media(max-width:900px){
-  nav{padding:10px 18px;}.nav-cta{display:none;}.hamburger{display:flex;}
-  .hero-content{padding:110px 20px 60px;}
-  .feat-grid,.plan-grid,.voice-grid{grid-template-columns:1fr;}
-  .features,.plans,.voices,.cta-gym{padding:64px 20px;}
-  .metric-b{padding:18px 20px;}
-  footer{padding:36px 20px;}.footer-inner{flex-direction:column;align-items:flex-start;}.footer-copy{text-align:left;}
+  .program-grid{grid-template-columns:1fr;}
+  .trainer-box{grid-template-columns:1fr;}
 }
-.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal{opacity:0;transform:translateY(30px);transition:0.8s ease-out;}
 .reveal.visible{opacity:1;transform:translateY(0);}
 </style>
+<link rel="stylesheet" href="premium_upgrade.css">
 </head>
 <body>
-<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ポートフォリオ作品 — 架空のパーソナルジムを題材にしたデザインサンプルです</div>
-<button class="back-top-g" id="backTopG" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
-<nav>
-  <div class="nav-logo">BEAST FIT</div>
-  <a href="#cta" class="nav-cta">▶ 無料体験を予約</a>
-  <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
-</nav>
-<div class="mobile-menu" id="mobileMenu">
-  <button class="mobile-menu-close" id="menuClose">✕</button>
-  <a href="#features" onclick="closeMobileMenu()">特徴</a>
-  <a href="#plans" onclick="closeMobileMenu()">プラン</a>
-  <a href="#voices" onclick="closeMobileMenu()">会員の声</a>
-  <a href="#cta" onclick="closeMobileMenu()" style="color:var(--orange)">無料体験を予約</a>
-</div>
+<div class="portfolio-banner"><span>PORTFOLIO</span>🎨 ああああああああああああああああああああ</div>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow">PREMIUM PERSONAL TRAINING GYM</div>
-    <h1>限界の<br>その先へ、<br><span class="or">BEAST.</span></h1>
-    <p class="hero-sub">完全個室のプライベートジムで、専任トレーナーがあなただけの身体を作る。2ヶ月で変化を目指す科学的トレーニング。</p>
-    <div class="hero-numbers">
-      <div class="hero-num-item"><div class="hero-num">98%</div><div class="hero-num-label">目標達成率</div></div>
-      <div class="hero-num-item"><div class="hero-num">2,400</div><div class="hero-num-label">会員実績</div></div>
-      <div class="hero-num-item"><div class="hero-num">-12kg</div><div class="hero-num-label">平均減量（3ヶ月）</div></div>
-    </div>
-    <a href="#cta" class="btn-orange">無料体験セッションを予約する →</a>
-    <div class="hero-note">※ 体験は完全無料。勧誘は一切ありません。</div>
+<section class="hero-gym">
+  <div class="reveal">
+    <h1 style="text-transform:uppercase;">Unleash Your<br><em>Potential.</em></h1>
+    <p style="font-size:20px; margin-bottom:40px;">あああああああああああああああああああああああああ</p>
+    <a href="#contact" class="btn-gym">無料カウンセリング予約</a>
   </div>
 </section>
 
-<div class="metrics-bar">
-  <div class="metric-b"><div class="num">4.9</div><div class="lbl">Google平均評価</div></div>
-  <div class="metric-b"><div class="num">92%</div><div class="lbl">リピート率</div></div>
-  <div class="metric-b"><div class="num">7年</div><div class="lbl">運営実績</div></div>
-  <div class="metric-b"><div class="num">12店舗</div><div class="lbl">全国展開</div></div>
-</div>
-
-<section class="features" id="features">
-  <h2>BEAST FITが<span>選ばれる</span>理由</h2>
-  <div class="feat-grid">
-    <div class="feat-card reveal"><div class="feat-num">01</div><div class="feat-title">完全個室プライベート空間</div><p class="feat-text">他の利用者と鉢合わせなし。人目を気にせず、集中してトレーニングに臨めます。更衣室・シャワー完備。</p></div>
-    <div class="feat-card reveal"><div class="feat-num">02</div><div class="feat-title">科学的根拠に基づく指導</div><p class="feat-text">InBodyによる体組成測定、食事管理アプリ連携、専属トレーナーによる毎回のデータ分析で最短ルートを設計。</p></div>
-    <div class="feat-card reveal"><div class="feat-num">03</div><div class="feat-title">リバウンドしにくい体づくりをサポート</div><p class="feat-text">「痩せる」だけでなく「痩せ続ける体」を作ることに特化。食事指導・生活習慣の改善まで包括的にサポート。</p></div>
+<section class="section" id="reasons">
+  <h2 class="sec-h2">WHY CHOOSE US</h2>
+  <p class="sec-sub">選ばれる理由 あああああ</p>
+  <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:20px; text-align:center;">
+    <div class="reveal"><h3>あああああ</h3><p style="font-size:14px; opacity:0.7;">あああああああああ</p></div>
+    <div class="reveal"><h3>いいいいい</h3><p style="font-size:14px; opacity:0.7;">いいいいいいいいい</p></div>
+    <div class="reveal"><h3>ううううう</h3><p style="font-size:14px; opacity:0.7;">ううううううううう</p></div>
+    <div class="reveal"><h3>えええええ</h3><p style="font-size:14px; opacity:0.7;">えええええええええ</p></div>
   </div>
 </section>
 
-<section class="plans" id="plans">
-  <h2>プランを選ぶ</h2>
-  <div class="plan-grid">
-    <div class="plan-b reveal">
-      <div class="plan-name">STARTER</div>
-      <div class="plan-period">月4回コース</div>
-      <div class="plan-price">¥39,800<span>/月</span></div>
-      <ul class="plan-features-b"><li>月4回パーソナルトレーニング</li><li>体組成測定・目標設定</li><li>トレーニングプラン作成</li></ul>
-      <a href="#" class="plan-cta-b">このプランで始める</a>
+<section class="section" style="background:#0a0a0a;" id="programs">
+  <h2 class="sec-h2">PROGRAMS</h2>
+  <p class="sec-sub">トレーニング内容 あああああ</p>
+  <div class="program-grid">
+    <div class="program-card reveal">
+      <div class="program-img">🏋️‍♂️</div>
+      <div class="program-info"><h3>あああああ</h3><p style="font-size:14px; opacity:0.7;">あああああああああああああああああああああああああああああああああああああああああ。</p></div>
     </div>
-    <div class="plan-b featured reveal">
-      <div class="plan-badge">🔥 最も人気</div>
-      <div class="plan-name">STANDARD</div>
-      <div class="plan-period">月8回コース</div>
-      <div class="plan-price">¥69,800<span>/月</span></div>
-      <ul class="plan-features-b"><li>月8回パーソナルトレーニング</li><li>食事管理サポート（月2回）</li><li>専用アプリで進捗管理</li><li>24h LINEサポート</li></ul>
-      <a href="#" class="plan-cta-b">このプランで始める</a>
+    <div class="program-card reveal">
+      <div class="program-img">🏃‍♀️</div>
+      <div class="program-info"><h3>いいいいい</h3><p style="font-size:14px; opacity:0.7;">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p></div>
     </div>
-    <div class="plan-b reveal">
-      <div class="plan-name">PREMIUM</div>
-      <div class="plan-period">月12回コース</div>
-      <div class="plan-price">¥98,000<span>/月</span></div>
-      <ul class="plan-features-b"><li>月12回パーソナルトレーニング</li><li>毎日の食事管理</li><li>専任トレーナー固定制</li><li>24h 優先サポート</li></ul>
-      <a href="#" class="plan-cta-b">このプランで始める</a>
+    <div class="program-card reveal">
+      <div class="program-img">🥗</div>
+      <div class="program-info"><h3>ううううう</h3><p style="font-size:14px; opacity:0.7;">うううううううううううううううううううううううううううううううううううううううう。</p></div>
     </div>
   </div>
 </section>
 
-<section class="voices" id="voices">
-  <h2>会員の声</h2>
-  <div class="voice-grid">
-    <div class="voice-b reveal"><div class="voice-change">-14kg</div><div class="voice-period">3ヶ月で達成</div><p class="voice-text">「過去に何度もジムに挫折してきたが、BEASTでは毎回楽しくて気づけば半年継続できた。」</p><div class="voice-name">山田 雄大 様</div><div class="voice-profile">32歳・会社員</div></div>
-    <div class="voice-b reveal"><div class="voice-change">-9kg</div><div class="voice-period">2ヶ月で達成</div><p class="voice-text">「産後太りを何とかしたくて入会。食事も無理なく見直せて、服のサイズが2つ下がりました！」</p><div class="voice-name">伊藤 なつみ 様</div><div class="voice-profile">34歳・主婦</div></div>
-    <div class="voice-b reveal"><div class="voice-change">体脂肪-12%</div><div class="voice-period">4ヶ月で達成</div><p class="voice-text">「数字で管理してもらえるので『なんとなく頑張る』ではなく確実に変化している実感がある。」</p><div class="voice-name">佐々木 誠 様</div><div class="voice-profile">45歳・経営者</div></div>
+<section class="section">
+  <div class="trainer-box reveal">
+    <div class="trainer-img">💪</div>
+    <div>
+      <h2 class="sec-h2" style="text-align:left;">TRAINER</h2>
+      <p style="font-weight:700; margin-bottom:20px;">トレーナー あああああ</p>
+      <p>あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+    </div>
   </div>
 </section>
 
-<section class="cta-gym" id="cta">
-  <h2>今日が、変わる日。</h2>
-  <p>無料体験セッション実施中。トレーナーがあなたの体の現状を分析し、最適なプランをご提案します。</p>
-  <a href="#" class="btn-white-g">無料体験セッションを予約する →</a>
+<section class="section" id="faq">
+  <h2 class="sec-h2">FAQ</h2>
+  <p class="sec-sub">よくある質問 あああああ</p>
+  <div class="faq-gym">
+    <div class="faq-item reveal">
+      <p class="faq-q">Q. あああああああああああああああああ？</p>
+      <p>A. ああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+    </div>
+    <div class="faq-item reveal">
+      <p class="faq-q">Q. いいいいいいいいいいいいいいいいいいい？</p>
+      <p>A. いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+    </div>
+  </div>
 </section>
 
-<footer>
-  <div class="footer-inner">
-    <div><div class="footer-logo">BEAST FIT</div><div style="font-size:12px;color:var(--gray);margin-top:7px;">全国12店舗展開（架空）／ TEL: 0120-XXX-XXX</div></div>
-    <div class="footer-copy"><div>© 2024 BEAST FIT. All Rights Reserved.</div><div class="footer-produce">和-Node プロデュース</div></div>
-  </div>
+<section class="section" style="text-align:center; background:var(--accent); color:var(--bg);" id="contact">
+  <h2 style="font-size:40px; font-weight:900; margin-bottom:20px;">START NOW</h2>
+  <p style="font-weight:700; margin-bottom:40px;">あああああああああああああああああああああああああああああ</p>
+  <a href="#" class="btn-gym" style="background:var(--bg); color:var(--accent);">無料体験レッスンを予約する</a>
+</section>
+
+<footer style="padding:60px; text-align:center; border-top:1px solid #222;">
+  <p>© 2024 Sample Fitness Gym. All Rights Reserved.</p>
+  <p style="margin-top:10px; color:var(--accent); font-weight:900;">和-Node プロデュース</p>
 </footer>
+
 <script>
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
-document.getElementById('menuClose').addEventListener('click',()=>document.getElementById('mobileMenu').classList.remove('open'));
-function closeMobileMenu(){document.getElementById('mobileMenu').classList.remove('open');}
-window.addEventListener('scroll',()=>document.getElementById('backTopG').classList.toggle('show',window.scrollY>400));
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=`${(i%3)*90}ms`;io.observe(el);});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 </script>
-</body></html>
-<!-- 和-Node プロデュース -->
-<<<<<<< HEAD
-
-=======
-
->>>>>>> 9fb38961f6d35b7098defb17bd75d95e6c6d7c48
+<script src="premium_upgrade.js"></script>
+</body>
+</html>

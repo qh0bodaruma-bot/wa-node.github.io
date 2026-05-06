@@ -2,72 +2,94 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="店舗・オフィスのバリアフリー度チェック | 和-Node" description="車いすSE視点でチェック！あなたの店舗やオフィスのバリアフリー達成度を5つの簡単な質問で無料診断します。">
+<BaseLayout title="バリアフリー度診断 | 和-Node" description="車いすユーザー視点でチェック！あなたの店舗やオフィスのバリアフリー達成度を無料診断します。">
+  <!-- Background Decoration -->
+  <div class="bg-decoration">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
   <div class="demo-banner">
-    <strong>【制作例サンプル】</strong> このページは和-Nodeの技術を体験できるデモです。このようなカスタムツールの導入をご検討中の方は <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">こちらから無料相談</a>
+    <strong>【制作例サンプル】</strong> これは和-Nodeの技術を体験できるデモアプリです。このようなカスタムツールの導入をご検討中の方は <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" class="banner-cta">こちらから無料相談</a>
   </div>
 
   <main class="quiz-container">
-    <div class="quiz-box">
+    <div class="quiz-box glass-card">
       
-      <!-- Welcome -->
+      <!-- Welcome Step -->
       <div id="step-welcome" class="quiz-step active">
-        <div style="text-align:center; font-size:48px; margin-bottom:16px;">♿️</div>
-        <h1 class="welcome-title">店舗・オフィスの<br />バリアフリー度チェック</h1>
+        <div class="welcome-visual">
+          <div class="pulse-icon">♿️</div>
+        </div>
+        <h1 class="welcome-title">店舗・オフィスの<br/><span class="accent-text">バリアフリー診断</span></h1>
         <p class="welcome-desc">
-          車いすユーザーがあなたの店舗やオフィスを訪れたとき、<br class="pc-only" />
-          どれくらい快適に過ごせるでしょうか？<br /><br />
-          「車いすSE」ならではの当事者視点で厳選した5つの質問に答えて、<br class="pc-only" />
-          あなたのビジネス空間的バリアフリー達成度を無料診断します！
+          車いすユーザーの視点から、あなたのビジネス空間の<br />
+          「本当の使いやすさ」を5つのステップで診断します。<br />
+          <span class="small-info">所要時間：約1分（全5問）</span>
         </p>
-        <button class="start-btn" id="start-quiz-btn">診断をスタートする</button>
+        <button class="primary-btn pulse" id="startBtn">診断をスタートする</button>
       </div>
 
-      <!-- Question Container -->
+      <!-- Question Step -->
       <div id="step-question" class="quiz-step">
-        <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
-        <div class="q-number" id="q-num">Q.1 / 5</div>
-        <h2 class="q-title" id="q-text">質問テキスト</h2>
-        <div class="q-options" id="q-opts">
-          <!-- Options injected by JS -->
+        <div class="quiz-header">
+          <div class="progress-container">
+            <div class="progress-text">
+              <span id="q-num">Q.1 / 5</span>
+              <span id="q-cat" class="cat-badge">入り口のチェック</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+          </div>
+        </div>
+
+        <div class="question-content" id="q-container">
+          <div class="category-icon-box" id="cat-icon">🚪</div>
+          <h2 class="q-title" id="q-text">質問テキスト</h2>
+          <div class="q-options" id="q-opts">
+            <!-- Options injected by JS -->
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <button id="backBtn" class="text-btn">← 前の質問に戻る</button>
         </div>
       </div>
 
-      <!-- Result -->
+      <!-- Result Step -->
       <div id="step-result" class="quiz-step">
-        <div class="result-header">
-          <div class="score-label">あなたの店舗のバリアフリー達成度は…</div>
-          <div class="score-circle" id="res-circle">
-            <div class="score-number"><span id="res-score">0</span>点</div>
-          </div>
-          <div class="eval-title" id="res-title">評価タイトル</div>
-        </div>
-        <div class="eval-text" id="res-desc">評価の詳細テキスト</div>
-        
-        <section class="wanode-cta">
-          <p class="label">バリアフリー改善相談</p>
-          <h2>店舗・オフィス・Web導線の使いやすさを、一緒に整理しませんか？</h2>
-          
-          <div class="bonus-notice">
-            <div class="bonus-badge">🎁 診断完了特典</div>
-            <p>
-              この結果をスクリーンショットして公式LINEにお送りいただくか、お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br />
-              <strong>初回無料カウンセリングを30分延長（計60分無料）</strong> させていただきます。
-            </p>
+        <div class="result-layout">
+          <div class="result-main">
+            <div class="gauge-container">
+              <svg class="gauge-svg" viewBox="0 0 100 100">
+                <circle class="gauge-bg" cx="50" cy="50" r="45"></circle>
+                <circle class="gauge-fill" id="gauge-circle" cx="50" cy="50" r="45"></circle>
+              </svg>
+              <div class="gauge-content">
+                <span class="gauge-label">達成度</span>
+                <span class="gauge-value" id="res-score">0%</span>
+              </div>
+            </div>
+            <h2 class="eval-title" id="res-title">評価タイトル</h2>
+            <div class="eval-card">
+              <p class="eval-text" id="res-desc">評価の詳細テキスト</p>
+            </div>
           </div>
 
-          <p>
-            ハード面（段差など）はすぐには変えられなくても、ソフト面（声かけ）やWeb上での情報発信は今日から変えられます。<br />
-            車いすユーザーの実体験をふまえて、誰もが利用しやすい環境づくりをサポートします。
-          </p>
-          <div class="cta-buttons">
-            <a href="mailto:contacts@wa-node.com" class="btn-cta">メールで相談する</a>
-            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="btn-cta secondary">フォームで相談する</a>
+          <div class="wanode-cta-box glass-card">
+            <div class="bonus-tag">🎁 診断完了特典</div>
+            <h3>バリアフリー改善相談を承ります</h3>
+            <p>
+              ハード面（段差等）の改修が難しくても、ソフト面（情報発信や声かけ）で解決できることはたくさんあります。<br/>
+              お問い合わせ時に合言葉 <strong>「わのーど診断」</strong> とお伝えいただくと、<br/>
+              <strong>通常の初回30分無料相談を「60分」に拡大</strong> してアドバイスさせていただきます。
+            </p>
+            <div class="cta-btns">
+              <a href="mailto:contacts@wa-node.com" class="primary-btn">メールで相談する</a>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" target="_blank" rel="noopener" class="secondary-btn">フォームで相談する</a>
+            </div>
+            <button class="retry-btn" id="retryBtn">もう一度診断する</button>
           </div>
-          <div style="margin-top:24px;">
-            <a href="/barrier_free" style="font-size:14px; color:var(--muted); text-decoration:underline;">もう一度診断する</a>
-          </div>
-        </section>
+        </div>
       </div>
 
     </div>
@@ -75,220 +97,339 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-    .demo-banner { background: #f8f9fb; border-bottom: 1px solid var(--line); padding: 12px; text-align: center; font-size: 0.9rem; }
-    .banner-cta { color: var(--accent); font-weight: 800; text-decoration: underline; margin-left: 10px; }
+    /* Premium Design System */
+    :root {
+      --accent-grad: linear-gradient(135deg, #4a6741 0%, #a8c69f 100%);
+      --accent-soft: rgba(74, 103, 65, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.5);
+    }
 
-    .quiz-container { max-width: 800px; margin: 40px auto 100px; padding: 0 20px; }
+    /* Background Decoration */
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; overflow: hidden; background: #f8fafc;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.3;
+      animation: move 25s infinite alternate;
+    }
+    .blob-1 { width: 600px; height: 600px; background: #cbdfe6; top: -15%; right: -5%; }
+    .blob-2 { width: 500px; height: 500px; background: #e2e8d5; bottom: -10%; left: -5%; animation-delay: -7s; }
+    @keyframes move { from { transform: translate(0, 0); } to { transform: translate(60px, 120px); } }
+
+    .demo-banner { background: rgba(74, 103, 65, 0.05); border-bottom: 1px solid var(--line); padding: 12px; text-align: center; font-size: 0.85rem; backdrop-filter: blur(5px); }
+    .banner-cta { color: #4a6741; font-weight: 800; text-decoration: underline; margin-left: 8px; }
+
+    .quiz-container { max-width: 900px; margin: 40px auto 100px; padding: 0 20px; }
+    
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.04);
+    }
+
     .quiz-box {
-      background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius);
-      padding: 40px; box-shadow: var(--shadow); position: relative; overflow: hidden;
-      min-height: 500px; display: flex; flex-direction: column; justify-content: center;
-      backdrop-filter: blur(10px);
+      padding: 60px 50px; min-height: 620px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
     }
-    .quiz-step { display: none; animation: fadeIn 0.5s ease forwards; }
+
+    .quiz-step { display: none; width: 100%; }
     .quiz-step.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
 
-    .welcome-title { font-size: 2.2rem; color: var(--text); margin-bottom: 16px; text-align: center; font-weight: 800; }
-    .welcome-desc { color: var(--muted); font-size: 1rem; line-height: 1.8; margin-bottom: 36px; text-align: center; }
-    .start-btn {
-      display: block; width: 100%; max-width: 320px; margin: 0 auto; text-align: center;
-      background: var(--accent); color: #fff; padding: 18px 0; border-radius: 999px;
-      font-weight: 800; font-size: 1.1rem; cursor: pointer; border: none; transition: 0.3s;
-      box-shadow: 0 8px 25px rgba(74, 103, 65, 0.2);
+    /* Animations */
+    .slide-in { animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    .slide-out { animation: slideOut 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-40px); } }
+    
+    .fade-in { animation: fadeIn 0.7s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Welcome Step */
+    .welcome-visual { margin-bottom: 30px; text-align: center; }
+    .pulse-icon {
+      font-size: 80px; display: inline-block;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
+      animation: pulse 4s infinite ease-in-out;
     }
-    .start-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(74, 103, 65, 0.3); }
+    @keyframes pulse { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.1) rotate(5deg); } }
+    .welcome-title { font-size: 2.8rem; font-weight: 900; margin-bottom: 24px; line-height: 1.2; text-align: center; color: #2c3e50; }
+    .accent-text { color: #4a6741; }
+    .welcome-desc { font-size: 1.15rem; color: var(--muted); margin-bottom: 48px; text-align: center; line-height: 1.8; }
+    .small-info { display: block; font-size: 0.9rem; margin-top: 20px; opacity: 0.6; }
 
-    .progress-bar { width: 100%; height: 8px; background: var(--line); border-radius: 999px; margin-bottom: 40px; overflow: hidden; }
-    .progress-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
-    .q-number { font-size: 0.9rem; color: var(--accent); font-weight: 800; letter-spacing: 0.1em; margin-bottom: 12px; }
-    .q-title { font-size: 1.5rem; color: var(--text); font-weight: 800; margin-bottom: 32px; line-height: 1.4; }
-    .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .primary-btn {
+      display: block; width: fit-content; margin: 0 auto; padding: 20px 64px;
+      background: var(--accent-grad); color: #fff; border-radius: 999px;
+      font-weight: 800; font-size: 1.25rem; border: none; cursor: pointer;
+      box-shadow: 0 12px 35px rgba(74, 103, 65, 0.25); transition: 0.4s;
+    }
+    .primary-btn:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(74, 103, 65, 0.35); }
+
+    /* Question Step */
+    .quiz-header { margin-bottom: 50px; }
+    .progress-text { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+    #q-num { font-size: 1rem; font-weight: 900; color: #4a6741; letter-spacing: 0.1em; }
+    .cat-badge { background: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; color: var(--muted); box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .progress-track { width: 100%; height: 8px; background: rgba(0,0,0,0.06); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent-grad); width: 0%; transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+
+    .category-icon-box { font-size: 3rem; margin-bottom: 20px; text-align: center; }
+    .q-title { font-size: 1.9rem; font-weight: 800; margin-bottom: 40px; line-height: 1.4; color: #2c3e50; text-align: center; }
+    .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     .q-option {
-      background: var(--white); border: 1px solid var(--line); padding: 18px; border-radius: 18px;
-      cursor: pointer; transition: 0.2s; font-size: 1rem; font-weight: 700; color: var(--text); text-align: center;
+      background: #fff; border-radius: 24px; padding: 28px; border: 2px solid transparent;
+      cursor: pointer; transition: 0.3s; text-align: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
     }
-    .q-option:hover { border-color: var(--accent); background: var(--accent-soft); transform: translateY(-4px); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+    .q-option:hover { transform: translateY(-5px); border-color: #4a6741; background: #f8faf9; box-shadow: 0 15px 35px rgba(74, 103, 65, 0.1); }
+    .opt-label { font-size: 1.1rem; font-weight: 800; color: #2c3e50; line-height: 1.4; }
 
-    .result-header { text-align: center; margin-bottom: 40px; }
-    .score-circle {
-      width: 160px; height: 160px; border-radius: 50%; border: 8px solid var(--line);
-      margin: 0 auto 24px; display: flex; align-items: center; justify-content: center;
-      position: relative; transition: 1s ease-out; background: var(--white);
-      box-shadow: inset 0 4px 10px rgba(0,0,0,0.05);
+    .quiz-footer { margin-top: 50px; text-align: center; }
+    .text-btn { background: none; border: none; color: var(--muted); font-weight: 700; cursor: pointer; font-size: 0.95rem; opacity: 0.6; transition: 0.3s; }
+    .text-btn:hover { opacity: 1; color: #4a6741; }
+
+    /* Result Step */
+    .result-layout { display: flex; flex-direction: column; gap: 40px; }
+    .result-main { text-align: center; background: #fff; padding: 60px 40px; border-radius: 32px; box-shadow: var(--shadow); }
+    
+    .gauge-container { position: relative; width: 180px; height: 180px; margin: 0 auto 30px; }
+    .gauge-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+    .gauge-bg { fill: none; stroke: #f0f4f2; stroke-width: 10; }
+    .gauge-fill {
+      fill: none; stroke: #4a6741; stroke-width: 10; stroke-linecap: round;
+      stroke-dasharray: 283; stroke-dashoffset: 283;
+      transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
     }
-    .score-circle.high { border-color: var(--accent); }
-    .score-circle.mid { border-color: #f39c12; }
-    .score-circle.low { border-color: #e74c3c; }
-    .score-number { font-size: 3rem; font-weight: 800; color: var(--text); }
-    .score-label { font-size: 0.9rem; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
-
-    .eval-title { font-size: 1.8rem; color: var(--text); margin-bottom: 16px; font-weight: 800; }
-    .eval-text { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 40px; padding: 24px; background: var(--accent-light); border-radius: 18px; border-left: 4px solid var(--accent); text-align: left; }
-
-    .wanode-cta { background: var(--accent-soft); padding: 40px; border-radius: var(--radius); border: 1px solid var(--line); text-align: center; }
-    .wanode-cta .label { color: var(--accent); font-weight: 800; font-size: 0.85rem; text-transform: uppercase; margin-bottom: 12px; }
-    .cta-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; }
-    .btn-cta { background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: 0.3s; display: inline-block; }
-    .btn-cta.secondary { background: #fff; color: var(--accent); border: 1px solid var(--accent); }
-
-    .bonus-notice {
-      background: #fff;
-      border: 2px dashed var(--accent);
-      border-radius: 16px;
-      padding: 24px;
-      margin: 24px 0;
-      text-align: center;
-      position: relative;
+    .gauge-content {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center;
     }
-    .bonus-badge {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--accent);
-      color: #fff;
-      padding: 4px 16px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 800;
-    }
-    .bonus-notice p { margin: 0; font-size: 0.95rem; line-height: 1.6; color: var(--text); }
-    .bonus-notice strong { color: var(--accent); }
+    .gauge-label { font-size: 0.8rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .gauge-value { font-size: 2.8rem; font-weight: 900; color: #2c3e50; }
 
-    @media(max-width: 600px) {
-      .quiz-box { padding: 30px 20px; }
+    .eval-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 24px; color: #2c3e50; }
+    .eval-card { background: #f8faf9; padding: 30px; border-radius: 24px; border-left: 6px solid #4a6741; }
+    .eval-text { font-size: 1.1rem; line-height: 1.9; color: #445566; text-align: left; margin: 0; }
+
+    .wanode-cta-box { padding: 60px; text-align: center; border: 3px solid #4a6741; position: relative; margin-top: 20px; }
+    .bonus-tag { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); background: #4a6741; color: #fff; padding: 6px 30px; border-radius: 999px; font-weight: 900; font-size: 1rem; box-shadow: 0 4px 15px rgba(74, 103, 65, 0.3); }
+    .wanode-cta-box h3 { font-size: 1.8rem; font-weight: 900; margin-bottom: 24px; color: #2c3e50; }
+    .wanode-cta-box p { font-size: 1.05rem; color: #556677; line-height: 1.8; margin-bottom: 40px; }
+    .cta-btns { display: flex; gap: 20px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+    .secondary-btn { padding: 20px 48px; border-radius: 999px; border: 2px solid #4a6741; color: #4a6741; font-weight: 800; text-decoration: none; transition: 0.3s; font-size: 1.1rem; }
+    .secondary-btn:hover { background: rgba(74, 103, 65, 0.08); }
+    .retry-btn { background: none; border: none; color: var(--muted); text-decoration: underline; font-weight: 700; cursor: pointer; font-size: 1rem; }
+
+    @media (max-width: 600px) {
+      .quiz-box { padding: 40px 20px; }
+      .welcome-title { font-size: 2rem; }
       .q-options { grid-template-columns: 1fr; }
-      .eval-title { font-size: 1.5rem; }
+      .q-title { font-size: 1.4rem; }
+      .cta-btns .primary-btn, .cta-btns .secondary-btn { width: 100%; }
     }
 </style>
 
 <script is:inline>
-const questions = [
-  {
-    q: "入り口の段差はどうなっていますか？",
-    opts: [
-      { text: "全くない（フラット・スロープあり）", score: 20 },
-      { text: "5cm以下のわずかな段差がある", score: 10 },
-      { text: "5cm以上の段差が1段ある", score: 5 },
-      { text: "階段しかない（スロープなし）", score: 0 }
-    ]
-  },
-  {
-    q: "出入り口のドアの種類は？",
-    opts: [
-      { text: "自動ドア", score: 20 },
-      { text: "引き戸（スライド式で軽め）", score: 15 },
-      { text: "開き戸（手前に引く・奥に押すタイプ）", score: 5 }
-    ]
-  },
-  {
-    q: "店内のメイン通路の幅は？",
-    opts: [
-      { text: "90cm以上（車いすが余裕で通れ、方向転換もできる）", score: 20 },
-      { text: "80cm程度（車いすがまっすぐならギリギリ通れる）", score: 10 },
-      { text: "80cm未満（車いすでの通行は厳しい）", score: 0 }
-    ]
-  },
-  {
-    q: "トイレの設備は？",
-    opts: [
-      { text: "車いす対応（多目的・だれでも）トイレがある", score: 20 },
-      { text: "一般的な洋式で、手すりがついている", score: 10 },
-      { text: "一般的な洋式トイレのみ", score: 5 },
-      { text: "和式のみ", score: 0 }
-    ]
-  },
-  {
-    q: "スタッフのサポート体制（ソフト面）は？",
-    opts: [
-      { text: "車いすや介助が必要な方への対応マニュアル・研修がある", score: 20 },
-      { text: "マニュアルはないが、スタッフが自主的に声かけや手伝いをしている", score: 15 },
-      { text: "特に決まりはなく、基本的にセルフサービス", score: 5 }
-    ]
-  }
-];
+    const questions = [
+      {
+        cat: "entrance",
+        catLabel: "入り口のチェック",
+        icon: "🚪",
+        q: "入り口の段差はどうなっていますか？",
+        opts: [
+          { text: "全くない（フラット・スロープあり）", score: 20 },
+          { text: "5cm以下のわずかな段差がある", score: 10 },
+          { text: "5cm以上の段差が1段ある", score: 5 },
+          { text: "階段しかない（スロープなし）", score: 0 }
+        ]
+      },
+      {
+        cat: "door",
+        catLabel: "ドアの仕様",
+        icon: "🔓",
+        q: "出入り口のドアの種類は？",
+        opts: [
+          { text: "自動ドア", score: 20 },
+          { text: "引き戸（スライド式）", score: 15 },
+          { text: "開き戸（引く・押すタイプ）", score: 5 }
+        ]
+      },
+      {
+        cat: "aisle",
+        catLabel: "店内の通路",
+        icon: "↔️",
+        q: "店内のメイン通路の幅は？",
+        opts: [
+          { text: "90cm以上（余裕で通れる）", score: 20 },
+          { text: "80cm程度（ギリギリ通れる）", score: 10 },
+          { text: "80cm未満（通行は厳しい）", score: 0 }
+        ]
+      },
+      {
+        cat: "toilet",
+        catLabel: "トイレ設備",
+        icon: "🚻",
+        q: "トイレの設備はどうなっていますか？",
+        opts: [
+          { text: "多目的・だれでもトイレがある", score: 20 },
+          { text: "洋式で手すりがついている", score: 10 },
+          { text: "一般的な洋式トイレのみ", score: 5 },
+          { text: "和式のみ", score: 0 }
+        ]
+      },
+      {
+        cat: "soft",
+        catLabel: "サポート体制",
+        icon: "🤝",
+        q: "スタッフのサポート（ソフト面）は？",
+        opts: [
+          { text: "対応マニュアルや研修がある", score: 20 },
+          { text: "自主的な声かけや手伝いがある", score: 15 },
+          { text: "基本的にセルフサービス", score: 5 }
+        ]
+      }
+    ];
 
-let currentQ = 0;
-let totalScore = 0;
+    let currentQ = 0;
+    let totalScore = 0;
+    let history = [];
 
-function showStep(id) {
-  document.querySelectorAll('.quiz-step').forEach(el => el.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-function renderQuestion() {
-  const qObj = questions[currentQ];
-  document.getElementById('q-num').textContent = `Q.${currentQ + 1} / ${questions.length}`;
-  document.getElementById('progress').style.width = `${((currentQ) / questions.length) * 100}%`;
-  document.getElementById('q-text').textContent = qObj.q;
-  
-  const optsContainer = document.getElementById('q-opts');
-  optsContainer.innerHTML = '';
-  
-  qObj.opts.forEach((opt) => {
-    const btn = document.createElement('div');
-    btn.className = 'q-option';
-    btn.textContent = opt.text;
-    btn.onclick = () => selectOption(opt.score);
-    optsContainer.appendChild(btn);
-  });
-}
-
-function selectOption(score) {
-  totalScore += score;
-  currentQ++;
-  if (currentQ < questions.length) {
-    renderQuestion();
-  } else {
-    showResult();
-  }
-}
-
-function showResult() {
-  showStep('step-result');
-  document.getElementById('progress').style.width = `100%`;
-  
-  const resScore = document.getElementById('res-score');
-  const resTitle = document.getElementById('res-title');
-  const resDesc = document.getElementById('res-desc');
-  const circle = document.getElementById('res-circle');
-  
-  let current = 0;
-  const interval = setInterval(() => {
-    if(current >= totalScore) {
-      clearInterval(interval);
-      resScore.textContent = totalScore;
-    } else {
-      current++;
-      resScore.textContent = current;
+    function showStep(id) {
+      const steps = document.querySelectorAll('.quiz-step');
+      const target = document.getElementById(id);
+      
+      steps.forEach(el => {
+        if (el.classList.contains('active')) {
+          el.classList.add('slide-out');
+          setTimeout(() => {
+            el.classList.remove('active', 'slide-out');
+            target.classList.add('active', 'slide-in');
+          }, 300);
+        }
+      });
+      
+      if (!Array.from(steps).some(el => el.classList.contains('active'))) {
+         target.classList.add('active', 'fade-in');
+      }
     }
-  }, 15);
 
-  if(totalScore >= 80) {
-    circle.className = 'score-circle high';
-    resTitle.textContent = "素晴らしい！誰もが使いやすい空間です👏";
-    resDesc.innerHTML = "ハード面もソフト面も充実しており、車いすユーザーにとっても非常に安心できる空間です。<br>この素晴らしいバリアフリー環境を、ぜひホームページやSNSでも積極的にアピールしていきましょう！";
-  } else if (totalScore >= 50) {
-    circle.className = 'score-circle mid';
-    resTitle.textContent = "もう一歩！少しの工夫でさらによくなります💡";
-    resDesc.innerHTML = "現状でも十分配慮されていますが、あと少しの工夫で劇的に使いやすくなります。<br>例えば、わずかな段差なら簡易スロープを置く、入り口でスタッフがドアを開ける声かけをするなど、ちょっとした「ソフト面」のカバーで満点に近づけます！";
-  } else {
-    circle.className = 'score-circle low';
-    resTitle.textContent = "改善の余地あり！まずは「ソフト面」から🌱";
-    resDesc.innerHTML = "建物の構造上、すぐに設備を改修するのは難しいかもしれません。<br>しかし「何かお手伝いしましょうか？」というスタッフの声かけや、事前にHPで『入り口に段差があります』と情報発信しておくこと（ソフト面でのバリアフリー）で、車いすユーザーの不安は大きく軽減されます。";
-  }
-}
+    function renderQuestion() {
+      const qObj = questions[currentQ];
+      const qNum = document.getElementById('q-num');
+      const qCat = document.getElementById('q-cat');
+      const qIcon = document.getElementById('cat-icon');
+      const qText = document.getElementById('q-text');
+      const progress = document.getElementById('progress');
+      const qOpts = document.getElementById('q-opts');
+      
+      // Update data
+      qNum.textContent = `Q.${currentQ + 1} / ${questions.length}`;
+      qCat.textContent = qObj.catLabel;
+      qIcon.textContent = qObj.icon;
+      qText.textContent = qObj.q;
+      progress.style.width = `${((currentQ) / questions.length) * 100}%`;
+      
+      // Render options
+      qOpts.innerHTML = '';
+      qObj.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'q-option';
+        btn.innerHTML = `
+          <span class="opt-label">${opt.text}</span>
+        `;
+        btn.onclick = () => selectOption(opt.score);
+        qOpts.appendChild(btn);
+      });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const startBtn = document.getElementById('start-quiz-btn');
-    if (startBtn) {
-        startBtn.onclick = () => {
-            currentQ = 0;
-            totalScore = 0;
-            showStep('step-question');
-            renderQuestion();
-        };
+      // Back button visibility
+      document.getElementById('backBtn').style.visibility = currentQ > 0 ? 'visible' : 'hidden';
     }
-});
+
+    function selectOption(score) {
+      history.push({ score });
+      totalScore += score;
+      
+      if (currentQ < questions.length - 1) {
+        currentQ++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQ > 0) {
+        currentQ--;
+        const last = history.pop();
+        totalScore -= last.score;
+        renderQuestion();
+      }
+    }
+
+    function showResult() {
+      showStep('step-result');
+      const scorePercent = totalScore; // Max is 100 in this case
+      
+      document.getElementById('res-score').textContent = `${scorePercent}%`;
+      
+      // Gauge Animation
+      const circle = document.getElementById('gauge-circle');
+      const radius = 45;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference - (scorePercent / 100) * circumference;
+      setTimeout(() => {
+        circle.style.strokeDashoffset = offset;
+      }, 500);
+
+      const resTitle = document.getElementById('res-title');
+      const resDesc = document.getElementById('res-desc');
+      
+      if (totalScore >= 80) {
+        resTitle.textContent = "素晴らしい！誰もが使いやすい空間です👏";
+        resDesc.innerHTML = "ハード面もソフト面も充実しており、車いすユーザーにとっても非常に安心できる空間です。<br>この素晴らしいバリアフリー環境を、ぜひホームページやSNSでも積極的にアピールしていきましょう！";
+      } else if (totalScore >= 50) {
+        resTitle.textContent = "もう一歩！少しの工夫でさらによくなります💡";
+        resDesc.innerHTML = "現状でも十分配慮されていますが、あと少しの工夫で劇的に使いやすくなります。<br>例えば、わずかな段差なら簡易スロープを置く、入り口でスタッフがドアを開ける声かけをするなど、ちょっとした「ソフト面」のカバーで満点に近づけます！";
+      } else {
+        resTitle.textContent = "改善の余地あり！まずは「ソフト面」から🌱";
+        resDesc.innerHTML = "建物の構造上、すぐに設備を改修するのは難しいかもしれません。<br>しかし「何かお手伝いしましょうか？」というスタッフの声かけや、事前にHPで『入り口に段差があります』と情報発信しておくことで、車いすユーザーの不安は大きく軽減されます。";
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('startBtn').addEventListener('click', () => {
+        currentQ = 0;
+        totalScore = 0;
+        history = [];
+        showStep('step-question');
+        renderQuestion();
+      });
+
+      document.getElementById('backBtn').addEventListener('click', prevQuestion);
+
+      document.getElementById('retryBtn').addEventListener('click', () => {
+        location.reload();
+      });
+
+      // Keyboard Shortcuts
+      document.addEventListener('keydown', (e) => {
+        const stepQuestion = document.getElementById('step-question');
+        if (!stepQuestion.classList.contains('active')) return;
+
+        if (e.key >= '1' && e.key <= '4') {
+          const index = parseInt(e.key) - 1;
+          const options = document.querySelectorAll('.q-option');
+          if (options[index]) options[index].click();
+        }
+        if (e.key === 'Backspace' || e.key === 'ArrowLeft') {
+          prevQuestion();
+        }
+      });
+    });
 </script>
