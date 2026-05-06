@@ -2,380 +2,296 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="デモHPパッケージ一覧 | 和-Node">
-  <main>
-    <!-- Hero Section -->
-    <section class="demo-hero">
-      <div class="container">
-        <div class="hero-label">Standard Website Packages</div>
-        <h1>理想のウェブサイトを、<br/><span>パッケージ</span>から選ぶ。</h1>
-        <p>事業の規模や目的に合わせ、厳選されたページ構成と最高級のデザインをパッケージ化しました。<br/>あなたのビジョンに最適な「器」をお選びください。</p>
-      </div>
-    </section>
+<BaseLayout title="HPパッケージ選択｜和-Node" description="事業規模に合わせて選べる3つのホームページパッケージ。和-Node独自のプレミアム・カスタマイズをご提案します。">
+  <!-- Luxury Background Layer -->
+  <div class="luxury-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
 
-    <!-- Package Grid -->
-    <section class="package-selection">
-      <div class="container">
-        <div class="grid">
-          
-          <!-- Standard / Business 7 -->
-          <article class="package-card reveal">
-            <div class="card-header">
-              <span class="plan-tag">Standard</span>
-              <h3>Business 7</h3>
-              <div class="page-count">7 Pages</div>
-            </div>
-            <div class="card-body">
-              <p class="description">あああああああああああああああああああああああああああああああああああああああああああああ。</p>
-              <ul class="features">
-                <li>✅ 構成設計（あああああ）</li>
-                <li>✅ レスポンシブ対応（いいいいい）</li>
-                <li>✅ 基本7ページ構成（ううううう）</li>
-                <li>✅ プレミアム・フィニッシュ適用</li>
+  <main class="demos-page">
+    <div class="container">
+      <!-- Header Section -->
+      <header class="demos-header reveal">
+        <div class="header-content">
+          <span class="eyebrow">Select Your Grade</span>
+          <h1>理想を形にする、<br/><span class="accent-text">3つのパッケージ案</span></h1>
+          <p class="header-desc">事業の成長フェーズや目的に合わせて選べる、戦略的Webパッケージをご用意しました。最高級のデザインと最新技術を、あなたのビジネスの強力な武器に。</p>
+        </div>
+      </header>
+
+      <!-- Package Selection Grid -->
+      <div class="package-grid">
+        <!-- Business 7 -->
+        <article class="package-card reveal">
+          <div class="card-inner">
+            <div class="package-tag">Standard Efficiency</div>
+            <div class="package-body">
+              <h2>Business 7</h2>
+              <p class="price-label">¥150,000〜</p>
+              <div class="divider"></div>
+              <ul class="feature-list">
+                <li><span>サイドメニュー（左側固定）</span></li>
+                <li><span>基本7ページ構成</span></li>
+                <li><span>プレミアム・フィニッシュ</span></li>
+                <li><span>スマホ最適化（完全レスポンシブ）</span></li>
               </ul>
               <a href="/portfolio-lp/demo-business-7/index.html" class="demo-btn">デモを体験する</a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <!-- Premium / Premium 10 -->
-          <article class="package-card premium reveal">
-            <div class="best-value">MOST POPULAR</div>
-            <div class="card-header">
-              <span class="plan-tag">High-End</span>
-              <h3>Premium 10</h3>
-              <div class="page-count">10 Pages</div>
-            </div>
-            <div class="card-body">
-              <p class="description">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
-              <ul class="features">
-                <li>✅ Business 7 の全機能</li>
-                <li>✅ リッチアニメーション（あああああ）</li>
-                <li>✅ SEO強化5セクション追加</li>
-                <li>✅ 心理導線10ページ構成</li>
+        <!-- Premium 10 -->
+        <article class="package-card reveal featured">
+          <div class="card-inner">
+            <div class="package-tag">Most Popular choice</div>
+            <div class="package-body">
+              <h2>Premium 10</h2>
+              <p class="price-label">¥220,000〜</p>
+              <div class="divider"></div>
+              <ul class="feature-list">
+                <li><span>フローティング・ガラスヘッダー</span></li>
+                <li><span>心理導線10ページ構成</span></li>
+                <li><span>SEO強化5セクション追加</span></li>
+                <li><span>リッチアニメーション演出</span></li>
+                <li><span>優先サポート対応</span></li>
               </ul>
               <a href="/portfolio-lp/demo-premium-10/index.html" class="demo-btn">デモを体験する</a>
             </div>
-          </article>
+          </div>
+        </article>
 
-          <!-- Elite / Enterprise 15+ -->
-          <article class="package-card elite reveal">
-            <div class="card-header">
-              <span class="plan-tag">Ultimate</span>
-              <h3>Enterprise 15+</h3>
-              <div class="page-count">15+ Pages</div>
-            </div>
-            <div class="card-body">
-              <p class="description">うううううううううううううううううううううううううううううううううううううううううううう。</p>
-              <ul class="features">
-                <li>✅ Premium 10 の全機能</li>
-                <li>✅ カスタムシステム連携（あああああ）</li>
-                <li>✅ 採用・実績・ブログ全網羅</li>
-                <li>✅ 権威性を極める15ページ超構成</li>
-                <li>✅ カスタムWebアプリ・DX連携の統合</li>
+        <!-- Enterprise 15+ -->
+        <article class="package-card reveal">
+          <div class="card-inner">
+            <div class="package-tag">High-End Performance</div>
+            <div class="package-body">
+              <h2>Enterprise 15+</h2>
+              <p class="price-label">ASK</p>
+              <div class="divider"></div>
+              <ul class="feature-list">
+                <li><span>全画面ドロワーメニュー</span></li>
+                <li><span>15ページ超の包括的構成</span></li>
+                <li><span>カスタムWebアプリ・DX連携</span></li>
+                <li><span>採用・実績・ブログ全網羅</span></li>
+                <li><span>独自DB・API連携対応</span></li>
               </ul>
               <a href="/portfolio-lp/demo-enterprise-15/index.html" class="demo-btn">デモを体験する</a>
             </div>
-          </article>
+          </div>
+        </article>
+      </div>
 
+      <!-- Functional Comparison -->
+      <section class="comparison-section reveal">
+        <div class="glass-panel">
+          <h2 class="sec-title">グレード別機能比較</h2>
+          <div class="table-wrap">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>機能 / プラン</th>
+                  <th>Business 7</th>
+                  <th>Premium 10</th>
+                  <th>Enterprise 15+</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>標準構成枚数</td>
+                  <td>7枚</td>
+                  <td>10枚</td>
+                  <td>15枚〜</td>
+                </tr>
+                <tr>
+                  <td>デザイングレード</td>
+                  <td>High Quality</td>
+                  <td>Luxury Glass</td>
+                  <td>Ultimate Custom</td>
+                </tr>
+                <tr>
+                  <td>アニメーション</td>
+                  <td>標準</td>
+                  <td>リッチ</td>
+                  <td>フルカスタム</td>
+                </tr>
+                <tr>
+                  <td>SEO対策</td>
+                  <td>標準内部対策</td>
+                  <td>戦略的セクション追加</td>
+                  <td>全ページ完全最適化</td>
+                </tr>
+                <tr>
+                  <td>システム連携</td>
+                  <td>基本フォーム</td>
+                  <td>基本フォーム</td>
+                  <td>カスタムDB/API</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- Comparison Table -->
-    <section class="comparison-section">
-      <div class="container glass-panel">
-        <h2 class="sec-title">グレード別機能比較</h2>
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>機能 / プラン</th>
-              <th>Business 7</th>
-              <th>Premium 10</th>
-              <th>Enterprise 15+</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ページ数</td>
-              <td>7枚</td>
-              <td>10枚</td>
-              <td>15枚〜</td>
-            </tr>
-            <tr>
-              <td>デザイン品質</td>
-              <td>Standard</td>
-              <td>High-End</td>
-              <td>Ultimate</td>
-            </tr>
-            <tr>
-              <td>アニメーション</td>
-              <td>基本のみ</td>
-              <td>リッチ演出</td>
-              <td>フルカスタム</td>
-            </tr>
-            <tr>
-              <td>心理導線設計</td>
-              <td>✅</td>
-              <td>✅ (強化版)</td>
-              <td>✅ (戦略網羅)</td>
-            </tr>
-            <tr>
-              <td>システム連携</td>
-              <td>ー</td>
-              <td>基本フォーム</td>
-              <td>カスタムDB/API</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- CTA -->
-    <section class="demo-cta">
-      <div class="container">
-        <h2>あなたのビジョンに、<br/>最適なプランを。</h2>
-        <p>どのパッケージが最適か、専門のコンサルタントがアドバイスいたします。</p>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform?usp=publish-editor" class="cta-btn">無料相談を予約する</a>
-      </div>
-    </section>
-
+      <!-- CTA -->
+      <section class="demo-cta reveal">
+        <div class="cta-inner">
+          <h2>あなたのビジョンに、<br/>最適なプランを。</h2>
+          <p>どのパッケージが最適か、専門のコンサルタントがアドバイスいたします。</p>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" class="cta-primary-btn" target="_blank">無料相談を予約する</a>
+        </div>
+      </section>
+    </div>
   </main>
 </BaseLayout>
 
 <style>
-  main {
+  /* Luxury Backdrop */
+  .luxury-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
     background: #0a0a0c;
-    color: #e2e2e7;
-    min-height: 100vh;
-    padding-bottom: 100px;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* Hero */
-  .demo-hero {
-    padding: 160px 0 100px;
-    text-align: center;
-  }
-  .hero-label {
-    color: #c0a060;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    font-size: 14px;
-    margin-bottom: 24px;
-  }
-  .demo-hero h1 {
-    font-size: clamp(40px, 8vw, 72px);
-    line-height: 1.1;
-    margin-bottom: 32px;
-    background: linear-gradient(135deg, #fff 0%, #a0a0a0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  .demo-hero h1 span {
-    color: #c0a060;
-    -webkit-text-fill-color: #c0a060;
-  }
-  .demo-hero p {
-    font-size: 18px;
-    color: #8e8e93;
-    max-width: 800px;
-    margin: 0 auto;
-    line-height: 1.8;
-  }
-
-  /* Package Grid */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-    margin-top: 40px;
-  }
-  .package-card {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 32px;
-    padding: 48px 32px;
-    position: relative;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
     overflow: hidden;
   }
-  .package-card:hover {
-    transform: translateY(-16px);
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(192, 160, 96, 0.4);
-    box-shadow: 0 40px 80px rgba(0,0,0,0.5);
-  }
-  .package-card.premium {
-    background: linear-gradient(180deg, rgba(192, 160, 96, 0.1) 0%, rgba(255, 255, 255, 0.03) 100%);
-    border-color: rgba(192, 160, 96, 0.3);
-  }
-  .best-value {
+  .grid-overlay {
     position: absolute;
-    top: 0;
-    right: 0;
-    background: #c0a060;
-    color: #000;
-    padding: 8px 24px;
-    font-size: 12px;
-    font-weight: 900;
-    border-bottom-left-radius: 16px;
+    width: 100%; height: 100%;
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    animation: orbFloat 25s infinite alternate ease-in-out;
+  }
+  .orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, #2d4f1e 0%, transparent 70%); top: -20%; left: -10%; }
+  .orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, #1e3a5f 0%, transparent 70%); bottom: -10%; right: -5%; animation-delay: -7s; }
+  .orb-3 { width: 500px; height: 500px; background: radial-gradient(circle, #4a3b1e 0%, transparent 70%); top: 40%; left: 30%; animation-delay: -12s; }
+
+  @keyframes orbFloat {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    100% { transform: translate(60px, 40px) scale(1.1) rotate(15deg); }
   }
 
-  .plan-tag {
-    font-size: 12px;
-    color: #c0a060;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    display: block;
-    margin-bottom: 16px;
+  .demos-page { padding-bottom: 120px; color: #fff; }
+  .demos-header { padding: 140px 0 80px; text-align: center; }
+  .eyebrow { font-size: 0.85rem; font-weight: 900; color: #639922; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 24px; display: block; }
+  .demos-header h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; line-height: 1.15; margin-bottom: 32px; }
+  .accent-text { color: #639922; text-shadow: 0 0 30px rgba(99, 153, 34, 0.3); }
+  .header-desc { font-size: 1.15rem; color: #aaa; max-width: 800px; margin: 0 auto; line-height: 1.8; }
+
+  /* Package Grid */
+  .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; margin-bottom: 100px; align-items: stretch; }
+  .package-card { position: relative; transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+  
+  .card-inner {
+    height: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
   }
-  .package-card h3 {
-    font-size: 32px;
-    margin-bottom: 8px;
-    color: #fff;
+  .package-card:hover .card-inner {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(99, 153, 34, 0.5);
+    transform: translateY(-15px);
   }
-  .page-count {
-    font-size: 14px;
-    color: #8e8e93;
-    margin-bottom: 32px;
+
+  .package-tag { font-size: 10px; font-weight: 900; color: #639922; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 40px; }
+  .package-body h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; }
+  .price-label { font-size: 1.6rem; font-weight: 800; color: #639922; margin-bottom: 30px; }
+  .divider { width: 40px; height: 2px; background: #639922; margin-bottom: 40px; }
+
+  .feature-list { list-style: none; margin-bottom: 60px; flex: 1; }
+  .feature-list li { margin-bottom: 18px; color: #ccc; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; }
+  .feature-list li::before { content: "•"; color: #639922; font-size: 1.5rem; }
+
+  .package-card.featured .card-inner {
+    background: linear-gradient(180deg, rgba(99, 153, 34, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border-color: rgba(99, 153, 34, 0.3);
   }
-  .description {
-    font-size: 15px;
-    color: #aeaeb2;
-    margin-bottom: 32px;
-    line-height: 1.6;
-  }
-  .features {
-    list-style: none;
-    padding: 0;
-    margin-bottom: 48px;
-  }
-  .features li {
-    margin-bottom: 16px;
-    font-size: 14px;
-    color: #d1d1d6;
+  .package-card.featured::after {
+    content: "RECOMMENDED";
+    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+    background: #639922; color: #fff; padding: 8px 24px; border-radius: 999px;
+    font-size: 11px; font-weight: 900; letter-spacing: 0.15em; box-shadow: 0 10px 20px rgba(99, 153, 34, 0.3);
   }
 
   .demo-btn {
-    display: block;
-    width: 100%;
-    padding: 16px;
-    text-align: center;
+    display: block; width: 100%; text-align: center; padding: 22px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 12px;
-    font-weight: 700;
-    transition: all 0.3s;
+    color: #fff; text-decoration: none; border-radius: 20px;
+    font-weight: 800; font-size: 14px; letter-spacing: 0.1em; transition: 0.4s;
   }
-  .package-card.premium .demo-btn {
-    background: #c0a060;
-    color: #000;
-    border: none;
-  }
-  .demo-btn:hover {
-    background: #fff;
-    color: #000;
-  }
+  .package-card.featured .demo-btn { background: #639922; border: none; }
+  .demo-btn:hover { background: #fff; color: #000; transform: scale(1.03); }
 
-  /* Comparison */
-  .comparison-section {
-    padding: 100px 0;
-  }
+  /* Comparison Section */
+  .comparison-section { margin-top: 120px; }
   .glass-panel {
     background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(30px);
     border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 40px;
-    padding: 60px;
-  }
-  .sec-title {
-    text-align: center;
-    font-size: 32px;
-    margin-bottom: 60px;
-    color: #fff;
-  }
-  .comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  .comparison-table th, .comparison-table td {
-    padding: 24px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  .comparison-table th {
-    font-size: 18px;
-    color: #c0a060;
-  }
-  .comparison-table td:first-child {
-    text-align: left;
-    color: #8e8e93;
-    font-weight: 500;
-  }
-
-  /* CTA */
-  .demo-cta {
-    text-align: center;
-    padding: 100px 0;
-  }
-  .demo-cta h2 {
-    font-size: 48px;
-    margin-bottom: 24px;
-    color: #fff;
-  }
-  .demo-cta p {
-    font-size: 18px;
-    color: #8e8e93;
-    margin-bottom: 48px;
-  }
-  .cta-btn {
-    background: #fff;
-    color: #000;
-    padding: 20px 60px;
     border-radius: 50px;
-    font-weight: 900;
-    text-decoration: none;
-    transition: 0.3s;
+    padding: 80px 60px;
   }
-  .cta-btn:hover {
-    background: #c0a060;
-    transform: scale(1.05);
+  .sec-title { text-align: center; font-size: 2.5rem; font-weight: 900; margin-bottom: 60px; }
+  .table-wrap { overflow-x: auto; }
+  .comparison-table { width: 100%; border-collapse: collapse; min-width: 800px; }
+  .comparison-table th, .comparison-table td { padding: 28px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+  .comparison-table th { font-size: 1.1rem; color: #639922; font-weight: 900; }
+  .comparison-table td:first-child { text-align: left; color: #888; font-weight: 700; width: 250px; }
+
+  /* CTA Section */
+  .demo-cta { margin-top: 140px; text-align: center; }
+  .cta-inner {
+    padding: 100px 40px;
+    background: linear-gradient(135deg, rgba(99, 153, 34, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+    border-radius: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
+  .demo-cta h2 { font-size: 3.5rem; font-weight: 900; margin-bottom: 24px; }
+  .demo-cta p { font-size: 1.2rem; color: #aaa; margin-bottom: 50px; }
+  .cta-primary-btn {
+    display: inline-block; padding: 24px 70px; background: #fff; color: #000;
+    text-decoration: none; border-radius: 999px; font-weight: 900; font-size: 1.1rem;
+    transition: 0.4s;
+  }
+  .cta-primary-btn:hover { background: #639922; color: #fff; transform: translateY(-5px) scale(1.05); box-shadow: 0 20px 40px rgba(99, 153, 34, 0.3); }
 
   @media (max-width: 900px) {
-    .grid { grid-template-columns: 1fr; }
-    .glass-panel { padding: 30px; }
-    .comparison-table { font-size: 12px; }
+    .package-grid { gap: 30px; }
+    .package-card.featured { scale: 1; }
+    .glass-panel { padding: 40px 20px; }
+    .demo-cta h2 { font-size: 2.2rem; }
   }
 
-  /* Reveal Animation */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 1s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .reveal { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.23, 1, 0.32, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 </style>
 
-<script>
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.1 });
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
 
-  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  });
 </script>
