@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>和-Node | お見積り・お問い合わせ</title>
+  
+  <!-- LINE LIFF SDK -->
+  <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Caveat:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-color: #f0f0f3;
+      --text-color: #2c2c2a;
+      --accent-color: #c8a84b;
+      --shadow-light: #ffffff;
+      --shadow-dark: #d1d1d6;
+      --line-green: #06C755;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .app-container {
+      width: 100%;
+      max-width: 480px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .app-container.loaded { opacity: 1; }
+
+    header { text-align: center; margin-bottom: 8px; }
+    .header-logo { font-size: 24px; font-weight: 700; letter-spacing: 0.1em; }
+    .header-sub { font-family: 'Caveat', cursive; font-size: 18px; color: #666; }
+
+    /* ニューモーフィズム */
+    .neu-pressed {
+      background: var(--bg-color);
+      border-radius: 20px;
+      box-shadow: inset 6px 6px 12px var(--shadow-dark), inset -6px -6px 12px var(--shadow-light);
+      border: 1px solid rgba(255,255,255,0.4);
+      padding: 20px;
+    }
+
+    .neu-raised {
+      background: var(--bg-color);
+      border-radius: 20px;
+      box-shadow: 8px 8px 16px var(--shadow-dark), -8px -8px 16px var(--shadow-light);
+      border: none;
+    }
+
+    /* 画面切り替え */
+    .screen { display: none; flex-direction: column; gap: 20px; animation: fadeIn 0.4s ease forwards; }
+    .screen.active { display: flex; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ステップ表示 */
+    .step-indicator { font-size: 12px; font-weight: 700; color: var(--accent-color); text-align: center; margin-bottom: -10px; }
+
+    /* ボタン */
+    .btn {
+      width: 100%; padding: 20px; border-radius: 20px; font-size: 16px; font-weight: 700;
+      color: var(--text-color); cursor: pointer; display: flex; flex-direction: column;
+      align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;
+    }
+    .btn:active { box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light); transform: scale(0.98); }
+    .btn-subtext { font-family: 'Caveat', cursive; font-size: 13px; font-weight: 400; color: #777; }
+
+    /* 入力フォーム */
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    label { font-size: 14px; font-weight: 700; padding-left: 8px; }
+    input, textarea {
+      width: 100%; padding: 16px; border-radius: 15px; border: none; outline: none;
+      background: var(--bg-color); font-size: 15px;
+      box-shadow: inset 4px 4px 8px var(--shadow-dark), inset -4px -4px 8px var(--shadow-light);
+    }
+    textarea { min-height: 120px; resize: none; }
+
+    /* LINEボタン */
+    .btn-line { background: var(--line-green); color: #fff !important; box-shadow: 0 10px 20px rgba(6, 199, 85, 0.2); }
+    .btn-line:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* ローディング */
+    .loading-overlay { position: fixed; inset: 0; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 100; transition: opacity 0.5s ease; }
+  </style>
+</head>
+<body>
+
+  <div id="loading" class="loading-overlay">
+    <div class="header-logo" style="margin-bottom: 20px;">和-Node</div>
+    <div class="header-sub">Connecting...</div>
+  </div>
+
+  <div class="app-container" id="app">
+    <header>
+      <div class="header-logo">和-Node</div>
+      <div class="header-sub">Estimate & Inquiry</div>
+    </header>
+
+    <!-- 1. カテゴリ選択 -->
+    <section id="screen-category" class="screen active">
+      <div class="step-indicator">STEP 1 / 3</div>
+      <div class="neu-pressed">
+        <p style="text-align: center; font-weight: 700; font-size: 15px;">
+          <span id="user-name" class="header-sub">Guest</span> 様、こんにちは。<br>ご相談内容を教えてください。
+        </p>
+      </div>
+      <button class="btn neu-raised" onclick="selectCategory('Web・LP制作', 'Web')">
+        <span>🌐 Web・LP制作</span><span class="btn-subtext">Web Design</span>
+      </button>
+      <button class="btn neu-raised" onclick="selectCategory('DX・業務効率化', 'DX')">
+        <span>⚙️ DX・業務効率化</span><span class="btn-subtext">Business Automation</span>
+      </button>
+      <button class="btn neu-raised" onclick="selectCategory('心理カウンセリング', 'Counseling')">
+        <span>🧠 心理カウンセリング</span><span class="btn-subtext">Counseling</span>
+      </button>
+      <button class="btn neu-raised" onclick="selectCategory('その他', 'Other')">
+        <span>✉️ その他・ご質問</span><span class="btn-subtext">Other</span>
+      </button>
+    </section>
+
+    <!-- 2. 詳細ヒアリング -->
+    <section id="screen-detail" class="screen">
+      <div class="step-indicator">STEP 2 / 3</div>
+      <div class="neu-pressed">
+        <p id="detail-title" style="font-weight: 700; text-align: center;"></p>
+      </div>
+      
+      <div id="options-container" style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- JSで選択肢を生成 -->
+      </div>
+
+      <button class="btn" style="box-shadow: none;" onclick="showScreen('screen-category')">
+        <span style="font-size: 13px; text-decoration: underline;">戻る</span>
+      </button>
+    </section>
+
+    <!-- 3. 入力・送信 -->
+    <section id="screen-form" class="screen">
+      <div class="step-indicator">STEP 3 / 3</div>
+      <div class="neu-pressed">
+        <p style="font-size: 13px; text-align: center;">これまでの内容に基づき、<br>最終的なお問い合わせを承ります。</p>
+      </div>
+
+      <div class="form-group">
+        <label>メッセージ（任意）</label>
+        <textarea id="form-message" placeholder="具体的なお悩みや、希望の納期などがあればご記入ください。"></textarea>
+      </div>
+
+      <button id="send-btn" class="btn btn-line" onclick="sendInquiry()">
+        <span>📩 この内容で相談する</span>
+        <span class="btn-subtext">Send to LINE</span>
+      </button>
+
+      <button class="btn" style="box-shadow: none;" onclick="showScreen('screen-category')">
+        <span style="font-size: 13px; text-decoration: underline;">最初からやり直す</span>
+      </button>
+    </section>
+  </div>
+
+  <script>
+    let currentData = { category: '', detail: '', cost: '' };
+
+    // LIFF初期化
+    liff.init({ liffId: "2009986975-3MkIwRFL" }).then(() => {
+      if (liff.isLoggedIn()) {
+        liff.getProfile().then(p => {
+          document.getElementById('user-name').innerText = p.displayName;
+          hideLoading();
+        });
+      } else { hideLoading(); }
+    }).catch(err => { console.error(err); hideLoading(); });
+
+    function hideLoading() {
+      document.getElementById('loading').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('app').classList.add('loaded');
+      }, 500);
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function selectCategory(name, key) {
+      currentData.category = name;
+      const container = document.getElementById('options-container');
+      const title = document.getElementById('detail-title');
+      container.innerHTML = '';
+      
+      let options = [];
+      if (key === 'Web') {
+        title.innerText = "どのようなサイトをご希望ですか？";
+        options = [
+          { n: "1枚完結のLP（集客用）", c: "10万円〜" },
+          { n: "数ページの小規模HP", c: "20万円〜" },
+          { n: "ミニアプリ付の高度なサイト", c: "30万円〜" }
+        ];
+      } else if (key === 'DX') {
+        title.innerText = "どのような効率化をお考えですか？";
+        options = [
+          { n: "GASによる自動化・ツール連携", c: "5万円〜" },
+          { n: "LINE公式アカウント構築", c: "10万円〜" },
+          { n: "業務フロー全体のDXコンサル", c: "20万円〜" }
+        ];
+      } else if (key === 'Counseling') {
+        title.innerText = "ご希望のメニューをお選びください";
+        options = [
+          { n: "単発カウンセリング（60分）", c: "5,000円〜" },
+          { n: "チャット相談（1ヶ月）", c: "1万円〜" },
+          { n: "企業・団体向けサポート", c: "お見積り" }
+        ];
+      } else {
+        selectDetail('一般的なお問い合わせ', '要相談');
+        return;
+      }
+
+      options.forEach(opt => {
+        const b = document.createElement('button');
+        b.className = 'btn neu-raised';
+        b.innerHTML = `<span>${opt.n}</span><span class="btn-subtext">参考：${opt.c}</span>`;
+        b.onclick = () => selectDetail(opt.n, opt.c);
+        container.appendChild(b);
+      });
+
+      showScreen('screen-detail');
+    }
+
+    function selectDetail(name, cost) {
+      currentData.detail = name;
+      currentData.cost = cost;
+      showScreen('screen-form');
+    }
+
+    function sendInquiry() {
+      if (!liff.isInClient()) { alert("LINEアプリ内で送信してください。"); return; }
+      
+      const btn = document.getElementById('send-btn');
+      const extraMsg = document.getElementById('form-message').value;
+      btn.disabled = true;
+      btn.innerText = "送信中...";
+
+      const text = `【和-Node お見積り・お問い合わせ】\n\n■カテゴリ\n${currentData.category}\n\n■ご希望内容\n${currentData.detail}\n\n■参考価格\n${currentData.cost}\n\n■メッセージ\n${extraMsg || 'なし'}\n\nこの内容で相談をお願いします。`;
+
+      liff.sendMessages([{ type: 'text', text: text }]).then(() => {
+        alert("お問い合わせを送信しました！トーク画面をご確認ください。");
+        liff.closeWindow();
+      }).catch(err => {
+        console.error(err);
+        alert("送信に失敗しました。権限設定を確認してください。");
+        btn.disabled = false;
+        btn.innerText = "📩 この内容で相談する";
+      });
+    }
+  </script>
+</body>
+</html>
