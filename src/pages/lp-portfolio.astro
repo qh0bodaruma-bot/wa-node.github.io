@@ -202,11 +202,57 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </article>
 
       </div>
+
+      <!-- Final CTA Section -->
+      <section class="portfolio-cta reveal">
+        <div class="cta-inner">
+          <span class="cta-eyebrow">Ready to Launch?</span>
+          <h2>あなたのビジネスを加速させる、<br/>最高の一枚を。</h2>
+          <p>制作のご相談や、どのパッケージが最適かのアドバイスも承っております。</p>
+          <div class="cta-btns">
+            <a href="/demos" class="btn-secondary">料金・パッケージを見る</a>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" class="btn-primary" target="_blank">無料相談・見積もり</a>
+          </div>
+        </div>
+      </section>
     </div>
   </main>
 </BaseLayout>
 
 <style>
+  /* ... existing styles ... */
+  .portfolio-cta { margin-top: 100px; text-align: center; }
+  .cta-inner {
+    padding: 80px 40px;
+    background: linear-gradient(135deg, rgba(99, 153, 34, 0.05), rgba(255, 255, 255, 0.02));
+    border-radius: 40px;
+    border: 1px solid rgba(99, 153, 34, 0.2);
+    backdrop-filter: blur(10px);
+  }
+  .cta-eyebrow { font-size: 0.9rem; font-weight: 900; color: #639922; letter-spacing: 0.2em; display: block; margin-bottom: 20px; }
+  .cta-inner h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 24px; color: #333; }
+  .cta-inner p { font-size: 1.1rem; color: #666; margin-bottom: 40px; }
+  .cta-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  
+  .btn-primary, .btn-secondary {
+    padding: 18px 40px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  .btn-primary { background: #639922; color: #fff; box-shadow: 0 10px 30px rgba(99, 153, 34, 0.3); }
+  .btn-secondary { background: #fff; color: #333; border: 1px solid #ddd; }
+  
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(99, 153, 34, 0.4); }
+  .btn-secondary:hover { background: #f9f9f9; transform: translateY(-3px); }
+
+  @media (max-width: 600px) {
+    .cta-inner h2 { font-size: 1.8rem; }
+    .cta-btns { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; }
+  }
   .lp-portfolio-page { padding-bottom: 120px; }
   .page-header { padding: 120px 0 80px; text-align: center; position: relative; }
   .eyebrow { font-size: 0.85rem; font-weight: 900; color: #639922; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }

@@ -5,10 +5,16 @@
   --ent-light: #f4f7f9;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background: #fff;
   color: #333;
-  padding-top: 100px;
+  padding-top: 112px; /* Accommodate both bars */
 }
 
 /* Corporate Header */
@@ -23,7 +29,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 60px;
+  padding: 0 32px; /* Reduced padding from 60px to 32px */
   z-index: 3000;
 }
 

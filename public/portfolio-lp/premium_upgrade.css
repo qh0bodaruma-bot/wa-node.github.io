@@ -3,6 +3,8 @@
   This CSS upgrades standard LPs into high-end interactive samples.
 */
 
+* { box-sizing: border-box; }
+
 /* Showroom Control Bar */
 .showroom-bar {
   position: fixed;
@@ -33,7 +35,13 @@
   background: #c0a060;
   color: #000;
 }
+
 body { margin-top: 32px !important; }
+
+/* Reset for Demo Packages to prevent global style contamination */
+.prem-header, .prem-nav, .ent-header, .ent-drawer, .side-nav {
+  background-clip: padding-box;
+}
 
 :root {
   --p-accent: #639922;
@@ -48,15 +56,6 @@ body {
   letter-spacing: 0.02em;
   -webkit-font-smoothing: antialiased;
   background-attachment: fixed;
-}
-
-/* Glassmorphism Navigation Upgrade (Targeting standard LPs, not custom demo packages) */
-nav:not(.side-nav):not(.prem-header):not(.ent-header), 
-header.nav-header:not(.ent-header) {
-  background: var(--p-glass);
-  backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid var(--p-border);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.03);
 }
 
 /* Card & Section Polish */
@@ -99,4 +98,3 @@ header.nav-header:not(.ent-header) {
   opacity: 1;
   transform: translateY(0);
 }
-

@@ -7,7 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // Inject Showroom Bar
   const bar = document.createElement('div');
   bar.className = 'showroom-bar';
-  bar.innerHTML = `<span>和-Node Digital Showroom</span><a href="/demos">← パッケージ一覧に戻る</a>`;
+  
+  // Determine back link based on current page
+  const isLP = window.location.pathname.includes('lp_');
+  const backLabel = isLP ? '← LP実績一覧に戻る' : '← パッケージ一覧に戻る';
+  const backLink = isLP ? '/lp-portfolio' : '/demos';
+
+  bar.innerHTML = `<span>和-Node Digital Showroom</span><a href="${backLink}">${backLabel}</a>`;
   document.body.prepend(bar);
 
   // Reveal Animation Logic

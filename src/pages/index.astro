@@ -150,7 +150,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
         </div>
         <div class="btns">
-          <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">まずは60分相談する</a>
+          <a class="btn" href="#consultation-flow">まずは60分相談する</a>
         </div>
       </div>
     </section>
@@ -162,39 +162,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <a href="/works" style="text-decoration:none;"><h2>LP制作・Webアプリ・診断ツールの制作例</h2></a>
         </div>
         <div class="cards">
-          <div class="card">
+          <div class="card highlight">
             <h3>LP制作実績ギャラリー</h3>
-            <p>【全13職種】クリニック・EC・SaaS・教育・イベント等、あらゆる業種に対応した高品質LP制作実績集です。</p>
-            <a href="/lp-portfolio">全実績を詳しく見る →</a>
+            <p>【全13職種】高品質なLP制作実績を職種別に公開。和-Nodeの圧倒的な「魅せる力」をご覧ください。</p>
+            <a href="/lp-portfolio">LP実績をすべて見る →</a>
+          </div>
+          <div class="card highlight">
+            <h3>HP制作パッケージ一覧</h3>
+            <p>事業規模に合わせて選べる3つの戦略的プラン。各パッケージのデモ体験もこちらから。</p>
+            <a href="/demos">プランとデモを見る →</a>
           </div>
           <div class="card">
             <h3>料金シミュレーター</h3>
-            <p>プランやオプションを選ぶだけで、概算費用と納期をリアルタイムで確認できます。</p>
-            <a href="/simulator">体験する →</a>
+            <p>概算費用と納期をリアルタイムで確認。予算計画の最初の一歩に。</p>
+            <a href="/simulator">シミュレーターを試す →</a>
           </div>
           <div class="card">
-            <h3>バリアフリー診断</h3>
-            <p>店舗やオフィスのバリアフリー度を、車いすユーザー視点の25項目でセルフチェック。</p>
-            <a href="/barrier_free">診断する →</a>
-          </div>
-          <div class="card">
-            <h3>こころの疲労度診断</h3>
-            <p>身体・心・環境の3軸からストレス要因を整理し、現在の状態を可視化します。</p>
-            <a href="/mental_care">チェックする →</a>
-          </div>
-          <div class="card">
-            <h3>SEO内部診断</h3>
-            <p>WordPressサイトのSEO状態を25項目の重要指標でリアルタイム採点します。</p>
-            <a href="/seo_check">採点する →</a>
-          </div>
-          <div class="card">
-            <h3>制作ヒアリング体験</h3>
-            <p>実際のヒアリングに近い流れで、Web制作に必要な要件を整理できます。</p>
-            <a href="/lp_wizard">体験する →</a>
+            <h3>Web診断ツール群</h3>
+            <p>SEO内部診断、バリアフリー診断、メンタルケア診断など、各種ツールを体験いただけます。</p>
+            <a href="/works">診断ツール一覧へ →</a>
           </div>
         </div>
         <div class="btns" style="margin-top: 40px;">
-          <a class="btn primary" href="/works">すべての実績・デモを見る</a>
+          <a class="btn primary" href="/demos">あなたに最適なプランを見つける</a>
         </div>
       </div>
     </section>
@@ -229,6 +219,34 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
           <div class="btns" style="justify-content: center; margin-top: 40px;">
             <a class="btn secondary" href="/barrier_free">バリアフリー度を診断する</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="consultation-flow">
+      <div class="section-inner">
+        <div class="section-title">
+          <span class="eyebrow">Consultation Flow</span>
+          <h2>無料相談を最大限に活用するために</h2>
+        </div>
+        <div class="philosophy-card">
+          <div class="philosophy-content">
+            <p>和-Nodeでは、初めての方でも安心してご相談いただけるよう、最大60分の無料相談枠をご用意しています。</p>
+            <div class="ba-grid">
+              <div class="ba-card">
+                <h3>① 初回30分無料</h3>
+                <p>すべての方に、最初の30分間を無料でご提供。現状の整理や解決の方向性をアドバイスします。</p>
+              </div>
+              <div class="ba-card after">
+                <h3>② 診断利用で＋30分</h3>
+                <p>事前にいずれかの診断アプリをご利用いただくと、さらに30分延長（計60分）が無料になります。</p>
+                <p class="small" style="font-size: 0.8rem; margin-top: 10px; color: var(--accent);">※診断アプリ利用による30分延長特典は、お一人様1回限りの適用となります。</p>
+              </div>
+            </div>
+            <div class="btns" style="margin-top: 40px; justify-content: center;">
+              <a class="btn" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">内容を理解して相談を申し込む</a>
+            </div>
           </div>
         </div>
       </div>
@@ -298,7 +316,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <p>文章がまとまっていなくても大丈夫です。今の状態から一緒に整理しましょう。</p>
         <div class="btns">
           <a class="btn" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">LINEで相談する</a>
-          <a class="btn secondary" href="https://docs.google.com/forms/d/e/1FAIpQLScUbeK9em6cjegU5ha5Sh2fWamrIbxDuhmHDJPIN_no5Sj8-w/viewform" target="_blank" rel="noopener">フォームから60分相談する</a>
+          <a class="btn secondary" href="#consultation-flow">フォームから60分相談する</a>
         </div>
       </div>
     </section>
