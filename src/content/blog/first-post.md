@@ -2,7 +2,7 @@
 title: "「心理導線」がWebサイトの成約率を変える理由"
 description: "なぜWebサイトには心理学が必要なのか？車いすカウンセラーの視点から、ユーザーの不安を解消し、行動を促すための「心の地図」の作り方を解説します。"
 pubDate: "2024-05-06"
-heroImage: "/images/blog-first.png"
+heroImage: "https://images.unsplash.com/photo-1542393545-10f5cda2bb83?auto=format&fit=crop&q=80&w=1200&h=675"
 tags: ["Web制作", "心理学", "成約率向上"]
 ---
 
