@@ -39,7 +39,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <!-- Form Column -->
         <section class="form-section">
           <div class="glass-panel">
-            <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form">
+            <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off">
               <input type="hidden" name="_next" value="https://wa-node.com/thanks" />
               <div class="form-group">
                 <label for="name">お名前 <span class="required">必須</span></label>
@@ -71,7 +71,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
               <div class="form-consent">
                 <p class="privacy-note">
-                  送信前に、<a href="/terms" target="_blank">利用規約</a>、<a href="/privacy" target="_blank">プライバシーポリシー</a>、および<a href="/counseling-notes" target="_blank">カウンセリング注意事項</a>をご確認ください。
+                  送信前に、<a href="/terms" target="_blank">利用規約</a>、<a href="/privacy" target="_blank">プライバシーポリシー</a>、および<a href="/counseling-notes" target="_blank">カウンセリング注意事項</a>をご確認ください。<br />
+                  <span style="font-size: 0.8rem; opacity: 0.8;">※送信された内容はサーバーには保存されず、メール転送後、速やかに破棄されます。</span>
                 </p>
                 <label class="checkbox-label">
                   <input type="checkbox" required />
