@@ -508,12 +508,13 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     /* Anniversary Styles */
     .anniversary-banner {
       display: inline-block;
-      background: rgba(216, 185, 140, 0.1);
+      background: rgba(216, 185, 140, 0.18); /* 不透明度を上げて文字をくっきりさせる */
       border: 1px solid var(--accent2);
       padding: 12px 24px;
       border-radius: 999px;
       margin-bottom: 32px;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(6px); /* ぼかしを少し抑えて滲みを軽減 */
+      -webkit-font-smoothing: antialiased;
     }
     .anniversary-badge {
       background: var(--accent2);
