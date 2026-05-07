@@ -12,13 +12,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <span class="anniversary-badge">ANNIVERSARY</span>
             <p><strong>起業記念キャンペーン実施中！</strong> 先着10名様限定で制作メニュー <strong>20% OFF</strong></p>
           </div>
-          <span class="eyebrow">車いすカウンセラー × ICTコンサル</span>
-          <h1>Web・AI・心の悩みを、<br />ひとつの窓口で整理します。</h1>
-          <p class="lead">和-Nodeは、IT・Web業界で20年以上の実績を持つエンジニアであり、心理カウンセラーでもある代表が運営する小さな相談窓口です。今困っていることを一緒に整理し、必要な一歩へつなげます。</p>
+          <span class="eyebrow">Psychology & ICT Consulting</span>
+          <h1>心理学を応用したICTコンサルティングで、<br />伝わる導線と、続けられる仕組みを。</h1>
+          <p class="lead">カウンセラー資格を持つコンサルタントが、Web制作・AI活用・LINE導線・業務整理を、心理面と実務面の両方から支援します。</p>
           <div class="hero-stats">
-            <span>IT・Web制作歴 20年以上</span>
-            <span>産業カウンセラー</span>
-            <span>JADP認定資格保有</span>
+            <span style="font-weight:800; color:var(--accent2); font-size:1.1rem;">不安を煽るのではなく、迷わず選べる情報設計へ。</span>
           </div>
           <div class="btns" style="justify-content: flex-start;">
             <a class="btn" href="/contact">まずは60分相談する</a>
@@ -34,7 +32,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 
     <div class="price-strip" aria-label="主な料金">
       <div><strong>60分相談</strong><span>5,000円</span></div>
-      <div><strong>LP制作</strong><span>24,000円〜</span></div>
+      <div><strong>LP制作</strong><span>30,000円〜</span></div>
       <div><strong>Web保守</strong><span>10,000円〜</span></div>
       <div><strong>法人メンタル</strong><span>15,000円〜</span></div>
     </div>
@@ -48,16 +46,19 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         <p class="section-lead">依頼内容がまとまっていなくても大丈夫です。まずは、今困っていることをそのままお聞かせください。</p>
         <div class="consult-grid">
           <article class="consult-card">
-            <h3>Webを作りたい・直したい</h3>
-            <p>LP、ホームページ、問い合わせ導線、SEO内部改善などを整理します。</p>
+            <span class="card-tag">01. Web & Funnel</span>
+            <h3>心理学を応用したWeb・導線設計</h3>
+            <p>HP・LP制作から文章整理まで。「伝わらない」を減らし、安心して選べる情報設計を心理学の知見で実現します。</p>
           </article>
           <article class="consult-card">
-            <h3>AIやITを仕事に使いたい</h3>
-            <p>ChatGPT活用、業務効率化、GAS、LINE Botなどを現場に合わせて考えます。</p>
+            <span class="card-tag">02. ICT & AI Efficiency</span>
+            <h3>ICT・AIによる業務改善</h3>
+            <p>LINE Mini App、ChatGPT活用、小規模DX支援。現場の「続けにくさ」を解消し、無理なく続く仕組みを整えます。</p>
           </article>
           <article class="consult-card">
-            <h3>心や人間関係の悩みを整理したい</h3>
-            <p>個人相談、職場の悩み、法人の外部相談窓口まで対応します。</p>
+            <span class="card-tag">03. Human & Organization</span>
+            <h3>人と組織の相談支援</h3>
+            <p>法人メンタル窓口、1on1、個人相談。心理的安全性と実務効率を両立させ、働く人と組織の課題を整えます。</p>
           </article>
         </div>
         <div class="btns">
@@ -74,11 +75,23 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         </div>
         <div class="philosophy-card">
           <div class="philosophy-content">
-            <p><strong>「技術を、もっと人の隣へ。」</strong></p>
+            <p>和-Nodeは、心理学の知見を活かして、<strong>「人に伝わるWeb導線」「現場で続くICT活用」「安心して相談できる仕組み」</strong>をつくるコンサルティングサービスです。</p>
             <p>IT制作の現場では、技術者は技術を語り、カウンセラーは心を語ります。しかし、その二つが別々の窓口であること自体が、クライアント様にとっての大きな「段差」になっていると感じてきました。</p>
             <p>和-Nodeは、20年のエンジニア経験と、心理カウンセラーとしての専門知見を一つの窓口に集約しました。<strong>「技術をカウンセラーに説明し、心理をエンジニアに説明する」という手間は、もういりません。</strong></p>
             <p>ある制作現場で、ボタンの文字を「問い合わせ」から「一緒に整理しましょう」という言葉に変えただけで、お客様の反応が劇的に変わりました。それは技術の勝利ではなく、心理の勝利です。私たちは、技術を単なる道具ではなく、あなたの可能性を広げ、心を支える「パートナー」として届けるために、この3つの領域を一本の導線で結んでいます。</p>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ethical Declaration Section -->
+    <section class="section ethics-section" style="background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+      <div class="container narrow">
+        <div class="ethics-box" style="padding: 60px 40px; text-align: center;">
+          <h2 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--accent);">不安を煽るのではなく、迷わず選べる情報設計へ。</h2>
+          <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+            和-Nodeでは、心理学を「不安を煽って買わせるため」ではなく、<strong>「伝わりにくさを減らし、安心して選べる導線をつくるため」</strong>に活用します。無理に売る仕組みではなく、必要な人に正しく価値が届く、誠実な情報設計をお手伝いします。
+          </p>
         </div>
       </div>
     </section>
@@ -216,6 +229,9 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
                 <li>日商簿記2級 / 全商簿記1級 / 全経簿記1級</li>
                 <li>車いすユーザー（バリアフリー住環境アドバイザー）</li>
               </ul>
+              <p class="medical-disclaimer" style="margin-top:16px; font-size:0.85rem; color:var(--muted); line-height:1.6;">
+                ※当窓口のカウンセリングは、対話による心の整理や心理的サポートを目的としており、医師による診断・治療・処方等の医療行為ではありません。必要に応じて専門機関への受診をお勧めする場合があります。
+              </p>
             </div>
           </div>
 
@@ -242,6 +258,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <h3>シンプルLP制作</h3>
             <span class="price-old">30,000円〜</span>
             <span class="price">24,000円〜</span>
+            <p class="small" style="margin-top:8px;">※テンプレート活用・1ページ構成</p>
           </div>
           <div class="price-card special">
             <div class="special-tag">20% OFF</div>
