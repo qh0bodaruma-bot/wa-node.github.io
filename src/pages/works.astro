@@ -11,20 +11,16 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     <div class="grid-overlay"></div>
   </div>
 
-  <main class="works-page">
-    <header class="works-header fade-in">
-      <div class="container">
-        <div class="header-visual">
-          <div class="orb"></div>
-        </div>
-        <span class="eyebrow">Portfolio Showcase</span>
-        <h1 class="works-title">Design Excellence &<br/><span class="accent-text">Strategic Solutions</span></h1>
-        <p class="works-desc">
-          心理学と最先端技術を融合させた、和-Nodeのクリエイティブ・ショーケース。<br />
-          「2.4万円〜」という価格概念を覆す、圧倒的なクオリティと成果へのこだわりを体感してください。
+    <section class="section works-hero">
+      <div class="container narrow">
+        <span class="eyebrow">Works & Demos</span>
+        <h1>制作実績・デモ・サンプル</h1>
+        <p class="lead">
+          実案件の制作実績に加え、デザイン提案のためのサンプルや独自開発のデモツールを公開しています。<br />
+          和-Nodeが提供する「伝わる導線」と「実用的な設計」を体験してください。
         </p>
       </div>
-    </header>
+    </section>
 
     <div class="container">
       <!-- Filter Tabs -->
@@ -43,7 +39,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg" style="overflow: hidden;">
               <img src="/works_diagnosis_real_1778051416753.png" alt="こころの疲労度診断" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag">Diagnostic Tool</span>
+              <span class="category-tag">Internal Demos</span>
             </div>
           </div>
           <div class="card-body">
@@ -134,18 +130,18 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           </div>
         </article>
 
-        <!-- Category: Web (Expanded Premium Gallery) -->
         <article class="work-card reveal" data-category="web">
           <div class="card-visual-wrap">
             <div class="card-visual">
               <img src="/lp_medical_natural_1778044719266.png" alt="クリニック・医療系LP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag">Medical / Clinic</span>
+              <span class="category-tag">Actual Works</span>
             </div>
           </div>
           <div class="card-body">
-            <div class="expert-label">Expert Opinion</div>
+            <div class="expert-label">Medical / Clinic</div>
             <h3>クリニック・医療系LP</h3>
-            <p class="card-text">美容クリニック、歯科医院、心療内科など、医療・福祉領域に特化した信頼感のあるLP。法的遵守（薬機法等）と患者様の安心を両立した設計です。</p>
+            <p class="card-text">美容クリニック、歯科医院、心療内科など。薬機法や医療広告ガイドラインに配慮しつつ、患者様の安心感と信頼を両立させた設計です。</p>
+            <div class="small" style="margin-bottom:16px; color:var(--muted);">※最終的な法的確認は、専門家やご依頼主側での確認をお願いしております。</div>
             <div class="card-footer">
               <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
               <a href="/portfolio-lp/lp_clinic.html" class="premium-link">作品を見る</a>
@@ -157,13 +153,13 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual">
               <img src="/premium_hero_1778044991189.png" alt="美容・エステ・サロン系LP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag">Beauty / Salon</span>
+              <span class="category-tag">Design Samples</span>
             </div>
           </div>
           <div class="card-body">
-            <div class="expert-label">Expert Opinion</div>
+            <div class="expert-label">Beauty / Salon</div>
             <h3>美容・エステ・サロン系LP</h3>
-            <p class="card-text">エステ、ネイル、美容室。憧れと親しみやすさを視覚的に表現し、初回来店への心理的ハードルを下げる導線を構築します。</p>
+            <p class="card-text">エステ、ネイル、美容室。憧れと親しみやすさを視覚的に表現し、初回来店への心理的ハードルを下げる構成サンプルです。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#Visual Art</span><span>#CVR</span></div>
               <a href="/portfolio-lp/lp_beauty.html" class="premium-link">作品を見る</a>
@@ -242,15 +238,17 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           </div>
         </article>
 
-        <!-- Category: System -->
         <article class="work-card reveal" data-category="system">
           <div class="card-visual-wrap">
+            <div class="card-visual">
               <img src="/works_system_real_1778051504514.png" alt="LINE カウンセリング予約システム" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag">Actual Works</span>
+            </div>
           </div>
           <div class="card-body">
             <div class="expert-label">System Build</div>
             <h3>LINE カウンセリング予約システム</h3>
-            <p class="card-text">LINEアプリ内で完結する予約・決済・診断システム。ユーザーの日常的なツールを窓口にすることで、利用のハードルを劇的に下げます。</p>
+            <p class="card-text">LINEアプリ内で完結する予約・決済・診断システム。ユーザーの日常的なツールを窓口にすることで、利用のハードルを下げ、利便性を向上させます。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#LIFF</span><span>#Node.js</span></div>
               <a href="/line_demo" class="premium-link">デモを見る</a>
