@@ -18,9 +18,12 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       <header class="demos-header reveal">
         <div class="header-content">
           <span class="eyebrow">Select Your Grade</span>
-          <div class="anniversary-banner reveal" style="background: rgba(99, 153, 34, 0.1); border: 1px solid #639922; padding: 10px 20px; border-radius: 999px; display: inline-block; margin-bottom: 24px;">
-            <span style="background: #639922; color: #fff; font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; margin-right: 10px; font-weight: 900;">20% OFF</span>
-            <span style="font-size: 0.9rem; font-weight: 700; color: #fff;">起業記念キャンペーン実施中！<br />制作メニュー 20% OFF（先着5名様限定・2026年7月31日まで）<br /><small style="font-weight: 400; opacity: 0.9;">※相談・保守・月額・実費は対象外</small></span>
+          <div class="anniversary-banner reveal on-dark">
+            <strong class="ann-title">起業記念キャンペーン実施中！</strong>
+            <div class="ann-body">
+              <span class="anniversary-badge">ANNIVERSARY</span>
+              <span>制作メニュー <strong>20% OFF</strong> <span style="font-size: 0.75rem; opacity: 0.8; margin-left: 6px;">（先着5名様限定・2026年7月31日まで） ※相談・保守・月額・実費は対象外</span></span>
+            </div>
           </div>
           <h1>理想を形にする、<br/><span class="accent-text">3つのパッケージ案</span></h1>
           <p class="header-desc">事業の成長フェーズや目的に合わせて選べる、戦略的Webパッケージをご用意しました。最高級のデザインと最新技術を、あなたのビジネスの強力な武器に。<br/><span style="color: #639922; font-weight: 700;">※表示は通常価格です。今ならここから20%割引が適用されます。</span></p>
@@ -35,7 +38,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <div class="package-tag">Standard Efficiency</div>
             <div class="package-body">
               <h2>Business 7</h2>
-              <p class="price-label">¥150,000〜</p>
+              <p class="price-label">
+                <span class="price-old">¥150,000〜</span>
+                <span class="price-discount">¥120,000〜</span>
+                <span class="price-badge-mini">20% OFF</span>
+              </p>
               <div class="divider"></div>
               <ul class="feature-list">
                 <li><span>サイドメニュー（左側固定）</span></li>
@@ -54,7 +61,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <div class="package-tag">Most Popular Choice</div>
             <div class="package-body">
               <h2>Premium 10</h2>
-              <p class="price-label">¥220,000〜</p>
+              <p class="price-label">
+                <span class="price-old">¥220,000〜</span>
+                <span class="price-discount">¥176,000〜</span>
+                <span class="price-badge-mini">20% OFF</span>
+              </p>
               <div class="divider"></div>
               <ul class="feature-list">
                 <li><span>フローティング・ガラスヘッダー</span></li>
@@ -208,7 +219,19 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 
   .package-tag { font-size: 10px; font-weight: 900; color: #639922; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 40px; }
   .package-body h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; }
-  .price-label { font-size: 1.6rem; font-weight: 800; color: #639922; margin-bottom: 30px; }
+  .price-label { font-size: 1.6rem; font-weight: 800; color: #639922; margin-bottom: 30px; display: flex; flex-direction: column; gap: 4px; }
+  .price-old { font-size: 0.9rem; color: #888; text-decoration: line-through; opacity: 0.7; }
+  .price-discount { font-size: 1.8rem; color: #639922; font-weight: 900; }
+  .price-badge-mini {
+    width: fit-content;
+    background: #639922;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
   .divider { width: 40px; height: 2px; background: #639922; margin-bottom: 40px; }
 
   .feature-list { list-style: none; margin-bottom: 60px; flex: 1; }

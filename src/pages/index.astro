@@ -41,7 +41,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     <div class="price-strip" aria-label="主な料金">
       <div><strong>初回相談</strong><span>30分〜最大60分無料</span></div>
       <div><strong>60分相談</strong><span>通常 5,000円（初回無料）</span></div>
-      <div><strong>LP制作</strong><span>25,000円〜</span></div>
+      <div><strong>LP制作</strong><span>20,000円〜</span></div>
       <div><strong>法人メンタル</strong><span>15,000円〜</span></div>
     </div>
 
@@ -139,7 +139,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <span class="card-tag">Web</span>
             <h3>心理導線Web制作</h3>
             <p>訪問者の不安・迷い・行動心理をふまえて、読みやすく、問い合わせにつながりやすいWebページを制作します。</p>
-            <div style="font-weight:bold; margin-bottom:10px;"><span class="price-old">120,000円〜</span> 96,000円〜</div>
+            <div style="font-weight:bold; margin-bottom:10px;">
+              <span class="price-old">120,000円〜</span> 
+              <span style="color:var(--accent2); margin-right:8px;">20% OFF</span>
+              96,000円〜
+            </div>
             <a href="/works">制作実績を見る →</a>
           </div>
           <div class="card">
@@ -212,7 +216,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <span class="card-tag">Highly Recommended</span>
             <h3>DX × メンタル相関診断</h3>
             <p>【経営者・個人事業主向け】あなたの「心の疲れ」と「技術の未整備」の相関を可視化。本来のパフォーマンスを取り戻す鍵を見つけます。</p>
-            <a href="/dx_mental_diagnosis" class="premium-link">自分と向き合う診断を始める →</a>
+            <a href="/dx_mental_diagnosis" class="card-link">自分と向き合い、診断を始める →</a>
           </div>
           <div class="card highlight">
             <h3>LP制作実績ギャラリー</h3>
@@ -574,45 +578,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
   .faq-list summary::after { content: "+"; font-size: 1.4rem; }
   .faq-list details[open] summary::after { content: "−"; }
 
-    /* Anniversary Styles */
-    .anniversary-banner {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      background: rgba(216, 185, 140, 0.18);
-      border: 1px solid var(--accent2);
-      padding: 12px 28px;
-      border-radius: 999px;
-      margin-bottom: 32px;
-      backdrop-filter: blur(6px);
-      -webkit-font-smoothing: antialiased;
-    }
-    .ann-title {
-      font-size: 0.95rem;
-      color: var(--text);
-      font-weight: 800;
-    }
-    .ann-body {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-    .anniversary-badge {
-      background: var(--accent2);
-      color: #fff;
-      font-size: 0.7rem;
-      font-weight: 800;
-      padding: 2px 10px;
-      border-radius: 4px;
-      letter-spacing: 0.1em;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-    .ann-body strong { color: var(--accent); }
-
+    /* Price Cards and others... */
     .price-card.special { border-color: var(--accent2); background: #fffcf8; position: relative; overflow: hidden; }
     .special-tag {
       position: absolute; top: 12px; right: -30px; background: var(--accent2); color: #fff;

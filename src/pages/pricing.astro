@@ -8,8 +8,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     <section class="hero">
       <div class="hero-inner">
         <div class="anniversary-banner reveal">
-          <span class="anniversary-badge">ANNIVERSARY</span>
-          <p><strong>起業記念キャンペーン実施中！</strong><br />制作メニュー <strong>20% OFF</strong> <span style="font-size: 0.75rem; opacity: 0.8; margin-left: 10px;">（先着5名様限定・2026年7月31日まで） ※相談・保守・月額・実費は対象外</span></p>
+          <strong class="ann-title">起業記念キャンペーン実施中！</strong>
+          <div class="ann-body">
+            <span class="anniversary-badge">ANNIVERSARY</span>
+            <span>制作メニュー <strong>20% OFF</strong> <span style="font-size: 0.75rem; opacity: 0.8; margin-left: 6px;">（先着5名様限定・2026年7月31日まで） ※相談・保守・月額・実費は対象外</span></span>
+          </div>
         </div>
         <p class="eyebrow">Pricing</p>
         <h1>料金一覧</h1>
@@ -41,13 +44,13 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <tr><th>サービス</th><th>料金 (通常)</th><th>内容</th></tr>
           </thead>
           <tbody>
-            <tr><td>テンプレートLP制作</td><td>25,000円〜</td><td>既存テンプレートを活用したスピード重視の制作</td></tr>
-            <tr><td>シンプルLP制作</td><td>30,000円〜</td><td>1ページの簡易的なランディングページ</td></tr>
-            <tr><td>シンプルHP制作</td><td>50,000円〜</td><td>名刺代わりの小規模ホームページ（3〜5ページ）</td></tr>
-            <tr><td>心理導線LP制作</td><td>60,000円〜</td><td>行動心理をふまえた高品質LP</td></tr>
-            <tr><td>心理導線HP制作</td><td>120,000円〜</td><td>5ページ程度の標準的なホームページ</td></tr>
-            <tr><td>HPパッケージ「Business 7」</td><td>150,000円〜</td><td>7ページ構成・標準SEO・プレミアム仕上げ</td></tr>
-            <tr><td>HPパッケージ「Premium 10」</td><td>220,000円〜</td><td>10ページ構成・戦略的SEO・リッチ演出</td></tr>
+            <tr><td>テンプレートLP制作</td><td><span class="price-badge">20% OFF</span> 25,000円〜</td><td>既存テンプレートを活用したスピード重視の制作</td></tr>
+            <tr><td>シンプルLP制作</td><td><span class="price-badge">20% OFF</span> 30,000円〜</td><td>1ページの簡易的なランディングページ</td></tr>
+            <tr><td>シンプルHP制作</td><td><span class="price-badge">20% OFF</span> 50,000円〜</td><td>名刺代わりの小規模ホームページ（3〜5ページ）</td></tr>
+            <tr><td>心理導線LP制作</td><td><span class="price-badge">20% OFF</span> 60,000円〜</td><td>行動心理をふまえた高品質LP</td></tr>
+            <tr><td>心理導線HP制作</td><td><span class="price-badge">20% OFF</span> 120,000円〜</td><td>5ページ程度の標準的なホームページ</td></tr>
+            <tr><td>HPパッケージ「Business 7」</td><td><span class="price-badge">20% OFF</span> 150,000円〜</td><td>7ページ構成・標準SEO・プレミアム仕上げ</td></tr>
+            <tr><td>HPパッケージ「Premium 10」</td><td><span class="price-badge">20% OFF</span> 220,000円〜</td><td>10ページ構成・戦略的SEO・リッチ演出</td></tr>
             <tr><td>制作オプション</td><td>5,000円〜</td><td>図解作成、ブログ機能、診断ツール組み込み等</td></tr>
             <tr><td>Webサイト保守</td><td>月額 10,000円〜</td><td>安全な運用、セキュリティ管理、軽微な修正代行</td></tr>
           </tbody>
@@ -66,8 +69,8 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           </thead>
           <tbody>
             <tr><td>AI・ICT活用相談</td><td><strong>初回 30分無料</strong></td><td>ChatGPT活用、業務整理。診断利用で＋30分無料特典あり。</td></tr>
-            <tr><td>LINE Mini App開発</td><td>150,000円〜</td><td>予約・診断・会員証などのLINE内アプリ構築</td></tr>
-            <tr><td>診断・シミュレーター制作</td><td>24,000円〜</td><td>静的ページ内で動く簡易的な診断機能の実装</td></tr>
+            <tr><td>LINE Mini App開発</td><td><span class="price-badge">20% OFF</span> 150,000円〜</td><td>予約・診断・会員証などのLINE内アプリ構築</td></tr>
+            <tr><td>診断・シミュレーター制作</td><td><span class="price-badge">20% OFF</span> 24,000円〜</td><td>静的ページ内で動く簡易的な診断機能の実装</td></tr>
             <tr><td>法人向けAI導入支援</td><td>要見積り</td><td>業務に合わせた研修・システム連携開発</td></tr>
           </tbody>
         </table>
@@ -150,6 +153,16 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 
   .small { font-size: 0.85rem; color: var(--muted); margin-top: 8px; }
   .campaign-note { margin-bottom: 20px; padding: 12px 20px; background: var(--accent-light); border-radius: 12px; font-size: 0.95rem; }
+  .price-badge {
+    background: var(--accent2);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 900;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
 
   h2 { font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1.35; margin: 8px 0 18px; font-weight: 800; }
 

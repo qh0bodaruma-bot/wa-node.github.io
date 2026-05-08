@@ -457,6 +457,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </style>
 
 <script is:inline>
+  function initKdpEffects() {
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
         if (e.isIntersecting) {
@@ -484,4 +485,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         book.style.transform = `rotateY(-25deg) rotateX(0deg) scale(1)`;
       });
     });
+  }
+
+  initKdpEffects();
+  document.addEventListener('astro:page-load', initKdpEffects);
 </script>

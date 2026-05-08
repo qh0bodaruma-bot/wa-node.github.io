@@ -231,11 +231,15 @@ const {
 </style>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initGAEvents() {
     const gaButtons = document.querySelectorAll('[data-ga-event]');
     gaButtons.forEach(button => {
-      button.addEventListener('click', () => {
-        const eventName = button.getAttribute('data-ga-event');
+      // Prevent duplicate listeners
+      const newButton = button.cloneNode(true);
+      button.parentNode.replaceChild(newButton, button);
+      
+      newButton.addEventListener('click', () => {
+        const eventName = newButton.getAttribute('data-ga-event');
         if (typeof gtag === 'function') {
           gtag('event', eventName, {
             'event_category': 'conversion',
@@ -244,5 +248,8 @@ const {
         }
       });
     });
-  });
+  }
+
+  initGAEvents();
+  document.addEventListener('astro:page-load', initGAEvents);
 </script>
