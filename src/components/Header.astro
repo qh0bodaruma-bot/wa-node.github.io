@@ -205,7 +205,7 @@
     }
 
     initHeader();
-    document.addEventListener('DOMContentLoaded', initHeader);
-    document.addEventListener('astro:after-swap', initHeader);
+    // Initial load and Astro page transitions
+    document.addEventListener('astro:page-load', initHeader);
   })();
 </script>

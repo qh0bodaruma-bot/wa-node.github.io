@@ -456,8 +456,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    function initSimulator() {
       document.querySelectorAll('input').forEach(i => i.addEventListener('change', update));
       update();
-    });
+    }
+
+    document.addEventListener('astro:page-load', initSimulator);
 </script>

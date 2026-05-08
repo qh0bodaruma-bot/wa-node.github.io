@@ -419,25 +419,32 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('startBtn').addEventListener('click', () => {
-        currentQ = 0;
-        totalScore = 0;
-        history = [];
-        showStep('step-question');
-        renderQuestion();
-      });
+    function initBarrierFree() {
+      const startBtn = document.getElementById('startBtn');
+      if (startBtn) {
+        startBtn.addEventListener('click', () => {
+          currentQ = 0;
+          totalScore = 0;
+          history = [];
+          showStep('step-question');
+          renderQuestion();
+        });
+      }
 
-      document.getElementById('backBtn').addEventListener('click', prevQuestion);
+      const backBtn = document.getElementById('backBtn');
+      if (backBtn) backBtn.addEventListener('click', prevQuestion);
 
-      document.getElementById('retryBtn').addEventListener('click', () => {
-        location.reload();
-      });
+      const retryBtn = document.getElementById('retryBtn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+          location.reload();
+        });
+      }
 
       // Keyboard Shortcuts
       document.addEventListener('keydown', (e) => {
         const stepQuestion = document.getElementById('step-question');
-        if (!stepQuestion.classList.contains('active')) return;
+        if (!stepQuestion || !stepQuestion.classList.contains('active')) return;
 
         if (e.key >= '1' && e.key <= '4') {
           const index = parseInt(e.key) - 1;
@@ -448,5 +455,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           prevQuestion();
         }
       });
-    });
+    }
+
+    document.addEventListener('astro:page-load', initBarrierFree);
 </script>

@@ -6,6 +6,12 @@ import Qualifications from './Qualifications.astro';
     <div class="footer-brand">
       <div class="logo">和-Node</div>
       <p class="tagline">心と、技術と、当事者の視点を結ぶ窓口。</p>
+      <div class="footer-info">
+        <p class="info-item">代表：高野 紘純</p>
+        <p class="info-item">〒509-0207 岐阜県可児市今渡2347番地1</p>
+        <p class="info-item">Tel: 080-3599-5388</p>
+        <p class="info-item">Email: <a href="mailto:contacts@wa-node.com">contacts@wa-node.com</a></p>
+      </div>
     </div>
 
     <Qualifications />
@@ -84,6 +90,19 @@ import Qualifications from './Qualifications.astro';
     font-size: 0.9rem;
     color: var(--accent2);
     font-weight: 700;
+    margin-bottom: 24px;
+  }
+  .footer-info {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.8;
+  }
+  .footer-info .info-item {
+    margin: 0;
+  }
+  .footer-info a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: underline;
   }
   .section-inner {
     max-width: 1200px;

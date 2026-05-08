@@ -405,39 +405,43 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 </style>
 
 <script is:inline>
-    // Filter Logic
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const workCards = document.querySelectorAll('.work-card');
+    function initWorks() {
+      // Filter Logic
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const workCards = document.querySelectorAll('.work-card');
 
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const filter = btn.dataset.filter;
-        
-        // Update active btn
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          
+          // Update active btn
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
 
-        // Filter cards
-        workCards.forEach(card => {
-          if (filter === 'all' || card.dataset.category === filter) {
-            card.style.display = 'flex';
-            setTimeout(() => card.classList.add('visible'), 50);
-          } else {
-            card.style.display = 'none';
-            card.classList.remove('visible');
-          }
+          // Filter cards
+          workCards.forEach(card => {
+            if (filter === 'all' || card.dataset.category === filter) {
+              card.style.display = 'flex';
+              setTimeout(() => card.classList.add('visible'), 50);
+            } else {
+              card.style.display = 'none';
+              card.classList.remove('visible');
+            }
+          });
         });
       });
-    });
 
-    // Reveal Logic
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+      // Reveal Logic
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }
+
+    document.addEventListener('astro:page-load', initWorks);
 </script>

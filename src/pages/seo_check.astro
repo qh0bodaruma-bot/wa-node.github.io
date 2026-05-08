@@ -419,23 +419,42 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       `).join('');
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('startBtn').addEventListener('click', () => showStep(1));
-      document.getElementById('nextBtn').addEventListener('click', () => {
-        if (currentStep < 5) showStep(currentStep + 1);
-        else showStep(6);
-      });
-      document.getElementById('backBtn').addEventListener('click', () => {
-        if (currentStep > 1) showStep(currentStep - 1);
-      });
-      document.getElementById('retryBtn').addEventListener('click', () => location.reload());
+    function initSeoCheck() {
+      const startBtn = document.getElementById('startBtn');
+      if (startBtn) startBtn.addEventListener('click', () => showStep(1));
+
+      const nextBtn = document.getElementById('nextBtn');
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          if (currentStep < 5) showStep(currentStep + 1);
+          else showStep(6);
+        });
+      }
+
+      const backBtn = document.getElementById('backBtn');
+      if (backBtn) {
+        backBtn.addEventListener('click', () => {
+          if (currentStep > 1) showStep(currentStep - 1);
+        });
+      }
+
+      const retryBtn = document.getElementById('retryBtn');
+      if (retryBtn) retryBtn.addEventListener('click', () => location.reload());
 
       // Keyboard support
       document.addEventListener('keydown', (e) => {
         if (currentStep > 0 && currentStep <= 5) {
-          if (e.key === 'ArrowRight' || e.key === 'Enter') document.getElementById('nextBtn').click();
-          if (e.key === 'ArrowLeft') document.getElementById('backBtn').click();
+          if (e.key === 'ArrowRight' || e.key === 'Enter') {
+            const next = document.getElementById('nextBtn');
+            if (next) next.click();
+          }
+          if (e.key === 'ArrowLeft') {
+            const back = document.getElementById('backBtn');
+            if (back) back.click();
+          }
         }
       });
-    });
+    }
+
+    document.addEventListener('astro:page-load', initSeoCheck);
 </script>

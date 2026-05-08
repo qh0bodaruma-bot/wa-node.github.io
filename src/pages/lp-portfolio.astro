@@ -296,7 +296,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 </style>
 
 <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
+  function initPortfolio() {
     const filterBtns = document.querySelectorAll('.filter-btn');
     const lpCards = document.querySelectorAll('.lp-card');
 
@@ -328,5 +328,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  });
+  }
+
+  document.addEventListener('astro:page-load', initPortfolio);
 </script>

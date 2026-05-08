@@ -1,0 +1,366 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="経営者向け DX×メンタル相関診断 | 和-Node" description="経営者・個人事業主の「心の疲れ」と「技術の未整備」の相関を可視化。あなたが本来の輝きを取り戻すための、技術と心の整え方を提案します。">
+  <!-- Background Decoration -->
+  <div class="bg-decoration">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="ink-blob blob-1"></div>
+    <div class="ink-blob blob-2"></div>
+  </div>
+
+  <div class="demo-banner">
+    <strong class="banner-title">【心理学 × ICT 特化ツール】</strong> これは和-Nodeが提供する、心のメカニズムとICTを融合させた独自診断です。
+  </div>
+
+  <main class="diagnosis-container">
+    <div class="diagnosis-card glass-card">
+      
+      <!-- Step 0: Welcome -->
+      <div id="step-welcome" class="diag-step active">
+        <div class="step-visual">
+          <div class="meditation-icon">🧘‍♂️</div>
+        </div>
+        <h1 class="welcome-title">経営者のための<br/><span class="accent-text">DX × メンタル相関診断</span></h1>
+        <p class="welcome-desc">
+          日々の「忙しさ」の正体は、心の疲れか、それとも技術の不足か。<br />
+          二つの相関関係を解き明かし、あなたが本来のパフォーマンスを<br />
+          取り戻すための「整え方」を導き出します。
+        </p>
+        <button class="primary-btn pulse" id="startBtn">静かに診断を始める</button>
+      </div>
+
+      <!-- Step 1-3: Quiz Steps -->
+      <div id="step-quiz" class="diag-step">
+        <div class="quiz-header">
+          <div class="diag-progress">
+            <div class="progress-info">
+              <span id="cat-title">自己対話</span>
+              <span id="step-indicator">Phase 1 / 3</span>
+            </div>
+            <div class="progress-bar-wrap">
+              <div class="progress-bar-fill" id="overall-progress"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="quiz-body" id="quiz-body">
+          <!-- Questions will be injected here -->
+        </div>
+
+        <div class="quiz-footer">
+          <button id="backBtn" class="text-btn">← 前の問いへ</button>
+          <button id="nextBtn" class="primary-btn-sm">次の問いへ</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Result -->
+      <div id="step-result" class="diag-step">
+        <div class="result-layout">
+          <div class="result-summary glass-card-dark">
+            <div class="score-display">
+              <div class="correlation-label">相関分析スコア</div>
+              <div class="main-score">
+                <span id="res-rank">Rank A</span>
+              </div>
+            </div>
+            <h2 class="res-title" id="res-title">分析結果：思考の余白が生まれています</h2>
+            <p class="res-desc" id="res-desc">診断結果の概略がここに入ります。</p>
+          </div>
+
+          <div class="analysis-grid">
+            <div class="analysis-panel glass-card">
+              <h3>🔋 メンタル耐久度</h3>
+              <div class="gauge-bar"><div id="mental-bar" class="bar-fill"></div></div>
+              <p id="mental-status" class="small-info">良好です</p>
+            </div>
+            <div class="analysis-panel glass-card">
+              <h3>⚙️ デジタル活用度</h3>
+              <div class="gauge-bar"><div id="dx-bar" class="bar-fill"></div></div>
+              <p id="dx-status" class="small-info">改善の余地があります</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="psych-advice glass-card">
+          <h3>🧠 心理学者・ICTコンサルタントからの提言</h3>
+          <div id="advice-content" class="advice-content"></div>
+        </div>
+        
+        <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px;">
+          <div class="bonus-tag">🎁 特別個別アドバイス</div>
+          <h3>この結果を元に、あなたの「3ヶ月後の景色」を変えませんか？</h3>
+          <p>
+            診断お疲れ様でした。あなた自身の状態が可視化された今が、変化の最大のチャンスです。<br/>
+            通常の30分無料相談を、<strong>「60分間の心理×ICT戦略会議」</strong>として提供させていただきます。
+          </p>
+
+          <div class="cta-btns">
+            <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="primary-btn" style="text-decoration: none; background: #1a2a3a;">LINEで戦略会議を予約する</a>
+            <a href="/#consultation-flow" class="secondary-btn">和-Nodeの想いを確認</a>
+          </div>
+          <button class="retry-btn" id="retryBtn">もう一度、自分と向き合う</button>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+    :root {
+      --deep-navy: #1a2a3a;
+      --gold-accent: #d8b98c;
+      --soft-paper: #f8f6f2;
+      --glass-dark: rgba(26, 42, 58, 0.9);
+      --glass-light: rgba(255, 255, 255, 0.85);
+    }
+
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; background: var(--soft-paper); overflow: hidden;
+    }
+    .glow { position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3; animation: float 20s infinite alternate; }
+    .glow-1 { width: 600px; height: 600px; background: #e0d5c5; top: -10%; right: -10%; }
+    .glow-2 { width: 500px; height: 500px; background: #cbd5e0; bottom: -10%; left: -10%; animation-delay: -5s; }
+    .ink-blob { position: absolute; background: var(--deep-navy); filter: blur(80px); opacity: 0.05; border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; animation: blob 25s infinite alternate; }
+    .blob-1 { width: 400px; height: 300px; top: 20%; left: 10%; }
+    .blob-2 { width: 350px; height: 450px; bottom: 20%; right: 10%; animation-delay: -8s; }
+    
+    @keyframes blob { 0% { border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; } 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; transform: translate(30px, 30px); } }
+    @keyframes float { from { transform: translate(0,0); } to { transform: translate(40px, 80px); } }
+
+    .demo-banner { background: rgba(26, 42, 58, 0.05); border-bottom: 1px solid var(--deep-navy); padding: 12px; text-align: center; font-size: 0.85rem; backdrop-filter: blur(5px); color: var(--deep-navy); }
+
+    .diagnosis-container { max-width: 900px; margin: 40px auto 100px; padding: 0 20px; }
+    
+    .glass-card { background: var(--glass-light); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.5); border-radius: 32px; box-shadow: 0 30px 60px rgba(26, 42, 58, 0.1); }
+    .glass-card-dark { background: var(--deep-navy); color: var(--gold-accent); border-radius: 24px; padding: 50px; text-align: center; }
+
+    .diagnosis-card { padding: 60px 40px; min-height: 700px; display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden; }
+
+    .diag-step { display: none; width: 100%; }
+    .diag-step.active { display: block; animation: fadeIn 0.8s ease-out forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    .meditation-icon { font-size: 80px; text-align: center; margin-bottom: 30px; animation: breathe 4s infinite ease-in-out; }
+    @keyframes breathe { 0%, 100% { transform: scale(1); opacity: 0.7; } 50% { transform: scale(1.1); opacity: 1; } }
+
+    .welcome-title { font-size: 3rem; font-weight: 900; line-height: 1.2; margin-bottom: 24px; text-align: center; color: var(--deep-navy); }
+    .accent-text { color: var(--gold-accent); position: relative; display: inline-block; }
+    .accent-text::after { content: ""; position: absolute; bottom: 5px; left: 0; width: 100%; height: 12px; background: rgba(216, 185, 140, 0.2); z-index: -1; }
+    
+    .welcome-desc { font-size: 1.15rem; color: #555; text-align: center; margin-bottom: 48px; line-height: 1.8; }
+
+    .primary-btn { display: block; width: fit-content; margin: 0 auto; padding: 22px 64px; background: var(--deep-navy); color: #fff; border-radius: 999px; font-weight: 800; font-size: 1.2rem; border: none; cursor: pointer; transition: 0.4s; box-shadow: 0 10px 30px rgba(26, 42, 58, 0.2); }
+    .primary-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(26, 42, 58, 0.3); }
+
+    .quiz-item { padding: 32px; background: #fff; border-radius: 24px; margin-bottom: 20px; border: 1px solid rgba(0,0,0,0.05); transition: 0.3s; }
+    .quiz-item:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+    .item-label { font-size: 1.2rem; font-weight: 800; color: var(--deep-navy); margin-bottom: 15px; text-align: center; }
+    
+    .opt-btns { display: flex; gap: 12px; justify-content: center; }
+    .opt-btn { padding: 12px 24px; border-radius: 12px; border: 1px solid #eee; background: #f9f9f9; cursor: pointer; transition: 0.2s; font-weight: 700; font-size: 0.9rem; }
+    .opt-btn.active { background: var(--deep-navy); color: #fff; border-color: var(--deep-navy); }
+
+    .progress-bar-wrap { height: 8px; background: #eee; border-radius: 999px; overflow: hidden; margin-top: 10px; }
+    .progress-bar-fill { height: 100%; background: var(--gold-accent); width: 0%; transition: width 0.8s ease; }
+
+    .result-layout { display: grid; gap: 30px; margin-bottom: 40px; }
+    .main-score { font-size: 3.5rem; font-weight: 900; margin: 10px 0; letter-spacing: -0.02em; }
+    .correlation-label { font-size: 0.9rem; opacity: 0.8; letter-spacing: 0.1em; }
+
+    .analysis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .analysis-panel { padding: 24px; text-align: center; }
+    .analysis-panel h3 { font-size: 1rem; margin-bottom: 15px; color: var(--deep-navy); }
+    .gauge-bar { height: 10px; background: #eee; border-radius: 999px; overflow: hidden; margin-bottom: 10px; }
+    .bar-fill { height: 100%; background: var(--gold-accent); width: 0%; transition: width 2s cubic-bezier(0.1, 0, 0.2, 1); }
+
+    .psych-advice { padding: 40px; border-left: 6px solid var(--gold-accent); background: #fff; }
+    .psych-advice h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 20px; color: var(--deep-navy); }
+    .advice-content { line-height: 1.8; color: #444; }
+
+    .wanode-cta-box { padding: 50px; text-align: center; border: 2px solid var(--gold-accent); position: relative; }
+    .bonus-tag { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); background: var(--gold-accent); color: var(--deep-navy); padding: 6px 30px; border-radius: 999px; font-weight: 900; font-size: 1rem; }
+    
+    .cta-btns { display: flex; gap: 20px; justify-content: center; margin-top: 30px; flex-wrap: wrap; }
+    .secondary-btn { padding: 20px 40px; border-radius: 999px; border: 2px solid var(--deep-navy); color: var(--deep-navy); font-weight: 800; text-decoration: none; transition: 0.3s; }
+    .retry-btn { margin-top: 30px; background: none; border: none; color: #888; text-decoration: underline; cursor: pointer; font-weight: 700; }
+
+    .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 40px; }
+    .text-btn { background: none; border: none; color: #888; cursor: pointer; font-weight: 700; }
+    .primary-btn-sm { padding: 12px 32px; background: var(--deep-navy); color: #fff; border-radius: 999px; font-weight: 800; border: none; cursor: pointer; }
+
+    @media (max-width: 768px) {
+      .welcome-title { font-size: 2.2rem; }
+      .analysis-grid { grid-template-columns: 1fr; }
+      .opt-btns { flex-direction: column; }
+    }
+</style>
+
+<script is:inline>
+    const questions = [
+      {
+        id: 'm1', cat: 'mental',
+        q: "夜、布団に入っても仕事の『やり残し』が気になりますか？",
+        opts: [{t:"ほとんどない", s:10}, {t:"たまにある", s:5}, {t:"毎晩のように気になる", s:0}]
+      },
+      {
+        id: 'd1', cat: 'dx',
+        q: "同じ内容のメール送信や、データのコピペ作業を週に3回以上行いますか？",
+        opts: [{t:"自動化している", s:10}, {t:"手動だが苦ではない", s:5}, {t:"苦痛だが手動でやっている", s:0}]
+      },
+      {
+        id: 'm2', cat: 'mental',
+        q: "新しいアイデアを考えるワクワク感より、タスクを消化する義務感が勝っていますか？",
+        opts: [{t:"ワクワクが勝る", s:10}, {t:"半々くらい", s:5}, {t:"義務感のみ", s:0}]
+      },
+      {
+        id: 'd2', cat: 'dx',
+        q: "「あの情報はどこだっけ？」と探す時間に、1日30分以上費やしていますか？",
+        opts: [{t:"すぐに整理・検索できる", s:10}, {t:"時々探す", s:5}, {t:"毎日探し物をしている", s:0}]
+      },
+      {
+        id: 'm3', cat: 'mental',
+        q: "自分の代わりがいないというプレッシャーで、3日以上の休みを取るのが怖いですか？",
+        opts: [{t:"安心して休める", s:10}, {t:"少し不安だが休める", s:5}, {t:"怖くて休めない", s:0}]
+      },
+      {
+        id: 'd3', cat: 'dx',
+        q: "ITツールを導入したいが、学習コストや設定を考えると動悸がしますか？",
+        opts: [{t:"楽しんで導入できる", s:10}, {t:"必要なら頑張れる", s:5}, {t:"拒絶反応が出る", s:0}]
+      }
+    ];
+
+    let currentIdx = 0;
+    let scores = {};
+
+    function showStep(id) {
+      document.querySelectorAll('.diag-step').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderQuestion() {
+      const q = questions[currentIdx];
+      const body = document.getElementById('quiz-body');
+      const progress = document.getElementById('overall-progress');
+      const stepInd = document.getElementById('step-indicator');
+      
+      stepInd.textContent = `Phase ${currentIdx + 1} / ${questions.length}`;
+      progress.style.width = `${((currentIdx + 1) / questions.length) * 100}%`;
+      
+      body.innerHTML = `
+        <div class="quiz-item">
+          <div class="item-label">${q.q}</div>
+          <div class="opt-btns">
+            ${q.opts.map((o, i) => `
+              <button class="opt-btn ${scores[q.id] === o.s ? 'active' : ''}" onclick="selectOpt('${q.id}', ${o.s})">${o.t}</button>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      
+      document.getElementById('backBtn').style.visibility = currentIdx > 0 ? 'visible' : 'hidden';
+      document.getElementById('nextBtn').textContent = currentIdx === questions.length - 1 ? '分析結果を生成する' : '次の問いへ';
+    }
+
+    window.selectOpt = (id, s) => {
+      scores[id] = s;
+      renderQuestion();
+      setTimeout(() => {
+        if (currentIdx < questions.length - 1) {
+          currentIdx++;
+          renderQuestion();
+        } else {
+          showResult();
+        }
+      }, 400);
+    };
+
+    function showResult() {
+      showStep('step-result');
+      
+      let mTotal = 0, dTotal = 0;
+      questions.forEach(q => {
+        if (q.cat === 'mental') mTotal += scores[q.id] || 0;
+        else dTotal += scores[q.id] || 0;
+      });
+
+      const mPct = (mTotal / 30) * 100;
+      const dPct = (dTotal / 30) * 100;
+
+      setTimeout(() => {
+        document.getElementById('mental-bar').style.width = mPct + '%';
+        document.getElementById('dx-bar').style.width = dPct + '%';
+      }, 500);
+
+      const rankEl = document.getElementById('res-rank');
+      const titleEl = document.getElementById('res-title');
+      const descEl = document.getElementById('res-desc');
+      const adviceEl = document.getElementById('advice-content');
+
+      if (mPct >= 70 && dPct >= 70) {
+        rankEl.textContent = "Rank: Equilibrium";
+        titleEl.textContent = "調和：心と技術が共鳴しています";
+        descEl.textContent = "あなたは技術を味方につけ、心に十分な余白を持てれています。現状を維持しつつ、さらに高度なAI活用で「自分にしかできない創造的活動」を広げるフェーズです。";
+        adviceEl.innerHTML = "素晴らしいバランスです。和-Nodeからは、さらなる余白を生むための「最新AIの伴走」を提案できます。より抽象度の高い課題解決へシフトしましょう。";
+      } else if (mPct >= 70 && dPct < 70) {
+        rankEl.textContent = "Rank: Potential";
+        titleEl.textContent = "潜在：強靭な精神力が技術不足をカバーしています";
+        descEl.textContent = "精神的なタフさで日々の非効率を乗り越えていますが、これは『気力の前借り』状態です。技術的な段差を解消するだけで、あなたの爆発的な飛躍が期待できます。";
+        adviceEl.innerHTML = "あなたはもっと楽をしていいはずです。コピペや情報探しに費やしている時間は、本来あなたの情熱が注がれるべき場所ではありません。小さな自動化から「技術への信頼」を築きましょう。";
+      } else if (mPct < 70 && dPct >= 70) {
+        rankEl.textContent = "Rank: Mechanical";
+        titleEl.textContent = "機械：効率化の果てに、心が置き去りになっています";
+        descEl.textContent = "仕組みは整っていますが、経営の楽しさやワクワク感が薄れている可能性があります。効率のための効率ではなく、あなたの『想い』を再定義するタイミングです。";
+        adviceEl.innerHTML = "ツールは完璧ですが、そのツールを使う『あなた』の心が疲弊しています。一度立ち止まり、カウンセリング的なアプローチで『なぜこの事業を始めたのか』を紐解く時間が必要です。";
+      } else {
+        rankEl.textContent = "Rank: Crisis";
+        titleEl.textContent = "危機：心と技術の両面で、摩擦が生じています";
+        descEl.textContent = "非効率な作業が心を削り、心の疲れが新しい技術への挑戦を阻む。この悪循環を断切るには、第三者の視点による「全方位の整理」が不可欠です。";
+        adviceEl.innerHTML = "今、一番必要なのは『止まる勇気』です。複雑に絡まった糸を一本ずつ解くように、技術の整理と心の整理を同時に行いましょう。和-Nodeがその「最初の糸口」になります。";
+      }
+    }
+
+    function initDiagnosis() {
+      const startBtn = document.getElementById('startBtn');
+      if (startBtn) {
+        startBtn.addEventListener('click', () => {
+          showStep('step-quiz');
+          renderQuestion();
+        });
+      }
+      
+      const retryBtn = document.getElementById('retryBtn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => location.reload());
+      }
+      
+      const backBtn = document.getElementById('backBtn');
+      if (backBtn) {
+        backBtn.addEventListener('click', () => {
+          if (currentIdx > 0) {
+            currentIdx--;
+            renderQuestion();
+          }
+        });
+      }
+      
+      const nextBtn = document.getElementById('nextBtn');
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          if (currentIdx < questions.length - 1) {
+            currentIdx++;
+            renderQuestion();
+          } else {
+            showResult();
+          }
+        });
+      }
+    }
+
+    document.addEventListener('astro:page-load', initDiagnosis);
+</script>

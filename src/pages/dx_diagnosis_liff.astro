@@ -257,7 +257,7 @@ import LiffLayout from '../layouts/LiffLayout.astro';
       .catch((err) => { alert("送信に失敗しました。"); });
     }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    function initLiffApp() {
         // LIFF Init
         if (typeof liff !== 'undefined') {
             liff.init({
@@ -300,5 +300,7 @@ import LiffLayout from '../layouts/LiffLayout.astro';
         document.querySelectorAll('.quiz-options button').forEach(btn => {
             btn.onclick = () => nextQuestion(btn.getAttribute('data-score'));
         });
-    });
+    }
+
+    document.addEventListener('astro:page-load', initLiffApp);
 </script>
