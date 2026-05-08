@@ -9,7 +9,7 @@ import AvailabilityStatus from '../components/AvailabilityStatus.astro';
       <div class="container">
         <span class="eyebrow">Contact</span>
         <h1>心と技術を、<br/><span class="accent-text">結ぶ窓口。</span></h1>
-        <p class="lead">制作のご依頼、AI活用の相談、法人メンタル支援など、<br/>どのような内容でもお気軽にお聞かせください。</p>
+        <p class="lead">あなたの想いを、形にする第一歩。<br/>今の状況を、そのままお聞かせください。</p>
       </div>
     </header>
 
@@ -32,7 +32,7 @@ import AvailabilityStatus from '../components/AvailabilityStatus.astro';
           <div class="line-card">
             <h3>LINEでのご相談</h3>
             <p>「まずはチャットで軽く聞きたい」という方は、公式LINEもご利用いただけます。</p>
-            <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="line-btn">
+            <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="line-btn shine-effect">
               <img src="https://vignette.wikia.nocookie.net/line/images/b/bb/Line_logo.png/revision/latest?cb=20150524021545" alt="LINE" class="line-icon" style="filter: brightness(0) invert(1); width: 24px; height: 24px;" />
               LINEで相談する
             </a>
@@ -42,6 +42,10 @@ import AvailabilityStatus from '../components/AvailabilityStatus.astro';
         <!-- Form Column -->
         <section class="form-section">
           <div class="glass-panel">
+            <div class="form-intro" style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--line);">
+              <p style="font-weight: 800; color: var(--accent); margin-bottom: 8px;">今の状況を、そのまま教えてください。</p>
+              <p class="small" style="color: var(--muted); line-height: 1.6;">「まだ何も決まっていない」という状態でも大丈夫です。あなたのペースで、一つずつ言葉にすることから始めましょう。</p>
+            </div>
             <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off">
               <input type="hidden" name="_next" value="https://wa-node.com/thanks" />
               <div class="form-group">
