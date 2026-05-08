@@ -324,7 +324,14 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <details><summary>予算が限られているのですが、相談だけでもいいですか？</summary><p>はい、ご相談いただけます。まずは問題を「整理」することが解決への近道です。ご予算に合わせて、無理のない範囲で始められる最小限のステップを一緒に考えましょう。</p></details>
           <details><summary>心理導線Web制作とは何ですか？</summary><p>見た目だけでなく、訪問者の不安・迷い・行動心理をふまえて、読み進めやすく、問い合わせにつながりやすい流れを設計するWeb制作です。</p></details>
           <details><summary>全国対応していますか？</summary><p>はい、すべてのサービスがオンライン（Google Meet, Zoom, LINE等）で全国対応可能です。</p></details>
-          <details><summary>契約はどのように進めますか？</summary><p>クラウドサインによる電子契約を採用しています。郵送や印紙代の手間がなく、オンライン上で安全・スピーディーに締結が可能です。全国どこからでもご依頼いただけます。</p></details>
+          <details>
+            <summary>契約はどのように進めますか？</summary>
+            <p>クラウドサインによる電子契約を推奨しておりますが、従来の「紙とハンコ」による郵送での締結にも柔軟に対応しております。ご希望に合わせて最適な方法をお選びいただけますので、ご安心ください。</p>
+            <div class="faq-image-container">
+              <img src="/images/cloudsign-guide.png" alt="クラウドサインによる電子契約の流れ" class="faq-image" />
+              <p class="image-caption">※クリックで詳細なメリットと操作手順を確認できます</p>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -531,6 +538,30 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     transition: 0.3s;
   }
   .faq-list summary { font-weight: 800; cursor: pointer; outline: none; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+  .faq-list details p {
+    color: var(--muted);
+    line-height: 1.8;
+    margin-top: 15px;
+  }
+  .faq-image-container {
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+  }
+  .faq-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+  }
+  .image-caption {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 12px !important;
+  }
   .faq-list summary::after { content: "+"; font-size: 1.4rem; }
   .faq-list details[open] summary::after { content: "−"; }
 
