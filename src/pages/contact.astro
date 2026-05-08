@@ -27,6 +27,8 @@ import AvailabilityStatus from '../components/AvailabilityStatus.astro';
             </ul>
           </div>
 
+          <AvailabilityStatus />
+
           <div class="line-card">
             <h3>LINEでのご相談</h3>
             <p>「まずはチャットで軽く聞きたい」という方は、公式LINEもご利用いただけます。</p>
@@ -35,8 +37,6 @@ import AvailabilityStatus from '../components/AvailabilityStatus.astro';
               LINEで相談する
             </a>
           </div>
-
-          <AvailabilityStatus />
         </aside>
 
         <!-- Form Column -->
@@ -69,7 +69,7 @@ import AvailabilityStatus from '../components/AvailabilityStatus.astro';
 
               <div class="form-group">
                 <label for="message">メッセージ内容 <span class="required">必須</span></label>
-                <textarea id="message" name="message" rows="6" required placeholder="ご相談内容の詳細や、現状の課題などをご記入ください。"></textarea>
+                <textarea id="message" name="message" rows="6" required placeholder="ご相談内容の詳細や、現状の課題をご記入ください。&#13;&#10;希望日時がある場合は「第一希望：○月○日 10:00〜」のようにご記入いただけるとスムーズです。"></textarea>
               </div>
 
               <div class="form-consent">
