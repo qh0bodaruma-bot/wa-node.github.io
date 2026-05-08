@@ -29,7 +29,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           二つの相関関係を解き明かし、あなたが本来のパフォーマンスを<br />
           取り戻すための「整え方」を導き出します。
         </p>
-        <button class="primary-btn pulse" id="startBtn">静かに診断を始める</button>
+        <button class="primary-btn pulse" id="startBtn">自分と向き合い、診断を始める</button>
       </div>
 
       <!-- Step 1-3: Quiz Steps -->
@@ -161,9 +161,40 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .quiz-item:hover { transform: scale(1.02); box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
     .item-label { font-size: 1.2rem; font-weight: 800; color: var(--deep-navy); margin-bottom: 15px; text-align: center; }
     
-    .opt-btns { display: flex; gap: 12px; justify-content: center; }
-    .opt-btn { padding: 12px 24px; border-radius: 12px; border: 1px solid #eee; background: #f9f9f9; cursor: pointer; transition: 0.2s; font-weight: 700; font-size: 0.9rem; }
-    .opt-btn.active { background: var(--deep-navy); color: #fff; border-color: var(--deep-navy); }
+    .opt-btns { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 500px; margin: 30px auto 0; }
+    .opt-btn { 
+      padding: 20px 30px; 
+      border-radius: 20px; 
+      border: 2px solid #eee; 
+      background: #fff; 
+      cursor: pointer; 
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); 
+      font-weight: 700; 
+      font-size: 1.1rem; 
+      color: var(--deep-navy);
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .opt-btn:hover {
+      border-color: var(--gold-accent);
+      background: #fffcf8;
+      transform: translateX(5px);
+    }
+    .opt-btn.active { 
+      background: var(--deep-navy); 
+      color: #fff; 
+      border-color: var(--deep-navy);
+      box-shadow: 0 10px 20px rgba(26, 42, 58, 0.2);
+    }
+    .opt-btn::before {
+      content: "●";
+      margin-right: 15px;
+      color: var(--gold-accent);
+      font-size: 0.8rem;
+      opacity: 0.5;
+    }
+    .opt-btn.active::before { color: #fff; opacity: 1; }
 
     .progress-bar-wrap { height: 8px; background: #eee; border-radius: 999px; overflow: hidden; margin-top: 10px; }
     .progress-bar-fill { height: 100%; background: var(--gold-accent); width: 0%; transition: width 0.8s ease; }

@@ -9,8 +9,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       <div class="hero-inner">
         <div class="hero-content">
           <div class="anniversary-banner reveal">
-            <span class="anniversary-badge">ANNIVERSARY</span>
-            <p><strong>起業記念キャンペーン実施中！</strong><br />制作メニュー <strong>20% OFF</strong> <span style="font-size: 0.75rem; opacity: 0.8; margin-left: 10px;">（先着5名様限定・2026年7月31日まで） ※相談・保守・月額・実費は対象外</span></p>
+            <strong class="ann-title">起業記念キャンペーン実施中！</strong>
+            <div class="ann-body">
+              <span class="anniversary-badge">ANNIVERSARY</span>
+              <span>制作メニュー <strong>20% OFF</strong> <span style="font-size: 0.75rem; opacity: 0.8; margin-left: 6px;">（先着5名様限定・2026年7月31日まで） ※相談・保守・月額・実費は対象外</span></span>
+            </div>
           </div>
           <span class="eyebrow">The Art of Order & Empathy</span>
           <h1>整う。進む。<br />あなたの想いを、形にする。</h1>
@@ -573,14 +576,29 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 
     /* Anniversary Styles */
     .anniversary-banner {
-      display: inline-block;
-      background: rgba(216, 185, 140, 0.18); /* 不透明度を上げて文字をくっきりさせる */
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      background: rgba(216, 185, 140, 0.18);
       border: 1px solid var(--accent2);
-      padding: 12px 24px;
+      padding: 12px 28px;
       border-radius: 999px;
       margin-bottom: 32px;
-      backdrop-filter: blur(6px); /* ぼかしを少し抑えて滲みを軽減 */
+      backdrop-filter: blur(6px);
       -webkit-font-smoothing: antialiased;
+    }
+    .ann-title {
+      font-size: 0.95rem;
+      color: var(--text);
+      font-weight: 800;
+    }
+    .ann-body {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: var(--text);
     }
     .anniversary-badge {
       background: var(--accent2);
@@ -589,17 +607,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       font-weight: 800;
       padding: 2px 10px;
       border-radius: 4px;
-      margin-right: 10px;
-      vertical-align: middle;
       letter-spacing: 0.1em;
+      white-space: nowrap;
+      flex-shrink: 0;
     }
-    .anniversary-banner p {
-      display: inline-block;
-      margin: 0;
-      font-size: 0.95rem;
-      color: var(--text);
-    }
-    .anniversary-banner strong { color: var(--accent); }
+    .ann-body strong { color: var(--accent); }
 
     .price-card.special { border-color: var(--accent2); background: #fffcf8; position: relative; overflow: hidden; }
     .special-tag {
