@@ -1,0 +1,218 @@
+---
+// AvailabilityStatus.astro
+// 管理用のデータ（ここを書き換えるだけで更新可能）
+const schedule = {
+  nextAvailableDate: "5月13日（水）",
+  productionStatus: "5月下旬着手より受付中",
+  weekly: [
+    { day: "月", morning: "busy", afternoon: "busy", evening: "ok" },
+    { day: "火", morning: "busy", afternoon: "ok", evening: "ok" },
+    { day: "水", morning: "ok", afternoon: "ok", evening: "busy" },
+    { day: "木", morning: "busy", afternoon: "busy", evening: "ok" },
+    { day: "金", morning: "ok", afternoon: "ok", evening: "ok" },
+    { day: "土", morning: "ok", afternoon: "busy", evening: "busy" },
+    { day: "日", morning: "busy", afternoon: "busy", evening: "busy" },
+  ]
+};
+
+const getStatusIcon = (status) => {
+  if (status === 'ok') return '◎';
+  if (status === 'few') return '△';
+  return 'ー';
+};
+
+const getStatusClass = (status) => {
+  return `status-icon ${status}`;
+};
+---
+
+<div class="availability-status glass-panel">
+  <div class="status-header">
+    <div class="status-badge">Current Status</div>
+    <h3>現在の予約・相談状況</h3>
+    <p class="status-update-date">最終更新：2026年5月8日</p>
+  </div>
+
+  <div class="summary-cards">
+    <div class="summary-card">
+      <span class="label">最短の相談可能日</span>
+      <span class="value">{schedule.nextAvailableDate}</span>
+    </div>
+    <div class="summary-card">
+      <span class="label">制作着手時期</span>
+      <span class="value">{schedule.productionStatus}</span>
+    </div>
+  </div>
+
+  <div class="schedule-table-wrap">
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th></th>
+          {schedule.weekly.map(s => <th>{s.day}</th>)}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="time-label">午前</td>
+          {schedule.weekly.map(s => <td class={getStatusClass(s.morning)}>{getStatusIcon(s.morning)}</td>)}
+        </tr>
+        <tr>
+          <td class="time-label">午後</td>
+          {schedule.weekly.map(s => <td class={getStatusClass(s.afternoon)}>{getStatusIcon(s.afternoon)}</td>)}
+        </tr>
+        <tr>
+          <td class="time-label">夜間</td>
+          {schedule.weekly.map(s => <td class={getStatusClass(s.evening)}>{getStatusIcon(s.evening)}</td>)}
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="legend">
+    <span>◎：空きあり</span>
+    <span>△：残りわずか</span>
+    <span>ー：受付終了</span>
+  </div>
+
+  <p class="status-note">
+    ※夜間（19:00〜22:00）のご相談も承っております。<br />
+    ※お急ぎの場合は、フォームよりその旨をお知らせください。
+  </p>
+</div>
+
+<style>
+  .availability-status {
+    padding: 40px;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--line);
+    border-radius: 32px;
+    backdrop-filter: blur(10px);
+  }
+
+  .status-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--accent2);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 900;
+    border-radius: 999px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .availability-status h3 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+
+  .status-update-date {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .summary-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+
+  .summary-card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+  }
+
+  .summary-card .label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--muted);
+    font-weight: 800;
+    margin-bottom: 6px;
+  }
+
+  .summary-card .value {
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--accent);
+  }
+
+  .schedule-table-wrap {
+    overflow-x: auto;
+    background: #fff;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    margin-bottom: 20px;
+  }
+
+  .schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  .schedule-table th, .schedule-table td {
+    padding: 15px 10px;
+    border: 1px solid #f0f0f0;
+  }
+
+  .schedule-table th {
+    background: #fdfaf7;
+    font-weight: 800;
+    color: var(--muted);
+  }
+
+  .time-label {
+    font-weight: 800;
+    color: var(--muted);
+    background: #fdfaf7;
+    width: 60px;
+  }
+
+  .status-icon {
+    font-weight: 900;
+  }
+
+  .status-icon.ok { color: var(--accent2); }
+  .status-icon.few { color: #f39c12; }
+  .status-icon.busy { color: #ccc; }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .status-note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.6;
+    text-align: center;
+    margin: 0;
+  }
+
+  @media (max-width: 480px) {
+    .summary-cards { grid-template-columns: 1fr; }
+    .availability-status { padding: 30px 20px; }
+  }
+</style>
