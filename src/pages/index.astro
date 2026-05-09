@@ -1,9 +1,42 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ConsultationFlow from '../components/ConsultationFlow.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "和-Node (wa-node)",
+  "url": "https://www.wa-node.com/",
+  "image": "https://www.wa-node.com/images/ogp.png",
+  "description": "心理学・ICT・AIを活用したWeb制作、業務改善、AI導入、ブランディング支援を行うコンサルティングサービスです。",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "可児市",
+    "addressRegion": "岐阜県",
+    "addressCountry": "JP"
+  },
+  "areaServed": [
+    {
+      "@type": "Country",
+      "name": "Japan"
+    }
+  ],
+  "serviceType": [
+    "心理導線Web制作",
+    "ICTコンサルティング",
+    "AI活用支援",
+    "個人・法人メンタル支援"
+  ],
+  "founder": {
+    "@type": "Person",
+    "name": "高野 紘純",
+    "url": "https://www.wa-node.com/#about"
+  }
+};
 ---
 
 <BaseLayout>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <main>
     <section class="hero">
       <div class="hero-inner">
@@ -16,8 +49,8 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             </div>
           </div>
           <span class="eyebrow">The Art of Order & Empathy</span>
-          <h1>整う。進む。<br />あなたの想いを、形にする。</h1>
-          <p class="lead">心理学 × ICT × AI の視点で、「心理導線Web制作」・AI活用・相談窓口を統合。<br/>伝わらない、続かない、相談しづらい——そんな課題を、実務と心の両面から整えます。<br/><strong style="color: var(--accent2);">★起業記念：制作費・制作オプションすべて20% OFF実施中</strong></p>
+          <h1>心理学・ICT・AIで、<br />ビジネスを整えるWeb制作・コンサルティング</h1>
+          <p class="lead"><strong>整う。進む。あなたの想いを、形にする。</strong><br/>心理学 × ICT × AI の視点で、「心理導線Web制作」・AI活用・相談窓口を統合。<br/>伝わらない、続かない、相談しづらい——そんな課題を、実務と心の両面から整えます。<br/><strong style="color: var(--accent2);">★起業記念：制作費・制作オプションすべて20% OFF実施中</strong></p>
           <div class="hero-stats">
             <span style="font-weight:800; color:var(--accent2); font-size:1.1rem;">初回30分無料。診断・シミュレーター利用で合計最大60分まで無料。</span>
           </div>
