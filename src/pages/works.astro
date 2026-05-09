@@ -138,14 +138,18 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual">
               <img src="/portfolio-lp/images/hero_clinic.png" alt="クリニック・医療系LP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag works">制作実績（実案件）</span>
+              <span class="category-tag real">実案件</span>
             </div>
           </div>
           <div class="card-body">
             <div class="expert-label">Medical / Clinic</div>
             <h3>クリニック・医療系LP</h3>
             <p class="card-text">美容クリニック、歯科医院、心療内科など。薬機法や医療広告ガイドラインに配慮しつつ、患者様の安心感と信頼を両立させた設計です。</p>
-            <div class="small" style="margin-bottom:16px; color:var(--muted); line-height: 1.5;">※AIによる補助を含む制作物の法的適合性（薬機法等）は、必要に応じて確認観点を提示しますが、最終的にはご依頼主側での確認をお願いしております。</div>
+            <div class="case-details">
+              <div class="detail-item"><strong>担当範囲：</strong>構成設計 / LP制作 / 導線改善</div>
+              <div class="detail-item"><strong>工夫：</strong>医療広告ガイドラインに配慮し、過度な訴求を避けながら、カウンセリングへの心理的ハードルを下げる安心感を設計。</div>
+            </div>
+            <div class="small" style="margin-bottom:16px; color:var(--muted); line-height: 1.5; font-size: 0.75rem;">※AIによる補助を含む制作物の法的適合性（薬機法等）は、必要に応じて確認観点を提示しますが、最終的にはご依頼主側での確認をお願いしております。</div>
             <div class="card-footer">
               <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
               <a href="/portfolio-lp/lp_clinic.html" class="premium-link">作品を見る</a>
@@ -175,7 +179,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual">
               <img src="/portfolio-lp/images/hero_realestate.png" alt="不動産・建設・リフォームLP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag sample">デザインサンプル</span>
+              <span class="category-tag proposal">提案用サンプル</span>
             </div>
           </div>
           <div class="card-body">
@@ -193,7 +197,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual">
               <img src="/portfolio-lp/images/hero_lawyer.png" alt="士業・コンサルティング・教育系LP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag sample">デザインサンプル</span>
+              <span class="category-tag recon">非公開案件の再構成</span>
             </div>
           </div>
           <div class="card-body">
@@ -229,12 +233,16 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         <article class="work-card reveal" data-category="kdp">
             <div class="card-visual">
               <img src="/images/works-kdp.png" alt="Amazon KDP 出版実績" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag works">制作実績（実案件）</span>
+              <span class="category-tag real">実案件</span>
             </div>
           <div class="card-body">
             <div class="expert-label">Global Design</div>
             <h3>Amazon KDP 出版実績</h3>
             <p class="card-text">浮世絵や鳥獣戯画をモチーフにした、海外市場向け（US/FR）の書籍制作。表紙から内部構成まで、和の美しさを世界へ届けています。価格改定：$12.99 / €12.99 対応済み。</p>
+            <div class="case-details">
+              <div class="detail-item"><strong>担当範囲：</strong>企画 / 構成案作成 / 入稿支援</div>
+              <div class="detail-item"><strong>工夫：</strong>専門的な内容を「自分事」として捉えてもらえるよう、ターゲット心理に合わせた章立てと、読みやすさを重視したデザインを徹底。</div>
+            </div>
             <div class="card-footer">
               <span class="tech-tag">Global</span>
               <span class="tech-tag">Publishing</span>
@@ -246,12 +254,16 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         <article class="work-card reveal" data-category="system">
             <div class="card-visual">
               <img src="/images/works-system.png" alt="LINE カウンセリング予約システム" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag works">制作実績（実案件）</span>
+              <span class="category-tag real">実案件</span>
             </div>
           <div class="card-body">
             <div class="expert-label">System Build</div>
             <h3>LINE カウンセリング予約システム</h3>
             <p class="card-text">LINEアプリ内で完結する予約・決済・診断システム。ユーザーの日常的なツールを窓口にすることで、利用のハードルを下げ、利便性を向上させます。</p>
+            <div class="case-details">
+              <div class="detail-item"><strong>担当範囲：</strong>要件定義 / LIFF開発 / API連携</div>
+              <div class="detail-item"><strong>工夫：</strong>カウンセリング予約という心理的ハードルの高いアクションに対し、LINEの親しみやすさと直感的なUIを組み合わせ、離脱を最小限に。</div>
+            </div>
             <div class="card-footer">
               <div class="tech-stack"><span>#LIFF</span><span>#Node.js</span></div>
               <a href="/line_demo" class="premium-link">デモを見る</a>
@@ -262,12 +274,16 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         <article class="work-card reveal" data-category="system">
             <div class="card-visual">
               <img src="/images/works-automation.png" alt="AI・GAS 業務自動化事例" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag works">制作実績（実案件）</span>
+              <span class="category-tag real">実案件</span>
             </div>
           <div class="card-body">
             <div class="expert-label">System Build</div>
             <h3>AI・GAS 業務自動化事例</h3>
             <p class="card-text">ChatGPT APIやGoogle Apps Scriptを用いた業務効率化。現場の「手作業」を「自動」に変え、より価値のある仕事へ時間を創出します。</p>
+            <div class="case-details">
+              <div class="detail-item"><strong>担当範囲：</strong>業務フロー分析 / 自動化プログラム実装</div>
+              <div class="detail-item"><strong>工夫：</strong>単なる自動化ではなく、現場担当者がストレスなく使い続けられるよう、既存のスプレッドシート等のインターフェースを活かした設計。</div>
+            </div>
             <div class="card-footer">
               <div class="tech-stack"><span>#OpenAI</span><span>#GAS</span></div>
               <span class="card-link-placeholder">詳細相談はお問い合わせまで</span>
@@ -370,10 +386,27 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       font-size: 0.65rem; font-weight: 900; color: #fff;
       padding: 4px 12px; border-radius: 999px; letter-spacing: 0.1em;
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      z-index: 2;
     }
-    .category-tag.works { background: var(--tag-works); }
-    .category-tag.sample { background: var(--tag-sample); }
-    .category-tag.demo { background: var(--tag-demo); }
+    .category-tag.real { background: var(--accent2); color: #fff; }
+    .category-tag.demo { background: var(--tag-demo); color: #fff; }
+    .category-tag.sample { background: var(--tag-sample); color: #fff; }
+    .category-tag.proposal { background: #555; color: #fff; }
+    .category-tag.recon { background: #333; color: #fff; }
+
+    .case-details {
+      margin-top: -10px;
+      margin-bottom: 24px;
+      padding: 16px;
+      background: rgba(var(--accent-rgb), 0.05);
+      border-radius: 12px;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      border-left: 4px solid var(--accent);
+    }
+    .detail-item { margin-bottom: 8px; }
+    .detail-item:last-child { margin-bottom: 0; }
+    .detail-item strong { color: var(--accent); font-weight: 900; }
     .card-icon { font-size: 4rem; opacity: 0.8; }
 
     .card-body { padding: 32px; flex: 1; display: flex; flex-direction: column; }

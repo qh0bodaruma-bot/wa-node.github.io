@@ -2,7 +2,7 @@
 // AvailabilityStatus.astro
 // 管理用のデータ（ここを書き換えるだけで更新可能）
 const schedule = {
-  nextAvailableDate: "5月13日（水）",
+  nextAvailableDate: "現在、最短で5月中旬以降",
   productionStatus: "5月下旬着手より受付中",
   weekly: [
     { day: "月", morning: "busy", afternoon: "ok", evening: "ok" },
@@ -30,16 +30,16 @@ const getStatusClass = (status) => {
   <div class="status-header">
     <div class="status-badge">Current Status</div>
     <h3>現在の予約・相談状況</h3>
-    <p class="status-update-date">最終更新：2026年5月8日</p>
+    <p class="status-update-date">※状況は随時変動いたします。最新状況は公式LINEよりお問い合わせください。</p>
   </div>
 
   <div class="summary-cards">
     <div class="summary-card">
-      <span class="label">最短の相談可能日</span>
+      <span class="label">最短の相談可能日（目安）</span>
       <span class="value">{schedule.nextAvailableDate}</span>
     </div>
     <div class="summary-card">
-      <span class="label">制作着手時期</span>
+      <span class="label">制作着手時期（目安）</span>
       <span class="value">{schedule.productionStatus}</span>
     </div>
   </div>

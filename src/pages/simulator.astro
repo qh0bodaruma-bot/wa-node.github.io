@@ -21,7 +21,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="sim-desc">
         プランやオプションを自由に組み合わせて、概算の費用と納期を算出できます。<br />
         <span class="campaign-text">現在、<strong>起業記念キャンペーン（制作費 20% OFF）</strong> を自動適用中！</span><br />
-        <span style="font-size: 0.85rem; opacity: 0.8;">※毎月3名様限定・2026年7月31日まで / 相談・保守・月額・実費は対象外</span>
+        <span style="font-size: 0.85rem; opacity: 0.8;">※毎月3名様限定 / 2026年7月31日まで / 相談・保守・月額契約・外部実費は対象外</span>
       </p>
     </header>
 
@@ -178,8 +178,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <input type="checkbox" id="rushCheck" name="rush" value="1.5" data-days="-2" data-label="特急対応" />
               <div class="card-inner">
                 <div class="icon">🚀</div>
-                <div class="info"><b>【特急】特急納品</b></div>
-                <div class="price">×1.5</div>
+                <div class="info">
+                  <b>特急納品</b>
+                  <span>通常料金の1.5倍 / お急ぎ案件向け</span>
+                </div>
+                <div class="price">1.5倍</div>
               </div>
             </label>
           </div>
@@ -201,14 +204,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
           </div>
 
-          <div class="delivery-info">
-            <div class="info-item">
-              <span class="lbl">概算納期</span>
-              <span class="val" id="deliveryDays">約0営業日</span>
-            </div>
-            <div class="info-item campaign-row" id="campaignRow">
-              <span class="lbl">🎁 起業記念 20% OFF</span>
-              <span class="val" id="discountVal">-¥0</span>
+          <div id="resultPlaceholder" style="padding: 20px 0; text-align: center; color: #aaa; font-size: 0.9rem; line-height: 1.6;">
+            プランを選択すると、<br/>概算費用と納期が表示されます。
+          </div>
+          <div id="resultDetails" style="display: none;">
+            <div class="delivery-info">
+              <div class="info-item">
+                <span class="lbl">概算納期</span>
+                <span class="val" id="deliveryDays">約0営業日</span>
+              </div>
+              <div class="info-item campaign-row" id="campaignRow">
+                <span class="lbl">🎁 起業記念 20% OFF</span>
+                <span class="val" id="discountVal">-¥0</span>
+              </div>
             </div>
           </div>
 
@@ -256,7 +264,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       </div>
 
       <div class="cta-btns" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-        <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="primary-btn" style="text-decoration: none; width: fit-content; padding-left: 40px; padding-right: 40px;">LINEで60分相談を予約する</a>
+        <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="primary-btn" style="text-decoration: none; width: fit-content; padding-left: 40px; padding-right: 40px;">特典つきで60分相談する</a>
         <a href="/#consultation-flow" rel="noopener" class="primary-btn" style="background: none; border: 2px solid var(--sim-accent); color: var(--sim-accent); width: fit-content; padding-left: 40px; padding-right: 40px; text-decoration: none;">無料相談のステップを確認</a>
       </div>
     </section>
@@ -403,7 +411,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (rush && rush.checked) {
         subtotal *= 1.5;
         days = Math.max(2, Math.ceil(days * 0.7));
-        rows.push({ label: '特急納品(×1.5)', price: 'Rush' });
+        rows.push({ label: '特急対応 (1.5倍)', price: 'Rush' });
       }
 
       // Campaign
@@ -442,17 +450,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const offset = circumference - (pct * circumference);
       if(gauge) gauge.style.strokeDashoffset = offset;
 
+      const placeholder = document.getElementById('resultPlaceholder');
+      const details = document.getElementById('resultDetails');
+      if (total > 0) {
+        if(placeholder) placeholder.style.display = 'none';
+        if(details) details.style.display = 'block';
+      } else {
+        if(placeholder) placeholder.style.display = 'block';
+        if(details) details.style.display = 'none';
+      }
+
       document.getElementById('deliveryDays').textContent = `約${days}営業日`;
       document.getElementById('discountVal').textContent = `-${yen(discount)}`;
       
       const list = document.getElementById('breakdownList');
       if(list) {
-        list.innerHTML = rows.map(r => `
-          <div class="breakdown-row">
-            <span class="r-label">${r.label}</span>
-            <span class="r-price">${typeof r.price === 'number' ? yen(r.price) : r.price}</span>
-          </div>
-        `).join('');
+        if (rows.length === 0) {
+          list.innerHTML = '<div style="color: #666; font-size: 0.8rem; text-align: center; padding: 10px;">未選択</div>';
+        } else {
+          list.innerHTML = rows.map(r => `
+            <div class="breakdown-row">
+              <span class="r-label">${r.label}</span>
+              <span class="r-price">${typeof r.price === 'number' ? yen(r.price) : r.price}</span>
+            </div>
+          `).join('');
+        }
       }
     }
 
