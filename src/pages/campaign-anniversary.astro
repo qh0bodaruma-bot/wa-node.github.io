@@ -5,7 +5,7 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "起業記念20%OFFキャンペーン | 和-Node",
-  "description": "心理学・ICT・AIを統合したWeb制作「和-Node」の起業記念キャンペーン。制作メニュー・オプションすべて20%OFF。2026年7月31日まで。",
+  "description": "心理学・ICT・AIを統合したWeb制作「和-Node」の起業記念キャンペーン。全メニュー20%OFF。2026年7月31日まで。",
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [
@@ -18,49 +18,16 @@ const jsonLd = {
 
 <BaseLayout 
   title="【20%OFF】起業記念キャンペーン｜心理学・ICT・AIWeb制作｜和-Node" 
-  description="和-Nodeの起業記念。心理導線LP制作からAI・LINE自動化システム構築まで、全メニュー20%OFF。毎月先着3名様限定の特別オファー。"
+  description="和-Nodeの起業記念。全メニュー20%OFF。毎月先着3名様限定の特別オファー。"
 >
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
-  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   
   <div class="campaign-page">
-    <!-- Sakura Container -->
     <div class="sakura-container" id="sakura-container"></div>
-    <script is:inline>
-      function initPremiumEffects() {
-        // Sakura
-        const container = document.getElementById('sakura-container');
-        if (!container) return;
-        container.innerHTML = '';
-        const petalCount = 60;
-        for (let i = 0; i < petalCount; i++) {
-          const petal = document.createElement('div');
-          petal.className = 'petal';
-          petal.style.left = Math.random() * 100 + '%';
-          petal.style.width = Math.random() * 10 + 5 + 'px';
-          petal.style.height = petal.style.width;
-          petal.style.animationDuration = Math.random() * 5 + 5 + 's';
-          petal.style.animationDelay = Math.random() * 5 + 's';
-          container.appendChild(petal);
-        }
-
-        // Parallax
-        const bg = document.querySelector('.parallax-bg');
-        window.addEventListener('scroll', () => {
-          const scroll = window.pageYOffset;
-          if (bg) {
-            bg.style.transform = `translateY(${scroll * 0.4}px)`;
-          }
-        });
-      }
-      initPremiumEffects();
-      document.addEventListener('astro:page-load', initPremiumEffects);
-    </script>
-
-    <!-- Hero Section Upgrade -->
+    
     <section class="hero-campaign-premium">
       <div class="hero-key-visual">
-        <img src="/images/campaign-key-visual.png" alt="Anniversary Key Visual" class="parallax-bg" />
+        <img src="/images/campaign-key-visual.png" alt="" class="parallax-bg" />
         <div class="hero-overlay"></div>
       </div>
       <div class="container">
@@ -86,12 +53,11 @@ const jsonLd = {
       </div>
     </section>
 
-    <!-- Value Section -->
     <section class="value-section">
       <div class="container">
         <div class="section-title reveal">
           <span class="eyebrow">Why Wa-Node?</span>
-          <h2>単なる制作ではない、<br/>和-Nodeだけの「三位一体」設計</h2>
+          <h2>和-Nodeだけの「三位一体」設計</h2>
         </div>
         <div class="value-grid">
           <div class="value-card reveal">
@@ -99,12 +65,12 @@ const jsonLd = {
             <h3>心理学の視点</h3>
             <p>不安を煽るのではなく「安心して選べる」導線。訪問者の心を整え、自然な行動を促します。</p>
           </div>
-          <div class="value-card reveal" style="transition-delay: 0.1s;">
+          <div class="value-card reveal">
             <div class="v-icon">⚡</div>
             <h3>ICT/AIの視点</h3>
             <p>LINE・ChatGPT連携・自動化。24時間働き、あなたの時間を創り出す仕組みを構築します。</p>
           </div>
-          <div class="value-card reveal" style="transition-delay: 0.2s;">
+          <div class="value-card reveal">
             <div class="v-icon">♿</div>
             <h3>当事者の視点</h3>
             <p>車いすユーザーとしてのバリアフリー設計。たった1ピクセルの「不親切」も逃しません。</p>
@@ -113,554 +79,160 @@ const jsonLd = {
       </div>
     </section>
 
-    <!-- Plan Section -->
     <section class="plan-section" id="plans">
       <div class="container">
         <div class="section-title reveal">
           <span class="eyebrow">Special Plans</span>
           <h2>キャンペーン限定・3つの提案</h2>
-          <p>制作費だけでなく、高度なオプションまで一律20%OFFが適用されます。</p>
         </div>
-
         <div class="plan-grid">
-          <!-- Plan A -->
           <div class="plan-card reveal">
-            <div class="p-header">
-              <span class="p-tag">整える</span>
-              <h3>心理導線・速戦LP案</h3>
-            </div>
-            <div class="p-price">
-              <span class="p-old">60,000円</span>
-              <span class="p-new">48,000<small>円</small></span>
-            </div>
-            <ul class="p-features">
-              <li>心理導線に基づいた構成設計</li>
-              <li>スマホ最適化レスポンシブ</li>
-              <li>基本SEO設定</li>
-              <li>無料たたき台作成（1P）</li>
-            </ul>
+            <div class="p-header"><h3>心理導線・速戦LP案</h3></div>
+            <div class="p-price"><span class="p-old">60,000円</span><span class="p-new">48,000<small>円</small></span></div>
+            <ul class="p-features"><li>心理導線に基づいた構成設計</li><li>スマホ最適化レスポンシブ</li><li>基本SEO設定</li><li>無料たたき台作成（1P）</li></ul>
             <a href="/anniversary-speed/" class="btn-outline">この案を詳しく見る</a>
           </div>
-
-          <!-- Plan B -->
           <div class="plan-card featured reveal">
             <div class="p-featured-badge">人気 No.1</div>
-            <div class="p-header">
-              <span class="p-tag">進む</span>
-              <h3>ICT・自動化フル強化案</h3>
-            </div>
-            <div class="p-price">
-              <span class="p-old">150,000円</span>
-              <span class="p-new">120,000<small>円</small></span>
-            </div>
-            <ul class="p-features">
-              <li><strong>Plan A の全内容</strong></li>
-              <li>LINE連携 / フォーム自動化</li>
-              <li>オリジナル図解・イラスト制作</li>
-              <li>高度な内部SEO対策</li>
-              <li class="plus">特典：LINEリッチメニュー作成</li>
-            </ul>
+            <div class="p-header"><h3>ICT・自動化フル強化案</h3></div>
+            <div class="p-price"><span class="p-old">150,000円</span><span class="p-new">120,000<small>円</small></span></div>
+            <ul class="p-features"><li><strong>Plan A の全内容</strong></li><li>LINE連携 / フォーム自動化</li><li>オリジナル図解・イラスト制作</li><li>高度な内部SEO対策</li></ul>
             <a href="/anniversary-automation/" class="btn-primary-gold">この案を詳しく見る</a>
           </div>
-
-          <!-- Plan C -->
           <div class="plan-card reveal">
-            <div class="p-header">
-              <span class="p-tag">和（む）</span>
-              <h3>和-Node 伴走型特注案</h3>
-            </div>
-            <div class="p-price">
-              <span class="p-old">250,000円</span>
-              <span class="p-new">200,000<small>円</small></span>
-            </div>
-            <ul class="p-features">
-              <li><strong>Plan B の全内容</strong></li>
-              <li>AI活用・ChatGPT導入支援</li>
-              <li>3ヶ月の継続並走コンサル</li>
-              <li>法人メンタル窓口セットアップ</li>
-              <li class="plus">特典：運用保守3ヶ月無料</li>
-            </ul>
+            <div class="p-header"><h3>和-Node 伴走型特注案</h3></div>
+            <div class="p-price"><span class="p-old">250,000円</span><span class="p-new">200,000<small>円</small></span></div>
+            <ul class="p-features"><li><strong>Plan B の全内容</strong></li><li>AI活用・ChatGPT導入支援</li><li>3ヶ月の継続並走コンサル</li><li>法人メンタル窓口セットアップ</li></ul>
             <a href="/anniversary-premium/" class="btn-outline">この案を詳しく見る</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Option Heavy Showcase -->
-    <section class="option-showcase">
-      <div class="container">
-        <div class="showcase-box reveal">
-          <h2>「オプション盛り盛り」で<br class="sp-only"/>あなたの理想をすべて叶える</h2>
-          <p>今回のキャンペーンは、制作本体だけでなく**「あったら嬉しいオプション」もすべて20%OFF**です。和-Nodeが提供できる「盛り盛り」の技術をご覧ください。</p>
-          
-          <div class="showcase-grid">
-            <div class="s-item">
-              <h4>ChatGPT連携</h4>
-              <p>お問い合わせ内容をAIが自動要約。返信案まで生成する「超効率」の仕組み。</p>
-            </div>
-            <div class="s-item">
-              <h4>LINE Mini App</h4>
-              <p>アプリ不要でスマホに常駐。予約や会員証、診断ツールをLINE内で完結。</p>
-            </div>
-            <div class="s-item">
-              <h4>心理テスト・診断ツール</h4>
-              <p>ユーザーが楽しみながら価値を知る、成約率を底上げする「診断型」コンテンツ。</p>
-            </div>
-            <div class="s-item">
-              <h4>バリアフリー診断・改善</h4>
-              <p>アクセシビリティのプロが、あらゆる人が使いやすい「真の親切」を実装。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CEO Section -->
-    <section class="ceo-message">
-      <div class="container">
-        <div class="ceo-card reveal">
-          <div class="ceo-image">
-            <img src="/images/avatar.png" alt="代表 高野紘純" />
-          </div>
-          <div class="ceo-text">
-            <span class="eyebrow">Message</span>
-            <h3>「技術の前に、心がある。」<br/>その信念を、カタチにしました。</h3>
-            <p>起業から今日まで、多くの方の「想い」に触れてきました。ITは冷たい道具ではなく、あなたの想いを乗せて遠くへ運ぶ「船」であるべきです。このキャンペーンが、あなたの素晴らしい事業を、もっと多くの人に届けるきっかけになれば、これ以上の喜びはありません。まずは、ゆっくりお話ししましょう。</p>
-            <p class="ceo-name">和-Node 代表　<strong>高野 紘純</strong></p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA -->
     <section class="campaign-cta">
       <div class="container reveal">
         <h2>今の不安を、未来の安心に変える。</h2>
-        <p>制作依頼が固まっていなくても大丈夫です。「何を整理すべきか」を一緒に考えるところから始めましょう。</p>
-        <div class="cta-btns">
-          <a href="/contact" class="btn-main">キャンペーン価格で相談する</a>
-          <p class="cta-note">※無理な勧誘は一切ありません。ご安心ください。</p>
-        </div>
+        <a href="/contact" class="btn-main">キャンペーン価格で相談する</a>
       </div>
     </section>
   </div>
+
+  <script is:inline>
+    function initCampaign() {
+      const container = document.getElementById('sakura-container');
+      if (!container) return;
+      container.innerHTML = '';
+      for (let i = 0; i < 60; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.width = Math.random() * 10 + 5 + 'px';
+        petal.style.height = petal.style.width;
+        petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+        petal.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(petal);
+      }
+      const bg = document.querySelector('.parallax-bg');
+      window.addEventListener('scroll', () => {
+        if (bg) bg.style.transform = `translateY(${window.pageYOffset * 0.4}px)`;
+      });
+    }
+    initCampaign();
+    document.addEventListener('astro:page-load', initCampaign);
+  </script>
 </BaseLayout>
 
-<style>
+<style is:global>
   :root {
     --gold: #c5a059;
-    --gold-dark: #a38241;
     --gold-light: #e2c891;
     --campaign-bg: #fdfcf9;
     --text-deep: #2c2c2c;
-    --sakura: #ffebf0;
+    --sakura: #ffb7c5;
   }
-
+  body {
+    background: #fdfcf9 !important; /* Washi color */
+  }
+  body::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3FfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3F/filter%3E%3Frect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3F/svg%3E") !important;
+    opacity: 0.15 !important; /* Slightly stronger */
+    pointer-events: none !important;
+    z-index: 9999 !important;
+  }
   .campaign-page {
-    background: var(--campaign-bg);
-    color: var(--text-deep);
+    background: transparent !important;
+    color: var(--text-deep) !important;
     overflow-x: hidden;
     position: relative;
-    font-family: 'Shippori Mincho', serif;
+    font-family: 'Shippori Mincho', serif !important;
   }
-
-  /* Sakura & Texture (Enhanced for visibility) */
+  /* Remove old before if any */
+  .campaign-page::before { display: none !important; }
   .sakura-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 100; /* Bring to front */
+    position: fixed !important;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none !important;
+    z-index: 9998 !important;
   }
   .petal {
-    position: absolute;
-    background: #ffc0cb; /* More pink */
-    border-radius: 150% 0 150% 0;
-    opacity: 0.8;
-    filter: blur(1px);
+    position: absolute !important;
+    background: var(--sakura) !important;
+    border-radius: 150% 0 150% 0 !important;
+    opacity: 0.9 !important;
+    box-shadow: 0 0 5px white;
     animation: fall linear infinite;
   }
   @keyframes fall {
     0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 0.8; }
-    90% { opacity: 0.8; }
+    10% { opacity: 0.9; }
+    90% { opacity: 0.9; }
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
   }
-  .campaign-page::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3FfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3F/filter%3E%3Frect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3F/svg%3E");
-    opacity: 0.08; /* Doubled opacity */
-    pointer-events: none;
-    z-index: 110;
-  }
-
-  .premium-heading {
-    font-family: 'Shippori Mincho', serif;
-    font-weight: 800;
-    letter-spacing: 0.05em;
-    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  }
-
-  /* Hero Premium */
   .hero-campaign-premium {
     position: relative;
-    height: 100vh;
-    min-height: 850px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    overflow: hidden;
-    color: white;
+    height: 100vh; min-height: 800px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; color: white !important; text-align: center;
+    background: black;
   }
-
-  .hero-key-visual {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-  }
-
-  .parallax-bg {
-    width: 100%;
-    height: 130%;
-    object-fit: cover;
-    will-change: transform;
-  }
-
+  .hero-key-visual { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+  .parallax-bg { width: 100%; height: 130%; object-fit: cover; }
   .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%) !important;
     z-index: 2;
   }
-
-  .hero-content-wrap {
-    position: relative;
-    z-index: 3;
-    max-width: 1000px;
-    padding: 0 20px;
-  }
-
+  .hero-content-wrap { position: relative; z-index: 3; max-width: 1000px; padding: 20px; }
+  .premium-heading { font-size: clamp(2rem, 5vw, 3.5rem) !important; line-height: 1.2 !important; text-shadow: 0 5px 20px rgba(0,0,0,0.8) !important; font-weight: 800 !important; }
+  .eyebrow-red { color: #ff4d4d !important; font-size: 1.3rem !important; font-weight: 800 !important; display: block; margin-bottom: 15px; }
   .hero-price-box {
-    margin: 50px auto;
-    padding: 30px 60px;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255,255,255,0.2);
-    border-radius: 20px;
-    display: inline-block;
+    margin: 40px auto; padding: 30px 60px;
+    background: rgba(255,255,255,0.15) !important; backdrop-filter: blur(15px) !important;
+    border: 1px solid rgba(255,255,255,0.3) !important; border-radius: 20px;
   }
-
-  .price-label {
-    font-size: 0.9rem;
-    letter-spacing: 0.3em;
-    margin-bottom: 10px;
-    opacity: 0.8;
-  }
-
-  .price-value {
-    font-size: 5rem;
-    font-weight: 900;
-    line-height: 1;
-    color: var(--gold-light);
-  }
-
-  .price-value .unit { font-size: 2rem; margin-left: 10px; }
-
-  /* Existing Styles Refined */
-  .hero-campaign {
-    position: relative;
-    padding: 160px 0 120px;
-    text-align: center;
-    background: radial-gradient(circle at center, #ffffff 0%, #f9f7f2 100%);
-    border-bottom: 1px solid rgba(197, 160, 89, 0.2);
-    z-index: 3;
-  }
-
-  .hero-bg-accent {
-    position: absolute;
-    top: -100px;
-    right: -100px;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(197, 160, 89, 0.08) 0%, transparent 70%);
-    z-index: 0;
-  }
-
-  .anniversary-badge-large {
-    display: inline-flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 30px;
-    padding: 20px 40px;
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(197, 160, 89, 0.3);
-    border-radius: 100px;
-    box-shadow: 0 15px 35px rgba(197, 160, 89, 0.15);
-  }
-
-  .badge-text {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.8rem;
-    font-weight: 800;
-    color: var(--gold);
-    letter-spacing: 0.1em;
-  }
-
-  .badge-sub {
-    font-size: 0.8rem;
-    font-weight: 700;
-    color: var(--text-muted);
-    text-transform: uppercase;
-  }
-
-  .hero-campaign h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
-    line-height: 1.2;
-    margin-bottom: 24px;
-    font-weight: 800;
-  }
-
-  .eyebrow-red {
-    font-size: 1.2rem;
-    color: #d14d3a;
-    font-weight: 800;
-    display: block;
-    margin-bottom: 10px;
-  }
-
-  .hero-price {
-    font-size: 1.8rem;
-    font-weight: 800;
-    margin-bottom: 10px;
-  }
-
-  .hero-price .highlight {
-    color: #d14d3a;
-    font-size: 2.4rem;
-    text-decoration: underline;
-    text-underline-offset: 8px;
-  }
-
-  .hero-limit {
-    font-size: 1.1rem;
-    color: var(--muted);
-    margin-bottom: 40px;
-  }
-
-  .hero-btns {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-  }
-
-  /* Plan Cards */
-  .plan-section { padding: 100px 0; }
-
-  .plan-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 30px;
-    margin-top: 60px;
-  }
-
+  .price-value { font-size: 6rem !important; font-weight: 900 !important; color: var(--gold-light) !important; text-shadow: 0 0 20px rgba(197,160,89,0.5); }
   .plan-card {
-    background: white;
-    padding: 40px 30px;
-    border-radius: 20px;
-    border: 1px solid var(--line);
-    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    background: white !important; padding: 40px; border-radius: 24px; border: 1px solid #eee;
+    transition: 0.4s; display: flex; flex-direction: column; position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
   }
-
   .plan-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(197, 160, 89, 0.2), inset 0 0 20px rgba(197, 160, 89, 0.1);
-    border-color: var(--gold);
+    transform: translateY(-15px) !important;
+    box-shadow: 0 30px 60px rgba(197, 160, 89, 0.3), inset 0 0 30px rgba(197, 160, 89, 0.2) !important;
+    border-color: var(--gold) !important;
   }
-
-  .plan-card.featured {
-    border: 3px solid var(--gold);
-    background: #fffefb;
-    box-shadow: 0 0 30px rgba(197, 160, 89, 0.15);
-    animation: pulse-gold 4s infinite;
+  .plan-card.featured { border: 4px solid var(--gold) !important; animation: pulse-glow 3s infinite !important; }
+  @keyframes pulse-glow {
+    0%, 100% { box-shadow: 0 0 20px rgba(197, 160, 89, 0.2); }
+    50% { box-shadow: 0 0 50px rgba(197, 160, 89, 0.5); }
   }
-
-  @keyframes pulse-gold {
-    0% { box-shadow: 0 0 30px rgba(197, 160, 89, 0.15); }
-    50% { box-shadow: 0 0 50px rgba(197, 160, 89, 0.3); }
-    100% { box-shadow: 0 0 30px rgba(197, 160, 89, 0.15); }
-  }
-
-  .p-featured-badge {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--gold);
-    color: white;
-    padding: 5px 20px;
-    border-radius: 50px;
-    font-weight: 800;
-    font-size: 0.9rem;
-  }
-
-  .p-tag {
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: var(--gold);
-    background: rgba(197, 160, 89, 0.1);
-    padding: 4px 12px;
-    border-radius: 4px;
-    display: inline-block;
-    margin-bottom: 10px;
-  }
-
-  .p-price {
-    margin: 24px 0;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .p-old {
-    font-size: 1rem;
-    color: var(--muted);
-    text-decoration: line-through;
-  }
-
-  .p-new {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #d14d3a;
-  }
-
-  .p-new small { font-size: 1rem; }
-
-  .p-features {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 40px;
-    flex: 1;
-  }
-
-  .p-features li {
-    padding: 12px 0;
-    border-bottom: 1px solid #f0f0f0;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .p-features li::before { content: '✓'; color: var(--gold); font-weight: 800; }
-  .p-features li.plus { color: var(--gold); font-weight: 700; background: #fff9f0; padding: 12px; border-radius: 8px; border-bottom: none; }
-  .p-features li.plus::before { content: '🎁'; }
-
-  /* Buttons */
-  .btn-primary-gold {
-    background: var(--gold);
-    color: white;
-    padding: 18px 36px;
-    border-radius: 50px;
-    font-weight: 800;
-    transition: 0.3s;
-    text-decoration: none;
-  }
-
-  .btn-primary-gold:hover {
-    background: var(--gold-dark);
-    transform: scale(1.05);
-  }
-
-  .btn-secondary-white {
-    background: white;
-    color: var(--gold);
-    border: 2px solid var(--gold);
-    padding: 16px 36px;
-    border-radius: 50px;
-    font-weight: 800;
-    transition: 0.3s;
-    text-decoration: none;
-  }
-
-  .btn-outline {
-    border: 2px solid var(--gold);
-    color: var(--gold);
-    text-align: center;
-    padding: 14px;
-    border-radius: 50px;
-    font-weight: 800;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-
-  .btn-outline:hover { background: var(--gold); color: white; }
-
-  /* Showcase */
-  .option-showcase { background: #1a1a1a; color: white; padding: 120px 0; }
-  
-  .showcase-box {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 60px;
-    border-radius: 40px;
-    backdrop-filter: blur(10px);
-  }
-
-  .showcase-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 40px;
-    margin-top: 60px;
-  }
-
-  .s-item h4 { color: var(--gold-light); font-size: 1.2rem; margin-bottom: 12px; border-bottom: 1px solid var(--gold); padding-bottom: 8px; display: inline-block; }
-  .s-item p { font-size: 0.9rem; opacity: 0.8; line-height: 1.6; }
-
-  /* CTA */
-  .campaign-cta {
-    padding: 120px 0;
-    text-align: center;
-    background: var(--gold);
-    color: white;
-  }
-
-  .btn-main {
-    display: inline-block;
-    background: white;
-    color: var(--gold);
-    padding: 24px 60px;
-    border-radius: 100px;
-    font-size: 1.4rem;
-    font-weight: 900;
-    text-decoration: none;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-    transition: 0.3s;
-    margin-top: 40px;
-  }
-
-  .btn-main:hover { transform: translateY(-5px); box-shadow: 0 20px 60px rgba(0,0,0,0.2); }
-  .cta-note { margin-top: 20px; font-size: 0.9rem; opacity: 0.9; }
-
-  @media (max-width: 768px) {
-    .hero-btns { flex-direction: column; padding: 0 40px; }
-    .showcase-box { padding: 40px 20px; }
-  }
+  .btn-primary-gold { background: var(--gold) !important; color: white !important; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: 900; display: inline-block; transition: 0.3s; }
+  .btn-primary-gold:hover { transform: scale(1.05); filter: brightness(1.1); }
+  .btn-outline { border: 2.5px solid var(--gold) !important; color: var(--gold) !important; padding: 15px; border-radius: 50px; text-decoration: none; text-align: center; font-weight: 800; transition: 0.3s; }
+  .btn-outline:hover { background: var(--gold); color: white !important; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+  .reveal { opacity: 1 !important; visibility: visible !important; }
 </style>
