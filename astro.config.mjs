@@ -1,9 +1,8 @@
 import { defineConfig } from 'astro/config';
-import sitemap from '@astrojs/sitemap';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.wa-node.com',
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  integrations: [], // 一時的にsitemapを無効化
 });
