@@ -22,7 +22,24 @@ const jsonLd = {
 >
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   
-  <main class="campaign-page">
+  <div class="campaign-page">
+    <!-- Sakura Container -->
+    <div class="sakura-container" id="sakura-container"></div>
+    <script>
+      const container = document.getElementById('sakura-container');
+      const petalCount = 30;
+      for (let i = 0; i < petalCount; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.width = Math.random() * 10 + 5 + 'px';
+        petal.style.height = petal.style.width;
+        petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+        petal.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(petal);
+      }
+    </script>
+
     <!-- Hero Section -->
     <section class="hero-campaign">
       <div class="hero-bg-accent"></div>
@@ -101,7 +118,6 @@ const jsonLd = {
               <li>スマホ最適化レスポンシブ</li>
               <li>基本SEO設定</li>
               <li>無料たたき台作成（1P）</li>
-              <li class="plus">特典：60分無料整理相談</li>
             </ul>
             <a href="/anniversary-speed/" class="btn-outline">この案を詳しく見る</a>
           </div>
@@ -207,7 +223,7 @@ const jsonLd = {
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </BaseLayout>
 
 <style>
@@ -217,21 +233,62 @@ const jsonLd = {
     --gold-light: #e2c891;
     --campaign-bg: #fdfcf9;
     --text-deep: #2c2c2c;
+    --sakura: #ffebf0;
   }
 
   .campaign-page {
     background: var(--campaign-bg);
     color: var(--text-deep);
     overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Sakura Petal Animation */
+  .sakura-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .petal {
+    position: absolute;
+    background: var(--sakura);
+    border-radius: 150% 0 150% 0;
+    opacity: 0.6;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Texture Overlay */
+  .campaign-page::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3FfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3F/filter%3E%3Frect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3F/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 2;
   }
 
   /* Hero */
   .hero-campaign {
     position: relative;
-    padding: 120px 0 100px;
+    padding: 160px 0 120px;
     text-align: center;
-    background: linear-gradient(135deg, #f9f7f2 0%, #ffffff 100%);
+    background: radial-gradient(circle at center, #ffffff 0%, #f9f7f2 100%);
     border-bottom: 1px solid rgba(197, 160, 89, 0.2);
+    z-index: 3;
   }
 
   .hero-bg-accent {
@@ -250,10 +307,12 @@ const jsonLd = {
     align-items: center;
     margin-bottom: 30px;
     padding: 20px 40px;
-    background: white;
-    border: 2px solid var(--gold);
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(197, 160, 89, 0.3);
     border-radius: 100px;
-    box-shadow: 0 10px 30px rgba(197, 160, 89, 0.1);
+    box-shadow: 0 15px 35px rgba(197, 160, 89, 0.15);
   }
 
   .badge-text {
@@ -334,12 +393,21 @@ const jsonLd = {
 
   .plan-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(197, 160, 89, 0.15);
+    box-shadow: 0 20px 50px rgba(197, 160, 89, 0.2), inset 0 0 20px rgba(197, 160, 89, 0.1);
+    border-color: var(--gold);
   }
 
   .plan-card.featured {
     border: 3px solid var(--gold);
     background: #fffefb;
+    box-shadow: 0 0 30px rgba(197, 160, 89, 0.15);
+    animation: pulse-gold 4s infinite;
+  }
+
+  @keyframes pulse-gold {
+    0% { box-shadow: 0 0 30px rgba(197, 160, 89, 0.15); }
+    50% { box-shadow: 0 0 50px rgba(197, 160, 89, 0.3); }
+    100% { box-shadow: 0 0 30px rgba(197, 160, 89, 0.15); }
   }
 
   .p-featured-badge {
