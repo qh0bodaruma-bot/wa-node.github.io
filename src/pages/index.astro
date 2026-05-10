@@ -83,7 +83,7 @@ const jsonLd = {
           <div class="hero-stats">
             <span style="font-weight:800; color:var(--accent2); font-size:1.1rem;">初回30分無料。診断・シミュレーター利用で合計最大60分まで無料。</span>
           </div>
-          <div class="btns" style="justify-content: flex-start; align-items: center; gap: 24px;">
+          <div class="btns" style="justify-content: flex-start; align-items: center; gap: 24px; margin-top: 40px;">
             <div class="cta-wrapper">
               <a class="btn" href="/contact">特典つきで60分相談する</a>
               <a href="/campaign-anniversary/" class="campaign-floating-badge">
@@ -705,10 +705,11 @@ const jsonLd = {
   .cta-wrapper {
     position: relative;
     display: inline-block;
+    margin-top: 15px; /* Added some space above */
   }
   .campaign-floating-badge {
     position: absolute;
-    top: -45px;
+    top: -38px; /* Lowered from -45px */
     left: 50%;
     transform: translateX(-50%);
     background: #d14d3a;
