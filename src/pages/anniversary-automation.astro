@@ -1,0 +1,173 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "【起業記念Plan B】ICT・自動化フル強化案 | 和-Node",
+  "description": "24時間働く営業マンを、あなたのWebサイトに。LINE連携・AI要約・自動予約をパッケージした最強のICT強化プラン。",
+};
+---
+
+<BaseLayout 
+  title="ICT活用・AI導入・LINE自動化（自動化プラン）｜起業記念20%OFF｜和-Node" 
+  description="Webサイトを単なる看板から「最強の営業ツール」へ。LINE連携・AI要約・自動予約システム構築がキャンペーン価格120,000円で。業務効率と成約率を同時に高めます。"
+>
+  <main class="plan-b-page">
+    <!-- Tech Hero -->
+    <section class="plan-hero dark">
+      <div class="tech-grid-bg"></div>
+      <div class="container">
+        <span class="plan-label blue">Plan B: Automation</span>
+        <h1>ICT活用・AI導入・LINE連携（自動化プラン）<br/><span style="font-size: 0.5em; display: block; opacity: 0.8; margin-top: 10px;">Webサイトを、24時間働く最強の営業マンへ。</span></h1>
+        <div class="campaign-price-tag blue">
+          <span class="label">起業記念 20% OFF</span>
+          <span class="price">¥120,000<small>(税別)</small></span>
+          <span class="old">通常 ¥150,000</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Automation Showcase -->
+    <section class="automation-showcase">
+      <div class="container">
+        <div class="showcase-header reveal">
+          <h2>「手作業」を「仕組み」に変える盛り盛りオプション</h2>
+          <p>Plan Bでは、WebサイトにICTとAIの力を注入し、あなたの自由な時間を創り出します。</p>
+        </div>
+
+        <div class="feature-rows">
+          <!-- LINE -->
+          <div class="f-row reveal">
+            <div class="f-text">
+              <span class="f-icon">💬</span>
+              <h3>LINE公式アカウント連携</h3>
+              <p>サイトからLINEへシームレスに誘導。予約、自動応答、プッシュ通知を組み合わせ、取りこぼしのない顧客体験を実現します。</p>
+            </div>
+            <div class="f-visual">
+              <div class="mockup-line">
+                <div class="msg">「予約ありがとうございます！」</div>
+                <div class="msg ai">AIが最適な日時を提案中...</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI -->
+          <div class="f-row reverse reveal">
+            <div class="f-text">
+              <span class="f-icon">🤖</span>
+              <h3>AIによる問い合わせ要約・返信支援</h3>
+              <p>ChatGPTを裏側で連携。届いたメールをAIが要約し、あなたのトーンに合わせた返信案を自動生成。管理の手間を激減させます。</p>
+            </div>
+            <div class="f-visual">
+              <div class="mockup-ai">
+                <div class="code-block">Input: 長いメール...</div>
+                <div class="code-block success">Summary: 3行で要約完了</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technical Specs -->
+    <section class="tech-specs">
+      <div class="container">
+        <h2 class="reveal">プロフェッショナルな技術スタック</h2>
+        <div class="spec-grid">
+          <div class="spec-card reveal">
+            <h4>高性能な基盤</h4>
+            <p>Astro / Next.js を採用。爆速の読み込み速度で、離脱率を極限まで下げます。</p>
+          </div>
+          <div class="spec-card reveal">
+            <h4>安心のセキュリティ</h4>
+            <p>SSL・WAF・最新の暗号化。個人情報や機密情報を守る、堅牢な設計です。</p>
+          </div>
+          <div class="spec-card reveal">
+            <h4>拡張性</h4>
+            <p>API連携が容易な設計。将来的に予約システムやEC機能を追加することも可能です。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container reveal">
+        <div class="cta-inner blue">
+          <h2>「技術」をあなたの味方にしませんか？</h2>
+          <p>難しい設定はすべてお任せください。あなたのビジネスに最適な「自動化の型」を提案します。</p>
+          <a href="/contact?plan=B" class="btn-primary blue">ICT活用を相談する</a>
+          <p class="limit">※今月の無料相談枠 残り2名</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .plan-b-page { background: #f4f7fa; color: #1a2a3a; }
+
+  /* Hero */
+  .plan-hero.dark {
+    background: #0f172a;
+    color: white;
+    padding: 120px 0;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+
+  .tech-grid-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-image: radial-gradient(circle at 2px 2px, rgba(59, 130, 246, 0.1) 1px, transparent 0);
+    background-size: 40px 40px;
+    opacity: 0.5;
+  }
+
+  .plan-label.blue { background: #3b82f6; color: white; }
+  .accent-blue { color: #60a5fa; }
+
+  .campaign-price-tag.blue { border-color: #3b82f6; background: rgba(15, 23, 42, 0.8); }
+  .campaign-price-tag.blue .price, .campaign-price-tag.blue .label { color: #60a5fa; }
+
+  /* Showcase */
+  .automation-showcase { padding: 100px 0; }
+  .showcase-header { text-align: center; margin-bottom: 80px; }
+  .showcase-header h2 { font-size: 2.2rem; margin-bottom: 20px; }
+
+  .f-row { display: flex; align-items: center; gap: 60px; margin-bottom: 80px; }
+  .f-row.reverse { flex-direction: row-reverse; }
+  .f-text { flex: 1; }
+  .f-visual { flex: 1; background: #e2e8f0; border-radius: 20px; padding: 40px; min-height: 200px; display: flex; align-items: center; justify-content: center; }
+
+  .f-icon { font-size: 3rem; display: block; margin-bottom: 20px; }
+  .f-text h3 { font-size: 1.8rem; margin-bottom: 15px; color: #1e3a8a; }
+  .f-text p { line-height: 1.8; color: #475569; }
+
+  /* Mockups */
+  .mockup-line { background: #fff; width: 100%; max-width: 300px; border-radius: 15px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+  .msg { background: #74eb74; padding: 10px; border-radius: 10px; margin-bottom: 10px; font-size: 0.8rem; width: fit-content; }
+  .msg.ai { background: #f0f4f8; margin-left: auto; border: 1px dashed #3b82f6; }
+
+  .mockup-ai { width: 100%; max-width: 350px; }
+  .code-block { background: #1e293b; color: #94a3b8; padding: 15px; border-radius: 8px; font-family: monospace; font-size: 0.75rem; margin-bottom: 10px; }
+  .code-block.success { border-left: 4px solid #10b981; color: #10b981; }
+
+  /* Tech Specs */
+  .tech-specs { padding: 80px 0; background: #fff; }
+  .spec-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 40px; }
+  .spec-card { padding: 30px; border: 1px solid #e2e8f0; border-radius: 15px; }
+  .spec-card h4 { color: #3b82f6; margin-bottom: 12px; }
+
+  /* CTA */
+  .cta-inner.blue { background: #1e3a8a; }
+  .btn-primary.blue { background: #3b82f6; color: white; border: none; }
+  .btn-primary.blue:hover { background: #2563eb; }
+
+  @media (max-width: 768px) {
+    .f-row, .f-row.reverse { flex-direction: column; text-align: center; gap: 30px; }
+    .spec-grid { grid-template-columns: 1fr; }
+  }
+</style>

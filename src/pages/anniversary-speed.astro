@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "【起業記念Plan A】心理導線・速戦LP案 | 和-Node",
+  "description": "心理学の知見で「安心して選ばれる」サイトへ。和-Node起業記念キャンペーン限定の速戦LPパッケージ。",
+};
+---
+
+<BaseLayout 
+  title="心理導線LP制作・速戦プラン｜起業記念20%OFF｜和-Node" 
+  description="「何を書けばいいか分からない」を心理学で解決。訪問者の心を整え、行動を促す心理導線Web制作をキャンペーン価格48,000円でご提供します。"
+>
+  <main class="plan-a-page">
+    <!-- Mini Hero -->
+    <section class="plan-hero">
+      <div class="container">
+        <span class="plan-label">Plan A: Standard</span>
+        <h1>心理導線Web制作・LP制作（速戦プラン）<br/><span style="font-size: 0.5em; display: block; opacity: 0.8; margin-top: 10px;">「伝わらない」を、心理学で「選ばれる」に変える。</span></h1>
+        <div class="campaign-price-tag">
+          <span class="label">起業記念 20% OFF</span>
+          <span class="price">¥48,000<small>(税別)</small></span>
+          <span class="old">通常 ¥60,000</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Psychology Focus -->
+    <section class="psychology-demo">
+      <div class="container">
+        <div class="demo-box reveal">
+          <h2>このLP自体が「心理導線」のデモです</h2>
+          <p>人は「不安」があるとき、行動を止めてしまいます。Plan Aでは、以下の3つの心理的アプローチを標準装備しています。</p>
+          
+          <div class="logic-grid">
+            <div class="logic-item">
+              <span class="num">01</span>
+              <h4>社会的証明の最適化</h4>
+              <p>実績や声を「ただ載せる」のではなく、信頼が最大化されるタイミングで配置します。</p>
+            </div>
+            <div class="logic-item">
+              <span class="num">02</span>
+              <h4>認知負荷の軽減</h4>
+              <p>情報を整理し、迷いをなくすことで、最後までストレスなく読み進められる設計を行います。</p>
+            </div>
+            <div class="logic-item">
+              <span class="num">03</span>
+              <h4>一貫性の原理</h4>
+              <p>ユーザーの小さな「Yes」を積み重ね、自然にお問い合わせへと導きます。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Options Included -->
+    <section class="options-list">
+      <div class="container">
+        <h2 class="reveal">Plan A に含まれる「盛り盛り」オプション</h2>
+        <div class="option-cards">
+          <div class="o-card reveal">
+            <h3>心理分析・構成作成</h3>
+            <p>ターゲットの悩みを深掘りし、刺さるキャッチコピーと構成をゼロから提案します。</p>
+          </div>
+          <div class="o-card reveal">
+            <h3>マイクロアニメーション</h3>
+            <p>ボタンや文字に命を吹き込み、「動いている＝生きているサイト」という安心感を与えます。</p>
+          </div>
+          <div class="o-card reveal">
+            <h3>レスポンシブ・スピード改善</h3>
+            <p>スマホでの読み心地を徹底追及。1秒の遅れによる離脱を最小限に抑えます。</p>
+          </div>
+          <div class="o-card reveal">
+            <h3>Googleアナリティクス設定</h3>
+            <p>公開して終わりではなく、どこまで読まれたか「次の一歩」のための計測基盤も構築します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Wait? -->
+    <section class="cta-section">
+      <div class="container reveal">
+        <div class="cta-inner">
+          <h2>まずは「たたき台」を見てから判断しませんか？</h2>
+          <p>和-Nodeは、ご相談後に1ページのたたき台を無料作成します。実物を見て、納得してから進める。それも一つの「安心」です。</p>
+          <a href="/contact?plan=A" class="btn-primary">キャンペーン価格で無料相談する</a>
+          <p class="limit">※毎月3名様限定（残りわずか）</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .plan-a-page {
+    background: #fff;
+    color: #333;
+  }
+
+  .plan-hero {
+    padding: 100px 0;
+    background: linear-gradient(to bottom, #f9f9f9, #fff);
+    text-align: center;
+    border-bottom: 1px solid #eee;
+  }
+
+  .plan-label {
+    display: inline-block;
+    background: #c5a059;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 4px;
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+
+  .plan-hero h1 {
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    line-height: 1.3;
+    margin-bottom: 30px;
+    font-weight: 800;
+  }
+
+  .campaign-price-tag {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 40px;
+    background: #fff;
+    border: 2px solid #d14d3a;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(209, 77, 58, 0.1);
+  }
+
+  .campaign-price-tag .label { color: #d14d3a; font-weight: 800; margin-bottom: 5px; }
+  .campaign-price-tag .price { font-size: 2.5rem; font-weight: 900; color: #d14d3a; }
+  .campaign-price-tag .old { font-size: 1rem; color: #999; text-decoration: line-through; }
+
+  .psychology-demo { padding: 80px 0; background: #fdfcf9; }
+  
+  .demo-box {
+    background: white;
+    padding: 50px;
+    border-radius: 30px;
+    border: 1px solid #e2c891;
+    box-shadow: 0 10px 40px rgba(197, 160, 89, 0.05);
+  }
+
+  .logic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+  }
+
+  .logic-item .num { font-size: 1.5rem; font-weight: 800; color: #c5a059; opacity: 0.5; }
+  .logic-item h4 { margin: 10px 0; font-size: 1.2rem; }
+  .logic-item p { font-size: 0.9rem; line-height: 1.6; color: #666; }
+
+  .options-list { padding: 80px 0; }
+  .option-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
+  }
+
+  .o-card {
+    background: #f9f9f9;
+    padding: 30px;
+    border-radius: 15px;
+    transition: 0.3s;
+  }
+  .o-card:hover { background: #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transform: translateY(-5px); }
+  .o-card h3 { font-size: 1.1rem; margin-bottom: 12px; color: #c5a059; }
+  .o-card p { font-size: 0.85rem; line-height: 1.6; color: #777; }
+
+  .cta-section { padding: 100px 0; }
+  .cta-inner {
+    background: #c5a059;
+    color: white;
+    padding: 60px;
+    border-radius: 40px;
+    text-align: center;
+  }
+
+  .btn-primary {
+    display: inline-block;
+    background: white;
+    color: #c5a059;
+    padding: 20px 50px;
+    border-radius: 100px;
+    font-weight: 800;
+    text-decoration: none;
+    margin-top: 30px;
+    font-size: 1.2rem;
+  }
+
+  .limit { margin-top: 15px; font-size: 0.9rem; opacity: 0.8; }
+</style>
