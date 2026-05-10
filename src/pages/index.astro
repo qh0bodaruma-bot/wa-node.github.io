@@ -38,29 +38,23 @@ const jsonLd = {
 <BaseLayout>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <main>
-    <!-- New: Problem/Empathy Section -->
+    <!-- Pain Points Section -->
     <section class="pain-points">
       <div class="container">
         <div class="pain-header reveal">
-          <span class="eyebrow">Your Challenges</span>
-          <h2>こんな「もどかしさ」、<br class="sp-only"/>抱えていませんか？</h2>
+          <div class="vertical-title">Your Challenges</div>
+          <h2>こんな「もどかしさ」、<br/>抱えていませんか？</h2>
         </div>
         <div class="pain-grid">
           <div class="pain-card reveal">
-            <div class="p-icon">📉</div>
+            <div class="p-accent"></div>
             <p>LPを作ってみたけれど、<br/><strong>驚くほど反応がない。</strong></p>
           </div>
           <div class="pain-card reveal" style="transition-delay: 0.1s;">
-            <div class="p-icon">🧩</div>
+            <div class="p-accent"></div>
             <p>やりたいことはあるのに、<br/><strong>ITの専門用語が壁になる。</strong></p>
           </div>
           <div class="pain-card reveal" style="transition-delay: 0.2s;">
-            <div class="p-icon">🤝</div>
-            <p>相談したいけれど、<br/><strong>売込みや勧誘が怖くて踏み出せない。</strong></p>
-          </div>
-        </div>
-        <div class="pain-solution reveal">
-          <p>その違和感、実は<strong>「技術」と「心」の段差</strong>から生まれています。<br/>和-Nodeは、その段差を埋めるために存在します。</p>
         </div>
       </div>
     </section>
@@ -748,43 +742,103 @@ const jsonLd = {
     opacity: 0.8;
   }
 
-  /* Pain Points Section */
+  /* Pain Points Section Upgrade */
   .pain-points {
-    padding: 100px 0;
-    background: #fffefb;
-    text-align: center;
+    padding: 120px 0;
+    background: #fffcf9;
+    position: relative;
+    overflow: hidden;
+    font-family: 'Shippori Mincho', serif;
   }
-  .pain-header { margin-bottom: 60px; }
+  .pain-points::before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: radial-gradient(circle at 10% 20%, rgba(197, 160, 89, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .pain-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 80px;
+    text-align: left;
+  }
+  .vertical-title {
+    writing-mode: vertical-rl;
+    font-size: 0.9rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: 700;
+    border-right: 1px solid var(--gold);
+    padding-right: 10px;
+    height: 120px;
+  }
+  .pain-header h2 {
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.4;
+    margin: 0;
+    font-weight: 800;
+    color: var(--text-deep);
+  }
   .pain-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    margin-bottom: 60px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-bottom: 80px;
   }
   .pain-card {
     background: white;
-    padding: 40px 20px;
-    border-radius: 20px;
-    border: 1px solid #f0e6d2;
-    transition: 0.3s;
-    text-align: center;
+    padding: 60px 40px;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    position: relative;
+    transition: 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
-  .pain-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(197, 160, 89, 0.1); }
-  .p-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
-  .pain-card p { font-size: 1.05rem; line-height: 1.8; color: #555; margin: 0; }
-  .pain-card strong { color: var(--accent2); }
-  .pain-solution {
-    max-width: 700px;
+  .pain-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+    box-shadow: 0 20px 60px rgba(197, 160, 89, 0.1);
+  }
+  .p-accent {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 30px;
+    height: 1px;
+    background: var(--gold);
+  }
+  .pain-card p {
+    font-size: 1.15rem;
+    line-height: 2;
+    color: #444;
+    margin: 0;
+  }
+  .pain-card strong {
+    color: #d14d3a;
+    display: block;
+    margin-top: 10px;
+    font-size: 1.3rem;
+  }
+  .pain-footer {
+    max-width: 800px;
     margin: 0 auto;
-    font-size: 1.2rem;
+    text-align: center;
+    border-top: 1px solid rgba(197, 160, 89, 0.2);
+    padding-top: 40px;
+  }
+  .pain-solution {
+    font-size: 1.3rem;
     font-weight: 700;
-    line-height: 1.8;
+    line-height: 2;
     color: var(--text-deep);
   }
 
   @media (max-width: 768px) {
-    .pain-points { padding: 60px 0; }
-    .pain-solution { font-size: 1.05rem; padding: 0 20px; }
-    .campaign-floating-badge { font-size: 0.7rem; padding: 4px 10px; }
+    .pain-header { flex-direction: column; gap: 20px; align-items: center; text-align: center; }
+    .vertical-title { writing-mode: horizontal-tb; height: auto; border-right: none; border-bottom: 1px solid var(--gold); padding: 0 0 5px; margin-bottom: 10px; }
+    .pain-points { padding: 80px 0; }
+    .pain-card { padding: 40px 30px; }
   }
 </style>
