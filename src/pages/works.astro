@@ -9,19 +9,48 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     <div class="glow glow-1"></div>
     <div class="glow glow-2"></div>
     <div class="grid-overlay"></div>
+    <div class="sakura-container" id="sakura-container"></div>
   </div>
 
+  <script is:inline>
+    function initSakura() {
+      const container = document.getElementById('sakura-container');
+      if (!container) return;
+      container.innerHTML = '';
+      for (let i = 0; i < 20; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal-subtle';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.width = Math.random() * 8 + 4 + 'px';
+        petal.style.height = petal.style.width;
+        petal.style.animationDuration = Math.random() * 5 + 7 + 's';
+        petal.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(petal);
+      }
+    }
+    initSakura();
+    document.addEventListener('astro:page-load', initSakura);
+  </script>
+
+  <main class="works-page">
     <section class="section works-hero">
       <div class="container narrow">
+        <!-- Anniversary Banner -->
+        <div class="works-anniversary-banner reveal">
+          <a href="/campaign-anniversary/">
+            <span class="ann-label">1st Anniversary Campaign</span>
+            <div class="ann-content">
+              <strong>起業記念 20% OFF 実施中</strong>
+              <span>制作実績と同クオリティのサイトを今だけ特別価格で。詳しくはこちら →</span>
+            </div>
+          </a>
+        </div>
+
         <span class="eyebrow">Works & Demos</span>
-        <h1>制作実績・デモ・サンプル</h1>
+        <h1 class="premium-heading">制作実績・デモ・サンプル</h1>
         <p class="lead">
           実案件の制作実績に加え、デザイン提案のためのサンプルや独自開発のデモツールを公開しています。<br />
           和-Nodeが提供する「伝わる導線」と「実用的な設計」を体験してください。
-        </p>
-        <p class="small" style="text-align: center; color: var(--muted); margin-top: 16px; line-height: 1.6;">
-          ※掲載内容には、実案件、デモ制作、自主制作、提案用サンプルが含まれます。各カードのラベルをご確認ください。<br />
-          ※AIにより作成・補助された内容を公開・広告利用する場合は、業界ごとの広告規制（薬機法・景表法・医療広告ガイドライン等）や法令確認をお客様の責任で行うものとします。
         </p>
       </div>
     </section>
@@ -41,7 +70,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         <!-- Category: Tool -->
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
-            <div class="card-visual tool-bg" style="overflow: hidden;">
+            <div class="card-visual tool-bg">
               <img src="/images/works-mental.png" alt="こころの疲労度診断" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag demo">自社開発デモ</span>
             </div>
@@ -60,7 +89,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
-            <div class="card-visual tool-bg" style="overflow: hidden;">
+            <div class="card-visual tool-bg">
               <img src="/images/works-accessibility.png" alt="バリアフリー診断" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag demo">自社開発デモ</span>
             </div>
@@ -79,7 +108,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
-            <div class="card-visual tool-bg" style="overflow: hidden;">
+            <div class="card-visual tool-bg">
               <img src="/images/works-seo.png" alt="SEO内部対策診断" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag demo">自社開発デモ</span>
             </div>
@@ -96,44 +125,6 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           </div>
         </article>
 
-        <article class="work-card reveal" data-category="tool">
-          <div class="card-visual-wrap">
-            <div class="card-visual tool-bg" style="overflow: hidden;">
-              <img src="/portfolio-lp/images/hero_saas.png" alt="LP構成案作成ウィザード" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag demo">自社開発デモ</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="expert-label">Strategic Planning</div>
-            <h3>LP構成案作成ウィザード</h3>
-            <p class="card-text">制作前の要件定義をインタラクティブに自動化。回答後にプロフェッショナルな要件定義サマリーを生成し、スムーズな相談を実現します。</p>
-            <div class="card-footer">
-              <span class="tech-tag">Planning</span>
-              <span class="tech-tag">Automation</span>
-              <a href="/lp_wizard" class="card-link">体験する →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="work-card reveal" data-category="tool">
-          <div class="card-visual-wrap">
-            <div class="card-visual pricing-bg" style="overflow: hidden;">
-              <img src="/images/works-seo.png" alt="料金シミュレーター" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag demo">自社開発デモ</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="expert-label">UX Simulation</div>
-            <h3>料金シミュレーター</h3>
-            <p class="card-text">プランやオプションをリアルタイムで試算。金額に連動するメーターやレシート形式の明細で、透明性と納得感のある見積もりを提供します。</p>
-            <div class="card-footer">
-              <span class="tech-tag">Dashboard</span>
-              <span class="tech-tag">JS Animation</span>
-              <a href="/simulator" class="card-link">体験する →</a>
-            </div>
-          </div>
-        </article>
-
         <article class="work-card reveal" data-category="web">
           <div class="card-visual-wrap">
             <div class="card-visual">
@@ -145,11 +136,6 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <div class="expert-label">Medical / Clinic</div>
             <h3>クリニック・医療系LP</h3>
             <p class="card-text">美容クリニック、歯科医院、心療内科など。薬機法や医療広告ガイドラインに配慮しつつ、患者様の安心感と信頼を両立させた設計です。</p>
-            <div class="case-details">
-              <div class="detail-item"><strong>担当範囲：</strong>構成設計 / LP制作 / 導線改善</div>
-              <div class="detail-item"><strong>工夫：</strong>医療広告ガイドラインに配慮し、過度な訴求を避けながら、カウンセリングへの心理的ハードルを下げる安心感を設計。</div>
-            </div>
-            <div class="small" style="margin-bottom:16px; color:var(--muted); line-height: 1.5; font-size: 0.75rem;">※AIによる補助を含む制作物の法的適合性（薬機法等）は、必要に応じて確認観点を提示しますが、最終的にはご依頼主側での確認をお願いしております。</div>
             <div class="card-footer">
               <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
               <a href="/portfolio-lp/lp_clinic.html" class="premium-link">作品を見る</a>
@@ -175,74 +161,17 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           </div>
         </article>
 
-        <article class="work-card reveal" data-category="web">
-          <div class="card-visual-wrap">
-            <div class="card-visual">
-              <img src="/portfolio-lp/images/hero_realestate.png" alt="不動産・建設・リフォームLP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag proposal">提案用サンプル</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="expert-label">Expert Opinion</div>
-            <h3>不動産・建設・リフォームLP</h3>
-            <p class="card-text">不動産、リフォーム、建築。大きな決断を支える安心感と、清潔感のある洗練されたレイアウトで、資料請求・成約へと導きます。</p>
-            <div class="card-footer">
-              <div class="tech-stack"><span>#Architecture</span><span>#Safety</span></div>
-              <a href="/portfolio-lp/lp_realestate.html" class="premium-link">作品を見る</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="work-card reveal" data-category="web">
-          <div class="card-visual-wrap">
-            <div class="card-visual">
-              <img src="/portfolio-lp/images/hero_lawyer.png" alt="士業・コンサルティング・教育系LP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag recon">非公開案件の再構成</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="expert-label">Expert Opinion</div>
-            <h3>士業・コンサルティング・教育系LP</h3>
-            <p class="card-text">士業、コンサルタント、教育。専門性と権威性を明確に伝えつつ、相談しやすさを感じさせる心理学的配色と構成を採用しています。</p>
-            <div class="card-footer">
-              <div class="tech-stack"><span>#Identity</span><span>#Strategy</span></div>
-              <a href="/portfolio-lp/lp_lawyer.html" class="premium-link">作品を見る</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="work-card reveal" data-category="web">
-          <div class="card-visual-wrap">
-            <div class="card-visual">
-              <img src="/portfolio-lp/images/hero_corporate.png" alt="コーポレート・企業サイトLP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag sample">デザインサンプル</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="expert-label">Expert Opinion</div>
-            <h3>コーポレート・企業サイトLP</h3>
-            <p class="card-text">企業サイトの信頼性を高めるブランディングLP。CI（企業理念）を尊重しつつ、見やすく使いやすいモダンなUIを提供します。</p>
-            <div class="card-footer">
-              <div class="tech-stack"><span>#Branding</span><span>#Corporate</span></div>
-              <a href="/portfolio-lp/lp_corporate.html" class="premium-link">作品を見る</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Category: KDP -->
         <article class="work-card reveal" data-category="kdp">
+          <div class="card-visual-wrap">
             <div class="card-visual">
               <img src="/images/works-kdp.png" alt="Amazon KDP 出版実績" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag real">実案件</span>
             </div>
+          </div>
           <div class="card-body">
             <div class="expert-label">Global Design</div>
             <h3>Amazon KDP 出版実績</h3>
-            <p class="card-text">浮世絵や鳥獣戯画をモチーフにした、海外市場向け（US/FR）の書籍制作。表紙から内部構成まで、和の美しさを世界へ届けています。価格改定：$12.99 / €12.99 対応済み。</p>
-            <div class="case-details">
-              <div class="detail-item"><strong>担当範囲：</strong>企画 / 構成案作成 / 入稿支援</div>
-              <div class="detail-item"><strong>工夫：</strong>専門的な内容を「自分事」として捉えてもらえるよう、ターゲット心理に合わせた章立てと、読みやすさを重視したデザインを徹底。</div>
-            </div>
+            <p class="card-text">浮世絵や鳥獣戯画をモチーフにした、海外市場向け（US/FR）の書籍制作。表紙から内部構成まで、和の美しさを世界へ届けています。</p>
             <div class="card-footer">
               <span class="tech-tag">Global</span>
               <span class="tech-tag">Publishing</span>
@@ -252,41 +181,19 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         </article>
 
         <article class="work-card reveal" data-category="system">
+          <div class="card-visual-wrap">
             <div class="card-visual">
               <img src="/images/works-system.png" alt="LINE カウンセリング予約システム" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag real">実案件</span>
             </div>
+          </div>
           <div class="card-body">
             <div class="expert-label">System Build</div>
             <h3>LINE カウンセリング予約システム</h3>
-            <p class="card-text">LINEアプリ内で完結する予約・決済・診断システム。ユーザーの日常的なツールを窓口にすることで、利用のハードルを下げ、利便性を向上させます。</p>
-            <div class="case-details">
-              <div class="detail-item"><strong>担当範囲：</strong>要件定義 / LIFF開発 / API連携</div>
-              <div class="detail-item"><strong>工夫：</strong>カウンセリング予約という心理的ハードルの高いアクションに対し、LINEの親しみやすさと直感的なUIを組み合わせ、離脱を最小限に。</div>
-            </div>
+            <p class="card-text">LINEアプリ内で完結する予約・決済・診断システム。ユーザーの日常的なツールを窓口にすることで、利用のハードルを下げます。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#LIFF</span><span>#Node.js</span></div>
               <a href="/line_demo" class="premium-link">デモを見る</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="work-card reveal" data-category="system">
-            <div class="card-visual">
-              <img src="/images/works-automation.png" alt="AI・GAS 業務自動化事例" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag real">実案件</span>
-            </div>
-          <div class="card-body">
-            <div class="expert-label">System Build</div>
-            <h3>AI・GAS 業務自動化事例</h3>
-            <p class="card-text">ChatGPT APIやGoogle Apps Scriptを用いた業務効率化。現場の「手作業」を「自動」に変え、より価値のある仕事へ時間を創出します。</p>
-            <div class="case-details">
-              <div class="detail-item"><strong>担当範囲：</strong>業務フロー分析 / 自動化プログラム実装</div>
-              <div class="detail-item"><strong>工夫：</strong>単なる自動化ではなく、現場担当者がストレスなく使い続けられるよう、既存のスプレッドシート等のインターフェースを活かした設計。</div>
-            </div>
-            <div class="card-footer">
-              <div class="tech-stack"><span>#OpenAI</span><span>#GAS</span></div>
-              <span class="card-link-placeholder">詳細相談はお問い合わせまで</span>
             </div>
           </div>
         </article>
@@ -299,11 +206,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     <!-- Standard Packages CTA -->
     <section class="packages-cta reveal">
       <div class="container glass-panel">
-        <div class="cta-label">NEW ARRIVAL</div>
-        <h2>標準HPパッケージのご案内</h2>
-        <p>「何が必要か」を迷わせない。7ページ、10ページ、15ページ〜など、<br/>事業規模に合わせた最適な構成から、Webアプリ・DX連携までをパッケージ化しました。</p>
+        <div class="cta-label">ANNIVERSARY SPECIAL</div>
+        <h2>キャンペーンでお得に制作しませんか？</h2>
+        <p>今なら制作メニューが 20% OFF。実績のような高品質なサイトを、あなたのビジネスにも導入するチャンスです。</p>
         <div class="cta-btns">
-          <a href="/demos" class="premium-link">パッケージ一覧を見る</a>
+          <a href="/campaign-anniversary/" class="btn-secondary-outline">キャンペーン詳細を見る</a>
         </div>
       </div>
     </section>
@@ -311,131 +218,149 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
   </main>
 </BaseLayout>
 
-<style>
+<style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
+
     :root {
-      --accent: #639922;
-      --accent-dark: #4d7a1a;
-      --glass: rgba(255, 255, 255, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.5);
-      --tag-works: #2c7c5e; /* 実案件用：深めの緑 */
-      --tag-sample: #7c5e2c; /* サンプル用：茶・ゴールド系 */
-      --tag-demo: #2c5e7c; /* デモ用：落ち着いた青 */
+      --accent: #c5a059;
+      --accent-dark: #b18e4a;
+      --accent-red: #d14d3a;
+      --glass: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(197, 160, 89, 0.2);
+      --tag-works: #2c7c5e;
+      --tag-sample: #c5a059;
+      --tag-demo: #2c5e7c;
+    }
+
+    .premium-heading {
+      font-family: 'Shippori Mincho', serif !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.05em;
     }
 
     /* Background Decoration */
     .bg-decoration {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1; background: #fdfaf7; overflow: hidden;
+      z-index: -1; background: #fdfcf9; overflow: hidden;
     }
-    .grid-overlay {
-      position: absolute; width: 100%; height: 100%;
-      background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px);
-      background-size: 30px 30px;
+    .bg-decoration::after {
+      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3FfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3F/filter%3E%3Frect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3F/svg%3E");
+      opacity: 0.05; pointer-events: none;
     }
-    .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; }
-    .glow-1 { width: 500px; height: 500px; background: #e8f0e5; top: -10%; right: -10%; }
-    .glow-2 { width: 400px; height: 400px; background: #f3e9d2; bottom: -10%; left: -10%; }
+    .sakura-container {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .petal-subtle {
+      position: absolute; background: #ffb7c5; border-radius: 150% 0 150% 0;
+      opacity: 0.4; animation: fall-subtle linear infinite;
+    }
+    @keyframes fall-subtle {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.4; }
+      90% { opacity: 0.4; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
 
-    .works-page { padding-bottom: 100px; }
+    .works-page { padding-bottom: 100px; font-family: 'Shippori Mincho', serif !important; }
     
-    .works-header { padding: 120px 0 80px; text-align: center; position: relative; }
-    .header-visual { position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100%; height: 100%; z-index: -1; overflow: hidden; }
-    .orb { position: absolute; top: -50px; left: 50%; transform: translateX(-50%); width: 400px; height: 400px; background: radial-gradient(circle, rgba(99, 153, 34, 0.15) 0%, transparent 70%); border-radius: 50%; filter: blur(50px); }
+    .works-hero { padding: 80px 0 60px; text-align: center; }
     
-    .accent-text { color: var(--accent); position: relative; }
-    .accent-text::after { content: ""; position: absolute; bottom: 8px; left: 0; width: 100%; height: 12px; background: rgba(99, 153, 34, 0.1); z-index: -1; }
+    /* Anniversary Banner */
+    .works-anniversary-banner {
+      margin-bottom: 40px;
+    }
+    .works-anniversary-banner a {
+      display: block; background: #fff; border: 1px solid var(--accent-red);
+      border-radius: 20px; padding: 20px 30px; text-decoration: none;
+      transition: 0.4s; position: relative; overflow: hidden;
+      box-shadow: 0 10px 30px rgba(209, 77, 58, 0.1);
+    }
+    .works-anniversary-banner a:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(209, 77, 58, 0.15); }
+    .ann-label {
+      display: inline-block; background: var(--accent-red); color: white;
+      font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .ann-content { display: flex; align-items: center; justify-content: center; gap: 20px; color: #2c2c2c; }
+    .ann-content strong { font-size: 1.2rem; color: var(--accent-red); }
+    .ann-content span { font-size: 0.95rem; opacity: 0.8; }
 
-    .eyebrow { font-size: 0.85rem; font-weight: 900; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
-    .works-title { font-size: clamp(2.5rem, 6vw, 4.2rem); font-weight: 900; color: var(--text); margin-bottom: 24px; line-height: 1.1; letter-spacing: -0.02em; }
-    .works-desc { font-size: 1.2rem; color: var(--muted); line-height: 1.8; max-width: 800px; margin: 0 auto; }
+    .eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+    .lead { font-size: 1.1rem; color: #555; line-height: 1.8; max-width: 800px; margin: 0 auto; }
 
     /* Filter Nav */
     .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 80px; flex-wrap: wrap; }
     .filter-btn {
-      padding: 12px 28px; border-radius: 999px; background: var(--glass);
-      border: 1px solid var(--glass-border); color: var(--muted); font-weight: 800;
-      cursor: pointer; transition: 0.3s; backdrop-filter: blur(10px);
-      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      padding: 12px 28px; border-radius: 999px; background: #fff;
+      border: 1px solid var(--glass-border); color: #666; font-weight: 800;
+      cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
     }
-    .filter-btn:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
-    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 8px 25px rgba(99, 153, 34, 0.3); }
+    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
+    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 8px 25px rgba(197, 160, 89, 0.3); }
 
     /* Works Grid */
-    .works-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-      gap: 40px;
-    }
+    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
 
     .work-card {
-      background: var(--glass); backdrop-filter: blur(30px);
-      border: 1px solid var(--glass-border); border-radius: 40px;
+      background: #fff; border: 1px solid var(--glass-border); border-radius: 30px;
       overflow: hidden; display: flex; flex-direction: column;
       transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.02);
     }
-    .work-card:hover { transform: translateY(-12px); border-color: var(--accent); box-shadow: 0 30px 60px rgba(0,0,0,0.08); }
+    .work-card:hover { transform: translateY(-12px); border-color: var(--accent); box-shadow: 0 30px 60px rgba(197, 160, 89, 0.1); }
 
-    .card-visual-wrap { padding: 12px; }
-    .card-visual {
-      height: 160px; background: rgba(99, 153, 34, 0.05);
-      display: flex; align-items: center; justify-content: center; position: relative;
-    }
+    .card-visual-wrap { padding: 15px; }
+    .card-visual { height: 180px; border-radius: 20px; overflow: hidden; position: relative; background: #f5f5f5; }
+    
     .category-tag {
-      position: absolute; top: 20px; left: 20px;
-      font-size: 0.65rem; font-weight: 900; color: #fff;
-      padding: 4px 12px; border-radius: 999px; letter-spacing: 0.1em;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      z-index: 2;
+      position: absolute; top: 15px; left: 15px; font-size: 0.65rem; font-weight: 800;
+      padding: 4px 12px; border-radius: 999px; z-index: 2;
     }
-    .category-tag.real { background: var(--accent2); color: #fff; }
+    .category-tag.real { background: var(--accent-red); color: #fff; }
     .category-tag.demo { background: var(--tag-demo); color: #fff; }
-    .category-tag.sample { background: var(--tag-sample); color: #fff; }
-    .category-tag.proposal { background: #555; color: #fff; }
-    .category-tag.recon { background: #333; color: #fff; }
+    .category-tag.sample { background: var(--accent); color: #fff; }
 
-    .case-details {
-      margin-top: -10px;
-      margin-bottom: 24px;
-      padding: 16px;
-      background: rgba(var(--accent-rgb), 0.05);
-      border-radius: 12px;
-      font-size: 0.85rem;
-      line-height: 1.6;
-      border-left: 4px solid var(--accent);
+    .card-body { padding: 30px; flex: 1; display: flex; flex-direction: column; }
+    .expert-label { font-size: 0.75rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 10px; }
+    .card-body h3 { font-size: 1.4rem; font-weight: 800; color: #2c2c2c; margin-bottom: 15px; line-height: 1.4; }
+    .card-text { font-size: 0.95rem; color: #666; line-height: 1.7; margin-bottom: 24px; flex: 1; }
+
+    .card-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+    .tech-tag { font-size: 0.7rem; font-weight: 800; color: #888; background: #f5f5f5; padding: 4px 10px; border-radius: 4px; }
+    .card-link, .premium-link { margin-left: auto; font-size: 0.9rem; font-weight: 800; color: var(--accent); text-decoration: none; transition: 0.2s; }
+    .card-link:hover, .premium-link:hover { color: var(--accent-red); transform: translateX(5px); }
+
+    .packages-cta { margin-top: 120px; }
+    .glass-panel {
+      background: #3a2e26; color: white; border-radius: 40px; padding: 80px 40px;
+      text-align: center; border: 1px solid var(--accent); position: relative; overflow: hidden;
     }
-    .detail-item { margin-bottom: 8px; }
-    .detail-item:last-child { margin-bottom: 0; }
-    .detail-item strong { color: var(--accent); font-weight: 900; }
-    .card-icon { font-size: 4rem; opacity: 0.8; }
+    .glass-panel::before {
+      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: radial-gradient(circle at top right, rgba(197, 160, 89, 0.15), transparent); pointer-events: none;
+    }
+    .cta-label { font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 20px; }
+    .glass-panel h2 { font-size: 2.2rem; margin-bottom: 24px; font-weight: 800; }
+    .glass-panel p { font-size: 1.1rem; opacity: 0.8; line-height: 1.8; margin-bottom: 40px; }
 
-    .card-body { padding: 32px; flex: 1; display: flex; flex-direction: column; }
-    .card-body h3 { font-size: 1.4rem; font-weight: 900; color: var(--text); margin-bottom: 15px; }
-    .card-text { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin-bottom: 24px; flex: 1; }
-
-    .card-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .tech-tag { font-size: 0.75rem; font-weight: 700; color: #888; background: rgba(0,0,0,0.03); padding: 4px 10px; border-radius: 4px; }
-    .card-link { margin-left: auto; font-size: 0.9rem; font-weight: 800; color: var(--accent); text-decoration: none; transition: 0.2s; }
-    .card-link:hover { text-decoration: underline; }
-    .card-link-placeholder { margin-left: auto; font-size: 0.85rem; color: #bbb; font-weight: 700; }
-
-    /* CTA Section */
-    .works-cta { margin-top: 100px; text-align: center; }
-    .glass-card { background: var(--glass); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); border-radius: 40px; padding: 60px 40px; }
-    .works-cta h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 20px; color: var(--text); }
-    .works-cta p { font-size: 1.1rem; color: var(--muted); margin-bottom: 40px; }
-    .btns { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
-    .primary-btn { padding: 18px 48px; background: var(--accent); color: #fff; border-radius: 999px; font-weight: 800; border: none; cursor: pointer; text-decoration: none; transition: 0.3s; }
-    .secondary-btn { padding: 18px 48px; border: 2px solid var(--accent); color: var(--accent); border-radius: 999px; font-weight: 800; text-decoration: none; transition: 0.3s; }
-    .primary-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(99, 153, 34, 0.2); }
+    .btn-secondary-outline {
+      display: inline-block; border: 2px solid var(--accent); color: var(--accent);
+      padding: 15px 40px; border-radius: 50px; text-decoration: none;
+      font-weight: 800; transition: 0.3s;
+    }
+    .btn-secondary-outline:hover { background: var(--accent); color: white; }
 
     .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    @media (max-width: 600px) {
-      .works-header { padding: 80px 0 40px; }
+    @media (max-width: 768px) {
+      .ann-content { flex-direction: column; gap: 5px; text-align: center; }
+      .ann-content strong { font-size: 1.1rem; }
+      .ann-content span { font-size: 0.85rem; }
       .works-grid { grid-template-columns: 1fr; }
-      .works-cta h2 { font-size: 1.8rem; }
+      .glass-panel { padding: 60px 20px; }
     }
 </style>
 
@@ -448,12 +373,9 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
           const filter = btn.dataset.filter;
-          
-          // Update active btn
           filterBtns.forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
 
-          // Filter cards
           workCards.forEach(card => {
             if (filter === 'all' || card.dataset.category === filter) {
               card.style.display = 'flex';
@@ -477,6 +399,6 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       }, { threshold: 0.1 });
       document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     }
-
+    initWorks();
     document.addEventListener('astro:page-load', initWorks);
 </script>

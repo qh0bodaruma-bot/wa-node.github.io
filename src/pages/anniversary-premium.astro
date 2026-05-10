@@ -5,162 +5,275 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "【起業記念Plan C】和-Node 伴走型特注案 | 和-Node",
-  "description": "技術と心、その両面から事業を支える最上位プラン。AI活用・メンタル支援・3ヶ月の並走コンサルをパッケージ。",
-};
----
+  "description": "技術と心、その両面から事  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
 
-<BaseLayout 
-  title="経営コンサル・AI伴走・メンタル支援（特注プラン）｜起業記念20%OFF｜和-Node" 
-  description="Webサイト制作、AI導入、そして経営者の心。すべてを一箇所で整える最上位の伴走型プラン。キャンペーン期間中、通常250,000円が200,000円に。"
->
-  <main class="plan-c-page">
-    <!-- Premium Hero -->
-    <section class="plan-hero premium">
-      <div class="luxury-overlay"></div>
-      <div class="container">
-        <div class="premium-badge reveal">The Masterpiece Plan</div>
-        <span class="plan-label gold">Plan C: Holistic Partner</span>
-        <h1>経営コンサル・AI伴走・メンタル支援（特注プラン）<br/><span style="font-size: 0.5em; display: block; opacity: 0.8; margin-top: 10px;">あなたの「人生」と「事業」を、一本の導線で整える。</span></h1>
-        <div class="campaign-price-tag gold">
-          <span class="label">起業記念 20% OFF</span>
-          <span class="price">¥200,000<small>(税別)</small></span>
-          <span class="old">通常 ¥250,000</span>
+  <div class="campaign-page">
+    <!-- Sakura Container -->
+    <div class="sakura-container" id="sakura-container"></div>
+    <script is:inline>
+      function initPremiumEffects() {
+        const container = document.getElementById('sakura-container');
+        if (!container) return;
+        container.innerHTML = '';
+        for (let i = 0; i < 50; i++) { // More petals for premium
+          const petal = document.createElement('div');
+          petal.className = 'petal';
+          petal.style.left = Math.random() * 100 + '%';
+          petal.style.width = Math.random() * 12 + 6 + 'px';
+          petal.style.height = petal.style.width;
+          petal.style.animationDuration = Math.random() * 6 + 4 + 's';
+          petal.style.animationDelay = Math.random() * 5 + 's';
+          container.appendChild(petal);
+        }
+      }
+      initPremiumEffects();
+      document.addEventListener('astro:page-load', initPremiumEffects);
+    </script>
+
+    <main class="plan-c-page">
+      <!-- Back Link -->
+      <nav class="back-nav container reveal">
+        <a href="/campaign-anniversary/" class="back-link">← キャンペーンポータルに戻る</a>
+      </nav>
+
+      <!-- Premium Hero -->
+      <section class="plan-hero premium">
+        <div class="luxury-overlay"></div>
+        <div class="container">
+          <div class="premium-badge reveal">The Masterpiece Plan</div>
+          <span class="plan-label gold">Plan C: Holistic Partner</span>
+          <h1 class="premium-heading">経営コンサル・AI伴走・メンタル支援<br/>（特注プラン）</h1>
+          <p class="plan-subtitle">あなたの「人生」と「事業」を、一本の導線で整える。</p>
+          <div class="campaign-price-tag gold reveal">
+            <span class="label">起業記念 20% OFF</span>
+            <span class="price">¥200,000<small>(税別)</small></span>
+            <span class="old">通常 ¥250,000</span>
+          </div>
         </div>
+      </section>
+
+      <!-- Holistic Experience -->
+      <section class="holistic-experience">
+        <div class="container">
+          <div class="section-intro reveal">
+            <h2 class="premium-heading">「作る」の、その先へ。</h2>
+            <p>Plan Cは、和-Nodeが提供できるすべてのリソースを、あなたの事業に投入する特別なプランです。</p>
+          </div>
+
+          <div class="holistic-grid">
+            <!-- Business -->
+            <div class="h-card reveal">
+              <div class="h-image-placeholder business"></div>
+              <div class="h-content">
+                <h3>戦略的なWeb・ICT基盤</h3>
+                <p>単なるLP制作にとどまらず、集客から顧客管理までのフローを「心理学×技術」で一貫して構築します。</p>
+              </div>
+            </div>
+
+            <!-- Mind -->
+            <div class="h-card reveal" style="transition-delay: 0.1s;">
+              <div class="h-image-placeholder mind"></div>
+              <div class="h-content">
+                <h3>経営者のための「心の整理」</h3>
+                <p>産業カウンセラー資格を持つ代表が、3ヶ月間あなたの良き対話相手（パートナー）として、孤独な経営判断を支えます。</p>
+              </div>
+            </div>
+
+            <!-- AI / Future -->
+            <div class="h-card reveal" style="transition-delay: 0.2s;">
+              <div class="h-image-placeholder ai"></div>
+              <div class="h-content">
+                <h3>AI活用・未来への投資</h3>
+                <p>ChatGPTなどの最新AIを「道具」として使いこなせるようレクチャー。現場に合わせたプロンプトエンジニアリングを伝授します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Included Options (Mori Mori) -->
+      <section class="premium-options">
+        <div class="container">
+          <h2 class="reveal premium-heading">Plan C だけに盛り込まれた贅沢な内容</h2>
+          <div class="p-opt-list">
+            <div class="p-opt-item reveal">
+              <span class="p-opt-num">01</span>
+              <div>
+                <h4>3ヶ月間の定例コンサルティング</h4>
+                <p>月1回のオンライン面談と、チャットでの随時相談。制作後の「どう運用するか」まで責任を持ちます。</p>
+              </div>
+            </div>
+            <div class="p-opt-item reveal">
+              <span class="p-opt-num">02</span>
+              <div>
+                <h4>法人メンタル相談窓口（β版）の設置</h4>
+                <p>従業員の皆様が、匿名で代表に相談できる窓口を開設。組織の心理的安全性を高めます。</p>
+              </div>
+            </div>
+            <div class="p-opt-item reveal">
+              <span class="p-opt-num">03</span>
+              <div>
+                <h4>AI特注プロンプト集の作成</h4>
+                <p>あなたの事業ドメインに特化した、ブログ作成やSNS運用を加速させる専用AI指示書を納品します。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Founders Message -->
+      <section class="premium-message">
+        <div class="container narrow reveal">
+          <div class="message-inner">
+            <p>「和-Node」という名前には、異なる点と点を結び、和やかにつなげるという意味を込めました。技術と心、理論と感性、そして私とあなた。このPlan Cは、そのすべてを結ぶための挑戦です。一生モノのパートナーシップを、ここから始めませんか。</p>
+            <div class="message-sig">和-Node 代表　高野 紘純</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Final CTA -->
+      <section class="cta-section premium">
+        <div class="container reveal">
+          <div class="cta-inner gold">
+            <h2>最高の「和」を、共に。</h2>
+            <p>このプランは高い密度でサポートを行うため、毎月1組様のみの受付とさせていただいております。</p>
+            <a href="/contact?plan=C" class="btn-primary gold-light">代表と直接話してみる</a>
+            <p class="cta-caution">※審査制ではありませんが、理念に共感いただける方を優先させていただきます。</p>
+          </div>
+        </div>
+      </section>
+
+      <div class="footer-nav container reveal">
+        <a href="/campaign-anniversary/" class="btn-secondary-outline">他の限定プランも見る</a>
       </div>
-    </section>
-
-    <!-- Holistic Experience -->
-    <section class="holistic-experience">
-      <div class="container">
-        <div class="section-intro reveal">
-          <h2>「作る」の、その先へ。</h2>
-          <p>Plan Cは、和-Nodeが提供できるすべてのリソースを、あなたの事業に投入する特別なプランです。</p>
-        </div>
-
-        <div class="holistic-grid">
-          <!-- Business -->
-          <div class="h-card reveal">
-            <div class="h-image-placeholder business"></div>
-            <div class="h-content">
-              <h3>戦略的なWeb・ICT基盤</h3>
-              <p>単なるLP制作にとどまらず、集客から顧客管理までのフローを「心理学×技術」で一貫して構築します。</p>
-            </div>
-          </div>
-
-          <!-- Mind -->
-          <div class="h-card reveal" style="transition-delay: 0.1s;">
-            <div class="h-image-placeholder mind"></div>
-            <div class="h-content">
-              <h3>経営者のための「心の整理」</h3>
-              <p>産業カウンセラー資格を持つ代表が、3ヶ月間あなたの良き対話相手（パートナー）として、孤独な経営判断を支えます。</p>
-            </div>
-          </div>
-
-          <!-- AI / Future -->
-          <div class="h-card reveal" style="transition-delay: 0.2s;">
-            <div class="h-image-placeholder ai"></div>
-            <div class="h-content">
-              <h3>AI活用・未来への投資</h3>
-              <p>ChatGPTなどの最新AIを「道具」として使いこなせるようレクチャー。現場に合わせたプロンプトエンジニアリングを伝授します。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Included Options (Mori Mori) -->
-    <section class="premium-options">
-      <div class="container">
-        <h2 class="reveal">Plan C だけに盛り込まれた贅沢な内容</h2>
-        <div class="p-opt-list">
-          <div class="p-opt-item reveal">
-            <span class="p-opt-num">01</span>
-            <div>
-              <h4>3ヶ月間の定例コンサルティング</h4>
-              <p>月1回のオンライン面談と、チャットでの随時相談。制作後の「どう運用するか」まで責任を持ちます。</p>
-            </div>
-          </div>
-          <div class="p-opt-item reveal">
-            <span class="p-opt-num">02</span>
-            <div>
-              <h4>法人メンタル相談窓口（β版）の設置</h4>
-              <p>従業員の皆様が、匿名で代表に相談できる窓口を開設。組織の心理的安全性を高めます。</p>
-            </div>
-          </div>
-          <div class="p-opt-item reveal">
-            <span class="p-opt-num">03</span>
-            <div>
-              <h4>AI特注プロンプト集の作成</h4>
-              <p>あなたの事業ドメインに特化した、ブログ作成やSNS運用を加速させる専用AI指示書を納品します。</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Founders Message -->
-    <section class="premium-message">
-      <div class="container narrow reveal">
-        <div class="message-inner">
-          <p>「和-Node」という名前には、異なる点と点を結び、和やかにつなげるという意味を込めました。技術と心、理論と感性、そして私とあなた。このPlan Cは、そのすべてを結ぶための挑戦です。一生モノのパートナーシップを、ここから始めませんか。</p>
-          <div class="message-sig">和-Node 代表　高野 紘純</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Final CTA -->
-    <section class="cta-section premium">
-      <div class="container reveal">
-        <div class="cta-inner gold">
-          <h2>最高の「和」を、共に。</h2>
-          <p>このプランは高い密度でサポートを行うため、毎月1組様のみの受付とさせていただいております。</p>
-          <a href="/contact?plan=C" class="btn-primary gold-light">代表と直接話してみる</a>
-          <p class="cta-caution">※審査制ではありませんが、理念に共感いただける方を優先させていただきます。</p>
-        </div>
-      </div>
-    </section>
-  </main>
+    </main>
+  </div>
 </BaseLayout>
 
-<style>
-  .plan-c-page { background: #fffaf5; color: #3a2e26; }
+<style is:global>
+  .campaign-page {
+    background: #fdfcf9 !important;
+    color: #3a2e26 !important;
+    overflow-x: hidden;
+    position: relative;
+    font-family: 'Shippori Mincho', serif !important;
+  }
+  .campaign-page::before {
+    content: "" !important;
+    position: fixed !important;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3FfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3F/filter%3E%3Frect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3F/svg%3E") !important;
+    opacity: 0.1 !important;
+    pointer-events: none !important;
+    z-index: 1000 !important;
+  }
+  .sakura-container {
+    position: fixed !important;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none !important;
+    z-index: 900 !important;
+  }
+  .petal {
+    position: absolute !important;
+    background: #ffb7c5 !important;
+    border-radius: 150% 0 150% 0 !important;
+    opacity: 0.7 !important;
+    animation: fall linear infinite;
+  }
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.7; }
+    90% { opacity: 0.7; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+  }
+
+  .premium-heading {
+    font-family: 'Shippori Mincho', serif !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.05em;
+  }
+
+  .back-nav { padding-top: 40px; position: relative; z-index: 10; }
+  .back-link {
+    color: #e2c891; text-decoration: none; font-weight: 700;
+    font-size: 0.9rem; transition: 0.3s;
+  }
+  .back-link:hover { color: white; transform: translateX(-5px); display: inline-block; }
 
   /* Hero */
   .plan-hero.premium {
     padding: 150px 0 120px;
     background: url('https://images.unsplash.com/photo-1518133910546-b6c2fb7d79e3?auto=format&fit=crop&q=80&w=1200') center/cover;
-    position: relative;
-    color: white;
-    text-align: center;
+    position: relative; color: white; text-align: center; margin-top: -60px;
   }
-
   .luxury-overlay {
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(to bottom, rgba(58, 46, 38, 0.9), rgba(58, 46, 38, 0.4));
+    position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, rgba(58, 46, 38, 0.9), rgba(58, 46, 38, 0.5));
   }
-
   .premium-badge {
-    display: inline-block;
-    font-family: 'Outfit', sans-serif;
-    font-size: 0.9rem;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #e2c891;
-    margin-bottom: 20px;
-    position: relative;
+    display: inline-block; font-size: 0.9rem; letter-spacing: 0.3em;
+    text-transform: uppercase; color: #e2c891; margin-bottom: 20px; position: relative; z-index: 2;
   }
+  .plan-label.gold { background: #c5a059; color: white; padding: 5px 15px; border-radius: 4px; font-weight: 800; margin-bottom: 20px; display: inline-block; position: relative; z-index: 2; }
+  .plan-subtitle { font-size: 1.1rem; opacity: 0.8; margin-top: 10px; position: relative; z-index: 2; }
 
-  .plan-label.gold { background: #c5a059; color: white; }
-  .campaign-price-tag.gold { background: rgba(255, 255, 255, 0.1); border-color: #e2c891; backdrop-filter: blur(10px); }
-  .campaign-price-tag.gold .price, .campaign-price-tag.gold .label { color: #e2c891; }
+  .campaign-price-tag.gold {
+    display: inline-flex; flex-direction: column; align-items: center;
+    padding: 20px 40px; background: rgba(255, 255, 255, 0.1); border: 2px solid #e2c891;
+    border-radius: 12px; margin-top: 30px; position: relative; z-index: 2; backdrop-filter: blur(10px);
+  }
+  .campaign-price-tag.gold .price { font-size: 2.8rem; font-weight: 900; color: #e2c891; }
+  .campaign-price-tag.gold .label { color: #e2c891; font-weight: 800; }
+  .campaign-price-tag.gold .old { font-size: 1.1rem; color: rgba(255,255,255,0.6); text-decoration: line-through; }
 
   /* Holistic Grid */
   .holistic-experience { padding: 120px 0; }
   .section-intro { text-align: center; margin-bottom: 80px; }
-  .section-intro h2 { font-size: 2.5rem; margin-bottom: 20px; }
-
   .holistic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
+  .h-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(58, 46, 38, 0.05); border: 1px solid #f0e6d2; }
+  .h-image-placeholder { height: 200px; }
+  .h-image-placeholder.business { background: #dcd2c3; }
+  .h-image-placeholder.mind { background: #c5a059; }
+  .h-image-placeholder.ai { background: #3a2e26; }
+  .h-content { padding: 30px; }
+  .h-content h3 { font-size: 1.4rem; margin-bottom: 15px; color: #c5a059; }
+
+  /* Premium Options */
+  .premium-options { padding: 120px 0; background: rgba(197, 160, 89, 0.05); }
+  .p-opt-list { max-width: 800px; margin: 60px auto 0; }
+  .p-opt-item { display: flex; gap: 30px; margin-bottom: 50px; }
+  .p-opt-num { font-size: 2.5rem; font-weight: 800; color: #c5a059; opacity: 0.3; line-height: 1; }
+  .p-opt-item h4 { font-size: 1.3rem; margin-bottom: 10px; border-bottom: 1px solid #f0e6d2; padding-bottom: 5px; }
+
+  /* Message */
+  .premium-message { padding: 120px 0; text-align: center; background: white; }
+  .message-inner { max-width: 700px; margin: 0 auto; line-height: 2.2; font-size: 1.2rem; }
+  .message-sig { margin-top: 50px; font-weight: 800; font-size: 1.4rem; color: #3a2e26; }
+
+  /* CTA */
+  .cta-section.premium { padding: 120px 0; }
+  .cta-inner.gold { background: #3a2e26; color: white; padding: 80px 40px; border-radius: 40px; text-align: center; border: 1px solid #c5a059; }
+  .btn-primary.gold-light {
+    display: inline-block; background: #c5a059; color: white;
+    padding: 22px 60px; border-radius: 100px; font-weight: 900;
+    text-decoration: none; margin-top: 40px; font-size: 1.4rem; transition: 0.3s;
+  }
+  .btn-primary.gold-light:hover { background: #e2c891; transform: translateY(-5px); box-shadow: 0 15px 30px rgba(197, 160, 89, 0.4); }
+  .cta-caution { margin-top: 25px; font-size: 0.9rem; color: #e2c891; opacity: 0.9; }
+
+  .footer-nav { padding-bottom: 80px; text-align: center; }
+  .btn-secondary-outline {
+    display: inline-block; border: 2px solid #c5a059; color: #c5a059;
+    padding: 15px 40px; border-radius: 50px; text-decoration: none;
+    font-weight: 800; transition: 0.3s;
+  }
+  .btn-secondary-outline:hover { background: #c5a059; color: white; }
+
+  @media (max-width: 768px) {
+    .p-opt-item { flex-direction: column; gap: 10px; }
+  }
+</style>
+auto-fit, minmax(300px, 1fr)); gap: 40px; }
   .h-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(58, 46, 38, 0.05); }
   .h-image-placeholder { height: 200px; background: #eee; }
   .h-image-placeholder.business { background: #dcd2c3; }
