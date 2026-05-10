@@ -20,48 +20,68 @@ const jsonLd = {
   title="【20%OFF】起業記念キャンペーン｜心理学・ICT・AIWeb制作｜和-Node" 
   description="和-Nodeの起業記念。心理導線LP制作からAI・LINE自動化システム構築まで、全メニュー20%OFF。毎月先着3名様限定の特別オファー。"
 >
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   
   <div class="campaign-page">
     <!-- Sakura Container -->
     <div class="sakura-container" id="sakura-container"></div>
-    <script>
-      const container = document.getElementById('sakura-container');
-      const petalCount = 30;
-      for (let i = 0; i < petalCount; i++) {
-        const petal = document.createElement('div');
-        petal.className = 'petal';
-        petal.style.left = Math.random() * 100 + '%';
-        petal.style.width = Math.random() * 10 + 5 + 'px';
-        petal.style.height = petal.style.width;
-        petal.style.animationDuration = Math.random() * 5 + 5 + 's';
-        petal.style.animationDelay = Math.random() * 5 + 's';
-        container.appendChild(petal);
+    <script is:inline>
+      function initPremiumEffects() {
+        // Sakura
+        const container = document.getElementById('sakura-container');
+        if (!container) return;
+        container.innerHTML = '';
+        const petalCount = 60;
+        for (let i = 0; i < petalCount; i++) {
+          const petal = document.createElement('div');
+          petal.className = 'petal';
+          petal.style.left = Math.random() * 100 + '%';
+          petal.style.width = Math.random() * 10 + 5 + 'px';
+          petal.style.height = petal.style.width;
+          petal.style.animationDuration = Math.random() * 5 + 5 + 's';
+          petal.style.animationDelay = Math.random() * 5 + 's';
+          container.appendChild(petal);
+        }
+
+        // Parallax
+        const bg = document.querySelector('.parallax-bg');
+        window.addEventListener('scroll', () => {
+          const scroll = window.pageYOffset;
+          if (bg) {
+            bg.style.transform = `translateY(${scroll * 0.4}px)`;
+          }
+        });
       }
+      initPremiumEffects();
+      document.addEventListener('astro:page-load', initPremiumEffects);
     </script>
 
-    <!-- Hero Section -->
-    <section class="hero-campaign">
-      <div class="hero-bg-accent"></div>
+    <!-- Hero Section Upgrade -->
+    <section class="hero-campaign-premium">
+      <div class="hero-key-visual">
+        <img src="/images/campaign-key-visual.png" alt="Anniversary Key Visual" class="parallax-bg" />
+        <div class="hero-overlay"></div>
+      </div>
       <div class="container">
-        <div class="anniversary-badge-large reveal">
-          <span class="badge-text">1st ANNIVERSARY</span>
-          <span class="badge-sub">Startup Campaign</span>
-        </div>
-        <h1 class="reveal">
-          <span class="eyebrow-red">起業記念・限定特別オファー</span>
-          <br/>心理学・ICT・AIを活用した<br/>Web制作・コンサルティング キャンペーン
-        </h1>
-        <p class="hero-lead"><strong>「想い」と「技術」を、もっとも優しい形で結ぶ。</strong></p>
-        <p class="hero-price reveal">
-          制作メニュー・オプション <span class="highlight">すべて20% OFF</span>
-        </p>
-        <p class="hero-limit reveal">
-          毎月先着 <strong>3名様</strong> 限定 / 2026年7月31日まで
-        </p>
-        <div class="hero-btns reveal">
-          <a href="#plans" class="btn-primary-gold">限定プランを見る</a>
-          <a href="/contact" class="btn-secondary-white">無料で相談する</a>
+        <div class="hero-content-wrap">
+          <div class="anniversary-badge-large reveal">
+            <span class="badge-text">1st ANNIVERSARY</span>
+            <span class="badge-sub">Startup Campaign</span>
+          </div>
+          <h1 class="reveal premium-heading">
+            <span class="eyebrow-red">起業記念・限定特別オファー</span>
+            <br/>ビジネスを整える、<br/>和の叡智と最先端の技術。
+          </h1>
+          <p class="hero-lead"><strong>「想い」と「技術」を、もっとも優しい形で結ぶ。</strong></p>
+          <div class="hero-price-box reveal">
+            <p class="price-label">ALL PRODUCTION & OPTIONS</p>
+            <p class="price-value">20% <span class="unit">OFF</span></p>
+          </div>
+          <div class="hero-btns reveal">
+            <a href="#plans" class="btn-primary-gold">限定プランを詳しく見る</a>
+            <a href="/contact" class="btn-secondary-white">無料で相談する</a>
+          </div>
         </div>
       </div>
     </section>
@@ -241,9 +261,10 @@ const jsonLd = {
     color: var(--text-deep);
     overflow-x: hidden;
     position: relative;
+    font-family: 'Shippori Mincho', serif;
   }
 
-  /* Sakura Petal Animation */
+  /* Sakura & Texture (Enhanced for visibility) */
   .sakura-container {
     position: fixed;
     top: 0;
@@ -251,13 +272,14 @@ const jsonLd = {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1;
+    z-index: 100; /* Bring to front */
   }
   .petal {
     position: absolute;
-    background: var(--sakura);
+    background: #ffc0cb; /* More pink */
     border-radius: 150% 0 150% 0;
-    opacity: 0.6;
+    opacity: 0.8;
+    filter: blur(1px);
     animation: fall linear infinite;
   }
   @keyframes fall {
@@ -266,8 +288,6 @@ const jsonLd = {
     90% { opacity: 0.8; }
     100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
   }
-
-  /* Texture Overlay */
   .campaign-page::before {
     content: "";
     position: fixed;
@@ -276,12 +296,91 @@ const jsonLd = {
     width: 100%;
     height: 100%;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3FfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3F/filter%3E%3Frect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3F/svg%3E");
-    opacity: 0.03;
+    opacity: 0.08; /* Doubled opacity */
     pointer-events: none;
+    z-index: 110;
+  }
+
+  .premium-heading {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  }
+
+  /* Hero Premium */
+  .hero-campaign-premium {
+    position: relative;
+    height: 100vh;
+    min-height: 850px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    overflow: hidden;
+    color: white;
+  }
+
+  .hero-key-visual {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .parallax-bg {
+    width: 100%;
+    height: 130%;
+    object-fit: cover;
+    will-change: transform;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
     z-index: 2;
   }
 
-  /* Hero */
+  .hero-content-wrap {
+    position: relative;
+    z-index: 3;
+    max-width: 1000px;
+    padding: 0 20px;
+  }
+
+  .hero-price-box {
+    margin: 50px auto;
+    padding: 30px 60px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
+    display: inline-block;
+  }
+
+  .price-label {
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  }
+
+  .price-value {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 1;
+    color: var(--gold-light);
+  }
+
+  .price-value .unit { font-size: 2rem; margin-left: 10px; }
+
+  /* Existing Styles Refined */
   .hero-campaign {
     position: relative;
     padding: 160px 0 120px;
