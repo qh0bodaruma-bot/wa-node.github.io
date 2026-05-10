@@ -38,6 +38,32 @@ const jsonLd = {
 <BaseLayout>
   <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   <main>
+    <!-- New: Problem/Empathy Section -->
+    <section class="pain-points">
+      <div class="container">
+        <div class="pain-header reveal">
+          <span class="eyebrow">Your Challenges</span>
+          <h2>こんな「もどかしさ」、<br class="sp-only"/>抱えていませんか？</h2>
+        </div>
+        <div class="pain-grid">
+          <div class="pain-card reveal">
+            <div class="p-icon">📉</div>
+            <p>LPを作ってみたけれど、<br/><strong>驚くほど反応がない。</strong></p>
+          </div>
+          <div class="pain-card reveal" style="transition-delay: 0.1s;">
+            <div class="p-icon">🧩</div>
+            <p>やりたいことはあるのに、<br/><strong>ITの専門用語が壁になる。</strong></p>
+          </div>
+          <div class="pain-card reveal" style="transition-delay: 0.2s;">
+            <div class="p-icon">🤝</div>
+            <p>相談したいけれど、<br/><strong>売込みや勧誘が怖くて踏み出せない。</strong></p>
+          </div>
+        </div>
+        <div class="pain-solution reveal">
+          <p>その違和感、実は<strong>「技術」と「心」の段差</strong>から生まれています。<br/>和-Nodeは、その段差を埋めるために存在します。</p>
+        </div>
+      </div>
+    </section>
     <section class="hero">
       <div class="hero-inner">
         <div class="hero-content">
@@ -54,9 +80,18 @@ const jsonLd = {
           <div class="hero-stats">
             <span style="font-weight:800; color:var(--accent2); font-size:1.1rem;">初回30分無料。診断・シミュレーター利用で合計最大60分まで無料。</span>
           </div>
-          <div class="btns" style="justify-content: flex-start;">
-            <a class="btn" href="/contact">特典つきで60分相談する</a>
+          <div class="btns" style="justify-content: flex-start; align-items: center; gap: 24px;">
+            <div class="cta-wrapper">
+              <a class="btn" href="/contact">特典つきで60分相談する</a>
+              <a href="/campaign-anniversary/" class="campaign-floating-badge">
+                <span class="badge-text">起業記念 20% OFF</span>
+                <span class="badge-sub">毎月3名限定・今月残りわずか</span>
+              </a>
+            </div>
             <a class="btn secondary" href="/simulator">制作費を試算する</a>
+          </div>
+          <div class="campaign-link-wrapper">
+            <a href="/campaign-anniversary/" class="campaign-text-link">キャンペーン詳細・特別プランはこちら →</a>
           </div>
           <div class="nav-guide" style="margin-top: 24px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 16px; max-width: 600px;">
             <p style="margin-bottom: 12px; font-weight: 800; color: var(--text);">【目的別に選ぶ】</p>
@@ -659,5 +694,97 @@ const jsonLd = {
     .about-content { order: 2; }
     .about-image { order: 1; }
     .philosophy-card { padding: 32px 20px; }
+  }
+
+  /* --- Psychological Enhancements --- */
+
+  /* Campaign Badge & Link */
+  .cta-wrapper {
+    position: relative;
+    display: inline-block;
+  }
+  .campaign-floating-badge {
+    position: absolute;
+    top: -45px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #d14d3a;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(209, 77, 58, 0.3);
+    z-index: 10;
+    animation: float 3s ease-in-out infinite;
+  }
+  .campaign-floating-badge::after {
+    content: '';
+    position: absolute;
+    bottom: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #d14d3a;
+  }
+  @keyframes float {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, -5px); }
+  }
+  .campaign-link-wrapper {
+    margin-top: 16px;
+  }
+  .campaign-text-link {
+    color: var(--accent2);
+    font-weight: 800;
+    text-decoration: none;
+    font-size: 0.95rem;
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+  }
+  .campaign-text-link:hover {
+    border-bottom-color: var(--accent2);
+    opacity: 0.8;
+  }
+
+  /* Pain Points Section */
+  .pain-points {
+    padding: 100px 0;
+    background: #fffefb;
+    text-align: center;
+  }
+  .pain-header { margin-bottom: 60px; }
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+  .pain-card {
+    background: white;
+    padding: 40px 20px;
+    border-radius: 20px;
+    border: 1px solid #f0e6d2;
+    transition: 0.3s;
+    text-align: center;
+  }
+  .pain-card:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(197, 160, 89, 0.1); }
+  .p-icon { font-size: 2.5rem; margin-bottom: 20px; display: block; }
+  .pain-card p { font-size: 1.05rem; line-height: 1.8; color: #555; margin: 0; }
+  .pain-card strong { color: var(--accent2); }
+  .pain-solution {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1.8;
+    color: var(--text-deep);
+  }
+
+  @media (max-width: 768px) {
+    .pain-points { padding: 60px 0; }
+    .pain-solution { font-size: 1.05rem; padding: 0 20px; }
+    .campaign-floating-badge { font-size: 0.7rem; padding: 4px 10px; }
   }
 </style>
