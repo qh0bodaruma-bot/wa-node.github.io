@@ -5,7 +5,13 @@ const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "【起業記念Plan C】和-Node 伴走型特注案 | 和-Node",
-  "description": "技術と心、その両面から事  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
+  "description": "技術と心、その両面から事業を整える、和-Node起業記念キャンペーン限定の特注プラン。経営コンサル・AI伴走・メンタル支援を統合した最上位パッケージです。",
+};
+---
+
+<BaseLayout title="【起業記念Plan C】和-Node 伴走型特注案" description={jsonLd.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap" rel="stylesheet">
 
   <div class="campaign-page">
     <!-- Sakura Container -->
@@ -15,7 +21,7 @@ const jsonLd = {
         const container = document.getElementById('sakura-container');
         if (!container) return;
         container.innerHTML = '';
-        for (let i = 0; i < 50; i++) { // More petals for premium
+        for (let i = 0; i < 50; i++) {
           const petal = document.createElement('div');
           petal.className = 'petal';
           petal.style.left = Math.random() * 100 + '%';
@@ -46,8 +52,8 @@ const jsonLd = {
           <p class="plan-subtitle">あなたの「人生」と「事業」を、一本の導線で整える。</p>
           <div class="campaign-price-tag gold reveal">
             <span class="label">起業記念 20% OFF</span>
-            <span class="price">¥200,000<small>(税別)</small></span>
-            <span class="old">通常 ¥250,000</span>
+            <span class="price">220,000円<small>(税込)</small></span>
+            <span class="old">通常 275,000円(税込)</span>
           </div>
         </div>
       </section>
@@ -61,7 +67,6 @@ const jsonLd = {
           </div>
 
           <div class="holistic-grid">
-            <!-- Business -->
             <div class="h-card reveal">
               <div class="h-image-placeholder business"></div>
               <div class="h-content">
@@ -70,28 +75,26 @@ const jsonLd = {
               </div>
             </div>
 
-            <!-- Mind -->
             <div class="h-card reveal" style="transition-delay: 0.1s;">
               <div class="h-image-placeholder mind"></div>
               <div class="h-content">
                 <h3>経営者のための「心の整理」</h3>
-                <p>産業カウンセラー資格を持つ代表が、3ヶ月間あなたの良き対話相手（パートナー）として、孤独な経営判断を支えます。</p>
+                <p>産業カウンセラー資格を持つ代表が、3ヶ月間あなたの良き対話相手として、孤独な経営判断を支えます。</p>
               </div>
             </div>
 
-            <!-- AI / Future -->
             <div class="h-card reveal" style="transition-delay: 0.2s;">
               <div class="h-image-placeholder ai"></div>
               <div class="h-content">
                 <h3>AI活用・未来への投資</h3>
-                <p>ChatGPTなどの最新AIを「道具」として使いこなせるようレクチャー。現場に合わせたプロンプトエンジニアリングを伝授します。</p>
+                <p>最新AIを「道具」として使いこなせるよう伴走。現場に合わせたプロンプト構築を伝授します。</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Included Options (Mori Mori) -->
+      <!-- Included Options -->
       <section class="premium-options">
         <div class="container">
           <h2 class="reveal premium-heading">Plan C だけに盛り込まれた贅沢な内容</h2>
@@ -108,13 +111,14 @@ const jsonLd = {
               <div>
                 <h4>法人メンタル相談窓口（β版）の設置</h4>
                 <p>従業員の皆様が、匿名で代表に相談できる窓口を開設。組織の心理的安全性を高めます。</p>
+                <p class="opt-note">※対象人数、相談頻度などは企業規模に合わせて個別に設計いたします。守秘義務を徹底し、個人が特定される情報は会社へ共有いたしません。</p>
               </div>
             </div>
             <div class="p-opt-item reveal">
               <span class="p-opt-num">03</span>
               <div>
                 <h4>AI特注プロンプト集の作成</h4>
-                <p>あなたの事業ドメインに特化した、ブログ作成やSNS運用を加速させる専用AI指示書を納品します。</p>
+                <p>あなたの事業に特化した、ブログ作成やSNS運用を加速させる専用AI指示書を納品します。</p>
               </div>
             </div>
           </div>
@@ -158,15 +162,6 @@ const jsonLd = {
     position: relative;
     font-family: 'Shippori Mincho', serif !important;
   }
-  .campaign-page::before {
-    content: "" !important;
-    position: fixed !important;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3FfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3F/filter%3E%3Frect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3F/svg%3E") !important;
-    opacity: 0.1 !important;
-    pointer-events: none !important;
-    z-index: 1000 !important;
-  }
   .sakura-container {
     position: fixed !important;
     top: 0; left: 0; width: 100%; height: 100%;
@@ -193,12 +188,12 @@ const jsonLd = {
     letter-spacing: 0.05em;
   }
 
-  .back-nav { padding-top: 40px; position: relative; z-index: 10; }
+  .back-nav { padding: 40px 0; position: relative; z-index: 10; }
   .back-link {
-    color: #e2c891; text-decoration: none; font-weight: 700;
+    color: var(--accent); text-decoration: none; font-weight: 700;
     font-size: 0.9rem; transition: 0.3s;
   }
-  .back-link:hover { color: white; transform: translateX(-5px); display: inline-block; }
+  .back-link:hover { color: var(--accent-red); transform: translateX(-5px); display: inline-block; }
 
   /* Hero */
   .plan-hero.premium {
@@ -231,12 +226,13 @@ const jsonLd = {
   .section-intro { text-align: center; margin-bottom: 80px; }
   .holistic-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; }
   .h-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(58, 46, 38, 0.05); border: 1px solid #f0e6d2; }
-  .h-image-placeholder { height: 200px; }
+  .h-image-placeholder { height: 200px; background: #eee; }
   .h-image-placeholder.business { background: #dcd2c3; }
   .h-image-placeholder.mind { background: #c5a059; }
   .h-image-placeholder.ai { background: #3a2e26; }
   .h-content { padding: 30px; }
   .h-content h3 { font-size: 1.4rem; margin-bottom: 15px; color: #c5a059; }
+  .h-content p { font-size: 0.95rem; line-height: 1.8; color: #6a5e55; }
 
   /* Premium Options */
   .premium-options { padding: 120px 0; background: rgba(197, 160, 89, 0.05); }
@@ -244,6 +240,8 @@ const jsonLd = {
   .p-opt-item { display: flex; gap: 30px; margin-bottom: 50px; }
   .p-opt-num { font-size: 2.5rem; font-weight: 800; color: #c5a059; opacity: 0.3; line-height: 1; }
   .p-opt-item h4 { font-size: 1.3rem; margin-bottom: 10px; border-bottom: 1px solid #f0e6d2; padding-bottom: 5px; }
+  .p-opt-item p { line-height: 1.7; color: #6a5e55; }
+  .opt-note { font-size: 0.85rem; color: #888; margin-top: 10px; }
 
   /* Message */
   .premium-message { padding: 120px 0; text-align: center; background: white; }
@@ -269,40 +267,29 @@ const jsonLd = {
   }
   .btn-secondary-outline:hover { background: #c5a059; color: white; }
 
-  @media (max-width: 768px) {
-    .p-opt-item { flex-direction: column; gap: 10px; }
-  }
-</style>
-auto-fit, minmax(300px, 1fr)); gap: 40px; }
-  .h-card { background: white; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 40px rgba(58, 46, 38, 0.05); }
-  .h-image-placeholder { height: 200px; background: #eee; }
-  .h-image-placeholder.business { background: #dcd2c3; }
-  .h-image-placeholder.mind { background: #c5a059; }
-  .h-image-placeholder.ai { background: #3a2e26; }
-  .h-content { padding: 30px; }
-  .h-content h3 { font-size: 1.4rem; margin-bottom: 15px; color: #c5a059; }
-  .h-content p { font-size: 0.95rem; line-height: 1.8; color: #6a5e55; }
-
-  /* Premium Options */
-  .premium-options { padding: 100px 0; background: #fdfaf7; }
-  .p-opt-list { max-width: 800px; margin: 60px auto 0; }
-  .p-opt-item { display: flex; gap: 30px; margin-bottom: 50px; }
-  .p-opt-num { font-size: 2.5rem; font-weight: 800; color: #c5a059; opacity: 0.3; line-height: 1; }
-  .p-opt-item h4 { font-size: 1.3rem; margin-bottom: 10px; }
-  .p-opt-item p { line-height: 1.7; color: #6a5e55; }
-
-  /* Message */
-  .premium-message { padding: 100px 0; text-align: center; background: white; }
-  .message-inner { max-width: 700px; margin: 0 auto; font-style: italic; line-height: 2; font-size: 1.1rem; }
-  .message-sig { margin-top: 40px; font-weight: 800; font-family: "Noto Serif JP", serif; }
-
-  /* CTA */
-  .cta-inner.gold { background: #3a2e26; border: 1px solid #c5a059; }
-  .btn-primary.gold-light { background: #c5a059; color: white; }
-  .btn-primary.gold-light:hover { background: #e2c891; color: #3a2e26; }
-  .cta-caution { margin-top: 20px; font-size: 0.85rem; color: #e2c891; }
+  .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
 
   @media (max-width: 768px) {
     .p-opt-item { flex-direction: column; gap: 10px; }
+    .cta-inner.gold { padding: 60px 20px; }
+    .premium-heading { font-size: 1.8rem; }
+    .campaign-price-tag.gold .price { font-size: 2rem; }
   }
 </style>
+
+<script is:inline>
+  function initReveal() {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+  initReveal();
+  document.addEventListener('astro:page-load', initReveal);
+</script>
