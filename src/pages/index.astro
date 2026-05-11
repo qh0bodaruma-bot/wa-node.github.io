@@ -181,12 +181,28 @@ const jsonLd = {
           <span class="eyebrow">Philosophy</span>
           <h2>なぜ、技術と心理を<br class="sp-only" />同じ窓口で扱うのか</h2>
         </div>
-        <div class="philosophy-card">
+        <div class="philosophy-card reveal">
           <div class="philosophy-content">
             <p>和-Nodeは、心理学の知見を活かして、<strong>「人に伝わるWeb導線」「現場で続くICT活用」「安心して相談できる仕組み」</strong>をつくるコンサルティングサービスです。</p>
             <p>IT制作の現場では、技術者は技術を語り、カウンセラーは心を語ります。しかし、その二つが別々の窓口であること自体が、クライアント様にとっての大きな「ギャップ」になっていると感じてきました。</p>
             <p>和-Nodeは、20年のエンジニア経験と、心理カウンセラーとしての専門知見を一つの窓口に集約しました。<strong>「技術をカウンセラーに説明し、心理をエンジニアに説明する」という手間は、もう必要ありません。</strong></p>
             <p>ある制作現場で、ボタンの文字を「問い合わせ」から「一緒に整理しましょう」という言葉に変えただけで、お客様の受け取り方が大きく変わりました。それは、技術だけではなく、受け取る人の心理に寄り添った設計の力でした。私は、技術を単なる道具ではなく、あなたの可能性を広げ、心を支える「パートナー」として届けるために、この3つの領域を一本の導線で結んでいます。</p>
+            
+            <!-- Synergy Diagram (Added for Authority) -->
+            <div class="synergy-container reveal">
+              <svg class="synergy-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="200" cy="120" r="70" fill="var(--soft)" opacity="0.6" stroke="var(--accent)" stroke-width="1"/>
+                <circle cx="150" cy="200" r="70" fill="var(--soft)" opacity="0.6" stroke="var(--accent)" stroke-width="1"/>
+                <circle cx="250" cy="200" r="70" fill="var(--soft)" opacity="0.6" stroke="var(--accent)" stroke-width="1"/>
+                <text x="200" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--accent)">心理学</text>
+                <text x="200" y="130" text-anchor="middle" font-size="10" fill="var(--muted)">人の心を動かす</text>
+                <text x="130" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--accent)">ICT</text>
+                <text x="130" y="220" text-anchor="middle" font-size="10" fill="var(--muted)">仕組みを整える</text>
+                <text x="270" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--accent)">AI</text>
+                <text x="270" y="220" text-anchor="middle" font-size="10" fill="var(--muted)">可能性を広げる</text>
+                <text x="200" y="180" text-anchor="middle" font-size="18" font-weight="800" fill="var(--accent2)">和-Node</text>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
@@ -422,6 +438,37 @@ const jsonLd = {
           こだわりたい機能を盛り込むなら、今が絶好の機会です。
         </p>
         <div class="btns"><a class="btn" href="/pricing">料金一覧を詳しく見る</a></div>
+      </div>
+    </section>
+
+    </section>
+
+    <!-- Next Stage Section (Added for Future Orientation) -->
+    <section class="next-stage-section">
+      <div class="container">
+        <div class="next-stage-box reveal">
+          <span class="eyebrow">The Future</span>
+          <h2>「整った後」に待っている景色</h2>
+          <p>和-Nodeが目指すのは、単なる問題解決ではありません。<br/>その先の、あなたが本来持っている力を最大限に発揮できる状態です。</p>
+          
+          <div class="next-stage-grid">
+            <div class="next-item reveal" style="transition-delay: 0.1s;">
+              <span>✨</span>
+              <h4>確信を持って進める</h4>
+              <p>迷いが消え、自分の進むべき道に自信が持てるようになります。</p>
+            </div>
+            <div class="next-item reveal" style="transition-delay: 0.2s;">
+              <span>🚀</span>
+              <h4>本質的な仕事に集中</h4>
+              <p>煩雑な技術課題から解放され、本当にやりたかったことに時間を使えます。</p>
+            </div>
+            <div class="next-item reveal" style="transition-delay: 0.3s;">
+              <span>🤝</span>
+              <h4>深い繋がりが生まれる</h4>
+              <p>想いが正しく伝わり、理想のお客様と深く繋がれるようになります。</p>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -851,4 +898,105 @@ const jsonLd = {
     .pain-points { padding: 80px 0; }
     .pain-card { padding: 40px 30px; }
   }
+
+  /* --- Micro-interactions (Reveal Animation) --- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+    backface-visibility: hidden;
+  }
+  .reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* --- Synergy Diagram (Psychological Authority) --- */
+  .synergy-container {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .synergy-svg {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+  }
+
+  /* --- Next Stage Section (Future-oriented) --- */
+  .next-stage-section {
+    padding: 120px 0;
+    background: linear-gradient(to bottom, var(--white), var(--soft));
+    text-align: center;
+  }
+  .next-stage-box {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .next-stage-box h2 {
+    font-size: 2.2rem;
+    margin-bottom: 32px;
+    color: var(--accent);
+  }
+  .next-stage-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+  }
+  .next-item {
+    background: rgba(255, 255, 255, 0.5);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+  }
+  .next-item span {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .next-item h4 {
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+  .next-item p {
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 768px) {
+    .next-stage-grid { grid-template-columns: 1fr; }
+  }
 </style>
+
+<script is:inline>
+  // Intersection Observer for Reveal Animations
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, observerOptions);
+
+    const revealElements = document.querySelectorAll('.reveal');
+    revealElements.forEach(el => observer.observe(el));
+  });
+
+  // Parallax Effect for Hero
+  window.addEventListener('scroll', () => {
+    const scrolled = window.pageYOffset;
+    const heroVisual = document.querySelector('.hero-visual');
+    if (heroVisual) {
+      heroVisual.style.transform = `translateY(${scrolled * 0.1}px)`;
+    }
+  });
+</script>
