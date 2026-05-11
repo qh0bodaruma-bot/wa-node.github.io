@@ -1,0 +1,470 @@
+---
+// src/pages/showcase-hydrogen.astro
+const title = "Hydrogen-X | Leading the Green Revolution";
+const description = "Next-generation hydrogen technology solutions for a sustainable future.";
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <meta name="description" content={description}>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d4ff;
+            --primary-dark: #008fb3;
+            --bg-deep: #0b1120;
+            --bg-card: rgba(255, 255, 255, 0.05);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --accent: #10b981;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 700;
+        }
+
+        /* --- Components --- */
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .glass {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.8rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        /* --- Header --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.5rem 0;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(11, 17, 32, 0.8);
+            backdrop-filter: blur(8px);
+            padding: 1rem 0;
+        }
+
+        .nav-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Outfit', sans-serif;
+        }
+
+        .lang-toggle {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.25rem;
+            border-radius: 999px;
+        }
+
+        .lang-btn {
+            padding: 0.4rem 1rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            background: transparent;
+            color: var(--text-dim);
+        }
+
+        .lang-btn.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        /* --- Hero --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            background: radial-gradient(circle at 70% 30%, rgba(0, 212, 255, 0.15) 0%, transparent 50%);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('/images/hydrogen-hero.png') no-repeat center center/cover;
+            opacity: 0.4;
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 4.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, #fff, var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        /* --- Case Studies --- */
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .case-card {
+            padding: 2rem;
+            transition: var(--transition);
+        }
+
+        .case-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .case-tag {
+            font-size: 0.75rem;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        /* --- Contact Form --- */
+        .contact-section {
+            padding: 8rem 0;
+            background: linear-gradient(to bottom, transparent, rgba(0, 212, 255, 0.05));
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 4rem;
+        }
+
+        .form-info h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-control label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+        }
+
+        .form-control input, 
+        .form-control select, 
+        .form-control textarea {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            color: #fff;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-control input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .branch-fields {
+            display: none;
+            padding: 1rem;
+            border-left: 2px solid var(--primary);
+            background: rgba(0, 212, 255, 0.03);
+            margin-bottom: 1.5rem;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        [data-lang="en"] { display: none; }
+
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container nav-inner">
+            <div class="logo">HYDROGEN-X</div>
+            <div class="lang-toggle">
+                <button class="lang-btn active" onclick="setLang('ja')">JP</button>
+                <button class="lang-btn" onclick="setLang('en')">EN</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <span class="case-tag" data-ja="クリーンエネルギーの未来" data-en="Future of Clean Energy">クリーンエネルギーの未来</span>
+                    <h1 data-ja="水素技術で、<br>地球を塗り替える。" data-en="Redefining Earth <br>with Hydrogen.">水素技術で、<br>地球を塗り替える。</h1>
+                    <p data-ja="私たちは、日本発のディープテック企業として、持続可能なエネルギー社会の基盤となる革新的な水素製造・管理ソリューションを提供します。" 
+                       data-en="As a Japan-born deep tech venture, we provide innovative hydrogen production and management solutions that form the foundation of a sustainable energy society.">
+                        私たちは、日本発のディープテック企業として、持続可能なエネルギー社会の基盤となる革新的な水素製造・管理ソリューションを提供します。
+                    </p>
+                    <a href="#contact" class="btn btn-primary" data-ja="技術相談を予約する" data-en="Book a Technical Consultation">技術相談を予約する</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Case Studies (The "5 Items") -->
+        <section class="container" style="padding: 8rem 0;">
+            <div class="section-title">
+                <h2 data-ja="技術実績 & ケーススタディ" data-en="Technical Achievements & Case Studies">技術実績 & ケーススタディ</h2>
+                <p data-ja="5つの異なる領域での課題解決実績" data-en="Proven solutions across 5 distinct domains">5つの異なる領域での課題解決実績</p>
+            </div>
+            <div class="grid">
+                <!-- Case 1 -->
+                <div class="case-card glass">
+                    <span class="case-tag">Case 01</span>
+                    <h3 data-ja="次世代エネルギー管理システム" data-en="Next-Gen Energy Management">次世代エネルギー管理システム</h3>
+                    <p data-ja="IoTを活用した水素流量のリアルタイム監視と最適化を実現。" data-en="Real-time monitoring and optimization of hydrogen flow using IoT.">IoTを活用した水素流量のリアルタイム監視と最適化を実現。</p>
+                </div>
+                <!-- Case 2 -->
+                <div class="case-card glass">
+                    <span class="case-tag">Case 02</span>
+                    <h3 data-ja="グローバル製造ポータル" data-en="Global Manufacturing Portal">グローバル製造ポータル</h3>
+                    <p data-ja="多言語対応のセキュアな技術情報共有プラットフォームの構築。" data-en="Construction of a secure, multi-language technical information sharing platform.">多言語対応のセキュアな技術情報共有プラットフォームの構築。</p>
+                </div>
+                <!-- Case 3 -->
+                <div class="case-card glass">
+                    <span class="case-tag">Case 03</span>
+                    <h3 data-ja="ディープテック特化型ポートフォリオ" data-en="Deep Tech Portfolio">ディープテック特化型ポートフォリオ</h3>
+                    <p data-ja="複雑な技術情報を視覚的に伝えるB2Bマーケティング支援。" data-en="B2B marketing support visually communicating complex technical information.">複雑な技術情報を視覚的に伝えるB2Bマーケティング支援。</p>
+                </div>
+                <!-- Case 4 -->
+                <div class="case-card glass">
+                    <span class="case-tag">Case 04</span>
+                    <h3 data-ja="公共セクター向けクリーンエネルギLP" data-en="Public Sector Energy LP">公共セクター向けクリーンエネルギLP</h3>
+                    <p data-ja="自治体連携を促進するアクセシビリティに優れた広報ページ。" data-en="Highly accessible PR page promoting municipal collaboration.">自治体連携を促進するアクセシビリティに優れた広報ページ。</p>
+                </div>
+                <!-- Case 5 -->
+                <div class="case-card glass">
+                    <span class="case-tag">Case 05</span>
+                    <h3 data-ja="拡張性の高い水素製造ダッシュボード" data-en="Scalable Hydrogen Dashboard">拡張性の高い水素製造ダッシュボード</h3>
+                    <p data-ja="マイクロサービス構成による高可用な監視システムの実装。" data-en="Implementation of a high-availability monitoring system using microservices.">マイクロサービス構成による高可用な監視システムの実装。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Branching Contact Form -->
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <div class="form-grid">
+                    <div class="form-info">
+                        <h2 data-ja="共に、未来を創る。" data-en="Shape the Future Together.">共に、未来を創る。</h2>
+                        <p data-ja="お問い合わせの目的に合わせ、専門の担当者が迅速に対応いたします。" data-en="Our specialized team will respond promptly according to your inquiry's purpose.">お問い合わせの目的に合わせ、専門の担当者が迅速に対応いたします。</p>
+                        <div style="margin-top: 2rem; color: var(--accent); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                            <span>Protected by Google reCAPTCHA v3</span>
+                        </div>
+                    </div>
+                    <div class="glass" style="padding: 3rem;">
+                        <form id="hydrogenForm">
+                            <div class="form-control">
+                                <label data-ja="お問い合わせの種類" data-en="Inquiry Type">お問い合わせの種類</label>
+                                <select id="inquiryType" required>
+                                    <option value="" disabled selected data-ja="選択してください" data-en="Please select">選択してください</option>
+                                    <option value="product" data-ja="製品に関するお問い合わせ" data-en="Product Inquiry">製品に関するお問い合わせ</option>
+                                    <option value="tech" data-ja="技術相談・共同研究" data-en="Technical / R&D Consultation">技術相談・共同研究</option>
+                                    <option value="media" data-ja="取材・登壇のご依頼" data-en="Media / Speaking Request">取材・登壇のご依頼</option>
+                                    <option value="recruit" data-ja="採用について" data-en="Careers">採用について</option>
+                                </select>
+                            </div>
+
+                            <!-- Dynamic Branching Fields -->
+                            <div id="branchProduct" class="branch-fields">
+                                <div class="form-control">
+                                    <label data-ja="ご検討中の製品" data-en="Product of Interest">ご検討中の製品</label>
+                                    <select>
+                                        <option data-ja="可搬式発電装置" data-en="Portable Generator">可搬式発電装置</option>
+                                        <option data-ja="加水分解装置" data-en="Hydrolysis Unit">加水分解装置</option>
+                                        <option data-ja="水素製造装置" data-en="Hydrogen Production Unit">水素製造装置</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div id="branchTech" class="branch-fields">
+                                <div class="form-control">
+                                    <label data-ja="相談内容の概要" data-en="Consultation Summary">相談内容の概要</label>
+                                    <textarea rows="3" placeholder="受託設計、共同研究のテーマなど"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="form-control">
+                                <label data-ja="お名前" data-en="Name">お名前</label>
+                                <input type="text" required placeholder="田中 太郎">
+                            </div>
+                            <div class="form-control">
+                                <label data-ja="貴社名" data-en="Company Name">貴社名</label>
+                                <input type="text" required placeholder="株式会社〇〇">
+                            </div>
+                            <div class="form-control">
+                                <label data-ja="メールアドレス" data-en="Email">メールアドレス</label>
+                                <input type="email" required placeholder="email@example.com">
+                            </div>
+                            <div class="form-control">
+                                <label data-ja="お問い合わせ内容" data-en="Message">お問い合わせ内容</label>
+                                <textarea rows="5" required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;" data-ja="送信する" data-en="Send Message">送信する</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script is:inline>
+        // Language Toggle Logic
+        function setLang(lang) {
+            document.querySelectorAll('[data-ja]').forEach(el => {
+                if (lang === 'en') {
+                    el.textContent = el.getAttribute('data-en') || el.textContent;
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                        el.placeholder = el.getAttribute('data-en-placeholder') || el.placeholder;
+                    }
+                } else {
+                    el.textContent = el.getAttribute('data-ja') || el.textContent;
+                }
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.toLowerCase() === lang);
+            });
+            
+            // Re-select options logic (simplified for demo)
+            document.querySelectorAll('option').forEach(opt => {
+                opt.textContent = lang === 'en' ? opt.getAttribute('data-en') : opt.getAttribute('data-ja');
+            });
+        }
+
+        // Branching Form Logic
+        const typeSelect = document.getElementById('inquiryType');
+        const branches = {
+            product: document.getElementById('branchProduct'),
+            tech: document.getElementById('branchTech')
+        };
+
+        typeSelect.addEventListener('change', (e) => {
+            // Hide all branches
+            Object.values(branches).forEach(b => b.style.display = 'none');
+            // Show selected branch
+            if (branches[e.target.value]) {
+                branches[e.target.value].style.display = 'block';
+            }
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
