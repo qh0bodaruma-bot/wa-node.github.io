@@ -5,5 +5,5 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://www.wa-node.com',
   trailingSlash: 'always',
-  integrations: [sitemap()],
+  // integrations: [sitemap()],
 });
