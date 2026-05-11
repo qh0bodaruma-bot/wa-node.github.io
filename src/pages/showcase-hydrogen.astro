@@ -65,6 +65,30 @@ const description = "Next-generation hydrogen technology solutions for a sustain
             transform: translateY(0);
         }
 
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.4);
+        }
+
         /* --- Mission Section (Heralbony inspired) --- */
         .mission-section {
             padding: 12rem 0;
@@ -401,7 +425,5 @@ const description = "Next-generation hydrogen technology solutions for a sustain
             header.classList.toggle('scrolled', window.scrollY > 50);
         });
     </script>
-</body>
-</html>
 </body>
 </html>
