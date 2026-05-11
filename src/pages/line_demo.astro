@@ -8,6 +8,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 
   <main class="demo-main">
+    <h1 class="sr-only">LINE Mini App 体験デモ - 和-Node</h1>
     <div class="phone-container">
       <!-- ヘッダー -->
       <div class="chat-header">
@@ -60,6 +61,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       --line-bg: #8CABD2;
       --bubble-white: #FFFFFF;
       --bubble-green: #E2F2D5;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border-width: 0;
     }
 
     .demo-notice {

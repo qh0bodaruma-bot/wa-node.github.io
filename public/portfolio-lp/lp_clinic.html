@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>【ポートフォリオ】LUMINOS CLINIC | 美容クリニック</title>
+<link rel="canonical" href="https://www.wa-node.com/portfolio-lp/lp_clinic.html">
 <meta name="description" content="これはポートフォリオ作品です。架空の美容クリニックのLPサンプルです。">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Noto+Sans+JP:wght@300;400;700&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet">
 <style>
@@ -27,10 +28,6 @@ nav{position:fixed;top:33px;left:0;right:0;z-index:999;display:flex;align-items:
 .nav-tel{color:var(--pink2);font-size:14px;font-weight:700;text-decoration:none;letter-spacing:0.04em;}
 .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
 .hamburger span{display:block;width:22px;height:2px;background:var(--pink2);}
-.mobile-menu{display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(253,240,242,0.98);z-index:9998;flex-direction:column;align-items:center;justify-content:center;gap:32px;}
-.mobile-menu.open{display:flex;}
-.mobile-menu a{color:var(--charcoal);font-size:20px;text-decoration:none;font-family:'Cormorant Garamond',serif;font-style:italic;}
-.mobile-menu-close{position:absolute;top:48px;right:22px;font-size:26px;color:var(--pink2);cursor:pointer;background:none;border:none;}
 
 .hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:66px;position: relative; overflow: hidden;}
 .hero-left{padding:80px 56px 80px 72px;display:flex;flex-direction:column;justify-content:center;}
@@ -87,8 +84,6 @@ footer{background:var(--charcoal);padding:60px 56px;color:rgba(255,255,255,0.5);
   .hero{grid-template-columns:1fr;}.hero-right{display:none;}.hero-left{padding:100px 20px 80px;}
   .menu,.reasons,.counseling,.profile,.facility,.flow,.faq{padding:80px 20px;}
   .menu-grid{grid-template-columns:1fr;}.reasons-grid{grid-template-columns:repeat(2,1fr);}
-  .profile div{grid-template-columns:1fr !important; gap:40px !important;}
-  .facility div{grid-template-columns:1fr !important;}
 }
 .reveal{opacity:0;transform:translateY(30px);transition: 1s cubic-bezier(0.23, 1, 0.32, 1);}
 .reveal.visible{opacity:1;transform:translateY(0);}
@@ -99,9 +94,9 @@ footer{background:var(--charcoal);padding:60px 56px;color:rgba(255,255,255,0.5);
 <nav>
   <div class="nav-logo">LUMINOS CLINIC</div>
   <ul class="nav-links">
-    <li><a href="#menu">AAAAA</a></li>
-    <li><a href="#reasons">BBBBB</a></li>
-    <li><a href="#contact">CCCCC</a></li>
+    <li><a href="#menu">MENU</a></li>
+    <li><a href="#reasons">REASONS</a></li>
+    <li><a href="#contact">CONTACT</a></li>
   </ul>
   <a href="#" class="nav-tel">📞 03-XXXX-XXXX</a>
   <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
@@ -111,7 +106,7 @@ footer{background:var(--charcoal);padding:60px 56px;color:rgba(255,255,255,0.5);
   <div class="hero-left">
     <div class="hero-eyebrow">Premium Beauty Medical Clinic</div>
     <h1>素肌の美しさを、<br><em>科学で</em><br>引き出す。</h1>
-    <p class="hero-sub">あああああああああああああああああああああああああああああああああああああああああああああ。</p>
+    <p class="hero-sub">一人ひとりの肌悩みに向き合い、最新の知見と確かな技術で、あなたが本来持つ美しさを最大限に引き出します。</p>
     <a href="#contact" class="btn-pink">お問い合わせはこちら</a>
   </div>
   <div class="hero-right">
@@ -119,16 +114,16 @@ footer{background:var(--charcoal);padding:60px 56px;color:rgba(255,255,255,0.5);
   </div>
 </section>
 
-<div class="med-notice"><p>※ 本ページはポートフォリオ用のデモページです。あああああああああああああああああああああああああああ。</p></div>
+<div class="med-notice"><p>※ 本ページはポートフォリオ用のデモページです。実際の医療行為や予約を行うものではありません。</p></div>
 
 <section class="menu" id="menu">
   <div class="sec-eyebrow">TREATMENT MENU</div>
-  <div class="sec-h">治療メニュー あああああ</div>
+  <div class="sec-h">治療メニュー</div>
   <div class="sec-line"></div>
   <div class="menu-grid">
-    <div class="menu-card reveal"><div class="menu-img-c a">✨</div><div class="menu-info-c"><div class="menu-category">AAAAA</div><div class="menu-name-c">メニューあああああ</div><p class="menu-desc-c">あああああああああああああああああああああああああああああああああああああああああああああああああああ。</p><div class="menu-price-c">¥00,000〜</div></div></div>
-    <div class="menu-card reveal"><div class="menu-img-c b">💉</div><div class="menu-info-c"><div class="menu-category">BBBBB</div><div class="menu-name-c">メニューいいいいい</div><p class="menu-desc-c">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p><div class="menu-price-c">¥00,000〜</div></div></div>
-    <div class="menu-card reveal"><div class="menu-img-c c">🔬</div><div class="menu-info-c"><div class="menu-category">CCCCC</div><div class="menu-name-c">メニューううううう</div><p class="menu-desc-c">ううううううううううううううううううううううううううううううううううううううううううううううううううう。</p><div class="menu-price-c">¥00,000〜</div></div></div>
+    <div class="menu-card reveal"><div class="menu-img-c a">✨</div><div class="menu-info-c"><div class="menu-category">SKIN CARE</div><div class="menu-name-c">美肌フォトフェイシャル</div><p class="menu-desc-c">最新の光線治療で、くすみやシミを根本からケア。内側から輝く透明感のある肌へ導きます。</p><div class="menu-price-c">¥15,000〜</div></div></div>
+    <div class="menu-card reveal"><div class="menu-img-c b">💉</div><div class="menu-info-c"><div class="menu-category">INJECTION</div><div class="menu-name-c">高濃度ビタミン点滴</div><p class="menu-desc-c">美肌・疲労回復に効果的な成分をバランスよく配合。体の内側から美しさをサポートします。</p><div class="menu-price-c">¥8,000〜</div></div></div>
+    <div class="menu-card reveal"><div class="menu-img-c c">🔬</div><div class="menu-info-c"><div class="menu-category">ANALYSIS</div><div class="menu-name-c">肌診断カウンセリング</div><p class="menu-desc-c">専門のカウンセラーがあなたの肌質を精密に分析。最適なケアプランをご提案します。</p><div class="menu-price-c">¥0 (初回無料)</div></div></div>
   </div>
 </section>
 
@@ -137,12 +132,12 @@ footer{background:var(--charcoal);padding:60px 56px;color:rgba(255,255,255,0.5);
     <div style="background:#f8f2ee; height:450px; border-radius:40px; display:flex; align-items:center; justify-content:center; font-size:120px; border:1px solid var(--glass-border);">👨‍⚕️</div>
     <div>
       <div class="sec-eyebrow" style="text-align:left;">DIRECTOR</div>
-      <h2 style="font-family:'Noto Serif JP',serif; font-size:36px; margin-bottom:24px; color:var(--charcoal);">院長 ああああああ</h2>
-      <p style="margin-bottom:24px; color:var(--gray); line-height:2.2;">あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+      <h2 style="font-family:'Noto Serif JP',serif; font-size:36px; margin-bottom:24px; color:var(--charcoal);">院長 美咲 玲奈</h2>
+      <p style="margin-bottom:24px; color:var(--gray); line-height:2.2;">「美しさは自信につながる」という信念のもと、最新の美容医療を提供しています。患者様一人ひとりのライフスタイルに寄り添った丁寧な診察を心がけております。不安なことがあれば、何でもご相談ください。</p>
       <div style="font-size:14px; color:var(--gray); border-top:1px solid #eee; padding-top:24px;">
-        <p style="margin-bottom:10px;">・20XX年 ああああああああ卒業</p>
-        <p style="margin-bottom:10px;">・20XX年 いいいいいいいい入職</p>
-        <p>・20XX年 当院開設 ああああああ</p>
+        <p style="margin-bottom:10px;">・20XX年 国内医科大学医学部卒業</p>
+        <p style="margin-bottom:10px;">・20XX年 美容皮膚科専門病院にて研鑽</p>
+        <p>・20XX年 LUMINOS CLINIC開設</p>
       </div>
     </div>
   </div>
@@ -150,46 +145,46 @@ footer{background:var(--charcoal);padding:60px 56px;color:rgba(255,255,255,0.5);
 
 <section class="facility reveal" style="padding:100px 56px; background:var(--beige);">
   <div class="sec-eyebrow">FACILITY</div>
-  <div class="sec-h">院内設備 あああああ</div>
+  <div class="sec-h">院内設備</div>
   <div class="sec-line"></div>
   <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:40px; max-width:1100px; margin:0 auto;">
     <div class="menu-card" style="padding:40px; background:#fff;">
-      <div style="height:240px; background:#eee; border-radius:24px; margin-bottom:24px; display:flex; align-items:center; justify-content:center; color:#bbb; font-weight:900;">IMAGE あああああ</div>
-      <h3 style="margin-bottom:15px; font-family:'Noto Serif JP',serif;">設備あああああ</h3>
-      <p style="font-size:14px; color:var(--gray);">あああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+      <div style="height:240px; background:#eee; border-radius:24px; margin-bottom:24px; display:flex; align-items:center; justify-content:center; color:#bbb; font-weight:900;">RECEPTION</div>
+      <h3 style="margin-bottom:15px; font-family:'Noto Serif JP',serif;">プライバシーに配慮した受付</h3>
+      <p style="font-size:14px; color:var(--gray);">落ち着いた空間で、リラックスしてお待ちいただけるよう配慮しております。</p>
     </div>
     <div class="menu-card" style="padding:40px; background:#fff;">
-      <div style="height:240px; background:#eee; border-radius:24px; margin-bottom:24px; display:flex; align-items:center; justify-content:center; color:#bbb; font-weight:900;">IMAGE いいいいい</div>
-      <h3 style="margin-bottom:15px; font-family:'Noto Serif JP',serif;">設備いいいいい</h3>
-      <p style="font-size:14px; color:var(--gray);">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+      <div style="height:240px; background:#eee; border-radius:24px; margin-bottom:24px; display:flex; align-items:center; justify-content:center; color:#bbb; font-weight:900;">TREATMENT ROOM</div>
+      <h3 style="margin-bottom:15px; font-family:'Noto Serif JP',serif;">完全個室の施術室</h3>
+      <p style="font-size:14px; color:var(--gray);">清潔感あふれる完全個室で、安心して施術を受けていただけます。</p>
     </div>
   </div>
 </section>
 
 <section class="flow reveal" style="padding:100px 56px; background:#fff;">
   <div class="sec-eyebrow">STEP FLOW</div>
-  <div class="sec-h">施術の流れ あああああ</div>
+  <div class="sec-h">施術の流れ</div>
   <div class="sec-line"></div>
   <div style="max-width:800px; margin:0 auto; display:grid; gap:44px;">
     <div style="display:flex; gap:44px; align-items:flex-start; border-bottom:1px solid #f8f8f8; padding-bottom:36px;">
       <div style="font-size:52px; font-weight:900; color:var(--pink2); opacity:0.3; font-family:'Cormorant Garamond',serif; line-height:1;">01</div>
       <div>
-        <h3 style="font-size:20px; margin-bottom:12px; font-family:'Noto Serif JP',serif;">ステップあああああ</h3>
-        <p style="color:var(--gray);">あああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+        <h3 style="font-size:20px; margin-bottom:12px; font-family:'Noto Serif JP',serif;">ご予約・来院</h3>
+        <p style="color:var(--gray);">WEBまたはお電話にてご予約ください。当日は受付にてカウンセリングシートのご記入をお願いします。</p>
       </div>
     </div>
     <div style="display:flex; gap:44px; align-items:flex-start; border-bottom:1px solid #f8f8f8; padding-bottom:36px;">
       <div style="font-size:52px; font-weight:900; color:var(--pink2); opacity:0.3; font-family:'Cormorant Garamond',serif; line-height:1;">02</div>
       <div>
-        <h3 style="font-size:20px; margin-bottom:12px; font-family:'Noto Serif JP',serif;">ステップいいいいい</h3>
-        <p style="color:var(--gray);">いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+        <h3 style="font-size:20px; margin-bottom:12px; font-family:'Noto Serif JP',serif;">専門医によるカウンセリング</h3>
+        <p style="color:var(--gray);">あなたのお悩みや理想を詳しく伺い、最適な治療プランをご提案いたします。</p>
       </div>
     </div>
     <div style="display:flex; gap:44px; align-items:flex-start;">
       <div style="font-size:52px; font-weight:900; color:var(--pink2); opacity:0.3; font-family:'Cormorant Garamond',serif; line-height:1;">03</div>
       <div>
-        <h3 style="font-size:20px; margin-bottom:12px; font-family:'Noto Serif JP',serif;">ステップううううう</h3>
-        <p style="color:var(--gray);">ううううううううううううううううううううううううううううううううううううううううううううううううううう。</p>
+        <h3 style="font-size:20px; margin-bottom:12px; font-family:'Noto Serif JP',serif;">施術開始</h3>
+        <p style="color:var(--gray);">最新の設備を使用し、経験豊富なスタッフが丁寧に施術を行います。</p>
       </div>
     </div>
   </div>
@@ -197,35 +192,35 @@ footer{background:var(--charcoal);padding:60px 56px;color:rgba(255,255,255,0.5);
 
 <section class="reasons" id="reasons">
   <div class="sec-eyebrow">WHY LUMINOS</div>
-  <div class="sec-h">選ばれる理由 あああああ</div>
+  <div class="sec-h">選ばれる理由</div>
   <div class="sec-line"></div>
   <div class="reasons-grid">
-    <div class="reason-c reveal"><div class="reason-num-c">01</div><h3>理由あああああ</h3><p>あああああああああああああああああああああああああああああああああああああああああああああ。</p></div>
-    <div class="reason-c reveal"><div class="reason-num-c">02</div><h3>理由いいいいい</h3><p>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p></div>
-    <div class="reason-c reveal"><div class="reason-num-c">03</div><h3>理由ううううう</h3><p>うううううううううううううううううううううううううううううううううううううううううううう。</p></div>
-    <div class="reason-c reveal"><div class="reason-num-c">04</div><h3>理由えええええ</h3><p>ええええええええええええええええええええええええええええええええええええええええええええ。</p></div>
+    <div class="reason-c reveal"><div class="reason-num-c">01</div><h3>専門医による安心の施術</h3><p>高度な技術を持つ専門医が、安全を最優先に施術を担当します。</p></div>
+    <div class="reason-c reveal"><div class="reason-num-c">02</div><h3>最新設備の導入</h3><p>効果と安全性が認められた、最新の医療機器を揃えています。</p></div>
+    <div class="reason-c reveal"><div class="reason-num-c">03</div><h3>徹底したカウンセリング</h3><p>納得いくまで何度でも、丁寧な説明を心がけています。</p></div>
+    <div class="reason-c reveal"><div class="reason-num-c">04</div><h3>完全予約制の安心感</h3><p>プライバシーに配慮し、待ち時間を最小限に抑えた予約制です。</p></div>
   </div>
 </section>
 
 <section class="faq reveal" style="padding:100px 56px; background:var(--white);">
   <div class="sec-eyebrow">FAQ</div>
-  <div class="sec-h">よくある質問 あああああ</div>
+  <div class="sec-h">よくある質問</div>
   <div class="sec-line"></div>
   <div style="max-width:850px; margin:0 auto; display:grid; gap:20px;">
     <div class="menu-card" style="padding:32px; border:1px solid #f5f5f5;">
-      <p style="font-weight:700; color:var(--pink2); margin-bottom:12px; font-size:18px;">Q. ああああああああああああああああ？</p>
-      <p style="font-size:15px; color:var(--gray); line-height:2;">A. あああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああああ。</p>
+      <p style="font-weight:700; color:var(--pink2); margin-bottom:12px; font-size:18px;">Q. 初めての来院でも大丈夫ですか？</p>
+      <p style="font-size:15px; color:var(--gray); line-height:2;">A. はい、もちろんです。専門のカウンセラーが丁寧にご説明いたしますので、お気軽にお越しください。</p>
     </div>
     <div class="menu-card" style="padding:32px; border:1px solid #f5f5f5;">
-      <p style="font-weight:700; color:var(--pink2); margin-bottom:12px; font-size:18px;">Q. いいいいいいいいいいいいいいいいいい？</p>
-      <p style="font-size:15px; color:var(--gray); line-height:2;">A. いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+      <p style="font-weight:700; color:var(--pink2); margin-bottom:12px; font-size:18px;">Q. 施術時間はどのくらいですか？</p>
+      <p style="font-size:15px; color:var(--gray); line-height:2;">A. メニューによりますが、カウンセリングを含めて1時間〜1.5時間程度を見ていただいております。</p>
     </div>
   </div>
 </section>
 
 <section class="counseling" id="contact">
-  <h2>AAAAA BBBBB CCCCC</h2>
-  <p>あああああああああああああああああああああああああああああああああああああああああああああ。<br>いいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいいい。</p>
+  <h2>Your Beauty, Our Mission.</h2>
+  <p>あなたの理想を形にするために。まずは無料カウンセリングでお悩みをお聞かせください。<br>和モダンな空間で、リラックスしたひとときを。</p>
   <a href="#" class="btn-white-c">お問い合わせはこちら</a>
 </section>
 
@@ -239,8 +234,9 @@ footer{background:var(--charcoal);padding:60px 56px;color:rgba(255,255,255,0.5);
   </div>
 </footer>
 
+<a href="/works" style="position:fixed; bottom:20px; left:20px; background:#2c2c2a; color:#fff; padding:10px 20px; border-radius:30px; text-decoration:none; z-index:9999; font-size:14px; font-weight:bold; box-shadow:0 4px 12px rgba(0,0,0,0.2); transition:0.3s;" onmouseover="this.style.background='#d14d3a'" onmouseout="this.style.background='#2c2c2a'">← 制作実績一覧に戻る</a>
+
 <script>
-document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileMenu').classList.add('open'));
 const io=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}});},{threshold:0.1});
 document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=`${(i%4)*80}ms`;io.observe(el);});
 </script>
