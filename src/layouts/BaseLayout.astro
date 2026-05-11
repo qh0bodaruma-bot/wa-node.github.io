@@ -51,6 +51,31 @@ const {
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet" />
     <GoogleAnalytics />
     <ViewTransitions />
+    <script is:inline>
+      function initReveal() {
+        const observerOptions = {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('active');
+            }
+          });
+        }, observerOptions);
+
+        const revealElements = document.querySelectorAll('.reveal');
+        revealElements.forEach(el => observer.observe(el));
+      }
+
+      // Initial load
+      document.addEventListener('DOMContentLoaded', initReveal);
+      // View Transitions navigation
+      document.addEventListener('astro:page-load', initReveal);
+    </script>
   </head>
   <body>
     <Header />

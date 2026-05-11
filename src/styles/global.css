@@ -46,6 +46,22 @@ a:hover { opacity: 0.7; }
 .section-title { text-align: center; margin-bottom: 50px; }
 .section-title h2 { font-size: clamp(1.8rem, 4vw, 3rem); margin-bottom: 12px; font-weight: 800; }
 
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.container.narrow {
+  max-width: 900px;
+}
+
+@media (max-width: 768px) {
+  .container, .section-inner {
+    padding: 0 20px;
+  }
+}
+
 .eyebrow {
   display: inline-block;
   letter-spacing: 0.12em;
@@ -226,4 +242,17 @@ a:hover { opacity: 0.7; }
     justify-content: center;
     text-align: center;
   }
+}
+
+/* --- Global Reveal Animation --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 1.2s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+  backface-visibility: hidden;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }

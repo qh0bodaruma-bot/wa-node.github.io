@@ -122,25 +122,25 @@ const jsonLd = {
     </div>
 
     <!-- New Target Audience Section -->
-    <section class="section target-section" style="background: var(--white); padding: 60px 0;">
+    <section class="section target-section">
       <div class="section-inner">
-        <div class="target-box" style="background: var(--soft); border-radius: var(--radius); padding: 40px; border: 1px solid var(--line);">
-          <h2 style="text-align: center; font-size: 1.6rem; margin-bottom: 32px; color: var(--accent);">和-Nodeは、こんな方のお役に立てます</h2>
-          <div class="target-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 30px;">
+        <div class="target-box reveal">
+          <h2>和-Nodeは、こんな方のお役に立てます</h2>
+          <div class="target-grid">
             <div class="target-item">
-              <h3 style="font-size: 1.1rem; color: var(--text); border-left: 4px solid var(--accent); padding-left: 12px; margin-bottom: 12px;">Web制作・導線</h3>
-              <p class="small" style="color: var(--muted); line-height: 1.6;">「HPを作りたいが、何を載せればいいか分からない」「今のサイトが自分らしくない気がする」</p>
+              <h3>Web制作・導線</h3>
+              <p class="small">「HPを作りたいが、何を載せればいいか分からない」「今のサイトが自分らしくない気がする」</p>
             </div>
             <div class="target-item">
-              <h3 style="font-size: 1.1rem; color: var(--text); border-left: 4px solid var(--accent); padding-left: 12px; margin-bottom: 12px;">ICT・AI活用</h3>
-              <p class="small" style="color: var(--muted); line-height: 1.6;">「LINEやChatGPTを仕事に取り入れたい」「ITツールが多すぎて、どれを選べばいいか整理したい」</p>
+              <h3>ICT・AI活用</h3>
+              <p class="small">「LINEやChatGPTを仕事に取り入れたい」「ITツールが多すぎて、どれを選べばいいか整理したい」</p>
             </div>
             <div class="target-item">
-              <h3 style="font-size: 1.1rem; color: var(--text); border-left: 4px solid var(--accent); padding-left: 12px; margin-bottom: 12px;">法人・チーム支援</h3>
-              <p class="small" style="color: var(--muted); line-height: 1.6;">「従業員のメンタル相談窓口を外部に置きたい」「DXを進めたいが、現場の心理的抵抗が心配だ」</p>
+              <h3>法人・チーム支援</h3>
+              <p class="small">「従業員のメンタル相談窓口を外部に置きたい」「DXを進めたいが、現場の心理的抵抗が心配だ」</p>
             </div>
           </div>
-          <p style="text-align: center; margin-top: 32px; font-weight: 800; color: var(--accent);">これらのお悩みを、ITと心理の両面から整理します。</p>
+          <p class="target-footer">これらのお悩みを、ITと心理の両面から整理します。</p>
         </div>
       </div>
     </section>
@@ -209,11 +209,11 @@ const jsonLd = {
     </section>
 
     <!-- Ethical Declaration Section -->
-    <section class="section ethics-section" style="background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <section class="section ethics-section">
       <div class="container narrow">
-        <div class="ethics-box" style="padding: 60px 40px; text-align: center;">
-          <h2 style="font-size: 1.8rem; margin-bottom: 24px; color: var(--accent);">不安を煽るのではなく、迷わず選べる情報設計へ。</h2>
-          <p style="font-size: 1.1rem; line-height: 1.8; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+        <div class="ethics-box reveal">
+          <h2>不安を煽るのではなく、迷わず選べる情報設計へ。</h2>
+          <p>
             和-Nodeでは、心理学を「不安を煽って買わせるため」ではなく、<strong>「伝わりにくさを減らし、安心して選べる導線をつくるため」</strong>に活用します。無理に売る仕組みではなく、必要な人に正しく価値が届く、誠実な情報設計をお手伝いします。
           </p>
         </div>
@@ -746,6 +746,77 @@ const jsonLd = {
     .philosophy-card { padding: 32px 20px; }
   }
 
+  /* Target Audience Section Styles */
+  .target-section {
+    background: var(--white);
+    padding: 60px 0;
+  }
+  .target-box {
+    background: var(--soft);
+    border-radius: var(--radius);
+    padding: 60px 40px;
+    border: 1px solid var(--line);
+  }
+  .target-box h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    margin-bottom: 40px;
+    color: var(--accent);
+  }
+  .target-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 32px;
+  }
+  .target-item h3 {
+    font-size: 1.1rem;
+    color: var(--text);
+    border-left: 4px solid var(--accent);
+    padding-left: 12px;
+    margin-bottom: 12px;
+  }
+  .target-item p {
+    color: var(--muted);
+    line-height: 1.7;
+    margin: 0;
+  }
+  .target-footer {
+    text-align: center;
+    margin-top: 40px;
+    font-weight: 800;
+    color: var(--accent);
+  }
+
+  /* Ethics Section Styles */
+  .ethics-section {
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .ethics-box {
+    padding: 80px 40px;
+    text-align: center;
+  }
+  .ethics-box h2 {
+    font-size: 1.8rem;
+    margin-bottom: 24px;
+    color: var(--accent);
+  }
+  .ethics-box p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 768px) {
+    .target-box { padding: 40px 20px; }
+    .target-grid { gap: 24px; }
+    .ethics-box { padding: 60px 20px; }
+    .ethics-box h2 { font-size: 1.5rem; }
+  }
+
   /* --- Psychological Enhancements --- */
 
   /* Campaign Badge & Link */
@@ -899,18 +970,6 @@ const jsonLd = {
     .pain-card { padding: 40px 30px; }
   }
 
-  /* --- Micro-interactions (Reveal Animation) --- */
-  .reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 1.2s cubic-bezier(0.215, 0.61, 0.355, 1), transform 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
-    backface-visibility: hidden;
-  }
-  .reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
   /* --- Synergy Diagram (Psychological Authority) --- */
   .synergy-container {
     margin-top: 60px;
@@ -971,32 +1030,16 @@ const jsonLd = {
 </style>
 
 <script is:inline>
-  // Intersection Observer for Reveal Animations
-  document.addEventListener('DOMContentLoaded', () => {
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, observerOptions);
-
-    const revealElements = document.querySelectorAll('.reveal');
-    revealElements.forEach(el => observer.observe(el));
-  });
-
   // Parallax Effect for Hero
-  window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroVisual = document.querySelector('.hero-visual');
-    if (heroVisual) {
-      heroVisual.style.transform = `translateY(${scrolled * 0.1}px)`;
-    }
-  });
+  function initParallax() {
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const heroVisual = document.querySelector('.hero-visual');
+      if (heroVisual) {
+        heroVisual.style.transform = `translateY(${scrolled * 0.1}px)`;
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initParallax);
 </script>

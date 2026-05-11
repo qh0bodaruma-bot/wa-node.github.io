@@ -267,8 +267,7 @@ const jsonLd = {
   }
   .btn-secondary-outline:hover { background: #c5a059; color: white; }
 
-  .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
-  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .btn-secondary-outline:hover { background: #c5a059; color: white; }
 
   @media (max-width: 768px) {
     .p-opt-item { flex-direction: column; gap: 10px; }
@@ -277,19 +276,3 @@ const jsonLd = {
     .campaign-price-tag.gold .price { font-size: 2rem; }
   }
 </style>
-
-<script is:inline>
-  function initReveal() {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-  }
-  initReveal();
-  document.addEventListener('astro:page-load', initReveal);
-</script>
