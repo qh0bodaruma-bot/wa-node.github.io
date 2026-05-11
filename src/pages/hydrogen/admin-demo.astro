@@ -52,7 +52,10 @@ import HydrogenLayout from '../../layouts/HydrogenLayout.astro';
         const previewText = document.getElementById('previewText');
 
         function updatePreview() {
-            // Check current language mode (simulated)
+            // Save to localStorage for site-wide simulation
+            localStorage.setItem('demo-news-jp', inputJp.value);
+            localStorage.setItem('demo-news-en', inputEn.value);
+
             const currentLang = localStorage.getItem('hydrogen-lang') || 'ja';
             previewText.textContent = currentLang === 'en' ? inputEn.value : inputJp.value;
         }
