@@ -56,81 +56,89 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     </section>
 
     <section class="section">
-      <p class="eyebrow">02. ICT & AI Efficiency</p>
-      <h2>ICT・AIによる業務改善</h2>
-      <p>現場の「続けにくさ」を解消し、無理なく続く仕組みを整えます。AIの導入からカスタムアプリ開発まで対応します。</p>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>サービス</th><th>通常価格</th><th>キャンペーン価格</th><th>内容</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>AI・ICT活用相談</td><td>5,000円/60分</td><td class="price-campaign">初回最大60分無料</td><td>ChatGPT活用、業務整理。★ご相談後、HPのたたき台（1ページ）作成も承ります。</td></tr>
-            <tr><td>LINE Mini App開発</td><td>150,000円〜</td><td class="price-campaign">120,000円〜</td><td>予約・診断・会員証などのLINE内アプリ構築</td></tr>
-            <tr><td>診断・シミュレーター制作</td><td>24,000円〜</td><td class="price-campaign">19,200円〜</td><td>静的ページ内で動く簡易的な診断機能の実装</td></tr>
-            <tr><td>法人向けAI導入支援</td><td>要見積り</td><td>-</td><td>業務に合わせた研修・システム連携開発</td></tr>
-          </tbody>
-        </table>
+      <p class="eyebrow">02. ICT & AI Strategy</p>
+      <h2 class="premium-heading">ICT・AIコンサルティング</h2>
+      <p>「何から手をつければいいか分からない」を整理し、現場で使える形に整えます。</p>
+      
+      <div class="pricing-grid-simple">
+        <div class="p-card-simple highlight">
+          <span class="p-tag">おすすめ</span>
+          <h3>初回ICT整理相談</h3>
+          <p class="p-price">30分 無料</p>
+          <p class="p-desc">現状ヒアリング、課題整理、次にやることの提案</p>
+        </div>
+        <div class="p-card-simple">
+          <h3>ICTスポット相談</h3>
+          <p class="p-price">5,000円 <small>/ 60分</small></p>
+          <p class="p-desc">ChatGPT、LINE、業務ツール、Webまわりの壁打ち</p>
+        </div>
+        <div class="p-card-simple">
+          <h3>AI活用スタートパック</h3>
+          <p class="p-price">30,000円</p>
+          <p class="p-desc">ChatGPT活用設計、プロンプト雛形、業務別活用整理</p>
+        </div>
+        <div class="p-card-simple">
+          <h3>月額ICT伴走</h3>
+          <p class="p-price">15,000円〜 <small>/ 月</small></p>
+          <p class="p-desc">月1回相談 + チャットでの軽相談（ライトプラン）</p>
+        </div>
       </div>
+
+      <details class="addon-details">
+        <summary>その他のパック・詳細オプションを表示する</summary>
+        <div class="table-wrap mini">
+          <table>
+            <thead>
+              <tr><th>メニュー名</th><th>料金</th><th>内容</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>業務整理ミニ診断</td><td>15,000円</td><td>90分相談 + 改善メモ。何を自動化すべきか整理</td></tr>
+              <tr><td>小規模DX設計パック</td><td>50,000円</td><td>業務フロー整理、ツール選定、導入ステップ作成</td></tr>
+              <tr><td>月額ICT伴走スタンダード</td><td>30,000円 / 月</td><td>月2回相談 + 改善提案 + 簡易マニュアル作成</td></tr>
+              <tr><td>法人向けAI導入支援</td><td>80,000円〜</td><td>研修、運用ルール、業務別AI活用設計</td></tr>
+              <tr><td>操作マニュアル作成</td><td>10,000円〜</td><td>業務に合わせたオリジナル手順書</td></tr>
+              <tr><td>業務フロー図作成</td><td>10,000円〜</td><td>複雑なプロセスを可視化</td></tr>
+              <tr><td>プロンプト集作成</td><td>15,000円〜</td><td>あなたの業務専用のChatGPT指示書</td></tr>
+              <tr><td>LINE導線設計</td><td>20,000円〜</td><td>登録から成約までの心理動線構築</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
     </section>
 
     <section class="section">
       <p class="eyebrow">03. Human & Organization</p>
-      <h2>人と組織の相談支援</h2>
-      <p>心理的安全性と実務効率を両立させ、働く人と組織の課題を整えます。医療行為ではない対話による支援です。</p>
+      <h2 class="premium-heading">心と組織の相談支援</h2>
+      <p>心理的安全性と実務効率を両立させ、働く人と組織の課題を整えます。</p>
       <div class="table-wrap">
         <table>
-          <thead>
-            <tr><th>サービス</th><th>通常価格</th><th>キャンペーン価格</th><th>内容</th></tr>
-          </thead>
           <tbody>
             <tr>
               <td>個人カウンセリング</td>
               <td>5,000円 / 60分</td>
-              <td class="price-campaign">初回最大60分無料</td>
-              <td>
-                仕事・家庭・人間関係の心の整理。診断・シミュレーター利用で合計最大60分無料。<br />
-                <strong>※2回目以降：通常料金</strong>
-              </td>
+              <td>初回30分無料。産業カウンセラーによる心の整理。</td>
             </tr>
             <tr>
               <td>法人メンタル相談窓口</td>
-              <td>15,000円〜</td>
-              <td class="price-campaign">-</td>
-              <td>
-                従業員50名以下の小規模法人向け。匿名面談、月次レポート等。<br />
-                <strong>※スタンダード：30,000円 / 月</strong>
-              </td>
+              <td>15,000円〜 / 月</td>
+              <td>従業員50名以下の小規模法人向け。匿名面談、月次レポート等。</td>
             </tr>
-            <tr><td>1on1・チーム支援</td><td>要見積り</td><td class="price-campaign">-</td><td>定期面談、コミュニケーション活性化支援など</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="small">※カウンセリングは医療行為ではありません。必要に応じて専門機関への受診をお勧めする場合があります。</p>
     </section>
 
-    <ConsultationFlow />
-
-    <section class="section">
-      <p class="eyebrow">Payment / Contract</p>
-      <h2>お支払い・ご契約について</h2>
+    <section class="section contact-guide" id="consultation-flow">
       <div class="box">
-        <ul class="list-style" style="list-style: none; padding: 0;">
-          <li style="margin-bottom: 16px;"><strong>電子契約対応</strong>：オンラインで完結。郵送や印紙代の手間がありません。</li>
-          <li style="margin-bottom: 16px;"><strong>お支払い方法</strong>：銀行振込、Stripe（クレジットカード決済）、請求書払いに対応しています。</li>
-          <li style="margin-bottom: 16px;"><strong>外部プラットフォーム</strong>：ココナラ、クラウドワークス、ランサーズ経由でのご依頼も可能です（各サービスの決済方法に準じます）。</li>
-          <li style="margin-bottom: 16px;"><strong>インボイス対応</strong>：適格請求書発行事業者として適格請求書を発行します。</li>
-          <li style="margin-bottom: 16px;"><strong>制作着手金</strong>：原則として着手時に50%をお支払いいただく形式となります。</li>
-          <li><strong>別途実費</strong>：サーバー・ドメイン代、有料素材費等は別途実費となります。</li>
-        </ul>
-      </div>
-
-      <div class="box" style="margin-top: 40px;">
-        <h2>どのサービスを選べばいいか分からない方へ</h2>
-        <p>Web制作、AI活用、カウンセリングのうち、どれが必要か分からない段階でも大丈夫です。まずは今の想いをお聞かせください。</p>
+        <h2 class="premium-heading">ご相談の進め方</h2>
+        <p style="line-height: 2; margin-bottom: 30px;">
+          1. フォームまたはLINEよりお気軽にご連絡ください。<br/>
+          2. 30分程度の初回無料ヒアリングにて、課題を整理します。<br/>
+          3. 状況に合わせた最適なプランをご提案し、ご納得いただければ着手となります。
+        </p>
         <div class="btns">
-          <a class="btn" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">LINEで相談する</a>
-          <a class="btn secondary" href="#consultation-flow">フォームで問い合わせる</a>
+          <a class="btn" href="/contact">お問い合わせはこちら</a>
+          <a class="btn secondary" href="https://lin.ee/o5QFPwc" target="_blank">LINEで相談する</a>
         </div>
       </div>
     </section>
@@ -206,6 +214,58 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
   th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--line); }
   th { background: #fdfaf5; color: var(--accent-dark); font-weight: 800; font-size: 0.85rem; }
   .price-campaign { color: var(--accent-red); font-weight: 800; }
+
+  /* New Pricing Grid */
+  .pricing-grid-simple {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin: 40px 0;
+  }
+  .p-card-simple {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-align: center;
+    position: relative;
+    transition: 0.3s;
+  }
+  .p-card-simple.highlight {
+    border: 2px solid var(--accent);
+    background: #fffdf9;
+    transform: scale(1.05);
+    z-index: 1;
+  }
+  .p-tag {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 2px 12px;
+    border-radius: 4px;
+  }
+  .p-card-simple h3 { font-size: 1.1rem; margin-bottom: 15px; font-weight: 800; }
+  .p-price { font-size: 1.6rem; font-weight: 800; color: var(--accent-dark); margin-bottom: 15px; }
+  .p-price small { font-size: 0.8rem; font-weight: 400; color: #999; }
+  .p-desc { font-size: 0.85rem; color: #666; line-height: 1.5; }
+
+  .addon-details { margin-top: 20px; }
+  .addon-details summary {
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--accent);
+    font-weight: 800;
+    text-align: center;
+    list-style: none;
+  }
+  .addon-details summary:hover { text-decoration: underline; }
+  .table-wrap.mini { margin-top: 20px; }
+  .table-wrap.mini th, .table-wrap.mini td { padding: 12px 15px; font-size: 0.85rem; }
 
   .box { background: #fff; border: 1px solid var(--line); padding: 40px; border-radius: 30px; }
 
