@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.wa-node.com/sitemap-index.xml
+Sitemap: https://www.wa-node.com/sitemap.xml
