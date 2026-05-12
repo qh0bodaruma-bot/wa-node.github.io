@@ -6,8 +6,16 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = path.resolve(__dirname, '../dist');
 const SITE_URL = 'https://www.wa-node.com';
 
-// 手動で追加するページ（publicにあるものなど）
+// 手動で追加するページ（publicにあるものや、確実に含めたい主要ページ）
 const CUSTOM_PAGES = [
+  '/',
+  '/about/',
+  '/works/',
+  '/contact/',
+  '/free-guide/',
+  '/psychology-demo/',
+  '/pricing/',
+  '/simulator/',
   '/portfolio-lp/index.html',
   '/portfolio-lp/demo_business_7.html',
   '/portfolio-lp/demo_corporate.html',

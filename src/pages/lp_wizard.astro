@@ -346,26 +346,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="step-node ${i === idx ? 'active' : i < idx ? 'done' : ''}"></div>
       `).join('');
 
-      let html = `<h2>${q.title}</h2>`;
+      let html = '<h2>' + q.title + '</h2>';
       if (q.type === 'text') {
-        html += `<input type="text" class="input-field" placeholder="${q.placeholder}" value="${answers[q.id] || ''}" id="input-${q.id}">`;
+        html += '<input type="text" class="input-field" placeholder="' + q.placeholder + '" value="' + (answers[q.id] || '') + '" id="input-' + q.id + '">';
       } else if (q.type === 'textarea') {
-        html += `<textarea class="input-field textarea-field" placeholder="${q.placeholder}" id="input-${q.id}">${answers[q.id] || ''}</textarea>`;
+        html += '<textarea class="input-field textarea-field" placeholder="' + q.placeholder + '" id="input-' + q.id + '">' + (answers[q.id] || '') + '</textarea>';
       } else if (q.type === 'choice') {
-        html += `<div class="choices-grid">`;
+        html += '<div class="choices-grid">';
         q.options.forEach(opt => {
           const isSelected = q.multi ? (answers[q.id] || []).includes(opt.val) : answers[q.id] === opt.val;
-          html += `
-            <div class="choice-item ${isSelected ? 'selected' : ''}" onclick="selectChoice('${q.id}', '${opt.val}', ${q.multi || false})">
-              <div class="choice-icon">${opt.icon}</div>
-              <div class="choice-text">
-                <b>${opt.label}</b>
-                ${opt.desc ? `<span>${opt.desc}</span>` : ''}
-              </div>
-            </div>
-          `;
+          html += '<div class="choice-item ' + (isSelected ? 'selected' : '') + '" onclick="selectChoice(\'' + q.id + '\', \'' + opt.val + '\', ' + (q.multi || false) + ')">' +
+                  '<div class="choice-icon">' + opt.icon + '</div>' +
+                  '<div class="choice-text">' +
+                  '<b>' + opt.label + '</b>' +
+                  (opt.desc ? '<span>' + opt.desc + '</span>' : '') +
+                  '</div>' +
+                  '</div>';
         });
-        html += `</div>`;
+        html += '</div>';
       }
       qContent.innerHTML = html;
 
@@ -406,9 +404,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         '備考': answers.message || '—'
       };
 
-      grid.innerHTML = Object.entries(data).map(([k, v]) => `
-        <div class="doc-row"><label>${k}</label><span>${v}</span></div>
-      `).join('');
+      grid.innerHTML = Object.entries(data).map(([k, v]) => 
+        '<div class="doc-row"><label>' + k + '</label><span>' + v + '</span></div>'
+      ).join('');
 
       let rec = "まずは、心理導線LP制作から始めて、最も重要な「問い合わせ導線」を固めるのが良さそうです。";
       if(answers.scale === '6ページ以上') rec = "複数ページにわたる心理導線ホームページ制作が適しています。各ページから最終的なゴールへの導線を統合的に設計しましょう。";
@@ -416,7 +414,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       recText.textContent = rec;
       
-      const copyStr = `【制作要件ヒアリングサマリー】\n業種：${data['業種']}\n目的：${data['主要目的']}\n現状：${data['現状']}\n規模：${data['規模感']}\nデザイン：${data['デザイン']}\n納期：${data['納期']}\n予算：${data['予算']}\n重視：${data['重視ポイント']}\n備考：${data['備考']}\n\n【初期提案】\n${rec}`;
+      const copyStr = '【制作要件ヒアリングサマリー】\n業種：' + data['業種'] + '\n目的：' + data['主要目的'] + '\n現状：' + data['現状'] + '\n規模：' + data['規模感'] + '\nデザイン：' + data['デザイン'] + '\n納期：' + data['納期'] + '\n予算：' + data['予算'] + '\n重視：' + data['重視ポイント'] + '\n備考：' + data['備考'] + '\n\n【初期提案】\n' + rec;
       copyArea.textContent = copyStr;
     }
 
