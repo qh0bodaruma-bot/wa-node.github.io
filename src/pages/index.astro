@@ -8,7 +8,7 @@ const jsonLd = {
   "name": "和-Node (wa-node)",
   "url": "https://www.wa-node.com/",
   "image": "https://www.wa-node.com/images/ogp.png",
-  "description": "和-Nodeは、心理学とICT・AIを組み合わせたコンサルティングサービスです。Web制作、業務効率化、メンタル支援を一本の導線で提供します。",
+  "description": "和-Nodeは、心理学を応用したWeb制作・導線設計の専門家です。LP・HP制作からAI・ICT活用、月額制の伴走コンサルティングまで提供します。",
   "address": {
     "@type": "PostalAddress",
     "addressCountry": "JP"
@@ -16,7 +16,7 @@ const jsonLd = {
 };
 ---
 
-<BaseLayout title="和-Node｜心理学×ICT・AIで、ビジネスと心に優しい橋を架ける" description="20年のエンジニア経験と心理学の専門知見を融合。心理導線のWeb制作、AI・ICT活用による業務改善、人と組織の相談支援まで、あなたの可能性を広げる最適な解決策をワンストップで提供します。">
+<BaseLayout title="心理学×Web制作｜選ばれる導線とAI伴走でビジネスを整える｜和-Node" description="心理学の知見をWeb導線設計に応用。20年のエンジニア経験を活かしたHP・LP制作、AI・ICT活用、そして月額制の継続伴走コンサルティングで、あなたのビジネスの可能性を最大化します。">
   <!-- JSON-LD for SEO -->
   <script type="application/ld+json" is:inline set:html={JSON.stringify(jsonLd)} />
 
@@ -26,12 +26,13 @@ const jsonLd = {
       <div class="hero-inner">
         <div class="hero-content reveal">
           <div class="hero-badge">月3名まで丁寧に対応</div>
-          <h1>技術の前に、<br />心がある。</h1>
-          <p class="lead">和-Nodeは、<strong>「心理導線のWeb制作・LP制作」「ChatGPT等のAI活用・ICT化による業務改善」「人と組織のメンタル・心理相談支援」</strong>を一本の導線で結び、ビジネスと心の課題を同時に整える専門家パートナーです。</p>
+          <p class="tagline-top">技術の前に、心がある。</p>
+          <h1>心理学を応用した<br />Web制作で、<br />選ばれる導線をつくる</h1>
+          <p class="lead">和-Nodeは、<strong>心理学の知見をWeb導線・相談設計・組織内コミュニケーションに応用し、</strong>ビジネスの成果と心地よさを両立させるWeb制作・伴走パートナーです。</p>
           <div class="btns">
             <a class="btn primary" href="/contact">無料で相談する</a>
-            <a class="btn secondary" href="/psychology-demo/">心理導線デモを見る</a>
-            <a class="btn secondary" href="/pricing">料金を確認する</a>
+            <a class="btn secondary" href="/psychology-demo/">心理導線デモを体験</a>
+            <a class="btn secondary" href="/works">制作実績を見る</a>
           </div>
           <div class="hero-stats">
             <div class="stat-item">
@@ -40,11 +41,11 @@ const jsonLd = {
             </div>
             <div class="stat-item">
               <span class="stat-num">3k+</span>
-              <span class="stat-label">Support</span>
+              <span class="stat-label">Consulting</span>
             </div>
             <div class="stat-item">
               <span class="stat-num">100%</span>
-              <span class="stat-label">Empathy</span>
+              <span class="stat-label">Psychology</span>
             </div>
           </div>
         </div>
@@ -57,130 +58,53 @@ const jsonLd = {
       </div>
     </section>
 
-
-    <!-- Services Section (Consolidated) -->
+    <!-- Services Section (Updated Priority) -->
     <section class="section" id="services">
       <div class="section-inner">
         <div class="section-title">
           <span class="eyebrow">Service Pillars</span>
-          <h2>ビジネスと心を、<br class="pc-only" />一本の導線で整える。</h2>
+          <h2>心理学と技術で、<br class="pc-only" />ビジネスの「出口」を整える。</h2>
         </div>
         <div class="consult-grid">
-          <article class="consult-card">
+          <article class="consult-card highlight">
             <span class="card-tag">Web Design</span>
             <h3>心理導線のWeb制作</h3>
-            <p>20年の実績に基づく「伝わる」設計。初回30分のヒアリング後に「たたき台」を無料作成します。</p>
+            <p>行動心理に基づいた、離脱させない情報設計。LPから多機能HPまで、20年の技術力で形にします。</p>
             <a href="/pricing" class="card-link">制作プランを見る →</a>
           </article>
           <article class="consult-card">
-            <span class="card-tag">ICT & AI</span>
-            <h3>ICT・AIコンサルティング</h3>
-            <p>現場で「無理なく続く」仕組み作り。ChatGPT活用から業務自動化まで、伴走支援いたします。</p>
-            <a href="/pricing" class="card-link">コンサル料金を見る →</a>
+            <span class="card-tag">Ongoing Support</span>
+            <h3>月額ICT・AI伴走</h3>
+            <p>作って終わりにしない。月額制のコンサルティングで、AI活用から業務改善まで継続的にサポートします。</p>
+            <a href="/pricing" class="card-link">伴走プランを見る →</a>
           </article>
           <article class="consult-card">
-            <span class="card-tag">Mental Care</span>
-            <h3>人と組織の相談支援</h3>
-            <p>産業カウンセラーによるメンタルケア。心理的安全性と実務効率の両立をサポートします。</p>
-            <a href="/pricing" class="card-link">相談メニューを見る →</a>
+            <span class="card-tag">ICT & System</span>
+            <h3>ICT・アプリ連携</h3>
+            <p>LINE Mini App活用や、ChatGPTを用いた業務自動化。複雑な仕組みを「人に優しく」実装します。</p>
+            <a href="/pricing" class="card-link">連携メニューを見る →</a>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section philosophy" id="philosophy">
-      <div class="section-inner">
-        <div class="section-title">
-          <span class="eyebrow">Philosophy</span>
-          <h2>なぜ、技術と心理を<br class="sp-only" />同じ窓口で扱うのか</h2>
-        </div>
-        <div class="philosophy-card reveal">
-          <div class="philosophy-content">
-            <p>和-Nodeは、心理学の知見を活かして、<strong>「人に伝わるWeb導線」「現場で続くICT活用」「安心して相談できる仕組み」</strong>をつくるコンサルティングサービスです。</p>
-            <p>和-Nodeは、20年のエンジニア経験と、心理カウンセラーとしての専門知見を一つの窓口に集約しました。<strong>「技術をカウンセラーに説明し、心理をエンジニアに説明する」という手間は、もう必要ありません。</strong></p>
-            <p>技術を単なる道具ではなく、あなたの可能性を広げ、心を支える「パートナー」として届けるために、この3つの領域を一本の導線で結んでいます。</p>
-            
-            <!-- Synergy Diagram (Added for Authority) -->
-            <div class="synergy-container reveal">
-              <svg class="synergy-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="200" cy="120" r="70" fill="var(--soft)" opacity="0.6" stroke="var(--accent)" stroke-width="1"/>
-                <circle cx="150" cy="200" r="70" fill="var(--soft)" opacity="0.6" stroke="var(--accent)" stroke-width="1"/>
-                <circle cx="250" cy="200" r="70" fill="var(--soft)" opacity="0.6" stroke="var(--accent)" stroke-width="1"/>
-                <text x="200" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--accent)">心理学</text>
-                <text x="200" y="130" text-anchor="middle" font-size="10" fill="var(--muted)">人の心を動かす</text>
-                <text x="130" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--accent)">ICT</text>
-                <text x="130" y="220" text-anchor="middle" font-size="10" fill="var(--muted)">仕組みを整える</text>
-                <text x="270" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--accent)">AI</text>
-                <text x="270" y="220" text-anchor="middle" font-size="10" fill="var(--muted)">可能性を広げる</text>
-                <text x="200" y="180" text-anchor="middle" font-size="18" font-weight="800" fill="var(--accent2)">和-Node</text>
-              </svg>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Ethical Declaration Section -->
-    <section class="section ethics-section">
-      <div class="container narrow">
-        <div class="ethics-box reveal">
-          <h2>不安を煽るのではなく、迷わず選べる情報設計へ。</h2>
-          <p>
-            心理学を「不安を煽って買わせるため」ではなく、<strong>「伝わりにくさを減らし、安心して選べる導線をつくるため」</strong>に活用します。必要な人に正しく価値が届く、誠実な情報設計をお手伝いします。
-          </p>
-        </div>
-      </div>
-    </section>
-
-
-    <section class="section before-after" id="before-after">
-      <div class="section-inner">
-        <div class="section-title">
-          <span class="eyebrow">Before / After</span>
-          <h2>相談すると、何が変わるのか</h2>
-        </div>
-        <div class="ba-grid">
-          <div class="ba-card">
-            <h3>相談前</h3>
-            <ul>
-              <li>何から手をつければいいか分からない</li>
-              <li>Web、AI、心の悩みを別々に抱えている</li>
-              <li>誰に相談すればいいか分からない</li>
-              <li>必要なものと不要なものの判断がつかない</li>
-            </ul>
-          </div>
-          <div class="ba-card after">
-            <h3>相談後</h3>
-            <ul>
-              <li>今やるべきことの優先順位が見える</li>
-              <li>必要な制作物・改善策が整理できる</li>
-              <li>一人で抱え込まなくてよくなる</li>
-              <li>無理のない一歩目から始められる</li>
-            </ul>
-          </div>
-        </div>
-        <div class="btns">
-          <a class="btn" href="#consultation-flow">特典つきで60分相談する</a>
-        </div>
-      </div>
-    </section>
-
+    <!-- Psychology Demo & Works (Moved Up) -->
     <section class="section" id="works">
       <div class="section-inner">
         <div class="section-title" style="text-align: center;">
-          <span class="eyebrow">Works & Tools</span>
-          <h2>実績とツールを体験する</h2>
+          <span class="eyebrow">Experience the Difference</span>
+          <h2>「伝わる」の正体を体験・確認する</h2>
         </div>
         <div class="action-buttons-grid reveal">
+          <a href="/psychology-demo/" class="action-card highlight-border">
+            <div class="action-icon">💡</div>
+            <h3>心理導線デモ</h3>
+            <p>なぜこの配置なのか。心理学的根拠を可視化したデモページ</p>
+          </a>
           <a href="/works" class="action-card">
             <div class="action-icon">📂</div>
-            <h3>制作実績を見る</h3>
-            <p>LP・HPの制作例やWebツール開発実績</p>
-          </a>
-          <a href="/dx_mental_diagnosis" class="action-card">
-            <div class="action-icon">📊</div>
-            <h3>診断を試す</h3>
-            <p>DX × メンタル相関診断で課題を可視化</p>
+            <h3>制作実績・サンプル</h3>
+            <p>架空サンプルを含む、和-Nodeのクオリティを確認</p>
           </a>
           <a href="/simulator" class="action-card">
             <div class="action-icon">💰</div>
@@ -191,39 +115,83 @@ const jsonLd = {
       </div>
     </section>
 
+    <!-- Philosophy (Mental Expertise as Background) -->
+    <section class="section philosophy" id="philosophy">
+      <div class="section-inner">
+        <div class="section-title">
+          <span class="eyebrow">Background</span>
+          <h2>心理学の知見を、<br class="sp-only" />実務のすべての接点に。</h2>
+        </div>
+        <div class="philosophy-card reveal">
+          <div class="philosophy-content">
+            <p>和-Nodeは、心理学を「不安を煽る道具」ではなく、<strong>「Web導線の最適化」「円滑な相談設計」「組織内コミュニケーション」</strong>に応用しています。</p>
+            <p>20年のエンジニア経験と産業カウンセラーの知見を融合。<strong>「技術をカウンセラーに説明し、心理をエンジニアに説明する」というコストをゼロにします。</strong></p>
+            <p>心理的安全性と実務効率を同じ窓口で解決できるからこそ、無理のない、けれど着実な一歩目を提案できます。</p>
+            
+            <div class="synergy-container reveal">
+              <svg class="synergy-svg" viewBox="0 0 400 300" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="200" cy="120" r="70" fill="var(--soft)" opacity="0.6" stroke="var(--accent)" stroke-width="1"/>
+                <circle cx="150" cy="200" r="70" fill="var(--soft)" opacity="0.6" stroke="var(--accent)" stroke-width="1"/>
+                <circle cx="250" cy="200" r="70" fill="var(--soft)" opacity="0.6" stroke="var(--accent)" stroke-width="1"/>
+                <text x="200" y="110" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--accent)">心理学</text>
+                <text x="200" y="130" text-anchor="middle" font-size="10" fill="var(--muted)">行動を促す・安心を創る</text>
+                <text x="130" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--accent)">Web制作</text>
+                <text x="130" y="220" text-anchor="middle" font-size="10" fill="var(--muted)">価値を形にする</text>
+                <text x="270" y="200" text-anchor="middle" font-size="14" font-weight="bold" fill="var(--accent)">ICT/AI</text>
+                <text x="270" y="220" text-anchor="middle" font-size="10" fill="var(--muted)">時間を創り出す</text>
+                <text x="200" y="180" text-anchor="middle" font-size="18" font-weight="800" fill="var(--accent2)">和-Node</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Ethical Declaration -->
+    <section class="section ethics-section">
+      <div class="container narrow">
+        <div class="ethics-box reveal">
+          <h2>「売るため」ではなく、「届けるため」の心理学。</h2>
+          <p>
+            私たちは心理学を、必要な人に正しく価値が届くための<strong>「誠実な情報設計」</strong>に活用します。不安を煽る手法とは対極にある、10年後も愛されるWebサイトをお手伝いします。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Profile (Refined Message) -->
     <section class="section" id="about">
       <div class="section-inner">
         <div class="about-content">
           <div class="section-title" style="text-align: center; margin-bottom: 32px;">
-            <span class="eyebrow">Founder</span>
-            <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.3;">代表 高野 紘純について</h2>
+            <span class="eyebrow">Professional</span>
+            <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); line-height: 1.3;">なぜ「違う視点」で<br class="sp-only"/>設計できるのか</h2>
           </div>
           
           <div class="about-text-wrap reveal" style="text-align: center; max-width: 800px; margin: 0 auto;">
-            <p>IT業界で20年以上。エンジニアとしての高度な技術力と、産業カウンセラーとしての専門的な知見を併せ持つ、車いすの当事者エンジニアです。</p>
-            <p>「たった1ピクセルの不親切が、人の心を傷つけることがある。」<br />
-            自身の経験から生まれたこの想いを胸に、技術を単なる道具ではなく、人の心を支え、可能性を広げるための「和（和らぎ・繋ぎ目）」としてお届けします。</p>
+            <p>IT業界20年のエンジニア経験、産業カウンセラーとしての専門知見、そして車いす当事者としての視点。</p>
+            <p>これらはすべて、<strong>「1pxの不親切が、どれほど人の心を遠ざけるか」</strong>を知っている強みです。技術を単なる道具ではなく、人と人を繋ぐ優しい「和（なぎ）」としてお届けするのが、私の使命です。</p>
             
             <div class="btns" style="justify-content: center; margin-top: 40px;">
               <a class="btn primary" href="/about">詳しいプロフィール・事業概要</a>
-              <a class="btn secondary" href="/barrier_free">バリアフリー度を診断する</a>
+              <a class="btn secondary" href="/pricing">提供サービス一覧</a>
             </div>
           </div>
         </div>
       </div>
     </section>
     
+    <!-- Tataki-dai Refined -->
     <section class="section visual-proof" style="background: var(--paper); padding-top: 80px; padding-bottom: 80px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
       <div class="section-inner" style="max-width: 900px; text-align: center;">
-        <span class="eyebrow" style="color: var(--accent2);">Visual Proof</span>
-        <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin: 16px 0 24px; line-height: 1.3;">「自分のHPを作ったとして、<br class="pc-only"/>どんな感じになるんだろう？」</h2>
+        <span class="eyebrow" style="color: var(--accent2);">Step toward Quality</span>
+        <h2 style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 800; margin: 16px 0 24px; line-height: 1.3;">「実物を見てから、<br class="pc-only"/>進めるかどうか決めてください」</h2>
         <p style="font-size: 1.15rem; color: var(--text); line-height: 1.8; margin-bottom: 32px;">
-          そんな疑問に応えるために、和-Nodeではご相談内容を元に<br class="pc-only"/>
-          <strong>「たたき台（1ページ）」を無料で作成し、実際にお見せします。</strong><br/>
-          「実物を見てから、契約するかどうかを決める」という進め方が可能です。
+          初回相談後、必要に応じて<strong>「簡易的なたたき台（構成案）」</strong>を無料で作成し、実際にお見せします。<br class="pc-only"/>
+          本格的な設計・制作はご契約後に進めますが、まずは「和-Nodeと組む価値」を肌で感じていただければ幸いです。
         </p>
         <div class="btns" style="justify-content: center;">
-          <a class="btn" href="#consultation-flow">無料で相談・たたき台作成を依頼する</a>
+          <a class="btn" href="#consultation-flow">無料で相談・構成案を依頼する</a>
         </div>
       </div>
     </section>
@@ -261,9 +229,10 @@ const jsonLd = {
   .section-inner { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
 
   h1, h2, h3 { font-family: 'Shippori Mincho', serif; font-weight: 800; }
-  h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.2; margin-bottom: 24px; color: var(--text-deep); }
-  h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 32px; color: var(--text-deep); }
+  h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.2; margin-bottom: 24px; color: var(--text-deep); }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 32px; color: var(--text-deep); }
 
+  .tagline-top { font-size: 1.1rem; color: var(--accent); font-weight: 800; letter-spacing: 0.1em; margin-bottom: 8px; }
   .lead { font-size: 1.25rem; color: var(--muted); margin-bottom: 40px; max-width: 800px; }
   .lead strong { color: var(--accent); }
 
@@ -296,11 +265,6 @@ const jsonLd = {
   .stat-num { font-size: 1.8rem; font-weight: 800; color: var(--accent); }
   .stat-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
 
-  /* Mission Box */
-  .mission-box { text-align: center; margin-bottom: 80px; }
-  .mission-box h2 { font-size: clamp(1.8rem, 4vw, 2.8rem); margin-bottom: 24px; color: var(--accent); }
-  .mission-box p { font-size: 1.15rem; color: var(--muted); line-height: 1.8; }
-
   /* Cards Grid */
   .consult-grid, .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-top: 60px; }
   .consult-card, .card {
@@ -313,6 +277,7 @@ const jsonLd = {
     overflow: hidden;
   }
   .consult-card:hover, .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.05); border-color: var(--accent); }
+  .consult-card.highlight { border-color: var(--accent); background: var(--soft); }
   .card-tag { font-size: 0.75rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; display: block; }
   .consult-card h3, .card h3 { font-size: 1.5rem; margin-bottom: 16px; color: var(--text-deep); }
   .consult-card p, .card p { font-size: 1rem; color: var(--muted); margin-bottom: 24px; }
@@ -340,6 +305,7 @@ const jsonLd = {
     border-color: var(--accent);
     box-shadow: 0 15px 35px rgba(197, 160, 89, 0.1);
   }
+  .action-card.highlight-border { border: 2px solid var(--accent); }
   .action-icon {
     font-size: 2.5rem;
     margin-bottom: 20px;
@@ -351,42 +317,23 @@ const jsonLd = {
   /* Section Titles */
   .section-title { margin-bottom: 40px; }
   .eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; display: block; }
-  .section-lead { font-size: 1.2rem; color: var(--muted); max-width: 700px; }
 
   /* Philosophy Card */
   .philosophy-card { background: var(--soft); border-radius: var(--radius); padding: 80px 60px; border: 1px solid var(--line); }
   .philosophy-content { max-width: 800px; margin: 0 auto; }
   .philosophy-content p { font-size: 1.15rem; margin-bottom: 24px; color: #444; }
 
-  /* Before/After Grid */
-  .ba-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-top: 60px; }
-  .ba-card { background: #f5f5f5; padding: 40px; border-radius: var(--radius); border-left: 6px solid #ccc; }
-  .ba-card.after { background: var(--soft); border-left-color: var(--accent); }
-  .ba-card h3 { margin-bottom: 24px; font-size: 1.25rem; color: var(--text-deep); }
-  .ba-card ul { list-style: none; padding: 0; }
-  .ba-card li { position: relative; padding-left: 28px; margin-bottom: 16px; color: var(--muted); }
-  .ba-card li::before { content: "✕"; position: absolute; left: 0; color: #999; }
-  .ba-card.after li::before { content: "✔"; color: var(--accent); }
+  /* Ethical Box */
+  .ethics-box { background: white; padding: 48px; border-radius: var(--radius); border: 1px solid var(--line); text-align: center; }
 
-  /* Qual Box */
-  .qual-box-wrapper { margin-top: 60px; }
-  .qual-box { background: var(--white); padding: 48px; border-radius: var(--radius); border: 1px solid var(--line); }
-  .qual-box h3 { margin-bottom: 24px; font-size: 1.25rem; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
-  .qual-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; list-style: none; padding: 0; }
-  .qual-list li { position: relative; padding-left: 20px; font-size: 0.95rem; color: var(--muted); }
-  .qual-list li::before { content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
-
-  /* Highlights */
-  .card.highlight { background: var(--soft); border-color: var(--accent); }
   .card-link { display: inline-block; margin-top: 24px; font-weight: 800; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
 
   /* Visual Proof Section */
   .visual-proof { position: relative; overflow: hidden; }
   .visual-proof::before {
-    content: "Sample"; position: absolute; top: 10px; right: -40px; background: var(--accent2); color: white;
+    content: "Professional"; position: absolute; top: 10px; right: -40px; background: var(--accent); color: white;
     font-size: 0.7rem; font-weight: 800; padding: 4px 30px; transform: rotate(45deg);
   }
-  .price-old { text-decoration: line-through; color: var(--muted); font-size: 0.9rem; margin-right: 8px; }
 
   @media (max-width: 768px) {
     .hero { padding: 60px 0; text-align: center; }
@@ -395,11 +342,10 @@ const jsonLd = {
     .hero-avatar { width: 200px; height: 200px; }
     .lead { margin-inline: auto; }
     .hero-stats { justify-content: center; flex-wrap: wrap; }
-    .consult-grid, .ba-grid { grid-template-columns: 1fr; }
+    .consult-grid, .action-buttons-grid { grid-template-columns: 1fr; }
     .philosophy-card { padding: 32px 20px; }
   }
 
-  /* --- Synergy Diagram (Psychological Authority) --- */
   .synergy-container {
     margin-top: 60px;
     display: flex;
@@ -411,55 +357,9 @@ const jsonLd = {
     width: 100%;
     height: auto;
   }
-
-  /* --- Next Stage Section (Future-oriented) --- */
-  .next-stage-section {
-    padding: 120px 0;
-    background: linear-gradient(to bottom, var(--white), var(--soft));
-    text-align: center;
-  }
-  .next-stage-box {
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  .next-stage-box h2 {
-    font-size: 2.2rem;
-    margin-bottom: 32px;
-    color: var(--accent);
-  }
-  .next-stage-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    margin-top: 50px;
-  }
-  .next-item {
-    background: rgba(255, 255, 255, 0.5);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid var(--line);
-  }
-  .next-item span {
-    font-size: 2rem;
-    display: block;
-    margin-bottom: 16px;
-  }
-  .next-item h4 {
-    margin-bottom: 12px;
-    color: var(--text);
-  }
-  .next-item p {
-    font-size: 0.85rem;
-    color: var(--muted);
-  }
-
-  @media (max-width: 768px) {
-    .next-stage-grid { grid-template-columns: 1fr; }
-  }
 </style>
 
 <script is:inline>
-  // Parallax Effect for Hero
   function initParallax() {
     window.addEventListener('scroll', () => {
       const scrolled = window.pageYOffset;
@@ -469,6 +369,5 @@ const jsonLd = {
       }
     });
   }
-
   document.addEventListener('astro:page-load', initParallax);
 </script>
