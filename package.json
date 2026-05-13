@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "astro": "^4.16.10",
-    "@astrojs/cloudflare": "^11.0.0"
+    "@astrojs/cloudflare": "^11.0.0",
+    "openai": "^4.52.0"
   }
 }
