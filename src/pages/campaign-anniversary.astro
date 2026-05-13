@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
+const CAMPAIGN_END_DATE = "2026年7月31日";
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "起業記念20%OFFキャンペーン | 和-Node",
-  "description": "心理学・ICT・AIを統合したWeb制作「和-Node」の起業記念キャンペーン。全メニュー20%OFF。2026年7月31日まで。",
+  "description": `心理学・ICT・AIを統合したWeb制作「和-Node」の起業記念キャンペーン。全メニュー20%OFF。${CAMPAIGN_END_DATE}まで。`,
   "breadcrumb": {
     "@type": "BreadcrumbList",
     "itemListElement": [
@@ -58,7 +60,7 @@ const jsonLd = {
         <div class="conditions-grid reveal">
           <div class="cond-item">
             <span class="label">お申込期限</span>
-            <span class="value">2026年7月31日まで</span>
+            <span class="value">{CAMPAIGN_END_DATE}まで</span>
           </div>
           <div class="cond-item">
             <span class="label">限定枠</span>

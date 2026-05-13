@@ -1,5 +1,5 @@
----
 import BaseLayout from '../layouts/BaseLayout.astro';
+const CAMPAIGN_END_DATE = "2026年7月31日";
 ---
 
 <BaseLayout title="料金シミュレーター | 和-Node" description="心理導線Web制作の概算費用をリアルタイムで算出。起業記念キャンペーン実施中。">
@@ -21,7 +21,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p class="sim-desc">
         プランやオプションを自由に組み合わせて、概算の費用と納期を算出できます。<br />
         <span class="campaign-text">現在、<strong>起業記念キャンペーン（制作費 20% OFF）</strong> を自動適用中！</span><br />
-        <span style="font-size: 0.85rem; opacity: 0.8;">※毎月3名様限定 / 2026年7月31日まで / 相談・保守・月額契約・外部実費は対象外</span>
+        <span style="font-size: 0.85rem; opacity: 0.8;">※毎月3名様限定 / {CAMPAIGN_END_DATE}まで / 相談・保守・月額契約・外部実費は対象外</span>
       </p>
     </header>
 
