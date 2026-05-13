@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ConsultationFlow from '../components/ConsultationFlow.astro';
 ---
 
-<BaseLayout title="制作実績・デモ｜和-Node" description="心理導線Web制作、診断ツール開発、KDP出版、LINE Mini Appなど、和-Nodeの幅広い制作実績とインタラクティブなデモアプリを紹介します。">
+<BaseLayout title="制作実績・デモ｜和-Node" description="心理導線Web制作、AI相談ナビ、各種診断ツール、KDP出版、LINE Mini Appなど、和-Nodeの幅広い制作実績とインタラクティブなデモを紹介します。">
   <!-- Background -->
   <div class="bg-decoration">
     <div class="glow glow-1"></div>
@@ -47,10 +47,10 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         </div>
 
         <span class="eyebrow">Works & Demos</span>
-        <h1 class="premium-heading">制作実績・デモ・サンプル</h1>
+        <h1 class="premium-heading">制作実績・デモ・ツール</h1>
         <p class="lead">
-          実案件の制作実績に加え、デザイン提案のためのサンプルや独自開発のデモツールを公開しています。<br />
-          和-Nodeが提供する「伝わる導線」と「実用的な設計」を体験してください。
+          実案件の実績に加え、和-Node独自の視点（心理学・AI・バリアフリー）を形にした<br class="pc-only" />
+          各種デモツールを公開しています。技術と知見の融合を体験してください。
         </p>
       </div>
     </section>
@@ -61,13 +61,53 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         <button class="filter-btn active" data-filter="all">すべて</button>
         <button class="filter-btn" data-filter="web">Web & LP</button>
         <button class="filter-btn" data-filter="tool">診断・ツール</button>
+        <button class="filter-btn" data-filter="system">AI・システム</button>
         <button class="filter-btn" data-filter="kdp">KDP出版</button>
-        <button class="filter-btn" data-filter="system">システム・AI</button>
       </nav>
 
       <div class="works-grid" id="works-grid">
         
-        <!-- Category: Tool -->
+        <!-- Category: Web (Psychology Demo) -->
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg">
+              <img src="/images/works-psy-demo.png" alt="心理導線体験デモ" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag demo">自社開発デモ</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Psychology Logic</div>
+            <h3>心理導線体験デモ</h3>
+            <p class="card-text">なぜそのボタンはそこにあるのか？心理学的根拠に基づいた情報配置の「正解」を、解説付きで体験できる特別なデモページです。</p>
+            <div class="card-footer">
+              <span class="tech-tag">UI/UX</span>
+              <span class="tech-tag">Psychology</span>
+              <a href="/psychology-demo/" class="card-link">デモを体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: System (AI Demo) -->
+        <article class="work-card reveal" data-category="system">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg" style="background: var(--text-deep);">
+              <div style="display:flex; align-items:center; justify-content:center; height:100%; color:#fff; font-size:3rem;">🤖</div>
+              <span class="category-tag demo">自社開発デモ</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">AI Solution</div>
+            <h3>AI相談内容整理ナビ</h3>
+            <p class="card-text">ユーザーの漠然とした悩みを、Web制作やICT活用の切り口でAIが整理。OpenAI APIを活用した実用的なAI接客のデモアプリケーションです。</p>
+            <div class="card-footer">
+              <span class="tech-tag">OpenAI API</span>
+              <span class="tech-tag">Astro</span>
+              <a href="/ai-chat-demo" class="card-link">ナビを試す →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: Tool (Mental) -->
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
@@ -76,17 +116,18 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             </div>
           </div>
           <div class="card-body">
-            <div class="expert-label">Strategic Tool</div>
+            <div class="expert-label">Mental Health</div>
             <h3>こころの疲労度診断</h3>
-            <p class="card-text">心理カウンセラーの知見を活かし、現在のストレス要因を可視化。グラスモーフィズムを用いたモダンなUIで、回答者の心理的ハードルを下げています。</p>
+            <p class="card-text">産業カウンセラーの知見をシステム化。現在のストレス要因を可視化し、適切なケアへの気づきを促すインタラクティブな診断ツールです。</p>
             <div class="card-footer">
-              <span class="tech-tag">JavaScript</span>
-              <span class="tech-tag">Astro</span>
+              <span class="tech-tag">Logic</span>
+              <span class="tech-tag">Empathy UI</span>
               <a href="/mental_care" class="card-link">診断を体験する →</a>
             </div>
           </div>
         </article>
 
+        <!-- Category: Tool (Accessibility) -->
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
@@ -96,16 +137,17 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           </div>
           <div class="card-body">
             <div class="expert-label">Accessibility</div>
-            <h3>バリアフリー診断</h3>
-            <p class="card-text">車いすユーザー視点の25項目によるセルフチェック。物理的な障壁を「自分事」として捉え直すための、アクセシビリティに配慮した設計です。</p>
+            <h3>セルフ・バリアフリー診断</h3>
+            <p class="card-text">車いすユーザー視点でのアクセシビリティチェック。物理的な障壁を可視化し、改善の第一歩をサポートするための診断アプリです。</p>
             <div class="card-footer">
-              <span class="tech-tag">UI/UX</span>
+              <span class="tech-tag">UD Design</span>
               <span class="tech-tag">SVG Gauge</span>
               <a href="/barrier_free" class="card-link">診断を体験する →</a>
             </div>
           </div>
         </article>
 
+        <!-- Category: Tool (SEO) -->
         <article class="work-card reveal" data-category="tool">
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
@@ -114,17 +156,18 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             </div>
           </div>
           <div class="card-body">
-            <div class="expert-label">SEO Logic</div>
-            <h3>SEO内部対策診断</h3>
-            <p class="card-text">WordPressサイトのSEO状態を25項目でリアルタイム採点。テクニカルな情報を、段階的なステップとチャートで分かりやすく提示します。</p>
+            <div class="expert-label">SEO Analysis</div>
+            <h3>SEO内部対策セルフ診断</h3>
+            <p class="card-text">Webサイトの健全性を25項目でチェック。テクニカルな情報を、段階的なステップとチャートで分かりやすく提示します。</p>
             <div class="card-footer">
               <span class="tech-tag">SEO</span>
-              <span class="tech-tag">Logic</span>
+              <span class="tech-tag">Marketing</span>
               <a href="/seo_check" class="card-link">診断を体験する →</a>
             </div>
           </div>
         </article>
 
+        <!-- Category: Web (Medical) -->
         <article class="work-card reveal" data-category="web">
           <div class="card-visual-wrap">
             <div class="card-visual">
@@ -135,7 +178,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-body">
             <div class="expert-label">Medical / Clinic</div>
             <h3>クリニック・医療系LP</h3>
-            <p class="card-text">美容クリニック、歯科医院、心療内科など。薬機法や医療広告ガイドラインに配慮しつつ、患者様の安心感と信頼を両立させた設計です。</p>
+            <p class="card-text">美容クリニック、心療内科等。医療広告ガイドラインに配慮しつつ、患者様の安心感と信頼を両立させた導線設計の実績です。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
               <a href="/portfolio-lp/lp_clinic.html" class="premium-link">作品を見る</a>
@@ -143,24 +186,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           </div>
         </article>
 
-        <article class="work-card reveal" data-category="web">
-          <div class="card-visual-wrap">
-            <div class="card-visual">
-              <img src="/portfolio-lp/images/hero_beauty.png" alt="美容・エステ・サロン系LP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag sample">デザインサンプル</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="expert-label">Beauty / Salon</div>
-            <h3>美容・エステ・サロン系LP</h3>
-            <p class="card-text">エステ、ネイル、美容室。憧れと親しみやすさを視覚的に表現し、初回来店への心理的ハードルを下げる構成サンプルです。</p>
-            <div class="card-footer">
-              <div class="tech-stack"><span>#Visual Art</span><span>#CVR</span></div>
-              <a href="/portfolio-lp/lp_beauty.html" class="premium-link">作品を見る</a>
-            </div>
-          </div>
-        </article>
-
+        <!-- Category: KDP -->
         <article class="work-card reveal" data-category="kdp">
           <div class="card-visual-wrap">
             <div class="card-visual">
@@ -169,31 +195,13 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             </div>
           </div>
           <div class="card-body">
-            <div class="expert-label">Global Design</div>
+            <div class="expert-label">Publishing</div>
             <h3>Amazon KDP 出版実績</h3>
-            <p class="card-text">浮世絵や鳥獣戯画をモチーフにした、海外市場向け（US/FR）の書籍制作。表紙から内部構成まで、和の美しさを世界へ届けています。</p>
+            <p class="card-text">浮世絵や伝統文様をモチーフにした海外市場向け書籍制作。和の美しさを世界へ届けるブランディング支援の実績です。</p>
             <div class="card-footer">
               <span class="tech-tag">Global</span>
-              <span class="tech-tag">Publishing</span>
-              <a href="/kdp_books" class="card-link">作品一覧を見る →</a>
-            </div>
-          </div>
-        </article>
-
-        <article class="work-card reveal" data-category="system">
-          <div class="card-visual-wrap">
-            <div class="card-visual">
-              <img src="/images/works-system.png" alt="LINE カウンセリング予約システム" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag real">実案件</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="expert-label">System Build</div>
-            <h3>LINE カウンセリング予約システム</h3>
-            <p class="card-text">LINEアプリ内で完結する予約・決済・診断システム。ユーザーの日常的なツールを窓口にすることで、利用のハードルを下げます。</p>
-            <div class="card-footer">
-              <div class="tech-stack"><span>#LIFF</span><span>#Node.js</span></div>
-              <a href="/line_demo" class="premium-link">デモを見る</a>
+              <span class="tech-tag">Design</span>
+              <a href="/kdp_books" class="card-link">実績を見る →</a>
             </div>
           </div>
         </article>
@@ -230,6 +238,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       --tag-works: #2c7c5e;
       --tag-sample: #c5a059;
       --tag-demo: #2c5e7c;
+      --text-deep: #1a1a1a;
     }
 
     .premium-heading {
@@ -264,20 +273,15 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     }
 
     .works-page { padding-bottom: 100px; font-family: 'Shippori Mincho', serif !important; }
-    
     .works-hero { padding: 80px 0 60px; text-align: center; }
     
-    /* Anniversary Banner */
-    .works-anniversary-banner {
-      margin-bottom: 40px;
-    }
+    .works-anniversary-banner { margin-bottom: 40px; }
     .works-anniversary-banner a {
       display: block; background: #fff; border: 1px solid var(--accent-red);
       border-radius: 20px; padding: 20px 30px; text-decoration: none;
-      transition: 0.4s; position: relative; overflow: hidden;
-      box-shadow: 0 10px 30px rgba(209, 77, 58, 0.1);
+      transition: 0.4s; box-shadow: 0 10px 30px rgba(209, 77, 58, 0.1);
     }
-    .works-anniversary-banner a:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(209, 77, 58, 0.15); }
+    .works-anniversary-banner a:hover { transform: translateY(-3px); }
     .ann-label {
       display: inline-block; background: var(--accent-red); color: white;
       font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 4px;
@@ -285,88 +289,74 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     }
     .ann-content { display: flex; align-items: center; justify-content: center; gap: 20px; color: #2c2c2c; }
     .ann-content strong { font-size: 1.2rem; color: var(--accent-red); }
-    .ann-content span { font-size: 0.95rem; opacity: 0.8; }
 
     .eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
     .lead { font-size: 1.1rem; color: #555; line-height: 1.8; max-width: 800px; margin: 0 auto; }
 
     /* Filter Nav */
-    .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 80px; flex-wrap: wrap; }
+    .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
     .filter-btn {
       padding: 12px 28px; border-radius: 999px; background: #fff;
       border: 1px solid var(--glass-border); color: #666; font-weight: 800;
-      cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      cursor: pointer; transition: 0.3s;
     }
-    .filter-btn:hover { border-color: var(--accent); color: var(--accent); }
-    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 8px 25px rgba(197, 160, 89, 0.3); }
+    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
 
     /* Works Grid */
-    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 40px; }
+    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
 
     .work-card {
-      background: #fff; border: 1px solid var(--glass-border); border-radius: 30px;
+      background: #fff; border: 1px solid var(--glass-border); border-radius: 24px;
       overflow: hidden; display: flex; flex-direction: column;
-      transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.02);
+      transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.02);
     }
-    .work-card:hover { transform: translateY(-12px); border-color: var(--accent); box-shadow: 0 30px 60px rgba(197, 160, 89, 0.1); }
+    .work-card:hover { transform: translateY(-10px); border-color: var(--accent); }
 
-    .card-visual-wrap { padding: 15px; }
-    .card-visual { height: 180px; border-radius: 20px; overflow: hidden; position: relative; background: #f5f5f5; }
+    .card-visual-wrap { padding: 12px; }
+    .card-visual { height: 160px; border-radius: 16px; overflow: hidden; position: relative; background: #f5f5f5; }
     
     .category-tag {
-      position: absolute; top: 15px; left: 15px; font-size: 0.65rem; font-weight: 800;
-      padding: 4px 12px; border-radius: 999px; z-index: 2;
+      position: absolute; top: 12px; left: 12px; font-size: 0.65rem; font-weight: 800;
+      padding: 4px 10px; border-radius: 999px; z-index: 2;
     }
     .category-tag.real { background: var(--accent-red); color: #fff; }
     .category-tag.demo { background: var(--tag-demo); color: #fff; }
     .category-tag.sample { background: var(--accent); color: #fff; }
 
-    .card-body { padding: 30px; flex: 1; display: flex; flex-direction: column; }
-    .expert-label { font-size: 0.75rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 10px; }
-    .card-body h3 { font-size: 1.4rem; font-weight: 800; color: #2c2c2c; margin-bottom: 15px; line-height: 1.4; }
-    .card-text { font-size: 0.95rem; color: #666; line-height: 1.7; margin-bottom: 24px; flex: 1; }
+    .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .expert-label { font-size: 0.75rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 8px; }
+    .card-body h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 12px; line-height: 1.4; }
+    .card-text { font-size: 0.9rem; color: #666; line-height: 1.7; margin-bottom: 20px; flex: 1; }
 
     .card-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: auto; }
-    .tech-tag { font-size: 0.7rem; font-weight: 800; color: #888; background: #f5f5f5; padding: 4px 10px; border-radius: 4px; }
-    .card-link, .premium-link { margin-left: auto; font-size: 0.9rem; font-weight: 800; color: var(--accent); text-decoration: none; transition: 0.2s; }
-    .card-link:hover, .premium-link:hover { color: var(--accent-red); transform: translateX(5px); }
+    .tech-tag { font-size: 0.7rem; font-weight: 800; color: #888; background: #f5f5f5; padding: 4px 8px; border-radius: 4px; }
+    .card-link, .premium-link { margin-left: auto; font-size: 0.85rem; font-weight: 800; color: var(--accent); text-decoration: none; }
 
-    .packages-cta { margin-top: 120px; }
+    .packages-cta { margin-top: 100px; }
     .glass-panel {
-      background: #3a2e26; color: white; border-radius: 40px; padding: 80px 40px;
-      text-align: center; border: 1px solid var(--accent); position: relative; overflow: hidden;
+      background: #3a2e26; color: white; border-radius: 32px; padding: 60px 20px;
+      text-align: center; border: 1px solid var(--accent);
     }
-    .glass-panel::before {
-      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-      background: radial-gradient(circle at top right, rgba(197, 160, 89, 0.15), transparent); pointer-events: none;
-    }
-    .cta-label { font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 20px; }
-    .glass-panel h2 { font-size: 2.2rem; margin-bottom: 24px; font-weight: 800; }
-    .glass-panel p { font-size: 1.1rem; opacity: 0.8; line-height: 1.8; margin-bottom: 40px; }
+    .cta-label { font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 16px; }
+    .glass-panel h2 { font-size: 1.8rem; margin-bottom: 20px; font-weight: 800; }
+    .glass-panel p { font-size: 1rem; opacity: 0.8; margin-bottom: 32px; }
 
     .btn-secondary-outline {
       display: inline-block; border: 2px solid var(--accent); color: var(--accent);
-      padding: 15px 40px; border-radius: 50px; text-decoration: none;
-      font-weight: 800; transition: 0.3s;
+      padding: 12px 36px; border-radius: 50px; text-decoration: none; font-weight: 800; transition: 0.3s;
     }
     .btn-secondary-outline:hover { background: var(--accent); color: white; }
 
-    .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+    .reveal { opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 768px) {
-      .ann-content { flex-direction: column; gap: 5px; text-align: center; }
-      .ann-content strong { font-size: 1.1rem; }
-      .ann-content span { font-size: 0.85rem; }
       .works-grid { grid-template-columns: 1fr; }
-      .glass-panel { padding: 60px 20px; }
     }
 </style>
 
 <script is:inline>
     function initWorks() {
-      // Filter Logic
       const filterBtns = document.querySelectorAll('.filter-btn');
       const workCards = document.querySelectorAll('.work-card');
 
@@ -388,7 +378,6 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         });
       });
 
-      // Reveal Logic
       const io = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting) {

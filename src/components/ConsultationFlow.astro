@@ -17,239 +17,83 @@ const {
   <div class="consultation-wrap">
     <div class="section-head">
       <p class="kicker">Consultation Flow</p>
-      <h2>無料相談のステップ</h2>
-      <p class="muted">和-Nodeでは、初めての方でも安心してご相談いただけるよう、最大60分の無料相談枠をご用意しています。</p>
+      <h2>ご相談の流れ</h2>
+      <p class="muted">まずは無料相談（最大60分）で、あなたのビジネスの現状と理想を整理します。</p>
     </div>
     
     <div class="consultation-card" style={`background: ${background};`}>
-      <p class="intro-text">
-        「何から手をつけていいか分からない」「自分の課題を整理したい」といった状態でも大丈夫です。専門のカウンセラーが、あなたの想いを形にするお手伝いをします。
-      </p>
-      
-      <div class="step-grid">
-        <div class="step-item">
-          <h3>① 初回30分無料</h3>
-          <p>どなたでも初回の30分間は無料でご相談いただけます。現在の悩みや課題をそのままお聞かせください。</p>
+      <div class="flow-steps-compact">
+        <div class="flow-step">
+          <div class="step-circle">1</div>
+          <div class="step-body">
+            <h3>無料相談</h3>
+            <p>オンラインにて課題をヒアリング。今やるべきことを整理します。</p>
+          </div>
         </div>
-        <div class="step-item bonus">
-          <h3>② 特典でさらに30分無料</h3>
-          <p>診断・シミュレーター利用で、さらに30分無料となります。<strong>合計最大60分まで無料相談が可能です。</strong></p>
-          <a href="/works" class="inline-link" data-ga-event="click_bonus_diagnosis">→ 診断・試算をして特典を受ける</a>
+        <div class="flow-step">
+          <div class="step-circle">2</div>
+          <div class="step-body">
+            <h3>ご提案</h3>
+            <p>必要に応じて「たたき台」を作成し、最適なプランを提示します。</p>
+          </div>
+        </div>
+        <div class="flow-step">
+          <div class="step-circle">3</div>
+          <div class="step-body">
+            <h3>着手・伴走</h3>
+            <p>内容にご納得いただければ、制作やサポートを開始します。</p>
+          </div>
         </div>
       </div>
 
-      <!-- FAQ Section for Conversion Push -->
-      <div class="faq-box">
-        <h4 class="faq-title">無料相談に関するよくある質問</h4>
-        <div class="faq-grid">
-          <div class="faq-item">
-            <p class="question">Q. まだ具体的なプランが決まっていないのですが相談できますか？</p>
-            <p class="answer">A. はい、ご相談いただけます。何から手をつけていいか分からない状態こそ、私たちの強みである「お悩み整理」が活きます。</p>
-          </div>
-          <div class="faq-item">
-            <p class="question">Q. 60分無料（30分+特典30分）は、本当に費用はかかりませんか？</p>
-            <p class="answer">A. はい、費用は一切発生しません。無理な勧誘も行いませんので、まずは壁打ち相手としてお気軽にご利用ください。</p>
-          </div>
-          <div class="faq-item">
-            <p class="question">Q. ZoomではなくLINEチャットでの相談も可能ですか？</p>
-            <p class="answer">A. 可能です。お好みのスタイル（LINE / Google Meet / Zoom）を予約時にご指定いただけます。</p>
-          </div>
-        </div>
+      <div class="consultation-note">
+        <p>※無理な勧誘は一切行いません。まずは「壁打ち相手」としてお気軽にご活用ください。</p>
       </div>
       
-      <p class="disclaimer">※診断アプリ利用による30分延長特典は、お一人様1回限りの適用となります。法人様の導入相談時も同様です。</p>
-      
       <div class="cta-btns">
-        <a class="btn-primary shine-effect" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" data-ga-event="click_consultation_line">LINEで相談（60分）を予約</a>
-        <a class="btn-secondary" href="/contact" data-ga-event="click_consultation_form">内容を理解して相談を申し込む</a>
+        <a class="btn-primary shine-effect" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">LINEで相談予約（最大60分）</a>
+        <a class="btn-secondary" href="/contact">フォームから申し込む</a>
       </div>
     </div>
   </div>
 </section>
 
 <style>
-  .consultation-section {
-    padding: 100px 0;
-    background: #fff;
-    scroll-margin-top: 80px; /* Backup for older browsers */
-  }
-  .consultation-wrap {
-    max-width: 940px;
-    margin: 0 auto;
-    padding: 0 20px;
-  }
-  .section-head {
-    text-align: center;
-    margin-bottom: 50px;
-  }
-  .kicker {
-    color: var(--accent);
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    margin-bottom: 12px;
-  }
-  h2 {
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 900;
-    margin-bottom: 20px;
-    color: var(--ink);
-  }
-  .muted {
-    color: #666;
-    font-size: 1.05rem;
-  }
-  .consultation-card {
-    padding: 60px;
-    border: 1px solid var(--line);
-    border-radius: 40px;
-    box-shadow: var(--shadow);
-  }
-  .intro-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: #4d463e;
-    margin-bottom: 40px;
-    text-align: center;
-  }
-  .step-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    margin-bottom: 40px;
-  }
-  .step-item {
-    background: #fff;
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 30px;
-  }
-  .step-item.bonus {
-    background: linear-gradient(135deg, #fffdf9 0%, #f4eadc 100%);
-    border-color: var(--accent2);
-  }
-  .step-item h3 {
-    font-size: 1.25rem;
-    color: var(--accent);
-    margin-bottom: 15px;
-    font-weight: 800;
-  }
-  .step-item p {
-    font-size: 0.95rem;
-    color: #555;
-    line-height: 1.6;
-    margin: 0;
-  }
-  .inline-link {
-    display: inline-block;
-    margin-top: 15px;
-    font-weight: 800;
-    color: var(--accent);
-    text-decoration: underline;
-  }
+  .consultation-section { padding: 100px 0; background: #fff; }
+  .consultation-wrap { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .section-head { text-align: center; margin-bottom: 50px; }
+  .kicker { color: var(--accent); font-weight: 700; letter-spacing: .1em; font-size: 0.9rem; margin-bottom: 12px; }
+  h2 { font-size: 2rem; font-weight: 900; margin-bottom: 16px; color: var(--text-deep); }
+  .muted { color: #666; font-size: 1rem; }
 
-  /* FAQ Box */
-  .faq-box {
-    background: rgba(255,255,255,0.7);
-    border: 1px solid var(--line);
-    border-radius: 24px;
-    padding: 32px;
-    margin-bottom: 40px;
+  .consultation-card { padding: 50px; border: 1px solid var(--line); border-radius: 32px; box-shadow: 0 20px 40px rgba(0,0,0,0.02); }
+  
+  .flow-steps-compact { display: flex; flex-direction: column; gap: 30px; margin-bottom: 40px; }
+  .flow-step { display: flex; gap: 24px; align-items: flex-start; }
+  .step-circle { 
+    flex: 0 0 40px; height: 40px; background: var(--accent); color: #fff; 
+    border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+    font-weight: 800; font-size: 1.1rem;
   }
-  .faq-title {
-    margin-top: 0;
-    color: var(--accent);
-    font-size: 1.1rem;
-    font-weight: 800;
-    border-bottom: 1px solid var(--line);
-    padding-bottom: 12px;
-    margin-bottom: 20px;
-  }
-  .faq-grid {
-    display: grid;
-    gap: 20px;
-  }
-  .faq-item .question {
-    font-weight: 800;
-    color: var(--accent);
-    margin-bottom: 6px;
-    font-size: 0.95rem;
-  }
-  .faq-item .answer {
-    font-size: 0.9rem;
-    color: #666;
-    margin: 0;
-    line-height: 1.6;
-  }
+  .step-body h3 { font-size: 1.2rem; margin-bottom: 6px; font-weight: 800; color: var(--text-deep); }
+  .step-body p { font-size: 0.95rem; color: #555; margin: 0; }
 
-  .disclaimer {
-    text-align: center;
-    color: var(--accent);
-    font-weight: 700;
-    font-size: 0.85rem;
-    margin-bottom: 40px;
-  }
-  .cta-btns {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+  .consultation-note { text-align: center; margin-bottom: 40px; padding: 16px; background: var(--soft); border-radius: 12px; }
+  .consultation-note p { font-size: 0.85rem; color: var(--muted); margin: 0; font-weight: 700; }
+
+  .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
   .btn-primary, .btn-secondary {
-    padding: 18px 40px;
-    border-radius: 999px;
-    font-weight: 800;
-    text-decoration: none;
-    transition: 0.3s;
-    text-align: center;
-    min-width: 280px;
+    padding: 16px 40px; border-radius: 999px; font-weight: 800; text-decoration: none; 
+    transition: 0.3s; text-align: center; min-width: 260px;
   }
-  .btn-primary {
-    background: var(--accent2);
-    color: #fff;
-  }
-  .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(99, 153, 34, 0.3);
-  }
-  .btn-secondary {
-    background: #fff;
-    color: var(--accent2);
-    border: 2px solid var(--accent2);
-  }
-  .btn-secondary:hover {
-    background: var(--accent2);
-    color: #fff;
-  }
+  .btn-primary { background: var(--accent2); color: #fff; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(209, 77, 58, 0.2); }
+  .btn-secondary { background: #fff; color: var(--accent2); border: 2px solid var(--accent2); }
+  .btn-secondary:hover { background: var(--accent2); color: #fff; }
 
-  @media (max-width: 768px) {
+  @media (max-width: 600px) {
     .consultation-card { padding: 30px 20px; }
-    .step-grid { grid-template-columns: 1fr; }
     .btn-primary, .btn-secondary { width: 100%; min-width: 0; }
+    .flow-step { gap: 16px; }
   }
 </style>
-
-<script is:inline>
-  function initGAEvents() {
-    const gaButtons = document.querySelectorAll('[data-ga-event]');
-    gaButtons.forEach(button => {
-      // Prevent duplicate listeners
-      const newButton = button.cloneNode(true);
-      button.parentNode.replaceChild(newButton, button);
-      
-      newButton.addEventListener('click', () => {
-        const eventName = newButton.getAttribute('data-ga-event');
-        if (typeof gtag === 'function') {
-          gtag('event', eventName, {
-            'event_category': 'conversion',
-            'event_label': window.location.pathname
-          });
-        }
-      });
-    });
-  }
-
-  initGAEvents();
-  document.addEventListener('astro:page-load', initGAEvents);
-</script>
