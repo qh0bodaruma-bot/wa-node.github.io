@@ -198,7 +198,7 @@ const jsonLd = {
 
   /* Hero */
   .hero { padding: 100px 0 60px; background: linear-gradient(135deg, #fff 0%, #fdfcf9 100%); }
-  .hero-inner { display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+  .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
   .hero-visual { flex: 0 0 350px; }
   .hero-avatar { position: relative; width: 350px; height: 350px; border-radius: 40px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
   .hero-avatar img { width: 100%; height: 100%; object-fit: cover; }
@@ -230,7 +230,7 @@ const jsonLd = {
   .eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; display: block; }
 
   @media (max-width: 768px) {
-    .hero-inner { flex-direction: column; text-align: center; }
+    .hero-inner { flex-direction: column; text-align: center; padding: 0 20px; }
     .hero-visual { order: -1; flex: 0 0 auto; }
     .hero-avatar { width: 220px; height: 220px; }
     .action-buttons-grid, .simple-flow-grid { grid-template-columns: 1fr; }
