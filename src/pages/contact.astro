@@ -79,8 +79,40 @@ import AvailabilityStatus from '../components/AvailabilityStatus.astro';
               </div>
 
               <div class="form-group">
-                <label for="message">メッセージ内容 <span class="required">必須</span></label>
-                <textarea id="message" name="message" rows="6" required placeholder="ご相談内容や現状の課題など、どのようなことでもお気軽にご記入ください。&#13;&#10;具体的な希望日時がございましたら「第一希望：○月○日 10:00〜」のようにお書き添えいただけますと幸いです。内容を確認の上、日程の調整について改めてご連絡させていただきます。"></textarea>
+                <label for="method">ご相談の通信方式 <span class="required">必須</span></label>
+                <select id="method" name="method" required>
+                  <option value="" disabled selected>選択してください</option>
+                  <option value="google_meet">Google Meet (推奨)</option>
+                  <option value="zoom">Zoom</option>
+                  <option value="line_video">LINEビデオ通話</option>
+                  <option value="phone">お電話</option>
+                  <option value="face_to_face">対面（岐阜県可児市・近郊）</option>
+                  <option value="other">その他（メッセージに記載）</option>
+                </select>
+              </div>
+
+              <div class="form-group date-candidates">
+                <label>ご相談の希望日時（候補を3つほど） <span class="required">必須</span></label>
+                <div class="date-input-group">
+                  <div class="date-item">
+                    <span>第一希望:</span>
+                    <input type="datetime-local" name="date_1" required />
+                  </div>
+                  <div class="date-item">
+                    <span>第二希望:</span>
+                    <input type="datetime-local" name="date_2" />
+                  </div>
+                  <div class="date-item">
+                    <span>第三希望:</span>
+                    <input type="datetime-local" name="date_3" />
+                  </div>
+                </div>
+                <p class="field-desc">※平日の10:00〜18:00が基本ですが、夜間や土日も調整可能です。ご希望があればご記入ください。</p>
+              </div>
+
+              <div class="form-group">
+                <label for="message">メッセージ内容</label>
+                <textarea id="message" name="message" rows="6" placeholder="ご相談内容や現状の課題など、どのようなことでもお気軽にご記入ください。"></textarea>
               </div>
 
               <div class="form-consent">
@@ -182,6 +214,13 @@ import AvailabilityStatus from '../components/AvailabilityStatus.astro';
     background: #fdfcf9; font-size: 1rem; font-family: inherit; transition: 0.3s;
   }
   input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent-red); background: #fff; }
+  
+  .field-desc { font-size: 0.8rem; color: var(--muted); margin-top: 8px; line-height: 1.5; }
+
+  .date-input-group { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+  .date-item { display: flex; align-items: center; gap: 15px; }
+  .date-item span { font-size: 0.85rem; font-weight: 800; color: var(--muted); width: 80px; flex-shrink: 0; }
+  .date-item input { padding: 12px 15px; font-size: 0.9rem; }
 
   .submit-btn {
     width: 100%; padding: 22px; border-radius: 999px; border: none;
