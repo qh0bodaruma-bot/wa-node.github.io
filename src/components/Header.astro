@@ -1,8 +1,22 @@
 ---
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import t from '../i18n/translations.json';
+
+interface Props {
+  lang?: 'ja' | 'en' | 'fr';
+}
+
+const { lang = 'ja' } = Astro.props;
+
+function getLocalizedLink(path: string) {
+  const prefix = lang === 'ja' ? '' : `/${lang}`;
+  const finalPath = `${prefix}${path}`.replace(/\/+/g, '/');
+  return finalPath.endsWith('/') ? finalPath : `${finalPath}/`;
+}
 ---
 <header class="site-header" id="site-header">
   <div class="header-inner">
-    <a class="logo" href="/">
+    <a class="logo" href={getLocalizedLink('/')}>
       和-Node<span class="logo-sub">心理学 × ICT × AI</span>
     </a>
 
@@ -16,11 +30,12 @@
 
     <nav class="nav" id="site-nav">
       <div class="nav-links">
-        <a href="/psychology-demo/">心理導線デモ</a>
-        <a href="/works">制作実績・デモ</a>
-        <a href="/pricing">サービス・料金</a>
-        <a href="/about">和-Nodeについて</a>
-        <a href="/contact" class="nav-cta">相談する</a>
+        <a href={getLocalizedLink('/psychology-demo')}>{t.nav.demo[lang]}</a>
+        <a href={getLocalizedLink('/works')}>{t.nav.works[lang]}</a>
+        <a href={getLocalizedLink('/pricing')}>{t.nav.pricing[lang]}</a>
+        <a href={getLocalizedLink('/about')}>{t.nav.about[lang]}</a>
+        <LanguageSwitcher lang={lang} />
+        <a href={getLocalizedLink('/contact')} class="nav-cta">{t.nav.cta[lang]}</a>
       </div>
     </nav>
   </div>

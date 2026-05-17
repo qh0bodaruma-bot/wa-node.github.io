@@ -1,13 +1,26 @@
 ---
 import Qualifications from './Qualifications.astro';
+import t from '../i18n/translations.json';
+
+interface Props {
+  lang?: 'ja' | 'en' | 'fr';
+}
+
+const { lang = 'ja' } = Astro.props;
+
+function getLocalizedLink(path: string) {
+  const prefix = lang === 'ja' ? '' : `/${lang}`;
+  const finalPath = `${prefix}${path}`.replace(/\/+/g, '/');
+  return finalPath.endsWith('/') ? finalPath : `${finalPath}/`;
+}
 ---
 <footer class="footer">
   <div class="section-inner">
     <div class="footer-brand">
       <div class="logo">和-Node</div>
-      <p class="tagline">心理学×Web制作｜選ばれる導線と継続的な伴走で、ビジネスを整える。</p>
+      <p class="tagline">{t.footer.tagline[lang]}</p>
       <div class="footer-info">
-        <p class="info-item">代表：高野 紘純</p>
+        <p class="info-item">{t.footer.founder[lang]}</p>
         <p class="info-item">〒509-0207 岐阜県可児市今渡2347番地1</p>
         <p class="info-item">Tel: 080-3599-5388</p>
         <p class="info-item">Email: <a href="mailto:contacts@wa-node.com">contacts@wa-node.com</a></p>
@@ -16,43 +29,43 @@ import Qualifications from './Qualifications.astro';
 
     <div class="footer-grid">
       <div class="footer-col">
-        <h3>制作・伴走サービス</h3>
+        <h3>{t.footer.col1[lang]}</h3>
         <ul>
-          <li><a href="/pricing">心理導線Web制作</a></li>
-          <li><a href="/pricing">ホームページ・LP制作</a></li>
-          <li><a href="/pricing">月額ICT・AI伴走</a></li>
-          <li><a href="/works">制作実績・サンプル</a></li>
+          <li><a href={getLocalizedLink('/pricing')}>{t.footer.col1_item1[lang]}</a></li>
+          <li><a href={getLocalizedLink('/pricing')}>{t.footer.col1_item2[lang]}</a></li>
+          <li><a href={getLocalizedLink('/pricing')}>{t.footer.col1_item3[lang]}</a></li>
+          <li><a href={getLocalizedLink('/works')}>{t.footer.col1_item4[lang]}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>診断・デモツール</h3>
+        <h3>{t.footer.col2[lang]}</h3>
         <ul>
-          <li><a href="/psychology-demo/">心理導線デモ</a></li>
-          <li><a href="/ai-chat-demo/">AI相談ナビ</a></li>
-          <li><a href="/lp_wizard">制作ヒアリング体験</a></li>
-          <li><a href="/simulator">料金シミュレーター</a></li>
-          <li><a href="/seo_check">SEO内部対策診断</a></li>
+          <li><a href={getLocalizedLink('/psychology-demo')}>{t.footer.col2_item1[lang]}</a></li>
+          <li><a href={getLocalizedLink('/ai-chat-demo')}>{t.footer.col2_item2[lang]}</a></li>
+          <li><a href={getLocalizedLink('/lp_wizard')}>{t.footer.col2_item3[lang]}</a></li>
+          <li><a href={getLocalizedLink('/simulator')}>{t.footer.col2_item4[lang]}</a></li>
+          <li><a href={getLocalizedLink('/seo_check')}>{t.footer.col2_item5[lang]}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>専門領域・その他</h3>
+        <h3>{t.footer.col3[lang]}</h3>
         <ul>
-          <li><a href="/corporate-mental">組織コミュニケーション支援</a></li>
-          <li><a href="/barrier_free">バリアフリー診断</a></li>
-          <li><a href="/mental_care">こころの疲労度診断</a></li>
-          <li><a href="/kdp_books">KDP出版実績</a></li>
-          <li><a href="/free-guide">🎁 無料特典</a></li>
+          <li><a href={getLocalizedLink('/corporate-mental')}>{t.footer.col3_item1[lang]}</a></li>
+          <li><a href={getLocalizedLink('/barrier_free')}>{t.footer.col3_item2[lang]}</a></li>
+          <li><a href={getLocalizedLink('/mental_care')}>{t.footer.col3_item3[lang]}</a></li>
+          <li><a href={getLocalizedLink('/kdp_books')}>{t.footer.col3_item4[lang]}</a></li>
+          <li><a href={getLocalizedLink('/free-guide')}>{t.footer.col3_item5[lang]}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>運営・規約ポリシー</h3>
+        <h3>{t.footer.col4[lang]}</h3>
         <ul>
-          <li><a href="/about">和-Nodeについて・代表紹介</a></li>
-          <li><a href="/terms">利用規約</a></li>
-          <li><a href="/privacy">プライバシーポリシー</a></li>
-          <li><a href="/security-policy">情報セキュリティ方針</a></li>
-          <li><a href="/tokutei">特定商取引法に基づく表記</a></li>
-          <li><a href="/terms_miniapp">LINE Mini App 利用規約</a></li>
+          <li><a href={getLocalizedLink('/about')}>{t.footer.col4_item1[lang]}</a></li>
+          <li><a href={getLocalizedLink('/terms')}>{t.footer.col4_item2[lang]}</a></li>
+          <li><a href={getLocalizedLink('/privacy')}>{t.footer.col4_item3[lang]}</a></li>
+          <li><a href={getLocalizedLink('/security-policy')}>{t.footer.col4_item4[lang]}</a></li>
+          <li><a href={getLocalizedLink('/tokutei')}>{t.footer.col4_item5[lang]}</a></li>
+          <li><a href={getLocalizedLink('/terms_miniapp')}>{t.footer.col4_item6[lang]}</a></li>
         </ul>
       </div>
     </div>

@@ -1,0 +1,156 @@
+{
+  "nav": {
+    "demo": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
+    "works": { "ja": "制作実績・デモ", "en": "Works & Demos", "fr": "Portefeuille" },
+    "pricing": { "ja": "サービス・料金", "en": "Pricing", "fr": "Tarifs" },
+    "about": { "ja": "和-Nodeについて", "en": "About Us", "fr": "À Propos" },
+    "cta": { "ja": "相談する", "en": "Contact", "fr": "Contact" }
+  },
+  "hero": {
+    "badge": { "ja": "月3名まで丁寧に対応", "en": "Max 3 Clients / Month", "fr": "Max 3 Clients / Mois" },
+    "tagline": { "ja": "技術（ICT×統計）のその先へ。", "en": "Beyond Technology (ICT & Statistics).", "fr": "Au-delà de la technologie (TIC & statistiques)." },
+    "title_part1": { "ja": "「選ばれる」には、", "en": "There is a ", "fr": "Il y a une " },
+    "title_highlight": { "ja": "心理学", "en": "Psychological Reason", "fr": "Raison Psychologique" },
+    "title_part2": { "ja": "的な根拠がある。", "en": " to be Chosen.", "fr": " d'être Choisi." },
+    "lead": {
+      "ja": "和-Nodeは、「ICT・統計技術」に「行動心理学」を融合させたWeb制作で、訪問者の「なんとなく離脱」を防ぎ、澱みのない購入・成約導線をデザインする「ビジネスの副操縦士（戦略的パートナー）」です。",
+      "en": "Wa-Node blends ICT and statistical data with behavioral psychology to prevent visitors from bouncing, designing flawless conversion funnels as your strategic business co-pilot.",
+      "fr": "Wa-Node fusionne les technologies TIC et statistiques avec la psychologie comportementale pour retenir vos visiteurs, agissant comme le co-pilote stratégique de vos affaires."
+    },
+    "btn_consult": { "ja": "無料で相談する", "en": "Free Consultation", "fr": "Consultation Gratuite" },
+    "btn_demo": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
+    "btn_price": { "ja": "料金を確認", "en": "Check Pricing", "fr": "Vérifier les Tarifs" }
+  },
+  "why_psy": {
+    "eyebrow": { "ja": "こんなお悩みはありませんか？", "en": "Do you face these challenges?", "fr": "Rencontrez-vous ces défis?" },
+    "title": {
+      "ja": "「デザイン会社に頼んだのに、なぜ成果が出ないのか？」",
+      "en": "Why does your website fail to convert, despite hiring a design agency?",
+      "fr": "Pourquoi votre site ne produit-il aucun résultat malgré l'aide d'une agence?"
+    },
+    "lead": {
+      "ja": "その答えは、見た目の良さの中に潜む「1pxの心理的不親切（ユーザーの迷い）」にあります。",
+      "en": "The answer lies in a '1px psychological friction (user confusion)' hidden beneath a beautiful design.",
+      "fr": "La réponse réside dans une friction psychologique de 1px (confusion de l'utilisateur) cachée sous un beau design."
+    },
+    "card1_title": { "ja": "「綺麗」だけでは、人は動きません", "en": "Beauty alone won't move users", "fr": "La beauté seule ne fait pas agir" },
+    "card1_desc": {
+      "ja": "優れたグラフィックデザインも、ユーザーの「次の行動への心理ステップ」が設計されていなければ、ただの自己満足で終わり、離脱の原因になります。",
+      "en": "Even great graphic design ends up as self-satisfaction and drives high bounce rates if the user's psychological steps to the next action are not carefully designed.",
+      "fr": "Même un superbe design graphique reste une auto-satisfaction s'il ne conçoit pas les étapes psychologiques de l'utilisateur pour l'action suivante."
+    },
+    "card2_title": { "ja": "ICT × 統計 × 行動心理学", "en": "ICT × Statistics × Psychology", "fr": "TIC × Statistiques × Psychologie" },
+    "card2_desc": {
+      "ja": "和-Nodeは、20年のシステム構築力とデータ分析（統計）に加え、カウンセラーの心理学知見を融合。ロジカルかつ直感的に「迷わない」導線を作ります。",
+      "en": "Wa-Node combines 20 years of system development and data analysis (statistics) with counselor-level psychological insights to build logical and intuitive user paths.",
+      "fr": "Wa-Node combine 20 ans de développement et d'analyse de données avec une expertise psychologique pour créer des parcours utilisateur logiques."
+    }
+  },
+  "services": {
+    "eyebrow": { "ja": "Service Pillars", "en": "Service Pillars", "fr": "Piliers de Service" },
+    "title": { "ja": "ビジネスの「出口」を整える3つの柱", "en": "3 Pillars to Optimize Business Conversion", "fr": "3 piliers pour optimiser votre conversion" },
+    "card1_tag": { "ja": "Web Design", "en": "Web Design", "fr": "Design Web" },
+    "card1_title": { "ja": "心理導線のWeb制作", "en": "Psychology-Driven Web Design", "fr": "Design Web Orienté Psychologie" },
+    "card1_desc": { "ja": "行動心理に基づいた導線設計。LPから多機能HPまで20年の技術力で形にします。", "en": "Conversion-optimized design based on behavioral psychology. Realized with 20 years of engineering expertise.", "fr": "Conception optimisée pour la conversion basée sur la psychologie comportementale, portée par 20 ans d'expertise." },
+    "card1_link": { "ja": "30,000円〜 →", "en": "From 30,000 JPY →", "fr": "À partir de 30 000 JPY →" },
+    "card2_tag": { "ja": "Ongoing Partnership", "en": "Ongoing Partnership", "fr": "Partenariat" },
+    "card2_title": { "ja": "ビジネスの副操縦士", "en": "Business Co-pilot (Monthly)", "fr": "Co-pilote d'Affaires" },
+    "card2_desc": { "ja": "AI活用から業務改善まで。戦略的パートナーとして、あなたのビジネスにスマートに寄り添います。", "en": "From AI integration to business optimization. As your strategic partner, we support your growth.", "fr": "De l'intégration de l'IA à l'optimisation. En tant que partenaire stratégique, nous soutenons votre croissance." },
+    "card2_link": { "ja": "15,000円/月〜 →", "en": "From 15,000 JPY/mo →", "fr": "À partir de 15 000 JPY/mois →" },
+    "card3_tag": { "ja": "ICT & System", "en": "ICT & System", "fr": "TIC & Système" },
+    "card3_title": { "ja": "ICT・アプリ連携", "en": "ICT & App Integration", "fr": "Intégration TIC & Application" },
+    "card3_desc": { "ja": "LINE Mini App連携や自動化。複雑な仕組みを「人に優しく」実装します。", "en": "LINE Mini App sync and automation. We implement complex backend systems with user-friendly frontends.", "fr": "LINE Mini App sync et automatisation. Nous implémentons des systèmes complexes de manière simple." },
+    "card3_link": { "ja": "スポット相談 5,000円〜 →", "en": "Consultation from 5,000 JPY →", "fr": "Consultation dès 5 000 JPY →" }
+  },
+  "experience": {
+    "eyebrow": { "ja": "Experience Demo", "en": "Experience Demo", "fr": "Démo & Expérience" },
+    "title": { "ja": "「伝わる」と「動く」を体験する", "en": "Experience How It Works and Converts", "fr": "Découvrez comment cela fonctionne" },
+    "card1_title": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
+    "card1_desc": { "ja": "心理学的根拠を可視化したデモページ", "en": "Visualized psychological principles on a live page", "fr": "Visualisation des principes psychologiques" },
+    "card2_title": { "ja": "AI相談ナビ", "en": "AI Assistant Nav", "fr": "Assistant IA" },
+    "card2_desc": { "ja": "AIがあなたの課題を整理。技術力を体験", "en": "Let our AI organize your challenges and experience our tech capability", "fr": "Laissez l'IA organiser vos défis et découvrez notre technique" },
+    "card3_title": { "ja": "料金シミュレーター", "en": "Price Simulator", "fr": "Simulateur de Tarifs" },
+    "card3_desc": { "ja": "概算費用と納期をリアルタイム確認", "en": "Check your estimated costs and delivery timeline in real-time", "fr": "Estimez vos coûts et délais en temps réel" },
+    "all_works": { "ja": "すべての制作実績・診断ツールを見る →", "en": "See all works and demo tools →", "fr": "Voir tous nos projets et outils démo →" }
+  },
+  "proof": {
+    "eyebrow": { "ja": "Step toward Quality", "en": "Step toward Quality", "fr": "Étape Vers la Qualité" },
+    "title": { "ja": "「実物を見てから、決めてください」", "en": "Decide after seeing the draft mock-up", "fr": "Décidez après avoir vu la maquette" },
+    "desc": {
+      "ja": "初回相談後、必要に応じて「簡易的な構成案（たたき台）」を無料で作成します。まずは「和-Nodeと組む価値」を肌で感じていただいた上で、進めるかどうかをご判断いただけます。",
+      "en": "Following the initial consultation, we can create a free basic draft mockup if needed. Experience the real value of partnering with Wa-Node before making any final commitment.",
+      "fr": "Après la première consultation, nous créons gratuitement une ébauche si nécessaire. Découvrez la valeur du partenariat avec Wa-Node avant tout engagement."
+    }
+  },
+  "flow": {
+    "eyebrow": { "ja": "Flow", "en": "Flow", "fr": "Déroulement" },
+    "title": { "ja": "ご相談の流れ", "en": "Consultation Flow", "fr": "Déroulement de la Consultation" },
+    "step1_title": { "ja": "無料相談（30-60分）", "en": "Free Consultation (30-60 min)", "fr": "Consultation Gratuite (30-60 min)" },
+    "step1_desc": { "ja": "フォームまたはLINEより。現状の課題を丁寧に整理します。", "en": "Via form or LINE. We will clarify your current business challenges in detail.", "fr": "Via le formulaire ou LINE. Nous clarifierons vos défis actuels en détail." },
+    "step2_title": { "ja": "構成案・お見積り", "en": "Draft Mockup & Quote", "fr": "Maquette & Devis" },
+    "step2_desc": { "ja": "必要に応じて「たたき台」を作成し、最適なプランをご提示します。", "en": "We build a basic draft if required and present the most optimized proposal.", "fr": "Nous créons une ébauche si nécessaire et présentons la proposition optimale." },
+    "step3_title": { "ja": "ご契約・着手", "en": "Contract & Launch", "fr": "Contrat & Lancement" },
+    "step3_desc": { "ja": "内容にご納得いただいた上で、制作・戦略的パートナーシップをスタートします。", "en": "Once fully satisfied with the plan, we start development and strategic partnership.", "fr": "Une fois pleinement satisfait, nous lançons le projet et notre partenariat stratégique." },
+    "btn_cta": {
+      "ja": "無料で相談し、必要に応じて構成案を検討する",
+      "en": "Start free consultation & request a draft mockup",
+      "fr": "Commencer la consultation gratuite & demander une ébauche"
+    }
+  },
+  "profile": {
+    "eyebrow": { "ja": "Professional Partner", "en": "Professional Partner", "fr": "Partenaire Professionnel" },
+    "title": { "ja": "代表：高野 紘純", "en": "Founder: Hirozumi Takano", "fr": "Fondateur: Hirozumi Takano" },
+    "desc": {
+      "ja": "IT業界20年のエンジニア経験、産業カウンセラーとしての行動心理学の知見、そして車いす当事者としてのユニバーサル（バリアフリー）視点。これらすべての強みを掛け合わせ、「1px of 不親切も見逃さない、澱みのない導線」を作ります。",
+      "en": "With 20 years of IT experience, insights as an Industrial Counselor, and a universal accessibility perspective as a wheelchair user, I integrate these strengths to craft flawless conversion paths that leave no user confused.",
+      "fr": "Avec 20 ans d'expérience en informatique, une expertise en psychologie et une perspective d'accessibilité universelle, je crée des parcours fluides sans aucune confusion."
+    },
+    "link": { "ja": "詳しいプロフィール・活動実績はこちら →", "en": "Learn more about my profile and works →", "fr": "En savoir plus sur mon profil et mes projets →" }
+  },
+  "form": {
+    "title": { "ja": "無料相談・お問い合わせ", "en": "Free Consultation & Inquiry", "fr": "Consultation Gratuite & Demande" },
+    "lead": {
+      "ja": "Web制作、AI活用、戦略的パートナーシップなど、お気軽にご相談ください。",
+      "en": "Feel free to reach out to us regarding web design, AI integration, or strategic partnership.",
+      "fr": "N'hésitez pas à nous contacter pour le design web, l'intégration de l'IA ou le partenariat stratégique."
+    },
+    "label_name": { "ja": "お名前", "en": "Your Name", "fr": "Votre Nom" },
+    "label_kana": { "ja": "お名前（フリガナ）", "en": "Your Name (Katakana)", "fr": "Votre Nom (Katakana)" },
+    "label_email": { "ja": "メールアドレス", "en": "Email Address", "fr": "Adresse e-mail" },
+    "label_company": { "ja": "会社名・屋号（任意）", "en": "Company Name (Optional)", "fr": "Nom de l'entreprise (Optionnel)" },
+    "label_message": { "ja": "お問い合わせ内容", "en": "Inquiry Details", "fr": "Détails de la demande" },
+    "btn_submit": { "ja": "送信する", "en": "Submit", "fr": "Envoyer" }
+  },
+  "footer": {
+    "tagline": {
+      "ja": "心理学×Web制作｜選ばれる導線と「ビジネスの副操縦士（戦略的パートナー）」で、ビジネスを整える。",
+      "en": "Psychology × Web Design | Aligning business with optimal funnel design and strategic co-piloting.",
+      "fr": "Psychologie × Design Web | Alignement de l'entreprise avec des parcours optimisés et co-pilotage stratégique."
+    },
+    "founder": { "ja": "代表：高野 紘純", "en": "Founder: Hirozumi Takano", "fr": "Fondateur: Hirozumi Takano" },
+    "col1": { "ja": "制作・戦略的パートナー", "en": "Development & Partnership", "fr": "Création & Partenariat" },
+    "col1_item1": { "ja": "心理導線Web制作", "en": "Psychology Web Design", "fr": "Design Web Orienté Psychologie" },
+    "col1_item2": { "ja": "ホームページ・LP制作", "en": "Homepage & LP Design", "fr": "Création LP & Site Web" },
+    "col1_item3": { "ja": "ビジネスの副操縦士（月額）", "en": "Business Co-pilot (Monthly)", "fr": "Co-pilote d'Affaires (Mensuel)" },
+    "col1_item4": { "ja": "制作実績・サンプル", "en": "Works & Portfolio", "fr": "Portefeuille" },
+    "col2": { "ja": "診断・デモツール", "en": "Demos & Utilities", "fr": "Démos & Utilitaires" },
+    "col2_item1": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
+    "col2_item2": { "ja": "AI相談ナビ", "en": "AI Assistant Nav", "fr": "Assistant IA" },
+    "col2_item3": { "ja": "制作ヒアリング体験", "en": "Hearing Experience", "fr": "Audition & Cadrage" },
+    "col2_item4": { "ja": "料金シミュレーター", "en": "Price Simulator", "fr": "Simulateur de Tarifs" },
+    "col2_item5": { "ja": "SEO内部対策診断", "en": "SEO Audit", "fr": "Audit SEO Interne" },
+    "col3": { "ja": "専門領域・その他", "en": "Expertise & Others", "fr": "Expertise & Autre" },
+    "col3_item1": { "ja": "組織コミュニケーション支援", "en": "Corporate Support", "fr": "Communication d'Entreprise" },
+    "col3_item2": { "ja": "バリアフリー診断", "en": "Accessibility Audit", "fr": "Audit Accessibilité" },
+    "col3_item3": { "ja": "こころの疲労度診断", "en": "Mental Fatigue Check", "fr": "Fatigue Mentale Check" },
+    "col3_item4": { "ja": "KDP出版実績", "en": "KDP Books Portfolio", "fr": "Livres KDP" },
+    "col3_item5": { "ja": "🎁 無料特典", "en": "🎁 Free Guide", "fr": "🎁 Guide Gratuit" },
+    "col4": { "ja": "運営・規約ポリシー", "en": "About & Policies", "fr": "À Propos & Conditions" },
+    "col4_item1": { "ja": "和-Nodeについて・代表紹介", "en": "About Us & Profile", "fr": "À Propos & Profil" },
+    "col4_item2": { "ja": "利用規約", "en": "Terms of Service", "fr": "Conditions d'Utilisation" },
+    "col4_item3": { "ja": "プライバシーポリシー", "en": "Privacy Policy", "fr": "Confidentialité" },
+    "col4_item4": { "ja": "情報セキュリティ方針", "en": "Security Policy", "fr": "Sécurité" },
+    "col4_item5": { "ja": "特定商取引法に基づく表記", "en": "Legal Notice", "fr": "Mentions Légales" },
+    "col4_item6": { "ja": "LINE Mini App 利用規約", "en": "LINE Mini App Terms", "fr": "Conditions LINE Mini App" }
+  }
+}

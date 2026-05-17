@@ -1,0 +1,74 @@
+---
+const { lang = 'ja' } = Astro.props;
+const currentUrl = Astro.url;
+let pathWithoutLang = currentUrl.pathname.replace(/^\/(en|fr)/, '');
+if (pathWithoutLang === '') pathWithoutLang = '/';
+
+function getLangPath(targetLang: string) {
+  const prefix = targetLang === 'ja' ? '' : `/${targetLang}`;
+  const cleanPath = pathWithoutLang.startsWith('/') ? pathWithoutLang : `/${pathWithoutLang}`;
+  const finalPath = `${prefix}${cleanPath}`.replace(/\/+/g, '/');
+  return finalPath.endsWith('/') ? finalPath : `${finalPath}/`;
+}
+---
+<div class="lang-switch-capsule" aria-label="Language Selector">
+  <div class={`switch-bg lang-${lang}`}></div>
+  <a href={getLangPath('ja')} class={lang === 'ja' ? 'active' : ''} aria-label="日本語">JA</a>
+  <a href={getLangPath('en')} class={lang === 'en' ? 'active' : ''} aria-label="English">EN</a>
+  <a href={getLangPath('fr')} class={lang === 'fr' ? 'active' : ''} aria-label="Français">FR</a>
+</div>
+
+<style>
+  .lang-switch-capsule {
+    position: relative;
+    display: inline-flex;
+    background: #f1e6da;
+    border-radius: 99px;
+    padding: 3px;
+    border: 1px solid rgba(138, 90, 50, 0.15);
+    box-shadow: inset 0 2px 5px rgba(138, 90, 50, 0.05);
+    align-items: center;
+    vertical-align: middle;
+  }
+
+  .lang-switch-capsule a {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 26px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: #6d6259;
+    text-decoration: none !important;
+    border-radius: 99px;
+    transition: color 0.3s ease;
+  }
+
+  .lang-switch-capsule a::after {
+    display: none !important; /* BaseLayout等のホバー下線を排除 */
+  }
+
+  .lang-switch-capsule a.active {
+    color: #fff;
+  }
+
+  .switch-bg {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    width: 44px;
+    height: 26px;
+    background: #8a5a32;
+    border-radius: 99px;
+    box-shadow: 0 4px 10px rgba(138, 90, 50, 0.25);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .switch-bg.lang-ja { transform: translateX(0); }
+  .switch-bg.lang-en { transform: translateX(44px); }
+  .switch-bg.lang-fr { transform: translateX(88px); }
+</style>

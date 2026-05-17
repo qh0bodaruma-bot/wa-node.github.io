@@ -8,4 +8,11 @@ export default defineConfig({
   output: 'hybrid',
   adapter: cloudflare(),
   integrations: [],
+  i18n: {
+    defaultLocale: 'ja',
+    locales: ['ja', 'en', 'fr'],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  }
 });

@@ -23,7 +23,7 @@ export async function POST({ request }) {
 
 【和-Nodeの主軸】
 1. 心理導線Web制作：行動心理に基づき、離脱を防いで成果を出すHP/LP制作。
-2. 月額ICT・AI伴走：ChatGPT等のAI活用やICTツールによる業務改善を継続支援。
+2. ビジネスの副操縦士（月額制戦略的パートナー）：ChatGPT等のAI活用やICTツールによる業務改善をスマートに継続支援。
 3. ICT・アプリ連携：LINE Mini Appや予約導線、自動化ツールの実装。
 
 【回答のガイドライン】

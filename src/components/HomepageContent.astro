@@ -1,0 +1,285 @@
+---
+import t from '../i18n/translations.json';
+
+interface Props {
+  lang?: 'ja' | 'en' | 'fr';
+}
+
+const { lang = 'ja' } = Astro.props;
+
+function getLocalizedLink(path: string) {
+  const prefix = lang === 'ja' ? '' : `/${lang}`;
+  const finalPath = `${prefix}${path}`.replace(/\/+/g, '/');
+  return finalPath.endsWith('/') ? finalPath : `${finalPath}/`;
+}
+---
+<main>
+  <!-- 1. Hero Section -->
+  <section class="section hero">
+    <div class="hero-inner">
+      <div class="hero-content reveal">
+        <div class="hero-badge">{t.hero.badge[lang]}</div>
+        <p class="tagline-top">{t.hero.tagline[lang]}</p>
+        <h1>{t.hero.title_part1[lang]}<br /><span class="highlight-text">{t.hero.title_highlight[lang]}</span>{t.hero.title_part2[lang]}</h1>
+        <p class="lead" set:html={t.hero.lead[lang]}></p>
+        <div class="btns">
+          <a class="btn primary" href={getLocalizedLink('/contact')}>{t.hero.btn_consult[lang]}</a>
+          <a class="btn secondary" href={getLocalizedLink('/psychology-demo')}>{t.hero.btn_demo[lang]}</a>
+          <a class="btn secondary" href={getLocalizedLink('/pricing')}>{t.hero.btn_price[lang]}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1.5. Agitation Section (For frustrated/skeptical users) -->
+  <section class="section why-psy">
+    <div class="section-inner why-psy-inner">
+      <div class="question-box">
+        <span class="q-eyebrow">{t.why_psy.eyebrow[lang]}</span>
+        <h2>{t.why_psy.title[lang]}</h2>
+        <p class="q-lead">{t.why_psy.lead[lang]}</p>
+      </div>
+      <div class="concept-intro-grid">
+        <div class="concept-intro-card highlight-card">
+          <div class="card-num">💡</div>
+          <h3>{t.why_psy.card1_title[lang]}</h3>
+          <p>{t.why_psy.card1_desc[lang]}</p>
+        </div>
+        <div class="concept-intro-card">
+          <div class="card-num">📈</div>
+          <h3>{t.why_psy.card2_title[lang]}</h3>
+          <p>{t.why_psy.card2_desc[lang]}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. Services (Minimal) -->
+  <section class="section" id="services">
+    <div class="section-inner">
+      <div class="section-title">
+        <span class="eyebrow">{t.services.eyebrow[lang]}</span>
+        <h2>{t.services.title[lang]}</h2>
+      </div>
+      <div class="consult-grid">
+        <article class="consult-card highlight">
+          <span class="card-tag">{t.services.card1_tag[lang]}</span>
+          <h3>{t.services.card1_title[lang]}</h3>
+          <p>{t.services.card1_desc[lang]}</p>
+          <a href={getLocalizedLink('/pricing')} class="card-link">{t.services.card1_link[lang]}</a>
+        </article>
+        <article class="consult-card">
+          <span class="card-tag">{t.services.card2_tag[lang]}</span>
+          <h3>{t.services.card2_title[lang]}</h3>
+          <p>{t.services.card2_desc[lang]}</p>
+          <a href={getLocalizedLink('/pricing')} class="card-link">{t.services.card2_link[lang]}</a>
+        </article>
+        <article class="consult-card">
+          <span class="card-tag">{t.services.card3_tag[lang]}</span>
+          <h3>{t.services.card3_title[lang]}</h3>
+          <p>{t.services.card3_desc[lang]}</p>
+          <a href={getLocalizedLink('/pricing')} class="card-link">{t.services.card3_link[lang]}</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Experience (Psychology & AI) -->
+  <section class="section" id="experience" style="background: var(--soft);">
+    <div class="section-inner">
+      <div class="section-title" style="text-align: center;">
+        <span class="eyebrow">{t.experience.eyebrow[lang]}</span>
+        <h2>{t.experience.title[lang]}</h2>
+      </div>
+      <div class="action-buttons-grid reveal">
+        <a href={getLocalizedLink('/psychology-demo')} class="action-card highlight-border">
+          <div class="action-icon">💡</div>
+          <h3>{t.experience.card1_title[lang]}</h3>
+          <p>{t.experience.card1_desc[lang]}</p>
+        </a>
+        <a href={getLocalizedLink('/ai-chat-demo')} class="action-card">
+          <div class="action-icon">🤖</div>
+          <h3>{t.experience.card2_title[lang]}</h3>
+          <p>{t.experience.card2_desc[lang]}</p>
+        </a>
+        <a href={getLocalizedLink('/simulator')} class="action-card">
+          <div class="action-icon">💰</div>
+          <h3>{t.experience.card3_title[lang]}</h3>
+          <p>{t.experience.card3_desc[lang]}</p>
+        </a>
+      </div>
+      <div style="text-align: center; margin-top: 40px;">
+        <a href={getLocalizedLink('/works')} style="color: var(--accent); font-weight: 800; text-decoration: underline;">{t.experience.all_works[lang]}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Visual Proof (Offer) -->
+  <section class="section visual-proof" style="background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+    <div class="section-inner" style="max-width: 800px; text-align: center;">
+      <span class="eyebrow" style="color: var(--accent2);">{t.proof.eyebrow[lang]}</span>
+      <h2>{t.proof.title[lang]}</h2>
+      <p style="font-size: 1.1rem; color: var(--text); line-height: 1.8; margin-bottom: 32px;" set:html={t.proof.desc[lang]}></p>
+    </div>
+  </section>
+
+  <!-- 6. Consultation Flow (Simplified) -->
+  <section class="section flow" id="flow">
+    <div class="section-inner">
+      <div class="section-title" style="text-align: center;">
+        <span class="eyebrow">{t.flow.eyebrow[lang]}</span>
+        <h2>{t.flow.title[lang]}</h2>
+      </div>
+      <div class="simple-flow-grid">
+        <div class="flow-item">
+          <span class="flow-num">1</span>
+          <h4>{t.flow.step1_title[lang]}</h4>
+          <p>{t.flow.step1_desc[lang]}</p>
+        </div>
+        <div class="flow-item">
+          <span class="flow-num">2</span>
+          <h4>{t.flow.step2_title[lang]}</h4>
+          <p>{t.flow.step2_desc[lang]}</p>
+        </div>
+        <div class="flow-item">
+          <span class="flow-num">3</span>
+          <h4>{t.flow.step3_title[lang]}</h4>
+          <p>{t.flow.step3_desc[lang]}</p>
+        </div>
+      </div>
+      <div class="btns" style="justify-content: center; margin-top: 60px;">
+        <a class="btn primary" href={getLocalizedLink('/contact')}>{t.flow.btn_cta[lang]}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Profile Summary (Avatar relocated here) -->
+  <section class="section profile-summary">
+    <div class="section-inner profile-summary-inner">
+      <div class="profile-avatar-wrap">
+        <img src="/images/avatar.png" alt="和-Node 代表 高野紘純" class="profile-avatar-img" />
+      </div>
+      <div class="profile-text-wrap">
+        <span class="eyebrow">{t.profile.eyebrow[lang]}</span>
+        <h2>{t.profile.title[lang]}</h2>
+        <p class="profile-desc">{t.profile.desc[lang]}</p>
+        <a href={getLocalizedLink('/about')} class="profile-link">{t.profile.link[lang]}</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<style is:global>
+  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
+
+  :root {
+    --accent: #c5a059;
+    --accent-dark: #b18e4a;
+    --accent2: #d14d3a;
+    --text: #333;
+    --text-deep: #1a1a1a;
+    --muted: #666;
+    --line: rgba(197, 160, 89, 0.2);
+    --soft: #fdfaf5;
+    --white: #ffffff;
+    --paper: #fdfcf9;
+    --radius: 24px;
+  }
+
+  body { font-family: 'Shippori Mincho', serif; color: var(--text); line-height: 1.8; background: var(--paper); }
+  .section { padding: 80px 0; }
+  .section-inner { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+  h1, h2, h3, h4 { font-family: 'Shippori Mincho', serif; font-weight: 800; color: var(--text-deep); }
+  h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.2; margin-bottom: 24px; }
+  h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 32px; }
+
+  .tagline-top { font-size: 1.1rem; color: var(--accent); font-weight: 800; letter-spacing: 0.1em; margin-bottom: 8px; }
+  .lead { font-size: 1.2rem; color: var(--muted); margin-bottom: 40px; max-width: 700px; }
+  .lead strong { color: var(--accent); }
+
+  .btns { display: flex; gap: 16px; margin-top: 40px; }
+  .btn { padding: 18px 36px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: 0.3s; text-align: center; }
+  .btn.primary { background: var(--accent); color: white; box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); }
+  .btn.primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
+  .btn.secondary { border: 1px solid var(--accent); color: var(--accent); }
+
+  /* Hero */
+  .hero { 
+    padding: 160px 0 120px; 
+    background: 
+      linear-gradient(to right, rgba(253, 250, 245, 1) 40%, rgba(253, 250, 245, 0.9) 55%, rgba(253, 250, 245, 0.2) 80%, rgba(253, 250, 245, 0) 100%), 
+      url('/images/hero.png') no-repeat right center/cover;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+  }
+  .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; }
+  .hero-content { max-width: 650px; }
+  .hero-badge { display: inline-block; background: var(--accent2); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 800; margin-bottom: 24px; }
+  .highlight-text { border-bottom: 3px double var(--accent); padding-bottom: 2px; color: var(--accent2); font-weight: 800; }
+
+  /* Agitation / Hook Section */
+  .why-psy { background: var(--white); border-bottom: 1px solid var(--line); }
+  .why-psy-inner { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .question-box { text-align: center; margin-bottom: 48px; }
+  .q-eyebrow { font-size: 0.9rem; color: var(--accent2); font-weight: 800; letter-spacing: 0.1em; display: block; margin-bottom: 12px; }
+  .q-lead { font-size: 1.2rem; color: var(--text-deep); margin-top: 16px; font-weight: 700; }
+  
+  .concept-intro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+  .concept-intro-card { background: var(--paper); padding: 40px; border-radius: var(--radius); border: 1px solid var(--line); transition: 0.3s; }
+  .concept-intro-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+  .concept-intro-card.highlight-card { background: var(--soft); border-color: var(--accent); box-shadow: 0 15px 30px rgba(197, 160, 89, 0.08); }
+  .card-num { font-size: 2.2rem; margin-bottom: 16px; }
+
+  /* Profile Summary Section */
+  .profile-summary { background: var(--soft); border-top: 1px solid var(--line); }
+  .profile-summary-inner { max-width: 850px; display: flex; align-items: center; gap: 48px; margin: 0 auto; padding: 0 20px; }
+  .profile-avatar-wrap { flex: 0 0 200px; width: 200px; height: 200px; border-radius: 30px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border: 3px solid var(--white); }
+  .profile-avatar-img { width: 100%; height: 100%; object-fit: cover; }
+  .profile-text-wrap { flex: 1; }
+  .profile-desc { font-size: 1rem; color: var(--muted); margin: 16px 0 24px; line-height: 1.8; }
+  .profile-link { font-weight: 800; color: var(--accent); text-decoration: underline; transition: 0.3s; }
+  .profile-link:hover { color: var(--accent-dark); }
+
+  /* Cards */
+  .consult-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px; }
+  .consult-card { background: var(--white); padding: 40px; border-radius: var(--radius); border: 1px solid var(--line); transition: 0.3s; }
+  .consult-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+  .consult-card.highlight { background: var(--soft); border-color: var(--accent); }
+  .card-tag { font-size: 0.75rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
+  .card-link { display: inline-block; margin-top: 16px; font-weight: 800; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
+
+  /* Experience Grid */
+  .action-buttons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
+  .action-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 30px 20px; text-decoration: none; text-align: center; transition: 0.3s; color: inherit; }
+  .action-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+  .action-card.highlight-border { border: 2px solid var(--accent); }
+  .action-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+
+  /* Flow */
+  .simple-flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
+  .flow-item { text-align: center; position: relative; }
+  .flow-num { width: 40px; height: 40px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; }
+  .flow-item h4 { margin-bottom: 12px; }
+  .flow-item p { font-size: 0.9rem; color: var(--muted); }
+
+  .eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; display: block; }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 80px 0;
+      background: 
+        linear-gradient(to bottom, rgba(253, 250, 245, 0.98) 50%, rgba(253, 250, 245, 0.8) 80%, rgba(253, 250, 245, 0.4) 100%), 
+        url('/images/hero.png') no-repeat center center/cover;
+      text-align: center;
+      min-height: auto;
+    }
+    .hero-inner { padding: 0 20px; }
+    .hero-content { max-width: 100%; }
+    .action-buttons-grid, .simple-flow-grid, .concept-intro-grid { grid-template-columns: 1fr; }
+    .flow-item:not(:last-child)::after { display: none; }
+    .profile-summary-inner { flex-direction: column; text-align: center; gap: 24px; }
+    .profile-avatar-wrap { flex: 0 0 160px; width: 160px; height: 160px; }
+  }
+</style>

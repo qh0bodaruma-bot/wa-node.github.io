@@ -1,19 +1,76 @@
 ---
 // AvailabilityStatus.astro
-// 管理用のデータ（ここを書き換えるだけで更新可能）
+interface Props {
+  lang?: 'ja' | 'en' | 'fr';
+}
+
+const { lang = 'ja' } = Astro.props;
+
+// 管理用のデータ
 const schedule = {
-  nextAvailableDate: "現在、最短で5月中旬以降",
-  productionStatus: "5月下旬着手より受付中",
   weekly: [
-    { day: "月", morning: "busy", afternoon: "ok", evening: "ok" },
-    { day: "火", morning: "ok", afternoon: "ok", evening: "ok" },
-    { day: "水", morning: "busy", afternoon: "ok", evening: "ok" },
-    { day: "木", morning: "ok", afternoon: "busy", evening: "ok" },
-    { day: "金", morning: "busy", afternoon: "ok", evening: "ok" },
-    { day: "土", morning: "busy", afternoon: "busy", evening: "busy" },
-    { day: "日", morning: "busy", afternoon: "busy", evening: "busy" },
+    { morning: "busy", afternoon: "ok", evening: "ok" },
+    { morning: "ok", afternoon: "ok", evening: "ok" },
+    { morning: "busy", afternoon: "ok", evening: "ok" },
+    { morning: "ok", afternoon: "busy", evening: "ok" },
+    { morning: "busy", afternoon: "ok", evening: "ok" },
+    { morning: "busy", afternoon: "busy", evening: "busy" },
+    { morning: "busy", afternoon: "busy", evening: "busy" },
   ]
 };
+
+const d = {
+  ja: {
+    title: "現在の予約・相談状況",
+    update_date: "※状況は随時変動いたします。最新状況は公式LINEよりお問い合わせください。",
+    label_available: "最短の相談可能日（目安）",
+    label_start: "制作着手時期（目安）",
+    next_date: "現在、最短で5月中旬以降",
+    start_status: "5月下旬着手より受付中",
+    time_morning: "午前",
+    time_afternoon: "午後",
+    time_evening: "夜間",
+    legend_ok: "◎：空きあり",
+    legend_few: "△：残りわずか",
+    legend_busy: "ー：受付終了",
+    note: "※夜間（19:00〜22:00）のご相談も承っております。<br />※お急ぎの場合は、フォームよりその旨をお知らせください。",
+    days: ["月", "火", "水", "木", "金", "土", "日"]
+  },
+  en: {
+    title: "Availability Status",
+    update_date: "*Status changes frequently. Contact us via LINE or form for the latest slots.",
+    label_available: "Next Available Date",
+    label_start: "Project Commencement",
+    next_date: "Mid-May onward",
+    start_status: "Accepting late May slots",
+    time_morning: "Morning",
+    time_afternoon: "Afternoon",
+    time_evening: "Evening",
+    legend_ok: "◎: Available",
+    legend_few: "△: Low slots",
+    legend_busy: "ー: Closed",
+    note: "*Evening consultation (19:00-22:00 JST) is also open.<br />*If urgent, please mention it in the form.",
+    days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+  },
+  fr: {
+    title: "Statut des Réservations",
+    update_date: "*Le statut change fréquemment. Contactez-nous pour les derniers créneaux.",
+    label_available: "Prochaine Disponibilité",
+    label_start: "Début de Projet",
+    next_date: "Mi-mai et après",
+    start_status: "Créneaux fin mai ouverts",
+    time_morning: "Matin",
+    time_afternoon: "Après-midi",
+    time_evening: "Soirée",
+    legend_ok: "◎: Disponible",
+    legend_few: "△: Limité",
+    legend_busy: "ー: Fermé",
+    note: "*Consultation en soirée (19:00-22:00 JST) également ouverte.<br />*Si urgent, veuillez le préciser dans le formulaire.",
+    days: ["Lun", "Mar", "Mer", "Jeu", "Ven", "Sam", "Dim"]
+  }
+};
+
+const t = d[lang];
 
 const getStatusIcon = (status) => {
   if (status === 'ok') return '◎';
@@ -29,18 +86,18 @@ const getStatusClass = (status) => {
 <div class="availability-status glass-panel float-animation">
   <div class="status-header">
     <div class="status-badge">Current Status</div>
-    <h3>現在の予約・相談状況</h3>
-    <p class="status-update-date">※状況は随時変動いたします。最新状況は公式LINEよりお問い合わせください。</p>
+    <h3>{t.title}</h3>
+    <p class="status-update-date">{t.update_date}</p>
   </div>
 
   <div class="summary-cards">
     <div class="summary-card">
-      <span class="label">最短の相談可能日（目安）</span>
-      <span class="value">{schedule.nextAvailableDate}</span>
+      <span class="label">{t.label_available}</span>
+      <span class="value">{t.next_date}</span>
     </div>
     <div class="summary-card">
-      <span class="label">制作着手時期（目安）</span>
-      <span class="value">{schedule.productionStatus}</span>
+      <span class="label">{t.label_start}</span>
+      <span class="value">{t.start_status}</span>
     </div>
   </div>
 
@@ -49,20 +106,20 @@ const getStatusClass = (status) => {
       <thead>
         <tr>
           <th></th>
-          {schedule.weekly.map(s => <th>{s.day}</th>)}
+          {t.days.map(day => <th>{day}</th>)}
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td class="time-label">午前</td>
+          <td class="time-label">{t.time_morning}</td>
           {schedule.weekly.map(s => <td class={getStatusClass(s.morning)}>{getStatusIcon(s.morning)}</td>)}
         </tr>
         <tr>
-          <td class="time-label">午後</td>
+          <td class="time-label">{t.time_afternoon}</td>
           {schedule.weekly.map(s => <td class={getStatusClass(s.afternoon)}>{getStatusIcon(s.afternoon)}</td>)}
         </tr>
         <tr>
-          <td class="time-label">夜間</td>
+          <td class="time-label">{t.time_evening}</td>
           {schedule.weekly.map(s => <td class={getStatusClass(s.evening)}>{getStatusIcon(s.evening)}</td>)}
         </tr>
       </tbody>
@@ -70,15 +127,12 @@ const getStatusClass = (status) => {
   </div>
 
   <div class="legend">
-    <span>◎：空きあり</span>
-    <span>△：残りわずか</span>
-    <span>ー：受付終了</span>
+    <span>{t.legend_ok}</span>
+    <span>{t.legend_few}</span>
+    <span>{t.legend_busy}</span>
   </div>
 
-  <p class="status-note">
-    ※夜間（19:00〜22:00）のご相談も承っております。<br />
-    ※お急ぎの場合は、フォームよりその旨をお知らせください。
-  </p>
+  <p class="status-note" set:html={t.note}></p>
 </div>
 
 <style>
