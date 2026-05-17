@@ -5,10 +5,12 @@ let pathWithoutLang = currentUrl.pathname.replace(/^\/(en|fr)/, '');
 if (pathWithoutLang === '') pathWithoutLang = '/';
 
 function getLangPath(targetLang: string) {
-  const prefix = targetLang === 'ja' ? '' : `/${targetLang}`;
-  const cleanPath = pathWithoutLang.startsWith('/') ? pathWithoutLang : `/${pathWithoutLang}`;
-  const finalPath = `${prefix}${cleanPath}`.replace(/\/+/g, '/');
-  return finalPath.endsWith('/') ? finalPath : `${finalPath}/`;
+  if (targetLang === 'ja') {
+    const cleanPath = pathWithoutLang.startsWith('/') ? pathWithoutLang : `/${pathWithoutLang}`;
+    const finalPath = cleanPath.replace(/\/+/g, '/');
+    return finalPath.endsWith('/') ? finalPath : `${finalPath}/`;
+  }
+  return `/${targetLang}/`;
 }
 ---
 <div class="lang-switch-capsule" aria-label="Language Selector">

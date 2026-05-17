@@ -81,6 +81,16 @@ const getStatusIcon = (status) => {
 const getStatusClass = (status) => {
   return `status-icon ${status}`;
 };
+
+const labelMap = {
+  ja: { ok: '空きあり', few: '残りわずか', busy: '受付終了' },
+  en: { ok: 'Available', few: 'Low slots', busy: 'Closed' },
+  fr: { ok: 'Disponible', few: 'Limité', busy: 'Fermé' }
+};
+
+const getStatusLabel = (status: 'ok' | 'few' | 'busy') => {
+  return labelMap[lang][status];
+};
 ---
 
 <div class="availability-status glass-panel float-animation">
@@ -112,15 +122,15 @@ const getStatusClass = (status) => {
       <tbody>
         <tr>
           <td class="time-label">{t.time_morning}</td>
-          {schedule.weekly.map(s => <td class={getStatusClass(s.morning)}>{getStatusIcon(s.morning)}</td>)}
+          {schedule.weekly.map(s => <td class={getStatusClass(s.morning)} aria-label={getStatusLabel(s.morning)}>{getStatusIcon(s.morning)}</td>)}
         </tr>
         <tr>
           <td class="time-label">{t.time_afternoon}</td>
-          {schedule.weekly.map(s => <td class={getStatusClass(s.afternoon)}>{getStatusIcon(s.afternoon)}</td>)}
+          {schedule.weekly.map(s => <td class={getStatusClass(s.afternoon)} aria-label={getStatusLabel(s.afternoon)}>{getStatusIcon(s.afternoon)}</td>)}
         </tr>
         <tr>
           <td class="time-label">{t.time_evening}</td>
-          {schedule.weekly.map(s => <td class={getStatusClass(s.evening)}>{getStatusIcon(s.evening)}</td>)}
+          {schedule.weekly.map(s => <td class={getStatusClass(s.evening)} aria-label={getStatusLabel(s.evening)}>{getStatusIcon(s.evening)}</td>)}
         </tr>
       </tbody>
     </table>

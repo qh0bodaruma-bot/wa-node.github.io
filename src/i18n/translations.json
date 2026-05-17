@@ -13,9 +13,9 @@
     "title_highlight": { "ja": "心理学", "en": "Psychological Reason", "fr": "Raison Psychologique" },
     "title_part2": { "ja": "的な根拠がある。", "en": " to be Chosen.", "fr": " d'être Choisi." },
     "lead": {
-      "ja": "和-Nodeは、「ICT・統計技術」に「行動心理学」を融合させたWeb制作で、訪問者の「なんとなく離脱」を防ぎ、澱みのない購入・成約導線をデザインする「ビジネスの副操縦士（戦略的パートナー）」です。",
-      "en": "Wa-Node blends ICT and statistical data with behavioral psychology to prevent visitors from bouncing, designing flawless conversion funnels as your strategic business co-pilot.",
-      "fr": "Wa-Node fusionne les technologies TIC et statistiques avec la psychologie comportementale pour retenir vos visiteurs, agissant comme le co-pilote stratégique de vos affaires."
+      "ja": "和-Nodeは、「行動心理学」と「統計技術」の視点をWeb導線設計に応用したホームページ制作・LP制作の専門家。ビジネスの副操縦士として、意思決定からシステム・AI活用まで判断と実行を支えます。",
+      "en": "Wa-Node blends behavioral psychology and statistical insights with web design to prevent bounces. Serving as your business co-pilot, we support decisions and execution from LP/website production to AI/ICT integration.",
+      "fr": "Wa-Node applique la psychologie comportementale et les analyses statistiques à la conception web. En tant que co-pilote d'affaires, nous soutenons vos décisions de la création de LP/sites internet à l'intégration de l'IA/TIC."
     },
     "btn_consult": { "ja": "無料で相談する", "en": "Free Consultation", "fr": "Consultation Gratuite" },
     "btn_demo": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
@@ -123,12 +123,12 @@
   },
   "footer": {
     "tagline": {
-      "ja": "心理学×Web制作｜選ばれる導線と「ビジネスの副操縦士（戦略的パートナー）」で、ビジネスを整える。",
-      "en": "Psychology × Web Design | Aligning business with optimal funnel design and strategic co-piloting.",
-      "fr": "Psychologie × Design Web | Alignement de l'entreprise avec des parcours optimisés et co-pilotage stratégique."
+      "ja": "心理学×Web制作・ホームページ制作｜選ばれる導線と「ビジネスの副操縦士」で、ビジネスを整える。",
+      "en": "Psychology × Web Production & Homepage | Aligning business with optimal funnel design and business co-piloting.",
+      "fr": "Psychologie × Production Web & Site Internet | Alignement de l'entreprise avec des parcours optimisés et co-pilotage."
     },
     "founder": { "ja": "代表：高野 紘純", "en": "Founder: Hirozumi Takano", "fr": "Fondateur: Hirozumi Takano" },
-    "col1": { "ja": "制作・戦略的パートナー", "en": "Development & Partnership", "fr": "Création & Partenariat" },
+    "col1": { "ja": "ホームページ制作・副操縦士", "en": "Web Design & Co-pilot", "fr": "Création Web & Co-pilote" },
     "col1_item1": { "ja": "心理導線Web制作", "en": "Psychology Web Design", "fr": "Design Web Orienté Psychologie" },
     "col1_item2": { "ja": "ホームページ・LP制作", "en": "Homepage & LP Design", "fr": "Création LP & Site Web" },
     "col1_item3": { "ja": "ビジネスの副操縦士（月額）", "en": "Business Co-pilot (Monthly)", "fr": "Co-pilote d'Affaires (Mensuel)" },

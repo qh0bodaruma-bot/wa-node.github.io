@@ -9,9 +9,11 @@ interface Props {
 const { lang = 'ja' } = Astro.props;
 
 function getLocalizedLink(path: string) {
-  const prefix = lang === 'ja' ? '' : `/${lang}`;
-  const finalPath = `${prefix}${path}`.replace(/\/+/g, '/');
-  return finalPath.endsWith('/') ? finalPath : `${finalPath}/`;
+  if (lang === 'ja') {
+    const finalPath = path.replace(/\/+/g, '/');
+    return finalPath.endsWith('/') ? finalPath : `${finalPath}/`;
+  }
+  return `/${lang}/`;
 }
 ---
 <header class="site-header" id="site-header">
