@@ -25,19 +25,36 @@ const jsonLd = {
       <div class="hero-inner">
         <div class="hero-content reveal">
           <div class="hero-badge">月3名まで丁寧に対応</div>
-          <p class="tagline-top">技術の前に、心がある。</p>
-          <h1>「選ばれる」には、<br />心理学的な根拠がある。</h1>
-          <p class="lead">和-Nodeは、<strong>技術と心理を融合させたWeb制作・ホームページ制作</strong>で、淀みのない導線をデザインする伴走パートナーです。行動心理学に基づいたサイト改善や、成果に特化したランディングページ制作で、あなたのビジネスを次のステージへ導きます。</p>
+          <p class="tagline-top">技術（ICT×統計）のその先へ。</p>
+          <h1>「選ばれる」には、<br /><span class="highlight-text">心理学</span>的な根拠がある。</h1>
+          <p class="lead">和-Nodeは、<strong>「ICT・統計技術」に「行動心理学」を融合</strong>させたWeb制作で、訪問者の「なんとなく離脱」を防ぎ、澱みのない購入・成約導線をデザインする伴走パートナーです。</p>
           <div class="btns">
             <a class="btn primary" href="/contact">無料で相談する</a>
             <a class="btn secondary" href="/psychology-demo/">心理導線デモ</a>
             <a class="btn secondary" href="/pricing">料金を確認</a>
           </div>
         </div>
-        <div class="hero-visual reveal">
-          <div class="hero-avatar">
-            <img src="/images/avatar.png" alt="和-Node 代表 高野紘純" />
-            <a href="/about" class="hero-badge-small" style="display: block; text-decoration: none;">代表 高野 紘純 →</a>
+      </div>
+    </section>
+
+    <!-- 1.5. Agitation Section (For frustrated/skeptical users) -->
+    <section class="section why-psy">
+      <div class="section-inner why-psy-inner">
+        <div class="question-box">
+          <span class="q-eyebrow">こんなお悩みはありませんか？</span>
+          <h2>「デザイン会社に頼んだのに、なぜ成果が出ないのか？」</h2>
+          <p class="q-lead">その答えは、見た目の良さの中に潜む「1pxの心理的不親切（ユーザーの迷い）」にあります。</p>
+        </div>
+        <div class="concept-intro-grid">
+          <div class="concept-intro-card highlight-card">
+            <div class="card-num">💡</div>
+            <h3>「綺麗」だけでは、人は動きません</h3>
+            <p>優れたグラフィックデザインも、ユーザーの「次の行動への心理ステップ」が設計されていなければ、ただの自己満足で終わり、離脱の原因になります。</p>
+          </div>
+          <div class="concept-intro-card">
+            <div class="card-num">📈</div>
+            <h3>ICT × 統計 × 行動心理学</h3>
+            <p>和-Nodeは、20年のシステム構築力とデータ分析（統計）に加え、カウンセラーの心理学知見を融合。ロジカルかつ直感的に「迷わない」導線を作ります。</p>
           </div>
         </div>
       </div>
@@ -143,6 +160,23 @@ const jsonLd = {
         </div>
       </div>
     </section>
+
+    <!-- 6. Profile Summary (Avatar relocated here) -->
+    <section class="section profile-summary">
+      <div class="section-inner profile-summary-inner">
+        <div class="profile-avatar-wrap">
+          <img src="/images/avatar.png" alt="和-Node 代表 高野紘純" class="profile-avatar-img" />
+        </div>
+        <div class="profile-text-wrap">
+          <span class="eyebrow">Professional Partner</span>
+          <h2>代表：高野 紘純</h2>
+          <p class="profile-desc">
+            IT業界20年のエンジニア経験、産業カウンセラーとしての行動心理学の知見、そして車いす当事者としてのユニバーサル（バリアフリー）視点。これらすべての強みを掛け合わせ、「1pxの不親切も見逃さない、澱みのない導線」を作ります。
+          </p>
+          <a href="/about" class="profile-link">詳しいプロフィール・活動実績はこちら →</a>
+        </div>
+      </div>
+    </section>
   </main>
 </BaseLayout>
 
@@ -182,13 +216,42 @@ const jsonLd = {
   .btn.secondary { border: 1px solid var(--accent); color: var(--accent); }
 
   /* Hero */
-  .hero { padding: 100px 0 60px; background: linear-gradient(135deg, #fff 0%, #fdfcf9 100%); }
-  .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
-  .hero-visual { flex: 0 0 350px; }
-  .hero-avatar { position: relative; width: 350px; height: 350px; border-radius: 40px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
-  .hero-avatar img { width: 100%; height: 100%; object-fit: cover; }
-  .hero-badge-small { position: absolute; bottom: 0; width: 100%; background: rgba(255,255,255,0.9); padding: 12px; text-align: center; font-weight: 800; color: var(--accent); }
+  .hero { 
+    padding: 160px 0 120px; 
+    background: 
+      linear-gradient(to right, rgba(253, 250, 245, 1) 40%, rgba(253, 250, 245, 0.9) 55%, rgba(253, 250, 245, 0.2) 80%, rgba(253, 250, 245, 0) 100%), 
+      url('/images/hero.png') no-repeat right center/cover;
+    min-height: 520px;
+    display: flex;
+    align-items: center;
+  }
+  .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; }
+  .hero-content { max-width: 650px; }
   .hero-badge { display: inline-block; background: var(--accent2); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 800; margin-bottom: 24px; }
+  .highlight-text { border-bottom: 3px double var(--accent); padding-bottom: 2px; color: var(--accent2); font-weight: 800; }
+
+  /* Agitation / Hook Section */
+  .why-psy { background: var(--white); border-bottom: 1px solid var(--line); }
+  .why-psy-inner { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+  .question-box { text-align: center; margin-bottom: 48px; }
+  .q-eyebrow { font-size: 0.9rem; color: var(--accent2); font-weight: 800; letter-spacing: 0.1em; display: block; margin-bottom: 12px; }
+  .q-lead { font-size: 1.2rem; color: var(--text-deep); margin-top: 16px; font-weight: 700; }
+  
+  .concept-intro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+  .concept-intro-card { background: var(--paper); padding: 40px; border-radius: var(--radius); border: 1px solid var(--line); transition: 0.3s; }
+  .concept-intro-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+  .concept-intro-card.highlight-card { background: var(--soft); border-color: var(--accent); box-shadow: 0 15px 30px rgba(197, 160, 89, 0.08); }
+  .card-num { font-size: 2.2rem; margin-bottom: 16px; }
+
+  /* Profile Summary Section */
+  .profile-summary { background: var(--soft); border-top: 1px solid var(--line); }
+  .profile-summary-inner { max-width: 850px; display: flex; align-items: center; gap: 48px; margin: 0 auto; padding: 0 20px; }
+  .profile-avatar-wrap { flex: 0 0 200px; width: 200px; height: 200px; border-radius: 30px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border: 3px solid var(--white); }
+  .profile-avatar-img { width: 100%; height: 100%; object-fit: cover; }
+  .profile-text-wrap { flex: 1; }
+  .profile-desc { font-size: 1rem; color: var(--muted); margin: 16px 0 24px; line-height: 1.8; }
+  .profile-link { font-weight: 800; color: var(--accent); text-decoration: underline; transition: 0.3s; }
+  .profile-link:hover { color: var(--accent-dark); }
 
   /* Cards */
   .consult-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px; }
@@ -215,10 +278,19 @@ const jsonLd = {
   .eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; display: block; }
 
   @media (max-width: 768px) {
-    .hero-inner { flex-direction: column; text-align: center; padding: 0 20px; }
-    .hero-visual { order: -1; flex: 0 0 auto; }
-    .hero-avatar { width: 220px; height: 220px; }
-    .action-buttons-grid, .simple-flow-grid { grid-template-columns: 1fr; }
+    .hero {
+      padding: 80px 0;
+      background: 
+        linear-gradient(to bottom, rgba(253, 250, 245, 0.98) 50%, rgba(253, 250, 245, 0.8) 80%, rgba(253, 250, 245, 0.4) 100%), 
+        url('/images/hero.png') no-repeat center center/cover;
+      text-align: center;
+      min-height: auto;
+    }
+    .hero-inner { padding: 0 20px; }
+    .hero-content { max-width: 100%; }
+    .action-buttons-grid, .simple-flow-grid, .concept-intro-grid { grid-template-columns: 1fr; }
     .flow-item:not(:last-child)::after { display: none; }
+    .profile-summary-inner { flex-direction: column; text-align: center; gap: 24px; }
+    .profile-avatar-wrap { flex: 0 0 160px; width: 160px; height: 160px; }
   }
 </style>
