@@ -1,47 +1,12 @@
----
-import BaseLayout from '../layouts/BaseLayout.astro';
----
+const fs = require('fs');
+const path = require('path');
 
-<BaseLayout title="KDP出版実績｜和-Node" description="和-Node代表 高野 紘純によるAmazon Kindle (KDP) の出版実績一覧。オリジナル鳥獣戯画や浮世絵風デザインの書籍など。">
-  <!-- Decorative background for the whole page -->
-  <div class="kdp-bg-overlay"></div>
+const filePath = path.join(__dirname, '..', 'src', 'pages', 'kdp_books.astro');
+console.log('Reading file:', filePath);
 
-  <main>
-    <div class="kdp-header">
-      <div class="container fade-in">
-        <span class="eyebrow">Design Strategy & Publishing</span>
-        <h1 class="kdp-title">KDP 出版実績</h1>
-        <p class="kdp-desc">
-          Amazon Kindle (KDP) を通じて、日本の伝統美（浮世絵・鳥獣戯画）を世界へ発信。<br />
-          ターゲット市場に合わせた「売れる表紙」と「心地よい読書体験」を一貫して設計しています。
-        </p>
-      </div>
-    </div>
+let content = fs.readFileSync(filePath, 'utf8');
 
-    <!-- Why Coloring? Art Therapy Section -->
-    <section class="kdp-concept-section reveal">
-      <div class="section-container">
-        <div class="concept-grid">
-          <div class="concept-text">
-            <span class="concept-badge float-animation">Why Coloring?</span>
-            <h2>なぜ「塗り絵」なのか。</h2>
-            <p class="concept-lead">
-              塗り絵は、単なる趣味の枠を超えた「アートセラピー（芸術療法）」の一種として、世界中でその効果が認められています。
-            </p>
-            <div class="benefit-cards">
-              <div class="benefit-card">
-                <span class="icon">🧘</span>
-                <h4>マインドフルネスの促進</h4>
-                <p>色を選び、塗るという行為に没頭することで、脳が「今、ここ」に集中する瞑想に近い状態となり、不安やストレスを和らげます。</p>
-              </div>
-              <div class="benefit-card">
-                <span class="icon">🧠</span>
-                <h4>右脳の活性化と感情の整理</h4>
-                <p>言葉にできない感情を「色」として表現することで、心の奥底にあるストレスが解放（カタルシス）されます。</p>
-              </div>
-            </div>
-            <p class="concept-final">
-              心理カウンセラーとして活動する私が塗り絵を手がけるのは、日本の伝統美に触れながら、誰もが手�        <div class="book-showcase">
+const replacement1 = `        <div class="book-showcase">
           {/* Item 1 */}
           <div class="book-item reveal" data-concept="気品と落ち着きを表現する、藍色とベージュの対比。">
             <div class="book-3d-wrap">
@@ -221,52 +186,31 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </div>
             </div>
           </div>
-        </div>
+        </div>`;
 
-              </div>
-            </div>
-          </div>
+// Replace Section 1
+const section1Start = content.indexOf('<section class="kdp-section premium-dark">');
+if (section1Start !== -1) {
+  const showcaseStart = content.indexOf('<div class="book-showcase">', section1Start);
+  const nextSection = content.indexOf('<!-- Section 2:', showcaseStart);
+  if (showcaseStart !== -1 && nextSection !== -1) {
+    const showcaseEnd = content.lastIndexOf('</div>', nextSection);
+    if (showcaseEnd !== -1 && showcaseEnd > showcaseStart) {
+      const targetSegment = content.substring(showcaseStart, showcaseEnd + 6);
+      content = content.replace(targetSegment, replacement1);
+      console.log('Processed Section 1 (Edo Travelogue)');
+    }
+  }
+}
 
-          {/* Item 8: Wolf (狼) */}
-          <div class="book-item reveal" data-concept="静寂の中に宿る力強さ。冬の月夜に佇む狼を、江戸の筆致で描き出しました。">
-            <div class="book-3d-wrap">
-              <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記狼.png" alt="江戸旅行記 狼" /></div>
-                <div class="book-spine"></div>
-              </div>
-            </div>
-            <div class="book-meta">
-              <h3 class="title">江戸旅行記 狼 (Wolf)</h3>
-              <p class="price">$12.99 / €12.99</p>
-              <div class="links">
-                <a href="https://www.amazon.com/dp/B0H1M3FN28" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
-                <a href="https://www.amazon.fr/dp/B0H1M3FN28" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
-              </div>
-            </div>
-          </div>
+// Replace Section 2 & 3
+const section2Start = content.indexOf('<!-- Section 2: かわいい浮世絵シリーズ');
+const footerCtaStart = content.indexOf('<section class="kdp-cta');
 
-          {/* Item 9: Travels in Edo (江戸の旅) */}
-          <div class="book-item reveal" data-concept="旅の原点。江戸の宿場町を行き交う旅人たちの活気を、現代的な色彩で再構築。">
-            <div class="book-3d-wrap">
-              <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸の旅.png" alt="江戸の旅" /></div>
-                <div class="book-spine"></div>
-              </div>
-            </div>
-            <div class="book-meta">
-              <h3 class="title">江戸の旅 (Travels in Edo)</h3>
-              <p class="price">$12.99 / €12.99</p>
-              <div class="links">
-                <a href="https://www.amazon.com/dp/B0H1LTDRDQ" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
-                <a href="https://www.amazon.fr/dp/B0H1LTDRDQ" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Section 2: かわいい浮世絵シリーズ (Modern pop) -->
+if (section2Start !== -1 && footerCtaStart !== -1) {
+  const targetSegment2 = content.substring(section2Start, footerCtaStart);
+  
+  const replacement2 = `<!-- Section 2: かわいい浮世絵シリーズ (Modern pop) -->
     <section class="kdp-section">
       <div class="section-container">
         <h2 class="section-title">かわいい浮世絵シリーズ</h2>
@@ -378,189 +322,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
       </div>
     </section>
-<section class="kdp-cta reveal" style="text-align: center; padding: 100px 20px; background: rgba(255,255,255,0.5);">
-      <div class="section-container" style="max-width: 800px; margin: 0 auto;">
-        <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 24px;">あなたのコンテンツを、<br/>世界へ届けるお手伝いを。</h2>
-        <p style="font-size: 1.1rem; color: var(--muted); margin-bottom: 40px; line-height: 1.8;">
-          表紙デザインから出版手続きのサポートまで、KDP出版に関するご相談を承ります。<br/>
-          まずは最大60分の無料相談（特典利用時）で、あなたの出版計画をお聞かせください。
-        </p>
-        <a href="/#consultation-flow" class="store-link" style="padding: 20px 60px; font-size: 1.1rem; border-width: 2px;">無料相談のステップを確認</a>
-      </div>
-    </section>
+`;
+  
+  content = content.replace(targetSegment2, replacement2);
+  console.log('Processed Section 2 and 3');
+}
 
-    <div class="back-to-top">
-      <a href="/" class="btn-back">← ページトップへ戻る</a>
-    </div>
-  </main>
-</BaseLayout>
-
-<style>
-    /* Design Variables */
-    :root {
-      --gold: #d8b98c;
-      --gold-dark: #8a5a32;
-      --paper: #fdfaf7;
-      --ink: #2c241e;
-    }
-
-    /* Overall Layout */
-    .kdp-bg-overlay {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1; background: var(--paper); opacity: 0.5;
-      background-image: radial-gradient(var(--gold) 0.5px, transparent 0.5px);
-      background-size: 50px 50px;
-    }
-
-    .kdp-header { padding: 120px 0 60px; text-align: center; }
-    .eyebrow { font-size: 0.8rem; font-weight: 900; color: var(--gold-dark); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 12px; display: block; }
-    .kdp-title { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 900; color: var(--ink); margin-bottom: 24px; line-height: 1; }
-    .kdp-desc { font-size: 1.15rem; color: var(--muted); line-height: 1.8; max-width: 800px; margin: 0 auto; }
-
-    .kdp-section { padding: 100px 0; overflow: hidden; }
-    .section-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-
-    /* Concept Section Styling */
-    .kdp-concept-section { padding: 80px 0; background: #fff; position: relative; }
-    .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-    .concept-badge { font-size: 0.7rem; font-weight: 900; color: #fff; background: var(--gold-dark); padding: 4px 12px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.2em; display: inline-block; margin-bottom: 20px; }
-    .concept-text h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 24px; color: var(--ink); }
-    .concept-lead { font-size: 1.25rem; font-weight: 700; color: var(--gold-dark); line-height: 1.6; margin-bottom: 40px; }
-    .benefit-cards { display: grid; gap: 24px; margin-bottom: 40px; }
-    .benefit-card { background: var(--paper); padding: 24px; border-radius: 20px; border-left: 4px solid var(--gold); }
-    .benefit-card h4 { font-size: 1.1rem; font-weight: 900; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; color: var(--ink); }
-    .benefit-card p { font-size: 0.95rem; color: var(--muted); line-height: 1.7; margin: 0; }
-    .concept-final { font-size: 1rem; color: var(--muted); line-height: 1.8; font-style: italic; }
-    
-    .concept-visual { position: relative; }
-    .concept-img { width: 100%; border-radius: 30px; box-shadow: 0 30px 60px rgba(0,0,0,0.1); position: relative; z-index: 2; }
-    .visual-accent { position: absolute; width: 80%; height: 80%; background: var(--gold); border-radius: 30px; top: -10%; right: -10%; z-index: 1; opacity: 0.2; }
-
-    .section-title { font-size: 2.2rem; font-weight: 900; text-align: center; margin-bottom: 15px; position: relative; }
-    .section-concept { text-align: center; font-size: 1rem; color: var(--muted); margin-bottom: 60px; }
-
-    /* Premium Dark Section */
-    .premium-dark { background: #1a1c1e; color: #fff; }
-    .premium-dark .section-title { color: #fff; }
-    .premium-dark .badge { background: var(--gold); color: #1a1c1e; padding: 4px 16px; border-radius: 999px; font-weight: 900; font-size: 0.75rem; letter-spacing: 0.1em; display: inline-block; margin-bottom: 15px; }
-    .premium-header { text-align: center; margin-bottom: 80px; }
-
-    /* Book Grid / Showcase */
-    .book-showcase {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 60px 40px;
-    }
-    .single-focus { max-width: 400px; margin: 0 auto; }
-
-    /* 3D Book Animation */
-    .book-item {
-      display: flex; flex-direction: column; align-items: center;
-      transition: 0.5s;
-    }
-    .book-3d-wrap {
-      perspective: 1200px; width: 220px; height: 310px; margin-bottom: 30px;
-      cursor: pointer;
-    }
-    .book-3d {
-      position: relative; width: 100%; height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-      box-shadow: 10px 10px 20px rgba(0,0,0,0.15);
-    }
-    .book-item:hover .book-3d { transform: rotateY(-25deg) rotateX(5deg) scale(1.05); box-shadow: 25px 25px 50px rgba(0,0,0,0.3); }
-
-    .book-cover {
-      position: absolute; width: 100%; height: 100%; z-index: 2;
-      background: #eee; border-radius: 2px 4px 4px 2px; overflow: hidden;
-    }
-    .book-cover img { width: 100%; height: 100%; object-fit: cover; }
-    
-    .book-spine {
-      position: absolute; width: 40px; height: 100%; left: -20px;
-      background: #333; transform: rotateY(-90deg); transform-origin: right;
-      z-index: 1; border-radius: 4px 0 0 4px;
-      background-image: linear-gradient(90deg, rgba(255,255,255,0.1), transparent);
-    }
-
-    /* Meta Info */
-    .book-meta { text-align: center; width: 100%; }
-    .book-meta .title { font-size: 1.15rem; font-weight: 800; margin-bottom: 8px; height: 2.8em; line-height: 1.4; display: flex; align-items: center; justify-content: center; }
-    .book-meta .price { font-size: 0.9rem; color: var(--gold-dark); font-weight: 800; margin-bottom: 20px; letter-spacing: 0.1em; }
-    
-    /* Concept Tooltip/Blurb */
-    .book-item::after {
-      content: attr(data-concept);
-      display: block; width: 90%; max-width: 280px; font-size: 0.8rem; line-height: 1.6;
-      color: var(--muted); background: rgba(0,0,0,0.03); padding: 12px; border-radius: 12px;
-      opacity: 0; transform: translateY(10px); transition: 0.4s;
-    }
-    .book-item:hover::after { opacity: 1; transform: translateY(0); }
-    .premium-dark .book-item::after { color: #aaa; background: rgba(255,255,255,0.05); }
-
-    /* Links */
-    .links { display: flex; gap: 10px; justify-content: center; }
-    .store-link {
-      padding: 10px 16px; border-radius: 999px; border: 1.5px solid var(--gold);
-      color: var(--gold-dark); font-size: 0.8rem; font-weight: 900; text-decoration: none;
-      transition: 0.3s;
-    }
-    .store-link:hover { background: var(--gold); color: #fff; transform: scale(1.05); }
-    .premium-dark .store-link { border-color: var(--gold); color: var(--gold); }
-    .premium-dark .store-link:hover { background: var(--gold); color: #1a1c1e; }
-
-    /* Utils */
-    .bg-paper { background: #fdfaf7; background-image: url("https://www.transparenttextures.com/patterns/natural-paper.png"); }
-    .btn-back { display: inline-block; padding: 16px 40px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--muted); font-weight: 800; text-decoration: none; transition: 0.3s; }
-    .btn-back:hover { color: var(--gold-dark); border-color: var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-    
-    .fade-in { animation: fadeIn 1.2s ease forwards; }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @media (max-width: 768px) {
-      .book-showcase { grid-template-columns: 1fr 1fr; gap: 40px 20px; }
-      .book-3d-wrap { width: 160px; height: 230px; }
-      .book-meta .title { font-size: 1rem; }
-    }
-    @media (max-width: 480px) {
-      .book-showcase { grid-template-columns: 1fr; }
-    }
-</style>
-
-<script is:inline>
-  function initKdpEffects() {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          io.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    // Mouse Tilt Effect
-    document.querySelectorAll('.book-3d-wrap').forEach(wrap => {
-      const book = wrap.querySelector('.book-3d');
-      wrap.addEventListener('mousemove', (e) => {
-        const rect = wrap.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -10;
-        const rotateY = ((x - centerX) / centerX) * 20;
-        book.style.transform = `rotateY(${rotateY - 25}deg) rotateX(${rotateX}deg) scale(1.05)`;
-      });
-      wrap.addEventListener('mouseleave', () => {
-        book.style.transform = `rotateY(-25deg) rotateX(0deg) scale(1)`;
-      });
-    });
-  }
-
-  initKdpEffects();
-  document.addEventListener('astro:page-load', initKdpEffects);
-</script>
+fs.writeFileSync(filePath, content, 'utf8');
+console.log('KDP books update completed successfully.');
