@@ -153,20 +153,6 @@ function getLocalizedLink(path: string) {
     </div>
   </section>
 
-  <!-- 6. Profile Summary (Avatar relocated here) -->
-  <section class="section profile-summary">
-    <div class="section-inner profile-summary-inner">
-      <div class="profile-avatar-wrap">
-        <img src="/images/avatar.png" alt="和-Node 代表 高野紘純" class="profile-avatar-img" />
-      </div>
-      <div class="profile-text-wrap">
-        <span class="eyebrow">{t.profile.eyebrow[lang]}</span>
-        <h2>{t.profile.title[lang]}</h2>
-        <p class="profile-desc">{t.profile.desc[lang]}</p>
-        <a href={getLocalizedLink('/about')} class="profile-link">{t.profile.link[lang]}</a>
-      </div>
-    </div>
-  </section>
 </main>
 
 <style is:global>
