@@ -1,0 +1,569 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = "UX Design & Psychological Funnel Demo | Wa-Node";
+const description = "Why do high-converting landing pages succeed? The secret lies in the behavioral psychology behind the design. Compare standard legacy layouts with Wa-Node's modern psychological architecture.";
+---
+
+<BaseLayout title={title} description={description} lang="en">
+  <main class="demo-page">
+    <!-- Hero Section -->
+    <section class="hero-demo section">
+      <div class="container narrow reveal">
+        <div class="eyebrow">Visualizing the Psychology</div>
+        <h1>Does your Landing Page<br/><span class="text-accent">possess a 'Soul'?</span></h1>
+        <p class="lead">
+          Visual elegance alone cannot move a human heart. Anticipate and resolve your visitor's subconscious anxieties,
+          building a steady flow of trust. That is the essence of Wa-Node's "Psychological Conversion Funnel."
+        </p>
+      </div>
+    </section>
+
+    <!-- Comparison Intro -->
+    <section class="comparison-intro container">
+      <div class="comparison-header reveal">
+        <h2>A single word shifts<br class="mobile-only"/> the emotional distance.</h2>
+        <p>Compare a standard legacy LP (Before) with a psychology-optimized LP redesigned by Wa-Node (After), and explore the cognitive science behind the change.</p>
+      </div>
+    </section>
+
+    <!-- Comparison Items -->
+    <div class="comparison-list container">
+      
+      <!-- Case 1: CTA -->
+      <section class="comp-item reveal">
+        <div class="comp-label">CASE 01: Driving User Action (CTA)</div>
+        <div class="comp-grid">
+          <div class="comp-card before">
+            <div class="status-badge before">BEFORE</div>
+            <div class="preview-area">
+              <button class="btn-legacy">Inquire Now</button>
+            </div>
+            <p class="card-note">"I'm still just browsing, inquiring right now feels like a huge commitment..."</p>
+          </div>
+          <div class="comp-arrow-wrapper">
+            <div class="comp-arrow-svg">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="arrow-text">Improve</span>
+          </div>
+          <div class="comp-card after">
+            <div class="status-badge after">AFTER (Wa-Node)</div>
+            <div class="preview-area">
+              <button class="btn-modern">Let's Organize Together</button>
+            </div>
+            <div class="logic-card">
+              <span class="logic-tag">Psychology: Low Hurdle</span>
+              <p>By removing the pressure of "inquiry = immediate decision" and proposing "organizing" as a collaborative first step, we lower the psychological barrier and foster a natural dialogue.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Case 2: Pricing -->
+      <section class="comp-item reveal">
+        <div class="comp-label">CASE 02: Navigating to Pricing</div>
+        <div class="comp-grid">
+          <div class="comp-card before">
+            <div class="status-badge before">BEFORE</div>
+            <div class="preview-area">
+              <div class="link-legacy">See Price List</div>
+            </div>
+            <p class="card-note">"How much will it actually cost me? I'm afraid it might be way out of my budget..."</p>
+          </div>
+          <div class="comp-arrow-wrapper">
+            <div class="comp-arrow-svg">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="arrow-text">Improve</span>
+          </div>
+          <div class="comp-card after">
+            <div class="status-badge after">AFTER (Wa-Node)</div>
+            <div class="preview-area">
+              <div class="link-modern">Address Concerns Before Choosing</div>
+            </div>
+            <div class="logic-card">
+              <span class="logic-tag">Psychology: Safety First</span>
+              <p>Establish peace of mind before presenting raw numbers. By demonstrating a supportive stance toward individual concerns, we empower users to make proactive, positive decisions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Case 3: Hero Message -->
+      <section class="comp-item reveal">
+        <div class="comp-label">CASE 03: The Hero Message</div>
+        <div class="comp-grid">
+          <div class="comp-card before">
+            <div class="status-badge before">BEFORE</div>
+            <div class="preview-area">
+              <h3 class="h-legacy">No.1 Industry Solution &<br/>Overwhelming Results</h3>
+            </div>
+            <p class="card-note">"Sounds impressive, but does it have anything to do with my own life?"</p>
+          </div>
+          <div class="comp-arrow-wrapper">
+            <div class="comp-arrow-svg">
+              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="arrow-text">Improve</span>
+          </div>
+          <div class="comp-card after">
+            <div class="status-badge after">AFTER (Wa-Node)</div>
+            <div class="preview-area">
+              <h3 class="h-modern">Restore Calm & Harmony<br/>to Your Daily Life.</h3>
+            </div>
+            <div class="logic-card">
+              <span class="logic-tag">Psychology: Benefit over Feature</span>
+              <p>Focus on "future transformation" rather than boasting specs. The human brain prioritizes information directly tied to personal benefit, so presenting outcomes quickly wins trust.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Methodology -->
+    <section class="methodology section">
+      <div class="container narrow reveal">
+        <h2 class="section-title">Wa-Node's Psychological Architecture Flow</h2>
+        <div class="method-steps">
+          <div class="step">
+            <div class="step-num">01</div>
+            <h3>Listen (Empathy)</h3>
+            <p>Unravel the subconscious source of anxiety that even the client hasn't noticed.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">02</div>
+            <h3>Align (Design)</h3>
+            <p>Connect the optimal conversion paths into a single, cohesive journey from both logical and emotional standpoints.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">03</div>
+            <h3>Connect (Implement)</h3>
+            <p>Leverage state-of-the-art AI and modern tech to materialize those paths into an elegant, high-performing reality.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Designer Profile -->
+    <section class="designer-profile section">
+      <div class="container narrow reveal">
+        <div class="profile-card">
+          <div class="profile-header">
+            <div class="profile-title">
+              <span class="eyebrow">Designer Profile</span>
+              <h2>About the Designer</h2>
+            </div>
+          </div>
+          <div class="profile-content">
+            <div class="profile-text">
+              <h3>Hirozumi Takano <small>Hirozumi Takano</small></h3>
+              <p class="profile-qual">Industrial Counselor / ICT Consultant</p>
+              
+              <div class="profile-history">
+                <p>
+                  Active in the culinary and hospitality industry starting in 2001. Qualified as an Industrial Counselor in 2002, dedicating over 20 years to employee mental care and organizational relationship risk management.
+                  Simultaneously pursued a career in IT and system engineering, handling UNIX systems monitoring, POS maintenance, and database modernization (Access, etc.). Successfully halved operational times by developing custom data entry systems, prioritizing practical usability.
+                </p>
+                <p>
+                  Following retirement from a previous role, underwent a period of physical rehabilitation due to long-term mobility constraints and chronic pain, during which research into modern web technologies and generative AI was continuously pursued. Successfully returned to active practice, founding Wa-Node in April 2026. Supporting businesses to streamline their digital presence through a multi-dimensional perspective of hardware, software, and human psychology.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta section">
+      <div class="container narrow reveal">
+        <div class="cta-box">
+          <h2>Let's Align Your Funnel Together.</h2>
+          <p>
+            Concerned about your current landing page conversion? Want your true message to resonate?<br/>
+            Start with a free strategic consultation to identify your optimal path.
+          </p>
+          <div class="btns">
+            <a href="/en/contact" class="btn">Start Free Consultation</a>
+            <a href="/en/works" class="btn secondary">View Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .demo-page {
+    background-color: var(--bg);
+    overflow-x: hidden;
+  }
+
+  .text-accent { color: var(--accent); }
+
+  .hero-demo {
+    text-align: center;
+    padding: 120px 0 80px;
+  }
+  .hero-demo h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.2;
+    margin-bottom: 32px;
+    font-weight: 800;
+  }
+  .hero-demo .lead {
+    font-size: 1.2rem;
+    color: var(--muted);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .comparison-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+  .comparison-header h2 {
+    font-size: 2.2rem;
+    margin-bottom: 20px;
+    font-weight: 800;
+  }
+
+  .comp-item {
+    margin-bottom: 120px;
+  }
+  .comp-label {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 40px;
+    text-align: center;
+  }
+
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 120px 1.2fr;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .comp-card {
+    border-radius: var(--radius);
+    padding: 50px 40px;
+    position: relative;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 340px;
+    transition: 0.3s;
+  }
+  .comp-card.before {
+    background: #ececec;
+    border: 1px solid #ddd;
+  }
+  .comp-card.after {
+    background: var(--paper);
+    border: 2px solid var(--accent2);
+  }
+
+  .status-badge {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+  }
+  .status-badge.before {
+    background: #999;
+    color: #fff;
+  }
+  .status-badge.after {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(138, 90, 50, 0.2);
+  }
+
+  .preview-area {
+    margin: 40px 0 24px;
+    text-align: center;
+  }
+
+  /* Legacy Elements */
+  .btn-legacy {
+    background: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 18px 36px;
+    font-weight: 700;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: default;
+    opacity: 0.7;
+  }
+  .link-legacy {
+    color: #2980b9;
+    text-decoration: underline;
+    font-weight: 700;
+    font-size: 1.1rem;
+    opacity: 0.7;
+  }
+  .h-legacy {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    line-height: 1.3;
+    font-weight: 900;
+    opacity: 0.6;
+  }
+
+  /* Wa-Node Elements */
+  .btn-modern {
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    padding: 20px 56px;
+    font-weight: 800;
+    border-radius: 999px;
+    font-size: 1.2rem;
+    box-shadow: 0 10px 30px rgba(138, 90, 50, 0.2);
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-modern::after {
+    content: "";
+    position: absolute;
+    top: -50%; left: -100%;
+    width: 30%; height: 200%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: rotate(30deg);
+    animation: shine-demo 6s infinite;
+  }
+  @keyframes shine-demo {
+    0% { left: -100%; }
+    20% { left: 150%; }
+    100% { left: 150%; }
+  }
+
+  .link-modern {
+    display: inline-block;
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 1.3rem;
+    border-bottom: 3px solid var(--accent2);
+    padding-bottom: 6px;
+  }
+  .h-modern {
+    font-size: 2.2rem;
+    color: var(--text);
+    line-height: 1.4;
+    font-weight: 800;
+  }
+
+  .card-note {
+    font-size: 0.85rem;
+    color: #777;
+    text-align: center;
+    font-style: italic;
+    line-height: 1.6;
+  }
+
+  .comp-arrow-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    color: var(--accent);
+  }
+  .comp-arrow-svg {
+    width: 60px;
+    height: 60px;
+    background: var(--soft);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(138, 90, 50, 0.1);
+  }
+  .comp-arrow-svg svg {
+    width: 32px;
+    height: 32px;
+  }
+  .arrow-text {
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+  }
+
+  .logic-card {
+    margin-top: 30px;
+    padding: 24px;
+    background: var(--soft);
+    border-radius: 16px;
+    text-align: left;
+    border-left: 4px solid var(--accent);
+  }
+  .logic-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 800;
+    color: #fff;
+    background: var(--accent);
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+  }
+  .logic-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.7;
+  }
+
+  /* Steps */
+  .methodology {
+    background-color: var(--paper);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .method-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 60px;
+  }
+  .step {
+    text-align: center;
+  }
+  .step-num {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--accent2);
+    opacity: 0.3;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .step h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    font-weight: 800;
+  }
+
+  /* Designer Profile */
+  .designer-profile {
+    background: #fdfaf5;
+    border-top: 1px solid var(--line);
+  }
+  .profile-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+  .profile-header h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-top: 10px;
+  }
+  .profile-text h3 {
+    font-size: 1.8rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+  }
+  .profile-text h3 small {
+    font-size: 0.9rem;
+    color: var(--muted);
+    font-weight: 400;
+    margin-left: 10px;
+  }
+  .profile-qual {
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 1.1rem;
+    margin-bottom: 24px;
+  }
+  .profile-history p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  /* CTA Box */
+  .cta-box {
+    background: var(--paper);
+    border: 2px solid var(--accent2);
+    border-radius: 40px;
+    padding: 80px 40px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(138, 90, 50, 0.1);
+  }
+  .cta-box h2 {
+    font-size: 2.8rem;
+    margin-bottom: 24px;
+    font-weight: 800;
+  }
+  .cta-box p {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 1024px) {
+    .comp-grid {
+      grid-template-columns: 1fr;
+      gap: 30px;
+    }
+    .comp-arrow-wrapper {
+      flex-direction: row;
+      justify-content: center;
+      gap: 20px;
+    }
+    .comp-arrow-wrapper svg {
+      transform: rotate(90deg);
+    }
+    .method-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero-demo h1 { font-size: 2.2rem; }
+    .cta-box h2 { font-size: 2rem; }
+    .cta-box { padding: 60px 20px; }
+    .mobile-only { display: block; }
+    .comp-card { padding: 40px 24px; }
+  }
+</style>
+
+<script is:inline>
+  function initReveal() {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+  initReveal();
+  document.addEventListener('astro:page-load', initReveal);
+</script>
