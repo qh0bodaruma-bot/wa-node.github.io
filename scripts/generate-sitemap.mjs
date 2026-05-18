@@ -73,7 +73,7 @@ function getHtmlFiles(dir, fileList = []) {
       }
       
       // 除外するページ
-      if (!urlPath.includes('404') && !urlPath.includes('500')) {
+      if (!urlPath.includes('404') && !urlPath.includes('500') && !urlPath.includes('exclusive-monitor')) {
         fileList.push(urlPath.startsWith('/') ? urlPath : '/' + urlPath);
       }
     }

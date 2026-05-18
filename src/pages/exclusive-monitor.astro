@@ -1,0 +1,632 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ConsultationFlow from '../components/ConsultationFlow.astro';
+
+// クローズドな知人・ご紹介限定オファーのため、noindex を true に設定
+const pageTitle = "【ご紹介・知人限定】ホームページ制作 特別モニター募集｜和-Node";
+const pageDescription = "和-Node（代表 高野）の新しい実績づくりのため、信頼できる知人・ご紹介者様限定で「デザイン・制作費0円」でホームページ・LPを制作する特別モニターキャンペーン。維持実費のみご負担ください。";
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription} 
+  noindex={true}
+>
+  <main class="monitor-lp">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container-narrow text-center">
+        <div class="reveal">
+          <span class="badge">Special Invitation</span>
+          <h1>ご紹介・ご友人限定<br/><span class="accent-text">ホームページ制作</span><br/>特別モニター募集</h1>
+          <p class="hero-lead">
+            新ブランド「和-Node」のさらなる実績掲載と、<br/>
+            お客様の生の声（レビュー）をいただくための、特別なご招待企画です。
+          </p>
+          <div class="pricing-badge-wrapper">
+            <div class="price-bubble-old">通常制作費 120,000円〜</div>
+            <div class="price-bubble-new">デザイン・制作費 <span class="bold-zero">0</span>円</div>
+          </div>
+          <p class="hero-subtext">
+            ※サーバー代・ドメイン代（月1,000円程度〜）の実費のみご負担いただきます。
+          </p>
+          <div class="hero-cta-wrap">
+            <a href="#apply-form" class="main-btn">
+              <span class="btn-text">特別モニターに申し込む（相談無料）</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Free Section (誠実な背景開示) -->
+    <section class="why-free-section">
+      <div class="container-narrow">
+        <div class="section-title reveal">
+          <span class="eyebrow">Reason</span>
+          <h2>なぜ、制作費を「完全無料」にするのか？</h2>
+        </div>
+        <div class="content-box reveal">
+          <p>
+            私は、IT業界で20年以上エンジニアとして開発に携わってきました。また、心理カウンセラーや車いすユーザーとしての視点も生かし、この度新しく<strong>「和-Node（わのーど）」</strong>というWeb制作・DXコンサルティングのブランドを本格的に立ち上げました。
+          </p>
+          <p>
+            今回、この新ブランドにおける<strong>「実名でご紹介できるホームページやLPの制作実績」</strong>を最速で増やすため、私の直接の友人や知人、そしてその大切なご紹介者様だけに限定し、この「制作費0円」というオファーをご用意しました。
+          </p>
+          <p class="highlight-p">
+            「無料だからといって、品質に妥協は一切ありません。」
+          </p>
+          <p>
+            通常12万円〜でお引き受けしている「行動心理学に基づいた、迷わせない導線設計」と「スマホ対応」を備えた本格的なホームページを、通常のご依頼とまったく同じ熱量で丁寧にお作りします。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Project Specifications (無料で作れるホームページの仕様) -->
+    <section class="specs-section">
+      <div class="container">
+        <div class="section-title text-center reveal">
+          <span class="eyebrow">Specifications</span>
+          <h2>無料で制作するホームページの仕様</h2>
+          <p class="section-lead">初めてホームページを持つ方や、現在のサイトをリニューアルしたい方に十分な内容です。</p>
+        </div>
+        
+        <div class="specs-grid">
+          <div class="spec-card reveal">
+            <div class="spec-icon">📄</div>
+            <h3>最大3ページの構成</h3>
+            <p>トップページ、事業紹介・サービス内容、会社概要・お問い合わせフォームなど、必要な情報を網羅した最大3ページ構成で構築します。</p>
+          </div>
+          <div class="spec-card reveal">
+            <div class="spec-icon">📱</div>
+            <h3>スマホ完全対応</h3>
+            <p>今のWebアクセスの8割以上を占めるスマートフォン表示に完全対応。どの端末から見ても美しく、読みやすいレスポンシブデザインです。</p>
+          </div>
+          <div class="spec-card reveal">
+            <div class="spec-icon">💡</div>
+            <h3>心理学ベースの導線設計</h3>
+            <p>産業カウンセラーとしての行動心理学の知見を活かし、訪れたユーザーが「迷わずに」お問い合わせに進めるスムーズなレイアウトを設計します。</p>
+          </div>
+          <div class="spec-card reveal">
+            <div class="spec-icon">♿</div>
+            <h3>1pxの優しさ（バリアフリー）</h3>
+            <p>車いすエンジニアとしての当事者視点を盛り込み、文字の読みやすさや操作のしやすさなど、誰も置き去りにしないアクセシビリティ対応を施します。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Monitor Conditions (モニター参加条件) -->
+    <section class="conditions-section">
+      <div class="container-narrow">
+        <div class="section-title reveal">
+          <span class="eyebrow">Conditions</span>
+          <h2>モニターとしてご参加いただく3つの条件</h2>
+        </div>
+        <div class="conditions-list">
+          <div class="condition-item reveal">
+            <div class="c-num">01</div>
+            <div class="c-content">
+              <h3>実績としての掲載許可</h3>
+              <p>完成したホームページを、和-Nodeのポートフォリオ（実績紹介）ページにて掲載させていただける方に限ります。</p>
+            </div>
+          </div>
+          <div class="condition-item reveal">
+            <div class="c-num">02</div>
+            <div class="c-content">
+              <h3>アンケート・レビューへのご協力</h3>
+              <p>納品完了後、サービスに対するご意見や、制作したホームページの使い心地などに関する簡単なインタビュー（レビュー）にご回答いただける方。</p>
+            </div>
+          </div>
+          <div class="condition-item reveal">
+            <div class="c-num">03</div>
+            <div class="c-content">
+              <h3>維持実費（サーバー・ドメイン代）のご負担</h3>
+              <p>ホームページをネット上に公開し維持するための実費（月額1,000円程度〜）は、お客様ご自身のクレジットカード等でお支払いいただきます。（契約の手続きは丁寧にサポートいたしますのでご安心ください）</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation Process -->
+    <ConsultationFlow border={true} background="var(--soft)" />
+
+    <!-- Application Form (お申し込みフォーム) -->
+    <section class="apply-section" id="apply-form">
+      <div class="container-narrow">
+        <div class="form-box reveal">
+          <span class="form-badge">Closed Promotion</span>
+          <h2>特別モニターお申し込み・ご相談</h2>
+          <p class="form-lead">
+            まずは「こういうホームページを作りたい」「本当にタダでいいの？」といったご相談からで構いません。下記のフォームよりお気軽にご連絡ください。
+          </p>
+
+          <form action="https://ssgform.com/s/zC8w4Fw9Nq7n" method="post" class="apply-form-element">
+            <!-- 識別用の隠しフィールド -->
+            <input type="hidden" name="InquiryType" value="特別モニター応募" />
+            
+            <div class="form-group">
+              <label for="name">お名前 <span class="required">必須</span></label>
+              <input type="text" id="name" name="name" required placeholder="高野 紘純" />
+            </div>
+
+            <div class="form-group">
+              <label for="email">メールアドレス <span class="required">必須</span></label>
+              <input type="email" id="email" name="email" required placeholder="example@wa-node.com" />
+            </div>
+
+            <div class="form-group">
+              <label for="site-type">作りたいWebサイトのタイプ</label>
+              <select id="site-type" name="site_type">
+                <option value="新規のホームページ制作">新規のホームページ制作（最大3ページ）</option>
+                <option value="既存ホームページのリニューアル">既存ホームページのリニューアル</option>
+                <option value="1枚ものの集客ページ（LP）">1枚ものの集客ページ（LP）</option>
+                <option value="その他・まだ決まっていない">その他・まだ決まっていない</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="content">制作したい内容や事業への想いなど（自由記述）</label>
+              <textarea id="content" name="content" rows="5" placeholder="例：パーソナルジムを開業予定で、料金表とアクセスが載ったシンプルなサイトが欲しい。心理学の導線設計に興味があります！" required></textarea>
+            </div>
+
+            <div class="form-group consent-group">
+              <p class="consent-title">モニター条件への同意 <span class="required">必須</span></p>
+              <label class="checkbox-label">
+                <input type="checkbox" name="consent_portfolio" required value="同意する" />
+                <span>制作物の実績掲載（ポートフォリオ公開）に同意します。</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="consent_review" required value="同意する" />
+                <span>納品後のお客様アンケート・レビューへの回答に同意します。</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" name="consent_cost" required value="同意する" />
+                <span>サーバー・ドメインの実費（月1,000円程度〜）を自分で負担することに同意します。</span>
+              </label>
+            </div>
+
+            <button type="submit" class="submit-btn">
+              <span class="btn-text">モニター面談に申し込む</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .monitor-lp {
+    overflow: hidden;
+    background: var(--white);
+    color: var(--text);
+  }
+
+  .container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .accent-text {
+    color: var(--accent2);
+  }
+
+  .badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 4px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+
+  .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: var(--accent2);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .section-title {
+    margin-bottom: 48px;
+  }
+
+  .section-title h2 {
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 900;
+    line-height: 1.3;
+  }
+
+  .section-lead {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-top: 16px;
+  }
+
+  /* Hero Section */
+  .hero-section {
+    padding: 140px 0 100px;
+    background: linear-gradient(135deg, #2b241f 0%, #1a1512 100%);
+    color: #fff;
+    position: relative;
+  }
+
+  .hero-section h1 {
+    font-size: clamp(2.2rem, 6vw, 4rem);
+    line-height: 1.25;
+    font-weight: 900;
+    margin-bottom: 30px;
+  }
+
+  .hero-lead {
+    font-size: clamp(1.05rem, 2.5vw, 1.3rem);
+    color: #ddd;
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .pricing-badge-wrapper {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 24px 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    margin-bottom: 20px;
+  }
+
+  .price-bubble-old {
+    font-size: 0.95rem;
+    color: #aaa;
+    text-decoration: line-through;
+    margin-bottom: 4px;
+  }
+
+  .price-bubble-new {
+    font-size: 1.6rem;
+    color: var(--accent2);
+    font-weight: 900;
+  }
+
+  .bold-zero {
+    font-size: 3.2rem;
+    font-family: 'Outfit', sans-serif;
+    line-height: 1;
+    margin: 0 4px;
+  }
+
+  .hero-subtext {
+    font-size: 0.85rem;
+    color: #bbb;
+    margin-bottom: 40px;
+  }
+
+  .main-btn {
+    display: inline-flex;
+    background: var(--accent2);
+    color: #fff;
+    padding: 20px 48px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1.15rem;
+    box-shadow: 0 20px 40px rgba(216, 185, 140, 0.2);
+    transition: 0.4s;
+  }
+
+  .main-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 25px 50px rgba(216, 185, 140, 0.3);
+    background: #fff;
+    color: var(--accent2);
+  }
+
+  /* Why Free Section */
+  .why-free-section {
+    padding: 100px 0;
+    background: #fff;
+  }
+
+  .content-box {
+    background: #fdfaf7;
+    border: 1px solid var(--line);
+    padding: 48px;
+    border-radius: 32px;
+  }
+
+  .content-box p {
+    font-size: 1.05rem;
+    line-height: 1.9;
+    color: #444;
+    margin-bottom: 24px;
+  }
+
+  .content-box p:last-child {
+    margin-bottom: 0;
+  }
+
+  .highlight-p {
+    font-size: 1.3rem !important;
+    font-weight: 900;
+    color: var(--accent) !important;
+    border-left: 4px solid var(--accent2);
+    padding-left: 20px;
+    margin: 32px 0 !important;
+  }
+
+  /* Specs Section */
+  .specs-section {
+    padding: 100px 0;
+    background: #faf8f5;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .specs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 48px;
+  }
+
+  .spec-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 40px 30px;
+    border-radius: 24px;
+    transition: 0.3s;
+  }
+
+  .spec-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow);
+  }
+
+  .spec-icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .spec-card h3 {
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .spec-card p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* Conditions Section */
+  .conditions-section {
+    padding: 100px 0;
+    background: #fff;
+  }
+
+  .conditions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .condition-item {
+    display: flex;
+    gap: 30px;
+    background: #fdfaf7;
+    border: 1px solid var(--line);
+    padding: 32px;
+    border-radius: 24px;
+    align-items: flex-start;
+  }
+
+  .c-num {
+    font-size: 2.2rem;
+    font-weight: 900;
+    font-family: 'Outfit', sans-serif;
+    color: var(--accent2);
+    line-height: 1;
+  }
+
+  .c-content h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+
+  .c-content p {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* Apply Section (Form) */
+  .apply-section {
+    padding: 120px 0;
+    background: linear-gradient(135deg, #faf8f5 0%, #fff 100%);
+  }
+
+  .form-box {
+    background: #fff;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    padding: 60px 48px;
+    border-radius: 40px;
+  }
+
+  .form-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: var(--soft);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 900;
+    border-radius: 999px;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+  }
+
+  .form-box h2 {
+    font-size: 2rem;
+    font-weight: 900;
+    margin: 0 0 12px;
+    color: var(--text);
+  }
+
+  .form-lead {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .apply-form-element {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .form-group label {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .required {
+    color: #ef4444;
+    font-size: 0.75rem;
+    margin-left: 4px;
+  }
+
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group select,
+  .form-group textarea {
+    padding: 16px;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    background: #faf8f5;
+    transition: 0.3s;
+  }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent2);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(216, 185, 140, 0.15);
+  }
+
+  .consent-group {
+    background: #fdfaf7;
+    border: 1px solid var(--line);
+    padding: 24px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .consent-title {
+    font-weight: 900;
+    font-size: 0.9rem;
+    margin: 0 0 8px;
+    color: var(--text);
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    color: #555;
+    line-height: 1.5;
+  }
+
+  .checkbox-label input[type="checkbox"] {
+    margin-top: 3px;
+    accent-color: var(--accent2);
+    width: 16px;
+    height: 16px;
+  }
+
+  .submit-btn {
+    background: var(--accent2);
+    color: #fff;
+    padding: 20px;
+    border: none;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 15px 30px rgba(216, 185, 140, 0.2);
+    margin-top: 16px;
+  }
+
+  .submit-btn:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(216, 185, 140, 0.3);
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 120px 0 80px;
+    }
+
+    .content-box {
+      padding: 30px 20px;
+      border-radius: 24px;
+    }
+
+    .form-box {
+      padding: 40px 20px;
+      border-radius: 28px;
+    }
+
+    .condition-item {
+      flex-direction: column;
+      gap: 16px;
+      padding: 24px;
+    }
+  }
+</style>
