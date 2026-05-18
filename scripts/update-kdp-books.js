@@ -12,12 +12,12 @@ const target1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="気品と落ち着きを表現する、藍色とベージュの対比。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記ラグドール.png" alt="江戸旅行記ラグドール" /></div>
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記ラグドール.png" alt="江戸の旅 ラグドール" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 ラグドール</h3>
+              <h3 class="title">江戸の旅 ラグドール</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GWDRMFHJ" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -30,12 +30,12 @@ const target1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="エネルギッシュな構図と、親しみやすさを両立。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記フレンチブルドッグ.png" alt="江戸旅行記フレンチブルドッグ" /></div>
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記フレンチブルドッグ.png" alt="江戸の旅 フレンチブルドッグ" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 フレンチブルドッグ</h3>
+              <h3 class="title">江戸の旅 フレンチブルドッグ</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GWQ5VTWC" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -48,12 +48,12 @@ const target1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="静寂と可愛らしさが同居する、冬の江戸をイメージ。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記シマエナガ.png" alt="江戸旅行記シマエナガ" /></div>
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記シマエナガ.png" alt="江戸の旅 シマエナガ" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 シマエナガ</h3>
+              <h3 class="title">江戸の旅 シマエナガ</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GXKYSTSY" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -66,12 +66,12 @@ const target1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="茶屋の温かみを、暖色系のグラデーションで表現。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記たぬき.png" alt="江戸旅行記たぬき" /></div>
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記たぬき.png" alt="江戸の旅 たぬき" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 たぬき</h3>
+              <h3 class="title">江戸の旅 たぬき</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GY95QR8G" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -84,12 +84,12 @@ const target1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="太古のロマンを、力強い筆致と彩度で可視化。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記古代生物.png" alt="江戸旅行記古代生物" /></div>
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記古代生物.png" alt="江戸の旅 古代生物" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 古代生物</h3>
+              <h3 class="title">江戸の旅 古代生物</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GYHTJRWK" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -102,12 +102,12 @@ const target1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="ミステリアスな雰囲気を、紫と黒の調和で演出。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記きつね.png" alt="江戸旅行記きつね" /></div>
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記きつね.png" alt="江戸の旅 きつね" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 きつね</h3>
+              <h3 class="title">江戸の旅 きつね</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GZ2Z1QY1" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -120,12 +120,12 @@ const target1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="江戸の芝居小屋を背景に、愛らしい三毛猫が新たな旅を彩ります。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記三毛猫.png" alt="江戸旅行記三毛猫" /></div>
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記三毛猫.png" alt="江戸の旅 三毛猫" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 三毛猫</h3>
+              <h3 class="title">江戸の旅 三毛猫</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GZZ7R7H6" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -138,12 +138,12 @@ const target1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="静寂の中に宿る力強さ。冬の月夜に佇む狼を、江戸の筆致で描き出しました。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記狼.png" alt="江戸旅行記 狼" /></div>
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸旅行記狼.png" alt="江戸の旅 狼" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 狼 (Wolf)</h3>
+              <h3 class="title">江戸の旅 狼 (Wolf)</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0H1M3FN28" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -152,16 +152,16 @@ const target1 = `        <div class="book-showcase">
             </div>
           </div>
 
-          {/* Item 9: Travels in Edo (江戸の旅) */}
-          <div class="book-item reveal" data-concept="旅の原点。江戸の宿場町を行き交う旅人たちの活気を、現代的な色彩で再構築。">
+          {/* Item 9: Travels in Edo (江戸的旅) */}
+          <div class="book-item reveal" data-concept="旅の原点。江戸的宿場町を行き交う旅人たちの活気を、現代的な色彩で再構築。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/en_title/江戸の旅.png" alt="江戸の旅" /></div>
+                <div class="book-cover"><img src="/images/KDP/en_title/江戸的旅.png" alt="江戸的旅" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸の旅 (Travels in Edo)</h3>
+              <h3 class="title">江戸的旅 (Travels in Edo)</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0H1LTDRDQ" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -176,12 +176,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="気品と落ち着きを表現する、藍色とベージュの対比。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.01 ラグドール.png" alt="江戸旅行記 ラグドール" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.01 ラグドール.png" alt="江戸の旅 ラグドール" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 ラグドール</h3>
+              <h3 class="title">江戸の旅 ラグドール</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GWDRMFHJ" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -194,12 +194,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="エネルギッシュな構図と、親しみやすさを両立。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.02 フレンチブルドッグ.png" alt="江戸旅行記 フレンチブルドッグ" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.02 フレンチブルドッグ.png" alt="江戸の旅 フレンチブルドッグ" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 フレンチブルドッグ</h3>
+              <h3 class="title">江戸の旅 フレンチブルドッグ</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GWQ5VTWC" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -212,12 +212,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="静寂と可愛らしさが同居する、冬の江戸をイメージ。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.03 シマエナガ.png" alt="江戸旅行記 シマエナガ" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.03 シマエナガ.png" alt="江戸の旅 シマエナガ" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 シマエナガ</h3>
+              <h3 class="title">江戸の旅 シマエナガ</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GXKYSTSY" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -230,12 +230,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="茶屋の温かみを、暖色系のグラデーションで表現。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.04 狸.png" alt="江戸旅行記 たぬき" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.04 狸.png" alt="江戸の旅 たぬき" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 たぬき</h3>
+              <h3 class="title">江戸の旅 たぬき</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GY95QR8G" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -248,12 +248,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="太古のロマンを、力強い筆致と彩度で可視化。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.05 古代生物.png" alt="江戸旅行記 古代生物" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.05 古代生物.png" alt="江戸の旅 古代生物" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 古代生物</h3>
+              <h3 class="title">江戸の旅 古代生物</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GYHTJRWK" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -266,12 +266,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="ミステリアスな雰囲気を、紫と黒の調和で演出。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.06 狐.png" alt="江戸旅行記 きつね" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.06 狐.png" alt="江戸の旅 きつね" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 きつね</h3>
+              <h3 class="title">江戸の旅 きつね</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GZ2Z1QY1" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -284,12 +284,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="江戸の芝居小屋を背景に、愛らしい三毛猫が新たな旅を彩ります。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.07 三毛猫.png" alt="江戸旅行記 三毛猫" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.07 三毛猫.png" alt="江戸の旅 三毛猫" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 三毛猫</h3>
+              <h3 class="title">江戸の旅 三毛猫</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0GZZ7R7H6" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -302,12 +302,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="静寂の中に宿る力強さ。冬の月夜に佇む狼を、江戸の筆致で描き出しました。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.08 狼.png" alt="江戸旅行記 狼" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.08 狼.png" alt="江戸の旅 狼" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 狼 (Wolf)</h3>
+              <h3 class="title">江戸の旅 狼 (Wolf)</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0H1M3FN28" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -320,12 +320,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="愛嬌たっぷりの蛙たちが、雨上がりの江戸の名所をユニークな視点で巡る旅。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.09 蛙.png" alt="江戸旅行記 蛙" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.09 蛙.png" alt="江戸の旅 蛙" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 蛙 (Frog)</h3>
+              <h3 class="title">江戸の旅 蛙 (Frog)</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
                 <a href="https://www.amazon.com/dp/B0H24Y9MDN" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
@@ -338,12 +338,12 @@ const replacement1 = `        <div class="book-showcase">
           <div class="book-item reveal" data-concept="夜の江戸に佇む知恵の象徴・梟。月明かりに照らされた神秘的な旅情を描く、最新作。">
             <div class="book-3d-wrap">
               <div class="book-3d">
-                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.10 梟.png" alt="江戸旅行記 梟" /></div>
+                <div class="book-cover"><img src="/images/KDP/江戸旅行記/江戸旅行記vol.10 梟.png" alt="江戸の旅 梟" /></div>
                 <div class="book-spine"></div>
               </div>
             </div>
             <div class="book-meta">
-              <h3 class="title">江戸旅行記 梟 (Owl)</h3>
+              <h3 class="title">江戸の旅 梟 (Owl)</h3>
               <p class="price">近日公開 / Coming Soon</p>
               <div class="links">
                 <span class="store-link us" style="opacity: 0.6; cursor: default;">🇺🇸 Amazon US (準備中)</span>
