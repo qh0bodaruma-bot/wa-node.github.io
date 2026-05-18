@@ -328,8 +328,8 @@ const replacement1 = `        <div class="book-showcase">
               <h3 class="title">江戸旅行記 蛙 (Frog)</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
-                <a href="https://www.amazon.com/dp/B0H1LTDRDQ" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
-                <a href="https://www.amazon.fr/dp/B0H1LTDRDQ" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
+                <a href="https://www.amazon.com/dp/B0H24Y9MDN" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
+                <a href="https://www.amazon.fr/dp/B0H2552VV8" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
               </div>
             </div>
           </div>
