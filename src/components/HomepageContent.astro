@@ -34,7 +34,21 @@ function getLocalizedLink(path: string) {
       <div class="hero-content reveal">
         <div class="hero-badge">{t.hero.badge[lang]}</div>
         <p class="tagline-top">{t.hero.tagline[lang]}</p>
-        <h1>{t.hero.title_part1[lang]}<br /><span class="highlight-text">{t.hero.title_highlight[lang]}</span>{t.hero.title_part2[lang]}</h1>
+        <h1>
+          {lang === 'ja' ? (
+            <>
+              <span class="hero-title-chosen">「選ばれる」</span>
+              <span class="hero-title-sub">には、</span>
+              <br />
+              <span class="hero-title-psy">心理学</span>
+              <span class="hero-title-base">的な根拠がある。</span>
+            </>
+          ) : (
+            <>
+              {t.hero.title_part1[lang]}<br /><span class="highlight-text">{t.hero.title_highlight[lang]}</span>{t.hero.title_part2[lang]}
+            </>
+          )}
+        </h1>
         <p class="lead" set:html={t.hero.lead[lang]}></p>
         <div class="btns">
           <a class="btn primary" href={getLocalizedLink('/contact')}>{t.hero.btn_consult[lang]}</a>
@@ -224,6 +238,33 @@ function getLocalizedLink(path: string) {
   .hero-content { max-width: 650px; }
   .hero-badge { display: inline-block; background: var(--accent2); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 800; margin-bottom: 24px; }
   .highlight-text { border-bottom: 3px double var(--accent); padding-bottom: 2px; color: var(--accent2); font-weight: 800; }
+
+  /* ジャンプ率・タイポグラフィの心理設計クラス */
+  .hero-title-chosen {
+    font-size: clamp(2.6rem, 5.8vw, 4.8rem);
+    font-weight: 900;
+    color: var(--accent2);
+    letter-spacing: -0.05em;
+  }
+  .hero-title-sub {
+    font-size: clamp(1.1rem, 2.5vw, 1.8rem);
+    font-weight: 500;
+    color: var(--muted);
+    margin-left: 2px;
+  }
+  .hero-title-psy {
+    font-size: clamp(2.3rem, 5.2vw, 4.2rem);
+    font-weight: 900;
+    color: var(--text-deep);
+    border-bottom: 3px double var(--accent);
+    padding-bottom: 2px;
+    letter-spacing: -0.02em;
+  }
+  .hero-title-base {
+    font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: var(--text-deep);
+  }
 
   /* Agitation / Hook Section */
   .why-psy { background: var(--white); border-bottom: 1px solid var(--line); }
