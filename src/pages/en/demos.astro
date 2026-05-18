@@ -1,0 +1,303 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConsultationFlow from '../../components/ConsultationFlow.astro';
+---
+
+<BaseLayout title="Homepage Package Selection | Wa-Node" description="Three strategic website packages to fit your business stage. Experience our premium customization tailored specifically for your conversion goals.">
+  <!-- Luxury Background Layer -->
+  <div class="luxury-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <main class="demos-page">
+    <div class="container">
+      <!-- Header Section -->
+      <header class="demos-header reveal">
+        <div class="header-content">
+          <span class="eyebrow">Select Your Grade</span>
+          <div class="anniversary-banner reveal on-dark">
+            <strong class="ann-title">Launch Celebration: 20% OFF Production Fees</strong>
+            <div class="ann-body">
+              <span class="anniversary-badge">ANNIVERSARY</span>
+              <span>Applies to all plans & options (Max 3 clients/month, Ends July 31) <span style="font-size: 0.75rem; opacity: 0.8; margin-left: 6px;">*Excludes ongoing support, monthly agreements, and third-party expenses</span></span>
+            </div>
+          </div>
+          <h1>3 Strategic Packages<br/>to <span class="accent-text">Elevate Your Brand</span></h1>
+          <p class="header-desc">We offer logical, premium web packages tailored specifically to your business growth phase and marketing objectives. Connect conversion-oriented designs with high-performance technology to empower your daily operations.<br/>
+            <span style="color: #639922; font-weight: 700;">*Pricing shown represents standard rates. A 20% launch discount will be applied to your final proposal.</span>
+          </p>
+        </div>
+      </header>
+
+      <!-- Package Selection Grid -->
+      <div class="package-grid">
+        <!-- Business 7 -->
+        <article class="package-card reveal">
+          <div class="card-inner">
+            <div class="package-tag">Standard Efficiency</div>
+            <div class="package-body">
+              <h2>Business 7</h2>
+              <p class="price-label">
+                <span class="price-old">¥150,000〜</span>
+                <span class="price-discount">¥120,000〜</span>
+                <span class="price-badge-mini">20% OFF</span>
+              </p>
+              <div class="divider"></div>
+              <ul class="feature-list">
+                <li><span>Left-side sticky nav bar</span></li>
+                <li><span>Core 7-page structure</span></li>
+                <li><span>Premium design finish</span></li>
+                <li><span>Fully mobile-responsive</span></li>
+              </ul>
+              <a href="/portfolio-lp/demo-business-7/index.html" class="demo-btn">Experience Live Demo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Premium 10 -->
+        <article class="package-card reveal featured">
+          <div class="card-inner">
+            <div class="package-tag">Most Popular Choice</div>
+            <div class="package-body">
+              <h2>Premium 10</h2>
+              <p class="price-label">
+                <span class="price-old">¥220,000〜</span>
+                <span class="price-discount">¥176,000〜</span>
+                <span class="price-badge-mini">20% OFF</span>
+              </p>
+              <div class="divider"></div>
+              <ul class="feature-list">
+                <li><span>Floating glassmorphism header</span></li>
+                <li><span>Psychology-driven 10-page funnel</span></li>
+                <li><span>5 strategic SEO audit sections</span></li>
+                <li><span>Rich animations & micro-interactions</span></li>
+                <li><span>Priority support priority SLA</span></li>
+              </ul>
+              <a href="/portfolio-lp/demo-premium-10/index.html" class="demo-btn">Experience Live Demo</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Enterprise 15+ -->
+        <article class="package-card reveal">
+          <div class="card-inner">
+            <div class="package-tag">High-End Performance</div>
+            <div class="package-body">
+              <h2>Enterprise 15+</h2>
+              <p class="price-label">ASK</p>
+              <div class="divider"></div>
+              <ul class="feature-list">
+                <li><span>Fullscreen responsive drawer menu</span></li>
+                <li><span>Comprehensive 15+ page architecture</span></li>
+                <li><span>Custom web app & DX integrations</span></li>
+                <li><span>Full recruitment/blog features</span></li>
+                <li><span>Custom database & third-party API sync</span></li>
+              </ul>
+              <a href="/portfolio-lp/demo-enterprise-15/index.html" class="demo-btn">Experience Live Demo</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Functional Comparison -->
+      <section class="comparison-section reveal">
+        <div class="glass-panel">
+          <h2 class="sec-title">Grade Feature Comparison</h2>
+          <div class="table-wrap">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Feature / Plan</th>
+                  <th>Business 7</th>
+                  <th>Premium 10</th>
+                  <th>Enterprise 15+</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Standard page count</td>
+                  <td>7 pages</td>
+                  <td>10 pages</td>
+                  <td>15+ pages</td>
+                </tr>
+                <tr>
+                  <td>Design quality</td>
+                  <td>High Quality</td>
+                  <td>Luxury Glass</td>
+                  <td>Ultimate Custom</td>
+                </tr>
+                <tr>
+                  <td>Animations</td>
+                  <td>Standard</td>
+                  <td>Rich</td>
+                  <td>Full Custom</td>
+                </tr>
+                <tr>
+                  <td>SEO optimization</td>
+                  <td>Core internal SEO</td>
+                  <td>Strategic section additions</td>
+                  <td>100% full audit & optimization</td>
+                </tr>
+                <tr>
+                  <td>System integration</td>
+                  <td>Basic contact form</td>
+                  <td>Basic contact form</td>
+                  <td>Custom DB & API sync</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <ConsultationFlow border={false} lang="en" />
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  /* Luxury Backdrop */
+  .luxury-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    background: #0a0a0c;
+    overflow: hidden;
+  }
+  .grid-overlay {
+    position: absolute;
+    width: 100%; height: 100%;
+    background-image: 
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.35;
+    animation: orbFloat 25s infinite alternate ease-in-out;
+  }
+  .orb-1 { width: 700px; height: 700px; background: radial-gradient(circle, #2d4f1e 0%, transparent 70%); top: -20%; left: -10%; }
+  .orb-2 { width: 600px; height: 600px; background: radial-gradient(circle, #1e3a5f 0%, transparent 70%); bottom: -10%; right: -5%; animation-delay: -7s; }
+  .orb-3 { width: 500px; height: 500px; background: radial-gradient(circle, #4a3b1e 0%, transparent 70%); top: 40%; left: 30%; animation-delay: -12s; }
+
+  @keyframes orbFloat {
+    0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+    100% { transform: translate(60px, 40px) scale(1.1) rotate(15deg); }
+  }
+
+  .demos-page { padding-bottom: 120px; color: #fff; }
+  .demos-header { padding: 140px 0 80px; text-align: center; }
+  .eyebrow { font-size: 0.85rem; font-weight: 900; color: #639922; letter-spacing: 0.4em; text-transform: uppercase; margin-bottom: 24px; display: block; }
+  .demos-header h1 { font-size: clamp(2.2rem, 6vw, 4rem); font-weight: 900; line-height: 1.15; margin-bottom: 32px; }
+  .accent-text { color: #639922; text-shadow: 0 0 30px rgba(99, 153, 34, 0.3); }
+  .header-desc { font-size: 1.15rem; color: #aaa; max-width: 800px; margin: 0 auto; line-height: 1.8; }
+
+  /* Package Grid */
+  .package-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 40px; margin-bottom: 100px; align-items: stretch; }
+  .package-card { position: relative; transition: 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+  
+  .card-inner {
+    height: 100%;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 40px;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  }
+  .package-card:hover .card-inner {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(99, 153, 34, 0.5);
+    transform: translateY(-15px);
+  }
+
+  .package-tag { font-size: 10px; font-weight: 900; color: #639922; text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 40px; }
+  .package-body h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 12px; }
+  .price-label { font-size: 1.6rem; font-weight: 800; color: #639922; margin-bottom: 30px; display: flex; flex-direction: column; gap: 4px; }
+  .price-old { font-size: 0.9rem; color: #888; text-decoration: line-through; opacity: 0.7; }
+  .price-discount { font-size: 1.8rem; color: #639922; font-weight: 900; }
+  .price-badge-mini {
+    width: fit-content;
+    background: #639922;
+    color: #fff;
+    font-size: 10px;
+    font-weight: 900;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-top: 4px;
+  }
+  .divider { width: 40px; height: 2px; background: #639922; margin-bottom: 40px; }
+
+  .feature-list { list-style: none; margin-bottom: 60px; flex: 1; }
+  .feature-list li { margin-bottom: 18px; color: #ccc; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; }
+  .feature-list li::before { content: "•"; color: #639922; font-size: 1.5rem; }
+
+  .package-card.featured .card-inner {
+    background: linear-gradient(180deg, rgba(99, 153, 34, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    border-color: rgba(99, 153, 34, 0.3);
+  }
+  .package-card.featured::after {
+    content: "RECOMMENDED";
+    position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+    background: #639922; color: #fff; padding: 8px 24px; border-radius: 999px;
+    font-size: 11px; font-weight: 900; letter-spacing: 0.15em; box-shadow: 0 10px 20px rgba(99, 153, 34, 0.3);
+  }
+
+  .demo-btn {
+    display: block; width: 100%; text-align: center; padding: 22px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff; text-decoration: none; border-radius: 20px;
+    font-weight: 800; font-size: 14px; letter-spacing: 0.1em; transition: 0.4s;
+  }
+  .package-card.featured .demo-btn { background: #639922; border: none; }
+  .demo-btn:hover { background: #fff; color: #000; transform: scale(1.03); }
+
+  /* Comparison Section */
+  .comparison-section { margin-top: 120px; }
+  .glass-panel {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 50px;
+    padding: 80px 60px;
+  }
+  .sec-title { text-align: center; font-size: 2.5rem; font-weight: 900; margin-bottom: 60px; }
+  .table-wrap { overflow-x: auto; }
+  .comparison-table { width: 100%; border-collapse: collapse; min-width: 800px; }
+  .comparison-table th, .comparison-table td { padding: 28px; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+  .comparison-table th { font-size: 1.1rem; color: #639922; font-weight: 900; }
+  .comparison-table td:first-child { text-align: left; color: #888; font-weight: 700; width: 250px; }
+
+  @media (max-width: 900px) {
+    .package-grid { gap: 30px; }
+    .package-card.featured { scale: 1; }
+    .glass-panel { padding: 40px 20px; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: 1s cubic-bezier(0.23, 1, 0.32, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
+
+<script is:inline>
+  function initReveal() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  }
+  document.addEventListener('astro:page-load', initReveal);
+</script>

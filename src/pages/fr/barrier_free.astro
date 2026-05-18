@@ -1,0 +1,460 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Diagnostic d'Accessibilité | Wa-Node" description="Évaluez votre espace du point de vue d'un utilisateur en fauteuil roulant! Faites notre diagnostic gratuit pour évaluer l'accessibilité de votre magasin ou bureau.">
+  <!-- Background Decoration -->
+  <div class="bg-decoration">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="demo-banner">
+    <strong class="banner-title">【Exemple de Projet】</strong> Il s'agit d'une application de démonstration pour découvrir les technologies de Wa-Node. Si vous envisagez d'intégrer des outils sur mesure comme celui-ci, n'hésitez pas à demander une <a href="/fr/#consultation-flow" class="banner-cta">Consultation Gratuite</a>.
+  </div>
+
+  <main class="quiz-container">
+    <div class="quiz-box glass-card">
+      
+      <!-- Welcome Step -->
+      <div id="step-welcome" class="quiz-step active">
+        <div class="welcome-visual">
+          <div class="pulse-icon">♿️</div>
+        </div>
+        <h1 class="welcome-title">Diagnostic d'Accessibilité<br/><span class="accent-text">de Magasins & Bureaux</span></h1>
+        <p class="welcome-desc">
+          Évaluez la "véritable facilité d'utilisation" de votre espace professionnel<br />
+          du point de vue d'un utilisateur en fauteuil roulant en 5 étapes simples.<br />
+          <span class="small-info">Durée requise : Environ 1 minute (5 questions)</span>
+        </p>
+        <button class="primary-btn pulse" id="startBtn">Commencer le Diagnostic</button>
+      </div>
+
+      <!-- Question Step -->
+      <div id="step-question" class="quiz-step">
+        <div class="quiz-header">
+          <div class="progress-container">
+            <div class="progress-text">
+              <span id="q-num">Q.1 / 5</span>
+              <span id="q-cat" class="cat-badge">Vérification de l'Entrée</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+          </div>
+        </div>
+
+        <div class="question-content" id="q-container">
+          <div class="category-icon-box" id="cat-icon">🚪</div>
+          <h2 class="q-title" id="q-text">Point de Diagnostic</h2>
+          <div class="q-options" id="q-opts">
+            <!-- Options injected by JS -->
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <button id="backBtn" class="text-btn">← Revenir à la Question Précédente</button>
+        </div>
+      </div>
+
+      <!-- Result Step -->
+      <div id="step-result" class="quiz-step">
+        <div class="result-layout">
+          <div class="result-main">
+            <div class="gauge-container">
+              <svg class="gauge-svg" viewBox="0 0 100 100">
+                <circle class="gauge-bg" cx="50" cy="50" r="45"></circle>
+                <circle class="gauge-fill" id="gauge-circle" cx="50" cy="50" r="45"></circle>
+              </svg>
+              <div class="gauge-content">
+                <span class="gauge-label">Score</span>
+                <span class="gauge-value" id="res-score">0%</span>
+              </div>
+            </div>
+            <h2 class="eval-title" id="res-title">Résultat du Diagnostic</h2>
+            <div class="eval-card">
+              <p class="eval-text" id="res-desc">Texte d'évaluation détaillé</p>
+            </div>
+          </div>
+
+          <div class="wanode-cta-box glass-card">
+            <div class="bonus-tag">🎁 Bonus Fin de Diagnostic</div>
+            <div id="consultation-flow" class="result-cta slide-in" style="scroll-margin-top: 40px;">
+              <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 20px;">Bénéficiez d'une Séance de Conseil Gratuite de 60 Minutes</h3>
+              <p style="font-size: 1rem; color: #555; line-height: 1.8; margin-bottom: 30px;">
+                Félicitations pour avoir complété le diagnostic. Même si la modification physique (comme la construction de rampes) est complexe, de nombreuses barrières d'accessibilité peuvent être surmontées grâce à un accueil attentionné et une bonne conception de l'information numérique.<br/>
+                Nous prolongeons notre consultation standard de 30 minutes à **60 minutes entièrement gratuites** pour partager des solutions sur mesure.
+              </p>
+
+              <div style="background: rgba(255,255,255,0.6); border: 1px solid rgba(74, 103, 65, 0.2); border-radius: 20px; padding: 30px; margin-bottom: 30px; text-align: left;">
+                <h4 style="margin-top: 0; color: #4a6741; font-size: 1.1rem; border-bottom: 1px solid rgba(74, 103, 65, 0.1); padding-bottom: 10px; margin-bottom: 15px;">Étapes de la Consultation Gratuite</h4>
+                <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem; color: #444;">
+                  <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="background: #4a6741; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem; font-weight: 800;">1</span>
+                    <span><strong>Premières 30 minutes (Gratuit):</strong> Audit de votre site web ou des problèmes de votre établissement.</span>
+                  </li>
+                  <li style="display: flex; align-items: flex-start; gap: 10px;">
+                    <span style="background: #4a6741; color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.75rem; font-weight: 800;">2</span>
+                    <span><strong>Bonus +30 minutes (Gratuit):</strong> Plan d'amélioration de l'accessibilité basé sur vos résultats.</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="cta-btns" style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="primary-btn" style="padding: 16px 32px; background: var(--accent-grad); color: #fff; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: 0.95rem; box-shadow: 0 10px 20px rgba(74, 103, 65, 0.2);">Prendre RDV (60 min)</a>
+                <a href="/fr/#consultation-flow" class="secondary-btn" style="padding: 16px 32px; border: 1px solid #4a6741; color: #4a6741; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: 0.95rem;">Vérifier les Étapes de Consultation</a>
+              </div>
+              <button class="retry-btn" id="retryBtn" style="margin-top: 30px; background: none; border: none; color: #888; font-size: 0.9rem; cursor: pointer; text-decoration: underline;">Recommencer le Diagnostic</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+    /* Premium Design System */
+    :root {
+      --accent-grad: linear-gradient(135deg, #4a6741 0%, #a8c69f 100%);
+      --accent-soft: rgba(74, 103, 65, 0.05);
+      --glass-bg: rgba(255, 255, 255, 0.75);
+      --glass-border: rgba(255, 255, 255, 0.5);
+    }
+
+    /* Background Decoration */
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; overflow: hidden; background: #f8fafc;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(70px); opacity: 0.3;
+      animation: move 25s infinite alternate;
+    }
+    .blob-1 { width: 600px; height: 600px; background: #cbdfe6; top: -15%; right: -5%; }
+    .blob-2 { width: 500px; height: 500px; background: #e2e8d5; bottom: -10%; left: -5%; animation-delay: -7s; }
+    @keyframes move { from { transform: translate(0, 0); } to { transform: translate(60px, 120px); } }
+
+    .demo-banner { background: rgba(74, 103, 65, 0.05); border-bottom: 1px solid var(--line); padding: 12px; text-align: center; font-size: 0.85rem; backdrop-filter: blur(5px); }
+    .banner-cta { color: #4a6741; font-weight: 800; text-decoration: underline; margin-left: 8px; }
+
+    .quiz-container { max-width: 900px; margin: 40px auto 100px; padding: 0 20px; }
+    
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 40px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.04);
+    }
+
+    .quiz-box {
+      padding: 60px 50px; min-height: 620px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+
+    .quiz-step { display: none; width: 100%; }
+    .quiz-step.active { display: block; }
+
+    /* Animations */
+    .slide-in { animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    .slide-out { animation: slideOut 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(40px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-40px); } }
+    
+    .fade-in { animation: fadeIn 0.7s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Welcome Step */
+    .welcome-visual { margin-bottom: 30px; text-align: center; }
+    .pulse-icon {
+      font-size: 80px; display: inline-block;
+      filter: drop-shadow(0 10px 20px rgba(0,0,0,0.05));
+      animation: pulse 4s infinite ease-in-out;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1) rotate(0); } 50% { transform: scale(1.1) rotate(5deg); } }
+    .welcome-title { font-size: 2.8rem; font-weight: 900; margin-bottom: 24px; line-height: 1.2; text-align: center; color: #2c3e50; }
+    .accent-text { color: #4a6741; }
+    .welcome-desc { font-size: 1.15rem; color: var(--muted); margin-bottom: 48px; text-align: center; line-height: 1.8; }
+    .small-info { display: block; font-size: 0.9rem; margin-top: 20px; opacity: 0.6; }
+
+    .primary-btn {
+      display: block; width: fit-content; margin: 0 auto; padding: 20px 64px;
+      background: var(--accent-grad); color: #fff; border-radius: 999px;
+      font-weight: 800; font-size: 1.25rem; border: none; cursor: pointer;
+      box-shadow: 0 12px 35px rgba(74, 103, 65, 0.25); transition: 0.4s;
+    }
+    .primary-btn:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(74, 103, 65, 0.35); }
+
+    /* Question Step */
+    .quiz-header { margin-bottom: 50px; }
+    .progress-text { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+    #q-num { font-size: 1rem; font-weight: 900; color: #4a6741; letter-spacing: 0.1em; }
+    .cat-badge { background: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; color: var(--muted); box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+    .progress-track { width: 100%; height: 8px; background: rgba(0,0,0,0.06); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent-grad); width: 0%; transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+
+    .category-icon-box { font-size: 3rem; margin-bottom: 20px; text-align: center; }
+    .q-title { font-size: 1.9rem; font-weight: 800; margin-bottom: 40px; line-height: 1.4; color: #2c3e50; text-align: center; }
+    .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .q-option {
+      background: #fff; border-radius: 24px; padding: 28px; border: 2px solid transparent;
+      cursor: pointer; transition: 0.3s; text-align: center;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+    }
+    .q-option:hover { transform: translateY(-5px); border-color: #4a6741; background: #f8faf9; box-shadow: 0 15px 35px rgba(74, 103, 65, 0.1); }
+    .opt-label { font-size: 1.1rem; font-weight: 800; color: #2c3e50; line-height: 1.4; }
+
+    .quiz-footer { margin-top: 50px; text-align: center; }
+    .text-btn { background: none; border: none; color: var(--muted); font-weight: 700; cursor: pointer; font-size: 0.95rem; opacity: 0.6; transition: 0.3s; }
+    .text-btn:hover { opacity: 1; color: #4a6741; }
+
+    /* Result Step */
+    .result-layout { display: flex; flex-direction: column; gap: 40px; }
+    .result-main { text-align: center; background: #fff; padding: 60px 40px; border-radius: 32px; box-shadow: var(--shadow); }
+    
+    .gauge-container { position: relative; width: 180px; height: 180px; margin: 0 auto 30px; }
+    .gauge-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+    .gauge-bg { fill: none; stroke: #f0f4f2; stroke-width: 10; }
+    .gauge-fill {
+      fill: none; stroke: #4a6741; stroke-width: 10; stroke-linecap: round;
+      stroke-dasharray: 283; stroke-dashoffset: 283;
+      transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gauge-content {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .gauge-label { font-size: 0.8rem; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+    .gauge-value { font-size: 2.8rem; font-weight: 900; color: #2c3e50; }
+
+    .eval-title { font-size: 1.8rem; font-weight: 900; margin-bottom: 24px; color: #2c3e50; }
+    .eval-card { background: #f8faf9; padding: 30px; border-radius: 24px; border-left: 6px solid #4a6741; }
+    .eval-text { font-size: 1.1rem; line-height: 1.9; color: #445566; text-align: left; margin: 0; }
+
+    .wanode-cta-box { padding: 60px; text-align: center; border: 3px solid #4a6741; position: relative; margin-top: 20px; }
+    .bonus-tag { position: absolute; top: -18px; left: 50%; transform: translateX(-50%); background: #4a6741; color: #fff; padding: 6px 30px; border-radius: 999px; font-weight: 900; font-size: 1rem; box-shadow: 0 4px 15px rgba(74, 103, 65, 0.3); }
+    .wanode-cta-box h3 { font-size: 1.8rem; font-weight: 900; margin-bottom: 24px; color: #2c3e50; }
+    .wanode-cta-box p { font-size: 1.05rem; color: #556677; line-height: 1.8; margin-bottom: 40px; }
+    .cta-btns { display: flex; gap: 20px; justify-content: center; margin-bottom: 40px; flex-wrap: wrap; }
+    .secondary-btn { padding: 20px 48px; border-radius: 999px; border: 2px solid #4a6741; color: #4a6741; font-weight: 800; text-decoration: none; transition: 0.3s; font-size: 1.1rem; }
+    .secondary-btn:hover { background: rgba(74, 103, 65, 0.08); }
+    .retry-btn { background: none; border: none; color: var(--muted); text-decoration: underline; font-weight: 700; cursor: pointer; font-size: 1rem; }
+
+    @media (max-width: 600px) {
+      .quiz-box { padding: 40px 20px; }
+      .welcome-title { font-size: 2rem; }
+      .q-options { grid-template-columns: 1fr; }
+      .q-title { font-size: 1.4rem; }
+      .cta-btns .primary-btn, .cta-btns .secondary-btn { width: 100%; }
+    }
+</style>
+
+<script is:inline>
+    const questions = [
+      {
+        cat: "entrance",
+        catLabel: "Vérification de l'Entrée",
+        icon: "🚪",
+        q: "Comment est structuré le seuil/marche de l'entrée ?",
+        opts: [
+          { text: "Complètement plat (de plain-pied ou rampe)", score: 20 },
+          { text: "Marche mineure de 5 cm ou moins", score: 10 },
+          { text: "Marche simple de 5 cm ou plus", score: 5 },
+          { text: "Escaliers uniquement (aucune rampe)", score: 0 }
+        ]
+      },
+      {
+        cat: "door",
+        catLabel: "Mécanisme de Porte",
+        icon: "🔓",
+        q: "Quel type de porte d'entrée avez-vous ?",
+        opts: [
+          { text: "Porte coulissante automatique", score: 20 },
+          { text: "Porte coulissante manuelle", score: 15 },
+          { text: "Porte battante standard (tirer/pousser)", score: 5 }
+        ]
+      },
+      {
+        cat: "aisle",
+        catLabel: "Allées Intérieures",
+        icon: "↔️",
+        q: "Quelle est la largeur des allées principales ?",
+        opts: [
+          { text: "90 cm ou plus (passage facile)", score: 20 },
+          { text: "Environ 80 cm (passage juste)", score: 10 },
+          { text: "Moins de 80 cm (passage difficile/impossible)", score: 0 }
+        ]
+      },
+      {
+        cat: "toilet",
+        catLabel: "Toilettes & Sanitaires",
+        icon: "🚻",
+        q: "Comment sont configurées les toilettes ?",
+        opts: [
+          { text: "Toilettes universelles / accessibles en fauteuil", score: 20 },
+          { text: "Toilettes occidentales avec barres d'appui", score: 10 },
+          { text: "Toilettes occidentales standard uniquement", score: 5 },
+          { text: "Toilettes à la turque uniquement", score: 0 }
+        ]
+      },
+      {
+        cat: "soft",
+        catLabel: "Accompagnement",
+        icon: "🤝",
+        q: "Comment est structuré l'accueil (côté humain) ?",
+        opts: [
+          { text: "Manuels de support & formations disponibles", score: 20 },
+          { text: "Le personnel propose activement son aide", score: 15 },
+          { text: "Essentiellement en libre-service", score: 5 }
+        ]
+      }
+    ];
+
+    let currentQ = 0;
+    let totalScore = 0;
+    let history = [];
+
+    function showStep(id) {
+      const steps = document.querySelectorAll('.quiz-step');
+      const target = document.getElementById(id);
+      
+      steps.forEach(el => {
+        if (el.classList.contains('active')) {
+          el.classList.add('slide-out');
+          setTimeout(() => {
+            el.classList.remove('active', 'slide-out');
+            target.classList.add('active', 'slide-in');
+          }, 300);
+        }
+      });
+      
+      if (!Array.from(steps).some(el => el.classList.contains('active'))) {
+         target.classList.add('active', 'fade-in');
+      }
+    }
+
+    function renderQuestion() {
+      const qObj = questions[currentQ];
+      const qNum = document.getElementById('q-num');
+      const qCat = document.getElementById('q-cat');
+      const qIcon = document.getElementById('cat-icon');
+      const qText = document.getElementById('q-text');
+      const progress = document.getElementById('progress');
+      const qOpts = document.getElementById('q-opts');
+      
+      // Update data
+      qNum.textContent = `Q.${currentQ + 1} / ${questions.length}`;
+      qCat.textContent = qObj.catLabel;
+      qIcon.textContent = qObj.icon;
+      qText.textContent = qObj.q;
+      progress.style.width = `${((currentQ) / questions.length) * 100}%`;
+      
+      // Render options
+      qOpts.innerHTML = '';
+      qObj.opts.forEach((opt, idx) => {
+        const btn = document.createElement('button');
+        btn.className = 'q-option';
+        btn.innerHTML = `
+          <span class="opt-label">${opt.text}</span>
+        `;
+        btn.onclick = () => selectOption(opt.score);
+        qOpts.appendChild(btn);
+      });
+
+      // Back button visibility
+      document.getElementById('backBtn').style.visibility = currentQ > 0 ? 'visible' : 'hidden';
+    }
+
+    function selectOption(score) {
+      history.push({ score });
+      totalScore += score;
+      
+      if (currentQ < questions.length - 1) {
+        currentQ++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQ > 0) {
+        currentQ--;
+        const last = history.pop();
+        totalScore -= last.score;
+        renderQuestion();
+      }
+    }
+
+    function showResult() {
+      showStep('step-result');
+      const scorePercent = totalScore;
+      
+      document.getElementById('res-score').textContent = `${scorePercent}%`;
+      
+      // Gauge Animation
+      const circle = document.getElementById('gauge-circle');
+      const radius = 45;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference - (scorePercent / 100) * circumference;
+      setTimeout(() => {
+        circle.style.strokeDashoffset = offset;
+      }, 500);
+
+      const resTitle = document.getElementById('res-title');
+      const resDesc = document.getElementById('res-desc');
+      
+      if (totalScore >= 80) {
+        resTitle.textContent = "Excellent ! Votre espace est hautement accessible à tous 👏";
+        resDesc.innerHTML = "Les installations physiques et le support du personnel sont exceptionnels. C'est un environnement très rassurant pour les utilisateurs de fauteuils roulants. Nous vous conseillons vivement d'afficher fièrement cette accessibilité sur votre site web et vos réseaux sociaux !";
+      } else if (totalScore >= 50) {
+        resTitle.textContent = "Presque ! Quelques ajustements simples le rendront parfait 💡";
+        resDesc.innerHTML = "Bien que votre espace présente de bonnes attentions, de légères améliorations peuvent radicalement optimiser le confort. Par exemple, installer une rampe amovible ou faire ouvrir la porte par le personnel peut facilement compenser les limites physiques.";
+      } else {
+        resTitle.textContent = "Marge de progression ! Commencez par l'aide humaine 🌱";
+        resDesc.innerHTML = "Modifier la structure du bâtiment peut être difficile dans l'immédiat. Cependant, des gestes chaleureux comme 'Puis-je vous aider ?' et indiquer clairement à l'avance sur votre site internet 'Notre entrée comporte une marche' réduiront considérablement l'anxiété des utilisateurs de fauteuils roulants.";
+      }
+    }
+
+    function initBarrierFree() {
+      const startBtn = document.getElementById('startBtn');
+      if (startBtn) {
+        startBtn.addEventListener('click', () => {
+          currentQ = 0;
+          totalScore = 0;
+          history = [];
+          showStep('step-question');
+          renderQuestion();
+        });
+      }
+
+      const backBtn = document.getElementById('backBtn');
+      if (backBtn) backBtn.addEventListener('click', prevQuestion);
+
+      const retryBtn = document.getElementById('retryBtn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+          location.reload();
+        });
+      }
+
+      // Keyboard Shortcuts
+      document.addEventListener('keydown', (e) => {
+        const stepQuestion = document.getElementById('step-question');
+        if (!stepQuestion || !stepQuestion.classList.contains('active')) return;
+
+        if (e.key >= '1' && e.key <= '4') {
+          const index = parseInt(e.key) - 1;
+          const options = document.querySelectorAll('.q-option');
+          if (options[index]) options[index].click();
+        }
+        if (e.key === 'Backspace' || e.key === 'ArrowLeft') {
+          prevQuestion();
+        }
+      });
+    }
+
+    document.addEventListener('astro:page-load', initBarrierFree);
+</script>

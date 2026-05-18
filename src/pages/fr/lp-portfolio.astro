@@ -1,0 +1,334 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConsultationFlow from '../../components/ConsultationFlow.astro';
+---
+
+<BaseLayout title="Galerie de Réalisations de LP | Wa-Node" description="Découvrez notre collection de Landing Pages (LP) haut de gamme couvrant 13 secteurs d'activité. Design premium basé sur la psychologie de l'utilisateur.">
+  <!-- Background Decor -->
+  <div class="bg-decoration">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="grid-overlay"></div>
+  </div>
+
+  <main class="lp-portfolio-page">
+    <header class="page-header reveal">
+      <div class="container">
+        <span class="eyebrow">Galerie de Réalisations de LP</span>
+        <h1 class="page-title">Wa-Node Présente,<br/><span class="accent-text">Notre Portfolio de LP Premium</span></h1>
+        <p class="page-desc">
+          Des conceptions stratégiques qui redéfinissent les normes de prix à partir de seulement 24 000 ¥.<br />
+          Découvrez nos 13 démonstrations de landing pages adaptées pour le médical, la beauté, l'immobilier et l'éducation.
+        </p>
+        <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 20px;">
+          *Tous les contenus affichés sont des modèles conceptuels et des démonstrations illustrant nos solutions UX optimales.
+        </p>
+      </div>
+    </header>
+
+    <div class="container">
+      <!-- Category Filter -->
+      <nav class="filter-nav">
+        <button class="filter-btn active" data-filter="all">Tout</button>
+        <button class="filter-btn" data-filter="medical">Médical & Beauté</button>
+        <button class="filter-btn" data-filter="business">Business & IT</button>
+        <button class="filter-btn" data-filter="lifestyle">Lifestyle</button>
+      </nav>
+
+      <div class="lp-grid">
+        <!-- 1. Medical -->
+        <article class="lp-card reveal" data-category="medical">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_clinic.png" alt="Clinique Esthétique & Dentaire" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Medical</span>
+          </div>
+          <div class="lp-info">
+            <h3>Clinique Esthétique & Dentaire</h3>
+            <p>Allier hygiène absolue et confiance. Conçu pour maximiser les taux de réservation.</p>
+            <a href="/portfolio-lp/lp_clinic.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 2. Beauty -->
+        <article class="lp-card reveal" data-category="medical">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_beauty.png" alt="Salons d'Esthétique & d'Épilation" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Beauty</span>
+          </div>
+          <div class="lp-info">
+            <h3>Salons d'Esthétique & d'Épilation</h3>
+            <p>Des visuels haut de gamme conçus pour stimuler l'aspiration et le désir de réservation des clients.</p>
+            <a href="/portfolio-lp/lp_beauty.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 3. Gym -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_gym.png" alt="Salle de Gym & Fitness" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Fitness</span>
+          </div>
+          <div class="lp-info">
+            <h3>Salle de Gym & Fitness</h3>
+            <p>Force et motivation élevée. Parcours utilisateur stratégique mettant en valeur les cas avant-après.</p>
+            <a href="/portfolio-lp/lp_gym.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 4. EC -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_ec.png" alt="Vente de Produits & E-Commerce" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">E-Commerce</span>
+          </div>
+          <div class="lp-info">
+            <h3>Vente de Produits & E-Commerce</h3>
+            <p>Ancré dans la psychologie du consommateur. Maximise les détails du produit pour des commandes immédiates.</p>
+            <a href="/portfolio-lp/lp_ec.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 5. SaaS -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_saas.png" alt="Solutions IT & Services SaaS" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">IT / SaaS</span>
+          </div>
+          <div class="lp-info">
+            <h3>Solutions IT & Services SaaS</h3>
+            <p>Innovation technologique et clarté. Simplifie les fonctionnalités complexes grâce à des graphiques interactifs.</p>
+            <a href="/portfolio-lp/lp_saas.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 6. Real Estate -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_realestate.png" alt="Immobilier & Promoteurs" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Real Estate</span>
+          </div>
+          <div class="lp-info">
+            <h3>Immobilier & Promoteurs</h3>
+            <p>Un design rassurant pour accompagner l'achat d'une vie. Présentation haute définition des propriétés.</p>
+            <a href="/portfolio-lp/lp_realestate.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 7. Professional -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_lawyer.png" alt="Cabinet de Conseil & Académie" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Consulting</span>
+          </div>
+          <div class="lp-info">
+            <h3>Cabinet de Conseil & Académie</h3>
+            <p>Autorité et grand professionnalisme. Organisation claire de l'information pour gagner la confiance immédiate.</p>
+            <a href="/portfolio-lp/lp_lawyer.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 8. Seminar -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_seminar.png" alt="Séminaires d'Investissement & Éducation" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Education</span>
+          </div>
+          <div class="lp-info">
+            <h3>Séminaires d'Investissement & Éducation</h3>
+            <p>Maximise l'enthousiasme et l'attente. Visualisation claire de la réussite pour simplifier la réservation.</p>
+            <a href="/portfolio-lp/lp_seminar.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 9. Recruit -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_recruit.png" alt="Recrutement & Carrières" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Recruit</span>
+          </div>
+          <div class="lp-info">
+            <h3>Recrutement & Carrières</h3>
+            <p>Transmettre les valeurs fondamentales de l'entreprise. Marque employeur qui suscite l'engagement et l'aspiration.</p>
+            <a href="/portfolio-lp/lp_recruit.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 10. Local -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_cafe.png" alt="Commerces Locaux & Cafés" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Regional</span>
+          </div>
+          <div class="lp-info">
+            <h3>Commerces Locaux & Cafés</h3>
+            <p>Chaleur et forte singularité. Reproduire l'ambiance chaleureuse d'une boutique physique sur écran numérique.</p>
+            <a href="/portfolio-lp/lp_local.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 11. Event -->
+        <article class="lp-card reveal" data-category="lifestyle">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_event.png" alt="Événements & Festivals" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Event</span>
+          </div>
+          <div class="lp-info">
+            <h3>Événements & Festivals</h3>
+            <p>Excitation et dynamisme. Mise en page énergique créant un immense engouement pour le jour J.</p>
+            <a href="/portfolio-lp/lp_event.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 12. Corporate -->
+        <article class="lp-card reveal" data-category="business">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_corporate.png" alt="Branding d'Entreprise" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Corporate</span>
+          </div>
+          <div class="lp-info">
+            <h3>Branding d'Entreprise</h3>
+            <p>Crédibilité inébranlable. Présentation soignée entièrement alignée sur l'identité visuelle de l'entreprise.</p>
+            <a href="/portfolio-lp/lp_corporate.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+
+        <!-- 13. Osteopathy -->
+        <article class="lp-card reveal" data-category="medical">
+          <div class="lp-visual">
+            <img src="/portfolio-lp/images/hero_sekkotsu.png" alt="Kinésithérapie & Soins Chiropratiques" style="width: 100%; height: 100%; object-fit: cover;" />
+            <span class="lp-tag">Therapy</span>
+          </div>
+          <div class="lp-info">
+            <h3>Kinésithérapie & Soins Chiropratiques</h3>
+            <p>Sécurité profonde et expertise médicale. Un ton rassurant pour exprimer le soulagement de la douleur corporelle.</p>
+            <a href="/portfolio-lp/lp_sekkotsu.html" class="lp-link">Voir Démo →</a>
+          </div>
+        </article>
+      </div>
+
+      <ConsultationFlow />
+
+      <!-- Final CTA Section (Rerouted) -->
+      <section class="portfolio-cta reveal" style="margin-top: 80px;">
+        <div class="cta-inner">
+          <span class="cta-eyebrow">Prêt à Lancer ?</span>
+          <h2>Un chef-d'œuvre pour accélérer la croissance de votre entreprise.</h2>
+          <p>Nous vous proposons le plan parfait à partir d'une consultation gratuite de 30 minutes.</p>
+          <div class="cta-btns">
+            <a href="/fr/demos" class="btn-secondary">Voir les Forfaits de Pack</a>
+            <a href="#consultation-flow" class="btn-primary">Vérifier les Étapes de Consultation</a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .lp-portfolio-page { padding-bottom: 120px; }
+  .page-header { padding: 120px 0 80px; text-align: center; position: relative; }
+  .eyebrow { font-size: 0.85rem; font-weight: 900; color: #639922; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+  .page-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 24px; color: #333; }
+  .accent-text { color: #639922; position: relative; }
+  .page-desc { font-size: 1.1rem; color: #666; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+
+  .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
+  .filter-btn { padding: 10px 24px; border-radius: 999px; border: 1px solid #ddd; background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; }
+  .filter-btn.active, .filter-btn:hover { background: #639922; color: #fff; border-color: #639922; }
+
+  .lp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 40px; }
+  .lp-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); border: 1px solid #eee; }
+  .lp-card:hover { transform: translateY(-12px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-color: #639922; }
+
+  .lp-visual { height: 200px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .lp-tag { position: absolute; top: 20px; left: 20px; font-size: 10px; font-weight: 900; background: #fff; padding: 4px 12px; border-radius: 999px; color: #639922; z-index: 2; }
+
+  .lp-info { padding: 32px; }
+  .lp-info h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 12px; color: #333; }
+  .lp-info p { font-size: 0.95rem; color: #666; line-height: 1.6; margin-bottom: 24px; min-height: 3.2em; }
+  .lp-link { font-size: 0.95rem; font-weight: 900; color: #639922; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
+  .lp-link:hover { border-bottom-color: #639922; }
+
+  .portfolio-cta { margin-top: 100px; text-align: center; }
+  .cta-inner {
+    padding: 80px 40px;
+    background: linear-gradient(135deg, rgba(99, 153, 34, 0.05), rgba(255, 255, 255, 0.02));
+    border-radius: 40px;
+    border: 1px solid rgba(99, 153, 34, 0.2);
+    backdrop-filter: blur(10px);
+  }
+  .cta-eyebrow { font-size: 0.9rem; font-weight: 900; color: #639922; letter-spacing: 0.2em; display: block; margin-bottom: 20px; }
+  .cta-inner h2 { font-size: 2.2rem; font-weight: 900; margin-bottom: 24px; color: #333; }
+  .cta-inner p { font-size: 1.1rem; color: #666; margin-bottom: 40px; }
+  .cta-btns { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+  
+  .btn-primary, .btn-secondary {
+    padding: 18px 40px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 15px;
+    text-decoration: none;
+    transition: 0.3s;
+    display: inline-block;
+  }
+  .btn-primary { background: #639922 !important; color: #fff !important; box-shadow: 0 10px 30px rgba(99, 153, 34, 0.3); }
+  .btn-secondary { background: #fff; color: #333; border: 1px solid #ddd; }
+  
+  .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(99, 153, 34, 0.4); }
+  .btn-secondary:hover { background: #f9f9f9; transform: translateY(-3px); }
+
+  .bg-decoration { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #fdfaf7; overflow: hidden; }
+  .grid-overlay { position: absolute; width: 100%; height: 100%; background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 30px 30px; }
+  .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; }
+  .glow-1 { width: 500px; height: 500px; background: #e8f0e5; top: -10%; right: -10%; }
+  .glow-2 { width: 400px; height: 400px; background: #f3e9d2; bottom: -10%; left: -10%; }
+
+  .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 600px) {
+    .page-header { padding: 80px 20px 40px; }
+    .lp-grid { grid-template-columns: 1fr; gap: 24px; }
+    .cta-inner h2 { font-size: 1.8rem; }
+    .cta-btns { flex-direction: column; }
+    .btn-primary, .btn-secondary { width: 100%; box-sizing: border-box; }
+  }
+</style>
+
+<script is:inline>
+  function initPortfolio() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const lpCards = document.querySelectorAll('.lp-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.dataset.filter;
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        lpCards.forEach(card => {
+          if (filter === 'all' || card.dataset.category === filter) {
+            card.style.display = 'block';
+            setTimeout(() => card.classList.add('visible'), 50);
+          } else {
+            card.style.display = 'none';
+            card.classList.remove('visible');
+          }
+        });
+      });
+    });
+
+    // Reveal Logic
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  }
+
+  document.addEventListener('astro:page-load', initPortfolio);
+</script>

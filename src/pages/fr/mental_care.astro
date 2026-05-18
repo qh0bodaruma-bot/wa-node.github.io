@@ -1,0 +1,479 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Diagnostic de Fatigue Mentale | Wa-Node" description="Évaluez votre niveau de fatigue psychologique et de stress grâce à notre outil conçu par un conseiller industriel.">
+  <!-- Background Decoration -->
+  <div class="bg-decoration">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="demo-banner">
+    <strong class="banner-title">【Exemple de Projet】</strong> Il s'agit d'une application de démonstration pour découvrir les technologies de Wa-Node. Si vous envisagez d'intégrer des outils sur mesure comme celui-ci, n'hésitez pas à demander une <a href="/fr/#consultation-flow" class="banner-cta">Consultation Gratuite</a>.
+  </div>
+
+  <main class="quiz-container">
+    <div class="quiz-box glass-card">
+      
+      <!-- Welcome Step -->
+      <div id="step-welcome" class="quiz-step active">
+        <div class="welcome-visual">
+          <div class="pulse-icon">🌱</div>
+        </div>
+        <h1 class="welcome-title">Diagnostic de Fatigue Mentale<br/><span class="accent-text">& de Stress Psychologique</span></h1>
+        <p class="welcome-desc">
+          Visualisez votre niveau de stress actuel selon 3 axes clés :<br />
+          physique, mental et environnemental.<br />
+          <span class="small-info">Durée requise : Environ 2 minutes (10 questions)</span>
+        </p>
+        <button class="primary-btn pulse" id="startBtn">Commencer le Diagnostic</button>
+      </div>
+
+      <!-- Question Step -->
+      <div id="step-question" class="quiz-step">
+        <div class="quiz-header">
+          <div class="progress-container">
+            <div class="progress-text">
+              <span id="q-num">Q.1 / 10</span>
+              <span id="q-cat" class="cat-badge">Signes Physiques</span>
+            </div>
+            <div class="progress-track"><div class="progress-fill" id="progress"></div></div>
+          </div>
+        </div>
+
+        <div class="question-content" id="q-container">
+          <h2 class="q-title" id="q-text">Point de Diagnostic</h2>
+          <div class="q-options" id="q-opts">
+            <button class="q-option neumorphic" data-score="0">
+              <span class="opt-label">Pas du tout</span>
+              <span class="opt-key">1</span>
+            </button>
+            <button class="q-option neumorphic" data-score="1">
+              <span class="opt-label">Parfois</span>
+              <span class="opt-key">2</span>
+            </button>
+            <button class="q-option neumorphic" data-score="2">
+              <span class="opt-label">Souvent</span>
+              <span class="opt-key">3</span>
+            </button>
+            <button class="q-option neumorphic" data-score="3">
+              <span class="opt-label">Toujours</span>
+              <span class="opt-key">4</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="quiz-footer">
+          <button id="backBtn" class="text-btn">← Revenir à la Question Précédente</button>
+        </div>
+      </div>
+
+      <!-- Result Step -->
+      <div id="step-result" class="quiz-step">
+        <div class="result-layout">
+          <div class="result-main">
+            <div class="gauge-container">
+              <svg class="gauge-svg" viewBox="0 0 100 100">
+                <circle class="gauge-bg" cx="50" cy="50" r="45"></circle>
+                <circle class="gauge-fill" id="gauge-circle" cx="50" cy="50" r="45"></circle>
+              </svg>
+              <div class="gauge-content">
+                <span class="gauge-label">Fatigue</span>
+                <span class="gauge-value" id="res-score">0%</span>
+              </div>
+            </div>
+            <h2 class="eval-title" id="res-title">Résultat du Diagnostic</h2>
+            <p class="eval-text" id="res-desc">Texte d'évaluation détaillé</p>
+          </div>
+
+          <div class="result-analysis">
+            <h3>Analyse des Facteurs de Stress</h3>
+            <div class="analysis-grid">
+              <div class="analysis-item">
+                <div class="item-header">
+                  <span class="icon">🏃‍♂️</span>
+                  <span class="label">Fatigue Physique</span>
+                  <span class="score" id="val-body">0/6</span>
+                </div>
+                <div class="mini-track"><div class="mini-fill body" id="bar-body"></div></div>
+              </div>
+              <div class="analysis-item">
+                <div class="item-header">
+                  <span class="icon">💭</span>
+                  <span class="label">Fatigue Mentale</span>
+                  <span class="score" id="val-mind">0/12</span>
+                </div>
+                <div class="mini-track"><div class="mini-fill mind" id="bar-mind"></div></div>
+              </div>
+              <div class="analysis-item">
+                <div class="item-header">
+                  <span class="icon">🏢</span>
+                  <span class="label">Degré de Pression</span>
+                  <span class="score" id="val-env">0/12</span>
+                </div>
+                <div class="mini-track"><div class="mini-fill env" id="bar-env"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px;">
+          <div class="bonus-tag">🎁 Bonus Fin de Diagnostic</div>
+          <h3>Bénéficiez d'une Séance de Conseil Gratuite de 60 Minutes</h3>
+          <p>
+            Félicitations pour avoir complété le diagnostic. Prenez une capture d'écran de ce résultat et envoyez-la sur LINE officielle ou utilisez le mot-clé <strong>「DIAGNOSTIC WANODE」</strong>.<br/>
+            Nous prolongeons notre consultation gratuite habituelle de 30 minutes à **60 minutes entièrement gratuites**.
+          </p>
+          
+          <div style="background: rgba(255,255,255,0.5); border: 1px solid var(--accent); border-radius: 20px; padding: 30px; margin: 30px 0; text-align: left;">
+            <h4 style="margin-top: 0; color: var(--accent);">Étapes de la Consultation Gratuite</h4>
+            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.95rem;">
+              <li style="margin-bottom: 12px; display: flex; align-items: flex-start; gap: 10px;">
+                <span style="background: var(--accent); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; font-weight: 800;">1</span>
+                <span><strong>Premières 30 minutes (Gratuit):</strong> Entretien initial, écoute de vos difficultés et clarification des enjeux.</span>
+              </li>
+              <li style="display: flex; align-items: flex-start; gap: 10px;">
+                <span style="background: var(--accent); color: #fff; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 0.8rem; font-weight: 800;">2</span>
+                <span><strong>Bonus +30 minutes (Gratuit):</strong> Conseils professionnels et pistes d'action basés sur votre diagnostic.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="cta-btns">
+            <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="primary-btn" style="text-decoration: none;">Prendre RDV (60 min)</a>
+            <a href="/fr/#consultation-flow" class="secondary-btn">Vérifier les Étapes de Consultation</a>
+          </div>
+          <button class="retry-btn" id="retryBtn" style="margin-top: 20px;">Recommencer le Diagnostic</button>
+        </section>
+      </div>
+
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+    /* Premium Design System */
+    :root {
+      --accent-grad: linear-gradient(135deg, #8a5a32 0%, #d8b98c 100%);
+      --glass-bg: rgba(255, 255, 255, 0.7);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --neu-shadow: 8px 8px 16px #d1cdc7, -8px -8px 16px #ffffff;
+      --neu-inner: inset 2px 2px 5px rgba(0,0,0,0.05), inset -5px -5px 10px rgba(255,255,255,0.8);
+    }
+
+    /* Background Decoration */
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; overflow: hidden; background: #fdfaf7;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(60px); opacity: 0.4;
+      animation: move 20s infinite alternate;
+    }
+    .blob-1 { width: 500px; height: 500px; background: #e9d5c1; top: -10%; left: -10%; }
+    .blob-2 { width: 400px; height: 400px; background: #d2e4d8; bottom: -10%; right: -10%; animation-delay: -5s; }
+    @keyframes move { from { transform: translate(0, 0); } to { transform: translate(50px, 100px); } }
+
+    .demo-banner { background: rgba(138, 90, 50, 0.05); border-bottom: 1px solid var(--line); padding: 12px; text-align: center; font-size: 0.85rem; backdrop-filter: blur(5px); }
+    .banner-cta { color: var(--accent); font-weight: 800; text-decoration: underline; margin-left: 8px; }
+
+    .quiz-container { max-width: 900px; margin: 40px auto 100px; padding: 0 20px; perspective: 1000px; }
+    
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(15px);
+      border: 1px solid var(--glass-border);
+      border-radius: 32px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.03);
+    }
+
+    .quiz-box {
+      padding: 60px 40px; min-height: 600px;
+      display: flex; flex-direction: column; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+
+    .quiz-step { display: none; width: 100%; }
+    .quiz-step.active { display: block; }
+
+    /* Animations */
+    .slide-in { animation: slideIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    .slide-out { animation: slideOut 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards; }
+    @keyframes slideIn { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes slideOut { from { opacity: 1; transform: translateX(0); } to { opacity: 0; transform: translateX(-50px); } }
+    
+    .fade-in { animation: fadeIn 0.8s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* Welcome Step */
+    .welcome-visual { margin-bottom: 30px; text-align: center; }
+    .pulse-icon {
+      font-size: 64px; display: inline-block;
+      animation: pulse 3s infinite ease-in-out;
+    }
+    @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+    .welcome-title { font-size: 3rem; font-weight: 900; margin-bottom: 20px; line-height: 1.1; text-align: center; }
+    .accent-text { color: var(--accent); position: relative; display: inline-block; }
+    .accent-text::after { content: ""; position: absolute; bottom: 5px; left: 0; width: 100%; height: 8px; background: rgba(138, 90, 50, 0.1); z-index: -1; }
+    .welcome-desc { font-size: 1.1rem; color: var(--muted); margin-bottom: 40px; text-align: center; line-height: 1.8; }
+    .small-info { display: block; font-size: 0.85rem; margin-top: 15px; opacity: 0.7; }
+
+    .primary-btn {
+      display: block; width: fit-content; margin: 0 auto; padding: 20px 60px;
+      background: var(--accent-grad); color: #fff; border-radius: 999px;
+      font-weight: 800; font-size: 1.2rem; border: none; cursor: pointer;
+      box-shadow: 0 10px 30px rgba(138, 90, 50, 0.2); transition: 0.4s;
+    }
+    .primary-btn:hover { transform: translateY(-4px); box-shadow: 0 15px 40px rgba(138, 90, 50, 0.3); }
+
+    /* Question Step */
+    .quiz-header { margin-bottom: 50px; }
+    .progress-text { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 12px; }
+    #q-num { font-size: 0.9rem; font-weight: 900; color: var(--accent); letter-spacing: 0.1em; }
+    .cat-badge { background: #fff; padding: 4px 12px; border-radius: 999px; font-size: 0.75rem; font-weight: 800; color: var(--muted); border: 1px solid var(--line); }
+    .progress-track { width: 100%; height: 6px; background: rgba(0,0,0,0.05); border-radius: 999px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--accent-grad); width: 0%; transition: width 0.8s cubic-bezier(0.23, 1, 0.32, 1); }
+
+    .q-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 40px; line-height: 1.4; color: var(--text); }
+    .q-options { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .q-option {
+      background: #fdfaf7; border-radius: 20px; padding: 24px; border: 1px solid transparent;
+      cursor: pointer; transition: 0.3s; text-align: left; position: relative;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    . neumorphic { box-shadow: var(--neu-shadow); }
+    .q-option:hover { transform: translateY(-4px); border-color: var(--accent); background: #fff; }
+    .opt-label { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .opt-key { font-size: 0.7rem; font-weight: 900; color: var(--accent); opacity: 0.3; border: 1px solid var(--accent); width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; border-radius: 4px; }
+
+    .quiz-footer { margin-top: 50px; }
+    .text-btn { background: none; border: none; color: var(--muted); font-weight: 700; cursor: pointer; font-size: 0.9rem; opacity: 0.6; transition: 0.3s; }
+    .text-btn:hover { opacity: 1; color: var(--accent); }
+
+    /* Result Step */
+    .result-layout { display: grid; grid-template-columns: 1fr 340px; gap: 40px; margin-bottom: 60px; }
+    .result-main { text-align: center; background: #fff; padding: 40px; border-radius: 24px; box-shadow: var(--shadow); }
+    
+    .gauge-container { position: relative; width: 160px; height: 160px; margin: 0 auto 30px; }
+    .gauge-svg { transform: rotate(-90deg); width: 100%; height: 100%; }
+    .gauge-bg { fill: none; stroke: #f0f0f0; stroke-width: 8; }
+    .gauge-fill {
+      fill: none; stroke: var(--accent); stroke-width: 8; stroke-linecap: round;
+      stroke-dasharray: 283; stroke-dashoffset: 283;
+      transition: stroke-dashoffset 2s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gauge-content {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      display: flex; flex-direction: column; align-items: center;
+    }
+    .gauge-label { font-size: 0.75rem; font-weight: 800; color: var(--muted); }
+    .gauge-value { font-size: 2.2rem; font-weight: 900; color: var(--text); }
+
+    .eval-title { font-size: 1.6rem; font-weight: 900; margin-bottom: 15px; }
+    .eval-text { font-size: 1rem; line-height: 1.8; color: var(--muted); text-align: left; }
+
+    .result-analysis { background: rgba(255,255,255,0.5); padding: 30px; border-radius: 24px; }
+    .result-analysis h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: 25px; border-bottom: 1px solid var(--line); padding-bottom: 10px; }
+    .analysis-item { margin-bottom: 20px; }
+    .item-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-weight: 800; font-size: 0.9rem; }
+    .item-header .score { margin-left: auto; color: var(--accent); }
+    .mini-track { width: 100%; height: 6px; background: var(--line); border-radius: 999px; overflow: hidden; }
+    .mini-fill { height: 100%; width: 0%; transition: width 1.5s cubic-bezier(0.23, 1, 0.32, 1); border-radius: 999px; }
+    .mini-fill.body { background: #3498db; }
+    .mini-fill.mind { background: #e74c3c; }
+    .mini-fill.env { background: #f1c40f; }
+
+    .wanode-cta-box { margin-top: 40px; padding: 50px; text-align: center; border: 2px solid var(--accent); position: relative; }
+    .bonus-tag { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--accent); color: #fff; padding: 5px 25px; border-radius: 999px; font-weight: 900; font-size: 0.9rem; }
+    .wanode-cta-box h3 { font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; }
+    .wanode-cta-box p { font-size: 1rem; color: var(--muted); line-height: 1.8; margin-bottom: 30px; }
+    .cta-btns { display: flex; gap: 15px; justify-content: center; margin-bottom: 30px; }
+    .secondary-btn { padding: 18px 40px; border-radius: 999px; border: 1px solid var(--accent); color: var(--accent); font-weight: 800; text-decoration: none; transition: 0.3s; }
+    .secondary-btn:hover { background: var(--accent-soft); }
+    .retry-btn { background: none; border: none; color: var(--muted); text-decoration: underline; font-weight: 700; cursor: pointer; }
+
+    @media (max-width: 820px) {
+      .result-layout { grid-template-columns: 1fr; }
+      .quiz-box { padding: 40px 20px; }
+      .welcome-title { font-size: 2.2rem; }
+      .q-options { grid-template-columns: 1fr; }
+      .q-title { font-size: 1.4rem; }
+    }
+</style>
+
+<script is:inline>
+    const questions = [
+      { cat: "body", catLabel: "Signes Physiques", q: "Ces derniers temps, j'ai du mal à m'endormir ou je me réveille plusieurs fois au milieu de la nuit." },
+      { cat: "body", catLabel: "Signes Physiques", q: "Je me sens fatigué sans raison particulière, et la fatigue ne disparaît pas même après m'être reposé." },
+      { cat: "mind", catLabel: "Signes Mentaux", q: "Je m'irrite facilement pour des détails et je me sens émotionnellement instable." },
+      { cat: "mind", catLabel: "Signes Mentaux", q: "Je ne ressens plus de joie ni d'intérêt pour les activités ou loisirs que j'aimais auparavant." },
+      { cat: "mind", catLabel: "Signes Mentaux", q: "Mon niveau de concentration est faible au travail ou dans mes tâches quotidiennes, et je fais plus d'erreurs." },
+      { cat: "mind", catLabel: "Signes Mentaux", q: "Je me sens triste, seul ou vide sans raison spécifique." },
+      { cat: "env",  catLabel: "Pression & Environnement", q: "Je n'ai personne à qui exprimer honnêtement mes inquiétudes ou mes faiblesses sans faire semblant." },
+      { cat: "env",  catLabel: "Pression & Environnement", q: "Je me sens écrasé par la pression constante de devoir 'tout faire moi-même'." },
+      { cat: "env",  catLabel: "Pression & Environnement", q: "J'ai l'impression que ce que je fais est inutile, ou je ressens un manque sévère de confiance en moi." },
+      { cat: "env",  catLabel: "Pression & Environnement", q: "J'ai parfois l'impression de 'ne vouloir voir personne' ou de 'vouloir tout abandonner'." }
+    ];
+
+    let currentQ = 0;
+    let scores = { body: 0, mind: 0, env: 0 };
+    let history = [];
+
+    function showStep(id) {
+      const steps = document.querySelectorAll('.quiz-step');
+      const target = document.getElementById(id);
+      
+      steps.forEach(el => {
+        if (el.classList.contains('active')) {
+          el.classList.add('slide-out');
+          setTimeout(() => {
+            el.classList.remove('active', 'slide-out');
+            target.classList.add('active', 'slide-in');
+          }, 300);
+        }
+      });
+      
+      if (!Array.from(steps).some(el => el.classList.contains('active'))) {
+         target.classList.add('active', 'fade-in');
+      }
+    }
+
+    function renderQuestion() {
+      const qObj = questions[currentQ];
+      const qNum = document.getElementById('q-num');
+      const qCat = document.getElementById('q-cat');
+      const qText = document.getElementById('q-text');
+      const progress = document.getElementById('progress');
+      const qContainer = document.getElementById('q-container');
+      
+      // Update data
+      qNum.textContent = `Q.${currentQ + 1} / ${questions.length}`;
+      qCat.textContent = qObj.catLabel;
+      qText.textContent = qObj.q;
+      progress.style.width = `${((currentQ) / questions.length) * 100}%`;
+      
+      // Animation
+      qContainer.classList.remove('fade-in');
+      void qContainer.offsetWidth;
+      qContainer.classList.add('fade-in');
+
+      // Back button visibility
+      document.getElementById('backBtn').style.visibility = currentQ > 0 ? 'visible' : 'hidden';
+    }
+
+    function selectOption(score) {
+      const cat = questions[currentQ].cat;
+      history.push({ cat, score });
+      scores[cat] += score;
+      
+      if (currentQ < questions.length - 1) {
+        currentQ++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQ > 0) {
+        currentQ--;
+        const last = history.pop();
+        scores[last.cat] -= last.score;
+        renderQuestion();
+      }
+    }
+
+    function showResult() {
+      showStep('step-result');
+      const totalScore = scores.body + scores.mind + scores.env;
+      const maxScore = questions.length * 3;
+      const scorePercent = Math.round((totalScore / maxScore) * 100);
+      
+      document.getElementById('res-score').textContent = `${scorePercent}%`;
+      
+      // Gauge Animation
+      const circle = document.getElementById('gauge-circle');
+      const radius = 45;
+      const circumference = 2 * Math.PI * radius;
+      const offset = circumference - (scorePercent / 100) * circumference;
+      setTimeout(() => {
+        circle.style.strokeDashoffset = offset;
+      }, 500);
+
+      const resTitle = document.getElementById('res-title');
+      const resDesc = document.getElementById('res-desc');
+      
+      if (totalScore >= 20) {
+        resTitle.textContent = "【Signal de Danger】 Votre esprit crie à l'aide";
+        resTitle.style.color = "#e74c3c";
+        resDesc.innerHTML = "Vous avez accumulé trop de fatigue, et vous êtes peut-être proche de votre limite physique et mentale. En ce moment, votre tâche la plus importante est de vous reposer, pas de travailler plus. Ne vous isolez pas ; commencez par partager vos sentiments avec une personne de confiance.";
+      } else if (totalScore >= 10) {
+        resTitle.textContent = "【Attention】 Le stress commence à s'accumuler";
+        resTitle.style.color = "#f39c12";
+        resDesc.innerHTML = "Vous pensez peut-être 'je peux encore y arriver,' mais le stress s'accumule de manière régulière. Avant d'atteindre votre limite absolue, planifiez consciemment des moments pour prendre soin de vous ou pour confier vos soucis.";
+      } else {
+        resTitle.textContent = "【Stable】 Esprit et corps en bonne santé";
+        resTitle.style.color = "var(--accent)";
+        resDesc.innerHTML = "Pour le moment, vous semblez très bien gérer le stress. Continuez à respecter votre propre rythme et continuez vos activités quotidiennes dans une fourchette confortable !";
+      }
+
+      // Mini bars
+      setTimeout(() => {
+        document.getElementById('bar-body').style.width = `${(scores.body / 6) * 100}%`;
+        document.getElementById('val-body').textContent = `${scores.body}/6`;
+        document.getElementById('bar-mind').style.width = `${(scores.mind / 12) * 100}%`;
+        document.getElementById('val-mind').textContent = `${scores.mind}/12`;
+        document.getElementById('bar-env').style.width = `${(scores.env / 12) * 100}%`;
+        document.getElementById('val-env').textContent = `${scores.env}/12`;
+      }, 600);
+    }
+
+    function initMentalCare() {
+      const startBtn = document.getElementById('startBtn');
+      if (startBtn) {
+        startBtn.addEventListener('click', () => {
+          currentQ = 0;
+          scores = { body: 0, mind: 0, env: 0 };
+          history = [];
+          showStep('step-question');
+          renderQuestion();
+        });
+      }
+
+      const backBtn = document.getElementById('backBtn');
+      if (backBtn) backBtn.addEventListener('click', prevQuestion);
+
+      const retryBtn = document.getElementById('retryBtn');
+      if (retryBtn) {
+        retryBtn.addEventListener('click', () => {
+          location.reload();
+        });
+      }
+
+      // Option click events
+      document.querySelectorAll('.q-option').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const score = parseInt(this.getAttribute('data-score'));
+          selectOption(score);
+        });
+      });
+
+      // Keyboard Shortcuts
+      document.addEventListener('keydown', (e) => {
+        const stepQuestion = document.getElementById('step-question');
+        if (!stepQuestion || !stepQuestion.classList.contains('active')) return;
+
+        if (e.key >= '1' && e.key <= '4') {
+          const index = parseInt(e.key) - 1;
+          const options = document.querySelectorAll('.q-option');
+          if (options[index]) options[index].click();
+        }
+        if (e.key === 'Backspace' || e.key === 'ArrowLeft') {
+          prevQuestion();
+        }
+      });
+    }
+
+    document.addEventListener('astro:page-load', initMentalCare);
+</script>
