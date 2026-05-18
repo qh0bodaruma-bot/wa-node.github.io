@@ -8,11 +8,20 @@ interface Props {
 const { lang = 'ja' } = Astro.props;
 
 function getLocalizedLink(path: string) {
+  const cleanPath = path.replace(/\/+/g, '/');
   if (lang === 'ja') {
-    const finalPath = path.replace(/\/+/g, '/');
-    return finalPath.endsWith('/') ? finalPath : `${finalPath}/`;
+    return cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
   }
-  return `/${lang}/`;
+  
+  // en or fr: For existing multi-language pages (Home or Contact)
+  if (cleanPath === '/' || cleanPath === '' || cleanPath === '/contact') {
+    const langPath = cleanPath === '/' || cleanPath === '' ? `/${lang}/` : `/${lang}${cleanPath}/`;
+    return langPath.replace(/\/+/g, '/');
+  }
+  
+  // For other pages that do not have multi-language files, fallback to Japanese page with ?lang parameter to preserve state
+  const fallbackPath = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
+  return `${fallbackPath}?lang=${lang}`;
 }
 ---
 <main>

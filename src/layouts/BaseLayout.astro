@@ -22,10 +22,13 @@ const {
   lang = 'ja',
   noindex = false
 } = Astro.props;
+
+const urlLang = Astro.url.searchParams.get('lang');
+const currentLang = urlLang === 'en' || urlLang === 'fr' ? urlLang : lang;
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={currentLang}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -83,8 +86,8 @@ const {
     </script>
   </head>
   <body>
-    <Header lang={lang} />
+    <Header lang={currentLang} />
     <slot />
-    <Footer lang={lang} />
+    <Footer lang={currentLang} />
   </body>
 </html>

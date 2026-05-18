@@ -20,8 +20,9 @@ function getLocalizedLink(path: string) {
     return langPath.replace(/\/+/g, '/');
   }
   
-  // For other pages that do not have multi-language files, fallback to their Japanese counterpart to avoid 404
-  return cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
+  // For other pages that do not have multi-language files, fallback to their Japanese counterpart with lang param to preserve state
+  const fallbackPath = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
+  return `${fallbackPath}?lang=${lang}`;
 }
 ---
 <header class="site-header" id="site-header">
