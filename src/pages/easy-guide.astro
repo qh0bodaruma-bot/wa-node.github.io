@@ -1,0 +1,580 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const pageTitle = "中学生でもわかる！ホームページ・LP・GAS（自動化）のやさしい解説｜和-Node";
+const pageDescription = "「ホームページとLPの違いって何？」「GAS（ガス）ってどうやって業務を楽にするの？」という疑問を、世界一わかりやすい例え話でスッキリ解決する初心者向けガイド。";
+---
+
+<BaseLayout 
+  title={pageTitle} 
+  description={pageDescription}
+>
+  <main class="easy-guide-page">
+    <!-- Hero Section -->
+    <section class="guide-hero">
+      <div class="container-narrow text-center">
+        <span class="guide-badge">Beginner's Guide</span>
+        <h1>世界一やさしい！<br/><span class="accent-text">Web制作 ＆ 自動化</span>の解説</h1>
+        <p class="hero-lead">
+          「ITの専門用語は難しくて苦手…」という方のために、<br/>
+          中学生でも1秒でイメージできる例え話でスッキリ解説します！
+        </p>
+      </div>
+    </section>
+
+    <!-- Table of Contents -->
+    <section class="toc-section">
+      <div class="container-narrow">
+        <div class="toc-box">
+          <h3>📖 このガイドでわかること</h3>
+          <ul>
+            <li><a href="#hp-lp-diff">① ホームページ（HP）とLP（ランディングページ）の違い</a></li>
+            <li><a href="#gas-section">② GAS（ガス）ってなに？（超優秀なロボットの秘書）</a></li>
+            <li><a href="#why-combo">③ なぜ「和-Node」はこれらを組み合わせて作るのか？</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 1: HP & LP Difference -->
+    <section class="guide-section" id="hp-lp-diff">
+      <div class="container-narrow">
+        <div class="section-title text-center">
+          <span class="eyebrow">Chapter 01</span>
+          <h2>ホームページ (HP) と LP の違い</h2>
+          <p class="title-sub">あなたのお店やサービスに必要なのは、どちらでしょうか？</p>
+        </div>
+
+        <div class="illustration-box">
+          <div class="ill-card">
+            <div class="ill-icon">🏢</div>
+            <h4>ホームページ (HP) は<br/><strong>「あなたのお店そのもの」</strong></h4>
+            <p>デパートや大きなお店のように、いろんなお部屋（ページ）があり、メニュー、アクセス、働く人の紹介などがきれいに並んでいる場所です。</p>
+            <div class="ill-points">
+              <span>🎯 目的：全体のことを知ってもらい、安心・信頼してもらう</span>
+              <span>📱 構成：会社概要、アクセス、お知らせ、複数のメニュー等</span>
+            </div>
+          </div>
+
+          <div class="ill-card">
+            <div class="ill-icon">📢</div>
+            <h4>ランディングページ (LP) は<br/><strong>「熱血なチラシ・販売員」</strong></h4>
+            <p>1つの勝負商品や、イベント（無料体験など）の良さをアピールするために、上から下まで1本道で縦に長〜く作られた1枚のチラシです。</p>
+            <div class="ill-points">
+              <span>🎯 目的：読んだ人を「よし、今すぐ申し込もう！」と行動させる</span>
+              <span>📱 構成：縦に長い1枚のページ、余計なリンクを省いた設計</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="explanation-text-box">
+          <h3>💡 選び方のシンプルな基準</h3>
+          <p>
+            会社の看板やお店の名刺として<strong>「まずは全体をしっかり見せたい」ならホームページ（HP）</strong>を、<br/>
+            「特定のイベントに人を集めたい」「この商品だけをネットで売りたい」という<strong>明確な目的が1つあるならLP</strong>を選ぶのが大正解です！
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: What is GAS? -->
+    <section class="guide-section bg-soft" id="gas-section">
+      <div class="container-narrow">
+        <div class="section-title text-center">
+          <span class="eyebrow">Chapter 02</span>
+          <h2>GAS（ガス）ってなに？</h2>
+          <p class="title-sub">「Google Apps Script」という、業務を全自動化する魔法のツールです。</p>
+        </div>
+
+        <div class="concept-intro">
+          <div class="robot-avatar">🤖</div>
+          <h3>GASを中学生向けに一言で言うと：<br/><span class="highlight-speech">「24時間休まず働く、あなた専属のロボット秘書」</span></h3>
+          <p class="lead-speech">
+            あなたが眠っている間も、遊んでいる間も、面倒な手入力やお知らせの仕事を、コンピューターの中でロボットが代わりに全部やってくれます！
+          </p>
+        </div>
+
+        <div class="robot-jobs">
+          <h3>🛠️ ロボット秘書（GAS）ができる3つの得意な仕事</h3>
+          
+          <div class="job-card">
+            <div class="job-header">
+              <span class="job-num">01</span>
+              <h4>お知らせロボ（LINEやメールの自動連携）</h4>
+            </div>
+            <p>
+              ホームページにお客さんからお問い合わせや予約が入ると、ロボットがそれを検知して、<strong>1秒であなたのスマホ（LINEやチャット）に「〇〇様から予約が入ったよ！」と自動でメッセージ</strong>を飛ばして教えてくれます。これで、大切な連絡を見逃す心配がゼロになります！
+            </p>
+          </div>
+
+          <div class="job-card">
+            <div class="job-header">
+              <span class="job-num">02</span>
+              <h4>自動台帳メモロボ（スプレッドシート自動転記）</h4>
+            </div>
+            <p>
+              お客さんがホームページに入力した「名前」や「希望日」を、ロボットが自動でGoogleスプレッドシート（ネット上のエクセル台帳）へ、<strong>寸分狂わず一瞬でキレイに書き写してくれます。</strong>あなたが手動でコピペして台帳を作る面倒な作業は一切不要です！
+            </p>
+          </div>
+
+          <div class="job-card">
+            <div class="job-header">
+              <span class="job-num">03</span>
+              <h4>お返事・書類作成ロボ（自動返信）</h4>
+            </div>
+            <p>
+              お問い合わせをくれたお客さんへ、<strong>「ご連絡ありがとうございます。担当の高野です…」というお返事メールを、ロボットが自動で作成して一瞬で送信</strong>します。さらに、必要な請求書や案内PDFをその場でお客さんへ自動で作成して送ることすら可能です！
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: Why Combo? -->
+    <section class="guide-section" id="why-combo">
+      <div class="container-narrow">
+        <div class="section-title text-center">
+          <span class="eyebrow">Our Value</span>
+          <h2>なぜ「和-Node」は、これらをセットで創るのか？</h2>
+          <p class="title-sub">ただ綺麗なホームページを作るだけでは、ビジネスは楽にならないからです。</p>
+        </div>
+
+        <div class="why-box">
+          <div class="why-item">
+            <h3>📈 従来のホームページ制作の場合</h3>
+            <p>せっかく綺麗なホームページを作っても、お問い合わせが届くたびに、あなたが自分でメールを開き、手動で返信し、エクセルの顧客台帳にコピペする…という<strong>「めんどくさい事務作業」</strong>に毎日追われてしまいます。</p>
+          </div>
+
+          <div class="why-item highlight-why">
+            <h3>✨ 和-Node（心理導線 × 自動化）の場合</h3>
+            <p>
+              心理カウンセラーの導線設計で「驚くほどお問い合わせが増えるWebサイト」を作ると同時に、裏側で<strong>ロボット秘書（GAS）が顧客台帳へのメモやメール返信をすべて全自動</strong>で行います。
+            </p>
+            <p class="bold-highlight">
+              あなたはただ座っているだけで、お問い合わせが増え、面倒な入力作業はロボットが勝手に片付けてくれます。
+            </p>
+          </div>
+        </div>
+
+        <div class="final-message text-center">
+          <p>
+            「私のビジネスなら、どんな自動化ができるかな？」<br/>
+            「ホームページと一緒に、こんなことを自動にしてほしい！」
+          </p>
+          <p class="message-lead">
+            そんな疑問やワクワクをお持ちになりましたら、ぜひお気軽に高野までご相談ください。相談はいつでも無料です！
+          </p>
+          <div class="cta-btns">
+            <a href={Astro.site ? new URL('/contact', Astro.site).pathname : '/contact'} class="btn-main">無料相談をしてみる</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .easy-guide-page {
+    background: #fff;
+    color: var(--text);
+    overflow: hidden;
+  }
+
+  .container-narrow {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .accent-text {
+    color: var(--accent2);
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--accent2);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 16px;
+  }
+
+  /* Hero Section */
+  .guide-hero {
+    padding: 120px 0 60px;
+    background: linear-gradient(135deg, #2b241f 0%, #1a1512 100%);
+    color: #fff;
+  }
+
+  .guide-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: var(--accent2);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+    margin-bottom: 24px;
+  }
+
+  .guide-hero h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 900;
+    line-height: 1.3;
+    margin-bottom: 24px;
+  }
+
+  .hero-lead {
+    font-size: 1.1rem;
+    color: #ccc;
+    line-height: 1.8;
+  }
+
+  /* TOC */
+  .toc-section {
+    padding: 40px 0;
+    background: #faf8f5;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .toc-box {
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 24px 32px;
+    border-radius: 16px;
+  }
+
+  .toc-box h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+  }
+
+  .toc-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .toc-box a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 800;
+    font-size: 0.95rem;
+    transition: 0.2s;
+  }
+
+  .toc-box a:hover {
+    color: var(--accent2);
+    text-decoration: underline;
+  }
+
+  /* Guide Sections */
+  .guide-section {
+    padding: 100px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .bg-soft {
+    background: #fdfaf7;
+  }
+
+  .section-title h2 {
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    font-weight: 900;
+    margin-bottom: 12px;
+  }
+
+  .title-sub {
+    font-size: 0.95rem;
+    color: var(--muted);
+    margin-bottom: 48px;
+  }
+
+  /* Chapter 1: Illustration Grid */
+  .illustration-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 48px;
+  }
+
+  .ill-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 40px 30px;
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .ill-icon {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+  }
+
+  .ill-card h4 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .ill-card h4 strong {
+    color: var(--accent2);
+    font-weight: 900;
+  }
+
+  .ill-card p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #555;
+    margin-bottom: 24px;
+  }
+
+  .ill-points {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+    width: 100%;
+    border-top: 1px dashed var(--line);
+    padding-top: 20px;
+  }
+
+  .ill-points span {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+
+  .explanation-text-box {
+    background: #faf8f5;
+    padding: 32px;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+  }
+
+  .explanation-text-box h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: var(--accent);
+  }
+
+  .explanation-text-box p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #444;
+    margin: 0;
+  }
+
+  /* Chapter 2: GAS Robot Avatar */
+  .concept-intro {
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 40px;
+    border-radius: 32px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    margin-bottom: 48px;
+  }
+
+  .robot-avatar {
+    font-size: 4rem;
+    margin-bottom: 16px;
+  }
+
+  .concept-intro h3 {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    font-weight: 800;
+    line-height: 1.5;
+  }
+
+  .highlight-speech {
+    color: var(--accent);
+    font-weight: 900;
+    border-bottom: 3px double var(--accent2);
+    padding-bottom: 4px;
+    display: inline-block;
+    margin-top: 8px;
+  }
+
+  .lead-speech {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-top: 24px;
+  }
+
+  .robot-jobs {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .robot-jobs h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--accent);
+    padding-left: 16px;
+  }
+
+  .job-card {
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 32px;
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+  }
+
+  .job-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .job-num {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--accent2);
+    font-family: 'Outfit', sans-serif;
+  }
+
+  .job-header h4 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin: 0;
+  }
+
+  .job-card p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #555;
+    margin: 0;
+  }
+
+  .job-card p strong {
+    color: var(--accent);
+  }
+
+  /* Chapter 3: Why Combo */
+  .why-box {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 30px;
+    margin-bottom: 60px;
+  }
+
+  .why-item {
+    background: #faf8f5;
+    border: 1px solid var(--line);
+    padding: 40px 30px;
+    border-radius: 24px;
+  }
+
+  .why-item h3 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    margin-bottom: 20px;
+  }
+
+  .why-item p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: #555;
+  }
+
+  .highlight-why {
+    background: var(--soft);
+    border-color: var(--accent);
+    box-shadow: var(--shadow);
+  }
+
+  .highlight-why h3 {
+    color: var(--accent);
+  }
+
+  .bold-highlight {
+    font-size: 1.1rem !important;
+    font-weight: 800;
+    color: var(--text-deep);
+    border-left: 3px solid var(--accent2);
+    padding-left: 16px;
+    margin-top: 24px;
+  }
+
+  /* Final Message & CTA */
+  .final-message {
+    background: #faf8f5;
+    border: 1px solid var(--line);
+    padding: 60px 40px;
+    border-radius: 32px;
+    margin-top: 60px;
+  }
+
+  .final-message p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  .message-lead {
+    font-size: 1.3rem !important;
+    font-weight: 900;
+    color: var(--text) !important;
+    margin: 24px 0 36px !important;
+  }
+
+  .btn-main {
+    display: inline-block;
+    background: var(--accent2);
+    color: #fff;
+    padding: 20px 48px;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 900;
+    font-size: 1.15rem;
+    box-shadow: 0 15px 30px rgba(216, 185, 140, 0.25);
+    transition: 0.3s;
+  }
+
+  .btn-main:hover {
+    background: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(216, 185, 140, 0.35);
+  }
+
+  @media (max-width: 768px) {
+    .illustration-box, .why-box {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .ill-card, .why-item {
+      padding: 30px 20px;
+    }
+
+    .concept-intro {
+      padding: 30px 20px;
+    }
+
+    .final-message {
+      padding: 40px 20px;
+    }
+  }
+</style>
