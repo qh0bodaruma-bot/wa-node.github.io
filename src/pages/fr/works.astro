@@ -1,0 +1,393 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConsultationFlow from '../../components/ConsultationFlow.astro';
+---
+
+<BaseLayout title="Réalisations & Démos Interactives | Wa-Node" description="Découvrez le portefeuille de Wa-Node : design web orienté psychologie, assistants IA, outils de diagnostic interactifs, auto-publication et LINE Mini Apps." lang="fr">
+  <!-- Background -->
+  <div class="bg-decoration">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="grid-overlay"></div>
+    <div class="sakura-container" id="sakura-container"></div>
+  </div>
+
+  <script is:inline>
+    function initSakura() {
+      const container = document.getElementById('sakura-container');
+      if (!container) return;
+      container.innerHTML = '';
+      for (let i = 0; i < 20; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'petal-subtle';
+        petal.style.left = Math.random() * 100 + '%';
+        petal.style.width = Math.random() * 8 + 4 + 'px';
+        petal.style.height = petal.style.width;
+        petal.style.animationDuration = Math.random() * 5 + 7 + 's';
+        petal.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(petal);
+      }
+    }
+    initSakura();
+    document.addEventListener('astro:page-load', initSakura);
+  </script>
+
+  <main class="works-page">
+    <section class="section works-hero">
+      <div class="container narrow">
+        <!-- Anniversary Banner -->
+        <div class="works-anniversary-banner reveal">
+          <a href="/campaign-anniversary/?lang=fr">
+            <span class="ann-label">Offre 1er Anniversaire</span>
+            <div class="ann-content">
+              <strong>Offre Spéciale Anniversaire : 20% de réduction sur la Création Web !</strong>
+              <span>Profitez de tarifs d'exception. Obtenez le même niveau d'exigence que nos réalisations. En savoir plus →</span>
+            </div>
+          </a>
+        </div>
+
+        <span class="eyebrow">Portfolio & Outils</span>
+        <h1 class="premium-heading">Portefeuille & Outils Démo</h1>
+        <p class="lead">
+          Découvrez nos projets clients réels ainsi que nos applications interactives exclusives,<br class="pc-only" />
+          mettant en valeur la psychologie comportementale, l'IA et l'accessibilité.
+        </p>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Filter Tabs -->
+      <nav class="filter-nav" id="filter-nav">
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="web">Sites Web & LP</button>
+        <button class="filter-btn" data-filter="tool">Démos & Diagnostics</button>
+        <button class="filter-btn" data-filter="system">IA & Systèmes</button>
+        <button class="filter-btn" data-filter="kdp">Livres KDP</button>
+      </nav>
+
+      <div class="works-grid" id="works-grid">
+        
+        <!-- Category: Web (Psychology Demo) -->
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg" style="background: linear-gradient(135deg, #fdfcf9 0%, #f5eee0 100%);">
+              <img src="/images/works-psy-demo.png" alt="UX Orientée Psychologie" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'" />
+              <span class="category-tag demo">Application Démo</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Logique Cognitive</div>
+            <h3>UX Orientée Psychologie</h3>
+            <p class="card-text">Pourquoi ce bouton est-il précisément placé à cet endroit ? Découvrez comment la psychologie comportementale dicte l'agencement optimal des informations.</p>
+            <div class="card-footer">
+              <span class="tech-tag">UI/UX</span>
+              <span class="tech-tag">Psychologie</span>
+              <a href="/psychology-demo/?lang=fr" class="card-link">Tester la Démo →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: System (AI Demo) -->
+        <article class="work-card reveal" data-category="system">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg">
+              <img src="/images/works-system.png" alt="Assistant Stratégique IA" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag demo">Application Démo</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Solution IA</div>
+            <h3>Assistant Stratégique IA</h3>
+            <p class="card-text">L'IA structure vos besoins flous en création web et outils TIC. Découvrez une application pratique et fluide de l'API OpenAI.</p>
+            <div class="card-footer">
+              <span class="tech-tag">OpenAI API</span>
+              <span class="tech-tag">Astro</span>
+              <a href="/ai-chat-demo/?lang=fr" class="card-link">Lancer l'Assistant →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: Tool (Mental) -->
+        <article class="work-card reveal" data-category="tool">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg">
+              <img src="/images/works-mental.png" alt="Diagnostic de Fatigue Mentale" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag demo">Application Démo</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Santé Mentale</div>
+            <h3>Diagnostic de Fatigue Mentale</h3>
+            <p class="card-text">L'expertise de Conseiller Industriel transposée en algorithme. Visualisez vos facteurs de stress grâce à une interface bienveillante.</p>
+            <div class="card-footer">
+              <span class="tech-tag">Logique</span>
+              <span class="tech-tag">Empathy UI</span>
+              <a href="/mental_care/?lang=fr" class="card-link">Faire le Diagnostic →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: Tool (Accessibility) -->
+        <article class="work-card reveal" data-category="tool">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg">
+              <img src="/images/works-accessibility.png" alt="Audit d'Accessibilité PMR" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag demo">Application Démo</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Accessibilité</div>
+            <h3>Audit d'Accessibilité PMR</h3>
+            <p class="card-text">Analysez l'accessibilité universelle de votre site du point de vue d'un utilisateur en fauteuil roulant. Identifiez les barrières physiques et numériques.</p>
+            <div class="card-footer">
+              <span class="tech-tag">UD Design</span>
+              <span class="tech-tag">SVG Gauge</span>
+              <a href="/barrier_free/?lang=fr" class="card-link">Lancer l'Audit →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: Tool (SEO) -->
+        <article class="work-card reveal" data-category="tool">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg">
+              <img src="/images/works-seo.png" alt="Diagnostic SEO Technique" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag demo">Application Démo</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Analyse SEO</div>
+            <h3>Diagnostic SEO Technique</h3>
+            <p class="card-text">Évaluez la santé de votre site internet à travers 25 critères techniques. Des métriques claires représentées sous forme de graphiques.</p>
+            <div class="card-footer">
+              <span class="tech-tag">SEO</span>
+              <span class="tech-tag">Marketing</span>
+              <a href="/seo_check/?lang=fr" class="card-link">Faire le Diagnostic →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: Web (Medical) -->
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual">
+              <img src="/portfolio-lp/images/hero_clinic.png" alt="Page d'Atterrissage Médicale" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag real">Projet Réel</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Médical / Clinique</div>
+            <h3>Page d'Atterrissage Médicale</h3>
+            <p class="card-text">Conçue pour des cliniques esthétiques et la médecine psychosomatique. Respect rigoureux de la déontologie médicale tout en instaurant une haute confiance.</p>
+            <div class="card-footer">
+              <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
+              <a href="/portfolio-lp/lp_clinic.html?lang=fr" class="premium-link">Voir la Réalisation</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: KDP -->
+        <article class="work-card reveal" data-category="kdp">
+          <div class="card-visual-wrap">
+            <div class="card-visual">
+              <img src="/images/works-kdp.png" alt="Livres KDP auto-publiés sur Amazon" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag real">Projet Réel</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Édition KDP</div>
+            <h3>Livres KDP auto-publiés sur Amazon</h3>
+            <p class="card-text">Création et publication d'ouvrages artistiques japonais (Ukiyo-e et Choju-giga) pour les marchés internationaux. Accompagnement complet de la couverture aux métadonnées.</p>
+            <div class="card-footer">
+              <span class="tech-tag">Global</span>
+              <span class="tech-tag">Design</span>
+              <a href="/fr/kdp_books/" class="card-link">Consulter le Portefeuille →</a>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <ConsultationFlow lang="fr" />
+
+    <!-- Standard Packages CTA -->
+    <section class="packages-cta reveal">
+      <div class="container glass-panel">
+        <div class="cta-label">SPÉCIAL ANNIVERSAIRE</div>
+        <h2>Prêt à optimiser la conversion de votre site ?</h2>
+        <p>Profitez actuellement de 20% de réduction sur l'ensemble de nos prestations de création web. Intégrez dès aujourd'hui l'excellence cognitive à votre activité.</p>
+        <div class="cta-btns">
+          <a href="/campaign-anniversary/?lang=fr" class="btn-secondary-outline">Découvrir la Campagne</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style is:global>
+    @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
+
+    :root {
+      --accent: #c5a059;
+      --accent-dark: #b18e4a;
+      --accent-red: #d14d3a;
+      --glass: rgba(255, 255, 255, 0.85);
+      --glass-border: rgba(197, 160, 89, 0.2);
+      --tag-works: #2c7c5e;
+      --tag-sample: #c5a059;
+      --tag-demo: #2c5e7c;
+      --text-deep: #1a1a1a;
+    }
+
+    .premium-heading {
+      font-family: 'Shippori Mincho', serif !important;
+      font-weight: 800 !important;
+      letter-spacing: 0.05em;
+    }
+
+    /* Background Decoration */
+    .bg-decoration {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: -1; background: #fdfcf9; overflow: hidden;
+    }
+    .bg-decoration::after {
+      content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3%3Ffilter id='noiseFilter'%3E%3FfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3F/filter%3E%3Frect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3F/svg%3E");
+      opacity: 0.05; pointer-events: none;
+    }
+    .sakura-container {
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+    }
+    .petal-subtle {
+      position: absolute; background: #ffb7c5; border-radius: 150% 0 150% 0;
+      opacity: 0.4; animation: fall-subtle linear infinite;
+    }
+    @keyframes fall-subtle {
+      0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+      10% { opacity: 0.4; }
+      90% { opacity: 0.4; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+
+    .works-page { padding-bottom: 100px; font-family: 'Shippori Mincho', serif !important; }
+    .works-hero { padding: 80px 0 60px; text-align: center; }
+    
+    .works-anniversary-banner { margin-bottom: 40px; }
+    .works-anniversary-banner a {
+      display: block; background: #fff; border: 1px solid var(--accent-red);
+      border-radius: 20px; padding: 20px 30px; text-decoration: none;
+      transition: 0.4s; box-shadow: 0 10px 30px rgba(209, 77, 58, 0.1);
+    }
+    .works-anniversary-banner a:hover { transform: translateY(-3px); }
+    .ann-label {
+      display: inline-block; background: var(--accent-red); color: white;
+      font-size: 0.75rem; font-weight: 800; padding: 4px 12px; border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .ann-content { display: flex; align-items: center; justify-content: center; gap: 20px; color: #2c2c2c; }
+    .ann-content strong { font-size: 1.2rem; color: var(--accent-red); }
+
+    .eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
+    .lead { font-size: 1.1rem; color: #555; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+
+    /* Filter Nav */
+    .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 12px 28px; border-radius: 999px; background: #fff;
+      border: 1px solid var(--glass-border); color: #666; font-weight: 800;
+      cursor: pointer; transition: 0.3s;
+    }
+    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* Works Grid */
+    .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
+
+    .work-card {
+      background: #fff; border: 1px solid var(--glass-border); border-radius: 24px;
+      overflow: hidden; display: flex; flex-direction: column;
+      transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+    }
+    .work-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+
+    .card-visual-wrap { padding: 12px; }
+    .card-visual { height: 160px; border-radius: 16px; overflow: hidden; position: relative; background: #f5f5f5; }
+    
+    .category-tag {
+      position: absolute; top: 12px; left: 12px; font-size: 0.65rem; font-weight: 800;
+      padding: 4px 10px; border-radius: 999px; z-index: 2;
+    }
+    .category-tag.real { background: var(--accent-red); color: #fff; }
+    .category-tag.demo { background: var(--tag-demo); color: #fff; }
+    .category-tag.sample { background: var(--accent); color: #fff; }
+
+    .card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
+    .expert-label { font-size: 0.75rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 8px; }
+    .card-body h3 { font-size: 1.25rem; font-weight: 800; margin-bottom: 12px; line-height: 1.4; }
+    .card-text { font-size: 0.9rem; color: #666; line-height: 1.7; margin-bottom: 20px; flex: 1; }
+
+    .card-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+    .tech-tag { font-size: 0.7rem; font-weight: 800; color: #888; background: #f5f5f5; padding: 4px 8px; border-radius: 4px; }
+    .card-link, .premium-link { margin-left: auto; font-size: 0.85rem; font-weight: 800; color: var(--accent); text-decoration: none; }
+
+    .packages-cta { margin-top: 100px; }
+    .glass-panel {
+      background: #3a2e26; color: white; border-radius: 32px; padding: 60px 20px;
+      text-align: center; border: 1px solid var(--accent);
+    }
+    .cta-label { font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; margin-bottom: 16px; }
+    .glass-panel h2 { font-size: 1.8rem; margin-bottom: 20px; font-weight: 800; }
+    .glass-panel p { font-size: 1rem; opacity: 0.8; margin-bottom: 32px; }
+
+    .btn-secondary-outline {
+      display: inline-block; border: 2px solid var(--accent); color: var(--accent);
+      padding: 12px 36px; border-radius: 50px; text-decoration: none; font-weight: 800; transition: 0.3s;
+    }
+    .btn-secondary-outline:hover { background: var(--accent); color: white; }
+
+    .reveal { opacity: 0; transform: translateY(20px); transition: 0.6s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 768px) {
+      .works-grid { grid-template-columns: 1fr; }
+    }
+</style>
+
+<script is:inline>
+    function initWorks() {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const workCards = document.querySelectorAll('.work-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.dataset.filter;
+          filterBtns.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          workCards.forEach(card => {
+            if (filter === 'all' || card.dataset.category === filter) {
+              card.style.display = 'flex';
+              setTimeout(() => card.classList.add('visible'), 50);
+            } else {
+              card.style.display = 'none';
+              card.classList.remove('visible');
+            }
+          });
+        });
+      });
+
+      const io = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    }
+    initWorks();
+    document.addEventListener('astro:page-load', initWorks);
+  </script>

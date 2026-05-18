@@ -12,9 +12,12 @@ function getLangPath(targetLang: string) {
     return finalPath.replace(/\/+/g, '/');
   }
   
-  // en or fr: For existing multi-language pages (Home or Contact)
-  if (cleanPath === '/' || cleanPath === '' || cleanPath === '/contact') {
-    const langPath = cleanPath === '/' || cleanPath === '' ? `/${targetLang}/` : `/${targetLang}${cleanPath}/`;
+  // en or fr: For existing multi-language pages
+  const validPages = ['/', '', '/contact', '/works', '/pricing', '/about', '/kdp_books'];
+  const basePage = cleanPath.split(/[?#]/)[0];
+  
+  if (validPages.includes(basePage)) {
+    const langPath = basePage === '/' || basePage === '' ? `/${targetLang}/` : `/${targetLang}${cleanPath}/`;
     return langPath.replace(/\/+/g, '/');
   }
   
