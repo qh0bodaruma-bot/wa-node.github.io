@@ -28,15 +28,17 @@ const f = {
     line_btn: "LINEで相談する",
     form_intro_title: "今の状況を、そのまま教えてください。",
     form_intro_desc: "「まだ何も決まっていない」という状態でも大丈夫です。あなたのペースで、一つずつ言葉にすることから始めましょう。",
+    submit_flow_desc: "送信後、通常2営業日以内にご返信します。日程確定後、無料相談を行い、必要に応じて簡易たたき台・お見積りをご提案します。正式な制作・月額支援は、内容と費用にご納得いただいた後に開始します。",
     label_name: "お名前",
     placeholder_name: "和 太郎",
     required: "必須",
     label_email: "メールアドレス",
     placeholder_email: "example@wa-node.com",
-    label_category: "ご相談内容",
+    label_category: "ご相談カテゴリ",
     placeholder_category: "選択してください",
     categories: {
       web: "Webサイト・LP制作",
+      copilot: "ビジネスの副操縦士（月額支援）",
       line: "LINE Mini App制作・LINE導線相談",
       ai: "AI活用・業務効率化",
       counseling: "カウンセリング・メンタル支援",
@@ -53,14 +55,20 @@ const f = {
       face_to_face: "対面（岐阜県可児市・近郊）",
       other: "その他（メッセージに記載）"
     },
-    label_dates: "ご相談の希望日時（候補を3つほど）",
+    label_phone: "お電話番号",
+    placeholder_phone: "例：080-1234-5678",
+    desc_phone: "※ご希望の面談時間にこちらからお電話いたします。",
+    label_line: "LINE表示名 または LINE ID",
+    placeholder_line: "例：和 太郎（ID: wa-taro）",
+    desc_line: "※LINEでのやり取り、またはビデオ通話の接続に必要な情報をご記入ください。",
+    label_dates: "ご相談の希望日時（※第一希望のみ必須）",
     date_1: "第一希望:",
     date_2: "第二希望:",
     date_3: "第三希望:",
     date_desc: "※平日の10:00〜18:00が基本ですが、夜間や土日も調整可能です。ご希望があればご記入ください。",
-    label_message: "メッセージ内容",
-    placeholder_message: "ご相談内容や現状の課題など、どのようなことでもお気軽にご記入ください。",
-    consent_note: "送信前に、利用規約、プライバシーポリシー、およびカウンセリング注意事項をご確認ください。送信された内容はサーバーには保存されず、メール転送後、速やかに破棄されます。",
+    label_message: "ご相談内容（現在の状況・相談したいこと）",
+    placeholder_message: "現在の状況や、具体的に相談したいこと（解決したい課題など）をご記入ください。",
+    consent_note: "送信前に、利用規約、プライバシーポリシー、およびキャンセルポリシー、カウンセリング注意事項をご確認ください。送信内容は、当サイト内では保存せず、外部フォームサービスの仕様に基づきメール転送されます。取得した情報は、お問い合わせ対応の目的に限って利用します。",
     consent_checkbox: "各規約および注意事項に同意します",
     btn_submit: "この内容で送信する"
   },
@@ -83,6 +91,7 @@ const f = {
     line_btn: "Chat on LINE",
     form_intro_title: "Tell us about your current situation.",
     form_intro_desc: "It is completely fine if details are not decided yet. Let's start by translating your thoughts step by step.",
+    submit_flow_desc: "Upon submission, we will reply within 2 business days. After fixing a slot, we will have a free consultation and propose a brief outline/estimate if needed. Formal design and support will start only after you agree to the plan and costs.",
     label_name: "Full Name",
     placeholder_name: "John Doe",
     required: "Required",
@@ -92,6 +101,7 @@ const f = {
     placeholder_category: "Please select",
     categories: {
       web: "Web Site & LP Design",
+      copilot: "Business Copilot (Monthly Support)",
       line: "LINE Mini App & Custom Funnel",
       ai: "AI Integration & Business Automation",
       counseling: "Mental Support & Consultation",
@@ -108,14 +118,20 @@ const f = {
       face_to_face: "In Person (Gifu Prefecture, Japan)",
       other: "Others (Write in message)"
     },
-    label_dates: "Preferred Dates (Please suggest up to 3 slots in JST)",
+    label_phone: "Phone Number",
+    placeholder_phone: "e.g. +81-80-1234-5678",
+    desc_phone: "*We will call you at the requested consultation slot.",
+    label_line: "LINE Display Name or LINE ID",
+    placeholder_line: "e.g. Taro Wa (ID: wa-taro)",
+    desc_line: "*Required for LINE connection or video call setup.",
+    label_dates: "Preferred Dates (*1st Choice is Required)",
     date_1: "1st Choice:",
     date_2: "2nd Choice:",
     date_3: "3rd Choice:",
     date_desc: "※Basically weekdays 10:00-18:00 JST, but nights and weekends are also flexible. Please request your timezone.",
-    label_message: "Message Content",
-    placeholder_message: "Please feel free to write anything about your challenges, requests, or current status.",
-    consent_note: "Please review our Terms of Service, Privacy Policy, and Counseling disclaimer before submitting. Submissions are processed via secure email and immediately deleted from server storage.",
+    label_message: "Inquiry Content (Current Status & What you want to discuss)",
+    placeholder_message: "Please describe your current situation, challenges, or what you specifically want to discuss.",
+    consent_note: "Please review our Terms of Service, Privacy Policy, Cancellation Policy, and Counseling disclaimer before submitting. Submissions are processed securely via external form services and will only be used to respond to your inquiry.",
     consent_checkbox: "I agree to the terms and privacy conditions",
     btn_submit: "Submit Inquiry"
   },
@@ -138,6 +154,7 @@ const f = {
     line_btn: "Discuter sur LINE",
     form_intro_title: "Décrivez votre situation actuelle.",
     form_intro_desc: "Aucun souci si tout n'est pas encore clair. Commençons par exprimer vos pensées pas à pas.",
+    submit_flow_desc: "Après envoi, nous vous répondrons sous 2 jours ouvrables. Une fois le créneau fixé, nous aurons une consultation gratuite et proposerons un projet initial/devis si nécessaire. La création officielle commencera uniquement après votre accord.",
     label_name: "Nom Complet",
     placeholder_name: "Jean Dupont",
     required: "Requis",
@@ -147,6 +164,7 @@ const f = {
     placeholder_category: "Veuillez choisir",
     categories: {
       web: "Design Web & LP",
+      copilot: "Co-pilote d'Affaires (Soutien Mensuel)",
       line: "LINE Mini App & Entonnoir personnalisé",
       ai: "Intégration de l'IA & Automatisation",
       counseling: "Conseil & Soutien Mental",
@@ -163,14 +181,20 @@ const f = {
       face_to_face: "En personne (Gifu, Japon)",
       other: "Autre (À préciser dans le message)"
     },
-    label_dates: "Dates souhaitées (Proposez jusqu'à 3 créneaux en heure JST)",
+    label_phone: "Numéro de Téléphone",
+    placeholder_phone: "Ex: +81-80-1234-5678",
+    desc_phone: "*Nous vous appellerons au créneau horaire souhaité.",
+    label_line: "Nom d'affichage LINE ou ID LINE",
+    placeholder_line: "Ex: Jean Dupont (ID: jean-d)",
+    desc_line: "*Requis pour la connexion LINE ou l'appel vidéo.",
+    label_dates: "Dates souhaitées (*1er Choix Requis)",
     date_1: "1er Choix:",
     date_2: "2e Choix:",
     date_3: "3e Choix:",
     date_desc: "※En principe, en semaine de 10h00 à 18h00 JST, mais flexible les soirs et week-ends. Précisez votre fuseau horaire.",
-    label_message: "Détails du message",
-    placeholder_message: "N'hésitez pas à décrire vos défis, vos besoins ou votre situation actuelle.",
-    consent_note: "Veuillez lire nos Conditions d'Utilisation, Politique de Confidentialité et Avertissements avant d'envoyer. Les données sont envoyées par e-mail sécurisé et immédiatement supprimées du serveur.",
+    label_message: "Détails du message (Situation actuelle & Sujet à aborder)",
+    placeholder_message: "N'hésitez pas à décrire vos défis, vos besoins ou la situation actuelle que vous souhaitez aborder.",
+    consent_note: "Veuillez lire nos Conditions d'Utilisation, Politique de Confidentialité, Politique d'Annulation et Avertissements avant d'envoyer. Les données sont traitées de manière sécurisée par des services externes et uniquement utilisées pour répondre à votre demande.",
     consent_checkbox: "J'accepte les conditions et la politique de confidentialité",
     btn_submit: "Envoyer la demande"
   }
@@ -224,7 +248,12 @@ const t = f[lang];
         <div class="glass-panel">
           <div class="form-intro" style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--line);">
             <p style="font-weight: 800; color: var(--accent); margin-bottom: 8px;">{t.form_intro_title}</p>
-            <p class="small" style="color: var(--muted); line-height: 1.6;">{t.form_intro_desc}</p>
+            <p class="small" style="color: var(--muted); line-height: 1.6; margin-bottom: 20px;">{t.form_intro_desc}</p>
+            
+            <div class="form-flow-notice" style="background: rgba(197, 160, 89, 0.05); padding: 18px; border-radius: 16px; border: 1px solid var(--line); font-size: 0.85rem; color: #555; line-height: 1.6;">
+              <strong style="color: var(--accent-dark); display: block; margin-bottom: 6px; font-weight: 800; font-family: 'Shippori Mincho', serif;">💡 {lang === 'ja' ? '送信後の流れ' : lang === 'fr' ? 'Déroulement après envoi' : 'Process After Submission'}</strong>
+              <p style="margin: 0;">{t.submit_flow_desc}</p>
+            </div>
           </div>
           <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off">
             <input type="hidden" name="_next" value={lang === 'ja' ? 'https://wa-node.com/thanks' : `https://wa-node.com/${lang}/thanks`} />
@@ -244,6 +273,7 @@ const t = f[lang];
               <select id="category" name="category" required>
                 <option value="" disabled selected>{t.placeholder_category}</option>
                 <option value="web">{t.categories.web}</option>
+                <option value="copilot">{t.categories.copilot}</option>
                 <option value="line">{t.categories.line}</option>
                 <option value="ai">{t.categories.ai}</option>
                 <option value="counseling">{t.categories.counseling}</option>
@@ -265,11 +295,30 @@ const t = f[lang];
               </select>
             </div>
 
+            <!-- 動的な連絡先詳細入力欄（電話・LINE選択時のみJavaScriptで表示制御） -->
+            <div class="form-group" id="dynamic-contact-field" style="display: none; transition: all 0.3s ease;">
+              <label for="contact_detail" id="dynamic-contact-label">ご連絡先詳細</label>
+              <input 
+                type="text" 
+                id="contact_detail" 
+                name="contact_detail" 
+                placeholder="" 
+                data-phone-label={t.label_phone}
+                data-phone-placeholder={t.placeholder_phone}
+                data-phone-desc={t.desc_phone}
+                data-line-label={t.label_line}
+                data-line-placeholder={t.placeholder_line}
+                data-line-desc={t.desc_line}
+                data-required-text={t.required}
+              />
+              <p class="field-desc" id="dynamic-contact-desc"></p>
+            </div>
+
             <div class="form-group date-candidates">
-              <label>{t.label_dates} <span class="required">{t.required}</span></label>
+              <label>{t.label_dates}</label>
               <div class="date-input-group">
                 <div class="date-item">
-                  <span>{t.date_1}</span>
+                  <span>{t.date_1} <span class="required">{t.required}</span></span>
                   <input type="datetime-local" name="date_1" required />
                 </div>
                 <div class="date-item">
@@ -285,8 +334,8 @@ const t = f[lang];
             </div>
 
             <div class="form-group">
-              <label for="message">{t.label_message}</label>
-              <textarea id="message" name="message" rows="6" placeholder={t.placeholder_message}></textarea>
+              <label for="message">{t.label_message} <span class="required">{t.required}</span></label>
+              <textarea id="message" name="message" rows="6" placeholder={t.placeholder_message} required></textarea>
             </div>
 
             <div class="form-consent">
@@ -405,3 +454,55 @@ const t = f[lang];
     .glass-panel { padding: 30px 20px; }
   }
 </style>
+
+<script is:inline>
+  (function() {
+    function initDynamicContactField() {
+      const methodSelect = document.getElementById('method');
+      const dynamicField = document.getElementById('dynamic-contact-field');
+      const dynamicLabel = document.getElementById('dynamic-contact-label');
+      const dynamicInput = document.getElementById('contact_detail');
+      const dynamicDesc = document.getElementById('dynamic-contact-desc');
+      if (!methodSelect || !dynamicField || !dynamicLabel || !dynamicInput || !dynamicDesc) return;
+
+      function updateField() {
+        const val = methodSelect.value;
+        const phoneLabel = dynamicInput.getAttribute('data-phone-label');
+        const phonePlaceholder = dynamicInput.getAttribute('data-phone-placeholder');
+        const phoneDesc = dynamicInput.getAttribute('data-phone-desc');
+        const lineLabel = dynamicInput.getAttribute('data-line-label');
+        const linePlaceholder = dynamicInput.getAttribute('data-line-placeholder');
+        const lineDesc = dynamicInput.getAttribute('data-line-desc');
+        const reqText = dynamicInput.getAttribute('data-required-text');
+
+        if (val === 'phone') {
+          dynamicField.style.display = 'block';
+          dynamicLabel.innerHTML = `${phoneLabel} <span class="required">${reqText}</span>`;
+          dynamicInput.placeholder = phonePlaceholder;
+          dynamicInput.required = true;
+          dynamicDesc.textContent = phoneDesc;
+        } else if (val === 'line_video') {
+          dynamicField.style.display = 'block';
+          dynamicLabel.innerHTML = `${lineLabel} <span class="required">${reqText}</span>`;
+          dynamicInput.placeholder = linePlaceholder;
+          dynamicInput.required = true;
+          dynamicDesc.textContent = lineDesc;
+        } else {
+          dynamicField.style.display = 'none';
+          dynamicInput.required = false;
+          dynamicInput.placeholder = '';
+          dynamicDesc.textContent = '';
+        }
+      }
+
+      methodSelect.addEventListener('change', updateField);
+      // 初期状態の反映（入力フォームに戻った場合などの保持対応）
+      updateField();
+    }
+
+    // 初回ロード時
+    initDynamicContactField();
+    // Astroのトランジション（画面遷移時）対応
+    document.addEventListener('astro:page-load', initDynamicContactField);
+  })();
+</script>
