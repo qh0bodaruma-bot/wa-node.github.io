@@ -1,20 +1,13 @@
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
-node_modules
+# Dependencies
+node_modules/
+package-lock.json
+
+# Build output
+dist/
+.astro/
+
+# Generated files
+.DS_Store
+*.local
+.env
+.env.*
