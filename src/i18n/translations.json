@@ -132,6 +132,7 @@
     "col1_item1": { "ja": "心理導線Web制作", "en": "Psychology Web Design", "fr": "Design Web Orienté Psychologie" },
     "col1_item2": { "ja": "ホームページ・LP制作", "en": "Homepage & LP Design", "fr": "Création LP & Site Web" },
     "col1_item3": { "ja": "ビジネスの副操縦士（月額）", "en": "Business Co-pilot (Monthly)", "fr": "Co-pilote d'Affaires (Mensuel)" },
+    "col1_item_flow": { "ja": "ご契約後の進行フロー", "en": "Project Flow", "fr": "Déroulement du Projet" },
     "col1_item4": { "ja": "制作実績・サンプル", "en": "Works & Portfolio", "fr": "Portefeuille" },
     "col2": { "ja": "診断・デモツール", "en": "Demos & Utilities", "fr": "Démos & Utilitaires" },
     "col2_item1": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },

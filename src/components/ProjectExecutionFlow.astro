@@ -1,0 +1,685 @@
+---
+interface Props {
+  lang?: 'ja' | 'en' | 'fr';
+  id?: string;
+}
+
+const { lang = 'ja', id = 'project-flow' } = Astro.props;
+
+const f = {
+  ja: {
+    title: "ご契約後の制作・サポートの流れ",
+    subtitle: "いつ・どこでお金の請求が発生し、お互い何をするのかを可視化します",
+    tab_web: "🌐 Webサイト・LP制作",
+    tab_copilot: "🤝 ビジネスの副操縦士",
+    label_our_task: "和-Nodeの作業内容",
+    label_client_task: "お客様のご協力義務",
+    badge_payment: "💰 お支払い・ご請求タイミング",
+    web_duration: "期間の目安：約3〜6週間",
+    copilot_duration: "契約形式：月額支援（伴走型）",
+    web_steps: [
+      {
+        step: "STEP 01",
+        title: "キックオフ & ご契約",
+        payment: "【着手金 50% のご請求】契約合意後、正式な制作着手前に総額の50%をお支払いいただきます。",
+        our_task: "要件定義の明文化、プロジェクトの全体スケジュールおよびマイルストーンの策定、着手金請求書の発行",
+        client_task: "ご契約内容の最終合意、詳細ヒアリングシートへのご回答"
+      },
+      {
+        step: "STEP 02",
+        title: "詳細構成案・ワイヤーフレーム作成",
+        payment: null,
+        our_task: "行動心理学に基づいたページ構成（ワイヤーフレーム）、心理コピーライティング、原稿たたき台の作成・提示",
+        client_task: "提示された構成案・文章内容の確認、必要に応じた修正フィードバック（※合意が得られるまで丁寧に調整します）"
+      },
+      {
+        step: "STEP 03",
+        title: "デザインカンプ作成・素材選定",
+        payment: null,
+        our_task: "ブランドコンセプトに合わせた配色・フォント（トンマナ）設計、PC/スマホ両方のデザインカンプ（初稿）の作成",
+        client_task: "お手持ちの写真素材やロゴデータの共有、デザイン初稿の確認・方向性のご指示"
+      },
+      {
+        step: "STEP 04",
+        title: "コーディング & システム構築",
+        payment: null,
+        our_task: "モダンで高速なコーディング、完全レスポンシブ（スマホ最適化）、SEO内部設定、お問い合わせ等の機能実装、テスト環境への公開",
+        client_task: "テスト公開されたサイトの実機（お手持ちのスマホやPC）での表示・動作のテスト確認"
+      },
+      {
+        step: "STEP 05",
+        title: "最終検収 & 残金ご入金",
+        payment: "【残金 50% のご請求】テスト環境でのすべての表示・動作にご納得いただいた後、残金（50%）をお支払いいただきます。",
+        our_task: "テスト確認で発覚したバグや表示ズレの最終調整、操作・簡易編集レクチャー、残金請求書の発行",
+        client_task: "最終公開前の検収、残金（50%）のご入金"
+      },
+      {
+        step: "STEP 06",
+        title: "本番公開 & アフターサポート",
+        payment: "【無償サポート期間】納品公開後1ヶ月間は、表示崩れやシステム不具合を完全に無償で迅速に修正いたします。",
+        our_task: "本番サーバーへの公開・移管作業、ドメイン・SSLの紐付け設定、Google Analytics等の計測初期設定、1ヶ月間のバグ修正",
+        client_task: "本番公開されたサイトの最終稼働確認"
+      }
+    ],
+    copilot_steps: [
+      {
+        step: "STEP 01",
+        title: "現状ヒアリング & DX・AI診断",
+        payment: "【初回月額費用のご請求】ご契約時に、初月分（前払い）の月額費用をお支払いいただきます。",
+        our_task: "現在の業務フロー（アナログ作業やボトルネック）のヒアリング、DX・AI・LINE連携等を活用した自動化可能性の診断",
+        client_task: "普段の業務手順、現在抱えている課題や不満、導入検討中のツール等の情報共有"
+      },
+      {
+        step: "STEP 02",
+        title: "改善ロードマップ策定",
+        payment: null,
+        our_task: "診断結果に基づき、最初の3ヶ月〜半年で「何を自動化し、どう効率化するか」の優先順位とアクションプラン（ロードマップ）の提示",
+        client_task: "提示されたロードマップの確認、現実的な実行順序や作業範囲の最終合意"
+      },
+      {
+        step: "STEP 03",
+        title: "毎月の実行支援・伴走",
+        payment: "【翌月分のご請求（前払い）】毎月25日頃に、翌月分の月額支援費用をご請求いたします。",
+        our_task: "定期オンラインミーティング（プランに応じて月1〜2回）、チャット（Slack/LINE等）による随時相談、実務用プロンプト作成支援、ツール初期設定の代行や指導",
+        client_task: "定例会議へのご参加、チャットでの質問、実務へのツールや仕組みの導入と日々の運用"
+      },
+      {
+        step: "STEP 04",
+        title: "効果測定 & 次月の計画策定",
+        payment: null,
+        our_task: "導入した自動化ツールや業務改善の成果（削減時間や売上影響）を分析し、ロードマップの進捗状況をレビューの上、翌月の注力目標を策定",
+        client_task: "実際の運用で気づいた不都合や追加要望のフィードバック、次月に解決したい新たな課題の共有"
+      }
+    ]
+  },
+  en: {
+    title: "Project & Payment Flow After Contract",
+    subtitle: "We visualize when payments occur and what tasks both parties handle to ensure peace of mind.",
+    tab_web: "🌐 Web Site & LP Design",
+    tab_copilot: "🤝 Business Copilot",
+    label_our_task: "Wa-Node Tasks",
+    label_client_task: "Client Tasks",
+    badge_payment: "💰 Billing & Payment Timing",
+    web_duration: "Estimated Timeline: Approx. 3-6 Weeks",
+    copilot_duration: "Contract: Monthly Partnership (Ongoing)",
+    web_steps: [
+      {
+        step: "STEP 01",
+        title: "Kickoff & Contract",
+        payment: "[💰 Down Payment 50%] After signing the contract, a 50% deposit is required before launching the formal production.",
+        our_task: "Define specifications, establish a detailed timeline and milestones, and issue the down payment invoice.",
+        client_task: "Final agreement on contract terms, and fill out the detailed project brief questionnaire."
+      },
+      {
+        step: "STEP 02",
+        title: "Structure & Wireframe Draft",
+        payment: null,
+        our_task: "Create page structure (wireframes), psychological copywriting drafts based on behavioral psychology.",
+        client_task: "Review structure and copy drafts, and provide constructive feedback for adjustments until final alignment."
+      },
+      {
+        step: "STEP 03",
+        title: "Visual Design & Assets",
+        payment: null,
+        our_task: "Establish design rules (colors & typography), create homepage/LP UI mockups (1st draft) for PC and Mobile.",
+        client_task: "Share high-resolution images, brand logos, review design drafts and direct necessary revisions."
+      },
+      {
+        step: "STEP 04",
+        title: "Coding & System Setup",
+        payment: null,
+        our_task: "Modern responsive HTML/Astro coding, SEO setup, secure forms integration, staging environment deployment.",
+        client_task: "Test staging environment and browse on your actual mobile phones/PCs to verify responsiveness and forms."
+      },
+      {
+        step: "STEP 05",
+        title: "Final Verification & Delivery",
+        payment: "[💰 Final Payment 50%] After confirming all features work on the staging server, the final 50% balance is invoiced.",
+        our_task: "Fine-tune UI details based on tests, instruct CMS operations/simple edits, and issue the final balance invoice.",
+        client_task: "Perform final inspection, approve the build, and transfer the remaining 50% balance."
+      },
+      {
+        step: "STEP 06",
+        title: "Public Launch & Support",
+        payment: "[Free Bug-Fix Period] For 30 days after launch, any system errors or display bugs will be fixed completely free of charge.",
+        our_task: "Transfer files to production server, link custom domains & SSL certificate, initial setup of Google Analytics, 1-month bug support.",
+        client_task: "Perform final post-launch check on live custom domain."
+      }
+    ],
+    copilot_steps: [
+      {
+        step: "STEP 01",
+        title: "Auditing & DX/AI Diagnosis",
+        payment: "[💰 First Month Fee] The first month fee (prepaid) is invoiced upon contract signing.",
+        our_task: "Audit current operations (analysing analog bottlenecks), diagnose automation possibilities using AI & LINE integrations.",
+        client_task: "Share daily work procedures, current administrative frustrations, and tools currently used or considered."
+      },
+      {
+        step: "STEP 02",
+        title: "Roadmap Formulation",
+        payment: null,
+        our_task: "Present a 3-to-6 month priority list and operational roadmap based on the initial diagnosis findings.",
+        client_task: "Review proposed roadmap, finalize execution orders and boundaries of the partnership."
+      },
+      {
+        step: "STEP 03",
+        title: "Monthly Support & Co-piloting",
+        payment: "[💰 Monthly Retainer] Retainer invoices for the next month are sent around the 25th of each month (prepaid).",
+        our_task: "Conduct regular online meetings (1-2 times/month), chat support (Slack/LINE), custom AI prompt engineering, tool setups.",
+        client_task: "Attend scheduled meetings, raise questions via chat, implement systems and apply new workflows to daily tasks."
+      },
+      {
+        step: "STEP 04",
+        title: "Review & Next Steps Planning",
+        payment: null,
+        our_task: "Analyze efficiency improvements (hours saved or financial impacts), review progress, and plan next month's priorities.",
+        client_task: "Provide feedback on new systems, discuss practical hurdles, and define next target bottlenecks."
+      }
+    ]
+  },
+  fr: {
+    title: "Déroulement du Projet & Planification des Paiements",
+    subtitle: "Nous visualisons clairement quand ont lieu les paiements et le rôle de chacun pour un partenariat serein.",
+    tab_web: "🌐 Création Web & LP",
+    tab_copilot: "🤝 Co-pilote d'Affaires",
+    label_our_task: "Tâches de Wa-Node",
+    label_client_task: "Votre Collaboration",
+    badge_payment: "💰 Facturation & Paiements",
+    web_duration: "Délai estimé : environ 3 à 6 semaines",
+    copilot_duration: "Contrat : Abonnement mensuel (Accompagnement)",
+    web_steps: [
+      {
+        step: "STEP 01",
+        title: "Lancement & Contrat",
+        payment: "[💰 Acompte de 50%] Après la signature du contrat, un acompte de 50% est requis avant le début officiel de la production.",
+        our_task: "Définir précisément le cahier des charges, établir le calendrier détaillé et émettre la facture d'acompte.",
+        client_task: "Validation finale du contrat de prestation, et réponse au questionnaire de cadrage de projet."
+      },
+      {
+        step: "STEP 02",
+        title: "Structure & Maquette de Plan",
+        payment: null,
+        our_task: "Création de la structure de page (wireframe), rédaction des textes persuasifs selon la psychologie comportementale.",
+        client_task: "Vérification de la structure et du ton des textes, retour d'ajustement jusqu'à validation complète."
+      },
+      {
+        step: "STEP 03",
+        title: "Design Visuel & Maquettes",
+        payment: null,
+        our_task: "Conception de la charte graphique (couleurs & typographie), création des maquettes visuelles PC et Mobile.",
+        client_task: "Partage de vos photos et logos, vérification des maquettes visuelles et indications de corrections."
+      },
+      {
+        step: "STEP 04",
+        title: "Intégration & Développement",
+        payment: null,
+        our_task: "Développement HTML/Astro moderne, responsive (mobile-first), optimisation SEO interne, déploiement sur environnement de test.",
+        client_task: "Test de l'environnement de staging depuis votre propre smartphone ou PC pour valider l'affichage et les formulaires."
+      },
+      {
+        step: "STEP 05",
+        title: "Vérification Finale & Livraison",
+        payment: "[💰 Solde de 50%] Après validation complète sur le serveur de test, les 50% restants sont facturés avant la mise en ligne.",
+        our_task: "Dernières corrections de l'interface, formation rapide à la gestion du site, émission de la facture de solde.",
+        client_task: "Inspection finale, validation formelle et règlement du solde de 50% restant."
+      },
+      {
+        step: "STEP 06",
+        title: "Mise en ligne & Support gratuit",
+        payment: "[Support Bug Gratuit] Pendant les 30 jours suivant la mise en ligne, toutes les erreurs d'affichage ou bugs sont corrigés gratuitement.",
+        our_task: "Mise en ligne sur serveur de production, configuration du domaine & SSL, configuration de Google Analytics, support de 1 mois.",
+        client_task: "Vérification finale du bon fonctionnement sur le nom de domaine en ligne."
+      }
+    ],
+    copilot_steps: [
+      {
+        step: "STEP 01",
+        title: "Audit & Diagnostic DX/IA",
+        payment: "[💰 Premier Mois] Les frais du premier mois (prépayés) sont facturés lors de la signature du contrat d'accompagnement.",
+        our_task: "Audit de vos processus opérationnels (identification des tâches manuelles répétitives), diagnostic des opportunités d'automatisation.",
+        client_task: "Partage de vos méthodes de travail, de vos frustrations administratives et des outils actuellement utilisés."
+      },
+      {
+        step: "STEP 02",
+        title: "Création de la Feuille de Route",
+        payment: null,
+        our_task: "Présentation d'une feuille de route priorisée sur 3 à 6 mois définissant les automatisations et les gains d'efficacité.",
+        client_task: "Examen de la feuille de route, accord final sur l'ordre d'exécution et les responsabilités respectives."
+      },
+      {
+        step: "STEP 03",
+        title: "Co-piloting & Support Mensuel",
+        payment: "[💰 Retrait mensuel] La mensualité du mois suivant est facturée aux alentours du 25 de chaque mois (prépayé).",
+        our_task: "Sessions en ligne régulières (1 à 2 fois/mois), support par chat (Slack/LINE), conception de prompts IA, configuration d'outils.",
+        client_task: "Présence aux réunions planifiées, questions par chat, intégration des systèmes et application des nouveaux flux de travail."
+      },
+      {
+        step: "STEP 04",
+        title: "Mesure de Performance & Planning",
+        payment: null,
+        our_task: "Analyse des gains de temps réalisés, examen de l'avancement de la feuille de route et planification des priorités du mois suivant.",
+        client_task: "Retours d'expérience sur les systèmes, retours sur les défis de terrain et définition de nouveaux points de blocage."
+      }
+    ]
+  }
+};
+
+const t = f[lang];
+---
+
+<section id={id} class="execution-flow-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Project Flow</span>
+      <h2 class="premium-heading ShipporiMincho">{t.title}</h2>
+      <p class="section-subtitle">{t.subtitle}</p>
+    </div>
+
+    <!-- Interactive Navigation Tabs -->
+    <div class="flow-tabs-wrapper reveal">
+      <div class="flow-tabs" role="tablist">
+        <button class="flow-tab-btn active" data-tab="web" role="tab" aria-selected="true">
+          {t.tab_web}
+        </button>
+        <button class="flow-tab-btn" data-tab="copilot" role="tab" aria-selected="false">
+          {t.tab_copilot}
+        </button>
+      </div>
+    </div>
+
+    <!-- Web/LP Timelines -->
+    <div id="flow-content-web" class="flow-content active-flow">
+      <div class="flow-meta">
+        <span class="duration-badge">{t.web_duration}</span>
+      </div>
+
+      <div class="timeline">
+        {t.web_steps.map((item) => (
+          <div class="timeline-item reveal">
+            <div class="timeline-step">
+              <span class="step-num">{item.step}</span>
+            </div>
+            
+            <div class="timeline-body">
+              <h3 class="step-title ShipporiMincho">{item.title}</h3>
+              
+              {item.payment && (
+                <div class="payment-box">
+                  <span class="payment-badge">{t.badge_payment}</span>
+                  <p class="payment-text">{item.payment}</p>
+                </div>
+              )}
+
+              <div class="task-grid">
+                <div class="task-col our-task-col">
+                  <span class="task-header-badge">{t.label_our_task}</span>
+                  <p class="task-desc">{item.our_task}</p>
+                </div>
+                <div class="task-col client-task-col">
+                  <span class="task-header-badge client">{t.label_client_task}</span>
+                  <p class="task-desc">{item.client_task}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Business Copilot Timelines -->
+    <div id="flow-content-copilot" class="flow-content">
+      <div class="flow-meta">
+        <span class="duration-badge copilot">{t.copilot_duration}</span>
+      </div>
+
+      <div class="timeline">
+        {t.copilot_steps.map((item) => (
+          <div class="timeline-item reveal">
+            <div class="timeline-step">
+              <span class="step-num">{item.step}</span>
+            </div>
+            
+            <div class="timeline-body">
+              <h3 class="step-title ShipporiMincho">{item.title}</h3>
+              
+              {item.payment && (
+                <div class="payment-box">
+                  <span class="payment-badge">{t.badge_payment}</span>
+                  <p class="payment-text">{item.payment}</p>
+                </div>
+              )}
+
+              <div class="task-grid">
+                <div class="task-col our-task-col">
+                  <span class="task-header-badge">{t.label_our_task}</span>
+                  <p class="task-desc">{item.our_task}</p>
+                </div>
+                <div class="task-col client-task-col">
+                  <span class="task-header-badge client">{t.label_client_task}</span>
+                  <p class="task-desc">{item.client_task}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initFlowTabs() {
+    const tabButtons = document.querySelectorAll('.flow-tab-btn');
+    const flowContents = document.querySelectorAll('.flow-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-tab');
+
+        // Deactivate all buttons
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+
+        // Hide all contents
+        flowContents.forEach(content => {
+          content.classList.remove('active-flow');
+        });
+
+        // Activate selected button & content
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        
+        const targetContent = document.getElementById(`flow-content-${targetTab}`);
+        if (targetContent) {
+          targetContent.classList.add('active-flow');
+        }
+      });
+    });
+  }
+
+  // Support page transition in Astro (swup/barba/native)
+  document.addEventListener('astro:page-load', initFlowTabs);
+  // Fallback for regular load
+  document.addEventListener('DOMContentLoaded', initFlowTabs);
+  // Immediate run
+  initFlowTabs();
+</script>
+
+<style>
+  .execution-flow-section {
+    padding: 120px 0;
+    background-color: var(--soft);
+    border-top: 1px solid var(--line);
+    overflow: hidden;
+  }
+  
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  .eyebrow {
+    font-size: 0.85rem;
+    font-weight: 800;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    display: block;
+    margin-bottom: 12px;
+  }
+  .section-subtitle {
+    font-size: 1.05rem;
+    color: var(--muted);
+    margin-top: 16px;
+  }
+
+  /* Premium Tabs */
+  .flow-tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 50px;
+  }
+  .flow-tabs {
+    display: flex;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 6px;
+    box-shadow: var(--shadow-sm);
+  }
+  .flow-tab-btn {
+    padding: 14px 32px;
+    border: none;
+    background: transparent;
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 800;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .flow-tab-btn.active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+  }
+
+  /* Metadata badges */
+  .flow-meta {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+  }
+  .duration-badge {
+    display: inline-block;
+    padding: 8px 24px;
+    background: rgba(197, 160, 89, 0.08);
+    border: 1.5px solid var(--accent);
+    color: var(--accent-dark);
+    font-weight: 800;
+    font-size: 0.9rem;
+    border-radius: 99px;
+  }
+  .duration-badge.copilot {
+    background: rgba(99, 153, 34, 0.08);
+    border-color: var(--accent2);
+    color: var(--accent2-dark);
+  }
+
+  /* Flow content visibility */
+  .flow-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .flow-content.active-flow {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Timeline Tree */
+  .timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding-left: 50px;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 14px;
+    width: 2px;
+    background: var(--line);
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 60px;
+  }
+  .timeline-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .timeline-step {
+    position: absolute;
+    left: -50px;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border: 2px solid var(--accent);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: var(--shadow-sm);
+  }
+  .step-num {
+    font-size: 0.7rem;
+    font-weight: 900;
+    color: var(--accent-dark);
+    font-family: 'Shippori Mincho', serif;
+  }
+  #flow-content-copilot .timeline-step {
+    border-color: var(--accent2);
+  }
+  #flow-content-copilot .step-num {
+    color: var(--accent2-dark);
+  }
+
+  /* Timeline card body */
+  .timeline-body {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 40px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .timeline-body:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: rgba(197, 160, 89, 0.3);
+  }
+  #flow-content-copilot .timeline-body:hover {
+    border-color: rgba(99, 153, 34, 0.3);
+  }
+
+  .step-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: #222;
+  }
+
+  /* Billing & Payment Highlight Area */
+  .payment-box {
+    display: flex;
+    flex-direction: column;
+    background: #fff9f6;
+    border: 1px dashed #d14d3a;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 24px;
+  }
+  .payment-badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: 4px 12px;
+    background: #d14d3a;
+    color: #fff;
+    font-weight: 800;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    letter-spacing: 0.05em;
+  }
+  .payment-text {
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: #4a1d17;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  /* Task splits */
+  .task-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .task-col {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 24px;
+  }
+  .task-header-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(99, 153, 34, 0.08);
+    border: 1px solid rgba(99, 153, 34, 0.2);
+    color: var(--accent2-dark);
+    font-weight: 800;
+    font-size: 0.75rem;
+    border-radius: 6px;
+    margin-bottom: 12px;
+  }
+  .task-header-badge.client {
+    background: rgba(197, 160, 89, 0.08);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    color: var(--accent-dark);
+  }
+  .task-desc {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: #555;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .execution-flow-section {
+      padding: 80px 0;
+    }
+    .timeline {
+      padding-left: 30px;
+    }
+    .timeline::before {
+      left: 4px;
+    }
+    .timeline-step {
+      left: -36px;
+    }
+    .timeline-body {
+      padding: 24px;
+      border-radius: 20px;
+    }
+    .step-title {
+      font-size: 1.15rem;
+      margin-bottom: 20px;
+    }
+    .task-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .payment-box {
+      padding: 16px;
+    }
+    .flow-tab-btn {
+      padding: 12px 20px;
+      font-size: 0.85rem;
+    }
+  }
+</style>
