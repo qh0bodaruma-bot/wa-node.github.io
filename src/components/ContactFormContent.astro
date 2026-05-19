@@ -237,7 +237,9 @@ const t = f[lang];
           <h3>{t.line_title}</h3>
           <p>{t.line_desc}</p>
           <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="line-btn shine-effect">
-            <img src="https://vignette.wikia.nocookie.net/line/images/b/bb/Line_logo.png/revision/latest?cb=20150524021545" alt="LINE" class="line-icon" style="filter: brightness(0) invert(1); width: 24px; height: 24px;" />
+            <svg class="line-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width: 24px; height: 24px; margin-right: 8px;">
+              <path d="M24 10.304c0-5.369-5.383-9.738-12-9.738-6.616 0-12 4.369-12 9.738 0 4.814 3.904 8.846 9.449 9.58.373.08.882.247 1.01.594.116.313.076.804.037 1.135 0 0-.154.93-.188 1.127-.058.327-.272 1.341 1.173.732 1.445-.609 7.828-4.606 10.151-7.511C23.235 14.168 24 12.333 24 10.304zm-14.735 2.146c-.22 0-.398-.178-.398-.398V8.629c0-.22.178-.398.398-.398h2.68c.22 0 .398.178.398.398s-.178.398-.398.398h-2.282v1.196h2.282c.22 0 .398.178.398.398s-.178.398-.398.398h-2.282v1.406h2.282c.22 0 .398.178.398.398s-.178.398-.398.398h-2.68zm5.556 0c-.22 0-.398-.178-.398-.398V8.629c0-.22.178-.398.398-.398.22 0 .398.178.398.398v3.423c0 .22-.178.398-.398.398zm3.262 0c-.134 0-.263-.067-.34-.183l-2.028-3.083v2.868c0 .22-.178.398-.398.398-.22 0-.398-.178-.398-.398V8.629c0-.181.122-.34.298-.385.176-.045.36.035.452.19l2.016 3.064V8.629c0-.22.178-.398.398-.398.22 0 .398.178.398.398v3.423c0 .181-.122.34-.298.385-.054.014-.11.014-.164 0h.064zm-11.89 0c-.22 0-.398-.178-.398-.398V8.629c0-.22.178-.398.398-.398.22 0 .398.178.398.398v3.423c0 .22-.178.398-.398.398z"/>
+            </svg>
             {t.line_btn}
           </a>
         </div>
@@ -452,6 +454,7 @@ const t = f[lang];
     .container { padding: 0 15px; }
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     .glass-panel { padding: 30px 20px; }
+    .contact-ann-notice { flex-direction: column; text-align: center; gap: 8px; padding: 12px 20px; }
   }
 </style>
 
