@@ -297,10 +297,11 @@ const t = f[lang];
         {t.web_steps.map((item) => (
           <div class="timeline-item reveal">
             <div class="timeline-step">
-              <span class="step-num">{item.step}</span>
+              <span class="step-num">{item.step.replace('STEP ', '')}</span>
             </div>
             
             <div class="timeline-body">
+              <span class="step-label">{item.step}</span>
               <h3 class="step-title ShipporiMincho">{item.title}</h3>
               
               {item.payment && (
@@ -336,10 +337,11 @@ const t = f[lang];
         {t.copilot_steps.map((item) => (
           <div class="timeline-item reveal">
             <div class="timeline-step">
-              <span class="step-num">{item.step}</span>
+              <span class="step-num">{item.step.replace('STEP ', '')}</span>
             </div>
             
             <div class="timeline-body">
+              <span class="step-label">{item.step}</span>
               <h3 class="step-title ShipporiMincho">{item.title}</h3>
               
               {item.payment && (
@@ -533,10 +535,10 @@ const t = f[lang];
 
   .timeline-step {
     position: absolute;
-    left: -50px;
+    left: -53px;
     top: 0;
-    width: 30px;
-    height: 30px;
+    width: 36px;
+    height: 36px;
     background: #fff;
     border: 2px solid var(--accent);
     border-radius: 50%;
@@ -547,7 +549,7 @@ const t = f[lang];
     box-shadow: var(--shadow-sm);
   }
   .step-num {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     font-weight: 900;
     color: var(--accent-dark);
     font-family: 'Shippori Mincho', serif;
@@ -582,6 +584,19 @@ const t = f[lang];
     font-weight: 800;
     margin-bottom: 24px;
     color: #222;
+  }
+
+  .step-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 4px;
+    font-family: 'Shippori Mincho', serif;
+  }
+  #flow-content-copilot .step-label {
+    color: var(--accent2);
   }
 
   /* Billing & Payment Highlight Area */
@@ -660,7 +675,7 @@ const t = f[lang];
       left: 4px;
     }
     .timeline-step {
-      left: -36px;
+      left: -43px;
     }
     .timeline-body {
       padding: 24px;
