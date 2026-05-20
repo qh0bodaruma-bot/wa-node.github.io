@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "和-Nodeを支えるテクノロジー（Tech Stack）｜和-Node";
+const description = "和-NodeのWeb制作を支える技術基盤。Astro、Cloudflare Pages、Vanilla CSSを用いた、高速・セキュア・柔軟なWebサイト構築の裏側を解説します。";
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="tech-page">
+    <!-- Hero Section -->
+    <section class="tech-hero section">
+      <div class="container narrow reveal">
+        <div class="eyebrow">Technology & Architecture</div>
+        <h1>和-Nodeを支える<br/><span class="text-accent">テクノロジー</span></h1>
+        <p class="lead">
+          ただ見た目が綺麗なだけでなく、極限まで軽く、安全で、ユーザーの心理に寄り添う。<br/>
+          それを実現するための、私たちの技術スタックとその理由を公開します。
+        </p>
+      </div>
+    </section>
+
+    <!-- Tech Stack Grid -->
+    <section class="tech-stack-section section">
+      <div class="container">
+        
+        <div class="tech-card reveal">
+          <div class="tech-header">
+            <h2 class="tech-title">Astro</h2>
+            <span class="tech-badge">Framework</span>
+          </div>
+          <div class="tech-body">
+            <h3>「Zero JS」による圧倒的な表示速度</h3>
+            <p>
+              現代のWebフレームワークの多くは、ユーザーのブラウザに大量のJavaScriptを送信します。
+              Astroは「デフォルトでJavaScriptを送信しない（Zero JS）」という設計思想を持ち、
+              必要な部分だけを動的にする「Islands Architecture」を採用しています。
+            </p>
+            <p>
+              これにより、ページ表示の待ち時間を極限まで削り、離脱率の低下とSEO評価の向上を同時に実現します。
+            </p>
+          </div>
+        </div>
+
+        <div class="tech-card reveal">
+          <div class="tech-header">
+            <h2 class="tech-title">Cloudflare Pages</h2>
+            <span class="tech-badge">Infrastructure</span>
+          </div>
+          <div class="tech-body">
+            <h3>エッジ・コンピューティングと強固なセキュリティ</h3>
+            <p>
+              従来の「一つのサーバーから世界中に配信する」方式ではなく、世界中に分散されたCloudflareのエッジサーバー（CDN）を利用します。
+              ユーザーの最も近くにあるサーバーからデータが爆速で配信されるため、どの地域からアクセスしても高速です。
+            </p>
+            <p>
+              また、強力なDDoS対策や常時SSL化など、エンタープライズ水準のセキュリティが標準で備わっています。
+            </p>
+          </div>
+        </div>
+
+        <div class="tech-card reveal">
+          <div class="tech-header">
+            <h2 class="tech-title">Vanilla CSS</h2>
+            <span class="tech-badge">Styling</span>
+          </div>
+          <div class="tech-body">
+            <h3>ピクセル単位の「心理導線」を描くために</h3>
+            <p>
+              流行のCSSフレームワーク（Tailwind CSSなど）に依存せず、あえてピュアな「Vanilla CSS」を中心に構築しています。
+              これは、フレームワークの制約に縛られず、ユーザーの視線誘導や「1pxの余白」が与える心理的影響を完璧にコントロールするためです。
+            </p>
+            <p>
+              不要なCSSクラスが読み込まれないため、ファイルサイズも最小限に抑えられます。
+            </p>
+          </div>
+        </div>
+
+        <div class="tech-card reveal">
+          <div class="tech-header">
+            <h2 class="tech-title">AI Driven Development</h2>
+            <span class="tech-badge">Workflow</span>
+          </div>
+          <div class="tech-body">
+            <h3>生成AIを活用した高品質な高速開発</h3>
+            <p>
+              最新の生成AIをコードのレビューやリファクタリング、反復タスクの自動化に組み込んでいます。
+              これにより、ヒューマンエラーを減らしながら開発スピードを飛躍的に向上させ、
+              私たちは「デザインとユーザー心理の設計」という人間にしかできないクリエイティブな領域に集中しています。
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy section">
+      <div class="container narrow reveal">
+        <div class="philosophy-box">
+          <h2>技術は、心を動かすための「裏方」である。</h2>
+          <p>
+            私たちが最新技術を追い求めるのは、スペックを誇示するためではありません。<br/>
+            ページが1秒早く表示されることで、訪問者のイライラを防ぐ。<br/>
+            セキュアな通信環境があるからこそ、安心して問い合わせができる。<br/>
+            すべては、<strong>ユーザーの心理的負担をゼロにし、本来の「和」を届けるため</strong>の裏方なのです。
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .tech-page { background-color: var(--bg); overflow-x: hidden; }
+  .text-accent { color: var(--accent); }
+
+  .tech-hero {
+    text-align: center;
+    padding: 120px 0 80px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tech-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.2;
+    margin-bottom: 32px;
+    font-weight: 800;
+  }
+  .tech-hero .lead {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .tech-stack-section { padding: 80px 0; }
+  .tech-stack-section .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .tech-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(138, 90, 50, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(138, 90, 50, 0.1);
+    border-color: rgba(138, 90, 50, 0.2);
+  }
+
+  .tech-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 16px;
+  }
+  .tech-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin: 0;
+    color: #2b241f;
+  }
+  .tech-badge {
+    background: var(--soft);
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+  }
+
+  .tech-body h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  .tech-body p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .tech-body p:last-child { margin-bottom: 0; }
+
+  .philosophy { padding: 60px 0 120px; }
+  .philosophy-box {
+    background: linear-gradient(135deg, rgba(241, 230, 218, 0.6) 0%, rgba(253, 250, 245, 0.9) 100%);
+    border: 1px solid var(--line);
+    border-radius: 32px;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .philosophy-box h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: var(--accent);
+  }
+  .philosophy-box p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: var(--text);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .tech-stack-section .container { grid-template-columns: 1fr; }
+    .tech-card { padding: 30px 24px; }
+  }
+  @media (max-width: 768px) {
+    .tech-hero h1 { font-size: 2.2rem; }
+    .philosophy-box { padding: 40px 20px; }
+    .philosophy-box h2 { font-size: 1.6rem; }
+  }
+</style>
