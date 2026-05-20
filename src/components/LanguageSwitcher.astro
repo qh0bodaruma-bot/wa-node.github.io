@@ -1,7 +1,7 @@
 ---
 const { lang = 'ja' } = Astro.props;
 const currentUrl = Astro.url;
-let pathWithoutLang = currentUrl.pathname.replace(/^\/(en|fr)/, '');
+let pathWithoutLang = currentUrl.pathname.replace(/^\/(en|fr)(\/|$)/, '/');
 if (pathWithoutLang === '') pathWithoutLang = '/';
 
 function getLangPath(targetLang: string) {

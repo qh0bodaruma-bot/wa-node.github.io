@@ -12,13 +12,13 @@ const CUSTOM_PAGES = [
   '/simulator/', '/lp_wizard/', '/seo_check/', '/dx_mental_diagnosis/', 
   '/barrier_free/', '/corporate-mental/', '/mental_care/', '/kdp_books/', 
   '/lp-portfolio/', '/campaign-anniversary/', '/easy-guide/',
-  '/en/', '/fr/'
+  '/en/', '/fr/', '/ai-chat-demo/', '/psychology-demo/'
 ];
 
 // Sitemapから除外するページ（noindex対象）
 const EXCLUDED_PAGES = [
   '404', '500', 'exclusive-monitor',
-  '/ai-chat-demo', '/psychology-demo', '/line_demo', '/demos',
+  '/line_demo', '/demos',
   '/terms', '/privacy', '/cancel-policy', '/tokutei', 
   '/security-policy', '/terms_miniapp', '/counseling-notes', '/thanks',
   '/counseling_liff', '/dx_diagnosis_liff', '/inquiry_liff',
