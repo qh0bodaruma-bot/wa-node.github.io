@@ -15,7 +15,7 @@ function getLocalizedLink(path: string) {
   }
   
   // en or fr: For existing multi-language pages
-  const validPages = ['/', '', '/contact', '/pricing', '/ai-chat-demo', '/corporate-mental'];
+  const validPages = ['/', '', '/contact', '/pricing', '/ai-chat-demo', '/corporate-mental', '/tech-stack'];
   const basePage = cleanPath.split(/[?#]/)[0];
   
   if (validPages.includes(basePage)) {

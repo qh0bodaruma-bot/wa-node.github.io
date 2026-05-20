@@ -1,0 +1,224 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = "Technologies & Architecture (Tech Stack) | Wa-Node";
+const description = "Les fondations techniques derrière le développement web de Wa-Node. Découvrez comment nous utilisons Astro, Cloudflare Pages et Vanilla CSS pour créer des sites rapides, sécurisés et flexibles.";
+---
+
+<BaseLayout title={title} description={description} lang="fr">
+  <main class="tech-page">
+    <!-- Hero Section -->
+    <section class="tech-hero section">
+      <div class="container narrow reveal">
+        <div class="eyebrow">Technologie & Architecture</div>
+        <h1>Les technologies derrière<br/><span class="text-accent">Wa-Node</span></h1>
+        <p class="lead">
+          Nous ne créons pas seulement des sites esthétiques ; nous les rendons extrêmement légers, sécurisés et psychologiquement alignés sur le comportement des utilisateurs.<br/>
+          Voici notre stack technique principale et la philosophie derrière nos choix.
+        </p>
+      </div>
+    </section>
+
+    <!-- Tech Stack Grid -->
+    <section class="tech-stack-section section">
+      <div class="container">
+        
+        <div class="tech-card reveal">
+          <div class="tech-header">
+            <h2 class="tech-title">Astro</h2>
+            <span class="tech-badge">Framework</span>
+          </div>
+          <div class="tech-body">
+            <h3>Une vitesse fulgurante grâce au « Zero JS »</h3>
+            <p>
+              La plupart des frameworks web modernes envoient une quantité massive de JavaScript au navigateur de l'utilisateur.
+              Astro repose sur une philosophie « Zero JS par défaut », ne rendant dynamiques les éléments que lorsque c'est nécessaire grâce à l'« Islands Architecture ».
+            </p>
+            <p>
+              Cela réduit considérablement le temps de chargement, diminuant le taux de rebond tout en optimisant le potentiel SEO.
+            </p>
+          </div>
+        </div>
+
+        <div class="tech-card reveal">
+          <div class="tech-header">
+            <h2 class="tech-title">Cloudflare Pages</h2>
+            <span class="tech-badge">Infrastructure</span>
+          </div>
+          <div class="tech-body">
+            <h3>Edge Computing et sécurité de niveau entreprise</h3>
+            <p>
+              Au lieu de servir des sites depuis un seul serveur, nous distribuons les données à l'échelle mondiale via le réseau Edge de Cloudflare (CDN).
+              Les fichiers sont servis depuis le nœud le plus proche de l'utilisateur, garantissant des performances rapides, quel que soit son emplacement.
+            </p>
+            <p>
+              De plus, cette infrastructure offre une sécurité de premier ordre dès le départ, incluant la protection DDoS et le SSL automatique.
+            </p>
+          </div>
+        </div>
+
+        <div class="tech-card reveal">
+          <div class="tech-header">
+            <h2 class="tech-title">Vanilla CSS</h2>
+            <span class="tech-badge">Styling</span>
+          </div>
+          <div class="tech-body">
+            <h3>Conception de précision pour les tunnels psychologiques</h3>
+            <p>
+              Nous évitons les frameworks CSS populaires comme Tailwind CSS pour écrire du CSS pur.
+              Cela nous permet de nous affranchir des limitations des frameworks, en gardant le contrôle total sur chaque pixel d'espacement et en affinant les indices visuels qui guident les actions des utilisateurs.
+            </p>
+            <p>
+              L'écriture de CSS sur mesure évite également la surcharge de styles, maintenant le poids global de la page exceptionnellement bas.
+            </p>
+          </div>
+        </div>
+
+        <div class="tech-card reveal">
+          <div class="tech-header">
+            <h2 class="tech-title">AI Driven Development</h2>
+            <span class="tech-badge">Workflow</span>
+          </div>
+          <div class="tech-body">
+            <h3>Flux de travail automatisés, rapides et de haute qualité</h3>
+            <p>
+              Nous intégrons l'intelligence artificielle générative de pointe dans nos pipelines de revue de code, d'optimisation et de test.
+              Cela réduit les erreurs humaines, accélère les délais de développement et nous permet de nous concentrer sur ce que les humains font de mieux : la conception stratégique et la psychologie des utilisateurs.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy section">
+      <div class="container narrow reveal">
+        <div class="philosophy-box">
+          <h2>La technologie n'est qu'un outil pour toucher les esprits.</h2>
+          <p>
+            Nous ne courons pas après les dernières tendances technologiques juste pour afficher des spécifications.<br/>
+            Charger une page une seconde plus vite évite aux visiteurs de se détourner.<br/>
+            Une infrastructure sécurisée permet aux utilisateurs de nous contacter en toute tranquillité d'esprit.<br/>
+            En fin de compte, <strong>chaque technologie que nous utilisons sert à éliminer les frictions et à connecter les gens.</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</BaseLayout>
+
+<style>
+  .tech-page { background-color: var(--bg); overflow-x: hidden; }
+  .text-accent { color: var(--accent); }
+
+  .tech-hero {
+    text-align: center;
+    padding: 120px 0 80px;
+    border-bottom: 1px solid var(--line);
+  }
+  .tech-hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    line-height: 1.2;
+    margin-bottom: 32px;
+    font-weight: 800;
+  }
+  .tech-hero .lead {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .tech-stack-section { padding: 80px 0; }
+  .tech-stack-section .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+
+  .tech-card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(138, 90, 50, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .tech-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(138, 90, 50, 0.1);
+    border-color: rgba(138, 90, 50, 0.2);
+  }
+
+  .tech-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 16px;
+  }
+  .tech-title {
+    font-size: 1.8rem;
+    font-weight: 900;
+    margin: 0;
+    color: #2b241f;
+  }
+  .tech-badge {
+    background: var(--soft);
+    color: var(--accent);
+    font-size: 0.8rem;
+    font-weight: 800;
+    padding: 6px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.05em;
+  }
+
+  .tech-body h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    color: var(--text);
+  }
+  .tech-body p {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .tech-body p:last-child { margin-bottom: 0; }
+
+  .philosophy { padding: 60px 0 120px; }
+  .philosophy-box {
+    background: linear-gradient(135deg, rgba(241, 230, 218, 0.6) 0%, rgba(253, 250, 245, 0.9) 100%);
+    border: 1px solid var(--line);
+    border-radius: 32px;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .philosophy-box h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 24px;
+    color: var(--accent);
+  }
+  .philosophy-box p {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: var(--text);
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
+    .tech-stack-section .container { grid-template-columns: 1fr; }
+    .tech-card { padding: 30px 24px; }
+  }
+  @media (max-width: 768px) {
+    .tech-hero h1 { font-size: 2.2rem; }
+    .philosophy-box { padding: 40px 20px; }
+    .philosophy-box h2 { font-size: 1.6rem; }
+  }
+</style>

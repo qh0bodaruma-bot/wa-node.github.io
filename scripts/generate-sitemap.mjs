@@ -12,7 +12,8 @@ const CUSTOM_PAGES = [
   '/simulator/', '/lp_wizard/', '/seo_check/', '/dx_mental_diagnosis/', 
   '/barrier_free/', '/corporate-mental/', '/mental_care/', '/kdp_books/', 
   '/lp-portfolio/', '/campaign-anniversary/', '/easy-guide/', '/tech-stack/',
-  '/en/', '/fr/', '/ai-chat-demo/', '/psychology-demo/'
+  '/en/', '/fr/', '/ai-chat-demo/', '/psychology-demo/',
+  '/en/tech-stack/', '/fr/tech-stack/'
 ];
 
 // Sitemapから除外するページ（noindex対象）
