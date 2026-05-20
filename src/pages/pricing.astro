@@ -27,7 +27,34 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
       </div>
     </section>
 
-    <section class="section">
+    <section class="section choice-guide">
+      <p class="eyebrow">Start Here</p>
+      <h2 class="premium-heading">迷ったら、まずは3つからお選びください</h2>
+      <p class="choice-lead">細かなメニューを先に選ぶ必要はありません。今の目的に近い入口からご相談いただければ、最適なプランに整理します。</p>
+      <div class="choice-grid">
+        <a class="choice-card primary-choice" href="#web-production">
+          <span class="choice-label">一番人気</span>
+          <h3>ホームページ・LPを作りたい</h3>
+          <p>心理導線LP・心理導線HPを中心に、伝わる構成とデザインを整えます。</p>
+          <strong>48,000円〜</strong>
+        </a>
+        <a class="choice-card" href="#copilot">
+          <span class="choice-label">継続改善</span>
+          <h3>作った後も相談したい</h3>
+          <p>Web改善、AI活用、業務整理を月額で伴走する「ビジネスの副操縦士」です。</p>
+          <strong>月額 15,000円〜</strong>
+        </a>
+        <a class="choice-card" href="#ict-ai">
+          <span class="choice-label">単発相談</span>
+          <h3>AI・ICTで業務を整えたい</h3>
+          <p>ChatGPT、LINE、業務ツール、簡単な自動化などをスポットで整理します。</p>
+          <strong>5,000円〜</strong>
+        </a>
+      </div>
+      <p class="choice-footnote">迷った場合は「ホームページ・LPを作りたい」または「作った後も相談したい」からで大丈夫です。</p>
+    </section>
+
+    <section class="section" id="web-production">
       <p class="eyebrow">01. Web & Lead Design</p>
       <h2 class="premium-heading">心理学を応用したWeb・導線制作</h2>
       <p>「伝わらない」を減らし、成果に繋げる情報設計。行動心理に基づいた高品質なWebサイトを制作します。</p>
@@ -35,25 +62,42 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
         <strong>【起業記念キャンペーン】制作費 20% OFF！</strong>
         <p>以下の通常価格より20%割引いたします（毎月3名様限定）。</p>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>サービス</th><th>通常価格</th><th>キャンペーン価格</th><th>内容</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>シンプルLP制作</td><td>30,000円〜</td><td class="price-campaign">24,000円〜</td><td>1ページの簡易的なランディングページ</td></tr>
-            <tr><td>シンプルHP制作</td><td>50,000円〜</td><td class="price-campaign">40,000円〜</td><td>名刺代わりの小規模ホームページ（3〜5ページ）</td></tr>
-            <tr><td>心理導線LP制作</td><td>60,000円〜</td><td class="price-campaign">48,000円〜</td><td>行動心理をふまえた高品質LP（構成案から作成）</td></tr>
-            <tr><td>心理導線HP制作</td><td>120,000円〜</td><td class="price-campaign">96,000円〜</td><td>5ページ程度の標準的なホームページ</td></tr>
-            <tr><td>HPパッケージ「Business 7」</td><td>150,000円〜</td><td class="price-campaign">120,000円〜</td><td>7ページ構成・標準SEO・プレミアム仕上げ</td></tr>
-            <tr><td>制作オプション</td><td>5,000円〜</td><td class="price-campaign">4,000円〜</td><td>図解作成、ブログ機能、診断ツール組み込み等</td></tr>
-            <tr><td>Webサイト保守</td><td>月額 10,000円〜</td><td>-</td><td>安全な運用、セキュリティ管理、軽微な修正代行</td></tr>
-          </tbody>
-        </table>
+      <div class="recommended-price-grid">
+        <article class="recommended-price-card">
+          <span>LPで反応を取りたい方</span>
+          <h3>心理導線LP制作</h3>
+          <p class="p-price">48,000円〜 <small>キャンペーン価格</small></p>
+          <p>行動心理をふまえ、ファーストビュー・信頼形成・CTAまで一貫して設計します。</p>
+        </article>
+        <article class="recommended-price-card">
+          <span>事業の土台を整えたい方</span>
+          <h3>心理導線HP制作</h3>
+          <p class="p-price">96,000円〜 <small>キャンペーン価格</small></p>
+          <p>5ページ程度の標準的なホームページを、見込み客が安心して相談できる導線で構成します。</p>
+        </article>
       </div>
+      <details class="addon-details price-details">
+        <summary>シンプル制作・保守・オプションを含む料金一覧を見る</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>サービス</th><th>通常価格</th><th>キャンペーン価格</th><th>内容</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>シンプルLP制作</td><td>30,000円〜</td><td class="price-campaign">24,000円〜</td><td>1ページの簡易的なランディングページ</td></tr>
+              <tr><td>シンプルHP制作</td><td>50,000円〜</td><td class="price-campaign">40,000円〜</td><td>名刺代わりの小規模ホームページ（3〜5ページ）</td></tr>
+              <tr><td>心理導線LP制作</td><td>60,000円〜</td><td class="price-campaign">48,000円〜</td><td>行動心理をふまえた高品質LP（構成案から作成）</td></tr>
+              <tr><td>心理導線HP制作</td><td>120,000円〜</td><td class="price-campaign">96,000円〜</td><td>5ページ程度の標準的なホームページ</td></tr>
+              <tr><td>HPパッケージ「Business 7」</td><td>150,000円〜</td><td class="price-campaign">120,000円〜</td><td>7ページ構成・標準SEO・プレミアム仕上げ</td></tr>
+              <tr><td>制作オプション</td><td>5,000円〜</td><td class="price-campaign">4,000円〜</td><td>図解作成、ブログ機能、診断ツール組み込み等</td></tr>
+              <tr><td>Webサイト保守</td><td>月額 10,000円〜</td><td>-</td><td>安全な運用、セキュリティ管理、軽微な修正代行</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
     </section>
 
-    <section class="section">
+    <section class="section" id="copilot">
       <p class="eyebrow">02. Ongoing Support & AI</p>
       <h2 class="premium-heading">ビジネスの副操縦士（月額制戦略的パートナー）</h2>
       <p>「作って終わり」にせず、現場の課題を継続的に解決し、AIによる自動化を定着させます。</p>
@@ -65,7 +109,7 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
           <p class="p-price">15,000円〜 <small>/ 月</small></p>
           <p class="p-desc">月1回のオンライン相談 + チャットでの随時相談。Web改善からAI活用まで幅広くサポート。</p>
         </div>
-        <div class="p-card-simple">
+        <div class="p-card-simple" id="ict-ai">
           <h3>ICTスポット相談</h3>
           <p class="p-price">5,000円 <small>/ 60分</small></p>
           <p class="p-desc">ChatGPT、LINE、業務ツール、Webまわりの課題をピンポイントで解決します。</p>
@@ -100,22 +144,25 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
       <p class="eyebrow">03. Organization & Communication</p>
       <h2 class="premium-heading">組織・コミュニケーション支援</h2>
       <p>心理学の専門知見を、組織の課題解決や相談窓口の設計に応用します。</p>
-      <div class="table-wrap">
-        <table>
-          <tbody>
-            <tr>
-              <td>心理学的コミュニケーション支援</td>
-              <td>15,000円〜 / 月</td>
-              <td>小規模法人向け。相談窓口の設計や、心理的安全性の構築サポート。</td>
-            </tr>
-            <tr>
-              <td>個別専門相談（産業カウンセラー）</td>
-              <td>5,000円 / 60分</td>
-              <td>経営者・リーダーのための心の整理。初回30分無料。</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <details class="addon-details">
+        <summary>組織支援・個別専門相談の料金を見る</summary>
+        <div class="table-wrap mini">
+          <table>
+            <tbody>
+              <tr>
+                <td>心理学的コミュニケーション支援</td>
+                <td>15,000円〜 / 月</td>
+                <td>小規模法人向け。相談窓口の設計や、心理的安全性の構築サポート。</td>
+              </tr>
+              <tr>
+                <td>個別専門相談（産業カウンセラー）</td>
+                <td>5,000円 / 60分</td>
+                <td>経営者・リーダーのための心の整理。初回30分無料。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
     </section>
 
     <ConsultationFlow />
@@ -173,6 +220,81 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
   .eyebrow { font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.2em; margin-bottom: 10px; display: block; }
   h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c2c2c; }
 
+  .choice-guide {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .choice-lead {
+    max-width: 720px;
+    margin: 0 auto 34px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 34px 0 20px;
+  }
+  .choice-card {
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    text-align: left;
+    box-shadow: 0 16px 34px rgba(44, 44, 44, 0.04);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .choice-card:hover {
+    border-color: rgba(197, 160, 89, 0.55);
+    box-shadow: 0 20px 44px rgba(44, 44, 44, 0.08);
+    transform: translateY(-3px);
+  }
+  .choice-card.primary-choice {
+    border: 2px solid var(--accent);
+    background: #fffdf9;
+  }
+  .choice-label {
+    align-self: flex-start;
+    border-radius: 999px;
+    background: rgba(197, 160, 89, 0.12);
+    color: var(--accent-dark);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 5px 12px;
+  }
+  .choice-card h3 {
+    margin: 0;
+    color: #2c2c2c;
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+  .choice-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .choice-card strong {
+    color: var(--accent-red);
+    font-size: 1.15rem;
+  }
+  .choice-footnote {
+    margin: 0 auto;
+    max-width: 680px;
+    color: #777;
+    font-size: 0.92rem;
+  }
+
   .campaign-notice-box {
     background: rgba(209, 77, 58, 0.03); border-left: 4px solid var(--accent-red);
     padding: 20px; border-radius: 0 15px 15px 0; margin-bottom: 30px;
@@ -184,6 +306,41 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
   th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--line); }
   th { background: #fdfaf5; color: var(--accent-dark); font-weight: 800; font-size: 0.85rem; }
   .price-campaign { color: var(--accent-red); font-weight: 800; }
+
+  .recommended-price-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    margin: 34px 0 18px;
+  }
+  .recommended-price-card {
+    background: #fff;
+    border: 1px solid rgba(197, 160, 89, 0.28);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 16px 34px rgba(44, 44, 44, 0.04);
+  }
+  .recommended-price-card span {
+    display: inline-block;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    background: rgba(209, 77, 58, 0.08);
+    color: var(--accent-red);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 5px 12px;
+  }
+  .recommended-price-card h3 {
+    margin: 0 0 12px;
+    color: #2c2c2c;
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+  .recommended-price-card p:last-child {
+    margin-bottom: 0;
+    color: #666;
+    line-height: 1.7;
+  }
 
   .pricing-grid-simple {
     display: grid;
@@ -235,6 +392,10 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
   .addon-details summary:hover { text-decoration: underline; }
   .table-wrap.mini { margin-top: 20px; }
   .table-wrap.mini th, .table-wrap.mini td { padding: 12px 15px; font-size: 0.85rem; }
+  .price-details .table-wrap {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
 
   @media (max-width: 768px) {
     .banner-inner { flex-direction: column; text-align: center; padding: 30px 20px; gap: 15px; }
@@ -242,6 +403,12 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
     .banner-main strong { font-size: 1.1rem; }
     h2 { font-size: 1.8rem; }
     th, td { padding: 15px 10px; font-size: 0.9rem; }
+    .choice-grid,
+    .recommended-price-grid,
     .pricing-grid-simple { grid-template-columns: 1fr; }
+    .choice-guide { text-align: left; }
+    .choice-lead,
+    .choice-footnote { margin-left: 0; }
+    .choice-card { min-height: auto; }
   }
 </style>

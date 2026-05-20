@@ -56,6 +56,31 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     </section>
 
     <div class="container">
+      <section class="priority-works reveal" aria-labelledby="priority-works-title">
+        <div class="priority-copy">
+          <span class="eyebrow">First View</span>
+          <h2 id="priority-works-title" class="premium-heading">迷ったら、まずはこの3つをご覧ください</h2>
+          <p>和-Nodeの主軸である「心理学×Web制作」と、AI・ICTの実装力が伝わりやすい代表デモです。</p>
+        </div>
+        <div class="priority-grid">
+          <a href="/psychology-demo/" class="priority-card main">
+            <span>心理導線の強み</span>
+            <h3>心理導線体験デモ</h3>
+            <p>配置・言葉・CTAの理由を、心理学的な根拠と一緒に体験できます。</p>
+          </a>
+          <a href="/portfolio-lp/lp_clinic.html" class="priority-card">
+            <span>LP制作サンプル</span>
+            <h3>クリニック・医療系LP</h3>
+            <p>信頼形成と予約導線を両立させた、LP制作の見え方を確認できます。</p>
+          </a>
+          <a href="/ai-chat-demo/" class="priority-card">
+            <span>AI・ICT実装</span>
+            <h3>AI相談内容整理ナビ</h3>
+            <p>曖昧な相談内容を、Web制作やICT活用の観点で整理するデモです。</p>
+          </a>
+        </div>
+      </section>
+
       <!-- Filter Tabs -->
       <nav class="filter-nav" id="filter-nav">
         <button class="filter-btn active" data-filter="all">すべて</button>
@@ -102,7 +127,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <div class="card-footer">
               <span class="tech-tag">OpenAI API</span>
               <span class="tech-tag">Astro</span>
-              <a href="/ai-chat-demo" class="card-link">ナビを試す →</a>
+              <a href="/ai-chat-demo/" class="card-link">ナビを試す →</a>
             </div>
           </div>
         </article>
@@ -122,7 +147,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <div class="card-footer">
               <span class="tech-tag">Logic</span>
               <span class="tech-tag">Empathy UI</span>
-              <a href="/mental_care" class="card-link">診断を体験する →</a>
+              <a href="/mental_care/" class="card-link">診断を体験する →</a>
             </div>
           </div>
         </article>
@@ -142,7 +167,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <div class="card-footer">
               <span class="tech-tag">UD Design</span>
               <span class="tech-tag">SVG Gauge</span>
-              <a href="/barrier_free" class="card-link">診断を体験する →</a>
+              <a href="/barrier_free/" class="card-link">診断を体験する →</a>
             </div>
           </div>
         </article>
@@ -162,7 +187,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <div class="card-footer">
               <span class="tech-tag">SEO</span>
               <span class="tech-tag">Marketing</span>
-              <a href="/seo_check" class="card-link">診断を体験する →</a>
+              <a href="/seo_check/" class="card-link">診断を体験する →</a>
             </div>
           </div>
         </article>
@@ -201,7 +226,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <div class="card-footer">
               <span class="tech-tag">Global</span>
               <span class="tech-tag">Design</span>
-              <a href="/kdp_books" class="card-link">実績を見る →</a>
+              <a href="/kdp_books/" class="card-link">実績を見る →</a>
             </div>
           </div>
         </article>
@@ -293,6 +318,79 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     .eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--accent); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
     .lead { font-size: 1.1rem; color: #555; line-height: 1.8; max-width: 800px; margin: 0 auto; }
 
+    .priority-works {
+      margin-bottom: 60px;
+      padding: 36px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid var(--glass-border);
+      border-radius: 28px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.03);
+    }
+    .priority-copy {
+      max-width: 720px;
+      margin: 0 auto 28px;
+      text-align: center;
+    }
+    .priority-copy h2 {
+      margin-bottom: 14px;
+      color: var(--text-deep);
+      font-size: 1.9rem;
+    }
+    .priority-copy p {
+      margin: 0;
+      color: #666;
+      line-height: 1.8;
+    }
+    .priority-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .priority-card {
+      display: flex;
+      min-height: 220px;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 26px 22px;
+      background: #fff;
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      color: #333;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .priority-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--accent);
+      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.06);
+    }
+    .priority-card.main {
+      border: 2px solid var(--accent);
+      background: #fffdf8;
+    }
+    .priority-card span {
+      align-self: flex-start;
+      padding: 4px 10px;
+      background: rgba(197, 160, 89, 0.12);
+      border-radius: 999px;
+      color: var(--accent-dark);
+      font-size: 0.72rem;
+      font-weight: 800;
+    }
+    .priority-card h3 {
+      margin: 0;
+      color: var(--text-deep);
+      font-size: 1.18rem;
+      line-height: 1.45;
+    }
+    .priority-card p {
+      margin: 0;
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.7;
+    }
+
     /* Filter Nav */
     .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
     .filter-btn {
@@ -351,6 +449,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 768px) {
+      .priority-works { padding: 28px 20px; }
+      .priority-copy { text-align: left; }
+      .priority-copy h2 { font-size: 1.55rem; }
+      .priority-grid { grid-template-columns: 1fr; }
+      .priority-card { min-height: auto; }
       .works-grid { grid-template-columns: 1fr; }
     }
 </style>

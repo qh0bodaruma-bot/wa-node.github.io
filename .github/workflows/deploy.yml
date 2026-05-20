@@ -29,6 +29,9 @@ jobs:
       - name: Build Astro
         run: npx --no-install astro build
 
+      - name: Generate sitemap
+        run: node scripts/generate-sitemap.mjs
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:

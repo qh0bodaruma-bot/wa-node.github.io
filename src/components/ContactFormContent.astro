@@ -29,6 +29,24 @@ const f = {
     form_intro_title: "今の状況を、そのまま教えてください。",
     form_intro_desc: "「まだ何も決まっていない」という状態でも大丈夫です。あなたのペースで、一つずつ言葉にすることから始めましょう。",
     submit_flow_desc: "送信後、通常2営業日以内にご返信します。日程確定後、無料相談を行い、必要に応じて簡易たたき台・お見積りをご提案します。正式な制作・月額支援は、内容と費用にご納得いただいた後に開始します。",
+    precheck_title: "相談前1分チェック",
+    precheck_desc: "近いものを選ぶだけで大丈夫です。無料相談で話す内容が整理しやすくなります。",
+    label_issue: "今いちばん困っていること",
+    label_takeaway: "無料相談で持ち帰りたいもの",
+    precheck_placeholder: "近いものを選択してください",
+    issues: {
+      traffic: "集客・アクセスが足りない",
+      inquiry: "問い合わせ・申込みにつながらない",
+      message: "サービスの魅力が伝わりにくい",
+      workflow: "業務やAI・ICT活用を整理したい",
+      other: "まだうまく言語化できていない"
+    },
+    takeaways: {
+      direction: "進むべき方向性を整理したい",
+      cost: "概算費用や優先順位を知りたい",
+      idea: "改善案・構成案のたたき台が欲しい",
+      fit: "依頼できる内容か判断したい"
+    },
     label_name: "お名前",
     placeholder_name: "和 太郎",
     required: "必須",
@@ -36,6 +54,7 @@ const f = {
     placeholder_email: "example@wa-node.com",
     label_category: "ご相談カテゴリ",
     placeholder_category: "選択してください",
+    category_hint: "迷った場合は「Webサイト・LP制作」または「ビジネスの副操縦士」をお選びください。LINE・メンタル・法人窓口などの詳細は、相談内容欄にそのままご記入いただけます。",
     categories: {
       web: "Webサイト・LP制作",
       copilot: "ビジネスの副操縦士（月額支援）",
@@ -47,6 +66,7 @@ const f = {
     },
     label_method: "ご相談の通信方式",
     placeholder_method: "選択してください",
+    method_hint: "Zoom・対面などをご希望の場合は「その他」を選び、相談内容欄にご記入ください。",
     methods: {
       google_meet: "Google Meet (推奨)",
       zoom: "Zoom",
@@ -92,6 +112,24 @@ const f = {
     form_intro_title: "Tell us about your current situation.",
     form_intro_desc: "It is completely fine if details are not decided yet. Let's start by translating your thoughts step by step.",
     submit_flow_desc: "Upon submission, we will reply within 2 business days. After fixing a slot, we will have a free consultation and propose a brief outline/estimate if needed. Formal design and support will start only after you agree to the plan and costs.",
+    precheck_title: "1-Minute Pre-Consultation Check",
+    precheck_desc: "Just choose the closest options. This helps us make the free consultation more concrete.",
+    label_issue: "What is your biggest current challenge?",
+    label_takeaway: "What would you like to take away from the free consultation?",
+    precheck_placeholder: "Please choose the closest option",
+    issues: {
+      traffic: "Not enough traffic or awareness",
+      inquiry: "Not enough inquiries or applications",
+      message: "The value of my service is hard to communicate",
+      workflow: "I want to organize operations, AI, or ICT use",
+      other: "I cannot clearly put it into words yet"
+    },
+    takeaways: {
+      direction: "Clarify the direction",
+      cost: "Understand rough costs and priorities",
+      idea: "Get improvement or structure ideas",
+      fit: "Check whether the request is a good fit"
+    },
     label_name: "Full Name",
     placeholder_name: "John Doe",
     required: "Required",
@@ -99,6 +137,7 @@ const f = {
     placeholder_email: "example@wa-node.com",
     label_category: "Inquiry Category",
     placeholder_category: "Please select",
+    category_hint: "If you are unsure, choose Web Site & LP Design or Business Copilot. Please write LINE, mental support, corporate support, or other details in the message field.",
     categories: {
       web: "Web Site & LP Design",
       copilot: "Business Copilot (Monthly Support)",
@@ -110,6 +149,7 @@ const f = {
     },
     label_method: "Preferred Communication Method",
     placeholder_method: "Please select",
+    method_hint: "If you prefer Zoom, in-person, or another format, choose Others and write the details in the message field.",
     methods: {
       google_meet: "Google Meet (Recommended)",
       zoom: "Zoom",
@@ -155,6 +195,24 @@ const f = {
     form_intro_title: "Décrivez votre situation actuelle.",
     form_intro_desc: "Aucun souci si tout n'est pas encore clair. Commençons par exprimer vos pensées pas à pas.",
     submit_flow_desc: "Après envoi, nous vous répondrons sous 2 jours ouvrables. Une fois le créneau fixé, nous aurons une consultation gratuite et proposerons un projet initial/devis si nécessaire. La création officielle commencera uniquement après votre accord.",
+    precheck_title: "Mini-check avant consultation",
+    precheck_desc: "Choisissez simplement les options les plus proches. Cela rendra la consultation gratuite plus concrète.",
+    label_issue: "Quel est votre principal défi actuel ?",
+    label_takeaway: "Que souhaitez-vous obtenir pendant la consultation gratuite ?",
+    precheck_placeholder: "Choisissez l'option la plus proche",
+    issues: {
+      traffic: "Pas assez de visibilité ou de trafic",
+      inquiry: "Pas assez de demandes ou de réservations",
+      message: "La valeur du service est difficile à communiquer",
+      workflow: "Je veux organiser les opérations, l'IA ou les TIC",
+      other: "Je n'arrive pas encore à le formuler clairement"
+    },
+    takeaways: {
+      direction: "Clarifier la direction",
+      cost: "Comprendre les coûts approximatifs et priorités",
+      idea: "Recevoir des idées d'amélioration ou de structure",
+      fit: "Vérifier si la demande est adaptée"
+    },
     label_name: "Nom Complet",
     placeholder_name: "Jean Dupont",
     required: "Requis",
@@ -162,6 +220,7 @@ const f = {
     placeholder_email: "exemple@wa-node.com",
     label_category: "Catégorie de demande",
     placeholder_category: "Veuillez choisir",
+    category_hint: "Si vous hésitez, choisissez Design Web & LP ou Co-pilote d'Affaires. Ajoutez les détails LINE, soutien mental, entreprise ou autre dans le message.",
     categories: {
       web: "Design Web & LP",
       copilot: "Co-pilote d'Affaires (Soutien Mensuel)",
@@ -173,6 +232,7 @@ const f = {
     },
     label_method: "Méthode de communication",
     placeholder_method: "Veuillez choisir",
+    method_hint: "Pour Zoom, une rencontre en personne ou une autre méthode, choisissez Autre et précisez dans le message.",
     methods: {
       google_meet: "Google Meet (Recommandé)",
       zoom: "Zoom",
@@ -259,6 +319,48 @@ const t = f[lang];
           </div>
           <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off">
             <input type="hidden" name="_next" value={lang === 'ja' ? 'https://www.wa-node.com/thanks/' : `https://www.wa-node.com/${lang}/thanks/`} />
+
+            <section class="precheck-card" aria-labelledby="precheck-title">
+              <div class="precheck-header">
+                <span>Start</span>
+                <h3 id="precheck-title">{t.precheck_title}</h3>
+                <p>{t.precheck_desc}</p>
+              </div>
+              <div class="precheck-grid">
+                <div class="form-group">
+                  <label for="category">{t.label_category} <span class="required">{t.required}</span></label>
+                  <select id="category" name="category" required>
+                    <option value="" disabled selected>{t.precheck_placeholder}</option>
+                    <option value="web">{t.categories.web}</option>
+                    <option value="copilot">{t.categories.copilot}</option>
+                    <option value="ai">{t.categories.ai}</option>
+                    <option value="other">{t.categories.other}</option>
+                  </select>
+                  <p class="field-desc">{t.category_hint}</p>
+                </div>
+                <div class="form-group">
+                  <label for="current_issue">{t.label_issue} <span class="required">{t.required}</span></label>
+                  <select id="current_issue" name="current_issue" required>
+                    <option value="" disabled selected>{t.precheck_placeholder}</option>
+                    <option value="traffic">{t.issues.traffic}</option>
+                    <option value="inquiry">{t.issues.inquiry}</option>
+                    <option value="message">{t.issues.message}</option>
+                    <option value="workflow">{t.issues.workflow}</option>
+                    <option value="other">{t.issues.other}</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="consultation_takeaway">{t.label_takeaway} <span class="required">{t.required}</span></label>
+                  <select id="consultation_takeaway" name="consultation_takeaway" required>
+                    <option value="" disabled selected>{t.precheck_placeholder}</option>
+                    <option value="direction">{t.takeaways.direction}</option>
+                    <option value="cost">{t.takeaways.cost}</option>
+                    <option value="idea">{t.takeaways.idea}</option>
+                    <option value="fit">{t.takeaways.fit}</option>
+                  </select>
+                </div>
+              </div>
+            </section>
             
             <div class="form-group">
               <label for="name">{t.label_name} <span class="required">{t.required}</span></label>
@@ -271,30 +373,15 @@ const t = f[lang];
             </div>
 
             <div class="form-group">
-              <label for="category">{t.label_category} <span class="required">{t.required}</span></label>
-              <select id="category" name="category" required>
-                <option value="" disabled selected>{t.placeholder_category}</option>
-                <option value="web">{t.categories.web}</option>
-                <option value="copilot">{t.categories.copilot}</option>
-                <option value="line">{t.categories.line}</option>
-                <option value="ai">{t.categories.ai}</option>
-                <option value="counseling">{t.categories.counseling}</option>
-                <option value="corporate">{t.categories.corporate}</option>
-                <option value="other">{t.categories.other}</option>
-              </select>
-            </div>
-
-            <div class="form-group">
               <label for="method">{t.label_method} <span class="required">{t.required}</span></label>
               <select id="method" name="method" required>
                 <option value="" disabled selected>{t.placeholder_method}</option>
                 <option value="google_meet">{t.methods.google_meet}</option>
-                <option value="zoom">{t.methods.zoom}</option>
                 <option value="line_video">{t.methods.line_video}</option>
                 <option value="phone">{t.methods.phone}</option>
-                <option value="face_to_face">{t.methods.face_to_face}</option>
                 <option value="other">{t.methods.other}</option>
               </select>
+              <p class="field-desc">{t.method_hint}</p>
             </div>
 
             <!-- 動的な連絡先詳細入力欄（電話・LINE選択時のみJavaScriptで表示制御） -->
@@ -426,6 +513,48 @@ const t = f[lang];
 
   /* Form Column */
   .glass-panel { background: #fff; border: 1px solid var(--line); border-radius: 40px; padding: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.02); }
+  .precheck-card {
+    margin-bottom: 34px;
+    padding: 28px;
+    border: 1px solid rgba(197, 160, 89, 0.26);
+    border-radius: 24px;
+    background: #fffdf8;
+  }
+  .precheck-header {
+    margin-bottom: 22px;
+    text-align: center;
+  }
+  .precheck-header span {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 4px 12px;
+    border-radius: 999px;
+    background: rgba(197, 160, 89, 0.12);
+    color: var(--accent-dark);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .precheck-header h3 {
+    margin: 0 0 8px;
+    color: #2c2c2c;
+    font-size: 1.35rem;
+    font-weight: 800;
+  }
+  .precheck-header p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .precheck-grid {
+    display: grid;
+    gap: 18px;
+  }
+  .precheck-card .form-group {
+    margin-bottom: 0;
+  }
   .form-group { margin-bottom: 30px; }
   .form-group label { display: block; font-weight: 800; font-size: 0.9rem; margin-bottom: 10px; color: #2c2c2c; }
   .required { color: var(--accent-red); font-size: 0.7rem; margin-left: 5px; }
@@ -454,21 +583,48 @@ const t = f[lang];
     .container { padding: 0 15px; }
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     .glass-panel { padding: 30px 20px; }
+    .precheck-card { padding: 24px 18px; }
+    .precheck-header { text-align: left; }
+    .contact-header { overflow-x: hidden; }
+    .contact-header .container {
+      max-width: 390px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-left: 20px;
+      padding-right: 20px;
+      box-sizing: border-box;
+    }
+    .contact-header h1 {
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+      text-wrap: balance;
+    }
+    .contact-header .lead {
+      max-width: 340px;
+      margin-left: auto;
+      margin-right: auto;
+      word-break: normal;
+      overflow-wrap: anywhere;
+      line-break: strict;
+      text-align: center;
+    }
     .contact-ann-notice { 
       display: flex;
       flex-direction: column; 
       text-align: center; 
       gap: 6px; 
       padding: 10px 12px; 
-      width: calc(100% - 32px); 
-      margin: 0 auto;
+      width: min(100%, 320px);
+      margin: 0 auto 32px;
       box-sizing: border-box; 
     }
     .contact-ann-notice p {
       font-size: 0.75rem;
       line-height: 1.4;
-      word-break: auto-phrase;
-      overflow-wrap: break-word;
+      word-break: normal;
+      overflow-wrap: anywhere;
+      line-break: strict;
     }
   }
 </style>

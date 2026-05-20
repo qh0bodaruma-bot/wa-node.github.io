@@ -9,23 +9,30 @@ interface Props {
 const { lang = 'ja' } = Astro.props;
 
 function getLocalizedLink(path: string) {
-  const cleanPath = path.replace(/\/+/g, '/');
+  const [beforeHash, hashFragment] = path.split('#');
+  const hash = hashFragment ? `#${hashFragment}` : '';
+  const queryIndex = beforeHash.indexOf('?');
+  const pathname = queryIndex >= 0 ? beforeHash.slice(0, queryIndex) : beforeHash;
+  const search = queryIndex >= 0 ? beforeHash.slice(queryIndex) : '';
+  const cleanPath = pathname.replace(/\/+/g, '/');
+  const pathWithSlash = cleanPath === '/' || cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
+
   if (lang === 'ja') {
-    return cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
+    return `${pathWithSlash}${search}${hash}`;
   }
   
   // en or fr: For existing multi-language pages
-  const validPages = ['/', '', '/contact', '/pricing', '/ai-chat-demo', '/corporate-mental', '/tech-stack'];
-  const basePage = cleanPath.split(/[?#]/)[0];
+  const validPages = ['/', '', '/about', '/works', '/contact', '/pricing', '/ai-chat-demo', '/psychology-demo', '/simulator', '/tech-stack', '/corporate-mental', '/barrier_free', '/mental_care', '/kdp_books'];
+  const basePage = cleanPath.replace(/\/$/, '');
   
   if (validPages.includes(basePage)) {
-    const langPath = basePage === '/' || basePage === '' ? `/${lang}/` : `/${lang}${cleanPath}/`;
-    return langPath.replace(/\/+/g, '/');
+    const langPath = basePage === '/' || basePage === '' ? `/${lang}/` : `/${lang}${pathWithSlash}`;
+    return `${langPath.replace(/\/+/g, '/')}${search}${hash}`;
   }
   
   // For other pages that do not have multi-language files, fallback to their Japanese counterpart with lang param
-  const fallbackPath = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
-  return `${fallbackPath}?lang=${lang}`;
+  const separator = search ? '&' : '?';
+  return `${pathWithSlash}${search}${separator}lang=${lang}${hash}`;
 }
 ---
 <footer class="footer">
@@ -103,7 +110,7 @@ function getLocalizedLink(path: string) {
 
     <div class="footer-bottom">
       <div class="footer-badges">
-        <a href="/security-policy"><img src="/images/security_action_hitotsuboshi-large_color.jpg" alt="SECURITY ACTION 一つ星"></a>
+        <a href="/security-policy/"><img src="/images/security_action_hitotsuboshi-large_color.jpg" alt="SECURITY ACTION 一つ星"></a>
       </div>
       <p class="copyright">© 2026 和-Node. All Rights Reserved.</p>
     </div>

@@ -27,6 +27,29 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     </header>
 
     <div class="container">
+      <section class="lp-choice-guide reveal" aria-labelledby="lp-choice-title">
+        <span class="eyebrow">Choose by Purpose</span>
+        <h2 id="lp-choice-title">目的が近いサンプルからご覧ください</h2>
+        <p>業種が完全に一致していなくても大丈夫です。まずは、近い目的のLPを見ると完成イメージが掴みやすくなります。</p>
+        <div class="lp-choice-grid">
+          <a href="/portfolio-lp/lp_clinic.html" class="lp-choice-card main">
+            <span>予約・相談を増やしたい</span>
+            <h3>信頼形成型LP</h3>
+            <p>医療・美容・士業など、安心感が成果に直結する事業に向いた構成です。</p>
+          </a>
+          <a href="/portfolio-lp/lp_ec.html" class="lp-choice-card">
+            <span>商品・サービスを売りたい</span>
+            <h3>販売促進型LP</h3>
+            <p>EC、SaaS、セミナーなど、魅力とベネフィットを素早く伝える構成です。</p>
+          </a>
+          <a href="/portfolio-lp/lp_corporate.html" class="lp-choice-card">
+            <span>ブランドの土台を整えたい</span>
+            <h3>信頼・採用型LP</h3>
+            <p>企業紹介、採用、地域事業など、想いや実績を丁寧に届ける構成です。</p>
+          </a>
+        </div>
+      </section>
+
       <!-- Category Filter -->
       <nav class="filter-nav">
         <button class="filter-btn active" data-filter="all">すべて</button>
@@ -215,7 +238,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <h2>あなたのビジネスを加速させる、<br/>最高の一枚を。</h2>
           <p>まずは無料相談から、最適なプランをご提案します。</p>
           <div class="cta-btns">
-            <a href="/demos" class="btn-secondary">パッケージ一覧を見る</a>
+            <a href="/pricing/" class="btn-secondary">パッケージ一覧を見る</a>
             <a href="#consultation-flow" class="btn-primary">無料相談のステップを確認</a>
           </div>
         </div>
@@ -231,6 +254,79 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
   .page-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 24px; color: #333; }
   .accent-text { color: #639922; position: relative; }
   .page-desc { font-size: 1.1rem; color: #666; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+
+  .lp-choice-guide {
+    margin-bottom: 56px;
+    padding: 36px;
+    background: rgba(255, 255, 255, 0.82);
+    border: 1px solid rgba(99, 153, 34, 0.18);
+    border-radius: 28px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.035);
+    text-align: center;
+  }
+  .lp-choice-guide h2 {
+    margin: 0 0 14px;
+    color: #333;
+    font-size: 1.9rem;
+    font-weight: 900;
+  }
+  .lp-choice-guide > p {
+    max-width: 740px;
+    margin: 0 auto 28px;
+    color: #666;
+    line-height: 1.8;
+  }
+  .lp-choice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .lp-choice-card {
+    display: flex;
+    min-height: 220px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 26px 22px;
+    background: #fff;
+    border: 1px solid rgba(99, 153, 34, 0.18);
+    border-radius: 20px;
+    color: #333;
+    text-align: left;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  .lp-choice-card:hover {
+    transform: translateY(-4px);
+    border-color: #639922;
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.06);
+  }
+  .lp-choice-card.main {
+    border: 2px solid #639922;
+    background: rgba(99, 153, 34, 0.035);
+  }
+  .lp-choice-card span {
+    align-self: flex-start;
+    padding: 4px 10px;
+    background: rgba(99, 153, 34, 0.1);
+    border-radius: 999px;
+    color: #4f7c1b;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+  .lp-choice-card h3 {
+    margin: 0;
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: 900;
+    line-height: 1.45;
+  }
+  .lp-choice-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
 
   .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
   .filter-btn { padding: 10px 24px; border-radius: 999px; border: 1px solid #ddd; background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; }
@@ -289,6 +385,10 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
   @media (max-width: 600px) {
     .page-header { padding: 80px 20px 40px; }
     .lp-grid { grid-template-columns: 1fr; gap: 24px; }
+    .lp-choice-guide { padding: 28px 20px; text-align: left; }
+    .lp-choice-guide h2 { font-size: 1.55rem; }
+    .lp-choice-grid { grid-template-columns: 1fr; }
+    .lp-choice-card { min-height: auto; }
     .cta-inner h2 { font-size: 1.8rem; }
     .cta-btns { flex-direction: column; }
     .btn-primary, .btn-secondary { width: 100%; box-sizing: border-box; }
@@ -330,5 +430,6 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   }
 
+  initPortfolio();
   document.addEventListener('astro:page-load', initPortfolio);
 </script>

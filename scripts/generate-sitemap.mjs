@@ -6,77 +6,72 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = path.resolve(__dirname, '../dist');
 const SITE_URL = 'https://www.wa-node.com';
 
-// 手動で追加・確保する主要ページ
-const CUSTOM_PAGES = [
-  '/', '/about/', '/works/', '/contact/', '/free-guide/', '/pricing/', 
-  '/simulator/', '/lp_wizard/', '/seo_check/', '/dx_mental_diagnosis/', 
-  '/barrier_free/', '/corporate-mental/', '/mental_care/', '/kdp_books/', 
-  '/lp-portfolio/', '/campaign-anniversary/', '/easy-guide/', '/tech-stack/',
-  '/en/', '/fr/', '/ai-chat-demo/', '/psychology-demo/',
-  '/en/tech-stack/', '/fr/tech-stack/'
+// Search-focused sitemap. Demo subpages and noindex legal/utility pages are intentionally omitted.
+const PAGES = [
+  ['/', '1.0'],
+  ['/about/', '0.9'],
+  ['/works/', '0.9'],
+  ['/contact/', '0.9'],
+  ['/pricing/', '0.9'],
+  ['/free-guide/', '0.8'],
+  ['/psychology-demo/', '0.8'],
+  ['/ai-chat-demo/', '0.8'],
+  ['/simulator/', '0.8'],
+  ['/lp_wizard/', '0.8'],
+  ['/seo_check/', '0.8'],
+  ['/easy-guide/', '0.8'],
+  ['/tech-stack/', '0.8'],
+  ['/lp-portfolio/', '0.8'],
+  ['/campaign-anniversary/', '0.8'],
+  ['/anniversary-speed/', '0.7'],
+  ['/anniversary-automation/', '0.7'],
+  ['/anniversary-premium/', '0.7'],
+  ['/corporate-mental/', '0.6'],
+  ['/barrier_free/', '0.6'],
+  ['/mental_care/', '0.6'],
+  ['/kdp_books/', '0.6'],
+  ['/en/', '0.7'],
+  ['/en/about/', '0.6'],
+  ['/en/works/', '0.6'],
+  ['/en/contact/', '0.6'],
+  ['/en/pricing/', '0.6'],
+  ['/en/ai-chat-demo/', '0.6'],
+  ['/en/psychology-demo/', '0.6'],
+  ['/en/simulator/', '0.6'],
+  ['/en/tech-stack/', '0.6'],
+  ['/en/corporate-mental/', '0.5'],
+  ['/en/barrier_free/', '0.5'],
+  ['/en/mental_care/', '0.5'],
+  ['/en/kdp_books/', '0.5'],
+  ['/fr/', '0.7'],
+  ['/fr/about/', '0.6'],
+  ['/fr/works/', '0.6'],
+  ['/fr/contact/', '0.6'],
+  ['/fr/pricing/', '0.6'],
+  ['/fr/ai-chat-demo/', '0.6'],
+  ['/fr/psychology-demo/', '0.6'],
+  ['/fr/simulator/', '0.6'],
+  ['/fr/tech-stack/', '0.6'],
+  ['/fr/corporate-mental/', '0.5'],
+  ['/fr/barrier_free/', '0.5'],
+  ['/fr/mental_care/', '0.5'],
+  ['/fr/kdp_books/', '0.5'],
 ];
 
-// Sitemapから除外するページ（noindex対象）
-const EXCLUDED_PAGES = [
-  '404', '500', 'exclusive-monitor',
-  '/line_demo', '/demos',
-  '/terms', '/privacy', '/cancel-policy', '/tokutei', 
-  '/security-policy', '/terms_miniapp', '/counseling-notes', '/thanks',
-  '/counseling_liff', '/dx_diagnosis_liff', '/inquiry_liff',
-  '/portfolio-lp'
-];
-
-function getHtmlFiles(dir, fileList = []) {
-  const files = fs.readdirSync(dir);
-  files.forEach(file => {
-    const filePath = path.join(dir, file);
-    if (fs.statSync(filePath).isDirectory()) {
-      getHtmlFiles(filePath, fileList);
-    } else if (file.endsWith('.html')) {
-      const relativePath = path.relative(DIST_DIR, filePath);
-      let urlPath = relativePath.replace(/\\/g, '/');
-      if (urlPath === 'index.html') {
-        urlPath = '';
-      } else if (urlPath.endsWith('/index.html')) {
-        urlPath = urlPath.replace('/index.html', '/');
-      }
-      
-      const isExcluded = EXCLUDED_PAGES.some(ex => urlPath.includes(ex.replace(/^\//, '')));
-      if (!isExcluded) {
-        fileList.push(urlPath.startsWith('/') ? urlPath : '/' + urlPath);
-      }
-    }
-  });
-  return fileList;
-}
-
-try {
-  console.log('Generating sitemap...');
-  let pages = getHtmlFiles(DIST_DIR);
-  
-  CUSTOM_PAGES.forEach(cp => {
-    const isExcluded = EXCLUDED_PAGES.some(ex => cp.includes(ex));
-    if (!pages.includes(cp) && !isExcluded) {
-      pages.push(cp);
-    }
-  });
-
-  const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+const lastmod = new Date().toISOString().split('T')[0];
+const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map(page => `  <url>
+${PAGES.map(([page, priority]) => `  <url>
     <loc>${SITE_URL}${page}</loc>
-    <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+    <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>${page === '/' ? '1.0' : '0.8'}</priority>
+    <priority>${priority}</priority>
   </url>`).join('\n')}
-</urlset>`;
+</urlset>
+`;
 
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapContent);
-  // robots.txtとの互換性のためindexも作成
-  fs.writeFileSync(path.join(DIST_DIR, 'sitemap-index.xml'), sitemapContent);
-  
-  console.log(`Successfully generated sitemap with ${pages.length} pages.`);
-} catch (error) {
-  console.error('Error generating sitemap:', error);
-  process.exit(1);
-}
+fs.mkdirSync(DIST_DIR, { recursive: true });
+fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapContent);
+fs.writeFileSync(path.join(DIST_DIR, 'sitemap-index.xml'), sitemapContent);
+
+console.log(`Successfully generated sitemap with ${PAGES.length} pages.`);
