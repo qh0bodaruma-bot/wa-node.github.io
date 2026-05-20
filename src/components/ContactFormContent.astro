@@ -29,8 +29,11 @@ const f = {
     form_intro_title: "今の状況を、そのまま教えてください。",
     form_intro_desc: "「まだ何も決まっていない」という状態でも大丈夫です。あなたのペースで、一つずつ言葉にすることから始めましょう。",
     submit_flow_desc: "送信後、通常2営業日以内にご返信します。日程確定後、無料相談を行い、必要に応じて簡易たたき台・お見積りをご提案します。正式な制作・月額支援は、内容と費用にご納得いただいた後に開始します。",
+    precheck_badge: "相談前チェック",
     precheck_title: "相談前1分チェック",
     precheck_desc: "近いものを選ぶだけで大丈夫です。無料相談で話す内容が整理しやすくなります。",
+    form_start_label: "ここから通常フォームです",
+    form_start_desc: "お名前・連絡先・希望日時など、返信に必要な情報をご入力ください。",
     label_issue: "今いちばん困っていること",
     label_takeaway: "無料相談で持ち帰りたいもの",
     precheck_placeholder: "近いものを選択してください",
@@ -112,8 +115,11 @@ const f = {
     form_intro_title: "Tell us about your current situation.",
     form_intro_desc: "It is completely fine if details are not decided yet. Let's start by translating your thoughts step by step.",
     submit_flow_desc: "Upon submission, we will reply within 2 business days. After fixing a slot, we will have a free consultation and propose a brief outline/estimate if needed. Formal design and support will start only after you agree to the plan and costs.",
+    precheck_badge: "Pre-check",
     precheck_title: "1-Minute Pre-Consultation Check",
     precheck_desc: "Just choose the closest options. This helps us make the free consultation more concrete.",
+    form_start_label: "Regular form starts here",
+    form_start_desc: "Please enter the information needed for our reply, such as your name, contact details, and preferred dates.",
     label_issue: "What is your biggest current challenge?",
     label_takeaway: "What would you like to take away from the free consultation?",
     precheck_placeholder: "Please choose the closest option",
@@ -195,8 +201,11 @@ const f = {
     form_intro_title: "Décrivez votre situation actuelle.",
     form_intro_desc: "Aucun souci si tout n'est pas encore clair. Commençons par exprimer vos pensées pas à pas.",
     submit_flow_desc: "Après envoi, nous vous répondrons sous 2 jours ouvrables. Une fois le créneau fixé, nous aurons une consultation gratuite et proposerons un projet initial/devis si nécessaire. La création officielle commencera uniquement après votre accord.",
+    precheck_badge: "Mini-check",
     precheck_title: "Mini-check avant consultation",
     precheck_desc: "Choisissez simplement les options les plus proches. Cela rendra la consultation gratuite plus concrète.",
+    form_start_label: "Le formulaire principal commence ici",
+    form_start_desc: "Veuillez saisir les informations nécessaires à notre réponse, comme votre nom, vos coordonnées et vos dates souhaitées.",
     label_issue: "Quel est votre principal défi actuel ?",
     label_takeaway: "Que souhaitez-vous obtenir pendant la consultation gratuite ?",
     precheck_placeholder: "Choisissez l'option la plus proche",
@@ -322,12 +331,12 @@ const t = f[lang];
 
             <section class="precheck-card" aria-labelledby="precheck-title">
               <div class="precheck-header">
-                <span>Start</span>
+                <span>{t.precheck_badge}</span>
                 <h3 id="precheck-title">{t.precheck_title}</h3>
                 <p>{t.precheck_desc}</p>
               </div>
               <div class="precheck-grid">
-                <div class="form-group">
+                <div class="form-group precheck-form-group" data-step="Q1">
                   <label for="category">{t.label_category} <span class="required">{t.required}</span></label>
                   <select id="category" name="category" required>
                     <option value="" disabled selected>{t.precheck_placeholder}</option>
@@ -338,7 +347,7 @@ const t = f[lang];
                   </select>
                   <p class="field-desc">{t.category_hint}</p>
                 </div>
-                <div class="form-group">
+                <div class="form-group precheck-form-group" data-step="Q2">
                   <label for="current_issue">{t.label_issue} <span class="required">{t.required}</span></label>
                   <select id="current_issue" name="current_issue" required>
                     <option value="" disabled selected>{t.precheck_placeholder}</option>
@@ -349,7 +358,7 @@ const t = f[lang];
                     <option value="other">{t.issues.other}</option>
                   </select>
                 </div>
-                <div class="form-group">
+                <div class="form-group precheck-form-group" data-step="Q3">
                   <label for="consultation_takeaway">{t.label_takeaway} <span class="required">{t.required}</span></label>
                   <select id="consultation_takeaway" name="consultation_takeaway" required>
                     <option value="" disabled selected>{t.precheck_placeholder}</option>
@@ -361,6 +370,11 @@ const t = f[lang];
                 </div>
               </div>
             </section>
+
+            <div class="form-start-divider">
+              <span>{t.form_start_label}</span>
+              <p>{t.form_start_desc}</p>
+            </div>
             
             <div class="form-group">
               <label for="name">{t.label_name} <span class="required">{t.required}</span></label>
@@ -514,11 +528,25 @@ const t = f[lang];
   /* Form Column */
   .glass-panel { background: #fff; border: 1px solid var(--line); border-radius: 40px; padding: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.02); }
   .precheck-card {
+    position: relative;
+    overflow: hidden;
     margin-bottom: 34px;
-    padding: 28px;
-    border: 1px solid rgba(197, 160, 89, 0.26);
-    border-radius: 24px;
-    background: #fffdf8;
+    padding: 34px 28px 28px;
+    border: 2px solid rgba(209, 77, 58, 0.28);
+    border-radius: 26px;
+    background:
+      linear-gradient(135deg, rgba(209, 77, 58, 0.07), rgba(197, 160, 89, 0.06)),
+      #fffdf8;
+    box-shadow: 0 18px 45px rgba(209, 77, 58, 0.08);
+  }
+  .precheck-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(90deg, var(--accent-red), var(--accent));
   }
   .precheck-header {
     margin-bottom: 22px;
@@ -529,8 +557,8 @@ const t = f[lang];
     margin-bottom: 8px;
     padding: 4px 12px;
     border-radius: 999px;
-    background: rgba(197, 160, 89, 0.12);
-    color: var(--accent-dark);
+    background: var(--accent-red);
+    color: #fff;
     font-size: 0.72rem;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -552,8 +580,56 @@ const t = f[lang];
     display: grid;
     gap: 18px;
   }
-  .precheck-card .form-group {
+  .precheck-card .form-group,
+  .precheck-form-group {
     margin-bottom: 0;
+  }
+  .precheck-form-group {
+    position: relative;
+    padding: 18px 18px 18px 70px;
+    border: 1px solid rgba(209, 77, 58, 0.16);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+  .precheck-form-group::before {
+    content: attr(data-step);
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    display: grid;
+    width: 36px;
+    height: 36px;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--accent-red);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+  .precheck-form-group select {
+    background: #fff;
+  }
+  .form-start-divider {
+    margin: 34px 0 28px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+    text-align: center;
+  }
+  .form-start-divider span {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 6px 16px;
+    border-radius: 999px;
+    background: #2c2c2c;
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+  .form-start-divider p {
+    margin: 0;
+    color: #666;
+    font-size: 0.88rem;
+    line-height: 1.6;
   }
   .form-group { margin-bottom: 30px; }
   .form-group label { display: block; font-weight: 800; font-size: 0.9rem; margin-bottom: 10px; color: #2c2c2c; }
@@ -585,6 +661,14 @@ const t = f[lang];
     .glass-panel { padding: 30px 20px; }
     .precheck-card { padding: 24px 18px; }
     .precheck-header { text-align: left; }
+    .precheck-form-group {
+      padding: 66px 16px 18px;
+    }
+    .precheck-form-group::before {
+      top: 18px;
+      left: 16px;
+    }
+    .form-start-divider { text-align: left; }
     .contact-header { overflow-x: hidden; }
     .contact-header .container {
       max-width: 390px;
