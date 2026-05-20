@@ -6,69 +6,23 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = path.resolve(__dirname, '../dist');
 const SITE_URL = 'https://www.wa-node.com';
 
-// 手動で追加するページ（publicにあるものや、確実に含めたい主要ページ）
+// 手動で追加・確保する主要ページ
 const CUSTOM_PAGES = [
-  '/',
-  '/about/',
-  '/works/',
-  '/contact/',
-  '/free-guide/',
-  '/psychology-demo/',
-  '/pricing/',
-  '/simulator/',
-  '/lp_wizard/',
-  '/ai-chat-demo/',
-  '/seo_check/',
-  '/dx_mental_diagnosis/',
-  '/barrier_free/',
-  '/corporate-mental/',
-  '/mental_care/',
-  '/kdp_books/',
-  '/demos/',
-  '/line_demo/',
-  '/lp-portfolio/',
-  '/campaign-anniversary/',
-  '/en/pricing/',
-  '/fr/pricing/',
-  '/en/ai-chat-demo/',
-  '/fr/ai-chat-demo/',
-  '/en/corporate-mental/',
-  '/fr/corporate-mental/',
-  '/terms/',
-  '/privacy/',
-  '/cancel-policy/',
-  '/tokutei/',
-  '/counseling-notes/',
-  '/security-policy/',
-  '/terms_miniapp/',
-  '/thanks/',
-  '/easy-guide/',
-  '/portfolio-lp/index.html',
-  '/portfolio-lp/demo_business_7.html',
-  '/portfolio-lp/demo_corporate.html',
-  '/portfolio-lp/demo_enterprise_15.html',
-  '/portfolio-lp/demo_lead.html',
-  '/portfolio-lp/demo_local.html',
-  '/portfolio-lp/demo_media.html',
-  '/portfolio-lp/demo_premium_10.html',
-  '/portfolio-lp/demo_profile.html',
-  '/portfolio-lp/lp_beauty.html',
-  '/portfolio-lp/lp_clinic.html',
-  '/portfolio-lp/lp_corporate.html',
-  '/portfolio-lp/lp_ec.html',
-  '/portfolio-lp/lp_event.html',
-  '/portfolio-lp/lp_gym.html',
-  '/portfolio-lp/lp_lawyer.html',
-  '/portfolio-lp/lp_local.html',
-  '/portfolio-lp/lp_realestate.html',
-  '/portfolio-lp/lp_recruit.html',
-  '/portfolio-lp/lp_saas.html',
-  '/portfolio-lp/lp_sekkotsu.html',
-  '/portfolio-lp/lp_seminar.html',
-  '/portfolio-lp/giken-lp/index.html',
-  '/counseling_liff.html',
-  '/dx_diagnosis_liff.html',
-  '/inquiry_liff.html'
+  '/', '/about/', '/works/', '/contact/', '/free-guide/', '/pricing/', 
+  '/simulator/', '/lp_wizard/', '/seo_check/', '/dx_mental_diagnosis/', 
+  '/barrier_free/', '/corporate-mental/', '/mental_care/', '/kdp_books/', 
+  '/lp-portfolio/', '/campaign-anniversary/', '/easy-guide/',
+  '/en/', '/fr/'
+];
+
+// Sitemapから除外するページ（noindex対象）
+const EXCLUDED_PAGES = [
+  '404', '500', 'exclusive-monitor',
+  '/ai-chat-demo', '/psychology-demo', '/line_demo', '/demos',
+  '/terms', '/privacy', '/cancel-policy', '/tokutei', 
+  '/security-policy', '/terms_miniapp', '/counseling-notes', '/thanks',
+  '/counseling_liff', '/dx_diagnosis_liff', '/inquiry_liff',
+  '/portfolio-lp'
 ];
 
 function getHtmlFiles(dir, fileList = []) {
@@ -79,7 +33,6 @@ function getHtmlFiles(dir, fileList = []) {
       getHtmlFiles(filePath, fileList);
     } else if (file.endsWith('.html')) {
       const relativePath = path.relative(DIST_DIR, filePath);
-      // index.html はディレクトリ名として扱う（trailingSlash対応）
       let urlPath = relativePath.replace(/\\/g, '/');
       if (urlPath === 'index.html') {
         urlPath = '';
@@ -87,8 +40,8 @@ function getHtmlFiles(dir, fileList = []) {
         urlPath = urlPath.replace('/index.html', '/');
       }
       
-      // 除外するページ
-      if (!urlPath.includes('404') && !urlPath.includes('500') && !urlPath.includes('exclusive-monitor')) {
+      const isExcluded = EXCLUDED_PAGES.some(ex => urlPath.includes(ex.replace(/^\//, '')));
+      if (!isExcluded) {
         fileList.push(urlPath.startsWith('/') ? urlPath : '/' + urlPath);
       }
     }
@@ -100,9 +53,9 @@ try {
   console.log('Generating sitemap...');
   let pages = getHtmlFiles(DIST_DIR);
   
-  // CUSTOM_PAGESを追加（重複排除）
   CUSTOM_PAGES.forEach(cp => {
-    if (!pages.includes(cp)) {
+    const isExcluded = EXCLUDED_PAGES.some(ex => cp.includes(ex));
+    if (!pages.includes(cp) && !isExcluded) {
       pages.push(cp);
     }
   });

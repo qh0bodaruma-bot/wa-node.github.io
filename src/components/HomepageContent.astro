@@ -324,10 +324,14 @@ function getLocalizedLink(path: string) {
         url('/images/hero.png') no-repeat center center/cover;
       text-align: center;
       min-height: auto;
+      overflow-x: hidden;
     }
-    .hero .btns { flex-direction: column; width: 100%; align-items: stretch; gap: 12px; }
-    .hero-inner { padding: 0 20px; }
-    .hero-content { max-width: 100%; }
+    .hero .btns { flex-direction: column; width: 100%; box-sizing: border-box; align-items: stretch; gap: 12px; }
+    .hero-inner { padding: 0 15px; width: 100%; box-sizing: border-box; }
+    .hero-content { max-width: 100%; box-sizing: border-box; }
+    .lead { max-width: 100%; box-sizing: border-box; word-break: auto-phrase; overflow-wrap: break-word; margin-left: auto; margin-right: auto; }
+    .hero-title-chosen { font-size: clamp(2.2rem, 8vw, 3.2rem); }
+    .hero-title-psy { font-size: clamp(2rem, 7vw, 3rem); }
     .action-buttons-grid, .simple-flow-grid, .concept-intro-grid { grid-template-columns: 1fr; }
     .flow-item:not(:last-child)::after { display: none; }
     .profile-summary-inner { flex-direction: column; text-align: center; gap: 24px; }

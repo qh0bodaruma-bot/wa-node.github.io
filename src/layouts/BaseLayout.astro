@@ -27,10 +27,14 @@ const urlLang = Astro.url.searchParams.get('lang');
 const currentLang = urlLang === 'en' || urlLang === 'fr' ? urlLang : lang;
 
 const urlObj = new URL(url);
-const pathWithoutLocale = urlObj.pathname.replace(/^\/(en|fr)\//, '/');
+const pathWithoutLocale = urlObj.pathname.replace(/^\/(en|fr)\//, '/').replace(/\/$/, '');
+const multiLangPages = ['', '/contact', '/pricing', '/ai-chat-demo', '/corporate-mental'];
+const hasTranslation = multiLangPages.includes(pathWithoutLocale);
+
 const getLocalizedHref = (l: string) => {
-  if (l === 'ja') return new URL(pathWithoutLocale, urlObj.origin).href;
-  return new URL(`/${l}${pathWithoutLocale === '/' ? '/' : pathWithoutLocale}`, urlObj.origin).href;
+  const cleanPath = pathWithoutLocale === '' ? '/' : pathWithoutLocale + '/';
+  if (l === 'ja') return new URL(cleanPath, urlObj.origin).href;
+  return new URL(`/${l}${cleanPath}`, urlObj.origin).href;
 };
 ---
 
@@ -61,11 +65,14 @@ const getLocalizedHref = (l: string) => {
     <meta name="twitter:image" content={new URL(image, Astro.url)} />
 
     <link rel="canonical" href={url} />
-    <link rel="alternate" hreflang="ja" href={getLocalizedHref('ja')} />
-    <link rel="alternate" hreflang="en" href={getLocalizedHref('en')} />
-    <link rel="alternate" hreflang="fr" href={getLocalizedHref('fr')} />
-    <link rel="alternate" hreflang="x-default" href={getLocalizedHref('ja')} />
-
+    {hasTranslation && (
+      <>
+        <link rel="alternate" hreflang="ja" href={getLocalizedHref('ja')} />
+        <link rel="alternate" hreflang="en" href={getLocalizedHref('en')} />
+        <link rel="alternate" hreflang="fr" href={getLocalizedHref('fr')} />
+        <link rel="alternate" hreflang="x-default" href={getLocalizedHref('ja')} />
+      </>
+    )}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet" />

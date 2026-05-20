@@ -454,7 +454,20 @@ const t = f[lang];
     .container { padding: 0 15px; }
     .contact-grid { grid-template-columns: 1fr; gap: 40px; }
     .glass-panel { padding: 30px 20px; }
-    .contact-ann-notice { flex-direction: column; text-align: center; gap: 8px; padding: 12px 20px; }
+    .contact-ann-notice { 
+      flex-direction: column; 
+      text-align: center; 
+      gap: 8px; 
+      padding: 12px 15px; 
+      width: 100%; 
+      box-sizing: border-box; 
+    }
+    .contact-ann-notice p {
+      font-size: 0.8rem;
+      line-height: 1.4;
+      word-break: auto-phrase;
+      overflow-wrap: break-word;
+    }
   }
 </style>
 
