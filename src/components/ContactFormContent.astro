@@ -318,7 +318,7 @@ const t = f[lang];
             <p style="font-weight: 800; color: var(--trust); margin-bottom: 8px;">{t.form_intro_title}</p>
             <p class="small" style="color: var(--muted); line-height: 1.6; margin-bottom: 0;">{t.form_intro_desc}</p>
           </div>
-          <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off">
+          <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off" data-lang={lang}>
             <input type="hidden" name="_next" value={lang === 'ja' ? 'https://www.wa-node.com/thanks/' : `https://www.wa-node.com/${lang}/thanks/`} />
 
             <section class="precheck-card" aria-labelledby="precheck-title">
@@ -447,7 +447,9 @@ const t = f[lang];
               <p>{t.submit_flow_desc}</p>
             </div>
 
-            <button type="submit" class="submit-btn">
+            <button type="submit" class="submit-btn" 
+              data-submitting-text={lang === 'ja' ? '送信中...' : lang === 'fr' ? 'Envoi en cours...' : 'Sending...'}
+              data-original-text={t.btn_submit}>
               <span>{t.btn_submit}</span>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </button>
@@ -796,9 +798,71 @@ const t = f[lang];
       updateField();
     }
 
-    // 初回ロード時
-    initDynamicContactField();
-    // Astroのトランジション（画面遷移時）対応
-    document.addEventListener('astro:page-load', initDynamicContactField);
-  })();
-</script>
+      function initContactForm() {
+        const form = document.querySelector('.contact-form');
+        if (!form) return;
+
+        const button = form.querySelector('.submit-btn');
+        const buttonSpan = button ? button.querySelector('span') : null;
+        const lang = form.getAttribute('data-lang') || 'ja';
+
+        const errorMessages = {
+          ja: '送信に失敗しました。お手数ですが時間をおいて再度お試しいただくか、LINEからお問い合わせください。',
+          en: 'Failed to send. Please try again later or contact us via LINE.',
+          fr: 'Échec de l\'envoi. Veuillez réessayer plus tard ou nous contacter via LINE.'
+        };
+
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          if (!button || !buttonSpan) return;
+
+          // 送信中のUI表示と多重送信防止
+          button.disabled = true;
+          const originalText = button.getAttribute('data-original-text') || buttonSpan.textContent;
+          const submittingText = button.getAttribute('data-submitting-text') || 'Sending...';
+          buttonSpan.textContent = submittingText;
+          button.style.opacity = '0.7';
+
+          // Fetch APIで非同期送信
+          const formData = new FormData(form);
+          fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'Accept': 'application/json'
+            }
+          })
+          .then(response => {
+            if (response.ok) {
+              // 送信成功時：言語に応じたThanksページに遷移
+              const redirectPaths = {
+                ja: '/thanks/',
+                en: '/en/thanks/',
+                fr: '/fr/thanks/'
+              };
+              window.location.href = redirectPaths[lang] || '/thanks/';
+            } else {
+              throw new Error('Formspree response not ok');
+            }
+          })
+          .catch(err => {
+            console.error('Form submission error:', err);
+            alert(errorMessages[lang] || errorMessages.ja);
+            // UIを元に戻す
+            button.disabled = false;
+            buttonSpan.textContent = originalText;
+            button.style.opacity = '';
+          });
+        });
+      }
+
+      // 初回ロード時
+      initDynamicContactField();
+      initContactForm();
+      // Astroのトランジション（画面遷移時）対応
+      document.addEventListener('astro:page-load', function() {
+        initDynamicContactField();
+        initContactForm();
+      });
+    })();
+  </script>

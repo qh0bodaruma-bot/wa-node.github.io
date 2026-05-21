@@ -363,6 +363,14 @@ const CAMPAIGN_END_DATE = "2026年7月31日";
     const yen = (n) => '¥' + Math.round(n).toLocaleString('ja-JP');
     let currentTotal = 0;
 
+    function safeParseInt(val, minVal, maxVal, defaultValue) {
+      let parsed = parseInt(val, 10);
+      if (isNaN(parsed)) {
+        return defaultValue;
+      }
+      return Math.max(minVal, Math.min(parsed, maxVal));
+    }
+
     function update() {
       let subtotal = 0;
       let days = 0;
@@ -371,27 +379,30 @@ const CAMPAIGN_END_DATE = "2026年7月31日";
       // Plan
       const type = document.querySelector('input[name="type"]:checked');
       if (type) {
-        const v = parseInt(type.value);
+        const v = safeParseInt(type.value, 0, 1000000, 50000);
+        const d = safeParseInt(type.dataset.days, 0, 100, 3);
         subtotal += v;
-        days += parseInt(type.dataset.days);
-        rows.push({ label: type.dataset.label, price: v });
+        days += d;
+        rows.push({ label: type.dataset.label || 'Plan', price: v });
       }
 
       // Pages
       const pages = document.querySelector('input[name="pages"]:checked');
       if (pages) {
-        const v = parseInt(pages.value);
+        const v = safeParseInt(pages.value, 0, 1000000, 0);
+        const d = safeParseInt(pages.dataset.days, 0, 100, 0);
         subtotal += v;
-        days += parseInt(pages.dataset.days);
-        if (v > 0) rows.push({ label: pages.dataset.label, price: v });
+        days += d;
+        if (v > 0) rows.push({ label: pages.dataset.label || 'Pages', price: v });
       }
 
       // Features
       document.querySelectorAll('input[name="feature"]:checked').forEach(f => {
-        const v = parseInt(f.value);
+        const v = safeParseInt(f.value, 0, 1000000, 0);
+        const d = safeParseInt(f.dataset.days, 0, 100, 0);
         subtotal += v;
-        days += parseInt(f.dataset.days);
-        rows.push({ label: f.dataset.label, price: v });
+        days += d;
+        rows.push({ label: f.dataset.label || 'Feature', price: v });
       });
 
       // Rush

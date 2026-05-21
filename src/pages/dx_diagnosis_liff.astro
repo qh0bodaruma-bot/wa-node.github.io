@@ -207,7 +207,11 @@ import LiffLayout from '../layouts/LiffLayout.astro';
     }
 
     function nextQuestion(s) {
-      score += parseInt(s);
+      let parsedScore = parseInt(s, 10);
+      if (isNaN(parsedScore) || ![0, 1, 2].includes(parsedScore)) {
+        parsedScore = 0;
+      }
+      score += parsedScore;
       currentIdx++;
       if (currentIdx < questions.length) {
         updateQuiz();
