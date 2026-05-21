@@ -121,25 +121,64 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
         </div>
       </div>
 
-      <div class="recommended-price-grid">
-        <article class="recommended-price-card">
-          <span class="price-badge-ume">Formule Basique (Ume)</span>
-          <h3>Site Web Simple</h3>
-          <p class="p-price">40 000 JPY〜 <small>Tarif de Campagne</small></p>
-          <p>Un site compact (3-5 pages) faisant office de carte de visite numérique. Idéal pour débuter en ligne avec un budget maîtrisé.</p>
-        </article>
-        <article class="recommended-price-card highlight-take">
-          <span class="price-badge-take">Formule Standard (Take) ★ Recommandée</span>
-          <h3>LP Optimisée Psychologie</h3>
-          <p class="p-price">48 000 JPY〜 <small>Tarif de Campagne</small></p>
-          <p>Conçue selon la psychologie comportementale, alignant le visuel principal, les éléments de confiance et les CTAs. Notre offre au meilleur ROI, directement liée à vos conversions.</p>
-        </article>
-        <article class="recommended-price-card">
-          <span class="price-badge-matsu">Formule Premium (Matsu)</span>
-          <h3>Site Web Psychologie</h3>
-          <p class="p-price">96 000 JPY〜 <small>Tarif de Campagne</small></p>
-          <p>Un site internet standard (environ 5 pages). Nous appliquons une structure d'information robuste pour guider sereinement vos prospects vers le contact.</p>
-        </article>
+      <!-- Commutateur de Plan -->
+      <div class="plan-tabs-wrapper reveal">
+        <div class="plan-tabs" role="tablist">
+          <button class="plan-tab-btn active" data-plan-tab="hp" role="tab" aria-selected="true">
+            🌐 Site Web (HP)
+          </button>
+          <button class="plan-tab-btn" data-plan-tab="lp" role="tab" aria-selected="false">
+            🎯 Landing Page (LP)
+          </button>
+        </div>
+      </div>
+
+      <!-- Plans de Création HP -->
+      <div id="plan-content-hp" class="plan-content active-plan">
+        <div class="recommended-price-grid">
+          <article class="recommended-price-card">
+            <span class="price-badge-ume">Formule Basique (Ume)</span>
+            <h3>Site Web Simple</h3>
+            <p class="p-price">40 000 JPY〜 <small>Tarif de Campagne</small></p>
+            <p>Un site compact (3-5 pages) faisant office de carte de visite numérique. Idéal pour débuter en ligne avec un budget maîtrisé.</p>
+          </article>
+          <article class="recommended-price-card highlight-take">
+            <span class="price-badge-take">Formule Standard (Take) ★ Recommandée・Populaire</span>
+            <h3>Site Web Psychologie</h3>
+            <p class="p-price">96 000 JPY〜 <small>Tarif de Campagne</small></p>
+            <p>Un site internet standard (environ 5 pages). Nous appliquons une structure d'information robuste pour guider sereinement vos prospects vers le contact.</p>
+          </article>
+          <article class="recommended-price-card">
+            <span class="price-badge-matsu">Formule Premium (Matsu)</span>
+            <h3>Formule "Business 7"</h3>
+            <p class="p-price">120 000 JPY〜 <small>Tarif de Campagne</small></p>
+            <p>Un package complet de 7 pages avec optimisation SEO, finitions graphiques premium et points de contact multiples pour maximiser vos opportunités de conversion.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- Plans de Création LP -->
+      <div id="plan-content-lp" class="plan-content">
+        <div class="recommended-price-grid">
+          <article class="recommended-price-card">
+            <span class="price-badge-ume">Formule Basique (Ume)</span>
+            <h3>LP Simple</h3>
+            <p class="p-price">24 000 JPY〜 <small>Tarif de Campagne</small></p>
+            <p>Une landing page simple sur une seule page. Parfait pour présenter vos services ou événements avec un budget minimal.</p>
+          </article>
+          <article class="recommended-price-card highlight-take">
+            <span class="price-badge-take">Formule Standard (Take) ★ Recommandée・Populaire</span>
+            <h3>LP Optimisée Psychologie</h3>
+            <p class="p-price">48 000 JPY〜 <small>Tarif de Campagne</small></p>
+            <p>Conçue selon la psychologie comportementale, alignant le visuel principal, les éléments de confiance et les CTAs. Notre offre au meilleur ROI, directement liée à vos conversions.</p>
+          </article>
+          <article class="recommended-price-card">
+            <span class="price-badge-matsu">Formule Premium (Matsu)</span>
+            <h3>LP Psychologie Premium</h3>
+            <p class="p-price">72 000 JPY〜 <small>Tarif de Campagne</small></p>
+            <p>Notre LP axée sur la psychologie comportementale combinée à des outils d'automatisation back-end (e-mails auto via GAS, intégration API LINE, etc.) pour simplifier vos opérations.</p>
+          </article>
+        </div>
       </div>
 
       <details class="addon-details price-details">
@@ -255,6 +294,44 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     <ProjectExecutionFlow lang="fr" />
   </main>
 </BaseLayout>
+
+<script>
+  function initPlanTabs() {
+    const tabButtons = document.querySelectorAll('.plan-tab-btn');
+    const planContents = document.querySelectorAll('.plan-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-plan-tab');
+
+        // Deactivate all buttons
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+
+        // Hide all contents
+        planContents.forEach(content => {
+          content.classList.remove('active-plan');
+        });
+
+        // Activate selected button & content
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        
+        const targetContent = document.getElementById(`plan-content-${targetTab}`);
+        if (targetContent) {
+          targetContent.classList.add('active-plan');
+        }
+      });
+    });
+  }
+
+  // Support page transition in Astro (swup/barba/native)
+  document.addEventListener('astro:page-load', initPlanTabs);
+  document.addEventListener('DOMContentLoaded', initPlanTabs);
+  initPlanTabs();
+</script>
 
 <style is:global>
   @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
@@ -533,6 +610,51 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
     margin: 40px 0;
+  }
+
+  /* Plan Tabs */
+  .plan-tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+  .plan-tabs {
+    display: flex;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  }
+  .plan-tab-btn {
+    padding: 12px 28px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 800;
+    border-radius: 99px;
+    cursor: pointer;
+    font-family: 'Shippori Mincho', serif !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .plan-tab-btn.active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+  }
+  
+  .plan-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .plan-content.active-plan {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
   }
   .p-card-simple {
     background: #fff;

@@ -121,25 +121,64 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
         </div>
       </div>
 
-      <div class="recommended-price-grid">
-        <article class="recommended-price-card">
-          <span class="price-badge-ume">Basic (Ume)</span>
-          <h3>Simple Website Design</h3>
-          <p class="p-price">40,000 JPY〜 <small>Campaign Price</small></p>
-          <p>A compact website (3-5 pages) serving as your digital business card. Ideal for establishing an online hub on a budget.</p>
-        </article>
-        <article class="recommended-price-card highlight-take">
-          <span class="price-badge-take">Standard (Take) ★ Most Popular</span>
-          <h3>Psychology LP Design</h3>
-          <p class="p-price">48,000 JPY〜 <small>Campaign Price</small></p>
-          <p>Designed around behavioral psychology, aligning everything from the hero area to trust-building elements and CTAs. Our highest ROI package directly tied to conversions.</p>
-        </article>
-        <article class="recommended-price-card">
-          <span class="price-badge-matsu">Premium (Matsu)</span>
-          <h3>Psychology Website</h3>
-          <p class="p-price">96,000 JPY〜 <small>Campaign Price</small></p>
-          <p>A standard website (around 5 pages). We apply robust informational structuring so prospects can comfortably navigate toward inquiries or sales.</p>
-        </article>
+      <!-- Plan Selector Switch -->
+      <div class="plan-tabs-wrapper reveal">
+        <div class="plan-tabs" role="tablist">
+          <button class="plan-tab-btn active" data-plan-tab="hp" role="tab" aria-selected="true">
+            🌐 Homepage (HP) Design
+          </button>
+          <button class="plan-tab-btn" data-plan-tab="lp" role="tab" aria-selected="false">
+            🎯 Landing Page (LP) Design
+          </button>
+        </div>
+      </div>
+
+      <!-- HP Design Plans -->
+      <div id="plan-content-hp" class="plan-content active-plan">
+        <div class="recommended-price-grid">
+          <article class="recommended-price-card">
+            <span class="price-badge-ume">Basic (Ume)</span>
+            <h3>Simple Website Design</h3>
+            <p class="p-price">40,000 JPY〜 <small>Campaign Price</small></p>
+            <p>A compact website (3-5 pages) serving as your digital business card. Ideal for establishing an online hub on a budget.</p>
+          </article>
+          <article class="recommended-price-card highlight-take">
+            <span class="price-badge-take">Standard (Take) ★ Recommended・Most Popular</span>
+            <h3>Psychology Website</h3>
+            <p class="p-price">96,000 JPY〜 <small>Campaign Price</small></p>
+            <p>A standard website (around 5 pages). We apply robust informational structuring so prospects can comfortably navigate toward inquiries or sales.</p>
+          </article>
+          <article class="recommended-price-card">
+            <span class="price-badge-matsu">Premium (Matsu)</span>
+            <h3>"Business 7" Website Package</h3>
+            <p class="p-price">120,000 JPY〜 <small>Campaign Price</small></p>
+            <p>A comprehensive 7-page website package including standard SEO optimization, premium visual styling, and multiple touchpoints to maximize conversion rates.</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- LP Design Plans -->
+      <div id="plan-content-lp" class="plan-content">
+        <div class="recommended-price-grid">
+          <article class="recommended-price-card">
+            <span class="price-badge-ume">Basic (Ume)</span>
+            <h3>Simple LP Design</h3>
+            <p class="p-price">24,000 JPY〜 <small>Campaign Price</small></p>
+            <p>A single-page, clean landing page. Perfect for introducing your business or event on a limited budget.</p>
+          </article>
+          <article class="recommended-price-card highlight-take">
+            <span class="price-badge-take">Standard (Take) ★ Recommended・Most Popular</span>
+            <h3>Psychology LP Design</h3>
+            <p class="p-price">48,000 JPY〜 <small>Campaign Price</small></p>
+            <p>Designed around behavioral psychology, aligning everything from the hero area to trust-building elements and CTAs. Our highest ROI package directly tied to conversions.</p>
+          </article>
+          <article class="recommended-price-card">
+            <span class="price-badge-matsu">Premium (Matsu)</span>
+            <h3>Premium Psychology LP</h3>
+            <p class="p-price">72,000 JPY〜 <small>Campaign Price</small></p>
+            <p>Our conversion-focused psychology LP bundled with backend automation systems (GAS automatic emails, LINE API integration, etc.) to streamline your operations.</p>
+          </article>
+        </div>
       </div>
 
       <details class="addon-details price-details">
@@ -255,6 +294,44 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     <ProjectExecutionFlow lang="en" />
   </main>
 </BaseLayout>
+
+<script>
+  function initPlanTabs() {
+    const tabButtons = document.querySelectorAll('.plan-tab-btn');
+    const planContents = document.querySelectorAll('.plan-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-plan-tab');
+
+        // Deactivate all buttons
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+
+        // Hide all contents
+        planContents.forEach(content => {
+          content.classList.remove('active-plan');
+        });
+
+        // Activate selected button & content
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        
+        const targetContent = document.getElementById(`plan-content-${targetTab}`);
+        if (targetContent) {
+          targetContent.classList.add('active-plan');
+        }
+      });
+    });
+  }
+
+  // Support page transition in Astro (swup/barba/native)
+  document.addEventListener('astro:page-load', initPlanTabs);
+  document.addEventListener('DOMContentLoaded', initPlanTabs);
+  initPlanTabs();
+</script>
 
 <style is:global>
   @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
@@ -533,6 +610,51 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
     margin: 40px 0;
+  }
+
+  /* Plan Tabs */
+  .plan-tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+  .plan-tabs {
+    display: flex;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  }
+  .plan-tab-btn {
+    padding: 12px 28px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 800;
+    border-radius: 99px;
+    cursor: pointer;
+    font-family: 'Shippori Mincho', serif !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .plan-tab-btn.active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+  }
+  
+  .plan-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .plan-content.active-plan {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
   }
   .p-card-simple {
     background: #fff;

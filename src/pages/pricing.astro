@@ -100,7 +100,7 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
             <div class="wa-price">初期 40,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
           </div>
           <div class="anchoring-row">
-            <div class="type-name">心理導線LP（本命）</div>
+            <div class="type-name">心理導線LP（推奨）</div>
             <div class="market-price">初期 15万〜50万円<br><span class="sub">保守：月額 1万〜3万円</span></div>
             <div class="wa-price highlight">初期 48,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
           </div>
@@ -121,25 +121,64 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
         </div>
       </div>
 
-      <div class="recommended-price-grid">
-        <article class="recommended-price-card">
-          <span class="price-badge-ume">梅プラン</span>
-          <h3>シンプルHP制作</h3>
-          <p class="p-price">40,000円〜 <small>キャンペーン価格</small></p>
-          <p>名刺代わりとなる小規模なホームページ（3〜5ページ）。まずは低予算でネット上にビジネスの拠点を作りたい方向けです。</p>
-        </article>
-        <article class="recommended-price-card highlight-take">
-          <span class="price-badge-take">竹プラン ★ 一番人気</span>
-          <h3>心理導線LP制作</h3>
-          <p class="p-price">48,000円〜 <small>キャンペーン価格</small></p>
-          <p>行動心理をふまえ、ファーストビューから信頼形成、CTAまで一貫設計。費用対効果が最も高く、成果に直結する本命プランです。</p>
-        </article>
-        <article class="recommended-price-card">
-          <span class="price-badge-matsu">松プラン</span>
-          <h3>心理導線HP制作</h3>
-          <p class="p-price">96,000円〜 <small>キャンペーン価格</small></p>
-          <p>5ページ程度の標準的なホームページ。見込み客が迷わず安心して相談や購入に進むための盤石な情報設計を施します。</p>
-        </article>
+      <!-- プラン切り替えスイッチ -->
+      <div class="plan-tabs-wrapper reveal">
+        <div class="plan-tabs" role="tablist">
+          <button class="plan-tab-btn active" data-plan-tab="hp" role="tab" aria-selected="true">
+            🌐 ホームページ（HP）制作
+          </button>
+          <button class="plan-tab-btn" data-plan-tab="lp" role="tab" aria-selected="false">
+            🎯 ランディングページ（LP）制作
+          </button>
+        </div>
+      </div>
+
+      <!-- HP制作プランカード -->
+      <div id="plan-content-hp" class="plan-content active-plan">
+        <div class="recommended-price-grid">
+          <article class="recommended-price-card">
+            <span class="price-badge-ume">梅プラン</span>
+            <h3>シンプルHP制作</h3>
+            <p class="p-price">40,000円〜 <small>キャンペーン価格</small></p>
+            <p>名刺代わりとなる小規模なホームページ（3〜5ページ）。まずは低予算でネット上にビジネスの拠点を作りたい方向けです。</p>
+          </article>
+          <article class="recommended-price-card highlight-take">
+            <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
+            <h3>心理導線HP制作</h3>
+            <p class="p-price">96,000円〜 <small>キャンペーン価格</small></p>
+            <p>5ページ程度の標準的なホームページ。行動心理をふまえ、見込み客が迷わず安心して相談や購入に進むための盤石な情報設計を施します。</p>
+          </article>
+          <article class="recommended-price-card">
+            <span class="price-badge-matsu">松プラン</span>
+            <h3>HPパッケージ「Business 7」</h3>
+            <p class="p-price">120,000円〜 <small>キャンペーン価格</small></p>
+            <p>7ページ構成の充実プラン。標準SEO、プレミアム仕上げ、複数のお問い合わせ動線を含む本格パッケージです。</p>
+          </article>
+        </div>
+      </div>
+
+      <!-- LP制作プランカード -->
+      <div id="plan-content-lp" class="plan-content">
+        <div class="recommended-price-grid">
+          <article class="recommended-price-card">
+            <span class="price-badge-ume">梅プラン</span>
+            <h3>シンプルLP制作</h3>
+            <p class="p-price">24,000円〜 <small>キャンペーン価格</small></p>
+            <p>1ページの簡易的なランディングページ。まずは手軽にネット上でビジネスやサービスの紹介を行いたい方向けです。</p>
+          </article>
+          <article class="recommended-price-card highlight-take">
+            <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
+            <h3>心理導線LP制作</h3>
+            <p class="p-price">48,000円〜 <small>キャンペーン価格</small></p>
+            <p>行動心理をふまえ、ファーストビューから信頼形成、CTAまで一貫設計。費用対効果が最も高く、成果に直結する推奨プランです。</p>
+          </article>
+          <article class="recommended-price-card">
+            <span class="price-badge-matsu">松プラン</span>
+            <h3>プレミアム心理導線LP</h3>
+            <p class="p-price">72,000円〜 <small>キャンペーン価格</small></p>
+            <p>高品質な行動心理LPに加え、問い合わせ後のGASメール自動送信やLINE連携などの自動化システム構築をセットにした業務効率化パックです。</p>
+          </article>
+        </div>
       </div>
       <details class="addon-details price-details">
         <summary>シンプル制作・保守・オプションを含む料金一覧を見る</summary>
@@ -257,6 +296,44 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
     <ProjectExecutionFlow lang="ja" />
   </main>
 </BaseLayout>
+
+<script>
+  function initPlanTabs() {
+    const tabButtons = document.querySelectorAll('.plan-tab-btn');
+    const planContents = document.querySelectorAll('.plan-content');
+
+    tabButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const targetTab = button.getAttribute('data-plan-tab');
+
+        // Deactivate all buttons
+        tabButtons.forEach(btn => {
+          btn.classList.remove('active');
+          btn.setAttribute('aria-selected', 'false');
+        });
+
+        // Hide all contents
+        planContents.forEach(content => {
+          content.classList.remove('active-plan');
+        });
+
+        // Activate selected button & content
+        button.classList.add('active');
+        button.setAttribute('aria-selected', 'true');
+        
+        const targetContent = document.getElementById(`plan-content-${targetTab}`);
+        if (targetContent) {
+          targetContent.classList.add('active-plan');
+        }
+      });
+    });
+  }
+
+  // Support page transition in Astro (swup/barba/native)
+  document.addEventListener('astro:page-load', initPlanTabs);
+  document.addEventListener('DOMContentLoaded', initPlanTabs);
+  initPlanTabs();
+</script>
 
 <style is:global>
   @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
@@ -535,6 +612,51 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: 20px;
     margin: 40px 0;
+  }
+
+  /* Plan Tabs */
+  .plan-tabs-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 40px;
+  }
+  .plan-tabs {
+    display: flex;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 99px;
+    padding: 6px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+  }
+  .plan-tab-btn {
+    padding: 12px 28px;
+    border: none;
+    background: transparent;
+    color: #666;
+    font-size: 0.95rem;
+    font-weight: 800;
+    border-radius: 99px;
+    cursor: pointer;
+    font-family: 'Shippori Mincho', serif !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .plan-tab-btn.active {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+  }
+  
+  .plan-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+  }
+  .plan-content.active-plan {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
   }
   .p-card-simple {
     background: #fff;

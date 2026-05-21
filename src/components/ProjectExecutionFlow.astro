@@ -10,14 +10,16 @@ const f = {
   ja: {
     title: "ご契約後の制作・サポートの流れ",
     subtitle: "いつ・どこでお金の請求が発生し、お互い何をするのかを可視化します",
-    tab_web: "🌐 Webサイト・LP制作",
+    tab_hp: "🌐 ホームページ（HP）制作",
+    tab_lp: "🎯 ランディングページ（LP）制作",
     tab_copilot: "🤝 ビジネスの副操縦士",
     label_our_task: "和-Nodeの作業内容",
     label_client_task: "お客様のご協力義務",
     badge_payment: "💰 お支払い・ご請求タイミング",
-    web_duration: "期間の目安：約3〜6週間",
+    hp_duration: "期間の目安：約4〜8週間",
+    lp_duration: "期間の目安：約2〜4週間",
     copilot_duration: "契約形式：月額支援（伴走型）",
-    web_steps: [
+    hp_steps: [
       {
         step: "STEP 01",
         title: "キックオフ & ご契約",
@@ -27,23 +29,23 @@ const f = {
       },
       {
         step: "STEP 02",
-        title: "詳細構成案・ワイヤーフレーム作成",
+        title: "サイトマップ & 詳細構成案作成",
         payment: null,
-        our_task: "行動心理学に基づいたページ構成（ワイヤーフレーム）、心理コピーライティング、原稿の方向性メモの作成・提示",
-        client_task: "提示された構成案・文章内容の確認、必要に応じた修正フィードバック（※合意が得られるまで丁寧に調整します）"
+        our_task: "全体の構成マップ（梅・竹・松プランに応じた3〜7ページ分）の策定、行動心理学に基づいた各ページの詳細構成（ワイヤーフレーム）、心理コピーライティング、原稿方向性の提示",
+        client_task: "提示されたページ構成・文章案の確認、必要に応じた修正フィードバック（合意が得られるまで丁寧に調整します）"
       },
       {
         step: "STEP 03",
         title: "デザインカンプ作成・素材選定",
         payment: null,
-        our_task: "ブランドコンセプトに合わせた配色・フォント（トンマナ）設計、PC/スマホ両方のデザインカンプ（初稿）の作成",
-        client_task: "お手持ちの写真素材やロゴデータの共有、デザイン初稿の確認・方向性のご指示"
+        our_task: "ブランドコンセプトに合わせた配色・フォント（トンマナ）設計、トップページおよび主要下層ページのPC/スマホ両デザインカンプの作成",
+        client_task: "お手持ちの写真素材やロゴデータの共有、デザインカンプ（初稿）の確認・方向性のご指示"
       },
       {
         step: "STEP 04",
         title: "コーディング & システム構築",
         payment: null,
-        our_task: "モダンで高速なコーディング、完全レスポンシブ（スマホ最適化）、SEO内部設定、お問い合わせ等の機能実装、テスト環境への公開",
+        our_task: "モダンで高速なコーディング（Astro / Vanilla CSS）、完全レスポンシブ、SEO内部設定、お問い合わせ等の機能実装、テスト環境への公開",
         client_task: "テスト公開されたサイトの実機（お手持ちのスマホやPC）での表示・動作のテスト確認"
       },
       {
@@ -59,6 +61,50 @@ const f = {
         payment: "【無償サポート期間】納品公開後1ヶ月間は、表示崩れやシステム不具合を完全に無償で迅速に修正いたします。",
         our_task: "本番サーバーへの公開・移管作業、ドメイン・SSLの紐付け設定、Google Analytics等の計測初期設定、1ヶ月間のバグ修正",
         client_task: "本番公開されたサイトの最終稼働確認"
+      }
+    ],
+    lp_steps: [
+      {
+        step: "STEP 01",
+        title: "キックオフ & ペルソナ分析",
+        payment: "【着手金 50% のご請求】契約合意後、正式な制作着手前に総額の50%をお支払いいただきます。",
+        our_task: "ターゲットペルソナおよび競合の分析、LP全体の構成・ストーリー展開方針の策定、スケジュール策定、着手金請求書の発行",
+        client_task: "ご契約内容の最終合意、ヒアリングシートへのご回答"
+      },
+      {
+        step: "STEP 02",
+        title: "行動心理LP構成案（ワイヤーフレーム）作成",
+        payment: null,
+        our_task: "行動心理（ファーストビューからCTAまで）に基づいた1ページの構成案（ワイヤーフレーム）作成、感情を動かす心理コピーライティング原稿の提示",
+        client_task: "提示された構成案・文章の確認、フィードバック"
+      },
+      {
+        step: "STEP 03",
+        title: "LPビジュアルデザイン作成",
+        payment: null,
+        our_task: "コンバージョン率（CVR）を最大化する配色・ビジュアル設計、PC/スマホデザインカンプ（初稿）の作成",
+        client_task: "イメージ写真素材・ロゴの共有、デザイン初稿の確認・方向指示"
+      },
+      {
+        step: "STEP 04",
+        title: "コーディング & 自動化・システム連携",
+        payment: null,
+        our_task: "モダンで超高速なLPコーディング、フォーム実装。松プラン（プレミアム）の場合はGASメール自動送信やLINE API等の連携システム構築、テスト環境への公開",
+        client_task: "テストLPの表示・動作・フォーム送信などの動作テスト確認"
+      },
+      {
+        step: "STEP 05",
+        title: "最終検収 & 残金ご入金",
+        payment: "【残金 50% のご請求】テスト環境でのLPの動作にご納得いただいた後、残金（50%）をお支払いいただきます。",
+        our_task: "バグ調整、表示微調整、残金請求書の発行",
+        client_task: "最終公開前の検収、残金（50%）のご入金"
+      },
+      {
+        step: "STEP 06",
+        title: "本番公開 & アフターサポート",
+        payment: "【無償サポート期間】納品公開後1ヶ月間は、表示崩れやシステム不具合を完全に無償で迅速に修正いたします。",
+        our_task: "本番サーバー公開、ドメイン・SSL設定、計測タグ（Google Analytics/広告タグ等）初期設定、1ヶ月間のバグ修正",
+        client_task: "本番公開されたLPの最終稼働確認"
       }
     ],
     copilot_steps: [
@@ -88,21 +134,23 @@ const f = {
         title: "効果測定 & 次月の計画策定",
         payment: null,
         our_task: "導入した自動化ツールや業務改善の成果（削減時間や売上影響）を分析し、ロードマップの進捗状況をレビューの上、翌月の注力目標を策定",
-        client_task: "実際の運用で気づいた不都合や追加要望のフィードバック、次月に解決したい新たな課題の共有"
+        client_task: "実際の運用で気づいた不都合や追加要望のフィードバック、次月に解決したい新たな課題 of 共有"
       }
     ]
   },
   en: {
-    title: "Project & Payment Flow After Contract",
+    title: "Project & Support Flow After Contract",
     subtitle: "We visualize when payments occur and what tasks both parties handle to ensure peace of mind.",
-    tab_web: "🌐 Web Site & LP Design",
+    tab_hp: "🌐 Homepage (HP) Production",
+    tab_lp: "🎯 Landing Page (LP) Production",
     tab_copilot: "🤝 Business Copilot",
     label_our_task: "Wa-Node Tasks",
     label_client_task: "Client Tasks",
     badge_payment: "💰 Billing & Payment Timing",
-    web_duration: "Estimated Timeline: Approx. 3-6 Weeks",
+    hp_duration: "Estimated Timeline: Approx. 4-8 Weeks",
+    lp_duration: "Estimated Timeline: Approx. 2-4 Weeks",
     copilot_duration: "Contract: Monthly Partnership (Ongoing)",
-    web_steps: [
+    hp_steps: [
       {
         step: "STEP 01",
         title: "Kickoff & Contract",
@@ -112,23 +160,23 @@ const f = {
       },
       {
         step: "STEP 02",
-        title: "Structure & Wireframe Draft",
+        title: "Sitemap & Page Structure Draft",
         payment: null,
-        our_task: "Create page structure (wireframes), psychological copywriting drafts based on behavioral psychology.",
-        client_task: "Review structure and copy drafts, and provide constructive feedback for adjustments until final alignment."
+        our_task: "Establish the complete sitemap structure (3 to 7 pages depending on Ume/Take/Matsu), create page structure (wireframes), and write psychological copywriting drafts.",
+        client_task: "Review sitemap, wireframes, and copy drafts, and provide feedback for adjustments until final alignment."
       },
       {
         step: "STEP 03",
         title: "Visual Design & Assets",
         payment: null,
-        our_task: "Establish design rules (colors & typography), create homepage/LP UI mockups (1st draft) for PC and Mobile.",
-        client_task: "Share high-resolution images, brand logos, review design drafts and direct necessary revisions."
+        our_task: "Establish design rules (colors & typography), and create homepage & key sub-page UI mockups (1st draft) for PC and Mobile.",
+        client_task: "Share high-resolution images, brand logos, review design drafts, and direct necessary revisions."
       },
       {
         step: "STEP 04",
         title: "Coding & System Setup",
         payment: null,
-        our_task: "Modern responsive HTML/Astro coding, SEO setup, secure forms integration, staging environment deployment.",
+        our_task: "Modern responsive HTML/Astro coding, SEO setup, secure forms integration, and staging environment deployment.",
         client_task: "Test staging environment and browse on your actual mobile phones/PCs to verify responsiveness and forms."
       },
       {
@@ -142,7 +190,51 @@ const f = {
         step: "STEP 06",
         title: "Public Launch & Support",
         payment: "[Free Bug-Fix Period] For 30 days after launch, any system errors or display bugs will be fixed completely free of charge.",
-        our_task: "Transfer files to production server, link custom domains & SSL certificate, initial setup of Google Analytics, 1-month bug support.",
+        our_task: "Transfer files to production server, link custom domains & SSL certificate, initial setup of Google Analytics, and 1-month bug support.",
+        client_task: "Perform final post-launch check on live custom domain."
+      }
+    ],
+    lp_steps: [
+      {
+        step: "STEP 01",
+        title: "Kickoff & Persona Analysis",
+        payment: "[💰 Down Payment 50%] After signing the contract, a 50% deposit is required before launching the formal production.",
+        our_task: "Analyze target persona & competitors, outline LP story direction, set project schedule, and issue down payment invoice.",
+        client_task: "Final agreement on contract terms, and fill out the detailed questionnaire."
+      },
+      {
+        step: "STEP 02",
+        title: "Psychology-Backed LP Structure Draft",
+        payment: null,
+        our_task: "Create wireframes structured around conversion flow (from hero area to CTA) and draft persuasive copywriting based on behavioral psychology.",
+        client_task: "Review wireframes & copywriting drafts and provide feedback."
+      },
+      {
+        step: "STEP 03",
+        title: "LP Visual Design",
+        payment: null,
+        our_task: "Formulate a color scheme and layout optimized for maximum conversion rate (CVR) and create PC/Mobile UI designカンプ (1st draft).",
+        client_task: "Share brand images & logos, review design drafts, and direct changes."
+      },
+      {
+        step: "STEP 04",
+        title: "Coding & Backend Automations",
+        payment: null,
+        our_task: "Perform fast LP coding and form integration. Setup backend automation systems (GAS automated emails, LINE API integration, etc.) for Matsu (Premium) plans, and deploy to staging.",
+        client_task: "Test staging LP, verifying display, forms, and email response."
+      },
+      {
+        step: "STEP 05",
+        title: "Final Verification & Delivery",
+        payment: "[💰 Final Payment 50%] After confirming features work on the staging server, the final 50% balance is invoiced.",
+        our_task: "Perform final adjustments, fix bugs, and issue the final balance invoice.",
+        client_task: "Verify final build, approve delivery, and transfer the remaining 50% balance."
+      },
+      {
+        step: "STEP 06",
+        title: "Public Launch & Support",
+        payment: "[Free Bug-Fix Period] For 30 days after launch, any system errors or display bugs will be fixed completely free of charge.",
+        our_task: "Deploy to production server, link custom domains & SSL, configure Google Analytics/advertising tags, and 1-month bug support.",
         client_task: "Perform final post-launch check on live custom domain."
       }
     ],
@@ -151,7 +243,7 @@ const f = {
         step: "STEP 01",
         title: "Auditing & DX/AI Diagnosis",
         payment: "[💰 First Month Fee] The first month fee (prepaid) is invoiced upon contract signing.",
-        our_task: "Audit current operations (analysing analog bottlenecks), diagnose automation possibilities using AI & LINE integrations.",
+        our_task: "Audit current operations (analysing analog bottlenecks), and diagnose automation possibilities using AI & LINE integrations.",
         client_task: "Share daily work procedures, current administrative frustrations, and tools currently used or considered."
       },
       {
@@ -159,14 +251,14 @@ const f = {
         title: "Roadmap Formulation",
         payment: null,
         our_task: "Present a 3-to-6 month priority list and operational roadmap based on the initial diagnosis findings.",
-        client_task: "Review proposed roadmap, finalize execution orders and boundaries of the partnership."
+        client_task: "Review proposed roadmap, and finalize execution orders and boundaries of the partnership."
       },
       {
         step: "STEP 03",
         title: "Monthly Support & Co-piloting",
         payment: "[💰 Monthly Retainer] Retainer invoices for the next month are sent around the 25th of each month (prepaid).",
-        our_task: "Conduct regular online meetings (1-2 times/month), chat support (Slack/LINE), custom AI prompt engineering, tool setups.",
-        client_task: "Attend scheduled meetings, raise questions via chat, implement systems and apply new workflows to daily tasks."
+        our_task: "Conduct regular online meetings (1-2 times/month), chat support (Slack/LINE), custom AI prompt engineering, and tool setups.",
+        client_task: "Attend scheduled meetings, raise questions via chat, and implement systems and apply new workflows to daily tasks."
       },
       {
         step: "STEP 04",
@@ -180,14 +272,16 @@ const f = {
   fr: {
     title: "Déroulement du Projet & Planification des Paiements",
     subtitle: "Nous visualisons clairement quand ont lieu les paiements et le rôle de chacun pour un partenariat serein.",
-    tab_web: "🌐 Création Web & LP",
+    tab_hp: "🌐 Création de Site Web (HP)",
+    tab_lp: "🎯 Création de Landing Page (LP)",
     tab_copilot: "🤝 Co-pilote d'Affaires",
     label_our_task: "Tâches de Wa-Node",
     label_client_task: "Votre Collaboration",
     badge_payment: "💰 Facturation & Paiements",
-    web_duration: "Délai estimé : environ 3 à 6 semaines",
+    hp_duration: "Délai estimé : environ 4 à 8 semaines",
+    lp_duration: "Délai estimé : environ 2 à 4 semaines",
     copilot_duration: "Contrat : Abonnement mensuel (Accompagnement)",
-    web_steps: [
+    hp_steps: [
       {
         step: "STEP 01",
         title: "Lancement & Contrat",
@@ -197,23 +291,23 @@ const f = {
       },
       {
         step: "STEP 02",
-        title: "Structure & Maquette de Plan",
+        title: "Sitemap & Structure de Page",
         payment: null,
-        our_task: "Création de la structure de page (wireframe), rédaction des textes persuasifs selon la psychologie comportementale.",
+        our_task: "Établir la sitemap complète (3 à 7 pages selon la formule Ume/Take/Matsu), créer la structure des pages (wireframes) et rédiger les textes persuasifs.",
         client_task: "Vérification de la structure et du ton des textes, retour d'ajustement jusqu'à validation complète."
       },
       {
         step: "STEP 03",
         title: "Design Visuel & Maquettes",
         payment: null,
-        our_task: "Conception de la charte graphique (couleurs & typographie), création des maquettes visuelles PC et Mobile.",
+        our_task: "Conception de la charte graphique (couleurs & typographie), création des maquettes visuelles PC et Mobile pour la page d'accueil et les pages clés.",
         client_task: "Partage de vos photos et logos, vérification des maquettes visuelles et indications de corrections."
       },
       {
         step: "STEP 04",
         title: "Intégration & Développement",
         payment: null,
-        our_task: "Développement HTML/Astro moderne, responsive (mobile-first), optimisation SEO interne, déploiement sur environnement de test.",
+        our_task: "Développement HTML/Astro moderne, responsive (mobile-first), optimisation SEO interne et déploiement sur environnement de test.",
         client_task: "Test de l'environnement de staging depuis votre propre smartphone ou PC pour valider l'affichage et les formulaires."
       },
       {
@@ -228,6 +322,50 @@ const f = {
         title: "Mise en ligne & Support gratuit",
         payment: "[Support Bug Gratuit] Pendant les 30 jours suivant la mise en ligne, toutes les erreurs d'affichage ou bugs sont corrigés gratuitement.",
         our_task: "Mise en ligne sur serveur de production, configuration du domaine & SSL, configuration de Google Analytics, support de 1 mois.",
+        client_task: "Vérification finale du bon fonctionnement sur le nom de domaine en ligne."
+      }
+    ],
+    lp_steps: [
+      {
+        step: "STEP 01",
+        title: "Lancement & Analyse de Persona",
+        payment: "[💰 Acompte de 50%] Après la signature du contrat, un acompte de 50% est requis avant le début officiel de la production.",
+        our_task: "Analyser la cible de clients et les concurrents, structurer la chronologie et le story-board de la LP, planifier le projet et émettre la facture d'acompte.",
+        client_task: "Validation finale du contrat et réponse au questionnaire détaillé."
+      },
+      {
+        step: "STEP 02",
+        title: "Structure de LP axée Psychologie",
+        payment: null,
+        our_task: "Créer un wireframe d'une page basé sur les étapes psychologiques de conversion (du visuel principal au CTA) et rédiger les contenus persuasifs.",
+        client_task: "Vérification du wireframe et des textes persuasifs, puis retour d'ajustements."
+      },
+      {
+        step: "STEP 03",
+        title: "Conception Visuelle de LP",
+        payment: null,
+        our_task: "Concevoir une charte graphique et une mise en page optimisées pour maximiser le taux de conversion (CVR) et créer les maquettes PC/Mobile.",
+        client_task: "Partage de vos logos et photos, examen des maquettes visuelles et indications de corrections."
+      },
+      {
+        step: "STEP 04",
+        title: "Intégration & Automatisation",
+        payment: null,
+        our_task: "Développement moderne de la LP, intégration des formulaires. Pour la formule Matsu (Premium), intégration des systèmes d'automatisation back-end (e-mails auto via GAS, API LINE, etc.) et mise en test.",
+        client_task: "Test de l'environnement de staging (affichage, formulaires et e-mails auto)."
+      },
+      {
+        step: "STEP 05",
+        title: "Vérification Finale & Solde",
+        payment: "[💰 Solde de 50%] Après validation complète de la LP en staging, le solde restant est facturé.",
+        our_task: "Ajustements finaux de l'affichage, correction de bugs, émission de la facture de solde.",
+        client_task: "Inspection finale de la LP, validation formelle et règlement du solde de 50% restant."
+      },
+      {
+        step: "STEP 06",
+        title: "Mise en ligne & Support gratuit",
+        payment: "[Support Bug Gratuit] Pendant les 30 jours suivant la mise en ligne, toutes les erreurs d'affichage ou bugs sont corrigés gratuitement.",
+        our_task: "Mise en ligne, configuration du domaine & SSL, initialisation de Google Analytics et des balises publicitaires, support de 1 mois.",
         client_task: "Vérification finale du bon fonctionnement sur le nom de domaine en ligne."
       }
     ],
@@ -278,8 +416,11 @@ const t = f[lang];
     <!-- Interactive Navigation Tabs -->
     <div class="flow-tabs-wrapper reveal">
       <div class="flow-tabs" role="tablist">
-        <button class="flow-tab-btn active" data-tab="web" role="tab" aria-selected="true">
-          {t.tab_web}
+        <button class="flow-tab-btn active" data-tab="hp" role="tab" aria-selected="true">
+          {t.tab_hp}
+        </button>
+        <button class="flow-tab-btn" data-tab="lp" role="tab" aria-selected="false">
+          {t.tab_lp}
         </button>
         <button class="flow-tab-btn" data-tab="copilot" role="tab" aria-selected="false">
           {t.tab_copilot}
@@ -287,14 +428,54 @@ const t = f[lang];
       </div>
     </div>
 
-    <!-- Web/LP Timelines -->
-    <div id="flow-content-web" class="flow-content active-flow">
+    <!-- HP Timelines -->
+    <div id="flow-content-hp" class="flow-content active-flow">
       <div class="flow-meta">
-        <span class="duration-badge">{t.web_duration}</span>
+        <span class="duration-badge">{t.hp_duration}</span>
       </div>
 
       <div class="timeline">
-        {t.web_steps.map((item) => (
+        {t.hp_steps.map((item) => (
+          <div class="timeline-item reveal">
+            <div class="timeline-step">
+              <span class="step-num">{item.step.replace('STEP ', '')}</span>
+            </div>
+            
+            <div class="timeline-body">
+              <span class="step-label">{item.step}</span>
+              <h3 class="step-title ShipporiMincho">{item.title}</h3>
+              
+              {item.payment && (
+                <div class="payment-box">
+                  <span class="payment-badge">{t.badge_payment}</span>
+                  <p class="payment-text">{item.payment}</p>
+                </div>
+              )}
+
+              <div class="task-grid">
+                <div class="task-col our-task-col">
+                  <span class="task-header-badge">{t.label_our_task}</span>
+                  <p class="task-desc">{item.our_task}</p>
+                </div>
+                <div class="task-col client-task-col">
+                  <span class="task-header-badge client">{t.label_client_task}</span>
+                  <p class="task-desc">{item.client_task}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- LP Timelines -->
+    <div id="flow-content-lp" class="flow-content">
+      <div class="flow-meta">
+        <span class="duration-badge">{t.lp_duration}</span>
+      </div>
+
+      <div class="timeline">
+        {t.lp_steps.map((item) => (
           <div class="timeline-item reveal">
             <div class="timeline-step">
               <span class="step-num">{item.step.replace('STEP ', '')}</span>
@@ -668,6 +849,17 @@ const t = f[lang];
     .execution-flow-section {
       padding: 80px 0;
     }
+    .flow-tabs {
+      flex-wrap: wrap;
+      justify-content: center;
+      border-radius: 20px;
+      padding: 8px;
+      gap: 6px;
+    }
+    .flow-tab-btn {
+      padding: 10px 18px;
+      font-size: 0.8rem;
+    }
     .timeline {
       padding-left: 30px;
     }
@@ -691,10 +883,6 @@ const t = f[lang];
     }
     .payment-box {
       padding: 16px;
-    }
-    .flow-tab-btn {
-      padding: 12px 20px;
-      font-size: 0.85rem;
     }
   }
 </style>
