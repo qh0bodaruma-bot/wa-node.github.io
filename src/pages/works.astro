@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ConsultationFlow from '../components/ConsultationFlow.astro';
 ---
 
-<BaseLayout title="制作実績・デモ｜和-Node" description="心理導線Web制作、AI相談ナビ、各種診断ツール、KDP出版、LINE Mini Appなど、和-Nodeの幅広い制作実績とインタラクティブなデモを紹介します。">
+<BaseLayout title="制作例・デモ｜心理導線Web制作・LP制作サンプル｜和-Node" description="心理導線Web制作、LP制作サンプル、AI相談ナビ、各種診断ツール、KDP出版など、和-Nodeの制作例とインタラクティブなデモを紹介します。">
   <!-- Background -->
   <div class="bg-decoration">
     <div class="glow glow-1"></div>
@@ -35,22 +35,11 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
   <main class="works-page">
     <section class="section works-hero">
       <div class="container narrow">
-        <!-- Anniversary Banner -->
-        <div class="works-anniversary-banner reveal">
-          <a href="/campaign-anniversary/">
-            <span class="ann-label">1st Anniversary Campaign</span>
-            <div class="ann-content">
-              <strong>起業記念 20% OFF 実施中</strong>
-              <span>制作実績と同クオリティのサイトを今だけ特別価格で。詳しくはこちら →</span>
-            </div>
-          </a>
-        </div>
-
         <span class="eyebrow">Works & Demos</span>
-        <h1 class="premium-heading">制作実績・デモ・ツール</h1>
+        <h1 class="premium-heading">制作例・デモ・ツール</h1>
         <p class="lead">
-          実案件の実績に加え、和-Node独自の視点（心理学・AI・バリアフリー）を形にした<br class="pc-only" />
-          各種デモツールを公開しています。技術と知見の融合を体験してください。
+          ホームページ制作・LP制作の見え方を中心に、和-Node独自の視点（心理学・AI・アクセシビリティ）を形にした<br class="pc-only" />
+          制作サンプルとデモツールを公開しています。技術と知見の融合を体験してください。
         </p>
       </div>
     </section>
@@ -100,7 +89,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg" style="background: linear-gradient(135deg, #fdfcf9 0%, #f5eee0 100%);">
               <img src="/images/works-psy-demo.png" alt="心理導線体験デモ" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'" />
-              <span class="category-tag demo">自社開発デモ</span>
+              <span class="category-tag demo">Web導線デモ</span>
             </div>
           </div>
           <div class="card-body">
@@ -120,16 +109,36 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual">
               <img src="/portfolio-lp/images/hero_clinic.png" alt="クリニック・医療系LP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag real">実案件</span>
+              <span class="category-tag sample">LP制作サンプル</span>
             </div>
           </div>
           <div class="card-body">
             <div class="expert-label">Medical / Clinic</div>
             <h3>クリニック・医療系LP</h3>
-            <p class="card-text">美容クリニック、心療内科等。医療広告ガイドラインに配慮しつつ、患者様の安心感と信頼を両立させた導線設計の実績です。</p>
+            <p class="card-text">美容クリニック、心療内科等を想定したLP制作サンプル。医療広告ガイドラインに配慮しつつ、安心感と予約導線を両立させた構成例です。</p>
             <div class="card-footer">
               <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
               <a href="/portfolio-lp/lp_clinic.html" class="premium-link">作品を見る</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: System (AI Demo) -->
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual">
+              <img src="/portfolio-lp/images/hero_corporate.png" alt="LP制作サンプル集" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag sample">LPサンプル集</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">LP Portfolio</div>
+            <h3>LP制作サンプル集</h3>
+            <p class="card-text">業種別のLP制作サンプルをまとめたギャラリーです。ファーストビュー、信頼形成、CTAまでの見せ方を比較できます。</p>
+            <div class="card-footer">
+              <span class="tech-tag">LP Design</span>
+              <span class="tech-tag">Sample</span>
+              <a href="/lp-portfolio/" class="card-link">サンプルを見る →</a>
             </div>
           </div>
         </article>
@@ -139,7 +148,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
               <img src="/images/works-system.png" alt="AI相談内容整理ナビ" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag demo">自社開発デモ</span>
+              <span class="category-tag demo">AIデモ</span>
             </div>
           </div>
           <div class="card-body">
@@ -159,7 +168,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
               <img src="/images/works-mental.png" alt="こころの疲労度診断" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag demo">自社開発デモ</span>
+              <span class="category-tag demo">診断デモ</span>
             </div>
           </div>
           <div class="card-body">
@@ -179,7 +188,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
               <img src="/images/works-accessibility.png" alt="バリアフリー診断" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag demo">自社開発デモ</span>
+              <span class="category-tag demo">診断デモ</span>
             </div>
           </div>
           <div class="card-body">
@@ -199,7 +208,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
               <img src="/images/works-seo.png" alt="SEO内部対策診断" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag demo">自社開発デモ</span>
+              <span class="category-tag demo">SEOデモ</span>
             </div>
           </div>
           <div class="card-body">
@@ -243,10 +252,10 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     <section class="packages-cta reveal">
       <div class="container glass-panel">
         <div class="cta-label">ANNIVERSARY SPECIAL</div>
-        <h2>キャンペーンでお得に制作しませんか？</h2>
-        <p>今なら制作メニューが 20% OFF。実績のような高品質なサイトを、あなたのビジネスにも導入するチャンスです。</p>
+        <h2>近い方向性をもとに相談できます</h2>
+        <p>制作例やデモを見て「この方向に近い」と感じたものがあれば、そのまま無料相談でお知らせください。</p>
         <div class="cta-btns">
-          <a href="/campaign-anniversary/" class="btn-secondary-outline">キャンペーン詳細を見る</a>
+          <a href="/contact/" class="btn-secondary-outline">近い方向で相談する</a>
         </div>
       </div>
     </section>

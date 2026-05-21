@@ -1,7 +1,7 @@
 {
   "nav": {
     "demo": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
-    "works": { "ja": "制作実績・デモ", "en": "Works & Demos", "fr": "Portefeuille" },
+    "works": { "ja": "制作例・デモ", "en": "Works & Demos", "fr": "Portefeuille" },
     "pricing": { "ja": "サービス・料金", "en": "Pricing", "fr": "Tarifs" },
     "about": { "ja": "和-Nodeについて", "en": "About Us", "fr": "À Propos" },
     "cta": { "ja": "相談する", "en": "Contact", "fr": "Contact" }
@@ -50,8 +50,8 @@
     "eyebrow": { "ja": "Service Pillars", "en": "Service Pillars", "fr": "Piliers de Service" },
     "title": { "ja": "迷ったら、まずはこの3つから", "en": "Start With One of These Three", "fr": "Commencez par l'un de ces trois choix" },
     "card1_tag": { "ja": "Web Design", "en": "Web Design", "fr": "Design Web" },
-    "card1_title": { "ja": "ホームページ・LPを作りたい", "en": "Build a Website or LP", "fr": "Créer un site ou une LP" },
-    "card1_desc": { "ja": "心理導線LP・心理導線HPを中心に、伝わる構成とデザインを整えます。", "en": "We design websites and landing pages with psychology-informed structure and messaging.", "fr": "Nous concevons sites et landing pages avec une structure guidée par la psychologie." },
+    "card1_title": { "ja": "ホームページ・LP制作を相談したい", "en": "Build a Website or LP", "fr": "Créer un site ou une LP" },
+    "card1_desc": { "ja": "ホームページ制作・LP制作・Webサイト改善を中心に、伝わる構成とデザインを整えます。", "en": "We design websites and landing pages with psychology-informed structure and messaging.", "fr": "Nous concevons sites et landing pages avec une structure guidée par la psychologie." },
     "card1_link": { "ja": "48,000円〜 →", "en": "From 48,000 JPY →", "fr": "À partir de 48 000 JPY →" },
     "card2_tag": { "ja": "Ongoing Partnership", "en": "Ongoing Partnership", "fr": "Partenariat" },
     "card2_title": { "ja": "作った後も相談したい", "en": "Keep Improving After Launch", "fr": "Continuer à améliorer après lancement" },
@@ -71,13 +71,13 @@
     "card2_desc": { "ja": "AIがあなたの課題を整理。技術力を体験", "en": "Let our AI organize your challenges and experience our tech capability", "fr": "Laissez l'IA organiser vos défis et découvrez notre technique" },
     "card3_title": { "ja": "料金シミュレーター", "en": "Price Simulator", "fr": "Simulateur de Tarifs" },
     "card3_desc": { "ja": "概算費用と納期をリアルタイム確認", "en": "Check your estimated costs and delivery timeline in real-time", "fr": "Estimez vos coûts et délais en temps réel" },
-    "all_works": { "ja": "すべての制作実績・診断ツールを見る →", "en": "See all works and demo tools →", "fr": "Voir tous nos projets et outils démo →" }
+    "all_works": { "ja": "Web制作例・デモを見る →", "en": "See all works and demo tools →", "fr": "Voir tous nos projets et outils démo →" }
   },
   "proof": {
     "eyebrow": { "ja": "Step toward Quality", "en": "Step toward Quality", "fr": "Étape Vers la Qualité" },
-    "title": { "ja": "「実物を見てから、決めてください」", "en": "Decide after seeing the draft mock-up", "fr": "Décidez après avoir vu la maquette" },
+    "title": { "ja": "相談後に、方向性を見える形へ。", "en": "Decide after seeing the draft mock-up", "fr": "Décidez après avoir vu la maquette" },
     "desc": {
-      "ja": "初回相談後、必要に応じて「簡易的な構成案（たたき台）」を無料で作成します。まずは「和-Nodeと組む価値」を肌で感じていただいた上で、進めるかどうかをご判断いただけます。",
+      "ja": "初回相談後、必要に応じて簡易メモ・概要案をお渡しします。詳細な設計やデザイン制作に入る前に、進む方向と費用感を確認できます。",
       "en": "Following the initial consultation, we can create a free basic draft mockup if needed. Experience the real value of partnering with Wa-Node before making any final commitment.",
       "fr": "Après la première consultation, nous créons gratuitement une ébauche si nécessaire. Découvrez la valeur du partenariat avec Wa-Node avant tout engagement."
     }
@@ -87,8 +87,8 @@
     "title": { "ja": "ご相談の流れ", "en": "Consultation Flow", "fr": "Déroulement de la Consultation" },
     "step1_title": { "ja": "無料相談（30-60分）", "en": "Free Consultation (30-60 min)", "fr": "Consultation Gratuite (30-60 min)" },
     "step1_desc": { "ja": "フォームまたはLINEより。現状の課題を丁寧に整理します。", "en": "Via form or LINE. We will clarify your current business challenges in detail.", "fr": "Via le formulaire ou LINE. Nous clarifierons vos défis actuels en détail." },
-    "step2_title": { "ja": "構成案・お見積り", "en": "Draft Mockup & Quote", "fr": "Maquette & Devis" },
-    "step2_desc": { "ja": "必要に応じて「たたき台」を作成し、最適なプランをご提示します。", "en": "We build a basic draft if required and present the most optimized proposal.", "fr": "Nous créons une ébauche si nécessaire et présentons la proposition optimale." },
+    "step2_title": { "ja": "方向性整理・お見積り", "en": "Draft Mockup & Quote", "fr": "Maquette & Devis" },
+    "step2_desc": { "ja": "必要に応じて簡易メモ・概要案を添え、最適なプランをご提示します。", "en": "We build a basic draft if required and present the most optimized proposal.", "fr": "Nous créons une ébauche si nécessaire et présentons la proposition optimale." },
     "step3_title": { "ja": "ご契約・着手", "en": "Contract & Launch", "fr": "Contrat & Lancement" },
     "step3_desc": { "ja": "内容にご納得いただいた上で、制作・戦略的パートナーシップをスタートします。", "en": "Once fully satisfied with the plan, we start development and strategic partnership.", "fr": "Une fois pleinement satisfait, nous lançons le projet et notre partenariat stratégique." },
     "btn_cta": {

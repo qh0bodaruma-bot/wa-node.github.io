@@ -162,27 +162,50 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
 
     <section class="section">
       <p class="eyebrow">03. Organization & Communication</p>
-      <h2 class="premium-heading">組織・コミュニケーション支援</h2>
-      <p>心理学の専門知見を、組織の課題解決や相談窓口の設計に応用します。</p>
+      <h2 class="premium-heading">チームの相談設計・コミュニケーション支援</h2>
+      <p>心理学の専門知見を、職場の対話設計やチーム運用の整理に応用します。Web・ICT支援の補助線として必要な範囲で扱います。</p>
       <details class="addon-details">
-        <summary>組織支援・個別専門相談の料金を見る</summary>
+        <summary>チーム支援・個別相談整理の料金を見る</summary>
         <div class="table-wrap mini">
           <table>
             <tbody>
               <tr>
-                <td>心理学的コミュニケーション支援</td>
+                <td>チームコミュニケーション設計</td>
                 <td>15,000円〜 / 月</td>
-                <td>小規模法人向け。相談窓口の設計や、心理的安全性の構築サポート。</td>
+                <td>小規模法人向け。相談導線の設計や、心理的安全性をふまえた運用サポート。</td>
               </tr>
               <tr>
-                <td>個別専門相談（産業カウンセラー）</td>
+                <td>経営者・リーダーの相談整理</td>
                 <td>5,000円 / 60分</td>
-                <td>経営者・リーダーのための心の整理。初回30分無料。</td>
+                <td>意思決定やチーム運用のための壁打ち・状況整理。初回30分無料。</td>
               </tr>
             </tbody>
           </table>
         </div>
       </details>
+    </section>
+
+    <section class="section pricing-faq" aria-labelledby="pricing-faq-title">
+      <p class="eyebrow">Before Consultation</p>
+      <h2 id="pricing-faq-title" class="premium-heading">無料相談前のよくある不安</h2>
+      <div class="faq-list">
+        <details>
+          <summary>相談だけで終わっても大丈夫ですか？</summary>
+          <p>大丈夫です。状況整理だけで十分な場合は、無理に制作や月額契約をおすすめしません。</p>
+        </details>
+        <details>
+          <summary>まだ何を頼むか決まっていなくても相談できますか？</summary>
+          <p>はい。Web制作、LP制作、AI・ICT活用、公開後の改善のうち、今どこから始めるべきか一緒に整理します。</p>
+        </details>
+        <details>
+          <summary>相談後に契約を迫られることはありますか？</summary>
+          <p>ありません。必要な範囲・費用・進め方を確認し、ご納得いただいた場合のみ正式に開始します。</p>
+        </details>
+        <details>
+          <summary>料金があとから大きく増えることはありますか？</summary>
+          <p>追加作業が必要な場合は、事前に内容と費用を確認します。合意のない追加請求は行いません。</p>
+        </details>
+      </div>
     </section>
 
     <ConsultationFlow />
@@ -477,6 +500,46 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
   .price-details .table-wrap {
     margin-top: 20px;
     margin-bottom: 0;
+  }
+  .pricing-faq {
+    border-top: 1px solid var(--line);
+  }
+  .faq-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .faq-list details {
+    border: 1px solid var(--trust-line);
+    border-radius: 16px;
+    background: #fff;
+    padding: 0;
+    overflow: hidden;
+  }
+  .faq-list summary {
+    cursor: pointer;
+    padding: 18px 20px;
+    color: #2c2c2c;
+    font-weight: 800;
+    list-style: none;
+  }
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-list summary::after {
+    content: "+";
+    float: right;
+    color: var(--trust);
+    font-weight: 900;
+  }
+  .faq-list details[open] summary::after {
+    content: "-";
+  }
+  .faq-list p {
+    margin: 0;
+    padding: 0 20px 18px;
+    color: #666;
+    line-height: 1.8;
   }
 
   @media (max-width: 768px) {
