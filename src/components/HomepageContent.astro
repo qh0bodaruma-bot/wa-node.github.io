@@ -44,6 +44,24 @@ const serviceAudiences = {
     'Pour commencer par l organisation et l IA'
   ]
 };
+
+const trustSignals = {
+  ja: [
+    { value: '20年以上', label: 'IT・Web制作の現場経験' },
+    { value: '心理学', label: '信頼される導線設計に応用' },
+    { value: '公開後', label: '改善・運用まで継続支援' }
+  ],
+  en: [
+    { value: '20+ years', label: 'IT and web production experience' },
+    { value: 'Psychology', label: 'Applied to trust-building flows' },
+    { value: 'After launch', label: 'Ongoing improvement and support' }
+  ],
+  fr: [
+    { value: '20+ ans', label: 'Experience IT et creation web' },
+    { value: 'Psychologie', label: 'Appliquee aux parcours de confiance' },
+    { value: 'Apres lancement', label: 'Amelioration et accompagnement' }
+  ]
+};
 ---
 <main>
   <!-- 1. Hero Section -->
@@ -74,6 +92,17 @@ const serviceAudiences = {
           <a class="btn secondary" href={getLocalizedLink('/pricing')}>{t.hero.btn_price[lang]}</a>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="trust-strip" aria-label={lang === 'ja' ? '和-Nodeの安心材料' : 'Wa-Node trust signals'}>
+    <div class="trust-strip-inner">
+      {trustSignals[lang].map((signal) => (
+        <div class="trust-signal">
+          <strong>{signal.value}</strong>
+          <span>{signal.label}</span>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -290,6 +319,38 @@ const serviceAudiences = {
     color: var(--text-deep);
   }
 
+  .trust-strip {
+    background: var(--white);
+    border-bottom: 1px solid var(--trust-line);
+  }
+  .trust-strip-inner {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-width: 1000px;
+    margin: 0 auto;
+    border-left: 1px solid var(--trust-line);
+  }
+  .trust-signal {
+    padding: 18px 24px;
+    border-right: 1px solid var(--trust-line);
+    text-align: center;
+  }
+  .trust-signal strong {
+    display: block;
+    color: var(--trust);
+    font-size: 1.08rem;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+  .trust-signal span {
+    display: block;
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
   /* Agitation / Hook Section */
   .why-psy { background: var(--white); border-bottom: 1px solid var(--line); }
   .why-psy-inner { max-width: 900px; margin: 0 auto; padding: 0 20px; }
@@ -369,6 +430,16 @@ const serviceAudiences = {
     .lead { max-width: 100%; box-sizing: border-box; word-break: normal; overflow-wrap: anywhere; line-break: strict; margin-left: auto; margin-right: auto; text-align: center; }
     .hero-title-chosen { font-size: clamp(2.2rem, 8vw, 3.2rem); }
     .hero-title-psy { font-size: clamp(2rem, 7vw, 3rem); }
+    .trust-strip-inner {
+      grid-template-columns: 1fr;
+      border-left: 0;
+    }
+    .trust-signal {
+      padding: 15px 20px;
+      border-right: 0;
+      border-bottom: 1px solid var(--trust-line);
+    }
+    .trust-signal:last-child { border-bottom: 0; }
     .action-buttons-grid, .simple-flow-grid, .concept-intro-grid { grid-template-columns: 1fr; }
     .flow-item:not(:last-child)::after { display: none; }
     .profile-summary-inner { flex-direction: column; text-align: center; gap: 24px; }

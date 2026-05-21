@@ -5,34 +5,39 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <BaseLayout title="お問い合わせありがとうございます｜和-Node" description="お問い合わせの送信が完了しました。内容を確認し、担当者より折り返しご連絡いたします。">
   <main class="thanks-page">
     <div class="container">
-      <div class="thanks-card reveal">
+      <div class="thanks-card">
         <div class="icon-wrap">
           <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="check-icon"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
         </div>
-        <h1>想いを受け取りました。</h1>
+        <h1>送信ありがとうございました。</h1>
         <p class="desc">
           勇気を出してメッセージを送ってくださり、ありがとうございます。<br/>
           お預かりした言葉は、代表の高野が大切に拝読させていただきます。<br/>
           通常2営業日以内に折り返しご連絡いたしますので、どうぞ安心してお待ちください。
         </p>
 
-        <div class="thanks-flow" style="margin-bottom: 50px;">
-          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--accent-dark); margin-bottom: 24px; font-family: 'Shippori Mincho', serif;">✉️ 送信完了後の流れ</h3>
-          <div class="flow-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: left;">
-            <div class="flow-card" style="background: rgba(197, 160, 89, 0.03); border: 1px solid var(--line); border-radius: 16px; padding: 20px; position: relative;">
-              <span style="font-size: 0.75rem; font-weight: 800; color: var(--accent); display: block; margin-bottom: 6px;">STEP 1</span>
-              <strong style="display: block; font-size: 0.95rem; margin-bottom: 6px; color: #2c2c2c;">日程のご調整</strong>
-              <p style="font-size: 0.8rem; color: #666; margin: 0; line-height: 1.5;">通常2営業日以内に、ご希望の日時に基づいてオンライン相談用のリンク（Google Meet等）をお送りします。</p>
+        <div class="assurance-note">
+          <strong>まだ決めきれていなくても大丈夫です。</strong>
+          <span>次のご返信で、相談内容・優先順位・概算費用の整理から一緒に始めます。</span>
+        </div>
+
+        <div class="thanks-flow">
+          <h3>送信完了後の流れ</h3>
+          <div class="flow-grid">
+            <div class="flow-card">
+              <span>STEP 1</span>
+              <strong>内容確認・日程調整</strong>
+              <p>通常2営業日以内に、ご希望の日時に基づいてオンライン相談用のリンク（Google Meet等）をお送りします。</p>
             </div>
-            <div class="flow-card" style="background: rgba(197, 160, 89, 0.03); border: 1px solid var(--line); border-radius: 16px; padding: 20px; position: relative;">
-              <span style="font-size: 0.75rem; font-weight: 800; color: var(--accent); display: block; margin-bottom: 6px;">STEP 2</span>
-              <strong style="display: block; font-size: 0.95rem; margin-bottom: 6px; color: #2c2c2c;">無料相談（最大60分）</strong>
-              <p style="font-size: 0.8rem; color: #666; margin: 0; line-height: 1.5;">現在のお悩みや課題、想いを丁寧にお聞きし、方向性や解決のステップを一緒に整理します。</p>
+            <div class="flow-card">
+              <span>STEP 2</span>
+              <strong>無料相談（最大60分）</strong>
+              <p>現在のお悩みや課題、想いを丁寧にお聞きし、方向性や解決のステップを一緒に整理します。</p>
             </div>
-            <div class="flow-card" style="background: rgba(197, 160, 89, 0.03); border: 1px solid var(--line); border-radius: 16px; padding: 20px; position: relative;">
-              <span style="font-size: 0.75rem; font-weight: 800; color: var(--accent); display: block; margin-bottom: 6px;">STEP 3</span>
-              <strong style="display: block; font-size: 0.95rem; margin-bottom: 6px; color: #2c2c2c;">ご提案・たたき台提示</strong>
-              <p style="font-size: 0.8rem; color: #666; margin: 0; line-height: 1.5;">ご相談内容に応じて、簡易的なたたき台（概要案）やお見積もりを提示します。ご納得後に正式開始となります。</p>
+            <div class="flow-card">
+              <span>STEP 3</span>
+              <strong>方向性・概算費用の整理</strong>
+              <p>ご相談内容に応じて、簡易的なたたき台（概要案）やお見積もりを提示します。ご納得後に正式開始となります。</p>
             </div>
           </div>
         </div>
@@ -60,11 +65,70 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     max-width: 700px; margin: 0 auto; background: #fff; border: 1px solid var(--line);
     border-radius: 48px; padding: 80px 40px; text-align: center; box-shadow: var(--shadow);
   }
-  .icon-wrap { width: 100px; height: 100px; background: rgba(99, 153, 34, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; color: var(--accent); }
+  .icon-wrap { width: 100px; height: 100px; background: rgba(15, 76, 92, 0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 32px; color: #0f4c5c; }
   
   .thanks-card h1 { font-size: 2.4rem; font-weight: 900; line-height: 1.3; margin-bottom: 24px; }
   .accent-text { color: var(--accent); }
-  .desc { font-size: 1.1rem; color: var(--muted); line-height: 1.8; margin-bottom: 48px; }
+  .desc { font-size: 1.1rem; color: var(--muted); line-height: 1.8; margin-bottom: 26px; }
+  .assurance-note {
+    margin: 0 auto 46px;
+    padding: 20px 24px;
+    border: 1px solid rgba(15, 76, 92, 0.18);
+    border-radius: 18px;
+    background: rgba(15, 76, 92, 0.035);
+    text-align: left;
+  }
+  .assurance-note strong {
+    display: block;
+    color: #0f4c5c;
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+  .assurance-note span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .thanks-flow { margin-bottom: 50px; }
+  .thanks-flow h3 {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: #0f4c5c;
+    margin-bottom: 24px;
+    font-family: 'Shippori Mincho', serif;
+  }
+  .flow-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    text-align: left;
+  }
+  .flow-card {
+    background: rgba(15, 76, 92, 0.035);
+    border: 1px solid rgba(15, 76, 92, 0.14);
+    border-radius: 16px;
+    padding: 20px;
+  }
+  .flow-card span {
+    display: block;
+    margin-bottom: 6px;
+    color: #0f4c5c;
+    font-size: 0.75rem;
+    font-weight: 800;
+  }
+  .flow-card strong {
+    display: block;
+    margin-bottom: 6px;
+    color: #2c2c2c;
+    font-size: 0.95rem;
+  }
+  .flow-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
 
   .next-steps { border-top: 1px solid var(--line); padding-top: 48px; }
   .step-card { background: #fdfaf7; border-radius: 24px; padding: 32px; margin-bottom: 40px; border: 1px solid var(--line); }

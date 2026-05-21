@@ -60,7 +60,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
         <div class="priority-copy">
           <span class="eyebrow">First View</span>
           <h2 id="priority-works-title" class="premium-heading">迷ったら、まずはこの3つをご覧ください</h2>
-          <p>和-Nodeの主軸である「心理学×Web制作」と、AI・ICTの実装力が伝わりやすい代表デモです。</p>
+          <p>まずはWeb制作・LP制作の見え方を中心に、必要に応じてAI・ICTの実装力も確認できます。</p>
         </div>
         <div class="priority-grid">
           <a href="/psychology-demo/" class="priority-card main">
@@ -111,6 +111,25 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
               <span class="tech-tag">UI/UX</span>
               <span class="tech-tag">Psychology</span>
               <a href="/psychology-demo/" class="card-link">デモを体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: Web (Medical) -->
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual">
+              <img src="/portfolio-lp/images/hero_clinic.png" alt="クリニック・医療系LP" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag real">実案件</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Medical / Clinic</div>
+            <h3>クリニック・医療系LP</h3>
+            <p class="card-text">美容クリニック、心療内科等。医療広告ガイドラインに配慮しつつ、患者様の安心感と信頼を両立させた導線設計の実績です。</p>
+            <div class="card-footer">
+              <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
+              <a href="/portfolio-lp/lp_clinic.html" class="premium-link">作品を見る</a>
             </div>
           </div>
         </article>
@@ -191,25 +210,6 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
               <span class="tech-tag">SEO</span>
               <span class="tech-tag">Marketing</span>
               <a href="/seo_check/" class="card-link">診断を体験する →</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Category: Web (Medical) -->
-        <article class="work-card reveal" data-category="web">
-          <div class="card-visual-wrap">
-            <div class="card-visual">
-              <img src="/portfolio-lp/images/hero_clinic.png" alt="クリニック・医療系LP" style="width: 100%; height: 100%; object-fit: cover;" />
-              <span class="category-tag real">実案件</span>
-            </div>
-          </div>
-          <div class="card-body">
-            <div class="expert-label">Medical / Clinic</div>
-            <h3>クリニック・医療系LP</h3>
-            <p class="card-text">美容クリニック、心療内科等。医療広告ガイドラインに配慮しつつ、患者様の安心感と信頼を両立させた導線設計の実績です。</p>
-            <div class="card-footer">
-              <div class="tech-stack"><span>#UX Design</span><span>#Trust</span></div>
-              <a href="/portfolio-lp/lp_clinic.html" class="premium-link">作品を見る</a>
             </div>
           </div>
         </article>
@@ -426,7 +426,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       border: 1px solid var(--glass-border); color: #666; font-weight: 800;
       cursor: pointer; transition: 0.3s;
     }
-    .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .filter-btn.active { background: var(--trust); color: #fff; border-color: var(--trust); }
 
     /* Works Grid */
     .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
@@ -436,7 +436,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       overflow: hidden; display: flex; flex-direction: column;
       transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.02);
     }
-    .work-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+    .work-card:hover { transform: translateY(-10px); border-color: var(--trust-mid); }
 
     .card-visual-wrap { padding: 12px; }
     .card-visual { height: 160px; border-radius: 16px; overflow: hidden; position: relative; background: #f5f5f5; }
@@ -456,7 +456,7 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
 
     .card-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: auto; }
     .tech-tag { font-size: 0.7rem; font-weight: 800; color: #888; background: #f5f5f5; padding: 4px 8px; border-radius: 4px; }
-    .card-link, .premium-link { margin-left: auto; font-size: 0.85rem; font-weight: 800; color: var(--accent); text-decoration: none; }
+    .card-link, .premium-link { margin-left: auto; font-size: 0.85rem; font-weight: 800; color: var(--trust); text-decoration: none; }
 
     .packages-cta { margin-top: 100px; }
     .glass-panel {
