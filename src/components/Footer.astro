@@ -43,7 +43,11 @@ function getLocalizedLink(path: string) {
         <div class="logo">和-Node</div>
         <p class="tagline">{t.footer.tagline[lang]}</p>
         <div class="footer-info">
-          <p class="info-item">〒509-0207 岐阜県可児市今渡2347番地1</p>
+          <p class="info-item">
+            {lang === 'ja' ? '〒509-0207 岐阜県可児市今渡2347番地1' : 
+             lang === 'en' ? '2347-1 Imawatari, Kani-shi, Gifu 509-0207, Japan' : 
+             '2347-1 Imawatari, Kani-shi, Gifu 509-0207, Japon'}
+          </p>
           <p class="info-item">Tel: 080-3599-5388</p>
           <p class="info-item">Email: <a href="mailto:contacts@wa-node.com">contacts@wa-node.com</a></p>
         </div>

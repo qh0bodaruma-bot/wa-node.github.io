@@ -64,7 +64,17 @@
     "card3_tag": { "ja": "ICT & System", "en": "ICT & System", "fr": "TIC & Système" },
     "card3_title": { "ja": "AI・ICTで業務を整えたい", "en": "Organize Work With AI & ICT", "fr": "Organiser le travail avec IA & TIC" },
     "card3_desc": { "ja": "ChatGPT、LINE、業務ツール、簡単な自動化などをスポットで整理します。", "en": "Spot consultations for ChatGPT, LINE, business tools, and simple automation.", "fr": "Consultations ponctuelles pour ChatGPT, LINE, outils metier et automatisation simple." },
-    "card3_link": { "ja": "スポット相談 5,000円〜 →", "en": "Consultation from 5,000 JPY →", "fr": "Consultation dès 5 000 JPY →" }
+    "card3_link": { "ja": "スポット相談 5,000円〜 →", "en": "Consultation from 5,000 JPY →", "fr": "Consultation dès 5 000 JPY →" },
+    "sub_link_hp_lp": {
+      "ja": "💡 HPとLPの違い・解説はこちら →",
+      "en": "💡 Learn the difference between HP and LP →",
+      "fr": "💡 Apprenez la différence entre HP et LP →"
+    },
+    "sub_link_gas": {
+      "ja": "💡 自動化(GAS)でできることはこちら →",
+      "en": "💡 What you can do with automation (GAS) →",
+      "fr": "💡 Ce que vous pouvez faire avec l'automatisation (GAS) →"
+    }
   },
   "experience": {
     "eyebrow": { "ja": "Experience Demo", "en": "Experience Demo", "fr": "Démo & Expérience" },

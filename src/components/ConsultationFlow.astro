@@ -4,21 +4,80 @@ interface Props {
   id?: string;
   background?: string;
   border?: boolean;
+  lang?: 'ja' | 'en' | 'fr';
 }
 
 const { 
   id = "consultation-flow", 
   background = "rgba(255, 253, 248, 0.9)", 
-  border = true 
+  border = true,
+  lang = 'ja'
 } = Astro.props;
+
+// 翻訳データの定義
+const t = {
+  ja: {
+    kicker: "Consultation Flow",
+    title: "ご相談の流れ",
+    lead: "まずは無料相談（最大60分）で、あなたのビジネスの現状と理想を整理します。",
+    step1_title: "無料相談",
+    step1_desc: "オンラインにて課題をヒアリング。今やるべきことを整理します。",
+    step2_title: "方向性整理・ご提案",
+    step2_desc: "必要に応じて簡易メモ・概要案を添え、最適なプランを提示します。",
+    step3_title: "スマートな開発とサポート",
+    step3_desc: "内容にご納得いただければ、Web制作やビジネスの副操縦士としての各種支援をスタートします。",
+    note1: "※無理な勧誘は一切行いません。まずは「壁打ち相手」としてお気軽にご活用ください。",
+    note2: "※無料相談後にお渡しする場合がある資料は、方向性を確認するための簡易メモ・概要案です。詳細な構成案、設計書、原稿整理、デザイン作成は、ご契約後の正式な制作工程として扱います。",
+    micro_copy: "※専門的なIT知識や難しい言葉は一切不要です。「何から相談していいか分からない」状態でも、私たちの『副操縦士』が優しく状況を整理しますので、どうぞご安心ください。",
+    btn_line: "LINEで相談予約（最大60分）",
+    btn_form: "フォームから申し込む",
+    form_link: "/contact/"
+  },
+  en: {
+    kicker: "Consultation Flow",
+    title: "Consultation Flow",
+    lead: "We clarify your current business challenges and goals during a free consultation (up to 60 minutes).",
+    step1_title: "Free Consultation",
+    step1_desc: "We clarify your challenges online and outline your immediate priorities.",
+    step2_title: "Proposal & Strategy",
+    step2_desc: "We present the most optimized plan, accompanied by a brief draft mockup if needed.",
+    step3_title: "Smart Development & Support",
+    step3_desc: "Once satisfied with the proposal, we launch the website production or ongoing partnership.",
+    note1: "*Absolutely no high-pressure sales. Feel free to use this session simply to bounce ideas off us.",
+    note2: "*The materials provided after the free consultation are basic drafts to confirm direction. Detailed structures, blueprints, copywriting, and final design work will be handled as part of the formal development process post-contract.",
+    micro_copy: "*No professional IT knowledge or complex jargon is required. Even if you don't know where to start, our 'Co-pilot' will gently guide you through the process.",
+    btn_line: "Book via LINE (Max 60 min)",
+    btn_form: "Book via Web Form",
+    form_link: "/en/contact/"
+  },
+  fr: {
+    kicker: "Déroulement",
+    title: "Déroulement de la Consultation",
+    lead: "Nous clarifions vos défis actuels et vos objectifs lors d'une consultation gratuite (jusqu'à 60 minutes).",
+    step1_title: "Consultation Gratuite",
+    step1_desc: "Nous analysons vos besoins en ligne et définissons vos priorités immédiates.",
+    step2_title: "Proposition & Orientation",
+    step2_desc: "Nous présentons l'offre la plus adaptée, accompagnée d'une ébauche de maquette si nécessaire.",
+    step3_title: "Développement & Support",
+    step3_desc: "Dès que l'offre vous convient, nous lançons la création web ou notre partenariat de co-pilotage.",
+    note1: "*Aucune pression commerciale. Profitez simplement de cet échange pour clarifier vos idées.",
+    note2: "*Les documents fournis après la consultation gratuite sont des ébauches destinées à valider l'orientation. La structure détaillée, le cahier des charges, la rédaction et le design final font partie du processus officiel après signature.",
+    micro_copy: "*Aucune compétence technique ou jargon complexe n'est requis. Même si vous hésitez sur le point de départ, notre « Co-pilote » clarifiera la situation en douceur.",
+    btn_line: "Réserver via LINE (Max 60 min)",
+    btn_form: "Réserver via Formulaire",
+    form_link: "/fr/contact/"
+  }
+};
+
+const curT = t[lang];
 ---
 
 <section id={id} class="consultation-section" style={border ? 'border-top: 1px solid var(--line);' : ''}>
   <div class="consultation-wrap">
     <div class="section-head">
-      <p class="kicker">Consultation Flow</p>
-      <h2>ご相談の流れ</h2>
-      <p class="muted">まずは無料相談（最大60分）で、あなたのビジネスの現状と理想を整理します。</p>
+      <p class="kicker">{curT.kicker}</p>
+      <h2>{curT.title}</h2>
+      <p class="muted">{curT.lead}</p>
     </div>
     
     <div class="consultation-card" style={`background: ${background};`}>
@@ -26,41 +85,41 @@ const {
         <div class="flow-step">
           <div class="step-circle">1</div>
           <div class="step-body">
-            <h3>無料相談</h3>
-            <p>オンラインにて課題をヒアリング。今やるべきことを整理します。</p>
+            <h3>{curT.step1_title}</h3>
+            <p>{curT.step1_desc}</p>
           </div>
         </div>
         <div class="flow-step">
           <div class="step-circle">2</div>
           <div class="step-body">
-            <h3>方向性整理・ご提案</h3>
-            <p>必要に応じて簡易メモ・概要案を添え、最適なプランを提示します。</p>
+            <h3>{curT.step2_title}</h3>
+            <p>{curT.step2_desc}</p>
           </div>
         </div>
         <div class="flow-step">
           <div class="step-circle">3</div>
           <div class="step-body">
-            <h3>スマートな開発とサポート</h3>
-            <p>内容にご納得いただければ、Web制作やビジネスの副操縦士としての各種支援をスタートします。</p>
+            <h3>{curT.step3_title}</h3>
+            <p>{curT.step3_desc}</p>
           </div>
         </div>
       </div>
 
       <div class="consultation-note">
-        <p>※無理な勧誘は一切行いません。まずは「壁打ち相手」としてお気軽にご活用ください。</p>
+        <p>{curT.note1}</p>
         <p style="margin-top: 12px; font-size: 0.8rem; font-weight: 500; text-align: left; line-height: 1.6; color: #666; max-width: 680px; margin-left: auto; margin-right: auto; border-top: 1px dashed rgba(197, 160, 89, 0.3); padding-top: 10px;">
-          ※無料相談後にお渡しする場合がある資料は、方向性を確認するための簡易メモ・概要案です。詳細な構成案、設計書、原稿整理、デザイン作成は、ご契約後の正式な制作工程として扱います。
+          {curT.note2}
         </p>
       </div>
       
       <!-- 自己効力感向上のマイクロコピー -->
       <p class="micro-copy" style="text-align: center; font-size: 0.85rem; color: var(--trust); font-weight: 700; margin-bottom: 16px; letter-spacing: 0.02em; line-height: 1.6; max-width: 680px; margin-left: auto; margin-right: auto;">
-        ※専門的なIT知識や難しい言葉は一切不要です。「何から相談していいか分からない」状態でも、私たちの『副操縦士』が優しく状況を整理しますので、どうぞご安心ください。
+        {curT.micro_copy}
       </p>
 
       <div class="cta-btns">
-        <a class="btn-primary shine-effect" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">LINEで相談予約（最大60分）</a>
-        <a class="btn-secondary" href="/contact/">フォームから申し込む</a>
+        <a class="btn-primary shine-effect" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">{curT.btn_line}</a>
+        <a class="btn-secondary" href={curT.form_link}>{curT.btn_form}</a>
       </div>
     </div>
   </div>

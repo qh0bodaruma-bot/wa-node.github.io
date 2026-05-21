@@ -27,7 +27,54 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
       </div>
     </section>
 
-    <section class="section">
+    <section class="section choice-guide">
+      <p class="eyebrow">Commencez Ici</p>
+      <h2 class="premium-heading">Un doute ? Choisissez parmi ces 3 points d'entrée</h2>
+      <p class="choice-lead">Pas besoin de choisir une formule détaillée d'emblée. Exprimez simplement vos objectifs depuis l'un de ces points d'entrée, et nous concevrons l'offre idéale.</p>
+      <div class="choice-grid">
+        <a class="choice-card primary-choice" href="#web-production">
+          <span class="choice-label">Le Plus Populaire</span>
+          <h3>Je souhaite créer un Site Web ou une LP</h3>
+          <p class="choice-fit">Pour établir une présence de confiance</p>
+          <p>Nous structurons et concevons des LPs et sites web optimisés pour la conversion et la confiance.</p>
+          <strong>Dès 48 000 JPY</strong>
+        </a>
+        <a class="choice-card" href="#copilot">
+          <span class="choice-label">Support Continu</span>
+          <h3>Je souhaite un accompagnement après le lancement</h3>
+          <p class="choice-fit">Pour l'optimisation continue</p>
+          <p>Votre « Co-pilote d'Affaires » mensuel pour l'optimisation, l'intégration de l'IA et la simplification des flux.</p>
+          <strong>Dès 15 000 JPY / mois</strong>
+        </a>
+        <a class="choice-card" href="#ict-ai">
+          <span class="choice-label">Consultation Ponctuelle</span>
+          <h3>Je souhaite optimiser mes flux avec l'IA & les TIC</h3>
+          <p class="choice-fit">Pour débuter avec un audit de flux</p>
+          <p>Nous résolvons vos questions sur ChatGPT, LINE, outils internes et automatisations simples lors d'une session unique.</p>
+          <strong>Dès 5 000 JPY</strong>
+        </a>
+      </div>
+      <p class="choice-footnote">En cas de doute, nous vous recommandons de commencer par « Je souhaite créer un Site Web ou une LP » ou « Je souhaite un accompagnement après le lancement ».</p>
+      <div class="decision-guide" aria-label="Recommandé par Objectif">
+        <h3>Recommandé par Objectif</h3>
+        <div class="decision-grid">
+          <a href="#web-production">
+            <span>Augmenter les demandes de contact</span>
+            <strong>LP Optimisée Psychologie</strong>
+          </a>
+          <a href="#web-production">
+            <span>Bâtir des bases commerciales solides</span>
+            <strong>Site Web Optimisé Psychologie</strong>
+          </a>
+          <a href="#copilot">
+            <span>Optimiser en continu</span>
+            <strong>Co-pilote d'Affaires</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="web-production">
       <p class="eyebrow">01. Web & Lead Design</p>
       <h2 class="premium-heading">Design Web & LP Orienté Psychologie</h2>
       <p>Élimination des frictions numériques et optimisation de la conversion. Des sites d'exception conçus selon les analyses cognitives.</p>
@@ -35,22 +82,85 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
         <strong>【Campagne du 1er Anniversaire】 -20% sur la Création Web !</strong>
         <p>Bénéficiez d'une réduction de 20% sur nos tarifs standards ci-dessous (Limité à 3 clients par mois).</p>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Service</th><th>Tarif Standard</th><th>Tarif de Campagne</th><th>Détails</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>LP Simple</td><td>30 000 JPY〜</td><td class="price-campaign">24 000 JPY〜</td><td>Page d'atterrissage épurée et efficace pour une présentation claire</td></tr>
-            <tr><td>Site Web Simple</td><td>50 000 JPY〜</td><td class="price-campaign">40 000 JPY〜</td><td>Site professionnel vitrine (3 à 5 pages)</td></tr>
-            <tr><td>LP Psychologie</td><td>60 000 JPY〜</td><td class="price-campaign">48 000 JPY〜</td><td>LP optimisée pour la conversion (structure stratégique incluse)</td></tr>
-            <tr><td>Site Web Psychologie</td><td>120 000 JPY〜</td><td class="price-campaign">96 000 JPY〜</td><td>Site standard haut de gamme (environ 5 pages)</td></tr>
-            <tr><td>Formule "Business 7"</td><td>150 000 JPY〜</td><td class="price-campaign">120 000 JPY〜</td><td>Structure à 7 pages, SEO de base optimisé, finitions premium</td></tr>
-            <tr><td>Options Personnalisées</td><td>5 000 JPY〜</td><td class="price-campaign">4 000 JPY〜</td><td>Création d'infographies, configuration de blog, quiz sur mesure, etc.</td></tr>
-            <tr><td>Maintenance & Support</td><td>10 000 JPY〜 / mois</td><td>-</td><td>Audits de sécurité réguliers, mises à jour techniques, retouches mineures</td></tr>
-          </tbody>
-        </table>
+
+      <!-- Effet d'Ancrage (Comparaison de Marché) -->
+      <div class="market-anchoring-box">
+        <h3 class="anchoring-title">« Tarifs du Marché » de la Création Web vs Wa-Node</h3>
+        <p class="anchoring-intro">Lors de la création d'un site, vous pouvez vous demander : « Pourquoi est-ce si abordable ? La qualité est-elle fiable ? » Laissez-nous vous expliquer pourquoi Wa-Node propose une qualité exceptionnelle à un tarif juste par rapport aux prix du marché.</p>
+        
+        <div class="anchoring-table-wrap">
+          <div class="anchoring-row header">
+            <div>Type de Création</div>
+            <div>Tarif Moyen en Agence</div>
+            <div>Wa-Node (Tarif de Campagne)</div>
+          </div>
+          <div class="anchoring-row">
+            <div class="type-name">Site Web Simple</div>
+            <div class="market-price">Initial : 300k - 500k JPY<br><span class="sub">Maint. : 10k - 30k JPY/mois</span></div>
+            <div class="wa-price">Initial : Dès 40 000 JPY<br><span class="sub">Maint. : Optionnelle (10 000 JPY/mois)</span></div>
+          </div>
+          <div class="anchoring-row">
+            <div class="type-name">LP Psychologie (Recommandée)</div>
+            <div class="market-price">Initial : 150k - 500k JPY<br><span class="sub">Maint. : 10k - 30k JPY/mois</span></div>
+            <div class="wa-price highlight">Initial : Dès 48 000 JPY<br><span class="sub">Maint. : Optionnelle (10 000 JPY/mois)</span></div>
+          </div>
+          <div class="anchoring-row">
+            <div class="type-name">Site Web Psychologie</div>
+            <div class="market-price">Initial : 500k - 1,2M JPY<br><span class="sub">Maint. : 15k - 50k JPY/mois</span></div>
+            <div class="wa-price">Initial : Dès 96 000 JPY<br><span class="sub">Maint. : Optionnelle (10 000 JPY/mois)</span></div>
+          </div>
+        </div>
+
+        <div class="anchoring-reason">
+          <h4>Comment nous assurons une « Haute Qualité à Tarifs Justes »</h4>
+          <ul>
+            <li><strong>Pas d'intermédiaires ni de frais publicitaires :</strong> En éliminant le marketing agressif et les frais de bureau élevés, nous fonctionnons uniquement par recommandation et recherche organique, répercutant ces économies directement sur vous.</li>
+            <li><strong>Vanilla CSS & Modèles Internes :</strong> Au lieu de CMS lourds (comme WordPress) ou de systèmes superflus, nous développons du code ultra-léger et rapide optimisé en interne, réduisant considérablement le temps de développement.</li>
+            <li><strong>Concentration sur l'Essentiel : Les Parcours Cognitifs :</strong> Nous évitons les effets visuels superflus ou les structures complexes, en nous concentrant sur un design basé sur la psychologie pour que vos prospects se sentent en sécurité.</li>
+          </ul>
+        </div>
       </div>
+
+      <div class="recommended-price-grid">
+        <article class="recommended-price-card">
+          <span class="price-badge-ume">Formule Basique (Ume)</span>
+          <h3>Site Web Simple</h3>
+          <p class="p-price">40 000 JPY〜 <small>Tarif de Campagne</small></p>
+          <p>Un site compact (3-5 pages) faisant office de carte de visite numérique. Idéal pour débuter en ligne avec un budget maîtrisé.</p>
+        </article>
+        <article class="recommended-price-card highlight-take">
+          <span class="price-badge-take">Formule Standard (Take) ★ Recommandée</span>
+          <h3>LP Optimisée Psychologie</h3>
+          <p class="p-price">48 000 JPY〜 <small>Tarif de Campagne</small></p>
+          <p>Conçue selon la psychologie comportementale, alignant le visuel principal, les éléments de confiance et les CTAs. Notre offre au meilleur ROI, directement liée à vos conversions.</p>
+        </article>
+        <article class="recommended-price-card">
+          <span class="price-badge-matsu">Formule Premium (Matsu)</span>
+          <h3>Site Web Psychologie</h3>
+          <p class="p-price">96 000 JPY〜 <small>Tarif de Campagne</small></p>
+          <p>Un site internet standard (environ 5 pages). Nous appliquons une structure d'information robuste pour guider sereinement vos prospects vers le contact.</p>
+        </article>
+      </div>
+
+      <details class="addon-details price-details">
+        <summary>Afficher la liste complète des tarifs (y compris créations simples, maintenance et options)</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Service</th><th>Tarif Standard</th><th>Tarif de Campagne</th><th>Détails</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>LP Simple</td><td>30 000 JPY〜</td><td class="price-campaign">24 000 JPY〜</td><td>Page d'atterrissage épurée et efficace pour une présentation claire</td></tr>
+              <tr><td>Site Web Simple</td><td>50 000 JPY〜</td><td class="price-campaign">40 000 JPY〜</td><td>Site professionnel vitrine (3 à 5 pages)</td></tr>
+              <tr><td>LP Psychologie</td><td>60 000 JPY〜</td><td class="price-campaign">48 000 JPY〜</td><td>LP optimisée pour la conversion (structure stratégique incluse)</td></tr>
+              <tr><td>Site Web Psychologie</td><td>120 000 JPY〜</td><td class="price-campaign">96 000 JPY〜</td><td>Site standard haut de gamme (environ 5 pages)</td></tr>
+              <tr><td>Formule "Business 7"</td><td>150 000 JPY〜</td><td class="price-campaign">120 000 JPY〜</td><td>Structure à 7 pages, SEO de base optimisé, finitions premium</td></tr>
+              <tr><td>Options Personnalisées</td><td>5 000 JPY〜</td><td class="price-campaign">4 000 JPY〜</td><td>Création d'infographies, configuration de blog, quiz sur mesure, etc.</td></tr>
+              <tr><td>Maintenance & Support</td><td>10 000 JPY〜 / mois</td><td>-</td><td>Audits de sécurité réguliers, mises à jour techniques, retouches mineures</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
     </section>
 
     <section class="section">
@@ -65,7 +175,7 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
           <p class="p-price">15 000 JPY〜 <small>/ mois</small></p>
           <p class="p-desc">1 entretien mensuel + assistance continue par messagerie. Idéal pour vos retouches web et conseils en IA.</p>
         </div>
-        <div class="p-card-simple">
+        <div class="p-card-simple" id="ict-ai">
           <h3>Consultation TIC Ponctuelle</h3>
           <p class="p-price">5 000 JPY <small>/ 60 min</small></p>
           <p class="p-desc">Résolution ciblée pour ChatGPT, APIs LINE, outils internes ou questions web.</p>
@@ -118,6 +228,29 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
       </div>
     </section>
 
+    <section class="section pricing-faq" aria-labelledby="pricing-faq-title">
+      <p class="eyebrow">Avant Consultation</p>
+      <h2 id="pricing-faq-title" class="premium-heading">FAQ avant Consultation</h2>
+      <div class="faq-list">
+        <details>
+          <summary>Est-il possible de consulter sans commander ?</summary>
+          <p>Tout à fait. Si la clarification de votre situation vous suffit, nous ne pousserons à aucune création ni abonnement.</p>
+        </details>
+        <details>
+          <summary>Puis-je consulter même si je n'ai pas encore choisi d'offre ?</summary>
+          <p>Oui. Nous déterminerons ensemble par quoi commencer : création web, LP, intégration IA/TIC ou optimisation post-lancement.</p>
+        </details>
+        <details>
+          <summary>Serai-je poussé à signer un contrat après l'entretien ?</summary>
+          <p>Jamais. Nous validons le périmètre, les coûts et le planning. Nous ne démarrons qu'après votre entière validation.</p>
+        </details>
+        <details>
+          <summary>Y aura-t-il des hausses de tarifs imprévues par la suite ?</summary>
+          <p>Si des travaux supplémentaires s'avèrent nécessaires, nous validerons le budget avec vous au préalable. Aucuns frais imprévus.</p>
+        </details>
+      </div>
+    </section>
+
     <ConsultationFlow lang="fr" />
     <ProjectExecutionFlow lang="fr" />
   </main>
@@ -130,6 +263,9 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     --accent: #c5a059;
     --accent-dark: #b18e4a;
     --accent-red: #d14d3a;
+    --trust: #0f4c5c;
+    --trust-mid: #1f6f78;
+    --trust-line: rgba(15, 76, 92, 0.18);
     --line: rgba(197, 160, 89, 0.2);
   }
 
@@ -173,6 +309,140 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
   .eyebrow { font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.2em; margin-bottom: 10px; display: block; }
   h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c2c2c; }
 
+  .choice-guide {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .choice-lead {
+    max-width: 720px;
+    margin: 0 auto 34px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 34px 0 20px;
+  }
+  .choice-card {
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    text-align: left;
+    box-shadow: 0 16px 34px rgba(44, 44, 44, 0.04);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .choice-card:hover {
+    border-color: var(--trust-mid);
+    box-shadow: 0 20px 44px rgba(44, 44, 44, 0.08);
+    transform: translateY(-3px);
+  }
+  .choice-card.primary-choice {
+    border: 2px solid var(--trust-line);
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(197, 160, 89, 0.06)), #fff;
+  }
+  .choice-label {
+    align-self: flex-start;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 5px 12px;
+  }
+  .choice-card h3 {
+    margin: 0;
+    color: #2c2c2c;
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+  .choice-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .choice-card .choice-fit {
+    display: inline-block;
+    align-self: flex-start;
+    margin: 0;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.07);
+    color: var(--trust);
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+  .choice-card strong {
+    color: var(--trust);
+    font-size: 1.15rem;
+  }
+  .choice-footnote {
+    margin: 0 auto;
+    max-width: 680px;
+    color: #777;
+    font-size: 0.92rem;
+  }
+  .decision-guide {
+    margin: 30px auto 0;
+    max-width: 840px;
+    padding: 24px;
+    border: 1px solid var(--trust-line);
+    border-radius: 20px;
+    background: rgba(15, 76, 92, 0.035);
+    text-align: left;
+  }
+  .decision-guide h3 {
+    margin: 0 0 16px;
+    color: #2c2c2c;
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+  .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .decision-grid a {
+    display: block;
+    padding: 16px 18px;
+    border: 1px solid var(--trust-line);
+    border-radius: 14px;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    transition: 0.25s ease;
+  }
+  .decision-grid a:hover {
+    border-color: var(--trust-mid);
+    transform: translateY(-2px);
+  }
+  .decision-grid span {
+    display: block;
+    color: #666;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .decision-grid strong {
+    display: block;
+    margin-top: 4px;
+    color: var(--trust);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
   .campaign-notice-box {
     background: rgba(209, 77, 58, 0.03); border-left: 4px solid var(--accent-red);
     padding: 20px; border-radius: 0 15px 15px 0; margin-bottom: 30px;
@@ -184,6 +454,79 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
   th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--line); }
   th { background: #fdfaf5; color: var(--accent-dark); font-weight: 800; font-size: 0.85rem; }
   .price-campaign { color: var(--accent-red); font-weight: 800; }
+
+  .recommended-price-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 34px 0 18px;
+  }
+  .recommended-price-card {
+    background: #fff;
+    border: 1px solid var(--trust-line);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 16px 34px rgba(44, 44, 44, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .recommended-price-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(44, 44, 44, 0.08);
+  }
+  .recommended-price-card.highlight-take {
+    border: 2px solid var(--accent-red);
+    background: linear-gradient(135deg, rgba(209, 77, 58, 0.03), rgba(253, 250, 245, 0.98)), #fff;
+    transform: scale(1.03);
+    box-shadow: 0 20px 45px rgba(209, 77, 58, 0.1);
+  }
+  .recommended-price-card.highlight-take:hover {
+    transform: scale(1.03) translateY(-3px);
+  }
+  .price-badge-ume, .price-badge-take, .price-badge-matsu {
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 5px 12px;
+  }
+  .price-badge-ume {
+    background: rgba(44, 44, 44, 0.08);
+    color: #555;
+  }
+  .price-badge-take {
+    background: var(--accent-red);
+    color: #fff;
+  }
+  .price-badge-matsu {
+    background: rgba(197, 160, 89, 0.15);
+    color: var(--accent-dark);
+  }
+  .recommended-price-card span {
+    display: inline-block;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 5px 12px;
+  }
+  .recommended-price-card h3 {
+    margin: 0 0 12px;
+    color: #2c2c2c;
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+  .recommended-price-card p:last-child {
+    margin-bottom: 0;
+    color: #666;
+    line-height: 1.7;
+  }
 
   .pricing-grid-simple {
     display: grid;
@@ -201,8 +544,8 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     transition: 0.3s;
   }
   .p-card-simple.highlight {
-    border: 2px solid var(--accent);
-    background: #fffdf9;
+    border: 2px solid var(--trust-line);
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(197, 160, 89, 0.06)), #fff;
     transform: scale(1.05);
     z-index: 1;
   }
@@ -211,7 +554,7 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--accent);
+    background: var(--trust);
     color: #fff;
     font-size: 0.7rem;
     font-weight: 800;
@@ -219,7 +562,7 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     border-radius: 4px;
   }
   .p-card-simple h3 { font-size: 1.1rem; margin-bottom: 15px; font-weight: 800; }
-  .p-price { font-size: 1.6rem; font-weight: 800; color: var(--accent-dark); margin-bottom: 15px; }
+  .p-price { font-size: 1.6rem; font-weight: 800; color: var(--trust); margin-bottom: 15px; }
   .p-price small { font-size: 0.8rem; font-weight: 400; color: #999; }
   .p-desc { font-size: 0.85rem; color: #666; line-height: 1.5; }
 
@@ -235,6 +578,50 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
   .addon-details summary:hover { text-decoration: underline; }
   .table-wrap.mini { margin-top: 20px; }
   .table-wrap.mini th, .table-wrap.mini td { padding: 12px 15px; font-size: 0.85rem; }
+  .price-details .table-wrap {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  .pricing-faq {
+    border-top: 1px solid var(--line);
+  }
+  .faq-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .faq-list details {
+    border: 1px solid var(--trust-line);
+    border-radius: 16px;
+    background: #fff;
+    padding: 0;
+    overflow: hidden;
+  }
+  .faq-list summary {
+    cursor: pointer;
+    padding: 18px 20px;
+    color: #2c2c2c;
+    font-weight: 800;
+    list-style: none;
+  }
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-list summary::after {
+    content: "+";
+    float: right;
+    color: var(--trust);
+    font-weight: 900;
+  }
+  .faq-list details[open] summary::after {
+    content: "-";
+  }
+  .faq-list p {
+    margin: 0;
+    padding: 0 20px 18px;
+    color: #666;
+    line-height: 1.8;
+  }
 
   @media (max-width: 768px) {
     .banner-inner { flex-direction: column; text-align: center; padding: 30px 20px; gap: 15px; }
@@ -242,6 +629,149 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     .banner-main strong { font-size: 1.1rem; }
     h2 { font-size: 1.8rem; }
     th, td { padding: 15px 10px; font-size: 0.9rem; }
+    .choice-grid,
+    .recommended-price-grid,
     .pricing-grid-simple { grid-template-columns: 1fr; }
+    .recommended-price-card.highlight-take {
+      transform: none !important;
+    }
+    .choice-guide { text-align: left; }
+    .choice-lead,
+    .choice-footnote { margin-left: 0; }
+    .choice-card { min-height: auto; }
+    .decision-grid { grid-template-columns: 1fr; }
+  }
+
+  /* アンカリング効果（市場相場）のスタイル */
+  .market-anchoring-box {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 36px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(44, 44, 44, 0.02);
+    text-align: left;
+  }
+  .anchoring-title {
+    font-size: 1.35rem;
+    color: var(--trust);
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: 800;
+  }
+  .anchoring-intro {
+    font-size: 0.92rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .anchoring-table-wrap {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .anchoring-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.4fr 1.4fr;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .anchoring-row:last-child {
+    border-bottom: none;
+  }
+  .anchoring-row.header {
+    background: rgba(15, 76, 92, 0.04);
+    color: var(--trust);
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 14px 20px;
+  }
+  .anchoring-row:not(.header) {
+    padding: 16px 20px;
+    font-size: 0.92rem;
+  }
+  .anchoring-row .type-name {
+    font-weight: 800;
+    color: #333;
+  }
+  .anchoring-row .market-price {
+    color: #777;
+    line-height: 1.4;
+  }
+  .anchoring-row .market-price .sub, .anchoring-row .wa-price .sub {
+    font-size: 0.78rem;
+  }
+  .anchoring-row .wa-price {
+    color: var(--accent-dark);
+    font-weight: 800;
+    line-height: 1.4;
+  }
+  .anchoring-row .wa-price.highlight {
+    color: var(--accent-red);
+  }
+  .anchoring-reason {
+    background: rgba(197, 160, 89, 0.04);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px dashed var(--line);
+  }
+  .anchoring-reason h4 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    color: var(--accent-dark);
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  .anchoring-reason ul {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .anchoring-reason li {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    list-style-type: disc;
+  }
+  .anchoring-reason li strong {
+    color: #333;
+  }
+
+  @media (max-width: 600px) {
+    .market-anchoring-box {
+      padding: 24px 20px;
+    }
+    .anchoring-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 16px 20px;
+    }
+    .anchoring-row.header {
+      display: none;
+    }
+    .anchoring-row:not(.header) {
+      border-bottom: 1px solid var(--line);
+    }
+    .anchoring-row .type-name {
+      font-size: 1rem;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 6px;
+      margin-bottom: 4px;
+    }
+    .anchoring-row .market-price::before {
+      content: "市場相場: ";
+      font-size: 0.8rem;
+      color: #999;
+      font-weight: bold;
+    }
+    .anchoring-row .wa-price::before {
+      content: "和-Node: ";
+      font-size: 0.8rem;
+      color: #999;
+      font-weight: bold;
+    }
   }
 </style>

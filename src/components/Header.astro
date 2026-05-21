@@ -32,10 +32,10 @@ function getLocalizedLink(path: string) {
 <header class="site-header" id="site-header">
   <div class="header-inner">
     <a class="logo" href={getLocalizedLink('/')}>
-      和-Node<span class="logo-sub">心理学 × ICT × AI</span>
+      和-Node<span class="logo-sub">{lang === 'ja' ? '心理学 × ICT × AI' : lang === 'en' ? 'Psychology × ICT × AI' : 'Psychologie × TIC × IA'}</span>
     </a>
 
-    <button class="menu-toggle" id="menu-toggle" aria-label="メニューを開く">
+    <button class="menu-toggle" id="menu-toggle" aria-label={lang === 'ja' ? 'メニューを開く' : lang === 'en' ? 'Open Menu' : 'Ouvrir le menu'}>
       <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
         <rect class="bar-top" x="5" y="7" width="20" height="2" rx="1" fill="#2b241f"/>
         <rect class="bar-mid" x="5" y="14" width="20" height="2" rx="1" fill="#2b241f"/>

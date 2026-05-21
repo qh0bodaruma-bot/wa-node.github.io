@@ -40,6 +40,34 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
       </div>
     </section>
 
+    <section class="mental-stats-section" style="background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 60px 0;">
+      <div class="wrap">
+        <div class="section-head" style="text-align: center; margin-bottom: 40px;">
+          <p class="kicker">Données & Preuves</p>
+          <h2>Défis de Santé Mentale & Retours sur Investissement</h2>
+          <p class="muted">La détresse mentale des collaborateurs n'est pas qu'un problème individuel ; c'est un enjeu crucial pour la durabilité de l'organisation.</p>
+        </div>
+        <div class="grid two" style="gap: 32px; max-width: 900px; margin: 0 auto;">
+          <div class="card stat-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 36px 24px;">
+            <span class="badge" style="background: rgba(209, 77, 58, 0.1); color: var(--accent2);">Défis Actuels</span>
+            <div class="stat-number" style="font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 900; color: var(--accent2); line-height: 1.1; margin: 16px 0;">82.7<span style="font-size: 1.8rem; font-weight: 800;">%</span></div>
+            <h4 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; color: var(--text-deep);">Proportion de Salariés Fortement Stressés</h4>
+            <p style="font-size: 0.92rem; color: var(--muted); line-height: 1.6; margin: 0;">
+              Représente le taux de travailleurs éprouvant de fortes angoisses ou du stress lié au travail, selon l'enquête du ministère japonais de la Santé, du Travail et des Affaires sociales (2023). Quelle que soit la taille, beaucoup souffrent en silence.
+            </p>
+          </div>
+          <div class="card stat-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 36px 24px;">
+            <span class="badge" style="background: rgba(197, 160, 89, 0.1); color: var(--accent);">Impact du Soutien</span>
+            <div class="stat-number" style="font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 900; color: var(--accent); line-height: 1.1; margin: 16px 0;">230<span style="font-size: 1.8rem; font-weight: 800;">%</span></div>
+            <h4 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; color: var(--text-deep);">Retour sur Investissement (ROI) de la Prévention</h4>
+            <p style="font-size: 0.92rem; color: var(--muted); line-height: 1.6; margin: 0;">
+              Les études internationales (Gallup, etc.) prouvent que les entreprises investissant dans la sécurité psychologique obtiennent un retour de 2,3 fois le montant investi (ROI de 230%) grâce à la baisse du turnover et l'amélioration de la productivité.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section>
       <div class="wrap">
         <div class="section-head">
@@ -177,7 +205,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
       </div>
     </section>
 
-    <ConsultationFlow />
+    <ConsultationFlow lang="fr" />
   </main>
 </BaseLayout>
 

@@ -40,6 +40,34 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
       </div>
     </section>
 
+    <section class="mental-stats-section" style="background: var(--paper); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 60px 0;">
+      <div class="wrap">
+        <div class="section-head" style="text-align: center; margin-bottom: 40px;">
+          <p class="kicker">Data & Evidence</p>
+          <h2>Mental Health Issues & the ROI of Support Programs</h2>
+          <p class="muted">Employee mental strain is not just a personal struggle; it is a critical issue directly affecting organizational sustainability.</p>
+        </div>
+        <div class="grid two" style="gap: 32px; max-width: 900px; margin: 0 auto;">
+          <div class="card stat-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 36px 24px;">
+            <span class="badge" style="background: rgba(209, 77, 58, 0.1); color: var(--accent2);">Current Challenges</span>
+            <div class="stat-number" style="font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 900; color: var(--accent2); line-height: 1.1; margin: 16px 0;">82.7<span style="font-size: 1.8rem; font-weight: 800;">%</span></div>
+            <h4 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; color: var(--text-deep);">Ratio of Employees Facing High Stress</h4>
+            <p style="font-size: 0.92rem; color: var(--muted); line-height: 1.6; margin: 0;">
+              This represents the percentage of workers experiencing intense anxiety or stress in their jobs, based on the Ministry of Health, Labour and Welfare's 2023 Occupational Health and Safety Survey. Regardless of company size, many employees suffer in silence.
+            </p>
+          </div>
+          <div class="card stat-card" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 36px 24px;">
+            <span class="badge" style="background: rgba(197, 160, 89, 0.1); color: var(--accent);">Impact of Support</span>
+            <div class="stat-number" style="font-size: clamp(3rem, 6vw, 4.5rem); font-weight: 900; color: var(--accent); line-height: 1.1; margin: 16px 0;">230<span style="font-size: 1.8rem; font-weight: 800;">%</span></div>
+            <h4 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 12px; color: var(--text-deep);">Return on Investment (ROI) of Psychological Care</h4>
+            <p style="font-size: 0.92rem; color: var(--muted); line-height: 1.6; margin: 0;">
+              International studies (such as Gallup) demonstrate that organizations investing in psychological safety and mental health support receive 2.3 times the economic return (230% ROI) through decreased turnover and higher productivity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section>
       <div class="wrap">
         <div class="section-head">
@@ -177,7 +205,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
       </div>
     </section>
 
-    <ConsultationFlow />
+    <ConsultationFlow lang="en" />
   </main>
 </BaseLayout>
 

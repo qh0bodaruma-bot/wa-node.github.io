@@ -27,7 +27,54 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
       </div>
     </section>
 
-    <section class="section">
+    <section class="section choice-guide">
+      <p class="eyebrow">Start Here</p>
+      <h2 class="premium-heading">Not sure where to start? Choose from these 3 entry points</h2>
+      <p class="choice-lead">No need to select a detailed package upfront. Simply share your goals from one of these entry points, and we will tailor the best plan for you.</p>
+      <div class="choice-grid">
+        <a class="choice-card primary-choice" href="#web-production">
+          <span class="choice-label">Most Popular</span>
+          <h3>I want to build a Website or LP</h3>
+          <p class="choice-fit">For establishing a trusted presence</p>
+          <p>We structure and design high-converting LPs and websites optimized for trust.</p>
+          <strong>From 48,000 JPY</strong>
+        </a>
+        <a class="choice-card" href="#copilot">
+          <span class="choice-label">Ongoing Support</span>
+          <h3>I want ongoing advice after launch</h3>
+          <p class="choice-fit">For continuous optimization</p>
+          <p>Your "Business Co-pilot" for monthly optimization, AI integration, and workflow streamlining.</p>
+          <strong>From 15,000 JPY / mo</strong>
+        </a>
+        <a class="choice-card" href="#ict-ai">
+          <span class="choice-label">One-off Advice</span>
+          <h3>I want to optimize operations with AI & ICT</h3>
+          <p class="choice-fit">For starting with workflow audits</p>
+          <p>We resolve questions about ChatGPT, LINE, business tools, and simple automation in a single session.</p>
+          <strong>From 5,000 JPY</strong>
+        </a>
+      </div>
+      <p class="choice-footnote">If you are unsure, we recommend starting with "I want to build a Website or LP" or "I want ongoing advice after launch."</p>
+      <div class="decision-guide" aria-label="Recommended by Goal">
+        <h3>Recommended by Goal</h3>
+        <div class="decision-grid">
+          <a href="#web-production">
+            <span>Want to increase inquiries</span>
+            <strong>Psychology LP Design</strong>
+          </a>
+          <a href="#web-production">
+            <span>Want solid business foundations</span>
+            <strong>Psychology Website Design</strong>
+          </a>
+          <a href="#copilot">
+            <span>Want continuous improvement</span>
+            <strong>Business Co-pilot</strong>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="web-production">
       <p class="eyebrow">01. Web & Lead Design</p>
       <h2 class="premium-heading">Psychology-Driven Web & LP Design</h2>
       <p>Eliminating digital friction and maximizing conversion. High-end websites engineered with behavioral insights.</p>
@@ -35,22 +82,85 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
         <strong>【1st Anniversary Campaign】 20% OFF Web Production!</strong>
         <p>Enjoy a 20% discount on the standard prices below (Limited to 3 clients per month).</p>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr><th>Service</th><th>Regular Price</th><th>Campaign Price</th><th>Details</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Simple LP Design</td><td>30,000 JPY〜</td><td class="price-campaign">24,000 JPY〜</td><td>Lightweight single-page landing page for clean presentation</td></tr>
-            <tr><td>Simple Website Design</td><td>50,000 JPY〜</td><td class="price-campaign">40,000 JPY〜</td><td>Compact business website (3 to 5 pages)</td></tr>
-            <tr><td>Psychology LP Design</td><td>60,000 JPY〜</td><td class="price-campaign">48,000 JPY〜</td><td>Behavioral-psychology optimized LP (including wireframe draft)</td></tr>
-            <tr><td>Psychology Website</td><td>120,000 JPY〜</td><td class="price-campaign">96,000 JPY〜</td><td>High-end standard website (around 5 pages)</td></tr>
-            <tr><td>Website Pack "Business 7"</td><td>150,000 JPY〜</td><td class="price-campaign">120,000 JPY〜</td><td>Standard 7 pages, Basic SEO setup, Premium polish finish</td></tr>
-            <tr><td>Add-on Custom Options</td><td>5,000 JPY〜</td><td class="price-campaign">4,000 JPY〜</td><td>Infographics, Blog setup, Custom quiz/diagnostics, etc.</td></tr>
-            <tr><td>Web Maintenance & Support</td><td>10,000 JPY〜 / mo</td><td>-</td><td>Security audits, platform updates, and minor text/image edits</td></tr>
-          </tbody>
-        </table>
+
+      <!-- Anchoring Effect (Market Comparison) -->
+      <div class="market-anchoring-box">
+        <h3 class="anchoring-title">Web Production "Market Rates" vs Wa-Node</h3>
+        <p class="anchoring-intro">When requesting web development, you might wonder, "Why is it so affordable? Is the quality reliable?" Let us explain why Wa-Node offers high quality at such reasonable prices compared to typical market rates.</p>
+        
+        <div class="anchoring-table-wrap">
+          <div class="anchoring-row header">
+            <div>Production Type</div>
+            <div>Average Agency Rate</div>
+            <div>Wa-Node (Campaign Rate)</div>
+          </div>
+          <div class="anchoring-row">
+            <div class="type-name">Simple Website Design</div>
+            <div class="market-price">Initial: 300k - 500k JPY<br><span class="sub">Maint.: 10k - 30k JPY/mo</span></div>
+            <div class="wa-price">Initial: From 40,000 JPY<br><span class="sub">Maint.: Optional (10,000 JPY/mo)</span></div>
+          </div>
+          <div class="anchoring-row">
+            <div class="type-name">Psychology LP (Recommended)</div>
+            <div class="market-price">Initial: 150k - 500k JPY<br><span class="sub">Maint.: 10k - 30k JPY/mo</span></div>
+            <div class="wa-price highlight">Initial: From 48,000 JPY<br><span class="sub">Maint.: Optional (10,000 JPY/mo)</span></div>
+          </div>
+          <div class="anchoring-row">
+            <div class="type-name">Psychology Website</div>
+            <div class="market-price">Initial: 500k - 1.2M JPY<br><span class="sub">Maint.: 15k - 50k JPY/mo</span></div>
+            <div class="wa-price">Initial: From 96,000 JPY<br><span class="sub">Maint.: Optional (10,000 JPY/mo)</span></div>
+          </div>
+        </div>
+
+        <div class="anchoring-reason">
+          <h4>How We Deliver "High Quality at Reasonable Rates"</h4>
+          <ul>
+            <li><strong>No Middlemen or High Ad Spend:</strong> By eliminating aggressive marketing and high office maintenance fees, we operate solely on client referrals and organic web inquiries, passing the savings directly to you.</li>
+            <li><strong>Vanilla CSS & In-House Templates:</strong> Instead of bloated CMS (like WordPress) or unnecessary systems, we build lightweight, lightning-fast code optimized in-house, significantly reducing developer hours.</li>
+            <li><strong>Focusing on What Matters — Psychology Funnels:</strong> We skip flashy visual effects or over-complicated layouts, focusing purely on psychology-backed design that makes prospects feel secure and confident in choosing you.</li>
+          </ul>
+        </div>
       </div>
+
+      <div class="recommended-price-grid">
+        <article class="recommended-price-card">
+          <span class="price-badge-ume">Basic (Ume)</span>
+          <h3>Simple Website Design</h3>
+          <p class="p-price">40,000 JPY〜 <small>Campaign Price</small></p>
+          <p>A compact website (3-5 pages) serving as your digital business card. Ideal for establishing an online hub on a budget.</p>
+        </article>
+        <article class="recommended-price-card highlight-take">
+          <span class="price-badge-take">Standard (Take) ★ Most Popular</span>
+          <h3>Psychology LP Design</h3>
+          <p class="p-price">48,000 JPY〜 <small>Campaign Price</small></p>
+          <p>Designed around behavioral psychology, aligning everything from the hero area to trust-building elements and CTAs. Our highest ROI package directly tied to conversions.</p>
+        </article>
+        <article class="recommended-price-card">
+          <span class="price-badge-matsu">Premium (Matsu)</span>
+          <h3>Psychology Website</h3>
+          <p class="p-price">96,000 JPY〜 <small>Campaign Price</small></p>
+          <p>A standard website (around 5 pages). We apply robust informational structuring so prospects can comfortably navigate toward inquiries or sales.</p>
+        </article>
+      </div>
+
+      <details class="addon-details price-details">
+        <summary>Show full price list (including simple designs, maintenance, and add-ons)</summary>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr><th>Service</th><th>Regular Price</th><th>Campaign Price</th><th>Details</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Simple LP Design</td><td>30,000 JPY〜</td><td class="price-campaign">24,000 JPY〜</td><td>Lightweight single-page landing page for clean presentation</td></tr>
+              <tr><td>Simple Website Design</td><td>50,000 JPY〜</td><td class="price-campaign">40,000 JPY〜</td><td>Compact business website (3 to 5 pages)</td></tr>
+              <tr><td>Psychology LP Design</td><td>60,000 JPY〜</td><td class="price-campaign">48,000 JPY〜</td><td>Behavioral-psychology optimized LP (including wireframe draft)</td></tr>
+              <tr><td>Psychology Website</td><td>120,000 JPY〜</td><td class="price-campaign">96,000 JPY〜</td><td>High-end standard website (around 5 pages)</td></tr>
+              <tr><td>Website Pack "Business 7"</td><td>150,000 JPY〜</td><td class="price-campaign">120,000 JPY〜</td><td>Standard 7 pages, Basic SEO setup, Premium polish finish</td></tr>
+              <tr><td>Add-on Custom Options</td><td>5,000 JPY〜</td><td class="price-campaign">4,000 JPY〜</td><td>Infographics, Blog setup, Custom quiz/diagnostics, etc.</td></tr>
+              <tr><td>Web Maintenance & Support</td><td>10,000 JPY〜 / mo</td><td>-</td><td>Security audits, platform updates, and minor text/image edits</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </details>
     </section>
 
     <section class="section">
@@ -65,7 +175,7 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
           <p class="p-price">15,000 JPY〜 <small>/ month</small></p>
           <p class="p-desc">1 monthly consultation + ongoing chat support. Perfect for continuous web updates and AI tooling advice.</p>
         </div>
-        <div class="p-card-simple">
+        <div class="p-card-simple" id="ict-ai">
           <h3>ICT Spot Consultation</h3>
           <p class="p-price">5,000 JPY <small>/ 60 min</small></p>
           <p class="p-desc">Single-session troubleshooting for ChatGPT, LINE APIs, workflow tools, or generic web concerns.</p>
@@ -118,6 +228,29 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
       </div>
     </section>
 
+    <section class="section pricing-faq" aria-labelledby="pricing-faq-title">
+      <p class="eyebrow">Before Consultation</p>
+      <h2 id="pricing-faq-title" class="premium-heading">FAQ before Consultation</h2>
+      <div class="faq-list">
+        <details>
+          <summary>Is it okay if I only consult without ordering?</summary>
+          <p>Absolutely. If clarifying your current situation is all you need, we will not push any development or monthly plans.</p>
+        </details>
+        <details>
+          <summary>Can I consult even if I haven't decided what to request?</summary>
+          <p>Yes. We will work together to define where you should start among web design, LP development, AI/ICT integration, or ongoing optimization.</p>
+        </details>
+        <details>
+          <summary>Will I be pressured into a contract after the session?</summary>
+          <p>Never. We clarify the required scope, costs, and timeline, and we only begin officially once you are completely comfortable.</p>
+        </details>
+        <details>
+          <summary>Will there be any unexpected price increases later?</summary>
+          <p>If additional work is needed, we will confirm the scope and budget with you beforehand. No unsanctioned fees will ever be charged.</p>
+        </details>
+      </div>
+    </section>
+
     <ConsultationFlow lang="en" />
     <ProjectExecutionFlow lang="en" />
   </main>
@@ -130,6 +263,9 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     --accent: #c5a059;
     --accent-dark: #b18e4a;
     --accent-red: #d14d3a;
+    --trust: #0f4c5c;
+    --trust-mid: #1f6f78;
+    --trust-line: rgba(15, 76, 92, 0.18);
     --line: rgba(197, 160, 89, 0.2);
   }
 
@@ -173,6 +309,140 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
   .eyebrow { font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.2em; margin-bottom: 10px; display: block; }
   h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c2c2c; }
 
+  .choice-guide {
+    padding-top: 70px;
+    padding-bottom: 70px;
+    text-align: center;
+    border-bottom: 1px solid var(--line);
+  }
+  .choice-lead {
+    max-width: 720px;
+    margin: 0 auto 34px;
+    color: #555;
+    line-height: 1.8;
+  }
+  .choice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 34px 0 20px;
+  }
+  .choice-card {
+    display: flex;
+    min-height: 260px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 28px 24px;
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    text-align: left;
+    box-shadow: 0 16px 34px rgba(44, 44, 44, 0.04);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .choice-card:hover {
+    border-color: var(--trust-mid);
+    box-shadow: 0 20px 44px rgba(44, 44, 44, 0.08);
+    transform: translateY(-3px);
+  }
+  .choice-card.primary-choice {
+    border: 2px solid var(--trust-line);
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(197, 160, 89, 0.06)), #fff;
+  }
+  .choice-label {
+    align-self: flex-start;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust);
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 5px 12px;
+  }
+  .choice-card h3 {
+    margin: 0;
+    color: #2c2c2c;
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+  .choice-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.92rem;
+    line-height: 1.7;
+  }
+  .choice-card .choice-fit {
+    display: inline-block;
+    align-self: flex-start;
+    margin: 0;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.07);
+    color: var(--trust);
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+  .choice-card strong {
+    color: var(--trust);
+    font-size: 1.15rem;
+  }
+  .choice-footnote {
+    margin: 0 auto;
+    max-width: 680px;
+    color: #777;
+    font-size: 0.92rem;
+  }
+  .decision-guide {
+    margin: 30px auto 0;
+    max-width: 840px;
+    padding: 24px;
+    border: 1px solid var(--trust-line);
+    border-radius: 20px;
+    background: rgba(15, 76, 92, 0.035);
+    text-align: left;
+  }
+  .decision-guide h3 {
+    margin: 0 0 16px;
+    color: #2c2c2c;
+    font-size: 1.05rem;
+    font-weight: 800;
+  }
+  .decision-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .decision-grid a {
+    display: block;
+    padding: 16px 18px;
+    border: 1px solid var(--trust-line);
+    border-radius: 14px;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    transition: 0.25s ease;
+  }
+  .decision-grid a:hover {
+    border-color: var(--trust-mid);
+    transform: translateY(-2px);
+  }
+  .decision-grid span {
+    display: block;
+    color: #666;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .decision-grid strong {
+    display: block;
+    margin-top: 4px;
+    color: var(--trust);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
   .campaign-notice-box {
     background: rgba(209, 77, 58, 0.03); border-left: 4px solid var(--accent-red);
     padding: 20px; border-radius: 0 15px 15px 0; margin-bottom: 30px;
@@ -184,6 +454,79 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
   th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--line); }
   th { background: #fdfaf5; color: var(--accent-dark); font-weight: 800; font-size: 0.85rem; }
   .price-campaign { color: var(--accent-red); font-weight: 800; }
+
+  .recommended-price-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 22px;
+    margin: 34px 0 18px;
+  }
+  .recommended-price-card {
+    background: #fff;
+    border: 1px solid var(--trust-line);
+    border-radius: 20px;
+    padding: 30px;
+    box-shadow: 0 16px 34px rgba(44, 44, 44, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .recommended-price-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(44, 44, 44, 0.08);
+  }
+  .recommended-price-card.highlight-take {
+    border: 2px solid var(--accent-red);
+    background: linear-gradient(135deg, rgba(209, 77, 58, 0.03), rgba(253, 250, 245, 0.98)), #fff;
+    transform: scale(1.03);
+    box-shadow: 0 20px 45px rgba(209, 77, 58, 0.1);
+  }
+  .recommended-price-card.highlight-take:hover {
+    transform: scale(1.03) translateY(-3px);
+  }
+  .price-badge-ume, .price-badge-take, .price-badge-matsu {
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 5px 12px;
+  }
+  .price-badge-ume {
+    background: rgba(44, 44, 44, 0.08);
+    color: #555;
+  }
+  .price-badge-take {
+    background: var(--accent-red);
+    color: #fff;
+  }
+  .price-badge-matsu {
+    background: rgba(197, 160, 89, 0.15);
+    color: var(--accent-dark);
+  }
+  .recommended-price-card span {
+    display: inline-block;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 5px 12px;
+  }
+  .recommended-price-card h3 {
+    margin: 0 0 12px;
+    color: #2c2c2c;
+    font-size: 1.25rem;
+    font-weight: 800;
+  }
+  .recommended-price-card p:last-child {
+    margin-bottom: 0;
+    color: #666;
+    line-height: 1.7;
+  }
 
   .pricing-grid-simple {
     display: grid;
@@ -201,8 +544,8 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     transition: 0.3s;
   }
   .p-card-simple.highlight {
-    border: 2px solid var(--accent);
-    background: #fffdf9;
+    border: 2px solid var(--trust-line);
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(197, 160, 89, 0.06)), #fff;
     transform: scale(1.05);
     z-index: 1;
   }
@@ -211,7 +554,7 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     top: -12px;
     left: 50%;
     transform: translateX(-50%);
-    background: var(--accent);
+    background: var(--trust);
     color: #fff;
     font-size: 0.7rem;
     font-weight: 800;
@@ -219,7 +562,7 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     border-radius: 4px;
   }
   .p-card-simple h3 { font-size: 1.1rem; margin-bottom: 15px; font-weight: 800; }
-  .p-price { font-size: 1.6rem; font-weight: 800; color: var(--accent-dark); margin-bottom: 15px; }
+  .p-price { font-size: 1.6rem; font-weight: 800; color: var(--trust); margin-bottom: 15px; }
   .p-price small { font-size: 0.8rem; font-weight: 400; color: #999; }
   .p-desc { font-size: 0.85rem; color: #666; line-height: 1.5; }
 
@@ -235,6 +578,50 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
   .addon-details summary:hover { text-decoration: underline; }
   .table-wrap.mini { margin-top: 20px; }
   .table-wrap.mini th, .table-wrap.mini td { padding: 12px 15px; font-size: 0.85rem; }
+  .price-details .table-wrap {
+    margin-top: 20px;
+    margin-bottom: 0;
+  }
+  .pricing-faq {
+    border-top: 1px solid var(--line);
+  }
+  .faq-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 28px;
+  }
+  .faq-list details {
+    border: 1px solid var(--trust-line);
+    border-radius: 16px;
+    background: #fff;
+    padding: 0;
+    overflow: hidden;
+  }
+  .faq-list summary {
+    cursor: pointer;
+    padding: 18px 20px;
+    color: #2c2c2c;
+    font-weight: 800;
+    list-style: none;
+  }
+  .faq-list summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-list summary::after {
+    content: "+";
+    float: right;
+    color: var(--trust);
+    font-weight: 900;
+  }
+  .faq-list details[open] summary::after {
+    content: "-";
+  }
+  .faq-list p {
+    margin: 0;
+    padding: 0 20px 18px;
+    color: #666;
+    line-height: 1.8;
+  }
 
   @media (max-width: 768px) {
     .banner-inner { flex-direction: column; text-align: center; padding: 30px 20px; gap: 15px; }
@@ -242,6 +629,149 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
     .banner-main strong { font-size: 1.1rem; }
     h2 { font-size: 1.8rem; }
     th, td { padding: 15px 10px; font-size: 0.9rem; }
+    .choice-grid,
+    .recommended-price-grid,
     .pricing-grid-simple { grid-template-columns: 1fr; }
+    .recommended-price-card.highlight-take {
+      transform: none !important;
+    }
+    .choice-guide { text-align: left; }
+    .choice-lead,
+    .choice-footnote { margin-left: 0; }
+    .choice-card { min-height: auto; }
+    .decision-grid { grid-template-columns: 1fr; }
+  }
+
+  /* アンカリング効果（市場相場）のスタイル */
+  .market-anchoring-box {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 36px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(44, 44, 44, 0.02);
+    text-align: left;
+  }
+  .anchoring-title {
+    font-size: 1.35rem;
+    color: var(--trust);
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: 800;
+  }
+  .anchoring-intro {
+    font-size: 0.92rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .anchoring-table-wrap {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .anchoring-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.4fr 1.4fr;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .anchoring-row:last-child {
+    border-bottom: none;
+  }
+  .anchoring-row.header {
+    background: rgba(15, 76, 92, 0.04);
+    color: var(--trust);
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 14px 20px;
+  }
+  .anchoring-row:not(.header) {
+    padding: 16px 20px;
+    font-size: 0.92rem;
+  }
+  .anchoring-row .type-name {
+    font-weight: 800;
+    color: #333;
+  }
+  .anchoring-row .market-price {
+    color: #777;
+    line-height: 1.4;
+  }
+  .anchoring-row .market-price .sub, .anchoring-row .wa-price .sub {
+    font-size: 0.78rem;
+  }
+  .anchoring-row .wa-price {
+    color: var(--accent-dark);
+    font-weight: 800;
+    line-height: 1.4;
+  }
+  .anchoring-row .wa-price.highlight {
+    color: var(--accent-red);
+  }
+  .anchoring-reason {
+    background: rgba(197, 160, 89, 0.04);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px dashed var(--line);
+  }
+  .anchoring-reason h4 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    color: var(--accent-dark);
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  .anchoring-reason ul {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .anchoring-reason li {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    list-style-type: disc;
+  }
+  .anchoring-reason li strong {
+    color: #333;
+  }
+
+  @media (max-width: 600px) {
+    .market-anchoring-box {
+      padding: 24px 20px;
+    }
+    .anchoring-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 16px 20px;
+    }
+    .anchoring-row.header {
+      display: none;
+    }
+    .anchoring-row:not(.header) {
+      border-bottom: 1px solid var(--line);
+    }
+    .anchoring-row .type-name {
+      font-size: 1rem;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 6px;
+      margin-bottom: 4px;
+    }
+    .anchoring-row .market-price::before {
+      content: "市場相場: ";
+      font-size: 0.8rem;
+      color: #999;
+      font-weight: bold;
+    }
+    .anchoring-row .wa-price::before {
+      content: "和-Node: ";
+      font-size: 0.8rem;
+      color: #999;
+      font-weight: bold;
+    }
   }
 </style>
