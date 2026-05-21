@@ -82,6 +82,45 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
         <strong>【起業記念キャンペーン】制作費 20% OFF！</strong>
         <p>以下の通常価格より20%割引いたします（毎月3名様限定）。</p>
       </div>
+
+      <!-- アンカリング効果（市場相場との比較） -->
+      <div class="market-anchoring-box">
+        <h3 class="anchoring-title">Webサイト制作の「市場相場」と和-Nodeの価格</h3>
+        <p class="anchoring-intro">Web制作を依頼する際、「なぜこんなに安いの？」「品質は大丈夫？」と不安に思われるかもしれません。一般的な市場相場と比較して、和-Nodeが適正価格で高品質な理由をご説明します。</p>
+        
+        <div class="anchoring-table-wrap">
+          <div class="anchoring-row header">
+            <div>制作タイプ</div>
+            <div>一般的な制作会社相場</div>
+            <div>和-Node（キャンペーン価格）</div>
+          </div>
+          <div class="anchoring-row">
+            <div class="type-name">シンプルHP制作</div>
+            <div class="market-price">初期 30万〜50万円<br><span class="sub">保守：月額 1万〜3万円</span></div>
+            <div class="wa-price">初期 40,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
+          </div>
+          <div class="anchoring-row">
+            <div class="type-name">心理導線LP（本命）</div>
+            <div class="market-price">初期 15万〜50万円<br><span class="sub">保守：月額 1万〜3万円</span></div>
+            <div class="wa-price highlight">初期 48,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
+          </div>
+          <div class="anchoring-row">
+            <div class="type-name">心理導線HP制作</div>
+            <div class="market-price">初期 50万〜120万円<br><span class="sub">保守：月額 1.5万〜5万円</span></div>
+            <div class="wa-price">初期 96,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
+          </div>
+        </div>
+
+        <div class="anchoring-reason">
+          <h4>和-Nodeが「高品質×適正価格」を実現できる理由</h4>
+          <ul>
+            <li><strong>余計な中間マージンや広告費のカット:</strong> 営業活動や過度なオフィス維持費を省き、紹介やWebからの直接依頼のみで運営しているため、余分なコストが上乗せされません。</li>
+            <li><strong>Vanilla CSSと自社開発テンプレートの最適化:</strong> 無駄な重いCMS（WordPressなど）や余計なシステムを使わず、高速・軽量なコードを自社で最適化して構築するため、エンジニアの作業工数を大幅に短縮しています。</li>
+            <li><strong>本質的な「心理導線」に集中:</strong> 突飛な視覚効果や自己満足の複雑なデザインは省き、見込み客が「迷わず安心して選べる」心理学的な設計だけに集中して構築します。</li>
+          </ul>
+        </div>
+      </div>
+
       <div class="recommended-price-grid">
         <article class="recommended-price-card">
           <span class="price-badge-ume">梅プラン</span>
@@ -603,5 +642,138 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
     .choice-footnote { margin-left: 0; }
     .choice-card { min-height: auto; }
     .decision-grid { grid-template-columns: 1fr; }
+  }
+
+  /* アンカリング効果（市場相場）のスタイル */
+  .market-anchoring-box {
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 24px;
+    padding: 36px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(44, 44, 44, 0.02);
+    text-align: left;
+  }
+  .anchoring-title {
+    font-size: 1.35rem;
+    color: var(--trust);
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-weight: 800;
+  }
+  .anchoring-intro {
+    font-size: 0.92rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .anchoring-table-wrap {
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  .anchoring-row {
+    display: grid;
+    grid-template-columns: 1.2fr 1.4fr 1.4fr;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .anchoring-row:last-child {
+    border-bottom: none;
+  }
+  .anchoring-row.header {
+    background: rgba(15, 76, 92, 0.04);
+    color: var(--trust);
+    font-weight: 800;
+    font-size: 0.85rem;
+    padding: 14px 20px;
+  }
+  .anchoring-row:not(.header) {
+    padding: 16px 20px;
+    font-size: 0.92rem;
+  }
+  .anchoring-row .type-name {
+    font-weight: 800;
+    color: #333;
+  }
+  .anchoring-row .market-price {
+    color: #777;
+    line-height: 1.4;
+  }
+  .anchoring-row .market-price .sub, .anchoring-row .wa-price .sub {
+    font-size: 0.78rem;
+  }
+  .anchoring-row .wa-price {
+    color: var(--accent-dark);
+    font-weight: 800;
+    line-height: 1.4;
+  }
+  .anchoring-row .wa-price.highlight {
+    color: var(--accent-red);
+  }
+  .anchoring-reason {
+    background: rgba(197, 160, 89, 0.04);
+    border-radius: 16px;
+    padding: 24px;
+    border: 1px dashed var(--line);
+  }
+  .anchoring-reason h4 {
+    margin-top: 0;
+    margin-bottom: 14px;
+    color: var(--accent-dark);
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  .anchoring-reason ul {
+    margin: 0;
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .anchoring-reason li {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    list-style-type: disc;
+  }
+  .anchoring-reason li strong {
+    color: #333;
+  }
+
+  @media (max-width: 600px) {
+    .market-anchoring-box {
+      padding: 24px 20px;
+    }
+    .anchoring-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 16px 20px;
+    }
+    .anchoring-row.header {
+      display: none;
+    }
+    .anchoring-row:not(.header) {
+      border-bottom: 1px solid var(--line);
+    }
+    .anchoring-row .type-name {
+      font-size: 1rem;
+      border-bottom: 1px dashed var(--line);
+      padding-bottom: 6px;
+      margin-bottom: 4px;
+    }
+    .anchoring-row .market-price::before {
+      content: "市場相場: ";
+      font-size: 0.8rem;
+      color: #999;
+      font-weight: bold;
+    }
+    .anchoring-row .wa-price::before {
+      content: "和-Node: ";
+      font-size: 0.8rem;
+      color: #999;
+      font-weight: bold;
+    }
   }
 </style>
