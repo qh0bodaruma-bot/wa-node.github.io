@@ -1,6 +1,6 @@
 {
   "nav": {
-    "demo": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
+    "demo": { "ja": "選ばれる導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
     "works": { "ja": "制作例・デモ", "en": "Works & Demos", "fr": "Portefeuille" },
     "pricing": { "ja": "サービス・料金", "en": "Pricing", "fr": "Tarifs" },
     "about": { "ja": "和-Nodeについて", "en": "About Us", "fr": "À Propos" },
@@ -18,7 +18,7 @@
       "fr": "Wa-Node applique la psychologie comportementale et les analyses statistiques à la conception web. En tant que co-pilote d'affaires, nous soutenons vos décisions de la création de LP/sites internet à l'intégration de l'IA/TIC."
     },
     "btn_consult": { "ja": "無料で相談する", "en": "Free Consultation", "fr": "Consultation Gratuite" },
-    "btn_demo": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
+    "btn_demo": { "ja": "選ばれる導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
     "btn_price": { "ja": "料金を確認", "en": "Check Pricing", "fr": "Vérifier les Tarifs" }
   },
   "why_psy": {
@@ -52,7 +52,7 @@
     "card1_tag": { "ja": "Web Design", "en": "Web Design", "fr": "Design Web" },
     "card1_title": { "ja": "ホームページ・LP制作を相談したい", "en": "Build a Website or LP", "fr": "Créer un site ou une LP" },
     "card1_desc": {
-      "ja": "わずか50ミリ秒（0.05秒）で決まる第一印象を逃さない超高速表示と、心理導線に基づく構成で成果へと繋げます。",
+      "ja": "わずか50ミリ秒（0.05秒）で決まる第一印象を逃さない超高速表示と、行動心理に基づく構成で成果へと繋げます。",
       "en": "We design ultra-fast websites and landing pages to capture the critical first 50 milliseconds of user attention.",
       "fr": "Nous concevons des sites ultra-rapides et des LP pour capter l'attention dès les premières 50 millisecondes."
     },
@@ -79,7 +79,7 @@
   "experience": {
     "eyebrow": { "ja": "Experience Demo", "en": "Experience Demo", "fr": "Démo & Expérience" },
     "title": { "ja": "「伝わる」と「動く」を体験する", "en": "Experience How It Works and Converts", "fr": "Découvrez comment cela fonctionne" },
-    "card1_title": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
+    "card1_title": { "ja": "選ばれる導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
     "card1_desc": { "ja": "心理学的根拠を可視化したデモページ", "en": "Visualized psychological principles on a live page", "fr": "Visualisation des principes psychologiques" },
     "card2_title": { "ja": "AI相談ナビ", "en": "AI Assistant Nav", "fr": "Assistant IA" },
     "card2_desc": { "ja": "AIがあなたの課題を整理。技術力を体験", "en": "Let our AI organize your challenges and experience our tech capability", "fr": "Laissez l'IA organiser vos défis et découvrez notre technique" },
@@ -143,13 +143,13 @@
     },
     "founder": { "ja": "代表：高野 紘純", "en": "Founder: Hirozumi Takano", "fr": "Fondateur: Hirozumi Takano" },
     "col1": { "ja": "ホームページ制作・副操縦士", "en": "Web Design & Co-pilot", "fr": "Création Web & Co-pilote" },
-    "col1_item1": { "ja": "心理導線Web制作", "en": "Psychology Web Design", "fr": "Design Web Orienté Psychologie" },
+    "col1_item1": { "ja": "行動心理に基づくWeb制作", "en": "Psychology Web Design", "fr": "Design Web Orienté Psychologie" },
     "col1_item2": { "ja": "ホームページ・LP制作", "en": "Homepage & LP Design", "fr": "Création LP & Site Web" },
     "col1_item3": { "ja": "ビジネスの副操縦士（月額）", "en": "Business Co-pilot (Monthly)", "fr": "Co-pilote d'Affaires (Mensuel)" },
     "col1_item_flow": { "ja": "ご契約後の進行フロー", "en": "Project Flow", "fr": "Déroulement du Projet" },
     "col1_item4": { "ja": "制作例・サンプル", "en": "Works & Portfolio", "fr": "Portefeuille" },
     "col2": { "ja": "診断・デモツール", "en": "Demos & Utilities", "fr": "Démos & Utilitaires" },
-    "col2_item1": { "ja": "心理導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
+    "col2_item1": { "ja": "選ばれる導線デモ", "en": "Psychology Demo", "fr": "Démo Psychologique" },
     "col2_item2": { "ja": "AI相談ナビ", "en": "AI Assistant Nav", "fr": "Assistant IA" },
     "col2_item3": { "ja": "制作ヒアリング体験", "en": "Hearing Experience", "fr": "Audition & Cadrage" },
     "col2_item4": { "ja": "料金シミュレーター", "en": "Price Simulator", "fr": "Simulateur de Tarifs" },

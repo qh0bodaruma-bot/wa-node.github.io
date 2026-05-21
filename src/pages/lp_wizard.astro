@@ -413,8 +413,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         '<div class="doc-row"><label>' + k + '</label><span>' + v + '</span></div>'
       ).join('');
 
-      let rec = "まずは、心理導線LP制作から始めて、最も重要な「問い合わせ導線」を固めるのが良さそうです。";
-      if(answers.scale === '6ページ以上') rec = "複数ページにわたる心理導線ホームページ制作が適しています。各ページから最終的なゴールへの導線を統合的に設計しましょう。";
+      let rec = "まずは、選ばれる導線LP制作から始めて、最も重要な「問い合わせ導線」を固めるのが良さそうです。";
+      if(answers.scale === '6ページ以上') rec = "複数ページにわたる選ばれる導線ホームページ制作が適しています。各ページから最終的なゴールへの導線を統合的に設計しましょう。";
       if((answers.points || []).includes('システム')) rec = "Web制作に加え、LINE Mini Appや外部診断システムとの連携を視野に入れた「ICT活用プラン」をご提案します。";
 
       recText.textContent = rec;
