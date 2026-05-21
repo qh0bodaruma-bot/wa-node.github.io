@@ -6,6 +6,8 @@
   --line: #eadfd4;
   --accent: #8a5a32;
   --accent2: #d8b98c;
+  --trust: #0f4c5c;
+  --trust-mid: #1f6f78;
   --soft: #f1e6da;
   --white: #fff;
   --shadow: 0 12px 40px rgba(70, 52, 32, 0.08);
@@ -82,15 +84,15 @@ a:hover { opacity: 0.7; }
   justify-content: center;
   padding: 16px 32px;
   border-radius: 999px;
-  background: var(--accent);
+  background: var(--trust);
   color: #fff;
   font-weight: 800;
   transition: 0.3s;
-  box-shadow: 0 8px 25px rgba(138, 90, 50, 0.2);
+  box-shadow: 0 8px 25px rgba(15, 76, 92, 0.2);
   cursor: pointer;
   border: none;
 }
-.btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(138, 90, 50, 0.3); color: #fff; opacity: 1; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(15, 76, 92, 0.28); color: #fff; opacity: 1; }
 .btn.secondary {
   background: var(--white);
   color: var(--accent);

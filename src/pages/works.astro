@@ -79,6 +79,9 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
             <p>曖昧な相談内容を、Web制作やICT活用の観点で整理するデモです。</p>
           </a>
         </div>
+        <div class="priority-cta">
+          <a href="/contact/">この方向で相談する</a>
+        </div>
       </section>
 
       <!-- Filter Tabs -->
@@ -258,6 +261,9 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       --accent: #c5a059;
       --accent-dark: #b18e4a;
       --accent-red: #d14d3a;
+      --trust: #0f4c5c;
+      --trust-mid: #1f6f78;
+      --trust-line: rgba(15, 76, 92, 0.18);
       --glass: rgba(255, 255, 255, 0.85);
       --glass-border: rgba(197, 160, 89, 0.2);
       --tag-works: #2c7c5e;
@@ -362,19 +368,19 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
     }
     .priority-card:hover {
       transform: translateY(-4px);
-      border-color: var(--accent);
+      border-color: var(--trust-mid);
       box-shadow: 0 18px 38px rgba(0, 0, 0, 0.06);
     }
     .priority-card.main {
-      border: 2px solid var(--accent);
-      background: #fffdf8;
+      border: 2px solid var(--trust-line);
+      background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(197, 160, 89, 0.06)), #fff;
     }
     .priority-card span {
       align-self: flex-start;
       padding: 4px 10px;
-      background: rgba(197, 160, 89, 0.12);
+      background: rgba(15, 76, 92, 0.08);
       border-radius: 999px;
-      color: var(--accent-dark);
+      color: var(--trust);
       font-size: 0.72rem;
       font-weight: 800;
     }
@@ -389,6 +395,28 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
       color: #666;
       font-size: 0.9rem;
       line-height: 1.7;
+    }
+    .priority-cta {
+      margin-top: 26px;
+      text-align: center;
+    }
+    .priority-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 12px 28px;
+      border-radius: 999px;
+      background: var(--trust);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 800;
+      box-shadow: 0 12px 26px rgba(15, 76, 92, 0.18);
+      transition: 0.3s;
+    }
+    .priority-cta a:hover {
+      background: #123c45;
+      transform: translateY(-2px);
     }
 
     /* Filter Nav */

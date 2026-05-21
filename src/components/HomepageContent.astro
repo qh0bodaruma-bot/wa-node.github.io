@@ -26,6 +26,24 @@ function getLocalizedLink(path: string) {
   const fallbackPath = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
   return `${fallbackPath}?lang=${lang}`;
 }
+
+const serviceAudiences = {
+  ja: [
+    'まず信頼されるサイトを作りたい方へ',
+    '公開後も改善や判断を相談したい方へ',
+    '業務整理やAI活用から始めたい方へ'
+  ],
+  en: [
+    'For people who need a trustworthy site first',
+    'For people who want ongoing decisions and improvements',
+    'For people starting with workflow or AI support'
+  ],
+  fr: [
+    'Pour creer d abord un site digne de confiance',
+    'Pour continuer a ameliorer et decider apres lancement',
+    'Pour commencer par l organisation et l IA'
+  ]
+};
 ---
 <main>
   <!-- 1. Hero Section -->
@@ -93,26 +111,29 @@ function getLocalizedLink(path: string) {
         <article class="consult-card highlight">
           <span class="card-tag">{t.services.card1_tag[lang]}</span>
           <h3>{t.services.card1_title[lang]}</h3>
+          <p class="service-fit">{serviceAudiences[lang][0]}</p>
           <p>{t.services.card1_desc[lang]}</p>
           <div class="card-sub-links">
             <a href={getLocalizedLink('/easy-guide')} class="sub-link-text">💡 HPとLPの違い・解説はこちら →</a>
           </div>
-          <a href={getLocalizedLink('/pricing')} class="card-link">{t.services.card1_link[lang]}</a>
+          <a href={`${getLocalizedLink('/pricing')}#web-production`} class="card-link">{t.services.card1_link[lang]}</a>
         </article>
         <article class="consult-card">
           <span class="card-tag">{t.services.card2_tag[lang]}</span>
           <h3>{t.services.card2_title[lang]}</h3>
+          <p class="service-fit">{serviceAudiences[lang][1]}</p>
           <p>{t.services.card2_desc[lang]}</p>
           <div class="card-sub-links">
             <a href={getLocalizedLink('/easy-guide') + '#gas-section'} class="sub-link-text">💡 自動化(GAS)でできることはこちら →</a>
           </div>
-          <a href={getLocalizedLink('/pricing')} class="card-link">{t.services.card2_link[lang]}</a>
+          <a href={`${getLocalizedLink('/pricing')}#copilot`} class="card-link">{t.services.card2_link[lang]}</a>
         </article>
         <article class="consult-card">
           <span class="card-tag">{t.services.card3_tag[lang]}</span>
           <h3>{t.services.card3_title[lang]}</h3>
+          <p class="service-fit">{serviceAudiences[lang][2]}</p>
           <p>{t.services.card3_desc[lang]}</p>
-          <a href={getLocalizedLink('/pricing')} class="card-link">{t.services.card3_link[lang]}</a>
+          <a href={`${getLocalizedLink('/pricing')}#ict-ai`} class="card-link">{t.services.card3_link[lang]}</a>
         </article>
       </div>
     </div>
@@ -196,6 +217,9 @@ function getLocalizedLink(path: string) {
     --accent: #c5a059;
     --accent-dark: #b18e4a;
     --accent2: #d14d3a;
+    --trust: #0f4c5c;
+    --trust-mid: #1f6f78;
+    --trust-line: rgba(15, 76, 92, 0.18);
     --text: #333;
     --text-deep: #1a1a1a;
     --muted: #666;
@@ -220,8 +244,8 @@ function getLocalizedLink(path: string) {
 
   .btns { display: flex; gap: 16px; margin-top: 40px; }
   .btn { padding: 18px 36px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: 0.3s; text-align: center; }
-  .btn.primary { background: var(--accent); color: white; box-shadow: 0 10px 20px rgba(197, 160, 89, 0.2); }
-  .btn.primary:hover { background: var(--accent-dark); transform: translateY(-2px); }
+  .btn.primary { background: var(--trust); color: white; box-shadow: 0 10px 20px rgba(15, 76, 92, 0.2); }
+  .btn.primary:hover { background: #123c45; transform: translateY(-2px); }
   .btn.secondary { border: 1px solid var(--accent); color: var(--accent); }
 
   /* Hero */
@@ -292,13 +316,24 @@ function getLocalizedLink(path: string) {
   /* Cards */
   .consult-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-top: 40px; }
   .consult-card { background: var(--white); padding: 40px; border-radius: var(--radius); border: 1px solid var(--line); transition: 0.3s; }
-  .consult-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-  .consult-card.highlight { background: var(--soft); border-color: var(--accent); }
-  .card-tag { font-size: 0.75rem; font-weight: 800; color: var(--accent); letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
+  .consult-card:hover { transform: translateY(-5px); border-color: var(--trust-mid); }
+  .consult-card.highlight { background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(197, 160, 89, 0.06)), var(--white); border-color: var(--trust-line); }
+  .card-tag { font-size: 0.75rem; font-weight: 800; color: var(--trust); letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
+  .service-fit {
+    display: inline-block;
+    margin: 0 0 14px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.07);
+    color: var(--trust);
+    font-size: 0.78rem;
+    font-weight: 800;
+    line-height: 1.5;
+  }
   .card-sub-links { margin-top: 12px; margin-bottom: 4px; }
   .sub-link-text { font-size: 0.85rem; font-weight: 800; color: var(--accent2); text-decoration: none; display: inline-block; transition: 0.3s; padding: 4px 0; }
   .sub-link-text:hover { color: var(--accent); text-decoration: underline; transform: translateX(2px); }
-  .card-link { display: inline-block; margin-top: 16px; font-weight: 800; color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent); }
+  .card-link { display: inline-block; margin-top: 16px; font-weight: 800; color: var(--trust); text-decoration: none; border-bottom: 1px solid var(--trust); }
 
   /* Experience Grid */
   .action-buttons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
@@ -310,7 +345,7 @@ function getLocalizedLink(path: string) {
   /* Flow */
   .simple-flow-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 40px; }
   .flow-item { text-align: center; position: relative; }
-  .flow-num { width: 40px; height: 40px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; }
+  .flow-num { width: 40px; height: 40px; background: var(--trust); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 800; }
   .flow-item h4 { margin-bottom: 12px; }
   .flow-item p { font-size: 0.9rem; color: var(--muted); }
 
