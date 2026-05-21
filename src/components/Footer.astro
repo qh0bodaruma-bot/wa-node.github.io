@@ -79,29 +79,24 @@ function getLocalizedLink(path: string) {
         </ul>
       </div>
       <div class="footer-col">
-        <h3>{t.footer.col2[lang]}</h3>
+        <h3>{lang === 'ja' ? '相談前に見る' : lang === 'en' ? 'Start Here' : 'Commencer ici'}</h3>
         <ul>
-          <li><a href={getLocalizedLink('/psychology-demo')}>{t.footer.col2_item1[lang]}</a></li>
-          <li><a href={getLocalizedLink('/ai-chat-demo')}>{t.footer.col2_item2[lang]}</a></li>
-          <li><a href={getLocalizedLink('/lp_wizard')}>{t.footer.col2_item3[lang]}</a></li>
-          <li><a href={getLocalizedLink('/simulator')}>{t.footer.col2_item4[lang]}</a></li>
-          <li><a href={getLocalizedLink('/seo_check')}>{t.footer.col2_item5[lang]}</a></li>
+          <li><a href={getLocalizedLink('/contact')}>{lang === 'ja' ? '無料相談' : lang === 'en' ? 'Free Consultation' : 'Consultation gratuite'}</a></li>
+          <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? '料金を見る' : lang === 'en' ? 'See Pricing' : 'Voir les tarifs'}</a></li>
+          <li><a href={getLocalizedLink('/works')}>{lang === 'ja' ? '制作例・デモを見る' : lang === 'en' ? 'Works & Demos' : 'Réalisations & démos'}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>{t.footer.col3[lang]}</h3>
+        <h3>{lang === 'ja' ? '補足コンテンツ' : lang === 'en' ? 'Resources' : 'Ressources'}</h3>
         <ul>
-          <li><a href={getLocalizedLink('/corporate-mental')}>{t.footer.col3_item1[lang]}</a></li>
-          <li><a href={getLocalizedLink('/barrier_free')}>{t.footer.col3_item2[lang]}</a></li>
-          <li><a href={getLocalizedLink('/mental_care')}>{t.footer.col3_item3[lang]}</a></li>
+          <li><a href={getLocalizedLink('/psychology-demo')}>{t.footer.col2_item1[lang]}</a></li>
+          <li><a href={getLocalizedLink('/easy-guide')}>{t.footer.col4_item0[lang]}</a></li>
           <li><a href={getLocalizedLink('/kdp_books')}>{t.footer.col3_item4[lang]}</a></li>
-          <li><a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">{t.footer.col3_item5[lang]}</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h3>{t.footer.col4[lang]}</h3>
         <ul>
-          <li><a href={getLocalizedLink('/easy-guide')}>{t.footer.col4_item0[lang]}</a></li>
           <li><a href={getLocalizedLink('/about')}>{t.footer.col4_item1[lang]}</a></li>
           <li><a href={getLocalizedLink('/tech-stack')}>{t.footer.col4_item_tech[lang]}</a></li>
           <li><a href={getLocalizedLink('/terms')}>{t.footer.col4_item2[lang]}</a></li>

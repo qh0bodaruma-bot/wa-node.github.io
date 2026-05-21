@@ -6,7 +6,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = path.resolve(__dirname, '../dist');
 const SITE_URL = 'https://www.wa-node.com';
 
-// Search-focused sitemap. Demo subpages and noindex legal/utility pages are intentionally omitted.
+// Search-focused sitemap. Demo subpages, mental-care pages, and noindex legal/utility pages are intentionally omitted.
 const PAGES = [
   ['/', '1.0'],
   ['/about/', '0.9'],
@@ -27,9 +27,7 @@ const PAGES = [
   ['/anniversary-speed/', '0.7'],
   ['/anniversary-automation/', '0.7'],
   ['/anniversary-premium/', '0.7'],
-  ['/corporate-mental/', '0.6'],
   ['/barrier_free/', '0.6'],
-  ['/mental_care/', '0.6'],
   ['/kdp_books/', '0.6'],
   ['/en/', '0.7'],
   ['/en/about/', '0.6'],
@@ -42,9 +40,7 @@ const PAGES = [
   ['/en/tech-stack/', '0.6'],
   ['/en/demos/', '0.6'],
   ['/en/lp-portfolio/', '0.6'],
-  ['/en/corporate-mental/', '0.5'],
   ['/en/barrier_free/', '0.5'],
-  ['/en/mental_care/', '0.5'],
   ['/en/kdp_books/', '0.5'],
   ['/fr/', '0.7'],
   ['/fr/about/', '0.6'],
@@ -57,9 +53,7 @@ const PAGES = [
   ['/fr/tech-stack/', '0.6'],
   ['/fr/demos/', '0.6'],
   ['/fr/lp-portfolio/', '0.6'],
-  ['/fr/corporate-mental/', '0.5'],
   ['/fr/barrier_free/', '0.5'],
-  ['/fr/mental_care/', '0.5'],
   ['/fr/kdp_books/', '0.5'],
 ];
 
