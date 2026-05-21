@@ -117,6 +117,15 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             </div>
           </div>
         </div>
+
+        <div class="evidence-box glass-card" style="margin-top: 40px; padding: 40px; border-left: 6px solid var(--accent); background: #fff; text-align: left;">
+          <h3 style="font-size: 1.3rem; font-weight: 900; margin-top: 0; margin-bottom: 20px; color: var(--text);">🧠 感情や悩みを「言葉にする」科学的な効果</h3>
+          <p style="line-height: 1.8; color: var(--muted); margin: 0;">
+            心理学では、心の中のストレスやモヤモヤを文章や言葉として外に吐き出すことを**「筆記開示（エクスプレッシブ・ライティング）」**と呼びます（テキサス大学ジェームズ・ペネベーカー教授の研究）。<br/><br/>
+            自分の抱える感情を言語化して客観的に見つめることで、ストレスホルモンが減少し、脳のワーキングメモリ（考えるスペース）が回復して、心がスッキリと整理されることが科学的に実証されています。<br/><br/>
+            話がまとまっていなくても大丈夫です。まずは今ある言葉を外に出してみることから、一緒に始めてみませんか？
+          </p>
+        </div>
         
         <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px;">
           <div class="bonus-tag">🎁 診断完了特典</div>
@@ -351,7 +360,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       qNum.textContent = `Q.${currentQ + 1} / ${questions.length}`;
       qCat.textContent = qObj.catLabel;
       qText.textContent = qObj.q;
-      progress.style.width = `${((currentQ) / questions.length) * 100}%`;
+      const baseProgress = 15; // 心理的な初期進捗値(%)
+      const calculatedProgress = baseProgress + (currentQ / (questions.length - 1)) * (100 - baseProgress);
+      progress.style.width = `${calculatedProgress}%`;
       
       // Animation
       qContainer.classList.remove('fade-in');

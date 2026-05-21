@@ -51,7 +51,11 @@
     "title": { "ja": "迷ったら、まずはこの3つから", "en": "Start With One of These Three", "fr": "Commencez par l'un de ces trois choix" },
     "card1_tag": { "ja": "Web Design", "en": "Web Design", "fr": "Design Web" },
     "card1_title": { "ja": "ホームページ・LP制作を相談したい", "en": "Build a Website or LP", "fr": "Créer un site ou une LP" },
-    "card1_desc": { "ja": "ホームページ制作・LP制作・Webサイト改善を中心に、伝わる構成とデザインを整えます。", "en": "We design websites and landing pages with psychology-informed structure and messaging.", "fr": "Nous concevons sites et landing pages avec une structure guidée par la psychologie." },
+    "card1_desc": {
+      "ja": "わずか50ミリ秒（0.05秒）で決まる第一印象を逃さない超高速表示と、心理導線に基づく構成で成果へと繋げます。",
+      "en": "We design ultra-fast websites and landing pages to capture the critical first 50 milliseconds of user attention.",
+      "fr": "Nous concevons des sites ultra-rapides et des LP pour capter l'attention dès les premières 50 millisecondes."
+    },
     "card1_link": { "ja": "48,000円〜 →", "en": "From 48,000 JPY →", "fr": "À partir de 48 000 JPY →" },
     "card2_tag": { "ja": "Ongoing Partnership", "en": "Ongoing Partnership", "fr": "Partenariat" },
     "card2_title": { "ja": "作った後も相談したい", "en": "Keep Improving After Launch", "fr": "Continuer à améliorer après lancement" },

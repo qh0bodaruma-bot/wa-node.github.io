@@ -271,10 +271,11 @@ const trustSignals = {
   .lead strong { color: var(--accent); }
 
   .btns { display: flex; gap: 16px; margin-top: 40px; }
-  .btn { padding: 18px 36px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: 0.3s; text-align: center; }
-  .btn.primary { background: var(--trust); color: white; box-shadow: 0 10px 20px rgba(15, 76, 92, 0.2); }
-  .btn.primary:hover { background: #123c45; transform: translateY(-2px); }
-  .btn.secondary { border: 1px solid var(--accent); color: var(--accent); }
+  .btn { padding: 18px 36px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: all 0.3s ease; text-align: center; }
+  .btn.primary { background: var(--trust); color: white; border: 1px solid var(--trust); box-shadow: 0 10px 25px rgba(15, 76, 92, 0.25); }
+  .btn.primary:hover { background: #123c45; border-color: #123c45; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(15, 76, 92, 0.35); }
+  .btn.secondary { border: 1px solid rgba(197, 160, 89, 0.5); color: var(--accent); background: transparent; }
+  .btn.secondary:hover { border-color: var(--accent); background: rgba(197, 160, 89, 0.05); transform: translateY(-1px); }
 
   /* Hero */
   .hero { 

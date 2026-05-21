@@ -281,7 +281,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const stepInd = document.getElementById('step-indicator');
       
       stepInd.textContent = `Phase ${currentIdx + 1} / ${questions.length}`;
-      progress.style.width = `${((currentIdx + 1) / questions.length) * 100}%`;
+      const baseProgress = 15; // 心理的な初期進捗値(%)
+      const calculatedProgress = baseProgress + (currentIdx / (questions.length - 1)) * (100 - baseProgress);
+      progress.style.width = `${calculatedProgress}%`;
       
       body.innerHTML = `
         <div class="quiz-item">

@@ -84,16 +84,22 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
       </div>
       <div class="recommended-price-grid">
         <article class="recommended-price-card">
-          <span>LPで反応を取りたい方</span>
+          <span class="price-badge-ume">梅プラン</span>
+          <h3>シンプルHP制作</h3>
+          <p class="p-price">40,000円〜 <small>キャンペーン価格</small></p>
+          <p>名刺代わりとなる小規模なホームページ（3〜5ページ）。まずは低予算でネット上にビジネスの拠点を作りたい方向けです。</p>
+        </article>
+        <article class="recommended-price-card highlight-take">
+          <span class="price-badge-take">竹プラン ★ 一番人気</span>
           <h3>心理導線LP制作</h3>
           <p class="p-price">48,000円〜 <small>キャンペーン価格</small></p>
-          <p>行動心理をふまえ、ファーストビュー・信頼形成・CTAまで一貫して設計します。</p>
+          <p>行動心理をふまえ、ファーストビューから信頼形成、CTAまで一貫設計。費用対効果が最も高く、成果に直結する本命プランです。</p>
         </article>
         <article class="recommended-price-card">
-          <span>事業の土台を整えたい方</span>
+          <span class="price-badge-matsu">松プラン</span>
           <h3>心理導線HP制作</h3>
           <p class="p-price">96,000円〜 <small>キャンペーン価格</small></p>
-          <p>5ページ程度の標準的なホームページを、見込み客が安心して相談できる導線で構成します。</p>
+          <p>5ページ程度の標準的なホームページ。見込み客が迷わず安心して相談や購入に進むための盤石な情報設計を施します。</p>
         </article>
       </div>
       <details class="addon-details price-details">
@@ -414,7 +420,7 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
 
   .recommended-price-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 22px;
     margin: 34px 0 18px;
   }
@@ -424,6 +430,44 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
     border-radius: 20px;
     padding: 30px;
     box-shadow: 0 16px 34px rgba(44, 44, 44, 0.04);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .recommended-price-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 40px rgba(44, 44, 44, 0.08);
+  }
+  .recommended-price-card.highlight-take {
+    border: 2px solid var(--accent-red);
+    background: linear-gradient(135deg, rgba(209, 77, 58, 0.03), rgba(253, 250, 245, 0.98)), #fff;
+    transform: scale(1.03);
+    box-shadow: 0 20px 45px rgba(209, 77, 58, 0.1);
+  }
+  .recommended-price-card.highlight-take:hover {
+    transform: scale(1.03) translateY(-3px);
+  }
+  .price-badge-ume, .price-badge-take, .price-badge-matsu {
+    display: inline-block;
+    align-self: flex-start;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 5px 12px;
+  }
+  .price-badge-ume {
+    background: rgba(44, 44, 44, 0.08);
+    color: #555;
+  }
+  .price-badge-take {
+    background: var(--accent-red);
+    color: #fff;
+  }
+  .price-badge-matsu {
+    background: rgba(197, 160, 89, 0.15);
+    color: var(--accent-dark);
   }
   .recommended-price-card span {
     display: inline-block;
@@ -551,6 +595,9 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
     .choice-grid,
     .recommended-price-grid,
     .pricing-grid-simple { grid-template-columns: 1fr; }
+    .recommended-price-card.highlight-take {
+      transform: none !important;
+    }
     .choice-guide { text-align: left; }
     .choice-lead,
     .choice-footnote { margin-left: 0; }
