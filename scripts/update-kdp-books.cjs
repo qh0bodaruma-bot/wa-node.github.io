@@ -37,7 +37,7 @@ const replacement1 = `        <div class="book-showcase">
               <h3 class="title">江戸の旅 フレンチブルドッグ</h3>
               <p class="price">$12.99 / €12.99</p>
               <div class="links">
-                <a href="https://www.amazon.com/dp/B0GWQ5VTWC" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
+                <a href="https://www.amazon.com/dp/B0H2GRTH2R" target="_blank" class="store-link us">🇺🇸 Amazon US</a>
                 <a href="https://www.amazon.fr/dp/B0GWQ56YDN" target="_blank" class="store-link fr">🇫🇷 Amazon FR</a>
               </div>
             </div>

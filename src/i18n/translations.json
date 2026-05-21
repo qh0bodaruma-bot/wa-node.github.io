@@ -29,9 +29,9 @@
       "fr": "Pourquoi votre site ne produit-il aucun résultat malgré l'aide d'une agence?"
     },
     "lead": {
-      "ja": "その答えは、見た目の良さの中に潜む「1pxの心理的不親切（ユーザーの迷い）」にあります。",
-      "en": "The answer lies in a '1px psychological friction (user confusion)' hidden beneath a beautiful design.",
-      "fr": "La réponse réside dans une friction psychologique de 1px (confusion de l'utilisateur) cachée sous un beau design."
+      "ja": "その答えは、見た目の良さの中に潜む「心理的不親切（ユーザーの迷い）」にあります。",
+      "en": "The answer lies in a 'psychological friction (user confusion)' hidden beneath a beautiful design.",
+      "fr": "La réponse réside dans une friction psychologique (confusion de l'utilisateur) cachée sous un beau design."
     },
     "card1_title": { "ja": "「綺麗」だけでは、人は動きません", "en": "Beauty alone won't move users", "fr": "La beauté seule ne fait pas agir" },
     "card1_desc": {
@@ -101,7 +101,7 @@
     "eyebrow": { "ja": "Professional Partner", "en": "Professional Partner", "fr": "Partenaire Professionnel" },
     "title": { "ja": "代表：高野 紘純", "en": "Founder: Hirozumi Takano", "fr": "Fondateur: Hirozumi Takano" },
     "desc": {
-      "ja": "IT業界20年のエンジニア経験、産業カウンセラーとしての行動心理学の知見、そして車いす当事者としてのユニバーサル（バリアフリー）視点。これらすべての強みを掛け合わせ、「1px of 不親切も見逃さない、澱みのない導線」を作ります。",
+      "ja": "IT業界20年のエンジニア経験、産業カウンセラーとしての行動心理学の知見、そして車いす当事者としてのユニバーサル（バリアフリー）視点。これらすべての強みを掛け合わせ、「心理的不親切も見逃さない、澱みのない導線」を作ります。",
       "en": "With 20 years of IT experience, insights as an Industrial Counselor, and a universal accessibility perspective as a wheelchair user, I integrate these strengths to craft flawless conversion paths that leave no user confused.",
       "fr": "Avec 20 ans d'expérience en informatique, une expertise en psychologie et une perspective d'accessibilité universelle, je crée des parcours fluides sans aucune confusion."
     },

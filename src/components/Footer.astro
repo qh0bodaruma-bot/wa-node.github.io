@@ -1,6 +1,7 @@
 ---
 import Qualifications from './Qualifications.astro';
 import t from '../i18n/translations.json';
+import { MULTILANG_PAGES } from '../i18n/navigation';
 
 interface Props {
   lang?: 'ja' | 'en' | 'fr';
@@ -22,7 +23,7 @@ function getLocalizedLink(path: string) {
   }
   
   // en or fr: For existing multi-language pages
-  const validPages = ['/', '', '/about', '/works', '/contact', '/pricing', '/ai-chat-demo', '/psychology-demo', '/simulator', '/tech-stack', '/corporate-mental', '/barrier_free', '/mental_care', '/kdp_books'];
+  const validPages = [...MULTILANG_PAGES, ''];
   const basePage = cleanPath.replace(/\/$/, '');
   
   if (validPages.includes(basePage)) {

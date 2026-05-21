@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import { ViewTransitions } from 'astro:transitions';
+import { MULTILANG_PAGES } from '../i18n/navigation';
 import '../styles/global.css';
 
 interface Props {
@@ -28,8 +29,8 @@ const currentLang = urlLang === 'en' || urlLang === 'fr' ? urlLang : lang;
 
 const urlObj = new URL(url);
 const pathWithoutLocale = urlObj.pathname.replace(/^\/(en|fr)\//, '/').replace(/\/$/, '');
-const multiLangPages = ['', '/contact', '/pricing', '/ai-chat-demo', '/corporate-mental'];
-const hasTranslation = multiLangPages.includes(pathWithoutLocale);
+const normalizedPath = pathWithoutLocale === '' ? '/' : pathWithoutLocale;
+const hasTranslation = MULTILANG_PAGES.includes(normalizedPath);
 
 const getLocalizedHref = (l: string) => {
   const cleanPath = pathWithoutLocale === '' ? '/' : pathWithoutLocale + '/';
