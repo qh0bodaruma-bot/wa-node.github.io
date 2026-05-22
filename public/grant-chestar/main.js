@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. パーティクル（浮遊する光の粒子）の生成
   initParticles();
 
+  // 2. カレンダー登録モーダルの制御
+  initCalendarModal();
 });
 
 /**
@@ -77,4 +79,95 @@ function initParticles() {
 
   // ループで粒子を追加し続ける
   setInterval(createParticle, 800); // 発生頻度を少し上げる（1000ms -> 800ms）
+}
+
+/**
+ * カレンダー登録モーダルの表示制御と、.icsファイルの動的生成・ダウンロード処理
+ */
+function initCalendarModal() {
+  const trigger = document.getElementById('event-calendar-trigger');
+  const modal = document.getElementById('calendar-modal');
+  const closeBtn = document.getElementById('modal-close-btn');
+  const icsBtn = document.getElementById('ics-cal-btn');
+
+  if (!trigger || !modal || !closeBtn || !icsBtn) return;
+
+  // モーダルを開く
+  const openModal = () => {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden'; // 背後のスクロールを防止
+  };
+
+  // モーダルを閉じる
+  const closeModal = () => {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = ''; // スクロール防止を解除
+  };
+
+  trigger.addEventListener('click', openModal);
+  trigger.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openModal();
+    }
+  });
+
+  closeBtn.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+
+  // ESCキーでモーダルを閉じる
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('active')) {
+      closeModal();
+    }
+  });
+
+  // iCalendar (.ics) ファイルのダウンロード生成
+  icsBtn.addEventListener('click', () => {
+    const event = {
+      title: 'GRANT-CHESTAR mini-concert',
+      description: '東北シスターズと魚住英史(drums)による、夏の夜に懐かしいメロディをお届けするミニコンサート。',
+      location: '小牧市郷中2-1',
+      start: '20260718T183000',
+      end: '20260718T200000',
+    };
+
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//GRANT-CHESTAR//CalendarEvent//EN',
+      'CALSCALE:GREGORIAN',
+      'METHOD:PUBLISH',
+      'BEGIN:VEVENT',
+      `UID:grant-chestar-20260718@tohokusisters`,
+      `DTSTART;TZID=Asia/Tokyo:${event.start}`,
+      `DTEND;TZID=Asia/Tokyo:${event.end}`,
+      `SUMMARY:${event.title}`,
+      `DESCRIPTION:${event.description}`,
+      `LOCATION:${event.location}`,
+      'STATUS:CONFIRMED',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    // Blobを作成してダウンロードを発火
+    const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'grant-chestar-concert.ics');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+    
+    // 登録完了後にモーダルを閉じる
+    closeModal();
+  });
 }

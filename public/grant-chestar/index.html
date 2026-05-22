@@ -39,8 +39,8 @@
         
         <p class="catchphrase">夏の夜に懐かしいメロディを♪</p>
         
-        <!-- 開催日時バッジ -->
-        <div class="event-badge">
+        <!-- 開催日時バッジ (カレンダー登録用インタラクティブ要素) -->
+        <div class="event-badge interactive-badge" id="event-calendar-trigger" role="button" tabindex="0" aria-label="タップしてカレンダーに登録">
           <div class="date-box">
             <span class="year">2026年</span>
             <div class="day-wrapper">
@@ -52,6 +52,7 @@
             <span class="time-label">開演</span>
             <span class="time-value">18:30 - 20:00</span>
           </div>
+          <span class="badge-hint">📅 タップしてカレンダーに登録</span>
         </div>
 
         <!-- 開催場所 -->
@@ -169,6 +170,23 @@
     </main>
   </div>
 
+
+  <!-- カレンダー追加用モーダル -->
+  <div id="calendar-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <button class="modal-close" id="modal-close-btn" aria-label="閉じる">&times;</button>
+      <h3 id="modal-title" class="modal-title">📅 カレンダーに登録</h3>
+      <p class="modal-desc">ミニコンサートの予定をご自身のカレンダーに追加できます。お使いのカレンダーを選択してください。</p>
+      <div class="modal-buttons">
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=GRANT-CHESTAR+mini-concert&dates=20260718T183000/20260718T200000&ctz=Asia/Tokyo&details=%E6%9D%B1%E5%8C%97%E3%82%B7%E3%82%B9%E3%82%BF%E3%83%BC%E3%82%BA%E3%81%A8%E9%AD%9A%E4%BD%8F%E8%8B%B1%E5%8F%B2(drums)%E3%81%AB%E3%82%88%E3%82%8B%E3%80%81%E5%A4%8F%E3%81%AE%E5%A4%9C%E3%81%AB%E6%87%90%E3%81%B3%E3%81%97%E3%81%84%E3%83%A1%E3%83%AD%E3%83%87%E3%82%A3%E3%82%92%E3%81%8A%E5%B1%8A%E3%81%91%E3%81%99%E3%82%8B%E3%83%9F%E3%83%8B%E3%82%B3%E3%83%B3%E3%82%B5%E3%83%BC%E3%83%88%E3%80%82&location=%E5%B0%8F%E7%89%A7%E5%B8%82%E9%83%B7%E4%B8%AD2-1" id="google-cal-btn" class="modal-btn btn-google" target="_blank" rel="noopener noreferrer">
+          <span class="btn-icon">🌐</span> Google カレンダーに追加
+        </a>
+        <button id="ics-cal-btn" class="modal-btn btn-ics">
+          <span class="btn-icon">📱</span> Apple / その他カレンダーに追加
+        </button>
+      </div>
+    </div>
+  </div>
 
   <!-- JS -->
   <script src="main.js"></script>
