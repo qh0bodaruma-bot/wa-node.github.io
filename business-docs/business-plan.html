@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>事業計画書｜和-Node（わのーど）</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #c5a059;
+      --accent-dark: #8a6d2e;
+      --trust: #0f4c5c;
+      --trust-mid: #1f6f78;
+      --text: #1a1a1a;
+      --muted: #666;
+      --soft: #fdfcf9;
+      --line: rgba(197,160,89,0.2);
+      --red: #c0392b;
+      --green: #1e7e5e;
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+      font-size: 10pt;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.8;
+    }
+
+    @media print {
+      body { font-size: 9pt; }
+      .page-break { page-break-before: always; }
+      .no-print { display: none !important; }
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+    }
+
+    /* ヘッダー */
+    header {
+      background: linear-gradient(135deg, #0f4c5c 0%, #1f6f78 60%, #c5a059 100%);
+      color: #fff;
+      padding: 48px 60px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      right: -40px; top: -40px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(197,160,89,0.12);
+    }
+    .header-content { display: flex; justify-content: space-between; align-items: flex-end; }
+    .doc-title {
+      font-size: 22pt;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      margin-bottom: 10px;
+    }
+    .header-left h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 20pt;
+      font-weight: 900;
+    }
+    .header-left .tagline { font-size: 10pt; opacity: 0.82; margin-top: 6px; }
+    .header-right { text-align: right; font-size: 9pt; opacity: 0.88; line-height: 1.9; }
+
+    /* 共通レイアウト */
+    .container { max-width: 780px; margin: 0 auto; padding: 0 40px; }
+    .page { padding: 44px 0; }
+
+    .section-header {
+      background: var(--trust);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-size: 11pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-header .number {
+      background: var(--accent);
+      color: var(--trust);
+      font-weight: 900;
+      font-size: 9pt;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    h2.sub {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--trust);
+      border-left: 4px solid var(--accent);
+      padding-left: 12px;
+      margin: 24px 0 14px;
+    }
+
+    p { font-size: 9.5pt; color: #444; line-height: 1.85; margin-bottom: 14px; }
+
+    /* テーブル */
+    .basic-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 9.5pt; }
+    .basic-table th, .basic-table td {
+      padding: 11px 15px;
+      border: 1px solid #ddd;
+      vertical-align: top;
+      text-align: left;
+    }
+    .basic-table th {
+      background: #f5f0e8;
+      font-weight: 700;
+      color: var(--trust);
+      width: 28%;
+    }
+
+    /* 売上計画テーブル */
+    .plan-table { width: 100%; border-collapse: collapse; margin-bottom: 12px; font-size: 9pt; }
+    .plan-table th {
+      background: var(--trust);
+      color: #fff;
+      padding: 9px 13px;
+      text-align: center;
+      font-weight: 700;
+    }
+    .plan-table td {
+      padding: 9px 13px;
+      border-bottom: 1px solid #eee;
+      text-align: right;
+    }
+    .plan-table td:first-child { text-align: left; }
+    .plan-table tr:nth-child(even) td { background: #fafaf8; }
+    .plan-table .total-row td {
+      background: #e8f0ee;
+      font-weight: 700;
+      font-size: 10pt;
+      color: var(--trust);
+    }
+    .plan-table .subtotal-row td {
+      background: #fffbf0;
+      font-weight: 700;
+    }
+
+    /* 月別計画グラフ（棒グラフ風） */
+    .bar-chart { margin: 20px 0 30px; }
+    .bar-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 12px;
+    }
+    .bar-label { width: 60px; font-size: 8.5pt; text-align: right; color: #666; flex-shrink: 0; }
+    .bar-wrap { flex: 1; height: 22px; background: #eee; border-radius: 3px; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 3px; display: flex; align-items: center; padding-left: 10px; }
+    .bar-fill span { font-size: 7.5pt; color: #fff; font-weight: 700; }
+    .bar-value { width: 80px; font-size: 8.5pt; color: var(--trust); font-weight: 700; text-align: right; flex-shrink: 0; }
+
+    /* ボックス */
+    .info-box {
+      background: #f5f8fa;
+      border: 1px solid #cce0ea;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+    .info-box h4 { font-size: 10pt; color: var(--trust); font-weight: 700; margin-bottom: 8px; }
+    .info-box p, .info-box li { font-size: 9pt; color: #555; }
+    .info-box ul { padding-left: 18px; }
+    .info-box li { margin-bottom: 5px; }
+
+    .warn-box {
+      background: #fff8f0;
+      border: 1px solid #f0c090;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+    .warn-box h4 { font-size: 10pt; color: #a05000; font-weight: 700; margin-bottom: 8px; }
+    .warn-box p, .warn-box li { font-size: 9pt; color: #664400; }
+    .warn-box ul { padding-left: 18px; }
+    .warn-box li { margin-bottom: 5px; }
+
+    .green-box {
+      background: #f0faf5;
+      border: 1px solid #a0d8c0;
+      border-radius: 8px;
+      padding: 18px 22px;
+      margin-bottom: 20px;
+    }
+    .green-box h4 { font-size: 10pt; color: var(--green); font-weight: 700; margin-bottom: 8px; }
+
+    /* 競合比較 */
+    .comp-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 9pt; }
+    .comp-table th {
+      background: #f5f0e8;
+      padding: 10px 14px;
+      font-weight: 700;
+      color: var(--trust);
+      text-align: center;
+      border: 1px solid #ddd;
+    }
+    .comp-table td {
+      padding: 10px 14px;
+      border: 1px solid #ddd;
+      text-align: center;
+      vertical-align: middle;
+    }
+    .comp-table .wa-col { background: #fffbf0; font-weight: 700; color: var(--trust); }
+    .comp-table .check { color: #1e7e5e; font-weight: 700; font-size: 12pt; }
+    .comp-table .cross { color: #c0392b; }
+    .comp-table .partial { color: #e67e22; }
+
+    /* ロードマップ */
+    .roadmap { list-style: none; padding: 0; margin-bottom: 28px; }
+    .roadmap li {
+      display: flex;
+      gap: 18px;
+      margin-bottom: 0;
+      position: relative;
+    }
+    .roadmap li::before {
+      content: '';
+      position: absolute;
+      left: 42px;
+      top: 30px;
+      bottom: -20px;
+      width: 2px;
+      background: #ddd;
+    }
+    .roadmap li:last-child::before { display: none; }
+    .roadmap-phase {
+      width: 84px;
+      flex-shrink: 0;
+      text-align: center;
+      padding: 6px;
+    }
+    .roadmap-phase .phase-badge {
+      background: var(--trust);
+      color: #fff;
+      font-size: 8pt;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .roadmap-phase .phase-period { font-size: 8pt; color: #888; }
+    .roadmap-content {
+      flex: 1;
+      background: #fdfcf9;
+      border: 1px solid #e0ddd0;
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-bottom: 20px;
+    }
+    .roadmap-content h4 { font-size: 10pt; font-weight: 700; color: var(--trust); margin-bottom: 6px; }
+    .roadmap-content ul { padding-left: 16px; }
+    .roadmap-content li { font-size: 9pt; color: #555; margin-bottom: 4px; list-style: disc; }
+
+    /* フッター */
+    footer {
+      background: #1a1a1a;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      padding: 20px;
+      font-size: 8.5pt;
+      margin-top: 40px;
+    }
+    footer strong { color: var(--accent); }
+
+    hr { border: none; border-top: 1px solid var(--line); margin: 28px 0; }
+
+    /* 印刷ボタン */
+    .print-btn-wrap { text-align: center; padding: 20px; background: #f5f0e8; }
+    .print-btn {
+      background: var(--trust);
+      color: #fff;
+      border: none;
+      padding: 14px 40px;
+      font-size: 11pt;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+  </style>
+</head>
+<body>
+
+<div class="print-btn-wrap no-print">
+  <button class="print-btn" onclick="window.print()">📄 PDFとして保存・印刷する</button>
+</div>
+
+<header>
+  <div class="header-content">
+    <div class="header-left">
+      <div class="doc-title">事 業 計 画 書</div>
+      <h1>和-Node（わのーど）</h1>
+      <div class="tagline">心理学 × ICT × AI を融合した Webコンサルティング・制作業</div>
+    </div>
+    <div class="header-right">
+      〒509-0207<br>
+      岐阜県可児市今渡2347番地1<br>
+      contacts@wa-node.com<br>
+      代表：高野 紘純<br>
+      作成日：2026年5月
+    </div>
+  </div>
+</header>
+
+<div class="container">
+<div class="page">
+
+  <!-- 01. 事業の概要と目的 -->
+  <div class="section-header">
+    <span class="number">01</span> 事業の概要と目的
+  </div>
+
+  <h2 class="sub">事業の基本情報</h2>
+  <table class="basic-table">
+    <tbody>
+      <tr><th>事業名（屋号）</th><td>和-Node（わのーど）</td></tr>
+      <tr><th>代表者</th><td>高野 紘純（個人事業主）</td></tr>
+      <tr><th>業種分類</th><td>情報通信業 / インターネット付随サービス業 / コンサルティング業</td></tr>
+      <tr><th>事業開始年</th><td>2026年</td></tr>
+      <tr><th>事業目的</th><td>心理学・ICT・AIの三領域を融合した独自のWebコンサルティング・制作サービスにより、中小事業者・個人事業主のビジネス成果を最大化する</td></tr>
+      <tr><th>コアコンセプト</th><td>「心理的な不親切が、人の心を遠ざける」──行動心理に基づく導線設計で、見込み客が「迷わず・安心して・選べる」Webサイトを実現する</td></tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub">事業のミッション・ビジョン</h2>
+  <div class="info-box">
+    <h4>ミッション（使命）</h4>
+    <p>
+      IT技術と心理学の専門知識を融合し、中小事業者・個人事業主が「選ばれる仕組み」を手に入れるための戦略的パートナーとなる。
+      技術力と心理的知見で、クライアントのビジネスに「和（なぎ）」をもたらす。
+    </p>
+  </div>
+  <div class="green-box">
+    <h4>ビジョン（将来像）</h4>
+    <p style="color:#1a4a35;">
+      「ビジネスの副操縦士」として月額継続支援するクライアントを中核に、
+      心理学×ICT×AIの三位一体メソッドを確立した専門家として、
+      岐阜・東海エリアから全国へ発信する「行動心理に基づくWeb戦略の第一人者」を目指す。
+    </p>
+  </div>
+
+  <!-- 02. 市場分析 -->
+  <div class="section-header" style="margin-top:16px;">
+    <span class="number">02</span> 市場分析・競合分析
+  </div>
+
+  <h2 class="sub">ターゲット市場</h2>
+  <div class="info-box">
+    <h4>主要ターゲット層</h4>
+    <ul>
+      <li>中小企業・個人事業主（士業・治療院・コンサルタント・サロン・EC事業者等）でWebサイトの成果に悩んでいる事業者</li>
+      <li>「集客できるサイトを作ったが、問い合わせが来ない」という経験を持つ既存事業者</li>
+      <li>デジタル化・業務自動化（AI活用）を始めたいが、どこから手をつければよいかわからない中小事業者</li>
+      <li>公開後も継続的に伴走してくれるパートナーを求めている経営者・個人事業主</li>
+    </ul>
+  </div>
+
+  <h2 class="sub">市場規模・成長性</h2>
+  <p>
+    国内のWeb制作市場規模は約3.5兆円（2024年度推計）。中小事業者向けのWeb制作需要は依然として高く、
+    特に「AI活用支援」「業務自動化」分野は年率20〜30%の成長が見込まれる。
+    また、フリーランス・個人事業主による高品質・低価格サービスへのニーズが急拡大しており、
+    和-Nodeが提供する「心理学×ICT×AI」の複合価値は差別化優位性が高い。
+  </p>
+
+  <h2 class="sub">競合分析と差別化</h2>
+  <table class="comp-table">
+    <thead>
+      <tr>
+        <th>比較項目</th>
+        <th class="wa-col">和-Node</th>
+        <th>大手制作会社</th>
+        <th>フリーランス<br>（一般）</th>
+        <th>格安制作サービス</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>心理学に基づく導線設計</td>
+        <td class="wa-col check">●</td>
+        <td class="cross">△</td>
+        <td class="cross">×</td>
+        <td class="cross">×</td>
+      </tr>
+      <tr>
+        <td>IT実務20年以上の技術力</td>
+        <td class="wa-col check">●</td>
+        <td class="check">●</td>
+        <td class="partial">△</td>
+        <td class="cross">×</td>
+      </tr>
+      <tr>
+        <td>産業カウンセラー資格</td>
+        <td class="wa-col check">●</td>
+        <td class="cross">×</td>
+        <td class="cross">×</td>
+        <td class="cross">×</td>
+      </tr>
+      <tr>
+        <td>月額制の継続伴走支援</td>
+        <td class="wa-col check">●</td>
+        <td class="cross">△</td>
+        <td class="cross">△</td>
+        <td class="cross">×</td>
+      </tr>
+      <tr>
+        <td>多言語対応（日・英・仏）</td>
+        <td class="wa-col check">●</td>
+        <td class="check">●</td>
+        <td class="cross">×</td>
+        <td class="cross">×</td>
+      </tr>
+      <tr>
+        <td>適正価格（市場の1/3〜1/5）</td>
+        <td class="wa-col check">●</td>
+        <td class="cross">×</td>
+        <td class="partial">△</td>
+        <td class="check">●</td>
+      </tr>
+      <tr>
+        <td>アクセシビリティ設計</td>
+        <td class="wa-col check">●</td>
+        <td class="partial">△</td>
+        <td class="cross">×</td>
+        <td class="cross">×</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div><!-- /page -->
+</div><!-- /container -->
+
+<div class="page-break"></div>
+
+<div class="container">
+<div class="page">
+
+  <!-- 03. サービス構成と収益モデル -->
+  <div class="section-header">
+    <span class="number">03</span> サービス構成と収益モデル
+  </div>
+
+  <h2 class="sub">サービスラインナップと単価</h2>
+  <table class="basic-table">
+    <thead>
+      <tr>
+        <th style="background:#e8f0ee;">サービス区分</th>
+        <th style="background:#e8f0ee; width:30%;">価格帯（税別）</th>
+        <th style="background:#e8f0ee;">収益性</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Webサイト制作（HP・シンプル）</td>
+        <td>40,000〜80,000円</td>
+        <td>スポット収益</td>
+      </tr>
+      <tr>
+        <td>Webサイト制作（HP・心理導線）</td>
+        <td>96,000〜168,000円</td>
+        <td>スポット収益（主力）</td>
+      </tr>
+      <tr>
+        <td>LP制作（シンプル〜プレミアム）</td>
+        <td>48,000〜180,000円</td>
+        <td>スポット収益（主力）</td>
+      </tr>
+      <tr>
+        <td>ビジネスの副操縦士（月額）</td>
+        <td>月額 15,000〜30,000円</td>
+        <td>ストック収益（継続安定）</td>
+      </tr>
+      <tr>
+        <td>LINE Mini App・業務自動化</td>
+        <td>30,000〜100,000円</td>
+        <td>スポット収益</td>
+      </tr>
+      <tr>
+        <td>組織支援・産業カウンセリング（法人）</td>
+        <td>月額 30,000〜50,000円</td>
+        <td>ストック収益</td>
+      </tr>
+      <tr>
+        <td>KDP出版・ブランディング支援</td>
+        <td>個別見積もり</td>
+        <td>スポット収益</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 class="sub">収益モデルの特徴</h2>
+  <div class="info-box">
+    <h4>スポット収益 ＋ ストック収益のハイブリッドモデル</h4>
+    <ul>
+      <li><strong>スポット収益</strong>：Web制作・LP制作・システム開発などの一時収益。案件ごとの単価が高く、収益の基盤を作る。</li>
+      <li><strong>ストック収益</strong>：「ビジネスの副操縦士」月額契約・法人組織支援契約など。解約率が低く、毎月の固定収入として事業安定の柱となる。</li>
+      <li>制作完了後のクライアントを月額契約に誘導することで、LTV（顧客生涯価値）を最大化する設計。</li>
+    </ul>
+  </div>
+
+  <!-- 04. 売上計画 -->
+  <div class="section-header">
+    <span class="number">04</span> 売上計画（第1〜2期）
+  </div>
+
+  <h2 class="sub">第1期（2026年度）月別売上目標</h2>
+  <table class="plan-table">
+    <thead>
+      <tr>
+        <th>月</th>
+        <th>Web制作（スポット）</th>
+        <th>月額契約（ストック）</th>
+        <th>その他</th>
+        <th>合計（月）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>4月</td><td>96,000</td><td>30,000</td><td>0</td><td>126,000</td></tr>
+      <tr><td>5月</td><td>96,000</td><td>45,000</td><td>0</td><td>141,000</td></tr>
+      <tr><td>6月</td><td>120,000</td><td>60,000</td><td>30,000</td><td>210,000</td></tr>
+      <tr><td>7月</td><td>150,000</td><td>75,000</td><td>30,000</td><td>255,000</td></tr>
+      <tr><td>8月</td><td>96,000</td><td>90,000</td><td>30,000</td><td>216,000</td></tr>
+      <tr><td>9月</td><td>180,000</td><td>105,000</td><td>50,000</td><td>335,000</td></tr>
+      <tr><td>10月</td><td>180,000</td><td>120,000</td><td>50,000</td><td>350,000</td></tr>
+      <tr><td>11月</td><td>200,000</td><td>135,000</td><td>50,000</td><td>385,000</td></tr>
+      <tr><td>12月</td><td>150,000</td><td>150,000</td><td>0</td><td>300,000</td></tr>
+      <tr><td>1月</td><td>150,000</td><td>165,000</td><td>0</td><td>315,000</td></tr>
+      <tr><td>2月</td><td>200,000</td><td>180,000</td><td>50,000</td><td>430,000</td></tr>
+      <tr><td>3月</td><td>200,000</td><td>180,000</td><td>50,000</td><td>430,000</td></tr>
+      <tr class="total-row"><td>合計（第1期）</td><td>1,618,000</td><td>1,335,000</td><td>340,000</td><td>3,293,000</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:8.5pt; color:#888; margin-bottom:20px;">※ 金額はすべて税別（円）。月額契約は積み上げ想定。</p>
+
+  <h2 class="sub">月次売上推移（第1期目標）</h2>
+  <div class="bar-chart">
+    <div class="bar-row"><div class="bar-label">4月</div><div class="bar-wrap"><div class="bar-fill" style="width:29%; background:var(--trust);"><span>126千円</span></div></div><div class="bar-value">126,000円</div></div>
+    <div class="bar-row"><div class="bar-label">5月</div><div class="bar-wrap"><div class="bar-fill" style="width:33%; background:var(--trust);"><span>141千円</span></div></div><div class="bar-value">141,000円</div></div>
+    <div class="bar-row"><div class="bar-label">6月</div><div class="bar-wrap"><div class="bar-fill" style="width:49%; background:var(--trust-mid);"><span>210千円</span></div></div><div class="bar-value">210,000円</div></div>
+    <div class="bar-row"><div class="bar-label">7月</div><div class="bar-wrap"><div class="bar-fill" style="width:59%; background:var(--trust-mid);"><span>255千円</span></div></div><div class="bar-value">255,000円</div></div>
+    <div class="bar-row"><div class="bar-label">8月</div><div class="bar-wrap"><div class="bar-fill" style="width:50%; background:var(--trust-mid);"><span>216千円</span></div></div><div class="bar-value">216,000円</div></div>
+    <div class="bar-row"><div class="bar-label">9月</div><div class="bar-wrap"><div class="bar-fill" style="width:78%; background:var(--accent-dark);"><span>335千円</span></div></div><div class="bar-value">335,000円</div></div>
+    <div class="bar-row"><div class="bar-label">10月</div><div class="bar-wrap"><div class="bar-fill" style="width:81%; background:var(--accent-dark);"><span>350千円</span></div></div><div class="bar-value">350,000円</div></div>
+    <div class="bar-row"><div class="bar-label">11月</div><div class="bar-wrap"><div class="bar-fill" style="width:89%; background:var(--accent);"><span>385千円</span></div></div><div class="bar-value">385,000円</div></div>
+    <div class="bar-row"><div class="bar-label">12月</div><div class="bar-wrap"><div class="bar-fill" style="width:70%; background:var(--accent-dark);"><span>300千円</span></div></div><div class="bar-value">300,000円</div></div>
+    <div class="bar-row"><div class="bar-label">1月</div><div class="bar-wrap"><div class="bar-fill" style="width:73%; background:var(--accent-dark);"><span>315千円</span></div></div><div class="bar-value">315,000円</div></div>
+    <div class="bar-row"><div class="bar-label">2月</div><div class="bar-wrap"><div class="bar-fill" style="width:100%; background:var(--accent);"><span>430千円</span></div></div><div class="bar-value">430,000円</div></div>
+    <div class="bar-row"><div class="bar-label">3月</div><div class="bar-wrap"><div class="bar-fill" style="width:100%; background:var(--accent);"><span>430千円</span></div></div><div class="bar-value">430,000円</div></div>
+  </div>
+
+  <h2 class="sub">第2期（2027年度）年間目標</h2>
+  <table class="plan-table">
+    <thead>
+      <tr>
+        <th>区分</th>
+        <th>第1期実績見込み</th>
+        <th>第2期目標</th>
+        <th>成長率</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Web制作収益（スポット）</td><td>1,618,000円</td><td>2,400,000円</td><td>+48%</td></tr>
+      <tr><td>月額契約収益（ストック）</td><td>1,335,000円</td><td>2,400,000円</td><td>+80%</td></tr>
+      <tr><td>その他（ICT・組織支援等）</td><td>340,000円</td><td>600,000円</td><td>+76%</td></tr>
+      <tr class="total-row"><td>年間売上合計</td><td>3,293,000円</td><td>5,400,000円</td><td>+64%</td></tr>
+    </tbody>
+  </table>
+
+</div>
+</div>
+
+<div class="page-break"></div>
+
+<div class="container">
+<div class="page">
+
+  <!-- 05. 資金計画 -->
+  <div class="section-header">
+    <span class="number">05</span> 資金計画・経費計画
+  </div>
+
+  <h2 class="sub">年間経費見込み（第1期）</h2>
+  <table class="plan-table">
+    <thead>
+      <tr>
+        <th style="width:40%">費目</th>
+        <th>月額目安</th>
+        <th>年間合計</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>サーバー・ドメイン費用</td><td>3,000円</td><td>36,000円</td><td>Cloudflare / GitHub Pages 等</td></tr>
+      <tr><td>各種SaaS・ツール費用</td><td>5,000円</td><td>60,000円</td><td>生成AIAPI・Formspree・Stripe等</td></tr>
+      <tr><td>通信費（インターネット等）</td><td>5,000円</td><td>60,000円</td><td></td></tr>
+      <tr><td>消耗品・機材費</td><td>2,000円</td><td>24,000円</td><td>PC周辺機器・文具等</td></tr>
+      <tr><td>研修・書籍・資格更新費</td><td>3,000円</td><td>36,000円</td><td>スキルアップ・資格維持</td></tr>
+      <tr><td>広告・マーケティング費</td><td>5,000円</td><td>60,000円</td><td>SNS・コンテンツ制作等</td></tr>
+      <tr><td>その他雑費</td><td>2,000円</td><td>24,000円</td><td>交通費・郵送費等</td></tr>
+      <tr class="total-row"><td>合計経費</td><td>25,000円</td><td>300,000円</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div class="green-box">
+    <h4>収支見込みサマリー（第1期）</h4>
+    <table class="plan-table" style="margin-bottom:0;">
+      <tbody>
+        <tr>
+          <td style="text-align:left; font-weight:700;">年間売上見込み</td>
+          <td style="font-weight:700; color:var(--green);">3,293,000円</td>
+        </tr>
+        <tr>
+          <td style="text-align:left; font-weight:700;">年間経費合計</td>
+          <td style="color:#c0392b;">△ 300,000円</td>
+        </tr>
+        <tr class="total-row">
+          <td style="text-align:left;">事業所得見込み</td>
+          <td style="color:var(--trust);">2,993,000円</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 06. マーケティング戦略 -->
+  <div class="section-header">
+    <span class="number">06</span> マーケティング戦略・集客計画
+  </div>
+
+  <div class="info-box">
+    <h4>主要集客チャネル</h4>
+    <ul>
+      <li><strong>Webサイト（SEO・コンテンツマーケティング）：</strong>wa-node.com を中心に、心理学×Web制作に関する専門的なブログ記事・デモページを発信し、検索流入を獲得</li>
+      <li><strong>SNS（X / Instagram / YouTube）：</strong>Web制作Tips・AI活用事例・心理学コンテンツの発信でフォロワーを育成し、自然流入を創出</li>
+      <li><strong>クラウドソーシング（ランサーズ / ココナラ / クラウドワークス）：</strong>スキルプロフィールを充実させ、プラットフォームからの受注を継続</li>
+      <li><strong>紹介・口コミ：</strong>既存クライアントの満足度を高め、紹介報酬制度を設けて口コミ紹介を促進</li>
+      <li><strong>法人営業（メール・DM）：</strong>岐阜・愛知エリアの中小企業に対してダイレクトメールによる直接営業</li>
+    </ul>
+  </div>
+
+  <!-- 07. リスク分析 -->
+  <div class="section-header">
+    <span class="number">07</span> リスク分析と対応策
+  </div>
+
+  <div class="warn-box">
+    <h4>主要リスクと対応策</h4>
+    <ul>
+      <li>
+        <strong>受注の変動リスク：</strong>
+        スポット収益の月次変動を、月額制「ビジネスの副操縦士」契約のストック収益でカバーする設計。月額10クライアント達成で月15万円以上の固定収入を確保。
+      </li>
+      <li>
+        <strong>一人事業者のキャパシティリスク：</strong>
+        受注上限を月3〜4件（制作）に設定し、過負荷を防ぐ。将来的にはアシスタント採用またはパートナー連携で対応。
+      </li>
+      <li>
+        <strong>技術トレンドの変化：</strong>
+        AIや新フレームワークへの継続的な自己研鑽と、資格更新・勉強会参加で常に最新技術に対応。
+      </li>
+      <li>
+        <strong>健康・身体的リスク（車いす使用）：</strong>
+        リモートワーク中心・オンライン完結サービスにより、身体的制約の影響を最小化。緊急時の対応ポリシーをクライアントと事前合意。
+      </li>
+    </ul>
+  </div>
+
+  <!-- 08. 今後のロードマップ -->
+  <div class="section-header">
+    <span class="number">08</span> 今後の事業展開ロードマップ
+  </div>
+
+  <ul class="roadmap">
+    <li>
+      <div class="roadmap-phase">
+        <span class="phase-badge">Phase 1</span>
+        <span class="phase-period">2026年開業。基盤構築期</span>
+      </div>
+      <div class="roadmap-content">
+        <h4>基盤構築期 ── 実績作りと月額収益の安定化</h4>
+        <ul>
+          <li>Webサイト（wa-node.com）の多言語化・SEO強化を完了</li>
+          <li>「ビジネスの副操縦士」月額契約を5〜10クライアントへ拡大</li>
+          <li>制作実績・事例ページの充実（ポートフォリオ拡張）</li>
+          <li>クラウドソーシングプロフィールの最適化・実績評価の積み上げ</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="roadmap-phase">
+        <span class="phase-badge">Phase 2</span>
+        <span class="phase-period">2026〜2027</span>
+      </div>
+      <div class="roadmap-content">
+        <h4>成長期 ── 売上500万円突破・ブランド確立</h4>
+        <ul>
+          <li>年間売上500万円超を達成</li>
+          <li>法人向け組織支援サービスの本格展開（岐阜・東海エリアへの法人営業強化）</li>
+          <li>「行動心理×Web制作」の独自メソッドをコンテンツ化・出版（KDP活用）</li>
+          <li>SNSフォロワー・メルマガリスト拡大による自社集客の強化</li>
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="roadmap-phase">
+        <span class="phase-badge">Phase 3</span>
+        <span class="phase-period">2027〜2028</span>
+      </div>
+      <div class="roadmap-content">
+        <h4>拡大期 ── パートナー連携・海外展開の準備</h4>
+        <ul>
+          <li>業務委託アシスタント・パートナーデザイナーとの連携体制を構築</li>
+          <li>英語・フランス語対応を活かした海外クライアントへのサービス展開</li>
+          <li>AI活用支援メニューの体系化・研修サービスとしての提供開始</li>
+          <li>法人化（合同会社設立）の検討</li>
+        </ul>
+      </div>
+    </li>
+  </ul>
+
+  <!-- 09. 代表者プロフィール（略歴） -->
+  <div class="section-header">
+    <span class="number">09</span> 代表者略歴
+  </div>
+  <table class="basic-table">
+    <tbody>
+      <tr><th>氏名</th><td>高野 紘純（たかの ひろずみ）</td></tr>
+      <tr><th>役職</th><td>和-Node 代表（個人事業主）</td></tr>
+      <tr>
+        <th>主な経歴</th>
+        <td>
+          IT業界での実務経験20年以上。大規模システム設計・開発からWebサイト制作・インフラ設計まで幅広く経験。<br>
+          2002年に産業カウンセラー資格を取得し、技術と心理の融合した支援を追求。<br>
+          JADP認定 上級心理カウンセラー・メンタル心理カウンセラーとして相談支援実績多数。<br>
+          車いす使用者として当事者の視点を活かしたアクセシビリティ設計に精通。<br>
+          2026年に和-Nodeを開業し、心理学×ICT×AIの三領域を融合した専門サービスを展開中。
+        </td>
+      </tr>
+      <tr>
+        <th>主な保有資格</th>
+        <td>
+          産業カウンセラー（2002年〜）／上級心理カウンセラー／メンタル心理カウンセラー／
+          情報セキュリティマネジメント技術者／基本情報技術者／
+          Cisco認定資格（CCNA等）／日商簿記2級／バリアフリー住環境アドバイザー
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+</div>
+
+<footer>
+  <strong>和-Node（わのーど）事業計画書</strong>｜代表：高野 紘純｜〒509-0207 岐阜県可児市今渡2347番地1<br>
+  contacts@wa-node.com｜https://www.wa-node.com｜作成日：2026年5月
+</footer>
+
+</body>
+</html>

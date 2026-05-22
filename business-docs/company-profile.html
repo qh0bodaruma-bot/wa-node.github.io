@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>会社案内｜和-Node（わのーど）</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #c5a059;
+      --accent-dark: #8a6d2e;
+      --trust: #0f4c5c;
+      --trust-mid: #1f6f78;
+      --text: #1a1a1a;
+      --muted: #666;
+      --soft: #fdfcf9;
+      --line: rgba(197,160,89,0.2);
+    }
+
+    body {
+      font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', sans-serif;
+      font-size: 10pt;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.8;
+    }
+
+    /* === 印刷用 === */
+    @media print {
+      body { font-size: 9pt; }
+      .page-break { page-break-before: always; }
+      .no-print { display: none !important; }
+      header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .section-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .service-item { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .trust-block { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+
+    /* === ヘッダー === */
+    header {
+      background: linear-gradient(135deg, #0f4c5c 0%, #1f6f78 60%, #c5a059 100%);
+      color: #fff;
+      padding: 48px 60px 40px;
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      right: -40px; top: -40px;
+      width: 260px; height: 260px;
+      border-radius: 50%;
+      background: rgba(197,160,89,0.12);
+    }
+    .header-content { display: flex; justify-content: space-between; align-items: flex-end; }
+    .header-left h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: 28pt;
+      font-weight: 900;
+      letter-spacing: 0.05em;
+      margin-bottom: 6px;
+    }
+    .header-left .tagline {
+      font-size: 10pt;
+      opacity: 0.85;
+      letter-spacing: 0.1em;
+    }
+    .header-right {
+      text-align: right;
+      font-size: 9pt;
+      opacity: 0.9;
+      line-height: 1.9;
+    }
+    .doc-title {
+      font-size: 18pt;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      color: rgba(255,255,255,0.95);
+      margin-bottom: 4px;
+    }
+
+    /* === コンテンツ共通 === */
+    .container { max-width: 780px; margin: 0 auto; padding: 0 40px; }
+    .page { padding: 48px 0; }
+
+    .section-header {
+      background: var(--trust);
+      color: #fff;
+      padding: 10px 24px;
+      border-radius: 4px;
+      font-size: 11pt;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-header .number {
+      background: var(--accent);
+      color: var(--trust);
+      font-weight: 900;
+      font-size: 9pt;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    /* === 基本情報テーブル === */
+    .info-table { width: 100%; border-collapse: collapse; margin-bottom: 40px; }
+    .info-table th, .info-table td {
+      padding: 12px 16px;
+      border: 1px solid #ddd;
+      vertical-align: top;
+      text-align: left;
+    }
+    .info-table th {
+      background: #f5f0e8;
+      font-weight: 700;
+      color: var(--trust);
+      width: 28%;
+      font-size: 9.5pt;
+    }
+    .info-table td { font-size: 9.5pt; line-height: 1.7; }
+
+    /* === 代表者プロフィール === */
+    .profile-box {
+      border: 2px solid var(--accent);
+      border-radius: 8px;
+      padding: 28px 32px;
+      margin-bottom: 40px;
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .profile-left { text-align: center; }
+    .profile-avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: #e8f0ee;
+      border: 3px solid var(--accent);
+      display: block;
+      margin: 0 auto 12px;
+      object-fit: cover;
+    }
+    .profile-name-jp { font-size: 14pt; font-weight: 900; font-family: 'Noto Serif JP', serif; }
+    .profile-name-en { font-size: 9pt; color: var(--accent-dark); letter-spacing: 0.1em; margin-top: 2px; }
+    .profile-role { font-size: 8.5pt; color: var(--muted); margin-top: 4px; }
+    .profile-right h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--trust);
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+    }
+    .profile-right p { font-size: 9.5pt; color: #444; margin-bottom: 10px; line-height: 1.8; }
+    .qual-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+    .qual-list li {
+      background: #f0ede6;
+      border: 1px solid var(--accent);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 8.5pt;
+      color: var(--accent-dark);
+      font-weight: 700;
+    }
+
+    /* === サービス一覧 === */
+    .service-item {
+      border-left: 5px solid var(--accent);
+      padding: 16px 20px;
+      margin-bottom: 18px;
+      background: #fdfcf9;
+      border-radius: 0 8px 8px 0;
+    }
+    .service-item h3 {
+      font-size: 11pt;
+      font-weight: 700;
+      color: var(--trust);
+      margin-bottom: 6px;
+    }
+    .service-item p { font-size: 9pt; color: #555; margin-bottom: 6px; line-height: 1.7; }
+    .service-price {
+      display: inline-block;
+      background: var(--trust);
+      color: #fff;
+      font-size: 8.5pt;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 3px;
+    }
+
+    /* === 料金一覧テーブル === */
+    .price-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 9pt; }
+    .price-table th {
+      background: var(--trust);
+      color: #fff;
+      padding: 10px 14px;
+      font-weight: 700;
+      text-align: left;
+    }
+    .price-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+    .price-table tr:nth-child(even) td { background: #fafaf8; }
+    .price-table .highlight-row td { background: #fff8ee; font-weight: 700; }
+
+    /* === 強み・差別化 === */
+    .strength-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+    .strength-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+    .strength-card h4 {
+      font-size: 10pt;
+      font-weight: 700;
+      color: var(--trust);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .strength-card p { font-size: 9pt; color: #555; line-height: 1.7; }
+
+    /* === 信頼・セキュリティ === */
+    .trust-block {
+      background: var(--trust);
+      color: #fff;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+    }
+    .trust-block h3 { font-size: 11pt; color: var(--accent); margin-bottom: 14px; }
+    .trust-block ul { list-style: none; padding: 0; }
+    .trust-block li { font-size: 9.5pt; padding: 5px 0; padding-left: 18px; position: relative; opacity: 0.9; }
+    .trust-block li::before { content: '✓'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+
+    /* === フッター === */
+    footer {
+      background: #1a1a1a;
+      color: rgba(255,255,255,0.75);
+      text-align: center;
+      padding: 20px;
+      font-size: 8.5pt;
+      margin-top: 40px;
+    }
+    footer strong { color: var(--accent); }
+
+    /* === 区切り線 === */
+    hr { border: none; border-top: 1px solid var(--line); margin: 32px 0; }
+
+    /* === 印刷ボタン === */
+    .print-btn-wrap {
+      text-align: center;
+      padding: 20px;
+      background: #f5f0e8;
+    }
+    .print-btn {
+      background: var(--trust);
+      color: #fff;
+      border: none;
+      padding: 14px 40px;
+      font-size: 11pt;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+    .print-btn:hover { background: var(--trust-mid); }
+  </style>
+</head>
+<body>
+
+<!-- 印刷ボタン（印刷時は非表示） -->
+<div class="print-btn-wrap no-print">
+  <button class="print-btn" onclick="window.print()">📄 PDFとして保存・印刷する</button>
+</div>
+
+<!-- ヘッダー -->
+<header>
+  <div class="header-content">
+    <div class="header-left">
+      <div class="doc-title">会 社 案 内</div>
+      <h1>和-Node</h1>
+      <div class="tagline">心理学 × ICT × AI ― 選ばれるための導線設計</div>
+    </div>
+    <div class="header-right">
+      〒509-0207<br>
+      岐阜県可児市今渡2347番地1<br>
+      contacts@wa-node.com<br>
+      https://www.wa-node.com<br>
+      作成日：2026年5月
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="page">
+
+    <!-- 01. 事業者基本情報 -->
+    <div class="section-header">
+      <span class="number">01</span> 事業者基本情報
+    </div>
+    <table class="info-table">
+      <tbody>
+        <tr>
+          <th>屋号（事業名）</th>
+          <td>和-Node（わのーど）</td>
+        </tr>
+        <tr>
+          <th>代表者氏名</th>
+          <td>高野 紘純（たかの ひろずみ）</td>
+        </tr>
+        <tr>
+          <th>事業形態</th>
+          <td>個人事業主</td>
+        </tr>
+        <tr>
+          <th>所在地</th>
+          <td>〒509-0207 岐阜県可児市今渡2347番地1</td>
+        </tr>
+        <tr>
+          <th>電話番号</th>
+          <td>080-3599-5388</td>
+        </tr>
+        <tr>
+          <th>メールアドレス</th>
+          <td>contacts@wa-node.com</td>
+        </tr>
+        <tr>
+          <th>Webサイト</th>
+          <td>https://www.wa-node.com</td>
+        </tr>
+        <tr>
+          <th>対応エリア</th>
+          <td>全国対応（オンライン完結可）／岐阜・愛知近郊（対面対応可）</td>
+        </tr>
+        <tr>
+          <th>業種・業態</th>
+          <td>Webサイト制作業、情報処理サービス業、コンサルティング業</td>
+        </tr>
+        <tr>
+          <th>開業年</th>
+          <td>2026年</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 02. 代表者プロフィール -->
+    <div class="section-header">
+      <span class="number">02</span> 代表者プロフィール
+    </div>
+    <div class="profile-box">
+      <div class="profile-left">
+        <img class="profile-avatar" src="https://www.wa-node.com/images/avatar.png" alt="代表 高野紘純" />
+        <div class="profile-name-jp">高野 紘純</div>
+        <div class="profile-name-en">Hirozumi Takano</div>
+        <div class="profile-role">和-Node 代表</div>
+      </div>
+      <div class="profile-right">
+        <h3>代表者紹介</h3>
+        <p>
+          IT業界での実務経験20年以上。大規模システム開発からWebサイト制作まで幅広い現場を経験。
+          その過程で「技術だけでは人の行動は変わらない」という確信を持ち、
+          産業カウンセラー・上級心理カウンセラーとしての心理学的知見を組み合わせた
+          独自の「行動心理に基づく導線設計」メソッドを確立。
+        </p>
+        <p>
+          車いすユーザーとしての当事者視点から、アクセシビリティとバリアフリー設計にも精通。
+          技術・心理・アクセシビリティの三位一体で、クライアントのビジネス課題を根本から解決することを使命とする。
+        </p>
+        <ul class="qual-list">
+          <li>産業カウンセラー（2002年〜）</li>
+          <li>上級心理カウンセラー</li>
+          <li>メンタル心理カウンセラー</li>
+          <li>情報セキュリティマネジメント</li>
+          <li>基本情報技術者</li>
+          <li>Cisco認定資格（CCNA等）</li>
+          <li>日商簿記2級</li>
+          <li>バリアフリー住環境アドバイザー</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 03. 事業内容・サービス -->
+    <div class="section-header">
+      <span class="number">03</span> 事業内容・提供サービス
+    </div>
+
+    <div class="service-item">
+      <h3>① 行動心理に基づくWebサイト・LP制作</h3>
+      <p>
+        単なるデザイン制作ではなく、行動心理学の知見を活用した「選ばれるための導線設計」が最大の特徴。
+        ランディングページ（LP）・ホームページ（HP）の戦略的設計・制作を行い、問い合わせ・購買・予約などのコンバージョン率向上を実現する。
+        AstroやReactなどの最新フレームワークを用いた高速・高品質なサイト構築が可能。
+      </p>
+      <span class="service-price">40,000円〜（HP） ／ 48,000円〜（LP）</span>
+    </div>
+
+    <div class="service-item">
+      <h3>② ビジネスの副操縦士（月額制 戦略的パートナー）</h3>
+      <p>
+        公開後の継続的なWebサイト改善・AI活用支援・業務フロー整理・経営相談など、
+        ビジネス全般の「もう一人の相棒」として月額制で伴走するサービス。
+        技術と心理両面からクライアントの意思決定をサポートし、持続的な事業成長を支援する。
+      </p>
+      <span class="service-price">月額 15,000円〜（スタンダード）/ 30,000円〜（プレミアム）</span>
+    </div>
+
+    <div class="service-item">
+      <h3>③ ICT活用・業務自動化支援（LINE Mini App / GAS / AI活用）</h3>
+      <p>
+        LINE Mini Appの企画・設計・実装、Google App Script（GAS）による業務自動化、
+        ChatGPT・Claude等の生成AIを活用したプロンプト設計・社内定着支援など、
+        中小事業者のデジタル化・業務効率化をワンストップで支援する。
+      </p>
+      <span class="service-price">50,000円〜（スポット対応可）</span>
+    </div>
+
+    <div class="service-item">
+      <h3>④ 組織コミュニケーション支援・産業カウンセリング</h3>
+      <p>
+        産業カウンセラーの有資格者として、経営者・リーダー層の相談整理、
+        チームコミュニケーション課題の改善支援、組織のメンタルヘルス対策の窓口を担う。
+        心理的安全性を高める職場環境の設計にも対応。
+      </p>
+      <span class="service-price">月額 30,000円〜（法人契約）</span>
+    </div>
+
+    <div class="service-item">
+      <h3>⑤ Amazon KDP出版支援・ブランディング支援</h3>
+      <p>
+        Amazon Kindle Direct Publishing（KDP）を活用した電子書籍出版のサポート。
+        専門知識のコンテンツ化・出版・ブランディング活用まで一連の流れを支援する。
+      </p>
+      <span class="service-price">個別見積もり</span>
+    </div>
+
+  </div><!-- /page -->
+</div><!-- /container -->
+
+<!-- ページ区切り -->
+<div class="page-break"></div>
+
+<div class="container">
+  <div class="page">
+
+    <!-- 04. 料金体系 -->
+    <div class="section-header">
+      <span class="number">04</span> 料金体系（主要サービス）
+    </div>
+    <table class="price-table">
+      <thead>
+        <tr>
+          <th style="width:30%">サービス</th>
+          <th style="width:25%">価格（税別）</th>
+          <th>概要</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>シンプルHP制作（梅）</td>
+          <td>40,000円〜</td>
+          <td>名刺代わりの小規模HP（3〜5ページ）</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>選ばれる導線HP制作（竹・推奨）</td>
+          <td>96,000円〜</td>
+          <td>行動心理を活かした成果重視の標準HP（5ページ程度）</td>
+        </tr>
+        <tr>
+          <td>Business 7 HP制作（松）</td>
+          <td>168,000円〜</td>
+          <td>多言語対応・AI連携含むプレミアム大型HP</td>
+        </tr>
+        <tr>
+          <td>シンプルLP制作（梅）</td>
+          <td>48,000円〜</td>
+          <td>1ページ完結の集客用ランディングページ</td>
+        </tr>
+        <tr class="highlight-row">
+          <td>選ばれる導線LP制作（竹・推奨）</td>
+          <td>96,000円〜</td>
+          <td>心理導線を徹底設計したコンバージョン重視LP</td>
+        </tr>
+        <tr>
+          <td>プレミアム心理導線LP（松）</td>
+          <td>180,000円〜</td>
+          <td>A/Bテスト設計・多言語対応含む最上位LP</td>
+        </tr>
+        <tr>
+          <td>ビジネスの副操縦士 スタンダード</td>
+          <td>月額 15,000円〜</td>
+          <td>軽めの月次相談・Web保守・AI活用サポート</td>
+        </tr>
+        <tr>
+          <td>ビジネスの副操縦士 プレミアム</td>
+          <td>月額 30,000円〜</td>
+          <td>経営全般伴走・無制限相談・優先対応</td>
+        </tr>
+        <tr>
+          <td>LINE Mini App制作</td>
+          <td>50,000円〜</td>
+          <td>予約・カウンセリング・診断ツールなど</td>
+        </tr>
+        <tr>
+          <td>業務自動化（GAS / AI）</td>
+          <td>30,000円〜</td>
+          <td>Google Apps Script・AIプロンプト設計等</td>
+        </tr>
+        <tr>
+          <td>組織支援（法人）</td>
+          <td>月額 30,000円〜</td>
+          <td>産業カウンセリング・コミュニケーション改善支援</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:8.5pt; color:#888; margin-bottom:32px;">
+      ※ 上記は目安価格（税別）です。プロジェクトの規模・要件によって個別見積もりを提示します。<br>
+      ※ 制作系サービスの支払条件：着手時50%／納品前50%（銀行振込・クレジットカード対応）。
+    </p>
+
+    <!-- 05. 和-Nodeの強み・差別化 -->
+    <div class="section-header">
+      <span class="number">05</span> 和-Nodeの強み・差別化ポイント
+    </div>
+    <div class="strength-grid">
+      <div class="strength-card">
+        <h4>🧠 心理学×IT 二刀流の専門性</h4>
+        <p>産業カウンセラー資格を持つITエンジニアは希少。行動心理に基づく「迷わない・離脱しない」導線設計で、一般的なWeb制作会社との明確な差別化を実現。</p>
+      </div>
+      <div class="strength-card">
+        <h4>💡 20年以上の実務技術力</h4>
+        <p>大規模システム開発・インフラ設計からAI活用まで。最新技術（Astro、React、生成AI）を実務レベルで扱える技術基盤があり、長期的な保守・改善も安心。</p>
+      </div>
+      <div class="strength-card">
+        <h4>♿ バリアフリー・ユニバーサル設計</h4>
+        <p>車いすユーザーの当事者視点とバリアフリー住環境アドバイザーの専門知識を活かし、あらゆるユーザーが使いやすいアクセシブルなサイトを設計。</p>
+      </div>
+      <div class="strength-card">
+        <h4>🌍 多言語対応（日・英・仏）</h4>
+        <p>日本語・英語・フランス語の3言語対応が可能。インバウンド・海外展開を視野に入れた事業者へも即対応できる体制を整備。</p>
+      </div>
+      <div class="strength-card">
+        <h4>💴 中間マージンなしの適正価格</h4>
+        <p>外注・中間業者を使わず代表が直接対応。大手制作会社の1/3〜1/5程度の価格で同水準以上のクオリティを提供。</p>
+      </div>
+      <div class="strength-card">
+        <h4>🤝 月額制の継続伴走支援</h4>
+        <p>制作後に「丸投げ」にしない「ビジネスの副操縦士」は業界でも独自の提供価値。解約率が低く、長期的なクライアントリレーション構築に強み。</p>
+      </div>
+    </div>
+
+    <!-- 06. 信頼・セキュリティ -->
+    <div class="section-header">
+      <span class="number">06</span> 信頼・セキュリティへの取り組み
+    </div>
+    <div class="trust-block">
+      <h3>情報セキュリティ・倫理規程</h3>
+      <ul>
+        <li>IPA「SECURITY ACTION（一つ星）」宣言事業者として、情報セキュリティ基本方針を公開・運用</li>
+        <li>産業カウンセラーとしての守秘義務を遵守し、相談内容・個人情報を厳格に管理</li>
+        <li>プライバシーポリシー・利用規約・キャンセルポリシーをWebサイト上で完全公開</li>
+        <li>見積もり外の追加料金・不透明な請求は一切なし（誠実な価格提示を徹底）</li>
+        <li>支払いはStripe（クレジットカード）・銀行振込・各種外部プラットフォーム経由に対応</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- フッター -->
+<footer>
+  <strong>和-Node（わのーど）</strong>｜代表：高野 紘純｜〒509-0207 岐阜県可児市今渡2347番地1<br>
+  contacts@wa-node.com｜https://www.wa-node.com｜2026年5月作成
+</footer>
+
+</body>
+</html>
