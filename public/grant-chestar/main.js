@@ -2,8 +2,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. パーティクル（浮遊する光の粒子）の生成
   initParticles();
 
-  // 2. BGMプレイヤーの制御
-  initBgmPlayer();
 });
 
 /**
@@ -56,47 +54,4 @@ function initParticles() {
 
   // ループで粒子を追加し続ける
   setInterval(createParticle, 1000);
-}
-
-/**
- * BGMプレイヤーのコントロールを初期化する関数
- */
-function initBgmPlayer() {
-  const playBtn = document.getElementById('play-btn');
-  const bgm = document.getElementById('bgm-player');
-  const equalizer = document.getElementById('equalizer');
-
-  if (!playBtn || !bgm || !equalizer) return;
-
-  // 再生/一時停止の切り替え
-  const togglePlay = () => {
-    if (bgm.paused) {
-      // 再生する
-      bgm.play()
-        .then(() => {
-          playBtn.classList.add('playing');
-          equalizer.classList.add('playing');
-          playBtn.setAttribute('aria-label', '音楽を一時停止する');
-        })
-        .catch(err => {
-          console.error('Audio playback failed:', err);
-          alert('ブラウザのセキュリティ設定により、インタラクションなしでの自動再生がブロックされる場合があります。ボタンを再度クリックしてください。');
-        });
-    } else {
-      // 一時停止する
-      bgm.pause();
-      playBtn.classList.remove('playing');
-      equalizer.classList.remove('playing');
-      playBtn.setAttribute('aria-label', '音楽を再生する');
-    }
-  };
-
-  playBtn.addEventListener('click', togglePlay);
-
-  // 音声が終了したらUIを初期状態に戻す
-  bgm.addEventListener('ended', () => {
-    playBtn.classList.remove('playing');
-    equalizer.classList.remove('playing');
-    playBtn.setAttribute('aria-label', '音楽を再生する');
-  });
 }
