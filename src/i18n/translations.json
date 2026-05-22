@@ -8,12 +8,12 @@
   },
   "hero": {
     "badge": { "ja": "月3名まで丁寧に対応", "en": "Max 3 Clients / Month", "fr": "Max 3 Clients / Mois" },
-    "tagline": { "ja": "技術（ICT×統計）のその先へ。", "en": "Beyond Technology (ICT & Statistics).", "fr": "Au-delà de la technologie (TIC & statistiques)." },
+    "tagline": { "ja": "心理学 × ICT × 計測改善で、相談につながるWebへ。", "en": "Psychology, ICT, and measurable improvement for websites that lead to inquiries.", "fr": "Psychologie, TIC et amélioration mesurable pour transformer le web en demandes." },
     "title_part1": { "ja": "「選ばれる」には、", "en": "There is a ", "fr": "Il y a une " },
     "title_highlight": { "ja": "心理学", "en": "Psychological Reason", "fr": "Raison Psychologique" },
     "title_part2": { "ja": "的な根拠がある。", "en": " to be Chosen.", "fr": " d'être Choisi." },
     "lead": {
-      "ja": "和-Nodeは、「行動心理学」と「統計技術」の視点をWeb導線設計に応用したホームページ制作・LP制作の専門家。ビジネスの副操縦士として、意思決定からシステム・AI活用まで判断と実行を支えます。",
+      "ja": "和-Nodeは、心理学の知見を活かしたホームページ制作・LP制作・Web改善の専門窓口です。伝わる情報設計、相談しやすい導線、GA4やヒートマップを使った計測改善まで、公開後の成果を見据えて整えます。",
       "en": "Wa-Node blends behavioral psychology and statistical insights with web design to prevent bounces. Serving as your business co-pilot, we support decisions and execution from LP/website production to AI/ICT integration.",
       "fr": "Wa-Node applique la psychologie comportementale et les analyses statistiques à la conception web. En tant que co-pilote d'affaires, nous soutenons vos décisions de la création de LP/sites internet à l'intégration de l'IA/TIC."
     },
@@ -48,7 +48,7 @@
   },
   "services": {
     "eyebrow": { "ja": "Service Pillars", "en": "Service Pillars", "fr": "Piliers de Service" },
-    "title": { "ja": "迷ったら、まずはこの3つから", "en": "Start With One of These Three", "fr": "Commencez par l'un de ces trois choix" },
+    "title": { "ja": "迷ったら、まずはこの4つから", "en": "Start With One of These Four", "fr": "Commencez par l'un de ces quatre choix" },
     "card1_tag": { "ja": "Web Design", "en": "Web Design", "fr": "Design Web" },
     "card1_title": { "ja": "ホームページ・LP制作を相談したい", "en": "Build a Website or LP", "fr": "Créer un site ou une LP" },
     "card1_desc": {
@@ -57,14 +57,18 @@
       "fr": "Nous concevons des sites ultra-rapides et des LP pour capter l'attention dès les premières 50 millisecondes."
     },
     "card1_link": { "ja": "48,000円〜 →", "en": "From 48,000 JPY →", "fr": "À partir de 48 000 JPY →" },
-    "card2_tag": { "ja": "Ongoing Partnership", "en": "Ongoing Partnership", "fr": "Partenariat" },
-    "card2_title": { "ja": "作った後も相談したい", "en": "Keep Improving After Launch", "fr": "Continuer à améliorer après lancement" },
-    "card2_desc": { "ja": "Web改善、AI活用、業務整理を月額で伴走する「ビジネスの副操縦士」です。", "en": "Monthly support as your Business Co-pilot, covering web improvements, AI use, and workflow planning.", "fr": "Un soutien mensuel comme co-pilote d'affaires pour le web, l'IA et l'organisation des operations." },
-    "card2_link": { "ja": "15,000円/月〜 →", "en": "From 15,000 JPY/mo →", "fr": "À partir de 15 000 JPY/mois →" },
-    "card3_tag": { "ja": "ICT & System", "en": "ICT & System", "fr": "TIC & Système" },
-    "card3_title": { "ja": "AI・ICTで業務を整えたい", "en": "Organize Work With AI & ICT", "fr": "Organiser le travail avec IA & TIC" },
-    "card3_desc": { "ja": "ChatGPT、LINE、業務ツール、簡単な自動化などをスポットで整理します。", "en": "Spot consultations for ChatGPT, LINE, business tools, and simple automation.", "fr": "Consultations ponctuelles pour ChatGPT, LINE, outils metier et automatisation simple." },
-    "card3_link": { "ja": "スポット相談 5,000円〜 →", "en": "Consultation from 5,000 JPY →", "fr": "Consultation dès 5 000 JPY →" },
+    "card2_tag": { "ja": "Web Improvement", "en": "Web Improvement", "fr": "Amélioration Web" },
+    "card2_title": { "ja": "今あるサイト・LPを改善したい", "en": "Improve an Existing Site or LP", "fr": "Améliorer un site ou une LP" },
+    "card2_desc": { "ja": "CTA、料金表、フォーム、ファーストビューに加え、色彩・動き・読みにくさまで見直し、相談につながりやすい導線へ整えます。GA4・Clarityなどの計測改善にも対応します。", "en": "We improve CTAs, pricing, forms, first views, colors, motion, and readability so existing pages lead more naturally to inquiries, including GA4 and Clarity measurement.", "fr": "Nous améliorons CTA, tarifs, formulaires, première vue, couleurs, mouvements et lisibilité pour faciliter les demandes, avec mesure GA4 et Clarity." },
+    "card2_link": { "ja": "改善相談 15,000円〜 →", "en": "Improvement review from 15,000 JPY →", "fr": "Audit d'amélioration dès 15 000 JPY →" },
+    "card3_tag": { "ja": "Ongoing Partnership", "en": "Ongoing Partnership", "fr": "Partenariat" },
+    "card3_title": { "ja": "作った後も相談したい", "en": "Keep Improving After Launch", "fr": "Continuer à améliorer après lancement" },
+    "card3_desc": { "ja": "Web改善、AI活用、業務整理を月額で伴走する「ビジネスの副操縦士」です。", "en": "Monthly support as your Business Co-pilot, covering web improvements, AI use, and workflow planning.", "fr": "Un soutien mensuel comme co-pilote d'affaires pour le web, l'IA et l'organisation des operations." },
+    "card3_link": { "ja": "15,000円/月〜 →", "en": "From 15,000 JPY/mo →", "fr": "À partir de 15 000 JPY/mois →" },
+    "card4_tag": { "ja": "ICT & System", "en": "ICT & System", "fr": "TIC & Système" },
+    "card4_title": { "ja": "AI・ICTで業務を整えたい", "en": "Organize Work With AI & ICT", "fr": "Organiser le travail avec IA & TIC" },
+    "card4_desc": { "ja": "ChatGPT、LINE、業務ツール、簡単な自動化などをスポットで整理します。", "en": "Spot consultations for ChatGPT, LINE, business tools, and simple automation.", "fr": "Consultations ponctuelles pour ChatGPT, LINE, outils metier et automatisation simple." },
+    "card4_link": { "ja": "スポット相談 5,000円〜 →", "en": "Consultation from 5,000 JPY →", "fr": "Consultation dès 5 000 JPY →" },
     "sub_link_hp_lp": {
       "ja": "💡 HPとLPの違い・解説はこちら →",
       "en": "💡 Learn the difference between HP and LP →",
