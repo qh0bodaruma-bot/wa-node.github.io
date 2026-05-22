@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="WordPress SEO内部診断 | 和-Node" description="25項目のテクニカルチェックで、あなたのWordPressサイトのSEO内部状態を可視化。改善ポイントをプロの視点で特定します。">
+<BaseLayout title="SEO/AEO内部診断 | 和-Node" description="30項目のテクニカルチェックで、検索エンジンとAI検索に読まれやすいサイト構造を可視化。改善ポイントをプロの視点で特定します。">
   <!-- Background Decoration -->
   <div class="bg-decoration">
     <div class="glow glow-1"></div>
@@ -22,22 +22,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="step-visual">
           <div class="scanner-icon">🔍</div>
         </div>
-        <h1 class="welcome-title">WordPress<br/><span class="accent-text">SEO内部診断</span></h1>
+        <h1 class="welcome-title">Webサイト<br/><span class="accent-text">SEO/AEO内部診断</span></h1>
         <p class="welcome-desc">
-          25項目の専門的なチェックリストを通して、<br />
-          あなたのサイトが持つ「検索に強いポテンシャル」を可視化します。<br />
+          30項目の専門的なチェックリストを通して、<br />
+          あなたのサイトが持つ「検索とAI回答に強いポテンシャル」を可視化します。<br />
           <span class="small-info">専門知識がなくても、直感で回答可能です。</span>
         </p>
         <button class="primary-btn pulse" id="startBtn">診断を開始する</button>
       </div>
 
-      <!-- Step 1-5: Category Steps -->
+      <!-- Category Steps -->
       <div id="step-quiz" class="diag-step">
         <div class="quiz-header">
           <div class="diag-progress">
             <div class="progress-info">
               <span id="cat-title">基本設定</span>
-              <span id="step-indicator">Step 1 / 5</span>
+              <span id="step-indicator">Step 1 / 6</span>
             </div>
             <div class="progress-bar-wrap">
               <div class="progress-bar-fill" id="overall-progress"></div>
@@ -67,7 +67,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 </svg>
                 <div class="score-text">
                   <span class="score-num" id="total-score">0</span>
-                  <span class="score-total">/ 50</span>
+                  <span class="score-total" id="score-max">/ 60</span>
                 </div>
               </div>
               <div class="grade-badge" id="res-grade">Grade: B</div>
@@ -272,6 +272,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ]
       },
       {
+        id:'aeo', name:'AI検索/AEO', icon:'🤖',
+        items:[
+          {l:'サービス要約の明確化', h:'誰に、何を、どの地域・条件で提供するかが短く明確に書かれているか。'},
+          {l:'FAQ・Q&A構造', h:'検索者の質問にそのまま答えられるFAQやQ&A形式の情報が用意されているか。'},
+          {l:'Organization/Service構造化データ', h:'事業者情報、サービス内容、所在地、連絡先などを機械が理解しやすい形で補足しているか。'},
+          {l:'根拠・実績・代表情報', h:'AIが信頼性を判断しやすいよう、実績、代表プロフィール、方針が確認しやすいか。'},
+          {l:'AIクローラーへの可読性', h:'重要情報が画像だけ、複雑なJSだけ、閉じたUIだけに偏らず、本文として読める状態か。'},
+        ]
+      },
+      {
         id:'speed', name:'表示速度', icon:'⚡',
         items:[
           {l:'画像の軽量化', h:'WebP形式や圧縮により、ファイルサイズが最適化されているか。'},
@@ -293,12 +303,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
     ];
 
-    let currentStep = 0; // 0 is welcome, 1-5 categories, 6 result
+    const categoryCount = categories.length;
+    const maxScore = categories.reduce((sum, category) => sum + category.items.length * 2, 0);
+    let currentStep = 0; // 0 is welcome, 1-categoryCount categories, categoryCount + 1 is result
     let state = {}; // Stores cid_idx: value (0=none, 1=ok, 2=warn, 3=bad)
 
     function showStep(idx) {
       const steps = document.querySelectorAll('.diag-step');
-      const target = steps[idx];
+      const target = idx === 0
+        ? steps[0]
+        : idx === categoryCount + 1
+          ? document.getElementById('step-result')
+          : document.getElementById('step-quiz');
+      if (!target) return;
       
       const active = document.querySelector('.diag-step.active');
       if (active) {
@@ -312,8 +329,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }
       currentStep = idx;
       
-      if (idx > 0 && idx <= 5) renderCategory(idx - 1);
-      if (idx === 6) renderResult();
+      if (idx > 0 && idx <= categoryCount) renderCategory(idx - 1);
+      if (idx === categoryCount + 1) renderResult();
     }
 
     function renderCategory(catIdx) {
@@ -324,8 +341,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const progressFill = document.getElementById('overall-progress');
 
       catTitle.textContent = `${cat.icon} ${cat.name}`;
-      stepIndicator.textContent = `Phase ${catIdx + 1} / 5`;
-      progressFill.style.width = `${((catIdx + 1) / 5) * 100}%`;
+      stepIndicator.textContent = `Phase ${catIdx + 1} / ${categoryCount}`;
+      progressFill.style.width = `${((catIdx + 1) / categoryCount) * 100}%`;
 
       quizBody.innerHTML = cat.items.map((it, i) => {
         const val = state[`${cat.id}_${i}`] || 0;
@@ -345,7 +362,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       }).join('');
       
       document.getElementById('backBtn').style.visibility = catIdx > 0 ? 'visible' : 'hidden';
-      document.getElementById('nextBtn').textContent = catIdx === 4 ? '診断を完了する' : '次のステップへ';
+      document.getElementById('nextBtn').textContent = catIdx === categoryCount - 1 ? '診断を完了する' : '次のステップへ';
     }
 
     window.setVal = (cid, i, val) => {
@@ -368,21 +385,22 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         total += cs;
       });
 
-      const scorePercent = Math.round((total / 50) * 100);
+      const scorePercent = Math.round((total / maxScore) * 100);
       document.getElementById('total-score').textContent = total;
+      document.getElementById('score-max').textContent = `/ ${maxScore}`;
       
       // Ring Animation
       const ring = document.getElementById('score-ring');
       const circumference = 283;
-      const offset = circumference - (total / 50) * circumference;
+      const offset = circumference - (total / maxScore) * circumference;
       setTimeout(() => { ring.style.strokeDashoffset = offset; }, 500);
 
       // Grade
       const gradeEl = document.getElementById('res-grade');
       const titleEl = document.getElementById('res-title');
       const descEl = document.getElementById('res-desc');
-      if (scorePercent >= 85) { gradeEl.textContent = 'A+ : Expert'; gradeEl.style.background = '#27ae60'; titleEl.textContent = '素晴らしいSEO最適化状態です'; descEl.textContent = '内部SEOの主要なポイントを完璧に抑えられています。この状態を維持しつつ、今後は被リンク獲得やコンテンツの深掘りに注力しましょう。'; }
-      else if (scorePercent >= 65) { gradeEl.textContent = 'B : Good'; gradeEl.style.background = '#639922'; titleEl.textContent = '良好なサイト構造です'; descEl.textContent = '基本的なSEO対策はできていますが、細かいタグ設定や速度面で改善の余地があります。これらを修正することでさらなる上位表示が狙えます。'; }
+      if (scorePercent >= 85) { gradeEl.textContent = 'A+ : Expert'; gradeEl.style.background = '#27ae60'; titleEl.textContent = '素晴らしいSEO/AEO最適化状態です'; descEl.textContent = '検索エンジンとAI回答に伝わる主要ポイントをしっかり抑えられています。この状態を維持しつつ、今後は実績・FAQ・コンテンツの深掘りに注力しましょう。'; }
+      else if (scorePercent >= 65) { gradeEl.textContent = 'B : Good'; gradeEl.style.background = '#639922'; titleEl.textContent = '良好なサイト構造です'; descEl.textContent = '基本的なSEO/AEO対策はできていますが、細かいタグ設定、AI検索向けの要約、速度面で改善の余地があります。'; }
       else if (scorePercent >= 45) { gradeEl.textContent = 'C : Need Work'; gradeEl.style.background = '#f39c12'; titleEl.textContent = '改善の余地が多くあります'; descEl.textContent = '主要なキーワード設定や表示速度など、いくつかの致命的な弱点が見受けられます。まずは基本設定の見直しから着手することをおすすめします。'; }
       else { gradeEl.textContent = 'D : Poor'; gradeEl.style.background = '#e74c3c'; titleEl.textContent = '早急な対策が必要です'; descEl.textContent = '現在のサイト構造は検索エンジンに正しく評価されにくい状態です。プロの視点による全面的な内部対策の見直しをおすすめします。'; }
 
@@ -390,13 +408,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const analysisEl = document.getElementById('category-analysis');
       analysisEl.innerHTML = categories.map(c => {
         const s = catScores[c.id];
-        const pct = (s / 10) * 100;
+        const catMax = c.items.length * 2;
+        const pct = (s / catMax) * 100;
         const col = pct >= 80 ? '#27ae60' : pct >= 50 ? '#f39c12' : '#e74c3c';
         return `
           <div class="cat-result-row">
             <div class="cat-icon">${c.icon}</div>
             <div class="cat-info">
-              <span class="cat-name">${c.name} (${s}/10)</span>
+              <span class="cat-name">${c.name} (${s}/${catMax})</span>
               <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${pct}%; background:${col}"></div></div>
             </div>
           </div>
@@ -409,6 +428,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       if (catScores.basic < 7) recs.push({ col:'#e74c3c', txt:'【基本設定】メタ情報やGSC連携が不十分です。ここを整えるだけで順位が安定しやすくなります。' });
       if (catScores.speed < 7) recs.push({ col:'#f39c12', txt:'【表示速度】画像の重さやキャッシュ設定がネックです。高速化によりユーザーの離脱を防げます。' });
       if (catScores.technical < 7) recs.push({ col:'#e74c3c', txt:'【テクニカル】canonicalや構造化データの設定を推奨します。Googleに正確な情報を伝える土台が不足しています。' });
+      if (catScores.aeo < 7) recs.push({ col:'#9b59b6', txt:'【AI検索/AEO】FAQ、サービス要約、代表情報、構造化データを整えると、AI回答にも引用されやすい土台を作れます。' });
       if (recs.length === 0) recs.push({ col:'#27ae60', txt:'全体的に良好です！定期的なキーワードの見直しと継続的なコンテンツ配信を続けましょう。' });
       
       recsList.innerHTML = recs.map(r => `
@@ -426,8 +446,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const nextBtn = document.getElementById('nextBtn');
       if (nextBtn) {
         nextBtn.addEventListener('click', () => {
-          if (currentStep < 5) showStep(currentStep + 1);
-          else showStep(6);
+          if (currentStep < categoryCount) showStep(currentStep + 1);
+          else showStep(categoryCount + 1);
         });
       }
 
@@ -443,7 +463,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       // Keyboard support
       document.addEventListener('keydown', (e) => {
-        if (currentStep > 0 && currentStep <= 5) {
+        if (currentStep > 0 && currentStep <= categoryCount) {
           if (e.key === 'ArrowRight' || e.key === 'Enter') {
             const next = document.getElementById('nextBtn');
             if (next) next.click();
