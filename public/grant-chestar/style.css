@@ -149,28 +149,28 @@ body {
   height: 100%;
   background: 
     /* 右上：月明かりからの柔らかい金光 */
-    radial-gradient(circle at 90% 10%, rgba(253, 224, 71, 0.12) 0%, transparent 55%),
+    radial-gradient(circle at 90% 10%, rgba(253, 224, 71, 0.24) 0%, transparent 60%),
     /* 中央左：街灯の光がにじみ出るような光芒 */
-    radial-gradient(circle at 10% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 10% 40%, rgba(212, 175, 55, 0.18) 0%, transparent 55%),
     /* 右下：民家の温かい窓明かりのようなアンバー */
-    radial-gradient(circle at 85% 70%, rgba(249, 115, 22, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 85% 70%, rgba(249, 115, 22, 0.24) 0%, transparent 55%),
     /* 左下：遠くの街灯の光 */
-    radial-gradient(circle at 15% 92%, rgba(212, 175, 55, 0.08) 0%, transparent 45%);
+    radial-gradient(circle at 15% 92%, rgba(212, 175, 55, 0.16) 0%, transparent 50%);
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: screen;
-  opacity: 0.85;
+  opacity: 0.9;
   animation: warmGlowPulse 8s ease-in-out infinite alternate;
 }
 
 @keyframes warmGlowPulse {
   0% {
-    opacity: 0.75;
+    opacity: 0.8;
     filter: brightness(0.9);
   }
   100% {
     opacity: 1.0;
-    filter: brightness(1.1);
+    filter: brightness(1.3);
   }
 }
 
