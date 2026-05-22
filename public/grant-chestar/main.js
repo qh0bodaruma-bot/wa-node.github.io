@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // 2. カレンダー登録モーダルの制御
   initCalendarModal();
+
+  // 3. シェアボタン（URLコピー）の制御
+  initShareCopy();
 });
 
 /**
@@ -169,5 +172,44 @@ function initCalendarModal() {
     
     // 登録完了後にモーダルを閉じる
     closeModal();
+  });
+}
+
+/**
+ * シェアボタン（URLコピー）の制御
+ */
+function initShareCopy() {
+  const copyBtn = document.getElementById('btn-share-copy');
+  const copyText = document.getElementById('copy-btn-text');
+  if (!copyBtn || !copyText) return;
+
+  copyBtn.addEventListener('click', async () => {
+    const url = 'https://www.wa-node.com/grant-chestar/';
+    try {
+      await navigator.clipboard.writeText(url);
+      // コピー成功フィードバック
+      copyText.textContent = 'コピーしました！';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyText.textContent = 'URLをコピー';
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    } catch {
+      // フォールバック（古いブラウザ向け）
+      const textarea = document.createElement('textarea');
+      textarea.value = url;
+      textarea.style.position = 'fixed';
+      textarea.style.opacity = '0';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      copyText.textContent = 'コピーしました！';
+      copyBtn.classList.add('copied');
+      setTimeout(() => {
+        copyText.textContent = 'URLをコピー';
+        copyBtn.classList.remove('copied');
+      }, 2000);
+    }
   });
 }

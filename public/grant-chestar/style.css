@@ -535,7 +535,97 @@ body {
   margin-bottom: 0;
 }
 
+/* ===== シェアセクション ===== */
+.share-lead {
+  font-size: 0.88rem;
+  text-align: center;
+  color: rgba(243, 244, 246, 0.65);
+  margin-bottom: 20px;
+  letter-spacing: 0.05em;
+}
+
+.share-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.share-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  flex: 1;
+  padding: 14px 8px;
+  border-radius: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  font-family: inherit;
+  transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1),
+              box-shadow 0.25s ease,
+              filter 0.25s ease;
+}
+
+.share-btn:hover {
+  transform: translateY(-4px);
+}
+
+.share-btn:active {
+  transform: translateY(-1px);
+}
+
+.share-icon {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+/* LINE */
+.share-btn-line {
+  background: #06C755;
+  color: #fff;
+  border-color: rgba(255,255,255,0.1);
+}
+.share-btn-line:hover {
+  box-shadow: 0 8px 22px rgba(6, 199, 85, 0.4);
+  filter: brightness(1.1);
+}
+
+/* X */
+.share-btn-x {
+  background: #000;
+  color: #fff;
+  border-color: rgba(255,255,255,0.15);
+}
+.share-btn-x:hover {
+  box-shadow: 0 8px 22px rgba(255, 255, 255, 0.15);
+  filter: brightness(1.25);
+}
+
+/* コピー */
+.share-btn-copy {
+  background: rgba(212, 175, 55, 0.1);
+  color: #fef08a;
+  border-color: rgba(212, 175, 55, 0.35);
+}
+.share-btn-copy:hover {
+  background: rgba(212, 175, 55, 0.2);
+  border-color: rgba(212, 175, 55, 0.65);
+  box-shadow: 0 8px 22px rgba(212, 175, 55, 0.2);
+}
+.share-btn-copy.copied {
+  background: rgba(30, 126, 94, 0.25);
+  color: #6ee7b7;
+  border-color: rgba(52, 211, 153, 0.5);
+}
+
 /* お問い合わせセクション */
+
 .contact-lead {
   font-size: 0.9rem;
   text-align: center;
