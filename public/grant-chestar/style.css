@@ -53,29 +53,60 @@ body {
   z-index: 1;
 }
 
-.particle {
+/* パーティクルラッパー（落下を担当） */
+.particle-wrapper {
   position: absolute;
-  background: radial-gradient(circle, rgba(253, 224, 71, 0.8) 0%, rgba(250, 204, 21, 0) 70%);
-  border-radius: 50%;
   pointer-events: none;
-  animation: floatUp linear infinite;
-  opacity: 0;
+  z-index: 1;
+  animation: fall linear forwards;
 }
 
-@keyframes floatUp {
+/* パーティクルインナー（明滅と形状を担当） */
+.particle-inner {
+  width: 100%;
+  height: 100%;
+  animation: twinkle 1.5s ease-in-out infinite alternate;
+}
+
+/* 丸型（ドット） */
+.particle-inner.dot {
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(254, 240, 138, 0.9) 0%, rgba(250, 204, 21, 0) 70%);
+}
+
+/* 星型（きらめき） */
+.particle-inner.star {
+  background: linear-gradient(135deg, #ffffff 0%, #fef08a 40%, #ca8a04 100%);
+  clip-path: polygon(50% 0%, 61% 39%, 100% 50%, 61% 61%, 50% 100%, 39% 61%, 0% 50%, 39% 39%);
+  filter: drop-shadow(0 0 4px rgba(254, 240, 138, 0.8));
+}
+
+@keyframes fall {
   0% {
-    transform: translateY(100vh) scale(0.3);
+    transform: translateY(-25px) rotate(0deg) translateX(0);
     opacity: 0;
   }
   10% {
-    opacity: 0.8;
+    opacity: var(--max-opacity, 0.9);
   }
   90% {
-    opacity: 0.8;
+    opacity: var(--max-opacity, 0.9);
   }
   100% {
-    transform: translateY(-10vh) scale(1.2);
+    transform: translateY(105vh) rotate(var(--target-rotate, 360deg)) translateX(var(--drift-x, 20px));
     opacity: 0;
+  }
+}
+
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+    filter: brightness(1.3) drop-shadow(0 0 6px rgba(254, 240, 138, 0.9));
   }
 }
 
@@ -85,7 +116,9 @@ body {
   width: 100%;
   max-width: 480px; /* スマホ・パンフレットサイズ */
   min-height: 100vh;
-  background-image: linear-gradient(to bottom, rgba(6, 11, 25, 0.85), rgba(6, 11, 25, 0.95)), url('background.png');
+  background-image: 
+    linear-gradient(to bottom, rgba(254, 240, 138, 0.08) 0%, rgba(6, 11, 25, 0.9) 30%, rgba(6, 11, 25, 0.97) 100%), 
+    url('background.png');
   background-size: cover;
   background-position: center;
   background-attachment: scroll;
@@ -103,11 +136,12 @@ body {
 /* 輝く月明かりのエフェクト */
 .moon-glow {
   position: absolute;
-  top: -100px;
-  right: -50px;
-  width: 250px;
-  height: 250px;
-  background: radial-gradient(circle, rgba(253, 224, 71, 0.15) 0%, rgba(253, 224, 71, 0) 70%);
+  top: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 450px;
+  height: 350px;
+  background: radial-gradient(ellipse at center, rgba(253, 224, 71, 0.25) 0%, rgba(253, 224, 71, 0.08) 40%, rgba(253, 224, 71, 0) 70%);
   pointer-events: none;
   z-index: 1;
 }
@@ -142,7 +176,7 @@ body {
   background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #ca8a04 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(214, 175, 55, 0.25);
+  text-shadow: 0 0 20px rgba(254, 240, 138, 0.6), 0 0 40px rgba(212, 175, 55, 0.3);
 }
 
 .title-middle {
@@ -151,7 +185,7 @@ body {
   background: linear-gradient(135deg, #fef08a 0%, #d4af37 50%, #ca8a04 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(214, 175, 55, 0.25);
+  text-shadow: 0 0 20px rgba(254, 240, 138, 0.6), 0 0 40px rgba(212, 175, 55, 0.3);
   margin-top: -2px;
 }
 
@@ -180,7 +214,7 @@ body {
   font-size: 1.2rem;
   letter-spacing: 0.15em;
   color: #fef08a;
-  text-shadow: 0 0 12px rgba(254, 240, 138, 0.4);
+  text-shadow: 0 0 15px rgba(254, 240, 138, 0.7), 0 0 30px rgba(212, 175, 55, 0.4);
   margin-bottom: 36px;
   font-weight: 600;
 }

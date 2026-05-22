@@ -11,47 +11,70 @@ function initParticles() {
   const container = document.getElementById('particle-container');
   if (!container) return;
 
-  const maxParticles = 30; // パフォーマンス考慮し最大30個に制限
+  const maxParticles = 45; // 華やかにするために最大45個に増加
   let particleCount = 0;
 
   const createParticle = () => {
     if (particleCount >= maxParticles) return;
 
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
+    const wrapper = document.createElement('div');
+    wrapper.classList.add('particle-wrapper');
+
+    const inner = document.createElement('div');
+    inner.classList.add('particle-inner');
+
+    // 星型か丸型かをランダムで決定
+    const isStar = Math.random() > 0.4; // 60%が星型
+    if (isStar) {
+      inner.classList.add('star');
+    } else {
+      inner.classList.add('dot');
+    }
 
     // ランダムなパラメータ設定
-    const size = Math.random() * 8 + 3; // 3px 〜 11px
+    const size = isStar ? (Math.random() * 10 + 6) : (Math.random() * 6 + 3); // 星は6〜16px、ドットは3〜9px
     const left = Math.random() * 100; // 0% 〜 100%
-    const duration = Math.random() * 10 + 10; // 10秒 〜 20秒で上昇
+    const duration = Math.random() * 10 + 8; // 8秒 〜 18秒で落下
     const delay = Math.random() * 5; // 0秒 〜 5秒のディレイ
+    
+    // 左右の揺れと回転、透明度の設定
+    const driftX = Math.random() * 50 - 25; // -25px 〜 25px 左右に揺れる
+    const targetRotate = (Math.random() * 360 + 180) * (Math.random() > 0.5 ? 1 : -1); // 180〜540度回転
+    const maxOpacity = Math.random() * 0.35 + 0.65; // 0.65 〜 1.0
 
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-    particle.style.left = `${left}%`;
-    particle.style.bottom = `-20px`; // 画面下部から開始
-    particle.style.animationDuration = `${duration}s`;
-    particle.style.animationDelay = `${delay}s`;
+    // スタイル適用
+    wrapper.style.width = `${size}px`;
+    wrapper.style.height = `${size}px`;
+    wrapper.style.left = `${left}%`;
+    wrapper.style.top = `-20px`; // 画面上部から開始
+    wrapper.style.animationDuration = `${duration}s`;
+    wrapper.style.animationDelay = `${delay}s`;
+    
+    // カスタムプロパティ設定
+    wrapper.style.setProperty('--drift-x', `${driftX}px`);
+    wrapper.style.setProperty('--target-rotate', `${targetRotate}deg`);
+    wrapper.style.setProperty('--max-opacity', maxOpacity);
 
-    // 粒子がほんのり黄色〜オレンジに揺らぐようにする
-    const hue = 40 + Math.random() * 20; // 40(オレンジ寄り) 〜 60(黄色)
-    particle.style.background = `radial-gradient(circle, hsla(${hue}, 90%, 70%, 0.8) 0%, hsla(${hue}, 90%, 70%, 0) 70%)`;
+    // インナーにランダムな明滅（twinkle）のアニメーションディレイを適用
+    inner.style.animationDelay = `${Math.random() * 1.5}s`;
+    inner.style.animationDuration = `${Math.random() * 1.0 + 1.0}s`; // 1.0s 〜 2.0s で明滅
 
-    container.appendChild(particle);
+    wrapper.appendChild(inner);
+    container.appendChild(wrapper);
     particleCount++;
 
-    // アニメーションが終了したら削除してカウントを減らす
-    particle.addEventListener('animationend', () => {
-      particle.remove();
+    // アニメーションが終了したら削除
+    wrapper.addEventListener('animationend', () => {
+      wrapper.remove();
       particleCount--;
     });
   };
 
   // 初期粒子をいくつか生成
-  for (let i = 0; i < 15; i++) {
-    setTimeout(createParticle, Math.random() * 6000);
+  for (let i = 0; i < 20; i++) {
+    setTimeout(createParticle, Math.random() * 5000);
   }
 
   // ループで粒子を追加し続ける
-  setInterval(createParticle, 1000);
+  setInterval(createParticle, 800); // 発生頻度を少し上げる（1000ms -> 800ms）
 }
