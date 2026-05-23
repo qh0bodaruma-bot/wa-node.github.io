@@ -35,6 +35,15 @@ const f = {
     precheck_reassurance: "この3つが整理できていれば、初回相談では方向性・優先順位・概算費用まで話しやすくなります。",
     form_start_label: "ここから通常フォームです",
     form_start_desc: "お名前・連絡先・希望日時など、返信に必要な情報をご入力ください。",
+    consult_examples_title: "相談内容の例",
+    consult_examples_desc: "下のような短いメモで大丈夫です。まだ整理できていない場合も、そのまま書いてください。",
+    consult_examples: [
+      "既存HPを見直して、問い合わせにつながりやすくしたい",
+      "料金表・CTA・フォームのどこで迷われているか知りたい",
+      "AIやICTを使いたいが、何から始めるべきか相談したい"
+    ],
+    safety_note_title: "初回フォームに書かなくてよいこと",
+    safety_note_desc: "ログイン情報、顧客名簿、売上の詳細、病歴やメンタル面の詳しい内容などは入力しないでください。必要になった場合のみ、相談後に安全な共有方法を確認します。",
     label_issue: "今いちばん困っていること",
     label_takeaway: "無料相談で持ち帰りたいもの",
     precheck_placeholder: "近いものを選択してください",
@@ -122,6 +131,15 @@ const f = {
     precheck_reassurance: "Once these three points are clear, we can discuss direction, priorities, and rough costs more smoothly.",
     form_start_label: "Regular form starts here",
     form_start_desc: "Please enter the information needed for our reply, such as your name, contact details, and preferred dates.",
+    consult_examples_title: "Examples of what to write",
+    consult_examples_desc: "A short note like these is enough. If it is not organized yet, please write it as it is.",
+    consult_examples: [
+      "I want to improve my existing website so it leads to more inquiries",
+      "I want to know where people hesitate around pricing, CTAs, or forms",
+      "I want to use AI or ICT, but I am not sure where to start"
+    ],
+    safety_note_title: "What not to include in the first form",
+    safety_note_desc: "Please do not include login credentials, customer lists, detailed sales data, medical history, or sensitive mental-health details. If needed, we will confirm a safer sharing method after the consultation starts.",
     label_issue: "What is your biggest current challenge?",
     label_takeaway: "What would you like to take away from the free consultation?",
     precheck_placeholder: "Please choose the closest option",
@@ -209,6 +227,15 @@ const f = {
     precheck_reassurance: "Avec ces trois points clarifies, nous pourrons aborder plus facilement la direction, les priorites et le budget.",
     form_start_label: "Le formulaire principal commence ici",
     form_start_desc: "Veuillez saisir les informations nécessaires à notre réponse, comme votre nom, vos coordonnées et vos dates souhaitées.",
+    consult_examples_title: "Exemples de message",
+    consult_examples_desc: "Une courte note comme ci-dessous suffit. Si ce n'est pas encore organisé, écrivez simplement la situation telle quelle.",
+    consult_examples: [
+      "Je veux améliorer mon site actuel pour recevoir plus de demandes",
+      "Je veux savoir où les visiteurs hésitent: tarifs, CTA ou formulaire",
+      "Je veux utiliser l'IA ou les TIC, mais je ne sais pas par où commencer"
+    ],
+    safety_note_title: "Ce qu'il vaut mieux éviter dans le premier formulaire",
+    safety_note_desc: "N'indiquez pas d'identifiants, de listes clients, de données de vente détaillées, d'antécédents médicaux ou d'informations sensibles sur la santé mentale. Si nécessaire, nous confirmerons une méthode de partage plus sûre après le début de la consultation.",
     label_issue: "Quel est votre principal défi actuel ?",
     label_takeaway: "Que souhaitez-vous obtenir pendant la consultation gratuite ?",
     precheck_placeholder: "Choisissez l'option la plus proche",
@@ -367,6 +394,20 @@ const t = f[lang];
             <div class="form-start-divider">
               <span>{t.form_start_label}</span>
               <p>{t.form_start_desc}</p>
+            </div>
+
+            <div class="consultation-guide" aria-label={t.consult_examples_title}>
+              <div class="guide-section">
+                <strong>{t.consult_examples_title}</strong>
+                <p>{t.consult_examples_desc}</p>
+                <ul>
+                  {t.consult_examples.map((item) => <li>{item}</li>)}
+                </ul>
+              </div>
+              <div class="guide-section guide-section-safe">
+                <strong>{t.safety_note_title}</strong>
+                <p>{t.safety_note_desc}</p>
+              </div>
             </div>
             
             <div class="form-group">
@@ -649,6 +690,62 @@ const t = f[lang];
     font-size: 0.88rem;
     line-height: 1.6;
   }
+  .consultation-guide {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
+    gap: 24px;
+    margin: 0 0 30px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .guide-section {
+    min-width: 0;
+  }
+  .guide-section strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #2c2c2c;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem;
+    font-weight: 800;
+  }
+  .guide-section p {
+    margin: 0 0 12px;
+    color: #666;
+    font-size: 0.86rem;
+    line-height: 1.7;
+  }
+  .guide-section ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .guide-section li {
+    position: relative;
+    margin-bottom: 8px;
+    padding-left: 18px;
+    color: #445;
+    font-size: 0.86rem;
+    line-height: 1.6;
+  }
+  .guide-section li::before {
+    content: "";
+    position: absolute;
+    top: 0.72em;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--accent);
+  }
+  .guide-section-safe {
+    padding-left: 24px;
+    border-left: 1px solid var(--trust-line);
+  }
+  .guide-section-safe strong {
+    color: var(--trust);
+  }
   .form-group { margin-bottom: 30px; }
   .form-group label { display: block; font-weight: 800; font-size: 0.9rem; margin-bottom: 10px; color: #2c2c2c; }
   .required { color: var(--accent-red); font-size: 0.7rem; margin-left: 5px; }
@@ -709,6 +806,13 @@ const t = f[lang];
       left: 16px;
     }
     .form-start-divider { text-align: left; }
+    .consultation-guide { grid-template-columns: 1fr; gap: 20px; }
+    .guide-section-safe {
+      padding-left: 0;
+      padding-top: 20px;
+      border-left: 0;
+      border-top: 1px solid var(--trust-line);
+    }
     .contact-header { overflow-x: hidden; }
     .contact-header .container {
       max-width: 390px;
