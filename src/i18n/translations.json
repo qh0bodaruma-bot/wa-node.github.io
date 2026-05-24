@@ -8,12 +8,12 @@
   },
   "hero": {
     "badge": { "ja": "月3名まで丁寧に対応", "en": "Max 3 Clients / Month", "fr": "Max 3 Clients / Mois" },
-    "tagline": { "ja": "心理学 × ICT × 計測改善で、相談につながるWebへ。", "en": "Psychology, ICT, and measurable improvement for websites that lead to inquiries.", "fr": "Psychologie, TIC et amélioration mesurable pour transformer le web en demandes." },
+    "tagline": { "ja": "行動心理に基づく設計 × ICT × 計測改善で、相談しやすいWebへ。", "en": "Psychology, ICT, and measurable improvement for websites that lead to inquiries.", "fr": "Psychologie, TIC et amélioration mesurable pour transformer le web en demandes." },
     "title_part1": { "ja": "「選ばれる」には、", "en": "There is a ", "fr": "Il y a une " },
     "title_highlight": { "ja": "心理学", "en": "Psychological Reason", "fr": "Raison Psychologique" },
     "title_part2": { "ja": "的な根拠がある。", "en": " to be Chosen.", "fr": " d'être Choisi." },
     "lead": {
-      "ja": "和-Nodeは、心理学の知見を活かしたホームページ制作・LP制作・Web改善の専門窓口です。伝わる情報設計、相談しやすい導線、GA4やヒートマップを使った計測改善まで、公開後の成果を見据えて整えます。",
+      "ja": "和-Nodeは、行動心理学の知見を応用し、訪問者の不安や迷いを減らすホームページ制作・LP制作の専門窓口です。分かりやすい情報設計、押し付け感のない導線、GA4を使った客観的なデータ検証まで、長く成果に繋がるWeb環境を整えます。",
       "en": "Wa-Node blends behavioral psychology and statistical insights with web design to prevent bounces. Serving as your business co-pilot, we support decisions and execution from LP/website production to AI/ICT integration.",
       "fr": "Wa-Node applique la psychologie comportementale et les analyses statistiques à la conception web. En tant que co-pilote d'affaires, nous soutenons vos décisions de la création de LP/sites internet à l'intégration de l'IA/TIC."
     },

@@ -101,7 +101,7 @@ const f = {
     date_desc: "※平日の10:00〜18:00が基本ですが、夜間や土日も調整可能です。ご希望があればご記入ください。",
     label_message: "ご相談内容（現在の状況・相談したいこと）",
     placeholder_message: "現在の状況や、具体的に相談したいこと（解決したい課題など）をご記入ください。",
-    consent_note: "送信前に、<a href='/terms/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>利用規約</a>、<a href='/privacy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>プライバシーポリシー</a>、および<a href='/cancel-policy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>キャンセルポリシー</a>、<a href='/counseling-notes/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>カウンセリング注意事項</a>をご確認ください。送信内容は、当サイト内では保存せず、外部フォームサービスの仕様に基づきメール転送されます。取得した情報は、お問い合わせ対応の目的に限って利用します。",
+    consent_note: "送信前に、<a href='/terms/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>利用規約</a>、<a href='/privacy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>プライバシーポリシー</a>、および<a href='/cancel-policy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>キャンセルポリシー</a>、<a href='/counseling-notes/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>カウンセリング注意事項</a>をご確認ください。<strong>なお、送信後に強引な営業や売り込みは一切行いませんのでご安心ください。</strong>送信内容は、当サイト内では保存せず、外部フォームサービスの仕様に基づきメール転送されます。取得した情報は、お問い合わせ対応の目的に限って利用します。",
     consent_checkbox: "各規約および注意事項に同意します",
     btn_submit: "この内容で送信する"
   },
@@ -348,6 +348,17 @@ const t = f[lang];
           <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off" data-lang={lang}>
             <input type="hidden" name="_next" value={lang === 'ja' ? 'https://www.wa-node.com/thanks/' : `https://www.wa-node.com/${lang}/thanks/`} />
 
+            <!-- Dynamic Benefit Badge -->
+            <div id="benefit-badge-container" style="display: none; margin-bottom: 24px;">
+              <div class="benefit-dynamic-badge">
+                <span class="badge-icon">🎁</span>
+                <div class="badge-content">
+                  <strong id="benefit-badge-title">特典が適用されています</strong>
+                  <p id="benefit-badge-desc">初回無料相談の時間を60分（30分拡大）に設定し、優先的に日程調整いたします。</p>
+                </div>
+              </div>
+            </div>
+
             <section class="precheck-card" aria-labelledby="precheck-title">
               <div class="precheck-header">
                 <span>{t.precheck_badge}</span>
@@ -513,6 +524,46 @@ const t = f[lang];
     --trust-green: #2f6f5e;
     --line: rgba(197, 160, 89, 0.2);
     --trust-line: rgba(15, 76, 92, 0.18);
+  }
+
+  /* Benefit Dynamic Badge Style */
+  .benefit-dynamic-badge {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, rgba(209, 77, 58, 0.08), rgba(197, 160, 89, 0.08));
+    border: 2px solid var(--accent-red);
+    border-radius: 24px;
+    padding: 24px;
+    box-shadow: 0 10px 25px rgba(209, 77, 58, 0.08);
+    margin-bottom: 24px;
+    animation: pulse-border 3s infinite alternate;
+  }
+  .benefit-dynamic-badge .badge-icon {
+    font-size: 2.2rem;
+    flex-shrink: 0;
+  }
+  .benefit-dynamic-badge .badge-content {
+    flex: 1;
+    text-align: left;
+  }
+  .benefit-dynamic-badge strong {
+    display: block;
+    color: var(--accent-red);
+    font-size: 1.1rem;
+    font-weight: 800;
+    margin-bottom: 6px;
+    font-family: 'Shippori Mincho', serif !important;
+  }
+  .benefit-dynamic-badge p {
+    margin: 0;
+    color: #444;
+    font-size: 0.88rem;
+    line-height: 1.6;
+  }
+  @keyframes pulse-border {
+    from { border-color: var(--accent-red); }
+    to { border-color: var(--accent); }
   }
 
   .premium-heading {
@@ -960,13 +1011,105 @@ const t = f[lang];
         });
       }
 
+      function checkBenefitParam() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const benefit = urlParams.get('benefit');
+        const container = document.getElementById('benefit-badge-container');
+        const titleEl = document.getElementById('benefit-badge-title');
+        const descEl = document.getElementById('benefit-badge-desc');
+        const form = document.querySelector('.contact-form');
+        const lang = form ? (form.getAttribute('data-lang') || 'ja') : 'ja';
+        
+        if (benefit && container && titleEl && descEl) {
+          const texts = {
+            seo60: {
+              ja: {
+                title: '【SEO/AEO診断完了特典】60分無料相談が適用されています',
+                desc: '診断完了ありがとうございます。初回無料相談の時間を60分（30分拡大）に設定し、診断結果に基づく具体的な改善アドバイスを提示いたします。'
+              },
+              en: {
+                title: '[SEO/AEO Diagnosis Benefit] 60-min Free Consultation Applied',
+                desc: 'Thank you for using the diagnosis tool. We have extended your free consultation to 60 minutes to provide concrete improvement advice based on your results.'
+              },
+              fr: {
+                title: '[Avantage Diagnostic SEO/AEO] Consultation Gratuite de 60 min Appliquée',
+                desc: 'Merci d\'avoir utilisé l\'outil de diagnostic. Nous avons prolongé votre consultation gratuite à 60 minutes pour vous fournir des conseils d\'amélioration concrets basés sur vos résultats.'
+              }
+            },
+            sim60: {
+              ja: {
+                title: '【料金試算完了特典】60分無料相談が適用されています',
+                desc: 'シミュレーターのご利用ありがとうございます。初回無料相談の時間を60分（30分拡大）に設定し、概算に基づいた最適なプラン構築をアドバイスいたします。'
+              },
+              en: {
+                title: '[Estimation Benefit] 60-min Free Consultation Applied',
+                desc: 'Thank you for using the simulator. We have extended your free consultation to 60 minutes to advise you on the best plan setup based on the estimation.'
+              },
+              fr: {
+                title: '[Avantage Estimation] Consultation Gratuite de 60 min Appliquée',
+                desc: 'Merci d\'avoir utilisé le simulateur. Nous avons prolongé votre consultation gratuite à 60 minutes pour vous conseiller sur la meilleure configuration de plan basée sur l\'estimation.'
+              }
+            },
+            dx60: {
+              ja: {
+                title: '【DX×メンタル診断完了特典】60分無料相談が適用されています',
+                desc: '診断のご利用ありがとうございます。初回無料相談の時間を60分（30分拡大）に設定し、心と技術のボトルネックを整理した具体的なDX改善アプローチをアドバイスいたします。'
+              },
+              en: {
+                title: '[DX & Mental Diagnosis Benefit] 60-min Free Consultation Applied',
+                desc: 'Thank you for taking the diagnosis. We have extended your free consultation to 60 minutes to advise on concrete DX improvements by resolving both mind and technology bottlenecks.'
+              },
+              fr: {
+                title: '[Avantage Diagnostic DX & Mental] Consultation Gratuite de 60 min Appliquée',
+                desc: 'Merci d\'avoir fait le diagnostic. Nous avons prolongé votre consultation gratuite à 60 minutes pour vous conseiller sur des améliorations DX concrètes en résolvant les goulots d\'étranglement mentaux et techniques.'
+              }
+            },
+            demo60: {
+              ja: {
+                title: '【デモ体験特典】60分無料相談が適用されています',
+                desc: 'Before/Afterデモのご体験ありがとうございます。初回無料相談の時間を60分（30分拡大）に設定し、あなたのLPやHPの「選ばれる導線設計」について具体的なアドバイスを提示いたします。'
+              },
+              en: {
+                title: '[Demo Experience Benefit] 60-min Free Consultation Applied',
+                desc: 'Thank you for experiencing our Before/After demo. We have extended your free consultation to 60 minutes to provide concrete advice on your LP or website\'s high-converting funnel design.'
+              },
+              fr: {
+                title: '[Avantage Démo] Consultation Gratuite de 60 min Appliquée',
+                desc: 'Merci d\'avoir testé notre démo Before/After. Nous avons prolongé votre consultation gratuite à 60 minutes pour vous fournir des conseils concrets sur la conception d\'entonnoirs de conversion pour votre LP ou site.'
+              }
+            }
+          };
+
+          const selected = texts[benefit];
+          if (selected) {
+            const translation = selected[lang] || selected['ja'];
+            titleEl.textContent = translation.title;
+            descEl.textContent = translation.desc;
+            container.style.display = 'block';
+          }
+          
+          // 希望日時欄の補足メッセージも更新
+          const dateDesc = document.querySelector('.date-candidates .field-desc');
+          if (dateDesc && !dateDesc.querySelector('.benefit-applied-text')) {
+            const dateNotice = {
+              ja: '🎁 特典適用中：通常30分のところ、面談時間を60分（30分拡大）として優先調整いたします。',
+              en: '🎁 Benefit Applied: We will prioritize scheduling a 60-minute session (extended by 30 mins) instead of the regular 30 minutes.',
+              fr: '🎁 Avantage Appliqué: Nous planifierons en priorité une session de 60 minutes (prolongée de 30 min) au lieu des 30 minutes habituelles.'
+            };
+            dateDesc.innerHTML = `<strong class="benefit-applied-text" style="color: var(--accent-red); display: block; margin-bottom: 6px;">${dateNotice[lang] || dateNotice['ja']}</strong>` + dateDesc.innerHTML;
+          }
+        }
+      }
+
       // 初回ロード時
       initDynamicContactField();
       initContactForm();
+      checkBenefitParam();
       // Astroのトランジション（画面遷移時）対応
       document.addEventListener('astro:page-load', function() {
         initDynamicContactField();
         initContactForm();
+        checkBenefitParam();
       });
     })();
   </script>
