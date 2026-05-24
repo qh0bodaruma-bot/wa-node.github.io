@@ -176,7 +176,7 @@ const trustSignals = {
   </section>
 
   <!-- 3. Experience (Psychology & AI) -->
-  <section class="section" id="experience" style="background: var(--soft);">
+  <section class="section" id="experience" style="background: var(--paper);">
     <div class="section-inner">
       <div class="section-title" style="text-align: center;">
         <span class="eyebrow">{t.experience.eyebrow[lang]}</span>
@@ -206,7 +206,7 @@ const trustSignals = {
   </section>
 
   <!-- 5. Visual Proof (Offer) -->
-  <section class="section visual-proof" style="background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
+  <section class="section visual-proof" style="background: var(--surface); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
     <div class="section-inner" style="max-width: 800px; text-align: center;">
       <span class="eyebrow" style="color: var(--accent2);">{t.proof.eyebrow[lang]}</span>
       <h2>{t.proof.title[lang]}</h2>
@@ -259,14 +259,27 @@ const trustSignals = {
     --text: #333;
     --text-deep: #1a1a1a;
     --muted: #666;
-    --line: rgba(197, 160, 89, 0.2);
-    --soft: #fdfaf5;
+    --line: rgba(197, 160, 89, 0.18);
+    --soft: #f3eadf;
     --white: #ffffff;
-    --paper: #fdfcf9;
+    --paper: #f6efe5;
+    --surface: #fffdf8;
+    --surface-strong: #fffaf2;
+    --surface-cool: #f4fbfa;
+    --card-border: rgba(15, 76, 92, 0.14);
+    --card-border-warm: rgba(197, 160, 89, 0.24);
+    --card-shadow: 0 16px 38px rgba(15, 76, 92, 0.075), 0 4px 14px rgba(70, 52, 32, 0.045);
+    --card-shadow-hover: 0 24px 52px rgba(15, 76, 92, 0.12), 0 8px 20px rgba(70, 52, 32, 0.07);
     --radius: 24px;
   }
 
-  body { font-family: 'Shippori Mincho', serif; color: var(--text); line-height: 1.8; background: var(--paper); }
+  body {
+    font-family: 'Shippori Mincho', serif;
+    color: var(--text);
+    line-height: 1.8;
+    background:
+      linear-gradient(180deg, #fbf7ef 0%, var(--paper) 48%, #f2e8dc 100%);
+  }
   .section { padding: 80px 0; }
   .section-inner { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
@@ -329,8 +342,9 @@ const trustSignals = {
   }
 
   .trust-strip {
-    background: var(--white);
+    background: linear-gradient(90deg, var(--surface) 0%, var(--surface-cool) 100%);
     border-bottom: 1px solid var(--trust-line);
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.72);
   }
   .trust-strip-inner {
     display: grid;
@@ -361,16 +375,27 @@ const trustSignals = {
   }
 
   /* Agitation / Hook Section */
-  .why-psy { background: var(--white); border-bottom: 1px solid var(--line); }
+  .why-psy { background: var(--paper); border-bottom: 1px solid var(--line); }
   .why-psy-inner { max-width: 900px; margin: 0 auto; padding: 0 20px; }
   .question-box { text-align: center; margin-bottom: 48px; }
   .q-eyebrow { font-size: 0.9rem; color: var(--accent2); font-weight: 800; letter-spacing: 0.1em; display: block; margin-bottom: 12px; }
   .q-lead { font-size: 1.2rem; color: var(--text-deep); margin-top: 16px; font-weight: 700; }
   
   .concept-intro-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
-  .concept-intro-card { background: var(--paper); padding: 40px; border-radius: var(--radius); border: 1px solid var(--line); transition: 0.3s; }
-  .concept-intro-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-  .concept-intro-card.highlight-card { background: var(--soft); border-color: var(--accent); box-shadow: 0 15px 30px rgba(197, 160, 89, 0.08); }
+  .concept-intro-card {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
+    padding: 40px;
+    border-radius: var(--radius);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    transition: 0.3s;
+  }
+  .concept-intro-card:hover { transform: translateY(-5px); border-color: var(--trust-line); box-shadow: var(--card-shadow-hover); }
+  .concept-intro-card.highlight-card {
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.07), rgba(209, 77, 58, 0.035)), var(--surface);
+    border-color: var(--card-border-warm);
+    box-shadow: var(--card-shadow);
+  }
   .card-num { font-size: 2.2rem; margin-bottom: 16px; }
 
   /* Profile Summary Section */
@@ -391,9 +416,19 @@ const trustSignals = {
     margin: 40px auto 0;
     max-width: 960px;
   }
-  .consult-card { background: var(--white); padding: 40px; border-radius: var(--radius); border: 1px solid var(--line); transition: 0.3s; }
-  .consult-card:hover { transform: translateY(-5px); border-color: var(--trust-mid); }
-  .consult-card.highlight { background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(197, 160, 89, 0.06)), var(--white); border-color: var(--trust-line); }
+  .consult-card {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
+    padding: 40px;
+    border-radius: var(--radius);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--card-shadow);
+    transition: 0.3s;
+  }
+  .consult-card:hover { transform: translateY(-5px); border-color: var(--trust-mid); box-shadow: var(--card-shadow-hover); }
+  .consult-card.highlight {
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.08), rgba(209, 77, 58, 0.035)), var(--surface);
+    border-color: rgba(15, 76, 92, 0.24);
+  }
   .card-tag { font-size: 0.75rem; font-weight: 800; color: var(--trust); letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
   .service-fit {
     display: inline-block;
@@ -413,8 +448,18 @@ const trustSignals = {
 
   /* Experience Grid */
   .action-buttons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
-  .action-card { background: #fff; border: 1px solid var(--line); border-radius: 20px; padding: 30px 20px; text-decoration: none; text-align: center; transition: 0.3s; color: inherit; }
-  .action-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+  .action-card {
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 30px 20px;
+    text-decoration: none;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    transition: 0.3s;
+    color: inherit;
+  }
+  .action-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--card-shadow-hover); }
   .action-card.highlight-border { border: 2px solid var(--accent); }
   .action-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
 

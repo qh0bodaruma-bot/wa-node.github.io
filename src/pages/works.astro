@@ -290,8 +290,14 @@ const structuredData = [
       --trust: #0f4c5c;
       --trust-mid: #1f6f78;
       --trust-line: rgba(15, 76, 92, 0.18);
-      --glass: rgba(255, 255, 255, 0.85);
-      --glass-border: rgba(197, 160, 89, 0.2);
+      --glass: rgba(255, 253, 248, 0.9);
+      --glass-border: rgba(15, 76, 92, 0.14);
+      --base: #f6efe5;
+      --surface: #fffdf8;
+      --surface-strong: #fffaf2;
+      --surface-cool: #f4fbfa;
+      --card-shadow: 0 16px 38px rgba(15, 76, 92, 0.075), 0 4px 14px rgba(70, 52, 32, 0.045);
+      --card-shadow-hover: 0 24px 52px rgba(15, 76, 92, 0.12), 0 8px 20px rgba(70, 52, 32, 0.07);
       --tag-works: #2c7c5e;
       --tag-sample: #c5a059;
       --tag-demo: #2c5e7c;
@@ -307,7 +313,9 @@ const structuredData = [
     /* Background Decoration */
     .bg-decoration {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      z-index: -1; background: #fdfcf9; overflow: hidden;
+      z-index: -1;
+      background: linear-gradient(180deg, #fbf7ef 0%, var(--base) 48%, #f2e8dc 100%);
+      overflow: hidden;
     }
     .bg-decoration::after {
       content: ""; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -334,7 +342,7 @@ const structuredData = [
     
     .works-anniversary-banner { margin-bottom: 40px; }
     .works-anniversary-banner a {
-      display: block; background: #fff; border: 1px solid var(--accent-red);
+      display: block; background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%); border: 1px solid var(--accent-red);
       border-radius: 20px; padding: 20px 30px; text-decoration: none;
       transition: 0.4s; box-shadow: 0 10px 30px rgba(209, 77, 58, 0.1);
     }
@@ -353,10 +361,10 @@ const structuredData = [
     .priority-works {
       margin-bottom: 60px;
       padding: 36px;
-      background: rgba(255, 255, 255, 0.75);
+      background: linear-gradient(135deg, rgba(255, 253, 248, 0.9), rgba(244, 251, 250, 0.74));
       border: 1px solid var(--glass-border);
       border-radius: 28px;
-      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.03);
+      box-shadow: var(--card-shadow);
     }
     .priority-copy {
       max-width: 720px;
@@ -385,21 +393,22 @@ const structuredData = [
       justify-content: space-between;
       gap: 12px;
       padding: 26px 22px;
-      background: #fff;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
       color: #333;
       text-decoration: none;
       transition: 0.3s;
+      box-shadow: 0 10px 26px rgba(15, 76, 92, 0.045);
     }
     .priority-card:hover {
       transform: translateY(-4px);
       border-color: var(--trust-mid);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.06);
+      box-shadow: var(--card-shadow-hover);
     }
     .priority-card.main {
       border: 2px solid var(--trust-line);
-      background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(197, 160, 89, 0.06)), #fff;
+      background: linear-gradient(135deg, rgba(15, 76, 92, 0.075), rgba(209, 77, 58, 0.035)), var(--surface);
     }
     .priority-card span {
       align-self: flex-start;
@@ -448,7 +457,7 @@ const structuredData = [
     /* Filter Nav */
     .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
     .filter-btn {
-      padding: 12px 28px; border-radius: 999px; background: #fff;
+      padding: 12px 28px; border-radius: 999px; background: var(--surface);
       border: 1px solid var(--glass-border); color: #666; font-weight: 800;
       cursor: pointer; transition: 0.3s;
     }
@@ -458,11 +467,11 @@ const structuredData = [
     .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
 
     .work-card {
-      background: #fff; border: 1px solid var(--glass-border); border-radius: 24px;
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%); border: 1px solid var(--glass-border); border-radius: 24px;
       overflow: hidden; display: flex; flex-direction: column;
-      transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.02);
+      transition: 0.4s; box-shadow: var(--card-shadow);
     }
-    .work-card:hover { transform: translateY(-10px); border-color: var(--trust-mid); }
+    .work-card:hover { transform: translateY(-10px); border-color: var(--trust-mid); box-shadow: var(--card-shadow-hover); }
 
     .card-visual-wrap { padding: 12px; }
     .card-visual { height: 160px; border-radius: 16px; overflow: hidden; position: relative; background: #f5f5f5; }
