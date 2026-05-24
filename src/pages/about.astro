@@ -1,11 +1,26 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+  personSchema,
+} from '../data/structuredData';
 
 const title = "和-Nodeについて（代表プロフィール・事業概要）｜和-Node";
 const description = "和-Node代表・高野紘純のプロフィール。IT実務20年の技術力に、心理カウンセラーの知見と車いすユーザーの視点を融合。Web制作と「ビジネスの副操縦士」（戦略的パートナー）としての継続支援を通じて、ビジネスの課題を根本から整えます。";
+const structuredData = [
+  organizationSchema,
+  personSchema,
+  createWebPageSchema({ name: title, description, path: "/about/", type: "AboutPage" }),
+  createBreadcrumbSchema([
+    { name: "ホーム", path: "/" },
+    { name: "和-Nodeについて", path: "/about/" },
+  ]),
+];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} structuredData={structuredData}>
   <main>
     <section class="section about-hero">
       <div class="section-inner">

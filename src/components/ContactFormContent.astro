@@ -26,6 +26,7 @@ const f = {
     line_title: "LINEでのご相談",
     line_desc: "「まずはチャットで軽く聞きたい」という方は、公式LINEもご利用いただけます。",
     line_btn: "LINEで相談する",
+    form_heading: "無料相談フォーム",
     form_intro_title: "今の状況を、そのまま教えてください。",
     form_intro_desc: "「まだ何も決まっていない」という状態でも大丈夫です。専門知識や難しいIT用語は一切不要ですので、あなたのペースで、一つずつ言葉にすることから始めましょう。私たちの「副操縦士」が優しく状況を整理します。",
     submit_flow_desc: "送信後、通常2営業日以内にご返信します。日程確定後、無料相談を行い、必要に応じて簡易メモ・概要案やお見積りをご提案します。正式な制作・月額支援は、内容と費用にご納得いただいた後に開始します。",
@@ -122,6 +123,7 @@ const f = {
     line_title: "Chat via LINE",
     line_desc: "If you prefer a quick and casual chat, feel free to contact us via our official LINE account.",
     line_btn: "Chat on LINE",
+    form_heading: "Free Consultation Form",
     form_intro_title: "Tell us about your current situation.",
     form_intro_desc: "It is completely fine if details are not decided yet. No technical background or IT jargon is required. Let's start by translating your thoughts step by step. Our 'Copilot' will gently guide and organize them with you.",
     submit_flow_desc: "Upon submission, we will reply within 2 business days. After fixing a slot, we will have a free consultation and propose a brief outline/estimate if needed. Formal design and support will start only after you agree to the plan and costs.",
@@ -218,6 +220,7 @@ const f = {
     line_title: "Discuter sur LINE",
     line_desc: "Pour une discussion simple et rapide, vous pouvez nous contacter sur notre compte LINE officiel.",
     line_btn: "Discuter sur LINE",
+    form_heading: "Formulaire de consultation gratuite",
     form_intro_title: "Décrivez votre situation actuelle.",
     form_intro_desc: "Aucun souci si tout n'est pas encore clair. Aucune connaissance technique ou jargon informatique n'est requis. Commençons par exprimer vos pensées pas à pas. Notre « Copilote » vous guidera pour organiser le tout avec bienveillance.",
     submit_flow_desc: "Après envoi, nous vous répondrons sous 2 jours ouvrables. Une fois le créneau fixé, nous aurons une consultation gratuite et proposerons un projet initial/devis si nécessaire. La création officielle commencera uniquement après votre accord.",
@@ -342,7 +345,8 @@ const t = f[lang];
       <section class="form-section">
         <div class="glass-panel">
           <div class="form-intro" style="margin-bottom: 30px; padding-bottom: 20px; border-bottom: 1px solid var(--line);">
-            <p style="font-weight: 800; color: var(--trust); margin-bottom: 8px;">{t.form_intro_title}</p>
+            <h2 class="form-section-title">{t.form_heading}</h2>
+            <p class="form-intro-title">{t.form_intro_title}</p>
             <p class="small" style="color: var(--muted); line-height: 1.6; margin-bottom: 0;">{t.form_intro_desc}</p>
           </div>
           <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off" data-lang={lang}>
@@ -627,6 +631,19 @@ const t = f[lang];
 
   /* Form Column */
   .glass-panel { background: #fff; border: 1px solid var(--line); border-radius: 40px; padding: 50px; box-shadow: 0 20px 50px rgba(0,0,0,0.02); }
+  .form-section-title {
+    margin: 0 0 10px;
+    color: var(--trust);
+    font-size: 1.35rem;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+  .form-intro-title {
+    margin: 0 0 8px;
+    color: #2c2c2c;
+    font-weight: 800;
+    line-height: 1.6;
+  }
   .precheck-card {
     position: relative;
     overflow: hidden;

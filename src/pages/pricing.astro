@@ -2,9 +2,63 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ConsultationFlow from '../components/ConsultationFlow.astro';
 import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
+import {
+  createBreadcrumbSchema,
+  createFAQSchema,
+  createServiceSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../data/structuredData';
+
+const title = "料金プラン・制作費用｜心理学を応用したWeb制作と「ビジネスの副操縦士」（戦略的パートナー）｜和-Node";
+const description = "和-Nodeの料金プラン。行動心理に基づくWeb制作・導線設計（LP・HP）、ビジネスの副操縦士（月額制戦略的パートナー）コンサルティング、および組織支援の費用をご案内します。";
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: "/pricing/" }),
+  createBreadcrumbSchema([
+    { name: "ホーム", path: "/" },
+    { name: "料金プラン・制作費用", path: "/pricing/" },
+  ]),
+  createServiceSchema({
+    name: "行動心理に基づくWeb制作・LP制作",
+    description:
+      "心理学の知見を活かし、信頼形成、CTA、フォーム、計測改善まで含めてWebサイトとLPを設計します。",
+    path: "/pricing/#web-production",
+    serviceType: "Web design and landing page production",
+    priceFrom: "64000",
+  }),
+  createServiceSchema({
+    name: "ビジネスの副操縦士（月額制戦略的パートナー）",
+    description:
+      "Web改善、AI・ICT活用、業務整理を月額で相談できる継続支援です。",
+    path: "/pricing/#copilot",
+    serviceType: "ICT consulting and business support",
+    priceFrom: "15000",
+  }),
+  createFAQSchema([
+    {
+      question: "相談だけで終わっても大丈夫ですか？",
+      answer: "大丈夫です。状況整理だけで十分な場合は、無理に制作や月額契約をおすすめしません。",
+    },
+    {
+      question: "まだ何を頼むか決まっていなくても相談できますか？",
+      answer:
+        "はい。Web制作、LP制作、AI・ICT活用、公開後の改善のうち、今どこから始めるべきか一緒に整理します。",
+    },
+    {
+      question: "相談後に契約を迫られることはありますか？",
+      answer: "ありません。必要な範囲・費用・進め方を確認し、ご納得いただいた場合のみ正式に開始します。",
+    },
+    {
+      question: "不安を煽る表現や、強く誘導する導線も作れますか？",
+      answer:
+        "和-Nodeでは、いわゆるダーク心理学や、不安・焦り・断りにくさを利用して行動を迫る設計は行いません。訪問者が安心して比較・相談・判断できる導線を設計します。",
+    },
+  ]),
+];
 ---
 
-<BaseLayout title="料金プラン・制作費用｜心理学を応用したWeb制作と「ビジネスの副操縦士」（戦略的パートナー）｜和-Node" description="和-Nodeの料金プラン。行動心理に基づくWeb制作・導線設計（LP・HP）、ビジネスの副操縦士（月額制戦略的パートナー）コンサルティング、および組織支援の費用をご案内します。">
+<BaseLayout title={title} description={description} structuredData={structuredData}>
   <main class="pricing-container">
     <section class="hero">
       <div class="hero-inner">
@@ -37,7 +91,7 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
           <h3>ホームページ・LPを作りたい</h3>
           <p class="choice-fit">まず信頼されるサイトを作りたい方へ</p>
           <p>選ばれる導線設計を取り入れたLP・HP制作を中心に、伝わる構成とデザインを整えます。</p>
-          <strong>48,000円〜</strong>
+          <strong>推奨 64,000円〜</strong>
         </a>
         <a class="choice-card" href="#copilot">
           <span class="choice-label">導線改善</span>
@@ -109,12 +163,12 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
           <div class="anchoring-row">
             <div class="type-name">選ばれる導線LP（推奨）</div>
             <div class="market-price">初期 15万〜50万円<br><span class="sub">保守：月額 1万〜3万円</span></div>
-            <div class="wa-price highlight">初期 48,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
+            <div class="wa-price highlight">初期 64,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
           </div>
           <div class="anchoring-row">
             <div class="type-name">選ばれる導線HP制作</div>
             <div class="market-price">初期 50万〜120万円<br><span class="sub">保守：月額 1.5万〜5万円</span></div>
-            <div class="wa-price">初期 96,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
+            <div class="wa-price">初期 144,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
           </div>
         </div>
 
@@ -152,13 +206,13 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
           <article class="recommended-price-card highlight-take">
             <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
             <h3>選ばれる導線HP制作</h3>
-            <p class="p-price">96,000円〜 <small>キャンペーン価格</small></p>
+            <p class="p-price">144,000円〜 <small>キャンペーン価格</small></p>
             <p>5ページ程度の標準的なホームページ。行動心理をふまえ、見込み客が迷わず安心して相談や購入に進むための盤石な情報設計を施します。</p>
           </article>
           <article class="recommended-price-card">
             <span class="price-badge-matsu">松プラン</span>
             <h3>HPパッケージ「Business 7」</h3>
-            <p class="p-price">120,000円〜 <small>キャンペーン価格</small></p>
+            <p class="p-price">192,000円〜 <small>キャンペーン価格</small></p>
             <p>7ページ構成の充実プラン。標準SEO、プレミアム仕上げ、複数のお問い合わせ動線を含む本格パッケージです。</p>
           </article>
         </div>
@@ -176,13 +230,13 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
           <article class="recommended-price-card highlight-take">
             <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
             <h3>選ばれる導線LP制作</h3>
-            <p class="p-price">48,000円〜 <small>キャンペーン価格</small></p>
+            <p class="p-price">64,000円〜 <small>キャンペーン価格</small></p>
             <p>行動心理をふまえ、ファーストビューから信頼形成、CTAまで一貫設計。費用対効果が最も高く、成果に直結する推奨プランです。</p>
           </article>
           <article class="recommended-price-card">
             <span class="price-badge-matsu">松プラン</span>
             <h3>プレミアム選ばれる導線LP</h3>
-            <p class="p-price">72,000円〜 <small>キャンペーン価格</small></p>
+            <p class="p-price">120,000円〜 <small>キャンペーン価格</small></p>
             <p>高品質な行動心理LPに加え、問い合わせ後のGASメール自動送信やLINE連携などの自動化システム構築をセットにした業務効率化パックです。</p>
           </article>
         </div>
@@ -197,9 +251,10 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
             <tbody>
               <tr><td>シンプルLP制作</td><td>30,000円〜</td><td class="price-campaign">24,000円〜</td><td>1ページの簡易的なランディングページ</td></tr>
               <tr><td>シンプルHP制作</td><td>50,000円〜</td><td class="price-campaign">40,000円〜</td><td>名刺代わりの小規模ホームページ（3〜5ページ）</td></tr>
-              <tr><td>選ばれる導線LP制作</td><td>60,000円〜</td><td class="price-campaign">48,000円〜</td><td>行動心理をふまえた高品質LP（構成案から作成）</td></tr>
-              <tr><td>選ばれる導線HP制作</td><td>120,000円〜</td><td class="price-campaign">96,000円〜</td><td>5ページ程度の標準的なホームページ</td></tr>
-              <tr><td>HPパッケージ「Business 7」</td><td>150,000円〜</td><td class="price-campaign">120,000円〜</td><td>7ページ構成・標準SEO・プレミアム仕上げ</td></tr>
+              <tr><td>選ばれる導線LP制作</td><td>80,000円〜</td><td class="price-campaign">64,000円〜</td><td>行動心理をふまえた高品質LP（構成案から作成）</td></tr>
+              <tr><td>プレミアム選ばれる導線LP</td><td>150,000円〜</td><td class="price-campaign">120,000円〜</td><td>高品質LPに、問い合わせ後のGASメール自動送信やLINE連携などの自動化を追加</td></tr>
+              <tr><td>選ばれる導線HP制作</td><td>180,000円〜</td><td class="price-campaign">144,000円〜</td><td>5ページ程度の標準的なホームページ</td></tr>
+              <tr><td>HPパッケージ「Business 7」</td><td>240,000円〜</td><td class="price-campaign">192,000円〜</td><td>7ページ構成・標準SEO・プレミアム仕上げ</td></tr>
               <tr><td>制作オプション</td><td>5,000円〜</td><td class="price-campaign">4,000円〜</td><td>図解作成、ブログ/CMS機能、診断ツール組み込み、CTA・色彩チェック、AI検索/AEO内部対策等</td></tr>
               <tr><td>Webサイト保守</td><td>月額 10,000円〜</td><td>-</td><td>安全な運用、セキュリティ管理、軽微な修正代行</td></tr>
             </tbody>
@@ -241,7 +296,7 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
               <tr><th>メニュー名</th><th>料金</th><th>内容</th></tr>
             </thead>
             <tbody>
-              <tr><td>ビジネスの副操縦士（スタンダード）</td><td>30,000円 / 月</td><td>月2回相談 + 改善提案 + 簡易マニュアル・プロンプト作成</td></tr>
+              <tr><td>ビジネスの副操縦士（スタンダード）</td><td>45,000円 / 月</td><td>月2回相談 + 改善提案 + 簡易マニュアル・プロンプト作成</td></tr>
               <tr><td>業務整理ミニ診断</td><td>15,000円</td><td>90分相談 + 改善メモ。何を自動化すべきか優先順位を整理</td></tr>
               <tr><td>Web/LP改善診断</td><td>15,000円〜</td><td>CTA、料金表、フォーム、ファーストビューを心理学とUXの両面から確認し、改善優先度を整理</td></tr>
               <tr><td>AI検索・AEO内部対策</td><td>15,000円〜</td><td>ChatGPT等のAI検索やGoogle AI Overviewsに拾われやすい見出し、FAQ、構造化データ、要約設計を確認</td></tr>
@@ -276,8 +331,8 @@ import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
               </tr>
               <tr>
                 <td>経営者・リーダーの相談整理</td>
-                <td>5,000円 / 60分</td>
-                <td>意思決定やチーム運用のための壁打ち・状況整理。初回30分無料。</td>
+                <td>初回 5,000円 / 60分<br />通常 10,000円 / 60分</td>
+                <td>意思決定やチーム運用のための壁打ち・状況整理。初回は試しやすい価格でご相談いただけます。</td>
               </tr>
             </tbody>
           </table>

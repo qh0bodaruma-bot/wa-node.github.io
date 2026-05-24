@@ -1,9 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ConsultationFlow from '../components/ConsultationFlow.astro';
+import {
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../data/structuredData';
+
+const title = "制作例・デモ｜行動心理に基づくWeb制作・LP制作サンプル｜和-Node";
+const description = "行動心理に基づくWeb制作、LP制作サンプル、AI相談ナビ、各種診断ツール、KDP出版など、和-Nodeの制作例とインタラクティブなデモを紹介します。";
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: "/works/", type: "CollectionPage" }),
+  createBreadcrumbSchema([
+    { name: "ホーム", path: "/" },
+    { name: "制作例・デモ", path: "/works/" },
+  ]),
+];
 ---
 
-<BaseLayout title="制作例・デモ｜行動心理に基づくWeb制作・LP制作サンプル｜和-Node" description="行動心理に基づくWeb制作、LP制作サンプル、AI相談ナビ、各種診断ツール、KDP出版など、和-Nodeの制作例とインタラクティブなデモを紹介します。">
+<BaseLayout title={title} description={description} structuredData={structuredData}>
   <!-- Background -->
   <div class="bg-decoration">
     <div class="glow glow-1"></div>

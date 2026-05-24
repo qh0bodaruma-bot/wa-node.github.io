@@ -13,6 +13,7 @@ interface Props {
   url?: string;
   lang?: 'ja' | 'en' | 'fr';
   noindex?: boolean;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
 const { 
@@ -21,8 +22,15 @@ const {
   image = "/images/ogp-service.png",
   url = Astro.url.href,
   lang = 'ja',
-  noindex = false
+  noindex = false,
+  structuredData
 } = Astro.props;
+
+const structuredDataItems = structuredData
+  ? Array.isArray(structuredData)
+    ? structuredData
+    : [structuredData]
+  : [];
 
 const urlLang = Astro.url.searchParams.get('lang');
 const currentLang = urlLang === 'en' || urlLang === 'fr' ? urlLang : lang;
@@ -77,6 +85,9 @@ const getLocalizedHref = (l: string) => {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;800&display=swap" rel="stylesheet" />
+    {structuredDataItems.map((item) => (
+      <script type="application/ld+json" set:html={JSON.stringify(item)} />
+    ))}
     <GoogleAnalytics />
     <ViewTransitions />
     <script is:inline>

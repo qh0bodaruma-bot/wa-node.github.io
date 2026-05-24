@@ -1,9 +1,25 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ConsultationFlow from '../components/ConsultationFlow.astro';
+import {
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../data/structuredData';
+
+const title = "LP制作サンプルギャラリー｜和-Node";
+const description = "和-Nodeが業種別に用意した全13種類のランディングページ（LP）制作サンプルです。心理学に基づいた導線設計と、最新技術を駆使したプレミアムなデザイン。";
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: "/lp-portfolio/", type: "CollectionPage" }),
+  createBreadcrumbSchema([
+    { name: "ホーム", path: "/" },
+    { name: "LP制作サンプルギャラリー", path: "/lp-portfolio/" },
+  ]),
+];
 ---
 
-<BaseLayout title="LP制作サンプルギャラリー｜和-Node" description="和-Nodeが業種別に用意した全13種類のランディングページ（LP）制作サンプルです。心理学に基づいた導線設計と、最新技術を駆使したプレミアムなデザイン。">
+<BaseLayout title={title} description={description} structuredData={structuredData}>
   <!-- Background Decor -->
   <div class="bg-decoration">
     <div class="glow glow-1"></div>
@@ -20,8 +36,8 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
           「2.4万円〜」という価格の常識を覆す、和-Nodeならではのデザインと戦略性。<br />
           医療、美容、IT、不動産、教育など、多岐にわたる全13種類の制作サンプルをご覧ください。
         </p>
-        <p style="text-align: center; color: #666; font-size: 0.9rem; margin-top: 20px;">
-          ※本ギャラリーの掲載内容は、提案用サンプルおよび自主制作デモです。各職種の「最適解」を視覚化したものです。
+        <p class="sample-disclaimer">
+          ※掲載LPはすべて架空の業種・商品・団体を題材にした自主制作サンプルです。実在の実績・企業・成果を示すものではなく、業種別の表現例としてご覧ください。
         </p>
       </div>
     </header>
@@ -262,6 +278,19 @@ import ConsultationFlow from '../components/ConsultationFlow.astro';
   .page-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 24px; color: #333; }
   .accent-text { color: #639922; position: relative; }
   .page-desc { font-size: 1.1rem; color: #666; line-height: 1.8; max-width: 800px; margin: 0 auto; }
+  .sample-disclaimer {
+    max-width: 780px;
+    margin: 22px auto 0;
+    padding: 14px 18px;
+    border: 1px solid var(--trust-line);
+    border-radius: 16px;
+    background: rgba(15, 76, 92, 0.06);
+    color: var(--trust);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.8;
+    text-align: left;
+  }
 
   .lp-choice-guide {
     margin-bottom: 56px;
