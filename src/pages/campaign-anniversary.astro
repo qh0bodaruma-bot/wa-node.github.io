@@ -109,19 +109,28 @@ const jsonLd = {
         </div>
         <div class="plan-grid">
           <div class="plan-card featured reveal">
-            <div class="p-featured-badge">主軸プラン</div>
+            <div class="plan-meta-row">
+              <span class="plan-card-code">PLAN A</span>
+              <span class="p-featured-badge">主軸プラン</span>
+            </div>
             <div class="p-header"><h3>選ばれる導線LP制作案</h3></div>
             <p class="p-target">「まずはWeb・LPの反応を整えたい」方に</p>
             <div class="p-price"><span class="p-old">80,000円</span><span class="p-new">64,000<small>円</small></span></div>
             <a href="/anniversary-speed/" class="btn-primary-gold">プラン詳細を見る</a>
           </div>
           <div class="plan-card reveal">
+            <div class="plan-meta-row">
+              <span class="plan-card-code">PLAN B</span>
+            </div>
             <div class="p-header"><h3>ICT・自動化フル強化案</h3></div>
             <p class="p-target">「問い合わせ対応や業務導線も整えたい」方に</p>
             <div class="p-price"><span class="p-old">165,000円</span><span class="p-new">132,000<small>円</small></span></div>
             <a href="/anniversary-automation/" class="btn-outline">プラン詳細を見る</a>
           </div>
           <div class="plan-card reveal">
+            <div class="plan-meta-row">
+              <span class="plan-card-code">PLAN C</span>
+            </div>
             <div class="p-header"><h3>ビジネスの副操縦士（継続改善案）</h3></div>
             <p class="p-target">「Web改善・AI活用を継続して整えたい」方に</p>
             <div class="p-price"><span class="p-old">275,000円</span><span class="p-new">220,000<small>円</small></span></div>
@@ -144,17 +153,17 @@ const jsonLd = {
               <tr>
                 <th>機能・サービス</th>
                 <th>
-                  <span class="compare-plan-code">Plan A</span>
+                  <span class="compare-plan-code">PLAN A</span>
                   <span class="compare-plan-name">選ばれる導線LP制作案</span>
                   <span class="compare-plan-note">速戦・LP制作</span>
                 </th>
                 <th>
-                  <span class="compare-plan-code">Plan B</span>
+                  <span class="compare-plan-code">PLAN B</span>
                   <span class="compare-plan-name">ICT・自動化フル強化案</span>
                   <span class="compare-plan-note">業務導線・自動化</span>
                 </th>
                 <th>
-                  <span class="compare-plan-code">Plan C</span>
+                  <span class="compare-plan-code">PLAN C</span>
                   <span class="compare-plan-name">ビジネスの副操縦士</span>
                   <span class="compare-plan-note">継続改善・特注支援</span>
                 </th>
@@ -423,6 +432,41 @@ const jsonLd = {
     line-height: 1.5;
   }
   .plan-card.featured { border: 4px solid var(--gold) !important; animation: pulse-glow 3s infinite !important; }
+  .plan-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+  }
+  .plan-card-code,
+  .p-featured-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    padding: 5px 13px;
+    border-radius: 999px;
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    line-height: 1.2;
+  }
+  .plan-card-code {
+    background: rgba(15, 76, 92, 0.08);
+    color: #0f4c5c;
+    border: 1px solid rgba(15, 76, 92, 0.12);
+  }
+  .featured .plan-card-code {
+    background: rgba(197, 160, 89, 0.16);
+    color: var(--gold);
+    border-color: rgba(197, 160, 89, 0.32);
+  }
+  .p-featured-badge {
+    background: var(--gold);
+    color: white;
+    box-shadow: 0 8px 18px rgba(197, 160, 89, 0.22);
+  }
   .p-header h3 {
     margin: 0;
     min-height: 4.1em;
@@ -541,6 +585,82 @@ const jsonLd = {
     margin: 0;
   }
 
+  .campaign-cta {
+    position: relative;
+    padding: 110px 0 120px;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.24), transparent 44%),
+      linear-gradient(135deg, #3a2e26 0%, #1f3740 100%);
+    color: #fff;
+    text-align: center;
+  }
+  .campaign-cta::before {
+    content: "";
+    position: absolute;
+    inset: 18px;
+    border: 1px solid rgba(226, 200, 145, 0.28);
+    border-radius: 32px;
+    pointer-events: none;
+  }
+  .campaign-cta .container {
+    position: relative;
+    z-index: 1;
+  }
+  .campaign-cta h2 {
+    margin: 0 0 34px;
+    color: #fff;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.35;
+    text-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  }
+  .btn-main {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 68px;
+    padding: 20px 42px;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.7);
+    background:
+      linear-gradient(135deg, #f3d37f 0%, var(--gold) 45%, #9f7135 100%);
+    color: #fff !important;
+    font-size: clamp(1.05rem, 2vw, 1.25rem);
+    font-weight: 900;
+    line-height: 1.35;
+    text-decoration: none;
+    box-shadow:
+      0 22px 52px rgba(197, 160, 89, 0.45),
+      0 0 0 8px rgba(255, 255, 255, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.48);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, filter 0.25s ease;
+  }
+  .btn-main::after {
+    content: "→";
+    display: inline-grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.22);
+    color: #fff;
+    font-size: 1rem;
+    transition: transform 0.25s ease, background 0.25s ease;
+  }
+  .btn-main:hover {
+    transform: translateY(-4px) scale(1.03);
+    filter: brightness(1.08);
+    box-shadow:
+      0 28px 64px rgba(197, 160, 89, 0.56),
+      0 0 0 10px rgba(255, 255, 255, 0.11),
+      inset 0 1px 0 rgba(255, 255, 255, 0.55);
+  }
+  .btn-main:hover::after {
+    transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.3);
+  }
+
   @keyframes pulse-glow {
     0%, 100% { box-shadow: 0 0 20px rgba(197, 160, 89, 0.2); }
     50% { box-shadow: 0 0 50px rgba(197, 160, 89, 0.5); }
@@ -563,6 +683,9 @@ const jsonLd = {
     .value-card,
     .plan-card { min-height: auto; }
     .p-header h3 { min-height: auto; }
+    .campaign-cta { padding: 82px 0 92px; }
+    .campaign-cta::before { inset: 12px; border-radius: 24px; }
+    .btn-main { width: min(100%, 340px); padding: 18px 24px; }
     .faq-grid { grid-template-columns: 1fr; }
     .price-value { font-size: 4rem !important; }
   }
