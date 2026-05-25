@@ -143,9 +143,21 @@ const jsonLd = {
             <thead>
               <tr>
                 <th>機能・サービス</th>
-                <th>Plan A (速戦)</th>
-                <th>Plan B (自動化)</th>
-                <th>Plan C (特注)</th>
+                <th>
+                  <span class="compare-plan-code">Plan A</span>
+                  <span class="compare-plan-name">選ばれる導線LP制作案</span>
+                  <span class="compare-plan-note">速戦・LP制作</span>
+                </th>
+                <th>
+                  <span class="compare-plan-code">Plan B</span>
+                  <span class="compare-plan-name">ICT・自動化フル強化案</span>
+                  <span class="compare-plan-note">業務導線・自動化</span>
+                </th>
+                <th>
+                  <span class="compare-plan-code">Plan C</span>
+                  <span class="compare-plan-name">ビジネスの副操縦士</span>
+                  <span class="compare-plan-note">継続改善・特注支援</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -178,7 +190,7 @@ const jsonLd = {
           <div class="faq-item">
             <button class="faq-question">制作期間はどのくらいですか？ <span class="icon"></span></button>
             <div class="faq-answer">
-              <p>Plan Aは最短2週間、Plan B・Cは1ヶ月〜1.5ヶ月程度が目安です。お客様の素材準備状況により前後いたします。</p>
+              <p>Plan A（選ばれる導線LP制作案）は最短2週間、Plan B（ICT・自動化フル強化案）・Plan C（ビジネスの副操縦士）は1ヶ月〜1.5ヶ月程度が目安です。お客様の素材準備状況により前後いたします。</p>
             </div>
           </div>
           <div class="faq-item">
@@ -190,7 +202,7 @@ const jsonLd = {
           <div class="faq-item">
             <button class="faq-question">月額費用などはかかりますか？ <span class="icon"></span></button>
             <div class="faq-answer">
-              <p>Web維持に必要な実費（月額1,000円程度）以外、和-Nodeへの継続的なお支払いは発生いたしません（Plan Cの支援期間終了後）。</p>
+              <p>Web維持に必要な実費（月額1,000円程度）以外、和-Nodeへの継続的なお支払いは発生いたしません（Plan C「ビジネスの副操縦士」の支援期間終了後）。</p>
             </div>
           </div>
         </div>
@@ -446,14 +458,37 @@ const jsonLd = {
   .comparison-section { padding: 100px 0; background: #fff; }
   .table-scroll { overflow-x: auto; margin-top: 40px; }
   .comparison-table {
-    width: 100%; border-collapse: collapse; min-width: 600px;
+    width: 100%; border-collapse: collapse; min-width: 760px;
     background: white; border-radius: 15px; overflow: hidden;
   }
   .comparison-table th, .comparison-table td {
-    padding: 25px; border: 1px solid #f0f0f0; text-align: center;
+    padding: 22px 20px; border: 1px solid #f0f0f0; text-align: center;
   }
   .comparison-table th { background: #f9f6f0; font-weight: 800; color: var(--gold); }
   .comparison-table td:first-child { text-align: left; font-weight: 700; background: #fdfcf9; }
+  .compare-plan-code,
+  .compare-plan-name,
+  .compare-plan-note {
+    display: block;
+    line-height: 1.45;
+  }
+  .compare-plan-code {
+    color: var(--gold);
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .compare-plan-name {
+    margin-top: 6px;
+    color: var(--text-deep);
+    font-size: 1rem;
+  }
+  .compare-plan-note {
+    margin-top: 5px;
+    color: #777;
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
 
   .faq-section { padding: 100px 0; }
   .faq-accordion {
