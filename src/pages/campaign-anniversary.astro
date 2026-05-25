@@ -332,9 +332,70 @@ const jsonLd = {
   .cond-item .label { display: block; font-size: 0.9rem; color: #666; margin-bottom: 5px; }
   .cond-item .value { display: block; font-size: 1.1rem; font-weight: 800; color: var(--text-deep); }
 
+  .value-section,
+  .plan-section {
+    padding: 100px 0;
+  }
+  .value-section {
+    background: #fdfcf9;
+  }
+  .plan-section {
+    background: #fff;
+    border-top: 1px solid var(--border-soft);
+    border-bottom: 1px solid var(--border-soft);
+  }
+  .value-grid,
+  .plan-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 28px;
+    align-items: stretch;
+  }
+  .value-card {
+    min-height: 250px;
+    padding: 40px 30px;
+    border: 1px solid rgba(15, 76, 92, 0.14);
+    border-radius: 24px;
+    background: linear-gradient(180deg, #fffdf8 0%, #fffaf2 100%);
+    box-shadow: 0 16px 38px rgba(15, 76, 92, 0.075), 0 4px 14px rgba(70, 52, 32, 0.045);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+  }
+  .value-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(197, 160, 89, 0.42);
+    box-shadow: 0 24px 52px rgba(15, 76, 92, 0.12), 0 8px 20px rgba(70, 52, 32, 0.07);
+  }
+  .v-icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 22px;
+    border-radius: 20px;
+    background: rgba(15, 76, 92, 0.08);
+    font-size: 2rem;
+  }
+  .value-card h3 {
+    margin: 0 0 14px;
+    color: var(--text-deep);
+    font-size: 1.35rem;
+    line-height: 1.45;
+  }
+  .value-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.98rem;
+    line-height: 1.8;
+  }
+
   .plan-card {
     background: white !important; padding: 40px; border-radius: 24px; border: 1px solid #eee;
     transition: 0.4s; display: flex; flex-direction: column; position: relative;
+    min-height: 420px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.05);
   }
   .plan-card:hover {
@@ -350,6 +411,37 @@ const jsonLd = {
     line-height: 1.5;
   }
   .plan-card.featured { border: 4px solid var(--gold) !important; animation: pulse-glow 3s infinite !important; }
+  .p-header h3 {
+    margin: 0;
+    min-height: 4.1em;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: var(--text-deep);
+  }
+  .p-price {
+    margin: auto 0 28px;
+  }
+  .p-old {
+    display: block;
+    color: #999;
+    font-size: 0.95rem;
+    text-decoration: line-through;
+  }
+  .p-new {
+    display: block;
+    color: var(--gold);
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+  }
+  .p-new small {
+    font-size: 0.5em;
+  }
+  .plan-card .btn-primary-gold,
+  .plan-card .btn-outline {
+    width: 100%;
+    margin-top: auto;
+  }
   
   .comparison-section { padding: 100px 0; background: #fff; }
   .table-scroll { overflow-x: auto; margin-top: 40px; }
@@ -429,6 +521,13 @@ const jsonLd = {
   .reveal { opacity: 1 !important; visibility: visible !important; }
 
   @media (max-width: 768px) {
+    .value-section,
+    .plan-section { padding: 70px 0; }
+    .value-grid,
+    .plan-grid { grid-template-columns: 1fr; }
+    .value-card,
+    .plan-card { min-height: auto; }
+    .p-header h3 { min-height: auto; }
     .faq-grid { grid-template-columns: 1fr; }
     .price-value { font-size: 4rem !important; }
   }
