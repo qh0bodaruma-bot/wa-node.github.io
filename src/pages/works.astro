@@ -64,7 +64,7 @@ const structuredData = [
       <section class="priority-works reveal" aria-labelledby="priority-works-title">
         <div class="priority-copy">
           <span class="eyebrow">First View</span>
-          <h2 id="priority-works-title" class="premium-heading">迷ったら、まずはこの3つをご覧ください</h2>
+          <h2 id="priority-works-title" class="premium-heading">迷ったら、まずはこの4つをご覧ください</h2>
           <p>まずはWeb制作・LP制作の見え方を中心に、必要に応じてAI・ICTの実装力も確認できます。</p>
         </div>
         <div class="priority-grid">
@@ -72,6 +72,11 @@ const structuredData = [
             <span>選ばれる導線の強み</span>
             <h3>選ばれる導線デモ</h3>
             <p>配置・言葉・CTAの理由を、心理学的な根拠と一緒に体験できます。</p>
+          </a>
+          <a href="/salon-reservation-demo/" class="priority-card">
+            <span>業種別LPデモ</span>
+            <h3>地域サロン・整体向け予約導線LP</h3>
+            <p>料金、初回の流れ、LINE予約、アクセスまで、来店前の不安を減らす構成例です。</p>
           </a>
           <a href="/portfolio-lp/lp_clinic.html" class="priority-card">
             <span>LP制作サンプル</span>
@@ -116,6 +121,26 @@ const structuredData = [
               <span class="tech-tag">UI/UX</span>
               <span class="tech-tag">Psychology</span>
               <a href="/psychology-demo/" class="card-link">デモを体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: Web (Salon Reservation Demo) -->
+        <article class="work-card reveal" data-category="web">
+          <div class="card-visual-wrap">
+            <div class="card-visual">
+              <img src="/portfolio-lp/images/hero_sekkotsu.png" alt="地域サロン・整体向け予約導線LPデモ" style="width: 100%; height: 100%; object-fit: cover;" />
+              <span class="category-tag demo">業種別LPデモ</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Local Salon / Reservation</div>
+            <h3>地域サロン・整体向け予約導線LP</h3>
+            <p class="card-text">初回来店前の不安を減らすために、料金、流れ、アクセス、LINE予約導線をスマホで確認しやすく整理した架空サンプルです。</p>
+            <div class="card-footer">
+              <span class="tech-tag">LP Design</span>
+              <span class="tech-tag">Reservation UX</span>
+              <a href="/salon-reservation-demo/" class="card-link">デモを見る →</a>
             </div>
           </div>
         </article>
@@ -383,7 +408,7 @@ const structuredData = [
     }
     .priority-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
     }
     .priority-card {
@@ -518,6 +543,10 @@ const structuredData = [
       .priority-grid { grid-template-columns: 1fr; }
       .priority-card { min-height: auto; }
       .works-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (min-width: 769px) and (max-width: 1100px) {
+      .priority-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
 </style>
 

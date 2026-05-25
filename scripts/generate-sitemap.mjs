@@ -22,6 +22,7 @@ const PAGES = [
   ['/easy-guide/', '0.8'],
   ['/tech-stack/', '0.8'],
   ['/lp-portfolio/', '0.8'],
+  ['/salon-reservation-demo/', '0.8'],
   ['/demos/', '0.8'],
   ['/campaign-anniversary/', '0.8'],
   ['/anniversary-speed/', '0.7'],

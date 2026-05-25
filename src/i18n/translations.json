@@ -8,12 +8,12 @@
   },
   "hero": {
     "badge": { "ja": "月3名まで丁寧に対応", "en": "Max 3 Clients / Month", "fr": "Max 3 Clients / Mois" },
-    "tagline": { "ja": "行動心理に基づく設計 × ICT × 計測改善で、相談しやすいWebへ。", "en": "Psychology, ICT, and measurable improvement for websites that lead to inquiries.", "fr": "Psychologie, TIC et amélioration mesurable pour transformer le web en demandes." },
+    "tagline": { "ja": "心理学 × ICT × 計測改善で、相談につながるWeb導線へ。", "en": "Psychology, ICT, and measurable improvement for websites that lead to inquiries.", "fr": "Psychologie, TIC et amélioration mesurable pour transformer le web en demandes." },
     "title_part1": { "ja": "「選ばれる」には、", "en": "There is a ", "fr": "Il y a une " },
     "title_highlight": { "ja": "心理学", "en": "Psychological Reason", "fr": "Raison Psychologique" },
     "title_part2": { "ja": "的な根拠がある。", "en": " to be Chosen.", "fr": " d'être Choisi." },
     "lead": {
-      "ja": "和-Nodeは、行動心理学の知見を応用し、訪問者の不安や迷いを減らすホームページ制作・LP制作の専門窓口です。分かりやすい情報設計、押し付け感のない導線、GA4を使った客観的なデータ検証まで、長く成果に繋がるWeb環境を整えます。",
+      "ja": "和-Nodeは、心理学の知見を活かし、訪問者の不安や迷いを減らすホームページ制作・LP改善の窓口です。料金・強み・相談の流れが伝わる情報設計、押し付け感のないCTA、GA4などを使った計測改善まで、相談しやすく育てやすいWeb環境を整えます。",
       "en": "Wa-Node blends behavioral psychology and statistical insights with web design to prevent bounces. Serving as your business co-pilot, we support decisions and execution from LP/website production to AI/ICT integration.",
       "fr": "Wa-Node applique la psychologie comportementale et les analyses statistiques à la conception web. En tant que co-pilote d'affaires, nous soutenons vos décisions de la création de LP/sites internet à l'intégration de l'IA/TIC."
     },
@@ -24,24 +24,24 @@
   "why_psy": {
     "eyebrow": { "ja": "こんなお悩みはありませんか？", "en": "Do you face these challenges?", "fr": "Rencontrez-vous ces défis?" },
     "title": {
-      "ja": "「デザイン会社に頼んだのに、なぜ成果が出ないのか？」",
+      "ja": "「見た目は整っているのに、なぜ相談につながりにくいのか？」",
       "en": "Why does your website fail to convert, despite hiring a design agency?",
       "fr": "Pourquoi votre site ne produit-il aucun résultat malgré l'aide d'une agence?"
     },
     "lead": {
-      "ja": "その答えは、見た目の良さの中に潜む「心理的不親切（ユーザーの迷い）」にあります。",
+      "ja": "多くの場合、原因はデザインの良し悪しだけでなく、初見の人が迷う情報の順番や相談前の不安にあります。",
       "en": "The answer lies in a 'psychological friction (user confusion)' hidden beneath a beautiful design.",
       "fr": "La réponse réside dans une friction psychologique (confusion de l'utilisateur) cachée sous un beau design."
     },
-    "card1_title": { "ja": "「綺麗」だけでは、人は動きません", "en": "Beauty alone won't move users", "fr": "La beauté seule ne fait pas agir" },
+    "card1_title": { "ja": "「綺麗」だけでは、不安は減りません", "en": "Beauty alone won't move users", "fr": "La beauté seule ne fait pas agir" },
     "card1_desc": {
-      "ja": "優れたグラフィックデザインも、ユーザーの「次の行動への心理ステップ」が設計されていなければ、ただの自己満足で終わり、離脱の原因になります。",
+      "ja": "見た目が整っていても、料金・流れ・次の行動が分かりにくいと、訪問者は相談前に立ち止まりやすくなります。",
       "en": "Even great graphic design ends up as self-satisfaction and drives high bounce rates if the user's psychological steps to the next action are not carefully designed.",
       "fr": "Même un superbe design graphique reste une auto-satisfaction s'il ne conçoit pas les étapes psychologiques de l'utilisateur pour l'action suivante."
     },
     "card2_title": { "ja": "ICT × 統計 × 行動心理学", "en": "ICT × Statistics × Psychology", "fr": "TIC × Statistiques × Psychologie" },
     "card2_desc": {
-      "ja": "和-Nodeは、20年のシステム構築力とデータ分析（統計）に加え、カウンセラーの心理学知見を融合。ロジカルかつ直感的に「迷わない」導線を作ります。",
+      "ja": "和-Nodeは、20年のシステム構築経験とデータ分析（統計）に、カウンセラーとしての心理学知見を組み合わせ、初見の人が迷いにくい導線を作ります。",
       "en": "Wa-Node combines 20 years of system development and data analysis (statistics) with counselor-level psychological insights to build logical and intuitive user paths.",
       "fr": "Wa-Node combine 20 ans de développement et d'analyse de données avec une expertise psychologique pour créer des parcours utilisateur logiques."
     }
@@ -52,7 +52,7 @@
     "card1_tag": { "ja": "Web Design", "en": "Web Design", "fr": "Design Web" },
     "card1_title": { "ja": "ホームページ・LP制作を相談したい", "en": "Build a Website or LP", "fr": "Créer un site ou une LP" },
     "card1_desc": {
-      "ja": "わずか50ミリ秒（0.05秒）で決まる第一印象を逃さない超高速表示と、行動心理に基づく構成で成果へと繋げます。",
+      "ja": "初見で信頼される構成、軽い表示、行動心理に基づく情報設計で、相談しやすいHP・LPへ整えます。",
       "en": "We design ultra-fast websites and landing pages to capture the critical first 50 milliseconds of user attention.",
       "fr": "Nous concevons des sites ultra-rapides et des LP pour capter l'attention dès les premières 50 millisecondes."
     },
@@ -119,7 +119,7 @@
     "eyebrow": { "ja": "Professional Partner", "en": "Professional Partner", "fr": "Partenaire Professionnel" },
     "title": { "ja": "代表：高野 紘純", "en": "Founder: Hirozumi Takano", "fr": "Fondateur: Hirozumi Takano" },
     "desc": {
-      "ja": "IT業界20年のエンジニア経験、産業カウンセラーとしての行動心理学の知見、そして車いす当事者としてのユニバーサル（バリアフリー）視点。これらすべての強みを掛け合わせ、「心理的不親切も見逃さない、澱みのない導線」を作ります。",
+      "ja": "IT業界20年のエンジニア経験、産業カウンセラーとしての行動心理学の知見、そして車いす当事者としてのユニバーサル（バリアフリー）視点。これらの強みを掛け合わせ、初見の人の迷いまで見落とさないWeb導線を作ります。",
       "en": "With 20 years of IT experience, insights as an Industrial Counselor, and a universal accessibility perspective as a wheelchair user, I integrate these strengths to craft flawless conversion paths that leave no user confused.",
       "fr": "Avec 20 ans d'expérience en informatique, une expertise en psychologie et une perspective d'accessibilité universelle, je crée des parcours fluides sans aucune confusion."
     },
