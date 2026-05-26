@@ -66,7 +66,7 @@ const f = {
     required: "必須",
     label_email: "メールアドレス",
     placeholder_email: "example@wa-node.com",
-    label_category: "ご相談カテゴリ",
+    label_category: "相談したい内容",
     placeholder_category: "選択してください",
     category_hint: "迷った場合は「Webサイト・LP制作」または「ビジネスの副操縦士」をお選びください。LINE・メンタル・法人窓口などの詳細は、相談内容欄にそのままご記入いただけます。",
     categories: {
@@ -77,6 +77,17 @@ const f = {
       counseling: "経営者・リーダーの相談整理",
       corporate: "組織コミュニケーション支援",
       other: "その他のお問い合わせ"
+    },
+    label_source: "見たデモ・気になったページ",
+    placeholder_source: "選択してください（任意）",
+    source_hint: "どのページを見て相談されたか分かると、初回相談で話を合わせやすくなります。自動で入っている場合もあります。",
+    sources: {
+      psychology_demo: "心理学×Web改善デモ",
+      salon_demo: "地域サロン・整体向け予約導線LP",
+      lp_portfolio: "LP制作サンプルギャラリー",
+      ai_chat_demo: "AIチャットデモ",
+      tool_or_pricing: "料金・診断・シミュレーター",
+      other: "トップページ・その他"
     },
     label_method: "ご相談の通信方式",
     placeholder_method: "選択してください",
@@ -163,7 +174,7 @@ const f = {
     required: "Required",
     label_email: "Email Address",
     placeholder_email: "example@wa-node.com",
-    label_category: "Inquiry Category",
+    label_category: "What would you like to discuss?",
     placeholder_category: "Please select",
     category_hint: "If you are unsure, choose Web Site & LP Design or Business Copilot. Please write LINE, mental support, corporate support, or other details in the message field.",
     categories: {
@@ -174,6 +185,17 @@ const f = {
       counseling: "Mental Support & Consultation",
       corporate: "Corporate Counseling Support",
       other: "Others"
+    },
+    label_source: "Demo or page you viewed",
+    placeholder_source: "Please select (optional)",
+    source_hint: "This helps us align the first consultation with the page or demo that interested you. It may be selected automatically.",
+    sources: {
+      psychology_demo: "Psychology x Web Improvement Demo",
+      salon_demo: "Local Salon Reservation LP",
+      lp_portfolio: "LP Sample Gallery",
+      ai_chat_demo: "AI Chat Demo",
+      tool_or_pricing: "Pricing, Diagnosis, or Simulator",
+      other: "Top page or others"
     },
     label_method: "Preferred Communication Method",
     placeholder_method: "Please select",
@@ -260,7 +282,7 @@ const f = {
     required: "Requis",
     label_email: "Adresse e-mail",
     placeholder_email: "exemple@wa-node.com",
-    label_category: "Catégorie de demande",
+    label_category: "Sujet que vous souhaitez aborder",
     placeholder_category: "Veuillez choisir",
     category_hint: "Si vous hésitez, choisissez Design Web & LP ou Co-pilote d'Affaires. Ajoutez les détails LINE, soutien mental, entreprise ou autre dans le message.",
     categories: {
@@ -271,6 +293,17 @@ const f = {
       counseling: "Conseil & Soutien Mental",
       corporate: "Soutien Mental aux Entreprises",
       other: "Autre"
+    },
+    label_source: "Démo ou page consultée",
+    placeholder_source: "Veuillez choisir (facultatif)",
+    source_hint: "Cela nous aide à adapter la première consultation à la page ou à la démo qui vous a intéressé. Ce champ peut être rempli automatiquement.",
+    sources: {
+      psychology_demo: "Démo Psychologie x Web",
+      salon_demo: "LP de réservation pour salon local",
+      lp_portfolio: "Galerie d'exemples LP",
+      ai_chat_demo: "Démo Chat IA",
+      tool_or_pricing: "Tarifs, diagnostic ou simulateur",
+      other: "Page d'accueil ou autre"
     },
     label_method: "Méthode de communication",
     placeholder_method: "Veuillez choisir",
@@ -351,6 +384,8 @@ const t = f[lang];
           </div>
           <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off" data-lang={lang}>
             <input type="hidden" name="_next" value={lang === 'ja' ? 'https://www.wa-node.com/thanks/' : `https://www.wa-node.com/${lang}/thanks/`} />
+            <input type="hidden" id="landing_url" name="landing_url" value="" />
+            <input type="hidden" id="referrer_url" name="referrer_url" value="" />
 
             <!-- Dynamic Benefit Badge -->
             <div id="benefit-badge-container" style="display: none; margin-bottom: 24px;">
@@ -376,6 +411,7 @@ const t = f[lang];
                     <option value="" disabled selected>{t.precheck_placeholder}</option>
                     <option value="web">{t.categories.web}</option>
                     <option value="copilot">{t.categories.copilot}</option>
+                    <option value="line">{t.categories.line}</option>
                     <option value="ai">{t.categories.ai}</option>
                     <option value="other">{t.categories.other}</option>
                   </select>
@@ -433,6 +469,20 @@ const t = f[lang];
             <div class="form-group">
               <label for="email">{t.label_email} <span class="required">{t.required}</span></label>
               <input type="email" id="email" name="email" required placeholder={t.placeholder_email} />
+            </div>
+
+            <div class="form-group">
+              <label for="seen_source">{t.label_source}</label>
+              <select id="seen_source" name="seen_source">
+                <option value="" selected>{t.placeholder_source}</option>
+                <option value="psychology_demo">{t.sources.psychology_demo}</option>
+                <option value="salon_demo">{t.sources.salon_demo}</option>
+                <option value="lp_portfolio">{t.sources.lp_portfolio}</option>
+                <option value="ai_chat_demo">{t.sources.ai_chat_demo}</option>
+                <option value="tool_or_pricing">{t.sources.tool_or_pricing}</option>
+                <option value="other">{t.sources.other}</option>
+              </select>
+              <p class="field-desc">{t.source_hint}</p>
             </div>
 
             <div class="form-group">
@@ -927,6 +977,70 @@ const t = f[lang];
 
 <script is:inline>
   (function() {
+    function initSourceContext() {
+      const sourceSelect = document.getElementById('seen_source');
+      const landingInput = document.getElementById('landing_url');
+      const referrerInput = document.getElementById('referrer_url');
+
+      if (landingInput) landingInput.value = window.location.href;
+      if (referrerInput) referrerInput.value = document.referrer || '';
+      if (!sourceSelect) return;
+
+      const aliases = {
+        psychology_demo: 'psychology_demo',
+        demo: 'psychology_demo',
+        demo60: 'psychology_demo',
+        salon_demo: 'salon_demo',
+        salon: 'salon_demo',
+        lp_portfolio: 'lp_portfolio',
+        portfolio: 'lp_portfolio',
+        ai_chat_demo: 'ai_chat_demo',
+        ai_chat: 'ai_chat_demo',
+        simulator: 'tool_or_pricing',
+        sim60: 'tool_or_pricing',
+        seo_check: 'tool_or_pricing',
+        seo60: 'tool_or_pricing',
+        dx60: 'tool_or_pricing',
+        pricing: 'tool_or_pricing',
+        tool_or_pricing: 'tool_or_pricing',
+        works: 'other',
+        top: 'other',
+        other: 'other'
+      };
+
+      function normalize(value) {
+        if (!value) return '';
+        const key = String(value).trim().replace(/-/g, '_');
+        return aliases[key] || '';
+      }
+
+      function inferFromPath(url) {
+        if (!url) return '';
+        try {
+          const path = new URL(url, window.location.origin).pathname;
+          if (path.includes('/salon-reservation-demo')) return 'salon_demo';
+          if (path.includes('/psychology-demo')) return 'psychology_demo';
+          if (path.includes('/lp-portfolio')) return 'lp_portfolio';
+          if (path.includes('/ai-chat-demo')) return 'ai_chat_demo';
+          if (path.includes('/simulator') || path.includes('/seo_check') || path.includes('/pricing')) return 'tool_or_pricing';
+          return '';
+        } catch (err) {
+          return '';
+        }
+      }
+
+      const params = new URLSearchParams(window.location.search);
+      const selectedSource =
+        normalize(params.get('source')) ||
+        normalize(params.get('benefit')) ||
+        normalize(params.get('plan')) ||
+        inferFromPath(document.referrer);
+
+      if (selectedSource && !sourceSelect.value) {
+        sourceSelect.value = selectedSource;
+      }
+    }
+
     function initDynamicContactField() {
       const methodSelect = document.getElementById('method');
       const dynamicField = document.getElementById('dynamic-contact-field');
@@ -1119,11 +1233,13 @@ const t = f[lang];
       }
 
       // 初回ロード時
+      initSourceContext();
       initDynamicContactField();
       initContactForm();
       checkBenefitParam();
       // Astroのトランジション（画面遷移時）対応
       document.addEventListener('astro:page-load', function() {
+        initSourceContext();
         initDynamicContactField();
         initContactForm();
         checkBenefitParam();
