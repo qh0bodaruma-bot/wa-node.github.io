@@ -66,7 +66,7 @@ const trustSignals = {
   ]
 };
 ---
-<main>
+<main class="home-content">
   <!-- 1. Hero Section -->
   <section class="section hero">
     <div class="hero-inner">
@@ -281,6 +281,13 @@ const trustSignals = {
     background:
       linear-gradient(180deg, #fbf7ef 0%, var(--paper) 48%, #f2e8dc 100%);
   }
+  .home-content {
+    --home-action: #c7352f;
+    --home-action-dark: #b62f29;
+    --home-gold: #8c6b1f;
+    --home-gold-dark: #725719;
+    --home-cool: #eef5f2;
+  }
   .section { padding: 80px 0; }
   .section-inner { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
 
@@ -288,20 +295,20 @@ const trustSignals = {
   h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.2; margin-bottom: 24px; }
   h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 32px; }
 
-  .tagline-top { font-size: 1.1rem; color: var(--accent); font-weight: 800; letter-spacing: 0.08em; margin-bottom: 8px; max-width: 100%; overflow-wrap: anywhere; line-break: strict; text-wrap: balance; }
+  .tagline-top { font-size: 1.1rem; color: var(--home-gold); font-weight: 800; letter-spacing: 0.08em; margin-bottom: 8px; max-width: 100%; overflow-wrap: anywhere; line-break: strict; text-wrap: balance; }
   .lead { font-size: 1.2rem; color: var(--muted); margin-bottom: 40px; max-width: 700px; }
   .lead strong { color: var(--accent); }
 
   .btns { display: flex; gap: 16px; margin-top: 40px; }
   .btn { padding: 18px 36px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: all 0.3s ease; text-align: center; }
-  .btn.primary { background: var(--accent2); color: white; border: 1px solid var(--accent2); box-shadow: 0 10px 25px rgba(199, 53, 47, 0.24); }
-  .btn.primary:hover { background: var(--accent2-dark); border-color: var(--accent2-dark); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(199, 53, 47, 0.32); }
-  .btn.secondary { border: 1px solid rgba(140, 107, 31, 0.5); color: var(--accent); background: transparent; }
-  .btn.secondary:hover { border-color: var(--accent); background: rgba(140, 107, 31, 0.06); transform: translateY(-1px); }
+  .btn.primary { background: var(--home-action); color: white; border: 1px solid var(--home-action); box-shadow: 0 10px 25px rgba(199, 53, 47, 0.24); }
+  .btn.primary:hover { background: var(--home-action-dark); border-color: var(--home-action-dark); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(199, 53, 47, 0.32); }
+  .btn.secondary { border: 1px solid rgba(140, 107, 31, 0.5); color: var(--home-gold); background: transparent; }
+  .btn.secondary:hover { border-color: var(--home-gold); background: rgba(140, 107, 31, 0.06); transform: translateY(-1px); }
 
   /* Hero */
   .hero { 
-    --hero-accent: var(--accent2);
+    --hero-accent: var(--home-action);
     padding: 160px 0 120px; 
     background: 
       linear-gradient(to right, rgba(253, 250, 245, 1) 40%, rgba(253, 250, 245, 0.9) 55%, rgba(253, 250, 245, 0.2) 80%, rgba(253, 250, 245, 0) 100%), 
@@ -313,7 +320,7 @@ const trustSignals = {
   .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; }
   .hero-content { max-width: 650px; }
   .hero-badge { display: inline-block; background: var(--hero-accent); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 800; margin-bottom: 24px; }
-  .highlight-text { border-bottom: 3px double var(--accent); padding-bottom: 2px; color: var(--hero-accent); font-weight: 800; }
+  .highlight-text { border-bottom: 3px double var(--home-gold); padding-bottom: 2px; color: var(--hero-accent); font-weight: 800; }
 
   /* ジャンプ率・タイポグラフィの心理設計クラス */
   .hero-title-chosen {
@@ -332,7 +339,7 @@ const trustSignals = {
     font-size: clamp(2.3rem, 5.2vw, 4.2rem);
     font-weight: 900;
     color: var(--text-deep);
-    border-bottom: 3px double var(--accent);
+    border-bottom: 3px double var(--home-gold);
     padding-bottom: 2px;
     letter-spacing: -0.02em;
   }
