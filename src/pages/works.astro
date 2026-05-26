@@ -309,9 +309,10 @@ const structuredData = [
     @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
 
     :root {
-      --accent: #c5a059;
-      --accent-dark: #b18e4a;
-      --accent-red: #d14d3a;
+      --accent: #8c6b1f;
+      --accent-dark: #725719;
+      --accent-red: #c7352f;
+      --accent-red-dark: #b62f29;
       --trust: #0f4c5c;
       --trust-mid: #1f6f78;
       --trust-line: rgba(15, 76, 92, 0.18);
@@ -320,11 +321,11 @@ const structuredData = [
       --base: #f6efe5;
       --surface: #fffdf8;
       --surface-strong: #fffaf2;
-      --surface-cool: #f4fbfa;
+      --surface-cool: #eef5f2;
       --card-shadow: 0 16px 38px rgba(15, 76, 92, 0.075), 0 4px 14px rgba(70, 52, 32, 0.045);
       --card-shadow-hover: 0 24px 52px rgba(15, 76, 92, 0.12), 0 8px 20px rgba(70, 52, 32, 0.07);
       --tag-works: #2c7c5e;
-      --tag-sample: #c5a059;
+      --tag-sample: #8c6b1f;
       --tag-demo: #2c5e7c;
       --text-deep: #1a1a1a;
     }
@@ -369,7 +370,7 @@ const structuredData = [
     .works-anniversary-banner a {
       display: block; background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%); border: 1px solid var(--accent-red);
       border-radius: 20px; padding: 20px 30px; text-decoration: none;
-      transition: 0.4s; box-shadow: 0 10px 30px rgba(209, 77, 58, 0.1);
+      transition: 0.4s; box-shadow: 0 10px 30px rgba(199, 53, 47, 0.1);
     }
     .works-anniversary-banner a:hover { transform: translateY(-3px); }
     .ann-label {
@@ -386,7 +387,7 @@ const structuredData = [
     .priority-works {
       margin-bottom: 60px;
       padding: 36px;
-      background: linear-gradient(135deg, rgba(255, 253, 248, 0.9), rgba(244, 251, 250, 0.74));
+      background: linear-gradient(135deg, rgba(238, 245, 242, 0.94), rgba(255, 253, 248, 0.82));
       border: 1px solid var(--glass-border);
       border-radius: 28px;
       box-shadow: var(--card-shadow);
@@ -418,7 +419,7 @@ const structuredData = [
       justify-content: space-between;
       gap: 12px;
       padding: 26px 22px;
-      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
+      background: linear-gradient(180deg, #fff 0%, var(--surface) 100%);
       border: 1px solid var(--glass-border);
       border-radius: 20px;
       color: #333;
@@ -433,7 +434,7 @@ const structuredData = [
     }
     .priority-card.main {
       border: 2px solid var(--trust-line);
-      background: linear-gradient(135deg, rgba(15, 76, 92, 0.075), rgba(209, 77, 58, 0.035)), var(--surface);
+      background: linear-gradient(135deg, rgba(238, 245, 242, 0.94), rgba(199, 53, 47, 0.045)), var(--surface);
     }
     .priority-card span {
       align-self: flex-start;
@@ -467,15 +468,15 @@ const structuredData = [
       min-height: 48px;
       padding: 12px 28px;
       border-radius: 999px;
-      background: var(--trust);
+      background: var(--accent-red);
       color: #fff;
       text-decoration: none;
       font-weight: 800;
-      box-shadow: 0 12px 26px rgba(15, 76, 92, 0.18);
+      box-shadow: 0 12px 26px rgba(199, 53, 47, 0.18);
       transition: 0.3s;
     }
     .priority-cta a:hover {
-      background: #123c45;
+      background: var(--accent-red-dark);
       transform: translateY(-2px);
     }
 
@@ -492,7 +493,7 @@ const structuredData = [
     .works-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 32px; }
 
     .work-card {
-      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%); border: 1px solid var(--glass-border); border-radius: 24px;
+      background: linear-gradient(180deg, #fff 0%, var(--surface) 100%); border: 1px solid var(--glass-border); border-radius: 24px;
       overflow: hidden; display: flex; flex-direction: column;
       transition: 0.4s; box-shadow: var(--card-shadow);
     }

@@ -250,24 +250,25 @@ const trustSignals = {
   @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
 
   :root {
-    --accent: #c5a059;
-    --accent-dark: #b18e4a;
-    --accent2: #d14d3a;
+    --accent: #8c6b1f;
+    --accent-dark: #725719;
+    --accent2: #c7352f;
+    --accent2-dark: #b62f29;
     --trust: #0f4c5c;
     --trust-mid: #1f6f78;
     --trust-line: rgba(15, 76, 92, 0.18);
     --text: #333;
     --text-deep: #1a1a1a;
     --muted: #666;
-    --line: rgba(197, 160, 89, 0.18);
+    --line: rgba(140, 107, 31, 0.2);
     --soft: #f3eadf;
     --white: #ffffff;
     --paper: #f6efe5;
     --surface: #fffdf8;
     --surface-strong: #fffaf2;
-    --surface-cool: #f4fbfa;
+    --surface-cool: #eef5f2;
     --card-border: rgba(15, 76, 92, 0.14);
-    --card-border-warm: rgba(197, 160, 89, 0.24);
+    --card-border-warm: rgba(140, 107, 31, 0.24);
     --card-shadow: 0 16px 38px rgba(15, 76, 92, 0.075), 0 4px 14px rgba(70, 52, 32, 0.045);
     --card-shadow-hover: 0 24px 52px rgba(15, 76, 92, 0.12), 0 8px 20px rgba(70, 52, 32, 0.07);
     --radius: 24px;
@@ -293,14 +294,14 @@ const trustSignals = {
 
   .btns { display: flex; gap: 16px; margin-top: 40px; }
   .btn { padding: 18px 36px; border-radius: 50px; font-weight: 800; text-decoration: none; transition: all 0.3s ease; text-align: center; }
-  .btn.primary { background: var(--trust); color: white; border: 1px solid var(--trust); box-shadow: 0 10px 25px rgba(15, 76, 92, 0.25); }
-  .btn.primary:hover { background: #123c45; border-color: #123c45; transform: translateY(-2px); box-shadow: 0 12px 30px rgba(15, 76, 92, 0.35); }
-  .btn.secondary { border: 1px solid rgba(197, 160, 89, 0.5); color: var(--accent); background: transparent; }
-  .btn.secondary:hover { border-color: var(--accent); background: rgba(197, 160, 89, 0.05); transform: translateY(-1px); }
+  .btn.primary { background: var(--accent2); color: white; border: 1px solid var(--accent2); box-shadow: 0 10px 25px rgba(199, 53, 47, 0.24); }
+  .btn.primary:hover { background: var(--accent2-dark); border-color: var(--accent2-dark); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(199, 53, 47, 0.32); }
+  .btn.secondary { border: 1px solid rgba(140, 107, 31, 0.5); color: var(--accent); background: transparent; }
+  .btn.secondary:hover { border-color: var(--accent); background: rgba(140, 107, 31, 0.06); transform: translateY(-1px); }
 
   /* Hero */
   .hero { 
-    --hero-accent: #d14d3a;
+    --hero-accent: var(--accent2);
     padding: 160px 0 120px; 
     background: 
       linear-gradient(to right, rgba(253, 250, 245, 1) 40%, rgba(253, 250, 245, 0.9) 55%, rgba(253, 250, 245, 0.2) 80%, rgba(253, 250, 245, 0) 100%), 
@@ -392,7 +393,7 @@ const trustSignals = {
   }
   .concept-intro-card:hover { transform: translateY(-5px); border-color: var(--trust-line); box-shadow: var(--card-shadow-hover); }
   .concept-intro-card.highlight-card {
-    background: linear-gradient(135deg, rgba(15, 76, 92, 0.07), rgba(209, 77, 58, 0.035)), var(--surface);
+    background: linear-gradient(135deg, rgba(238, 245, 242, 0.92), rgba(199, 53, 47, 0.035)), var(--surface);
     border-color: var(--card-border-warm);
     box-shadow: var(--card-shadow);
   }
@@ -418,7 +419,7 @@ const trustSignals = {
   }
   .consult-card {
     background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
-    padding: 40px;
+    padding: 36px;
     border-radius: var(--radius);
     border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
@@ -426,7 +427,7 @@ const trustSignals = {
   }
   .consult-card:hover { transform: translateY(-5px); border-color: var(--trust-mid); box-shadow: var(--card-shadow-hover); }
   .consult-card.highlight {
-    background: linear-gradient(135deg, rgba(15, 76, 92, 0.08), rgba(209, 77, 58, 0.035)), var(--surface);
+    background: linear-gradient(135deg, rgba(238, 245, 242, 0.92), rgba(199, 53, 47, 0.035)), var(--surface);
     border-color: rgba(15, 76, 92, 0.24);
   }
   .card-tag { font-size: 0.75rem; font-weight: 800; color: var(--trust); letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
@@ -449,7 +450,7 @@ const trustSignals = {
   /* Experience Grid */
   .action-buttons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
   .action-card {
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
+    background: linear-gradient(180deg, #fff 0%, var(--surface) 100%);
     border: 1px solid var(--card-border);
     border-radius: 20px;
     padding: 30px 20px;
@@ -459,8 +460,8 @@ const trustSignals = {
     transition: 0.3s;
     color: inherit;
   }
-  .action-card:hover { transform: translateY(-5px); border-color: var(--accent); box-shadow: var(--card-shadow-hover); }
-  .action-card.highlight-border { border: 2px solid var(--accent); }
+  .action-card:hover { transform: translateY(-5px); border-color: var(--accent2); box-shadow: var(--card-shadow-hover); }
+  .action-card.highlight-border { border: 2px solid var(--accent2); }
   .action-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
 
   /* Flow */
@@ -501,7 +502,8 @@ const trustSignals = {
       border-bottom: 1px solid var(--trust-line);
     }
     .trust-signal:last-child { border-bottom: 0; }
-    .action-buttons-grid, .simple-flow-grid, .concept-intro-grid { grid-template-columns: 1fr; }
+    .consult-grid, .action-buttons-grid, .simple-flow-grid, .concept-intro-grid { grid-template-columns: 1fr; }
+    .consult-card { padding: 28px 22px; }
     .flow-item:not(:last-child)::after { display: none; }
     .profile-summary-inner { flex-direction: column; text-align: center; gap: 24px; }
     .profile-avatar-wrap { flex: 0 0 160px; width: 160px; height: 160px; }

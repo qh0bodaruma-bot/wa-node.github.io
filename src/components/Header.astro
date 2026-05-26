@@ -139,12 +139,17 @@ function getLocalizedLink(path: string) {
   }
 
   .nav-cta {
-    background: #0f4c5c;
+    background: var(--action, #c7352f);
     color: #fff !important;
     padding: 8px 22px;
     border-radius: 999px;
-    box-shadow: 0 4px 15px rgba(15, 76, 92, 0.2);
+    box-shadow: 0 4px 15px rgba(199, 53, 47, 0.2);
     transition: 0.3s ease;
+  }
+
+  .nav-cta:hover {
+    background: var(--action-strong, #b62f29);
+    opacity: 1;
   }
 
   /* Hamburger Menu */
