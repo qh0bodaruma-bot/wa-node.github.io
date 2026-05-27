@@ -110,7 +110,7 @@ const f = {
     date_1: "第一希望:",
     date_2: "第二希望:",
     date_3: "第三希望:",
-    date_desc: "※平日の10:00〜18:00が基本ですが、夜間や土日も調整可能です。ご希望があればご記入ください。",
+    date_desc: "※オンライン（Google Meetなど）を基本としますが、Zoomやお電話等も可能です。ご希望があればメッセージ欄にご記入ください。平日の10:00〜18:00が基本ですが、夜間や土日も調整可能です。",
     label_message: "ご相談内容（現在の状況・相談したいこと）",
     placeholder_message: "現在の状況や、具体的に相談したいこと（解決したい課題など）をご記入ください。",
     consent_note: "送信前に、<a href='/terms/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>利用規約</a>、<a href='/privacy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>プライバシーポリシー</a>、および<a href='/cancel-policy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>キャンセルポリシー</a>、<a href='/counseling-notes/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>カウンセリング注意事項</a>をご確認ください。",
@@ -218,7 +218,7 @@ const f = {
     date_1: "1st Choice:",
     date_2: "2nd Choice:",
     date_3: "3rd Choice:",
-    date_desc: "※Basically weekdays 10:00-18:00 JST, but nights and weekends are also flexible. Please request your timezone.",
+    date_desc: "※Online (Google Meet, etc.) is the default. Zoom or phone is also available upon request in the message field. Basically weekdays 10:00-18:00 JST, but nights/weekends are flexible.",
     label_message: "Inquiry Content (Current Status & What you want to discuss)",
     placeholder_message: "Please describe your current situation, challenges, or what you specifically want to discuss.",
     consent_note: "Please review our <a href='/terms/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Terms of Service</a>, <a href='/privacy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Privacy Policy</a>, <a href='/cancel-policy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Cancellation Policy</a>, and <a href='/counseling-notes/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Counseling disclaimer</a> before submitting.",
@@ -326,7 +326,7 @@ const f = {
     date_1: "1er Choix:",
     date_2: "2e Choix:",
     date_3: "3e Choix:",
-    date_desc: "※En principe, en semaine de 10h00 à 18h00 JST, mais flexible les soirs et week-ends. Précisez votre fuseau horaire.",
+    date_desc: "※En ligne (Google Meet, etc.) par défaut. Zoom ou téléphone disponible sur demande dans le message. En principe, en semaine de 10h00 à 18h00 JST, flexible en soirée/week-end.",
     label_message: "Détails du message (Situation actuelle & Sujet à aborder)",
     placeholder_message: "N'hésitez pas à décrire vos défis, vos besoins ou la situation actuelle que vous souhaitez aborder.",
     consent_note: "Veuillez lire nos <a href='/terms/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Conditions d'Utilisation</a>, <a href='/privacy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Politique de Confidentialité</a>, <a href='/cancel-policy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Politique d'Annulation</a> et <a href='/counseling-notes/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Avertissements</a> avant d'envoyer.",
@@ -447,19 +447,7 @@ const t = f[lang];
               <p>{t.form_start_desc}</p>
             </div>
 
-            <div class="consultation-guide" aria-label={t.consult_examples_title}>
-              <div class="guide-section">
-                <strong>{t.consult_examples_title}</strong>
-                <p>{t.consult_examples_desc}</p>
-                <ul>
-                  {t.consult_examples.map((item) => <li>{item}</li>)}
-                </ul>
-              </div>
-              <div class="guide-section guide-section-safe">
-                <strong>{t.safety_note_title}</strong>
-                <p>{t.safety_note_desc}</p>
-              </div>
-            </div>
+
             
             <div class="form-group">
               <label for="name">{t.label_name} <span class="required">{t.required}</span></label>
@@ -471,50 +459,9 @@ const t = f[lang];
               <input type="email" id="email" name="email" required placeholder={t.placeholder_email} />
             </div>
 
-            <div class="form-group">
-              <label for="seen_source">{t.label_source}</label>
-              <select id="seen_source" name="seen_source">
-                <option value="" selected>{t.placeholder_source}</option>
-                <option value="psychology_demo">{t.sources.psychology_demo}</option>
-                <option value="salon_demo">{t.sources.salon_demo}</option>
-                <option value="lp_portfolio">{t.sources.lp_portfolio}</option>
-                <option value="ai_chat_demo">{t.sources.ai_chat_demo}</option>
-                <option value="tool_or_pricing">{t.sources.tool_or_pricing}</option>
-                <option value="other">{t.sources.other}</option>
-              </select>
-              <p class="field-desc">{t.source_hint}</p>
-            </div>
+            <input type="hidden" id="seen_source" name="seen_source" value="" />
 
-            <div class="form-group">
-              <label for="method">{t.label_method} <span class="required">{t.required}</span></label>
-              <select id="method" name="method" required>
-                <option value="" disabled selected>{t.placeholder_method}</option>
-                <option value="google_meet">{t.methods.google_meet}</option>
-                <option value="line_video">{t.methods.line_video}</option>
-                <option value="phone">{t.methods.phone}</option>
-                <option value="other">{t.methods.other}</option>
-              </select>
-              <p class="field-desc">{t.method_hint}</p>
-            </div>
 
-            <!-- 動的な連絡先詳細入力欄（電話・LINE選択時のみJavaScriptで表示制御） -->
-            <div class="form-group" id="dynamic-contact-field" style="display: none; transition: all 0.3s ease;">
-              <label for="contact_detail" id="dynamic-contact-label">ご連絡先詳細</label>
-              <input 
-                type="text" 
-                id="contact_detail" 
-                name="contact_detail" 
-                placeholder="" 
-                data-phone-label={t.label_phone}
-                data-phone-placeholder={t.placeholder_phone}
-                data-phone-desc={t.desc_phone}
-                data-line-label={t.label_line}
-                data-line-placeholder={t.placeholder_line}
-                data-line-desc={t.desc_line}
-                data-required-text={t.required}
-              />
-              <p class="field-desc" id="dynamic-contact-desc"></p>
-            </div>
 
             <div class="form-group date-candidates">
               <label>{t.label_dates}</label>
@@ -806,62 +753,7 @@ const t = f[lang];
     font-size: 0.88rem;
     line-height: 1.6;
   }
-  .consultation-guide {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr);
-    gap: 24px;
-    margin: 0 0 30px;
-    padding: 24px 0;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .guide-section {
-    min-width: 0;
-  }
-  .guide-section strong {
-    display: block;
-    margin-bottom: 8px;
-    color: #2c2c2c;
-    font-family: 'Shippori Mincho', serif;
-    font-size: 1rem;
-    font-weight: 800;
-  }
-  .guide-section p {
-    margin: 0 0 12px;
-    color: #666;
-    font-size: 0.86rem;
-    line-height: 1.7;
-  }
-  .guide-section ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .guide-section li {
-    position: relative;
-    margin-bottom: 8px;
-    padding-left: 18px;
-    color: #445;
-    font-size: 0.86rem;
-    line-height: 1.6;
-  }
-  .guide-section li::before {
-    content: "";
-    position: absolute;
-    top: 0.72em;
-    left: 0;
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: var(--accent);
-  }
-  .guide-section-safe {
-    padding-left: 24px;
-    border-left: 1px solid var(--trust-line);
-  }
-  .guide-section-safe strong {
-    color: var(--trust);
-  }
+
   .form-group { margin-bottom: 30px; }
   .form-group label { display: block; font-weight: 800; font-size: 0.9rem; margin-bottom: 10px; color: #2c2c2c; }
   .required { color: var(--accent-red); font-size: 0.7rem; margin-left: 5px; }
@@ -1039,48 +931,7 @@ const t = f[lang];
       }
     }
 
-    function initDynamicContactField() {
-      const methodSelect = document.getElementById('method');
-      const dynamicField = document.getElementById('dynamic-contact-field');
-      const dynamicLabel = document.getElementById('dynamic-contact-label');
-      const dynamicInput = document.getElementById('contact_detail');
-      const dynamicDesc = document.getElementById('dynamic-contact-desc');
-      if (!methodSelect || !dynamicField || !dynamicLabel || !dynamicInput || !dynamicDesc) return;
 
-      function updateField() {
-        const val = methodSelect.value;
-        const phoneLabel = dynamicInput.getAttribute('data-phone-label');
-        const phonePlaceholder = dynamicInput.getAttribute('data-phone-placeholder');
-        const phoneDesc = dynamicInput.getAttribute('data-phone-desc');
-        const lineLabel = dynamicInput.getAttribute('data-line-label');
-        const linePlaceholder = dynamicInput.getAttribute('data-line-placeholder');
-        const lineDesc = dynamicInput.getAttribute('data-line-desc');
-        const reqText = dynamicInput.getAttribute('data-required-text');
-
-        if (val === 'phone') {
-          dynamicField.style.display = 'block';
-          dynamicLabel.innerHTML = `${phoneLabel} <span class="required">${reqText}</span>`;
-          dynamicInput.placeholder = phonePlaceholder;
-          dynamicInput.required = true;
-          dynamicDesc.textContent = phoneDesc;
-        } else if (val === 'line_video') {
-          dynamicField.style.display = 'block';
-          dynamicLabel.innerHTML = `${lineLabel} <span class="required">${reqText}</span>`;
-          dynamicInput.placeholder = linePlaceholder;
-          dynamicInput.required = true;
-          dynamicDesc.textContent = lineDesc;
-        } else {
-          dynamicField.style.display = 'none';
-          dynamicInput.required = false;
-          dynamicInput.placeholder = '';
-          dynamicDesc.textContent = '';
-        }
-      }
-
-      methodSelect.addEventListener('change', updateField);
-      // 初期状態の反映（入力フォームに戻った場合などの保持対応）
-      updateField();
-    }
 
       function initContactForm() {
         const form = document.querySelector('.contact-form');
@@ -1232,13 +1083,11 @@ const t = f[lang];
 
       // 初回ロード時
       initSourceContext();
-      initDynamicContactField();
       initContactForm();
       checkBenefitParam();
-      // Astroのトランジション（画面遷移時）対応
+      // Astro's transition support
       document.addEventListener('astro:page-load', function() {
         initSourceContext();
-        initDynamicContactField();
         initContactForm();
         checkBenefitParam();
       });
