@@ -331,7 +331,41 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
 
     .card-footer { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: auto; }
     .tech-tag { font-size: 0.7rem; font-weight: 800; color: #888; background: #f5f5f5; padding: 4px 8px; border-radius: 4px; }
-    .card-link, .premium-link { margin-left: auto; font-size: 0.85rem; font-weight: 800; color: var(--accent); text-decoration: none; }
+    .card-link, .premium-link {
+      margin-left: auto;
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 22px;
+      border-radius: 99px;
+      color: #fff !important;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+      border: none;
+    }
+    .card-link:hover, .premium-link:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+    .card-border-green .card-link, .card-border-green .premium-link {
+      background: var(--tag-works);
+      box-shadow: 0 4px 12px rgba(44, 124, 94, 0.2);
+    }
+    .card-border-gold .card-link, .card-border-gold .premium-link {
+      background: var(--tag-sample);
+      box-shadow: 0 4px 12px rgba(140, 107, 31, 0.2);
+    }
+    .card-border-blue .card-link, .card-border-blue .premium-link {
+      background: var(--tag-demo);
+      box-shadow: 0 4px 12px rgba(44, 94, 124, 0.2);
+    }
+    .card-border-red .card-link, .card-border-red .premium-link {
+      background: var(--accent-red);
+      box-shadow: 0 4px 12px rgba(199, 53, 47, 0.2);
+    }
 
     .packages-cta { margin-top: 100px; }
     .glass-panel {
