@@ -150,8 +150,8 @@ const curT = t[lang];
 
   .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
   .btn-primary, .btn-secondary {
-    padding: 16px 40px; border-radius: 999px; font-weight: 800; text-decoration: none; 
-    transition: 0.3s; text-align: center; min-width: 260px;
+    box-sizing: border-box; max-width: 100%; padding: 16px 40px; border-radius: 999px; font-weight: 800; text-decoration: none; 
+    transition: 0.3s; text-align: center; min-width: 260px; overflow-wrap: anywhere;
   }
   .btn-primary { background: var(--trust, #0f4c5c); color: #fff; }
   .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(15, 76, 92, 0.2); background: #123c45; }
@@ -160,7 +160,7 @@ const curT = t[lang];
 
   @media (max-width: 600px) {
     .consultation-card { padding: 30px 20px; }
-    .btn-primary, .btn-secondary { width: 100%; min-width: 0; }
+    .btn-primary, .btn-secondary { width: 100%; min-width: 0; padding-right: 24px; padding-left: 24px; }
     .flow-step { gap: 16px; }
   }
 </style>

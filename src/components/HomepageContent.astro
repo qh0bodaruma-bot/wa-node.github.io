@@ -48,6 +48,99 @@ const serviceAudiences = {
   ]
 };
 
+const serviceVisuals = {
+  ja: [
+    {
+      mark: 'HP',
+      flow: ['不安', '整理', '相談'],
+      chips: ['心理導線', '料金設計', '公開後'],
+      summary: '信頼・料金・相談の流れを、初見で伝わる形に整えます。'
+    },
+    {
+      mark: 'LP',
+      flow: ['現状', '改善', '反応'],
+      chips: ['CTA改善', 'GA4', 'AI検索'],
+      summary: '迷いどころを見つけ、相談につながる導線へ組み直します。'
+    },
+    {
+      mark: '月次',
+      flow: ['判断', '実装', '改善'],
+      chips: ['月次相談', '優先順位', '継続改善'],
+      summary: 'Web・AI・業務の判断を、継続して相談できる形にします。'
+    },
+    {
+      mark: 'AI',
+      flow: ['業務', 'AI', '時短'],
+      chips: ['ChatGPT', 'LINE', '自動化'],
+      summary: '日々の作業を整理し、使いやすいICT活用へつなげます。'
+    }
+  ],
+  en: [
+    {
+      mark: 'HP',
+      flow: ['Doubt', 'Structure', 'Inquiry'],
+      chips: ['UX flow', 'Pricing', 'Support'],
+      summary: 'Make trust, pricing, and inquiry flow clear at first glance.'
+    },
+    {
+      mark: 'LP',
+      flow: ['Current', 'Improve', 'Response'],
+      chips: ['CTA', 'GA4', 'AI search'],
+      summary: 'Find friction and rebuild the page toward easier inquiries.'
+    },
+    {
+      mark: 'Monthly',
+      flow: ['Decide', 'Build', 'Improve'],
+      chips: ['Monthly', 'Priority', 'Iteration'],
+      summary: 'Keep web, AI, and workflow decisions moving with ongoing support.'
+    },
+    {
+      mark: 'AI',
+      flow: ['Work', 'AI', 'Time saved'],
+      chips: ['ChatGPT', 'LINE', 'Automation'],
+      summary: 'Organize daily work into practical, usable ICT support.'
+    }
+  ],
+  fr: [
+    {
+      mark: 'HP',
+      flow: ['Doute', 'Structure', 'Contact'],
+      chips: ['Parcours', 'Tarifs', 'Suivi'],
+      summary: 'Rendre la confiance, les tarifs et le contact clairs des le depart.'
+    },
+    {
+      mark: 'LP',
+      flow: ['Actuel', 'Ameliorer', 'Reponse'],
+      chips: ['CTA', 'GA4', 'Recherche IA'],
+      summary: 'Identifier les freins et reorganiser la page vers le contact.'
+    },
+    {
+      mark: 'Mensuel',
+      flow: ['Decider', 'Creer', 'Ameliorer'],
+      chips: ['Mensuel', 'Priorite', 'Iteration'],
+      summary: 'Faire avancer les decisions web, IA et organisation dans la duree.'
+    },
+    {
+      mark: 'IA',
+      flow: ['Travail', 'IA', 'Gain temps'],
+      chips: ['ChatGPT', 'LINE', 'Automatisation'],
+      summary: 'Transformer le travail quotidien en usages TIC simples et pratiques.'
+    }
+  ]
+};
+
+const detailLabel = {
+  ja: '詳しく見る',
+  en: 'Details',
+  fr: 'Details'
+};
+
+const chipLabel = {
+  ja: '対応内容',
+  en: 'Included',
+  fr: 'Contenu'
+};
+
 const trustSignals = {
   ja: [
     { value: '20年以上', label: 'IT・Web制作の現場経験' },
@@ -138,37 +231,105 @@ const trustSignals = {
       </div>
       <div class="consult-grid">
         <article class="consult-card highlight">
+          <div class="service-visual" aria-hidden="true">
+            <span class="service-mark">{serviceVisuals[lang][0].mark}</span>
+            <div class="mini-flow">
+              <span>{serviceVisuals[lang][0].flow[0]}</span>
+              <i></i>
+              <span>{serviceVisuals[lang][0].flow[1]}</span>
+              <i></i>
+              <span>{serviceVisuals[lang][0].flow[2]}</span>
+            </div>
+          </div>
           <span class="card-tag">{t.services.card1_tag[lang]}</span>
           <h3>{t.services.card1_title[lang]}</h3>
           <p class="service-fit">{serviceAudiences[lang][0]}</p>
-          <p>{t.services.card1_desc[lang]}</p>
+          <ul class="service-chips" aria-label={chipLabel[lang]}>
+            {serviceVisuals[lang][0].chips.map((chip) => <li>{chip}</li>)}
+          </ul>
+          <p class="service-summary">{serviceVisuals[lang][0].summary}</p>
+          <details class="service-details">
+            <summary>{detailLabel[lang]}</summary>
+            <p>{t.services.card1_desc[lang]}</p>
+          </details>
           <div class="card-sub-links">
             <a href={getLocalizedLink('/easy-guide')} class="sub-link-text">{t.services.sub_link_hp_lp[lang]}</a>
           </div>
           <a href={`${getLocalizedLink('/pricing')}#web-production`} class="card-link">{t.services.card1_link[lang]}</a>
         </article>
         <article class="consult-card">
+          <div class="service-visual" aria-hidden="true">
+            <span class="service-mark">{serviceVisuals[lang][1].mark}</span>
+            <div class="mini-flow">
+              <span>{serviceVisuals[lang][1].flow[0]}</span>
+              <i></i>
+              <span>{serviceVisuals[lang][1].flow[1]}</span>
+              <i></i>
+              <span>{serviceVisuals[lang][1].flow[2]}</span>
+            </div>
+          </div>
           <span class="card-tag">{t.services.card2_tag[lang]}</span>
           <h3>{t.services.card2_title[lang]}</h3>
           <p class="service-fit">{serviceAudiences[lang][1]}</p>
-          <p>{t.services.card2_desc[lang]}</p>
+          <ul class="service-chips" aria-label={chipLabel[lang]}>
+            {serviceVisuals[lang][1].chips.map((chip) => <li>{chip}</li>)}
+          </ul>
+          <p class="service-summary">{serviceVisuals[lang][1].summary}</p>
+          <details class="service-details">
+            <summary>{detailLabel[lang]}</summary>
+            <p>{t.services.card2_desc[lang]}</p>
+          </details>
           <a href={`${getLocalizedLink('/pricing')}#copilot`} class="card-link">{t.services.card2_link[lang]}</a>
         </article>
         <article class="consult-card">
+          <div class="service-visual" aria-hidden="true">
+            <span class="service-mark">{serviceVisuals[lang][2].mark}</span>
+            <div class="mini-flow">
+              <span>{serviceVisuals[lang][2].flow[0]}</span>
+              <i></i>
+              <span>{serviceVisuals[lang][2].flow[1]}</span>
+              <i></i>
+              <span>{serviceVisuals[lang][2].flow[2]}</span>
+            </div>
+          </div>
           <span class="card-tag">{t.services.card3_tag[lang]}</span>
           <h3>{t.services.card3_title[lang]}</h3>
           <p class="service-fit">{serviceAudiences[lang][2]}</p>
-          <p>{t.services.card3_desc[lang]}</p>
+          <ul class="service-chips" aria-label={chipLabel[lang]}>
+            {serviceVisuals[lang][2].chips.map((chip) => <li>{chip}</li>)}
+          </ul>
+          <p class="service-summary">{serviceVisuals[lang][2].summary}</p>
+          <details class="service-details">
+            <summary>{detailLabel[lang]}</summary>
+            <p>{t.services.card3_desc[lang]}</p>
+          </details>
           <div class="card-sub-links">
             <a href={getLocalizedLink('/easy-guide') + '#gas-section'} class="sub-link-text">{t.services.sub_link_gas[lang]}</a>
           </div>
           <a href={`${getLocalizedLink('/pricing')}#copilot`} class="card-link">{t.services.card3_link[lang]}</a>
         </article>
         <article class="consult-card">
+          <div class="service-visual" aria-hidden="true">
+            <span class="service-mark">{serviceVisuals[lang][3].mark}</span>
+            <div class="mini-flow">
+              <span>{serviceVisuals[lang][3].flow[0]}</span>
+              <i></i>
+              <span>{serviceVisuals[lang][3].flow[1]}</span>
+              <i></i>
+              <span>{serviceVisuals[lang][3].flow[2]}</span>
+            </div>
+          </div>
           <span class="card-tag">{t.services.card4_tag[lang]}</span>
           <h3>{t.services.card4_title[lang]}</h3>
           <p class="service-fit">{serviceAudiences[lang][3]}</p>
-          <p>{t.services.card4_desc[lang]}</p>
+          <ul class="service-chips" aria-label={chipLabel[lang]}>
+            {serviceVisuals[lang][3].chips.map((chip) => <li>{chip}</li>)}
+          </ul>
+          <p class="service-summary">{serviceVisuals[lang][3].summary}</p>
+          <details class="service-details">
+            <summary>{detailLabel[lang]}</summary>
+            <p>{t.services.card4_desc[lang]}</p>
+          </details>
           <a href={`${getLocalizedLink('/pricing')}#ict-ai`} class="card-link">{t.services.card4_link[lang]}</a>
         </article>
       </div>
@@ -431,13 +592,89 @@ const trustSignals = {
     border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
     transition: 0.3s;
+    display: flex;
+    flex-direction: column;
   }
   .consult-card:hover { transform: translateY(-5px); border-color: var(--trust-mid); box-shadow: var(--card-shadow-hover); }
   .consult-card.highlight {
     background: linear-gradient(135deg, rgba(238, 245, 242, 0.92), rgba(199, 53, 47, 0.035)), var(--surface);
     border-color: rgba(15, 76, 92, 0.24);
   }
+  .service-visual {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-height: 74px;
+    margin-bottom: 20px;
+    padding: 14px;
+    border: 1px solid var(--trust-line);
+    border-radius: 20px;
+    background: linear-gradient(135deg, rgba(238, 245, 242, 0.86), rgba(255, 255, 255, 0.78));
+  }
+  .service-mark {
+    display: grid;
+    flex: 0 0 54px;
+    width: 54px;
+    height: 54px;
+    place-items: center;
+    border-radius: 16px;
+    background: var(--trust);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 900;
+    line-height: 1.1;
+    text-align: center;
+    box-shadow: 0 10px 22px rgba(15, 76, 92, 0.14);
+  }
+  .consult-card.highlight .service-mark {
+    background: var(--home-action);
+    box-shadow: 0 10px 22px rgba(199, 53, 47, 0.16);
+  }
+  .mini-flow {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    gap: 7px;
+    min-width: 0;
+  }
+  .mini-flow span {
+    flex: 1;
+    min-width: 0;
+    padding: 7px 8px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.94);
+    color: var(--trust);
+    font-size: 0.76rem;
+    font-weight: 900;
+    line-height: 1.25;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .mini-flow i {
+    position: relative;
+    flex: 0 0 16px;
+    height: 2px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.24);
+  }
+  .mini-flow i::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -1px;
+    width: 6px;
+    height: 6px;
+    border-top: 2px solid rgba(15, 76, 92, 0.28);
+    border-right: 2px solid rgba(15, 76, 92, 0.28);
+    transform: translateY(-50%) rotate(45deg);
+  }
   .card-tag { font-size: 0.75rem; font-weight: 800; color: var(--trust); letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
+  .consult-card h3 {
+    margin: 0 0 14px;
+    font-size: 1.28rem;
+    line-height: 1.55;
+    text-wrap: balance;
+  }
   .service-fit {
     display: inline-block;
     margin: 0 0 14px;
@@ -449,10 +686,67 @@ const trustSignals = {
     font-weight: 800;
     line-height: 1.5;
   }
+  .service-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+  }
+  .service-chips li {
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(140, 107, 31, 0.08);
+    color: var(--home-gold);
+    font-size: 0.76rem;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+  .service-summary {
+    margin: 0 0 14px;
+    color: var(--text-deep);
+    font-size: 0.98rem;
+    font-weight: 700;
+    line-height: 1.75;
+  }
+  .service-details {
+    margin: 0 0 12px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(15, 76, 92, 0.1);
+  }
+  .service-details summary {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--home-gold);
+    cursor: pointer;
+    font-size: 0.86rem;
+    font-weight: 900;
+    list-style: none;
+  }
+  .service-details summary::-webkit-details-marker { display: none; }
+  .service-details summary::after {
+    content: "+";
+    display: grid;
+    width: 18px;
+    height: 18px;
+    place-items: center;
+    border-radius: 999px;
+    background: rgba(140, 107, 31, 0.1);
+    line-height: 1;
+  }
+  .service-details[open] summary::after { content: "-"; }
+  .service-details p {
+    margin: 10px 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
   .card-sub-links { margin-top: 12px; margin-bottom: 4px; }
   .sub-link-text { font-size: 0.85rem; font-weight: 800; color: var(--accent2); text-decoration: none; display: inline-block; transition: 0.3s; padding: 4px 0; }
   .sub-link-text:hover { color: var(--accent); text-decoration: underline; transform: translateX(2px); }
-  .card-link { display: inline-block; margin-top: 16px; font-weight: 800; color: var(--trust); text-decoration: none; border-bottom: 1px solid var(--trust); }
+  .card-link { display: inline-block; width: fit-content; margin-top: auto; font-weight: 800; color: var(--trust); text-decoration: none; border-bottom: 1px solid var(--trust); }
 
   /* Experience Grid */
   .action-buttons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 40px; }
@@ -511,6 +805,10 @@ const trustSignals = {
     .trust-signal:last-child { border-bottom: 0; }
     .consult-grid, .action-buttons-grid, .simple-flow-grid, .concept-intro-grid { grid-template-columns: 1fr; }
     .consult-card { padding: 28px 22px; }
+    .consult-card h3 { font-size: 1.12rem; line-height: 1.6; }
+    .service-visual { align-items: stretch; flex-direction: column; }
+    .service-mark { width: 100%; height: auto; min-height: 42px; flex-basis: auto; border-radius: 14px; }
+    .mini-flow { width: 100%; }
     .flow-item:not(:last-child)::after { display: none; }
     .profile-summary-inner { flex-direction: column; text-align: center; gap: 24px; }
     .profile-avatar-wrap { flex: 0 0 160px; width: 160px; height: 160px; }
