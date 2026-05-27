@@ -2,6 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import SakuraCanvas from '../components/SakuraCanvas.astro';
 import { ViewTransitions } from 'astro:transitions';
 import { MULTILANG_PAGES } from '../i18n/navigation';
 import '../styles/global.css';
@@ -114,9 +115,39 @@ const getLocalizedHref = (l: string) => {
       document.addEventListener('DOMContentLoaded', initReveal);
       // View Transitions navigation
       document.addEventListener('astro:page-load', initReveal);
+
+      // Global Progress Bar for View Transitions
+      (function() {
+        document.addEventListener('astro:before-preparation', () => {
+          const bar = document.getElementById('global-progress-bar');
+          if (bar) {
+            bar.style.width = '0%';
+            bar.classList.remove('finish');
+            bar.classList.add('active');
+            // 擬似的にプログレスを進行させる
+            setTimeout(() => {
+              bar.style.width = '70%';
+            }, 10);
+          }
+        });
+
+        document.addEventListener('astro:after-preparation', () => {
+          const bar = document.getElementById('global-progress-bar');
+          if (bar) {
+            bar.classList.add('finish');
+            bar.style.width = '100%';
+            setTimeout(() => {
+              bar.classList.remove('active', 'finish');
+              bar.style.width = '0%';
+            }, 400);
+          }
+        });
+      })();
     </script>
   </head>
   <body>
+    <div id="global-progress-bar" class="global-progress-bar" aria-hidden="true"></div>
+    <SakuraCanvas />
     <Header lang={currentLang} />
     <slot />
     <Footer lang={currentLang} />
