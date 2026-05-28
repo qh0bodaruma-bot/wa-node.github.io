@@ -43,6 +43,9 @@ const f = {
       "料金表・CTA・フォームのどこで迷われているか知りたい",
       "AIやICTを使いたいが、何から始めるべきか相談したい"
     ],
+    scope_note_title: "和-Nodeが大切にしている対応範囲",
+    scope_note_desc: "不安を煽る表現や、断りにくさを利用した導線設計は行いません。また、検索順位・広告成果・問い合わせ数・売上などの成果保証は行っていません。",
+    scope_note_closing: "その代わり、訪問者が安心して比較・判断・相談できるWeb導線づくりを支援します。",
     safety_note_title: "初回フォームに書かなくてよいこと",
     safety_note_desc: "ログイン情報、顧客名簿、売上の詳細、病歴やメンタル面の詳しい内容などは入力しないでください。必要になった場合のみ、相談後に安全な共有方法を確認します。",
     label_issue: "今いちばん困っていること",
@@ -151,6 +154,9 @@ const f = {
       "I want to know where people hesitate around pricing, CTAs, or forms",
       "I want to use AI or ICT, but I am not sure where to start"
     ],
+    scope_note_title: "How Wa-Node Defines Its Scope",
+    scope_note_desc: "We do not design experiences that pressure people through anxiety, urgency, or difficulty refusing. We also do not guarantee search rankings, ad performance, inquiry volume, or sales.",
+    scope_note_closing: "Instead, we support web flows that help visitors compare, decide, and contact you with confidence.",
     safety_note_title: "What not to include in the first form",
     safety_note_desc: "Please do not include login credentials, customer lists, detailed sales data, medical history, or sensitive mental-health details. If needed, we will confirm a safer sharing method after the consultation starts.",
     label_issue: "What is your biggest current challenge?",
@@ -259,6 +265,9 @@ const f = {
       "Je veux savoir où les visiteurs hésitent: tarifs, CTA ou formulaire",
       "Je veux utiliser l'IA ou les TIC, mais je ne sais pas par où commencer"
     ],
+    scope_note_title: "Le périmètre que Wa-Node respecte",
+    scope_note_desc: "Nous ne concevons pas de parcours qui poussent à agir par anxiété, urgence ou difficulté à refuser. Nous ne garantissons pas non plus le classement SEO, les résultats publicitaires, le volume de demandes ou les ventes.",
+    scope_note_closing: "Nous aidons plutôt à créer des parcours web qui permettent aux visiteurs de comparer, décider et vous contacter avec confiance.",
     safety_note_title: "Ce qu'il vaut mieux éviter dans le premier formulaire",
     safety_note_desc: "N'indiquez pas d'identifiants, de listes clients, de données de vente détaillées, d'antécédents médicaux ou d'informations sensibles sur la santé mentale. Si nécessaire, nous confirmerons une méthode de partage plus sûre après le début de la consultation.",
     label_issue: "Quel est votre principal défi actuel ?",
@@ -445,6 +454,12 @@ const t = f[lang];
             <div class="form-start-divider">
               <span>{t.form_start_label}</span>
               <p>{t.form_start_desc}</p>
+            </div>
+
+            <div class="scope-note-card">
+              <strong>{t.scope_note_title}</strong>
+              <p>{t.scope_note_desc}</p>
+              <p class="scope-closing">{t.scope_note_closing}</p>
             </div>
 
 
@@ -754,6 +769,36 @@ const t = f[lang];
     line-height: 1.6;
   }
 
+  .scope-note-card {
+    margin: 0 0 30px;
+    padding: 18px 20px;
+    border: 1px solid rgba(199, 53, 47, 0.22);
+    border-left: 5px solid var(--accent-red);
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(253, 246, 241, 0.9));
+    box-shadow: 0 10px 24px rgba(15, 76, 92, 0.05);
+  }
+  .scope-note-card strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--accent-red);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+  .scope-note-card p {
+    margin: 0;
+    color: #555;
+    font-size: 0.85rem;
+    line-height: 1.7;
+  }
+  .scope-closing {
+    margin-top: 10px !important;
+    color: var(--trust) !important;
+    font-weight: 800;
+  }
+
   .form-group { margin-bottom: 30px; }
   .form-group label { display: block; font-weight: 800; font-size: 0.9rem; margin-bottom: 10px; color: #2c2c2c; }
   .required { color: var(--accent-red); font-size: 0.7rem; margin-left: 5px; }
@@ -814,13 +859,7 @@ const t = f[lang];
       left: 16px;
     }
     .form-start-divider { text-align: left; }
-    .consultation-guide { grid-template-columns: 1fr; gap: 20px; }
-    .guide-section-safe {
-      padding-left: 0;
-      padding-top: 20px;
-      border-left: 0;
-      border-top: 1px solid var(--trust-line);
-    }
+    .scope-note-card { padding: 16px; }
     .contact-header { overflow-x: hidden; }
     .contact-header .container {
       max-width: 390px;
