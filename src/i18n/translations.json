@@ -13,7 +13,7 @@
     "title_highlight": { "ja": "心理学", "en": "Psychological Reason", "fr": "Raison Psychologique" },
     "title_part2": { "ja": "的な根拠がある。", "en": " to be Chosen.", "fr": " d'être Choisi." },
     "lead": {
-      "ja": "和-Nodeは、心理学の知見を活かし、訪問者の不安や迷いを減らすホームページ制作・LP改善の窓口です。料金・強み・相談の流れが伝わる情報設計、押し付け感のないCTA、GA4などを使った計測改善まで、相談しやすく育てやすいWeb環境を整えます。",
+      "ja": "和-Nodeは、心理学の知見を活かし、訪問者の不安や迷いを減らすホームページ制作・LP改善の窓口です。料金・強み・相談の流れが伝わる情報設計、自然に相談しやすいボタンや導線、アクセス解析を使った改善まで、相談しやすく育てやすいWeb環境を整えます。",
       "en": "Wa-Node blends behavioral psychology and statistical insights with web design to prevent bounces. Serving as your business co-pilot, we support decisions and execution from LP/website production to AI/ICT integration.",
       "fr": "Wa-Node applique la psychologie comportementale et les analyses statistiques à la conception web. En tant que co-pilote d'affaires, nous soutenons vos décisions de la création de LP/sites internet à l'intégration de l'IA/TIC."
     },
@@ -59,7 +59,7 @@
     "card1_link": { "ja": "推奨 64,000円〜 →", "en": "Recommended from 64,000 JPY →", "fr": "Recommandé dès 64 000 JPY →" },
     "card2_tag": { "ja": "Web Improvement", "en": "Web Improvement", "fr": "Amélioration Web" },
     "card2_title": { "ja": "今あるサイト・LPを改善したい", "en": "Improve an Existing Site or LP", "fr": "Améliorer un site ou une LP" },
-    "card2_desc": { "ja": "CTA、料金表、フォーム、AI検索で拾われる構造、色彩・動き・読みにくさまで見直し、相談につながりやすい導線へ整えます。GA4・Clarityなどの計測改善にも対応します。", "en": "We improve CTAs, pricing, forms, AI-search-ready structure, colors, motion, and readability so existing pages lead more naturally to inquiries, including GA4 and Clarity measurement.", "fr": "Nous améliorons CTA, tarifs, formulaires, structure lisible par l'IA, couleurs, mouvements et lisibilité pour faciliter les demandes, avec mesure GA4 et Clarity." },
+    "card2_desc": { "ja": "相談ボタン、料金表、フォーム、AI検索で拾われる構造、色彩・動き・読みにくさまで見直し、相談につながりやすい導線へ整えます。アクセス解析や閲覧状況の確認を使った改善にも対応します。", "en": "We improve inquiry buttons, pricing, forms, AI-search-ready structure, colors, motion, and readability so existing pages lead more naturally to inquiries, including analytics-based improvement.", "fr": "Nous améliorons les boutons de contact, tarifs, formulaires, structure lisible par l'IA, couleurs, mouvements et lisibilité pour faciliter les demandes, avec amélioration basée sur l'analyse." },
     "card2_link": { "ja": "改善相談 15,000円〜 →", "en": "Improvement review from 15,000 JPY →", "fr": "Audit d'amélioration dès 15 000 JPY →" },
     "card3_tag": { "ja": "Ongoing Partnership", "en": "Ongoing Partnership", "fr": "Partenariat" },
     "card3_title": { "ja": "作った後も相談したい", "en": "Keep Improving After Launch", "fr": "Continuer à améliorer après lancement" },
