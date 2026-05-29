@@ -41,6 +41,24 @@ const worries = [
   },
 ];
 
+const designNotes = [
+  {
+    label: 'Industry Insight',
+    title: '地域サロンは「腕前」より先に不安解消が見られる',
+    text: '初回来店前は、施術内容よりも料金、所要時間、場所、予約方法の分かりやすさが判断材料になります。そのため、料金と流れを早い位置に置いています。',
+  },
+  {
+    label: 'Psychology',
+    title: '予約前に小さな納得を積み上げる',
+    text: 'いきなり予約ボタンを押させるのではなく、料金、初回の流れ、FAQを見てから空き確認へ進めるようにしています。押し売り感を減らすための順番です。',
+  },
+  {
+    label: 'ICT Route',
+    title: 'LINE・地図・フォームを分けて迷いを減らす',
+    text: '電話が苦手な人、場所を先に確認したい人、相談してから決めたい人に合わせて入口を分けています。店舗側の返信負担を減らす導線にも応用できます。',
+  },
+];
+
 const menuItems = [
   {
     name: '初回コンディションチェック',
@@ -104,6 +122,25 @@ const steps = [
           地域サロンや整体院では、技術説明よりも先に「料金は分かるか」「初回は何をするか」
           「予約は簡単か」が見られます。このデモは、初回来店前の不安を減らす順番で情報を並べています。
         </p>
+      </div>
+    </section>
+
+    <section class="section design-notes-section">
+      <div class="container">
+        <div class="section-heading">
+          <p class="eyebrow">Design Notes</p>
+          <h2>このサンプルで入れている工夫と、その理由</h2>
+          <p>架空LPでも、業種ごとの相談前心理や予約行動を想定して設計しています。</p>
+        </div>
+        <div class="design-notes-grid">
+          {designNotes.map((item) => (
+            <article class="design-note-card">
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
 
@@ -445,6 +482,12 @@ const steps = [
     margin-bottom: 34px;
   }
 
+  .design-notes-section {
+    background: #fffdf8;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .design-notes-grid,
   .worry-grid,
   .menu-grid {
     display: grid;
@@ -452,6 +495,7 @@ const steps = [
     gap: 22px;
   }
 
+  .design-note-card,
   .worry-card,
   .menu-card {
     border: 1px solid var(--line);
@@ -460,10 +504,16 @@ const steps = [
     box-shadow: 0 16px 36px rgba(29, 48, 45, 0.055);
   }
 
+  .design-note-card,
   .worry-card {
     padding: 26px;
   }
 
+  .design-note-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(230, 241, 237, 0.72));
+  }
+
+  .design-note-card span,
   .worry-card span,
   .menu-time {
     display: inline-flex;
@@ -476,6 +526,12 @@ const steps = [
     font-weight: 800;
   }
 
+  .design-note-card span {
+    background: rgba(36, 92, 82, 0.1);
+    color: var(--sage-dark);
+  }
+
+  .design-note-card h3,
   .worry-card h3,
   .menu-card h3,
   .flow-item h3 {
@@ -484,6 +540,7 @@ const steps = [
     line-height: 1.45;
   }
 
+  .design-note-card p,
   .worry-card p,
   .menu-card p,
   .flow-item p {
@@ -712,6 +769,7 @@ const steps = [
       gap: 34px;
     }
 
+    .design-notes-grid,
     .worry-grid,
     .menu-grid {
       grid-template-columns: 1fr;
