@@ -261,6 +261,31 @@ const structuredData = [
           </table>
         </div>
       </details>
+
+      <div class="demo-price-guide reveal" aria-labelledby="demo-price-title">
+        <div class="demo-price-copy">
+          <p class="eyebrow">Demo Price Guide</p>
+          <h3 id="demo-price-title">デモを見ながら価格感をつかむ</h3>
+          <p>「このデモに近いものならいくら？」を相談前にイメージしやすいよう、制作例にも参考価格帯を載せています。</p>
+        </div>
+        <div class="demo-price-grid">
+          <a href="/lp-portfolio/" class="demo-price-card card-border-gold">
+            <span>LPサンプル</span>
+            <strong>24,000円〜120,000円前後</strong>
+            <small>業種別LP、キャンペーンLP、予約・申込導線など</small>
+          </a>
+          <a href="/salon-reservation-demo/" class="demo-price-card card-border-green">
+            <span>予約導線LP</span>
+            <strong>64,000円〜120,000円前後</strong>
+            <small>料金・初回説明・LINE予約などを整理した構成</small>
+          </a>
+          <a href="/ai-chat-demo/" class="demo-price-card card-border-blue">
+            <span>AI・診断ツール</span>
+            <strong>30,000円〜80,000円前後</strong>
+            <small>設問分岐、AI相談整理、簡易診断ツールなど</small>
+          </a>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="copilot">
@@ -810,6 +835,73 @@ const structuredData = [
     margin-top: 20px;
     margin-bottom: 0;
   }
+  .demo-price-guide {
+    margin-top: 42px;
+    padding: 30px;
+    border: 1px solid var(--card-border);
+    border-radius: 24px;
+    background: linear-gradient(135deg, rgba(238, 245, 242, 0.78), rgba(255, 253, 248, 0.92));
+    box-shadow: var(--card-shadow);
+  }
+  .demo-price-copy {
+    max-width: 720px;
+    margin-bottom: 22px;
+  }
+  .demo-price-copy h3 {
+    margin: 0 0 10px;
+    color: #2c2c2c;
+    font-size: 1.45rem;
+    font-weight: 900;
+  }
+  .demo-price-copy p:last-child {
+    margin: 0;
+    color: #666;
+    line-height: 1.8;
+  }
+  .demo-price-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .demo-price-card {
+    display: flex;
+    min-height: 170px;
+    flex-direction: column;
+    gap: 10px;
+    justify-content: space-between;
+    padding: 20px;
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    background: var(--surface);
+    color: inherit;
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .demo-price-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
+  }
+  .demo-price-card span {
+    width: fit-content;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(199, 53, 47, 0.1);
+    color: var(--accent-red);
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+  .demo-price-card strong {
+    color: var(--trust);
+    font-size: 1.05rem;
+    line-height: 1.45;
+  }
+  .demo-price-card small {
+    color: #6f6a62;
+    font-size: 0.8rem;
+    font-weight: 700;
+    line-height: 1.6;
+  }
   .pricing-faq {
     border-top: 1px solid var(--line);
   }
@@ -860,6 +952,7 @@ const structuredData = [
     th, td { padding: 15px 10px; font-size: 0.9rem; }
     .choice-grid,
     .recommended-price-grid,
+    .demo-price-grid,
     .pricing-grid-simple { grid-template-columns: 1fr; }
     .recommended-price-card.highlight-take {
       transform: none !important;
