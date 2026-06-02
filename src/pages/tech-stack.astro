@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandMovie from '../components/BrandMovie.astro';
 
 const title = "和-Nodeを支えるテクノロジー（Tech Stack）｜和-Node";
 const description = "和-NodeのWeb制作を支える技術基盤。Astro、Cloudflare Pages、Vanilla CSSを用いた、高速・安全性・柔軟性を重視するWebサイト構築の裏側を解説します。";
@@ -19,6 +20,11 @@ const description = "和-NodeのWeb制作を支える技術基盤。Astro、Clou
       </div>
     </section>
 
+    <BrandMovie
+      eyebrow="Brand Movie"
+      title="伝わるサイトは、見た目だけでは決まらない。"
+      body="心理学・Web制作・ICTの視点から、表示速度、導線、相談しやすさまで一つの流れとして整える。和-Nodeの制作思想を短い動画で紹介します。"
+    />
     <!-- Tech Stack Grid -->
     <section class="tech-stack-section section">
       <div class="container">
@@ -332,3 +338,4 @@ const description = "和-NodeのWeb制作を支える技術基盤。Astro、Clou
     margin-bottom: 4px;
   }
 </style>
+

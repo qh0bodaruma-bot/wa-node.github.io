@@ -1,0 +1,106 @@
+---
+interface Props {
+  eyebrow?: string;
+  title?: string;
+  body?: string;
+  compact?: boolean;
+}
+
+const {
+  eyebrow = "Brand Movie",
+  title = "伝わるサイトは、見た目だけでは決まらない。",
+  body = "和-Nodeでは、心理学・Web制作・ICTの視点から、相談につながる導線を整えます。",
+  compact = false,
+} = Astro.props;
+---
+
+<section class:list={["brand-movie-section", "section", { compact }]}>
+  <div class="container narrow reveal">
+    <div class="brand-movie-shell">
+      <div class="brand-movie-copy">
+        <span class="brand-movie-eyebrow">{eyebrow}</span>
+        <h2>{title}</h2>
+        <p>{body}</p>
+      </div>
+      <div class="brand-movie-frame" aria-label="和-Nodeのブランドムービー">
+        <video controls muted playsinline preload="metadata" poster="/videos/wa-node-brand-movie-poster.jpg">
+          <source src="/videos/wa-node-brand-movie.mp4" type="video/mp4" />
+          お使いのブラウザは動画の再生に対応していません。
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .brand-movie-section {
+    padding: 72px 0;
+    background:
+      linear-gradient(135deg, rgba(15, 76, 92, 0.08), rgba(197, 160, 89, 0.08)),
+      color-mix(in srgb, var(--paper) 88%, #ffffff 12%);
+    border-block: 1px solid rgba(15, 76, 92, 0.12);
+  }
+  .brand-movie-section.compact {
+    padding: 60px 0;
+  }
+  .brand-movie-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.25fr);
+    gap: 36px;
+    align-items: center;
+  }
+  .brand-movie-copy {
+    min-width: 0;
+  }
+  .brand-movie-eyebrow {
+    display: inline-block;
+    margin-bottom: 14px;
+    color: var(--trust, #0f4c5c);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .brand-movie-copy h2 {
+    margin: 0 0 18px;
+    color: var(--text-deep, var(--text));
+    font-size: clamp(1.65rem, 3vw, 2.35rem);
+    line-height: 1.35;
+    font-weight: 900;
+  }
+  .brand-movie-copy p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.02rem;
+    line-height: 1.9;
+  }
+  .brand-movie-frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 1px solid rgba(15, 76, 92, 0.18);
+    background: #071420;
+    box-shadow: 0 18px 44px rgba(15, 76, 92, 0.18), 0 6px 20px rgba(70, 52, 32, 0.08);
+  }
+  .brand-movie-frame video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: auto;
+    background: #071420;
+  }
+
+  @media (max-width: 860px) {
+    .brand-movie-section,
+    .brand-movie-section.compact {
+      padding: 52px 0;
+    }
+    .brand-movie-shell {
+      grid-template-columns: 1fr;
+      gap: 26px;
+    }
+    .brand-movie-copy h2 {
+      font-size: clamp(1.5rem, 7vw, 2rem);
+    }
+  }
+</style>

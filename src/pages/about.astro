@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import BrandMovie from '../components/BrandMovie.astro';
 import {
   createBreadcrumbSchema,
   createWebPageSchema,
@@ -30,6 +31,12 @@ const structuredData = [
       </div>
     </section>
 
+    <BrandMovie
+      eyebrow="Wa-Node Concept"
+      title="技術と心理を、相談につながる導線へ。"
+      body="和-Nodeが大切にしているのは、派手な表現ではなく、見る人の迷いを減らし、安心して次の行動へ進める設計です。"
+      compact
+    />
     <section class="section message">
       <div class="section-inner">
         <div class="message-content reveal">
@@ -316,3 +323,4 @@ const structuredData = [
     .reliability-box { padding: 40px 20px; }
   }
 </style>
+
