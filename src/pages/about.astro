@@ -296,21 +296,42 @@ const structuredData = [
   .overview-table tr:last-child th, .overview-table tr:last-child td { border-bottom: none; }
 
   .reliability-box {
-    background: var(--text-deep);
-    color: #fff;
+    background: linear-gradient(135deg, #142f3a 0%, #10222b 100%);
+    color: #f8fbfc;
     padding: 80px 60px;
     border-radius: 40px;
   }
-  .reliability-box h2 { color: var(--accent); margin-bottom: 40px; font-weight: 800; }
+  .reliability-box h2 { color: #f6d88f; margin-bottom: 40px; font-weight: 900; }
   .trust-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: center; }
-  .trust-badge { width: 150px; background: #fff; border-radius: 12px; padding: 10px; }
+  .trust-badge { width: 150px; background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 12px 28px rgba(0,0,0,0.18); }
+  .trust-item p {
+    margin: 18px 0 0;
+    color: rgba(248, 251, 252, 0.92);
+    line-height: 1.8;
+    font-weight: 700;
+  }
   .trust-content ul { list-style: none; padding: 0; margin-bottom: 32px; }
-  .trust-content li { margin-bottom: 16px; font-size: 0.95rem; color: rgba(255,255,255,0.8); }
-  .trust-content strong { color: var(--accent); }
+  .trust-content li { margin-bottom: 16px; font-size: 0.98rem; color: rgba(248, 251, 252, 0.9); line-height: 1.75; }
+  .trust-content strong { color: #f6d88f; }
   
-  .policy-links { display: flex; gap: 24px; flex-wrap: wrap; }
-  .policy-links a { color: #fff; text-decoration: underline; font-size: 0.9rem; opacity: 0.7; transition: 0.3s; }
-  .policy-links a:hover { opacity: 1; color: var(--accent); }
+  .policy-links { display: flex; gap: 12px; flex-wrap: wrap; }
+  .policy-links a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 9px 15px;
+    border: 1px solid rgba(248, 251, 252, 0.26);
+    border-radius: 999px;
+    background: rgba(255,255,255,0.1);
+    color: #fff8e8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 800;
+    opacity: 1;
+    transition: background 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.25s ease;
+  }
+  .policy-links a:hover { background: #f6d88f; border-color: #f6d88f; color: #10222b; transform: translateY(-1px); }
 
   .text-center { text-align: center; }
 
@@ -320,7 +341,9 @@ const structuredData = [
     .profile-image-wrap img { width: 160px; height: 160px; }
     .overview-table th { width: 120px; font-size: 0.9rem; padding: 15px; }
     .overview-table td { padding: 15px; font-size: 0.9rem; }
-    .reliability-box { padding: 40px 20px; }
+    .reliability-box { padding: 40px 20px; border-radius: 28px; }
+    .policy-links a { width: 100%; }
   }
 </style>
+
 
