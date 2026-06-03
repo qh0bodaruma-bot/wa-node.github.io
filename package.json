@@ -13,8 +13,9 @@
     "deploy": "git add . && git commit -m \"更新\" --allow-empty && git push origin main"
   },
   "dependencies": {
-    "astro": "^4.16.10",
     "@astrojs/cloudflare": "^11.0.0",
+    "astro": "^4.16.10",
+    "microcms-js-sdk": "^3.4.0",
     "openai": "^4.52.0"
   }
 }

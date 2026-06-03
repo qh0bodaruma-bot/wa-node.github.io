@@ -1,10 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getBlogs } from '../../library/microcms';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+// microCMSから記事一覧を取得（公開日の降順）
+const response = await getBlogs({ 
+  orders: '-publishedAt' 
+});
+const posts = response.contents;
 ---
 
 <BaseLayout title="コラム・知恵袋｜和-Node" description="心理学とITの交差点。成約率を高めるWeb制作のヒントや、AI活用の現場知見、心の健康を守る方法などを発信しています。">
@@ -21,31 +23,31 @@ const posts = (await getCollection('blog')).sort(
       <div class="post-grid">
         {posts.map((post) => (
           <article class="post-card reveal">
-            <a href={`/blog/${post.slug}/`}>
+            <a href={`/blog/${post.id}/`}>
               <div class="post-image">
-                {post.data.heroImage ? (
-                  <img src={post.data.heroImage} alt="" />
+                {post.eyecatch ? (
+                  <img src={post.eyecatch.url} alt="" />
                 ) : (
                   <div class="image-placeholder">No Image</div>
                 )}
               </div>
               <div class="post-content">
                 <div class="post-meta">
-                  <time datetime={post.data.pubDate.toISOString()}>
-                    {post.data.pubDate.toLocaleDateString('ja-JP', {
+                  <time datetime={post.publishedAt}>
+                    {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
                       year: 'numeric',
                       month: 'long',
                       day: 'numeric',
                     })}
                   </time>
-                  {post.data.tags && (
+                  {post.tags && post.tags.length > 0 && (
                     <div class="tags">
-                      {post.data.tags.map(tag => <span>#{tag}</span>)}
+                      {post.tags.map(tag => <span>#{tag}</span>)}
                     </div>
                   )}
                 </div>
-                <h2>{post.data.title}</h2>
-                <p>{post.data.description}</p>
+                <h2>{post.title}</h2>
+                <p>{post.description || post.content.replace(/<[^>]*>/g, '').substring(0, 100) + '...'}</p>
                 <span class="read-more">詳しく見る →</span>
               </div>
             </a>

@@ -1,47 +1,45 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ConsultationFlow from '../../components/ConsultationFlow.astro';
+import { getBlogs, getBlogDetail } from '../../library/microcms';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug },
-		props: post,
-	}));
+  const response = await getBlogs({ fields: ["id"] });
+  return response.contents.map((blog) => ({
+    params: { slug: blog.id },
+  }));
 }
-type Props = CollectionEntry<'blog'>;
 
-const post = Astro.props;
-const { Content } = await post.render();
+const { slug } = Astro.params;
+const post = await getBlogDetail(slug);
 ---
 
-<BaseLayout title={`${post.data.title}｜和-Node 知恵袋`} description={post.data.description} image={post.data.heroImage}>
+<BaseLayout title={`${post.title}｜和-Node 知恵袋`} description={post.description} image={post.eyecatch?.url}>
   <article class="post-single">
     <div class="post-header">
       <div class="container-narrow">
         <div class="post-meta">
-          <time datetime={post.data.pubDate.toISOString()}>
-            {post.data.pubDate.toLocaleDateString('ja-JP', {
+          <time datetime={post.publishedAt}>
+            {new Date(post.publishedAt).toLocaleDateString('ja-JP', {
               year: 'numeric',
               month: 'long',
               day: 'numeric',
             })}
           </time>
-          {post.data.tags && (
+          {post.tags && post.tags.length > 0 && (
             <div class="tags">
-              {post.data.tags.map(tag => <span>#{tag}</span>)}
+              {post.tags.map(tag => <span>#{tag}</span>)}
             </div>
           )}
         </div>
-        <h1>{post.data.title}</h1>
+        <h1>{post.title}</h1>
       </div>
     </div>
 
     <div class="post-hero">
       <div class="container-narrow">
-        {post.data.heroImage && (
-          <img src={post.data.heroImage} alt="" class="hero-image" />
+        {post.eyecatch && (
+          <img src={post.eyecatch.url} alt="" class="hero-image" />
         )}
       </div>
     </div>
@@ -49,7 +47,7 @@ const { Content } = await post.render();
     <div class="post-body">
       <div class="container-narrow">
         <div class="content-wrap">
-          <Content />
+          <div set:html={post.content} />
         </div>
       </div>
     </div>
