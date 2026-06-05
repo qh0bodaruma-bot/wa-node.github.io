@@ -2,7 +2,6 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
-import SakuraCanvas from '../components/SakuraCanvas.astro';
 import { ViewTransitions } from 'astro:transitions';
 import { MULTILANG_PAGES } from '../i18n/navigation';
 import '../styles/global.css';
@@ -148,7 +147,6 @@ const getLocalizedHref = (l: string) => {
   </head>
   <body>
     <div id="global-progress-bar" class="global-progress-bar" aria-hidden="true"></div>
-    <SakuraCanvas />
     <Header lang={currentLang} />
     <slot />
     <Footer lang={currentLang} />

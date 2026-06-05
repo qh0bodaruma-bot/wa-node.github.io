@@ -89,6 +89,7 @@ function getLocalizedLink(path: string) {
       <div class="footer-col">
         <h3>{lang === 'ja' ? '補足コンテンツ' : lang === 'en' ? 'Resources' : 'Ressources'}</h3>
         <ul>
+          <li><a href={getLocalizedLink('/blog')}>{lang === 'ja' ? '和-Node 知恵袋（ブログ）' : 'Blog'}</a></li>
           <li><a href={getLocalizedLink('/psychology-demo')}>{t.footer.col2_item1[lang]}</a></li>
           <li><a href={getLocalizedLink('/tech-stack')}>{t.footer.col4_item_tech[lang]}</a></li>
           <li><a href={getLocalizedLink('/easy-guide')}>{t.footer.col4_item0[lang]}</a></li>
