@@ -12,6 +12,7 @@ import {
 
 const title = "料金プラン・制作費用｜心理学を応用したWeb制作と「ビジネスの副操縦士」（戦略的パートナー）｜和-Node";
 const description = "和-Nodeの料金プラン。行動心理に基づくWeb制作・導線設計（LP・HP）、ビジネスの副操縦士（月額制戦略的パートナー）コンサルティング、および組織支援の費用をご案内します。";
+const image = "/images/ogp-pricing.png";
 const structuredData = [
   organizationSchema,
   createWebPageSchema({ name: title, description, path: "/pricing/" }),
@@ -52,13 +53,13 @@ const structuredData = [
     {
       question: "不安を煽る表現や、強く誘導する導線も作れますか？",
       answer:
-        "和-Nodeでは、いわゆるダーク心理学や、不安・焦り・断りにくさを利用して行動を迫る設計は行いません。訪問者が安心して比較・相談・判断できる導線を設計します。",
+        "和-Nodeでは、いわゆるダーク心理学や、恐怖・断りにくさを利用して行動を迫る設計は行いません。一方で、見落としがちなリスクや機会損失は誠実に可視化し、訪問者が安心して比較・相談・判断できる導線を設計します。",
     },
   ]),
 ];
 ---
 
-<BaseLayout title={title} description={description} structuredData={structuredData}>
+<BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
   <main class="pricing-container">
     <section class="hero">
       <div class="hero-inner">
@@ -391,7 +392,7 @@ const structuredData = [
         </details>
         <details>
           <summary>不安を煽る表現や、強く誘導する導線も作れますか？</summary>
-          <p>和-Nodeでは、いわゆる「ダーク心理学」や、不安・焦り・断りにくさを利用して行動を迫る設計は行いません。短期的な反応よりも、お客様のブランドと信頼を損なわないことを第一に、訪問者が安心して比較・相談・判断できる導線を設計します。</p>
+          <p>和-Nodeでは、いわゆる「ダーク心理学」や、恐怖・断りにくさを利用して行動を迫る設計は行いません。一方で、見落としがちなリスクや機会損失は誠実に可視化し、お客様のブランドと信頼を守りながら、訪問者が安心して比較・相談・判断できる導線を設計します。</p>
         </details>
         <details>
           <summary>AIや相談内容の扱いは安全ですか？</summary>
@@ -405,7 +406,13 @@ const structuredData = [
     </section>
 
     <ConsultationFlow />
-    <ProjectExecutionFlow lang="ja" />
+    <details class="flow-details reveal">
+      <summary>
+        <span>ご契約後の制作・サポートの流れを確認する</span>
+        <small>支払いタイミング、和-Nodeの作業、お客様にお願いする内容を開いて確認できます。</small>
+      </summary>
+      <ProjectExecutionFlow lang="ja" />
+    </details>
   </main>
 </BaseLayout>
 
@@ -831,6 +838,44 @@ const structuredData = [
   }
   .table-wrap.mini { margin-top: 20px; }
   .table-wrap.mini th, .table-wrap.mini td { padding: 12px 15px; font-size: 0.85rem; }
+
+  .flow-details {
+    max-width: 1100px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+  }
+  .flow-details > summary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    cursor: pointer;
+    padding: 22px 26px;
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    background: linear-gradient(135deg, #fff 0%, var(--surface-strong) 100%);
+    color: var(--trust);
+    box-shadow: var(--card-shadow);
+    list-style: none;
+  }
+  .flow-details > summary::-webkit-details-marker { display: none; }
+  .flow-details > summary span { font-size: 1rem; font-weight: 900; }
+  .flow-details > summary small { color: #666; line-height: 1.6; }
+  .flow-details > summary::after {
+    content: "+";
+    align-self: flex-end;
+    margin-top: -36px;
+    color: var(--accent-red);
+    font-size: 1.4rem;
+    font-weight: 900;
+  }
+  .flow-details[open] > summary::after { content: "-"; }
+  .flow-details .execution-flow-section {
+    margin-top: 18px;
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    overflow: hidden;
+    padding: 80px 0;
+  }
   .price-details .table-wrap {
     margin-top: 20px;
     margin-bottom: 0;

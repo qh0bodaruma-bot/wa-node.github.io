@@ -9,6 +9,7 @@ import {
 
 const title = "制作例・デモ｜行動心理に基づくWeb制作・LP制作サンプル｜和-Node";
 const description = "行動心理に基づくWeb制作、LP制作サンプル、AI相談ナビ、各種診断ツール、KDP出版など、和-Nodeの制作例とインタラクティブなデモを紹介します。";
+const image = "/images/ogp-works.png";
 const structuredData = [
   organizationSchema,
   createWebPageSchema({ name: title, description, path: "/works/", type: "CollectionPage" }),
@@ -19,7 +20,7 @@ const structuredData = [
 ];
 ---
 
-<BaseLayout title={title} description={description} structuredData={structuredData}>
+<BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
   <!-- Background -->
   <div class="bg-decoration">
     <div class="glow glow-1"></div>

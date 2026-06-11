@@ -1,11 +1,38 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  absoluteUrl,
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../data/structuredData';
 
 const title = "選ばれる導線 Before/After デモ｜和-Node";
 const description = "「なぜ、あのLPは売れるのか？」その答えは、言葉・配置・順番まで整える選ばれる導線設計にあります。一般的なLPと和-Nodeの心理設計を比較し、言葉と配置の力を体感してください。";
+const image = "/images/ogp-psychology-demo.png";
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: "/psychology-demo/" }),
+  createBreadcrumbSchema([
+    { name: "ホーム", path: "/" },
+    { name: "選ばれる導線 Before/After デモ", path: "/psychology-demo/" },
+  ]),
+  {
+    "@context": "https://schema.org",
+    "@type": "CreativeWork",
+    "@id": absoluteUrl("/psychology-demo/#demo"),
+    name: "選ばれる導線 Before/After デモ",
+    description,
+    url: absoluteUrl("/psychology-demo/"),
+    image: absoluteUrl(image),
+    inLanguage: "ja",
+    about: ["LP改善", "行動心理に基づく導線設計", "Web制作"],
+    provider: { "@id": "https://www.wa-node.com/#organization" },
+  },
+];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
   <main class="demo-page">
     <!-- Hero Section -->
     <section class="hero-demo section">
@@ -478,4 +505,3 @@ const description = "「なぜ、あのLPは売れるのか？」その答えは
     .comp-card { padding: 40px 24px; }
   }
 </style>
-

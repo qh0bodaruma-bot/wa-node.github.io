@@ -1,12 +1,39 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BrandMovie from '../components/BrandMovie.astro';
+import {
+  absoluteUrl,
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../data/structuredData';
 
 const title = "和-Nodeを支えるテクノロジー（Tech Stack）｜和-Node";
 const description = "和-NodeのWeb制作を支える技術基盤。Astro、Cloudflare Pages、Vanilla CSSを用いた、高速・安全性・柔軟性を重視するWebサイト構築の裏側を解説します。";
+const image = "/images/ogp-tech-stack.png";
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: "/tech-stack/" }),
+  createBreadcrumbSchema([
+    { name: "ホーム", path: "/" },
+    { name: "当サイトの技術", path: "/tech-stack/" },
+  ]),
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "@id": absoluteUrl("/tech-stack/#article"),
+    headline: "和-Nodeを支えるテクノロジー",
+    description,
+    url: absoluteUrl("/tech-stack/"),
+    image: absoluteUrl(image),
+    inLanguage: "ja",
+    publisher: { "@id": "https://www.wa-node.com/#organization" },
+    about: ["Astro", "Cloudflare Pages", "Vanilla CSS", "AI Driven Development"],
+  },
+];
 ---
 
-<BaseLayout title={title} description={description}>
+<BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
   <main class="tech-page">
     <!-- Hero Section -->
     <section class="tech-hero section">
@@ -338,4 +365,3 @@ const description = "和-NodeのWeb制作を支える技術基盤。Astro、Clou
     margin-bottom: 4px;
   }
 </style>
-
