@@ -7,6 +7,13 @@ const response = await getBlogs({
   orders: '-publishedAt' 
 });
 const posts = response.contents;
+const cleanBlogTitle = (title: string) => title.replace(/^\s*大見出し[：:]\s*/, "");
+const cleanBlogExcerpt = (content: string) => content
+  .replace(/(<h[2-3]\b[^>]*>)\s*中見出し[：:]\s*/g, "$1")
+  .replace(/<h[2-3]\b[^>]*>\s*設定用ハッシュタグ\s*<\/h[2-3]>/g, "")
+  .replace(/設定用ハッシュタグ\s*/g, "")
+  .replace(/<[^>]*>/g, "")
+  .substring(0, 100) + "...";
 ---
 
 <BaseLayout title="コラム・知恵袋｜和-Node" description="心理学とITの交差点。成約率を高めるWeb制作のヒントや、AI活用の現場知見、心の健康を守る方法などを発信しています。">
@@ -46,8 +53,8 @@ const posts = response.contents;
                     </div>
                   )}
                 </div>
-                <h2>{post.title}</h2>
-                <p>{post.description || post.content.replace(/<[^>]*>/g, '').substring(0, 100) + '...'}</p>
+                <h2>{cleanBlogTitle(post.title)}</h2>
+                <p>{post.description || cleanBlogExcerpt(post.content)}</p>
                 <span class="read-more">詳しく見る →</span>
               </div>
             </a>
