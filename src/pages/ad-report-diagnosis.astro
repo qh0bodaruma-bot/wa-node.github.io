@@ -1,0 +1,1210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = '広告レポート診断アプリ｜和-Node';
+const description = 'LINEヤフー広告・Yahoo検索広告のCSVをブラウザ内で読み込み、週次KPI、検索語句、除外候補、次の改善アクションを整理する和-Node用の広告改善ツールです。';
+---
+
+<BaseLayout title={title} description={description} noindex={true}>
+  <main class="ad-tool-page">
+    <section class="tool-hero">
+      <div class="tool-shell">
+        <div class="hero-copy">
+          <p class="tool-label">Wa-Node Internal Tool</p>
+          <h1>広告レポート診断</h1>
+          <p>
+            LINEヤフー広告・Yahoo検索広告のCSVを読み込み、無駄クリック、伸ばす語句、次週の改善順を整理します。
+            データはブラウザ内だけで処理され、サーバーには送信されません。
+          </p>
+        </div>
+        <div class="hero-status" aria-label="このツールの前提">
+          <span>自分用 7割</span>
+          <span>デモ転用 3割</span>
+          <span>非公開運用</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="tool-workspace" aria-labelledby="upload-title">
+      <div class="tool-shell tool-grid">
+        <aside class="upload-panel" aria-label="CSVアップロード">
+          <div class="panel-heading">
+            <p class="tool-label">Input</p>
+            <h2 id="upload-title">CSVを読み込む</h2>
+            <p>CSV拡張子でも、Yahoo広告のタブ区切り形式に対応しています。</p>
+          </div>
+
+          <div class="drop-list">
+            <label class="file-card" for="weeklyFile">
+              <span class="file-code">01</span>
+              <span>
+                <strong>週次サマリー</strong>
+                <small>日別 × キャンペーン別</small>
+              </span>
+              <input id="weeklyFile" type="file" accept=".csv,.tsv,.txt" data-kind="weekly" />
+            </label>
+
+            <label class="file-card" for="adFile">
+              <span class="file-code">02</span>
+              <span>
+                <strong>広告別</strong>
+                <small>広告文・クリエイティブ比較</small>
+              </span>
+              <input id="adFile" type="file" accept=".csv,.tsv,.txt" data-kind="ads" />
+            </label>
+
+            <label class="file-card" for="queryFile">
+              <span class="file-code">03</span>
+              <span>
+                <strong>検索クエリー</strong>
+                <small>除外候補・意図ズレ確認</small>
+              </span>
+              <input id="queryFile" type="file" accept=".csv,.tsv,.txt" data-kind="queries" />
+            </label>
+
+            <label class="file-card" for="keywordFile">
+              <span class="file-code">04</span>
+              <span>
+                <strong>キーワード別</strong>
+                <small>配信語句の強弱確認</small>
+              </span>
+              <input id="keywordFile" type="file" accept=".csv,.tsv,.txt" data-kind="keywords" />
+            </label>
+          </div>
+
+          <div class="tool-actions">
+            <button type="button" id="sampleBtn" class="secondary-btn">サンプルで試す</button>
+            <button type="button" id="resetBtn" class="ghost-btn">リセット</button>
+          </div>
+
+          <div class="privacy-note">
+            <strong>機密情報の扱い</strong>
+            <p>広告アカウントIDや顧客情報は共有前に削除・マスクしてください。このページ内の解析は端末内で完結します。</p>
+          </div>
+        </aside>
+
+        <div class="analysis-panel">
+          <section class="kpi-panel" aria-labelledby="kpi-title">
+            <div class="section-title-row">
+              <div>
+                <p class="tool-label">Overview</p>
+                <h2 id="kpi-title">週次KPI</h2>
+              </div>
+              <p id="loadedState" class="loaded-state">CSV未読込</p>
+            </div>
+
+            <div class="kpi-grid" id="kpiGrid">
+              <article class="kpi-card">
+                <span>表示回数</span>
+                <strong>0</strong>
+                <small>Impressions</small>
+              </article>
+              <article class="kpi-card">
+                <span>クリック数</span>
+                <strong>0</strong>
+                <small>Clicks</small>
+              </article>
+              <article class="kpi-card">
+                <span>CTR</span>
+                <strong>0.00%</strong>
+                <small>Click Through Rate</small>
+              </article>
+              <article class="kpi-card">
+                <span>費用</span>
+                <strong>0円</strong>
+                <small>Cost</small>
+              </article>
+              <article class="kpi-card">
+                <span>平均CPC</span>
+                <strong>0円</strong>
+                <small>Cost Per Click</small>
+              </article>
+              <article class="kpi-card caution">
+                <span>CV</span>
+                <strong>0</strong>
+                <small>Conversions</small>
+              </article>
+            </div>
+          </section>
+
+          <section class="diagnosis-board" aria-labelledby="diagnosis-title">
+            <div class="section-title-row">
+              <div>
+                <p class="tool-label">Diagnosis</p>
+                <h2 id="diagnosis-title">改善優先度</h2>
+              </div>
+            </div>
+            <div class="priority-list" id="priorityList">
+              <article class="priority-card muted">
+                <span>P0</span>
+                <strong>CSVを読み込むと診断が表示されます</strong>
+                <p>まず週次サマリー、検索クエリー、キーワード別の順で入れると判断しやすくなります。</p>
+              </article>
+            </div>
+          </section>
+
+          <section class="split-section">
+            <div class="data-card">
+              <div class="section-title-row compact">
+                <div>
+                  <p class="tool-label">Waste Control</p>
+                  <h2>除外候補</h2>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>語句</th>
+                      <th>理由</th>
+                      <th>クリック</th>
+                      <th>費用</th>
+                    </tr>
+                  </thead>
+                  <tbody id="negativeRows">
+                    <tr><td colspan="4">検索クエリーCSVを読み込んでください。</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="data-card">
+              <div class="section-title-row compact">
+                <div>
+                  <p class="tool-label">Opportunity</p>
+                  <h2>伸ばす候補</h2>
+                </div>
+              </div>
+              <div class="table-wrap">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>語句</th>
+                      <th>根拠</th>
+                      <th>CTR</th>
+                      <th>CPC</th>
+                    </tr>
+                  </thead>
+                  <tbody id="opportunityRows">
+                    <tr><td colspan="4">検索クエリーまたはキーワードCSVを読み込んでください。</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="split-section lower">
+            <div class="data-card">
+              <div class="section-title-row compact">
+                <div>
+                  <p class="tool-label">Creative</p>
+                  <h2>広告別メモ</h2>
+                </div>
+              </div>
+              <div id="creativePanel" class="message-panel">
+                広告別CSVを読み込むと、広告数とABテスト不足を確認します。
+              </div>
+            </div>
+
+            <div class="data-card">
+              <div class="section-title-row compact">
+                <div>
+                  <p class="tool-label">Next Action</p>
+                  <h2>次週チェックリスト</h2>
+                </div>
+              </div>
+              <div class="checklist" id="actionList">
+                <label><input type="checkbox" /> CV計測が正しく発火しているか確認</label>
+                <label><input type="checkbox" /> 除外キーワード追加後の検索クエリーを再確認</label>
+                <label><input type="checkbox" /> 広告文を3本以上に増やして比較</label>
+                <label><input type="checkbox" /> LINE追加・フォーム送信・相談化を別々に記録</label>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .ad-tool-page {
+    --tool-bg: #f6efe5;
+    --tool-surface: #fffdf8;
+    --tool-surface-2: #eef5f2;
+    --tool-ink: #1e2725;
+    --tool-muted: #68716e;
+    --tool-line: rgba(15, 76, 92, 0.16);
+    --tool-teal: #0f4c5c;
+    --tool-teal-2: #1f6f78;
+    --tool-gold: #8c6b1f;
+    --tool-red: #c7352f;
+    --tool-shadow: 0 18px 44px rgba(15, 76, 92, 0.08), 0 6px 18px rgba(70, 52, 32, 0.05);
+    background: linear-gradient(180deg, #fbf7ef 0%, var(--tool-bg) 100%);
+    color: var(--tool-ink);
+    min-height: 100vh;
+    padding-bottom: 96px;
+  }
+
+  .tool-shell {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+
+  .tool-hero {
+    padding: 82px 0 34px;
+  }
+
+  .tool-hero .tool-shell {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 32px;
+    align-items: end;
+  }
+
+  .tool-label {
+    margin: 0 0 10px;
+    color: var(--tool-gold);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .hero-copy h1 {
+    margin: 0 0 16px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(2.1rem, 5vw, 4.2rem);
+    line-height: 1.14;
+    letter-spacing: 0;
+  }
+
+  .hero-copy p:last-child {
+    max-width: 780px;
+    margin: 0;
+    color: var(--tool-muted);
+    font-size: 1.02rem;
+    line-height: 1.9;
+  }
+
+  .hero-status {
+    display: grid;
+    gap: 9px;
+    min-width: 190px;
+  }
+
+  .hero-status span {
+    display: block;
+    padding: 10px 13px;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: rgba(255, 253, 248, 0.82);
+    color: var(--tool-teal);
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .tool-grid {
+    display: grid;
+    grid-template-columns: 330px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .upload-panel,
+  .kpi-panel,
+  .diagnosis-board,
+  .data-card {
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: rgba(255, 253, 248, 0.92);
+    box-shadow: var(--tool-shadow);
+  }
+
+  .upload-panel {
+    position: sticky;
+    top: 86px;
+    padding: 24px;
+  }
+
+  .panel-heading h2,
+  .section-title-row h2 {
+    margin: 0;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.45rem;
+    line-height: 1.35;
+  }
+
+  .panel-heading p:last-child {
+    margin: 10px 0 0;
+    color: var(--tool-muted);
+    font-size: 0.88rem;
+    line-height: 1.65;
+  }
+
+  .drop-list {
+    display: grid;
+    gap: 12px;
+    margin-top: 22px;
+  }
+
+  .file-card {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 12px;
+    align-items: center;
+    min-height: 78px;
+    padding: 14px;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, #fffaf2 100%);
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+
+  .file-card:hover,
+  .file-card.loaded {
+    border-color: var(--tool-teal-2);
+    transform: translateY(-1px);
+  }
+
+  .file-code {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 8px;
+    background: var(--tool-surface-2);
+    color: var(--tool-teal);
+    font-weight: 900;
+  }
+
+  .file-card strong,
+  .file-card small {
+    display: block;
+  }
+
+  .file-card strong {
+    margin-bottom: 3px;
+    color: var(--tool-ink);
+    font-size: 0.94rem;
+  }
+
+  .file-card small {
+    color: var(--tool-muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .file-card input {
+    position: absolute;
+    inline-size: 1px;
+    block-size: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .tool-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 18px;
+  }
+
+  .secondary-btn,
+  .ghost-btn {
+    min-height: 44px;
+    border-radius: 8px;
+    font-size: 0.86rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+
+  .secondary-btn {
+    border: none;
+    background: var(--tool-teal);
+    color: #fff;
+  }
+
+  .ghost-btn {
+    border: 1px solid var(--tool-line);
+    background: transparent;
+    color: var(--tool-teal);
+  }
+
+  .secondary-btn:hover,
+  .ghost-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .privacy-note {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #eef5f2;
+    border: 1px solid var(--tool-line);
+  }
+
+  .privacy-note strong {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--tool-teal);
+    font-size: 0.88rem;
+  }
+
+  .privacy-note p {
+    margin: 0;
+    color: var(--tool-muted);
+    font-size: 0.8rem;
+    line-height: 1.65;
+  }
+
+  .analysis-panel {
+    display: grid;
+    gap: 22px;
+  }
+
+  .kpi-panel,
+  .diagnosis-board,
+  .data-card {
+    padding: 24px;
+  }
+
+  .section-title-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    align-items: start;
+    margin-bottom: 20px;
+  }
+
+  .section-title-row.compact {
+    margin-bottom: 14px;
+  }
+
+  .loaded-state {
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #f7f1e8;
+    color: var(--tool-muted);
+    font-size: 0.78rem;
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  .loaded-state.ready {
+    background: #e8f4ef;
+    color: #2c7c5e;
+  }
+
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 14px;
+  }
+
+  .kpi-card {
+    position: relative;
+    overflow: hidden;
+    min-height: 116px;
+    padding: 17px;
+    border: 1px solid rgba(15, 76, 92, 0.14);
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, #fffaf2 100%);
+    box-shadow: 0 12px 28px rgba(15, 76, 92, 0.07);
+  }
+
+  .kpi-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, var(--tool-teal), var(--tool-teal-2));
+  }
+
+  .kpi-card span,
+  .kpi-card small {
+    display: block;
+    color: var(--tool-muted);
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+
+  .kpi-card strong {
+    display: block;
+    margin: 10px 0 8px;
+    color: var(--tool-teal);
+    font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+    line-height: 1.05;
+  }
+
+  .kpi-card.caution {
+    background: linear-gradient(180deg, #fff 0%, #fff5f0 100%);
+  }
+
+  .kpi-card.caution::before {
+    background: linear-gradient(90deg, var(--tool-red), #f1a268);
+  }
+
+  .kpi-card.caution strong {
+    color: var(--tool-red);
+  }
+
+  .priority-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .priority-card {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(199, 53, 47, 0.22);
+    background: linear-gradient(135deg, rgba(199, 53, 47, 0.08), rgba(255, 253, 248, 0.9));
+  }
+
+  .priority-card.muted {
+    border-color: var(--tool-line);
+    background: var(--tool-surface-2);
+  }
+
+  .priority-card span {
+    display: grid;
+    width: 54px;
+    height: 42px;
+    place-items: center;
+    border-radius: 8px;
+    background: var(--tool-red);
+    color: #fff;
+    font-weight: 900;
+  }
+
+  .priority-card.p1 span { background: var(--tool-gold); }
+  .priority-card.p2 span { background: var(--tool-teal); }
+  .priority-card.muted span { background: var(--tool-teal-2); }
+
+  .priority-card strong,
+  .priority-card p {
+    grid-column: 2;
+  }
+
+  .priority-card strong {
+    margin-top: 1px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .priority-card p {
+    margin: 4px 0 0;
+    color: var(--tool-muted);
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  .split-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.82rem;
+  }
+
+  th,
+  td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--tool-line);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  th {
+    color: var(--tool-teal);
+    font-weight: 900;
+    white-space: nowrap;
+  }
+
+  td {
+    color: var(--tool-muted);
+    line-height: 1.45;
+  }
+
+  td:first-child {
+    color: var(--tool-ink);
+    font-weight: 800;
+  }
+
+  .message-panel {
+    min-height: 170px;
+    padding: 16px;
+    border-radius: 8px;
+    background: #f8f4ee;
+    color: var(--tool-muted);
+    line-height: 1.75;
+    font-size: 0.88rem;
+  }
+
+  .message-panel strong {
+    color: var(--tool-teal);
+  }
+
+  .checklist {
+    display: grid;
+    gap: 10px;
+  }
+
+  .checklist label {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    gap: 10px;
+    align-items: start;
+    padding: 12px;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: #fff;
+    color: var(--tool-ink);
+    font-size: 0.86rem;
+    font-weight: 800;
+    line-height: 1.55;
+  }
+
+  .checklist input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--tool-teal);
+  }
+
+  /* JSで後から描画する要素はAstroのscoped属性を持たないため、ページ内に限定して補足する。 */
+  .ad-tool-page :global(.kpi-card) {
+    position: relative;
+    overflow: hidden;
+    min-height: 116px;
+    padding: 17px;
+    border: 1px solid rgba(15, 76, 92, 0.14);
+    border-radius: 8px;
+    background: linear-gradient(180deg, #ffffff 0%, #fffaf2 100%);
+    box-shadow: 0 12px 28px rgba(15, 76, 92, 0.07);
+  }
+
+  .ad-tool-page :global(.kpi-card::before) {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, var(--tool-teal), var(--tool-teal-2));
+  }
+
+  .ad-tool-page :global(.kpi-card span),
+  .ad-tool-page :global(.kpi-card small) {
+    display: block;
+    color: var(--tool-muted);
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1.45;
+  }
+
+  .ad-tool-page :global(.kpi-card strong) {
+    display: block;
+    margin: 10px 0 8px;
+    color: var(--tool-teal);
+    font-size: clamp(1.25rem, 2.2vw, 1.85rem);
+    line-height: 1.05;
+  }
+
+  .ad-tool-page :global(.kpi-card.caution) {
+    background: linear-gradient(180deg, #fff 0%, #fff5f0 100%);
+  }
+
+  .ad-tool-page :global(.kpi-card.caution::before) {
+    background: linear-gradient(90deg, var(--tool-red), #f1a268);
+  }
+
+  .ad-tool-page :global(.kpi-card.caution strong) {
+    color: var(--tool-red);
+  }
+
+  .ad-tool-page :global(.priority-card) {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 14px;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(199, 53, 47, 0.22);
+    background: linear-gradient(135deg, rgba(199, 53, 47, 0.08), rgba(255, 253, 248, 0.9));
+  }
+
+  .ad-tool-page :global(.priority-card.muted) {
+    border-color: var(--tool-line);
+    background: var(--tool-surface-2);
+  }
+
+  .ad-tool-page :global(.priority-card span) {
+    display: grid;
+    width: 54px;
+    height: 42px;
+    place-items: center;
+    border-radius: 8px;
+    background: var(--tool-red);
+    color: #fff;
+    font-weight: 900;
+  }
+
+  .ad-tool-page :global(.priority-card.p1 span) { background: var(--tool-gold); }
+  .ad-tool-page :global(.priority-card.p2 span) { background: var(--tool-teal); }
+  .ad-tool-page :global(.priority-card.muted span) { background: var(--tool-teal-2); }
+
+  .ad-tool-page :global(.priority-card strong),
+  .ad-tool-page :global(.priority-card p) {
+    grid-column: 2;
+  }
+
+  .ad-tool-page :global(.priority-card strong) {
+    margin-top: 1px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .ad-tool-page :global(.priority-card p) {
+    margin: 4px 0 0;
+    color: var(--tool-muted);
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  .table-wrap :global(td) {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--tool-line);
+    color: var(--tool-muted);
+    line-height: 1.45;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .table-wrap :global(td:first-child) {
+    color: var(--tool-ink);
+    font-weight: 800;
+  }
+
+  .table-wrap :global(td small) {
+    color: var(--tool-muted);
+    font-size: 0.75rem;
+    line-height: 1.5;
+  }
+
+  .message-panel :global(strong) {
+    color: var(--tool-teal);
+  }
+  @media (max-width: 1060px) {
+    .tool-hero .tool-shell,
+    .tool-grid,
+    .split-section {
+      grid-template-columns: 1fr;
+    }
+
+    .upload-panel {
+      position: static;
+    }
+
+    .hero-status {
+      grid-template-columns: repeat(3, 1fr);
+      min-width: 0;
+    }
+
+    .kpi-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 680px) {
+    .ad-tool-page {
+      padding-bottom: 56px;
+    }
+
+    .tool-hero {
+      padding: 58px 0 24px;
+    }
+
+    .hero-status,
+    .tool-actions,
+    .kpi-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .upload-panel,
+    .kpi-panel,
+    .diagnosis-board,
+    .data-card {
+      padding: 18px;
+    }
+
+    .section-title-row {
+      display: grid;
+    }
+
+    .priority-card {
+      grid-template-columns: 1fr;
+    }
+
+    .priority-card strong,
+    .priority-card p {
+      grid-column: 1;
+    }
+
+    .ad-tool-page :global(.priority-card) {
+      grid-template-columns: 1fr;
+    }
+
+    .ad-tool-page :global(.priority-card strong),
+    .ad-tool-page :global(.priority-card p) {
+      grid-column: 1;
+    }
+  }
+</style>
+
+<script is:inline>
+  const state = {
+    weekly: [],
+    ads: [],
+    queries: [],
+    keywords: []
+  };
+
+  const patterns = [
+    { re: /無料|作り方|自作|ビルダー|テンプレート|素材|サンプル/i, reason: 'DIY・無料調査系で受注意図が弱い' },
+    { re: /html|パソコン|タウンページ/i, reason: '制作依頼より操作・作業方法の検索に近い' },
+    { re: /あきばれ|あきれば|ナノ|bindup|フロムノース|リアライズ|nya\s*s\s*ltd/i, reason: '他社名・サービス名検索の可能性が高い' },
+    { re: /studio|STUDIO|スタジオ/i, reason: 'STUDIOサービス指名検索の可能性あり。受ける場合は様子見' },
+    { re: /ai\s*に\s*相談|ai\s*で\s*相談|ai\s*へ\s*の\s*相談|生成\s*ai\s*相談|a\s*i\s*に\s*相談/i, reason: 'AI活用相談ではなく、AIそのものに相談したい意図が混ざる' }
+  ];
+
+  const opportunityPatterns = /改善|問い合わせ|導線|相談|パートナー|ICT|業務改善|AI\s*活用|AI\s*導入|LP\s*制作|心理学|行動心理/i;
+
+  const sampleData = {
+    weekly: `キャンペーン名\t日\tインプレッション数\tクリック数\tクリック率\tコスト\t平均CPC\tコンバージョン数\tコンバージョン率\tコンバージョンの価値\n和Node_検索広告\t2026/6/1\t294\t2\t0.0068\t120\t60\t0\t0\t0\n和Node_検索広告\t2026/6/2\t536\t8\t0.0149\t797\t99.625\t0\t0\t0\n和Node_検索広告\t2026/6/8\t351\t8\t0.0228\t1000\t125\t0\t0\t0`,
+    ads: `キャンペーン名\t広告グループ名\t広告名\tインプレッション数\tクリック数\tクリック率\tコスト\t平均CPC\tコンバージョン数\tコンバージョン率\tコンバージョンの価値\n和Node_検索広告\t和Node_検索広告グループ\tホームページ制作・LP制作｜心理学で問い合わせ導線を改善｜和-Node\t4446\t68\t0.0153\t7265\t106.8\t0\t0\t0`,
+    queries: `検索クエリー\t検索クエリーのマッチタイプ\tキャンペーン名\t広告グループ名\tインプレッション数\tクリック数\tクリック率\tコスト\t平均CPC\tコンバージョン数\nAI活用 相談\tフレーズ一致\t和Node_検索広告\t和Node_検索広告グループ\t120\t8\t0.0667\t520\t65\t0\nai に 相談\tフレーズ一致（類似語句）\t和Node_検索広告\t和Node_検索広告グループ\t196\t3\t0.0153\t438\t146\t0\nホームページ 作り方\tフレーズ一致（類似語句）\t和Node_検索広告\t和Node_検索広告グループ\t44\t1\t0.0227\t246\t246\t0\n問い合わせ 導線 改善\tフレーズ一致\t和Node_検索広告\t和Node_検索広告グループ\t18\t2\t0.1111\t160\t80\t0`,
+    keywords: `キーワード\tマッチタイプ\t品質インデックス\tインプレッション数\tクリック数\tクリック率\tコスト\t平均CPC\tコンバージョン数\nホームページ制作\tフレーズ一致\t\t3047\t28\t0.0092\t4077\t145.6\t0\nAI活用 相談\tフレーズ一致\t\t1309\t39\t0.0298\t3154\t80.9\t0\nICTコンサル\tフレーズ一致\t5\t38\t1\t0.0263\t34\t34\t0`
+  };
+
+  const fileInputs = document.querySelectorAll('input[type="file"][data-kind]');
+  fileInputs.forEach((input) => {
+    input.addEventListener('change', async (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      const text = await file.text();
+      state[input.dataset.kind] = parseDelimited(text);
+      input.closest('.file-card').classList.add('loaded');
+      render();
+    });
+  });
+
+  document.getElementById('sampleBtn').addEventListener('click', () => {
+    state.weekly = parseDelimited(sampleData.weekly);
+    state.ads = parseDelimited(sampleData.ads);
+    state.queries = parseDelimited(sampleData.queries);
+    state.keywords = parseDelimited(sampleData.keywords);
+    document.querySelectorAll('.file-card').forEach((card) => card.classList.add('loaded'));
+    render();
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    Object.keys(state).forEach((key) => { state[key] = []; });
+    fileInputs.forEach((input) => { input.value = ''; });
+    document.querySelectorAll('.file-card').forEach((card) => card.classList.remove('loaded'));
+    render();
+  });
+
+  if (new URLSearchParams(window.location.search).get('sample') === '1') {
+    document.getElementById('sampleBtn').click();
+  }
+
+  document.querySelectorAll('#actionList input').forEach((input, index) => {
+    const key = `ad-report-action-${index}`;
+    input.checked = localStorage.getItem(key) === 'true';
+    input.addEventListener('change', () => localStorage.setItem(key, input.checked));
+  });
+
+  function parseDelimited(text) {
+    const cleanText = text.replace(/^\uFEFF/, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n').trim();
+    if (!cleanText) return [];
+    const firstLine = cleanText.split('\n')[0] || '';
+    const delimiter = (firstLine.match(/\t/g) || []).length >= (firstLine.match(/,/g) || []).length ? '\t' : ',';
+    const rows = parseRows(cleanText, delimiter).filter((row) => row.some((cell) => String(cell).trim() && String(cell).trim() !== '�'));
+    const headers = rows.shift() || [];
+    return rows.map((row) => {
+      const obj = {};
+      headers.forEach((header, index) => {
+        obj[normalizeHeader(header)] = row[index] ? String(row[index]).trim() : '';
+      });
+      return obj;
+    }).filter((row) => Object.values(row).some(Boolean));
+  }
+
+  function parseRows(text, delimiter) {
+    const rows = [];
+    let row = [];
+    let cell = '';
+    let quoted = false;
+    for (let i = 0; i < text.length; i += 1) {
+      const char = text[i];
+      const next = text[i + 1];
+      if (char === '"') {
+        if (quoted && next === '"') {
+          cell += '"';
+          i += 1;
+        } else {
+          quoted = !quoted;
+        }
+      } else if (char === delimiter && !quoted) {
+        row.push(cell);
+        cell = '';
+      } else if (char === '\n' && !quoted) {
+        row.push(cell);
+        rows.push(row);
+        row = [];
+        cell = '';
+      } else {
+        cell += char;
+      }
+    }
+    row.push(cell);
+    rows.push(row);
+    return rows;
+  }
+
+  function normalizeHeader(header) {
+    return String(header).trim().replace(/\s+/g, '');
+  }
+
+  function get(row, names) {
+    for (const name of names) {
+      const key = normalizeHeader(name);
+      if (Object.prototype.hasOwnProperty.call(row, key)) return row[key];
+    }
+    return '';
+  }
+
+  function number(row, names) {
+    const raw = String(get(row, names)).replace(/[,%円￥\s]/g, '');
+    const value = Number(raw);
+    return Number.isFinite(value) ? value : 0;
+  }
+
+  function label(row, names) {
+    return String(get(row, names)).trim();
+  }
+
+  function sum(rows, names) {
+    return rows.reduce((total, row) => total + number(row, names), 0);
+  }
+
+  function formatNumber(value) {
+    return Math.round(value).toLocaleString('ja-JP');
+  }
+
+  function formatYen(value) {
+    return `${Math.round(value).toLocaleString('ja-JP')}円`;
+  }
+
+  function formatPercent(value) {
+    return `${(value * 100).toFixed(2)}%`;
+  }
+
+  function aggregateBaseRows() {
+    const rows = state.weekly.length ? state.weekly : state.keywords.length ? state.keywords : state.queries;
+    const impressions = sum(rows, ['インプレッション数']);
+    const clicks = sum(rows, ['クリック数']);
+    const cost = sum(rows, ['コスト', '費用']);
+    const conversions = sum(rows, ['コンバージョン数']);
+    return {
+      impressions,
+      clicks,
+      cost,
+      conversions,
+      ctr: impressions ? clicks / impressions : 0,
+      cpc: clicks ? cost / clicks : 0,
+      cvr: clicks ? conversions / clicks : 0,
+      cpa: conversions ? cost / conversions : 0
+    };
+  }
+
+  function buildNegativeRows() {
+    const candidates = new Map();
+    state.queries.forEach((row) => {
+      const query = label(row, ['検索クエリー']);
+      if (!query) return;
+      const pattern = patterns.find((item) => item.re.test(query));
+      if (!pattern) return;
+      const current = candidates.get(query) || { query, reason: pattern.reason, clicks: 0, cost: 0 };
+      current.clicks += number(row, ['クリック数']);
+      current.cost += number(row, ['コスト', '費用']);
+      candidates.set(query, current);
+    });
+    return [...candidates.values()].sort((a, b) => b.cost - a.cost || b.clicks - a.clicks).slice(0, 12);
+  }
+
+  function buildOpportunities() {
+    const sourceRows = [...state.queries.map((row) => ({ row, type: '検索語句', name: label(row, ['検索クエリー']) })), ...state.keywords.map((row) => ({ row, type: 'キーワード', name: label(row, ['キーワード']) }))];
+    return sourceRows
+      .map(({ row, type, name }) => {
+        const impressions = number(row, ['インプレッション数']);
+        const clicks = number(row, ['クリック数']);
+        const cost = number(row, ['コスト', '費用']);
+        const ctr = impressions ? clicks / impressions : number(row, ['クリック率']);
+        const cpc = clicks ? cost / clicks : number(row, ['平均CPC']);
+        let score = 0;
+        const reasons = [];
+        if (opportunityPatterns.test(name)) { score += 3; reasons.push('意図が近い'); }
+        if (clicks >= 2 && ctr >= 0.025) { score += 2; reasons.push('CTR高め'); }
+        if (clicks >= 1 && cpc > 0 && cpc <= 90) { score += 1; reasons.push('CPC低め'); }
+        return { name, type, reasons: reasons.join(' / '), ctr, cpc, clicks, score };
+      })
+      .filter((item) => item.name && item.score > 0)
+      .sort((a, b) => b.score - a.score || b.clicks - a.clicks)
+      .slice(0, 12);
+  }
+
+  function render() {
+    const totals = aggregateBaseRows();
+    const loadedCount = Object.values(state).filter((rows) => rows.length).length;
+    document.getElementById('loadedState').textContent = loadedCount ? `${loadedCount}/4 ファイル読込済み` : 'CSV未読込';
+    document.getElementById('loadedState').classList.toggle('ready', loadedCount > 0);
+
+    const kpis = [
+      ['表示回数', formatNumber(totals.impressions), 'Impressions'],
+      ['クリック数', formatNumber(totals.clicks), 'Clicks'],
+      ['CTR', formatPercent(totals.ctr), 'Click Through Rate'],
+      ['費用', formatYen(totals.cost), 'Cost'],
+      ['平均CPC', formatYen(totals.cpc), 'Cost Per Click'],
+      ['CV', formatNumber(totals.conversions), 'Conversions']
+    ];
+    document.getElementById('kpiGrid').innerHTML = kpis.map((kpi, index) => `
+      <article class="kpi-card ${index === 5 && totals.conversions === 0 ? 'caution' : ''}">
+        <span>${escapeHtml(kpi[0])}</span>
+        <strong>${escapeHtml(kpi[1])}</strong>
+        <small>${escapeHtml(kpi[2])}</small>
+      </article>
+    `).join('');
+
+    renderPriorities(totals, loadedCount);
+    renderNegativeRows();
+    renderOpportunities();
+    renderCreativePanel();
+  }
+
+  function renderPriorities(totals, loadedCount) {
+    const items = [];
+    if (!loadedCount) {
+      items.push({ rank: 'P0', className: 'muted', title: 'CSVを読み込むと診断が表示されます', text: 'まず週次サマリー、検索クエリー、キーワード別の順で入れると判断しやすくなります。' });
+    } else {
+      if (totals.clicks >= 30 && totals.conversions === 0) {
+        items.push({ rank: 'P0', className: '', title: 'CV計測またはLP導線を最優先で確認', text: 'クリックが出ているのにCVが0です。問い合わせ実数があるなら計測、実数も0ならLP・フォーム・CTAの摩擦を見ます。' });
+      }
+      const negatives = buildNegativeRows();
+      const wasteCost = negatives.reduce((sumValue, item) => sumValue + item.cost, 0);
+      if (wasteCost > 0) {
+        items.push({ rank: 'P1', className: 'p1', title: '除外候補の費用流出を整理', text: `除外候補に${formatYen(wasteCost)}ほど費用が寄っています。全体除外と様子見を分けて追加します。` });
+      }
+      const adCount = new Set(state.ads.map((row) => label(row, ['広告名'])).filter(Boolean)).size;
+      if (state.ads.length && adCount < 3) {
+        items.push({ rank: 'P1', className: 'p1', title: '広告文が少なくABテスト不足', text: '広告が3本未満です。心理学訴求、課題訴求、AI/ICT訴求の3軸で比較できる状態にします。' });
+      }
+      if (state.keywords.some((row) => label(row, ['キーワード']).match(/心理学|導線|問い合わせ|改善/) && number(row, ['インプレッション数']) === 0)) {
+        items.push({ rank: 'P2', className: 'p2', title: 'ブランド本命語句は表示不足', text: '心理学・導線・改善系の語句は検索需要が小さめです。SEO/広告文で認知させる語句として残しつつ、受注意図の近い語句を補います。' });
+      }
+      if (!items.length) {
+        items.push({ rank: 'P2', className: 'p2', title: '大きな警告はありません', text: '次は検索語句の質と問い合わせ実数を見ながら、広告文とLPの一致を調整します。' });
+      }
+    }
+    document.getElementById('priorityList').innerHTML = items.map((item) => `
+      <article class="priority-card ${item.className}">
+        <span>${item.rank}</span>
+        <strong>${escapeHtml(item.title)}</strong>
+        <p>${escapeHtml(item.text)}</p>
+      </article>
+    `).join('');
+  }
+
+  function renderNegativeRows() {
+    const rows = buildNegativeRows();
+    const body = document.getElementById('negativeRows');
+    if (!state.queries.length) {
+      body.innerHTML = '<tr><td colspan="4">検索クエリーCSVを読み込んでください。</td></tr>';
+      return;
+    }
+    if (!rows.length) {
+      body.innerHTML = '<tr><td colspan="4">明確な除外候補はまだ少なめです。次週も検索語句を見ます。</td></tr>';
+      return;
+    }
+    body.innerHTML = rows.map((row) => `
+      <tr>
+        <td>${escapeHtml(row.query)}</td>
+        <td>${escapeHtml(row.reason)}</td>
+        <td>${formatNumber(row.clicks)}</td>
+        <td>${formatYen(row.cost)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderOpportunities() {
+    const rows = buildOpportunities();
+    const body = document.getElementById('opportunityRows');
+    if (!state.queries.length && !state.keywords.length) {
+      body.innerHTML = '<tr><td colspan="4">検索クエリーまたはキーワードCSVを読み込んでください。</td></tr>';
+      return;
+    }
+    if (!rows.length) {
+      body.innerHTML = '<tr><td colspan="4">伸ばす候補はまだ弱めです。キーワード追加後に再確認します。</td></tr>';
+      return;
+    }
+    body.innerHTML = rows.map((row) => `
+      <tr>
+        <td>${escapeHtml(row.name)}<br><small>${escapeHtml(row.type)}</small></td>
+        <td>${escapeHtml(row.reasons)}</td>
+        <td>${formatPercent(row.ctr)}</td>
+        <td>${formatYen(row.cpc)}</td>
+      </tr>
+    `).join('');
+  }
+
+  function renderCreativePanel() {
+    const panel = document.getElementById('creativePanel');
+    if (!state.ads.length) {
+      panel.textContent = '広告別CSVを読み込むと、広告数とABテスト不足を確認します。';
+      return;
+    }
+    const names = [...new Set(state.ads.map((row) => label(row, ['広告名'])).filter(Boolean))];
+    const impressions = sum(state.ads, ['インプレッション数']);
+    const clicks = sum(state.ads, ['クリック数']);
+    const cost = sum(state.ads, ['コスト', '費用']);
+    const ctr = impressions ? clicks / impressions : 0;
+    const cpc = clicks ? cost / clicks : 0;
+    const message = names.length < 3
+      ? '広告が少ないため、勝ち負けの比較ができません。心理学訴求、課題訴求、AI/ICT訴求の3本体制にすると判断が早くなります。'
+      : '広告数は比較可能な状態です。次はCTRだけでなく、CV・相談化・受注化で勝ち広告を判断します。';
+    panel.innerHTML = `
+      <strong>広告数：${formatNumber(names.length)}本</strong><br>
+      表示 ${formatNumber(impressions)} / クリック ${formatNumber(clicks)} / CTR ${formatPercent(ctr)} / 平均CPC ${formatYen(cpc)}<br><br>
+      ${escapeHtml(message)}
+    `;
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
+  }
+
+  render();
+</script>
