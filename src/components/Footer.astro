@@ -37,30 +37,13 @@ function getLocalizedLink(path: string) {
 ---
 <footer class="footer">
   <div class="section-inner">
-    <div class="footer-brand">
-      <div class="brand-main">
-        <div class="logo">和-Node</div>
-        <p class="tagline">{t.footer.tagline[lang]}</p>
-        <div class="footer-info">
-          <p class="info-item">
-            {lang === 'ja' ? '〒509-0207 岐阜県可児市今渡2347番地1' : 
-             lang === 'en' ? '2347-1 Imawatari, Kani-shi, Gifu 509-0207, Japan' : 
-             '2347-1 Imawatari, Kani-shi, Gifu 509-0207, Japon'}
-          </p>
-          <p class="info-item">Tel: 080-3599-5388</p>
-          <p class="info-item">Email: <a href="mailto:contacts@wa-node.com">contacts@wa-node.com</a></p>
-        </div>
-      </div>
-
-    </div>
-
     <div class="footer-grid">
       <div class="footer-col">
         <h3>{t.footer.col1[lang]}</h3>
         <ul>
-          <li><a href={getLocalizedLink('/pricing')}>{t.footer.col1_item1[lang]}</a></li>
-          <li><a href={getLocalizedLink('/pricing')}>{t.footer.col1_item2[lang]}</a></li>
-          <li><a href={getLocalizedLink('/pricing')}>{t.footer.col1_item3[lang]}</a></li>
+          <li><a href={getLocalizedLink('/pricing#web-production')}>{t.footer.col1_item1[lang]}</a></li>
+          <li><a href={getLocalizedLink('/pricing#web-production')}>{t.footer.col1_item2[lang]}</a></li>
+          <li><a href={getLocalizedLink('/pricing#copilot')}>{t.footer.col1_item3[lang]}</a></li>
           <li><a href={getLocalizedLink('/pricing#project-flow')}>{t.footer.col1_item_flow[lang]}</a></li>
           <li><a href={getLocalizedLink('/works')}>{t.footer.col1_item4[lang]}</a></li>
         </ul>
@@ -110,39 +93,6 @@ function getLocalizedLink(path: string) {
     background-color: #0a0a0a;
     color: #fff;
     padding: 100px 0 40px;
-  }
-  .footer-brand {
-    margin-bottom: 60px;
-    padding-bottom: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  .brand-main {
-    flex: 1;
-    max-width: 400px;
-  }
-  .footer-brand .logo {
-    font-size: 1.8rem;
-    font-weight: 900;
-    margin-bottom: 10px;
-    letter-spacing: 0.1em;
-  }
-  .footer-brand .tagline {
-    font-size: 0.9rem;
-    color: var(--footer-accent);
-    font-weight: 700;
-    margin-bottom: 24px;
-  }
-  .footer-info {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
-    line-height: 1.8;
-  }
-  .footer-info .info-item {
-    margin: 0;
-  }
-  .footer-info a {
-    color: rgba(255, 255, 255, 0.8);
-    text-decoration: underline;
   }
   .section-inner {
     max-width: 1200px;
