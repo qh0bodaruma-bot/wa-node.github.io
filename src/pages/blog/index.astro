@@ -3,6 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getBlogs } from '../../library/microcms';
 
 // microCMSから記事一覧を取得（公開日の降順）
+console.log("DEBUG - MICROCMS_SERVICE_DOMAIN:", import.meta.env.MICROCMS_SERVICE_DOMAIN);
+console.log("DEBUG - MICROCMS_API_KEY:", import.meta.env.MICROCMS_API_KEY ? "EXISTS" : "MISSING");
 const response = await getBlogs({ 
   orders: '-publishedAt' 
 });

@@ -1,0 +1,1618 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = 'DOCXアクセシブル変換アプリ｜和-Node';
+const description = 'DOCXファイルをブラウザ内で読み込み、フォントサイズ拡大、反転、読み仮名プレビュー、変換済みDOCXのダウンロードを行うアクセシビリティ支援デモアプリです。';
+---
+
+<BaseLayout title={title} description={description} noindex={true}>
+  <main class="docx-app" data-docx-app>
+    <section class="docx-hero">
+      <div class="docx-shell hero-grid">
+        <div class="hero-copy">
+          <p class="tool-label">Wa-Node Accessibility Tool</p>
+          <h1>DOCX<wbr />アクセシブル<wbr />変換</h1>
+          <p>
+            Word文書をブラウザ内で読み込み、文字サイズの拡大、反転、読み仮名プレビューをまとめて確認できます。
+            文書データはサーバーへ送信されません。
+          </p>
+        </div>
+        <div class="hero-badges" aria-label="このアプリの前提">
+          <span>DOCX専用</span>
+          <span>端末内処理</span>
+          <span>初期デモ</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="docx-workspace" aria-labelledby="workspace-title">
+      <div class="docx-shell workspace-grid">
+        <aside class="control-panel" aria-label="ファイル読み込みと変換設定">
+          <div class="panel-heading">
+            <p class="tool-label">Input</p>
+            <h2 class="sr-only" id="workspace-title">文書を読み込む</h2>
+          </div>
+
+          <div class="input-actions">
+            <label class="icon-button primary icon-symbol-button" for="docxFiles" aria-label="DOCXファイルを選ぶ" title="ファイル">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/><path d="M12 18v-6"/><path d="m9 15 3 3 3-3"/></svg>
+              <span class="sr-only">ファイル</span>
+              <input id="docxFiles" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple />
+            </label>
+
+            <label class="icon-button icon-symbol-button" for="docxFolder" aria-label="フォルダを選ぶ" title="フォルダ">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 17v-6"/><path d="m9 14 3 3 3-3"/></svg>
+              <span class="sr-only">フォルダ</span>
+              <input id="docxFolder" type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple webkitdirectory directory />
+            </label>
+          </div>
+
+          <div class="mode-panel" aria-labelledby="mode-title">
+            <div class="section-title-row compact">
+              <div>
+                <p class="tool-label">Font Size</p>
+                <h2 class="sr-only" id="mode-title">文字サイズ</h2>
+              </div>
+              <button class="icon-only" id="settingsBtn" type="button" aria-label="設定を開く" title="設定">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 15a1.8 1.8 0 0 0 .36 1.98l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.8 1.8 0 0 0-1.98-.36 1.8 1.8 0 0 0-1.08 1.65V21a2 2 0 0 1-4 0v-.09A1.8 1.8 0 0 0 8.8 19.3a1.8 1.8 0 0 0-1.98.36l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.8 1.8 0 0 0 4.35 15a1.8 1.8 0 0 0-1.65-1.08H2.6a2 2 0 0 1 0-4h.09A1.8 1.8 0 0 0 4.3 8.8a1.8 1.8 0 0 0-.36-1.98l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.8 1.8 0 0 0 8.75 4.35a1.8 1.8 0 0 0 1.08-1.65V2.6a2 2 0 0 1 4 0v.09a1.8 1.8 0 0 0 1.08 1.65 1.8 1.8 0 0 0 1.98-.36l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.8 1.8 0 0 0-.36 1.98 1.8 1.8 0 0 0 1.65 1.08h.09a2 2 0 0 1 0 4h-.09A1.8 1.8 0 0 0 19.4 15Z"/></svg>
+              </button>
+            </div>
+            <div class="font-modes" role="group" aria-label="文字サイズモード">
+              <button type="button" class="mode-button" data-mode="standard">
+                <span class="mode-icon">A</span>
+                <strong>標準</strong>
+                <small class="sr-only">+0pt</small>
+              </button>
+              <button type="button" class="mode-button" data-mode="large">
+                <span class="mode-icon">A+</span>
+                <strong>大</strong>
+                <small class="sr-only" id="largeDeltaLabel">+6pt</small>
+              </button>
+              <button type="button" class="mode-button" data-mode="xlarge">
+                <span class="mode-icon">A++</span>
+                <strong>特大</strong>
+                <small class="sr-only" id="xlargeDeltaLabel">+10pt</small>
+              </button>
+            </div>
+          </div>
+
+          <div class="assist-panel" aria-label="補助表示設定">
+            <button type="button" class="assist-button" id="invertPreviewBtn" aria-pressed="false">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18z"/><path d="M12 3a9 9 0 0 1 0 18"/></svg>
+              <span>反転</span>
+            </button>
+            <button type="button" class="assist-button" id="rubyPreviewBtn" aria-pressed="false">
+              <span class="assist-icon-letter" aria-hidden="true">あ</span>
+              <span>読み仮名</span>
+            </button>
+          </div>
+
+          <div class="convert-actions">
+            <button type="button" class="icon-button primary icon-symbol-button" id="convertAllBtn" aria-label="選択中の文書を変換" title="変換">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-9 9 9.8 9.8 0 0 1-6.4-2.4"/><path d="M3 12a9 9 0 0 1 9-9 9.8 9.8 0 0 1 6.4 2.4"/><path d="M3 21v-6h6"/><path d="M21 3v6h-6"/></svg>
+              <span class="sr-only">変換</span>
+            </button>
+            <button type="button" class="icon-button icon-symbol-button" id="downloadAllBtn" aria-label="選択中の変換済み文書をダウンロード" title="ダウンロード">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+              <span class="sr-only">ダウンロード</span>
+            </button>
+          </div>
+
+          <div class="privacy-note">
+            <strong>初期版の注意</strong>
+            <p>フォント拡大と反転はdocxに反映します。読み仮名はプレビュー補助です。表・画像・複雑なテキストボックスは変換後に目視確認してください。</p>
+          </div>
+        </aside>
+
+        <section class="file-panel" aria-labelledby="file-list-title">
+          <div class="section-title-row">
+            <div>
+              <p class="tool-label">Files</p>
+              <h2 id="file-list-title">読み込んだ文書</h2>
+            </div>
+            <p class="loaded-state" id="fileCount" aria-label="変換対象 0件、読み込み 0件">0/0</p>
+          </div>
+          <div class="file-list" id="fileList">
+            <article class="empty-state">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>
+              <strong>.docxファイルをドラッグ＆ドロップで追加</strong>
+            </article>
+          </div>
+        </section>
+
+        <aside class="preview-panel" aria-labelledby="preview-title">
+          <div class="section-title-row">
+            <div>
+              <p class="tool-label">Preview</p>
+              <h2 id="preview-title">内容プレビュー</h2>
+            </div>
+            <span class="preview-mode" id="previewMode">標準</span>
+          </div>
+          <div class="preview-surface" id="previewSurface">
+            <p class="preview-placeholder">文書を選択すると、本文の先頭を表示します。</p>
+          </div>
+          <div class="status-board" id="statusBoard">
+            <span>待機中</span>
+            <strong>フォントサイズを選び、変換を実行してください。</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <div class="settings-drawer" id="settingsDrawer" hidden>
+      <div class="settings-card" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+        <div class="section-title-row">
+          <div>
+            <p class="tool-label">Settings</p>
+            <h2 id="settings-title">フォント加算値</h2>
+          </div>
+          <button class="icon-only" id="closeSettingsBtn" type="button" aria-label="設定を閉じる" title="閉じる">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+          </button>
+        </div>
+        <div class="setting-fields">
+          <label>
+            <span>大</span>
+            <input id="largeDeltaInput" type="number" min="0" max="20" step="1" />
+            <small>初期値 +6pt</small>
+          </label>
+          <label>
+            <span>特大</span>
+            <input id="xlargeDeltaInput" type="number" min="0" max="20" step="1" />
+            <small>初期値 +10pt</small>
+          </label>
+        </div>
+        <div class="drawer-actions">
+          <button type="button" class="ghost-btn" id="resetSettingsBtn">初期値に戻す</button>
+          <button type="button" class="primary-btn" id="saveSettingsBtn">保存</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .docx-app {
+    --tool-bg: #f7f0e7;
+    --tool-panel: #fffdf8;
+    --tool-panel-strong: #ffffff;
+    --tool-ink: #142523;
+    --tool-muted: #5e6b68;
+    --tool-teal: #0f4c5c;
+    --tool-teal-2: #2e8792;
+    --tool-gold: #9a6a15;
+    --tool-red: #c7352f;
+    --tool-line: rgba(15, 76, 92, 0.18);
+    --tool-shadow: 0 20px 52px rgba(32, 45, 41, 0.13);
+    background:
+      radial-gradient(circle at 16% 8%, rgba(46, 135, 146, 0.12), transparent 28%),
+      linear-gradient(180deg, #fffaf3 0%, var(--tool-bg) 100%);
+    color: var(--tool-ink);
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+
+  .docx-app.is-inverted {
+    --tool-bg: #071413;
+    --tool-panel: #0f1f1d;
+    --tool-panel-strong: #102927;
+    --tool-ink: #f6fff8;
+    --tool-muted: #c6d6d2;
+    --tool-line: rgba(246, 255, 248, 0.2);
+    --tool-shadow: 0 20px 52px rgba(0, 0, 0, 0.32);
+  }
+
+  .docx-shell {
+    width: min(1180px, calc(100% - 32px));
+    margin: 0 auto;
+  }
+
+  .docx-app *,
+  .docx-app *::before,
+  .docx-app *::after {
+    box-sizing: border-box;
+    min-width: 0;
+  }
+
+  .docx-app :where(p, h1, h2, h3, li, small) {
+    overflow-wrap: anywhere;
+  }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .docx-hero {
+    padding: 84px 0 32px;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 210px;
+    gap: 34px;
+    align-items: end;
+  }
+
+  .tool-label {
+    margin: 0 0 12px;
+    color: var(--tool-gold);
+    font-family: Outfit, system-ui, sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .hero-copy h1,
+  .panel-heading h2,
+  .section-title-row h2 {
+    margin: 0;
+    color: var(--tool-ink);
+    font-family: "Yu Mincho", "YuMincho", "Hiragino Mincho ProN", serif;
+    letter-spacing: 0;
+  }
+
+  .hero-copy h1 {
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    line-height: 1.08;
+  }
+
+  .hero-copy p:not(.tool-label),
+  .panel-heading p:not(.tool-label) {
+    max-width: 780px;
+    margin: 18px 0 0;
+    color: var(--tool-muted);
+    font-size: 1rem;
+    line-height: 2;
+  }
+
+  .hero-badges {
+    display: grid;
+    gap: 10px;
+  }
+
+  .hero-badges span,
+  .loaded-state,
+  .preview-mode {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    padding: 8px 14px;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.62);
+    color: var(--tool-teal);
+    font-weight: 800;
+    font-size: 0.85rem;
+  }
+
+  .workspace-grid {
+    display: grid;
+    grid-template-columns: 312px minmax(0, 1fr) 330px;
+    gap: 22px;
+    align-items: start;
+  }
+
+  .control-panel,
+  .file-panel,
+  .preview-panel,
+  .settings-card {
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: color-mix(in srgb, var(--tool-panel) 94%, transparent);
+    box-shadow: var(--tool-shadow);
+  }
+
+  .control-panel {
+    position: sticky;
+    top: 92px;
+    display: grid;
+    gap: 20px;
+    padding: 24px;
+  }
+
+  .file-panel,
+  .preview-panel {
+    padding: 24px;
+  }
+
+  .section-title-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 20px;
+  }
+
+  .section-title-row.compact {
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  .section-title-row h2,
+  .panel-heading h2 {
+    font-size: clamp(1.5rem, 2.3vw, 2rem);
+    line-height: 1.25;
+  }
+
+  .preview-panel .section-title-row h2 {
+    font-size: clamp(1.35rem, 1.8vw, 1.65rem);
+    overflow-wrap: normal;
+    word-break: keep-all;
+  }
+
+  .input-actions,
+  .convert-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .convert-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .icon-button,
+  .assist-button,
+  .primary-btn,
+  .ghost-btn {
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel-strong);
+    color: var(--tool-teal);
+    font: inherit;
+    font-weight: 900;
+    cursor: pointer;
+    transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  }
+
+  .icon-button {
+    position: relative;
+    display: flex;
+    min-height: 58px;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    padding: 12px;
+  }
+
+  .icon-symbol-button {
+    padding: 0;
+  }
+
+  .icon-button span,
+  .assist-button span {
+    white-space: nowrap;
+  }
+
+  .icon-button.primary,
+  .primary-btn {
+    border-color: var(--tool-teal);
+    background: var(--tool-teal);
+    color: #fff;
+  }
+
+  .icon-button:hover,
+  .assist-button:hover,
+  .primary-btn:hover,
+  .ghost-btn:hover,
+  .icon-only:hover {
+    transform: translateY(-1px);
+    border-color: var(--tool-teal-2);
+  }
+
+  .icon-button svg,
+  .assist-button svg,
+  .icon-only svg,
+  .empty-state svg {
+    width: 22px;
+    height: 22px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: 0 0 auto;
+  }
+
+  .icon-button input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .mode-panel,
+  .assist-panel,
+  .privacy-note {
+    padding: 16px;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .font-modes,
+  .assist-panel,
+  .file-list {
+    display: grid;
+    gap: 10px;
+  }
+
+  .font-modes {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .mode-button {
+    display: grid;
+    grid-template-rows: auto auto;
+    justify-items: center;
+    gap: 6px;
+    align-items: center;
+    min-height: 86px;
+    padding: 10px 6px 8px;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel-strong);
+    color: var(--tool-ink);
+    text-align: center;
+    cursor: pointer;
+  }
+
+  .mode-button.is-active {
+    border-color: var(--tool-teal);
+    box-shadow: inset 0 0 0 2px rgba(15, 76, 92, 0.14);
+  }
+
+  .mode-icon {
+    display: grid;
+    width: 50px;
+    height: 48px;
+    place-items: center;
+    border-radius: 8px;
+    background: #eaf6f3;
+    color: var(--tool-teal);
+    font-family: Outfit, system-ui, sans-serif;
+    font-size: 1.05rem;
+    font-weight: 900;
+  }
+
+  .mode-button strong {
+    display: block;
+    color: var(--tool-muted);
+    font-size: 0.78rem;
+    font-weight: 900;
+    line-height: 1.1;
+  }
+
+  .icon-only {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel-strong);
+    color: var(--tool-teal);
+    cursor: pointer;
+  }
+
+  .assist-button {
+    display: flex;
+    min-height: 48px;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+  }
+
+  .assist-button[aria-pressed="true"] {
+    border-color: var(--tool-teal);
+    background: #eaf6f3;
+  }
+
+  .assist-icon-letter {
+    display: grid;
+    width: 22px;
+    height: 22px;
+    place-items: center;
+    color: currentColor;
+    font-family: "Yu Gothic", "Hiragino Sans", system-ui, sans-serif;
+    font-size: 1.08rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .privacy-note strong {
+    color: var(--tool-teal);
+  }
+
+  .privacy-note p {
+    margin: 8px 0 0;
+    color: var(--tool-muted);
+    font-size: 0.86rem;
+    line-height: 1.75;
+  }
+
+  .file-row,
+  .empty-state {
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel-strong);
+  }
+
+  .file-row {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: center;
+    padding: 14px;
+  }
+
+  .file-row.is-selected {
+    border-color: var(--tool-teal);
+    box-shadow: inset 4px 0 0 var(--tool-teal);
+  }
+
+  .file-row.is-targeted {
+    background: color-mix(in srgb, var(--tool-panel-strong) 92%, #eaf6f3);
+  }
+
+  .file-check {
+    position: relative;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .file-check input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .file-check span {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel);
+    color: transparent;
+    font-size: 0.9rem;
+    font-weight: 900;
+  }
+
+  .file-check input:checked + span {
+    border-color: var(--tool-teal);
+    background: var(--tool-teal);
+    color: #fff;
+  }
+
+  .file-main {
+    min-width: 0;
+  }
+
+  .file-main button {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--tool-ink);
+    font: inherit;
+    font-weight: 900;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .file-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    color: var(--tool-muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .status-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #eef6f4;
+    color: var(--tool-teal);
+  }
+
+  .status-pill.error {
+    background: #fff1ed;
+    color: var(--tool-red);
+  }
+
+  .row-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .row-actions button {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel);
+    color: var(--tool-teal);
+    cursor: pointer;
+  }
+
+  .row-actions svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .empty-state {
+    display: grid;
+    place-items: center;
+    min-height: 280px;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .empty-state svg {
+    width: 46px;
+    height: 46px;
+    color: var(--tool-teal-2);
+  }
+
+  .empty-state strong {
+    margin-top: 12px;
+    color: var(--tool-ink);
+  }
+
+  .empty-state p {
+    max-width: 360px;
+    margin: 8px auto 0;
+    color: var(--tool-muted);
+    line-height: 1.75;
+  }
+
+  .preview-surface {
+    min-height: 430px;
+    max-height: 570px;
+    overflow: auto;
+    padding: 24px;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel-strong);
+    color: var(--tool-ink);
+    line-height: 1.95;
+    font-size: var(--preview-font-size, 16px);
+  }
+
+  .docx-app.is-inverted .preview-surface,
+  .preview-surface.is-inverted {
+    background: #050908;
+    color: #fbfff8;
+  }
+
+  .preview-surface p {
+    margin: 0 0 1em;
+  }
+
+  .preview-surface ruby {
+    ruby-position: over;
+  }
+
+  .preview-surface rt {
+    color: var(--tool-teal-2);
+    font-size: 0.55em;
+    font-weight: 800;
+  }
+
+  .preview-placeholder {
+    color: var(--tool-muted);
+  }
+
+  .status-board {
+    display: grid;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 14px;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.58);
+  }
+
+  .status-board span {
+    color: var(--tool-gold);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .status-board strong {
+    color: var(--tool-ink);
+    line-height: 1.55;
+  }
+
+  .settings-drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(10, 18, 17, 0.42);
+  }
+
+  .settings-drawer[hidden] {
+    display: none;
+  }
+
+  .settings-card {
+    width: min(520px, 100%);
+    padding: 24px;
+  }
+
+  .setting-fields {
+    display: grid;
+    gap: 14px;
+  }
+
+  .setting-fields label {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .setting-fields span {
+    font-weight: 900;
+  }
+
+  .setting-fields input {
+    width: 100%;
+    min-height: 46px;
+    padding: 8px 12px;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    color: var(--tool-ink);
+    font: inherit;
+    font-weight: 800;
+  }
+
+  .setting-fields small {
+    grid-column: 2;
+    color: var(--tool-muted);
+  }
+
+  .drawer-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .primary-btn,
+  .ghost-btn {
+    min-height: 44px;
+    padding: 9px 18px;
+  }
+
+  /* JSで後から描画する行はAstroのscoped属性を持たないため、ページ内に限定して補足する。 */
+  .docx-app :global(.file-list) {
+    display: grid;
+    gap: 10px;
+  }
+
+  .docx-app :global(.file-row),
+  .docx-app :global(.empty-state) {
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel-strong);
+  }
+
+  .docx-app :global(.file-row) {
+    display: grid;
+    grid-template-columns: 42px minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: center;
+    padding: 14px;
+  }
+
+  .docx-app :global(.file-row.is-selected) {
+    border-color: var(--tool-teal);
+    box-shadow: inset 4px 0 0 var(--tool-teal);
+  }
+
+  .docx-app :global(.file-row.is-targeted) {
+    background: color-mix(in srgb, var(--tool-panel-strong) 92%, #eaf6f3);
+  }
+
+  .docx-app :global(.file-check) {
+    position: relative;
+    display: grid;
+    width: 38px;
+    height: 38px;
+    place-items: center;
+    cursor: pointer;
+  }
+
+  .docx-app :global(.file-check input) {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .docx-app :global(.file-check span) {
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel);
+    color: transparent;
+    font-size: 0.9rem;
+    font-weight: 900;
+  }
+
+  .docx-app :global(.file-check input:checked + span) {
+    border-color: var(--tool-teal);
+    background: var(--tool-teal);
+    color: #fff;
+  }
+
+  .docx-app :global(.file-main) {
+    min-width: 0;
+  }
+
+  .docx-app :global(.file-main button) {
+    display: block;
+    width: 100%;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: var(--tool-ink);
+    font: inherit;
+    font-weight: 900;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .docx-app :global(.file-meta) {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+    color: var(--tool-muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+  }
+
+  .docx-app :global(.status-pill) {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: #eef6f4;
+    color: var(--tool-teal);
+  }
+
+  .docx-app :global(.status-pill.error) {
+    background: #fff1ed;
+    color: var(--tool-red);
+  }
+
+  .docx-app :global(.row-actions) {
+    display: flex;
+    gap: 8px;
+  }
+
+  .docx-app :global(.row-actions button) {
+    display: grid;
+    width: 40px;
+    height: 40px;
+    place-items: center;
+    border: 1px solid var(--tool-line);
+    border-radius: 8px;
+    background: var(--tool-panel);
+    color: var(--tool-teal);
+    cursor: pointer;
+  }
+
+  .docx-app :global(.row-actions svg),
+  .docx-app :global(.empty-state svg) {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .docx-app :global(.row-actions svg) {
+    width: 20px;
+    height: 20px;
+  }
+
+  .docx-app :global(.empty-state) {
+    display: grid;
+    place-items: center;
+    min-height: 280px;
+    padding: 32px;
+    text-align: center;
+  }
+
+  .docx-app :global(.empty-state svg) {
+    width: 46px;
+    height: 46px;
+    color: var(--tool-teal-2);
+  }
+
+  .docx-app :global(.empty-state strong) {
+    margin-top: 12px;
+    color: var(--tool-ink);
+  }
+
+  .docx-app :global(.empty-state p) {
+    max-width: 360px;
+    margin: 8px auto 0;
+    color: var(--tool-muted);
+    line-height: 1.75;
+  }
+
+  .preview-surface :global(p) {
+    margin: 0 0 1em;
+  }
+
+  .preview-surface :global(ruby) {
+    ruby-position: over;
+  }
+
+  .preview-surface :global(rt) {
+    color: var(--tool-teal-2);
+    font-size: 0.55em;
+    font-weight: 800;
+  }
+
+  .preview-surface :global(.preview-placeholder) {
+    color: var(--tool-muted);
+  }
+
+  @media (max-width: 1120px) {
+    .hero-grid,
+    .workspace-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .control-panel {
+      position: static;
+    }
+
+    .hero-badges {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 680px) {
+    .docx-shell {
+      width: min(1180px, calc(100% - 24px));
+    }
+
+    .docx-hero {
+      padding: 58px 0 24px;
+    }
+
+    .hero-copy h1 {
+      max-width: 100%;
+      font-size: 2rem;
+      line-height: 1.16;
+      overflow-wrap: anywhere;
+      word-break: normal;
+      line-break: loose;
+    }
+
+    .hero-copy p:not(.tool-label),
+    .panel-heading p:not(.tool-label),
+    .note-box p {
+      max-width: 100%;
+      word-break: break-all;
+      line-break: anywhere;
+    }
+
+    .hero-badges,
+    .input-actions {
+      grid-template-columns: 1fr;
+    }
+
+    .convert-actions {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .control-panel,
+    .file-panel,
+    .preview-panel,
+    .settings-card {
+      padding: 18px;
+    }
+
+    .mode-button {
+      grid-template-columns: none;
+      grid-template-rows: auto auto;
+    }
+
+    .row-actions {
+      grid-column: 2;
+      justify-content: flex-start;
+    }
+
+    .row-actions button {
+      width: 40px;
+    }
+
+    .docx-app :global(.file-row) {
+      grid-template-columns: 42px minmax(0, 1fr);
+    }
+
+    .docx-app :global(.row-actions) {
+      grid-column: 2;
+      justify-content: flex-start;
+    }
+
+    .docx-app :global(.row-actions button) {
+      width: 40px;
+    }
+
+    .setting-fields label {
+      grid-template-columns: 1fr;
+    }
+
+    .setting-fields small {
+      grid-column: 1;
+    }
+  }
+</style>
+
+<script>
+  import JSZip from 'jszip';
+
+  const STORAGE_KEY = 'wa-node-docx-accessibility-settings-v1';
+  const DEFAULT_SETTINGS = {
+    mode: 'large',
+    largeDelta: 6,
+    xlargeDelta: 10,
+    invertPreview: false,
+    rubyPreview: false,
+    invertOutput: false
+  };
+
+  const rubyDictionary = [
+    ['視覚障碍者', 'しかくしょうがいしゃ'],
+    ['視覚障害者', 'しかくしょうがいしゃ'],
+    ['読み仮名', 'よみがな'],
+    ['漢字', 'かんじ'],
+    ['文書', 'ぶんしょ'],
+    ['変換', 'へんかん'],
+    ['設定', 'せってい'],
+    ['標準', 'ひょうじゅん'],
+    ['特大', 'とくだい'],
+    ['反転', 'はんてん'],
+    ['色調', 'しきちょう'],
+    ['心理学', 'しんりがく'],
+    ['業務', 'ぎょうむ'],
+    ['改善', 'かいぜん'],
+    ['導線', 'どうせん'],
+    ['相談', 'そうだん'],
+    ['制作', 'せいさく'],
+    ['資料', 'しりょう'],
+    ['確認', 'かくにん'],
+    ['保存', 'ほぞん'],
+    ['和', 'わ']
+  ];
+
+  function bootDocxApp() {
+    const root = document.querySelector('[data-docx-app]');
+    if (!root || root.dataset.ready === 'true') return;
+    root.dataset.ready = 'true';
+
+    const state = {
+      files: [],
+      selectedId: null,
+      settings: loadSettings()
+    };
+
+    const els = {
+      fileInput: document.getElementById('docxFiles'),
+      folderInput: document.getElementById('docxFolder'),
+      fileList: document.getElementById('fileList'),
+      fileCount: document.getElementById('fileCount'),
+      convertAll: document.getElementById('convertAllBtn'),
+      downloadAll: document.getElementById('downloadAllBtn'),
+      settingsBtn: document.getElementById('settingsBtn'),
+      drawer: document.getElementById('settingsDrawer'),
+      closeSettings: document.getElementById('closeSettingsBtn'),
+      saveSettings: document.getElementById('saveSettingsBtn'),
+      resetSettings: document.getElementById('resetSettingsBtn'),
+      largeInput: document.getElementById('largeDeltaInput'),
+      xlargeInput: document.getElementById('xlargeDeltaInput'),
+      largeLabel: document.getElementById('largeDeltaLabel'),
+      xlargeLabel: document.getElementById('xlargeDeltaLabel'),
+      invertPreview: document.getElementById('invertPreviewBtn'),
+      rubyPreview: document.getElementById('rubyPreviewBtn'),
+      preview: document.getElementById('previewSurface'),
+      previewMode: document.getElementById('previewMode'),
+      statusBoard: document.getElementById('statusBoard')
+    };
+
+    applySettingsToUi();
+    render();
+
+    els.fileInput.addEventListener('change', (event) => addFiles(event.target.files));
+    els.folderInput.addEventListener('change', (event) => addFiles(event.target.files));
+
+    document.querySelectorAll('.mode-button').forEach((button) => {
+      button.addEventListener('click', () => {
+        state.settings.mode = button.dataset.mode;
+        saveSettings(state.settings);
+        applySettingsToUi();
+        renderPreview();
+      });
+    });
+
+    els.invertPreview.addEventListener('click', () => {
+      state.settings.invertPreview = !state.settings.invertPreview;
+      state.settings.invertOutput = state.settings.invertPreview;
+      saveSettings(state.settings);
+      applySettingsToUi();
+      renderPreview();
+      updateStatus('反転', state.settings.invertPreview ? 'プレビューとdocx出力に反映します。' : '反転を解除しました。');
+    });
+
+    els.rubyPreview.addEventListener('click', () => {
+      state.settings.rubyPreview = !state.settings.rubyPreview;
+      saveSettings(state.settings);
+      applySettingsToUi();
+      renderPreview();
+    });
+
+    els.settingsBtn.addEventListener('click', openSettings);
+    els.closeSettings.addEventListener('click', closeSettings);
+    els.drawer.addEventListener('click', (event) => {
+      if (event.target === els.drawer) closeSettings();
+    });
+    els.saveSettings.addEventListener('click', () => {
+      state.settings.largeDelta = clampPt(els.largeInput.value, 6);
+      state.settings.xlargeDelta = clampPt(els.xlargeInput.value, 10);
+      saveSettings(state.settings);
+      applySettingsToUi();
+      closeSettings();
+      renderPreview();
+      updateStatus('設定保存', `大は+${state.settings.largeDelta}pt、特大は+${state.settings.xlargeDelta}ptで保存しました。`);
+    });
+    els.resetSettings.addEventListener('click', () => {
+      state.settings.largeDelta = DEFAULT_SETTINGS.largeDelta;
+      state.settings.xlargeDelta = DEFAULT_SETTINGS.xlargeDelta;
+      saveSettings(state.settings);
+      applySettingsToUi();
+    });
+
+    els.convertAll.addEventListener('click', convertAllFiles);
+    els.downloadAll.addEventListener('click', downloadAllConverted);
+
+    els.fileList.addEventListener('click', async (event) => {
+      const button = event.target.closest('button[data-action]');
+      if (!button) return;
+      const item = state.files.find((file) => file.id === button.dataset.id);
+      if (!item) return;
+      if (button.dataset.action === 'select') {
+        state.selectedId = item.id;
+        if (!item.previewText && item.status !== 'reading') await readPreview(item);
+        render();
+      }
+      if (button.dataset.action === 'convert') await convertFile(item);
+      if (button.dataset.action === 'download') downloadItem(item);
+      if (button.dataset.action === 'remove') {
+        state.files = state.files.filter((file) => file.id !== item.id);
+        if (state.selectedId === item.id) state.selectedId = state.files[0]?.id || null;
+        render();
+      }
+    });
+
+    els.fileList.addEventListener('change', (event) => {
+      const input = event.target.closest('input[data-action="target"]');
+      if (!input) return;
+      const item = state.files.find((file) => file.id === input.dataset.id);
+      if (!item) return;
+      item.included = input.checked;
+      render();
+    });
+
+    async function addFiles(fileList) {
+      const incoming = [...fileList].filter((file) => file.name.toLowerCase().endsWith('.docx') && !file.name.startsWith('~$'));
+      if (!incoming.length) {
+        updateStatus('読み込みなし', '対象となる.docxファイルが見つかりませんでした。');
+        return;
+      }
+      const existingKeys = new Set(state.files.map((file) => file.key));
+      const additions = incoming
+        .map((file) => ({
+          id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+          key: `${file.name}-${file.size}-${file.lastModified}`,
+          file,
+          name: file.webkitRelativePath || file.name,
+          shortName: file.name,
+          size: file.size,
+          status: 'ready',
+          statusText: '読込済み',
+          included: true,
+          previewText: '',
+          convertedBlob: null,
+          convertedName: '',
+          error: ''
+        }))
+        .filter((item) => !existingKeys.has(item.key));
+      state.files.push(...additions);
+      if (!state.selectedId && state.files[0]) {
+        state.selectedId = state.files[0].id;
+        await readPreview(state.files[0]);
+      }
+      updateStatus('読み込み完了', `${additions.length}件のdocxを追加しました。`);
+      render();
+    }
+
+    async function readPreview(item) {
+      item.status = 'reading';
+      item.statusText = '解析中';
+      renderFileList();
+      try {
+        const zip = await JSZip.loadAsync(await item.file.arrayBuffer());
+        const doc = zip.file('word/document.xml');
+        if (!doc) throw new Error('word/document.xmlが見つかりません。');
+        item.previewText = extractText(await doc.async('string'));
+        item.status = 'ready';
+        item.statusText = '読込済み';
+      } catch (error) {
+        item.status = 'error';
+        item.statusText = '読込エラー';
+        item.error = error.message || String(error);
+      }
+    }
+
+    async function convertAllFiles() {
+      if (!state.files.length) {
+        updateStatus('変換できません', '先にdocxファイルを読み込んでください。');
+        return;
+      }
+      const targets = state.files.filter(isTargeted);
+      if (!targets.length) {
+        updateStatus('対象なし', '変換する文書を選択してください。');
+        return;
+      }
+      for (const item of targets) await convertFile(item, false);
+      const convertedCount = targets.filter((file) => file.convertedBlob).length;
+      updateStatus('変換完了', `${convertedCount}件を変換しました。`);
+      render();
+    }
+
+    async function convertFile(item, announce = true) {
+      item.status = 'processing';
+      item.statusText = '変換中';
+      item.error = '';
+      render();
+      try {
+        const zip = await JSZip.loadAsync(await item.file.arrayBuffer());
+        const deltaPt = getCurrentDelta();
+        const deltaHalfPoint = deltaPt * 2;
+        const xmlFiles = Object.keys(zip.files).filter(isWordXmlTarget);
+        for (const name of xmlFiles) {
+          const file = zip.file(name);
+          if (!file) continue;
+          let xml = await file.async('string');
+          xml = applyFontDelta(xml, deltaHalfPoint);
+          if (state.settings.invertOutput && name !== 'word/styles.xml') {
+            xml = applyInvertedColor(xml, name === 'word/document.xml');
+          }
+          zip.file(name, xml);
+        }
+        const blob = await zip.generateAsync({ type: 'blob', mimeType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+        item.convertedBlob = blob;
+        item.convertedName = buildOutputName(item.shortName, state.settings.mode, deltaPt, state.settings.invertOutput);
+        item.status = 'converted';
+        item.statusText = '変換済み';
+        if (announce) updateStatus('変換完了', `${item.shortName} を ${getModeLabel()} に変換しました。`);
+      } catch (error) {
+        item.status = 'error';
+        item.statusText = '変換エラー';
+        item.error = error.message || String(error);
+        if (announce) updateStatus('変換エラー', item.error);
+      }
+      render();
+    }
+
+    async function downloadAllConverted() {
+      const converted = state.files.filter((file) => isTargeted(file) && file.convertedBlob);
+      if (!converted.length) {
+        updateStatus('ダウンロード不可', '選択中の文書を先に変換してください。');
+        return;
+      }
+      if (converted.length === 1) {
+        downloadBlob(converted[0].convertedBlob, converted[0].convertedName);
+        return;
+      }
+      const zip = new JSZip();
+      converted.forEach((item) => zip.file(item.convertedName, item.convertedBlob));
+      const blob = await zip.generateAsync({ type: 'blob' });
+      downloadBlob(blob, `wa-node-docx-converted-${new Date().toISOString().slice(0, 10)}.zip`);
+    }
+
+    function downloadItem(item) {
+      if (!item.convertedBlob) {
+        updateStatus('未変換', 'この文書はまだ変換されていません。');
+        return;
+      }
+      downloadBlob(item.convertedBlob, item.convertedName);
+    }
+
+    function render() {
+      renderFileList();
+      renderPreview();
+      const targetCount = state.files.filter(isTargeted).length;
+      els.fileCount.textContent = `${targetCount}/${state.files.length}`;
+      els.fileCount.setAttribute('aria-label', `変換対象 ${targetCount}件、読み込み ${state.files.length}件`);
+    }
+
+    function renderFileList() {
+      if (!state.files.length) {
+        els.fileList.innerHTML = `
+            <article class="empty-state">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7z"/><path d="M14 2v5h5"/><path d="M9 13h6"/><path d="M9 17h4"/></svg>
+            <strong>.docxファイルをドラッグ＆ドロップで追加</strong>
+          </article>`;
+        return;
+      }
+      els.fileList.innerHTML = state.files.map((item) => `
+        <article class="file-row ${item.id === state.selectedId ? 'is-selected' : ''} ${isTargeted(item) ? 'is-targeted' : ''}">
+          <label class="file-check" title="変換対象" aria-label="${escapeHtml(item.shortName)}を変換対象にする">
+            <input type="checkbox" data-action="target" data-id="${item.id}" ${isTargeted(item) ? 'checked' : ''} />
+            <span aria-hidden="true">✓</span>
+          </label>
+          <div class="file-main">
+            <button type="button" data-action="select" data-id="${item.id}">${escapeHtml(item.name)}</button>
+            <div class="file-meta">
+              <span>${formatBytes(item.size)}</span>
+              <span class="status-pill ${item.status === 'error' ? 'error' : ''}">${escapeHtml(item.statusText)}</span>
+              ${item.convertedBlob ? `<span>${escapeHtml(item.convertedName)}</span>` : ''}
+              ${item.error ? `<span>${escapeHtml(item.error)}</span>` : ''}
+            </div>
+          </div>
+          <div class="row-actions" aria-label="${escapeHtml(item.shortName)}の操作">
+            <button type="button" data-action="convert" data-id="${item.id}" title="変換" aria-label="変換">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-9 9 9.8 9.8 0 0 1-6.4-2.4"/><path d="M3 12a9 9 0 0 1 9-9 9.8 9.8 0 0 1 6.4 2.4"/><path d="M3 21v-6h6"/><path d="M21 3v6h-6"/></svg>
+            </button>
+            <button type="button" data-action="download" data-id="${item.id}" title="ダウンロード" aria-label="ダウンロード">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+            </button>
+            <button type="button" data-action="remove" data-id="${item.id}" title="削除" aria-label="削除">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function isTargeted(item) {
+      return item.included !== false;
+    }
+
+    function renderPreview() {
+      const selected = state.files.find((file) => file.id === state.selectedId);
+      root.classList.toggle('is-inverted', state.settings.invertPreview);
+      els.preview.classList.toggle('is-inverted', state.settings.invertPreview);
+      els.preview.style.setProperty('--preview-font-size', `${Math.min(34, 16 + getCurrentDelta())}px`);
+      els.previewMode.textContent = getModeLabel();
+      if (!selected) {
+        els.preview.innerHTML = '<p class="preview-placeholder">文書を選択すると、本文の先頭を表示します。</p>';
+        return;
+      }
+      if (selected.status === 'error') {
+        els.preview.innerHTML = `<p class="preview-placeholder">${escapeHtml(selected.error || '読み込みに失敗しました。')}</p>`;
+        return;
+      }
+      const text = selected.previewText || '本文テキストを抽出できませんでした。画像化された文書や複雑なレイアウトの可能性があります。';
+      const paragraphs = text.split(/\n+/).filter(Boolean).slice(0, 12);
+      els.preview.innerHTML = paragraphs.map((paragraph) => `<p>${formatPreview(paragraph, state.settings.rubyPreview)}</p>`).join('');
+    }
+
+    function openSettings() {
+      els.largeInput.value = state.settings.largeDelta;
+      els.xlargeInput.value = state.settings.xlargeDelta;
+      els.drawer.hidden = false;
+      els.largeInput.focus();
+    }
+
+    function closeSettings() {
+      els.drawer.hidden = true;
+    }
+
+    function applySettingsToUi() {
+      state.settings.invertOutput = state.settings.invertPreview;
+      document.querySelectorAll('.mode-button').forEach((button) => {
+        button.classList.toggle('is-active', button.dataset.mode === state.settings.mode);
+      });
+      els.largeLabel.textContent = `+${state.settings.largeDelta}pt`;
+      els.xlargeLabel.textContent = `+${state.settings.xlargeDelta}pt`;
+      els.invertPreview.setAttribute('aria-pressed', String(state.settings.invertPreview));
+      els.rubyPreview.setAttribute('aria-pressed', String(state.settings.rubyPreview));
+      root.classList.toggle('is-inverted', state.settings.invertPreview);
+    }
+
+    function updateStatus(label, text) {
+      els.statusBoard.innerHTML = `<span>${escapeHtml(label)}</span><strong>${escapeHtml(text)}</strong>`;
+    }
+
+    function getCurrentDelta() {
+      if (state.settings.mode === 'large') return state.settings.largeDelta;
+      if (state.settings.mode === 'xlarge') return state.settings.xlargeDelta;
+      return 0;
+    }
+
+    function getModeLabel() {
+      if (state.settings.mode === 'large') return `大 +${state.settings.largeDelta}pt`;
+      if (state.settings.mode === 'xlarge') return `特大 +${state.settings.xlargeDelta}pt`;
+      return '標準 +0pt';
+    }
+  }
+
+  function loadSettings() {
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+      return {
+        ...DEFAULT_SETTINGS,
+        ...saved,
+        largeDelta: clampPt(saved.largeDelta, DEFAULT_SETTINGS.largeDelta),
+        xlargeDelta: clampPt(saved.xlargeDelta, DEFAULT_SETTINGS.xlargeDelta)
+      };
+    } catch {
+      return { ...DEFAULT_SETTINGS };
+    }
+  }
+
+  function saveSettings(settings) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
+  }
+
+  function clampPt(value, fallback) {
+    const numeric = Number(value);
+    if (!Number.isFinite(numeric)) return fallback;
+    return Math.max(0, Math.min(20, Math.round(numeric)));
+  }
+
+  function isWordXmlTarget(name) {
+    return /^word\/(document|styles|footnotes|endnotes|comments)\.xml$/.test(name)
+      || /^word\/(header|footer)\d+\.xml$/.test(name);
+  }
+
+  function applyFontDelta(xml, deltaHalfPoint) {
+    if (!deltaHalfPoint) return xml;
+    return xml.replace(/<(w:sz|w:szCs)(\b[^>]*?\bw:val=")([0-9]+)("[^>]*?)\/>/g, (_match, tag, before, value, after) => {
+      const next = Math.max(2, Math.min(200, Number(value) + deltaHalfPoint));
+      return `<${tag}${before}${next}${after}/>`;
+    });
+  }
+
+  function applyInvertedColor(xml, isDocumentXml) {
+    let next = xml;
+    if (isDocumentXml) {
+      if (/<w:background\b[^>]*\/>/.test(next)) {
+        next = next.replace(/<w:background\b[^>]*\/>/, '<w:background w:color="000000"/>');
+      } else {
+        next = next.replace(/(<w:document\b[^>]*>)/, '$1<w:background w:color="000000"/>');
+      }
+    }
+    return next.replace(/<w:r\b[^>]*>[\s\S]*?<\/w:r>/g, (run) => {
+      if (!/<w:t\b/.test(run)) return run;
+      if (/<w:rPr\b[\s\S]*?<\/w:rPr>/.test(run)) {
+        return run.replace(/<w:rPr\b[^>]*>[\s\S]*?<\/w:rPr>/, (rpr) => {
+          const cleaned = rpr
+            .replace(/<w:color\b[^>]*\/>/g, '')
+            .replace(/<w:highlight\b[^>]*\/>/g, '');
+          return cleaned.replace('</w:rPr>', '<w:color w:val="FFFFFF"/><w:highlight w:val="black"/></w:rPr>');
+        });
+      }
+      return run.replace(/(<w:r\b[^>]*>)/, '$1<w:rPr><w:color w:val="FFFFFF"/><w:highlight w:val="black"/></w:rPr>');
+    });
+  }
+
+  function extractText(xml) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(xml, 'application/xml');
+    const paragraphs = [...doc.getElementsByTagName('w:p')].map((paragraph) => {
+      let text = '';
+      paragraph.childNodes.forEach((node) => {
+        text += collectText(node);
+      });
+      return text.trim();
+    });
+    return paragraphs.filter(Boolean).join('\n');
+  }
+
+  function collectText(node) {
+    if (node.nodeType !== Node.ELEMENT_NODE) return '';
+    const element = node;
+    const name = element.nodeName;
+    if (name === 'w:t') return element.textContent || '';
+    if (name === 'w:tab') return '　';
+    if (name === 'w:br' || name === 'w:cr') return '\n';
+    let output = '';
+    element.childNodes.forEach((child) => {
+      output += collectText(child);
+    });
+    return output;
+  }
+
+  function formatPreview(text, rubyOn) {
+    const escaped = escapeHtml(text);
+    if (!rubyOn) return escaped;
+    let result = escaped;
+    rubyDictionary.forEach(([word, reading]) => {
+      const safeWord = escapeRegExp(escapeHtml(word));
+      result = result.replace(new RegExp(safeWord, 'g'), `<ruby>${escapeHtml(word)}<rt>${reading}</rt></ruby>`);
+    });
+    return result;
+  }
+
+  function buildOutputName(name, mode, deltaPt, invertOutput) {
+    const base = name.replace(/\.docx$/i, '');
+    const suffix = mode === 'standard' ? 'standard' : `${mode}_plus${deltaPt}pt`;
+    return `${base}_${suffix}${invertOutput ? '_invert' : ''}.docx`;
+  }
+
+  function downloadBlob(blob, fileName) {
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = fileName;
+    document.body.append(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function formatBytes(bytes) {
+    if (!bytes) return '0 KB';
+    if (bytes < 1024 * 1024) return `${Math.ceil(bytes / 1024)} KB`;
+    return `${(bytes / 1024 / 1024).toFixed(1)} MB`;
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"]/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[char]));
+  }
+
+  function escapeRegExp(value) {
+    return String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  }
+
+  document.addEventListener('DOMContentLoaded', bootDocxApp);
+  document.addEventListener('astro:page-load', bootDocxApp);
+  bootDocxApp();
+</script>
