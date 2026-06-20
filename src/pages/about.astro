@@ -37,6 +37,20 @@ const structuredData = [
       body="和-Nodeが大切にしているのは、派手な表現ではなく、見る人の迷いを減らし、安心して次の行動へ進める設計です。"
       compact
     />
+
+    <section class="section name-origin">
+      <div class="section-inner">
+        <div class="name-origin-content reveal">
+          <span class="eyebrow">Our Name</span>
+          <h2>和-Nodeという名前に込めたもの</h2>
+          <p>「和」には、人と人、考えと仕組みのあいだに調和をつくる意味を。</p>
+          <p>「Node」には、情報や技術、人をつなぐ結節点という意味があります。</p>
+          <p>心理学の知見をもとに、使う人の迷いや不安を見つめ、Web・AI・ICTを事業に合う形へ昇華する。</p>
+          <p>人と技術、想いと行動をつなぐ役割を担いたくて、和-Nodeと名付けました。</p>
+        </div>
+      </div>
+    </section>
+
     <section class="section message">
       <div class="section-inner">
         <div class="message-content reveal">
@@ -205,6 +219,29 @@ const structuredData = [
     border-bottom: 1px solid var(--line);
   }
   .about-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 24px; color: var(--text-deep); }
+
+  .name-origin {
+    padding: 72px 0;
+    background: var(--surface);
+    border-bottom: 1px solid var(--line);
+  }
+  .name-origin-content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding-left: 32px;
+    border-left: 4px solid var(--accent);
+  }
+  .name-origin-content h2 {
+    margin-bottom: 22px;
+    color: var(--text-deep);
+  }
+  .name-origin-content p {
+    margin: 0 0 12px;
+    color: #444;
+    font-size: 1.05rem;
+    line-height: 1.9;
+  }
+  .name-origin-content p:last-child { margin-bottom: 0; }
   
   .message-content {
     display: grid;
@@ -337,6 +374,8 @@ const structuredData = [
 
   @media (max-width: 820px) {
     .message-content, .trust-grid, .qual-grid { grid-template-columns: 1fr; }
+    .name-origin { padding: 56px 0; }
+    .name-origin-content { padding-left: 20px; }
     .content-right { order: -1; }
     .profile-image-wrap img { width: 160px; height: 160px; }
     .overview-table th { width: 120px; font-size: 0.9rem; padding: 15px; }
