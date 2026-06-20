@@ -1,0 +1,261 @@
+<style is:global>
+  .glossary-term {
+    position: relative;
+    display: inline;
+  }
+
+  .glossary-trigger {
+    display: inline;
+    margin: 0;
+    padding: 0 0 1px;
+    border: 0;
+    border-bottom: 1px solid var(--accent, #8c6b1f);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    text-decoration: none;
+    text-underline-offset: 0.18em;
+    cursor: help;
+  }
+
+  .glossary-trigger:hover,
+  .glossary-trigger[aria-expanded="true"] {
+    color: var(--trust, #0f4c5c);
+    border-bottom-color: var(--trust, #0f4c5c);
+  }
+
+  .glossary-trigger:focus-visible {
+    outline: 2px solid var(--trust, #0f4c5c);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  .glossary-icon {
+    display: inline-flex;
+    width: 0.9em;
+    height: 0.9em;
+    margin-left: 0.16em;
+    vertical-align: -0.08em;
+  }
+
+  .glossary-icon svg {
+    width: 100%;
+    height: 100%;
+    stroke: currentColor;
+  }
+
+  .glossary-tooltip {
+    position: absolute;
+    z-index: 60;
+    left: 0;
+    bottom: calc(100% + 10px);
+    width: min(300px, calc(100vw - 40px));
+    padding: 12px 14px;
+    border: 1px solid rgba(238, 245, 242, 0.68);
+    border-radius: 12px;
+    background: #123c45;
+    color: #fff;
+    box-shadow: 0 14px 28px rgba(15, 76, 92, 0.22);
+    font-family: inherit;
+    font-size: 0.86rem;
+    font-weight: 500;
+    line-height: 1.65;
+    text-align: left;
+  }
+
+  .glossary-tooltip strong {
+    display: block;
+    margin-bottom: 3px;
+    color: #f6d88f;
+    font-size: 0.82rem;
+    font-weight: 900;
+  }
+
+  @media (hover: none), (pointer: coarse) {
+    .glossary-trigger {
+      cursor: pointer;
+    }
+
+    .glossary-tooltip {
+      position: fixed;
+      right: 16px;
+      bottom: 16px;
+      left: 16px;
+      width: auto;
+      max-width: none;
+      padding: 16px 18px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      box-shadow: 0 18px 42px rgba(15, 76, 92, 0.3);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glossary-trigger {
+      transition: none;
+    }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const glossary = {
+      LP: 'ランディングページ。相談・申込みなど、特定の行動につながりやすいよう設計するWebページです。',
+      CTA: 'Call To Actionの略。相談・資料請求など、次にしてほしい行動を促すボタンやリンクです。',
+      SEO: '検索エンジンにサイトの内容を理解されやすくし、必要な人に見つけてもらいやすくするための取り組みです。',
+      AEO: 'AI検索や回答型検索に、ページの内容を読み取られやすくするための情報設計です。',
+      GA4: 'Google Analytics 4。サイトの閲覧やクリックなどを記録・分析するGoogleのアクセス解析ツールです。',
+      ICT: '情報通信技術。Web、AI、LINE、自動化など、仕事に使うデジタルの仕組み全般を指します。',
+      UX: 'User Experienceの略。使いやすさだけでなく、理解しやすさや操作中の安心感を含む利用体験です。',
+    };
+
+    const termPattern = /\b(GA4|SEO|AEO|ICT|CTA|UX|LP)\b/g;
+    const icon = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-4.2-4.2"></path></svg>';
+    let sequence = 0;
+
+    function closeItem(item) {
+      const trigger = item.querySelector('.glossary-trigger');
+      const tooltip = item.querySelector('.glossary-tooltip');
+      if (!trigger || !tooltip) return;
+      trigger.setAttribute('aria-expanded', 'false');
+      tooltip.hidden = true;
+    }
+
+    function closeAll(except) {
+      document.querySelectorAll('.glossary-term').forEach((item) => {
+        if (item !== except) closeItem(item);
+      });
+    }
+
+    function positionTooltip(tooltip) {
+      if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+      tooltip.style.left = '0px';
+      const viewportPadding = 12;
+      const rect = tooltip.getBoundingClientRect();
+      let offset = 0;
+      if (rect.right > window.innerWidth - viewportPadding) {
+        offset -= rect.right - (window.innerWidth - viewportPadding);
+      }
+      if (rect.left + offset < viewportPadding) {
+        offset += viewportPadding - (rect.left + offset);
+      }
+      tooltip.style.left = `${offset}px`;
+    }
+
+    function openItem(item) {
+      const trigger = item.querySelector('.glossary-trigger');
+      const tooltip = item.querySelector('.glossary-tooltip');
+      if (!trigger || !tooltip) return;
+      closeAll(item);
+      trigger.setAttribute('aria-expanded', 'true');
+      tooltip.hidden = false;
+      positionTooltip(tooltip);
+    }
+
+    function isEligible(node) {
+      const parent = node.parentElement;
+      if (!parent || !node.nodeValue) return false;
+      termPattern.lastIndex = 0;
+      const hasTerm = termPattern.test(node.nodeValue);
+      termPattern.lastIndex = 0;
+      if (!hasTerm) return false;
+      return !parent.closest('a, button, input, textarea, select, option, summary, script, style, code, pre, svg, [data-glossary-skip], .glossary-term');
+    }
+
+    function createGlossaryTerm(term) {
+      const item = document.createElement('span');
+      const trigger = document.createElement('button');
+      const tooltip = document.createElement('span');
+      const tooltipId = `glossary-${term.toLowerCase()}-${sequence++}`;
+
+      item.className = 'glossary-term';
+      trigger.type = 'button';
+      trigger.className = 'glossary-trigger';
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.setAttribute('aria-describedby', tooltipId);
+      trigger.setAttribute('aria-label', `${term}の意味を表示`);
+      trigger.innerHTML = `${term}<span class="glossary-icon">${icon}</span>`;
+
+      tooltip.id = tooltipId;
+      tooltip.className = 'glossary-tooltip';
+      tooltip.setAttribute('role', 'tooltip');
+      tooltip.hidden = true;
+      tooltip.innerHTML = `<strong>${term}</strong>${glossary[term]}`;
+
+      trigger.addEventListener('pointerenter', (event) => {
+        if (event.pointerType === 'mouse') openItem(item);
+      });
+      trigger.addEventListener('pointerleave', (event) => {
+        if (event.pointerType === 'mouse') closeItem(item);
+      });
+      trigger.addEventListener('focus', () => {
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) openItem(item);
+      });
+      trigger.addEventListener('blur', () => {
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) closeItem(item);
+      });
+      trigger.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+          openItem(item);
+          return;
+        }
+        const isOpen = trigger.getAttribute('aria-expanded') === 'true';
+        if (isOpen) closeItem(item);
+        else openItem(item);
+      });
+
+      item.append(trigger, tooltip);
+      return item;
+    }
+
+    function enhanceTextNode(node) {
+      const text = node.nodeValue;
+      if (!text) return;
+
+      termPattern.lastIndex = 0;
+      const matches = [...text.matchAll(termPattern)];
+      if (!matches.length) return;
+
+      const fragment = document.createDocumentFragment();
+      let lastIndex = 0;
+      matches.forEach((match) => {
+        if (match.index > lastIndex) fragment.append(text.slice(lastIndex, match.index));
+        fragment.append(createGlossaryTerm(match[0]));
+        lastIndex = match.index + match[0].length;
+      });
+      if (lastIndex < text.length) fragment.append(text.slice(lastIndex));
+      node.replaceWith(fragment);
+    }
+
+    function initGlossary() {
+      if (!document.documentElement.lang.startsWith('ja')) return;
+
+      document.querySelectorAll('main').forEach((root) => {
+        const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+          acceptNode: (node) => (isEligible(node) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT),
+        });
+        const nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        nodes.forEach(enhanceTextNode);
+      });
+    }
+
+    if (!window.__waNodeGlossaryInitialized) {
+      window.__waNodeGlossaryInitialized = true;
+      document.addEventListener('DOMContentLoaded', initGlossary);
+      document.addEventListener('astro:page-load', initGlossary);
+      document.addEventListener('click', (event) => {
+        if (!(event.target instanceof Element) || !event.target.closest('.glossary-term')) closeAll();
+      });
+      document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closeAll();
+      });
+    }
+
+    initGlossary();
+  })();
+</script>

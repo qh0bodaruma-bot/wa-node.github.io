@@ -1,6 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import GlossaryEnhancer from '../components/GlossaryEnhancer.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import { ViewTransitions } from 'astro:transitions';
 import { MULTILANG_PAGES } from '../i18n/navigation';
@@ -150,5 +151,6 @@ const getLocalizedHref = (l: string) => {
     <Header lang={currentLang} />
     <slot />
     <Footer lang={currentLang} />
+    <GlossaryEnhancer />
   </body>
 </html>
