@@ -136,7 +136,7 @@ const curT = t[lang];
   .consultation-card {
     padding: 50px;
     border: 1px solid var(--line, rgba(140, 107, 31, 0.22));
-    border-radius: 32px;
+    border-radius: 20px;
     box-shadow: 0 18px 42px rgba(15, 76, 92, 0.07), 0 4px 14px rgba(70, 52, 32, 0.04);
   }
   
@@ -150,12 +150,12 @@ const curT = t[lang];
   .step-body h3 { font-size: 1.2rem; margin-bottom: 6px; font-weight: 800; color: var(--text-deep); }
   .step-body p { font-size: 0.95rem; color: #555; margin: 0; }
 
-  .consultation-note { text-align: center; margin-bottom: 40px; padding: 16px; background: var(--soft); border-radius: 12px; }
+  .consultation-note { text-align: left; margin-bottom: 40px; padding: 16px; background: var(--soft); border-left: 3px solid var(--trust, #0f4c5c); border-radius: 0 10px 10px 0; }
   .consultation-note p { font-size: 0.85rem; color: var(--muted); margin: 0; font-weight: 700; }
 
   .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
   .btn-primary, .btn-secondary {
-    box-sizing: border-box; max-width: 100%; padding: 16px 40px; border-radius: 999px; font-weight: 800; text-decoration: none; 
+    box-sizing: border-box; max-width: 100%; padding: 16px 40px; border-radius: 12px; font-weight: 800; text-decoration: none;
     transition: 0.3s; text-align: center; min-width: 260px; overflow-wrap: anywhere;
   }
   .btn-primary { background: var(--trust, #0f4c5c); color: #fff; }
