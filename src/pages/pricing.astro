@@ -60,7 +60,7 @@ const structuredData = [
 ---
 
 <BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
-  <main class="pricing-container">
+  <main class="pricing-container" data-glossary-skip>
     <section class="hero">
       <div class="hero-inner">
         <!-- Premium Anniversary Banner -->
@@ -484,6 +484,10 @@ const structuredData = [
   .pricing-container {
     background: linear-gradient(180deg, #fbf7ef 0%, var(--base) 48%, #f2e8dc 100%);
     font-family: 'Shippori Mincho', serif !important;
+  }
+
+  .pricing-container .consultation-section {
+    padding-bottom: 48px;
   }
 
   .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--line); text-align: center; }
