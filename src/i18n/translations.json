@@ -50,7 +50,7 @@
     "eyebrow": { "ja": "Service Pillars", "en": "Service Pillars", "fr": "Piliers de Service" },
     "title": { "ja": "迷ったら、まずはこの4つから", "en": "Start With One of These Four", "fr": "Commencez par l'un de ces quatre choix" },
     "card1_tag": { "ja": "Web Design", "en": "Web Design", "fr": "Design Web" },
-    "card1_title": { "ja": "ホームページ・LP制作を相談したい", "en": "Build a Website or LP", "fr": "Créer un site ou une LP" },
+    "card1_title": { "ja": "ホームページ制作を相談したい", "en": "Build a Website or LP", "fr": "Créer un site ou une LP" },
     "card1_desc": {
       "ja": "初見で信頼される構成、軽い表示、行動心理に基づく情報設計で、相談しやすいHP・LPへ整えます。",
       "en": "We design ultra-fast websites and landing pages to capture the critical first 50 milliseconds of user attention.",
@@ -58,7 +58,7 @@
     },
     "card1_link": { "ja": "推奨 64,000円〜 →", "en": "Recommended from 64,000 JPY →", "fr": "Recommandé dès 64 000 JPY →" },
     "card2_tag": { "ja": "Web Improvement", "en": "Web Improvement", "fr": "Amélioration Web" },
-    "card2_title": { "ja": "今あるサイト・LPを改善したい", "en": "Improve an Existing Site or LP", "fr": "Améliorer un site ou une LP" },
+    "card2_title": { "ja": "今あるLPを改善したい", "en": "Improve an Existing Site or LP", "fr": "Améliorer un site ou une LP" },
     "card2_desc": { "ja": "相談ボタン、料金表、フォーム、AI検索で拾われる構造、色彩・動き・読みにくさまで見直し、相談につながりやすい導線へ整えます。アクセス解析や閲覧状況の確認を使った改善にも対応します。", "en": "We improve inquiry buttons, pricing, forms, AI-search-ready structure, colors, motion, and readability so existing pages lead more naturally to inquiries, including analytics-based improvement.", "fr": "Nous améliorons les boutons de contact, tarifs, formulaires, structure lisible par l'IA, couleurs, mouvements et lisibilité pour faciliter les demandes, avec amélioration basée sur l'analyse." },
     "card2_link": { "ja": "改善相談 15,000円〜 →", "en": "Improvement review from 15,000 JPY →", "fr": "Audit d'amélioration dès 15 000 JPY →" },
     "card3_tag": { "ja": "Ongoing Partnership", "en": "Ongoing Partnership", "fr": "Partenariat" },

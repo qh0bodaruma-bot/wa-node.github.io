@@ -96,7 +96,7 @@ const structuredData = [
         </a>
         <a class="choice-card card-border-green" href="#copilot">
           <span class="choice-label">導線改善</span>
-          <h3><span class="card-icon-window window-green"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span>今あるサイト・LPを改善したい</h3>
+          <h3><span class="card-icon-window window-green"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span>今あるLPを改善したい</h3>
           <p class="choice-fit">問い合わせ前の迷いを減らしたい方へ</p>
           <p>相談ボタン、料金表、フォーム、AI検索で拾われる構造、色彩・動き・読みにくさまで見直します。</p>
           <strong>15,000円〜</strong>
@@ -116,7 +116,7 @@ const structuredData = [
           <strong>5,000円〜</strong>
         </a>
       </div>
-      <p class="choice-footnote">迷った場合は「ホームページ・LPを作りたい」または「今あるサイト・LPを改善したい」からで大丈夫です。</p>
+      <p class="choice-footnote">迷った場合は「ホームページ・LPを作りたい」または「今あるLPを改善したい」からで大丈夫です。</p>
       <div class="decision-guide" aria-label="目的別のおすすめ">
         <h3>目的別のおすすめ</h3>
         <div class="decision-grid">
@@ -202,7 +202,7 @@ const structuredData = [
             <span class="price-badge-ume">梅プラン</span>
             <h3><span class="card-icon-window window-gold"><svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M13 2v7h7" stroke="currentColor" stroke-width="2"/></svg></span>シンプルHP制作</h3>
             <p class="p-price">40,000円〜 <small>キャンペーン価格</small></p>
-            <p>名刺代わりとなる小規模なホームページ（3〜5ページ）。まずは低予算でネット上にビジネスの拠点を作りたい方向けです。</p>
+            <p>3ページまで、PC幅1440px基準で各ページ縦1,500px程度・合計4,500px程度までの小規模なホームページです。</p>
           </article>
           <article class="recommended-price-card highlight-take card-border-gold">
             <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
@@ -226,7 +226,7 @@ const structuredData = [
             <span class="price-badge-ume">梅プラン</span>
             <h3><span class="card-icon-window window-gold"><svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M13 2v7h7" stroke="currentColor" stroke-width="2"/></svg></span>シンプルLP制作</h3>
             <p class="p-price">24,000円〜 <small>キャンペーン価格</small></p>
-            <p>1ページの簡易的なランディングページ。まずは手軽にネット上でビジネスやサービスの紹介を行いたい方向けです。</p>
+            <p>1ページ、PC幅1440px基準で縦2,500px程度・5セクションまでの簡易的なランディングページです。</p>
           </article>
           <article class="recommended-price-card highlight-take card-border-gold">
             <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
@@ -242,6 +242,33 @@ const structuredData = [
           </article>
         </div>
       </div>
+      <section class="minimum-scope" aria-labelledby="minimum-scope-title">
+        <div class="minimum-scope-heading">
+          <p class="eyebrow">Minimum Scope</p>
+          <h3 id="minimum-scope-title">最低価格で含まれる制作範囲</h3>
+          <p>PC幅1440pxで見た縦の目安です。スマホ表示はレスポンシブ対応します。</p>
+        </div>
+        <div class="minimum-scope-grid">
+          <div class="minimum-scope-item">
+            <strong>シンプルLP制作 <span>24,000円〜</span></strong>
+            <dl>
+              <div><dt>ページ数</dt><dd>1ページ</dd></div>
+              <div><dt>縦の目安</dt><dd>2,500px程度まで</dd></div>
+              <div><dt>構成</dt><dd>5セクションまで</dd></div>
+            </dl>
+          </div>
+          <div class="minimum-scope-item">
+            <strong>シンプルHP制作 <span>40,000円〜</span></strong>
+            <dl>
+              <div><dt>ページ数</dt><dd>3ページまで</dd></div>
+              <div><dt>縦の目安</dt><dd>各1,500px程度まで</dd></div>
+              <div><dt>合計</dt><dd>4,500px程度まで</dd></div>
+            </dl>
+          </div>
+        </div>
+        <p class="minimum-scope-note">原稿量・画像・表・フォーム・予約・ブログ・外部連携などで作業量が増える場合は、事前に追加範囲と費用をご案内します。</p>
+      </section>
+
       <details class="addon-details price-details">
         <summary>シンプル制作・保守・オプションを含む料金一覧を見る</summary>
         <div class="table-wrap">
@@ -250,8 +277,8 @@ const structuredData = [
               <tr><th>サービス</th><th>通常価格</th><th>キャンペーン価格</th><th>内容</th></tr>
             </thead>
             <tbody>
-              <tr><td>シンプルLP制作</td><td>30,000円〜</td><td class="price-campaign">24,000円〜</td><td>1ページの簡易的なランディングページ</td></tr>
-              <tr><td>シンプルHP制作</td><td>50,000円〜</td><td class="price-campaign">40,000円〜</td><td>名刺代わりの小規模ホームページ（3〜5ページ）</td></tr>
+              <tr><td>シンプルLP制作</td><td>30,000円〜</td><td class="price-campaign">24,000円〜</td><td>1ページ・PC幅1440px基準で縦2,500px程度・5セクションまで</td></tr>
+              <tr><td>シンプルHP制作</td><td>50,000円〜</td><td class="price-campaign">40,000円〜</td><td>3ページ・各ページ縦1,500px程度・合計4,500px程度まで</td></tr>
               <tr><td>選ばれる導線LP制作</td><td>80,000円〜</td><td class="price-campaign">64,000円〜</td><td>行動心理をふまえた高品質LP（構成案から作成）</td></tr>
               <tr><td>プレミアム選ばれる導線LP</td><td>150,000円〜</td><td class="price-campaign">120,000円〜</td><td>高品質LPに、問い合わせ後のGASメール自動送信やLINE連携などの自動化を追加</td></tr>
               <tr><td>選ばれる導線HP制作</td><td>180,000円〜</td><td class="price-campaign">144,000円〜</td><td>5ページ程度の標準的なホームページ</td></tr>
@@ -734,6 +761,81 @@ const structuredData = [
     line-height: 1.7;
   }
 
+  .minimum-scope {
+    margin: 28px 0 22px;
+    overflow: hidden;
+    border: 1px solid var(--trust-line);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(255, 253, 248, 0.82));
+  }
+  .minimum-scope-heading {
+    padding: 24px 28px 18px;
+  }
+  .minimum-scope-heading .eyebrow {
+    margin-bottom: 6px;
+  }
+  .minimum-scope-heading h3 {
+    margin: 0 0 8px;
+    color: var(--trust);
+    font-size: 1.2rem;
+    font-weight: 900;
+  }
+  .minimum-scope-heading p:last-child {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .minimum-scope-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: 1px solid var(--trust-line);
+  }
+  .minimum-scope-item {
+    padding: 22px 28px;
+  }
+  .minimum-scope-item + .minimum-scope-item {
+    border-left: 1px solid var(--trust-line);
+  }
+  .minimum-scope-item strong {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    color: #2c2c2c;
+    font-size: 1rem;
+  }
+  .minimum-scope-item strong span {
+    color: var(--accent-red);
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+  .minimum-scope-item dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 8px 16px;
+    margin: 16px 0 0;
+    font-size: 0.88rem;
+    line-height: 1.5;
+  }
+  .minimum-scope-item dt {
+    color: #777;
+  }
+  .minimum-scope-item dd {
+    margin: 0;
+    color: var(--trust);
+    font-weight: 800;
+    text-align: right;
+  }
+  .minimum-scope-note {
+    margin: 0;
+    padding: 16px 28px;
+    border-top: 1px solid var(--trust-line);
+    color: #666;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+
   .pricing-grid-simple {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1007,6 +1109,11 @@ const structuredData = [
     .choice-footnote { margin-left: 0; }
     .choice-card { min-height: auto; }
     .decision-grid { grid-template-columns: 1fr; }
+    .minimum-scope-grid { grid-template-columns: 1fr; }
+    .minimum-scope-item + .minimum-scope-item {
+      border-top: 1px solid var(--trust-line);
+      border-left: 0;
+    }
   }
 
   /* アンカリング効果（市場相場）のスタイル */
