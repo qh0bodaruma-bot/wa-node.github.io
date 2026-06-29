@@ -77,7 +77,7 @@ const structuredData = [
 
         <p class="eyebrow">Pricing</p>
         <h1 class="premium-heading">料金プラン・制作費用</h1>
-        <p class="lead">ビジネスの「出口」を整える、制作と戦略的パートナー契約（ビジネスの副操縦士）の料金目安です。ご予算に合わせた柔軟な提案も可能です。</p>
+        <p class="lead">ホームページ制作、LP制作・改善、戦略的パートナー契約（ビジネスの副操縦士）の料金目安です。ご予算に合わせた柔軟な提案も可能です。</p>
         <p class="note">和-Nodeでは、心理学の知見を「不安を煽るため」ではなく、「安心して選べる導線をつくるため」に活用します。正式な制作・月額支援は、内容・範囲・追加作業の有無を確認し、費用にご納得いただいた後に開始します。</p>
       </div>
     </section>
@@ -89,10 +89,10 @@ const structuredData = [
       <div class="choice-grid">
         <a class="choice-card primary-choice card-border-gold" href="#web-production">
           <span class="choice-label">一番人気</span>
-          <h3><span class="card-icon-window window-gold"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M2 12h20" stroke="currentColor" stroke-width="2"/></svg></span>ホームページ・LPを作りたい</h3>
+          <h3><span class="card-icon-window window-gold"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M2 12h20" stroke="currentColor" stroke-width="2"/></svg></span>ホームページを作りたい</h3>
           <p class="choice-fit">まず信頼されるサイトを作りたい方へ</p>
-          <p>選ばれる導線設計を取り入れたLP・HP制作を中心に、伝わる構成とデザインを整えます。</p>
-          <strong>推奨 64,000円〜</strong>
+          <p>会社概要、サービス、料金、相談の流れなど、初見で信頼される事業の土台を整えます。</p>
+          <strong>HP制作 40,000円〜</strong>
         </a>
         <a class="choice-card card-border-green" href="#copilot">
           <span class="choice-label">導線改善</span>
@@ -116,7 +116,7 @@ const structuredData = [
           <strong>5,000円〜</strong>
         </a>
       </div>
-      <p class="choice-footnote">迷った場合は「ホームページ・LPを作りたい」または「今あるLPを改善したい」からで大丈夫です。</p>
+      <p class="choice-footnote">迷った場合は「ホームページを作りたい」または「今あるLPを改善したい」からで大丈夫です。新規LP制作は、下のLP制作タブから選べます。</p>
       <div class="decision-guide" aria-label="目的別のおすすめ">
         <h3>目的別のおすすめ</h3>
         <div class="decision-grid">
@@ -202,6 +202,11 @@ const structuredData = [
             <span class="price-badge-ume">梅プラン</span>
             <h3><span class="card-icon-window window-gold"><svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M13 2v7h7" stroke="currentColor" stroke-width="2"/></svg></span>シンプルHP制作</h3>
             <p class="p-price">40,000円〜 <small>キャンペーン価格</small></p>
+            <div class="scope-badges" aria-label="最低価格で含まれる制作範囲">
+              <b>3ページまで</b>
+              <b>各1,500px程度</b>
+              <b>合計4,500px程度</b>
+            </div>
             <p>3ページまで、PC幅1440px基準で各ページ縦1,500px程度・合計4,500px程度までの小規模なホームページです。</p>
           </article>
           <article class="recommended-price-card highlight-take card-border-gold">
@@ -226,6 +231,11 @@ const structuredData = [
             <span class="price-badge-ume">梅プラン</span>
             <h3><span class="card-icon-window window-gold"><svg viewBox="0 0 24 24"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M13 2v7h7" stroke="currentColor" stroke-width="2"/></svg></span>シンプルLP制作</h3>
             <p class="p-price">24,000円〜 <small>キャンペーン価格</small></p>
+            <div class="scope-badges" aria-label="最低価格で含まれる制作範囲">
+              <b>1ページ</b>
+              <b>縦2,500px程度</b>
+              <b>5セクションまで</b>
+            </div>
             <p>1ページ、PC幅1440px基準で縦2,500px程度・5セクションまでの簡易的なランディングページです。</p>
           </article>
           <article class="recommended-price-card highlight-take card-border-gold">
@@ -493,9 +503,9 @@ const structuredData = [
     --trust-mid: #1f6f78;
     --trust-line: rgba(15, 76, 92, 0.18);
     --line: rgba(140, 107, 31, 0.2);
-    --base: #f6efe5;
-    --surface: #fffdf8;
-    --surface-strong: #fffaf2;
+    --base: #ffffff;
+    --surface: #ffffff;
+    --surface-strong: #fbfcfb;
     --surface-cool: #eef5f2;
     --card-border: rgba(15, 76, 92, 0.14);
     --card-shadow: 0 16px 38px rgba(15, 76, 92, 0.075), 0 4px 14px rgba(70, 52, 32, 0.045);
@@ -509,7 +519,7 @@ const structuredData = [
   }
 
   .pricing-container {
-    background: linear-gradient(180deg, #fbf7ef 0%, var(--base) 48%, #f2e8dc 100%);
+    background: linear-gradient(180deg, #ffffff 0%, #ffffff 52%, #f7faf8 100%);
     font-family: 'Shippori Mincho', serif !important;
   }
 
@@ -760,13 +770,32 @@ const structuredData = [
     color: #666;
     line-height: 1.7;
   }
+  .scope-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin: -2px 0 16px;
+  }
+  .scope-badges b {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 4px 9px;
+    border: 1px solid rgba(15, 76, 92, 0.16);
+    border-radius: 999px;
+    background: rgba(238, 245, 242, 0.92);
+    color: var(--trust);
+    font-size: 0.74rem;
+    font-weight: 900;
+    line-height: 1.35;
+  }
 
   .minimum-scope {
     margin: 28px 0 22px;
     overflow: hidden;
     border: 1px solid var(--trust-line);
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(15, 76, 92, 0.06), rgba(255, 253, 248, 0.82));
+    background: linear-gradient(135deg, rgba(15, 76, 92, 0.055), rgba(255, 255, 255, 0.94));
   }
   .minimum-scope-heading {
     padding: 24px 28px 18px;
@@ -987,7 +1016,7 @@ const structuredData = [
     padding: 30px;
     border: 1px solid var(--card-border);
     border-radius: 16px;
-    background: linear-gradient(135deg, rgba(238, 245, 242, 0.78), rgba(255, 253, 248, 0.92));
+    background: linear-gradient(135deg, rgba(238, 245, 242, 0.82), rgba(255, 255, 255, 0.96));
     box-shadow: var(--card-shadow);
   }
   .demo-price-copy {

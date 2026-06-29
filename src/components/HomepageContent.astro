@@ -144,17 +144,20 @@ const chipLabel = {
 const trustSignals = {
   ja: [
     { value: '20年以上', label: 'IT・Web制作の現場経験' },
-    { value: '心理学', label: '信頼される導線設計に応用' },
+    { value: '産業カウンセラー', label: '心理学を導線設計へ応用' },
+    { value: 'SECURITY ACTION', label: '情報管理への取り組みを宣言' },
     { value: '公開後', label: '改善・運用まで継続支援' }
   ],
   en: [
     { value: '20+ years', label: 'IT and web production experience' },
-    { value: 'Psychology', label: 'Applied to trust-building flows' },
+    { value: 'Counselor', label: 'Psychology applied to web flows' },
+    { value: 'Security Action', label: 'Declared information-security effort' },
     { value: 'After launch', label: 'Ongoing improvement and support' }
   ],
   fr: [
     { value: '20+ ans', label: 'Experience IT et creation web' },
-    { value: 'Psychologie', label: 'Appliquee aux parcours de confiance' },
+    { value: 'Conseiller', label: 'Psychologie appliquee aux parcours web' },
+    { value: 'Security Action', label: 'Engagement securite de l information' },
     { value: 'Apres lancement', label: 'Amelioration et accompagnement' }
   ]
 };
@@ -422,11 +425,11 @@ const trustSignals = {
     --text-deep: #1a1a1a;
     --muted: #666;
     --line: rgba(140, 107, 31, 0.2);
-    --soft: #f3eadf;
+    --soft: #f3f7f5;
     --white: #ffffff;
-    --paper: #f6efe5;
-    --surface: #fffdf8;
-    --surface-strong: #fffaf2;
+    --paper: #ffffff;
+    --surface: #ffffff;
+    --surface-strong: #fbfcfb;
     --surface-cool: #eef5f2;
     --card-border: rgba(15, 76, 92, 0.14);
     --card-border-warm: rgba(140, 107, 31, 0.24);
@@ -440,7 +443,7 @@ const trustSignals = {
     color: var(--text);
     line-height: 1.8;
     background:
-      linear-gradient(180deg, #fbf7ef 0%, var(--paper) 48%, #f2e8dc 100%);
+      linear-gradient(180deg, #ffffff 0%, #ffffff 54%, #f7faf8 100%);
   }
   .home-content {
     --home-action: #c7352f;
@@ -472,7 +475,7 @@ const trustSignals = {
     --hero-accent: var(--home-action);
     padding: 160px 0 120px; 
     background: 
-      linear-gradient(to right, rgba(253, 250, 245, 1) 40%, rgba(253, 250, 245, 0.9) 55%, rgba(253, 250, 245, 0.2) 80%, rgba(253, 250, 245, 0) 100%), 
+      linear-gradient(to right, rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0.92) 55%, rgba(255, 255, 255, 0.28) 80%, rgba(255, 255, 255, 0) 100%),
       url('/images/hero.png') no-repeat right center/cover;
     min-height: 520px;
     display: flex;
@@ -517,7 +520,7 @@ const trustSignals = {
   }
   .trust-strip-inner {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     max-width: 1000px;
     margin: 0 auto;
     border-left: 1px solid var(--trust-line);
@@ -544,7 +547,7 @@ const trustSignals = {
   }
 
   /* Agitation / Hook Section */
-  .why-psy { background: var(--paper); border-bottom: 1px solid var(--line); }
+  .why-psy { background: #ffffff; border-bottom: 1px solid var(--line); }
   .why-psy-inner { max-width: 900px; margin: 0 auto; padding: 0 20px; }
   .question-box { text-align: center; margin-bottom: 48px; }
   .q-eyebrow { font-size: 0.9rem; color: var(--accent2); font-weight: 800; letter-spacing: 0.1em; display: block; margin-bottom: 12px; }
@@ -785,7 +788,7 @@ const trustSignals = {
     .hero {
       padding: 80px 0;
       background: 
-        linear-gradient(to bottom, rgba(253, 250, 245, 0.98) 50%, rgba(253, 250, 245, 0.8) 80%, rgba(253, 250, 245, 0.4) 100%), 
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.98) 50%, rgba(255, 255, 255, 0.82) 80%, rgba(255, 255, 255, 0.44) 100%),
         url('/images/hero.png') no-repeat center center/cover;
       text-align: center;
       min-height: auto;
