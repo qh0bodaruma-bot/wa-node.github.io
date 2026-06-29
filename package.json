@@ -10,7 +10,7 @@
     "postbuild": "node scripts/generate-sitemap.mjs",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "git add . && git commit -m \"更新\" --allow-empty && git push origin main"
+    "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {
     "@astrojs/cloudflare": "^11.0.0",
