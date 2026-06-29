@@ -53,18 +53,42 @@ const structuredData = [
     <section class="section works-hero">
       <div class="container narrow">
         <span class="eyebrow">Works & Demos</span>
-        <h1 class="premium-heading">制作例・デモ・ツール</h1>
+        <h1 class="premium-heading">制作例・デモ・<span class="title-nowrap">ツール</span></h1>
         <p class="lead">
           ホームページ制作・LP制作の見え方を中心に、和-Node独自の視点（心理学・AI・アクセシビリティ）を形にした<br class="pc-only" />
-          制作サンプルとデモツールを公開しています。技術と知見の融合を体験してください。
+          制作サンプルとデモツールを公開しています。近い目的・設計意図・参考価格から、相談内容を整理できます。
         </p>
         <p class="price-guide-note">
-          掲載価格は、同じ方向性で制作・実装する場合の参考価格帯です。ページ数、原稿量、予約・LINE・AI連携の有無により変動します。
+          掲載価格は、同じ方向性で制作・実装する場合の参考価格帯です。LPサンプルの一部は架空の題材を使った表現例で、ページ数、原稿量、予約・LINE・AI連携の有無により変動します。
         </p>
       </div>
     </section>
 
     <div class="container">
+      <section class="works-use-guide reveal" aria-labelledby="works-use-guide-title">
+        <div>
+          <span class="eyebrow">How to Read</span>
+          <h2 id="works-use-guide-title">制作例の見方</h2>
+        </div>
+        <ol class="works-use-steps">
+          <li>
+            <span>01</span>
+            <strong>近い目的を選ぶ</strong>
+            <p>予約、相談、販売、診断など、業種よりも「起こしたい行動」で見ると選びやすくなります。</p>
+          </li>
+          <li>
+            <span>02</span>
+            <strong>見るポイントを比べる</strong>
+            <p>カード内の「見るポイント」で、何を解決するためのデザインかを先に確認できます。</p>
+          </li>
+          <li>
+            <span>03</span>
+            <strong>参考価格で相談範囲を決める</strong>
+            <p>近いサンプルを伝えていただくと、必要なページ数や機能を絞って話しやすくなります。</p>
+          </li>
+        </ol>
+      </section>
+
       <section class="priority-works reveal" aria-labelledby="priority-works-title">
         <div class="priority-copy">
           <span class="eyebrow">First View</span>
@@ -464,7 +488,7 @@ const structuredData = [
       --trust-line: rgba(15, 76, 92, 0.18);
       --glass: rgba(255, 253, 248, 0.9);
       --glass-border: rgba(15, 76, 92, 0.14);
-      --base: #f6efe5;
+      --base: #f8fbf9;
       --surface: #fffdf8;
       --surface-strong: #fffaf2;
       --surface-cool: #eef5f2;
@@ -481,12 +505,13 @@ const structuredData = [
       font-weight: 800 !important;
       letter-spacing: 0.05em;
     }
+    .title-nowrap { white-space: nowrap; }
 
     /* Background Decoration */
     .bg-decoration {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
-      background: linear-gradient(180deg, #fbf7ef 0%, var(--base) 48%, #f2e8dc 100%);
+      background: linear-gradient(180deg, #ffffff 0%, var(--base) 52%, #fffaf3 100%);
       overflow: hidden;
     }
     .bg-decoration::after {
@@ -541,6 +566,68 @@ const structuredData = [
       font-weight: 800;
       line-height: 1.8;
       text-align: left;
+    }
+
+    .works-use-guide {
+      display: grid;
+      grid-template-columns: minmax(180px, 0.7fr) minmax(0, 2.3fr);
+      gap: 28px;
+      align-items: stretch;
+      margin-bottom: 34px;
+      padding: 26px;
+      border: 1px solid rgba(15, 76, 92, 0.14);
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.92), rgba(238, 245, 242, 0.78));
+      box-shadow: 0 14px 34px rgba(15, 76, 92, 0.055);
+    }
+    .works-use-guide h2 {
+      margin: 0;
+      color: var(--text-deep);
+      font-size: 1.55rem;
+      line-height: 1.35;
+    }
+    .works-use-steps {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .works-use-steps li {
+      min-height: 160px;
+      padding: 18px 17px;
+      border: 1px solid var(--trust-line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.78);
+    }
+    .works-use-steps span {
+      display: inline-grid;
+      min-width: 36px;
+      min-height: 36px;
+      margin-bottom: 12px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--trust);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .works-use-steps strong {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--text-deep);
+      font-size: 0.98rem;
+      font-weight: 900;
+      line-height: 1.45;
+    }
+    .works-use-steps p {
+      margin: 0;
+      color: #636363;
+      font-size: 0.82rem;
+      font-weight: 700;
+      line-height: 1.7;
     }
 
     .priority-works {
@@ -881,6 +968,13 @@ const structuredData = [
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 768px) {
+      .works-hero .premium-heading {
+        font-size: clamp(1.55rem, 6.8vw, 1.95rem);
+        white-space: nowrap;
+      }
+      .works-use-guide { grid-template-columns: 1fr; padding: 24px 18px; }
+      .works-use-steps { grid-template-columns: 1fr; }
+      .works-use-steps li { min-height: auto; }
       .priority-works { padding: 28px 20px; }
       .priority-copy { text-align: left; }
       .priority-copy h2 { font-size: 1.55rem; }

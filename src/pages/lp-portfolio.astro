@@ -27,14 +27,14 @@ const structuredData = [
     <div class="grid-overlay"></div>
   </div>
 
-  <main class="lp-portfolio-page">
+  <main class="lp-portfolio-page" data-glossary-skip>
     <header class="page-header reveal">
       <div class="container">
         <span class="eyebrow">LP Production Gallery</span>
-        <h1 class="page-title">和-Nodeが贈る、<br/><span class="accent-text">業種別LP制作サンプル集</span></h1>
+        <h1 class="page-title">和-Nodeが贈る、<br/><span class="accent-text">業種別LP制作<br class="mobile-title-break" />サンプル集</span></h1>
         <p class="page-desc">
-          「2.4万円〜」という価格の常識を覆す、和-Nodeならではのデザインと戦略性。<br />
-          医療、美容、IT、不動産、教育など、全13種類の制作サンプルと、それぞれの設計意図をご覧ください。
+          見た目だけで終わらせず、相談・予約・申込みにつながる理由まで見えるLPサンプル集です。<br />
+          医療、美容、IT、不動産、教育など、全13種類の制作サンプルと、それぞれの設計意図を比較できます。
         </p>
         <p class="sample-disclaimer">
           ※掲載LPはすべて架空の業種・商品・団体を題材にした自主制作サンプルです。実在の実績・企業・成果を示すものではなく、業種別の表現例としてご覧ください。
@@ -44,14 +44,31 @@ const structuredData = [
           <strong>シンプルLP 24,000円〜 / 推奨LP 64,000円〜 / 連携つき 120,000円〜</strong>
           <small>業種別サンプルの多くは、構成・文章・導線設計を含む「推奨LP」以上を想定しています。</small>
         </div>
+        <ol class="lp-reading-guide" aria-label="LPサンプルの見方">
+          <li>
+            <span>Purpose</span>
+            <strong>業種より目的で選ぶ</strong>
+            <p>予約、販売、採用、相談など、近い目的から見ると判断しやすくなります。</p>
+          </li>
+          <li>
+            <span>Reason</span>
+            <strong>設計意図を見る</strong>
+            <p>なぜその構成なのかを確認すると、自社LPに必要な要素が見えてきます。</p>
+          </li>
+          <li>
+            <span>Budget</span>
+            <strong>参考価格を合わせる</strong>
+            <p>近いサンプルと予算感をもとに、制作範囲を絞って相談できます。</p>
+          </li>
+        </ol>
       </div>
     </header>
 
     <div class="container">
       <section class="lp-choice-guide reveal" aria-labelledby="lp-choice-title">
         <span class="eyebrow">Choose by Purpose</span>
-        <h2 id="lp-choice-title">目的が近いサンプルからご覧ください</h2>
-        <p>業種が完全に一致していなくても大丈夫です。まずは、近い目的のLPを見ると完成イメージが掴みやすくなります。</p>
+        <h2 id="lp-choice-title">目的が近いサンプルから選べます</h2>
+        <p>業種が完全に一致していなくても大丈夫です。まずは近い目的のLPを見ると、必要な構成や相談時の優先順位が掴みやすくなります。</p>
         <div class="lp-choice-grid">
           <a href="/portfolio-lp/lp_clinic.html" class="lp-choice-card main">
             <span>予約・相談を増やしたい</span>
@@ -285,11 +302,11 @@ const structuredData = [
       <section class="portfolio-cta reveal" style="margin-top: 80px;">
         <div class="cta-inner">
           <span class="cta-eyebrow">Ready to Launch?</span>
-          <h2>あなたのビジネスを加速させる、<br/>最高の一枚を。</h2>
-          <p>まずは無料相談から、最適なプランをご提案します。</p>
+          <h2>近いサンプルから、<br/>LP制作の方向性を決められます。</h2>
+          <p>気になるサンプルがあれば、無料相談で「この方向に近い」とお知らせください。構成・文章量・機能の必要範囲を一緒に整理します。</p>
           <div class="cta-btns">
             <a href="/pricing/" class="btn-secondary">パッケージ一覧を見る</a>
-            <a href="#consultation-flow" class="btn-primary">無料相談のステップを確認</a>
+            <a href="/contact/?source=lp_portfolio" class="btn-primary">LP制作を相談する</a>
           </div>
         </div>
       </section>
@@ -308,6 +325,7 @@ const structuredData = [
   .eyebrow { font-size: 0.85rem; font-weight: 900; color: #639922; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
   .page-title { font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 900; line-height: 1.2; margin-bottom: 24px; color: #333; }
   .accent-text { color: #639922; position: relative; }
+  .mobile-title-break { display: none; }
   .page-desc { font-size: 1.1rem; color: #666; line-height: 1.8; max-width: 800px; margin: 0 auto; }
   .sample-disclaimer {
     max-width: 780px;
@@ -353,6 +371,50 @@ const structuredData = [
     font-size: 0.82rem;
     font-weight: 700;
     line-height: 1.6;
+  }
+  .lp-reading-guide {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    max-width: 880px;
+    margin: 22px auto 0;
+    padding: 0;
+    list-style: none;
+    text-align: left;
+  }
+  .lp-reading-guide li {
+    min-height: 164px;
+    padding: 18px 18px 17px;
+    border: 1px solid var(--trust-line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.84);
+    box-shadow: 0 12px 30px rgba(15, 76, 92, 0.045);
+  }
+  .lp-reading-guide span {
+    display: inline-flex;
+    margin-bottom: 12px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+  }
+  .lp-reading-guide strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #222;
+    font-size: 1rem;
+    font-weight: 900;
+    line-height: 1.45;
+  }
+  .lp-reading-guide p {
+    margin: 0;
+    color: #666;
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.7;
   }
 
   .lp-choice-guide {
@@ -541,7 +603,7 @@ const structuredData = [
   .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(15, 76, 92, 0.28); background: #123c45 !important; }
   .btn-secondary:hover { background: #f9f9f9; transform: translateY(-3px); }
 
-  .bg-decoration { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #fdfaf7; overflow: hidden; }
+  .bg-decoration { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: linear-gradient(180deg, #fff 0%, #f8fbf9 54%, #fffaf3 100%); overflow: hidden; }
   .grid-overlay { position: absolute; width: 100%; height: 100%; background-image: radial-gradient(rgba(0,0,0,0.04) 1px, transparent 1px); background-size: 30px 30px; }
   .glow { position: absolute; border-radius: 50%; filter: blur(80px); opacity: 0.3; }
   .glow-1 { width: 500px; height: 500px; background: #e8f0e5; top: -10%; right: -10%; }
@@ -552,7 +614,11 @@ const structuredData = [
 
   @media (max-width: 600px) {
     .page-header { padding: 80px 20px 40px; }
+    .page-title { font-size: clamp(2.05rem, 8.8vw, 2.45rem); }
+    .mobile-title-break { display: block; }
     .lp-grid { grid-template-columns: 1fr; gap: 24px; }
+    .lp-reading-guide { grid-template-columns: 1fr; }
+    .lp-reading-guide li { min-height: auto; }
     .lp-choice-guide { padding: 28px 20px; text-align: left; }
     .lp-choice-guide h2 { font-size: 1.55rem; }
     .lp-choice-grid { grid-template-columns: 1fr; }
