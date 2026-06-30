@@ -197,6 +197,10 @@ const structuredData = [
               <span>見るポイント</span>
               <strong>相談ボタンの理由がわかる</strong>
             </div>
+            <dl class="design-chart">
+              <div><dt>課題</dt><dd>良い情報があっても、相談ボタンまでの理由が見えにくい</dd></div>
+              <div><dt>工夫</dt><dd>配置・言葉・根拠を順番に見せ、納得して次へ進める</dd></div>
+            </dl>
             <ul class="work-chips"><li>心理根拠</li><li>情報設計</li><li>相談導線</li></ul>
             <p class="card-text">なぜそのボタンはそこにあるのか？心理学的根拠に基づいた情報配置の「正解」を、解説付きで体験できる特別なデモページです。</p>
             <div class="price-hint"><span>参考価格</span><strong>診断 15,000円〜 / LP 64,000円〜</strong><small>現状改善のみか、制作込みかで変わります</small></div>
@@ -228,6 +232,10 @@ const structuredData = [
               <span>見るポイント</span>
               <strong>来店前の不安を減らす流れ</strong>
             </div>
+            <dl class="design-chart">
+              <div><dt>課題</dt><dd>初回来店前に料金・流れ・場所の不安が残りやすい</dd></div>
+              <div><dt>工夫</dt><dd>予約前に知りたい情報をスマホで追いやすく整理</dd></div>
+            </dl>
             <ul class="work-chips"><li>料金</li><li>初回説明</li><li>LINE予約</li></ul>
             <p class="card-text">初回来店前の不安を減らすために、料金、流れ、アクセス、LINE予約導線をスマホで確認しやすく整理した架空サンプルです。</p>
             <div class="price-hint"><span>参考価格</span><strong>64,000円〜120,000円前後</strong><small>予約導線・LINE連携の範囲で変動</small></div>
@@ -259,6 +267,10 @@ const structuredData = [
               <span>見るポイント</span>
               <strong>安心感と予約導線の両立</strong>
             </div>
+            <dl class="design-chart">
+              <div><dt>課題</dt><dd>安心材料が足りないと、比較段階で予約に進みにくい</dd></div>
+              <div><dt>工夫</dt><dd>信頼・確認事項・予約導線を落ち着いた順番で配置</dd></div>
+            </dl>
             <ul class="work-chips"><li>信頼形成</li><li>医療配慮</li><li>予約ボタン</li></ul>
             <p class="card-text">美容クリニック、心療内科等を想定したLP制作サンプル。医療広告ガイドラインに配慮しつつ、安心感と予約導線を両立させた構成例です。</p>
             <div class="price-hint"><span>参考価格</span><strong>64,000円〜120,000円前後</strong><small>確認事項・表現調整の量で変動</small></div>
@@ -289,6 +301,10 @@ const structuredData = [
               <span>見るポイント</span>
               <strong>業種別LPの見せ方を比較</strong>
             </div>
+            <dl class="design-chart">
+              <div><dt>課題</dt><dd>どのサンプルが自社に近いか判断しづらい</dd></div>
+              <div><dt>工夫</dt><dd>目的・設計意図・参考価格を比較して相談しやすくする</dd></div>
+            </dl>
             <ul class="work-chips"><li>第一印象</li><li>業種別</li><li>ボタン設計</li></ul>
             <p class="card-text">業種別のLP制作サンプルをまとめたギャラリーです。第一印象、信頼形成、相談ボタンに加えて「なぜその工夫を入れたか」まで比較できます。</p>
             <div class="price-hint"><span>参考価格</span><strong>LP 24,000円〜 / 推奨 64,000円〜</strong><small>目的に近いサンプルから見積もれます</small></div>
@@ -852,6 +868,35 @@ const structuredData = [
       font-size: 0.95rem;
       font-weight: 900;
       line-height: 1.5;
+    }
+    .design-chart {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 14px;
+      padding: 12px 13px;
+      border: 1px solid rgba(15, 76, 92, 0.12);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+    .design-chart div {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 8px;
+      align-items: start;
+    }
+    .design-chart dt {
+      color: var(--accent-red);
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1.6;
+    }
+    .design-chart dd {
+      margin: 0;
+      color: #555;
+      font-size: 0.78rem;
+      font-weight: 700;
+      line-height: 1.65;
     }
     .work-chips {
       display: flex;

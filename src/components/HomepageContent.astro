@@ -161,6 +161,30 @@ const trustSignals = {
     { value: 'Apres lancement', label: 'Amelioration et accompagnement' }
   ]
 };
+
+const transformationCards = [
+  {
+    label: '情報の順番',
+    before: '強み・料金・相談方法が別々に見えて、初見の人が判断しにくい。',
+    after: '誰向けか、何を頼めるか、次に何をすればいいかが自然に追える。'
+  },
+  {
+    label: '相談前の不安',
+    before: '「いくらかかるのか」「何を聞かれるのか」が分からず、フォーム前で止まりやすい。',
+    after: '料金目安、流れ、相談範囲を先に見せて、安心して問い合わせに進める。'
+  },
+  {
+    label: '公開後の改善',
+    before: '作って終わりになり、反応が悪い理由を後から見つけにくい。',
+    after: 'アクセス解析や問い合わせ状況を見ながら、改善しやすいWeb環境に育てる。'
+  }
+];
+
+const quickCheckItems = [
+  '最初の画面で「誰向けのサイトか」が分かる',
+  '料金・流れ・相談方法が迷わず見つかる',
+  '問い合わせ後に何が起きるか想像できる'
+];
 ---
 <main class="home-content">
   <!-- 1. Hero Section -->
@@ -172,9 +196,9 @@ const trustSignals = {
         <h1 data-glossary-skip>
           {lang === 'ja' ? (
             <>
-              <span class="hero-title-chosen">心理学を用い</span>
+              <span class="hero-title-chosen">心理学で、<br />伝わる順番を整える</span>
               <br />
-              <span class="hero-title-psy">Web制作・LP改善</span>
+              <span class="hero-title-psy">Web制作。</span>
             </>
           ) : (
             <>
@@ -201,6 +225,61 @@ const trustSignals = {
       ))}
     </div>
   </section>
+
+  {lang === 'ja' && (
+    <>
+      <section class="section transformation-section reveal" aria-labelledby="transformation-title">
+        <div class="section-inner">
+          <div class="transformation-head">
+            <span class="eyebrow">Before / After</span>
+            <h2 id="transformation-title">伝わる順番が整うと、相談前の迷いが減ります。</h2>
+            <p>見た目を飾る前に、訪問者が何を見て、何に安心し、どこから相談するかを整理します。</p>
+          </div>
+          <div class="transformation-stage" data-phase="after">
+            <div class="journey-toggle" aria-label="BeforeとAfterの切り替え">
+              <button type="button" data-phase="before" aria-pressed="false">Before</button>
+              <button type="button" data-phase="after" aria-pressed="true" class="active">After</button>
+            </div>
+            <div class="transformation-grid">
+              {transformationCards.map((card) => (
+                <article class="transformation-card motion-card">
+                  <span>{card.label}</span>
+                  <p class="phase-copy before-copy">{card.before}</p>
+                  <p class="phase-copy after-copy">{card.after}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section quick-check-section reveal" aria-labelledby="quick-check-title">
+        <div class="section-inner quick-check-inner">
+          <div class="quick-check-copy">
+            <span class="eyebrow">1 Minute Check</span>
+            <h2 id="quick-check-title">相談前に、まず3つだけ確認。</h2>
+            <p>ひとつでも引っかかる場合は、導線整理だけでも改善余地があります。</p>
+          </div>
+          <div class="quick-check-panel">
+            <div class="check-progress" aria-hidden="true">
+              <span></span>
+            </div>
+            <p class="check-progress-text" aria-live="polite">0 / 3 チェック済み</p>
+            <div class="check-list">
+              {quickCheckItems.map((item, index) => (
+                <label>
+                  <input type="checkbox" value={index} />
+                  <span>{item}</span>
+                </label>
+              ))}
+            </div>
+            <p class="check-result">まずは現在のサイトや構想をそのまま相談できます。</p>
+            <a class="btn primary check-cta" href={getLocalizedLink('/contact')}>無料相談で整理する</a>
+          </div>
+        </div>
+      </section>
+    </>
+  )}
 
   <!-- 1.5. Agitation Section (For frustrated/skeptical users) -->
   <section class="section why-psy">
@@ -378,6 +457,22 @@ const trustSignals = {
     </div>
   </section>
 
+  {lang === 'ja' && (
+    <section class="section profile-summary reveal">
+      <div class="profile-summary-inner">
+        <div class="profile-avatar-wrap">
+          <img src="/images/avatar.png" alt="和-Node 代表 高野紘純" class="profile-avatar-img" />
+        </div>
+        <div class="profile-text-wrap">
+          <span class="eyebrow">Message</span>
+          <h2>作る前に、まず迷いの原因を整理します。</h2>
+          <p class="profile-desc">IT実務20年以上の技術経験に、産業カウンセラーとしての心理学の知見を重ね、初見の人が迷わず相談できる順番を一緒に整えます。</p>
+          <a href={getLocalizedLink('/about')} class="profile-link">代表プロフィールを見る →</a>
+        </div>
+      </div>
+    </section>
+  )}
+
   <!-- 6. Consultation Flow (Simplified) -->
   <section class="section flow" id="flow">
     <div class="section-inner">
@@ -409,6 +504,72 @@ const trustSignals = {
   </section>
 
 </main>
+
+<script is:inline>
+  function initHomeInteractions() {
+    const root = document.querySelector('.home-content');
+    if (!root || root.dataset.homeInteractionsReady === 'true') return;
+    root.dataset.homeInteractionsReady = 'true';
+
+    const stage = root.querySelector('.transformation-stage');
+    if (stage) {
+      const buttons = stage.querySelectorAll('.journey-toggle button');
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          const phase = button.dataset.phase || 'after';
+          stage.dataset.phase = phase;
+          buttons.forEach((btn) => {
+            const active = btn === button;
+            btn.classList.toggle('active', active);
+            btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+          });
+        });
+      });
+    }
+
+    const quickCheck = root.querySelector('.quick-check-panel');
+    if (quickCheck) {
+      const boxes = quickCheck.querySelectorAll('input[type="checkbox"]');
+      const bar = quickCheck.querySelector('.check-progress span');
+      const progressText = quickCheck.querySelector('.check-progress-text');
+      const result = quickCheck.querySelector('.check-result');
+      const updateCheck = () => {
+        const checked = [...boxes].filter((box) => box.checked).length;
+        if (bar) bar.style.width = `${(checked / boxes.length) * 100}%`;
+        if (progressText) progressText.textContent = `${checked} / ${boxes.length} チェック済み`;
+        if (result) {
+          result.textContent = checked === boxes.length
+            ? '土台は整っています。次は、相談につながる見せ方を一緒に磨けます。'
+            : checked === 0
+              ? 'まずは現在のサイトや構想をそのまま相談できます。'
+              : '気になる箇所が見えてきました。優先順位をつけて整理できます。';
+        }
+      };
+      boxes.forEach((box) => box.addEventListener('change', updateCheck));
+      updateCheck();
+    }
+
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      root.querySelectorAll('.motion-card').forEach((card) => {
+        card.addEventListener('pointermove', (event) => {
+          const rect = card.getBoundingClientRect();
+          const x = (event.clientX - rect.left) / rect.width - 0.5;
+          const y = (event.clientY - rect.top) / rect.height - 0.5;
+          card.style.setProperty('--tilt-x', `${(-y * 3).toFixed(2)}deg`);
+          card.style.setProperty('--tilt-y', `${(x * 3).toFixed(2)}deg`);
+        });
+        card.addEventListener('pointerleave', () => {
+          card.style.setProperty('--tilt-x', '0deg');
+          card.style.setProperty('--tilt-y', '0deg');
+        });
+      });
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initHomeInteractions);
+  document.addEventListener('astro:page-load', initHomeInteractions);
+  initHomeInteractions();
+</script>
 
 <style is:global>
   @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
@@ -482,16 +643,17 @@ const trustSignals = {
     align-items: center;
   }
   .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; }
-  .hero-content { max-width: 650px; }
+  .hero-content { max-width: 720px; }
   .hero-badge { display: inline-block; background: var(--hero-accent); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 800; margin-bottom: 24px; }
   .highlight-text { border-bottom: 3px double var(--home-gold); padding-bottom: 2px; color: var(--hero-accent); font-weight: 800; }
 
   /* ジャンプ率・タイポグラフィの心理設計クラス */
   .hero-title-chosen {
-    font-size: clamp(2.6rem, 5.8vw, 4.8rem);
+    font-size: clamp(2.6rem, 5.2vw, 4.35rem);
     font-weight: 900;
     color: var(--hero-accent);
-    letter-spacing: -0.05em;
+    letter-spacing: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.86), 0 8px 24px rgba(199, 53, 47, 0.12);
   }
   .hero-title-sub {
     font-size: clamp(1.1rem, 2.5vw, 1.8rem);
@@ -505,7 +667,8 @@ const trustSignals = {
     color: var(--text-deep);
     border-bottom: 3px double var(--home-gold);
     padding-bottom: 2px;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
   }
   .hero-title-base {
     font-size: clamp(1.6rem, 3.5vw, 2.8rem);
@@ -546,6 +709,195 @@ const trustSignals = {
     line-height: 1.5;
   }
 
+  .transformation-section {
+    background: linear-gradient(180deg, #fff 0%, #f8fbf9 100%);
+    border-bottom: 1px solid var(--trust-line);
+  }
+  .transformation-head {
+    max-width: 780px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+  .transformation-head h2 {
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+  .transformation-head p {
+    margin: 0 auto;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .transformation-stage {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 28px;
+    border: 1px solid var(--card-border);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: var(--card-shadow);
+  }
+  .journey-toggle {
+    display: inline-flex;
+    gap: 6px;
+    margin-bottom: 22px;
+    padding: 6px;
+    border: 1px solid var(--trust-line);
+    border-radius: 999px;
+    background: var(--surface-cool);
+  }
+  .journey-toggle button {
+    min-height: 38px;
+    padding: 8px 18px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--trust);
+    cursor: pointer;
+    font: inherit;
+    font-weight: 900;
+  }
+  .journey-toggle button.active {
+    background: var(--home-action);
+    color: #fff;
+    box-shadow: 0 8px 18px rgba(199, 53, 47, 0.16);
+  }
+  .transformation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .transformation-card {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    min-height: 210px;
+    padding: 24px 22px;
+    border: 1px solid var(--trust-line);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #fff 0%, var(--surface-strong) 100%);
+    box-shadow: 0 10px 24px rgba(15, 76, 92, 0.05);
+    transform: perspective(900px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .transformation-card:hover {
+    border-color: var(--trust-mid);
+    box-shadow: var(--card-shadow-hover);
+  }
+  .transformation-card span {
+    display: inline-flex;
+    margin-bottom: 16px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust);
+    font-size: 0.76rem;
+    font-weight: 900;
+  }
+  .phase-copy {
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;
+    color: var(--text-deep);
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.8;
+    transition: opacity 0.28s ease, transform 0.28s ease;
+  }
+  .transformation-stage[data-phase="after"] .before-copy,
+  .transformation-stage[data-phase="before"] .after-copy {
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+  }
+  .transformation-stage[data-phase="after"] .after-copy,
+  .transformation-stage[data-phase="before"] .before-copy {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .quick-check-section {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+  }
+  .quick-check-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1.1fr);
+    gap: 32px;
+    align-items: center;
+  }
+  .quick-check-copy h2 {
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+  .quick-check-copy p {
+    color: var(--muted);
+    line-height: 1.8;
+  }
+  .quick-check-panel {
+    padding: 28px;
+    border: 1px solid var(--card-border);
+    border-radius: 22px;
+    background: linear-gradient(135deg, rgba(238, 245, 242, 0.92), rgba(255, 255, 255, 0.9));
+    box-shadow: var(--card-shadow);
+  }
+  .check-progress {
+    height: 8px;
+    overflow: hidden;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.12);
+  }
+  .check-progress span {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--trust) 0%, var(--home-action) 100%);
+    transition: width 0.35s ease;
+  }
+  .check-progress-text {
+    margin: 10px 0 18px;
+    color: var(--trust);
+    font-size: 0.82rem;
+    font-weight: 900;
+  }
+  .check-list {
+    display: grid;
+    gap: 10px;
+  }
+  .check-list label {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    align-items: start;
+    padding: 13px 14px;
+    border: 1px solid var(--trust-line);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.86);
+    cursor: pointer;
+  }
+  .check-list input {
+    width: 18px;
+    height: 18px;
+    margin-top: 4px;
+    accent-color: var(--home-action);
+  }
+  .check-list span {
+    color: var(--text-deep);
+    font-size: 0.92rem;
+    font-weight: 800;
+    line-height: 1.65;
+  }
+  .check-result {
+    min-height: 3.2em;
+    margin: 18px 0 20px;
+    color: var(--trust);
+    font-weight: 900;
+    line-height: 1.7;
+  }
+  .check-cta {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
   /* Agitation / Hook Section */
   .why-psy { background: #ffffff; border-bottom: 1px solid var(--line); }
   .why-psy-inner { max-width: 900px; margin: 0 auto; padding: 0 20px; }
@@ -576,6 +928,11 @@ const trustSignals = {
   .profile-avatar-wrap { flex: 0 0 200px; width: 200px; height: 200px; border-radius: 30px; overflow: hidden; box-shadow: 0 15px 30px rgba(0,0,0,0.08); border: 3px solid var(--white); }
   .profile-avatar-img { width: 100%; height: 100%; object-fit: cover; }
   .profile-text-wrap { flex: 1; }
+  .profile-text-wrap h2 {
+    margin-bottom: 14px;
+    font-size: clamp(1.55rem, 3vw, 2.15rem);
+    text-wrap: balance;
+  }
   .profile-desc { font-size: 1rem; color: var(--muted); margin: 16px 0 24px; line-height: 1.8; }
   .profile-link { font-weight: 800; color: var(--accent); text-decoration: underline; transition: 0.3s; }
   .profile-link:hover { color: var(--accent-dark); }
@@ -813,6 +1170,11 @@ const trustSignals = {
       border-bottom: 1px solid var(--trust-line);
     }
     .trust-signal:last-child { border-bottom: 0; }
+    .transformation-stage { padding: 22px 18px; }
+    .transformation-grid { grid-template-columns: 1fr; }
+    .transformation-card { min-height: auto; }
+    .quick-check-inner { grid-template-columns: 1fr; }
+    .quick-check-panel { padding: 22px 18px; }
     .consult-grid, .action-buttons-grid, .simple-flow-grid, .concept-intro-grid { grid-template-columns: 1fr; }
     .consult-card { padding: 28px 22px; }
     .consult-card h3 { font-size: 1.12rem; line-height: 1.6; }
@@ -822,5 +1184,14 @@ const trustSignals = {
     .flow-item:not(:last-child)::after { display: none; }
     .profile-summary-inner { flex-direction: column; text-align: center; gap: 24px; }
     .profile-avatar-wrap { flex: 0 0 160px; width: 160px; height: 160px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .transformation-card,
+    .phase-copy,
+    .check-progress span {
+      transition: none !important;
+      transform: none !important;
+    }
   }
 </style>

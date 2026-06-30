@@ -324,6 +324,23 @@ const structuredData = [
           </a>
         </div>
       </div>
+      <div class="plan-picker" aria-label="梅竹松の選び方">
+        <div>
+          <span>梅</span>
+          <strong>名刺代わりに最低限</strong>
+          <p>まずWeb上の拠点を作りたい方向け。</p>
+        </div>
+        <div class="recommended">
+          <span>竹</span>
+          <strong>相談につなげたい</strong>
+          <p>料金・流れ・強みを整理し、初見の不安を減らす推奨ライン。</p>
+        </div>
+        <div>
+          <span>松</span>
+          <strong>連携・自動化まで</strong>
+          <p>予約、LINE、メール自動送信なども含めて整えたい方向け。</p>
+        </div>
+      </div>
     </section>
 
     <section class="section" id="copilot">
@@ -684,6 +701,51 @@ const structuredData = [
     color: var(--trust);
     font-size: 0.95rem;
     line-height: 1.5;
+  }
+  .plan-picker {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    max-width: 840px;
+    margin: 22px auto 0;
+  }
+  .plan-picker > div {
+    padding: 18px 18px 17px;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    background: linear-gradient(180deg, #fff 0%, var(--surface-strong) 100%);
+    box-shadow: 0 10px 24px rgba(15, 76, 92, 0.045);
+    text-align: left;
+  }
+  .plan-picker > div.recommended {
+    border: 2px solid rgba(199, 53, 47, 0.35);
+    background: linear-gradient(135deg, rgba(199, 53, 47, 0.055), rgba(255, 255, 255, 0.96));
+  }
+  .plan-picker span {
+    display: inline-grid;
+    width: 34px;
+    height: 34px;
+    margin-bottom: 12px;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--trust);
+    color: #fff;
+    font-weight: 900;
+  }
+  .plan-picker .recommended span {
+    background: var(--accent-red);
+  }
+  .plan-picker strong {
+    display: block;
+    color: #2c2c2c;
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .plan-picker p {
+    margin: 8px 0 0;
+    color: #666;
+    font-size: 0.84rem;
+    line-height: 1.7;
   }
 
   .campaign-notice-box {
@@ -1137,7 +1199,8 @@ const structuredData = [
     .choice-lead,
     .choice-footnote { margin-left: 0; }
     .choice-card { min-height: auto; }
-    .decision-grid { grid-template-columns: 1fr; }
+    .decision-grid,
+    .plan-picker { grid-template-columns: 1fr; }
     .minimum-scope-grid { grid-template-columns: 1fr; }
     .minimum-scope-item + .minimum-scope-item {
       border-top: 1px solid var(--trust-line);
