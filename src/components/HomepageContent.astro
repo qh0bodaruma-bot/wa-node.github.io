@@ -162,6 +162,34 @@ const trustSignals = {
   ]
 };
 
+const signalPathSteps = [
+  {
+    label: '不安',
+    title: '迷いを見つける',
+    desc: '言葉・料金・流れの引っかかりを整理'
+  },
+  {
+    label: '心理学',
+    title: '伝わる順番へ',
+    desc: '初見の人が安心しやすい順番に再設計'
+  },
+  {
+    label: 'Web',
+    title: '画面に落とす',
+    desc: '見出し、導線、ボタンを形にする'
+  },
+  {
+    label: '相談',
+    title: '行動しやすく',
+    desc: '迷わず問い合わせへ進める状態に'
+  },
+  {
+    label: '改善',
+    title: '反応を育てる',
+    desc: '公開後も計測しながら整える'
+  }
+];
+
 const transformationCards = [
   {
     label: '情報の順番',
@@ -228,6 +256,39 @@ const quickCheckItems = [
 
   {lang === 'ja' && (
     <>
+      <section class="section signal-path-section reveal" aria-labelledby="signal-path-title">
+        <div class="section-inner signal-path-inner">
+          <div class="signal-path-copy">
+            <span class="eyebrow">CSS3 / SVG</span>
+            <h2 id="signal-path-title">技術は、伝わる順番を見える化するために。</h2>
+            <p>派手な演出ではなく、訪問者の視線が自然に次の判断へ進むよう、軽い動きで導線を補助します。</p>
+          </div>
+          <div class="signal-path-map" aria-label="不安から相談、改善までの流れ">
+            <svg class="signal-path-svg" viewBox="0 0 920 180" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="signal-path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#0f4c5c" />
+                  <stop offset="48%" stop-color="#8c6b1f" />
+                  <stop offset="100%" stop-color="#c7352f" />
+                </linearGradient>
+              </defs>
+              <path class="signal-path-track" d="M58 96 C190 18 280 172 420 92 S650 36 862 94" />
+              <path class="signal-path-line" d="M58 96 C190 18 280 172 420 92 S650 36 862 94" stroke="url(#signal-path-gradient)" />
+            </svg>
+            <ol class="signal-nodes">
+              {signalPathSteps.map((step, index) => (
+                <li>
+                  <span class="signal-node-dot" aria-hidden="true">{index + 1}</span>
+                  <strong>{step.label}</strong>
+                  <b>{step.title}</b>
+                  <small>{step.desc}</small>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
       <section class="section transformation-section reveal" aria-labelledby="transformation-title">
         <div class="section-inner">
           <div class="transformation-head">
@@ -693,6 +754,129 @@ const quickCheckItems = [
     line-height: 1.5;
   }
 
+  .signal-path-section {
+    background: linear-gradient(180deg, #fff 0%, #f8fbf9 100%);
+    border-bottom: 1px solid var(--trust-line);
+  }
+  .signal-path-inner {
+    display: grid;
+    grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
+    gap: 36px;
+    align-items: center;
+  }
+  .signal-path-copy h2 {
+    margin-bottom: 16px;
+    text-wrap: balance;
+  }
+  .signal-path-copy p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.85;
+  }
+  .signal-path-map {
+    position: relative;
+    min-height: 250px;
+    padding: 34px 28px 28px;
+    border: 1px solid var(--card-border);
+    border-radius: 22px;
+    background:
+      linear-gradient(135deg, rgba(238, 245, 242, 0.9), rgba(255, 255, 255, 0.94)),
+      radial-gradient(circle at 16% 10%, rgba(199, 53, 47, 0.08), transparent 30%);
+    box-shadow: var(--card-shadow);
+    overflow: hidden;
+  }
+  .signal-path-map::after {
+    content: "";
+    position: absolute;
+    inset: 16px;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.74);
+    pointer-events: none;
+  }
+  .signal-path-svg {
+    position: absolute;
+    inset: 46px 28px auto;
+    width: calc(100% - 56px);
+    height: 128px;
+    overflow: visible;
+  }
+  .signal-path-track,
+  .signal-path-line {
+    fill: none;
+    stroke-linecap: round;
+  }
+  .signal-path-track {
+    stroke: rgba(15, 76, 92, 0.16);
+    stroke-width: 8;
+  }
+  .signal-path-line {
+    stroke-width: 4;
+    stroke-dasharray: 44 18;
+    animation: signal-path-flow 4.8s linear infinite;
+  }
+  .signal-nodes {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .signal-nodes li {
+    display: grid;
+    justify-items: center;
+    align-content: start;
+    min-height: 180px;
+    padding: 0 4px;
+    text-align: center;
+  }
+  .signal-node-dot {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    place-items: center;
+    margin-bottom: 18px;
+    border: 2px solid rgba(15, 76, 92, 0.18);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--trust);
+    font-size: 0.94rem;
+    font-weight: 900;
+    box-shadow: 0 10px 24px rgba(15, 76, 92, 0.12);
+    transition: transform 0.28s ease, border-color 0.28s ease, background-color 0.28s ease, color 0.28s ease;
+  }
+  .signal-nodes li:hover .signal-node-dot {
+    transform: translateY(-4px) scale(1.06);
+    border-color: rgba(199, 53, 47, 0.32);
+    background: var(--home-action);
+    color: #fff;
+  }
+  .signal-nodes strong {
+    color: var(--trust);
+    font-size: 0.82rem;
+    font-weight: 900;
+    line-height: 1.4;
+  }
+  .signal-nodes b {
+    margin-top: 6px;
+    color: var(--text-deep);
+    font-size: 0.95rem;
+    font-weight: 900;
+    line-height: 1.45;
+  }
+  .signal-nodes small {
+    margin-top: 8px;
+    color: var(--muted);
+    font-size: 0.76rem;
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  @keyframes signal-path-flow {
+    to { stroke-dashoffset: -124; }
+  }
+
   .transformation-section {
     background: linear-gradient(180deg, #fff 0%, #f8fbf9 100%);
     border-bottom: 1px solid var(--trust-line);
@@ -915,14 +1099,34 @@ const quickCheckItems = [
     max-width: 960px;
   }
   .consult-card {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
     padding: 36px;
     border-radius: var(--radius);
     border: 1px solid var(--card-border);
     box-shadow: var(--card-shadow);
-    transition: 0.3s;
+    transition: transform 0.32s ease, border-color 0.32s ease, box-shadow 0.32s ease;
     display: flex;
     flex-direction: column;
+  }
+  .consult-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 28px;
+    right: 28px;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--trust), var(--home-action));
+    transform: scaleX(0.18);
+    transform-origin: left;
+    opacity: 0.7;
+    transition: transform 0.32s ease, opacity 0.32s ease;
+  }
+  .consult-card:hover::before {
+    transform: scaleX(1);
+    opacity: 1;
   }
   .consult-card:hover { transform: translateY(-5px); border-color: var(--trust-mid); box-shadow: var(--card-shadow-hover); }
   .consult-card.highlight {
@@ -939,6 +1143,7 @@ const quickCheckItems = [
     border: 1px solid var(--trust-line);
     border-radius: 12px;
     background: linear-gradient(135deg, rgba(238, 245, 242, 0.86), rgba(255, 255, 255, 0.78));
+    transition: border-color 0.3s ease, background-color 0.3s ease;
   }
   .service-mark {
     display: grid;
@@ -985,6 +1190,16 @@ const quickCheckItems = [
     height: 2px;
     border-radius: 999px;
     background: rgba(15, 76, 92, 0.24);
+    overflow: hidden;
+  }
+  .mini-flow i::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, transparent, var(--home-action), transparent);
+    transform: translateX(-120%);
+    transition: transform 0.42s ease;
   }
   .mini-flow i::after {
     content: "";
@@ -996,6 +1211,12 @@ const quickCheckItems = [
     border-top: 2px solid rgba(15, 76, 92, 0.28);
     border-right: 2px solid rgba(15, 76, 92, 0.28);
     transform: translateY(-50%) rotate(45deg);
+  }
+  .consult-card:hover .service-visual {
+    border-color: rgba(15, 76, 92, 0.28);
+  }
+  .consult-card:hover .mini-flow i::before {
+    transform: translateX(120%);
   }
   .card-tag { font-size: 0.75rem; font-weight: 800; color: var(--trust); letter-spacing: 0.1em; margin-bottom: 12px; display: block; }
   .consult-card h3 {
@@ -1129,6 +1350,33 @@ const quickCheckItems = [
     .lead { max-width: 100%; box-sizing: border-box; word-break: break-all; overflow-wrap: anywhere; line-break: strict; margin-left: auto; margin-right: auto; text-align: center; font-size: 1.02rem; line-height: 1.9; }
     .hero-title-chosen { font-size: clamp(2.2rem, 8vw, 3.2rem); }
     .hero-title-psy { font-size: clamp(2rem, 7vw, 3rem); }
+    .signal-path-inner { grid-template-columns: 1fr; }
+    .signal-path-map { min-height: auto; padding: 22px 18px; }
+    .signal-path-svg { display: none; }
+    .signal-nodes {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .signal-nodes li {
+      grid-template-columns: auto 1fr;
+      justify-items: start;
+      align-items: center;
+      min-height: 0;
+      padding: 12px 0;
+      text-align: left;
+      border-bottom: 1px solid var(--trust-line);
+    }
+    .signal-nodes li:last-child { border-bottom: 0; }
+    .signal-node-dot {
+      grid-row: span 3;
+      width: 42px;
+      height: 42px;
+      margin: 0 12px 0 0;
+    }
+    .signal-nodes b,
+    .signal-nodes small {
+      margin-top: 2px;
+    }
     .trust-strip-inner {
       grid-template-columns: 1fr;
       border-left: 0;
@@ -1154,9 +1402,16 @@ const quickCheckItems = [
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .signal-path-line,
     .transformation-card,
     .phase-copy,
+    .signal-node-dot,
+    .consult-card,
+    .consult-card::before,
+    .service-visual,
+    .mini-flow i::before,
     .check-progress span {
+      animation: none !important;
       transition: none !important;
       transform: none !important;
     }
