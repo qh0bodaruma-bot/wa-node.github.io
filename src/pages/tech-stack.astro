@@ -9,7 +9,7 @@ import {
 } from '../data/structuredData';
 
 const title = "和-Nodeを支えるテクノロジー（Tech Stack）｜和-Node";
-const description = "和-NodeのWeb制作を支える技術基盤。Astro、Cloudflare Pages、Vanilla CSSを用いた、高速・安全性・柔軟性を重視するWebサイト構築の裏側を解説します。";
+const description = "和-NodeのWeb制作を支える技術基盤。Astro、Cloudflare Pages、Vanilla CSSを用いた、高速・安全性・柔軟性を重視するWebサイト構築と、静的サイト・動的サイトの選び方を解説します。";
 const image = "/images/ogp-tech-stack.png";
 const structuredData = [
   organizationSchema,
@@ -28,7 +28,7 @@ const structuredData = [
     image: absoluteUrl(image),
     inLanguage: "ja",
     publisher: { "@id": "https://www.wa-node.com/#organization" },
-    about: ["Astro", "Cloudflare Pages", "Vanilla CSS", "AI Driven Development"],
+    about: ["Astro", "Cloudflare Pages", "Vanilla CSS", "AI Driven Development", "Static Site", "Dynamic Site"],
   },
 ];
 ---
@@ -131,6 +131,60 @@ const structuredData = [
           </div>
         </div>
 
+      </div>
+    </section>
+
+    <section class="site-type-section section" aria-labelledby="site-type-title">
+      <div class="container narrow reveal">
+        <div class="site-type-intro">
+          <span class="custom-tech-eyebrow">Static / Dynamic</span>
+          <h2 id="site-type-title">静的サイトと動的サイト、<br /><span class="site-type-nowrap">どちらが向いているか</span></h2>
+          <p>
+            Webサイトは、大きく分けると「表示が速く管理しやすい静的サイト」と、
+            「データ保存・認証・管理画面などを扱う動的な仕組み」があります。
+            予約フォームや管理画面の入口は静的サイトにも置けますが、保存・認証・編集などは外部サービスやサーバーレス機能、データベース連携と組み合わせて設計します。
+          </p>
+        </div>
+
+        <div class="site-type-grid">
+          <article class="site-type-card">
+            <span class="site-type-label">Static Site</span>
+            <h3>表示が速く、保守しやすい静的サイト</h3>
+            <p>
+              会社案内、サービス紹介、料金、制作例、問い合わせ導線など、内容を安定して伝えるページに向いています。
+              余計な処理が少ないため表示が速く、セキュリティ面でも管理しやすいのが特徴です。
+              予約ボタンやフォームの入口を置き、外部サービスへつなぐこともできます。
+            </p>
+            <ul>
+              <li>ホームページ・LP・キャンペーンページ</li>
+              <li>ブログ更新が少ない事業サイト</li>
+              <li>まず信頼されるWeb上の拠点を作りたい場合</li>
+            </ul>
+          </article>
+
+          <article class="site-type-card highlighted">
+            <span class="site-type-label">Dynamic Site</span>
+            <h3>保存・認証・管理が必要な動的な仕組み</h3>
+            <p>
+              予約データの保存、会員ログイン、管理画面からの登録・編集、在庫や顧客情報との連携など、
+              操作によってデータを扱う部分は、外部サービス、サーバーレス機能、データベース連携、または動的アプリとして設計します。
+              便利な一方で、設計・保守・セキュリティ確認の範囲が広がります。
+            </p>
+            <ul>
+              <li>予約データの保存・確認</li>
+              <li>会員認証・会員別の表示</li>
+              <li>管理画面、CMS、外部DB/API連携</li>
+            </ul>
+          </article>
+        </div>
+
+        <div class="site-type-note">
+          <strong>迷った場合は、目的から決めれば大丈夫です。</strong>
+          <p>
+            「まず見つけてもらい、安心して相談してもらう」ことが目的なら静的構成で十分なことも多く、
+            予約や管理画面などの業務機能が必要になった段階で、外部サービスやサーバーレス機能を追加する選び方もできます。
+          </p>
+        </div>
       </div>
     </section>
 
@@ -253,6 +307,98 @@ const structuredData = [
   }
   .tech-body p:last-child { margin-bottom: 0; }
 
+  .site-type-section {
+    padding: 20px 0 72px;
+  }
+  .site-type-intro {
+    margin-bottom: 28px;
+    text-align: center;
+  }
+  .site-type-intro h2 {
+    margin: 0 0 16px;
+    color: var(--text);
+    font-size: clamp(1.65rem, 4vw, 2.45rem);
+    line-height: 1.45;
+    font-weight: 900;
+  }
+  .site-type-intro p {
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--muted);
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+  .site-type-nowrap {
+    white-space: nowrap;
+  }
+  .site-type-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+  }
+  .site-type-card {
+    padding: 30px;
+    border: 1px solid rgba(15, 76, 92, 0.14);
+    border-radius: 24px;
+    background: linear-gradient(180deg, #fff 0%, rgba(248, 250, 249, 0.96) 100%);
+    box-shadow: 0 14px 32px rgba(15, 76, 92, 0.06);
+  }
+  .site-type-card.highlighted {
+    border-color: rgba(140, 107, 31, 0.28);
+    background: linear-gradient(135deg, rgba(140, 107, 31, 0.055), rgba(255, 255, 255, 0.96));
+  }
+  .site-type-label {
+    display: inline-flex;
+    margin-bottom: 14px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust, #0f4c5c);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .site-type-card h3 {
+    margin: 0 0 14px;
+    color: var(--text);
+    font-size: 1.25rem;
+    line-height: 1.45;
+    font-weight: 900;
+  }
+  .site-type-card p {
+    margin: 0 0 18px;
+    color: var(--muted);
+    line-height: 1.85;
+  }
+  .site-type-card ul {
+    margin: 0;
+    padding-left: 20px;
+    color: var(--trust, #0f4c5c);
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1.8;
+  }
+  .site-type-note {
+    margin-top: 22px;
+    padding: 22px 24px;
+    border: 1px solid rgba(15, 76, 92, 0.16);
+    border-left: 5px solid var(--trust, #0f4c5c);
+    border-radius: 0 16px 16px 0;
+    background: rgba(238, 245, 242, 0.72);
+  }
+  .site-type-note strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--trust, #0f4c5c);
+    font-weight: 900;
+  }
+  .site-type-note p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
   .custom-tech-section {
     padding: 20px 0 70px;
   }
@@ -338,10 +484,13 @@ const structuredData = [
 
   @media (max-width: 900px) {
     .tech-stack-section .container { grid-template-columns: 1fr; }
+    .site-type-grid { grid-template-columns: 1fr; }
     .tech-card { padding: 30px 24px; }
   }
   @media (max-width: 768px) {
     .tech-hero h1 { font-size: 2.2rem; }
+    .site-type-section { padding: 10px 0 52px; }
+    .site-type-card { padding: 24px 20px; }
     .custom-tech-section { padding: 10px 0 52px; }
     .custom-tech-box { padding: 32px 24px; }
     .philosophy-box { padding: 40px 20px; }

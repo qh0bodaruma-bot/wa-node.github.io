@@ -279,6 +279,21 @@ const structuredData = [
         <p class="minimum-scope-note">原稿量・画像・表・フォーム・予約・ブログ・外部連携などで作業量が増える場合は、事前に追加範囲と費用をご案内します。</p>
       </section>
 
+      <details class="site-type-cost-note">
+        <summary>料金が変わるポイント：静的サイト・動的サイトの違い</summary>
+        <div class="site-type-cost-body">
+          <p>
+            会社案内、サービス紹介、料金、問い合わせ導線などを見せるだけなら、表示が速く保守しやすい「静的サイト」で十分なことが多くあります。
+            一方で、予約データの保存、ログイン認証、管理画面での登録・編集、頻繁なCMS更新などが必要な場合は、
+            静的サイトに外部サービスやサーバーレス機能、データベース連携を組み合わせるか、動的な仕組みとして設計するため、制作・保守・セキュリティ確認の範囲が広がります。
+          </p>
+          <p>
+            どちらが必要か分からない段階でも大丈夫です。目的と運用方法を確認したうえで、過不足のない構成をご提案します。
+          </p>
+          <a href="/tech-stack/#site-type-title">静的・動的サイトの違いを詳しく見る</a>
+        </div>
+      </details>
+
       <details class="addon-details price-details">
         <summary>シンプル制作・保守・オプションを含む料金一覧を見る</summary>
         <div class="table-wrap">
@@ -925,6 +940,48 @@ const structuredData = [
     color: #666;
     font-size: 0.82rem;
     line-height: 1.7;
+  }
+
+  .site-type-cost-note {
+    margin: 18px 0 22px;
+    border: 1px solid var(--trust-line);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(238, 245, 242, 0.82), rgba(255, 255, 255, 0.96));
+    box-shadow: 0 10px 26px rgba(15, 76, 92, 0.045);
+    overflow: hidden;
+  }
+  .site-type-cost-note summary {
+    cursor: pointer;
+    padding: 18px 22px;
+    color: var(--trust);
+    font-weight: 900;
+    list-style: none;
+  }
+  .site-type-cost-note summary::-webkit-details-marker {
+    display: none;
+  }
+  .site-type-cost-note summary::after {
+    content: "+";
+    float: right;
+    color: var(--accent-red);
+    font-weight: 900;
+  }
+  .site-type-cost-note[open] summary::after {
+    content: "-";
+  }
+  .site-type-cost-body {
+    padding: 0 22px 20px;
+  }
+  .site-type-cost-body p {
+    margin: 0 0 12px;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.8;
+  }
+  .site-type-cost-body a {
+    color: var(--trust);
+    font-weight: 900;
+    text-decoration: underline;
   }
 
   .pricing-grid-simple {

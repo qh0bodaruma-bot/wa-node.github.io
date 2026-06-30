@@ -29,6 +29,8 @@ const f = {
     form_heading: "無料相談フォーム",
     form_intro_title: "今の状況を、そのまま教えてください。",
     form_intro_desc: "「まだ何も決まっていない」という状態でも大丈夫です。専門知識や難しいIT用語は不要です。分かる範囲だけ書いていただければ、こちらで状況と優先順位を整理します。",
+    server_note_title: "静的サイト・動的サイトが分からなくても大丈夫です",
+    server_note_desc: "予約フォームや管理画面の入口を静的サイトに置くか、外部サービス・サーバーレス機能・データベース連携を使うかも、無料相談で一緒に整理できます。先に技術を決める必要はありません。",
     submit_flow_desc: "送信後、通常2営業日以内にご返信します。日程確定後、無料相談を行い、必要に応じて簡易メモ・概要案やお見積りをご提案します。正式な制作・月額支援は、内容と費用にご納得いただいた後に開始します。",
     precheck_badge: "相談前チェック",
     precheck_title: "相談前1分チェック",
@@ -140,6 +142,8 @@ const f = {
     form_heading: "Free Consultation Form",
     form_intro_title: "Tell us about your current situation.",
     form_intro_desc: "It is completely fine if details are not decided yet. No technical background or IT jargon is required. Let's start by translating your thoughts step by step. Our 'Copilot' will gently guide and organize them with you.",
+    server_note_title: "Not sure whether you need a static or dynamic site? That is fine.",
+    server_note_desc: "We can clarify whether a static site can host the entry point, or whether booking, login, admin screens, serverless functions, databases, or external services are needed. You do not need to choose the technology first.",
     submit_flow_desc: "Upon submission, we will reply within 2 business days. After fixing a slot, we will have a free consultation and propose a brief outline/estimate if needed. Formal design and support will start only after you agree to the plan and costs.",
     precheck_badge: "Pre-check",
     precheck_title: "1-Minute Pre-Consultation Check",
@@ -251,6 +255,8 @@ const f = {
     form_heading: "Formulaire de consultation gratuite",
     form_intro_title: "Décrivez votre situation actuelle.",
     form_intro_desc: "Aucun souci si tout n'est pas encore clair. Aucune connaissance technique ou jargon informatique n'est requis. Commençons par exprimer vos pensées pas à pas. Notre « Copilote » vous guidera pour organiser le tout avec bienveillance.",
+    server_note_title: "Vous ne savez pas s'il faut un site statique ou dynamique ? Aucun souci.",
+    server_note_desc: "Nous pouvons clarifier si un site statique peut accueillir le point d'entrée, ou si des réservations, connexions, écrans d'administration, fonctions serverless, bases de données ou services externes sont nécessaires. Il n'est pas nécessaire de choisir la technologie d'abord.",
     submit_flow_desc: "Après envoi, nous vous répondrons sous 2 jours ouvrables. Une fois le créneau fixé, nous aurons une consultation gratuite et proposerons un projet initial/devis si nécessaire. La création officielle commencera uniquement après votre accord.",
     precheck_badge: "Mini-check",
     precheck_title: "Mini-check avant consultation",
@@ -390,6 +396,10 @@ const t = f[lang];
             <h2 class="form-section-title">{t.form_heading}</h2>
             <p class="form-intro-title">{t.form_intro_title}</p>
             <p class="small" style="color: var(--muted); line-height: 1.6; margin-bottom: 0;">{t.form_intro_desc}</p>
+          </div>
+          <div class="server-choice-note" aria-label={lang === 'ja' ? '静的サイトと動的サイトの相談について' : 'Static and dynamic site consultation note'}>
+            <strong>{t.server_note_title}</strong>
+            <p>{t.server_note_desc}</p>
           </div>
           <div class="submit-flow-note" aria-label={lang === 'ja' ? '送信後の流れ' : 'After submission'}>
             <strong>{lang === 'ja' ? '送信後の流れ' : lang === 'en' ? 'After submission' : 'Après envoi'}</strong>
@@ -674,6 +684,27 @@ const t = f[lang];
     font-weight: 900;
   }
   .submit-flow-note p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.86rem;
+    line-height: 1.75;
+  }
+  .server-choice-note {
+    display: grid;
+    gap: 8px;
+    margin: -10px 0 24px;
+    padding: 16px 18px;
+    border: 1px solid rgba(140, 107, 31, 0.2);
+    border-left: 4px solid var(--accent);
+    border-radius: 14px;
+    background: linear-gradient(135deg, rgba(140, 107, 31, 0.055), rgba(255, 255, 255, 0.96));
+  }
+  .server-choice-note strong {
+    color: var(--accent-dark);
+    font-size: 0.92rem;
+    font-weight: 900;
+  }
+  .server-choice-note p {
     margin: 0;
     color: var(--muted);
     font-size: 0.86rem;
