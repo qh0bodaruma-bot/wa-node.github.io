@@ -554,8 +554,23 @@ const t = f[lang];
   function initFlowTabs() {
     const tabButtons = document.querySelectorAll('.flow-tab-btn');
     const flowContents = document.querySelectorAll('.flow-content');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function playFlowMotion(content) {
+      if (!content || reduceMotion) return;
+      const items = content.querySelectorAll('.timeline-item');
+      items.forEach((item, index) => {
+        item.style.setProperty('--motion-order', index);
+        item.classList.remove('flow-item-enter');
+        void item.offsetWidth;
+        item.classList.add('flow-item-enter');
+      });
+    }
 
     tabButtons.forEach(button => {
+      if (button.dataset.flowTabBound === 'true') return;
+      button.dataset.flowTabBound = 'true';
+
       button.addEventListener('click', () => {
         const targetTab = button.getAttribute('data-tab');
 
@@ -577,9 +592,12 @@ const t = f[lang];
         const targetContent = document.getElementById(`flow-content-${targetTab}`);
         if (targetContent) {
           targetContent.classList.add('active-flow');
+          playFlowMotion(targetContent);
         }
       });
     });
+
+    playFlowMotion(document.querySelector('.flow-content.active-flow'));
   }
 
   // Support page transition in Astro (swup/barba/native)
@@ -648,6 +666,10 @@ const t = f[lang];
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
+  .flow-tab-btn:hover {
+    color: var(--accent-dark);
+    transform: translateY(-1px);
+  }
   .flow-tab-btn.active {
     background: var(--accent);
     color: #fff;
@@ -703,12 +725,19 @@ const t = f[lang];
     bottom: 5px;
     left: 14px;
     width: 2px;
-    background: var(--line);
+    background: linear-gradient(180deg, rgba(197, 160, 89, 0.16), var(--accent), rgba(15, 76, 92, 0.22), var(--line));
+    background-size: 100% 220%;
+    animation: flowTrace 7s ease-in-out infinite;
+    opacity: 0.72;
   }
 
   .timeline-item {
     position: relative;
     margin-bottom: 60px;
+  }
+  .timeline-item.flow-item-enter {
+    animation: flowItemEnter 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--motion-order, 0) * 80ms);
   }
   .timeline-item:last-child {
     margin-bottom: 0;
@@ -728,6 +757,11 @@ const t = f[lang];
     justify-content: center;
     z-index: 2;
     box-shadow: var(--shadow-sm);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .timeline-item:hover .timeline-step {
+    transform: scale(1.06);
+    box-shadow: 0 10px 22px rgba(197, 160, 89, 0.18);
   }
   .step-num {
     font-size: 0.8rem;
@@ -744,6 +778,8 @@ const t = f[lang];
 
   /* Timeline card body */
   .timeline-body {
+    position: relative;
+    overflow: hidden;
     background: #fff;
     border: 1px solid var(--line);
     border-radius: 16px;
@@ -751,13 +787,28 @@ const t = f[lang];
     box-shadow: var(--shadow-sm);
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
+  .timeline-body::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: linear-gradient(180deg, var(--accent), rgba(197, 160, 89, 0.24));
+    opacity: 0;
+    transition: opacity 0.25s ease;
+  }
   .timeline-body:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow);
     border-color: rgba(197, 160, 89, 0.3);
   }
+  .timeline-body:hover::before {
+    opacity: 1;
+  }
   #flow-content-copilot .timeline-body:hover {
     border-color: rgba(99, 153, 34, 0.3);
+  }
+  #flow-content-copilot .timeline-body::before {
+    background: linear-gradient(180deg, var(--accent2), rgba(99, 153, 34, 0.22));
   }
 
   .step-title {
@@ -845,6 +896,20 @@ const t = f[lang];
     color: #555;
     margin: 0;
   }
+  @keyframes flowTrace {
+    0%, 100% { background-position: 0 0; }
+    50% { background-position: 0 100%; }
+  }
+  @keyframes flowItemEnter {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
   @media (max-width: 768px) {
     .execution-flow-section {
@@ -884,6 +949,22 @@ const t = f[lang];
     }
     .payment-box {
       padding: 16px;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flow-tab-btn,
+    .timeline::before,
+    .timeline-item.flow-item-enter,
+    .timeline-step,
+    .timeline-body,
+    .timeline-body::before {
+      animation: none !important;
+      transition: none !important;
+    }
+    .flow-tab-btn:hover,
+    .timeline-item:hover .timeline-step,
+    .timeline-body:hover {
+      transform: none;
     }
   }
 </style>

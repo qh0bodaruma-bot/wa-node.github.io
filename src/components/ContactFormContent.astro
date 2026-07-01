@@ -32,6 +32,8 @@ const f = {
     server_note_title: "静的サイト・動的サイトが分からなくても大丈夫です",
     server_note_desc: "予約フォームや管理画面の入口を静的サイトに置くか、外部サービス・サーバーレス機能・データベース連携を使うかも、無料相談で一緒に整理できます。先に技術を決める必要はありません。",
     submit_flow_desc: "送信後、通常2営業日以内にご返信します。日程確定後、無料相談を行い、必要に応じて簡易メモ・概要案やお見積りをご提案します。正式な制作・月額支援は、内容と費用にご納得いただいた後に開始します。",
+    submit_flow_title: "送信後の流れ",
+    submit_flow_steps: ["送信", "日程調整", "無料相談", "整理・提案", "正式開始"],
     precheck_badge: "相談前チェック",
     precheck_title: "相談前1分チェック",
     precheck_desc: "近いものを選ぶだけで大丈夫です。無料相談で話す内容が整理しやすくなります。",
@@ -145,6 +147,8 @@ const f = {
     server_note_title: "Not sure whether you need a static or dynamic site? That is fine.",
     server_note_desc: "We can clarify whether a static site can host the entry point, or whether booking, login, admin screens, serverless functions, databases, or external services are needed. You do not need to choose the technology first.",
     submit_flow_desc: "Upon submission, we will reply within 2 business days. After fixing a slot, we will have a free consultation and propose a brief outline/estimate if needed. Formal design and support will start only after you agree to the plan and costs.",
+    submit_flow_title: "After submission",
+    submit_flow_steps: ["Submit", "Schedule", "Free consult", "Outline", "Start"],
     precheck_badge: "Pre-check",
     precheck_title: "1-Minute Pre-Consultation Check",
     precheck_desc: "Just choose the closest options. This helps us make the free consultation more concrete.",
@@ -258,6 +262,8 @@ const f = {
     server_note_title: "Vous ne savez pas s'il faut un site statique ou dynamique ? Aucun souci.",
     server_note_desc: "Nous pouvons clarifier si un site statique peut accueillir le point d'entrée, ou si des réservations, connexions, écrans d'administration, fonctions serverless, bases de données ou services externes sont nécessaires. Il n'est pas nécessaire de choisir la technologie d'abord.",
     submit_flow_desc: "Après envoi, nous vous répondrons sous 2 jours ouvrables. Une fois le créneau fixé, nous aurons une consultation gratuite et proposerons un projet initial/devis si nécessaire. La création officielle commencera uniquement après votre accord.",
+    submit_flow_title: "Après envoi",
+    submit_flow_steps: ["Envoyer", "Planifier", "Consultation", "Projet", "Démarrer"],
     precheck_badge: "Mini-check",
     precheck_title: "Mini-check avant consultation",
     precheck_desc: "Choisissez simplement les options les plus proches. Cela rendra la consultation gratuite plus concrète.",
@@ -401,9 +407,24 @@ const t = f[lang];
             <strong>{t.server_note_title}</strong>
             <p>{t.server_note_desc}</p>
           </div>
-          <div class="submit-flow-note" aria-label={lang === 'ja' ? '送信後の流れ' : 'After submission'}>
-            <strong>{lang === 'ja' ? '送信後の流れ' : lang === 'en' ? 'After submission' : 'Après envoi'}</strong>
-            <p>{t.submit_flow_desc}</p>
+          <div class="submit-flow-note consult-roadmap" aria-labelledby="consult-roadmap-title">
+            <div class="consult-roadmap-copy">
+              <strong id="consult-roadmap-title">{t.submit_flow_title}</strong>
+              <p>{t.submit_flow_desc}</p>
+            </div>
+            <div class="consult-roadmap-visual">
+              <svg class="consult-roadmap-line" viewBox="0 0 560 76" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+                <path class="consult-roadmap-path" d="M28 38 C90 12 126 64 186 38 S282 12 340 38 S438 64 532 38" />
+              </svg>
+              <ol class="consult-roadmap-steps" data-glossary-skip>
+                {t.submit_flow_steps.map((step, index) => (
+                  <li>
+                    <span>{String(index + 1).padStart(2, '0')}</span>
+                    <b>{step}</b>
+                  </li>
+                ))}
+              </ol>
+            </div>
           </div>
           <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" autocomplete="off" data-lang={lang}>
             <input type="hidden" name="_next" value={lang === 'ja' ? 'https://www.wa-node.com/thanks/' : `https://www.wa-node.com/${lang}/thanks/`} />
@@ -689,6 +710,79 @@ const t = f[lang];
     font-size: 0.86rem;
     line-height: 1.75;
   }
+  .consult-roadmap {
+    overflow: hidden;
+  }
+  .consult-roadmap-copy {
+    position: relative;
+    z-index: 2;
+  }
+  .consult-roadmap-visual {
+    position: relative;
+    margin-top: 14px;
+    padding: 8px 0 2px;
+  }
+  .consult-roadmap-line {
+    position: absolute;
+    top: 12px;
+    left: 7%;
+    width: 86%;
+    height: 62px;
+    pointer-events: none;
+  }
+  .consult-roadmap-path {
+    fill: none;
+    stroke: rgba(15, 76, 92, 0.24);
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-dasharray: 12 14;
+    animation: consultFlow 8s linear infinite;
+  }
+  .consult-roadmap-steps {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(78px, 1fr));
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .consult-roadmap-steps li {
+    display: grid;
+    min-height: 86px;
+    align-content: center;
+    justify-items: center;
+    gap: 8px;
+    padding: 12px 8px;
+    border: 1px solid rgba(15, 76, 92, 0.16);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 10px 24px rgba(15, 76, 92, 0.06);
+    text-align: center;
+  }
+  .consult-roadmap-steps span {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--trust);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 900;
+    line-height: 1;
+  }
+  .consult-roadmap-steps b {
+    color: #2c2c2c;
+    font-size: 0.8rem;
+    font-weight: 900;
+    line-height: 1.35;
+  }
+  @keyframes consultFlow {
+    from { stroke-dashoffset: 0; }
+    to { stroke-dashoffset: -52; }
+  }
   .server-choice-note {
     display: grid;
     gap: 8px;
@@ -916,6 +1010,31 @@ const t = f[lang];
       left: 16px;
     }
     .form-start-divider { text-align: left; }
+    .consult-roadmap-visual {
+      margin-top: 12px;
+      padding: 0;
+    }
+    .consult-roadmap-line {
+      top: 22px;
+      left: 24px;
+      width: 40px;
+      height: calc(100% - 44px);
+      transform: rotate(90deg);
+      transform-origin: top left;
+      opacity: 0.42;
+    }
+    .consult-roadmap-steps {
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    .consult-roadmap-steps li {
+      min-height: 0;
+      grid-template-columns: 34px 1fr;
+      justify-items: start;
+      align-items: center;
+      padding: 12px 14px;
+      text-align: left;
+    }
     .scope-note-card { padding: 16px; }
     .contact-header { overflow-x: hidden; }
     .contact-header .container {
@@ -957,6 +1076,11 @@ const t = f[lang];
       word-break: normal;
       overflow-wrap: anywhere;
       line-break: strict;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .consult-roadmap-path {
+      animation: none;
     }
   }
 </style>

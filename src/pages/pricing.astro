@@ -489,8 +489,23 @@ const structuredData = [
   function initPlanTabs() {
     const tabButtons = document.querySelectorAll('.plan-tab-btn');
     const planContents = document.querySelectorAll('.plan-content');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function playPlanMotion(content) {
+      if (!content || reduceMotion) return;
+      const cards = content.querySelectorAll('.recommended-price-card');
+      cards.forEach((card, index) => {
+        card.style.setProperty('--motion-order', index);
+        card.classList.remove('plan-card-enter');
+        void card.offsetWidth;
+        card.classList.add('plan-card-enter');
+      });
+    }
 
     tabButtons.forEach(button => {
+      if (button.dataset.planTabBound === 'true') return;
+      button.dataset.planTabBound = 'true';
+
       button.addEventListener('click', () => {
         const targetTab = button.getAttribute('data-plan-tab');
 
@@ -512,9 +527,12 @@ const structuredData = [
         const targetContent = document.getElementById(`plan-content-${targetTab}`);
         if (targetContent) {
           targetContent.classList.add('active-plan');
+          playPlanMotion(targetContent);
         }
       });
     });
+
+    playPlanMotion(document.querySelector('.plan-content.active-plan'));
   }
 
   // Support page transition in Astro (swup/barba/native)
@@ -782,6 +800,8 @@ const structuredData = [
     margin: 34px 0 18px;
   }
   .recommended-price-card {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
     border: 1px solid var(--card-border);
     border-radius: 20px;
@@ -792,9 +812,24 @@ const structuredData = [
     flex-direction: column;
     justify-content: space-between;
   }
+  .recommended-price-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.72) 46%, transparent 62%);
+    opacity: 0;
+    transform: translateX(-55%);
+    transition: opacity 0.25s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
   .recommended-price-card:hover {
     transform: translateY(-3px);
     box-shadow: var(--card-shadow-hover);
+  }
+  .recommended-price-card:hover::before {
+    opacity: 0.55;
+    transform: translateX(55%);
   }
   .recommended-price-card.highlight-take {
     border: 2px solid var(--accent-red);
@@ -804,6 +839,14 @@ const structuredData = [
   }
   .recommended-price-card.highlight-take:hover {
     transform: translateY(-3px);
+  }
+  .recommended-price-card.plan-card-enter {
+    animation: planCardEnter 0.46s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--motion-order, 0) * 70ms);
+  }
+  .recommended-price-card:hover .card-icon-window,
+  .p-card-simple:hover .card-icon-window {
+    transform: translateY(-2px) scale(1.04);
   }
   .price-badge-ume, .price-badge-take, .price-badge-matsu {
     display: inline-block;
@@ -965,12 +1008,19 @@ const structuredData = [
     float: right;
     color: var(--accent-red);
     font-weight: 900;
+    transition: transform 0.25s ease;
   }
   .site-type-cost-note[open] summary::after {
     content: "-";
+    transform: rotate(180deg);
   }
   .site-type-cost-body {
     padding: 0 22px 20px;
+  }
+  .site-type-cost-note[open] .site-type-cost-body,
+  .addon-details[open] .table-wrap,
+  .flow-details[open] .execution-flow-section {
+    animation: detailReveal 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
   .site-type-cost-body p {
     margin: 0 0 12px;
@@ -1036,6 +1086,7 @@ const structuredData = [
     transform: translateY(0);
   }
   .p-card-simple {
+    overflow: hidden;
     background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
     border: 1px solid var(--card-border);
     border-radius: 16px;
@@ -1044,6 +1095,10 @@ const structuredData = [
     position: relative;
     box-shadow: var(--card-shadow);
     transition: 0.3s;
+  }
+  .p-card-simple:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
   }
   .p-card-simple.highlight {
     border: 2px solid var(--trust-line);
@@ -1076,8 +1131,12 @@ const structuredData = [
     font-weight: 800;
     text-align: center;
     list-style: none;
+    transition: color 0.2s ease, letter-spacing 0.2s ease;
   }
-  .addon-details summary:hover { text-decoration: underline; }
+  .addon-details summary:hover {
+    color: var(--accent-red);
+    letter-spacing: 0.02em;
+  }
   .details-lead {
     max-width: 720px;
     margin: 16px auto 0;
@@ -1117,8 +1176,10 @@ const structuredData = [
     color: var(--accent-red);
     font-size: 1.4rem;
     font-weight: 900;
+    transition: transform 0.25s ease;
   }
   .flow-details[open] > summary::after { content: "-"; }
+  .flow-details[open] > summary::after { transform: rotate(180deg); }
   .flow-details .execution-flow-section {
     margin-top: 18px;
     border: 1px solid var(--line);
@@ -1212,6 +1273,12 @@ const structuredData = [
     box-shadow: 0 10px 26px rgba(15, 76, 92, 0.05);
     padding: 0;
     overflow: hidden;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .faq-list details:hover {
+    transform: translateY(-2px);
+    border-color: var(--trust-line);
+    box-shadow: var(--card-shadow);
   }
   .faq-list summary {
     cursor: pointer;
@@ -1228,15 +1295,42 @@ const structuredData = [
     float: right;
     color: var(--trust);
     font-weight: 900;
+    transition: transform 0.25s ease, color 0.25s ease;
   }
   .faq-list details[open] summary::after {
     content: "-";
+    color: var(--accent-red);
+    transform: rotate(180deg);
   }
   .faq-list p {
     margin: 0;
     padding: 0 20px 18px;
     color: #666;
     line-height: 1.8;
+  }
+  .faq-list details[open] p {
+    animation: detailReveal 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  @keyframes planCardEnter {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes detailReveal {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @media (max-width: 768px) {
@@ -1262,6 +1356,24 @@ const structuredData = [
     .minimum-scope-item + .minimum-scope-item {
       border-top: 1px solid var(--trust-line);
       border-left: 0;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .recommended-price-card,
+    .recommended-price-card::before,
+    .p-card-simple,
+    .faq-list details,
+    .site-type-cost-note[open] .site-type-cost-body,
+    .addon-details[open] .table-wrap,
+    .flow-details[open] .execution-flow-section,
+    .faq-list details[open] p {
+      animation: none !important;
+      transition: none !important;
+    }
+    .recommended-price-card:hover,
+    .p-card-simple:hover,
+    .faq-list details:hover {
+      transform: none;
     }
   }
 
