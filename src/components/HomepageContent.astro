@@ -795,9 +795,9 @@ const quickCheckItems = [
   }
   .signal-path-svg {
     position: absolute;
-    inset: 46px 28px auto;
+    inset: 20px 28px auto;
     width: calc(100% - 56px);
-    height: 128px;
+    height: 92px;
     overflow: visible;
   }
   .signal-path-track,
@@ -806,13 +806,14 @@ const quickCheckItems = [
     stroke-linecap: round;
   }
   .signal-path-track {
-    stroke: rgba(15, 76, 92, 0.16);
-    stroke-width: 8;
+    stroke: rgba(15, 76, 92, 0.08);
+    stroke-width: 5;
   }
   .signal-path-line {
-    stroke-width: 4;
-    stroke-dasharray: 44 18;
-    animation: signal-path-flow 4.8s linear infinite;
+    stroke-width: 2;
+    stroke-dasharray: 28 26;
+    opacity: 0.34;
+    animation: signal-path-flow 6.4s linear infinite;
   }
   .signal-nodes {
     position: relative;
