@@ -17,6 +17,58 @@ const structuredData = [
     { name: "LP制作サンプルギャラリー", path: "/lp-portfolio/" },
   ]),
 ];
+
+const valueBlocks = [
+  {
+    label: "Research",
+    title: "初見の不安を先回りする構成",
+    text: "業種ごとに、ユーザーが迷いやすい料金、信頼材料、申込前の不安を洗い出し、見せる順番を調整します。",
+  },
+  {
+    label: "Writing",
+    title: "原稿をそのまま並べない文章整理",
+    text: "強み、対象者、選ばれる理由を読み手の判断順に合わせて整理。見出し、補足文、CTA文言まで整えます。",
+  },
+  {
+    label: "Design",
+    title: "業種に合わせた第一印象づくり",
+    text: "信頼感、高級感、親しみ、専門性など、目的に合う印象へ寄せながら、スマホで読める余白と文字量に調整します。",
+  },
+  {
+    label: "Conversion",
+    title: "相談・予約・購入への導線",
+    text: "ボタンの位置、フォーム前の安心材料、よくある質問、料金表示を整え、次の行動に進みやすくします。",
+  },
+];
+
+const scopeTiers = [
+  {
+    name: "シンプルLP",
+    price: "24,000円〜",
+    target: "まず1ページを用意したい",
+    detail: "短めの縦幅、既存原稿中心、最低限のCTA。名刺代わりや小さなキャンペーン向け。",
+  },
+  {
+    name: "推奨LP",
+    price: "64,000円〜",
+    target: "相談・予約につなげたい",
+    detail: "構成整理、見出し設計、心理導線、FAQ、料金・流れの見せ方まで含めた標準制作。",
+  },
+  {
+    name: "連携つきLP",
+    price: "120,000円〜",
+    target: "公開後の対応も整えたい",
+    detail: "フォーム、LINE、メール自動送信、予約導線、計測改善などを必要範囲に合わせて追加。",
+  },
+];
+
+const buildSteps = [
+  "目的とゴールを整理",
+  "誰に何を伝えるかを決める",
+  "情報の順番とCTAを設計",
+  "文章・デザイン・スマホ表示を制作",
+  "公開後の改善ポイントを確認",
+];
 ---
 
 <BaseLayout title={title} description={description} structuredData={structuredData}>
@@ -88,6 +140,44 @@ const structuredData = [
         </div>
         <div class="lp-choice-cta">
           <a href="/contact/?source=lp_portfolio">近い目的で相談する</a>
+        </div>
+      </section>
+
+      <section class="lp-value-section reveal" aria-labelledby="lp-value-title">
+        <div class="section-head">
+          <span class="eyebrow">Why This Price</span>
+          <h2 id="lp-value-title">金額に含まれるのは、見た目だけではありません。</h2>
+          <p>
+            LPは1枚の長いページですが、実際には「誰に、どの順番で、何を見せるか」を設計する仕事です。
+            和-Nodeでは、心理学を用いた情報整理とWeb制作を組み合わせ、相談や予約につながる形まで整えます。
+          </p>
+        </div>
+        <div class="lp-value-grid">
+          {valueBlocks.map((item) => (
+            <article class="lp-value-card">
+              <span>{item.label}</span>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section class="lp-scope-section reveal" aria-labelledby="lp-scope-title">
+        <div class="section-head compact">
+          <span class="eyebrow">Scope</span>
+          <h2 id="lp-scope-title">同じLPでも、制作範囲で価格が変わります。</h2>
+          <p>サンプルを見るときは、デザインの好みだけでなく「どこまで作る必要があるか」も一緒に見ると、相談内容が整理しやすくなります。</p>
+        </div>
+        <div class="lp-scope-grid">
+          {scopeTiers.map((tier) => (
+            <article class="lp-scope-card">
+              <span>{tier.name}</span>
+              <strong>{tier.price}</strong>
+              <h3>{tier.target}</h3>
+              <p>{tier.detail}</p>
+            </article>
+          ))}
         </div>
       </section>
 
@@ -295,6 +385,35 @@ const structuredData = [
           </div>
         </article>
       </div>
+
+      <section class="lp-build-flow reveal" aria-labelledby="lp-build-title">
+        <div class="section-head compact">
+          <span class="eyebrow">Build Flow</span>
+          <h2 id="lp-build-title">サンプルを見たあと、こう進めます。</h2>
+          <p>「このサンプルに近い」から始めて大丈夫です。必要な情報量、見せる順番、連携機能を一緒に整理します。</p>
+        </div>
+        <ol class="lp-build-steps">
+          {buildSteps.map((step) => (
+            <li>{step}</li>
+          ))}
+        </ol>
+      </section>
+
+      <section class="lp-customize-section reveal" aria-labelledby="lp-customize-title">
+        <div>
+          <span class="eyebrow">Customize</span>
+          <h2 id="lp-customize-title">サンプルは、そのまま使うためではなく、方向性を決めるための土台です。</h2>
+        </div>
+        <div class="lp-customize-list">
+          <p>業種、価格帯、写真の有無、予約・LINE連携、フォームの項目数、公開後の改善方針によって、同じサンプルでも最適な形は変わります。</p>
+          <ul>
+            <li>文章量を抑えた短めLP</li>
+            <li>料金・FAQを厚くした安心重視LP</li>
+            <li>LINE予約やメール自動送信つきLP</li>
+            <li>広告配信用の検証しやすいLP</li>
+          </ul>
+        </div>
+      </section>
 
       <ConsultationFlow />
 
@@ -512,6 +631,110 @@ const structuredData = [
     transform: translateY(-2px);
   }
 
+  .section-head {
+    max-width: 820px;
+    margin: 0 auto 30px;
+    text-align: center;
+  }
+  .section-head.compact {
+    margin-bottom: 24px;
+  }
+  .section-head h2,
+  .lp-customize-section h2 {
+    margin: 0 0 14px;
+    color: #333;
+    font-size: clamp(1.55rem, 3.2vw, 2.25rem);
+    line-height: 1.45;
+    font-weight: 900;
+  }
+  .section-head p {
+    margin: 0;
+    color: #666;
+    line-height: 1.85;
+  }
+  .lp-value-section,
+  .lp-scope-section,
+  .lp-build-flow,
+  .lp-customize-section {
+    margin-bottom: 64px;
+  }
+  .lp-value-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .lp-value-card {
+    min-height: 238px;
+    padding: 24px 22px;
+    border: 1px solid var(--trust-line);
+    border-radius: 22px;
+    background: rgba(255, 255, 255, 0.88);
+    box-shadow: 0 14px 34px rgba(15, 76, 92, 0.055);
+  }
+  .lp-value-card span,
+  .lp-scope-card span {
+    display: inline-flex;
+    margin-bottom: 14px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+  }
+  .lp-value-card h3 {
+    margin: 0 0 12px;
+    color: #2b2b2b;
+    font-size: 1.08rem;
+    line-height: 1.5;
+    font-weight: 900;
+  }
+  .lp-value-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+  .lp-scope-section {
+    padding: 36px;
+    border: 1px solid rgba(199, 53, 47, 0.16);
+    border-radius: 28px;
+    background: linear-gradient(135deg, rgba(199, 53, 47, 0.055), rgba(255, 255, 255, 0.88));
+    box-shadow: 0 16px 40px rgba(70, 52, 32, 0.045);
+  }
+  .lp-scope-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .lp-scope-card {
+    padding: 24px;
+    border: 1px solid rgba(199, 53, 47, 0.14);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+  .lp-scope-card strong {
+    display: block;
+    margin-bottom: 12px;
+    color: #c7352f;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    font-weight: 900;
+  }
+  .lp-scope-card h3 {
+    margin: 0 0 10px;
+    color: #333;
+    font-size: 1.08rem;
+    font-weight: 900;
+  }
+  .lp-scope-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+
   .filter-nav { display: flex; justify-content: center; gap: 12px; margin-bottom: 60px; flex-wrap: wrap; }
   .filter-btn { padding: 10px 24px; border-radius: 999px; border: 1px solid #ddd; background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; }
   .filter-btn.active, .filter-btn:hover { background: #639922; color: #fff; border-color: #639922; }
@@ -575,6 +798,92 @@ const structuredData = [
   .lp-link { font-size: 0.95rem; font-weight: 900; color: #639922; text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
   .lp-link:hover { border-bottom-color: #639922; }
 
+  .lp-build-flow {
+    padding: 36px;
+    border: 1px solid var(--trust-line);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, 0.82);
+    box-shadow: 0 16px 42px rgba(15, 76, 92, 0.055);
+  }
+  .lp-build-steps {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    counter-reset: lp-step;
+  }
+  .lp-build-steps li {
+    position: relative;
+    min-height: 118px;
+    padding: 46px 16px 16px;
+    border: 1px solid var(--trust-line);
+    border-radius: 18px;
+    background: linear-gradient(180deg, #fff, rgba(248, 251, 249, 0.95));
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 900;
+    line-height: 1.6;
+    counter-increment: lp-step;
+  }
+  .lp-build-steps li::before {
+    content: counter(lp-step, decimal-leading-zero);
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    color: var(--trust);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+  .lp-customize-section {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: 30px;
+    align-items: center;
+    padding: 42px;
+    border: 1px solid rgba(15, 76, 92, 0.16);
+    border-radius: 30px;
+    background:
+      radial-gradient(circle at 92% 14%, rgba(99, 153, 34, 0.1), transparent 30%),
+      linear-gradient(135deg, rgba(15, 76, 92, 0.08), rgba(255, 255, 255, 0.92));
+  }
+  .lp-customize-list p {
+    margin: 0 0 18px;
+    color: #555;
+    line-height: 1.85;
+  }
+  .lp-customize-list ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .lp-customize-list li {
+    position: relative;
+    padding: 12px 14px 12px 34px;
+    border: 1px solid rgba(15, 76, 92, 0.13);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.82);
+    color: #333;
+    font-size: 0.9rem;
+    font-weight: 800;
+    line-height: 1.55;
+  }
+  .lp-customize-list li::before {
+    content: "";
+    position: absolute;
+    top: 1.08em;
+    left: 16px;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: #c7352f;
+  }
+
   .portfolio-cta { margin-top: 100px; text-align: center; }
   .cta-inner {
     padding: 80px 40px;
@@ -623,9 +932,38 @@ const structuredData = [
     .lp-choice-guide h2 { font-size: 1.55rem; }
     .lp-choice-grid { grid-template-columns: 1fr; }
     .lp-choice-card { min-height: auto; }
+    .section-head { text-align: left; }
+    .lp-value-grid,
+    .lp-scope-grid,
+    .lp-build-steps,
+    .lp-customize-section,
+    .lp-customize-list ul {
+      grid-template-columns: 1fr;
+    }
+    .lp-scope-section,
+    .lp-build-flow,
+    .lp-customize-section {
+      padding: 28px 20px;
+    }
+    .lp-value-card,
+    .lp-scope-card,
+    .lp-build-steps li {
+      min-height: auto;
+    }
     .cta-inner h2 { font-size: 1.8rem; }
     .cta-btns { flex-direction: column; }
     .btn-primary, .btn-secondary { width: 100%; box-sizing: border-box; }
+  }
+
+  @media (min-width: 601px) and (max-width: 1100px) {
+    .lp-value-grid,
+    .lp-build-steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .lp-scope-grid,
+    .lp-customize-section {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
