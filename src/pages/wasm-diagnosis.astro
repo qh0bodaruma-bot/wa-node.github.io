@@ -1,0 +1,573 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../data/structuredData';
+
+const title = 'WebAssembly ファーストビュー・色彩診断｜和-Node';
+const description = 'ファーストビューの伝わり方と、配色・コントラストの読みやすさをブラウザ内で簡易診断するWebAssemblyデモです。';
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: '/wasm-diagnosis/', type: 'WebPage' }),
+  createBreadcrumbSchema([
+    { name: 'ホーム', path: '/' },
+    { name: '制作例・デモ', path: '/works/' },
+    { name: 'WebAssembly診断', path: '/wasm-diagnosis/' },
+  ]),
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <main class="wasm-lab" data-glossary-skip>
+    <section class="lab-hero">
+      <div class="lab-container">
+        <p class="lab-kicker">WebAssembly Demo</p>
+        <h1>伝わり方と読みやすさを、ブラウザ内で即診断。</h1>
+        <p>
+          ファーストビューの情報設計と、文字色・背景色のコントラストを簡易チェックします。
+          入力内容は送信されず、スコア計算の一部をWebAssemblyで処理します。
+        </p>
+        <div class="lab-hero-actions">
+          <a href="#first-view-tool">ファーストビューを診断</a>
+          <a href="#color-tool">色彩・コントラストを診断</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="lab-container lab-grid" aria-label="WebAssembly診断ツール">
+      <article class="lab-panel reveal" id="first-view-tool">
+        <div class="panel-head">
+          <span>01</span>
+          <div>
+            <h2>LP/HPファーストビュー診断</h2>
+            <p>見出し、補足文、CTA、信頼材料のバランスを簡易スコア化します。</p>
+          </div>
+        </div>
+
+        <div class="input-grid">
+          <label>
+            <span>メイン見出し</span>
+            <textarea id="fvHeadline" rows="3">心理学を用い、伝わる順番を整えるWeb制作。</textarea>
+          </label>
+          <label>
+            <span>補足文</span>
+            <textarea id="fvLead" rows="4">料金、相談の流れ、制作後の改善まで、初見の人が迷わず相談できる導線を設計します。</textarea>
+          </label>
+          <label>
+            <span>メインCTA</span>
+            <input id="fvCta" type="text" value="無料相談する" />
+          </label>
+          <label>
+            <span>信頼材料の数</span>
+            <input id="fvTrust" type="number" min="0" max="8" value="3" />
+          </label>
+          <label>
+            <span>CTAの視認性</span>
+            <input id="fvVisibility" type="range" min="0" max="100" value="78" />
+          </label>
+          <label>
+            <span>情報密度</span>
+            <input id="fvDensity" type="range" min="0" max="100" value="42" />
+          </label>
+        </div>
+
+        <div class="result-card">
+          <div class="score-ring" style="--score: 0">
+            <strong id="fvScore">--</strong>
+            <span>/100</span>
+          </div>
+          <div>
+            <h3 id="fvTitle">入力すると診断します</h3>
+            <p id="fvAdvice">見出し、CTA、信頼材料のバランスを確認します。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="lab-panel reveal" id="color-tool">
+        <div class="panel-head">
+          <span>02</span>
+          <div>
+            <h2>色彩・コントラスト診断</h2>
+            <p>背景色と文字色の読みやすさ、CTA色の目立ち方を確認します。</p>
+          </div>
+        </div>
+
+        <div class="color-controls">
+          <label>
+            <span>背景色</span>
+            <input id="bgColor" type="color" value="#ffffff" />
+          </label>
+          <label>
+            <span>文字色</span>
+            <input id="textColor" type="color" value="#0f4c5c" />
+          </label>
+          <label>
+            <span>CTA色</span>
+            <input id="ctaColor" type="color" value="#c7352f" />
+          </label>
+        </div>
+
+        <div class="contrast-preview" id="contrastPreview">
+          <strong>心理学を用い、伝わる順番を整えるWeb制作。</strong>
+          <p>この配色で、見出し・本文・CTAが読みやすく見えるかを確認します。</p>
+          <button type="button">無料相談する</button>
+        </div>
+
+        <div class="metric-grid">
+          <div>
+            <span>文字コントラスト</span>
+            <strong id="textRatio">--</strong>
+          </div>
+          <div>
+            <span>CTAコントラスト</span>
+            <strong id="ctaRatio">--</strong>
+          </div>
+          <div>
+            <span>総合スコア</span>
+            <strong id="colorScore">--</strong>
+          </div>
+        </div>
+        <p class="color-advice" id="colorAdvice">色を選ぶと診断します。</p>
+      </article>
+    </section>
+
+    <section class="lab-container lab-note reveal">
+      <h2>このデモで見せたいこと</h2>
+      <p>
+        WebAssemblyは、画像解析・配色計算・大量データ処理などをブラウザ内で高速化しやすい技術です。
+        和-Nodeでは、派手な演出よりも「相談前に判断しやすくする実用ツール」として活用できます。
+      </p>
+      <a href="/contact/?source=wasm-diagnosis">このような診断ツールを相談する</a>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .wasm-lab {
+    --lab-trust: #0f4c5c;
+    --lab-gold: #8c6b1f;
+    --lab-red: #c7352f;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(15, 76, 92, 0.08), transparent 30%),
+      radial-gradient(circle at 84% 8%, rgba(199, 53, 47, 0.08), transparent 28%),
+      #fff;
+    color: #2c2c2c;
+    overflow-x: hidden;
+  }
+  .lab-container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .lab-hero {
+    padding: 110px 0 70px;
+    text-align: center;
+  }
+  .lab-kicker {
+    margin: 0 0 14px;
+    color: var(--lab-gold);
+    font-size: 0.82rem;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+  .lab-hero h1 {
+    max-width: 800px;
+    margin: 0 auto 22px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: clamp(2.2rem, 5vw, 4.4rem);
+    line-height: 1.18;
+  }
+  .lab-hero p {
+    max-width: 760px;
+    margin: 0 auto;
+    color: #5f5a53;
+    line-height: 1.9;
+  }
+  .lab-hero-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 34px;
+  }
+  .lab-hero-actions a,
+  .lab-note a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 0 22px;
+    border-radius: 999px;
+    background: var(--lab-red);
+    color: #fff;
+    font-weight: 900;
+    text-decoration: none;
+    box-shadow: 0 14px 30px rgba(199, 53, 47, 0.18);
+  }
+  .lab-hero-actions a + a {
+    background: #fff;
+    color: var(--lab-trust);
+    border: 1px solid rgba(15, 76, 92, 0.22);
+    box-shadow: 0 14px 30px rgba(15, 76, 92, 0.08);
+  }
+  .lab-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+    padding-bottom: 70px;
+  }
+  .lab-panel,
+  .lab-note {
+    border: 1px solid rgba(15, 76, 92, 0.14);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 22px 58px rgba(15, 76, 92, 0.08);
+  }
+  .lab-panel {
+    display: flex;
+    min-height: 720px;
+    flex-direction: column;
+    gap: 24px;
+    padding: 28px;
+  }
+  .panel-head {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .panel-head > span {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 42px;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--lab-trust);
+    color: #fff;
+    font-weight: 900;
+  }
+  .panel-head h2 {
+    margin: 0 0 8px;
+    color: var(--lab-trust);
+    font-size: 1.35rem;
+  }
+  .panel-head p {
+    margin: 0;
+    color: #666;
+    line-height: 1.7;
+  }
+  .input-grid,
+  .color-controls {
+    display: grid;
+    gap: 14px;
+  }
+  .input-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .input-grid label:first-child,
+  .input-grid label:nth-child(2) {
+    grid-column: 1 / -1;
+  }
+  label span {
+    display: block;
+    margin-bottom: 7px;
+    color: #4c4741;
+    font-size: 0.84rem;
+    font-weight: 900;
+  }
+  textarea,
+  input[type="text"],
+  input[type="number"] {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(15, 76, 92, 0.16);
+    border-radius: 12px;
+    background: #fff;
+    color: #2c2c2c;
+    font: inherit;
+    line-height: 1.65;
+    padding: 12px 14px;
+  }
+  input[type="range"] {
+    width: 100%;
+    accent-color: var(--lab-red);
+  }
+  .result-card {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 18px;
+    align-items: center;
+    margin-top: auto;
+    padding: 20px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, rgba(238, 245, 242, 0.94), rgba(255, 255, 255, 0.96));
+    border: 1px solid rgba(15, 76, 92, 0.14);
+  }
+  .score-ring {
+    display: grid;
+    width: 112px;
+    height: 112px;
+    place-items: center;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle, #fff 54%, transparent 56%),
+      conic-gradient(var(--lab-red) calc(var(--score) * 1%), rgba(15, 76, 92, 0.12) 0);
+    color: var(--lab-trust);
+  }
+  .score-ring strong {
+    font-size: 2rem;
+    line-height: 1;
+  }
+  .score-ring span {
+    margin-top: -34px;
+    color: #777;
+    font-size: 0.72rem;
+    font-weight: 800;
+  }
+  .result-card h3 {
+    margin: 0 0 8px;
+    font-size: 1.15rem;
+  }
+  .result-card p {
+    margin: 0;
+    color: #666;
+    line-height: 1.7;
+  }
+  .color-controls {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  input[type="color"] {
+    width: 100%;
+    height: 52px;
+    border: 1px solid rgba(15, 76, 92, 0.18);
+    border-radius: 12px;
+    background: #fff;
+    padding: 6px;
+  }
+  .contrast-preview {
+    padding: 28px;
+    border-radius: 20px;
+    border: 1px solid rgba(15, 76, 92, 0.14);
+    background: #fff;
+    color: var(--lab-trust);
+  }
+  .contrast-preview strong {
+    display: block;
+    margin-bottom: 12px;
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1.45rem;
+    line-height: 1.45;
+  }
+  .contrast-preview p {
+    margin: 0 0 18px;
+    line-height: 1.7;
+  }
+  .contrast-preview button {
+    min-height: 46px;
+    padding: 0 22px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--lab-red);
+    color: #fff;
+    font-weight: 900;
+  }
+  .metric-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .metric-grid div {
+    padding: 16px 12px;
+    border-radius: 14px;
+    background: rgba(238, 245, 242, 0.78);
+    text-align: center;
+  }
+  .metric-grid span {
+    display: block;
+    margin-bottom: 6px;
+    color: #6d6962;
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+  .metric-grid strong {
+    color: var(--lab-trust);
+    font-size: 1.25rem;
+  }
+  .color-advice {
+    margin: 0;
+    color: #666;
+    line-height: 1.8;
+  }
+  .lab-note {
+    padding: 34px;
+    margin-bottom: 90px;
+    text-align: center;
+  }
+  .lab-note h2 {
+    margin: 0 0 12px;
+    color: var(--lab-trust);
+    font-size: 1.45rem;
+  }
+  .lab-note p {
+    max-width: 760px;
+    margin: 0 auto 24px;
+    color: #666;
+    line-height: 1.85;
+  }
+  @media (max-width: 900px) {
+    .lab-grid {
+      grid-template-columns: 1fr;
+    }
+    .lab-panel {
+      min-height: auto;
+    }
+  }
+  @media (max-width: 560px) {
+    .lab-hero {
+      padding-top: 82px;
+      text-align: left;
+    }
+    .lab-hero-actions {
+      justify-content: flex-start;
+    }
+    .input-grid,
+    .color-controls,
+    .metric-grid,
+    .result-card {
+      grid-template-columns: 1fr;
+    }
+    .lab-panel {
+      padding: 20px;
+      border-radius: 18px;
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const wasmBytes = Uint8Array.from([
+      0,97,115,109,1,0,0,0,1,8,1,96,3,127,127,127,1,127,3,2,1,0,
+      7,12,1,8,119,101,105,103,104,116,101,100,0,0,10,25,1,23,0,
+      32,0,65,45,108,32,1,65,35,108,106,32,2,65,20,108,106,65,228,0,110,11
+    ]);
+    let weightedScore = (a, b, c) => Math.round(a * 0.45 + b * 0.35 + c * 0.2);
+
+    WebAssembly.instantiate(wasmBytes)
+      .then(({ instance }) => {
+        weightedScore = instance.exports.weighted;
+        updateAll();
+      })
+      .catch(() => updateAll());
+
+    const $ = (id) => document.getElementById(id);
+    const clamp = (value, min = 0, max = 100) => Math.max(min, Math.min(max, value));
+
+    function scoreLength(value, min, idealMax, hardMax) {
+      const length = value.trim().length;
+      if (!length) return 0;
+      if (length < min) return clamp(Math.round((length / min) * 70));
+      if (length <= idealMax) return 100;
+      return clamp(100 - Math.round(((length - idealMax) / Math.max(1, hardMax - idealMax)) * 45), 45, 100);
+    }
+
+    function updateFirstView() {
+      const headline = $('fvHeadline').value;
+      const lead = $('fvLead').value;
+      const cta = $('fvCta').value;
+      const trust = Number($('fvTrust').value || 0);
+      const visibility = Number($('fvVisibility').value || 0);
+      const density = Number($('fvDensity').value || 0);
+
+      const clarity = Math.round((scoreLength(headline, 10, 34, 70) + scoreLength(lead, 34, 92, 180)) / 2);
+      const action = clamp(Math.round((scoreLength(cta, 3, 12, 24) * 0.48) + (visibility * 0.52)));
+      const anxiety = clamp(Math.round((Math.min(trust, 4) / 4) * 70 + (100 - Math.abs(density - 45)) * 0.3));
+      const total = clamp(weightedScore(clarity, action, anxiety));
+
+      $('fvScore').textContent = total;
+      document.querySelector('#first-view-tool .score-ring').style.setProperty('--score', total);
+      $('fvTitle').textContent = total >= 82 ? '相談につながりやすい状態です' : total >= 64 ? 'あと少し整理すると強くなります' : 'まずは情報の優先順位を絞りましょう';
+      $('fvAdvice').textContent = total >= 82
+        ? '見出し、CTA、信頼材料のバランスが良好です。公開後はクリック率とフォーム到達率を確認しましょう。'
+        : total >= 64
+          ? '見出しを少し短くし、CTA直前に不安解消の一文を足すと、行動しやすくなります。'
+          : '最初に伝える内容が散らばりやすい状態です。誰に、何を、次にどうしてほしいかを一画面で整理しましょう。';
+    }
+
+    function hexToRgb(hex) {
+      const clean = hex.replace('#', '');
+      return {
+        r: parseInt(clean.slice(0, 2), 16),
+        g: parseInt(clean.slice(2, 4), 16),
+        b: parseInt(clean.slice(4, 6), 16),
+      };
+    }
+
+    function luminance(hex) {
+      const { r, g, b } = hexToRgb(hex);
+      const convert = (v) => {
+        const n = v / 255;
+        return n <= 0.03928 ? n / 12.92 : Math.pow((n + 0.055) / 1.055, 2.4);
+      };
+      return 0.2126 * convert(r) + 0.7152 * convert(g) + 0.0722 * convert(b);
+    }
+
+    function contrastRatio(a, b) {
+      const l1 = luminance(a);
+      const l2 = luminance(b);
+      const light = Math.max(l1, l2);
+      const dark = Math.min(l1, l2);
+      return (light + 0.05) / (dark + 0.05);
+    }
+
+    function ratioScore(ratio) {
+      if (ratio >= 7) return 100;
+      if (ratio >= 4.5) return 82;
+      if (ratio >= 3) return 58;
+      return Math.max(20, Math.round(ratio * 18));
+    }
+
+    function updateColor() {
+      const bg = $('bgColor').value;
+      const text = $('textColor').value;
+      const cta = $('ctaColor').value;
+      const textRatio = contrastRatio(bg, text);
+      const ctaRatio = contrastRatio(bg, cta);
+      const preview = $('contrastPreview');
+      const button = preview.querySelector('button');
+      const textScore = ratioScore(textRatio);
+      const ctaScore = ratioScore(ctaRatio);
+      const emphasis = clamp(Math.round(Math.abs(luminance(cta) - luminance(text)) * 140));
+      const total = clamp(weightedScore(textScore, ctaScore, emphasis));
+
+      preview.style.background = bg;
+      preview.style.color = text;
+      button.style.background = cta;
+      button.style.color = contrastRatio(cta, '#ffffff') >= contrastRatio(cta, '#111111') ? '#ffffff' : '#111111';
+
+      $('textRatio').textContent = textRatio.toFixed(2);
+      $('ctaRatio').textContent = ctaRatio.toFixed(2);
+      $('colorScore').textContent = total;
+      $('colorAdvice').textContent = total >= 82
+        ? '読みやすさとCTAの目立ち方が良好です。安心感を保ちながら行動箇所も見つけやすい配色です。'
+        : total >= 64
+          ? '本文は読めますが、CTAか本文色のどちらかをもう少し強めると判断しやすくなります。'
+          : '背景と文字・CTAの差が弱めです。読みやすさを優先して、文字色かCTA色を濃くしましょう。';
+    }
+
+    function updateAll() {
+      updateFirstView();
+      updateColor();
+    }
+
+    ['fvHeadline', 'fvLead', 'fvCta', 'fvTrust', 'fvVisibility', 'fvDensity'].forEach((id) => {
+      $(id)?.addEventListener('input', updateFirstView);
+    });
+    ['bgColor', 'textColor', 'ctaColor'].forEach((id) => {
+      $(id)?.addEventListener('input', updateColor);
+    });
+    updateAll();
+  })();
+</script>

@@ -347,6 +347,40 @@ const structuredData = [
           </div>
         </article>
 
+        <!-- Category: Tool (WASM Diagnosis) -->
+        <article class="work-card reveal card-border-blue" data-category="tool">
+          <div class="card-visual-wrap">
+            <div class="card-visual tool-bg" style="background: linear-gradient(135deg, #eef5f2 0%, #ffffff 52%, #f8e9e7 100%);">
+              <span class="category-tag demo"><span class="live-dot"></span>WASM診断デモ</span>
+              <div class="wasm-card-visual" aria-hidden="true">
+                <strong>WASM</strong>
+                <small>First View × Color</small>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">WebAssembly Lab</div>
+            <h3>
+              <span class="card-icon-window window-blue">
+                <svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/><path d="M8 4l-2 16M16 4l2 16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
+              </span>
+              ファーストビュー・色彩診断
+            </h3>
+            <div class="work-snapshot">
+              <span>見るポイント</span>
+              <strong>伝わり方と読みやすさを即診断</strong>
+            </div>
+            <ul class="work-chips"><li>WebAssembly</li><li>配色</li><li>導線</li></ul>
+            <p class="card-text">見出し・CTA・信頼材料のバランスと、文字色・背景色・CTA色のコントラストをブラウザ内で簡易診断するデモです。</p>
+            <div class="price-hint"><span>参考価格</span><strong>40,000円〜100,000円前後</strong><small>診断ロジック・入力項目・レポート出力で変動</small></div>
+            <div class="card-footer">
+              <span class="tech-tag">WebAssembly</span>
+              <span class="tech-tag">UX Audit</span>
+              <a href="/wasm-diagnosis/" class="card-link">診断を体験する →</a>
+            </div>
+          </div>
+        </article>
+
         <!-- Category: Tool (Mental) -->
         <article class="work-card reveal card-border-green" data-category="tool">
           <div class="card-visual-wrap">
@@ -835,6 +869,27 @@ const structuredData = [
 
     .card-visual-wrap { padding: 12px; }
     .card-visual { height: 160px; border-radius: 16px; overflow: hidden; position: relative; background: #f5f5f5; }
+    .wasm-card-visual {
+      display: grid;
+      place-items: center;
+      height: 100%;
+      text-align: center;
+      color: var(--trust);
+    }
+    .wasm-card-visual strong {
+      display: block;
+      font-size: 2.35rem;
+      font-weight: 900;
+      letter-spacing: 0.12em;
+      line-height: 1;
+    }
+    .wasm-card-visual small {
+      display: block;
+      margin-top: 10px;
+      color: var(--accent-dark);
+      font-weight: 900;
+      letter-spacing: 0.04em;
+    }
     
     .category-tag {
       position: absolute; top: 12px; left: 12px; font-size: 0.65rem; font-weight: 800;

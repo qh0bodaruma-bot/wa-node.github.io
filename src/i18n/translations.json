@@ -158,6 +158,7 @@
     "col2_item3": { "ja": "制作ヒアリング体験", "en": "Hearing Experience", "fr": "Audition & Cadrage" },
     "col2_item4": { "ja": "料金シミュレーター", "en": "Price Simulator", "fr": "Simulateur de Tarifs" },
     "col2_item5": { "ja": "SEO/AEO内部診断", "en": "SEO/AEO Audit", "fr": "Audit SEO/AEO" },
+    "col2_item6": { "ja": "WASMファーストビュー・色彩診断", "en": "WASM First View & Color Check", "fr": "Diagnostic WASM Vue Initiale & Couleurs" },
     "col3": { "ja": "専門領域・その他", "en": "Expertise & Others", "fr": "Expertise & Autre" },
     "col3_item1": { "ja": "組織コミュニケーション支援", "en": "Corporate Support", "fr": "Communication d'Entreprise" },
     "col3_item2": { "ja": "バリアフリー診断", "en": "Accessibility Audit", "fr": "Audit Accessibilité" },

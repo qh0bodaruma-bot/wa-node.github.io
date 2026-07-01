@@ -1110,6 +1110,8 @@ const t = f[lang];
         sim60: 'tool_or_pricing',
         seo_check: 'tool_or_pricing',
         seo60: 'tool_or_pricing',
+        wasm_diagnosis: 'tool_or_pricing',
+        wasm: 'tool_or_pricing',
         dx60: 'tool_or_pricing',
         pricing: 'tool_or_pricing',
         tool_or_pricing: 'tool_or_pricing',
@@ -1132,7 +1134,7 @@ const t = f[lang];
           if (path.includes('/psychology-demo')) return 'psychology_demo';
           if (path.includes('/lp-portfolio')) return 'lp_portfolio';
           if (path.includes('/ai-chat-demo')) return 'ai_chat_demo';
-          if (path.includes('/simulator') || path.includes('/seo_check') || path.includes('/pricing')) return 'tool_or_pricing';
+          if (path.includes('/simulator') || path.includes('/seo_check') || path.includes('/wasm-diagnosis') || path.includes('/pricing')) return 'tool_or_pricing';
           return '';
         } catch (err) {
           return '';
