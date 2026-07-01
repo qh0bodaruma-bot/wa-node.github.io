@@ -134,6 +134,46 @@ const structuredData = [
       </div>
     </section>
 
+    <section class="tech-demo-section section" aria-labelledby="tech-demo-title">
+      <div class="container narrow reveal">
+        <div class="tech-demo-shell">
+          <div class="tech-demo-copy">
+            <span class="custom-tech-eyebrow">HTML5 Canvas Demo</span>
+            <h2 id="tech-demo-title">必要な技術を、<br /><span class="tech-demo-nowrap">目的に合わせてつなぐ。</span></h2>
+            <p>
+              表示の速さ、問い合わせ導線、AI活用、アクセス解析。和-Nodeでは、技術単体ではなく、
+              事業の目的に合わせた組み合わせとして設計します。
+            </p>
+          </div>
+          <div class="tech-demo-visual" aria-label="Web制作で連携する技術領域">
+            <canvas id="techNodeCanvas" class="tech-node-canvas" width="760" height="360" aria-hidden="true"></canvas>
+            <ol class="tech-node-labels" data-glossary-skip>
+              <li style="--x: 18%; --y: 28%;">
+                <strong>静的サイト</strong>
+                <span>高速表示</span>
+              </li>
+              <li style="--x: 45%; --y: 18%;">
+                <strong>心理導線</strong>
+                <span>相談設計</span>
+              </li>
+              <li style="--x: 75%; --y: 32%;">
+                <strong>動的機能</strong>
+                <span>予約・管理</span>
+              </li>
+              <li style="--x: 31%; --y: 72%;">
+                <strong>AI・ICT</strong>
+                <span>業務支援</span>
+              </li>
+              <li style="--x: 66%; --y: 72%;">
+                <strong>計測改善</strong>
+                <span>公開後</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="site-type-section section" aria-labelledby="site-type-title">
       <div class="container narrow reveal">
         <div class="site-type-intro">
@@ -225,6 +265,129 @@ const structuredData = [
   </main>
 </BaseLayout>
 
+<script is:inline>
+  function initTechCanvas() {
+    const canvas = document.getElementById('techNodeCanvas');
+    if (!canvas || canvas.dataset.ready === 'true') return;
+    canvas.dataset.ready = 'true';
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const nodes = [
+      { x: 0.18, y: 0.28, r: 13, color: '#0f4c5c' },
+      { x: 0.45, y: 0.18, r: 15, color: '#8c6b1f' },
+      { x: 0.75, y: 0.32, r: 13, color: '#c7352f' },
+      { x: 0.31, y: 0.72, r: 12, color: '#1f6f78' },
+      { x: 0.66, y: 0.72, r: 12, color: '#8c6b1f' },
+    ];
+    const links = [
+      [0, 1],
+      [1, 2],
+      [0, 3],
+      [1, 3],
+      [1, 4],
+      [2, 4],
+      [3, 4],
+    ];
+
+    let width = 0;
+    let height = 0;
+    let frame = 0;
+    let rafId = 0;
+
+    function resize() {
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = rect.width || 760;
+      height = rect.height || 360;
+      canvas.width = Math.round(width * dpr);
+      canvas.height = Math.round(height * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+
+    function draw() {
+      frame += reduceMotion ? 0 : 1;
+      ctx.clearRect(0, 0, width, height);
+
+      const bg = ctx.createRadialGradient(width * 0.5, height * 0.5, 20, width * 0.5, height * 0.5, width * 0.7);
+      bg.addColorStop(0, 'rgba(238, 245, 242, 0.86)');
+      bg.addColorStop(1, 'rgba(255, 255, 255, 0)');
+      ctx.fillStyle = bg;
+      ctx.fillRect(0, 0, width, height);
+
+      links.forEach(([from, to], index) => {
+        const a = nodes[from];
+        const b = nodes[to];
+        const ax = a.x * width;
+        const ay = a.y * height;
+        const bx = b.x * width;
+        const by = b.y * height;
+        const pulse = reduceMotion ? 0.36 : 0.22 + 0.16 * Math.sin(frame * 0.035 + index);
+
+        ctx.beginPath();
+        ctx.moveTo(ax, ay);
+        ctx.lineTo(bx, by);
+        ctx.strokeStyle = `rgba(15, 76, 92, ${pulse})`;
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+
+        if (!reduceMotion) {
+          const t = (frame * 0.006 + index * 0.18) % 1;
+          const px = ax + (bx - ax) * t;
+          const py = ay + (by - ay) * t;
+          ctx.beginPath();
+          ctx.arc(px, py, 3.2, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(199, 53, 47, 0.46)';
+          ctx.fill();
+        }
+      });
+
+      nodes.forEach((node, index) => {
+        const x = node.x * width;
+        const y = node.y * height;
+        const breath = reduceMotion ? 0 : Math.sin(frame * 0.035 + index) * 1.5;
+
+        ctx.beginPath();
+        ctx.arc(x, y, node.r + 14 + breath, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(15, 76, 92, 0.055)';
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(x, y, node.r + breath, 0, Math.PI * 2);
+        ctx.fillStyle = node.color;
+        ctx.fill();
+
+        ctx.beginPath();
+        ctx.arc(x - node.r * 0.28, y - node.r * 0.28, Math.max(2, node.r * 0.22), 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.72)';
+        ctx.fill();
+      });
+
+      if (!reduceMotion) rafId = window.requestAnimationFrame(draw);
+    }
+
+    function start() {
+      resize();
+      window.cancelAnimationFrame(rafId);
+      draw();
+    }
+
+    if ('ResizeObserver' in window) {
+      const observer = new ResizeObserver(start);
+      observer.observe(canvas);
+    } else {
+      window.addEventListener('resize', start);
+    }
+
+    start();
+  }
+
+  document.addEventListener('astro:page-load', initTechCanvas);
+  initTechCanvas();
+</script>
+
 <style>
   .tech-page { background-color: var(--bg); overflow-x: hidden; }
   .text-accent { color: var(--accent); }
@@ -306,6 +469,91 @@ const structuredData = [
     margin-bottom: 16px;
   }
   .tech-body p:last-child { margin-bottom: 0; }
+
+  .tech-demo-section {
+    padding: 20px 0 76px;
+    border-top: 1px solid rgba(15, 76, 92, 0.08);
+  }
+  .tech-demo-shell {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.95fr) minmax(0, 1.05fr);
+    gap: 34px;
+    align-items: center;
+    padding: 34px;
+    border: 1px solid rgba(15, 76, 92, 0.15);
+    border-radius: 28px;
+    background:
+      linear-gradient(135deg, rgba(238, 245, 242, 0.92), rgba(255, 255, 255, 0.98)),
+      radial-gradient(circle at 88% 16%, rgba(199, 53, 47, 0.06), transparent 28%);
+    box-shadow: 0 18px 42px rgba(15, 76, 92, 0.08), 0 6px 18px rgba(70, 52, 32, 0.05);
+  }
+  .tech-demo-copy h2 {
+    margin: 0 0 16px;
+    color: var(--text);
+    font-size: clamp(1.45rem, 3.2vw, 2.15rem);
+    line-height: 1.45;
+    font-weight: 900;
+  }
+  .tech-demo-copy p {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.9;
+  }
+  .tech-demo-nowrap {
+    white-space: nowrap;
+  }
+  .tech-demo-visual {
+    position: relative;
+    min-height: 320px;
+    border: 1px solid rgba(15, 76, 92, 0.12);
+    border-radius: 24px;
+    background: rgba(255, 255, 255, 0.62);
+    overflow: hidden;
+  }
+  .tech-node-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .tech-node-labels {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    pointer-events: none;
+  }
+  .tech-node-labels li {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    min-width: 100px;
+    padding: 10px 12px;
+    border: 1px solid rgba(15, 76, 92, 0.13);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 10px 22px rgba(15, 76, 92, 0.08);
+    transform: translate(-50%, 26px);
+    text-align: center;
+  }
+  .tech-node-labels strong,
+  .tech-node-labels span {
+    display: block;
+    line-height: 1.35;
+  }
+  .tech-node-labels strong {
+    color: var(--trust, #0f4c5c);
+    font-size: 0.84rem;
+    font-weight: 900;
+  }
+  .tech-node-labels span {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.74rem;
+    font-weight: 800;
+  }
 
   .site-type-section {
     padding: 20px 0 72px;
@@ -484,11 +732,31 @@ const structuredData = [
 
   @media (max-width: 900px) {
     .tech-stack-section .container { grid-template-columns: 1fr; }
+    .tech-demo-shell { grid-template-columns: 1fr; }
     .site-type-grid { grid-template-columns: 1fr; }
     .tech-card { padding: 30px 24px; }
   }
   @media (max-width: 768px) {
     .tech-hero h1 { font-size: 2.2rem; }
+    .tech-demo-section { padding: 10px 0 52px; }
+    .tech-demo-shell { padding: 24px 18px; }
+    .tech-demo-nowrap { white-space: normal; }
+    .tech-demo-visual { min-height: 520px; }
+    .tech-node-labels {
+      display: grid;
+      position: relative;
+      inset: auto;
+      gap: 10px;
+      padding: 18px;
+    }
+    .tech-node-labels li {
+      position: relative;
+      left: auto;
+      top: auto;
+      transform: none;
+      text-align: left;
+    }
+    .tech-node-canvas { opacity: 0.34; }
     .site-type-section { padding: 10px 0 52px; }
     .site-type-card { padding: 24px 20px; }
     .custom-tech-section { padding: 10px 0 52px; }
