@@ -337,6 +337,11 @@ const structuredData = [
             <strong>30,000円〜80,000円前後</strong>
             <small>設問分岐、AI相談整理、簡易診断ツールなど</small>
           </a>
+          <a href="/wasm-diagnosis/" class="demo-price-card card-border-blue">
+            <span>ブラウザ内診断</span>
+            <strong>40,000円〜100,000円前後</strong>
+            <small>配色チェック、公開前診断、相談前セルフチェックなど</small>
+          </a>
         </div>
       </div>
       <div class="plan-picker" aria-label="梅竹松の選び方">
@@ -1216,7 +1221,7 @@ const structuredData = [
   }
   .demo-price-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
   }
   .demo-price-card {
@@ -1507,6 +1512,12 @@ const structuredData = [
       font-size: 0.8rem;
       color: #999;
       font-weight: bold;
+    }
+  }
+
+  @media (min-width: 769px) and (max-width: 1100px) {
+    .demo-price-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
   }
 </style>

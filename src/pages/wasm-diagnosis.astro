@@ -17,6 +17,27 @@ const structuredData = [
     { name: 'WebAssembly診断', path: '/wasm-diagnosis/' },
   ]),
 ];
+
+const useCases = [
+  {
+    title: 'LP・HP改善診断',
+    text: 'ファーストビュー、CTA、料金表、フォーム前の不安などを点数化し、改善候補を見つけやすくします。',
+  },
+  {
+    title: '相談前セルフチェック',
+    text: 'ユーザーが自分の状況を選ぶだけで、相談内容を整理できる導線として使えます。',
+  },
+  {
+    title: '配色・アクセシビリティ確認',
+    text: '文字色、背景色、ボタン色の読みやすさを確認し、公開前の見落としを減らします。',
+  },
+];
+
+const buildPoints = [
+  '診断したい対象と、利用者に持ち帰ってほしい気づき',
+  '設問数、分岐、スコアの出し方、結果画面の見せ方',
+  'フォーム連携、PDF出力、管理画面、AIコメント生成の有無',
+];
 ---
 
 <BaseLayout title={title} description={description} structuredData={structuredData}>
@@ -27,11 +48,12 @@ const structuredData = [
         <h1>伝わり方と読みやすさを、ブラウザ内で即診断。</h1>
         <p>
           ファーストビューの情報設計と、文字色・背景色のコントラストを簡易チェックします。
-          入力内容は送信されず、スコア計算の一部をWebAssemblyで処理します。
+          「こういう診断ツールを自社サイトに置ける」というイメージを持っていただくための実用デモです。
         </p>
         <div class="lab-hero-actions">
           <a href="#first-view-tool">ファーストビューを診断</a>
           <a href="#color-tool">色彩・コントラストを診断</a>
+          <a href="/contact/?source=wasm-diagnosis" class="contact-action">診断ツールを相談する</a>
         </div>
       </div>
     </section>
@@ -133,11 +155,41 @@ const structuredData = [
       </article>
     </section>
 
+    <section class="lab-container lab-usecase-section reveal" aria-labelledby="usecase-title">
+      <div class="lab-usecase-head">
+        <span>Service Image</span>
+        <h2 id="usecase-title">この技術で、どんな診断ツールを作れるか。</h2>
+        <p>
+          WebAssemblyやブラウザ内計算は、単なる技術展示ではなく、訪問者が「自分に必要か」を判断しやすくするために使えます。
+        </p>
+      </div>
+      <div class="lab-usecase-grid">
+        {useCases.map((item) => (
+          <article>
+            <h3>{item.title}</h3>
+            <p>{item.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="lab-container lab-build-section reveal" aria-labelledby="build-title">
+      <div>
+        <span>Build Point</span>
+        <h2 id="build-title">制作時は、技術より先に「何を判断しやすくするか」を決めます。</h2>
+      </div>
+      <ol>
+        {buildPoints.map((point) => (
+          <li>{point}</li>
+        ))}
+      </ol>
+    </section>
+
     <section class="lab-container lab-note reveal">
       <h2>このデモで見せたいこと</h2>
       <p>
         WebAssemblyは、画像解析・配色計算・大量データ処理などをブラウザ内で高速化しやすい技術です。
-        和-Nodeでは、派手な演出よりも「相談前に判断しやすくする実用ツール」として活用できます。
+        和-Nodeでは、派手な演出よりも「相談前に判断しやすくする実用ツール」として活用します。
       </p>
       <a href="/contact/?source=wasm-diagnosis">このような診断ツールを相談する</a>
     </section>
@@ -212,6 +264,12 @@ const structuredData = [
     color: var(--lab-trust);
     border: 1px solid rgba(15, 76, 92, 0.22);
     box-shadow: 0 14px 30px rgba(15, 76, 92, 0.08);
+  }
+  .lab-hero-actions a.contact-action {
+    border: 0;
+    background: var(--lab-red);
+    color: #fff;
+    box-shadow: 0 14px 30px rgba(199, 53, 47, 0.18);
   }
   .lab-grid {
     display: grid;
@@ -401,6 +459,108 @@ const structuredData = [
     color: #666;
     line-height: 1.8;
   }
+  .lab-usecase-section {
+    padding-bottom: 54px;
+  }
+  .lab-usecase-head {
+    max-width: 760px;
+    margin: 0 auto 24px;
+    text-align: center;
+  }
+  .lab-usecase-head span,
+  .lab-build-section span {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: var(--lab-gold);
+    font-size: 0.76rem;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+  .lab-usecase-head h2,
+  .lab-build-section h2 {
+    margin: 0;
+    color: var(--lab-trust);
+    font-size: clamp(1.35rem, 3vw, 2rem);
+    line-height: 1.45;
+  }
+  .lab-usecase-head p {
+    margin: 14px 0 0;
+    color: #666;
+    line-height: 1.85;
+  }
+  .lab-usecase-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .lab-usecase-grid article {
+    min-height: 178px;
+    padding: 24px;
+    border: 1px solid rgba(15, 76, 92, 0.14);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 16px 36px rgba(15, 76, 92, 0.07);
+  }
+  .lab-usecase-grid h3 {
+    margin: 0 0 12px;
+    color: var(--lab-trust);
+    font-size: 1.08rem;
+  }
+  .lab-usecase-grid p {
+    margin: 0;
+    color: #666;
+    line-height: 1.75;
+  }
+  .lab-build-section {
+    display: grid;
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 28px;
+    align-items: center;
+    margin-bottom: 58px;
+    padding: 30px;
+    border: 1px solid rgba(15, 76, 92, 0.14);
+    border-radius: 24px;
+    background:
+      linear-gradient(135deg, rgba(238, 245, 242, 0.78), rgba(255, 255, 255, 0.92)),
+      radial-gradient(circle at 90% 20%, rgba(199, 53, 47, 0.06), transparent 26%);
+    box-shadow: 0 18px 42px rgba(15, 76, 92, 0.08);
+  }
+  .lab-build-section ol {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    counter-reset: build-point;
+    list-style: none;
+  }
+  .lab-build-section li {
+    position: relative;
+    min-height: 52px;
+    padding: 14px 16px 14px 54px;
+    border: 1px solid rgba(15, 76, 92, 0.11);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.86);
+    color: #4c4741;
+    font-weight: 800;
+    line-height: 1.65;
+    counter-increment: build-point;
+  }
+  .lab-build-section li::before {
+    content: counter(build-point);
+    position: absolute;
+    top: 14px;
+    left: 16px;
+    display: grid;
+    width: 28px;
+    height: 28px;
+    place-items: center;
+    border-radius: 999px;
+    background: var(--lab-trust);
+    color: #fff;
+    font-size: 0.82rem;
+    font-weight: 900;
+  }
   .lab-note {
     padding: 34px;
     margin-bottom: 90px;
@@ -419,6 +579,10 @@ const structuredData = [
   }
   @media (max-width: 900px) {
     .lab-grid {
+      grid-template-columns: 1fr;
+    }
+    .lab-usecase-grid,
+    .lab-build-section {
       grid-template-columns: 1fr;
     }
     .lab-panel {
@@ -442,6 +606,20 @@ const structuredData = [
     .lab-panel {
       padding: 20px;
       border-radius: 18px;
+    }
+    .lab-usecase-head {
+      text-align: left;
+    }
+    .lab-usecase-grid article {
+      min-height: auto;
+      padding: 20px;
+    }
+    .lab-build-section {
+      padding: 22px 18px;
+      border-radius: 20px;
+    }
+    .lab-hero-actions a {
+      width: 100%;
     }
   }
 </style>

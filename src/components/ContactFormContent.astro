@@ -113,11 +113,11 @@ const f = {
     label_line: "LINE表示名 または LINE ID",
     placeholder_line: "例：和 太郎（ID: wa-taro）",
     desc_line: "※LINEでのやり取り、またはビデオ通話の接続に必要な情報をご記入ください。",
-    label_dates: "ご相談の希望日時（※第一希望のみ必須）",
+    label_dates: "ご相談の希望日時（分かる範囲で）",
     date_1: "第一希望:",
     date_2: "第二希望:",
     date_3: "第三希望:",
-    date_desc: "※オンライン（Google Meetなど）を基本としますが、Zoomやお電話等も可能です。ご希望があればメッセージ欄にご記入ください。平日の10:00〜18:00が基本ですが、夜間や土日も調整可能です。",
+    date_desc: "※未定でも送信できます。オンライン（Google Meetなど）を基本としますが、Zoomやお電話等も可能です。平日の10:00〜18:00が基本ですが、夜間や土日も調整可能です。",
     label_message: "ご相談内容（現在の状況・相談したいこと）",
     placeholder_message: "現在の状況や、具体的に相談したいこと（解決したい課題など）をご記入ください。",
     consent_note: "送信前に、<a href='/terms/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>利用規約</a>、<a href='/privacy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>プライバシーポリシー</a>、および<a href='/cancel-policy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>キャンセルポリシー</a>、<a href='/counseling-notes/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>カウンセリング注意事項</a>をご確認ください。",
@@ -228,11 +228,11 @@ const f = {
     label_line: "LINE Display Name or LINE ID",
     placeholder_line: "e.g. Taro Wa (ID: wa-taro)",
     desc_line: "*Required for LINE connection or video call setup.",
-    label_dates: "Preferred Dates (*1st Choice is Required)",
+    label_dates: "Preferred Dates (if known)",
     date_1: "1st Choice:",
     date_2: "2nd Choice:",
     date_3: "3rd Choice:",
-    date_desc: "※Online (Google Meet, etc.) is the default. Zoom or phone is also available upon request in the message field. Basically weekdays 10:00-18:00 JST, but nights/weekends are flexible.",
+    date_desc: "※You can submit even if dates are undecided. Online (Google Meet, etc.) is the default. Zoom or phone is also available. Weekdays 10:00-18:00 JST are standard, but nights/weekends are flexible.",
     label_message: "Inquiry Content (Current Status & What you want to discuss)",
     placeholder_message: "Please describe your current situation, challenges, or what you specifically want to discuss.",
     consent_note: "Please review our <a href='/terms/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Terms of Service</a>, <a href='/privacy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Privacy Policy</a>, <a href='/cancel-policy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Cancellation Policy</a>, and <a href='/counseling-notes/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Counseling disclaimer</a> before submitting.",
@@ -343,11 +343,11 @@ const f = {
     label_line: "Nom d'affichage LINE ou ID LINE",
     placeholder_line: "Ex: Jean Dupont (ID: jean-d)",
     desc_line: "*Requis pour la connexion LINE ou l'appel vidéo.",
-    label_dates: "Dates souhaitées (*1er Choix Requis)",
+    label_dates: "Dates souhaitées (si connues)",
     date_1: "1er Choix:",
     date_2: "2e Choix:",
     date_3: "3e Choix:",
-    date_desc: "※En ligne (Google Meet, etc.) par défaut. Zoom ou téléphone disponible sur demande dans le message. En principe, en semaine de 10h00 à 18h00 JST, flexible en soirée/week-end.",
+    date_desc: "※Vous pouvez envoyer même si les dates ne sont pas encore décidées. En ligne (Google Meet, etc.) par défaut. Zoom ou téléphone disponible. En principe, en semaine de 10h00 à 18h00 JST, flexible en soirée/week-end.",
     label_message: "Détails du message (Situation actuelle & Sujet à aborder)",
     placeholder_message: "N'hésitez pas à décrire vos défis, vos besoins ou la situation actuelle que vous souhaitez aborder.",
     consent_note: "Veuillez lire nos <a href='/terms/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Conditions d'Utilisation</a>, <a href='/privacy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Politique de Confidentialité</a>, <a href='/cancel-policy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Politique d'Annulation</a> et <a href='/counseling-notes/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>Avertissements</a> avant d'envoyer.",
@@ -511,14 +511,26 @@ const t = f[lang];
 
             <input type="hidden" id="seen_source" name="seen_source" value="" />
 
-
+            <div class="form-group">
+              <label for="consultation_method">{t.label_method}</label>
+              <select id="consultation_method" name="consultation_method">
+                <option value="" selected>{t.placeholder_method}</option>
+                <option value="google_meet">{t.methods.google_meet}</option>
+                <option value="zoom">{t.methods.zoom}</option>
+                <option value="line_video">{t.methods.line_video}</option>
+                <option value="phone">{t.methods.phone}</option>
+                <option value="face_to_face">{t.methods.face_to_face}</option>
+                <option value="other">{t.methods.other}</option>
+              </select>
+              <p class="field-desc">{t.method_hint}</p>
+            </div>
 
             <div class="form-group date-candidates">
               <label>{t.label_dates}</label>
               <div class="date-input-group">
                 <div class="date-item">
-                  <span>{t.date_1} <span class="required">{t.required}</span></span>
-                  <input type="datetime-local" name="date_1" required />
+                  <span>{t.date_1}</span>
+                  <input type="datetime-local" name="date_1" />
                 </div>
                 <div class="date-item">
                   <span>{t.date_2}</span>
@@ -530,6 +542,21 @@ const t = f[lang];
                 </div>
               </div>
               <p class="field-desc">{t.date_desc}</p>
+            </div>
+
+            <div class="consult-examples-card" aria-label={t.consult_examples_title}>
+              <strong>{t.consult_examples_title}</strong>
+              <p>{t.consult_examples_desc}</p>
+              <ul>
+                {t.consult_examples.map((example) => (
+                  <li>{example}</li>
+                ))}
+              </ul>
+            </div>
+
+            <div class="safety-note-card">
+              <strong>{t.safety_note_title}</strong>
+              <p>{t.safety_note_desc}</p>
             </div>
 
             <div class="form-group">
@@ -966,6 +993,62 @@ const t = f[lang];
   .date-item { display: flex; align-items: center; gap: 15px; }
   .date-item span { font-size: 0.85rem; font-weight: 800; color: var(--muted); width: 80px; flex-shrink: 0; }
   .date-item input { padding: 12px 15px; font-size: 0.9rem; }
+
+  .consult-examples-card,
+  .safety-note-card {
+    margin: 0 0 26px;
+    padding: 18px 20px;
+    border-radius: 14px;
+    background: rgba(238, 245, 242, 0.62);
+    border: 1px solid var(--trust-line);
+  }
+  .consult-examples-card strong,
+  .safety-note-card strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--trust);
+    font-size: 0.92rem;
+    font-weight: 900;
+  }
+  .consult-examples-card p,
+  .safety-note-card p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+  .consult-examples-card ul {
+    display: grid;
+    gap: 8px;
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .consult-examples-card li {
+    position: relative;
+    padding-left: 18px;
+    color: #444;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.65;
+  }
+  .consult-examples-card li::before {
+    content: "";
+    position: absolute;
+    top: 0.75em;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 999px;
+    background: var(--accent-red);
+  }
+  .safety-note-card {
+    background: rgba(255, 253, 248, 0.86);
+    border-color: rgba(140, 107, 31, 0.22);
+  }
+  .safety-note-card strong {
+    color: var(--accent-dark);
+  }
 
   .form-flow-notice {
     margin: 26px 0 24px;
