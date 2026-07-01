@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.hostname+location.pathname+location.search);</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>【ポートフォリオ】アート・ギャラリーLPサンプル | 展示・作品販売向け</title>
+<link rel="canonical" href="https://www.wa-node.com/portfolio-lp/lp_art.html">
+<meta name="description" content="和-Nodeによるアート・ギャラリー向けランディングページの制作サンプルです。作品の世界観、作家の想い、展示情報、来場・購入導線を丁寧につなぐ構成をご確認いただけます。">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{--ink:#1d2630;--paper:#fbf6ee;--cream:#f1e5d4;--accent:#b94850;--gold:#b58a42;--blue:#174e5b;--muted:#746b61;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:1.85;overflow-x:hidden;}
+.portfolio-banner{position:fixed;top:0;left:0;right:0;z-index:9999;background:rgba(29,38,48,.92);color:#fff;text-align:center;font-size:12px;font-weight:900;letter-spacing:.08em;padding:9px 12px;}
+nav{position:fixed;top:31px;left:0;right:0;z-index:999;display:flex;align-items:center;justify-content:space-between;padding:18px 56px;background:rgba(251,246,238,.82);backdrop-filter:blur(14px);border-bottom:1px solid rgba(29,38,48,.1);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;letter-spacing:.08em;color:var(--ink);}
+.nav-link{color:var(--ink);font-size:13px;font-weight:900;text-decoration:none;border-bottom:1px solid currentColor;}
+.hero{position:relative;min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,520px);gap:56px;align-items:center;padding:150px 7vw 90px;background:linear-gradient(135deg,#fbf6ee 0%,#f4e7d7 46%,#d9c1a3 100%);overflow:hidden;}
+.hero::before{content:"";position:absolute;width:560px;height:560px;right:-150px;top:90px;border-radius:50%;background:radial-gradient(circle,rgba(185,72,80,.34),transparent 68%);filter:blur(4px);}
+.hero::after{content:"";position:absolute;width:520px;height:220px;left:7vw;bottom:70px;border:1px solid rgba(29,38,48,.14);border-radius:999px;transform:rotate(-8deg);}
+.hero-copy,.art-stage{position:relative;z-index:1;}
+.eyebrow{display:inline-flex;margin-bottom:22px;color:var(--accent);font-size:12px;font-weight:900;letter-spacing:.24em;text-transform:uppercase;}
+h1{font-family:'Cormorant Garamond',serif;font-size:clamp(46px,7vw,88px);line-height:.95;letter-spacing:.02em;margin-bottom:28px;}
+.hero-lead{max-width:620px;color:var(--muted);font-size:18px;line-height:2;}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:34px;}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:999px;text-decoration:none;font-weight:900;transition:.3s;}
+.btn-primary{background:var(--ink);color:#fff;box-shadow:0 18px 42px rgba(29,38,48,.2);}
+.btn-secondary{border:1px solid rgba(29,38,48,.22);color:var(--ink);background:rgba(255,255,255,.42);}
+.btn:hover{transform:translateY(-3px);}
+.art-stage{min-height:520px;display:grid;place-items:center;}
+.canvas-card{position:relative;width:min(100%,420px);aspect-ratio:4/5;border:18px solid rgba(255,255,255,.72);border-radius:8px 72px 8px 72px;background:radial-gradient(circle at 30% 22%,#f7d69d,transparent 22%),radial-gradient(circle at 68% 40%,rgba(185,72,80,.78),transparent 25%),radial-gradient(circle at 48% 76%,rgba(23,78,91,.72),transparent 30%),linear-gradient(135deg,#fff7e8,#caa57f);box-shadow:0 34px 88px rgba(29,38,48,.22);transform:rotate(4deg);}
+.canvas-card::before,.canvas-card::after{content:"";position:absolute;border:1px solid rgba(255,255,255,.66);border-radius:999px;}
+.canvas-card::before{width:118%;height:36%;left:-9%;top:42%;transform:rotate(-22deg);}
+.canvas-card::after{width:72%;height:28%;right:-18%;bottom:12%;transform:rotate(19deg);}
+.section{padding:110px 7vw;}
+.section.narrow{max-width:1120px;margin:0 auto;}
+.section-head{max-width:780px;margin:0 auto 54px;text-align:center;}
+.section-head h2{font-family:'Cormorant Garamond',serif;font-size:clamp(36px,5vw,58px);line-height:1.08;margin-bottom:18px;}
+.section-head p{color:var(--muted);}
+.concept-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+.concept-card{min-height:260px;padding:34px;border:1px solid rgba(29,38,48,.12);border-radius:28px;background:rgba(255,255,255,.46);box-shadow:0 16px 42px rgba(29,38,48,.06);}
+.concept-card span{display:inline-flex;margin-bottom:18px;color:var(--gold);font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:700;}
+.concept-card h3{font-size:20px;margin-bottom:14px;}
+.concept-card p{color:var(--muted);}
+.works-band{background:var(--ink);color:#fff;}
+.works-band .section-head p{color:rgba(255,255,255,.72);}
+.gallery-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;max-width:1120px;margin:0 auto;}
+.gallery-piece{min-height:320px;border-radius:30px;padding:28px;display:flex;flex-direction:column;justify-content:flex-end;background:linear-gradient(135deg,rgba(255,255,255,.12),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);position:relative;overflow:hidden;}
+.gallery-piece::before{content:"";position:absolute;inset:24px;border-radius:50%;background:radial-gradient(circle at var(--x,50%) var(--y,50%),var(--c,#b94850),transparent 34%);opacity:.82;}
+.gallery-piece:nth-child(1){--x:32%;--y:38%;--c:#b94850;}
+.gallery-piece:nth-child(2){--x:64%;--y:36%;--c:#b58a42;}
+.gallery-piece:nth-child(3){--x:44%;--y:58%;--c:#174e5b;grid-column:1 / -1;min-height:240px;}
+.gallery-piece h3,.gallery-piece p{position:relative;z-index:1;}
+.gallery-piece h3{font-family:'Cormorant Garamond',serif;font-size:34px;margin-bottom:8px;}
+.gallery-piece p{color:rgba(255,255,255,.76);}
+.visit-flow{display:grid;grid-template-columns:.9fr 1.1fr;gap:42px;align-items:center;}
+.flow-list{display:grid;gap:14px;counter-reset:flow;}
+.flow-list li{list-style:none;position:relative;padding:18px 20px 18px 62px;border:1px solid rgba(29,38,48,.12);border-radius:18px;background:rgba(255,255,255,.58);font-weight:900;counter-increment:flow;}
+.flow-list li::before{content:counter(flow,decimal-leading-zero);position:absolute;left:20px;top:18px;color:var(--accent);font-family:'Cormorant Garamond',serif;font-size:24px;line-height:1;}
+.artist-note{padding:44px;border-radius:32px;background:linear-gradient(135deg,rgba(185,72,80,.1),rgba(255,255,255,.58));border:1px solid rgba(185,72,80,.16);}
+.artist-note h2{font-family:'Cormorant Garamond',serif;font-size:44px;margin-bottom:18px;}
+.artist-note p{color:var(--muted);}
+.cta{padding:110px 7vw;text-align:center;background:linear-gradient(135deg,#efe3d2,#fbf6ee);}
+.cta h2{font-family:'Cormorant Garamond',serif;font-size:clamp(38px,5vw,64px);line-height:1.1;margin-bottom:20px;}
+.cta p{max-width:680px;margin:0 auto 34px;color:var(--muted);}
+footer{padding:42px;text-align:center;color:var(--muted);font-size:13px;}
+.back-link{position:fixed;bottom:20px;left:20px;z-index:9999;background:var(--ink);color:#fff;padding:10px 20px;border-radius:999px;text-decoration:none;font-size:14px;font-weight:900;box-shadow:0 8px 22px rgba(0,0,0,.18);}
+.reveal{opacity:0;transform:translateY(28px);transition:.9s cubic-bezier(.22,1,.36,1);}
+.reveal.visible{opacity:1;transform:translateY(0);}
+@media(max-width:900px){
+  nav{padding:14px 20px;}.hero{grid-template-columns:1fr;padding:126px 24px 72px;}.art-stage{min-height:360px}.canvas-card{width:min(82vw,340px)}
+  .section{padding:82px 24px}.concept-grid,.gallery-grid,.visit-flow{grid-template-columns:1fr}.gallery-piece:nth-child(3){grid-column:auto}
+}
+@media(max-width:560px){.hero-actions{flex-direction:column}.btn{width:100%}.portfolio-banner{font-size:11px}.nav-logo{font-size:20px}.section-head{text-align:left}.concept-card{min-height:auto}.back-link{right:16px;left:16px;text-align:center}}
+</style>
+</head>
+<body>
+<div class="portfolio-banner">PORTFOLIO SAMPLE - Art / Gallery Landing Page</div>
+<nav>
+  <div class="nav-logo">HIKARI ATELIER</div>
+  <a class="nav-link" href="#reserve">VIEWING</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-copy reveal">
+    <span class="eyebrow">Solo Exhibition</span>
+    <h1>Light, Memory,<br>and Quiet Color.</h1>
+    <p class="hero-lead">光の粒、記憶の輪郭、静かな色彩。作品の余韻を壊さず、来場予約・作品購入・作家プロフィールへ自然につなげるアート系LPサンプルです。</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#reserve">来場予約へ進む</a>
+      <a class="btn btn-secondary" href="#works">作品を見る</a>
+    </div>
+  </div>
+  <div class="art-stage reveal" aria-hidden="true">
+    <div class="canvas-card"></div>
+  </div>
+</section>
+
+<section class="section narrow">
+  <div class="section-head reveal">
+    <span class="eyebrow">Design Point</span>
+    <h2>作品を主役にしながら、行動の道筋を消さない。</h2>
+    <p>アート系LPは、強い売り込みよりも、世界観への没入と安心して次へ進める情報整理が大切です。</p>
+  </div>
+  <div class="concept-grid">
+    <article class="concept-card reveal"><span>01</span><h3>余白で作品を見せる</h3><p>説明を詰め込みすぎず、視線が作品に戻るように余白と見出しの間隔を広めに設計します。</p></article>
+    <article class="concept-card reveal"><span>02</span><h3>作家の言葉で記憶に残す</h3><p>技法や経歴だけでなく、作品に込めた想いを短い言葉で届け、共感の入口を作ります。</p></article>
+    <article class="concept-card reveal"><span>03</span><h3>来場・購入導線を静かに置く</h3><p>予約、販売、問い合わせの導線を明確にしながら、作品鑑賞の空気を壊さないトーンに整えます。</p></article>
+  </div>
+</section>
+
+<section class="section works-band" id="works">
+  <div class="section-head reveal">
+    <span class="eyebrow">Selected Works</span>
+    <h2>展示される作品の温度を、画面上でも伝える。</h2>
+    <p>作品群、展示テーマ、購入導線をひとつのストーリーとして見せる構成です。</p>
+  </div>
+  <div class="gallery-grid">
+    <article class="gallery-piece reveal"><h3>Red Silence</h3><p>静けさの中に残る熱を表現したメインビジュアル。</p></article>
+    <article class="gallery-piece reveal"><h3>Golden Trace</h3><p>記憶の輪郭を光でたどる小作品シリーズ。</p></article>
+    <article class="gallery-piece reveal"><h3>Blue Distance</h3><p>展示全体の余韻を支える、深い青の連作。</p></article>
+  </div>
+</section>
+
+<section class="section narrow">
+  <div class="visit-flow">
+    <div class="artist-note reveal">
+      <span class="eyebrow">Artist Message</span>
+      <h2>色は、言葉になる前の記憶です。</h2>
+      <p>作品の前で立ち止まる時間が、見る人自身の記憶と静かにつながることを願っています。展示では、色の重なりと余白の呼吸を感じていただけます。</p>
+    </div>
+    <ol class="flow-list reveal">
+      <li>展示テーマを読む</li>
+      <li>代表作品を見る</li>
+      <li>作家の想いを知る</li>
+      <li>開催日・会場を確認する</li>
+      <li>来場予約または作品問い合わせへ進む</li>
+    </ol>
+  </div>
+</section>
+
+<section class="cta" id="reserve">
+  <span class="eyebrow">Viewing Reservation</span>
+  <h2>余韻が残っているうちに、次の行動へ。</h2>
+  <p>来場予約、作品購入、展示会のお問い合わせなど、目的に合わせて導線を調整できます。</p>
+  <a class="btn btn-primary" href="#">来場予約する</a>
+</section>
+
+<footer>
+  <p>© 2026 Hikari Atelier Exhibition Sample. Produced by Wa-Node.</p>
+</footer>
+
+<a href="/lp-portfolio/" class="back-link">LPサンプル集に戻る</a>
+
+<script>
+const io=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible');io.unobserve(entry.target);}});},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

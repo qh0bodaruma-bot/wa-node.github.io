@@ -8,7 +8,7 @@ import {
 } from '../data/structuredData';
 
 const title = "LP制作サンプルギャラリー｜和-Node";
-const description = "和-Nodeが業種別に用意した全13種類のランディングページ（LP）制作サンプルです。業種ごとの不安・比較・申込心理に合わせた設計意図と工夫を確認できます。";
+const description = "和-Nodeが業種別に用意した全14種類のランディングページ（LP）制作サンプルです。業種ごとの不安・比較・申込心理に合わせた設計意図と工夫を確認できます。";
 const structuredData = [
   organizationSchema,
   createWebPageSchema({ name: title, description, path: "/lp-portfolio/", type: "CollectionPage" }),
@@ -86,7 +86,7 @@ const buildSteps = [
         <h1 class="page-title">和-Nodeが贈る、<br/><span class="accent-text">業種別LP制作<br class="mobile-title-break" />サンプル集</span></h1>
         <p class="page-desc">
           見た目だけで終わらせず、相談・予約・申込みにつながる理由まで見えるLPサンプル集です。<br />
-          医療、美容、IT、不動産、教育など、全13種類の制作サンプルと、それぞれの設計意図を比較できます。
+          医療、美容、IT、不動産、教育、アートなど、全14種類の制作サンプルと、それぞれの設計意図を比較できます。
         </p>
         <p class="sample-disclaimer">
           ※掲載LPはすべて架空の業種・商品・団体を題材にした自主制作サンプルです。実在の実績・企業・成果を示すものではなく、業種別の表現例としてご覧ください。
@@ -187,6 +187,7 @@ const buildSteps = [
         <button class="filter-btn" data-filter="medical">医療・美容</button>
         <button class="filter-btn" data-filter="business">ビジネス・IT</button>
         <button class="filter-btn" data-filter="lifestyle">ライフスタイル</button>
+        <button class="filter-btn" data-filter="creative">アート・クリエイティブ</button>
       </nav>
 
       <div class="lp-grid">
@@ -355,7 +356,25 @@ const buildSteps = [
           </div>
         </article>
 
-        <!-- 12. Corporate -->
+        <!-- 12. Art -->
+        <article class="lp-card reveal" data-category="creative">
+          <div class="lp-visual art-card-visual" aria-label="アート・ギャラリーLP">
+            <span class="lp-tag">Art / Gallery</span>
+            <div class="art-orbit art-orbit-1"></div>
+            <div class="art-orbit art-orbit-2"></div>
+            <div class="art-frame-shape"></div>
+            <div class="art-caption-line"></div>
+          </div>
+          <div class="lp-info">
+            <h3>アート・ギャラリーLP</h3>
+            <p>作品の世界観と来場・購入導線を両立。余白、光、言葉の温度で記憶に残す構成。</p>
+            <p class="lp-rationale"><span>設計意図</span>作品の魅力を邪魔しないよう余白を広く取り、作家の想い、展示情報、購入・来場導線を静かに追える順番にしています。</p>
+            <p class="lp-price-hint"><span>参考価格</span>64,000円〜144,000円前後</p>
+            <a href="/portfolio-lp/lp_art.html" class="lp-link">デモを見る →</a>
+          </div>
+        </article>
+
+        <!-- 13. Corporate -->
         <article class="lp-card reveal" data-category="business">
           <div class="lp-visual">
             <img src="/portfolio-lp/images/hero_corporate.png" alt="企業紹介・ブランドLP" style="width: 100%; height: 100%; object-fit: cover;" />
@@ -370,7 +389,7 @@ const buildSteps = [
           </div>
         </article>
 
-        <!-- 13. Osteopathy -->
+        <!-- 14. Osteopathy -->
         <article class="lp-card reveal" data-category="medical">
           <div class="lp-visual">
             <img src="/portfolio-lp/images/hero_sekkotsu.png" alt="整骨院・鍼灸・整体院LP" style="width: 100%; height: 100%; object-fit: cover;" />
@@ -739,12 +758,58 @@ const buildSteps = [
   .filter-btn { padding: 10px 24px; border-radius: 999px; border: 1px solid #ddd; background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: 0.3s; }
   .filter-btn.active, .filter-btn:hover { background: #639922; color: #fff; border-color: #639922; }
 
-  .lp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 40px; }
+  .lp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 40px; margin-bottom: 88px; }
   .lp-card { background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.05); transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1); border: 1px solid #eee; }
   .lp-card:hover { transform: translateY(-12px); box-shadow: 0 20px 60px rgba(0,0,0,0.1); border-color: #639922; }
 
   .lp-visual { height: 200px; position: relative; display: flex; align-items: center; justify-content: center; overflow: hidden; }
   .lp-tag { position: absolute; top: 20px; left: 20px; font-size: 10px; font-weight: 900; background: #fff; padding: 4px 12px; border-radius: 999px; color: #639922; z-index: 2; }
+  .art-card-visual {
+    background:
+      radial-gradient(circle at 28% 24%, rgba(255, 225, 174, 0.95), transparent 22%),
+      radial-gradient(circle at 74% 28%, rgba(185, 72, 80, 0.58), transparent 20%),
+      radial-gradient(circle at 58% 78%, rgba(23, 78, 91, 0.45), transparent 26%),
+      linear-gradient(135deg, #fdf8ef 0%, #efe3d2 44%, #233744 100%);
+  }
+  .art-orbit {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.62);
+    border-radius: 999px;
+    transform: rotate(-18deg);
+  }
+  .art-orbit-1 {
+    width: 220px;
+    height: 86px;
+    right: -28px;
+    bottom: 28px;
+  }
+  .art-orbit-2 {
+    width: 160px;
+    height: 64px;
+    left: 40px;
+    top: 72px;
+    border-color: rgba(35, 55, 68, 0.18);
+    transform: rotate(22deg);
+  }
+  .art-frame-shape {
+    width: 116px;
+    height: 126px;
+    border: 10px solid rgba(255, 255, 255, 0.78);
+    border-radius: 4px 44px 4px 44px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.32), rgba(185, 72, 80, 0.28));
+    box-shadow: 0 18px 44px rgba(35, 55, 68, 0.22);
+    transform: rotate(8deg);
+  }
+  .art-caption-line {
+    position: absolute;
+    right: 30px;
+    bottom: 34px;
+    width: 96px;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.78);
+    box-shadow: 0 12px 0 rgba(255, 255, 255, 0.42);
+  }
 
   .lp-info { padding: 32px; }
   .lp-info h3 { font-size: 1.4rem; font-weight: 900; margin-bottom: 12px; color: #333; }
@@ -925,7 +990,7 @@ const buildSteps = [
     .page-header { padding: 80px 20px 40px; }
     .page-title { font-size: clamp(2.05rem, 8.8vw, 2.45rem); }
     .mobile-title-break { display: block; }
-    .lp-grid { grid-template-columns: 1fr; gap: 24px; }
+    .lp-grid { grid-template-columns: 1fr; gap: 24px; margin-bottom: 64px; }
     .lp-reading-guide { grid-template-columns: 1fr; }
     .lp-reading-guide li { min-height: auto; }
     .lp-choice-guide { padding: 28px 20px; text-align: left; }
