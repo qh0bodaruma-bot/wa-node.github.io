@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+<script>if(location.protocol==='http:'&&location.hostname!=='localhost'&&location.hostname!=='127.0.0.1')location.replace('https://'+location.hostname+location.pathname+location.search);</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>シンプルLP制作 2,500pxサンプル | 和-Node</title>
+<link rel="canonical" href="https://www.wa-node.com/portfolio-lp/simple-lp-scope.html">
+<meta name="description" content="和-NodeのシンプルLP制作に含まれる、1ページ・縦2,500px程度・5セクションまでのサイズ感を確認できる架空サンプルです。">
+<style>
+  :root {
+    --ink: #2f3133;
+    --muted: #6f7478;
+    --trust: #115466;
+    --trust-soft: #eaf3f1;
+    --green: #5d9d42;
+    --red: #c7352f;
+    --gold: #9b7627;
+    --line: rgba(17, 84, 102, 0.18);
+    --paper: #fffdf8;
+    --surface: #ffffff;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    margin: 0;
+    background:
+      linear-gradient(rgba(17, 84, 102, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(17, 84, 102, 0.035) 1px, transparent 1px),
+      var(--paper);
+    background-size: 28px 28px;
+    color: var(--ink);
+    font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Kaku Gothic ProN", sans-serif;
+    line-height: 1.8;
+  }
+  a {
+    color: inherit;
+  }
+  .demo-toolbar {
+    position: fixed;
+    z-index: 20;
+    top: 18px;
+    left: 50%;
+    display: flex;
+    width: min(1080px, calc(100% - 32px));
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    transform: translateX(-50%);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 16px 40px rgba(15, 76, 92, 0.12);
+    backdrop-filter: blur(12px);
+    padding: 10px 12px 10px 18px;
+  }
+  .demo-toolbar strong {
+    color: var(--trust);
+    font-size: 0.9rem;
+  }
+  .demo-toolbar span {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+  .demo-toolbar a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 36px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--trust);
+    color: #fff;
+    font-size: 0.78rem;
+    font-weight: 900;
+    text-decoration: none;
+  }
+  .scope-ruler {
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    right: 18px;
+    display: grid;
+    height: 2500px;
+    align-items: stretch;
+    pointer-events: none;
+  }
+  .scope-ruler::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 36px;
+    bottom: 0;
+    width: 2px;
+    border-radius: 999px;
+    background: linear-gradient(var(--green), var(--gold), var(--red));
+  }
+  .scope-ruler span {
+    position: relative;
+    display: flex;
+    min-width: 72px;
+    justify-content: flex-end;
+    color: var(--trust);
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+  .scope-ruler span::after {
+    content: "";
+    position: absolute;
+    top: 0.76em;
+    right: 30px;
+    width: 12px;
+    height: 2px;
+    background: rgba(17, 84, 102, 0.35);
+  }
+  .lp-canvas {
+    position: relative;
+    width: min(1120px, calc(100% - 40px));
+    height: 2500px;
+    margin: 0 auto;
+    background: var(--surface);
+    box-shadow: 0 24px 80px rgba(15, 76, 92, 0.12);
+  }
+  .lp-section {
+    position: relative;
+    display: grid;
+    min-height: 500px;
+    overflow: hidden;
+    border-bottom: 1px solid var(--line);
+    padding: 74px 128px 58px 80px;
+  }
+  .lp-section::before {
+    content: attr(data-section);
+    position: absolute;
+    top: 28px;
+    left: 80px;
+    border-radius: 999px;
+    background: rgba(17, 84, 102, 0.08);
+    color: var(--trust);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    padding: 6px 12px;
+  }
+  .section-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    gap: 24px;
+    align-content: center;
+    max-width: 900px;
+  }
+  .split {
+    grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.95fr);
+    align-items: center;
+  }
+  .eyebrow {
+    margin: 0 0 -10px;
+    color: var(--green);
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  h1,
+  h2,
+  p {
+    margin: 0;
+  }
+  h1 {
+    color: var(--ink);
+    font-size: clamp(2.25rem, 5vw, 4.4rem);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.12;
+  }
+  h2 {
+    color: var(--ink);
+    font-size: clamp(1.65rem, 3vw, 2.65rem);
+    font-weight: 900;
+    letter-spacing: 0;
+    line-height: 1.22;
+  }
+  .lead {
+    color: #50565a;
+    font-size: clamp(1rem, 1.35vw, 1.2rem);
+    font-weight: 700;
+  }
+  .note {
+    max-width: 760px;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-weight: 900;
+    text-decoration: none;
+  }
+  .btn-primary {
+    background: var(--red);
+    color: #fff;
+    box-shadow: 0 14px 30px rgba(199, 53, 47, 0.22);
+  }
+  .btn-secondary {
+    border: 1px solid var(--line);
+    background: #fff;
+    color: var(--trust);
+  }
+  .hero-visual {
+    position: relative;
+    min-height: 300px;
+    border: 1px solid var(--line);
+    border-radius: 30px;
+    background:
+      radial-gradient(circle at 30% 20%, rgba(93, 157, 66, 0.16), transparent 35%),
+      radial-gradient(circle at 78% 70%, rgba(199, 53, 47, 0.14), transparent 34%),
+      linear-gradient(135deg, #f1f8f6, #fffaf3);
+  }
+  .hero-card {
+    position: absolute;
+    border: 1px solid rgba(17, 84, 102, 0.16);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.84);
+    box-shadow: 0 18px 45px rgba(15, 76, 92, 0.12);
+    padding: 18px;
+  }
+  .hero-card strong {
+    display: block;
+    color: var(--trust);
+    font-size: 0.86rem;
+  }
+  .hero-card small {
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .hero-card.one {
+    top: 42px;
+    left: 34px;
+    width: 58%;
+  }
+  .hero-card.two {
+    right: 30px;
+    bottom: 42px;
+    width: 50%;
+  }
+  .pill-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .pill-list span {
+    border-radius: 999px;
+    background: var(--trust-soft);
+    color: var(--trust);
+    font-size: 0.82rem;
+    font-weight: 900;
+    padding: 7px 12px;
+  }
+  .problem-grid,
+  .service-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .mini-card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: #fff;
+    padding: 20px;
+  }
+  .mini-card b {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--trust);
+    font-size: 0.95rem;
+  }
+  .mini-card span {
+    color: var(--muted);
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+  .service-grid .mini-card {
+    background: linear-gradient(180deg, #fff, #f8fbfa);
+  }
+  .price-box {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 20px;
+    align-items: center;
+    border: 1px solid rgba(199, 53, 47, 0.22);
+    border-radius: 24px;
+    background: rgba(199, 53, 47, 0.045);
+    padding: 26px;
+  }
+  .price-box strong {
+    color: var(--red);
+    font-size: clamp(1.9rem, 4vw, 3.1rem);
+    line-height: 1;
+  }
+  .price-box span {
+    color: var(--muted);
+    font-size: 0.9rem;
+    font-weight: 800;
+  }
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .step {
+    border-radius: 18px;
+    background: var(--trust-soft);
+    padding: 18px;
+  }
+  .step b {
+    display: block;
+    color: var(--green);
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+  }
+  .step span {
+    display: block;
+    margin-top: 6px;
+    color: var(--trust);
+    font-weight: 900;
+    line-height: 1.55;
+  }
+  .contact-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 24px;
+    align-items: center;
+    border-radius: 28px;
+    background: var(--trust);
+    color: #fff;
+    padding: 34px;
+  }
+  .contact-panel h2,
+  .contact-panel p {
+    color: #fff;
+  }
+  .contact-panel .btn {
+    background: #fff;
+    color: var(--trust);
+    white-space: nowrap;
+  }
+  .section-scope {
+    position: absolute;
+    right: 28px;
+    bottom: 22px;
+    color: rgba(17, 84, 102, 0.46);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+  .scope-summary {
+    position: fixed;
+    z-index: 20;
+    right: max(18px, calc((100vw - 1180px) / 2));
+    bottom: 18px;
+    width: min(300px, calc(100% - 36px));
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.92);
+    box-shadow: 0 16px 40px rgba(15, 76, 92, 0.12);
+    backdrop-filter: blur(10px);
+    padding: 16px;
+  }
+  .scope-summary strong {
+    display: block;
+    color: var(--trust);
+    font-size: 0.9rem;
+  }
+  .scope-summary p {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.55;
+  }
+  @media (max-width: 860px) {
+    .demo-toolbar {
+      top: 10px;
+      width: calc(100% - 20px);
+      border-radius: 18px;
+      align-items: flex-start;
+    }
+    .demo-toolbar span {
+      display: none;
+    }
+    .scope-ruler,
+    .scope-summary {
+      display: none;
+    }
+    .lp-canvas {
+      width: 100%;
+      height: auto;
+      box-shadow: none;
+    }
+    .lp-section {
+      min-height: auto;
+      padding: 88px 22px 54px;
+    }
+    .lp-section::before {
+      top: 42px;
+      left: 22px;
+    }
+    .split,
+    .price-box,
+    .contact-panel {
+      grid-template-columns: 1fr;
+    }
+    .hero-visual {
+      display: grid;
+      gap: 14px;
+      align-content: center;
+      min-height: 250px;
+      padding: 20px;
+    }
+    .hero-card,
+    .hero-card.one,
+    .hero-card.two {
+      position: static;
+      width: auto;
+    }
+    .problem-grid,
+    .service-grid,
+    .steps {
+      grid-template-columns: 1fr;
+    }
+    .contact-panel {
+      padding: 26px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="demo-toolbar">
+    <div>
+      <strong>シンプルLP制作のサイズ感サンプル</strong>
+      <span>1ページ / 約2,500px / 5セクションの見本</span>
+    </div>
+    <a href="/pricing/">料金ページへ戻る</a>
+  </div>
+
+  <div class="scope-ruler" aria-hidden="true">
+    <span>0px</span>
+    <span>500px</span>
+    <span>1000px</span>
+    <span>1500px</span>
+    <span>2000px</span>
+    <span>2500px</span>
+  </div>
+
+  <main class="lp-canvas" aria-label="シンプルLP制作の範囲サンプル">
+    <section class="lp-section" data-section="SECTION 01 / 500px">
+      <div class="section-inner split">
+        <div>
+          <p class="eyebrow">First View</p>
+          <h1>小さなお店の魅力を、1ページで伝える。</h1>
+          <p class="lead">サービスの特徴、安心材料、相談先までをコンパクトにまとめるシンプルLPの例です。</p>
+          <div class="cta-row">
+            <a href="#contact" class="btn btn-primary">相談してみる</a>
+            <a href="#service" class="btn btn-secondary">内容を見る</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="hero-card one">
+            <strong>はじめてでも分かる</strong>
+            <small>料金・流れ・相談先を整理</small>
+          </div>
+          <div class="hero-card two">
+            <strong>1ページで完結</strong>
+            <small>必要な情報だけを掲載</small>
+          </div>
+        </div>
+      </div>
+      <span class="section-scope">目安: 0-500px</span>
+    </section>
+
+    <section class="lp-section" data-section="SECTION 02 / 500px">
+      <div class="section-inner">
+        <p class="eyebrow">Problem</p>
+        <h2>まず、訪問者の不安を整理します。</h2>
+        <p class="note">シンプルLPでは、すべてを詰め込むよりも「初見の人が止まりやすい不安」を先に見せる構成にします。</p>
+        <div class="problem-grid">
+          <div class="mini-card"><b>何を頼める？</b><span>サービス範囲を短く提示します。</span></div>
+          <div class="mini-card"><b>いくらかかる？</b><span>料金の目安を先に見せます。</span></div>
+          <div class="mini-card"><b>どう相談する？</b><span>問い合わせ前の心理的負担を下げます。</span></div>
+        </div>
+      </div>
+      <span class="section-scope">目安: 500-1000px</span>
+    </section>
+
+    <section class="lp-section" id="service" data-section="SECTION 03 / 500px">
+      <div class="section-inner">
+        <p class="eyebrow">Service</p>
+        <h2>伝える内容は、3つ程度に絞ります。</h2>
+        <p class="note">最低価格帯では、作り込みすぎた複雑な情報設計ではなく、サービスの核が伝わる範囲にまとめます。</p>
+        <div class="service-grid">
+          <div class="mini-card"><b>サービス紹介</b><span>できること、向いている人を整理。</span></div>
+          <div class="mini-card"><b>選ばれる理由</b><span>強みを短い比較で見せます。</span></div>
+          <div class="mini-card"><b>相談導線</b><span>フォームやLINEへの入口を設置。</span></div>
+        </div>
+      </div>
+      <span class="section-scope">目安: 1000-1500px</span>
+    </section>
+
+    <section class="lp-section" data-section="SECTION 04 / 500px">
+      <div class="section-inner">
+        <p class="eyebrow">Price & Flow</p>
+        <h2>料金と流れを、先回りして見せます。</h2>
+        <div class="price-box">
+          <div>
+            <p class="lead">シンプルLP制作の範囲例</p>
+            <p class="note">1ページ、PC幅1440px基準で縦2,500px程度、5セクションまで。</p>
+          </div>
+          <strong>24,000円〜</strong>
+        </div>
+        <div class="steps" aria-label="相談から公開までの流れ">
+          <div class="step"><b>01</b><span>内容確認</span></div>
+          <div class="step"><b>02</b><span>構成整理</span></div>
+          <div class="step"><b>03</b><span>制作</span></div>
+          <div class="step"><b>04</b><span>公開</span></div>
+        </div>
+      </div>
+      <span class="section-scope">目安: 1500-2000px</span>
+    </section>
+
+    <section class="lp-section" id="contact" data-section="SECTION 05 / 500px">
+      <div class="section-inner">
+        <p class="eyebrow">Contact</p>
+        <div class="contact-panel">
+          <div>
+            <h2>まずは、必要な情報量から一緒に決めましょう。</h2>
+            <p>このサンプルは最低価格帯のサイズ感を示すための見本です。文章量、画像、フォーム、予約機能、CMSなどが増える場合は別途お見積りします。</p>
+          </div>
+          <a href="/contact/" class="btn">相談する</a>
+        </div>
+        <div class="pill-list" aria-label="このサンプルで確認できる範囲">
+          <span>1ページ</span>
+          <span>5セクション</span>
+          <span>約2,500px</span>
+          <span>静的LP</span>
+        </div>
+      </div>
+      <span class="section-scope">目安: 2000-2500px</span>
+    </section>
+  </main>
+
+  <aside class="scope-summary" aria-label="サンプルの注意">
+    <strong>これは範囲感を見るための架空サンプルです。</strong>
+    <p>実際のデザイン、文章量、画像点数、外部連携の有無によって制作範囲と価格は変わります。</p>
+  </aside>
+</body>
+</html>

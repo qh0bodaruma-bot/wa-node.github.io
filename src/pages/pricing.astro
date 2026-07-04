@@ -286,6 +286,7 @@ const structuredData = [
               <b>合計4,500px程度</b>
             </div>
             <p>3ページまで、PC幅1440px基準で各ページ縦1,500px程度・合計4,500px程度までの小規模なホームページです。</p>
+            <a class="scope-sample-link" href="/portfolio-lp/simple-hp-scope/index.html">3ページサンプルを見る →</a>
           </article>
           <article class="recommended-price-card highlight-take card-border-gold">
             <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
@@ -315,6 +316,7 @@ const structuredData = [
               <b>5セクションまで</b>
             </div>
             <p>1ページ、PC幅1440px基準で縦2,500px程度・5セクションまでの簡易的なランディングページです。</p>
+            <a class="scope-sample-link" href="/portfolio-lp/simple-lp-scope.html">2,500pxサンプルを見る →</a>
           </article>
           <article class="recommended-price-card highlight-take card-border-gold">
             <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
@@ -344,6 +346,7 @@ const structuredData = [
               <div><dt>縦の目安</dt><dd>2,500px程度まで</dd></div>
               <div><dt>構成</dt><dd>5セクションまで</dd></div>
             </dl>
+            <a class="minimum-scope-link" href="/portfolio-lp/simple-lp-scope.html">実際のサイズ感を見る →</a>
           </div>
           <div class="minimum-scope-item">
             <strong>シンプルHP制作 <span>40,000円〜</span></strong>
@@ -352,6 +355,7 @@ const structuredData = [
               <div><dt>縦の目安</dt><dd>各1,500px程度まで</dd></div>
               <div><dt>合計</dt><dd>4,500px程度まで</dd></div>
             </dl>
+            <a class="minimum-scope-link" href="/portfolio-lp/simple-hp-scope/index.html">実際の3ページ構成を見る →</a>
           </div>
         </div>
         <p class="minimum-scope-note">原稿量・画像・表・フォーム・予約・ブログ・外部連携などで作業量が増える場合は、事前に追加範囲と費用をご案内します。</p>
@@ -360,11 +364,46 @@ const structuredData = [
       <details class="site-type-cost-note">
         <summary>料金が変わるポイント：静的サイト・動的サイトの違い</summary>
         <div class="site-type-cost-body">
-          <p>
-            会社案内、サービス紹介、料金、問い合わせ導線などを見せるだけなら、表示が速く保守しやすい「静的サイト」で十分なことが多くあります。
-            一方で、予約データの保存、ログイン認証、管理画面での登録・編集、頻繁なCMS更新などが必要な場合は、
-            静的サイトに外部サービスやサーバーレス機能、データベース連携を組み合わせるか、動的な仕組みとして設計するため、制作・保守・セキュリティ確認の範囲が広がります。
-          </p>
+          <div class="site-type-compare" aria-label="静的サイトと動的サイトの比較">
+            <div class="site-type-card site-type-card-static">
+              <span class="site-type-badge">静的サイト</span>
+              <strong>見せる・伝える中心</strong>
+              <div class="site-type-mini-flow" aria-hidden="true">
+                <span>情報</span>
+                <span>表示</span>
+                <span>相談</span>
+              </div>
+              <ul>
+                <li>会社案内・サービス紹介・料金表</li>
+                <li>LP、問い合わせ導線、実績紹介</li>
+                <li>更新頻度が低い固定ページ</li>
+              </ul>
+              <p class="site-type-result">表示が速く、費用と保守を抑えやすい</p>
+            </div>
+            <div class="site-type-card site-type-card-dynamic">
+              <span class="site-type-badge">動的サイト・連携機能</span>
+              <strong>保存・管理・個別処理が中心</strong>
+              <div class="site-type-mini-flow" aria-hidden="true">
+                <span>入力</span>
+                <span>保存</span>
+                <span>管理</span>
+              </div>
+              <ul>
+                <li>予約データの保存・自動返信</li>
+                <li>ログイン、会員機能、管理画面</li>
+                <li>CMS更新、DB連携、外部サービス連携</li>
+              </ul>
+              <p class="site-type-result">設計・保守・セキュリティ確認の範囲が広がる</p>
+            </div>
+          </div>
+          <div class="site-type-price-factors">
+            <strong>料金が上がりやすい条件</strong>
+            <ul>
+              <li>情報を「見せる」だけでなく、保存・検索・編集する</li>
+              <li>ユーザーごとに表示や操作できる内容を変える</li>
+              <li>LINE、予約システム、決済、メール自動送信などをつなぐ</li>
+            </ul>
+          </div>
           <p>
             どちらが必要か分からない段階でも大丈夫です。目的と運用方法を確認したうえで、過不足のない構成をご提案します。
           </p>
@@ -1162,6 +1201,24 @@ const structuredData = [
     font-weight: 900;
     line-height: 1.35;
   }
+  .scope-sample-link,
+  .minimum-scope-link {
+    display: inline-flex;
+    align-items: center;
+    width: fit-content;
+    margin-top: 14px;
+    color: var(--trust);
+    font-size: 0.86rem;
+    font-weight: 900;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    transition: color 0.2s ease, transform 0.2s ease;
+  }
+  .scope-sample-link:hover,
+  .minimum-scope-link:hover {
+    color: var(--accent-red);
+    transform: translateX(2px);
+  }
 
   .minimum-scope {
     margin: 28px 0 22px;
@@ -1280,6 +1337,122 @@ const structuredData = [
     color: #666;
     font-size: 0.9rem;
     line-height: 1.8;
+  }
+  .site-type-compare {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    margin: 2px 0 16px;
+  }
+  .site-type-card {
+    display: grid;
+    gap: 12px;
+    min-height: 100%;
+    padding: 18px;
+    border: 1px solid var(--trust-line);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+  .site-type-card-static {
+    border-left: 5px solid var(--accent-green);
+  }
+  .site-type-card-dynamic {
+    border-left: 5px solid var(--accent-red);
+  }
+  .site-type-badge {
+    width: fit-content;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust);
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+  .site-type-card strong {
+    color: var(--ink);
+    font-size: 1rem;
+    line-height: 1.45;
+  }
+  .site-type-mini-flow {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+    align-items: center;
+  }
+  .site-type-mini-flow span {
+    position: relative;
+    min-height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 999px;
+    background: rgba(238, 245, 242, 0.92);
+    color: var(--trust);
+    font-size: 0.8rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .site-type-mini-flow span:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -8px;
+    width: 8px;
+    height: 2px;
+    background: var(--trust-line);
+  }
+  .site-type-card ul,
+  .site-type-price-factors ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .site-type-card li,
+  .site-type-price-factors li {
+    position: relative;
+    padding-left: 18px;
+    color: #555;
+    font-size: 0.84rem;
+    line-height: 1.7;
+  }
+  .site-type-card li::before,
+  .site-type-price-factors li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.74em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent-green);
+  }
+  .site-type-card-dynamic li::before,
+  .site-type-price-factors li::before {
+    background: var(--accent-red);
+  }
+  .site-type-result {
+    margin: 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+    background: rgba(15, 76, 92, 0.06);
+    color: var(--trust);
+    font-size: 0.82rem;
+    font-weight: 900;
+    line-height: 1.6;
+  }
+  .site-type-price-factors {
+    margin: 0 0 14px;
+    padding: 14px 16px;
+    border: 1px solid rgba(199, 46, 46, 0.18);
+    border-radius: 14px;
+    background: rgba(199, 46, 46, 0.045);
+  }
+  .site-type-price-factors strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--accent-red);
+    font-size: 0.9rem;
   }
   .site-type-cost-body a {
     color: var(--trust);
@@ -1595,6 +1768,7 @@ const structuredData = [
     .choice-grid,
     .recommended-price-grid,
     .lp-diagnosis-grid,
+    .site-type-compare,
     .service-map-grid,
     .demo-price-grid,
     .pricing-grid-simple { grid-template-columns: 1fr; }
@@ -1613,6 +1787,20 @@ const structuredData = [
     .minimum-scope-item + .minimum-scope-item {
       border-top: 1px solid var(--trust-line);
       border-left: 0;
+    }
+    .site-type-cost-note summary {
+      padding: 16px 18px;
+      line-height: 1.55;
+    }
+    .site-type-cost-body {
+      padding: 0 16px 18px;
+    }
+    .site-type-card {
+      padding: 16px;
+    }
+    .site-type-mini-flow span {
+      min-height: 34px;
+      font-size: 0.76rem;
     }
   }
   @media (prefers-reduced-motion: reduce) {
