@@ -29,6 +29,14 @@ const structuredData = [
     priceFrom: "64000",
   }),
   createServiceSchema({
+    name: "LP改善入口診断",
+    description:
+      "既存LPを対象に、ファーストビュー、相談ボタン、料金表、フォーム前の不安、スマホ表示、AI検索で拾われる構造を確認し、改善優先度を整理します。",
+    path: "/pricing/#lp-diagnosis",
+    serviceType: "Landing page improvement audit",
+    priceFrom: "15000",
+  }),
+  createServiceSchema({
     name: "ビジネスの副操縦士（月額制戦略的パートナー）",
     description:
       "Web改善、AI・ICT活用、業務整理を月額で相談できる継続支援です。",
@@ -45,6 +53,16 @@ const structuredData = [
       question: "まだ何を頼むか決まっていなくても相談できますか？",
       answer:
         "はい。Web制作、LP制作、AI・ICT活用、公開後の改善のうち、今どこから始めるべきか一緒に整理します。",
+    },
+    {
+      question: "15,000円でLPを作ってもらえますか？",
+      answer:
+        "15,000円は新規LP制作ではなく、既存LPを対象にした改善診断の入口価格です。新規LP制作はシンプルLP制作24,000円〜、選ばれる導線LP制作64,000円〜が目安です。",
+    },
+    {
+      question: "LP改善診断では何がわかりますか？",
+      answer:
+        "ファーストビュー、相談ボタン、料金表、フォーム前の不安、スマホでの読みやすさ、AI検索で拾われる構造を確認し、優先して直すべき点を整理します。",
     },
     {
       question: "相談後に契約を迫られることはありますか？",
@@ -94,12 +112,12 @@ const structuredData = [
           <p>会社概要、サービス、料金、相談の流れなど、初見で信頼される事業の土台を整えます。</p>
           <strong>HP制作 40,000円〜</strong>
         </a>
-        <a class="choice-card card-border-green" href="#copilot">
-          <span class="choice-label">導線改善</span>
+        <a class="choice-card card-border-green" href="#lp-diagnosis">
+          <span class="choice-label">診断入口</span>
           <h3><span class="card-icon-window window-green"><svg viewBox="0 0 24 24"><path d="M18 20V10M12 20V4M6 20v-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg></span>今あるLPを改善したい</h3>
-          <p class="choice-fit">問い合わせ前の迷いを減らしたい方へ</p>
-          <p>相談ボタン、料金表、フォーム、AI検索で拾われる構造、色彩・動き・読みにくさまで見直します。</p>
-          <strong>15,000円〜</strong>
+          <p class="choice-fit">まず原因を見つけたい方へ</p>
+          <p>15,000円〜は新規制作ではなく、既存LPの迷いどころを確認して改善優先度を出す入口です。</p>
+          <strong>LP診断 15,000円〜</strong>
         </a>
         <a class="choice-card card-border-blue" href="#copilot">
           <span class="choice-label">継続改善</span>
@@ -120,9 +138,9 @@ const structuredData = [
       <div class="decision-guide" aria-label="目的別のおすすめ">
         <h3>目的別のおすすめ</h3>
         <div class="decision-grid">
-          <a href="#web-production">
-            <span>問い合わせを増やしたい</span>
-            <strong>選ばれる導線LP制作</strong>
+          <a href="#lp-diagnosis">
+            <span>LPの反応が鈍い理由を知りたい</span>
+            <strong>LP改善入口診断</strong>
           </a>
           <a href="#web-production">
             <span>事業の土台を整えたい</span>
@@ -132,6 +150,66 @@ const structuredData = [
             <span>公開後も改善したい</span>
             <strong>ビジネスの副操縦士</strong>
           </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section lp-diagnosis-section" id="lp-diagnosis">
+      <p class="eyebrow">Entry Diagnosis</p>
+      <h2 class="premium-heading">15,000円のLP改善診断で行うこと</h2>
+      <p class="lp-diagnosis-lead">
+        この15,000円〜は、LPを丸ごと新規制作する料金ではありません。すでにあるLPを前提に、
+        「どこで迷いが生まれているか」「先に直すべき場所はどこか」を短時間で切り分ける入口価格です。
+      </p>
+
+      <div class="lp-diagnosis-grid">
+        <article>
+          <span>01</span>
+          <h3>既存LPを前提にする</h3>
+          <p>ゼロから構成・デザイン・実装を作るのではなく、今あるページのファーストビュー、相談ボタン、料金表、フォーム前の不安を確認します。</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>見る場所を絞る</h3>
+          <p>色彩、読みやすさ、スマホ表示、AI検索で拾われる見出しやFAQなど、問い合わせ前の迷いに関わる部分へ絞って確認します。</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>成果物を軽くする</h3>
+          <p>詳細なデザインカンプや実装ではなく、優先順位つきの改善メモ、すぐ直せる文言案、次の見積り判断材料にまとめます。</p>
+        </article>
+      </div>
+
+      <div class="lp-diagnosis-price-box">
+        <div class="lp-diagnosis-price-copy">
+          <h3>価格が抑えられる理由</h3>
+          <p>
+            新規LP制作で発生する原稿整理、構成案、デザイン、コーディング、公開作業を含めず、
+            原因の切り分けと優先順位づけに集中するため、15,000円〜で始められます。
+          </p>
+        </div>
+        <div class="table-wrap mini lp-diagnosis-table">
+          <table>
+            <thead>
+              <tr><th>メニュー</th><th>料金</th><th>主な内容</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>LP改善入口診断</td><td>15,000円〜</td><td>既存LPの主要導線を確認し、改善優先度メモを作成</td></tr>
+              <tr><td>詳細導線診断</td><td>30,000円〜</td><td>競合・構成・CTA・料金表・フォームまで広げて確認</td></tr>
+              <tr><td>改善設計パック</td><td>50,000円〜</td><td>改善ラフ、文言案、実装範囲、次回見積り前提まで整理</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="lp-diagnosis-boundary" aria-label="含まれるものと含まれないもの">
+        <div>
+          <strong>含まれるもの</strong>
+          <p>現状LPの確認、改善優先度、文言・導線の方向性、制作へ進むかどうかの判断材料。</p>
+        </div>
+        <div>
+          <strong>含まれないもの</strong>
+          <p>新規LP制作、詳細デザインカンプ、コーディング、広告運用、問い合わせ数や順位の保証。</p>
         </div>
       </div>
     </section>
@@ -363,6 +441,41 @@ const structuredData = [
       </div>
     </section>
 
+    <section class="section service-map-section" aria-labelledby="service-map-title">
+      <p class="eyebrow">Service Map</p>
+      <h2 id="service-map-title" class="premium-heading">制作・診断・保守・成長支援の違い</h2>
+      <p class="service-map-lead">
+        似た言葉に見えても、目的はそれぞれ違います。新しく作るのか、今あるものの原因を見つけるのか、
+        公開後を守るのか、毎月の判断まで伴走するのかで、選ぶメニューが変わります。
+      </p>
+      <div class="service-map-grid">
+        <a href="#web-production" class="service-map-card card-border-gold">
+          <span>作る</span>
+          <h3>LP・HP制作</h3>
+          <p>構成、デザイン、実装、公開まで含めて新しく形にします。</p>
+          <strong>LP 24,000円〜 / HP 40,000円〜</strong>
+        </a>
+        <a href="#lp-diagnosis" class="service-map-card card-border-green">
+          <span>見つける</span>
+          <h3>LP改善診断</h3>
+          <p>今あるLPの迷いどころを確認し、直す順番を整理します。</p>
+          <strong>15,000円〜</strong>
+        </a>
+        <a href="#copilot" class="service-map-card card-border-blue">
+          <span>守る</span>
+          <h3>保守・軽微修正</h3>
+          <p>公開後の安全な運用、軽微な修正、更新まわりを支えます。</p>
+          <strong>月額 10,000円〜</strong>
+        </a>
+        <a href="#copilot" class="service-map-card card-border-red">
+          <span>伸ばす</span>
+          <h3>副操縦士・AI/ICT支援</h3>
+          <p>Web改善、AI活用、業務整理を継続的に相談できます。</p>
+          <strong>月額 15,000円〜</strong>
+        </a>
+      </div>
+    </section>
+
     <section class="section" id="copilot">
       <p class="eyebrow">02. Ongoing Support & AI</p>
       <h2 class="premium-heading">ビジネスの副操縦士（月額制戦略的パートナー）</h2>
@@ -398,7 +511,9 @@ const structuredData = [
             <tbody>
               <tr><td>ビジネスの副操縦士（スタンダード）</td><td>45,000円 / 月</td><td>月2回相談 + 改善提案 + 簡易マニュアル・プロンプト作成</td></tr>
               <tr><td>業務整理ミニ診断</td><td>15,000円</td><td>90分相談 + 改善メモ。何を自動化すべきか優先順位を整理</td></tr>
-              <tr><td>Web/LP改善診断</td><td>15,000円〜</td><td>相談ボタン、料金表、フォーム、最初に見える印象を心理学とUXの両面から確認し、改善優先度を整理</td></tr>
+              <tr><td>LP改善入口診断</td><td>15,000円〜</td><td>既存LPを対象に、ファーストビュー、相談ボタン、料金表、フォーム前の不安、スマホ表示を確認。新規制作ではなく改善優先度を整理</td></tr>
+              <tr><td>詳細導線診断</td><td>30,000円〜</td><td>競合・構成・CTA・料金表・フォーム・AI検索で拾われる構造まで広げて、改善箇所を切り分け</td></tr>
+              <tr><td>改善設計パック</td><td>50,000円〜</td><td>改善ラフ、文言案、実装範囲、制作へ進む場合の見積り前提を整理</td></tr>
               <tr><td>AI検索・AEO内部対策</td><td>15,000円〜</td><td>ChatGPT等のAI検索やGoogle AI Overviewsに拾われやすい見出し、FAQ、構造化データ、要約設計を確認</td></tr>
               <tr><td>LP改善A/Bテスト設計</td><td>15,000円〜</td><td>見出し、相談ボタン、料金表、フォーム文言の改善案を2〜3案に整理し、アクセス解析で比べやすい形に設計</td></tr>
               <tr><td>相談ボタン・色彩チェック</td><td>5,000円〜</td><td>ボタン色、文言、配置、文字の見やすさ、スマホでの押しやすさを確認</td></tr>
@@ -406,6 +521,8 @@ const structuredData = [
               <tr><td>AI制作物チェック</td><td>10,000円〜</td><td>AIで作成した文章・LP案・サイト案を、導線・信頼感・表現リスクの観点から整理</td></tr>
               <tr><td>Figma/AI試作品の本番化相談</td><td>15,000円〜</td><td>FigmaやAIツールで作った試作品を、本番公開に必要な構成・文言・実装方針へ整理</td></tr>
               <tr><td>軽量CMS・更新導線相談</td><td>10,000円〜</td><td>お知らせやブログの更新頻度に合わせ、静的サイトと相性のよいCMS連携を検討</td></tr>
+              <tr><td>軽量CMS・お知らせ更新導線設計</td><td>30,000円〜80,000円</td><td>microCMS等を使い、公開後に自分で更新しやすいお知らせ・ブログ導線を設計</td></tr>
+              <tr><td>Webサイト保守ライト</td><td>月額 10,000円〜</td><td>公開後の安全な運用、軽微な修正、表示崩れやリンク切れの確認を代行</td></tr>
               <tr><td>小規模DX設計パック</td><td>50,000円</td><td>業務フローの可視化、ツール選定、導入・定着のステップ作成</td></tr>
               <tr><td>法人向けAI導入・研修</td><td>80,000円〜</td><td>社内レクチャー、運用ガイドライン作成、業務別活用設計</td></tr>
               <tr><td>LINE公式アカウント設計</td><td>20,000円〜</td><td>登録から成約までの行動心理をふまえた初期構築</td></tr>
@@ -451,6 +568,14 @@ const structuredData = [
         <details>
           <summary>まだ何を頼むか決まっていなくても相談できますか？</summary>
           <p>はい。Web制作、LP制作、AI・ICT活用、公開後の改善のうち、今どこから始めるべきか一緒に整理します。</p>
+        </details>
+        <details>
+          <summary>15,000円でLPを作ってもらえますか？</summary>
+          <p>15,000円〜は、新規LP制作ではなく既存LPの改善診断の入口価格です。今あるLPのファーストビュー、相談ボタン、料金表、フォーム前の不安などを確認し、先に直すべき場所を整理します。新規LP制作はシンプルLP制作24,000円〜、選ばれる導線LP制作64,000円〜が目安です。</p>
+        </details>
+        <details>
+          <summary>LP改善診断のあと、そのまま制作や修正も頼めますか？</summary>
+          <p>はい。診断で見つかった課題をもとに、軽微修正で足りるのか、LPを作り直した方がよいのか、必要な範囲と費用を分けてご提案します。診断だけで終了しても問題ありません。</p>
         </details>
         <details>
           <summary>相談後に契約を迫られることはありますか？</summary>
@@ -691,6 +816,129 @@ const structuredData = [
     max-width: 680px;
     color: #777;
     font-size: 0.92rem;
+  }
+  .lp-diagnosis-section {
+    border-bottom: 1px solid var(--line);
+  }
+  .lp-diagnosis-lead,
+  .service-map-lead {
+    max-width: 780px;
+    color: #555;
+    line-height: 1.85;
+  }
+  .lp-diagnosis-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+    margin: 34px 0 28px;
+  }
+  .lp-diagnosis-grid article {
+    padding: 26px 24px;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
+    box-shadow: var(--card-shadow);
+  }
+  .lp-diagnosis-grid span,
+  .service-map-card span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 42px;
+    min-height: 30px;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    background: rgba(15, 76, 92, 0.08);
+    color: var(--trust);
+    font-size: 0.78rem;
+    font-weight: 900;
+  }
+  .lp-diagnosis-grid h3,
+  .lp-diagnosis-price-copy h3,
+  .service-map-card h3 {
+    margin: 0 0 10px;
+    color: #2c2c2c;
+    font-size: 1.12rem;
+    font-weight: 900;
+  }
+  .lp-diagnosis-grid p,
+  .lp-diagnosis-price-copy p,
+  .lp-diagnosis-boundary p,
+  .service-map-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.75;
+  }
+  .lp-diagnosis-price-box {
+    display: grid;
+    grid-template-columns: 0.85fr 1.35fr;
+    gap: 22px;
+    align-items: start;
+    margin: 28px 0 18px;
+    padding: 28px;
+    border: 1px solid var(--trust-line);
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(238, 245, 242, 0.86), rgba(255, 255, 255, 0.96));
+  }
+  .lp-diagnosis-price-copy h3 {
+    color: var(--trust);
+  }
+  .lp-diagnosis-table {
+    margin: 0;
+  }
+  .lp-diagnosis-boundary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .lp-diagnosis-boundary div {
+    padding: 20px 22px;
+    border: 1px dashed var(--line);
+    border-radius: 14px;
+    background: var(--surface);
+  }
+  .lp-diagnosis-boundary strong {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--accent-dark);
+    font-size: 0.95rem;
+    font-weight: 900;
+  }
+  .service-map-section {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .service-map-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 30px;
+  }
+  .service-map-card {
+    display: flex;
+    min-height: 230px;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 24px 20px;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    background: var(--surface);
+    color: inherit;
+    text-decoration: none;
+    box-shadow: var(--card-shadow);
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  }
+  .service-map-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--trust-line);
+    box-shadow: var(--card-shadow-hover);
+  }
+  .service-map-card strong {
+    color: var(--trust);
+    font-size: 0.96rem;
+    line-height: 1.5;
   }
   .decision-guide {
     margin: 30px auto 0;
@@ -1346,6 +1594,8 @@ const structuredData = [
     th, td { padding: 15px 10px; font-size: 0.9rem; }
     .choice-grid,
     .recommended-price-grid,
+    .lp-diagnosis-grid,
+    .service-map-grid,
     .demo-price-grid,
     .pricing-grid-simple { grid-template-columns: 1fr; }
     .recommended-price-card.highlight-take {
@@ -1356,7 +1606,9 @@ const structuredData = [
     .choice-footnote { margin-left: 0; }
     .choice-card { min-height: auto; }
     .decision-grid,
-    .plan-picker { grid-template-columns: 1fr; }
+    .plan-picker,
+    .lp-diagnosis-price-box,
+    .lp-diagnosis-boundary { grid-template-columns: 1fr; }
     .minimum-scope-grid { grid-template-columns: 1fr; }
     .minimum-scope-item + .minimum-scope-item {
       border-top: 1px solid var(--trust-line);
