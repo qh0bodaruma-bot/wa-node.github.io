@@ -25,6 +25,15 @@ type FAQItem = {
   answer: string;
 };
 
+type BlogPostingSchemaOptions = {
+  title: string;
+  description: string;
+  path: string;
+  datePublished: string;
+  dateModified: string;
+  image?: string;
+};
+
 export const absoluteUrl = (path = "/") => new URL(path, SITE_URL).href;
 
 export const organizationSchema = {
@@ -73,7 +82,7 @@ export const personSchema = {
   "@id": `${SITE_URL}/about/#person`,
   name: "高野 紘純",
   alternateName: "Hirozumi Takano",
-  image: absoluteUrl("/images/avatar.png"),
+  image: absoluteUrl("/images/avatar.webp"),
   jobTitle: "心理学に強いWeb制作者 / ICTコンサルタント",
   worksFor: { "@id": `${SITE_URL}/#organization` },
   knowsAbout: [
@@ -168,5 +177,32 @@ export function createFAQSchema(items: FAQItem[]) {
         text: item.answer,
       },
     })),
+  };
+}
+
+export function createBlogPostingSchema({
+  title,
+  description,
+  path,
+  datePublished,
+  dateModified,
+  image,
+}: BlogPostingSchemaOptions) {
+  const url = absoluteUrl(path);
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "@id": `${url}#article`,
+    headline: title,
+    description,
+    url,
+    mainEntityOfPage: { "@id": url },
+    inLanguage: "ja",
+    datePublished,
+    dateModified,
+    ...(image ? { image: absoluteUrl(image) } : {}),
+    author: { "@id": `${SITE_URL}/about/#person` },
+    publisher: { "@id": `${SITE_URL}/#organization` },
   };
 }

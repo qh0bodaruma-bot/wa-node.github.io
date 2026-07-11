@@ -81,7 +81,11 @@ const structuredData = [
   <main class="pricing-container" data-glossary-skip>
     <section class="hero">
       <div class="hero-inner">
-        <!-- Premium Anniversary Banner -->
+        <p class="eyebrow">Pricing</p>
+        <h1 class="premium-heading">料金プラン・制作費用</h1>
+        <p class="lead">ホームページ制作、LP制作・改善、戦略的パートナー契約（ビジネスの副操縦士）の料金目安です。ご予算に合わせた柔軟な提案も可能です。</p>
+        <p class="note">和-Nodeでは、心理学の知見を「不安を煽るため」ではなく、「安心して選べる導線をつくるため」に活用します。正式な制作・月額支援は、内容・範囲・追加作業の有無を確認し、費用にご納得いただいた後に開始します。</p>
+
         <div class="premium-ann-banner reveal">
           <div class="banner-inner">
             <span class="banner-badge">1st ANNIVERSARY</span>
@@ -92,11 +96,6 @@ const structuredData = [
             <a href="/campaign-anniversary/" class="banner-link">特設ページへ →</a>
           </div>
         </div>
-
-        <p class="eyebrow">Pricing</p>
-        <h1 class="premium-heading">料金プラン・制作費用</h1>
-        <p class="lead">ホームページ制作、LP制作・改善、戦略的パートナー契約（ビジネスの副操縦士）の料金目安です。ご予算に合わせた柔軟な提案も可能です。</p>
-        <p class="note">和-Nodeでは、心理学の知見を「不安を煽るため」ではなく、「安心して選べる導線をつくるため」に活用します。正式な制作・月額支援は、内容・範囲・追加作業の有無を確認し、費用にご納得いただいた後に開始します。</p>
       </div>
     </section>
 
@@ -225,13 +224,13 @@ const structuredData = [
 
       <!-- アンカリング効果（市場相場との比較） -->
       <div class="market-anchoring-box">
-        <h3 class="anchoring-title">Webサイト制作の「市場相場」と和-Nodeの価格</h3>
-        <p class="anchoring-intro">Web制作を依頼する際、「なぜこんなに安いの？」「品質は大丈夫？」と不安に思われるかもしれません。一般的な市場相場と比較して、和-Nodeが適正価格で丁寧に制作できる理由をご説明します。</p>
+        <h3 class="anchoring-title">Webサイト制作の参考価格帯と和-Nodeの価格</h3>
+        <p class="anchoring-intro">Web制作を依頼する際、「なぜこんなに安いの？」「品質は大丈夫？」と不安に思われるかもしれません。一般的な制作会社へ依頼する場合の参考価格帯と比べながら、和-Nodeが適正価格で丁寧に制作できる理由をご説明します。</p>
         
         <div class="anchoring-table-wrap">
           <div class="anchoring-row header">
             <div>制作タイプ</div>
-            <div>一般的な制作会社相場</div>
+            <div>一般的な制作会社の参考価格帯</div>
             <div>和-Node（キャンペーン価格）</div>
           </div>
           <div class="anchoring-row">
@@ -250,6 +249,7 @@ const structuredData = [
             <div class="wa-price">初期 144,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
           </div>
         </div>
+        <p class="anchoring-caveat">※価格帯はページ数、原稿・画像の準備状況、予約・決済・CMSなどの機能、運用支援の範囲によって大きく変わります。条件が同じとは限らないため、比較の目安としてご覧ください。</p>
 
         <div class="anchoring-reason">
           <h4>和-Nodeが「丁寧な設計×適正価格」を実現できる理由</h4>
@@ -745,7 +745,7 @@ const structuredData = [
   .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--line); text-align: center; }
   .hero-inner, .section { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
   
-  .premium-ann-banner { margin-bottom: 50px; }
+  .premium-ann-banner { margin: 40px 0 0; }
   .banner-inner {
     background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%); border: 1px solid var(--accent-red); border-radius: 24px;
     padding: 24px 32px; display: flex; align-items: center; gap: 30px;
@@ -1760,9 +1760,19 @@ const structuredData = [
   }
 
   @media (max-width: 768px) {
-    .banner-inner { flex-direction: column; text-align: center; padding: 30px 20px; gap: 15px; }
+    .hero { padding: 56px 0 48px; }
+    .hero .premium-heading {
+      font-size: clamp(1.8rem, 8vw, 2.15rem);
+      line-height: 1.35;
+      letter-spacing: 0.02em;
+      word-break: keep-all;
+    }
+    .premium-ann-banner { margin-top: 30px; }
+    .banner-inner { flex-direction: column; text-align: center; padding: 20px 16px; gap: 10px; }
     .banner-main { text-align: center; }
-    .banner-main strong { font-size: 1.1rem; }
+    .banner-main strong { font-size: 1rem; }
+    .banner-main p { margin: 0; font-size: 0.86rem; }
+    .banner-link { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
     h2 { font-size: 1.8rem; }
     th, td { padding: 15px 10px; font-size: 0.9rem; }
     .choice-grid,
@@ -1844,6 +1854,12 @@ const structuredData = [
     color: #666;
     line-height: 1.6;
     margin-bottom: 24px;
+  }
+  .anchoring-caveat {
+    margin: -8px 0 24px;
+    color: #666;
+    font-size: 0.78rem;
+    line-height: 1.7;
   }
   .anchoring-table-wrap {
     border: 1px solid var(--card-border);
@@ -1942,7 +1958,7 @@ const structuredData = [
       margin-bottom: 4px;
     }
     .anchoring-row .market-price::before {
-      content: "市場相場: ";
+      content: "参考価格帯: ";
       font-size: 0.8rem;
       color: #999;
       font-weight: bold;

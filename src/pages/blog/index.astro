@@ -1,21 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getBlogs } from '../../library/microcms';
+import { cleanBlogTitle, createBlogExcerpt } from '../../library/blogPresentation';
 
 // microCMSから記事一覧を取得（公開日の降順）
-console.log("DEBUG - MICROCMS_SERVICE_DOMAIN:", import.meta.env.MICROCMS_SERVICE_DOMAIN);
-console.log("DEBUG - MICROCMS_API_KEY:", import.meta.env.MICROCMS_API_KEY ? "EXISTS" : "MISSING");
 const response = await getBlogs({ 
   orders: '-publishedAt' 
 });
 const posts = response.contents;
-const cleanBlogTitle = (title: string) => title.replace(/^\s*大見出し[：:]\s*/, "");
-const cleanBlogExcerpt = (content: string) => content
-  .replace(/(<h[2-3]\b[^>]*>)\s*中見出し[：:]\s*/g, "$1")
-  .replace(/<h[2-3]\b[^>]*>\s*設定用ハッシュタグ\s*<\/h[2-3]>/g, "")
-  .replace(/設定用ハッシュタグ\s*/g, "")
-  .replace(/<[^>]*>/g, "")
-  .substring(0, 100) + "...";
 ---
 
 <BaseLayout title="コラム・知恵袋｜和-Node" description="心理学とITの交差点。成約率を高めるWeb制作のヒントや、AI活用の現場知見、心の健康を守る方法などを発信しています。">
@@ -35,7 +27,14 @@ const cleanBlogExcerpt = (content: string) => content
             <a href={`/blog/${post.id}/`}>
               <div class="post-image">
                 {post.eyecatch ? (
-                  <img src={post.eyecatch.url} alt="" />
+                  <img
+                    src={post.eyecatch.url}
+                    alt={`${cleanBlogTitle(post.title)}のアイキャッチ画像`}
+                    width={post.eyecatch.width}
+                    height={post.eyecatch.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
                 ) : (
                   <div class="image-placeholder">No Image</div>
                 )}
@@ -56,7 +55,7 @@ const cleanBlogExcerpt = (content: string) => content
                   )}
                 </div>
                 <h2>{cleanBlogTitle(post.title)}</h2>
-                <p>{post.description || cleanBlogExcerpt(post.content)}</p>
+                <p>{post.description || createBlogExcerpt(post.content, 110)}</p>
                 <span class="read-more">詳しく見る →</span>
               </div>
             </a>

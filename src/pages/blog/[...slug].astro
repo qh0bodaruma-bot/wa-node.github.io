@@ -2,6 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ConsultationFlow from '../../components/ConsultationFlow.astro';
 import { getBlogs, getBlogDetail } from '../../library/microcms';
+import { cleanBlogContent, cleanBlogTitle, createBlogExcerpt } from '../../library/blogPresentation';
+import { createBlogPostingSchema } from '../../data/structuredData';
 
 export async function getStaticPaths() {
   const response = await getBlogs({ fields: ["id"] });
@@ -12,16 +14,21 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params;
 const post = await getBlogDetail(slug);
-const cleanBlogTitle = (title: string) => title.replace(/^\s*大見出し[：:]\s*/, "");
-const cleanBlogContent = (content: string) => content
-  .replace(/(<h[2-3]\b[^>]*>)\s*中見出し[：:]\s*/g, "$1")
-  .replace(/<h[2-3]\b[^>]*>\s*設定用ハッシュタグ\s*<\/h[2-3]>/g, "")
-  .replace(/設定用ハッシュタグ\s*/g, "");
 const displayTitle = cleanBlogTitle(post.title);
 const cleanedContent = cleanBlogContent(post.content);
+const description = post.description?.trim() || createBlogExcerpt(cleanedContent, 150);
+const articlePath = `/blog/${slug}/`;
+const structuredData = createBlogPostingSchema({
+  title: displayTitle,
+  description,
+  path: articlePath,
+  datePublished: post.publishedAt,
+  dateModified: post.updatedAt || post.revisedAt,
+  image: post.eyecatch?.url,
+});
 ---
 
-<BaseLayout title={`${displayTitle}｜和-Node 知恵袋`} description={post.description} image={post.eyecatch?.url}>
+<BaseLayout title={`${displayTitle}｜和-Node 知恵袋`} description={description} image={post.eyecatch?.url} structuredData={structuredData}>
   <article class="post-single">
     <div class="post-header">
       <div class="container-narrow">
@@ -46,7 +53,14 @@ const cleanedContent = cleanBlogContent(post.content);
     <div class="post-hero">
       <div class="container-narrow">
         {post.eyecatch && (
-          <img src={post.eyecatch.url} alt="" class="hero-image" />
+          <img
+            src={post.eyecatch.url}
+            alt={`${displayTitle}のアイキャッチ画像`}
+            class="hero-image"
+            width={post.eyecatch.width}
+            height={post.eyecatch.height}
+            decoding="async"
+          />
         )}
       </div>
     </div>

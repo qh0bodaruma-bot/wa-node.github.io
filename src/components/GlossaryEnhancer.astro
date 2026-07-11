@@ -167,7 +167,7 @@
       const hasTerm = termPattern.test(node.nodeValue);
       termPattern.lastIndex = 0;
       if (!hasTerm) return false;
-      return !parent.closest('a, button, input, textarea, select, option, summary, script, style, code, pre, svg, [data-glossary-skip], .glossary-term');
+      return !parent.closest('a, button, input, textarea, select, option, summary, script, style, code, pre, svg, h1, h2, h3, h4, h5, h6, nav, footer, [role="navigation"], [data-glossary-skip], .glossary-term');
     }
 
     function createGlossaryTerm(term) {
