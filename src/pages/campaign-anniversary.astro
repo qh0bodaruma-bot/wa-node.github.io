@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 
 const CAMPAIGN_END_DATE = "2026年7月31日";
 
@@ -82,17 +83,17 @@ const jsonLd = {
         </div>
         <div class="value-grid">
           <div class="value-card reveal">
-            <div class="v-icon">🧠</div>
+            <div class="v-icon"><MaterialIcon name="psychology" /></div>
             <h3>心理学の導線</h3>
             <p>「安心」を設計し、離脱を防ぐ。</p>
           </div>
           <div class="value-card reveal">
-            <div class="v-icon">⚡</div>
+            <div class="v-icon"><MaterialIcon name="bolt" /></div>
             <h3>自動化の技術</h3>
             <p>AIとICTで、あなたの時間を創る。</p>
           </div>
           <div class="value-card reveal">
-            <div class="v-icon">♿</div>
+            <div class="v-icon"><MaterialIcon name="accessible_forward" /></div>
             <h3>当事者の視点</h3>
             <p>心理的不親切も見逃さない設計。</p>
           </div>

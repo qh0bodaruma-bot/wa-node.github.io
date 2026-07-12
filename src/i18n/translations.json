@@ -13,7 +13,7 @@
     "title_highlight": { "ja": "心理学", "en": "Psychological Reason", "fr": "Raison Psychologique" },
     "title_part2": { "ja": "的な根拠がある。", "en": " to be Chosen.", "fr": " d'être Choisi." },
     "lead": {
-      "ja": "和-Nodeは、心理学の知見を活かし、訪問者の不安や迷いを減らすホームページ制作・LP改善の窓口です。料金・強み・相談の流れが伝わる情報設計、自然に相談しやすいボタンや導線、アクセス解析を使った改善まで、相談しやすく育てやすいWeb環境を整えます。",
+      "ja": "和-Nodeは、心理学の知見を活かし、料金・強み・相談の流れを初見で伝わる順番に整えます。ホームページ制作・LP改善から、公開後の計測改善まで支援します。",
       "en": "Wa-Node blends behavioral psychology and statistical insights with web design to prevent bounces. Serving as your business co-pilot, we support decisions and execution from LP/website production to AI/ICT integration.",
       "fr": "Wa-Node applique la psychologie comportementale et les analyses statistiques à la conception web. En tant que co-pilote d'affaires, nous soutenons vos décisions de la création de LP/sites internet à l'intégration de l'IA/TIC."
     },
@@ -70,14 +70,14 @@
     "card4_desc": { "ja": "ChatGPT、LINE、業務ツール、簡単な自動化などをスポットで整理します。", "en": "Spot consultations for ChatGPT, LINE, business tools, and simple automation.", "fr": "Consultations ponctuelles pour ChatGPT, LINE, outils metier et automatisation simple." },
     "card4_link": { "ja": "スポット相談 5,000円〜 →", "en": "Consultation from 5,000 JPY →", "fr": "Consultation dès 5 000 JPY →" },
     "sub_link_hp_lp": {
-      "ja": "💡 HPとLPの違い・解説はこちら →",
-      "en": "💡 Learn the difference between HP and LP →",
-      "fr": "💡 Apprenez la différence entre HP et LP →"
+      "ja": "HPとLPの違い・解説はこちら →",
+      "en": "Learn the difference between HP and LP →",
+      "fr": "Apprenez la différence entre HP et LP →"
     },
     "sub_link_gas": {
-      "ja": "💡 自動化(GAS)でできることはこちら →",
-      "en": "💡 What you can do with automation (GAS) →",
-      "fr": "💡 Ce que vous pouvez faire avec l'automatisation (GAS) →"
+      "ja": "自動化(GAS)でできることはこちら →",
+      "en": "What you can do with automation (GAS) →",
+      "fr": "Ce que vous pouvez faire avec l'automatisation (GAS) →"
     }
   },
   "experience": {
@@ -164,9 +164,9 @@
     "col3_item2": { "ja": "バリアフリー診断", "en": "Accessibility Audit", "fr": "Audit Accessibilité" },
     "col3_item3": { "ja": "こころの疲労度診断", "en": "Mental Fatigue Check", "fr": "Fatigue Mentale Check" },
     "col3_item4": { "ja": "KDP出版実績", "en": "KDP Books Portfolio", "fr": "Livres KDP" },
-    "col3_item5": { "ja": "🎁 無料特典", "en": "🎁 Free Guide", "fr": "🎁 Guide Gratuit" },
+    "col3_item5": { "ja": "無料特典", "en": "Free Guide", "fr": "Guide Gratuit" },
     "col4": { "ja": "運営・規約ポリシー", "en": "About & Policies", "fr": "À Propos & Conditions" },
-    "col4_item0": { "ja": "💡 Web・自動化やさしい解説", "en": "💡 Easy Web & Automation Guide", "fr": "💡 Guide Simple Web & Automatisation" },
+    "col4_item0": { "ja": "Web・自動化やさしい解説", "en": "Easy Web & Automation Guide", "fr": "Guide Simple Web & Automatisation" },
     "col4_item1": { "ja": "和-Nodeについて・代表紹介", "en": "About Us & Profile", "fr": "À Propos & Profil" },
     "col4_item_tech": { "ja": "当サイトの技術（Tech Stack）", "en": "Our Tech Stack", "fr": "Notre Stack Technique" },
     "col4_item2": { "ja": "利用規約", "en": "Terms of Service", "fr": "Conditions d'Utilisation" },

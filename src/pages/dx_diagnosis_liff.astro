@@ -1,5 +1,6 @@
 ---
 import LiffLayout from '../layouts/LiffLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 ---
 
 <LiffLayout title="和-Node | ビジネスDX診断" description="和-NodeのLINE内ビジネスDX診断アプリです。あなたのビジネスの効率化ポイントを可視化します。">
@@ -26,13 +27,13 @@ import LiffLayout from '../layouts/LiffLayout.astro';
       </div>
       
       <button class="btn neu-raised" id="startBtn">
-        <span style="font-size: 24px;">🚀</span>
+        <MaterialIcon name="rocket_launch" />
         <span>ビジネスDX診断を始める</span>
         <span class="btn-subtext">Start Diagnosis</span>
       </button>
 
       <button class="btn neu-raised" id="menuBtn">
-        <span style="font-size: 24px;">⚙️</span>
+        <MaterialIcon name="settings" />
         <span>ICT・効率化メニュー</span>
         <span class="btn-subtext">ICT Solutions</span>
       </button>
@@ -77,13 +78,13 @@ import LiffLayout from '../layouts/LiffLayout.astro';
       </div>
 
       <button class="btn btn-line" id="sendResultBtn">
-        <span style="font-size: 20px;">💬</span>
+        <MaterialIcon name="forum" />
         <span>診断結果を相談に活かす</span>
         <span class="btn-subtext">Contact with result</span>
       </button>
 
       <button class="btn neu-raised" id="solutionBtn">
-        <span style="font-size: 20px;">💡</span>
+        <MaterialIcon name="tips_and_updates" />
         <span>おすすめの自動化ツールを見る</span>
         <span class="btn-subtext">Solution</span>
       </button>
@@ -107,7 +108,7 @@ import LiffLayout from '../layouts/LiffLayout.astro';
 
       <a href="https://lin.ee/o5QFPwc" style="text-decoration: none;">
         <button class="btn btn-line">
-          <span style="font-size: 20px;">💬</span>
+          <MaterialIcon name="forum" />
           <span>無料ICT相談（LINE）</span>
           <span class="btn-subtext">Direct Inquiry</span>
         </button>

@@ -1,4 +1,5 @@
 ---
+import MaterialIcon from './MaterialIcon.astro';
 import t from '../i18n/translations.json';
 
 interface Props {
@@ -144,7 +145,7 @@ const chipLabel = {
 const trustSignals = {
   ja: [
     { value: '20年以上', label: 'IT・Web制作の現場経験' },
-    { value: '産業カウンセラー', label: '心理学を導線設計へ応用' },
+    { value: 'カウンセラーとして', label: '心理学を導線設計へ応用' },
     { value: 'SECURITY ACTION', label: '情報管理への取り組みを宣言' },
     { value: '公開後', label: '改善・運用まで継続支援' }
   ],
@@ -162,31 +163,39 @@ const trustSignals = {
   ]
 };
 
-const signalPathSteps = [
+const consultationPreview = {
+  ja: [
+    { title: '必要なもの', desc: 'ご用意いただく情報や素材の目安' },
+    { title: '料金の目安', desc: '目的と規模に合う費用の考え方' },
+    { title: '進め方', desc: '相談から公開・改善までの流れ' }
+  ],
+  en: [
+    { title: 'What to prepare', desc: 'A practical guide to information and assets' },
+    { title: 'Price range', desc: 'How scope and purpose shape the estimate' },
+    { title: 'How it works', desc: 'From consultation to launch and improvement' }
+  ],
+  fr: [
+    { title: 'A preparer', desc: 'Les informations et ressources utiles' },
+    { title: 'Budget indicatif', desc: 'Le lien entre objectifs, perimetre et cout' },
+    { title: 'Deroulement', desc: 'De la consultation au lancement et au suivi' }
+  ]
+};
+
+const journeySteps = [
   {
-    label: '不安',
-    title: '迷いを見つける',
-    desc: '言葉・料金・流れの引っかかりを整理'
+    number: '01',
+    title: '迷いを言葉にする',
+    desc: '現状の課題や不安、伝えたい想いを、対話と心理学の視点から整理します。'
   },
   {
-    label: '心理学',
-    title: '伝わる順番へ',
-    desc: '初見の人が安心しやすい順番に再設計'
+    number: '02',
+    title: '順番を整える',
+    desc: '誰に何をどの順番で届けるかを決め、情報と相談導線を設計します。'
   },
   {
-    label: 'Web',
-    title: '画面に落とす',
-    desc: '見出し、導線、ボタンを形にする'
-  },
-  {
-    label: '相談',
-    title: '行動しやすく',
-    desc: '迷わず問い合わせへ進める状態に'
-  },
-  {
-    label: '改善',
-    title: '反応を育てる',
-    desc: '公開後も計測しながら整える'
+    number: '03',
+    title: '相談できる形へ',
+    desc: 'ホームページとして形にし、公開後も反応を見ながら改善を重ねます。'
   }
 ];
 
@@ -213,28 +222,56 @@ const transformationCards = [
   <!-- 1. Hero Section -->
   <section class="section hero">
     <div class="hero-inner">
-      <div class="hero-content reveal">
-        <div class="hero-badge">{t.hero.badge[lang]}</div>
-        <p class="tagline-top" data-glossary-skip>{t.hero.tagline[lang]}</p>
-        <h1 data-glossary-skip>
-          {lang === 'ja' ? (
-            <>
-              <span class="hero-title-chosen">心理学で、<br />伝わる順番を整える</span>
-              <br />
-              <span class="hero-title-psy">Web制作。</span>
-            </>
-          ) : (
-            <>
-              {t.hero.title_part1[lang]}<br /><span class="highlight-text">{t.hero.title_highlight[lang]}</span>{t.hero.title_part2[lang]}
-            </>
-          )}
-        </h1>
-        <p class="lead" set:html={t.hero.lead[lang]}></p>
-        <div class="btns">
-          <a class="btn primary" href={getLocalizedLink('/contact')}>{t.hero.btn_consult[lang]}</a>
-          <a class="btn secondary" href={getLocalizedLink('/pricing')}>{t.hero.btn_price[lang]}</a>
+      <div class="hero-content">
+        <div class="hero-editorial-rule" aria-hidden="true"></div>
+        <div class="hero-copy">
+          <h1 data-glossary-skip>
+            {lang === 'ja' ? (
+              <>
+                <span class="hero-title-chosen">
+                  <span class="hero-title-red">心理学</span><span class="hero-title-dark">で、</span><br />
+                  <span class="hero-title-red">伝わる順番を整える</span>
+                </span>
+                <br />
+                <span class="hero-title-psy">Web制作。</span>
+              </>
+            ) : (
+              <>
+                {t.hero.title_part1[lang]}<br /><span class="highlight-text">{t.hero.title_highlight[lang]}</span>{t.hero.title_part2[lang]}
+              </>
+            )}
+          </h1>
+          <div class="hero-divider" aria-hidden="true"></div>
+          <p class="lead" set:html={t.hero.lead[lang]}></p>
+          <div class="btns">
+            <a class="btn primary" href={getLocalizedLink('/contact')}>
+              <span>{t.hero.btn_consult[lang]}</span><span aria-hidden="true">→</span>
+            </a>
+            <a class="btn secondary" href={getLocalizedLink('/pricing')}>
+              <span>{t.hero.btn_price[lang]}</span><span aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="consultation-preview" aria-labelledby="consultation-preview-title">
+    <div class="consultation-preview-inner">
+      <h2 id="consultation-preview-title">
+        {lang === 'ja' ? '相談前にわかること' : lang === 'en' ? 'What you will know before consulting' : 'Ce que vous saurez avant de nous contacter'}
+      </h2>
+      <ol class="consultation-preview-list">
+        {consultationPreview[lang].map((item, index) => (
+          <li>
+            <span aria-hidden="true">0{index + 1}</span>
+            <div>
+              <strong>{item.title}</strong>
+              <small>{item.desc}</small>
+            </div>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 
@@ -251,36 +288,24 @@ const transformationCards = [
 
   {lang === 'ja' && (
     <>
-      <section class="section signal-path-section reveal" aria-labelledby="signal-path-title">
-        <div class="section-inner signal-path-inner">
-          <div class="signal-path-copy">
-            <span class="eyebrow">CSS3 / SVG</span>
-            <h2 id="signal-path-title">技術は、伝わる順番を見える化するために。</h2>
-            <p>派手な演出ではなく、訪問者の視線が自然に次の判断へ進むよう、軽い動きで導線を補助します。</p>
+      <section class="section journey-section" aria-labelledby="journey-title">
+        <div class="section-inner journey-inner">
+          <div class="journey-heading">
+            <span class="eyebrow">From uncertainty to clarity</span>
+            <h2 id="journey-title">つくる前に、迷いを相談できる形へ。</h2>
+            <p>技術を先に当てはめるのではなく、伝える相手と順番を整えてから必要なWeb制作へ進みます。</p>
           </div>
-          <div class="signal-path-map" aria-label="不安から相談、改善までの流れ">
-            <svg class="signal-path-svg" viewBox="0 0 920 180" preserveAspectRatio="none" aria-hidden="true">
-              <defs>
-                <linearGradient id="signal-path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stop-color="#0f4c5c" />
-                  <stop offset="48%" stop-color="#8c6b1f" />
-                  <stop offset="100%" stop-color="#c7352f" />
-                </linearGradient>
-              </defs>
-              <path class="signal-path-track" d="M58 96 C190 18 280 172 420 92 S650 36 862 94" />
-              <path class="signal-path-line" d="M58 96 C190 18 280 172 420 92 S650 36 862 94" stroke="url(#signal-path-gradient)" />
-            </svg>
-            <ol class="signal-nodes">
-              {signalPathSteps.map((step, index) => (
-                <li>
-                  <span class="signal-node-dot" aria-hidden="true">{index + 1}</span>
-                  <strong>{step.label}</strong>
-                  <b>{step.title}</b>
-                  <small>{step.desc}</small>
-                </li>
-              ))}
-            </ol>
-          </div>
+          <ol class="journey-list">
+            {journeySteps.map((step) => (
+              <li>
+                <span class="journey-number">{step.number}</span>
+                <div>
+                  <h3>{step.title}</h3>
+                  <p>{step.desc}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -318,10 +343,7 @@ const transformationCards = [
           </div>
           <div class="quick-guide-panel">
             <div class="quick-guide-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24">
-                <path d="M8 7h8M8 12h8M8 17h5" />
-                <path d="M5 4h14v16H5z" />
-              </svg>
+              <MaterialIcon name="fact_check" />
             </div>
             <p class="quick-guide-label">相談ページ内に1分チェックがあります</p>
             <p class="quick-guide-text">「何を相談すればいいか分からない」状態でも、選択肢に沿って整理しながら送信できます。</p>
@@ -342,12 +364,12 @@ const transformationCards = [
       </div>
       <div class="concept-intro-grid">
         <div class="concept-intro-card highlight-card">
-          <div class="card-num">💡</div>
+          <div class="card-num"><MaterialIcon name="psychology_alt" /></div>
           <h3>{t.why_psy.card1_title[lang]}</h3>
           <p>{t.why_psy.card1_desc[lang]}</p>
         </div>
         <div class="concept-intro-card">
-          <div class="card-num">📈</div>
+          <div class="card-num"><MaterialIcon name="monitoring" /></div>
           <h3>{t.why_psy.card2_title[lang]}</h3>
           <p>{t.why_psy.card2_desc[lang]}</p>
         </div>
@@ -478,17 +500,17 @@ const transformationCards = [
       </div>
       <div class="action-buttons-grid reveal">
         <a href={getLocalizedLink('/psychology-demo')} class="action-card highlight-border">
-          <div class="action-icon">💡</div>
+          <div class="action-icon"><MaterialIcon name="psychology_alt" /></div>
           <h3>{t.experience.card1_title[lang]}</h3>
           <p>{t.experience.card1_desc[lang]}</p>
         </a>
         <a href={getLocalizedLink('/ai-chat-demo')} class="action-card">
-          <div class="action-icon">🤖</div>
+          <div class="action-icon"><MaterialIcon name="smart_toy" /></div>
           <h3>{t.experience.card2_title[lang]}</h3>
           <p>{t.experience.card2_desc[lang]}</p>
         </a>
         <a href={getLocalizedLink('/simulator')} class="action-card">
-          <div class="action-icon">💰</div>
+          <div class="action-icon"><MaterialIcon name="calculate" /></div>
           <h3>{t.experience.card3_title[lang]}</h3>
           <p>{t.experience.card3_desc[lang]}</p>
         </a>
@@ -638,7 +660,7 @@ const transformationCards = [
   .lead strong { color: var(--accent); }
 
   .btns { display: flex; gap: 16px; margin-top: 40px; }
-  .btn { padding: 18px 36px; border-radius: 12px; font-weight: 800; text-decoration: none; transition: all 0.3s ease; text-align: center; }
+  .btn { padding: 18px 36px; border-radius: 6px; font-weight: 800; text-decoration: none; transition: all 0.3s ease; text-align: center; }
   .btn.primary { background: var(--home-action); color: white; border: 1px solid var(--home-action); box-shadow: 0 10px 25px rgba(199, 53, 47, 0.24); }
   .btn.primary:hover { background: var(--home-action-dark); border-color: var(--home-action-dark); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(199, 53, 47, 0.32); }
   .btn.secondary { border: 1px solid rgba(140, 107, 31, 0.5); color: var(--home-gold); background: transparent; }
@@ -647,30 +669,55 @@ const transformationCards = [
   /* Hero */
   .hero { 
     --hero-accent: var(--home-action);
-    padding: 32px 0;
+    padding: 58px 0;
     background: 
-      linear-gradient(to right, rgba(255, 255, 255, 1) 40%, rgba(255, 255, 255, 0.92) 55%, rgba(255, 255, 255, 0.28) 80%, rgba(255, 255, 255, 0) 100%),
+      linear-gradient(to right, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 0.98) 58%, rgba(255, 255, 255, 0.78) 72%, rgba(255, 255, 255, 0.18) 100%),
       url('/images/hero.webp') no-repeat right center/cover;
-    min-height: 520px;
+    min-height: 650px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid var(--trust-line);
   }
   .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; }
-  .hero-content { max-width: 720px; }
-  .hero-badge { display: inline-block; background: var(--hero-accent); color: white; padding: 6px 16px; border-radius: 4px; font-size: 0.85rem; font-weight: 800; margin-bottom: 16px; }
-  .hero h1 { margin-bottom: 18px; }
-  .hero .lead { margin-top: 0; margin-bottom: 20px; }
-  .hero .btns { margin-top: 0; }
+  .hero-content {
+    position: relative;
+    display: grid;
+    grid-template-columns: 4px minmax(0, 720px);
+    column-gap: 30px;
+    row-gap: 0;
+    max-width: 770px;
+  }
+  .hero-editorial-rule {
+    grid-column: 1;
+    grid-row: 1;
+    width: 4px;
+    height: 100%;
+    background: var(--hero-accent);
+  }
+  .hero-copy { display: contents; }
+  .hero h1 { grid-column: 2; grid-row: 1; min-width: 0; margin-bottom: 0; }
+  .hero-divider { grid-column: 2; grid-row: 2; }
+  .hero .lead { grid-column: 2; grid-row: 3; margin-top: 0; margin-bottom: 20px; }
+  .hero .btns { grid-column: 2; grid-row: 4; justify-content: flex-start; margin-top: 0; }
+  .hero .btn {
+    display: inline-flex;
+    min-width: 230px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
   .highlight-text { border-bottom: 3px double var(--home-gold); padding-bottom: 2px; color: var(--hero-accent); font-weight: 800; }
 
   /* ジャンプ率・タイポグラフィの心理設計クラス */
   .hero-title-chosen {
-    font-size: clamp(2.6rem, 4.8vw, 4.05rem);
+    font-size: clamp(2.75rem, 4.9vw, 4.35rem);
     font-weight: 900;
     color: var(--hero-accent);
     letter-spacing: 0;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.86), 0 8px 24px rgba(199, 53, 47, 0.12);
   }
+  .hero-title-red { color: var(--hero-accent); }
+  .hero-title-dark { color: var(--text-deep); }
   .hero-title-sub {
     font-size: clamp(1.1rem, 2.5vw, 1.8rem);
     font-weight: 500;
@@ -678,18 +725,81 @@ const transformationCards = [
     margin-left: 2px;
   }
   .hero-title-psy {
-    font-size: clamp(2.3rem, 4.8vw, 3.95rem);
+    font-size: clamp(2.5rem, 4.8vw, 4.1rem);
     font-weight: 900;
     color: var(--text-deep);
-    border-bottom: 3px double var(--home-gold);
-    padding-bottom: 2px;
+    padding-bottom: 0;
     letter-spacing: 0;
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+  }
+  .hero-divider {
+    width: min(100%, 760px);
+    height: 2px;
+    margin: 20px 0 22px;
+    background: var(--trust);
   }
   .hero-title-base {
     font-size: clamp(1.6rem, 3.5vw, 2.8rem);
     font-weight: 800;
     color: var(--text-deep);
+  }
+
+  .consultation-preview {
+    background: #fff;
+    border-bottom: 1px solid var(--trust-line);
+  }
+  .consultation-preview-inner {
+    display: grid;
+    grid-template-columns: minmax(190px, 0.72fr) minmax(0, 2.28fr);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .consultation-preview h2 {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 24px 26px 24px 0;
+    border-right: 1px solid var(--trust-line);
+    color: var(--trust);
+    font-size: 1.12rem;
+    line-height: 1.6;
+  }
+  .consultation-preview-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .consultation-preview-list li {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    gap: 12px;
+    align-items: center;
+    padding: 20px 24px;
+    border-right: 1px solid var(--trust-line);
+  }
+  .consultation-preview-list li:last-child { border-right: 0; }
+  .consultation-preview-list > li > span {
+    color: var(--home-gold);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+  .consultation-preview-list strong,
+  .consultation-preview-list small { display: block; }
+  .consultation-preview-list strong {
+    color: var(--text-deep);
+    font-size: 0.94rem;
+    line-height: 1.5;
+  }
+  .consultation-preview-list small {
+    margin-top: 2px;
+    color: var(--muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.55;
   }
 
   .trust-strip {
@@ -725,128 +835,99 @@ const transformationCards = [
     line-height: 1.5;
   }
 
-  .signal-path-section {
-    background: linear-gradient(180deg, #fff 0%, #f8fbf9 100%);
+  .journey-section {
+    background: #fff;
     border-bottom: 1px solid var(--trust-line);
   }
-  .signal-path-inner {
+  .journey-section.section { padding: 64px 0 72px; }
+  .journey-inner { max-width: 1120px; }
+  .journey-heading {
     display: grid;
-    grid-template-columns: minmax(240px, 0.72fr) minmax(0, 1.28fr);
-    gap: 36px;
-    align-items: center;
+    grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+    column-gap: 56px;
+    align-items: end;
+    margin-bottom: 44px;
   }
-  .signal-path-copy h2 {
-    margin-bottom: 16px;
+  .journey-heading .eyebrow { grid-column: 1 / -1; }
+  .journey-heading h2 {
+    margin: 0;
     text-wrap: balance;
   }
-  .signal-path-copy p {
+  .journey-heading p {
     margin: 0;
     color: var(--muted);
     line-height: 1.85;
   }
-  .signal-path-map {
+  .journey-list {
     position: relative;
-    min-height: 250px;
-    padding: 34px 28px 28px;
-    border: 1px solid var(--card-border);
-    border-radius: 22px;
-    background:
-      linear-gradient(135deg, rgba(238, 245, 242, 0.9), rgba(255, 255, 255, 0.94)),
-      radial-gradient(circle at 16% 10%, rgba(199, 53, 47, 0.08), transparent 30%);
-    box-shadow: var(--card-shadow);
-    overflow: hidden;
-  }
-  .signal-path-map::after {
-    content: "";
-    position: absolute;
-    inset: 16px;
-    border-radius: 18px;
-    border: 1px solid rgba(255, 255, 255, 0.74);
-    pointer-events: none;
-  }
-  .signal-path-svg {
-    position: absolute;
-    inset: 20px 28px auto;
-    width: calc(100% - 56px);
-    height: 92px;
-    overflow: visible;
-  }
-  .signal-path-track,
-  .signal-path-line {
-    fill: none;
-    stroke-linecap: round;
-  }
-  .signal-path-track {
-    stroke: rgba(15, 76, 92, 0.08);
-    stroke-width: 5;
-  }
-  .signal-path-line {
-    stroke-width: 2;
-    stroke-dasharray: 28 26;
-    opacity: 0.34;
-    animation: signal-path-flow 6.4s linear infinite;
-  }
-  .signal-nodes {
-    position: relative;
-    z-index: 1;
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 14px;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
     margin: 0;
     padding: 0;
     list-style: none;
   }
-  .signal-nodes li {
-    display: grid;
-    justify-items: center;
-    align-content: start;
-    min-height: 180px;
-    padding: 0 4px;
-    text-align: center;
+  .journey-list::before {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 8%;
+    right: 8%;
+    height: 2px;
+    background: var(--trust-line);
   }
-  .signal-node-dot {
+  .journey-list::after {
+    content: "";
+    position: absolute;
+    top: 28px;
+    left: 8%;
+    width: 84%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--trust), var(--home-gold), var(--home-action));
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: journey-line 1.3s 0.25s ease-out forwards;
+  }
+  .journey-list li {
+    position: relative;
+    z-index: 1;
+    padding: 0 34px;
+    border-right: 1px solid var(--trust-line);
+  }
+  .journey-list li:first-child { padding-left: 0; }
+  .journey-list li:last-child { padding-right: 0; border-right: 0; }
+  .journey-number {
     display: grid;
-    width: 48px;
-    height: 48px;
+    width: 56px;
+    height: 56px;
     place-items: center;
-    margin-bottom: 18px;
-    border: 2px solid rgba(15, 76, 92, 0.18);
-    border-radius: 999px;
+    margin-bottom: 26px;
+    border: 1px solid var(--trust-line);
+    border-radius: 50%;
     background: #fff;
-    color: var(--trust);
-    font-size: 0.94rem;
+    color: var(--home-gold);
+    font-family: 'Shippori Mincho', serif;
+    font-size: 1rem;
     font-weight: 900;
-    box-shadow: 0 10px 24px rgba(15, 76, 92, 0.12);
-    transition: transform 0.28s ease, border-color 0.28s ease, background-color 0.28s ease, color 0.28s ease;
+    box-shadow: 0 8px 20px rgba(15, 76, 92, 0.08);
   }
-  .signal-nodes li:hover .signal-node-dot {
-    transform: translateY(-4px) scale(1.06);
-    border-color: rgba(199, 53, 47, 0.32);
-    background: var(--home-action);
-    color: #fff;
+  .journey-list li:last-child .journey-number {
+    border-color: rgba(199, 53, 47, 0.28);
+    color: var(--home-action);
   }
-  .signal-nodes strong {
-    color: var(--trust);
-    font-size: 0.82rem;
-    font-weight: 900;
-    line-height: 1.4;
+  .journey-list h3 {
+    margin: 0 0 12px;
+    font-size: 1.22rem;
+    line-height: 1.55;
   }
-  .signal-nodes b {
-    margin-top: 6px;
-    color: var(--text-deep);
-    font-size: 0.95rem;
-    font-weight: 900;
-    line-height: 1.45;
-  }
-  .signal-nodes small {
-    margin-top: 8px;
+  .journey-list p {
+    margin: 0;
     color: var(--muted);
-    font-size: 0.76rem;
-    font-weight: 700;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.8;
   }
-  @keyframes signal-path-flow {
-    to { stroke-dashoffset: -124; }
+  @keyframes journey-line {
+    to { transform: scaleX(1); }
   }
 
   .transformation-section {
@@ -990,16 +1071,8 @@ const transformationCards = [
     color: var(--trust);
     box-shadow: 0 14px 30px rgba(15, 76, 92, 0.08);
   }
-  .quick-guide-icon svg {
-    width: 30px;
-    height: 30px;
-    fill: none;
-  }
-  .quick-guide-icon path {
-    stroke: currentColor;
-    stroke-width: 1.8;
-    stroke-linecap: round;
-    stroke-linejoin: round;
+  .quick-guide-icon .material-symbols-rounded {
+    font-size: 32px;
   }
   .quick-guide-label {
     margin: 0 0 10px;
@@ -1284,49 +1357,78 @@ const transformationCards = [
 
   @media (max-width: 768px) {
     .hero {
-      padding: 80px 0;
+      padding: 58px 0 82px;
       background: 
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.98) 50%, rgba(255, 255, 255, 0.82) 80%, rgba(255, 255, 255, 0.44) 100%),
-        url('/images/hero.webp') no-repeat center center/cover;
-      text-align: center;
+        linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.98) 58%, rgba(255, 255, 255, 0.78) 74%, rgba(255, 255, 255, 0.18) 100%),
+        url('/images/hero.webp') no-repeat 70% bottom/auto 55%;
+      text-align: left;
       min-height: auto;
       overflow-x: hidden;
     }
-    .hero .btns { flex-direction: column; width: min(100%, 280px); margin: 0 auto; box-sizing: border-box; align-items: stretch; gap: 12px; }
-    .hero .btn { width: 100%; padding: 16px 22px; }
+    .hero .btns { flex-direction: column; width: 100%; margin: 0; box-sizing: border-box; align-items: stretch; gap: 12px; }
+    .hero .btn { width: 100%; min-width: 0; padding: 16px 22px; }
     .hero-inner { padding: 0 20px; width: 100%; box-sizing: border-box; }
-    .hero-content { width: 100%; max-width: 340px; margin: 0 auto; box-sizing: border-box; }
-    .hero h1 { max-width: 100%; margin-left: auto; margin-right: auto; text-wrap: balance; }
+    .hero-content { grid-template-columns: 3px minmax(0, 1fr); gap: 18px; width: 100%; max-width: 430px; margin: 0; box-sizing: border-box; }
+    .hero h1 { max-width: 100%; margin-left: 0; margin-right: 0; text-wrap: balance; }
     .tagline-top { font-size: 0.98rem; letter-spacing: 0.03em; line-height: 1.8; }
-    .lead { max-width: 100%; box-sizing: border-box; word-break: break-all; overflow-wrap: anywhere; line-break: strict; margin-left: auto; margin-right: auto; text-align: center; font-size: 1.02rem; line-height: 1.9; }
+    .lead { max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; line-break: strict; margin-left: 0; margin-right: 0; text-align: left; font-size: 1rem; line-height: 1.85; }
     .hero-title-chosen { font-size: clamp(2.2rem, 8vw, 3.2rem); }
     .hero-title-psy { font-size: clamp(2rem, 7vw, 3rem); }
-    .signal-path-inner { grid-template-columns: 1fr; }
-    .signal-path-map { min-height: auto; padding: 22px 18px; }
-    .signal-path-svg { display: none; }
-    .signal-nodes {
+    .consultation-preview-inner {
       grid-template-columns: 1fr;
-      gap: 12px;
+      padding: 0 20px;
     }
-    .signal-nodes li {
-      grid-template-columns: auto 1fr;
-      justify-items: start;
-      align-items: center;
-      min-height: 0;
-      padding: 12px 0;
-      text-align: left;
+    .consultation-preview h2 {
+      padding: 20px 0 14px;
+      border-right: 0;
       border-bottom: 1px solid var(--trust-line);
     }
-    .signal-nodes li:last-child { border-bottom: 0; }
-    .signal-node-dot {
-      grid-row: span 3;
-      width: 42px;
-      height: 42px;
-      margin: 0 12px 0 0;
+    .consultation-preview-list {
+      grid-template-columns: 1fr;
     }
-    .signal-nodes b,
-    .signal-nodes small {
-      margin-top: 2px;
+    .consultation-preview-list li {
+      padding: 14px 0;
+      border-right: 0;
+      border-bottom: 1px solid var(--trust-line);
+    }
+    .consultation-preview-list li:last-child { border-bottom: 0; }
+    .journey-heading {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .journey-list {
+      grid-template-columns: 1fr;
+      gap: 0;
+    }
+    .journey-list::before,
+    .journey-list::after {
+      top: 0;
+      bottom: 0;
+      left: 27px;
+      right: auto;
+      width: 2px;
+      height: auto;
+    }
+    .journey-list::after {
+      transform: scaleY(0);
+      transform-origin: top;
+      animation-name: journey-line-mobile;
+    }
+    .journey-list li,
+    .journey-list li:first-child,
+    .journey-list li:last-child {
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
+      gap: 18px;
+      padding: 0 0 30px;
+      border-right: 0;
+    }
+    .journey-list li:last-child { padding-bottom: 0; }
+    .journey-number { margin: 0; }
+    .journey-list h3 { margin-top: 8px; }
+    @keyframes journey-line-mobile {
+      to { transform: scaleY(1); }
     }
     .trust-strip-inner {
       grid-template-columns: 1fr;
@@ -1353,10 +1455,9 @@ const transformationCards = [
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .signal-path-line,
+    .journey-list::after,
     .transformation-card,
     .phase-copy,
-    .signal-node-dot,
     .consult-card,
     .consult-card::before,
     .service-visual,

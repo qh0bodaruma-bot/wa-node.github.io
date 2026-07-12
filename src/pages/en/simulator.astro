@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
 const CAMPAIGN_END_DATE = "July 31, 2026";
 ---
 
@@ -100,7 +101,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
             <label class="choice-card selected">
               <input type="radio" name="pages" value="0" data-days="0" data-label="1 Page" checked />
               <div class="card-inner">
-                <div class="icon">1️⃣</div>
+                <div class="icon material-symbols-rounded">looks_one</div>
                 <div class="info"><b>1 Page</b><span>LPs, one-pagers</span></div>
                 <div class="price">+¥0</div>
               </div>
@@ -108,7 +109,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
             <label class="choice-card">
               <input type="radio" name="pages" value="30000" data-days="3" data-label="2–5 Pages" />
               <div class="card-inner">
-                <div class="icon">🔢</div>
+                <div class="icon material-symbols-rounded">format_list_numbered</div>
                 <div class="info"><b>2–5 Pages</b><span>Standard scale</span></div>
                 <div class="price">+¥30,000</div>
               </div>
@@ -116,7 +117,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
             <label class="choice-card">
               <input type="radio" name="pages" value="80000" data-days="6" data-label="6+ Pages" />
               <div class="card-inner">
-                <div class="icon">📑</div>
+                <div class="icon material-symbols-rounded">description</div>
                 <div class="info"><b>6+ Pages</b><span>Large-scale structure</span></div>
                 <div class="price">+¥80,000</div>
               </div>
@@ -133,7 +134,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
             <label class="choice-card">
               <input type="checkbox" name="feature" value="10000" data-days="1" data-label="Contact Form" />
               <div class="card-inner">
-                <div class="icon">✉️</div>
+                <div class="icon material-symbols-rounded">mail</div>
                 <div class="info"><b>Contact Form Setup</b></div>
                 <div class="price">+¥10,000</div>
               </div>
@@ -141,7 +142,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
             <label class="choice-card">
               <input type="checkbox" name="feature" value="30000" data-days="3" data-label="Blog/CMS Feature" />
               <div class="card-inner">
-                <div class="icon">📝</div>
+                <div class="icon material-symbols-rounded">edit_note</div>
                 <div class="info"><b>Blog/CMS Integration</b></div>
                 <div class="price">+¥30,000</div>
               </div>
@@ -149,7 +150,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
             <label class="choice-card">
               <input type="checkbox" name="feature" value="30000" data-days="3" data-label="Booking Integration" />
               <div class="card-inner">
-                <div class="icon">📅</div>
+                <div class="icon material-symbols-rounded">calendar_month</div>
                 <div class="info"><b>Booking System Link</b></div>
                 <div class="price">+¥30,000</div>
               </div>
@@ -157,7 +158,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
             <label class="choice-card">
               <input type="checkbox" name="feature" value="10000" data-days="1" data-label="Domain Setup Support" />
               <div class="card-inner">
-                <div class="icon">🛠</div>
+                <div class="icon material-symbols-rounded">construction</div>
                 <div class="info"><b>Domain Setup Assistance</b></div>
                 <div class="price">+¥10,000</div>
               </div>
@@ -165,7 +166,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
             <label class="choice-card rush-card">
               <input type="checkbox" id="rushCheck" name="rush" value="1.5" data-days="-2" data-label="Rush Delivery" />
               <div class="card-inner">
-                <div class="icon">🚀</div>
+                <div class="icon material-symbols-rounded">rocket_launch</div>
                 <div class="info">
                   <b>Rush Delivery</b>
                   <span>1.5x speed multiplier for urgent timelines</span>
@@ -202,7 +203,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
                 <span class="val" id="deliveryDays">Approx. 0 business days</span>
               </div>
               <div class="info-item campaign-row" id="campaignRow">
-                <span class="lbl">🎁 20% Launch Discount</span>
+                <span class="lbl"><MaterialIcon name="redeem" /> 20% Launch Discount</span>
                 <span class="val" id="discountVal">-¥0</span>
               </div>
             </div>
@@ -230,7 +231,7 @@ const CAMPAIGN_END_DATE = "July 31, 2026";
 
     <!-- Consultation Flow Section -->
     <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 80px; scroll-margin-top: 40px; padding: 40px; background: rgba(255,255,255,0.8); border: 1px solid var(--sim-accent); border-radius: 32px;">
-      <div class="bonus-tag" style="background: var(--sim-accent); color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 900; margin-bottom: 20px; display: inline-block;">🎁 Simulator Special Bonus</div>
+      <div class="bonus-tag" style="background: var(--sim-accent); color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 900; margin-bottom: 20px; display: inline-block;"><MaterialIcon name="redeem" /> Simulator Special Bonus</div>
       <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; color: var(--text);">Map Out Your Custom Solution Based on Your Estimate</h3>
       <p style="font-size: 1rem; color: #555; line-height: 1.8; margin-bottom: 30px;">
         Great job completing your simulation! Based on these results, we can organize your priorities and craft a highly precise roadmap for your business. We will upgrade your free consultation from 30 minutes to **60 minutes**.

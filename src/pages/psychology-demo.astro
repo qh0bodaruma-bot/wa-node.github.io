@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 import {
   absoluteUrl,
   createBreadcrumbSchema,
@@ -70,9 +71,7 @@ const structuredData = [
           </div>
           <div class="comp-arrow-wrapper">
             <div class="comp-arrow-svg">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <MaterialIcon name="arrow_forward" />
             </div>
             <span class="arrow-text">改善</span>
           </div>
@@ -102,9 +101,7 @@ const structuredData = [
           </div>
           <div class="comp-arrow-wrapper">
             <div class="comp-arrow-svg">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <MaterialIcon name="arrow_forward" />
             </div>
             <span class="arrow-text">改善</span>
           </div>
@@ -134,9 +131,7 @@ const structuredData = [
           </div>
           <div class="comp-arrow-wrapper">
             <div class="comp-arrow-svg">
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 12H19M19 12L13 6M19 12L13 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+              <MaterialIcon name="arrow_forward" />
             </div>
             <span class="arrow-text">改善</span>
           </div>
@@ -393,7 +388,8 @@ const structuredData = [
     justify-content: center;
     box-shadow: 0 4px 15px rgba(138, 90, 50, 0.1);
   }
-  .comp-arrow-svg svg {
+  .comp-arrow-svg svg,
+  .comp-arrow-svg :global(.material-symbols-rounded) {
     width: 32px;
     height: 32px;
   }
@@ -489,7 +485,8 @@ const structuredData = [
       justify-content: center;
       gap: 20px;
     }
-    .comp-arrow-wrapper svg {
+    .comp-arrow-wrapper svg,
+    .comp-arrow-wrapper :global(.material-symbols-rounded) {
       transform: rotate(90deg);
     }
     .method-steps {

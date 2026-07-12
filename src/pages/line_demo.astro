@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="お悩み整理 LINE Mini App（体験デモ）｜和-Node" description="LINE内で動くビジネスツールを体験。こころの悩みからICTの課題まで、あなたに寄り添う診断ツールです。" noindex={true}>
   <div class="demo-notice">
-    ⚠️ これはLINE Mini Appの動作デモ画面です。<a href="/">サイトに戻る</a>
+    <MaterialIcon name="warning" /> これはLINE Mini Appの動作デモ画面です。<a href="/">サイトに戻る</a>
   </div>
 
   <main class="demo-main">
@@ -12,7 +13,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <div class="phone-container">
       <!-- ヘッダー -->
       <div class="chat-header">
-        <div class="avatar">🎋</div>
+        <div class="avatar"><MaterialIcon name="hub" /></div>
         <div>
           <div class="bot-name">和-Node</div>
           <div class="status">● 応答時間: 通常1時間以内</div>
@@ -24,7 +25,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         
         <!-- Botの最初のメッセージ -->
         <div class="message bot">
-          <div class="avatar">🎋</div>
+          <div class="avatar"><MaterialIcon name="hub" /></div>
           <div class="bubble">
             はじめまして！和-Node公式LINEへようこそ。代表の高野です。<br /><br />
             ここでは、あなたの「こころの悩み」や「ビジネス・ICTの課題」を整理するお手伝いをします。
@@ -32,14 +33,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="message bot">
-          <div class="avatar">🎋</div>
+          <div class="avatar"><MaterialIcon name="hub" /></div>
           <div class="bubble">
             まずは、今一番気になっているジャンルを以下から選んでください👇
             
             <div class="options-container">
-              <button class="option-btn" data-genre="mental" data-label="こころの悩み・ストレス">🧠 こころの悩み・ストレス</button>
-              <button class="option-btn" data-genre="it" data-label="会社のICT化・業務効率化">💻 会社のICT化・業務効率化</button>
-              <button class="option-btn" data-genre="barrier" data-label="バリアフリー・車いす視点">♿ バリアフリー・車いす視点</button>
+              <button class="option-btn" data-genre="mental" data-label="こころの悩み・ストレス"><span class="material-symbols-rounded material-icon" aria-hidden="true">psychology</span>こころの悩み・ストレス</button>
+              <button class="option-btn" data-genre="it" data-label="会社のICT化・業務効率化"><span class="material-symbols-rounded material-icon" aria-hidden="true">computer</span>会社のICT化・業務効率化</button>
+              <button class="option-btn" data-genre="barrier" data-label="バリアフリー・車いす視点"><span class="material-symbols-rounded material-icon" aria-hidden="true">accessible_forward</span>バリアフリー・車いす視点</button>
             </div>
           </div>
         </div>
@@ -49,7 +50,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- フッター -->
       <div class="chat-footer">
         <input type="text" placeholder="選択肢からお選びください..." disabled />
-        <button class="send-btn">➤</button>
+        <button class="send-btn"><MaterialIcon name="send" /></button>
       </div>
     </div>
   </main>
@@ -120,7 +121,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       text-align: left; cursor: pointer; transition: all 0.2s; display: flex; align-items: center; justify-content: space-between; color: #2c2c2a;
     }
     .option-btn:hover { background-color: #f0f9f0; border-color: var(--line-green); color: var(--line-green); }
-    .option-btn::after { content: '➔'; font-size: 12px; opacity: 0.5; }
+    .option-btn::after { content: 'arrow_forward'; font-family: 'Material Symbols Rounded'; font-size: 18px; opacity: 0.5; }
 
     /* 下部フッター */
     .chat-footer { background-color: #fff; padding: 12px 16px; display: flex; align-items: center; gap: 12px; border-top: 1px solid #eee; }
@@ -156,7 +157,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       msg.className = 'message bot';
       msg.id = 'typing';
       msg.innerHTML = `
-        <div class="avatar">🎋</div>
+        <div class="avatar material-symbols-rounded">hub</div>
         <div class="typing-indicator">
           <span></span><span></span><span></span>
         </div>
@@ -187,29 +188,29 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         if (genreKey === 'mental') {
           responseText = 'ありがとうございます。こころのケアですね。現在、どのような状態に最も近いですか？';
           optionsHtml = `
-            <button class="option-btn final-opt" data-type="mental" data-label="人間関係">😓 仕事の人間関係で疲れている</button>
-            <button class="option-btn final-opt" data-type="mental" data-label="休職">🛏️ やる気が出ず、休職を考えている</button>
-            <button class="option-btn final-opt" data-type="mental" data-label="不安">💭 漠然とした不安がある</button>
+            <button class="option-btn final-opt" data-type="mental" data-label="人間関係"><span class="material-symbols-rounded material-icon" aria-hidden="true">sentiment_stressed</span>仕事の人間関係で疲れている</button>
+            <button class="option-btn final-opt" data-type="mental" data-label="休職"><span class="material-symbols-rounded material-icon" aria-hidden="true">bedtime</span>やる気が出ず、休職を考えている</button>
+            <button class="option-btn final-opt" data-type="mental" data-label="不安"><span class="material-symbols-rounded material-icon" aria-hidden="true">psychology</span>漠然とした不安がある</button>
           `;
         } else if (genreKey === 'it') {
           responseText = 'ありがとうございます。ICT・業務効率化ですね。現在の課題は何でしょうか？';
           optionsHtml = `
-            <button class="option-btn final-opt" data-type="it" data-label="自動化">⚙️ 手作業が多く、自動化したい</button>
-            <button class="option-btn final-opt" data-type="it" data-label="集客">🌐 集客のためにHP/LPを作りたい</button>
-            <button class="option-btn final-opt" data-type="it" data-label="不明">❓ 何から手をつけていいか不明</button>
+            <button class="option-btn final-opt" data-type="it" data-label="自動化"><span class="material-symbols-rounded material-icon" aria-hidden="true">settings</span>手作業が多く、自動化したい</button>
+            <button class="option-btn final-opt" data-type="it" data-label="集客"><span class="material-symbols-rounded material-icon" aria-hidden="true">public</span>集客のためにHP/LPを作りたい</button>
+            <button class="option-btn final-opt" data-type="it" data-label="不明"><span class="material-symbols-rounded material-icon" aria-hidden="true">help</span>何から手をつけていいか不明</button>
           `;
         } else if (genreKey === 'barrier') {
           responseText = 'ありがとうございます。当事者視点のアドバイスですね。どのようなご相談ですか？';
           optionsHtml = `
-            <button class="option-btn final-opt" data-type="barrier" data-label="店舗">🏢 店舗・オフィスのバリアフリー化</button>
-            <button class="option-btn final-opt" data-type="barrier" data-label="製品">🪟 製品への当事者レビュー</button>
+            <button class="option-btn final-opt" data-type="barrier" data-label="店舗"><span class="material-symbols-rounded material-icon" aria-hidden="true">business</span>店舗・オフィスのバリアフリー化</button>
+            <button class="option-btn final-opt" data-type="barrier" data-label="製品"><span class="material-symbols-rounded material-icon" aria-hidden="true">preview</span>製品への当事者レビュー</button>
           `;
         }
 
         const botMsg = document.createElement('div');
         botMsg.className = 'message bot';
         botMsg.innerHTML = `
-          <div class="avatar">🎋</div>
+          <div class="avatar material-symbols-rounded">hub</div>
           <div class="bubble">
             ${responseText}
             <div class="options-container">${optionsHtml}</div>
@@ -223,7 +224,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             btn.onclick = () => {
                 const label = btn.getAttribute('data-label');
                 const type = btn.getAttribute('data-type');
-                appendUserMessage(btn.innerText);
+                appendUserMessage(label);
                 appendBotTyping();
                 setTimeout(() => {
                     removeBotTyping();
@@ -251,7 +252,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const botMsg = document.createElement('div');
         botMsg.className = 'message bot';
         botMsg.innerHTML = `
-          <div class="avatar">🎋</div>
+          <div class="avatar material-symbols-rounded">hub</div>
           <div class="bubble">
             課題が見えてきました。<br />
             あなたにおすすめのプランは **【${recommendation}】** です。<br /><br />
@@ -259,8 +260,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             まずは **初回無料相談（最大60分）** で、詳しくお話ししてみませんか？
             
             <div class="options-container" style="margin-top:14px;">
-              <a href="https://lin.ee/o5QFPwc" target="_blank" class="option-btn" style="background:#06C755; color:#fff; text-decoration:none; border:none; justify-content:center;">💬 そのままLINEで相談する</a>
-              <a href="/#consultation-flow" class="option-btn" style="background:#2c2c2a; color:#fff; text-decoration:none; border:none; justify-content:center;">✉️ 無料相談のステップを確認</a>
+              <a href="https://lin.ee/o5QFPwc" target="_blank" class="option-btn" style="background:#06C755; color:#fff; text-decoration:none; border:none; justify-content:center;"><span class="material-symbols-rounded material-icon" aria-hidden="true">forum</span>そのままLINEで相談する</a>
+              <a href="/#consultation-flow" class="option-btn" style="background:#2c2c2a; color:#fff; text-decoration:none; border:none; justify-content:center;"><span class="material-symbols-rounded material-icon" aria-hidden="true">mail</span>無料相談のステップを確認</a>
             </div>
           </div>
         `;

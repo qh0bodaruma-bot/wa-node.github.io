@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="Diagnostic de Fatigue Mentale | Wa-Node" description="Évaluez votre niveau de fatigue psychologique et de stress grâce à notre outil conçu par un conseiller industriel." noindex={true}>
@@ -19,7 +20,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <!-- Welcome Step -->
       <div id="step-welcome" class="quiz-step active">
         <div class="welcome-visual">
-          <div class="pulse-icon">🌱</div>
+          <div class="pulse-icon"><MaterialIcon name="self_improvement" /></div>
         </div>
         <h1 class="welcome-title">Diagnostic de Fatigue Mentale<br/><span class="accent-text">& de Stress Psychologique</span></h1>
         <p class="welcome-desc">
@@ -92,7 +93,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <div class="analysis-grid">
               <div class="analysis-item">
                 <div class="item-header">
-                  <span class="icon">🏃‍♂️</span>
+                  <span class="icon material-symbols-rounded">directions_run</span>
                   <span class="label">Fatigue Physique</span>
                   <span class="score" id="val-body">0/6</span>
                 </div>
@@ -100,7 +101,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
               </div>
               <div class="analysis-item">
                 <div class="item-header">
-                  <span class="icon">💭</span>
+                  <span class="icon material-symbols-rounded">psychology</span>
                   <span class="label">Fatigue Mentale</span>
                   <span class="score" id="val-mind">0/12</span>
                 </div>
@@ -108,7 +109,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
               </div>
               <div class="analysis-item">
                 <div class="item-header">
-                  <span class="icon">🏢</span>
+                  <span class="icon material-symbols-rounded">business_center</span>
                   <span class="label">Degré de Pression</span>
                   <span class="score" id="val-env">0/12</span>
                 </div>
@@ -119,7 +120,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
         
         <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px;">
-          <div class="bonus-tag">🎁 Bonus Fin de Diagnostic</div>
+          <div class="bonus-tag"><MaterialIcon name="redeem" /> Bonus Fin de Diagnostic</div>
           <h3>Bénéficiez d'une Séance de Conseil Gratuite de 60 Minutes</h3>
           <p>
             Félicitations pour avoir complété le diagnostic. Prenez une capture d'écran de ce résultat et envoyez-la sur LINE officielle ou utilisez le mot-clé <strong>「DIAGNOSTIC WANODE」</strong>.<br/>

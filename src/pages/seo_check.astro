@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="SEO/AEO内部診断 | 和-Node" description="30項目のテクニカルチェックで、検索エンジンとAI検索に読まれやすいサイト構造を可視化。改善ポイントをプロの視点で特定します。">
@@ -20,7 +21,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Step 0: Welcome -->
       <div id="step-welcome" class="diag-step active">
         <div class="step-visual">
-          <div class="scanner-icon">🔍</div>
+          <div class="scanner-icon"><MaterialIcon name="search_insights" /></div>
         </div>
         <h1 class="welcome-title">Webサイト<br/><span class="accent-text">SEO/AEO内部診断</span></h1>
         <p class="welcome-desc">
@@ -85,12 +86,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="improvement-section glass-card">
-          <h3>🔍 改善ポイントのアドバイス</h3>
+          <h3><MaterialIcon name="search" /> 改善ポイントのアドバイス</h3>
           <div id="recs-list" class="recs-list"></div>
         </div>
         
         <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px;">
-          <div class="bonus-tag">🎁 診断完了特典</div>
+          <div class="bonus-tag"><MaterialIcon name="redeem" /> 診断完了特典</div>
           <h3>プロの目による「サイト全体最適化」を体験しませんか？</h3>
           <p>
             診断お疲れ様でした。採点結果に基づき、具体的にどの項目から着手すべきか、貴社サイトに合わせた優先順位をアドバイスします。<br/>
@@ -242,7 +243,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <script is:inline>
     const categories = [
       {
-        id:'basic', name:'基本設定', icon:'⚙️',
+        id:'basic', name:'基本設定', icon:'settings',
         items:[
           {l:'タイトルタグの最適化', h:'各ページに主要キーワードが含まれ、35文字以内に収まっているか。'},
           {l:'メタディスクリプション', h:'クリックを誘う120文字前後の要約が各ページに設定されているか。'},
@@ -252,7 +253,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ]
       },
       {
-        id:'content', name:'コンテンツ品質', icon:'📝',
+        id:'content', name:'コンテンツ品質', icon:'edit_note',
         items:[
           {l:'h1タグの単一使用', h:'見出し1が全ページで1つだけ適切に設定されているか。'},
           {l:'画像altテキスト', h:'すべての重要画像に内容を説明する代替テキストがあるか。'},
@@ -262,7 +263,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ]
       },
       {
-        id:'technical', name:'テクニカルSEO', icon:'🔧',
+        id:'technical', name:'テクニカルSEO', icon:'construction',
         items:[
           {l:'HTTPS（SSL対応）', h:'サイト全体が暗号化され、安全な通信が確保されているか。'},
           {l:'canonicalタグ', h:'重複コンテンツを避け、評価を一つのURLに集約させているか。'},
@@ -272,7 +273,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ]
       },
       {
-        id:'aeo', name:'AI検索/AEO', icon:'🤖',
+        id:'aeo', name:'AI検索/AEO', icon:'smart_toy',
         items:[
           {l:'サービス要約の明確化', h:'誰に、何を、どの地域・条件で提供するかが短く明確に書かれているか。'},
           {l:'FAQ・Q&A構造', h:'検索者の質問にそのまま答えられるFAQやQ&A形式の情報が用意されているか。'},
@@ -282,7 +283,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ]
       },
       {
-        id:'speed', name:'表示速度', icon:'⚡',
+        id:'speed', name:'表示速度', icon:'bolt',
         items:[
           {l:'画像の軽量化', h:'WebP形式や圧縮により、ファイルサイズが最適化されているか。'},
           {l:'キャッシュの活用', h:'サーバーやプラグインによる高速化設定が行われているか。'},
@@ -292,7 +293,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         ]
       },
       {
-        id:'ux', name:'ユーザー体験', icon:'📱',
+        id:'ux', name:'ユーザー体験', icon:'smartphone',
         items:[
           {l:'モバイルフレンドリー', h:'スマホで文字が小さすぎたり、崩れたりしていないか。'},
           {l:'問い合わせボタンの見やすさ', h:'問い合わせや購入ボタンが押しやすく、目立つ位置にあるか。'},
@@ -340,7 +341,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const stepIndicator = document.getElementById('step-indicator');
       const progressFill = document.getElementById('overall-progress');
 
-      catTitle.textContent = `${cat.icon} ${cat.name}`;
+      catTitle.innerHTML = `<span class="material-symbols-rounded material-icon" aria-hidden="true">${cat.icon}</span> ${cat.name}`;
       stepIndicator.textContent = `Phase ${catIdx + 1} / ${categoryCount}`;
       progressFill.style.width = `${((catIdx + 1) / categoryCount) * 100}%`;
 
@@ -353,9 +354,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <div class="item-hint">${it.h}</div>
             </div>
             <div class="opt-btns">
-              <button class="opt-btn ${val===1?'active ok':''}" onclick="setVal('${cat.id}', ${i}, 1)" title="OK">✅</button>
-              <button class="opt-btn ${val===2?'active warn':''}" onclick="setVal('${cat.id}', ${i}, 2)" title="一部不安">⚠️</button>
-              <button class="opt-btn ${val===3?'active bad':''}" onclick="setVal('${cat.id}', ${i}, 3)" title="未対応">❌</button>
+              <button class="opt-btn ${val===1?'active ok':''}" onclick="setVal('${cat.id}', ${i}, 1)" title="OK"><span class="material-symbols-rounded material-icon" aria-hidden="true">check</span></button>
+              <button class="opt-btn ${val===2?'active warn':''}" onclick="setVal('${cat.id}', ${i}, 2)" title="一部不安"><span class="material-symbols-rounded material-icon" aria-hidden="true">priority_high</span></button>
+              <button class="opt-btn ${val===3?'active bad':''}" onclick="setVal('${cat.id}', ${i}, 3)" title="未対応"><span class="material-symbols-rounded material-icon" aria-hidden="true">close</span></button>
             </div>
           </div>
         `;
@@ -413,7 +414,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         const col = pct >= 80 ? '#27ae60' : pct >= 50 ? '#f39c12' : '#e74c3c';
         return `
           <div class="cat-result-row">
-            <div class="cat-icon">${c.icon}</div>
+            <div class="cat-icon material-symbols-rounded" aria-hidden="true">${c.icon}</div>
             <div class="cat-info">
               <span class="cat-name">${c.name} (${s}/${catMax})</span>
               <div class="cat-bar-track"><div class="cat-bar-fill" style="width:${pct}%; background:${col}"></div></div>

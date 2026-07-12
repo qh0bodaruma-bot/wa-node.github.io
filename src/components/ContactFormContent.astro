@@ -1,5 +1,6 @@
 ---
 import AvailabilityStatus from './AvailabilityStatus.astro';
+import MaterialIcon from './MaterialIcon.astro';
 
 interface Props {
   lang?: 'ja' | 'en' | 'fr';
@@ -434,7 +435,7 @@ const t = f[lang];
             <!-- Dynamic Benefit Badge -->
             <div id="benefit-badge-container" style="display: none; margin-bottom: 24px;">
               <div class="benefit-dynamic-badge">
-                <span class="badge-icon">🎁</span>
+                <span class="badge-icon"><MaterialIcon name="redeem" /></span>
                 <div class="badge-content">
                   <strong id="benefit-badge-title">特典が適用されています</strong>
                   <p id="benefit-badge-desc">初回無料相談の時間を60分（30分拡大）に設定し、優先的に日程調整いたします。</p>
@@ -578,7 +579,7 @@ const t = f[lang];
               data-submitting-text={lang === 'ja' ? '送信中...' : lang === 'fr' ? 'Envoi en cours...' : 'Sending...'}
               data-original-text={t.btn_submit}>
               <span>{t.btn_submit}</span>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              <MaterialIcon name="send" />
             </button>
           </form>
         </div>
@@ -1377,9 +1378,9 @@ const t = f[lang];
           const dateDesc = document.querySelector('.date-candidates .field-desc');
           if (dateDesc && !dateDesc.querySelector('.benefit-applied-text')) {
             const dateNotice = {
-              ja: '🎁 特典適用中：通常30分のところ、面談時間を60分（30分拡大）として優先調整いたします。',
-              en: '🎁 Benefit Applied: We will prioritize scheduling a 60-minute session (extended by 30 mins) instead of the regular 30 minutes.',
-              fr: '🎁 Avantage Appliqué: Nous planifierons en priorité une session de 60 minutes (prolongée de 30 min) au lieu des 30 minutes habituelles.'
+              ja: '特典適用中：通常30分のところ、面談時間を60分（30分拡大）として優先調整いたします。',
+              en: 'Benefit Applied: We will prioritize scheduling a 60-minute session (extended by 30 mins) instead of the regular 30 minutes.',
+              fr: 'Avantage Appliqué: Nous planifierons en priorité une session de 60 minutes (prolongée de 30 min) au lieu des 30 minutes habituelles.'
             };
             dateDesc.innerHTML = `<strong class="benefit-applied-text" style="color: var(--accent-red); display: block; margin-bottom: 6px;">${dateNotice[lang] || dateNotice['ja']}</strong>` + dateDesc.innerHTML;
           }

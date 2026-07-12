@@ -1,13 +1,14 @@
 ---
 // src/components/AiChatWidget.astro
 // 和-Node AI コンシェルジュ ウィジェット
+import MaterialIcon from './MaterialIcon.astro';
 ---
 
 <div class="ai-chat-widget" id="ai-chat-widget">
   <!-- フローティングボタン -->
   <button class="chat-trigger" id="chat-trigger" aria-label="AI相談を開始する">
     <div class="trigger-icon">
-      <span class="icon-main">🧠</span>
+      <MaterialIcon name="psychology_alt" class="icon-main" />
       <span class="icon-sub">AI</span>
     </div>
     <span class="trigger-text">夜間のご相談・課題整理はこちら</span>
@@ -40,9 +41,7 @@
           rows="1"
         ></textarea>
         <button id="send-btn" disabled aria-label="送信">
-          <svg viewBox="0 0 24 24" width="24" height="24">
-            <path fill="currentColor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
-          </svg>
+          <MaterialIcon name="send" />
         </button>
       </div>
       <p class="input-note">※AIによる自動応答です。具体的な見積もり等は無料相談をご利用ください。個人情報・機密情報の詳細は入力しないでください。</p>
@@ -85,6 +84,11 @@
     font-size: 1.5rem;
     display: flex;
     align-items: center;
+  }
+
+  .icon-main {
+    color: var(--trust, #0f4c5c);
+    font-size: 1.7rem;
   }
 
   .icon-sub {

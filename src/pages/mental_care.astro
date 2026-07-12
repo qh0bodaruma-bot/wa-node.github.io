@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="こころの疲労度診断 | 和-Node" description="心理カウンセリング資格を持つ車いすSEが設計した、こころの疲労度とストレス要因を可視化する無料セルフチェックツールです。" noindex={true}>
@@ -19,7 +20,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Welcome Step -->
       <div id="step-welcome" class="quiz-step active">
         <div class="welcome-visual">
-          <div class="pulse-icon">🌱</div>
+          <div class="pulse-icon"><MaterialIcon name="self_improvement" /></div>
         </div>
         <h1 class="welcome-title">こころの疲労度<br/><span class="accent-text">モヤモヤ診断</span></h1>
         <p class="welcome-desc">
@@ -92,7 +93,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="analysis-grid">
               <div class="analysis-item">
                 <div class="item-header">
-                  <span class="icon">🏃‍♂️</span>
+                  <span class="icon material-symbols-rounded">directions_run</span>
                   <span class="label">身体の疲労</span>
                   <span class="score" id="val-body">0/6</span>
                 </div>
@@ -100,7 +101,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </div>
               <div class="analysis-item">
                 <div class="item-header">
-                  <span class="icon">💭</span>
+                  <span class="icon material-symbols-rounded">psychology</span>
                   <span class="label">心の疲労</span>
                   <span class="score" id="val-mind">0/12</span>
                 </div>
@@ -108,7 +109,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               </div>
               <div class="analysis-item">
                 <div class="item-header">
-                  <span class="icon">🏢</span>
+                  <span class="icon material-symbols-rounded">business_center</span>
                   <span class="label">抱え込み度</span>
                   <span class="score" id="val-env">0/12</span>
                 </div>
@@ -119,7 +120,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="evidence-box glass-card" style="margin-top: 40px; padding: 40px; border-left: 6px solid var(--accent); background: #fff; text-align: left;">
-          <h3 style="font-size: 1.3rem; font-weight: 900; margin-top: 0; margin-bottom: 20px; color: var(--text);">🧠 感情や悩みを「言葉にする」科学的な効果</h3>
+          <h3 style="font-size: 1.3rem; font-weight: 900; margin-top: 0; margin-bottom: 20px; color: var(--text);"><MaterialIcon name="psychology" /> 感情や悩みを「言葉にする」科学的な効果</h3>
           <p style="line-height: 1.8; color: var(--muted); margin: 0;">
             心理学では、心の中のストレスやモヤモヤを文章や言葉として外に吐き出すことを**「筆記開示（エクスプレッシブ・ライティング）」**と呼びます（テキサス大学ジェームズ・ペネベーカー教授の研究）。<br/><br/>
             自分の抱える感情を言語化して客観的に見つめることで、ストレスホルモンが減少し、脳のワーキングメモリ（考えるスペース）が回復して、心がスッキリと整理されることが科学的に実証されています。<br/><br/>
@@ -128,7 +129,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
         
         <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px;">
-          <div class="bonus-tag">🎁 診断完了特典</div>
+          <div class="bonus-tag"><MaterialIcon name="redeem" /> 診断完了特典</div>
           <h3>初回カウンセリングを30分延長いたします</h3>
           <p>
             診断お疲れ様でした。この結果画面をスクリーンショットして公式LINEへ送るか、合言葉 <strong>「わのーど診断」</strong> とお伝えください。<br/>

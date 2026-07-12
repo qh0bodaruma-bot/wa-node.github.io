@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="経営者向け DX×メンタル相関診断 | 和-Node" description="経営者・個人事業主の「心の疲れ」と「技術の未整備」の相関を可視化。あなたが本来の輝きを取り戻すための、技術と心の整え方を提案します。">
@@ -21,7 +22,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Step 0: Welcome -->
       <div id="step-welcome" class="diag-step active">
         <div class="step-visual">
-          <div class="meditation-icon">🧘‍♂️</div>
+          <div class="meditation-icon"><MaterialIcon name="self_improvement" /></div>
         </div>
         <h1 class="welcome-title">経営者のための<br/><span class="accent-text">DX × メンタル相関診断</span></h1>
         <p class="welcome-desc">
@@ -72,12 +73,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
           <div class="analysis-grid">
             <div class="analysis-panel glass-card">
-              <h3>🔋 メンタル耐久度</h3>
+              <h3><MaterialIcon name="battery_horiz_075" /> メンタル耐久度</h3>
               <div class="gauge-bar"><div id="mental-bar" class="bar-fill"></div></div>
               <p id="mental-status" class="small-info">良好です</p>
             </div>
             <div class="analysis-panel glass-card">
-              <h3>⚙️ デジタル活用度</h3>
+              <h3><MaterialIcon name="settings" /> デジタル活用度</h3>
               <div class="gauge-bar"><div id="dx-bar" class="bar-fill"></div></div>
               <p id="dx-status" class="small-info">改善の余地があります</p>
             </div>
@@ -85,12 +86,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="psych-advice glass-card">
-          <h3>🧠 心理学者・ICTコンサルタントからの提言</h3>
+          <h3><MaterialIcon name="psychology" /> 心理学者・ICTコンサルタントからの提言</h3>
           <div id="advice-content" class="advice-content"></div>
         </div>
         
         <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px;">
-          <div class="bonus-tag">🎁 特別個別アドバイス</div>
+          <div class="bonus-tag"><MaterialIcon name="redeem" /> 特別個別アドバイス</div>
           <h3>この結果を元に、あなたの「3ヶ月後の景色」を変えませんか？</h3>
           <p>
             診断お疲れ様でした。あなた自身の状態が可視化された今が、変化の最大のチャンスです。<br/>

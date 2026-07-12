@@ -1,5 +1,6 @@
 ---
 import LiffLayout from '../layouts/LiffLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 ---
 
 <LiffLayout title="和-Node | こころの相談室" description="和-NodeのLINE内カウンセリング診断・予約アプリです。">
@@ -22,17 +23,17 @@ import LiffLayout from '../layouts/LiffLayout.astro';
           今日もお疲れ様です。<br />
           ここは、あなたの「こころの声」を<br />そっと整理するための場所です。
         </p>
-        <div class="deco-flower">🌿</div>
+        <div class="deco-flower"><MaterialIcon name="eco" /></div>
       </div>
       
       <button class="btn neu-raised" id="startBtn">
-        <span style="font-size: 24px;">🔍</span>
+        <MaterialIcon name="search" />
         <span>こころの健康チェック</span>
         <span class="btn-subtext">Mental Check-up</span>
       </button>
 
       <button class="btn neu-raised" id="menuBtn">
-        <span style="font-size: 24px;">📅</span>
+        <MaterialIcon name="calendar_month" />
         <span>ご相談・予約メニュー</span>
         <span class="btn-subtext">Menu & Booking</span>
       </button>
@@ -76,13 +77,13 @@ import LiffLayout from '../layouts/LiffLayout.astro';
       </div>
 
       <button id="btn-send-chat" class="btn btn-line">
-        <span style="font-size: 20px;">💬</span>
+        <MaterialIcon name="forum" />
         <span>診断結果をトークに送る</span>
         <span class="btn-subtext">Send to Chat</span>
       </button>
 
       <button class="btn neu-raised" id="consultBtn">
-        <span style="font-size: 20px;">🌿</span>
+        <MaterialIcon name="eco" />
         <span>最適なケアを相談する</span>
         <span class="btn-subtext">Consultation</span>
       </button>
@@ -105,7 +106,7 @@ import LiffLayout from '../layouts/LiffLayout.astro';
 
       <a href="https://lin.ee/o5QFPwc" style="text-decoration: none;">
         <button class="btn btn-line">
-          <span style="font-size: 20px;">💬</span>
+          <MaterialIcon name="forum" />
           <span>チャットで相談する</span>
           <span class="btn-subtext">Direct Chat</span>
         </button>
@@ -113,7 +114,7 @@ import LiffLayout from '../layouts/LiffLayout.astro';
 
       <a href="https://wa-node.github.io/#consultation-flow" style="text-decoration: none;">
         <button class="btn neu-raised">
-          <span style="font-size: 20px;">📅</span>
+          <MaterialIcon name="calendar_month" />
           <span>無料相談のステップを確認</span>
           <span class="btn-subtext">Reservation Flow</span>
         </button>

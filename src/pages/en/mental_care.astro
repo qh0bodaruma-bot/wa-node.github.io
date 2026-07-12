@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="Mental Fatigue Assessment | Wa-Node" description="Check your mental health with our stress-level tool! Designed by an Industrial Counselor." noindex={true}>
@@ -19,7 +20,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <!-- Welcome Step -->
       <div id="step-welcome" class="quiz-step active">
         <div class="welcome-visual">
-          <div class="pulse-icon">🌱</div>
+          <div class="pulse-icon"><MaterialIcon name="self_improvement" /></div>
         </div>
         <h1 class="welcome-title">Mental Fatigue & Stress<br/><span class="accent-text">Mind Assessment</span></h1>
         <p class="welcome-desc">
@@ -92,7 +93,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
             <div class="analysis-grid">
               <div class="analysis-item">
                 <div class="item-header">
-                  <span class="icon">🏃‍♂️</span>
+                  <span class="icon material-symbols-rounded">directions_run</span>
                   <span class="label">Physical Fatigue</span>
                   <span class="score" id="val-body">0/6</span>
                 </div>
@@ -100,7 +101,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
               </div>
               <div class="analysis-item">
                 <div class="item-header">
-                  <span class="icon">💭</span>
+                  <span class="icon material-symbols-rounded">psychology</span>
                   <span class="label">Mental Fatigue</span>
                   <span class="score" id="val-mind">0/12</span>
                 </div>
@@ -108,7 +109,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
               </div>
               <div class="analysis-item">
                 <div class="item-header">
-                  <span class="icon">🏢</span>
+                  <span class="icon material-symbols-rounded">business_center</span>
                   <span class="label">Sense of Pressure</span>
                   <span class="score" id="val-env">0/12</span>
                 </div>
@@ -119,7 +120,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
         
         <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px;">
-          <div class="bonus-tag">🎁 Assessment Completion Bonus</div>
+          <div class="bonus-tag"><MaterialIcon name="redeem" /> Assessment Completion Bonus</div>
           <h3>Get a 60-Minute Free Professional Consultation</h3>
           <p>
             Thank you for completing the test. Share a screenshot of this result on official LINE or state the keyword <strong>「WANODE ASSESSMENT」</strong>.<br/>

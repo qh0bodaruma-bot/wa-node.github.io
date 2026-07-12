@@ -1,0 +1,20 @@
+---
+interface Props {
+  name: string;
+  label?: string;
+  class?: string;
+}
+
+const { name, label } = Astro.props;
+const className = Astro.props.class ?? '';
+const isDecorative = !label;
+---
+
+<span
+  class:list={['material-symbols-rounded', 'material-icon', className]}
+  aria-hidden={isDecorative ? 'true' : undefined}
+  aria-label={!isDecorative ? label : undefined}
+  role={!isDecorative ? 'img' : undefined}
+>
+  {name}
+</span>

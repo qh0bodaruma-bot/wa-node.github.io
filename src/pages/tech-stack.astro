@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BrandMovie from '../components/BrandMovie.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 import {
   absoluteUrl,
   createBreadcrumbSchema,
@@ -58,7 +59,7 @@ const structuredData = [
         
         <div class="tech-card reveal card-border-gold">
           <div class="tech-header">
-            <h2 class="tech-title"><span class="card-icon-window window-gold"><svg viewBox="0 0 24 24"><path d="M12 2S8 7 8 12c0 3 2 5 4 5s4-2 4-5c0-5-4-10-4-10z" stroke="currentColor" stroke-width="2" fill="none"/><path d="M9 15l-3 6M15 15l3 6M12 17v4" stroke="currentColor" stroke-width="2"/></svg></span>Astro</h2>
+            <h2 class="tech-title"><span class="card-icon-window window-gold"><MaterialIcon name="rocket_launch" /></span>Astro</h2>
             <span class="tech-badge">Framework</span>
           </div>
           <div class="tech-body">
@@ -72,7 +73,7 @@ const structuredData = [
               これにより、ページ表示の待ち時間を極限まで削り、離脱率の低下とSEO評価の向上を同時に実現します。
             </p>
             <div class="tech-psych-note">
-              <strong>🧠 心理学エビデンス：0.05秒の第一印象（Lindgaard et al., 2006）</strong><br/>
+              <strong><MaterialIcon name="psychology_alt" /> 心理学エビデンス：0.05秒の第一印象（Lindgaard et al., 2006）</strong><br/>
               ユーザーはWebページの第一印象を非常に短い時間で判断するとされています。表示の遅れは、無意識の不安やストレスにつながり、離脱の一因になり得ます。
             </div>
           </div>
@@ -80,7 +81,7 @@ const structuredData = [
 
         <div class="tech-card reveal card-border-blue">
           <div class="tech-header">
-            <h2 class="tech-title"><span class="card-icon-window window-blue"><svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 109 15h9a5 5 0 000-10z" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>Cloudflare Pages</h2>
+            <h2 class="tech-title"><span class="card-icon-window window-blue"><MaterialIcon name="cloud" /></span>Cloudflare Pages</h2>
             <span class="tech-badge">Infrastructure</span>
           </div>
           <div class="tech-body">
@@ -97,7 +98,7 @@ const structuredData = [
 
         <div class="tech-card reveal card-border-green">
           <div class="tech-header">
-            <h2 class="tech-title"><span class="card-icon-window window-green"><svg viewBox="0 0 24 24"><path d="M12 22C17.522 22 22 17.522 22 12C22 6.478 17.522 2 12 2C6.478 2 2 6.478 2 12C2 14.721 3.09 17.189 4.858 19C4.858 19.5 5 20 5.5 20.5C6 21 6.5 21.142 7 21.142C7 21.6 7.5 22 8 22H12Z" stroke="currentColor" stroke-width="2" fill="none"/><circle cx="7.5" cy="10.5" r="1.5" fill="currentColor"/><circle cx="11.5" cy="7.5" r="1.5" fill="currentColor"/><circle cx="16.5" cy="9.5" r="1.5" fill="currentColor"/><circle cx="15.5" cy="14.5" r="1.5" fill="currentColor"/></svg></span>Vanilla CSS</h2>
+            <h2 class="tech-title"><span class="card-icon-window window-green"><MaterialIcon name="palette" /></span>Vanilla CSS</h2>
             <span class="tech-badge">Styling</span>
           </div>
           <div class="tech-body">
@@ -110,7 +111,7 @@ const structuredData = [
               不要なCSSクラスが読み込まれないため、ファイルサイズも最小限に抑えられます。
             </p>
             <div class="tech-psych-note">
-              <strong>🧠 心理学エビデンス：視覚的シンプルさと信頼性（Google共同研究, 2012）</strong><br/>
+              <strong><MaterialIcon name="psychology_alt" /> 心理学エビデンス：視覚的シンプルさと信頼性（Google共同研究, 2012）</strong><br/>
               ユーザーは「視覚的複雑さが低く（シンプル）」、かつ「そのジャンルで標準的なレイアウト（プロトタイプ性）」を持つサイトを理解しやすいと感じやすいとされています。不要な装飾を削ぎ落とし、余白を整えることは、脳の処理負荷（認知摩擦）を下げる助けになります。
             </div>
           </div>
@@ -118,7 +119,7 @@ const structuredData = [
 
         <div class="tech-card reveal card-border-gold">
           <div class="tech-header">
-            <h2 class="tech-title"><span class="card-icon-window window-gold"><svg viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z" stroke="currentColor" stroke-width="2" fill="none"/></svg></span>AI Driven Development</h2>
+            <h2 class="tech-title"><span class="card-icon-window window-gold"><MaterialIcon name="auto_awesome" /></span>AI Driven Development</h2>
             <span class="tech-badge">Workflow</span>
           </div>
           <div class="tech-body">

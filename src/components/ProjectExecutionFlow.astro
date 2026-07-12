@@ -1,4 +1,6 @@
 ---
+import MaterialIcon from './MaterialIcon.astro';
+
 interface Props {
   lang?: 'ja' | 'en' | 'fr';
   id?: string;
@@ -10,12 +12,12 @@ const f = {
   ja: {
     title: "ご契約後の制作・サポートの流れ",
     subtitle: "いつ・どこでお金の請求が発生し、お互い何をするのかを可視化します",
-    tab_hp: "🌐 ホームページ（HP）制作",
-    tab_lp: "🎯 ランディングページ（LP）制作",
-    tab_copilot: "🤝 ビジネスの副操縦士",
+    tab_hp: "ホームページ（HP）制作",
+    tab_lp: "ランディングページ（LP）制作",
+    tab_copilot: "ビジネスの副操縦士",
     label_our_task: "和-Nodeの作業内容",
     label_client_task: "お客様のご協力義務",
-    badge_payment: "💰 お支払い・ご請求タイミング",
+    badge_payment: "お支払い・ご請求タイミング",
     hp_duration: "期間の目安：約4〜8週間",
     lp_duration: "期間の目安：約2〜4週間",
     copilot_duration: "契約形式：月額支援（伴走型）",
@@ -141,12 +143,12 @@ const f = {
   en: {
     title: "Project & Support Flow After Contract",
     subtitle: "We visualize when payments occur and what tasks both parties handle to ensure peace of mind.",
-    tab_hp: "🌐 Homepage (HP) Production",
-    tab_lp: "🎯 Landing Page (LP) Production",
-    tab_copilot: "🤝 Business Copilot",
+    tab_hp: "Homepage (HP) Production",
+    tab_lp: "Landing Page (LP) Production",
+    tab_copilot: "Business Copilot",
     label_our_task: "Wa-Node Tasks",
     label_client_task: "Client Tasks",
-    badge_payment: "💰 Billing & Payment Timing",
+    badge_payment: "Billing & Payment Timing",
     hp_duration: "Estimated Timeline: Approx. 4-8 Weeks",
     lp_duration: "Estimated Timeline: Approx. 2-4 Weeks",
     copilot_duration: "Contract: Monthly Partnership (Ongoing)",
@@ -154,7 +156,7 @@ const f = {
       {
         step: "STEP 01",
         title: "Kickoff & Contract",
-        payment: "[💰 Down Payment 50%] After signing the contract, a 50% deposit is required before launching the formal production.",
+        payment: "[Down Payment 50%] After signing the contract, a 50% deposit is required before launching the formal production.",
         our_task: "Define specifications, establish a detailed timeline and milestones, and issue the down payment invoice.",
         client_task: "Final agreement on contract terms, and fill out the detailed project brief questionnaire."
       },
@@ -182,7 +184,7 @@ const f = {
       {
         step: "STEP 05",
         title: "Final Verification & Delivery",
-        payment: "[💰 Final Payment 50%] After confirming all features work on the staging server, the final 50% balance is invoiced.",
+        payment: "[Final Payment 50%] After confirming all features work on the staging server, the final 50% balance is invoiced.",
         our_task: "Fine-tune UI details based on tests, instruct CMS operations/simple edits, and issue the final balance invoice.",
         client_task: "Perform final inspection, approve the build, and transfer the remaining 50% balance."
       },
@@ -198,7 +200,7 @@ const f = {
       {
         step: "STEP 01",
         title: "Kickoff & Persona Analysis",
-        payment: "[💰 Down Payment 50%] After signing the contract, a 50% deposit is required before launching the formal production.",
+        payment: "[Down Payment 50%] After signing the contract, a 50% deposit is required before launching the formal production.",
         our_task: "Analyze target persona & competitors, outline LP story direction, set project schedule, and issue down payment invoice.",
         client_task: "Final agreement on contract terms, and fill out the detailed questionnaire."
       },
@@ -226,7 +228,7 @@ const f = {
       {
         step: "STEP 05",
         title: "Final Verification & Delivery",
-        payment: "[💰 Final Payment 50%] After confirming features work on the staging server, the final 50% balance is invoiced.",
+        payment: "[Final Payment 50%] After confirming features work on the staging server, the final 50% balance is invoiced.",
         our_task: "Perform final adjustments, fix bugs, and issue the final balance invoice.",
         client_task: "Verify final build, approve delivery, and transfer the remaining 50% balance."
       },
@@ -242,7 +244,7 @@ const f = {
       {
         step: "STEP 01",
         title: "Auditing & DX/AI Diagnosis",
-        payment: "[💰 First Month Fee] The first month fee (prepaid) is invoiced upon contract signing.",
+        payment: "[First Month Fee] The first month fee (prepaid) is invoiced upon contract signing.",
         our_task: "Audit current operations (analysing analog bottlenecks), and diagnose automation possibilities using AI & LINE integrations.",
         client_task: "Share daily work procedures, current administrative frustrations, and tools currently used or considered."
       },
@@ -256,7 +258,7 @@ const f = {
       {
         step: "STEP 03",
         title: "Monthly Support & Co-piloting",
-        payment: "[💰 Monthly Retainer] Retainer invoices for the next month are sent around the 25th of each month (prepaid).",
+        payment: "[Monthly Retainer] Retainer invoices for the next month are sent around the 25th of each month (prepaid).",
         our_task: "Conduct regular online meetings (1-2 times/month), chat support (Slack/LINE), custom AI prompt engineering, and tool setups.",
         client_task: "Attend scheduled meetings, raise questions via chat, and implement systems and apply new workflows to daily tasks."
       },
@@ -272,12 +274,12 @@ const f = {
   fr: {
     title: "Déroulement du Projet & Planification des Paiements",
     subtitle: "Nous visualisons clairement quand ont lieu les paiements et le rôle de chacun pour un partenariat serein.",
-    tab_hp: "🌐 Création de Site Web (HP)",
-    tab_lp: "🎯 Création de Landing Page (LP)",
-    tab_copilot: "🤝 Co-pilote d'Affaires",
+    tab_hp: "Création de Site Web (HP)",
+    tab_lp: "Création de Landing Page (LP)",
+    tab_copilot: "Co-pilote d'Affaires",
     label_our_task: "Tâches de Wa-Node",
     label_client_task: "Votre Collaboration",
-    badge_payment: "💰 Facturation & Paiements",
+    badge_payment: "Facturation & Paiements",
     hp_duration: "Délai estimé : environ 4 à 8 semaines",
     lp_duration: "Délai estimé : environ 2 à 4 semaines",
     copilot_duration: "Contrat : Abonnement mensuel (Accompagnement)",
@@ -285,7 +287,7 @@ const f = {
       {
         step: "STEP 01",
         title: "Lancement & Contrat",
-        payment: "[💰 Acompte de 50%] Après la signature du contrat, un acompte de 50% est requis avant le début officiel de la production.",
+        payment: "[Acompte de 50%] Après la signature du contrat, un acompte de 50% est requis avant le début officiel de la production.",
         our_task: "Définir précisément le cahier des charges, établir le calendrier détaillé et émettre la facture d'acompte.",
         client_task: "Validation finale du contrat de prestation, et réponse au questionnaire de cadrage de projet."
       },
@@ -313,7 +315,7 @@ const f = {
       {
         step: "STEP 05",
         title: "Vérification Finale & Livraison",
-        payment: "[💰 Solde de 50%] Après validation complète sur le serveur de test, les 50% restants sont facturés avant la mise en ligne.",
+        payment: "[Solde de 50%] Après validation complète sur le serveur de test, les 50% restants sont facturés avant la mise en ligne.",
         our_task: "Dernières corrections de l'interface, formation rapide à la gestion du site, émission de la facture de solde.",
         client_task: "Inspection finale, validation formelle et règlement du solde de 50% restant."
       },
@@ -329,7 +331,7 @@ const f = {
       {
         step: "STEP 01",
         title: "Lancement & Analyse de Persona",
-        payment: "[💰 Acompte de 50%] Après la signature du contrat, un acompte de 50% est requis avant le début officiel de la production.",
+        payment: "[Acompte de 50%] Après la signature du contrat, un acompte de 50% est requis avant le début officiel de la production.",
         our_task: "Analyser la cible de clients et les concurrents, structurer la chronologie et le story-board de la LP, planifier le projet et émettre la facture d'acompte.",
         client_task: "Validation finale du contrat et réponse au questionnaire détaillé."
       },
@@ -357,7 +359,7 @@ const f = {
       {
         step: "STEP 05",
         title: "Vérification Finale & Solde",
-        payment: "[💰 Solde de 50%] Après validation complète de la LP en staging, le solde restant est facturé.",
+        payment: "[Solde de 50%] Après validation complète de la LP en staging, le solde restant est facturé.",
         our_task: "Ajustements finaux de l'affichage, correction de bugs, émission de la facture de solde.",
         client_task: "Inspection finale de la LP, validation formelle et règlement du solde de 50% restant."
       },
@@ -373,7 +375,7 @@ const f = {
       {
         step: "STEP 01",
         title: "Audit & Diagnostic DX/IA",
-        payment: "[💰 Premier Mois] Les frais du premier mois (prépayés) sont facturés lors de la signature du contrat d'accompagnement.",
+        payment: "[Premier Mois] Les frais du premier mois (prépayés) sont facturés lors de la signature du contrat d'accompagnement.",
         our_task: "Audit de vos processus opérationnels (identification des tâches manuelles répétitives), diagnostic des opportunités d'automatisation.",
         client_task: "Partage de vos méthodes de travail, de vos frustrations administratives et des outils actuellement utilisés."
       },
@@ -387,7 +389,7 @@ const f = {
       {
         step: "STEP 03",
         title: "Co-piloting & Support Mensuel",
-        payment: "[💰 Retrait mensuel] La mensualité du mois suivant est facturée aux alentours du 25 de chaque mois (prépayé).",
+        payment: "[Retrait mensuel] La mensualité du mois suivant est facturée aux alentours du 25 de chaque mois (prépayé).",
         our_task: "Sessions en ligne régulières (1 à 2 fois/mois), support par chat (Slack/LINE), conception de prompts IA, configuration d'outils.",
         client_task: "Présence aux réunions planifiées, questions par chat, intégration des systèmes et application des nouveaux flux de travail."
       },
@@ -417,13 +419,13 @@ const t = f[lang];
     <div class="flow-tabs-wrapper reveal">
       <div class="flow-tabs" role="tablist">
         <button class="flow-tab-btn active" data-tab="hp" role="tab" aria-selected="true">
-          {t.tab_hp}
+          <MaterialIcon name="language" /> {t.tab_hp}
         </button>
         <button class="flow-tab-btn" data-tab="lp" role="tab" aria-selected="false">
-          {t.tab_lp}
+          <MaterialIcon name="ads_click" /> {t.tab_lp}
         </button>
         <button class="flow-tab-btn" data-tab="copilot" role="tab" aria-selected="false">
-          {t.tab_copilot}
+          <MaterialIcon name="handshake" /> {t.tab_copilot}
         </button>
       </div>
     </div>
@@ -447,7 +449,7 @@ const t = f[lang];
               
               {item.payment && (
                 <div class="payment-box">
-                  <span class="payment-badge">{t.badge_payment}</span>
+                  <span class="payment-badge"><MaterialIcon name="payments" /> {t.badge_payment}</span>
                   <p class="payment-text">{item.payment}</p>
                 </div>
               )}
@@ -487,7 +489,7 @@ const t = f[lang];
               
               {item.payment && (
                 <div class="payment-box">
-                  <span class="payment-badge">{t.badge_payment}</span>
+                  <span class="payment-badge"><MaterialIcon name="payments" /> {t.badge_payment}</span>
                   <p class="payment-text">{item.payment}</p>
                 </div>
               )}
@@ -527,7 +529,7 @@ const t = f[lang];
               
               {item.payment && (
                 <div class="payment-box">
-                  <span class="payment-badge">{t.badge_payment}</span>
+                  <span class="payment-badge"><MaterialIcon name="payments" /> {t.badge_payment}</span>
                   <p class="payment-text">{item.payment}</p>
                 </div>
               )}
@@ -656,6 +658,9 @@ const t = f[lang];
     box-shadow: var(--shadow-sm);
   }
   .flow-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     padding: 14px 32px;
     border: none;
     background: transparent;
@@ -843,7 +848,9 @@ const t = f[lang];
     margin-bottom: 24px;
   }
   .payment-badge {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
     align-self: flex-start;
     padding: 4px 12px;
     background: #d14d3a;

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="バリアフリー度診断 | 和-Node" description="車いすユーザー視点で、店舗やオフィスの入口・通路・トイレ・接客導線をセルフチェックできる無料バリアフリー診断ツールです。">
@@ -19,7 +20,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <!-- Welcome Step -->
       <div id="step-welcome" class="quiz-step active">
         <div class="welcome-visual">
-          <div class="pulse-icon">♿️</div>
+          <div class="pulse-icon"><MaterialIcon name="accessible_forward" /></div>
         </div>
         <h1 class="welcome-title">店舗・オフィスの<br/><span class="accent-text">バリアフリー診断</span></h1>
         <p class="welcome-desc">
@@ -43,7 +44,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="question-content" id="q-container">
-          <div class="category-icon-box" id="cat-icon">🚪</div>
+          <div class="category-icon-box material-symbols-rounded" id="cat-icon">door_front</div>
           <h2 class="q-title" id="q-text">診断項目</h2>
           <div class="q-options" id="q-opts">
             <!-- Options injected by JS -->
@@ -76,9 +77,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </div>
 
           <div class="wanode-cta-box glass-card">
-            <div class="bonus-tag">🎁 診断完了特典</div>
+            <div class="bonus-tag"><MaterialIcon name="redeem" /> 診断完了特典</div>
           <div id="consultation-flow" class="result-cta slide-in" style="scroll-margin-top: 40px;">
-            <div class="bonus-tag" style="display:inline-block; background: var(--accent-grad); color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px;">🎁 診断完了特典</div>
+            <div class="bonus-tag" style="display:inline-block; background: var(--accent-grad); color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 800; margin-bottom: 20px;"><MaterialIcon name="redeem" /> 診断完了特典</div>
             <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 20px;">「60分無料」の個別アドバイスを承ります</h3>
             <p style="font-size: 1rem; color: #555; line-height: 1.8; margin-bottom: 30px;">
               診断お疲れ様でした。ハード面（段差等）の改修が難しくても、ソフト面（情報発信や声かけ）で解決できることはたくさんあります。<br/>
@@ -257,7 +258,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       {
         cat: "entrance",
         catLabel: "入り口のチェック",
-        icon: "🚪",
+        icon: "door_front",
         q: "入り口の段差はどうなっていますか？",
         opts: [
           { text: "全くない（フラット・スロープあり）", score: 20 },
@@ -269,7 +270,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       {
         cat: "door",
         catLabel: "ドアの仕様",
-        icon: "🔓",
+        icon: "lock_open",
         q: "出入り口のドアの種類は？",
         opts: [
           { text: "自動ドア", score: 20 },
@@ -280,7 +281,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       {
         cat: "aisle",
         catLabel: "店内の通路",
-        icon: "↔️",
+        icon: "swap_horiz",
         q: "店内のメイン通路の幅は？",
         opts: [
           { text: "90cm以上（余裕で通れる）", score: 20 },
@@ -291,7 +292,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       {
         cat: "toilet",
         catLabel: "トイレ設備",
-        icon: "🚻",
+        icon: "wc",
         q: "トイレの設備はどうなっていますか？",
         opts: [
           { text: "多目的・だれでもトイレがある", score: 20 },
@@ -303,7 +304,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       {
         cat: "soft",
         catLabel: "サポート体制",
-        icon: "🤝",
+        icon: "handshake",
         q: "スタッフのサポート（ソフト面）は？",
         opts: [
           { text: "対応マニュアルや研修がある", score: 20 },
@@ -408,13 +409,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const resDesc = document.getElementById('res-desc');
       
       if (totalScore >= 80) {
-        resTitle.textContent = "素晴らしい！誰もが使いやすい空間です👏";
+        resTitle.textContent = "素晴らしい！誰もが使いやすい空間です";
         resDesc.innerHTML = "ハード面もソフト面も充実しており、車いすユーザーにとっても非常に安心できる空間です。<br>この素晴らしいバリアフリー環境を、ぜひホームページやSNSでも積極的にアピールしていきましょう！";
       } else if (totalScore >= 50) {
-        resTitle.textContent = "もう一歩！少しの工夫でさらによくなります💡";
+        resTitle.textContent = "もう一歩！少しの工夫でさらによくなります";
         resDesc.innerHTML = "現状でも十分配慮されていますが、あと少しの工夫で劇的に使いやすくなります。<br>例えば、わずかな段差なら簡易スロープを置く、入り口でスタッフがドアを開ける声かけをするなど、ちょっとした「ソフト面」のカバーで満点に近づけます！";
       } else {
-        resTitle.textContent = "改善の余地あり！まずは「ソフト面」から🌱";
+        resTitle.textContent = "改善の余地あり！まずは「ソフト面」から";
         resDesc.innerHTML = "建物の構造上、すぐに設備を改修するのは難しいかもしれません。<br>しかし「何かお手伝いしましょうか？」というスタッフの声かけや、事前にHPで『入り口に段差があります』と情報発信しておくことで、車いすユーザーの不安は大きく軽減されます。";
       }
     }

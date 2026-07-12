@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="Diagnostic d'Accessibilité | Wa-Node" description="Évaluez votre espace du point de vue d'un utilisateur en fauteuil roulant! Faites notre diagnostic gratuit pour évaluer l'accessibilité de votre magasin ou bureau.">
@@ -19,7 +20,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       <!-- Welcome Step -->
       <div id="step-welcome" class="quiz-step active">
         <div class="welcome-visual">
-          <div class="pulse-icon">♿️</div>
+          <div class="pulse-icon"><MaterialIcon name="accessible_forward" /></div>
         </div>
         <h1 class="welcome-title">Diagnostic d'Accessibilité<br/><span class="accent-text">de Magasins & Bureaux</span></h1>
         <p class="welcome-desc">
@@ -43,7 +44,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
         </div>
 
         <div class="question-content" id="q-container">
-          <div class="category-icon-box" id="cat-icon">🚪</div>
+          <div class="category-icon-box material-symbols-rounded" id="cat-icon">door_front</div>
           <h2 class="q-title" id="q-text">Point de Diagnostic</h2>
           <div class="q-options" id="q-opts">
             <!-- Options injected by JS -->
@@ -76,7 +77,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
           </div>
 
           <div class="wanode-cta-box glass-card">
-            <div class="bonus-tag">🎁 Bonus Fin de Diagnostic</div>
+            <div class="bonus-tag"><MaterialIcon name="redeem" /> Bonus Fin de Diagnostic</div>
             <div id="consultation-flow" class="result-cta slide-in" style="scroll-margin-top: 40px;">
               <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 20px;">Bénéficiez d'une Séance de Conseil Gratuite de 60 Minutes</h3>
               <p style="font-size: 1rem; color: #555; line-height: 1.8; margin-bottom: 30px;">
@@ -256,7 +257,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       {
         cat: "entrance",
         catLabel: "Vérification de l'Entrée",
-        icon: "🚪",
+        icon: "door_front",
         q: "Comment est structuré le seuil/marche de l'entrée ?",
         opts: [
           { text: "Complètement plat (de plain-pied ou rampe)", score: 20 },
@@ -268,7 +269,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       {
         cat: "door",
         catLabel: "Mécanisme de Porte",
-        icon: "🔓",
+        icon: "lock_open",
         q: "Quel type de porte d'entrée avez-vous ?",
         opts: [
           { text: "Porte coulissante automatique", score: 20 },
@@ -279,7 +280,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       {
         cat: "aisle",
         catLabel: "Allées Intérieures",
-        icon: "↔️",
+        icon: "swap_horiz",
         q: "Quelle est la largeur des allées principales ?",
         opts: [
           { text: "90 cm ou plus (passage facile)", score: 20 },
@@ -290,7 +291,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       {
         cat: "toilet",
         catLabel: "Toilettes & Sanitaires",
-        icon: "🚻",
+        icon: "wc",
         q: "Comment sont configurées les toilettes ?",
         opts: [
           { text: "Toilettes universelles / accessibles en fauteuil", score: 20 },
@@ -302,7 +303,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       {
         cat: "soft",
         catLabel: "Accompagnement",
-        icon: "🤝",
+        icon: "handshake",
         q: "Comment est structuré l'accueil (côté humain) ?",
         opts: [
           { text: "Manuels de support & formations disponibles", score: 20 },
@@ -407,13 +408,13 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
       const resDesc = document.getElementById('res-desc');
       
       if (totalScore >= 80) {
-        resTitle.textContent = "Excellent ! Votre espace est hautement accessible à tous 👏";
+        resTitle.textContent = "Excellent ! Votre espace est hautement accessible à tous";
         resDesc.innerHTML = "Les installations physiques et le support du personnel sont exceptionnels. C'est un environnement très rassurant pour les utilisateurs de fauteuils roulants. Nous vous conseillons vivement d'afficher fièrement cette accessibilité sur votre site web et vos réseaux sociaux !";
       } else if (totalScore >= 50) {
-        resTitle.textContent = "Presque ! Quelques ajustements simples le rendront parfait 💡";
+        resTitle.textContent = "Presque ! Quelques ajustements simples le rendront parfait";
         resDesc.innerHTML = "Bien que votre espace présente de bonnes attentions, de légères améliorations peuvent radicalement optimiser le confort. Par exemple, installer une rampe amovible ou faire ouvrir la porte par le personnel peut facilement compenser les limites physiques.";
       } else {
-        resTitle.textContent = "Marge de progression ! Commencez par l'aide humaine 🌱";
+        resTitle.textContent = "Marge de progression ! Commencez par l'aide humaine";
         resDesc.innerHTML = "Modifier la structure du bâtiment peut être difficile dans l'immédiat. Cependant, des gestes chaleureux comme 'Puis-je vous aider ?' et indiquer clairement à l'avance sur votre site internet 'Notre entrée comporte une marche' réduiront considérablement l'anxiété des utilisateurs de fauteuils roulants.";
       }
     }

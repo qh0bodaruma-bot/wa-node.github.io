@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ConsultationFlow from '../../components/ConsultationFlow.astro';
 import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="Tarifs & Offres de Services | Wa-Node" description="Découvrez les tarifs transparents de Wa-Node. Nous proposons une conception de sites web et LP optimisée pour la conversion grâce à la psychologie comportementale, un co-pilotage stratégique mensuel et l'intégration de solutions IA." lang="fr">
@@ -132,10 +133,10 @@ import ProjectExecutionFlow from '../../components/ProjectExecutionFlow.astro';
       <div class="plan-tabs-wrapper reveal">
         <div class="plan-tabs" role="tablist">
           <button class="plan-tab-btn active" data-plan-tab="hp" role="tab" aria-selected="true">
-            🌐 Site Web (HP)
+            <MaterialIcon name="language" /> Site Web (HP)
           </button>
           <button class="plan-tab-btn" data-plan-tab="lp" role="tab" aria-selected="false">
-            🎯 Landing Page (LP)
+            <MaterialIcon name="ads_click" /> Landing Page (LP)
           </button>
         </div>
       </div>

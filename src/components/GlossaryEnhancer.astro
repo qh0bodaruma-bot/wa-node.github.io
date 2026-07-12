@@ -41,10 +41,10 @@
     color: #1f6f78;
   }
 
-  .glossary-icon svg {
+  .glossary-icon .material-symbols-rounded {
     width: 100%;
     height: 100%;
-    stroke: currentColor;
+    font-size: 0.9em;
   }
 
   .glossary-tooltip {
@@ -117,7 +117,7 @@
     };
 
     const termPattern = /\b(GA4|SEO|AEO|ICT|CTA|UX|LP)\b/g;
-    const icon = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6"></circle><path d="m20 20-4.2-4.2"></path></svg>';
+    const icon = '<span class="material-symbols-rounded" aria-hidden="true">search</span>';
     let sequence = 0;
 
     function closeItem(item) {

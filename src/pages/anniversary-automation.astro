@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -70,7 +71,7 @@ const jsonLd = {
             <!-- LINE -->
             <div class="f-row reveal">
               <div class="f-text">
-                <span class="f-icon">💬</span>
+                <span class="f-icon"><MaterialIcon name="forum" /></span>
                 <h3>LINE公式アカウント連携</h3>
                 <p>サイトからLINEへシームレスに誘導。予約、自動応答、プッシュ通知を組み合わせ、取りこぼしのない顧客体験を実現します。</p>
               </div>
@@ -85,7 +86,7 @@ const jsonLd = {
             <!-- AI -->
             <div class="f-row reverse reveal">
               <div class="f-text">
-                <span class="f-icon">🤖</span>
+                <span class="f-icon"><MaterialIcon name="smart_toy" /></span>
                 <h3>AIによる問い合わせ要約・返信支援</h3>
                 <p>ChatGPTを裏側で連携。届いたメールをAIが要約し、あなたのトーンに合わせた返信案を自動生成。管理の手間を激減させます。</p>
               </div>

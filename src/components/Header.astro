@@ -1,5 +1,6 @@
 ---
 import LanguageSwitcher from './LanguageSwitcher.astro';
+import MaterialIcon from './MaterialIcon.astro';
 import t from '../i18n/translations.json';
 import { MULTILANG_PAGES } from '../i18n/navigation';
 
@@ -35,12 +36,17 @@ function getLocalizedLink(path: string) {
       和-Node<span class="logo-sub">{lang === 'ja' ? '心理学 × ICT × AI' : lang === 'en' ? 'Psychology × ICT × AI' : 'Psychologie × TIC × IA'}</span>
     </a>
 
-    <button class="menu-toggle" id="menu-toggle" aria-label={lang === 'ja' ? 'メニューを開く' : lang === 'en' ? 'Open Menu' : 'Ouvrir le menu'}>
-      <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <rect class="bar-top" x="5" y="7" width="20" height="2" rx="1" fill="#2b241f"/>
-        <rect class="bar-mid" x="5" y="14" width="20" height="2" rx="1" fill="#2b241f"/>
-        <rect class="bar-bot" x="5" y="21" width="20" height="2" rx="1" fill="#2b241f"/>
-      </svg>
+    <button
+      class="menu-toggle"
+      id="menu-toggle"
+      aria-label={lang === 'ja' ? 'メニューを開く' : lang === 'en' ? 'Open Menu' : 'Ouvrir le menu'}
+      aria-expanded="false"
+      aria-controls="site-nav"
+      data-open-label={lang === 'ja' ? 'メニューを開く' : lang === 'en' ? 'Open Menu' : 'Ouvrir le menu'}
+      data-close-label={lang === 'ja' ? 'メニューを閉じる' : lang === 'en' ? 'Close Menu' : 'Fermer le menu'}
+    >
+      <MaterialIcon name="menu" class="menu-icon-open" />
+      <MaterialIcon name="close" class="menu-icon-close" />
     </button>
 
     <nav class="nav" id="site-nav">
@@ -154,6 +160,7 @@ function getLocalizedLink(path: string) {
 
   /* Hamburger Menu */
   .menu-toggle {
+    position: relative;
     display: none;
     width: 44px;
     height: 44px;
@@ -169,14 +176,33 @@ function getLocalizedLink(path: string) {
     transform: scale(1.1);
   }
 
-  .menu-toggle svg rect {
-    transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
+  .menu-toggle :global(.material-symbols-rounded) {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 30px;
+    margin: auto;
+    color: #2b241f;
+    font-size: 30px;
+    transition: opacity 0.24s ease, transform 0.24s ease;
   }
 
-  .menu-toggle.active .bar-top { transform: translateY(7px) rotate(45deg); }
-  .menu-toggle.active .bar-mid { opacity: 0; }
-  .menu-toggle.active .bar-bot { transform: translateY(-7px) rotate(-45deg); }
+  .menu-toggle :global(.menu-icon-close) {
+    opacity: 0;
+    transform: scale(0.7) rotate(-45deg);
+  }
+
+  .menu-toggle.active :global(.menu-icon-open) {
+    opacity: 0;
+    transform: scale(0.7) rotate(45deg);
+  }
+
+  .menu-toggle.active :global(.menu-icon-close) {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
 
   @media (max-width: 820px) {
     .menu-toggle { display: block; }
@@ -229,7 +255,10 @@ function getLocalizedLink(path: string) {
       newToggle.addEventListener('click', () => {
         newToggle.classList.toggle('active');
         nav.classList.toggle('active');
-        document.body.style.overflow = nav.classList.contains('active') ? 'hidden' : '';
+        const isOpen = nav.classList.contains('active');
+        newToggle.setAttribute('aria-expanded', String(isOpen));
+        newToggle.setAttribute('aria-label', isOpen ? newToggle.dataset.closeLabel : newToggle.dataset.openLabel);
+        document.body.style.overflow = isOpen ? 'hidden' : '';
       });
 
       window.addEventListener('scroll', () => {
@@ -241,6 +270,8 @@ function getLocalizedLink(path: string) {
         link.addEventListener('click', () => {
           newToggle.classList.remove('active');
           nav.classList.remove('active');
+          newToggle.setAttribute('aria-expanded', 'false');
+          newToggle.setAttribute('aria-label', newToggle.dataset.openLabel);
           document.body.style.overflow = '';
         });
       });

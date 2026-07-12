@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
 ---
 
 <BaseLayout title="LP制作・要件ヒアリング | 和-Node" description="理想のWebサイト・LP制作への第一歩。構成案作成ウィザードで、あなたのビジネスの強みをプロの視点で整理します。">
@@ -74,14 +75,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
               <!-- JS dynamic data -->
             </div>
             <div class="doc-ai-box">
-              <div class="ai-label">💡 和-Nodeからの初期提案</div>
+              <div class="ai-label"><MaterialIcon name="tips_and_updates" /> 和-Nodeからの初期提案</div>
               <p id="recommendText"></p>
             </div>
           </div>
 
           <div class="result-actions">
             <div class="bonus-notice-box glass-card">
-              <div class="bonus-tag">🎁 相談延長特典</div>
+              <div class="bonus-tag"><MaterialIcon name="redeem" /> 相談延長特典</div>
               <p>
                 この要件サマリーをコピーして公式LINEにお送りください。<br/>
                 合言葉 <strong>「わのーど診断」</strong> とともに、初回無料相談を <strong>「60分」</strong> に延長します。
@@ -100,7 +101,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
       <!-- Consultation Flow Section -->
       <section id="consultation-flow" class="wanode-cta-box glass-card" style="margin-top: 60px; scroll-margin-top: 40px; padding: 40px; background: rgba(255,255,255,0.8); border: 1px solid var(--wiz-accent-light); border-radius: 32px;">
-        <div class="bonus-tag" style="background: var(--wiz-accent); color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 900; margin-bottom: 20px; display: inline-block;">🎁 ウィザード完了特典</div>
+        <div class="bonus-tag" style="background: var(--wiz-accent); color: #fff; padding: 6px 16px; border-radius: 999px; font-size: 0.8rem; font-weight: 900; margin-bottom: 20px; display: inline-block;"><MaterialIcon name="redeem" /> ウィザード完了特典</div>
         <h3 style="font-size: 1.6rem; font-weight: 900; margin-bottom: 20px; color: var(--wiz-text);">要件サマリーを元に、最適なプランをご提案します</h3>
         <p style="font-size: 1rem; color: #555; line-height: 1.8; margin-bottom: 30px;">
           ウィザードのご利用ありがとうございました。作成されたサマリーを元に、より具体的な構成案や費用感をご相談いただけます。<br/>
@@ -264,44 +265,44 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     const questions = [
       { id: 'industry', title: '1. 業種・ビジネス内容', type: 'text', placeholder: '例：心理カウンセラー、士業、店舗経営など' },
       { id: 'goal', title: '2. 制作の主な目的', type: 'choice', options: [
-        { label: '問い合わせ・予約獲得', val: 'リード獲得', icon: '📈', desc: '新規顧客からのアクションを最大化します。' },
-        { label: '信頼感・専門性の向上', val: 'ブランディング', icon: '💎', desc: '実績紹介や名刺代わりとしての質を重視。' },
-        { label: '商品・サービスの直接販売', val: '直接販売', icon: '🛒', desc: 'LP上での決済や申し込み完了までを設計。' }
+        { label: '問い合わせ・予約獲得', val: 'リード獲得', icon: 'trending_up', desc: '新規顧客からのアクションを最大化します。' },
+        { label: '信頼感・専門性の向上', val: 'ブランディング', icon: 'diamond', desc: '実績紹介や名刺代わりとしての質を重視。' },
+        { label: '商品・サービスの直接販売', val: '直接販売', icon: 'shopping_cart', desc: 'LP上での決済や申し込み完了までを設計。' }
       ]},
       { id: 'current', title: '3. 現在のサイト状況', type: 'choice', options: [
-        { label: '新規立ち上げ', val: '新規', icon: '🌱', desc: '新ドメインでゼロから構築します。' },
-        { label: '既存のリニューアル', val: 'リニューアル', icon: '🔄', desc: '今の課題を解決し、価値を高めます。' },
-        { label: 'LPのみ追加制作', val: 'LP追加', icon: '📑', desc: '既存サイトとは別に集客特化ページを作成。' }
+        { label: '新規立ち上げ', val: '新規', icon: 'psychiatry', desc: '新ドメインでゼロから構築します。' },
+        { label: '既存のリニューアル', val: 'リニューアル', icon: 'sync', desc: '今の課題を解決し、価値を高めます。' },
+        { label: 'LPのみ追加制作', val: 'LP追加', icon: 'description', desc: '既存サイトとは別に集客特化ページを作成。' }
       ]},
       { id: 'scale', title: '4. 制作規模のイメージ', type: 'choice', options: [
-        { label: '1ページのLP', val: 'LP (1枚)', icon: '📄', desc: '縦に長い一枚完結の強力な訴求。' },
-        { label: '小規模サイト(2〜5P)', val: '2-5ページ', icon: '📁', desc: '主要ページを網羅した基本セット。' },
-        { label: '中規模サイト(6P〜)', val: '6ページ以上', icon: '🗂', desc: 'サービス数が多い、ブログを併用したい場合。' }
+        { label: '1ページのLP', val: 'LP (1枚)', icon: 'article', desc: '縦に長い一枚完結の強力な訴求。' },
+        { label: '小規模サイト(2〜5P)', val: '2-5ページ', icon: 'folder', desc: '主要ページを網羅した基本セット。' },
+        { label: '中規模サイト(6P〜)', val: '6ページ以上', icon: 'topic', desc: 'サービス数が多い、ブログを併用したい場合。' }
       ]},
       { id: 'taste', title: '5. 理想のデザインイメージ', type: 'choice', options: [
-        { label: 'やさしい・安心感', val: 'ソフト', icon: '🌿', desc: 'カウンセリングや教育系に最適。' },
-        { label: '誠実・プロフェッショナル', val: 'トラスト', icon: '🤝', desc: '士業やコンサルティング業に。' },
-        { label: 'シンプル・ミニマル', val: 'ミニマル', icon: '⚪️', desc: '本質を伝え、迷わせないデザイン。' },
-        { label: '高級感・モダン', val: 'プレミアム', icon: '✨', desc: '高単価サービスやブランド訴求に。' }
+        { label: 'やさしい・安心感', val: 'ソフト', icon: 'eco', desc: 'カウンセリングや教育系に最適。' },
+        { label: '誠実・プロフェッショナル', val: 'トラスト', icon: 'handshake', desc: '士業やコンサルティング業に。' },
+        { label: 'シンプル・ミニマル', val: 'ミニマル', icon: 'radio_button_unchecked', desc: '本質を伝え、迷わせないデザイン。' },
+        { label: '高級感・モダン', val: 'プレミアム', icon: 'auto_awesome', desc: '高単価サービスやブランド訴求に。' }
       ]},
       { id: 'deadline', title: '6. ご希望の納期', type: 'choice', options: [
-        { label: 'できるだけ早く(特急)', val: '特急希望', icon: '🚀', desc: '1.5倍速での制作（要相談）。' },
-        { label: '1ヶ月以内', val: '1ヶ月', icon: '📅', desc: '標準的なスピード。' },
-        { label: '2ヶ月程度', val: '2ヶ月', icon: '🗓', desc: 'じっくり作り込みたい場合。' },
-        { label: '特に決まっていない', val: '未定', icon: '⌛️', desc: '相談しながら進めたい。' }
+        { label: 'できるだけ早く(特急)', val: '特急希望', icon: 'rocket_launch', desc: '1.5倍速での制作（要相談）。' },
+        { label: '1ヶ月以内', val: '1ヶ月', icon: 'calendar_month', desc: '標準的なスピード。' },
+        { label: '2ヶ月程度', val: '2ヶ月', icon: 'event_note', desc: 'じっくり作り込みたい場合。' },
+        { label: '特に決まっていない', val: '未定', icon: 'hourglass_empty', desc: '相談しながら進めたい。' }
       ]},
       { id: 'budget', title: '7. 制作予算の目安', type: 'choice', options: [
-        { label: '〜10万円', val: '10万以下', icon: '🥉', desc: 'シンプルな1枚もの。' },
-        { label: '10〜20万円', val: '10-20万', icon: '🥈', desc: '標準的なLP制作。' },
-        { label: '20万円〜', val: '20万以上', icon: '🥇', desc: '構成・コピー含めフルオーダー。' },
-        { label: '相談して決めたい', val: '相談', icon: '💬', desc: '必要な機能から算出。' }
+        { label: '〜10万円', val: '10万以下', icon: 'looks_3', desc: 'シンプルな1枚もの。' },
+        { label: '10〜20万円', val: '10-20万', icon: 'looks_two', desc: '標準的なLP制作。' },
+        { label: '20万円〜', val: '20万以上', icon: 'looks_one', desc: '構成・コピー含めフルオーダー。' },
+        { label: '相談して決めたい', val: '相談', icon: 'forum', desc: '必要な機能から算出。' }
       ]},
       { id: 'points', title: '8. 特に重視したい点', type: 'choice', multi: true, options: [
-        { label: '問い合わせ導線', val: 'CV導線', icon: '🎯' },
-        { label: '読みやすいコピー', val: 'ライティング', icon: '✒️' },
-        { label: 'スマホの使いやすさ', val: 'モバイル最適化', icon: '📱' },
-        { label: 'SEO（検索対策）', val: 'SEO', icon: '🔍' },
-        { label: '独自システム(診断等)', val: 'システム', icon: '🛠' }
+        { label: '問い合わせ導線', val: 'CV導線', icon: 'ads_click' },
+        { label: '読みやすいコピー', val: 'ライティング', icon: 'stylus' },
+        { label: 'スマホの使いやすさ', val: 'モバイル最適化', icon: 'smartphone' },
+        { label: 'SEO（検索対策）', val: 'SEO', icon: 'search' },
+        { label: '独自システム(診断等)', val: 'システム', icon: 'construction' }
       ]},
       { id: 'message', title: '9. その他・メッセージ', type: 'textarea', placeholder: '例：原稿準備も手伝ってほしい、車いすユーザー視点の意見が欲しい、など' }
     ];
@@ -361,7 +362,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         q.options.forEach(opt => {
           const isSelected = q.multi ? (answers[q.id] || []).includes(opt.val) : answers[q.id] === opt.val;
           html += '<div class="choice-item ' + (isSelected ? 'selected' : '') + '" onclick="selectChoice(\'' + q.id + '\', \'' + opt.val + '\', ' + (q.multi || false) + ')">' +
-                  '<div class="choice-icon">' + opt.icon + '</div>' +
+                  '<div class="choice-icon material-symbols-rounded" aria-hidden="true">' + opt.icon + '</div>' +
                   '<div class="choice-text">' +
                   '<b>' + opt.label + '</b>' +
                   (opt.desc ? '<span>' + opt.desc + '</span>' : '') +

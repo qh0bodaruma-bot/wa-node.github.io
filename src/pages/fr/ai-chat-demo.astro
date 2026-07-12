@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
 
 const title = "Navigateur de Consultation Stratégique IA (Démo) | Wa-Node";
 const description = "Démo interactive des compétences de développement d'IA de Wa-Node. Clarifiez vos obstacles d'affaires (production web, automatisation de flux de travail, DX) en moins de 3 minutes grâce à notre assistant stratégique IA.";
@@ -43,7 +44,7 @@ const description = "Démo interactive des compétences de développement d'IA d
             <div class="input-wrap">
               <textarea id="chat-input" placeholder="Ex : Je souhaite optimiser ma page de destination, je veux intégrer ChatGPT dans mes tâches..." rows="1"></textarea>
               <button id="send-btn" type="button" aria-label="Envoyer la demande" disabled>
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+                <MaterialIcon name="send" />
               </button>
             </div>
           </div>
