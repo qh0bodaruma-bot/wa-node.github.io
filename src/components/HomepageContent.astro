@@ -165,20 +165,38 @@ const trustSignals = {
 
 const consultationPreview = {
   ja: [
-    { title: '必要なもの', desc: 'ご用意いただく情報や素材の目安' },
-    { title: '料金の目安', desc: '目的と規模に合う費用の考え方' },
-    { title: '進め方', desc: '相談から公開・改善までの流れ' }
+    { icon: 'assignment', title: '必要なもの', desc: 'ご用意いただく情報や素材の目安' },
+    { icon: 'payments', title: '料金の目安', desc: '目的と規模に合う費用の考え方' },
+    { icon: 'route', title: '進め方', desc: '相談から公開・改善までの流れ' }
   ],
   en: [
-    { title: 'What to prepare', desc: 'A practical guide to information and assets' },
-    { title: 'Price range', desc: 'How scope and purpose shape the estimate' },
-    { title: 'How it works', desc: 'From consultation to launch and improvement' }
+    { icon: 'assignment', title: 'What to prepare', desc: 'A practical guide to information and assets' },
+    { icon: 'payments', title: 'Price range', desc: 'How scope and purpose shape the estimate' },
+    { icon: 'route', title: 'How it works', desc: 'From consultation to launch and improvement' }
   ],
   fr: [
-    { title: 'A preparer', desc: 'Les informations et ressources utiles' },
-    { title: 'Budget indicatif', desc: 'Le lien entre objectifs, perimetre et cout' },
-    { title: 'Deroulement', desc: 'De la consultation au lancement et au suivi' }
+    { icon: 'assignment', title: 'A preparer', desc: 'Les informations et ressources utiles' },
+    { icon: 'payments', title: 'Budget indicatif', desc: 'Le lien entre objectifs, perimetre et cout' },
+    { icon: 'route', title: 'Deroulement', desc: 'De la consultation au lancement et au suivi' }
   ]
+};
+
+const consultationIntro = {
+  ja: {
+    eyebrow: 'Consultation Guide',
+    title: '相談前の見通しを、先に。',
+    desc: '無料相談の前に、準備物・料金の考え方・進め方を先に見える化。売り込みではなく、まず状況を整理するための入口です。'
+  },
+  en: {
+    eyebrow: 'Consultation Guide',
+    title: 'A clearer view before you talk to us.',
+    desc: 'Before a free consultation, we make preparation, pricing logic, and the process visible so the first step feels easier.'
+  },
+  fr: {
+    eyebrow: 'Guide de consultation',
+    title: 'Une vision claire avant de nous contacter.',
+    desc: 'Avant la consultation gratuite, nous clarifions les elements a preparer, la logique tarifaire et les etapes.'
+  }
 };
 
 const journeySteps = [
@@ -258,13 +276,18 @@ const transformationCards = [
 
   <section class="consultation-preview" aria-labelledby="consultation-preview-title">
     <div class="consultation-preview-inner">
-      <h2 id="consultation-preview-title">
-        {lang === 'ja' ? '相談前にわかること' : lang === 'en' ? 'What you will know before consulting' : 'Ce que vous saurez avant de nous contacter'}
-      </h2>
+      <div class="consultation-preview-copy">
+        <span class="eyebrow">{consultationIntro[lang].eyebrow}</span>
+        <h2 id="consultation-preview-title">{consultationIntro[lang].title}</h2>
+        <p>{consultationIntro[lang].desc}</p>
+      </div>
       <ol class="consultation-preview-list">
         {consultationPreview[lang].map((item, index) => (
           <li>
-            <span aria-hidden="true">0{index + 1}</span>
+            <span class="consultation-step-number" aria-hidden="true">0{index + 1}</span>
+            <span class="consultation-step-icon" aria-hidden="true">
+              <MaterialIcon name={item.icon} />
+            </span>
             <div>
               <strong>{item.title}</strong>
               <small>{item.desc}</small>
@@ -745,29 +768,55 @@ const transformationCards = [
   }
 
   .consultation-preview {
-    background: #fff;
+    background:
+      radial-gradient(circle at 12% 0%, rgba(203, 51, 51, 0.08) 0, transparent 28%),
+      linear-gradient(180deg, #fff 0%, var(--surface-cool) 100%);
     border-bottom: 1px solid var(--trust-line);
+    padding: 34px 40px 20px;
   }
   .consultation-preview-inner {
     display: grid;
-    grid-template-columns: minmax(190px, 0.72fr) minmax(0, 2.28fr);
+    grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.6fr);
+    gap: 28px;
+    align-items: stretch;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 40px;
+    padding: 28px;
+    border: 1px solid var(--trust-line);
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.86);
+    box-shadow: 0 20px 54px rgba(18, 82, 92, 0.11);
   }
-  .consultation-preview h2 {
+  .consultation-preview-copy {
     display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 24px 26px 24px 0;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8px 20px 8px 0;
     border-right: 1px solid var(--trust-line);
-    color: var(--trust);
-    font-size: 1.12rem;
-    line-height: 1.6;
+  }
+  .consultation-preview-copy .eyebrow {
+    color: var(--home-red);
+    margin-bottom: 10px;
+  }
+  .consultation-preview-copy h2 {
+    margin: 0;
+    color: var(--text-deep);
+    font-size: clamp(1.55rem, 2.2vw, 2.2rem);
+    line-height: 1.45;
+    letter-spacing: 0;
+    text-wrap: balance;
+  }
+  .consultation-preview-copy p {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.9;
   }
   .consultation-preview-list {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -775,35 +824,57 @@ const transformationCards = [
   .consultation-preview-list li {
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
-    gap: 12px;
-    align-items: center;
-    padding: 20px 24px;
-    border-right: 1px solid var(--trust-line);
+    grid-template-rows: auto auto;
+    gap: 14px 12px;
+    align-content: start;
+    min-height: 176px;
+    padding: 20px;
+    border: 1px solid rgba(18, 82, 92, 0.14);
+    border-radius: 14px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 247, 0.92) 100%);
+    box-shadow: 0 14px 34px rgba(18, 82, 92, 0.08);
   }
-  .consultation-preview-list li:last-child { border-right: 0; }
-  .consultation-preview-list > li > span {
+  .consultation-step-number {
     color: var(--home-gold);
     font-family: 'Shippori Mincho', serif;
-    font-size: 0.82rem;
+    font-size: 0.78rem;
     font-weight: 800;
+    line-height: 40px;
+  }
+  .consultation-step-icon {
+    display: inline-flex;
+    width: 40px;
+    height: 40px;
+    align-items: center;
+    justify-content: center;
+    justify-self: end;
+    border-radius: 999px;
+    background: rgba(18, 82, 92, 0.08);
+    color: var(--trust);
+  }
+  .consultation-step-icon :global(.material-symbols-rounded) {
+    font-size: 1.35rem;
   }
   .consultation-preview-list strong,
   .consultation-preview-list small { display: block; }
+  .consultation-preview-list li > div {
+    grid-column: 1 / -1;
+  }
   .consultation-preview-list strong {
     color: var(--text-deep);
-    font-size: 0.94rem;
+    font-size: 1.04rem;
     line-height: 1.5;
   }
   .consultation-preview-list small {
-    margin-top: 2px;
+    margin-top: 8px;
     color: var(--muted);
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     font-weight: 700;
-    line-height: 1.55;
+    line-height: 1.7;
   }
 
   .trust-strip {
-    background: linear-gradient(90deg, var(--surface) 0%, var(--surface-cool) 100%);
+    background: var(--surface-cool);
     border-bottom: 1px solid var(--trust-line);
     box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.72);
   }
@@ -1374,24 +1445,34 @@ const transformationCards = [
     .lead { max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; line-break: strict; margin-left: 0; margin-right: 0; text-align: left; font-size: 1rem; line-height: 1.85; }
     .hero-title-chosen { font-size: clamp(2.2rem, 8vw, 3.2rem); }
     .hero-title-psy { font-size: clamp(2rem, 7vw, 3rem); }
+    .consultation-preview {
+      padding: 24px 16px 16px;
+    }
     .consultation-preview-inner {
       grid-template-columns: 1fr;
-      padding: 0 20px;
+      gap: 20px;
+      padding: 22px;
+      border-radius: 16px;
     }
-    .consultation-preview h2 {
-      padding: 20px 0 14px;
+    .consultation-preview-copy {
+      padding: 0 0 18px;
       border-right: 0;
       border-bottom: 1px solid var(--trust-line);
+    }
+    .consultation-preview-copy h2 {
+      font-size: 1.52rem;
+    }
+    .consultation-preview-copy p {
+      font-size: 0.9rem;
+      line-height: 1.8;
     }
     .consultation-preview-list {
       grid-template-columns: 1fr;
     }
     .consultation-preview-list li {
-      padding: 14px 0;
-      border-right: 0;
-      border-bottom: 1px solid var(--trust-line);
+      min-height: auto;
+      padding: 18px;
     }
-    .consultation-preview-list li:last-child { border-bottom: 0; }
     .journey-heading {
       grid-template-columns: 1fr;
       gap: 16px;
