@@ -15,8 +15,10 @@
   "dependencies": {
     "@astrojs/cloudflare": "^11.0.0",
     "@google/generative-ai": "^0.24.1",
+    "@patdx/kuromoji": "^1.0.4",
     "astro": "^4.16.10",
     "jszip": "^3.10.1",
+    "kuroshiro": "^1.2.0",
     "microcms-js-sdk": "^3.4.0",
     "openai": "^4.52.0",
     "twitter-api-v2": "^1.29.0"
