@@ -165,19 +165,19 @@ const trustSignals = {
 
 const consultationPreview = {
   ja: [
-    { icon: 'assignment', title: '必要なもの', desc: 'ご用意いただく情報や素材の目安' },
-    { icon: 'payments', title: '料金の目安', desc: '目的と規模に合う費用の考え方' },
-    { icon: 'route', title: '進め方', desc: '相談から公開・改善までの流れ' }
+    { icon: 'assignment', title: '必要なもの', desc: '素材・情報の目安' },
+    { icon: 'payments', title: '料金の目安', desc: '規模別の考え方' },
+    { icon: 'route', title: '進め方', desc: '相談から公開まで' }
   ],
   en: [
-    { icon: 'assignment', title: 'What to prepare', desc: 'A practical guide to information and assets' },
-    { icon: 'payments', title: 'Price range', desc: 'How scope and purpose shape the estimate' },
-    { icon: 'route', title: 'How it works', desc: 'From consultation to launch and improvement' }
+    { icon: 'assignment', title: 'What to prepare', desc: 'Assets and information' },
+    { icon: 'payments', title: 'Price range', desc: 'Scope-based pricing' },
+    { icon: 'route', title: 'How it works', desc: 'Consultation to launch' }
   ],
   fr: [
-    { icon: 'assignment', title: 'A preparer', desc: 'Les informations et ressources utiles' },
-    { icon: 'payments', title: 'Budget indicatif', desc: 'Le lien entre objectifs, perimetre et cout' },
-    { icon: 'route', title: 'Deroulement', desc: 'De la consultation au lancement et au suivi' }
+    { icon: 'assignment', title: 'A preparer', desc: 'Ressources utiles' },
+    { icon: 'payments', title: 'Budget indicatif', desc: 'Selon le perimetre' },
+    { icon: 'route', title: 'Deroulement', desc: 'Consultation au lancement' }
   ]
 };
 
@@ -185,17 +185,17 @@ const consultationIntro = {
   ja: {
     eyebrow: 'Consultation Guide',
     title: '相談前の見通しを、先に。',
-    desc: '無料相談の前に、準備物・料金の考え方・進め方を先に見える化。売り込みではなく、まず状況を整理するための入口です。'
+    desc: '準備物・料金・進め方を、無料相談前に先に見える化します。'
   },
   en: {
     eyebrow: 'Consultation Guide',
     title: 'A clearer view before you talk to us.',
-    desc: 'Before a free consultation, we make preparation, pricing logic, and the process visible so the first step feels easier.'
+    desc: 'Preparation, pricing, and next steps are made clear before the free consultation.'
   },
   fr: {
     eyebrow: 'Guide de consultation',
     title: 'Une vision claire avant de nous contacter.',
-    desc: 'Avant la consultation gratuite, nous clarifions les elements a preparer, la logique tarifaire et les etapes.'
+    desc: 'Preparation, budget et etapes sont clarifies avant la consultation gratuite.'
   }
 };
 
@@ -772,20 +772,20 @@ const transformationCards = [
       radial-gradient(circle at 12% 0%, rgba(203, 51, 51, 0.08) 0, transparent 28%),
       linear-gradient(180deg, #fff 0%, var(--surface-cool) 100%);
     border-bottom: 1px solid var(--trust-line);
-    padding: 34px 40px 20px;
+    padding: 26px 40px 14px;
   }
   .consultation-preview-inner {
     display: grid;
     grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.6fr);
-    gap: 28px;
+    gap: 22px;
     align-items: stretch;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 28px;
+    padding: 22px;
     border: 1px solid var(--trust-line);
     border-radius: 18px;
     background: rgba(255, 255, 255, 0.86);
-    box-shadow: 0 20px 54px rgba(18, 82, 92, 0.11);
+    box-shadow: 0 16px 42px rgba(18, 82, 92, 0.09);
   }
   .consultation-preview-copy {
     display: flex;
@@ -796,7 +796,7 @@ const transformationCards = [
   }
   .consultation-preview-copy .eyebrow {
     color: var(--home-red);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .consultation-preview-copy h2 {
     margin: 0;
@@ -807,16 +807,16 @@ const transformationCards = [
     text-wrap: balance;
   }
   .consultation-preview-copy p {
-    margin: 14px 0 0;
+    margin: 10px 0 0;
     color: var(--muted);
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     font-weight: 700;
-    line-height: 1.9;
+    line-height: 1.75;
   }
   .consultation-preview-list {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
+    gap: 12px;
     margin: 0;
     padding: 0;
     list-style: none;
@@ -825,10 +825,10 @@ const transformationCards = [
     display: grid;
     grid-template-columns: auto minmax(0, 1fr);
     grid-template-rows: auto auto;
-    gap: 14px 12px;
+    gap: 10px 10px;
     align-content: start;
-    min-height: 176px;
-    padding: 20px;
+    min-height: 132px;
+    padding: 16px;
     border: 1px solid rgba(18, 82, 92, 0.14);
     border-radius: 14px;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.98) 0%, rgba(248, 250, 247, 0.92) 100%);
@@ -839,12 +839,12 @@ const transformationCards = [
     font-family: 'Shippori Mincho', serif;
     font-size: 0.78rem;
     font-weight: 800;
-    line-height: 40px;
+    line-height: 34px;
   }
   .consultation-step-icon {
     display: inline-flex;
-    width: 40px;
-    height: 40px;
+    width: 34px;
+    height: 34px;
     align-items: center;
     justify-content: center;
     justify-self: end;
@@ -853,7 +853,7 @@ const transformationCards = [
     color: var(--trust);
   }
   .consultation-step-icon :global(.material-symbols-rounded) {
-    font-size: 1.35rem;
+    font-size: 1.18rem;
   }
   .consultation-preview-list strong,
   .consultation-preview-list small { display: block; }
@@ -862,48 +862,51 @@ const transformationCards = [
   }
   .consultation-preview-list strong {
     color: var(--text-deep);
-    font-size: 1.04rem;
+    font-size: 0.98rem;
     line-height: 1.5;
   }
   .consultation-preview-list small {
-    margin-top: 8px;
+    margin-top: 5px;
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: 0.76rem;
     font-weight: 700;
-    line-height: 1.7;
+    line-height: 1.55;
   }
 
   .trust-strip {
     background: var(--surface-cool);
     border-bottom: 1px solid var(--trust-line);
     box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.72);
+    padding: 12px 20px;
   }
   .trust-strip-inner {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     max-width: 1000px;
     margin: 0 auto;
-    border-left: 1px solid var(--trust-line);
+    gap: 8px;
   }
   .trust-signal {
-    padding: 18px 24px;
-    border-right: 1px solid var(--trust-line);
+    padding: 10px 12px;
+    border: 1px solid rgba(18, 82, 92, 0.12);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.72);
     text-align: center;
   }
   .trust-signal strong {
     display: block;
     color: var(--trust);
-    font-size: 1.08rem;
+    font-size: 0.95rem;
     font-weight: 900;
-    line-height: 1.4;
+    line-height: 1.25;
   }
   .trust-signal span {
     display: block;
-    margin-top: 3px;
+    margin-top: 2px;
     color: var(--muted);
-    font-size: 0.82rem;
+    font-size: 0.72rem;
     font-weight: 700;
-    line-height: 1.5;
+    line-height: 1.35;
   }
 
   .journey-section {
@@ -1446,32 +1449,32 @@ const transformationCards = [
     .hero-title-chosen { font-size: clamp(2.2rem, 8vw, 3.2rem); }
     .hero-title-psy { font-size: clamp(2rem, 7vw, 3rem); }
     .consultation-preview {
-      padding: 24px 16px 16px;
+      padding: 18px 14px 12px;
     }
     .consultation-preview-inner {
       grid-template-columns: 1fr;
-      gap: 20px;
-      padding: 22px;
+      gap: 16px;
+      padding: 18px;
       border-radius: 16px;
     }
     .consultation-preview-copy {
-      padding: 0 0 18px;
+      padding: 0 0 14px;
       border-right: 0;
       border-bottom: 1px solid var(--trust-line);
     }
     .consultation-preview-copy h2 {
-      font-size: 1.52rem;
+      font-size: 1.36rem;
     }
     .consultation-preview-copy p {
-      font-size: 0.9rem;
-      line-height: 1.8;
+      font-size: 0.84rem;
+      line-height: 1.7;
     }
     .consultation-preview-list {
       grid-template-columns: 1fr;
     }
     .consultation-preview-list li {
       min-height: auto;
-      padding: 18px;
+      padding: 14px;
     }
     .journey-heading {
       grid-template-columns: 1fr;
@@ -1512,15 +1515,17 @@ const transformationCards = [
       to { transform: scaleY(1); }
     }
     .trust-strip-inner {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
       border-left: 0;
     }
     .trust-signal {
-      padding: 15px 20px;
-      border-right: 0;
-      border-bottom: 1px solid var(--trust-line);
+      padding: 9px 8px;
+      border-right: 1px solid rgba(18, 82, 92, 0.12);
+      border-bottom: 1px solid rgba(18, 82, 92, 0.12);
     }
-    .trust-signal:last-child { border-bottom: 0; }
+    .trust-signal:last-child { border-bottom: 1px solid rgba(18, 82, 92, 0.12); }
+    .trust-signal strong { font-size: 0.86rem; }
+    .trust-signal span { font-size: 0.66rem; }
     .transformation-stage { padding: 22px 18px; }
     .transformation-grid { grid-template-columns: 1fr; }
     .transformation-card { min-height: auto; }
