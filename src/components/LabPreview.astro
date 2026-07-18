@@ -1,0 +1,296 @@
+---
+import MaterialIcon from './MaterialIcon.astro';
+import type { LabMode, LabTopic } from '../data/labCases';
+
+interface Props {
+  mode: LabMode;
+  topic: LabTopic;
+}
+
+const { mode, topic } = Astro.props;
+const state = topic[mode];
+const isAfter = mode === 'after';
+---
+
+<article class:list={['lab-preview', `lab-preview--${mode}`, `lab-preview--${topic.id}`]} data-preview-mode={mode}>
+  <div class="lab-preview__chrome" aria-hidden="true">
+    <span></span><span></span><span></span>
+    <i></i>
+  </div>
+  <div class="lab-preview__sitebar">
+    <strong>まちのWeb相談室</strong>
+    <nav aria-label="サンプルサイト内ナビゲーション">
+      <span>サービス</span>
+      <span>料金</span>
+      <span>FAQ</span>
+    </nav>
+    <span class="lab-preview__mini-cta">{isAfter ? '無料相談を予約' : 'お問い合わせ'}</span>
+  </div>
+
+  <div class="lab-preview__body">
+    <div class="lab-preview__copy">
+      <p class="lab-preview__lead">{state.lead}</p>
+      <h3>{state.heading}</h3>
+      <p class="lab-preview__description">{state.description}</p>
+      <button type="button" tabindex="-1">{state.cta}</button>
+      <small>{state.ctaNote}</small>
+    </div>
+
+    <div class="lab-preview__visual" aria-hidden="true">
+      {topic.id === 'hero' && (
+        <>
+          <MaterialIcon name={isAfter ? 'fact_check' : 'crop_free'} />
+          <span>{isAfter ? '判断材料を整理' : '抽象的なイメージ'}</span>
+        </>
+      )}
+      {topic.id === 'pricing' && (
+        <>
+          <MaterialIcon name={isAfter ? 'receipt_long' : 'help'} />
+          <span>{isAfter ? '範囲と条件を表示' : '金額が見えない'}</span>
+        </>
+      )}
+      {topic.id === 'faq' && (
+        <>
+          <MaterialIcon name={isAfter ? 'forum' : 'more_horiz'} />
+          <span>{isAfter ? '不安から答える' : '一般的な質問だけ'}</span>
+        </>
+      )}
+      {topic.id === 'cta' && (
+        <>
+          <MaterialIcon name={isAfter ? 'signpost' : 'ads_click'} />
+          <span>{isAfter ? '目的別に案内' : '同じボタンだけ'}</span>
+        </>
+      )}
+    </div>
+  </div>
+
+  <div class="lab-preview__items">
+    {state.items.map((item, index) => (
+      <div>
+        <span>{String(index + 1).padStart(2, '0')} / {item.label}</span>
+        <strong>{item.value}</strong>
+        {item.note && <small>{item.note}</small>}
+      </div>
+    ))}
+  </div>
+</article>
+
+<style>
+  .lab-preview {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #9aaba6;
+    border-radius: 6px;
+    background: #fff;
+    color: #132622;
+    box-shadow: 0 14px 30px rgba(15, 76, 92, 0.08);
+  }
+
+  .lab-preview__chrome {
+    display: flex;
+    height: 28px;
+    align-items: center;
+    gap: 5px;
+    padding: 0 10px;
+    border-bottom: 1px solid #dce5e1;
+    background: #f6f8f7;
+  }
+
+  .lab-preview__chrome span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #a8b4b0;
+  }
+
+  .lab-preview__chrome i {
+    width: 45%;
+    height: 6px;
+    margin-left: 12%;
+    border-radius: 2px;
+    background: #e2e8e5;
+  }
+
+  .lab-preview__sitebar {
+    display: grid;
+    min-height: 48px;
+    grid-template-columns: 1fr auto auto;
+    gap: 14px;
+    align-items: center;
+    padding: 8px 14px;
+    border-bottom: 1px solid #dce5e1;
+    font-size: 0.68rem;
+  }
+
+  .lab-preview__sitebar strong {
+    font-size: 0.76rem;
+  }
+
+  .lab-preview__sitebar nav {
+    display: flex;
+    gap: 11px;
+    color: #52625d;
+  }
+
+  .lab-preview__mini-cta {
+    padding: 5px 8px;
+    border-radius: 3px;
+    background: #c7352f;
+    color: #fff;
+    font-weight: 800;
+  }
+
+  .lab-preview__body {
+    display: grid;
+    min-height: 260px;
+    grid-template-columns: minmax(0, 1.3fr) minmax(120px, 0.7fr);
+    gap: 18px;
+    align-items: center;
+    padding: 28px 22px 24px;
+  }
+
+  .lab-preview__lead {
+    margin: 0 0 8px;
+    color: #0f4c5c;
+    font-size: 0.68rem;
+    font-weight: 800;
+    line-height: 1.55;
+  }
+
+  .lab-preview h3 {
+    margin: 0 0 12px;
+    font-size: clamp(1.08rem, 1.8vw, 1.5rem);
+    line-height: 1.45;
+    letter-spacing: 0;
+  }
+
+  .lab-preview__description {
+    margin: 0 0 16px;
+    color: #4c5c57;
+    font-size: 0.76rem;
+    line-height: 1.75;
+  }
+
+  .lab-preview button {
+    display: block;
+    width: fit-content;
+    max-width: 100%;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 3px;
+    background: #c7352f;
+    color: #fff;
+    font: inherit;
+    font-size: 0.72rem;
+    font-weight: 800;
+    line-height: 1.4;
+    text-align: left;
+  }
+
+  .lab-preview__copy > small {
+    display: block;
+    margin-top: 7px;
+    color: #697873;
+    font-size: 0.61rem;
+    line-height: 1.55;
+  }
+
+  .lab-preview__visual {
+    display: grid;
+    aspect-ratio: 1;
+    place-items: center;
+    align-content: center;
+    gap: 8px;
+    border: 1px solid #d4dfdb;
+    background: #f1f5f3;
+    color: #71817c;
+    text-align: center;
+  }
+
+  .lab-preview--after .lab-preview__visual {
+    border-color: rgba(15, 76, 92, 0.32);
+    background: #eaf3f0;
+    color: #0f4c5c;
+  }
+
+  .lab-preview__visual :global(.material-symbols-rounded) {
+    font-size: 2.6rem;
+  }
+
+  .lab-preview__visual span {
+    padding: 0 8px;
+    font-size: 0.62rem;
+    font-weight: 800;
+  }
+
+  .lab-preview__items {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid #dce5e1;
+  }
+
+  .lab-preview__items > div {
+    min-width: 0;
+    min-height: 96px;
+    padding: 14px;
+    border-right: 1px solid #dce5e1;
+  }
+
+  .lab-preview__items > div:last-child {
+    border-right: 0;
+  }
+
+  .lab-preview__items span,
+  .lab-preview__items small {
+    display: block;
+    color: #6b7975;
+    font-size: 0.58rem;
+    line-height: 1.5;
+  }
+
+  .lab-preview__items strong {
+    display: block;
+    margin: 5px 0 2px;
+    font-size: 0.7rem;
+    line-height: 1.5;
+  }
+
+  .lab-preview--before {
+    filter: saturate(0.72);
+  }
+
+  @media (max-width: 680px) {
+    .lab-preview__sitebar {
+      grid-template-columns: 1fr auto;
+    }
+
+    .lab-preview__sitebar nav {
+      display: none;
+    }
+
+    .lab-preview__body {
+      min-height: 300px;
+      grid-template-columns: minmax(0, 1.25fr) minmax(92px, 0.75fr);
+      gap: 12px;
+      padding: 22px 16px 20px;
+    }
+
+    .lab-preview h3 {
+      font-size: 1.18rem;
+    }
+
+    .lab-preview__items {
+      grid-template-columns: 1fr;
+    }
+
+    .lab-preview__items > div {
+      min-height: auto;
+      border-right: 0;
+      border-bottom: 1px solid #dce5e1;
+    }
+
+    .lab-preview__items > div:last-child {
+      border-bottom: 0;
+    }
+  }
+</style>

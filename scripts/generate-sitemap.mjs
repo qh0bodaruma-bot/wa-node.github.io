@@ -11,6 +11,8 @@ const PAGES = [
   ['/', '1.0'],
   ['/about/', '0.9'],
   ['/works/', '0.9'],
+  ['/lab/', '0.9'],
+  ['/lab/cases/service-lp/', '0.8'],
   ['/contact/', '0.9'],
   ['/pricing/', '0.9'],
   ['/free-guide/', '0.8'],

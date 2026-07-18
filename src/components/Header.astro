@@ -51,7 +51,7 @@ function getLocalizedLink(path: string) {
 
     <nav class="nav" id="site-nav">
       <div class="nav-links">
-        <a href={getLocalizedLink('/psychology-demo')}>{t.nav.demo[lang]}</a>
+        <a href={getLocalizedLink('/lab')}>{lang === 'ja' ? '改善ラボ' : lang === 'en' ? 'Improvement Lab' : 'Lab d’amélioration'}</a>
         <a href={getLocalizedLink('/works')}>{t.nav.works[lang]}</a>
         <a href={getLocalizedLink('/pricing')}>{t.nav.pricing[lang]}</a>
         <a href={getLocalizedLink('/about')}>{t.nav.about[lang]}</a>
