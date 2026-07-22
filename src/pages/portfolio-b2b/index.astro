@@ -1,0 +1,14 @@
+---
+import B2BHome from '../../components/B2BHome.astro';
+import B2BShowcaseLayout from '../../layouts/B2BShowcaseLayout.astro';
+
+export const prerender = true;
+---
+
+<B2BShowcaseLayout
+  title="北辰精機株式会社｜精密加工・治具設計・量産改善"
+  description="精密加工・治具設計・量産改善を、課題整理から一つの窓口で支援する架空BtoB製造企業の自主制作サイトです。"
+  currentPath="/portfolio-b2b/"
+>
+  <B2BHome />
+</B2BShowcaseLayout>

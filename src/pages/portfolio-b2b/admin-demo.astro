@@ -1,0 +1,136 @@
+---
+import MaterialIcon from '../../components/MaterialIcon.astro';
+import B2BShowcaseLayout from '../../layouts/B2BShowcaseLayout.astro';
+
+export const prerender = true;
+---
+
+<B2BShowcaseLayout
+  title="CMS更新デモ｜北辰精機株式会社"
+  description="導入事例を更新するCMS管理画面を想定した、ブラウザ内だけで動作する操作デモです。"
+  currentPath=""
+  noindex={true}
+>
+  <header class="admin-demo-head">
+    <div class="b2b-container">
+      <span class="b2b-eyebrow">CMS EDITING DEMO</span>
+      <h1>導入事例を、担当者が更新できる設計。</h1>
+      <p>入力内容が右側の公開プレビューへ反映されます。保存内容はこのブラウザ内だけに保持され、サーバーへ送信されません。</p>
+    </div>
+  </header>
+
+  <section class="admin-demo-section">
+    <div class="admin-demo-shell">
+      <aside class="admin-demo-sidebar" aria-label="管理メニュー">
+        <strong>HOKUSHIN CMS</strong>
+        <a class="active" href="#editor"><MaterialIcon name="article" />導入事例</a>
+        <a href="#editor"><MaterialIcon name="campaign" />お知らせ</a>
+        <a href="#editor"><MaterialIcon name="inventory_2" />製品情報</a>
+        <a href="#editor"><MaterialIcon name="settings" />設定</a>
+      </aside>
+
+      <form class="admin-demo-editor" id="editor">
+        <div class="admin-demo-toolbar">
+          <div><span>導入事例</span><strong>新規作成</strong></div>
+          <button type="button" id="admin-save"><MaterialIcon name="save" />下書き保存</button>
+        </div>
+        <label>事例タイトル<input id="case-title" type="text" value="治具と作業順を見直し、確認手順を共通化" /></label>
+        <label>業種<select id="case-category"><option>自動車部品</option><option>産業設備</option><option>医療機器</option></select></label>
+        <label>課題<textarea id="case-problem" rows="4">作業者ごとに確認の順番が異なり、引き継ぎ時に判断の根拠が残りにくい状態でした。</textarea></label>
+        <label>対応内容<textarea id="case-action" rows="4">治具の位置決めと作業順を見直し、検査結果を同じ様式で残せるように整理しました。</textarea></label>
+        <p class="admin-demo-status" id="admin-status" role="status">入力内容は自動でプレビューされます。</p>
+      </form>
+
+      <section class="admin-demo-preview" aria-labelledby="preview-title">
+        <span>公開プレビュー</span>
+        <article>
+          <small id="preview-category">自動車部品</small>
+          <h2 id="preview-title">治具と作業順を見直し、確認手順を共通化</h2>
+          <dl>
+            <div><dt>課題</dt><dd id="preview-problem">作業者ごとに確認の順番が異なり、引き継ぎ時に判断の根拠が残りにくい状態でした。</dd></div>
+            <div><dt>対応</dt><dd id="preview-action">治具の位置決めと作業順を見直し、検査結果を同じ様式で残せるように整理しました。</dd></div>
+          </dl>
+          <a href="/portfolio-b2b/cases/">公開ページを確認</a>
+        </article>
+      </section>
+    </div>
+  </section>
+
+  <script is:inline>
+    const setupCmsDemo = () => {
+      const fields = {
+        title: document.getElementById('case-title'),
+        category: document.getElementById('case-category'),
+        problem: document.getElementById('case-problem'),
+        action: document.getElementById('case-action'),
+      };
+      const previews = {
+        title: document.getElementById('preview-title'),
+        category: document.getElementById('preview-category'),
+        problem: document.getElementById('preview-problem'),
+        action: document.getElementById('preview-action'),
+      };
+      const status = document.getElementById('admin-status');
+      const save = document.getElementById('admin-save');
+      const update = () => {
+        Object.entries(fields).forEach(([key, field]) => {
+          if ((field instanceof HTMLInputElement || field instanceof HTMLTextAreaElement || field instanceof HTMLSelectElement) && previews[key]) {
+            previews[key].textContent = field.value || '未入力';
+          }
+        });
+      };
+      Object.values(fields).forEach((field) => field?.addEventListener('input', update));
+      save?.addEventListener('click', () => {
+        const data = Object.fromEntries(Object.entries(fields).map(([key, field]) => [key, field?.value ?? '']));
+        localStorage.setItem('hokushin-cms-demo', JSON.stringify(data));
+        if (status) status.textContent = 'このブラウザ内に下書きを保存しました。';
+      });
+      const saved = localStorage.getItem('hokushin-cms-demo');
+      if (saved) {
+        try {
+          const data = JSON.parse(saved);
+          Object.entries(data).forEach(([key, value]) => {
+            const field = fields[key];
+            if (field && typeof value === 'string') field.value = value;
+          });
+          update();
+        } catch {}
+      }
+    };
+    document.addEventListener('DOMContentLoaded', setupCmsDemo, { once: true });
+  </script>
+</B2BShowcaseLayout>
+
+<style>
+  .admin-demo-head { padding: 72px 0 52px; background: #eef4f3; border-bottom: 1px solid #cbd8d7; }
+  .admin-demo-head h1 { max-width: 900px; margin: 0; font-family: "Yu Mincho", serif; font-size: clamp(36px, 5vw, 60px); line-height: 1.3; }
+  .admin-demo-head p { max-width: 760px; margin: 20px 0 0; color: #526470; }
+  .admin-demo-section { padding: 48px 20px 90px; background: #f2f5f5; }
+  .admin-demo-shell { width: min(1440px, 100%); min-height: 720px; margin: 0 auto; display: grid; grid-template-columns: 210px minmax(360px, 0.8fr) minmax(420px, 1.2fr); background: white; border: 1px solid #cbd8d7; box-shadow: 0 18px 50px rgba(20,36,50,.12); }
+  .admin-demo-sidebar { padding: 26px 16px; display: grid; align-content: start; gap: 7px; background: #142432; color: white; }
+  .admin-demo-sidebar strong { margin: 0 10px 24px; font-size: 14px; }
+  .admin-demo-sidebar a { min-height: 44px; padding: 0 10px; display: flex; align-items: center; gap: 9px; color: #dfe8eb; text-decoration: none; font-size: 13px; }
+  .admin-demo-sidebar a.active { background: #1b6a70; color: white; }
+  .admin-demo-editor { padding: 28px; display: grid; align-content: start; gap: 20px; border-right: 1px solid #cbd8d7; }
+  .admin-demo-toolbar { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+  .admin-demo-toolbar span, .admin-demo-toolbar strong { display: block; }
+  .admin-demo-toolbar span { color: #697a83; font-size: 12px; }
+  .admin-demo-toolbar strong { font-size: 20px; }
+  .admin-demo-toolbar button { min-height: 42px; padding: 0 14px; display: inline-flex; align-items: center; gap: 7px; border: 0; background: #d8602f; color: white; font-weight: 700; cursor: pointer; }
+  .admin-demo-editor label { display: grid; gap: 7px; font-size: 13px; font-weight: 700; }
+  .admin-demo-editor input, .admin-demo-editor select, .admin-demo-editor textarea { width: 100%; padding: 11px 12px; border: 1px solid #aebebf; border-radius: 4px; background: white; color: #142432; font: inherit; resize: vertical; }
+  .admin-demo-editor input:focus, .admin-demo-editor select:focus, .admin-demo-editor textarea:focus { outline: 3px solid rgba(27,106,112,.2); border-color: #1b6a70; }
+  .admin-demo-status { margin: 0; color: #526470; font-size: 12px; }
+  .admin-demo-preview { padding: 30px; background: #f7f9f8; }
+  .admin-demo-preview > span { color: #697a83; font-size: 12px; font-weight: 700; }
+  .admin-demo-preview article { margin-top: 16px; padding: clamp(28px, 4vw, 52px); border-top: 5px solid #1b6a70; background: white; box-shadow: 0 12px 34px rgba(20,36,50,.09); }
+  .admin-demo-preview small { color: #d8602f; font-weight: 800; }
+  .admin-demo-preview h2 { margin: 14px 0 28px; font-family: "Yu Mincho", serif; font-size: clamp(26px, 3vw, 42px); line-height: 1.4; }
+  .admin-demo-preview dl { margin: 0; display: grid; gap: 22px; }
+  .admin-demo-preview dl div { padding-top: 18px; border-top: 1px solid #cbd8d7; }
+  .admin-demo-preview dt { color: #1b6a70; font-size: 12px; font-weight: 800; }
+  .admin-demo-preview dd { margin: 7px 0 0; color: #526470; }
+  .admin-demo-preview a { display: inline-block; margin-top: 30px; color: #1b6a70; font-weight: 800; }
+  @media (max-width: 1050px) { .admin-demo-shell { grid-template-columns: 180px 1fr; } .admin-demo-preview { grid-column: 1 / -1; } }
+  @media (max-width: 720px) { .admin-demo-shell { grid-template-columns: 1fr; } .admin-demo-sidebar { display: none; } .admin-demo-editor { border-right: 0; } .admin-demo-toolbar { align-items: flex-start; flex-direction: column; } }
+</style>

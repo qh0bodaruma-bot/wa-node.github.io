@@ -1,0 +1,25 @@
+---
+import B2BSubpage from '../../components/B2BSubpage.astro';
+import B2BShowcaseLayout from '../../layouts/B2BShowcaseLayout.astro';
+import { b2bCompany, b2bPages, type B2BPage } from '../../data/b2bPortfolio';
+
+export const prerender = true;
+
+export function getStaticPaths() {
+  return b2bPages.map((page, index) => ({
+    params: { slug: page.slug },
+    props: { page, index },
+  }));
+}
+
+interface Props { page: B2BPage; index: number; }
+const { page, index } = Astro.props;
+---
+
+<B2BShowcaseLayout
+  title={`${page.title}｜${b2bCompany.name}`}
+  description={page.lead}
+  currentPath={`/portfolio-b2b/${page.slug}/`}
+>
+  <B2BSubpage page={page} index={index} />
+</B2BShowcaseLayout>

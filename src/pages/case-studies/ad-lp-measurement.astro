@@ -1,0 +1,244 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
+import {
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../../data/structuredData';
+
+const title = '広告・LP・計測をつなぐ改善設計｜ケーススタディ｜和-Node';
+const description = 'Yahoo・LINE広告を想定し、広告文、LP、フォーム、計測、週次改善を一つの判断ループとして設計した自主制作ケーススタディです。';
+const image = '/images/ogp-lab.png';
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: '/case-studies/ad-lp-measurement/', type: 'Article' }),
+  createBreadcrumbSchema([
+    { name: 'ホーム', path: '/' },
+    { name: '制作例・デモ', path: '/works/' },
+    { name: '広告・LP・計測改善', path: '/case-studies/ad-lp-measurement/' },
+  ]),
+];
+
+const funnel = [
+  ['01', '広告表示', '訴求軸と検索意図が合っているか', '表示回数・検索語句'],
+  ['02', 'クリック', '広告文と遷移先の約束が一致するか', 'CTR・CPC'],
+  ['03', 'LP理解', '対象・料金・次の行動を判断できるか', 'CTA到達・滞在'],
+  ['04', 'フォーム', '入力負担と送信後の不安が残らないか', '開始・離脱・完了'],
+  ['05', '問い合わせ', '件数だけでなく相談の質が合っているか', 'CVR・CPA・商談化'],
+];
+
+const events = [
+  ['view_landing_page', 'LP表示', '流入後にページが表示された'],
+  ['select_primary_cta', '主要CTA選択', '相談または資料確認を選んだ'],
+  ['begin_contact', 'フォーム開始', '入力画面へ進んだ'],
+  ['generate_lead', 'フォーム完了', '送信が正常に完了した'],
+  ['qualified_inquiry', '有効相談', '対象サービスに近い相談だった'],
+];
+
+const weekly = [
+  ['広告', '検索語句の意図ずれ', '除外候補と伸ばす語句を分ける'],
+  ['LP', '広告文との不一致', '見出し・料金・CTA周辺を一箇所ずつ試す'],
+  ['フォーム', '開始後の離脱', '入力項目・説明・エラー表示を確認する'],
+  ['商談', '問い合わせ品質', '受注対象に近い相談かを記録する'],
+];
+---
+
+<BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
+  <main class="ad-case" data-glossary-skip>
+    <section class="case-hero">
+      <div class="container case-hero__grid">
+        <div>
+          <a class="back-link" href="/works/"><MaterialIcon name="arrow_back" /> 制作例・デモ</a>
+          <p class="kicker">CASE STUDY / ADVERTISING & CRO</p>
+          <h1>広告を出して終わらせず、<br />相談までの詰まりを追う。</h1>
+          <p class="hero-lead">広告、LP、フォーム、問い合わせ品質を別々に評価せず、どこで期待が途切れたかを週次で確認する設計例です。</p>
+          <div class="hero-actions">
+            <a class="button primary" href="/ad-report-diagnosis/?sample=1"><MaterialIcon name="monitoring" /> 診断デモを試す</a>
+            <a class="button secondary" href="/lab/cases/service-lp/"><MaterialIcon name="difference" /> LP改善を見る</a>
+          </div>
+        </div>
+        <div class="funnel-visual" aria-label="広告から問い合わせまでの計測範囲">
+          <div class="funnel-visual__top">
+            <span>AD</span><MaterialIcon name="arrow_forward" /><span>LP</span><MaterialIcon name="arrow_forward" /><span>FORM</span>
+          </div>
+          <div class="funnel-visual__metrics">
+            <div><small>Traffic</small><strong>CTR / CPC</strong></div>
+            <div><small>Action</small><strong>CVR / CPA</strong></div>
+            <div><small>Business</small><strong>相談品質</strong></div>
+          </div>
+          <p>数値は架空データを使う操作例です。広告成果や受注を保証するものではありません。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-band" aria-label="ケーススタディの前提">
+      <div class="container fact-grid">
+        <div><span>題材</span><strong>Yahoo・LINE広告を想定</strong></div>
+        <div><span>実装</span><strong>CSV診断＋改善優先度</strong></div>
+        <div><span>データ</span><strong>架空・ブラウザ内処理</strong></div>
+        <div><span>検証</span><strong>週次で仮説を更新</strong></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">ONE FUNNEL</p>
+          <h2>五つの段階を、一つの流れとして見る。</h2>
+          <p>クリック数だけを良し悪しの結論にせず、次の段階へ進めなかった理由を切り分けます。</p>
+        </div>
+        <ol class="funnel-list">
+          {funnel.map(([number, titleText, question, metric]) => (
+            <li>
+              <span>{number}</span>
+              <div><strong>{titleText}</strong><p>{question}</p></div>
+              <small>{metric}</small>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container decision-grid">
+        <div class="section-head sticky-head">
+          <p class="kicker">DECISION RULE</p>
+          <h2>数字から、直す場所を決める。</h2>
+          <p>同じ「CVが少ない」状態でも、原因候補は一つではありません。確認順を決め、変更を重ねすぎないようにします。</p>
+        </div>
+        <div class="decision-list">
+          <article><MaterialIcon name="ads_click" /><div><h3>表示はあるがクリックされない</h3><p>検索意図、広告文、訴求軸を確認。LPを先に全面改修しません。</p></div></article>
+          <article><MaterialIcon name="web_traffic" /><div><h3>クリックはあるがCTAへ進まない</h3><p>広告とHeroの約束、対象者、料金、比較材料を確認します。</p></div></article>
+          <article><MaterialIcon name="edit_note" /><div><h3>フォーム開始後に離脱する</h3><p>入力項目、必須条件、エラー、送信後の流れを確認します。</p></div></article>
+          <article><MaterialIcon name="handshake" /><div><h3>CVはあるが商談につながらない</h3><p>広告対象、LPの期待調整、フォーム質問を見直します。</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">MEASUREMENT PLAN</p>
+          <h2>「相談完了」までの計測名を先に決める。</h2>
+          <p>実装前に、何を成果と呼ぶか、どの時点を中間行動として扱うかをそろえます。</p>
+        </div>
+        <div class="event-table-wrap">
+          <table>
+            <thead><tr><th>イベント名</th><th>意味</th><th>発火条件</th></tr></thead>
+            <tbody>{events.map(([name, meaning, trigger]) => <tr><td><code>{name}</code></td><td>{meaning}</td><td>{trigger}</td></tr>)}</tbody>
+          </table>
+        </div>
+        <p class="table-note">実案件ではGA4、広告媒体、フォーム仕様、同意管理に合わせて名称と発火条件を確定します。</p>
+      </div>
+    </section>
+
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-head light">
+          <p class="kicker">WEEKLY LOOP</p>
+          <h2>週次で見るのは、数字と実際の相談。</h2>
+        </div>
+        <div class="weekly-grid">
+          {weekly.map(([area, check, action]) => <article><span>{area}</span><h3>{check}</h3><p>{action}</p></article>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section final-section">
+      <div class="container final-grid">
+        <div><p class="kicker">TRY THE DEMO</p><h2>サンプルデータで、改善順を確認する。</h2><p>CSVを用意しなくても、架空データを読み込んだ状態から診断ロジックを体験できます。</p></div>
+        <a class="button primary" href="/ad-report-diagnosis/?sample=1">広告診断デモを開く <MaterialIcon name="arrow_forward" /></a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .ad-case { --ink:#172824; --muted:#5f6d69; --teal:#0f4c5c; --red:#c7352f; --gold:#9b741f; --line:#d6dfdc; background:#fff; color:var(--ink); }
+  .container { width:min(1180px, calc(100% - 40px)); margin:0 auto; }
+  .case-hero { padding:74px 0 70px; background:linear-gradient(135deg,#f7faf8 0%,#fff 58%,#f7ece9 100%); border-bottom:1px solid var(--line); }
+  .case-hero__grid { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(360px,.85fr); gap:64px; align-items:center; }
+  .back-link { display:inline-flex; align-items:center; gap:8px; margin-bottom:42px; color:var(--teal); font-weight:800; }
+  .kicker { margin:0 0 12px; color:var(--red); font-size:.78rem; font-weight:900; letter-spacing:0; }
+  h1,h2,h3,p { letter-spacing:0; }
+  h1 { margin:0; font-family:'Shippori Mincho',serif; font-size:4.35rem; line-height:1.25; }
+  .hero-lead { max-width:760px; margin:24px 0 0; color:var(--muted); font-size:1.08rem; line-height:1.9; }
+  .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:30px; }
+  .button { display:inline-flex; min-height:52px; align-items:center; justify-content:center; gap:9px; padding:13px 20px; border:1px solid var(--teal); border-radius:4px; font-weight:900; }
+  .button.primary { background:var(--red); border-color:var(--red); color:#fff; }
+  .button.secondary { background:#fff; color:var(--teal); }
+  .funnel-visual { padding:28px; border:1px solid #bfd2cc; background:rgba(255,255,255,.84); box-shadow:0 20px 50px rgba(15,76,92,.09); }
+  .funnel-visual__top { display:grid; grid-template-columns:1fr auto 1fr auto 1fr; align-items:center; gap:9px; }
+  .funnel-visual__top span { display:grid; min-height:74px; place-items:center; background:var(--teal); color:#fff; font-weight:900; }
+  .funnel-visual__top .material-icon { color:var(--red); }
+  .funnel-visual__metrics { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; margin-top:12px; }
+  .funnel-visual__metrics div { padding:14px 10px; background:#eef4f2; text-align:center; }
+  .funnel-visual__metrics small,.funnel-visual__metrics strong { display:block; }
+  .funnel-visual__metrics small { color:var(--muted); font-size:.7rem; }
+  .funnel-visual > p { margin:18px 0 0; color:var(--muted); font-size:.78rem; line-height:1.7; }
+  .case-band { padding:26px 0; background:var(--teal); color:#fff; }
+  .fact-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+  .fact-grid div { padding:4px 22px; border-left:1px solid rgba(255,255,255,.22); }
+  .fact-grid span,.fact-grid strong { display:block; }
+  .fact-grid span { color:#a9d2d3; font-size:.72rem; font-weight:800; }
+  .fact-grid strong { margin-top:5px; }
+  .section { padding:92px 0; }
+  .section-soft { background:#f3f6f4; }
+  .section-head { max-width:780px; margin-bottom:38px; }
+  .section-head h2,.final-grid h2 { margin:0; font-family:'Shippori Mincho',serif; font-size:3.15rem; line-height:1.35; }
+  .section-head > p:last-child,.final-grid p { color:var(--muted); line-height:1.85; }
+  .funnel-list { margin:0; padding:0; list-style:none; border-top:1px solid var(--line); }
+  .funnel-list li { display:grid; grid-template-columns:54px minmax(0,1fr) 170px; gap:18px; align-items:center; padding:22px 4px; border-bottom:1px solid var(--line); }
+  .funnel-list > li > span { color:var(--red); font-weight:900; }
+  .funnel-list strong { font-size:1.14rem; }
+  .funnel-list p { margin:4px 0 0; color:var(--muted); }
+  .funnel-list small { color:var(--teal); font-weight:800; text-align:right; }
+  .decision-grid { display:grid; grid-template-columns:minmax(280px,.75fr) minmax(0,1.25fr); gap:72px; }
+  .sticky-head { position:sticky; top:120px; align-self:start; }
+  .decision-list { display:grid; gap:12px; }
+  .decision-list article { display:grid; grid-template-columns:52px 1fr; gap:18px; padding:24px; border:1px solid var(--line); background:#fff; }
+  .decision-list .material-icon { display:grid; width:48px; height:48px; place-items:center; background:#e5f0ed; color:var(--teal); }
+  .decision-list h3 { margin:0; font-size:1.1rem; }
+  .decision-list p { margin:7px 0 0; color:var(--muted); line-height:1.75; }
+  .event-table-wrap { overflow-x:auto; border:1px solid var(--line); }
+  table { width:100%; border-collapse:collapse; min-width:720px; }
+  th,td { padding:17px 20px; border-bottom:1px solid var(--line); text-align:left; }
+  th { background:#eef4f2; color:var(--teal); }
+  code { color:var(--red); font-weight:800; }
+  .table-note { margin:14px 0 0; color:var(--muted); font-size:.84rem; }
+  .section-dark { background:#142b30; color:#fff; }
+  .section-head.light .kicker { color:#ef7e72; }
+  .weekly-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .weekly-grid article { padding:24px; border-top:3px solid #ef7e72; background:#1b3940; }
+  .weekly-grid span { color:#93c9c9; font-size:.76rem; font-weight:900; }
+  .weekly-grid h3 { margin:12px 0 9px; }
+  .weekly-grid p { margin:0; color:#d3dede; line-height:1.75; }
+  .final-section { background:#fff8f4; }
+  .final-grid { display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center; }
+  .final-grid p { max-width:720px; }
+  @media (max-width:900px) {
+    .case-hero__grid,.decision-grid { grid-template-columns:1fr; gap:42px; }
+    h1 { font-size:3.45rem; }
+    .section-head h2,.final-grid h2 { font-size:2.7rem; }
+    .sticky-head { position:static; }
+    .fact-grid,.weekly-grid { grid-template-columns:repeat(2,1fr); gap:18px 0; }
+    .final-grid { grid-template-columns:1fr; }
+  }
+  @media (max-width:620px) {
+    .container { width:min(100% - 28px,1180px); }
+    .case-hero,.section { padding:62px 0; }
+    .back-link { margin-bottom:28px; }
+    h1 { font-size:2.45rem; }
+    .section-head h2,.final-grid h2 { font-size:2.15rem; }
+    .hero-actions { display:grid; }
+    .funnel-visual { padding:16px; }
+    .funnel-visual__top span { min-height:58px; font-size:.82rem; }
+    .funnel-visual__metrics { grid-template-columns:1fr; }
+    .fact-grid,.weekly-grid { grid-template-columns:1fr; }
+    .fact-grid div { padding:8px 4px; border-left:0; border-bottom:1px solid rgba(255,255,255,.2); }
+    .funnel-list li { grid-template-columns:38px 1fr; }
+    .funnel-list small { grid-column:2; text-align:left; }
+    .decision-list article { grid-template-columns:1fr; }
+  }
+</style>

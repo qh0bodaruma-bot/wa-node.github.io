@@ -1,0 +1,447 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
+
+const title = '予約受付・店舗管理システムデモ｜和-Node';
+const description = '小規模サロンを想定し、予約受付、店舗側一覧、状態変更、CSV出力までをブラウザ内で試せる自主制作デモです。';
+---
+
+<BaseLayout title={title} description={description} image="/portfolio-lp/images/hero_sekkotsu.png" noindex={true}>
+  <main class="ops-demo" data-glossary-skip>
+    <div class="demo-notice">
+      <span>自主制作・架空店舗デモ</span>
+      <p>保存先はこのブラウザだけです。実名・電話番号などの個人情報は入力しないでください。</p>
+      <a href="/case-studies/reservation-operations/">設計意図を見る →</a>
+    </div>
+
+    <section class="ops-head">
+      <div class="ops-shell ops-head__grid">
+        <div>
+          <p class="kicker">RESERVATION OPERATIONS DEMO</p>
+          <h1>予約する人と、受ける人。<br />両方の画面をつなぐ。</h1>
+          <p>小規模サロンを想定し、空き枠選択、予約受付、店舗側の確認、状態変更、CSV出力までを一つのデモにしました。</p>
+        </div>
+        <div class="ops-head__visual" aria-label="予約画面と管理画面の関係">
+          <div><MaterialIcon name="calendar_add_on" /><strong>予約受付</strong><small>日時・メニューを選択</small></div>
+          <MaterialIcon name="sync_alt" />
+          <div><MaterialIcon name="dashboard" /><strong>店舗管理</strong><small>確認・更新・出力</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ops-workspace">
+      <div class="ops-shell">
+        <div class="workspace-tabs" role="tablist" aria-label="操作画面の切り替え">
+          <button type="button" id="booking-tab" role="tab" aria-selected="true" aria-controls="booking-panel" data-workspace-tab="booking">
+            <MaterialIcon name="event_available" /> お客様の予約
+          </button>
+          <button type="button" id="admin-tab" role="tab" aria-selected="false" aria-controls="admin-panel" data-workspace-tab="admin" tabindex="-1">
+            <MaterialIcon name="space_dashboard" /> 店舗管理
+          </button>
+        </div>
+
+        <section class="workspace-panel booking-panel" id="booking-panel" role="tabpanel" aria-labelledby="booking-tab" data-panel="booking">
+          <div class="booking-brand">
+            <div class="booking-brand__image" aria-hidden="true"></div>
+            <div>
+              <span>架空店舗</span>
+              <h2>みなも整体サロン</h2>
+              <p>料金と所要時間を確認して、空いている日時を選べます。</p>
+              <dl><div><dt>営業時間</dt><dd>10:00–18:00</dd></div><div><dt>場所</dt><dd>駅から徒歩5分想定</dd></div></dl>
+            </div>
+          </div>
+
+          <form class="booking-form" id="booking-form">
+            <fieldset>
+              <legend><span>1</span> メニューを選ぶ</legend>
+              <div class="service-options">
+                <button type="button" class="service-option is-selected" data-service="初回コンディションチェック" data-price="5,500円" data-duration="60分">
+                  <MaterialIcon name="fact_check" /><span><strong>初回コンディションチェック</strong><small>60分 / 5,500円</small></span><MaterialIcon name="check_circle" />
+                </button>
+                <button type="button" class="service-option" data-service="リラックス整体" data-price="6,600円" data-duration="50分">
+                  <MaterialIcon name="self_improvement" /><span><strong>リラックス整体</strong><small>50分 / 6,600円</small></span><MaterialIcon name="check_circle" />
+                </button>
+                <button type="button" class="service-option" data-service="オンライン事前相談" data-price="無料" data-duration="20分">
+                  <MaterialIcon name="video_chat" /><span><strong>オンライン事前相談</strong><small>20分 / 無料</small></span><MaterialIcon name="check_circle" />
+                </button>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span>2</span> 日時を選ぶ</legend>
+              <div class="date-options" id="date-options" aria-label="予約日"></div>
+              <div class="time-options" aria-label="予約時間">
+                {['10:00','11:30','13:00','14:30','16:00'].map((time, index) => (
+                  <button type="button" class:list={['time-option', index === 0 && 'is-selected']} data-time={time}>{time}</button>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span>3</span> 予約名を入力する</legend>
+              <label class="name-field" for="demo-name">
+                デモ用のお名前
+                <input id="demo-name" name="demo-name" type="text" maxlength="24" placeholder="例：サンプルC" autocomplete="off" />
+              </label>
+              <p class="privacy-warning"><MaterialIcon name="shield_lock" /> 実名や連絡先は入力しないでください。</p>
+            </fieldset>
+
+            <div class="booking-summary" aria-live="polite">
+              <div><span>選択内容</span><strong id="summary-service">初回コンディションチェック</strong><small id="summary-detail">60分 / 5,500円</small></div>
+              <div><span>日時</span><strong id="summary-date">日付を読み込み中</strong><small id="summary-time">10:00</small></div>
+              <button type="submit"><MaterialIcon name="event_available" /> この内容で予約する</button>
+            </div>
+            <p class="form-status" id="booking-status" role="status"></p>
+          </form>
+
+          <div class="booking-complete" id="booking-complete" hidden>
+            <MaterialIcon name="task_alt" />
+            <h2>デモ予約を受け付けました。</h2>
+            <p>受付番号 <strong id="complete-id"></strong> を店舗管理画面へ追加しました。</p>
+            <div><button type="button" id="open-admin">店舗管理で確認</button><button type="button" id="book-again">続けて試す</button></div>
+          </div>
+        </section>
+
+        <section class="workspace-panel admin-panel" id="admin-panel" role="tabpanel" aria-labelledby="admin-tab" data-panel="admin" hidden>
+          <div class="admin-toolbar">
+            <div><span>MINAMO RESERVE</span><h2>予約管理</h2></div>
+            <div class="admin-actions"><button type="button" id="export-csv"><MaterialIcon name="download" /> CSV出力</button><button type="button" id="reset-demo"><MaterialIcon name="restart_alt" /> 初期化</button></div>
+          </div>
+
+          <div class="admin-stats" aria-label="予約状況">
+            <article><MaterialIcon name="calendar_today" /><span>全予約</span><strong id="stat-total">0</strong></article>
+            <article><MaterialIcon name="pending_actions" /><span>受付待ち</span><strong id="stat-pending">0</strong></article>
+            <article><MaterialIcon name="event_available" /><span>確認済み</span><strong id="stat-confirmed">0</strong></article>
+            <article><MaterialIcon name="done_all" /><span>来店済み</span><strong id="stat-completed">0</strong></article>
+          </div>
+
+          <div class="admin-list-head">
+            <div><h3>予約一覧</h3><p>各操作はこのブラウザ内のデモデータだけを変更します。</p></div>
+            <div class="status-filters" role="group" aria-label="予約状態で絞り込み">
+              <button type="button" class="is-active" data-filter="all">すべて</button>
+              <button type="button" data-filter="pending">受付待ち</button>
+              <button type="button" data-filter="confirmed">確認済み</button>
+              <button type="button" data-filter="completed">来店済み</button>
+            </div>
+          </div>
+          <div class="reservation-list" id="reservation-list"></div>
+          <p class="admin-status" id="admin-status" role="status"></p>
+        </section>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .ops-demo { --ink:#182724; --muted:#66736f; --teal:#135b62; --green:#2f846b; --red:#c9473d; --line:#d4dfdb; --surface:#f4f7f5; background:#fff; color:var(--ink); }
+  .ops-shell { width:min(1280px,calc(100% - 40px)); margin:0 auto; }
+  .demo-notice { display:grid; grid-template-columns:auto 1fr auto; gap:18px; align-items:center; padding:10px max(20px,calc((100vw - 1280px)/2)); background:#162d32; color:#fff; font-size:.78rem; }
+  .demo-notice span { padding:4px 9px; background:#c9473d; font-weight:900; }
+  .demo-notice p { margin:0; color:#dce6e4; }
+  .demo-notice a { color:#fff; font-weight:800; text-decoration:underline; text-underline-offset:4px; }
+  .ops-head { padding:68px 0; background:linear-gradient(135deg,#f0f6f3,#fff 55%,#f8eee9); border-bottom:1px solid var(--line); }
+  .ops-head__grid { display:grid; grid-template-columns:minmax(0,1.2fr) minmax(420px,.8fr); gap:64px; align-items:center; }
+  .kicker { margin:0 0 10px; color:var(--red); font-size:.76rem; font-weight:900; letter-spacing:0; }
+  h1,h2,h3,p { letter-spacing:0; }
+  .ops-head h1 { margin:0; font-family:'Shippori Mincho',serif; font-size:4.2rem; line-height:1.25; }
+  .ops-head__grid > div:first-child > p:last-child { max-width:760px; margin:22px 0 0; color:var(--muted); line-height:1.9; }
+  .ops-head__visual { display:grid; grid-template-columns:1fr auto 1fr; gap:12px; align-items:center; }
+  .ops-head__visual > div { display:grid; min-height:184px; place-items:center; padding:22px; border:1px solid var(--line); background:#fff; text-align:center; box-shadow:0 16px 40px rgba(19,91,98,.08); }
+  .ops-head__visual > div .material-icon { font-size:2.4rem; color:var(--teal); }
+  .ops-head__visual strong,.ops-head__visual small { display:block; }
+  .ops-head__visual small { color:var(--muted); }
+  .ops-head__visual > .material-icon { color:var(--red); }
+  .ops-workspace { padding:48px 0 100px; background:#edf2f0; }
+  .workspace-tabs { display:flex; gap:4px; border-bottom:1px solid #bfcfca; }
+  .workspace-tabs button { min-height:52px; padding:0 22px; display:inline-flex; align-items:center; gap:8px; border:1px solid transparent; border-bottom:0; background:transparent; color:#53635f; font:inherit; font-weight:800; cursor:pointer; }
+  .workspace-tabs button[aria-selected='true'] { border-color:#bfcfca; background:#fff; color:var(--teal); }
+  .workspace-panel { min-height:720px; border:1px solid #bfcfca; border-top:0; background:#fff; }
+  .workspace-panel[hidden] { display:none; }
+  .booking-panel { display:grid; grid-template-columns:360px minmax(0,1fr); }
+  .booking-brand { background:#16383b; color:#fff; }
+  .booking-brand__image { aspect-ratio:4/3; background:linear-gradient(0deg,rgba(22,56,59,.25),rgba(22,56,59,.08)),url('/portfolio-lp/images/hero_sekkotsu.png') center/cover no-repeat; }
+  .booking-brand > div:last-child { padding:32px; }
+  .booking-brand span { color:#a7d0c3; font-size:.75rem; font-weight:900; }
+  .booking-brand h2 { margin:8px 0 12px; font-size:1.75rem; }
+  .booking-brand p { color:#d5e0de; line-height:1.75; }
+  .booking-brand dl { margin:28px 0 0; }
+  .booking-brand dl div { display:grid; grid-template-columns:78px 1fr; gap:10px; padding:12px 0; border-top:1px solid rgba(255,255,255,.18); }
+  .booking-brand dt { color:#a7d0c3; }
+  .booking-brand dd { margin:0; }
+  .booking-form { padding:38px clamp(24px,5vw,64px); }
+  fieldset { margin:0 0 38px; padding:0; border:0; }
+  legend { display:flex; align-items:center; gap:10px; margin-bottom:16px; font-size:1.08rem; font-weight:900; }
+  legend span { display:grid; width:30px; height:30px; place-items:center; background:var(--teal); color:#fff; font-size:.8rem; }
+  .service-options { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+  .service-option { min-height:112px; padding:16px; display:grid; grid-template-columns:auto 1fr auto; gap:11px; align-items:start; border:1px solid var(--line); background:#fff; color:var(--ink); text-align:left; cursor:pointer; }
+  .service-option > .material-icon:first-child { color:var(--teal); }
+  .service-option > .material-icon:last-child { color:#cad4d1; }
+  .service-option.is-selected { border:2px solid var(--green); background:#eff8f4; }
+  .service-option.is-selected > .material-icon:last-child { color:var(--green); font-variation-settings:'FILL' 1; }
+  .service-option strong,.service-option small { display:block; }
+  .service-option small { margin-top:6px; color:var(--muted); }
+  .date-options,.time-options { display:flex; flex-wrap:wrap; gap:8px; }
+  .date-options { margin-bottom:10px; }
+  .date-option,.time-option { min-width:86px; min-height:52px; padding:8px 12px; border:1px solid var(--line); background:#fff; color:var(--ink); font:inherit; cursor:pointer; }
+  .date-option span,.date-option small { display:block; }
+  .date-option small { color:var(--muted); }
+  .date-option.is-selected,.time-option.is-selected { border-color:var(--teal); background:var(--teal); color:#fff; }
+  .date-option.is-selected small { color:#d8e7e7; }
+  .name-field { display:grid; gap:8px; max-width:420px; font-weight:800; }
+  .name-field input { min-height:50px; padding:0 13px; border:1px solid #9eb2ac; font:inherit; }
+  .name-field input:focus { outline:3px solid rgba(19,91,98,.18); border-color:var(--teal); }
+  .privacy-warning { display:flex; align-items:center; gap:7px; margin:10px 0 0; color:var(--red); font-size:.8rem; }
+  .booking-summary { display:grid; grid-template-columns:1fr 1fr auto; gap:20px; align-items:center; padding:22px; background:#edf5f2; border-left:4px solid var(--green); }
+  .booking-summary span,.booking-summary strong,.booking-summary small { display:block; }
+  .booking-summary span { color:var(--muted); font-size:.72rem; }
+  .booking-summary small { color:var(--muted); }
+  .booking-summary button,.booking-complete button,#open-admin,.admin-actions button { min-height:48px; padding:0 17px; display:inline-flex; align-items:center; justify-content:center; gap:8px; border:0; background:var(--red); color:#fff; font:inherit; font-weight:900; cursor:pointer; }
+  .form-status { min-height:24px; margin:12px 0 0; color:var(--red); font-weight:800; }
+  .booking-complete { grid-column:2; align-self:center; padding:60px; text-align:center; }
+  .booking-complete > .material-icon { font-size:4rem; color:var(--green); font-variation-settings:'FILL' 1; }
+  .booking-complete h2 { font-size:2rem; }
+  .booking-complete p { color:var(--muted); }
+  .booking-complete > div { display:flex; justify-content:center; gap:10px; margin-top:24px; }
+  #book-again { background:#fff; border:1px solid var(--teal); color:var(--teal); }
+  .admin-panel { padding:34px; background:#f7f9f8; }
+  .admin-toolbar { display:flex; justify-content:space-between; gap:24px; align-items:center; padding-bottom:24px; border-bottom:1px solid var(--line); }
+  .admin-toolbar span { color:var(--teal); font-size:.72rem; font-weight:900; letter-spacing:0; }
+  .admin-toolbar h2 { margin:3px 0 0; }
+  .admin-actions { display:flex; gap:8px; }
+  .admin-actions button { background:#fff; border:1px solid var(--teal); color:var(--teal); }
+  .admin-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:24px 0; }
+  .admin-stats article { display:grid; grid-template-columns:auto 1fr; gap:4px 12px; padding:18px; border:1px solid var(--line); background:#fff; }
+  .admin-stats .material-icon { grid-row:1/3; align-self:center; color:var(--teal); }
+  .admin-stats span { color:var(--muted); font-size:.76rem; }
+  .admin-stats strong { font-size:1.65rem; }
+  .admin-list-head { display:flex; justify-content:space-between; gap:24px; align-items:end; margin:34px 0 14px; }
+  .admin-list-head h3 { margin:0; }
+  .admin-list-head p { margin:4px 0 0; color:var(--muted); font-size:.82rem; }
+  .status-filters { display:flex; flex-wrap:wrap; gap:5px; }
+  .status-filters button { min-height:38px; padding:0 12px; border:1px solid var(--line); background:#fff; color:var(--ink); cursor:pointer; }
+  .status-filters button.is-active { background:var(--teal); border-color:var(--teal); color:#fff; }
+  .reservation-list { display:grid; gap:8px; }
+  .reservation-row { display:grid; grid-template-columns:120px minmax(180px,1fr) minmax(220px,1.3fr) 110px auto; gap:18px; align-items:center; padding:16px 18px; border:1px solid var(--line); background:#fff; }
+  .reservation-row time,.reservation-row strong,.reservation-row small { display:block; }
+  .reservation-row time { color:var(--teal); font-weight:900; }
+  .reservation-row small { color:var(--muted); }
+  .status-badge { width:fit-content; padding:5px 8px; background:#f4ead4; color:#795b19; font-size:.72rem; font-weight:900; }
+  .status-badge.confirmed { background:#dcefea; color:#1f6956; }
+  .status-badge.completed { background:#e6eaec; color:#49585e; }
+  .status-badge.cancelled { background:#f5dddd; color:#9c352f; }
+  .row-actions { display:flex; gap:5px; }
+  .row-actions button { width:40px; height:40px; display:grid; place-items:center; border:1px solid var(--line); background:#fff; color:var(--teal); cursor:pointer; }
+  .row-actions button:last-child { color:var(--red); }
+  .empty-state { padding:42px; border:1px dashed #adc0ba; background:#fff; color:var(--muted); text-align:center; }
+  .admin-status { min-height:24px; color:var(--teal); font-weight:800; }
+  @media (max-width:1050px) {
+    .ops-head__grid { grid-template-columns:1fr; }
+    .ops-head h1 { font-size:3.45rem; }
+    .booking-panel { grid-template-columns:300px 1fr; }
+    .service-options { grid-template-columns:1fr; }
+    .booking-summary { grid-template-columns:1fr 1fr; }
+    .booking-summary button { grid-column:1/-1; }
+    .reservation-row { grid-template-columns:100px 1fr 1fr; }
+    .reservation-row .status-badge,.reservation-row .row-actions { grid-column:auto; }
+  }
+  @media (max-width:760px) {
+    .demo-notice { grid-template-columns:1fr; padding:12px 20px; gap:7px; }
+    .ops-shell { width:min(100% - 24px,1280px); }
+    .ops-head { padding:56px 0; }
+    .ops-head h1 { font-size:2.45rem; }
+    .ops-head__visual { grid-template-columns:1fr; }
+    .ops-head__visual > .material-icon { transform:rotate(90deg); }
+    .workspace-tabs { display:grid; grid-template-columns:1fr 1fr; }
+    .workspace-tabs button { justify-content:center; padding:0 10px; }
+    .booking-panel { display:block; }
+    .booking-brand { display:grid; grid-template-columns:140px 1fr; }
+    .booking-brand__image { aspect-ratio:auto; }
+    .booking-brand > div:last-child { padding:20px; }
+    .booking-brand dl { display:none; }
+    .booking-form { padding:28px 18px; }
+    .booking-summary { grid-template-columns:1fr; }
+    .booking-summary button { grid-column:auto; }
+    .booking-complete { padding:44px 20px; }
+    .booking-complete > div { display:grid; }
+    .admin-panel { padding:20px 14px; }
+    .admin-toolbar,.admin-list-head { align-items:flex-start; flex-direction:column; }
+    .admin-stats { grid-template-columns:repeat(2,1fr); }
+    .reservation-row { grid-template-columns:1fr 1fr; gap:12px; }
+    .reservation-row > div:nth-child(3) { grid-column:1/-1; }
+  }
+  @media (max-width:480px) {
+    .booking-brand { grid-template-columns:1fr; }
+    .booking-brand__image { aspect-ratio:16/7; }
+    .admin-stats { grid-template-columns:1fr; }
+    .reservation-row { grid-template-columns:1fr; }
+    .reservation-row > div:nth-child(3),.reservation-row .status-badge,.reservation-row .row-actions { grid-column:auto; }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const storageKey = 'wa-node-reservation-demo-v1';
+    const panels = [...document.querySelectorAll('[data-panel]')];
+    const tabButtons = [...document.querySelectorAll('[data-workspace-tab]')];
+    const statusLabels = { pending: '受付待ち', confirmed: '確認済み', completed: '来店済み', cancelled: '取消' };
+    let selectedService = { name: '初回コンディションチェック', price: '5,500円', duration: '60分' };
+    let selectedDate = '';
+    let selectedDateLabel = '';
+    let selectedTime = '10:00';
+    let activeFilter = 'all';
+
+    const dateToIso = (date) => {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+    const dateLabel = (date) => `${date.getMonth() + 1}/${date.getDate()}（${['日','月','火','水','木','金','土'][date.getDay()]}）`;
+    const addDays = (amount) => { const date = new Date(); date.setHours(12,0,0,0); date.setDate(date.getDate() + amount); return date; };
+    const seedBookings = () => [
+      { id:'DEMO-101', name:'サンプルA', service:'初回コンディションチェック', duration:'60分', price:'5,500円', date:dateToIso(addDays(1)), dateLabel:dateLabel(addDays(1)), time:'11:30', status:'confirmed' },
+      { id:'DEMO-102', name:'サンプルB', service:'リラックス整体', duration:'50分', price:'6,600円', date:dateToIso(addDays(2)), dateLabel:dateLabel(addDays(2)), time:'14:30', status:'pending' },
+    ];
+    const loadBookings = () => {
+      try { const saved = JSON.parse(localStorage.getItem(storageKey) || 'null'); return Array.isArray(saved) ? saved : seedBookings(); }
+      catch { return seedBookings(); }
+    };
+    let bookings = loadBookings();
+    const saveBookings = () => { try { localStorage.setItem(storageKey, JSON.stringify(bookings)); } catch {} };
+    if (!localStorage.getItem(storageKey)) saveBookings();
+
+    const switchPanel = (name) => {
+      panels.forEach((panel) => { panel.hidden = panel.dataset.panel !== name; });
+      tabButtons.forEach((button) => {
+        const active = button.dataset.workspaceTab === name;
+        button.setAttribute('aria-selected', String(active));
+        button.tabIndex = active ? 0 : -1;
+      });
+      if (name === 'admin') renderAdmin();
+    };
+    tabButtons.forEach((button) => button.addEventListener('click', () => switchPanel(button.dataset.workspaceTab)));
+
+    const dateContainer = document.getElementById('date-options');
+    [1,2,3,4,5].forEach((offset, index) => {
+      const date = addDays(offset);
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `date-option${index === 0 ? ' is-selected' : ''}`;
+      button.dataset.date = dateToIso(date);
+      button.dataset.label = dateLabel(date);
+      button.innerHTML = `<span>${index === 0 ? '明日' : `${offset}日後`}</span><small>${dateLabel(date)}</small>`;
+      dateContainer.appendChild(button);
+      if (index === 0) { selectedDate = button.dataset.date; selectedDateLabel = button.dataset.label; }
+    });
+
+    const updateSummary = () => {
+      document.getElementById('summary-service').textContent = selectedService.name;
+      document.getElementById('summary-detail').textContent = `${selectedService.duration} / ${selectedService.price}`;
+      document.getElementById('summary-date').textContent = selectedDateLabel;
+      document.getElementById('summary-time').textContent = selectedTime;
+    };
+    dateContainer.addEventListener('click', (event) => {
+      const button = event.target.closest('.date-option');
+      if (!button) return;
+      dateContainer.querySelectorAll('.date-option').forEach((item) => item.classList.remove('is-selected'));
+      button.classList.add('is-selected');
+      selectedDate = button.dataset.date; selectedDateLabel = button.dataset.label;
+      updateSummary();
+    });
+    document.querySelectorAll('.time-option').forEach((button) => button.addEventListener('click', () => {
+      document.querySelectorAll('.time-option').forEach((item) => item.classList.remove('is-selected'));
+      button.classList.add('is-selected'); selectedTime = button.dataset.time; updateSummary();
+    }));
+    document.querySelectorAll('.service-option').forEach((button) => button.addEventListener('click', () => {
+      document.querySelectorAll('.service-option').forEach((item) => item.classList.remove('is-selected'));
+      button.classList.add('is-selected');
+      selectedService = { name:button.dataset.service, price:button.dataset.price, duration:button.dataset.duration };
+      updateSummary();
+    }));
+    updateSummary();
+
+    document.getElementById('booking-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      const nameInput = document.getElementById('demo-name');
+      const name = nameInput.value.trim();
+      const status = document.getElementById('booking-status');
+      if (!name) { status.textContent = 'デモ用のお名前を入力してください。'; nameInput.focus(); return; }
+      const id = `DEMO-${String(Date.now()).slice(-6)}`;
+      bookings.unshift({
+        id,
+        name,
+        service:selectedService.name,
+        duration:selectedService.duration,
+        price:selectedService.price,
+        date:selectedDate,
+        dateLabel:selectedDateLabel,
+        time:selectedTime,
+        status:'pending'
+      });
+      saveBookings();
+      document.getElementById('complete-id').textContent = id;
+      document.querySelector('.booking-brand').hidden = true;
+      document.getElementById('booking-form').hidden = true;
+      document.getElementById('booking-complete').hidden = false;
+      status.textContent = '';
+    });
+    document.getElementById('open-admin').addEventListener('click', () => switchPanel('admin'));
+    document.getElementById('book-again').addEventListener('click', () => {
+      document.querySelector('.booking-brand').hidden = false;
+      document.getElementById('booking-form').hidden = false;
+      document.getElementById('booking-complete').hidden = true;
+      document.getElementById('demo-name').value = '';
+    });
+
+    const renderAdmin = () => {
+      document.getElementById('stat-total').textContent = bookings.filter((item) => item.status !== 'cancelled').length;
+      document.getElementById('stat-pending').textContent = bookings.filter((item) => item.status === 'pending').length;
+      document.getElementById('stat-confirmed').textContent = bookings.filter((item) => item.status === 'confirmed').length;
+      document.getElementById('stat-completed').textContent = bookings.filter((item) => item.status === 'completed').length;
+      const visible = activeFilter === 'all' ? bookings : bookings.filter((item) => item.status === activeFilter);
+      const list = document.getElementById('reservation-list');
+      if (!visible.length) { list.innerHTML = '<div class="empty-state">この状態の予約はありません。</div>'; return; }
+      list.innerHTML = visible.map((item) => `
+        <article class="reservation-row" data-id="${item.id}">
+          <div><time datetime="${item.date}T${item.time}">${item.dateLabel}</time><strong>${item.time}</strong></div>
+          <div><strong>${escapeHtml(item.name)}</strong><small>${item.id}</small></div>
+          <div><strong>${escapeHtml(item.service)}</strong><small>${item.duration} / ${item.price}</small></div>
+          <span class="status-badge ${item.status}">${statusLabels[item.status]}</span>
+          <div class="row-actions">
+            <button type="button" data-action="confirm" title="確認済みにする" aria-label="${escapeHtml(item.name)}を確認済みにする"><span class="material-symbols-rounded">check</span></button>
+            <button type="button" data-action="complete" title="来店済みにする" aria-label="${escapeHtml(item.name)}を来店済みにする"><span class="material-symbols-rounded">done_all</span></button>
+            <button type="button" data-action="cancel" title="取り消す" aria-label="${escapeHtml(item.name)}を取り消す"><span class="material-symbols-rounded">close</span></button>
+          </div>
+        </article>`).join('');
+    };
+    document.querySelectorAll('[data-filter]').forEach((button) => button.addEventListener('click', () => {
+      activeFilter = button.dataset.filter;
+      document.querySelectorAll('[data-filter]').forEach((item) => item.classList.toggle('is-active', item === button));
+      renderAdmin();
+    }));
+    document.getElementById('reservation-list').addEventListener('click', (event) => {
+      const button = event.target.closest('[data-action]');
+      const row = event.target.closest('[data-id]');
+      if (!button || !row) return;
+      const booking = bookings.find((item) => item.id === row.dataset.id);
+      if (!booking) return;
+      booking.status = button.dataset.action === 'confirm' ? 'confirmed' : button.dataset.action === 'complete' ? 'completed' : 'cancelled';
+      saveBookings(); renderAdmin();
+      document.getElementById('admin-status').textContent = `${booking.id}を「${statusLabels[booking.status]}」へ更新しました。`;
+    });
+    document.getElementById('reset-demo').addEventListener('click', () => {
+      bookings = seedBookings(); saveBookings(); activeFilter = 'all';
+      document.querySelectorAll('[data-filter]').forEach((item) => item.classList.toggle('is-active', item.dataset.filter === 'all'));
+      renderAdmin(); document.getElementById('admin-status').textContent = 'デモデータを初期状態へ戻しました。';
+    });
+    document.getElementById('export-csv').addEventListener('click', () => {
+      const rows = [['受付番号','予約名','メニュー','日付','時間','状態'], ...bookings.map((item) => [item.id,item.name,item.service,item.date,item.time,statusLabels[item.status]])];
+      const csv = '\uFEFF' + rows.map((row) => row.map((cell) => `"${String(cell).replace(/"/g,'""')}"`).join(',')).join('\r\n');
+      const url = URL.createObjectURL(new Blob([csv], { type:'text/csv;charset=utf-8' }));
+      const link = document.createElement('a'); link.href = url; link.download = 'reservation-demo.csv'; link.click(); URL.revokeObjectURL(url);
+      document.getElementById('admin-status').textContent = '架空の予約データをCSVへ出力しました。';
+    });
+    const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (char) => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[char]));
+    renderAdmin();
+  })();
+</script>

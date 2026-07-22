@@ -1,0 +1,270 @@
+---
+import MaterialIcon from '../components/MaterialIcon.astro';
+import { b2bCompany, b2bNav } from '../data/b2bPortfolio';
+
+interface Props {
+  title: string;
+  description: string;
+  currentPath?: string;
+  noindex?: boolean;
+}
+
+const { title, description, currentPath = '/portfolio-b2b/', noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=swap" rel="stylesheet" />
+  </head>
+  <body class="b2b-demo">
+    <a class="b2b-skip" href="#main-content">本文へ移動</a>
+    <div class="b2b-sample-notice">
+      <span>自主制作ポートフォリオ</span>
+      <p>このサイトは架空企業を題材にした情報設計・Web実装サンプルです。</p>
+      <a href="/case-studies/b2b-corporate-renewal/">設計意図を見る</a>
+    </div>
+
+    <header class="b2b-header">
+      <a class="b2b-brand" href="/portfolio-b2b/" aria-label={`${b2bCompany.name} トップ`}>
+        <span class="b2b-mark" aria-hidden="true">H</span>
+        <span><strong>{b2bCompany.name}</strong><small>{b2bCompany.englishName}</small></span>
+      </a>
+      <button class="b2b-menu-button" type="button" aria-expanded="false" aria-controls="b2b-navigation" title="メニューを開く">
+        <MaterialIcon name="menu" label="メニュー" />
+      </button>
+      <nav class="b2b-nav" id="b2b-navigation" aria-label="メインメニュー">
+        {b2bNav.map((item) => (
+          <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>
+        ))}
+        <a class="b2b-nav-cta" href="/portfolio-b2b/contact/"><MaterialIcon name="mail" />相談する</a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <footer class="b2b-footer">
+      <div>
+        <a class="b2b-brand footer-brand" href="/portfolio-b2b/">
+          <span class="b2b-mark" aria-hidden="true">H</span>
+          <span><strong>{b2bCompany.name}</strong><small>{b2bCompany.englishName}</small></span>
+        </a>
+        <p>{b2bCompany.description}</p>
+      </div>
+      <nav aria-label="フッターメニュー">
+        <a href="/portfolio-b2b/solutions/">課題解決</a>
+        <a href="/portfolio-b2b/products/">技術・製品</a>
+        <a href="/portfolio-b2b/cases/">導入事例</a>
+        <a href="/portfolio-b2b/company/">会社情報</a>
+        <a href="/portfolio-b2b/recruit/">採用情報</a>
+      </nav>
+      <div class="b2b-footer-meta">
+        <p>架空所在地：愛知県ものづくり市1-2-3</p>
+        <p>このサイト内の企業名・所在地・実績・数値はすべて架空です。</p>
+        <a href="/works/">和-Nodeの制作例へ戻る</a>
+      </div>
+    </footer>
+
+    <script is:inline>
+      const setupB2BMenu = () => {
+        const button = document.querySelector('.b2b-menu-button');
+        const nav = document.querySelector('.b2b-nav');
+        if (!(button instanceof HTMLButtonElement) || !(nav instanceof HTMLElement)) return;
+        button.addEventListener('click', () => {
+          const isOpen = button.getAttribute('aria-expanded') === 'true';
+          button.setAttribute('aria-expanded', String(!isOpen));
+          button.title = isOpen ? 'メニューを開く' : 'メニューを閉じる';
+          nav.classList.toggle('is-open', !isOpen);
+        });
+      };
+      document.addEventListener('DOMContentLoaded', setupB2BMenu, { once: true });
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --b2b-ink: #142432;
+    --b2b-navy: #17394f;
+    --b2b-teal: #1b6a70;
+    --b2b-orange: #d8602f;
+    --b2b-mist: #eef4f3;
+    --b2b-cloud: #f7f9f8;
+    --b2b-line: #cbd8d7;
+    --b2b-white: #ffffff;
+    --b2b-shadow: 0 16px 40px rgba(20, 36, 50, 0.11);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body.b2b-demo {
+    margin: 0;
+    color: var(--b2b-ink);
+    background: var(--b2b-white);
+    font-family: "Noto Sans JP", "Yu Gothic", "Meiryo", sans-serif;
+    line-height: 1.8;
+    letter-spacing: 0;
+  }
+  .b2b-demo a { color: inherit; }
+  .b2b-demo img { max-width: 100%; }
+  .b2b-demo .material-symbols-rounded { font-size: 1.25em; line-height: 1; vertical-align: -0.15em; }
+  .b2b-skip { position: fixed; left: 16px; top: -80px; z-index: 1000; padding: 10px 16px; background: var(--b2b-ink); color: white !important; }
+  .b2b-skip:focus { top: 12px; }
+
+  .b2b-sample-notice {
+    min-height: 38px;
+    padding: 7px clamp(18px, 4vw, 64px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    background: var(--b2b-ink);
+    color: white;
+    font-size: 12px;
+  }
+  .b2b-sample-notice span { color: #ffd7c6; font-weight: 700; }
+  .b2b-sample-notice p { margin: 0; }
+  .b2b-sample-notice a { color: white; text-underline-offset: 3px; }
+
+  .b2b-header {
+    min-height: 82px;
+    padding: 0 clamp(20px, 4vw, 64px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    border-bottom: 1px solid var(--b2b-line);
+    background: rgba(255, 255, 255, 0.97);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .b2b-brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; min-width: max-content; }
+  .b2b-mark { width: 42px; height: 42px; display: grid; place-items: center; background: var(--b2b-navy); color: white; font: 800 24px/1 Georgia, serif; }
+  .b2b-brand strong { display: block; font-size: 16px; line-height: 1.35; }
+  .b2b-brand small { display: block; color: #526470; font-size: 9px; letter-spacing: 0.12em; }
+  .b2b-nav { display: flex; align-items: center; justify-content: flex-end; gap: clamp(14px, 2vw, 28px); }
+  .b2b-nav > a { color: #334752; font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+  .b2b-nav > a:hover, .b2b-nav > a[aria-current="page"] { color: var(--b2b-teal); }
+  .b2b-nav .b2b-nav-cta { min-height: 44px; padding: 0 18px; display: inline-flex; align-items: center; gap: 7px; background: var(--b2b-orange); color: white; }
+  .b2b-menu-button { display: none; width: 44px; height: 44px; border: 1px solid var(--b2b-line); background: white; color: var(--b2b-navy); cursor: pointer; }
+
+  .b2b-container { width: min(1180px, calc(100% - 40px)); margin: 0 auto; }
+  .b2b-section { padding: clamp(64px, 8vw, 108px) 0; }
+  .b2b-section.alt { background: var(--b2b-cloud); }
+  .b2b-eyebrow { display: block; margin-bottom: 12px; color: var(--b2b-teal); font-size: 12px; font-weight: 800; letter-spacing: 0.14em; }
+  .b2b-section-title { margin: 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: clamp(30px, 4vw, 50px); line-height: 1.35; font-weight: 600; }
+  .b2b-section-lead { max-width: 720px; margin: 20px 0 0; color: #526470; font-size: 16px; }
+
+  .b2b-home-hero {
+    min-height: min(720px, calc(100vh - 120px));
+    display: flex;
+    align-items: center;
+    background: var(--b2b-white) url('/images/case-studies/b2b/hokushin-factory-hero.webp') center center / cover no-repeat;
+    border-bottom: 1px solid var(--b2b-line);
+  }
+  .b2b-hero-copy { width: min(680px, 58%); padding: clamp(70px, 10vw, 132px) 0; }
+  .b2b-hero-copy .b2b-eyebrow { color: var(--b2b-orange); }
+  .b2b-home-hero h1 { margin: 0; color: var(--b2b-ink); font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: clamp(42px, 6vw, 78px); line-height: 1.18; font-weight: 600; }
+  .b2b-home-hero h1 small { display: block; margin-bottom: 14px; font-family: "Noto Sans JP", "Yu Gothic", sans-serif; font-size: 0.24em; font-weight: 800; color: var(--b2b-navy); }
+  .b2b-hero-copy > p { max-width: 620px; margin: 26px 0 0; color: #334752; font-size: clamp(16px, 2vw, 19px); font-weight: 600; }
+  .b2b-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+  .b2b-button { min-height: 52px; padding: 0 22px; display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 2px solid var(--b2b-navy); background: var(--b2b-navy); color: white !important; text-decoration: none; font-weight: 800; }
+  .b2b-button.secondary { background: rgba(255, 255, 255, 0.88); color: var(--b2b-navy) !important; }
+  .b2b-button.orange { border-color: var(--b2b-orange); background: var(--b2b-orange); }
+
+  .b2b-trust-strip { border-bottom: 1px solid var(--b2b-line); background: white; }
+  .b2b-trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+  .b2b-trust-item { min-height: 128px; padding: 26px clamp(18px, 3vw, 38px); display: flex; align-items: center; gap: 16px; border-right: 1px solid var(--b2b-line); }
+  .b2b-trust-item:last-child { border-right: 0; }
+  .b2b-trust-item .material-symbols-rounded { color: var(--b2b-orange); font-size: 30px; }
+  .b2b-trust-item strong { display: block; font-size: 17px; }
+  .b2b-trust-item span { display: block; margin-top: 2px; color: #62737d; font-size: 13px; }
+
+  .b2b-feature-grid { margin-top: 42px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .b2b-feature-card { padding: 28px; border: 1px solid var(--b2b-line); border-top: 4px solid var(--b2b-teal); background: white; border-radius: 6px; }
+  .b2b-feature-card .material-symbols-rounded { display: inline-grid; place-items: center; width: 46px; height: 46px; margin-bottom: 24px; background: var(--b2b-mist); color: var(--b2b-teal); font-size: 26px; }
+  .b2b-feature-card h3 { margin: 0; font-size: 20px; }
+  .b2b-feature-card p { margin: 12px 0 0; color: #5b6d76; font-size: 14px; }
+  .b2b-feature-card a { display: inline-flex; align-items: center; gap: 6px; margin-top: 22px; color: var(--b2b-teal); font-weight: 800; text-underline-offset: 4px; }
+
+  .b2b-split { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(300px, 0.85fr); gap: clamp(42px, 7vw, 90px); align-items: center; }
+  .b2b-process { display: grid; gap: 0; border-top: 1px solid var(--b2b-line); }
+  .b2b-process div { padding: 20px 0; display: grid; grid-template-columns: 70px 1fr; gap: 12px; border-bottom: 1px solid var(--b2b-line); }
+  .b2b-process span { color: var(--b2b-orange); font-weight: 800; }
+  .b2b-process strong { font-size: 17px; }
+
+  .b2b-case-row { margin-top: 42px; border-top: 1px solid var(--b2b-line); }
+  .b2b-case-item { padding: 26px 0; display: grid; grid-template-columns: 160px 1fr auto; align-items: center; gap: 24px; border-bottom: 1px solid var(--b2b-line); }
+  .b2b-case-item span { color: var(--b2b-teal); font-size: 12px; font-weight: 800; }
+  .b2b-case-item h3 { margin: 0; font-size: 20px; }
+  .b2b-case-item p { margin: 5px 0 0; color: #62737d; font-size: 14px; }
+  .b2b-case-item a { color: var(--b2b-orange); font-weight: 800; }
+
+  .b2b-page-hero { padding: clamp(70px, 9vw, 118px) 0 72px; background: var(--b2b-mist); border-bottom: 1px solid var(--b2b-line); }
+  .b2b-page-hero h1 { max-width: 900px; margin: 0; font-family: "Yu Mincho", "Hiragino Mincho ProN", serif; font-size: clamp(36px, 5vw, 62px); line-height: 1.3; font-weight: 600; }
+  .b2b-page-hero p { max-width: 760px; margin: 24px 0 0; color: #4e626d; font-size: 17px; }
+  .b2b-page-number { margin-top: 42px; display: inline-flex; align-items: center; gap: 12px; color: var(--b2b-teal); font-size: 12px; font-weight: 800; }
+  .b2b-page-number::before { content: ''; width: 48px; height: 2px; background: var(--b2b-orange); }
+
+  .b2b-note-band { padding: 30px 0; background: var(--b2b-navy); color: white; }
+  .b2b-note-inner { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center; }
+  .b2b-note-inner h2 { margin: 0; font-size: 20px; }
+  .b2b-note-inner p { margin: 7px 0 0; color: #dbe5e8; font-size: 14px; }
+
+  .b2b-contact-preview { padding: 34px; border-left: 5px solid var(--b2b-orange); background: var(--b2b-cloud); }
+  .b2b-contact-preview h2 { margin: 0; font-size: 23px; }
+  .b2b-contact-preview p { margin: 10px 0 20px; color: #5b6d76; }
+  .b2b-check-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; }
+  .b2b-check-list li { display: flex; align-items: flex-start; gap: 8px; }
+  .b2b-check-list .material-symbols-rounded { color: var(--b2b-teal); }
+
+  .b2b-footer { padding: 56px clamp(20px, 4vw, 64px); display: grid; grid-template-columns: 1.2fr 0.8fr 1fr; gap: 50px; background: #0f202b; color: white; }
+  .b2b-footer .b2b-mark { background: white; color: var(--b2b-navy); }
+  .b2b-footer .b2b-brand small, .b2b-footer p { color: #b9c7cd; }
+  .b2b-footer > div > p { max-width: 420px; margin: 18px 0 0; font-size: 13px; }
+  .b2b-footer nav { display: grid; align-content: start; gap: 9px; }
+  .b2b-footer nav a, .b2b-footer-meta a { color: white; text-underline-offset: 4px; }
+  .b2b-footer-meta p { margin: 0 0 10px; }
+
+  @media (max-width: 1040px) {
+    .b2b-menu-button { display: grid; place-items: center; }
+    .b2b-nav { display: none; position: absolute; left: 20px; right: 20px; top: 74px; padding: 18px; flex-direction: column; align-items: stretch; gap: 0; background: white; border: 1px solid var(--b2b-line); box-shadow: var(--b2b-shadow); }
+    .b2b-nav.is-open { display: flex; }
+    .b2b-nav > a { padding: 12px; }
+    .b2b-nav .b2b-nav-cta { justify-content: center; margin-top: 8px; }
+  }
+  @media (max-width: 760px) {
+    .b2b-sample-notice { justify-content: space-between; }
+    .b2b-sample-notice p { display: none; }
+    .b2b-header { min-height: 72px; padding-inline: 18px; }
+    .b2b-brand strong { font-size: 14px; }
+    .b2b-brand small { display: none; }
+    .b2b-home-hero { min-height: 700px; align-items: flex-end; background-position: 66% center; position: relative; }
+    .b2b-home-hero::before { content: ''; position: absolute; inset: 42% 0 0; background: rgba(255,255,255,0.9); }
+    .b2b-hero-copy { position: relative; width: 100%; padding: 240px 0 52px; }
+    .b2b-home-hero h1 { font-size: 40px; }
+    .b2b-actions { flex-direction: column; }
+    .b2b-button { width: 100%; }
+    .b2b-trust-grid, .b2b-feature-grid, .b2b-split, .b2b-note-inner, .b2b-footer { grid-template-columns: 1fr; }
+    .b2b-trust-item { min-height: 104px; border-right: 0; border-bottom: 1px solid var(--b2b-line); }
+    .b2b-feature-grid { gap: 12px; }
+    .b2b-case-item { grid-template-columns: 1fr; gap: 6px; }
+    .b2b-case-item a { margin-top: 8px; }
+    .b2b-note-inner .b2b-button { width: 100%; }
+    .b2b-footer { gap: 28px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>

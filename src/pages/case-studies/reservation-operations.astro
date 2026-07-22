@@ -1,0 +1,221 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
+import {
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../../data/structuredData';
+
+const title = '予約受付・店舗管理システム｜ケーススタディ｜和-Node';
+const description = '小規模サロンを題材に、お客様の予約受付と店舗側の確認・状態変更・CSV出力をつないだ自主制作システムの設計ケーススタディです。';
+const image = '/portfolio-lp/images/hero_sekkotsu.png';
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: '/case-studies/reservation-operations/', type: 'Article' }),
+  createBreadcrumbSchema([
+    { name: 'ホーム', path: '/' },
+    { name: '制作例・デモ', path: '/works/' },
+    { name: '予約受付・店舗管理', path: '/case-studies/reservation-operations/' },
+  ]),
+];
+
+const requirements = [
+  ['お客様', '空き枠と料金を見て、自分で予約できる'],
+  ['店舗', '予約を一覧で確認し、受付状態を更新できる'],
+  ['運用', '必要な時だけCSVへ出し、既存業務へ渡せる'],
+  ['安全', 'デモでは個人情報を送信せず、端末内だけで扱う'],
+];
+
+const flow = [
+  ['01', 'メニュー選択', '料金と所要時間を同じ場所で確認'],
+  ['02', '日時選択', '予約可能な候補から迷わず選択'],
+  ['03', '受付完了', '受付番号と次に起こることを表示'],
+  ['04', '店舗確認', '受付待ち、確認済み、来店済みを更新'],
+  ['05', 'データ出力', '必要な予約だけを業務用CSVへ出力'],
+];
+---
+
+<BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
+  <main class="system-case" data-glossary-skip>
+    <section class="case-hero">
+      <div class="hero-image" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <a href="/works/"><MaterialIcon name="arrow_back" /> 制作例・デモ</a>
+          <p class="kicker">CASE STUDY / SMALL BUSINESS SYSTEM</p>
+          <h1>予約ページだけでなく、<br />受付後の仕事まで整える。</h1>
+          <p>お客様が予約できることと、店舗が無理なく確認・更新できることを、一つの業務として設計した自主制作ケーススタディです。</p>
+          <a class="primary-button" href="/reservation-operations-demo/"><MaterialIcon name="touch_app" /> 操作デモを開く</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="project-strip">
+      <div class="container project-grid">
+        <div><span>題材</span><strong>架空の小規模サロン</strong></div>
+        <div><span>画面</span><strong>予約受付＋店舗管理</strong></div>
+        <div><span>操作</span><strong>状態変更＋CSV出力</strong></div>
+        <div><span>保存</span><strong>ブラウザ内のみ</strong></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container problem-grid">
+        <div class="section-head">
+          <p class="kicker">PROBLEM</p>
+          <h2>予約フォームを置くだけでは、仕事は軽くならない。</h2>
+        </div>
+        <div class="problem-copy">
+          <p>予約を受けた後に、LINE、メール、紙の予定表へ転記し、確認済みかどうかを別途管理していると、入口だけをデジタル化しても運用負担が残ります。</p>
+          <p>そこで「予約する画面」と「受けた予約を処理する画面」を同時に考え、必要最小限の状態と操作へ絞りました。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-head wide">
+          <p class="kicker">REQUIREMENTS</p>
+          <h2>利用者ごとに、必要なことを分ける。</h2>
+          <p>機能一覧から始めず、誰が何を終えられればよいかを先に決めました。</p>
+        </div>
+        <div class="requirements-grid">
+          {requirements.map(([role, text], index) => <article><span>0{index + 1}</span><strong>{role}</strong><p>{text}</p></article>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="section flow-section">
+      <div class="container">
+        <div class="section-head wide">
+          <p class="kicker">OPERATION FLOW</p>
+          <h2>予約から店舗処理までを、一続きにする。</h2>
+        </div>
+        <ol class="flow-list">
+          {flow.map(([number, titleText, text]) => <li><span>{number}</span><MaterialIcon name={number === '05' ? 'download' : 'arrow_forward'} /><div><strong>{titleText}</strong><p>{text}</p></div></li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section screen-section">
+      <div class="container screen-grid">
+        <div class="screen-copy">
+          <p class="kicker">TWO SIDES</p>
+          <h2>同じ予約を、二つの視点で扱う。</h2>
+          <p>お客様画面は選ぶ負担を減らし、店舗画面は確認と処理の速さを優先。見た目をそろえるより、役割に合う情報密度へ分けています。</p>
+          <a href="/reservation-operations-demo/">両方の画面を操作する <MaterialIcon name="arrow_forward" /></a>
+        </div>
+        <div class="screen-mock" aria-label="予約受付画面と店舗管理画面の図解">
+          <article class="customer-screen"><span>お客様</span><div><MaterialIcon name="fact_check" /><strong>メニュー</strong></div><div><MaterialIcon name="calendar_month" /><strong>日時</strong></div><div><MaterialIcon name="task_alt" /><strong>受付完了</strong></div></article>
+          <MaterialIcon name="sync_alt" />
+          <article class="admin-screen"><span>店舗</span><div><strong>受付待ち</strong><b>2</b></div><div><strong>確認済み</strong><b>3</b></div><div><strong>来店済み</strong><b>8</b></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section limits-section">
+      <div class="container limits-grid">
+        <div><p class="kicker">SCOPE & LIMITS</p><h2>デモでできることと、本番で必要なこと。</h2></div>
+        <dl>
+          <div><dt><MaterialIcon name="check_circle" /> このデモ</dt><dd>予約作成、一覧表示、状態変更、絞り込み、CSV出力、ブラウザ内保存。</dd></div>
+          <div><dt><MaterialIcon name="build" /> 本番実装</dt><dd>認証、データベース、重複予約防止、通知、バックアップ、権限管理。</dd></div>
+          <div><dt><MaterialIcon name="verified_user" /> 個人情報</dt><dd>利用目的、保存期間、アクセス権、削除方法を運用と一緒に確定。</dd></div>
+          <div><dt><MaterialIcon name="hub" /> 外部連携</dt><dd>LINE、Googleカレンダー、決済などは契約・API仕様・費用を確認して追加。</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="section final-section">
+      <div class="container final-grid">
+        <div><p class="kicker">INTERACTIVE DEMO</p><h2>予約を一件追加し、店舗側で確認する。</h2><p>実名は使わず「サンプルC」などの架空名でお試しください。</p></div>
+        <a class="primary-button" href="/reservation-operations-demo/">予約システムを試す <MaterialIcon name="arrow_forward" /></a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .system-case { --ink:#182724; --muted:#62716d; --teal:#135b62; --green:#2f846b; --red:#c9473d; --line:#d3dfdb; background:#fff; color:var(--ink); }
+  .container { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
+  .case-hero { position:relative; min-height:680px; overflow:hidden; background:#edf4f1; }
+  .hero-image { position:absolute; inset:0 0 0 52%; background:linear-gradient(90deg,#edf4f1 0%,rgba(237,244,241,.12) 42%),url('/portfolio-lp/images/hero_sekkotsu.png') center/cover no-repeat; }
+  .hero-grid { position:relative; min-height:680px; display:grid; grid-template-columns:minmax(0,620px) 1fr; align-items:center; }
+  .hero-copy { padding:70px 0; }
+  .hero-copy > a:first-child { display:inline-flex; align-items:center; gap:8px; margin-bottom:48px; color:var(--teal); font-weight:800; }
+  .kicker { margin:0 0 12px; color:var(--red); font-size:.76rem; font-weight:900; letter-spacing:0; }
+  h1,h2,h3,p { letter-spacing:0; }
+  h1 { margin:0; font-family:'Shippori Mincho',serif; font-size:4.45rem; line-height:1.28; }
+  .hero-copy > p:not(.kicker) { margin:24px 0 0; color:var(--muted); font-size:1.06rem; line-height:1.9; }
+  .primary-button { display:inline-flex; min-height:54px; align-items:center; justify-content:center; gap:9px; margin-top:30px; padding:13px 20px; border-radius:4px; background:var(--red); color:#fff; font-weight:900; box-shadow:0 14px 30px rgba(201,71,61,.18); }
+  .project-strip { padding:26px 0; background:#14363a; color:#fff; }
+  .project-grid { display:grid; grid-template-columns:repeat(4,1fr); }
+  .project-grid div { padding:4px 22px; border-left:1px solid rgba(255,255,255,.2); }
+  .project-grid span,.project-grid strong { display:block; }
+  .project-grid span { color:#9bcac6; font-size:.72rem; font-weight:900; }
+  .project-grid strong { margin-top:4px; }
+  .section { padding:94px 0; }
+  .section-soft { background:#f1f6f3; }
+  .section-head h2,.final-grid h2,.limits-grid h2,.screen-copy h2 { margin:0; font-family:'Shippori Mincho',serif; font-size:3.15rem; line-height:1.35; }
+  .section-head.wide { max-width:820px; margin-bottom:38px; }
+  .section-head > p:last-child,.final-grid p,.screen-copy p { color:var(--muted); line-height:1.85; }
+  .problem-grid { display:grid; grid-template-columns:minmax(320px,.8fr) minmax(0,1.2fr); gap:80px; }
+  .problem-copy { padding-top:34px; border-top:3px solid var(--red); }
+  .problem-copy p { margin:0 0 18px; color:var(--muted); font-size:1.05rem; line-height:1.9; }
+  .requirements-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; }
+  .requirements-grid article { min-height:230px; padding:24px; border-top:4px solid var(--teal); background:#fff; }
+  .requirements-grid span { color:var(--red); font-weight:900; }
+  .requirements-grid strong { display:block; margin:30px 0 10px; font-size:1.2rem; }
+  .requirements-grid p { margin:0; color:var(--muted); line-height:1.75; }
+  .flow-section { background:#fff; }
+  .flow-list { display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin:0; padding:0; list-style:none; }
+  .flow-list li { position:relative; min-height:210px; padding:22px; border:1px solid var(--line); border-right:0; }
+  .flow-list li:last-child { border-right:1px solid var(--line); }
+  .flow-list > li > span { color:var(--red); font-weight:900; }
+  .flow-list > li > .material-icon { position:absolute; top:20px; right:16px; color:#9bb8b4; }
+  .flow-list strong { display:block; margin-top:50px; }
+  .flow-list p { color:var(--muted); line-height:1.7; }
+  .screen-section { background:#eaf1ef; }
+  .screen-grid { display:grid; grid-template-columns:minmax(280px,.7fr) minmax(0,1.3fr); gap:70px; align-items:center; }
+  .screen-copy a { display:inline-flex; align-items:center; gap:8px; margin-top:14px; color:var(--teal); font-weight:900; border-bottom:1px solid var(--teal); }
+  .screen-mock { display:grid; grid-template-columns:1fr auto 1fr; gap:14px; align-items:center; }
+  .screen-mock > .material-icon { color:var(--red); font-size:2rem; }
+  .screen-mock article { min-height:330px; padding:22px; background:#fff; box-shadow:0 18px 45px rgba(19,91,98,.08); }
+  .screen-mock article > span { color:var(--teal); font-size:.75rem; font-weight:900; }
+  .customer-screen div,.admin-screen div { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-top:15px; padding:18px 14px; border:1px solid var(--line); }
+  .customer-screen .material-icon { color:var(--green); }
+  .admin-screen b { display:grid; width:34px; height:34px; place-items:center; background:var(--teal); color:#fff; }
+  .limits-section { background:#142f34; color:#fff; }
+  .limits-grid { display:grid; grid-template-columns:minmax(280px,.7fr) minmax(0,1.3fr); gap:70px; }
+  .limits-grid dl { margin:0; display:grid; gap:12px; }
+  .limits-grid dl div { padding:20px; border-top:1px solid #456268; }
+  .limits-grid dt { display:flex; align-items:center; gap:8px; color:#a3d3ca; font-weight:900; }
+  .limits-grid dd { margin:8px 0 0; color:#d3dfdd; line-height:1.75; }
+  .final-section { background:#fff7f3; }
+  .final-grid { display:grid; grid-template-columns:1fr auto; gap:40px; align-items:center; }
+  .final-grid .primary-button { margin:0; }
+  @media (max-width:930px) {
+    .hero-image { inset:0; opacity:.2; }
+    .hero-grid { grid-template-columns:1fr; }
+    .hero-copy { max-width:760px; }
+    h1 { font-size:3.45rem; }
+    .section-head h2,.final-grid h2,.limits-grid h2,.screen-copy h2 { font-size:2.7rem; }
+    .project-grid,.requirements-grid { grid-template-columns:repeat(2,1fr); }
+    .problem-grid,.screen-grid,.limits-grid { grid-template-columns:1fr; gap:38px; }
+    .flow-list { grid-template-columns:repeat(2,1fr); }
+    .flow-list li { border-right:1px solid var(--line); }
+    .final-grid { grid-template-columns:1fr; }
+  }
+  @media (max-width:600px) {
+    .container { width:min(100% - 28px,1180px); }
+    .case-hero,.hero-grid { min-height:620px; }
+    .section { padding:64px 0; }
+    h1 { font-size:2.45rem; }
+    .section-head h2,.final-grid h2,.limits-grid h2,.screen-copy h2 { font-size:2.15rem; }
+    .project-grid,.requirements-grid,.flow-list { grid-template-columns:1fr; }
+    .project-grid div { padding:9px 4px; border-left:0; border-bottom:1px solid rgba(255,255,255,.2); }
+    .screen-mock { grid-template-columns:1fr; }
+    .screen-mock > .material-icon { transform:rotate(90deg); justify-self:center; }
+    .screen-mock article { min-height:auto; }
+  }
+</style>

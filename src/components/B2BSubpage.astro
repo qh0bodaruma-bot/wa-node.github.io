@@ -1,0 +1,58 @@
+---
+import MaterialIcon from './MaterialIcon.astro';
+import type { B2BPage } from '../data/b2bPortfolio';
+
+interface Props { page: B2BPage; index: number; }
+const { page, index } = Astro.props;
+---
+
+<header class="b2b-page-hero">
+  <div class="b2b-container">
+    <span class="b2b-eyebrow">{page.eyebrow}</span>
+    <h1>{page.title}</h1>
+    <p>{page.lead}</p>
+    <span class="b2b-page-number">PAGE {String(index + 1).padStart(2, '0')}</span>
+  </div>
+</header>
+
+<section class="b2b-section">
+  <div class="b2b-container">
+    <span class="b2b-eyebrow">SCOPE</span>
+    <h2 class="b2b-section-title">相談内容を、三つの入口に整理。</h2>
+    <div class="b2b-feature-grid">
+      {page.features.map((item) => (
+        <article class="b2b-feature-card">
+          <MaterialIcon name={item.icon} />
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="b2b-section alt">
+  <div class="b2b-container b2b-split">
+    <div>
+      <span class="b2b-eyebrow">HOW WE THINK</span>
+      <h2 class="b2b-section-title">条件を増やす前に、<br />判断材料を揃えます。</h2>
+      <p class="b2b-section-lead">価格や納期を先に断定せず、用途、品質、確認方法、更新後の使い方までを分けて整理します。</p>
+    </div>
+    <div class="b2b-contact-preview">
+      <h2>{page.noteTitle}</h2>
+      <p>{page.noteText}</p>
+      <ul class="b2b-check-list">
+        <li><MaterialIcon name="check_circle" />確認できたことと未確認事項を分ける</li>
+        <li><MaterialIcon name="check_circle" />追加費用や別工程になる条件を先に伝える</li>
+        <li><MaterialIcon name="check_circle" />担当者が社内共有しやすい形で返す</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="b2b-note-band">
+  <div class="b2b-container b2b-note-inner">
+    <div><h2>次に確認することを、一緒に整理します。</h2><p>初回相談だけで発注を決める必要はありません。</p></div>
+    <a class="b2b-button orange" href="/portfolio-b2b/contact/"><MaterialIcon name="mail" />{page.ctaLabel}</a>
+  </div>
+</section>

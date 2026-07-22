@@ -69,6 +69,33 @@ const buildSteps = [
   "文章・デザイン・スマホ表示を制作",
   "公開後の改善ポイントを確認",
 ];
+
+const relatedCases = [
+  {
+    label: "Before / After",
+    title: "伝わりにくさを改善した事例",
+    text: "見た目ではなく、情報の順番と相談導線をどう直したかを比較できます。",
+    href: "/lab/",
+  },
+  {
+    label: "B2B Web",
+    title: "企業サイトの再設計事例",
+    text: "複数のサービスや信頼材料を、検討しやすい企業サイトへ整理した例です。",
+    href: "/case-studies/b2b-corporate-renewal/",
+  },
+  {
+    label: "Ads / CRO",
+    title: "広告・LP・計測改善事例",
+    text: "広告文からLP、計測までを一続きで見直す考え方を確認できます。",
+    href: "/case-studies/ad-lp-measurement/",
+  },
+  {
+    label: "Operations",
+    title: "予約業務を整えるシステム事例",
+    text: "予約受付と管理業務をまとめて扱う、動的なWebアプリの設計例です。",
+    href: "/case-studies/reservation-operations/",
+  },
+];
 ---
 
 <BaseLayout title={title} description={description} structuredData={structuredData}>
@@ -431,6 +458,24 @@ const buildSteps = [
             <li>LINE予約やメール自動送信つきLP</li>
             <li>広告配信用の検証しやすいLP</li>
           </ul>
+        </div>
+      </section>
+
+      <section class="related-case-section reveal" aria-labelledby="related-case-title">
+        <div class="section-head compact">
+          <span class="eyebrow">Related Cases</span>
+          <h2 id="related-case-title">LP以外の制作・改善事例も見る</h2>
+          <p>ご相談内容に近い事例から、考え方と実装範囲を確認できます。</p>
+        </div>
+        <div class="related-case-grid">
+          {relatedCases.map((item) => (
+            <a class="related-case-link" href={item.href}>
+              <span>{item.label}</span>
+              <strong>{item.title}</strong>
+              <p>{item.text}</p>
+              <b aria-hidden="true">→</b>
+            </a>
+          ))}
         </div>
       </section>
 
@@ -949,6 +994,61 @@ const buildSteps = [
     background: #c7352f;
   }
 
+  .related-case-section {
+    padding: 42px;
+    border-top: 1px solid var(--trust-line);
+    border-bottom: 1px solid var(--trust-line);
+  }
+  .related-case-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .related-case-link {
+    position: relative;
+    min-height: 176px;
+    padding: 24px 56px 24px 24px;
+    border: 1px solid rgba(15, 76, 92, 0.15);
+    border-radius: 18px;
+    background: #fff;
+    color: #333;
+    text-decoration: none;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  }
+  .related-case-link:hover {
+    transform: translateY(-2px);
+    border-color: rgba(15, 76, 92, 0.38);
+    box-shadow: 0 12px 30px rgba(15, 76, 92, 0.08);
+  }
+  .related-case-link span {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--trust);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .related-case-link strong {
+    display: block;
+    margin-bottom: 8px;
+    color: #222;
+    font-size: 1.05rem;
+  }
+  .related-case-link p {
+    margin: 0;
+    color: #666;
+    font-size: 0.88rem;
+    line-height: 1.75;
+  }
+  .related-case-link b {
+    position: absolute;
+    right: 24px;
+    bottom: 22px;
+    color: #c7352f;
+    font-size: 1.25rem;
+  }
+
   .portfolio-cta { margin-top: 100px; text-align: center; }
   .cta-inner {
     padding: 80px 40px;
@@ -1002,12 +1102,14 @@ const buildSteps = [
     .lp-scope-grid,
     .lp-build-steps,
     .lp-customize-section,
-    .lp-customize-list ul {
+    .lp-customize-list ul,
+    .related-case-grid {
       grid-template-columns: 1fr;
     }
     .lp-scope-section,
     .lp-build-flow,
-    .lp-customize-section {
+    .lp-customize-section,
+    .related-case-section {
       padding: 28px 20px;
     }
     .lp-value-card,

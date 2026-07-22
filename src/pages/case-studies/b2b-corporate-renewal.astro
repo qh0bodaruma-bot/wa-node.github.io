@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
+import { createBreadcrumbSchema, createWebPageSchema, organizationSchema } from '../../data/structuredData';
+
+export const prerender = true;
+
+const title = 'BtoB企業サイト再構成ケーススタディ｜情報設計・CMS更新・問い合わせ導線｜和-Node';
+const description = '架空の精密製造企業を題材に、BtoB企業サイトの情報設計、7ページ構成、CMS更新想定、問い合わせ導線までを実装した自主制作ケーススタディです。';
+const image = '/images/case-studies/b2b/hokushin-factory-hero.webp';
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: '/case-studies/b2b-corporate-renewal/', type: 'CreativeWork' }),
+  createBreadcrumbSchema([
+    { name: 'ホーム', path: '/' },
+    { name: '制作例・デモ', path: '/works/' },
+    { name: 'BtoB企業サイト再構成ケーススタディ', path: '/case-studies/b2b-corporate-renewal/' },
+  ]),
+];
+
+const sitemap = [
+  { label: 'トップ', note: '事業理解と相談入口' },
+  { label: '課題解決', note: '顧客の困りごと起点' },
+  { label: '技術・製品', note: '加工・治具・検査' },
+  { label: '導入事例', note: '課題・変更・確認' },
+  { label: '会社情報', note: '方針・実在性' },
+  { label: '採用情報', note: '仕事理解と見学' },
+  { label: 'お問い合わせ', note: '機密配慮と相談整理' },
+];
+
+const decisions = [
+  { icon: 'account_tree', title: '製品名より、課題から入る', text: '初見の担当者が自社の相談先か判断できるよう、「量産」「品質」「工程」の入口を先に置きました。' },
+  { icon: 'verified_user', title: '成果より、判断根拠を見せる', text: '架空の改善率は使わず、課題・変更・確認方法を順番に説明する事例構成にしました。' },
+  { icon: 'edit_note', title: '更新する情報を分離する', text: '導入事例、お知らせ、製品情報を投稿型で管理できる想定にし、固定ページと分けています。' },
+  { icon: 'lock', title: '問い合わせで機密を集めすぎない', text: '図面や顧客情報を最初から送らせず、用途・数量・困りごとだけで相談を始められる設計です。' },
+];
+---
+
+<BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
+  <main class="b2b-case-page" data-glossary-skip>
+    <header class="case-hero">
+      <div class="case-hero-image" role="img" aria-label="精密部品を確認する二人の技術者"></div>
+      <div class="case-hero-copy">
+        <span>CASE STUDY / SELF-INITIATED</span>
+        <h1>BtoB企業サイトを、<br />情報設計から再構成。</h1>
+        <p>架空の精密製造企業を題材に、7ページの企業サイト、問い合わせ導線、更新担当者向けCMS操作デモまで制作しました。</p>
+        <div class="case-actions">
+          <a class="primary" href="/portfolio-b2b/"><MaterialIcon name="open_in_new" />企業サイトを見る</a>
+          <a href="/portfolio-b2b/admin-demo/"><MaterialIcon name="edit_note" />CMS更新デモ</a>
+        </div>
+      </div>
+    </header>
+
+    <section class="case-disclaimer">
+      <div>
+        <MaterialIcon name="info" />
+        <p><strong>自主制作・架空企業のケーススタディです。</strong>実在企業の実績、成果数値、WordPress導入実績を示すものではありません。情報設計とWeb実装の対応範囲をご確認いただくためのサンプルです。</p>
+      </div>
+    </section>
+
+    <section class="case-section case-summary">
+      <div class="case-container case-two-column">
+        <div>
+          <span class="case-eyebrow">PROJECT OUTLINE</span>
+          <h2>見た目より先に、<br />誰が何を判断するかを整理。</h2>
+        </div>
+        <dl class="case-facts">
+          <div><dt>想定業種</dt><dd>精密加工・生産設備・BtoB製造業</dd></div>
+          <div><dt>想定目的</dt><dd>新規相談、技術理解、採用、更新負担の軽減</dd></div>
+          <div><dt>制作範囲</dt><dd>情報設計、コピー、UI、Astro実装、レスポンシブ、CMS操作デモ</dd></div>
+          <div><dt>公開ページ</dt><dd>7ページ＋ブラウザ内CMS更新デモ</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="case-section case-problem">
+      <div class="case-container">
+        <span class="case-eyebrow">ASSUMED PROBLEM</span>
+        <h2>想定した四つの課題。</h2>
+        <div class="problem-list">
+          <article><span>01</span><h3>事業内容が設備名の羅列になりやすい</h3><p>専門外の担当者には、自社の課題と技術の関係が分かりにくい。</p></article>
+          <article><span>02</span><h3>導入事例が成果だけになりやすい</h3><p>検討者が知りたい判断の過程や確認方法が抜けやすい。</p></article>
+          <article><span>03</span><h3>更新情報と固定情報が混在する</h3><p>事例や製品を追加するたびに、ページ全体の編集が必要になる。</p></article>
+          <article><span>04</span><h3>問い合わせで機密情報を求めすぎる</h3><p>相談前の心理的・情報管理上の負担が大きくなる。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section case-decisions">
+      <div class="case-container">
+        <span class="case-eyebrow">DESIGN DECISIONS</span>
+        <h2>課題に対して決めたこと。</h2>
+        <div class="decision-grid">
+          {decisions.map((item) => (
+            <article>
+              <MaterialIcon name={item.icon} />
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section case-sitemap">
+      <div class="case-container case-two-column sitemap-layout">
+        <div>
+          <span class="case-eyebrow">INFORMATION ARCHITECTURE</span>
+          <h2>7ページに役割を分ける。</h2>
+          <p>トップだけへ情報を詰め込まず、顧客の課題、技術、事例、会社、採用、相談をそれぞれ独立させました。</p>
+        </div>
+        <ol class="sitemap-list">
+          {sitemap.map((item, index) => (
+            <li><span>{String(index + 1).padStart(2, '0')}</span><strong>{item.label}</strong><small>{item.note}</small></li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="case-section case-system">
+      <div class="case-container case-two-column">
+        <div class="system-copy">
+          <span class="case-eyebrow">CMS EDITING CONCEPT</span>
+          <h2>更新担当者の画面も、制作範囲として考える。</h2>
+          <p>導入事例のタイトル、業種、課題、対応内容を編集し、公開イメージをその場で確認できる操作デモを用意しました。</p>
+          <ul>
+            <li><MaterialIcon name="check_circle" />入力とプレビューを同時表示</li>
+            <li><MaterialIcon name="check_circle" />ブラウザ内に下書きを保存</li>
+            <li><MaterialIcon name="check_circle" />サーバー送信なしの安全なデモ</li>
+          </ul>
+          <a class="case-link" href="/portfolio-b2b/admin-demo/">CMS更新デモを試す <MaterialIcon name="arrow_forward" /></a>
+        </div>
+        <div class="system-preview" aria-label="CMS更新画面のイメージ">
+          <aside><strong>HOKUSHIN CMS</strong><span>導入事例</span><span>お知らせ</span><span>製品情報</span></aside>
+          <div><small>導入事例 / 編集</small><strong>治具と作業順を見直し、確認手順を共通化</strong><i></i><i></i><i></i><button>下書き保存</button></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section case-palette">
+      <div class="case-container case-two-column">
+        <div>
+          <span class="case-eyebrow">VISUAL SYSTEM</span>
+          <h2>信頼、改善、行動を色で分ける。</h2>
+          <p>ネイビーを技術と信頼、青緑を改善と案内、オレンジを問い合わせなどの明確な行動に限定しています。</p>
+        </div>
+        <div class="palette" aria-label="使用色">
+          <div style="--swatch:#142432"><span>#142432</span><strong>信頼・本文</strong></div>
+          <div style="--swatch:#1b6a70"><span>#1B6A70</span><strong>案内・改善</strong></div>
+          <div style="--swatch:#d8602f"><span>#D8602F</span><strong>行動・注意</strong></div>
+          <div style="--swatch:#eef4f3"><span>#EEF4F3</span><strong>情報の区切り</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-section case-pages">
+      <div class="case-container">
+        <span class="case-eyebrow">LIVE PAGES</span>
+        <h2>実際のページを確認できます。</h2>
+        <div class="page-links">
+          {sitemap.map((item, index) => {
+            const href = index === 0 ? '/portfolio-b2b/' : `/portfolio-b2b/${['solutions','products','cases','company','recruit','contact'][index - 1]}/`;
+            return <a href={href}><span>{String(index + 1).padStart(2, '0')}</span><strong>{item.label}</strong><MaterialIcon name="arrow_forward" /></a>;
+          })}
+        </div>
+      </div>
+    </section>
+
+    <section class="case-cta">
+      <div class="case-container">
+        <span>FOR YOUR PROJECT</span>
+        <h2>このケースに近い企業サイトを相談する。</h2>
+        <p>業種が同じでなくても、BtoBサイトの情報整理、CMS更新、問い合わせ導線として応用できます。</p>
+        <div class="case-actions centered">
+          <a class="primary" href="/contact/?source=b2b_case_study"><MaterialIcon name="mail" />相談内容を整理する</a>
+          <a href="/works/"><MaterialIcon name="grid_view" />制作例一覧へ戻る</a>
+        </div>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  .b2b-case-page { --ink:#142432; --navy:#17394f; --teal:#1b6a70; --orange:#d8602f; --mist:#eef4f3; --line:#cbd8d7; color:var(--ink); background:#fff; }
+  .case-container { width:min(1180px, calc(100% - 40px)); margin:0 auto; }
+  .case-hero { min-height:680px; display:grid; grid-template-columns:1.08fr .92fr; background:#fff; border-bottom:1px solid var(--line); }
+  .case-hero-image { min-height:680px; background:url('/images/case-studies/b2b/hokushin-factory-hero.webp') center/cover no-repeat; }
+  .case-hero-copy { padding:clamp(70px,8vw,120px) clamp(34px,6vw,90px); display:flex; flex-direction:column; justify-content:center; }
+  .case-hero-copy > span, .case-eyebrow, .case-cta > div > span { color:var(--teal); font-size:12px; font-weight:800; letter-spacing:.14em; }
+  .case-hero-copy h1 { margin:18px 0 0; font-family:"Yu Mincho",serif; font-size:clamp(38px,5vw,66px); line-height:1.3; font-weight:600; }
+  .case-hero-copy p { max-width:640px; margin:24px 0 0; color:#566a75; font-size:17px; }
+  .case-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+  .case-actions a { min-height:52px; padding:0 20px; display:inline-flex; align-items:center; justify-content:center; gap:8px; border:2px solid var(--navy); color:var(--navy); font-weight:800; text-decoration:none; }
+  .case-actions a.primary { background:var(--navy); color:#fff; }
+  .case-actions.centered { justify-content:center; }
+  .case-disclaimer { padding:22px 20px; background:#fff6f1; border-bottom:1px solid #f0c8b7; }
+  .case-disclaimer > div { width:min(1080px,100%); margin:auto; display:flex; align-items:flex-start; gap:12px; }
+  .case-disclaimer .material-symbols-rounded { color:var(--orange); font-size:26px; }
+  .case-disclaimer p { margin:0; color:#6a4b3d; font-size:13px; }
+  .case-section { padding:clamp(70px,9vw,118px) 0; }
+  .case-section h2 { margin:14px 0 0; font-family:"Yu Mincho",serif; font-size:clamp(32px,4vw,52px); line-height:1.4; font-weight:600; }
+  .case-two-column { display:grid; grid-template-columns:minmax(0,.85fr) minmax(420px,1.15fr); gap:clamp(48px,8vw,110px); align-items:start; }
+  .case-facts { margin:0; border-top:1px solid var(--line); }
+  .case-facts div { padding:18px 0; display:grid; grid-template-columns:120px 1fr; gap:24px; border-bottom:1px solid var(--line); }
+  .case-facts dt { color:var(--teal); font-size:12px; font-weight:800; }
+  .case-facts dd { margin:0; }
+  .case-problem, .case-sitemap, .case-palette { background:#f7f9f8; }
+  .problem-list { margin-top:44px; border-top:1px solid var(--line); }
+  .problem-list article { padding:24px 0; display:grid; grid-template-columns:80px minmax(260px,.8fr) 1fr; gap:24px; align-items:center; border-bottom:1px solid var(--line); }
+  .problem-list span { color:var(--orange); font-weight:800; }
+  .problem-list h3 { margin:0; font-size:20px; }
+  .problem-list p { margin:0; color:#60727c; }
+  .decision-grid { margin-top:44px; display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+  .decision-grid article { padding:30px; border:1px solid var(--line); border-top:4px solid var(--teal); border-radius:6px; background:#fff; }
+  .decision-grid .material-symbols-rounded { width:46px; height:46px; display:grid; place-items:center; background:var(--mist); color:var(--teal); font-size:26px; }
+  .decision-grid h3 { margin:20px 0 0; font-size:20px; }
+  .decision-grid p { margin:10px 0 0; color:#60727c; }
+  .sitemap-layout > div > p, .case-palette .case-two-column > div > p { color:#60727c; }
+  .sitemap-list { margin:0; padding:0; list-style:none; border-top:1px solid var(--line); }
+  .sitemap-list li { padding:16px 0; display:grid; grid-template-columns:54px 120px 1fr; gap:12px; border-bottom:1px solid var(--line); }
+  .sitemap-list span { color:var(--orange); font-weight:800; }
+  .sitemap-list small { color:#60727c; }
+  .system-copy p { color:#60727c; }
+  .system-copy ul { margin:24px 0 0; padding:0; display:grid; gap:10px; list-style:none; }
+  .system-copy li { display:flex; align-items:flex-start; gap:8px; }
+  .system-copy li .material-symbols-rounded { color:var(--teal); }
+  .case-link { margin-top:28px; display:inline-flex; align-items:center; gap:8px; color:var(--teal); font-weight:800; text-underline-offset:4px; }
+  .system-preview { min-height:420px; display:grid; grid-template-columns:150px 1fr; border:1px solid var(--line); box-shadow:0 18px 46px rgba(20,36,50,.11); background:#fff; }
+  .system-preview aside { padding:24px 14px; display:grid; align-content:start; gap:14px; background:var(--ink); color:#dce7ea; font-size:12px; }
+  .system-preview aside strong { margin-bottom:20px; color:#fff; }
+  .system-preview > div { padding:38px; display:flex; flex-direction:column; gap:17px; }
+  .system-preview > div > small { color:#667983; }
+  .system-preview > div > strong { font-size:21px; line-height:1.5; }
+  .system-preview i { display:block; height:40px; border:1px solid var(--line); background:#f8faf9; }
+  .system-preview button { align-self:flex-end; min-height:40px; padding:0 14px; border:0; background:var(--orange); color:#fff; font-weight:800; }
+  .palette { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; }
+  .palette div { min-height:150px; padding:22px; display:flex; flex-direction:column; justify-content:flex-end; background:var(--swatch); border:1px solid rgba(20,36,50,.14); color:#fff; }
+  .palette div:last-child { color:var(--ink); }
+  .palette span { font-size:12px; }
+  .palette strong { font-size:16px; }
+  .page-links { margin-top:44px; display:grid; grid-template-columns:repeat(2,1fr); border-top:1px solid var(--line); }
+  .page-links a { min-height:84px; padding:18px 16px; display:grid; grid-template-columns:48px 1fr auto; align-items:center; gap:12px; border-bottom:1px solid var(--line); color:var(--ink); text-decoration:none; }
+  .page-links a:nth-child(odd) { border-right:1px solid var(--line); }
+  .page-links a:hover { background:var(--mist); }
+  .page-links span { color:var(--orange); font-size:12px; font-weight:800; }
+  .case-cta { padding:90px 20px; text-align:center; background:var(--ink); color:#fff; }
+  .case-cta h2 { margin:15px 0 0; font-family:"Yu Mincho",serif; font-size:clamp(32px,4vw,50px); }
+  .case-cta p { max-width:700px; margin:18px auto 0; color:#d4e0e4; }
+  .case-cta .case-actions a { border-color:#fff; color:#fff; }
+  .case-cta .case-actions a.primary { border-color:var(--orange); background:var(--orange); }
+  @media (max-width:900px) { .case-hero { grid-template-columns:1fr; } .case-hero-image { min-height:420px; } .case-two-column { grid-template-columns:1fr; } .problem-list article { grid-template-columns:54px 1fr; } .problem-list p { grid-column:2; } }
+  @media (max-width:640px) { .case-hero-image { min-height:300px; } .case-hero-copy { padding:52px 20px; } .case-actions { flex-direction:column; } .case-actions a { width:100%; } .case-facts div, .problem-list article, .sitemap-list li { grid-template-columns:1fr; gap:6px; } .problem-list p { grid-column:auto; } .decision-grid, .page-links, .palette { grid-template-columns:1fr; } .page-links a:nth-child(odd) { border-right:0; } .system-preview { grid-template-columns:1fr; } .system-preview aside { display:none; } }
+</style>

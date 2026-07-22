@@ -1,0 +1,100 @@
+---
+import MaterialIcon from './MaterialIcon.astro';
+import { b2bCompany } from '../data/b2bPortfolio';
+
+const capabilities = [
+  { icon: 'precision_manufacturing', title: '精密加工', text: '用途と量産条件を確認し、加工方法と検査項目を整理します。', href: '/portfolio-b2b/products/' },
+  { icon: 'handyman', title: '治具・省力化', text: '作業のばらつきや負担を減らす、現場に合う仕組みを考えます。', href: '/portfolio-b2b/solutions/' },
+  { icon: 'fact_check', title: '品質・量産改善', text: '不具合と条件を分けて記録し、再発防止と標準化へつなげます。', href: '/portfolio-b2b/cases/' },
+];
+
+const cases = [
+  { category: '自動車部品', title: '治具と作業順を見直し、確認手順を共通化', text: '作業者ごとの差が出やすい工程を、治具と記録様式から整理した架空事例。' },
+  { category: '産業設備', title: '試作から量産へ移る条件を一枚に整理', text: '設計変更、加工条件、検査項目を関係者が追える形にした架空事例。' },
+  { category: '医療機器', title: '用途と検査根拠を早い段階で確認', text: '図面情報だけで進めず、使用環境と確認責任を整理した架空事例。' },
+];
+---
+
+<section class="b2b-home-hero">
+  <div class="b2b-container">
+    <div class="b2b-hero-copy">
+      <span class="b2b-eyebrow">PRECISION / FIXTURE / QUALITY</span>
+      <h1><small>{b2bCompany.name}</small>{b2bCompany.statement}</h1>
+      <p>精密加工・治具設計・量産改善を、課題整理から一つの窓口で支援します。</p>
+      <div class="b2b-actions">
+        <a class="b2b-button orange" href="/portfolio-b2b/contact/"><MaterialIcon name="mail" />製造課題を相談する</a>
+        <a class="b2b-button secondary" href="/portfolio-b2b/cases/"><MaterialIcon name="arrow_forward" />導入事例を見る</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="b2b-trust-strip" aria-label="北辰精機の対応方針">
+  <div class="b2b-container b2b-trust-grid">
+    <div class="b2b-trust-item"><MaterialIcon name="forum" /><div><strong>相談段階から対応</strong><span>図面や仕様が固まる前でも整理します</span></div></div>
+    <div class="b2b-trust-item"><MaterialIcon name="inventory_2" /><div><strong>試作から量産まで</strong><span>工程を分断せず、条件を引き継ぎます</span></div></div>
+    <div class="b2b-trust-item"><MaterialIcon name="manage_search" /><div><strong>記録に残る品質確認</strong><span>確認済みと未確認を分けて共有します</span></div></div>
+  </div>
+</section>
+
+<section class="b2b-section">
+  <div class="b2b-container">
+    <span class="b2b-eyebrow">WHAT WE DO</span>
+    <h2 class="b2b-section-title">加工だけで終わらせない、<br />三つの技術領域。</h2>
+    <p class="b2b-section-lead">部品、工程、検査を別々に考えず、量産後も困りにくい形へ整理します。</p>
+    <div class="b2b-feature-grid">
+      {capabilities.map((item) => (
+        <article class="b2b-feature-card">
+          <MaterialIcon name={item.icon} />
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+          <a href={item.href}>詳しく見る <MaterialIcon name="arrow_forward" /></a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="b2b-section alt">
+  <div class="b2b-container b2b-split">
+    <div>
+      <span class="b2b-eyebrow">PROJECT FLOW</span>
+      <h2 class="b2b-section-title">作れるか、の前に。<br />確認する順番を整えます。</h2>
+      <p class="b2b-section-lead">希望納期だけで判断せず、品質に影響する条件と、誰が何を確認するかを最初に共有します。</p>
+      <div class="b2b-actions"><a class="b2b-button" href="/portfolio-b2b/solutions/">課題解決の進め方を見る</a></div>
+    </div>
+    <div class="b2b-process" aria-label="相談から量産までの流れ">
+      <div><span>01</span><strong>用途・数量・希望時期を確認</strong></div>
+      <div><span>02</span><strong>加工条件と懸念点を整理</strong></div>
+      <div><span>03</span><strong>試作・測定・レビュー</strong></div>
+      <div><span>04</span><strong>量産条件と記録を引き継ぐ</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="b2b-section">
+  <div class="b2b-container">
+    <span class="b2b-eyebrow">CASE STUDIES</span>
+    <h2 class="b2b-section-title">課題と判断が見える導入事例。</h2>
+    <p class="b2b-section-lead">数値を大きく見せるのではなく、課題、変更、確認方法を追える構成にしています。</p>
+    <div class="b2b-case-row">
+      {cases.map((item) => (
+        <article class="b2b-case-item">
+          <span>{item.category}</span>
+          <div><h3>{item.title}</h3><p>{item.text}</p></div>
+          <a href="/portfolio-b2b/cases/">事例を見る</a>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="b2b-note-band">
+  <div class="b2b-container b2b-note-inner">
+    <div>
+      <h2>図面がなくても、分かる範囲から相談できます。</h2>
+      <p>秘密保持が必要な情報は送らず、用途・数量・困っている状況だけお知らせください。</p>
+    </div>
+    <a class="b2b-button orange" href="/portfolio-b2b/contact/">相談の入口を確認する</a>
+  </div>
+</section>
