@@ -50,7 +50,7 @@ const structuredData = [
     document.addEventListener('astro:page-load', initSakura);
   </script>
 
-  <main class="works-page" data-glossary-skip>
+  <main id="main" class="works-page" data-glossary-skip>
     <section class="section works-hero">
       <div class="container narrow">
         <span class="eyebrow">Works & Demos</span>
@@ -217,7 +217,7 @@ const structuredData = [
         <article class="work-card reveal card-border-blue" data-category="web">
           <div class="card-visual-wrap">
             <div class="card-visual">
-              <img src="/images/case-studies/b2b/hokushin-factory-hero.webp" alt="BtoB製造企業サイト再構成ケーススタディ" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="/images/case-studies/b2b/hokushin-factory-hero.webp" alt="BtoB製造企業サイト再構成ケーススタディ" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
               <span class="category-tag demo"><span class="live-dot"></span>企業サイト・ケーススタディ</span>
             </div>
           </div>
@@ -316,7 +316,7 @@ const structuredData = [
         <article class="work-card reveal card-border-green" data-category="web">
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg" style="background: linear-gradient(135deg, #fdfcf9 0%, #f5eee0 100%);">
-              <img src="/images/works-psy-demo.png" alt="選ばれる導線デモ" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'" />
+              <img src="/images/works-psy-demo.webp" width="800" height="800" loading="lazy" decoding="async" alt="選ばれる導線デモ" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none'" />
               <span class="category-tag demo"><span class="live-dot"></span>Web導線デモ</span>
             </div>
           </div>
@@ -351,7 +351,7 @@ const structuredData = [
         <article class="work-card reveal card-border-green" data-category="web">
           <div class="card-visual-wrap">
             <div class="card-visual">
-              <img src="/portfolio-lp/images/hero_sekkotsu.png" alt="地域サロン・整体向け予約導線LPデモ" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="/portfolio-lp/images/hero_sekkotsu.webp" alt="地域サロン・整体向け予約導線LPデモ" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
               <span class="category-tag demo"><span class="live-dot"></span>業種別LPデモ</span>
             </div>
           </div>
@@ -386,7 +386,7 @@ const structuredData = [
         <article class="work-card reveal card-border-gold" data-category="web">
           <div class="card-visual-wrap">
             <div class="card-visual">
-              <img src="/portfolio-lp/images/hero_clinic.png" alt="クリニック・医療系LP" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="/portfolio-lp/images/hero_clinic.webp" alt="クリニック・医療系LP" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
               <span class="category-tag sample">LP制作サンプル</span>
             </div>
           </div>
@@ -420,7 +420,7 @@ const structuredData = [
         <article class="work-card reveal card-border-gold" data-category="web">
           <div class="card-visual-wrap">
             <div class="card-visual">
-              <img src="/portfolio-lp/images/hero_corporate.png" alt="LP制作サンプル集" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="/portfolio-lp/images/hero_corporate.webp" alt="LP制作サンプル集" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
               <span class="category-tag sample">LPサンプル集</span>
             </div>
           </div>
@@ -455,7 +455,7 @@ const structuredData = [
         <article class="work-card reveal card-border-blue" data-category="system">
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
-              <img src="/images/works-system.png" alt="AI相談内容整理ナビ" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="/images/works-system.webp" width="800" height="800" loading="lazy" decoding="async" alt="AI相談内容整理ナビ" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag demo"><span class="live-dot"></span>AIデモ</span>
             </div>
           </div>
@@ -520,7 +520,7 @@ const structuredData = [
         <article class="work-card reveal card-border-green" data-category="tool">
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
-              <img src="/images/works-mental.png" alt="こころの疲労度診断" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="/images/works-mental.webp" width="800" height="800" loading="lazy" decoding="async" alt="こころの疲労度診断" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag demo"><span class="live-dot"></span>診断デモ</span>
             </div>
           </div>
@@ -551,7 +551,7 @@ const structuredData = [
         <article class="work-card reveal card-border-green" data-category="tool">
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
-              <img src="/images/works-accessibility.png" alt="バリアフリー診断" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="/images/works-accessibility.webp" width="800" height="800" loading="lazy" decoding="async" alt="バリアフリー診断" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag demo"><span class="live-dot"></span>診断デモ</span>
             </div>
           </div>
@@ -582,7 +582,7 @@ const structuredData = [
         <article class="work-card reveal card-border-green" data-category="tool">
           <div class="card-visual-wrap">
             <div class="card-visual tool-bg">
-              <img src="/images/works-seo.png" alt="SEO/AEO内部診断" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="/images/works-seo.webp" width="800" height="800" loading="lazy" decoding="async" alt="SEO/AEO内部診断" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag demo"><span class="live-dot"></span>SEO/AEOデモ</span>
             </div>
           </div>
@@ -614,7 +614,7 @@ const structuredData = [
         <article class="work-card reveal card-border-red" data-category="kdp">
           <div class="card-visual-wrap">
             <div class="card-visual">
-              <img src="/images/works-kdp.png" alt="Amazon KDP 出版実績" style="width: 100%; height: 100%; object-fit: cover;" />
+              <img src="/images/works-kdp.webp" width="800" height="800" loading="lazy" decoding="async" alt="Amazon KDP 出版実績" style="width: 100%; height: 100%; object-fit: cover;" />
               <span class="category-tag real">実案件</span>
             </div>
           </div>

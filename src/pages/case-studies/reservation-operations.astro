@@ -9,7 +9,7 @@ import {
 
 const title = '予約受付・店舗管理システム｜ケーススタディ｜和-Node';
 const description = '小規模サロンを題材に、お客様の予約受付と店舗側の確認・状態変更・CSV出力をつないだ自主制作システムの設計ケーススタディです。';
-const image = '/portfolio-lp/images/hero_sekkotsu.png';
+const image = '/portfolio-lp/images/hero_sekkotsu.webp';
 const structuredData = [
   organizationSchema,
   createWebPageSchema({ name: title, description, path: '/case-studies/reservation-operations/', type: 'Article' }),
@@ -37,7 +37,7 @@ const flow = [
 ---
 
 <BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
-  <main class="system-case" data-glossary-skip>
+  <main id="main" class="system-case" data-glossary-skip>
     <section class="case-hero">
       <div class="hero-image" aria-hidden="true"></div>
       <div class="container hero-grid">
@@ -139,7 +139,7 @@ const flow = [
   .system-case { --ink:#182724; --muted:#62716d; --teal:#135b62; --green:#2f846b; --red:#c9473d; --line:#d3dfdb; background:#fff; color:var(--ink); }
   .container { width:min(1180px,calc(100% - 40px)); margin:0 auto; }
   .case-hero { position:relative; min-height:680px; overflow:hidden; background:#edf4f1; }
-  .hero-image { position:absolute; inset:0 0 0 52%; background:linear-gradient(90deg,#edf4f1 0%,rgba(237,244,241,.12) 42%),url('/portfolio-lp/images/hero_sekkotsu.png') center/cover no-repeat; }
+  .hero-image { position:absolute; inset:0 0 0 52%; background:linear-gradient(90deg,#edf4f1 0%,rgba(237,244,241,.12) 42%),url('/portfolio-lp/images/hero_sekkotsu.webp') center/cover no-repeat; }
   .hero-grid { position:relative; min-height:680px; display:grid; grid-template-columns:minmax(0,620px) 1fr; align-items:center; }
   .hero-copy { padding:70px 0; }
   .hero-copy > a:first-child { display:inline-flex; align-items:center; gap:8px; margin-bottom:48px; color:var(--teal); font-weight:800; }

@@ -29,6 +29,7 @@ const structuredData = createBlogPostingSchema({
 ---
 
 <BaseLayout title={`${displayTitle}｜和-Node 知恵袋`} description={description} image={post.eyecatch?.url} structuredData={structuredData}>
+  <main id="main">
   <article class="post-single">
     <div class="post-header">
       <div class="container-narrow">
@@ -79,6 +80,7 @@ const structuredData = createBlogPostingSchema({
       </div>
     </footer>
   </article>
+  </main>
 </BaseLayout>
 
 <style>

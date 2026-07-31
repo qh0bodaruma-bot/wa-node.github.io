@@ -282,6 +282,29 @@ a:hover { opacity: 0.7; }
   }
 }
 
+/* --- Skip Link --- */
+/* 通常は画面外に置き、キーボードでフォーカスされたときだけ表示する */
+.skip-link {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10000;
+  padding: 12px 20px;
+  background: var(--trust);
+  color: var(--white);
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+  transform: translateY(-120%);
+}
+
+.skip-link:focus-visible,
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid var(--accent2);
+  outline-offset: 2px;
+}
+
 /* --- Global Reveal Animation --- */
 .reveal {
   opacity: 0;
@@ -293,6 +316,28 @@ a:hover { opacity: 0.7; }
 .reveal.active {
   opacity: 1;
   transform: translateY(0);
+}
+
+/*
+  revealはJSで .active（BaseLayout）または .visible（各ページ）が付くまで不可視。
+  JSが動かない環境で本文が消えないよう、BaseLayoutが reveal-ready を付けるまでは表示しておく。
+  ページ側のscoped styleより優先させる必要があるため !important を使う。
+*/
+html:not(.reveal-ready) .reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+/* 動きを減らす設定では、位置移動とフェードを行わず内容だけ見せる */
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.active,
+  .reveal.visible {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 /* --- Global Progress Bar for View Transitions --- */

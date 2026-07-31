@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ConsultationFlow from '../../components/ConsultationFlow.astro';
 ---
 
-<BaseLayout title="Galerie de Réalisations de LP | Wa-Node" description="Découvrez notre collection de Landing Pages (LP) haut de gamme couvrant 13 secteurs d'activité. Design premium basé sur la psychologie de l'utilisateur.">
+<BaseLayout lang="fr" title="Galerie de Réalisations de LP | Wa-Node" description="Découvrez notre collection de Landing Pages (LP) haut de gamme couvrant 13 secteurs d'activité. Design premium basé sur la psychologie de l'utilisateur.">
   <!-- Background Decor -->
   <div class="bg-decoration">
     <div class="glow glow-1"></div>
@@ -11,7 +11,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
     <div class="grid-overlay"></div>
   </div>
 
-  <main class="lp-portfolio-page">
+  <main id="main" class="lp-portfolio-page">
     <header class="page-header reveal">
       <div class="container">
         <span class="eyebrow">Galerie de Réalisations de LP</span>
@@ -39,7 +39,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 1. Medical -->
         <article class="lp-card reveal" data-category="medical">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_clinic.png" alt="Clinique Esthétique & Dentaire" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_clinic.webp" alt="Clinique Esthétique & Dentaire" style="width: 100%; height: 100%; object-fit: cover;" />
             <span class="lp-tag">Medical</span>
           </div>
           <div class="lp-info">
@@ -52,7 +52,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 2. Beauty -->
         <article class="lp-card reveal" data-category="medical">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_beauty.png" alt="Salons d'Esthétique & d'Épilation" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_beauty.webp" alt="Salons d'Esthétique & d'Épilation" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Beauty</span>
           </div>
           <div class="lp-info">
@@ -65,7 +65,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 3. Gym -->
         <article class="lp-card reveal" data-category="lifestyle">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_gym.png" alt="Salle de Gym & Fitness" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_gym.webp" alt="Salle de Gym & Fitness" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Fitness</span>
           </div>
           <div class="lp-info">
@@ -78,7 +78,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 4. EC -->
         <article class="lp-card reveal" data-category="lifestyle">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_ec.png" alt="Vente de Produits & E-Commerce" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_ec.webp" alt="Vente de Produits & E-Commerce" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">E-Commerce</span>
           </div>
           <div class="lp-info">
@@ -91,7 +91,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 5. SaaS -->
         <article class="lp-card reveal" data-category="business">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_saas.png" alt="Solutions IT & Services SaaS" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_saas.webp" alt="Solutions IT & Services SaaS" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">IT / SaaS</span>
           </div>
           <div class="lp-info">
@@ -104,7 +104,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 6. Real Estate -->
         <article class="lp-card reveal" data-category="business">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_realestate.png" alt="Immobilier & Promoteurs" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_realestate.webp" alt="Immobilier & Promoteurs" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Real Estate</span>
           </div>
           <div class="lp-info">
@@ -117,7 +117,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 7. Professional -->
         <article class="lp-card reveal" data-category="business">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_lawyer.png" alt="Cabinet de Conseil & Académie" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_lawyer.webp" alt="Cabinet de Conseil & Académie" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Consulting</span>
           </div>
           <div class="lp-info">
@@ -130,7 +130,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 8. Seminar -->
         <article class="lp-card reveal" data-category="lifestyle">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_seminar.png" alt="Séminaires d'Investissement & Éducation" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_seminar.webp" alt="Séminaires d'Investissement & Éducation" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Education</span>
           </div>
           <div class="lp-info">
@@ -143,7 +143,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 9. Recruit -->
         <article class="lp-card reveal" data-category="business">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_recruit.png" alt="Recrutement & Carrières" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_recruit.webp" alt="Recrutement & Carrières" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Recruit</span>
           </div>
           <div class="lp-info">
@@ -156,7 +156,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 10. Local -->
         <article class="lp-card reveal" data-category="lifestyle">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_cafe.png" alt="Commerces Locaux & Cafés" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_cafe.webp" alt="Commerces Locaux & Cafés" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Regional</span>
           </div>
           <div class="lp-info">
@@ -169,7 +169,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 11. Event -->
         <article class="lp-card reveal" data-category="lifestyle">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_event.png" alt="Événements & Festivals" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_event.webp" alt="Événements & Festivals" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Event</span>
           </div>
           <div class="lp-info">
@@ -182,7 +182,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 12. Corporate -->
         <article class="lp-card reveal" data-category="business">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_corporate.png" alt="Branding d'Entreprise" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_corporate.webp" alt="Branding d'Entreprise" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Corporate</span>
           </div>
           <div class="lp-info">
@@ -195,7 +195,7 @@ import ConsultationFlow from '../../components/ConsultationFlow.astro';
         <!-- 13. Osteopathy -->
         <article class="lp-card reveal" data-category="medical">
           <div class="lp-visual">
-            <img src="/portfolio-lp/images/hero_sekkotsu.png" alt="Kinésithérapie & Soins Chiropratiques" style="width: 100%; height: 100%; object-fit: cover;" />
+            <img src="/portfolio-lp/images/hero_sekkotsu.webp" alt="Kinésithérapie & Soins Chiropratiques" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy" decoding="async" />
             <span class="lp-tag">Therapy</span>
           </div>
           <div class="lp-info">

@@ -6,8 +6,8 @@ const title = '予約受付・店舗管理システムデモ｜和-Node';
 const description = '小規模サロンを想定し、予約受付、店舗側一覧、状態変更、CSV出力までをブラウザ内で試せる自主制作デモです。';
 ---
 
-<BaseLayout title={title} description={description} image="/portfolio-lp/images/hero_sekkotsu.png" noindex={true}>
-  <main class="ops-demo" data-glossary-skip>
+<BaseLayout title={title} description={description} image="/portfolio-lp/images/hero_sekkotsu.webp" noindex={true}>
+  <main id="main" class="ops-demo" data-glossary-skip>
     <div class="demo-notice">
       <span>自主制作・架空店舗デモ</span>
       <p>保存先はこのブラウザだけです。実名・電話番号などの個人情報は入力しないでください。</p>
@@ -159,7 +159,7 @@ const description = '小規模サロンを想定し、予約受付、店舗側�
   .workspace-panel[hidden] { display:none; }
   .booking-panel { display:grid; grid-template-columns:360px minmax(0,1fr); }
   .booking-brand { background:#16383b; color:#fff; }
-  .booking-brand__image { aspect-ratio:4/3; background:linear-gradient(0deg,rgba(22,56,59,.25),rgba(22,56,59,.08)),url('/portfolio-lp/images/hero_sekkotsu.png') center/cover no-repeat; }
+  .booking-brand__image { aspect-ratio:4/3; background:linear-gradient(0deg,rgba(22,56,59,.25),rgba(22,56,59,.08)),url('/portfolio-lp/images/hero_sekkotsu.webp') center/cover no-repeat; }
   .booking-brand > div:last-child { padding:32px; }
   .booking-brand span { color:#a7d0c3; font-size:.75rem; font-weight:900; }
   .booking-brand h2 { margin:8px 0 12px; font-size:1.75rem; }

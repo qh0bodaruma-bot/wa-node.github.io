@@ -1,3 +1,14 @@
+/**
+ * ビルド済みのdistを走査してsitemap.xmlを生成する。
+ *
+ * 以前はURLをこのファイルに直書きしていたため、microCMSから増えるブログ記事が
+ * 永久に載らなかった。実際に出力されたページから拾う方式に変更している。
+ *
+ * 収録しないもの:
+ *   - noindexを指定しているページ（法務・ユーティリティ系）
+ *   - EXCLUDE に列挙したデモ・LIFF・検証用ページ
+ * これらは検索結果に出す意図がないため、従来どおり除外する。
+ */
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -6,77 +17,121 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = path.resolve(__dirname, '../dist');
 const SITE_URL = 'https://www.wa-node.com';
 
-// Search-focused sitemap. Demo subpages, mental-care pages, and noindex legal/utility pages are intentionally omitted.
-const PAGES = [
+// 検索結果に出す意図がないパス。前方一致で判定する。
+const EXCLUDE = [
+  '/404',
+  '/test-wa',
+  '/thanks',
+  '/portfolio-lp/',
+  '/portfolio-b2b',
+  '/grant-chestar',
+  '/counseling_liff',
+  '/inquiry_liff',
+  '/dx_diagnosis_liff',
+  '/dx_mental_diagnosis',
+  '/mental_care',
+  '/corporate-mental',
+  '/counseling-notes',
+  '/lab/demos/',
+];
+
+// 優先度。長い前方一致を優先する。該当しなければ DEFAULT_PRIORITY。
+const PRIORITY = [
   ['/', '1.0'],
   ['/about/', '0.9'],
   ['/works/', '0.9'],
   ['/lab/', '0.9'],
-  ['/lab/cases/service-lp/', '0.8'],
-  ['/case-studies/b2b-corporate-renewal/', '0.8'],
-  ['/case-studies/ad-lp-measurement/', '0.8'],
-  ['/case-studies/reservation-operations/', '0.8'],
   ['/contact/', '0.9'],
   ['/pricing/', '0.9'],
-  ['/free-guide/', '0.8'],
-  ['/psychology-demo/', '0.8'],
-  ['/ai-chat-demo/', '0.8'],
-  ['/simulator/', '0.8'],
-  ['/lp_wizard/', '0.8'],
-  ['/seo_check/', '0.8'],
-  ['/easy-guide/', '0.8'],
-  ['/tech-stack/', '0.8'],
-  ['/lp-portfolio/', '0.8'],
-  ['/salon-reservation-demo/', '0.8'],
-  ['/demos/', '0.8'],
-  ['/campaign-anniversary/', '0.8'],
-  ['/anniversary-speed/', '0.7'],
-  ['/anniversary-automation/', '0.7'],
-  ['/anniversary-premium/', '0.7'],
-  ['/barrier_free/', '0.6'],
-  ['/kdp_books/', '0.6'],
-  ['/en/', '0.7'],
-  ['/en/about/', '0.6'],
-  ['/en/works/', '0.6'],
-  ['/en/contact/', '0.6'],
-  ['/en/pricing/', '0.6'],
-  ['/en/ai-chat-demo/', '0.6'],
-  ['/en/psychology-demo/', '0.6'],
-  ['/en/simulator/', '0.6'],
-  ['/en/tech-stack/', '0.6'],
-  ['/en/demos/', '0.6'],
-  ['/en/lp-portfolio/', '0.6'],
-  ['/en/barrier_free/', '0.5'],
-  ['/en/kdp_books/', '0.5'],
-  ['/fr/', '0.7'],
-  ['/fr/about/', '0.6'],
-  ['/fr/works/', '0.6'],
-  ['/fr/contact/', '0.6'],
-  ['/fr/pricing/', '0.6'],
-  ['/fr/ai-chat-demo/', '0.6'],
-  ['/fr/psychology-demo/', '0.6'],
-  ['/fr/simulator/', '0.6'],
-  ['/fr/tech-stack/', '0.6'],
-  ['/fr/demos/', '0.6'],
-  ['/fr/lp-portfolio/', '0.6'],
-  ['/fr/barrier_free/', '0.5'],
-  ['/fr/kdp_books/', '0.5'],
+  ['/blog/', '0.8'],
+  ['/case-studies/', '0.8'],
+  ['/en/', '0.6'],
+  ['/fr/', '0.6'],
 ];
+const DEFAULT_PRIORITY = '0.7';
 
-const lastmod = new Date().toISOString().split('T')[0];
-const sitemapContent = `<?xml version="1.0" encoding="UTF-8"?>
+function walk(dir) {
+  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
+    const full = path.join(dir, entry.name);
+    return entry.isDirectory() ? walk(full) : [full];
+  });
+}
+
+function toUrlPath(file) {
+  const rel = path.relative(DIST_DIR, file).split(path.sep).join('/');
+  return '/' + rel.replace(/index\.html$/, '');
+}
+
+function priorityFor(urlPath) {
+  let best = null;
+  for (const [prefix, value] of PRIORITY) {
+    if (urlPath.startsWith(prefix) && (!best || prefix.length > best[0].length)) {
+      best = [prefix, value];
+    }
+  }
+  return best ? best[1] : DEFAULT_PRIORITY;
+}
+
+const pages = [];
+const skipped = { noindex: 0, excluded: 0 };
+
+for (const file of walk(DIST_DIR)) {
+  // trailingSlash: 'always' なので、正となるURLは index.html のみ
+  if (path.basename(file) !== 'index.html') continue;
+
+  const urlPath = toUrlPath(file);
+  // /en /fr 配下も同じ除外条件で判定するため、ロケール接頭辞を外して比べる
+  const pathWithoutLocale = urlPath.replace(/^\/(en|fr)(\/|$)/, '/');
+  if (
+    EXCLUDE.some(
+      (prefix) =>
+        (urlPath.startsWith(prefix) || pathWithoutLocale.startsWith(prefix)) &&
+        pathWithoutLocale !== '/'
+    )
+  ) {
+    skipped.excluded++;
+    continue;
+  }
+  const html = fs.readFileSync(file, 'utf8');
+  if (/name="robots"[^>]*content="[^"]*noindex/i.test(html)) {
+    skipped.noindex++;
+    continue;
+  }
+  pages.push([urlPath, priorityFor(urlPath)]);
+}
+
+pages.sort((a, b) => a[0].localeCompare(b[0]));
+
+// lastmodは、ビルドのたびに全URLを更新済みと通知してしまうため出力しない。
+const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${PAGES.map(([page, priority]) => `  <url>
+${pages
+  .map(
+    ([page, priority]) => `  <url>
     <loc>${SITE_URL}${page}</loc>
-    <lastmod>${lastmod}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>${priority}</priority>
-  </url>`).join('\n')}
+  </url>`
+  )
+  .join('\n')}
 </urlset>
 `;
 
-fs.mkdirSync(DIST_DIR, { recursive: true });
-fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapContent);
-fs.writeFileSync(path.join(DIST_DIR, 'sitemap-index.xml'), sitemapContent);
+// sitemap-index.xml は以前 urlset をそのまま複製していて形式違反だった
+const sitemapIndex = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <sitemap>
+    <loc>${SITE_URL}/sitemap.xml</loc>
+  </sitemap>
+</sitemapindex>
+`;
 
-console.log(`Successfully generated sitemap with ${PAGES.length} pages.`);
+fs.mkdirSync(DIST_DIR, { recursive: true });
+fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemap);
+fs.writeFileSync(path.join(DIST_DIR, 'sitemap-index.xml'), sitemapIndex);
+
+const blogCount = pages.filter(([p]) => p.startsWith('/blog/')).length;
+console.log(
+  `sitemap.xml: ${pages.length}件（うちブログ記事 ${blogCount}件）` +
+    ` / 除外 ${skipped.excluded}件・noindex ${skipped.noindex}件`
+);

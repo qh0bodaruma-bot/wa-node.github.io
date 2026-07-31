@@ -41,6 +41,13 @@ const pathWithoutLocale = urlObj.pathname.replace(/^\/(en|fr)\//, '/').replace(/
 const normalizedPath = pathWithoutLocale === '' ? '/' : pathWithoutLocale;
 const hasTranslation = MULTILANG_PAGES.includes(normalizedPath);
 
+const SKIP_LINK_LABEL = {
+  ja: '本文へスキップ',
+  en: 'Skip to main content',
+  fr: 'Aller au contenu principal',
+} as const;
+const skipLinkLabel = SKIP_LINK_LABEL[currentLang] ?? SKIP_LINK_LABEL.ja;
+
 const getLocalizedHref = (l: string) => {
   const cleanPath = pathWithoutLocale === '' ? '/' : pathWithoutLocale + '/';
   if (l === 'ja') return new URL(cleanPath, urlObj.origin).href;
@@ -93,23 +100,37 @@ const getLocalizedHref = (l: string) => {
     <GoogleAnalytics />
     <ViewTransitions />
     <script is:inline>
-      function initReveal() {
-        const observerOptions = {
-          root: null,
-          rootMargin: '0px',
-          threshold: 0.1
-        };
+      // IntersectionObserverが使える環境でだけ .reveal を隠す。
+      // このクラスが付かない限り global.css 側で reveal は表示状態のままになる。
+      function markRevealReady() {
+        if ('IntersectionObserver' in window) {
+          document.documentElement.classList.add('reveal-ready');
+        }
+      }
+      markRevealReady();
+      // View Transitionsのswapでhtmlの属性が入れ替わるため、都度付け直す
+      document.addEventListener('astro:after-swap', markRevealReady);
 
-        const observer = new IntersectionObserver((entries) => {
+      let revealObserver = null;
+      function initReveal() {
+        if (!('IntersectionObserver' in window)) return;
+        // 前ページ分のobserverを破棄してから作り直す
+        if (revealObserver) revealObserver.disconnect();
+
+        revealObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('active');
+              revealObserver.unobserve(entry.target);
             }
           });
-        }, observerOptions);
+        }, {
+          root: null,
+          rootMargin: '0px',
+          threshold: 0.1
+        });
 
-        const revealElements = document.querySelectorAll('.reveal');
-        revealElements.forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
       }
 
       // Initial load
@@ -148,6 +169,7 @@ const getLocalizedHref = (l: string) => {
   </head>
   <body>
     <div id="global-progress-bar" class="global-progress-bar" aria-hidden="true"></div>
+    <a class="skip-link" href="#main">{skipLinkLabel}</a>
     <Header lang={currentLang} />
     <slot />
     <Footer lang={currentLang} />
