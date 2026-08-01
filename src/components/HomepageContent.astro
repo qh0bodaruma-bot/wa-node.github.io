@@ -247,9 +247,14 @@ const transformationCards = [
             {lang === 'ja' ? (
               <>
                 <span class="hero-title-chosen">
-                  <span class="hero-title-dark">安心して、ちょっと、</span><br />
+                  <span class="hero-title-dark">安心して</span><br />
+                  <span class="hero-title-dark">ちょっと</span><br />
                   <span class="hero-term">
                     <button type="button" class="hero-title-red hero-term-btn" aria-describedby="hero-tip-peak">わくわくしながら</button>
+                    <svg class="hero-term-underline" viewBox="0 0 320 26" preserveAspectRatio="none" aria-hidden="true">
+                      <path class="hero-term-underline-main" d="M7 16 C54 7, 108 20, 158 12 C206 4, 262 18, 313 9" />
+                      <path class="hero-term-underline-echo" d="M12 21 C62 13, 116 24, 164 17 C212 10, 266 22, 308 15" />
+                    </svg>
                     {/* h1の中にあるため、そのまま置くと見出しの読み上げに解説文まで混ざる。
                         aria-hiddenで見出しから外し、説明はaria-describedby経由でボタンに紐づける。 */}
                     <span class="hero-tip" id="hero-tip-peak" aria-hidden="true">ピーク・エンドの法則：体験の「山」と「終わり」の印象が、いちばん記憶に残ります。</span>
@@ -730,46 +735,47 @@ const transformationCards = [
   }
 
   /*
-    写真は四角い枠に収める。枠の縦横比は写真そのもの（16:9）に合わせてあるので、
-    object-fit: cover でも左右が切れず、3人とも収まる。
+    枠は4:3。写真そのものは16:9のままなので、上下に余白ができて額装のマットのように働く。
+    枠を4:3にしたうえで写真を切り抜くと左右の二人が欠けるため、写真は原寸比のまま収めている。
   */
   .hero-visual {
     position: relative;
     justify-self: end;
     width: 100%;
     max-width: 520px;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 4 / 3;
     display: flex;
     align-items: center;
     justify-content: center;
   }
   .hero-visual-frame {
     position: absolute;
-    inset: -14px;
+    inset: 0;
     /* 見出しの強調と左の罫がすでに朱なので、枠は金茶にして役割を分ける */
     border: 2px solid color-mix(in srgb, var(--accent) 72%, transparent);
-    border-radius: 2px;
-    animation: hero-frame-drift 11s ease-in-out infinite;
+    animation: hero-frame-warp 13s ease-in-out infinite;
     pointer-events: none;
   }
   .hero-visual-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 2px;
+    width: calc(100% - 44px);
+    height: auto;
+    object-fit: contain;
     box-shadow: var(--shadow-soft);
-    animation: hero-photo-drift 9s ease-in-out infinite;
+    animation: hero-photo-warp 9s ease-in-out infinite;
   }
-  /* 枠と写真で周期をずらし、傾きが噛み合わないことで不安定さを出す */
-  @keyframes hero-frame-drift {
-    0%, 100% { transform: rotate(-1.1deg) translate(0, 0); }
-    37%      { transform: rotate(0.9deg) translate(5px, -7px); }
-    68%      { transform: rotate(-0.4deg) translate(-4px, 5px); }
+  /*
+    四角のまま、遠近をわずかに効かせて各辺の傾きを狂わせる。
+    枠と写真で周期をずらしてあるので、輪郭が噛み合わず不安定に見える。
+  */
+  @keyframes hero-frame-warp {
+    0%, 100% { transform: perspective(900px) rotateX(1.7deg) rotateY(-2.6deg) rotate(-1.2deg); }
+    34%      { transform: perspective(900px) rotateX(-2deg) rotateY(3deg) rotate(0.9deg) translate(5px, -7px); }
+    67%      { transform: perspective(900px) rotateX(1.2deg) rotateY(1.6deg) rotate(-0.4deg) translate(-4px, 5px); }
   }
-  @keyframes hero-photo-drift {
-    0%, 100% { transform: rotate(0.5deg) translate(0, 0); }
-    45%      { transform: rotate(-0.8deg) translate(-3px, 6px); }
-    72%      { transform: rotate(0.3deg) translate(4px, -4px); }
+  @keyframes hero-photo-warp {
+    0%, 100% { transform: perspective(900px) rotateX(-1.1deg) rotateY(1.8deg) rotate(0.6deg); }
+    45%      { transform: perspective(900px) rotateX(1.5deg) rotateY(-2.2deg) rotate(-0.9deg) translate(-3px, 6px); }
+    72%      { transform: perspective(900px) rotateX(-0.6deg) rotateY(-1deg) rotate(0.3deg) translate(4px, -4px); }
   }
   .hero-content {
     position: relative;
@@ -824,7 +830,29 @@ const transformationCards = [
     padding: 0;
     cursor: help;
     text-shadow: inherit;
-    border-bottom: 3px dotted rgba(199, 53, 47, 0.4);
+  }
+  /* 手書きで引いたような下線。線を2本わずかにずらして重ね、筆の勢いを出す */
+  .hero-term-underline {
+    position: absolute;
+    left: -6px;
+    bottom: -0.16em;
+    width: calc(100% + 12px);
+    height: 0.3em;
+    overflow: visible;
+    pointer-events: none;
+  }
+  .hero-term-underline path {
+    fill: none;
+    stroke: var(--hero-accent);
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+  }
+  .hero-term-underline-main {
+    stroke-width: 4;
+  }
+  .hero-term-underline-echo {
+    stroke-width: 2;
+    opacity: 0.45;
   }
   .hero-tip {
     position: absolute;
@@ -1678,12 +1706,16 @@ const transformationCards = [
       transition: none !important;
       transform: none !important;
     }
-    /* ゆらぎは止めるが、わずかな傾きは意匠なので残す */
+    /* ゆらぎは止めるが、四角のゆがみそのものは意匠なので残す */
     .hero-visual-frame,
     .hero-visual-photo {
       animation: none !important;
     }
-    .hero-visual-frame { transform: rotate(-1.1deg); }
-    .hero-visual-photo { transform: rotate(0.5deg); }
+    .hero-visual-frame {
+      transform: perspective(900px) rotateX(1.7deg) rotateY(-2.6deg) rotate(-1.2deg);
+    }
+    .hero-visual-photo {
+      transform: perspective(900px) rotateX(-1.1deg) rotateY(1.8deg) rotate(0.6deg);
+    }
   }
 </style>
