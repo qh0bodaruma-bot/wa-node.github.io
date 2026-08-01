@@ -282,13 +282,15 @@ const transformationCards = [
         </div>
       </div>
       <div class="hero-visual">
-        <span class="hero-visual-frame" aria-hidden="true"></span>
+        <svg class="hero-visual-frame" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M14,22 C120,10 280,18 386,12 C394,110 390,196 388,286 C282,296 118,288 16,292 C8,198 10,108 14,22 Z" />
+        </svg>
         <img
           class="hero-visual-photo"
           src="/images/hero-meeting.webp"
           alt="打ち合わせの席で、資料と画面を見ながら和やかに方向性を話し合っている様子"
-          width="1200"
-          height="675"
+          width="1448"
+          height="1086"
           fetchpriority="high"
           decoding="async"
         />
@@ -734,10 +736,7 @@ const transformationCards = [
     align-items: center;
   }
 
-  /*
-    枠は4:3。写真そのものは16:9のままなので、上下に余白ができて額装のマットのように働く。
-    枠を4:3にしたうえで写真を切り抜くと左右の二人が欠けるため、写真は原寸比のまま収めている。
-  */
+  /* 枠も写真も4:3。比が一致しているので cover でも切り取りは起きない */
   .hero-visual {
     position: relative;
     justify-self: end;
@@ -748,34 +747,58 @@ const transformationCards = [
     align-items: center;
     justify-content: center;
   }
+  /*
+    枠は「四角いみずたまり」。各辺をゆるく波打たせた輪郭を、
+    形（16秒）と傾き（13秒）で別々に動かして不規則に揺らす。
+    見出しの強調と左の罫がすでに朱なので、線は金茶にして役割を分ける。
+  */
   .hero-visual-frame {
     position: absolute;
-    inset: 0;
-    /* 見出しの強調と左の罫がすでに朱なので、枠は金茶にして役割を分ける */
-    border: 2px solid color-mix(in srgb, var(--accent) 72%, transparent);
-    animation: hero-frame-warp 13s ease-in-out infinite;
+    inset: -10px;
+    width: calc(100% + 20px);
+    height: calc(100% + 20px);
+    overflow: visible;
     pointer-events: none;
+    animation: hero-frame-drift 13s ease-in-out infinite;
+  }
+  .hero-visual-frame path {
+    fill: none;
+    stroke: color-mix(in srgb, var(--accent) 72%, transparent);
+    stroke-width: 2;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+    vector-effect: non-scaling-stroke;
+    animation: hero-frame-puddle 16s ease-in-out infinite;
   }
   .hero-visual-photo {
-    width: calc(100% - 44px);
-    height: auto;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     box-shadow: var(--shadow-soft);
-    animation: hero-photo-warp 9s ease-in-out infinite;
+    animation: hero-photo-drift 9s ease-in-out infinite;
   }
-  /*
-    四角のまま、遠近をわずかに効かせて各辺の傾きを狂わせる。
-    枠と写真で周期をずらしてあるので、輪郭が噛み合わず不安定に見える。
-  */
-  @keyframes hero-frame-warp {
-    0%, 100% { transform: perspective(900px) rotateX(1.7deg) rotateY(-2.6deg) rotate(-1.2deg); }
-    34%      { transform: perspective(900px) rotateX(-2deg) rotateY(3deg) rotate(0.9deg) translate(5px, -7px); }
-    67%      { transform: perspective(900px) rotateX(1.2deg) rotateY(1.6deg) rotate(-0.4deg) translate(-4px, 5px); }
+  /* 輪郭そのものが波打つ。辺の膨らみ方を3状態で入れ替える */
+  @keyframes hero-frame-puddle {
+    0%, 100% {
+      d: path("M14,22 C120,10 280,18 386,12 C394,110 390,196 388,286 C282,296 118,288 16,292 C8,198 10,108 14,22 Z");
+    }
+    33% {
+      d: path("M10,16 C118,24 284,6 390,20 C380,116 396,200 384,290 C278,282 116,296 12,284 C16,192 4,104 10,16 Z");
+    }
+    66% {
+      d: path("M18,12 C112,16 276,28 384,8 C396,102 384,204 390,292 C286,298 122,280 10,294 C10,206 6,98 18,12 Z");
+    }
   }
-  @keyframes hero-photo-warp {
-    0%, 100% { transform: perspective(900px) rotateX(-1.1deg) rotateY(1.8deg) rotate(0.6deg); }
-    45%      { transform: perspective(900px) rotateX(1.5deg) rotateY(-2.2deg) rotate(-0.9deg) translate(-3px, 6px); }
-    72%      { transform: perspective(900px) rotateX(-0.6deg) rotateY(-1deg) rotate(0.3deg) translate(4px, -4px); }
+  /* 形の変化に対応しない環境でも動いて見えるよう、傾きは別途つける */
+  @keyframes hero-frame-drift {
+    0%, 100% { transform: rotate(-1.1deg) translate(0, 0); }
+    37%      { transform: rotate(0.8deg) translate(5px, -7px); }
+    68%      { transform: rotate(-0.3deg) translate(-4px, 5px); }
+  }
+  @keyframes hero-photo-drift {
+    0%, 100% { transform: rotate(0.5deg) translate(0, 0); }
+    45%      { transform: rotate(-0.7deg) translate(-3px, 6px); }
+    72%      { transform: rotate(0.3deg) translate(4px, -4px); }
   }
   .hero-content {
     position: relative;
@@ -807,8 +830,9 @@ const transformationCards = [
   .highlight-text { border-bottom: 3px double var(--home-gold); padding-bottom: 2px; color: var(--hero-accent); font-weight: 800; }
 
   /* ジャンプ率・タイポグラフィの心理設計クラス */
+  /* 2pt（約2.7px）下げたサイズ */
   .hero-title-chosen {
-    font-size: clamp(2.75rem, 4.9vw, 4.35rem);
+    font-size: clamp(2.58rem, 4.72vw, 4.18rem);
     font-weight: 900;
     color: var(--hero-accent);
     letter-spacing: 0;
@@ -818,9 +842,14 @@ const transformationCards = [
   .hero-title-dark { color: var(--text-deep); }
 
   /* 「わくわくしながら」の根拠を、その場で読めるようにする吹き出し */
+  /*
+    下線は絶対配置なので、そのままだと次の行に食い込む。
+    padding-bottom で下線ぶんの高さを語自身に持たせ、行が重ならないようにする。
+  */
   .hero-term {
     position: relative;
     display: inline-block;
+    padding-bottom: 0.34em;
   }
   .hero-term-btn {
     font: inherit;
@@ -835,9 +864,9 @@ const transformationCards = [
   .hero-term-underline {
     position: absolute;
     left: -6px;
-    bottom: -0.16em;
+    bottom: 0.16em;
     width: calc(100% + 12px);
-    height: 0.3em;
+    height: 0.2em;
     overflow: visible;
     pointer-events: none;
   }
@@ -887,7 +916,7 @@ const transformationCards = [
     margin-left: 2px;
   }
   .hero-title-psy {
-    font-size: clamp(2.5rem, 4.8vw, 4.1rem);
+    font-size: clamp(2.33rem, 4.62vw, 3.93rem);
     font-weight: 900;
     color: var(--text-deep);
     padding-bottom: 0;
@@ -1587,8 +1616,8 @@ const transformationCards = [
     .hero h1 { max-width: 100%; margin-left: 0; margin-right: 0; text-wrap: balance; }
     .tagline-top { font-size: 0.98rem; letter-spacing: 0.03em; line-height: 1.8; }
     .lead { max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; line-break: strict; margin-left: 0; margin-right: 0; text-align: left; font-size: 1rem; line-height: 1.85; }
-    .hero-title-chosen { font-size: clamp(2.2rem, 8vw, 3.2rem); }
-    .hero-title-psy { font-size: clamp(2rem, 7vw, 3rem); }
+    .hero-title-chosen { font-size: clamp(2.03rem, 7.55vw, 3.03rem); }
+    .hero-title-psy { font-size: clamp(1.83rem, 6.55vw, 2.83rem); }
     /* 見出し内の語に紐づく吹き出しは、狭い画面だと左端基準では画面外に出る。
        画面下部に固定して全文が読めるようにする。 */
     .hero-tip {
@@ -1706,16 +1735,13 @@ const transformationCards = [
       transition: none !important;
       transform: none !important;
     }
-    /* ゆらぎは止めるが、四角のゆがみそのものは意匠なので残す */
+    /* ゆらぎは止めるが、輪郭のゆがみそのものは意匠なので残す */
     .hero-visual-frame,
+    .hero-visual-frame path,
     .hero-visual-photo {
       animation: none !important;
     }
-    .hero-visual-frame {
-      transform: perspective(900px) rotateX(1.7deg) rotateY(-2.6deg) rotate(-1.2deg);
-    }
-    .hero-visual-photo {
-      transform: perspective(900px) rotateX(-1.1deg) rotateY(1.8deg) rotate(0.6deg);
-    }
+    .hero-visual-frame { transform: rotate(-1.1deg); }
+    .hero-visual-photo { transform: rotate(0.5deg); }
   }
 </style>
