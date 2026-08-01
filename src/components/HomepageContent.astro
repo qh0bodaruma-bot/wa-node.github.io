@@ -247,11 +247,16 @@ const transformationCards = [
             {lang === 'ja' ? (
               <>
                 <span class="hero-title-chosen">
-                  <span class="hero-title-red">心理学</span><span class="hero-title-dark">で、</span><br />
-                  <span class="hero-title-red">伝わる順番を整える</span>
+                  <span class="hero-title-dark">安心して、ちょっと、</span><br />
+                  <span class="hero-term">
+                    <button type="button" class="hero-title-red hero-term-btn" aria-describedby="hero-tip-peak">わくわくしながら</button>
+                    {/* h1の中にあるため、そのまま置くと見出しの読み上げに解説文まで混ざる。
+                        aria-hiddenで見出しから外し、説明はaria-describedby経由でボタンに紐づける。 */}
+                    <span class="hero-tip" id="hero-tip-peak" aria-hidden="true">ピーク・エンドの法則：体験の「山」と「終わり」の印象が、いちばん記憶に残ります。</span>
+                  </span>
                 </span>
                 <br />
-                <span class="hero-title-psy">Web制作。</span>
+                <span class="hero-title-psy">選んでもらう。</span>
               </>
             ) : (
               <>
@@ -270,6 +275,18 @@ const transformationCards = [
             </a>
           </div>
         </div>
+      </div>
+      <div class="hero-visual">
+        <span class="hero-visual-frame" aria-hidden="true"></span>
+        <img
+          class="hero-visual-photo"
+          src="/images/hero-meeting.webp"
+          alt="打ち合わせの席で、資料と画面を見ながら和やかに方向性を話し合っている様子"
+          width="1200"
+          height="675"
+          fetchpriority="high"
+          decoding="async"
+        />
       </div>
     </div>
   </section>
@@ -690,18 +707,81 @@ const transformationCards = [
   .btn.secondary:hover { border-color: var(--home-gold); background: rgba(140, 107, 31, 0.06); transform: translateY(-1px); }
 
   /* Hero */
-  .hero { 
+  .hero {
     --hero-accent: var(--home-action);
     padding: 58px 0;
-    background: 
-      linear-gradient(to right, rgba(255, 255, 255, 1) 45%, rgba(255, 255, 255, 0.98) 58%, rgba(255, 255, 255, 0.78) 72%, rgba(255, 255, 255, 0.18) 100%),
-      url('/images/hero.webp') no-repeat right center/cover;
+    background:
+      radial-gradient(120% 90% at 82% 50%, var(--surface-cool) 0%, rgba(255, 255, 255, 0) 62%),
+      #fff;
     min-height: 650px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--trust-line);
   }
-  .hero-inner { max-width: 1200px; margin: 0 auto; padding: 0 40px; width: 100%; }
+  .hero-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+    column-gap: 48px;
+    align-items: center;
+  }
+
+  /* 写真は、輪郭のゆがんだ枠に収めて、ゆっくり形を変えながら漂わせる */
+  .hero-visual {
+    position: relative;
+    justify-self: end;
+    width: 100%;
+    max-width: 460px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-visual-frame {
+    position: absolute;
+    inset: -14px;
+    /* 見出しの強調と左の罫がすでに朱なので、枠は金茶にして役割を分ける */
+    border: 2px solid color-mix(in srgb, var(--accent) 72%, transparent);
+    border-radius: 58% 42% 47% 53% / 44% 55% 45% 56%;
+    animation: hero-frame-morph 17s ease-in-out infinite,
+      hero-frame-drift 11s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .hero-visual-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 54% 46% 52% 48% / 48% 50% 50% 52%;
+    box-shadow: var(--shadow-soft);
+    animation: hero-photo-morph 14s ease-in-out infinite,
+      hero-photo-drift 9s ease-in-out infinite;
+  }
+  /* 枠と写真で周期をずらし、輪郭が噛み合わないことで不安定さを出す */
+  @keyframes hero-frame-morph {
+    0%, 100% { border-radius: 58% 42% 47% 53% / 44% 55% 45% 56%; }
+    28%      { border-radius: 44% 56% 61% 39% / 57% 41% 59% 43%; }
+    54%      { border-radius: 63% 37% 41% 59% / 39% 62% 38% 61%; }
+    79%      { border-radius: 48% 52% 56% 44% / 60% 45% 55% 40%; }
+  }
+  @keyframes hero-photo-morph {
+    0%, 100% { border-radius: 54% 46% 52% 48% / 48% 50% 50% 52%; }
+    31%      { border-radius: 62% 38% 44% 56% / 56% 43% 57% 44%; }
+    58%      { border-radius: 43% 57% 60% 40% / 41% 58% 42% 59%; }
+    82%      { border-radius: 57% 43% 47% 53% / 59% 46% 54% 41%; }
+  }
+  @keyframes hero-frame-drift {
+    0%, 100% { transform: rotate(-1.1deg) translate(0, 0); }
+    37%      { transform: rotate(0.9deg) translate(5px, -7px); }
+    68%      { transform: rotate(-0.4deg) translate(-4px, 5px); }
+  }
+  @keyframes hero-photo-drift {
+    0%, 100% { transform: rotate(0.5deg) translate(0, 0); }
+    45%      { transform: rotate(-0.8deg) translate(-3px, 6px); }
+    72%      { transform: rotate(0.3deg) translate(4px, -4px); }
+  }
   .hero-content {
     position: relative;
     display: grid;
@@ -741,6 +821,48 @@ const transformationCards = [
   }
   .hero-title-red { color: var(--hero-accent); }
   .hero-title-dark { color: var(--text-deep); }
+
+  /* 「わくわくしながら」の根拠を、その場で読めるようにする吹き出し */
+  .hero-term {
+    position: relative;
+    display: inline-block;
+  }
+  .hero-term-btn {
+    font: inherit;
+    color: var(--hero-accent);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: help;
+    text-shadow: inherit;
+    border-bottom: 3px dotted rgba(199, 53, 47, 0.4);
+  }
+  .hero-tip {
+    position: absolute;
+    left: 0;
+    top: calc(100% + 16px);
+    z-index: 20;
+    width: min(340px, 76vw);
+    padding: 14px 16px;
+    background: var(--text-deep);
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.75;
+    letter-spacing: 0.01em;
+    text-shadow: none;
+    border-radius: 12px;
+    box-shadow: var(--shadow-soft);
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    pointer-events: none;
+  }
+  .hero-term:hover .hero-tip,
+  .hero-term:focus-within .hero-tip {
+    opacity: 1;
+    transform: translateY(0);
+  }
   .hero-title-sub {
     font-size: clamp(1.1rem, 2.5vw, 1.8rem);
     font-weight: 500;
@@ -1431,14 +1553,16 @@ const transformationCards = [
 
   @media (max-width: 768px) {
     .hero {
-      padding: 58px 0 82px;
-      background: 
-        linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0.98) 58%, rgba(255, 255, 255, 0.78) 74%, rgba(255, 255, 255, 0.18) 100%),
-        url('/images/hero.webp') no-repeat 70% bottom/auto 55%;
+      padding: 58px 0 72px;
+      background:
+        radial-gradient(120% 60% at 50% 100%, var(--surface-cool) 0%, rgba(255, 255, 255, 0) 70%),
+        #fff;
       text-align: left;
       min-height: auto;
       overflow-x: hidden;
     }
+    .hero-inner { grid-template-columns: minmax(0, 1fr); row-gap: 38px; }
+    .hero-visual { justify-self: center; max-width: 340px; }
     .hero .btns { flex-direction: column; width: 100%; margin: 0; box-sizing: border-box; align-items: stretch; gap: 12px; }
     .hero .btn { width: 100%; min-width: 0; padding: 16px 22px; }
     .hero-inner { padding: 0 20px; width: 100%; box-sizing: border-box; }
@@ -1448,6 +1572,18 @@ const transformationCards = [
     .lead { max-width: 100%; box-sizing: border-box; overflow-wrap: anywhere; line-break: strict; margin-left: 0; margin-right: 0; text-align: left; font-size: 1rem; line-height: 1.85; }
     .hero-title-chosen { font-size: clamp(2.2rem, 8vw, 3.2rem); }
     .hero-title-psy { font-size: clamp(2rem, 7vw, 3rem); }
+    /* 見出し内の語に紐づく吹き出しは、狭い画面だと左端基準では画面外に出る。
+       画面下部に固定して全文が読めるようにする。 */
+    .hero-tip {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      top: auto;
+      bottom: 16px;
+      width: auto;
+      font-size: 0.92rem;
+      box-shadow: var(--shadow);
+    }
     .consultation-preview {
       padding: 18px 14px 12px;
     }
@@ -1547,10 +1683,18 @@ const transformationCards = [
     .consult-card,
     .consult-card::before,
     .service-visual,
-    .mini-flow i::before {
+    .mini-flow i::before,
+    .hero-tip {
       animation: none !important;
       transition: none !important;
       transform: none !important;
     }
+    /* ゆらぎは止めるが、ゆがんだ輪郭そのものは意匠なので残す */
+    .hero-visual-frame,
+    .hero-visual-photo {
+      animation: none !important;
+    }
+    .hero-visual-frame { transform: rotate(-1.1deg); }
+    .hero-visual-photo { transform: rotate(0.5deg); }
   }
 </style>
