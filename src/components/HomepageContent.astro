@@ -724,18 +724,21 @@ const transformationCards = [
     padding: 0 40px;
     width: 100%;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 460px);
+    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
     column-gap: 48px;
     align-items: center;
   }
 
-  /* 写真は、輪郭のゆがんだ枠に収めて、ゆっくり形を変えながら漂わせる */
+  /*
+    写真は四角い枠に収める。枠の縦横比は写真そのもの（16:9）に合わせてあるので、
+    object-fit: cover でも左右が切れず、3人とも収まる。
+  */
   .hero-visual {
     position: relative;
     justify-self: end;
     width: 100%;
-    max-width: 460px;
-    aspect-ratio: 1 / 1;
+    max-width: 520px;
+    aspect-ratio: 16 / 9;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -745,33 +748,19 @@ const transformationCards = [
     inset: -14px;
     /* 見出しの強調と左の罫がすでに朱なので、枠は金茶にして役割を分ける */
     border: 2px solid color-mix(in srgb, var(--accent) 72%, transparent);
-    border-radius: 58% 42% 47% 53% / 44% 55% 45% 56%;
-    animation: hero-frame-morph 17s ease-in-out infinite,
-      hero-frame-drift 11s ease-in-out infinite;
+    border-radius: 2px;
+    animation: hero-frame-drift 11s ease-in-out infinite;
     pointer-events: none;
   }
   .hero-visual-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 54% 46% 52% 48% / 48% 50% 50% 52%;
+    border-radius: 2px;
     box-shadow: var(--shadow-soft);
-    animation: hero-photo-morph 14s ease-in-out infinite,
-      hero-photo-drift 9s ease-in-out infinite;
+    animation: hero-photo-drift 9s ease-in-out infinite;
   }
-  /* 枠と写真で周期をずらし、輪郭が噛み合わないことで不安定さを出す */
-  @keyframes hero-frame-morph {
-    0%, 100% { border-radius: 58% 42% 47% 53% / 44% 55% 45% 56%; }
-    28%      { border-radius: 44% 56% 61% 39% / 57% 41% 59% 43%; }
-    54%      { border-radius: 63% 37% 41% 59% / 39% 62% 38% 61%; }
-    79%      { border-radius: 48% 52% 56% 44% / 60% 45% 55% 40%; }
-  }
-  @keyframes hero-photo-morph {
-    0%, 100% { border-radius: 54% 46% 52% 48% / 48% 50% 50% 52%; }
-    31%      { border-radius: 62% 38% 44% 56% / 56% 43% 57% 44%; }
-    58%      { border-radius: 43% 57% 60% 40% / 41% 58% 42% 59%; }
-    82%      { border-radius: 57% 43% 47% 53% / 59% 46% 54% 41%; }
-  }
+  /* 枠と写真で周期をずらし、傾きが噛み合わないことで不安定さを出す */
   @keyframes hero-frame-drift {
     0%, 100% { transform: rotate(-1.1deg) translate(0, 0); }
     37%      { transform: rotate(0.9deg) translate(5px, -7px); }
@@ -1562,7 +1551,7 @@ const transformationCards = [
       overflow-x: hidden;
     }
     .hero-inner { grid-template-columns: minmax(0, 1fr); row-gap: 38px; }
-    .hero-visual { justify-self: center; max-width: 340px; }
+    .hero-visual { justify-self: center; max-width: 100%; }
     .hero .btns { flex-direction: column; width: 100%; margin: 0; box-sizing: border-box; align-items: stretch; gap: 12px; }
     .hero .btn { width: 100%; min-width: 0; padding: 16px 22px; }
     .hero-inner { padding: 0 20px; width: 100%; box-sizing: border-box; }
@@ -1689,7 +1678,7 @@ const transformationCards = [
       transition: none !important;
       transform: none !important;
     }
-    /* ゆらぎは止めるが、ゆがんだ輪郭そのものは意匠なので残す */
+    /* ゆらぎは止めるが、わずかな傾きは意匠なので残す */
     .hero-visual-frame,
     .hero-visual-photo {
       animation: none !important;
