@@ -39,42 +39,28 @@ function getLocalizedLink(path: string) {
   <div class="section-inner">
     <div class="footer-grid">
       <div class="footer-col">
-        <h3>{t.footer.col1[lang]}</h3>
+        <h3>{lang === 'ja' ? 'サービス' : lang === 'en' ? 'Services' : 'Services'}</h3>
         <ul>
-          <li><a href={getLocalizedLink('/pricing#web-production')}>{t.footer.col1_item1[lang]}</a></li>
-          <li><a href={getLocalizedLink('/pricing#web-production')}>{t.footer.col1_item2[lang]}</a></li>
-          <li><a href={getLocalizedLink('/pricing#copilot')}>{t.footer.col1_item3[lang]}</a></li>
-          <li><a href={getLocalizedLink('/pricing#project-flow')}>{t.footer.col1_item_flow[lang]}</a></li>
-          <li><a href={getLocalizedLink('/works')}>{t.footer.col1_item4[lang]}</a></li>
+          <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? 'LINE×Salesforce連携構築' : lang === 'en' ? 'LINE × Salesforce Integration' : 'Intégration LINE × Salesforce'}</a></li>
+          <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? '料金・対応範囲' : lang === 'en' ? 'Pricing & Scope' : 'Tarifs & Périmètre'}</a></li>
+          <li><a href={getLocalizedLink('/contact')}>{lang === 'ja' ? '無料相談（30分）' : lang === 'en' ? 'Free Consultation' : 'Consultation gratuite'}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>{lang === 'ja' ? '相談前に見る' : lang === 'en' ? 'Start Here' : 'Commencer ici'}</h3>
+        <h3>{lang === 'ja' ? 'ご参考' : lang === 'en' ? 'Resources' : 'Ressources'}</h3>
         <ul>
-          <li><a href={getLocalizedLink('/contact')}>{lang === 'ja' ? '無料相談' : lang === 'en' ? 'Free Consultation' : 'Consultation gratuite'}</a></li>
-          <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? '料金を見る' : lang === 'en' ? 'See Pricing' : 'Voir les tarifs'}</a></li>
-          <li><a href={getLocalizedLink('/works')}>{lang === 'ja' ? '制作例・デモを見る' : lang === 'en' ? 'Works & Demos' : 'Réalisations & démos'}</a></li>
+          <li><a href={getLocalizedLink('/blog')}>{lang === 'ja' ? 'ブログ' : 'Blog'}</a></li>
+          <li><a href={getLocalizedLink('/about')}>{lang === 'ja' ? '和-Nodeについて' : lang === 'en' ? 'About Us' : 'À propos'}</a></li>
+          <li><a href={getLocalizedLink('/portfolio-b2b')}>{lang === 'ja' ? 'B2B導入事例' : lang === 'en' ? 'Case Studies' : 'Études de cas'}</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h3>{lang === 'ja' ? '補足コンテンツ' : lang === 'en' ? 'Resources' : 'Ressources'}</h3>
-        <ul>
-          <li><a href={getLocalizedLink('/blog')}>{lang === 'ja' ? '和-Node 知恵袋（ブログ）' : 'Blog'}</a></li>
-          <li><a href={getLocalizedLink('/psychology-demo')}>{t.footer.col2_item1[lang]}</a></li>
-          <li><a href={getLocalizedLink('/wasm-diagnosis')}>{t.footer.col2_item6[lang]}</a></li>
-          <li><a href={getLocalizedLink('/tech-stack')}>{t.footer.col4_item_tech[lang]}</a></li>
-          <li><a href={getLocalizedLink('/easy-guide')}>{t.footer.col4_item0[lang]}</a></li>
-          <li><a href={getLocalizedLink('/kdp_books')}>{t.footer.col3_item4[lang]}</a></li>
-        </ul>
-      </div>
-      <div class="footer-col">
-        <h3>{t.footer.col4[lang]}</h3>
+        <h3>{lang === 'ja' ? '運営・規約' : lang === 'en' ? 'Policies' : 'Politiques'}</h3>
         <ul>
           <li><a href={getLocalizedLink('/terms')}>{t.footer.col4_item2[lang]}</a></li>
           <li><a href={getLocalizedLink('/privacy')}>{t.footer.col4_item3[lang]}</a></li>
           <li><a href={getLocalizedLink('/security-policy')}>{t.footer.col4_item4[lang]}</a></li>
           <li><a href={getLocalizedLink('/tokutei')}>{t.footer.col4_item5[lang]}</a></li>
-          <li><a href={getLocalizedLink('/terms_miniapp')}>{t.footer.col4_item6[lang]}</a></li>
         </ul>
       </div>
     </div>
@@ -102,7 +88,7 @@ function getLocalizedLink(path: string) {
   }
   .footer-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 40px;
     margin-bottom: 60px;
   }
