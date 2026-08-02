@@ -398,10 +398,6 @@ const t = f[lang];
             <p class="form-intro-title">{t.form_intro_title}</p>
             <p class="small" style="color: var(--muted); line-height: 1.6; margin-bottom: 0;">{t.form_intro_desc}</p>
           </div>
-          <div class="server-choice-note" aria-label={lang === 'ja' ? '静的サイトと動的サイトの相談について' : 'Static and dynamic site consultation note'}>
-            <strong>{t.server_note_title}</strong>
-            <p>{t.server_note_desc}</p>
-          </div>
           <div class="submit-flow-note consult-roadmap" aria-labelledby="consult-roadmap-title">
             <div class="consult-roadmap-copy">
               <strong id="consult-roadmap-title">{t.submit_flow_title}</strong>
@@ -425,65 +421,6 @@ const t = f[lang];
             <input type="hidden" name="_next" value={lang === 'ja' ? 'https://www.wa-node.com/thanks/' : `https://www.wa-node.com/${lang}/thanks/`} />
             <input type="hidden" id="landing_url" name="landing_url" value="" />
             <input type="hidden" id="referrer_url" name="referrer_url" value="" />
-
-            <!-- Dynamic Benefit Badge -->
-            <div id="benefit-badge-container" style="display: none; margin-bottom: 24px;">
-              <div class="benefit-dynamic-badge">
-                <span class="badge-icon"><MaterialIcon name="redeem" /></span>
-                <div class="badge-content">
-                  <strong id="benefit-badge-title">特典が適用されています</strong>
-                  <p id="benefit-badge-desc">初回無料相談の時間を60分（30分拡大）に設定し、優先的に日程調整いたします。</p>
-                </div>
-              </div>
-            </div>
-
-            <section class="precheck-card" aria-labelledby="precheck-title">
-              <div class="precheck-header">
-                <span>{t.precheck_badge}</span>
-                <h3 id="precheck-title">{t.precheck_title}</h3>
-                <p>{t.precheck_desc}</p>
-              </div>
-              <div class="precheck-grid">
-                <div class="form-group precheck-form-group" data-step="Q1">
-                  <label for="category">{t.label_category}</label>
-                  <select id="category" name="category">
-                    <option value="" selected>{t.precheck_placeholder}</option>
-                    <option value="line_sf">{t.categories.line_sf}</option>
-                    <option value="liff_only">{t.categories.liff_only}</option>
-                    <option value="consultation">{t.categories.consultation}</option>
-                    <option value="other">{t.categories.other}</option>
-                  </select>
-                  {t.category_hint && <p class="field-desc">{t.category_hint}</p>}
-                </div>
-                <div class="form-group precheck-form-group" data-step="Q2">
-                  <label for="current_issue">{t.label_issue}</label>
-                  <select id="current_issue" name="current_issue">
-                    <option value="" selected>{t.precheck_placeholder}</option>
-                    <option value="double_input">{t.issues.double_input}</option>
-                    <option value="vendor_split">{t.issues.vendor_split}</option>
-                    <option value="tech_block">{t.issues.tech_block}</option>
-                    <option value="workflow">{t.issues.workflow}</option>
-                    <option value="other">{t.issues.other}</option>
-                  </select>
-                </div>
-                <div class="form-group precheck-form-group" data-step="Q3">
-                  <label for="consultation_takeaway">{t.label_takeaway}</label>
-                  <select id="consultation_takeaway" name="consultation_takeaway">
-                    <option value="" selected>{t.precheck_placeholder}</option>
-                    <option value="direction">{t.takeaways.direction}</option>
-                    <option value="cost">{t.takeaways.cost}</option>
-                    <option value="idea">{t.takeaways.idea}</option>
-                    <option value="fit">{t.takeaways.fit}</option>
-                  </select>
-                </div>
-              </div>
-              {t.precheck_reassurance && <p class="precheck-reassurance">{t.precheck_reassurance}</p>}
-            </section>
-
-            <div class="form-start-divider">
-              <span>{t.form_start_label}</span>
-              <p>{t.form_start_desc}</p>
-            </div>
 
             <div class="scope-note-card">
               <strong>{t.scope_note_title}</strong>
