@@ -23,15 +23,15 @@ function getLocalizedLink(path: string) {
 }
 
 const trustSignals = [
-  { value: 'LINE×Salesforce', label: '連携構築の専門窓口' },
+  { value: 'LINE連携', label: 'Salesforce・kintone・HubSpot等に対応' },
   { value: 'LIFF開発', label: 'LINEアプリ内フォーム・ツール開発' },
   { value: '20年以上', label: 'IT・Web・開発の現場経験' },
   { value: 'SECURITY ACTION', label: '情報管理への取り組みを宣言' },
 ];
 
 const issues = [
-  'LINEで受けた問い合わせ情報を、毎回Salesforceに手入力している（二重入力）',
-  'LINE側の開発会社とSalesforce側のコンサルが別々で、要件がかみ合わない（ベンダー分断）',
+  'LINEで受けた問い合わせ情報を、毎回管理システムに手入力している（二重入力）',
+  'LINE側の開発会社とシステム側の担当が別々で、要件がかみ合わない（ベンダー分断）',
   '自社でAPI（システム同士をつなぐ仕組み）の連携を試みたが、技術的に行き詰まった（技術の壁）',
 ];
 
@@ -43,13 +43,13 @@ const capabilities = [
   },
   {
     icon: 'sync_alt',
-    title: 'Salesforceへの自動連携設定',
-    desc: 'フォーム送信データをSalesforceのリード・取引先責任者・カスタムオブジェクトへ即時反映。手入力・CSV出力の手間をゼロにします。',
+    title: '各種システムへの自動連携設定',
+    desc: 'フォーム送信データをSalesforce・kintone・HubSpot等のシステムへ即時反映。手入力・CSV出力の手間をゼロにします。',
   },
   {
     icon: 'chat',
     title: 'Messaging APIによる自動応答',
-    desc: '申込・問い合わせ後にLINEで自動確認メッセージを送信。Salesforceのステータス変更に連動したLINE通知にも対応します。',
+    desc: '申込・問い合わせ後にLINEで自動確認メッセージを送信。各システムのステータス変更に連動したLINE通知にも対応します。',
   },
   {
     icon: 'verified',
@@ -89,19 +89,19 @@ const devSteps = [
 const faqs = [
   {
     q: '費用の目安を教えてください。',
-    a: 'LINE×Salesforce連携構築は40万円〜（税別）が目安です。要件定義・設計・実装・テストを含みます。連携するデータの種類や画面数により変動するため、まずヒアリングで範囲を確認したうえでお見積りします。',
+    a: '連携先システムにより異なります。Salesforce連携は40万円〜、kintone連携は25万円〜、HubSpot連携は20万円〜、Googleスプレッドシート連携は10万円〜（いずれも税別）が目安です。要件定義・設計・実装・テストを含みます。連携するデータの種類や画面数により変動するため、まずヒアリングで範囲を確認したうえでお見積りします。',
   },
   {
     q: '開発期間はどのくらいかかりますか？',
-    a: '必要な情報・権限がそろった時点から4〜6週間が目安です。SalesforceのAPI権限やオブジェクト仕様が固まっているほど短くなります。',
+    a: '必要な情報・権限がそろった時点から4〜6週間が目安です。連携先システムのAPI権限や仕様が固まっているほど短くなります。',
   },
   {
-    q: 'Salesforceの設定変更も対応してもらえますか？',
-    a: '連携に必要な範囲のSalesforce設定（カスタム項目・APIユーザー設定等）は対応します。Apexによるカスタム開発や大規模なSalesforce改修は対応外です。',
+    q: '連携先システムの設定変更も対応してもらえますか？',
+    a: '連携に必要な範囲のシステム設定（カスタム項目・APIユーザー設定等）は対応します。Salesforce Apexカスタム開発・各システムの大規模な改修は対応外です。',
   },
   {
-    q: 'LINEとSalesforceの両方を使っていないと依頼できませんか？',
-    a: 'Salesforceを導入済み、またはこれから導入予定の企業を対象としています。LINE公式アカウントはお持ちであれば問題ありません。',
+    q: 'Salesforce以外のシステムでも対応してもらえますか？',
+    a: 'Salesforce・kintone・HubSpot・Googleスプレッドシートなど、各種システムに対応しています。LINE公式アカウントをお持ちであれば、連携先システムについてはご相談ください。',
   },
   {
     q: '適格請求書（インボイス）は発行できますか？',
@@ -123,10 +123,10 @@ const faqs = [
         <div class="hero-editorial-rule" aria-hidden="true"></div>
         <div class="hero-copy">
           <h1>
-            <span class="hero-title-main">LINEとSalesforce、<br />つなぐ。</span>
+            <span class="hero-title-main">LINEを、<br />つなぐ。</span>
           </h1>
           <div class="hero-divider" aria-hidden="true"></div>
-          <p class="lead">LINE公式アカウントの顧客データをSalesforceへ自動連携。<br /><strong>二重入力をなくし、対応漏れを防ぐ仕組みを構築します。</strong></p>
+          <p class="lead">LINE公式アカウントの顧客データを、お使いのシステムへ自動連携。<br /><strong>Salesforce・kintone・HubSpot等に対応。二重入力をなくし、対応漏れを防ぐ仕組みを構築します。</strong></p>
           <div class="btns">
             <a class="btn primary" href={getLocalizedLink('/contact')}>
               <span>無料で相談する</span><span aria-hidden="true">→</span>
@@ -227,14 +227,14 @@ const faqs = [
       <div class="section-title">
         <span class="eyebrow">Why Us</span>
         <h2 id="strengths-title">なぜ和-Nodeに頼むのか。</h2>
-        <p class="section-subtitle">大手SIerでもなく、LINE単体の開発会社でもない。<br />LINE × Salesforce連携に特化した専門パートナーです。</p>
+        <p class="section-subtitle">大手SIerでもなく、LINE単体の開発会社でもない。<br />LINE連携構築に特化した専門パートナーです。</p>
       </div>
       <div class="strengths-list">
         <div class="strength-item">
           <div class="strength-num" aria-hidden="true">01</div>
           <div class="strength-body">
             <h3>ベンダー間の調整が不要。窓口は1つだけ。</h3>
-            <p>LINE側の開発もSalesforce側の設定も、和-Nodeが一括対応します。「LINE会社とSalesforce会社の言っていることが食い違う」問題が起きません。</p>
+            <p>LINE側の開発も連携先システムの設定も、和-Nodeが一括対応します。「LINE会社とシステム会社の言っていることが食い違う」問題が起きません。</p>
           </div>
         </div>
         <div class="strength-item">
@@ -248,7 +248,7 @@ const faqs = [
           <div class="strength-num" aria-hidden="true">03</div>
           <div class="strength-body">
             <h3>必要な範囲を適正価格で。</h3>
-            <p>大手SIerのような大規模体制は持っていません。その分、中間コストを省いた適正価格で、LINE × Salesforce連携だけに特化した対応が可能です。</p>
+            <p>大手SIerのような大規模体制は持っていません。その分、中間コストを省いた適正価格で、LINE連携構築に特化した対応が可能です。</p>
           </div>
         </div>
       </div>
@@ -284,7 +284,7 @@ const faqs = [
       <div class="section-title">
         <span class="eyebrow">Cases</span>
         <h2 id="cases-title">連携事例のご紹介。</h2>
-        <p class="section-subtitle">LINE × Salesforce連携の構築事例は、現在個別にご紹介しています。<br />自社の課題に当てはまるか、ぜひご相談ください。</p>
+        <p class="section-subtitle">LINE連携の構築事例は、現在個別にご紹介しています。<br />自社の課題に当てはまるか、ぜひご相談ください。</p>
       </div>
       <div class="cases-placeholder">
         <p class="cases-placeholder-text">現在、掲載許可をいただいた実績から順次公開を進めています。<br />具体的な導入事例をお知りになりたい場合は、個別にご説明いたします。</p>
@@ -328,15 +328,27 @@ const faqs = [
         <p class="section-subtitle">「いくらかかるかわからない」が相談のハードルになっていませんか。<br />目安価格と料金の決まり方をお伝えします。</p>
       </div>
       <div class="pricing-card">
+        <p class="pricing-includes">要件定義・設計・実装・テストを含みます。</p>
         <div class="pricing-main">
-          <span class="pricing-label">LINE × Salesforce 連携構築</span>
+          <span class="pricing-label">Salesforce連携</span>
           <span class="pricing-price">40万円〜<small>（税別）</small></span>
         </div>
-        <p class="pricing-includes">要件定義・設計・実装・テストを含みます。</p>
-        <ul class="pricing-vars">
+        <div class="pricing-main" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(15, 76, 92, 0.15);">
+          <span class="pricing-label">kintone連携</span>
+          <span class="pricing-price">25万円〜<small>（税別）</small></span>
+        </div>
+        <div class="pricing-main" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(15, 76, 92, 0.15);">
+          <span class="pricing-label">HubSpot連携</span>
+          <span class="pricing-price">20万円〜<small>（税別）</small></span>
+        </div>
+        <div class="pricing-main" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(15, 76, 92, 0.15);">
+          <span class="pricing-label">Googleスプレッドシート連携</span>
+          <span class="pricing-price">10万円〜<small>（税別）</small></span>
+        </div>
+        <ul class="pricing-vars" style="margin-top: 16px;">
           <li>連携するデータ項目の種類・数</li>
           <li>LIFF画面（LINEアプリ内ページ）の有無・画面数</li>
-          <li>既存Salesforce環境の設定状況</li>
+          <li>連携先システムの設定状況・API権限</li>
         </ul>
         <p class="pricing-note">上記により最終費用は変動します。「自社の場合いくらになるか」を知るための初回相談は無料です。</p>
         <a class="btn primary" href={getLocalizedLink('/contact')}>
