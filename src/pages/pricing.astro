@@ -1,7 +1,5 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import ConsultationFlow from '../components/ConsultationFlow.astro';
-import ProjectExecutionFlow from '../components/ProjectExecutionFlow.astro';
 import MaterialIcon from '../components/MaterialIcon.astro';
 import {
   createBreadcrumbSchema,
@@ -11,1970 +9,545 @@ import {
   organizationSchema,
 } from '../data/structuredData';
 
-const title = "料金プラン・制作費用｜心理学を応用したWeb制作と「ビジネスの副操縦士」（戦略的パートナー）｜和-Node";
-const description = "和-Nodeの料金プラン。行動心理に基づくWeb制作・導線設計（LP・HP）、ビジネスの副操縦士（月額制戦略的パートナー）コンサルティング、および組織支援の費用をご案内します。";
-const image = "/images/ogp-pricing.png";
+const title = "料金・費用の目安｜LINE×Salesforce連携構築｜和-Node";
+const description = "LINE×Salesforce連携構築の料金目安は40万円〜（税別）。要件定義・設計・実装・テストを含みます。初回相談は無料。費用の詳細はお気軽にご相談ください。";
+
+const faqItems = [
+  {
+    question: "費用の目安を教えてください。",
+    answer: "LINE×Salesforce連携構築は40万円〜（税別）が目安です。要件定義・設計・実装・テストを含みます。連携するデータの種類や画面数により変動するため、まずヒアリングで範囲を確認したうえでお見積りします。",
+  },
+  {
+    question: "何が価格に影響しますか？",
+    answer: "連携するSalesforceオブジェクト・データ項目の種類と数、LIFF画面（LINEアプリ内ページ）の有無と画面数、既存Salesforce環境の設定状況が主な変動要因です。",
+  },
+  {
+    question: "Salesforceを導入していないと依頼できませんか？",
+    answer: "Salesforceを導入済み、またはこれから導入予定の企業を対象としています。LINE公式アカウントはお持ちであれば問題ありません。",
+  },
+  {
+    question: "初回相談は有料ですか？",
+    answer: "初回相談・要件整理は無料で対応しています。ご相談後に必ず契約する必要はありません。",
+  },
+  {
+    question: "開発期間はどれくらいかかりますか？",
+    answer: "必要な情報・権限がそろった時点から4〜6週間が目安です。SalesforceのAPI権限やオブジェクト仕様が固まっているほど短くなります。",
+  },
+];
+
 const structuredData = [
   organizationSchema,
   createWebPageSchema({ name: title, description, path: "/pricing/" }),
   createBreadcrumbSchema([
     { name: "ホーム", path: "/" },
-    { name: "料金プラン・制作費用", path: "/pricing/" },
+    { name: "料金・費用の目安", path: "/pricing/" },
   ]),
   createServiceSchema({
-    name: "行動心理に基づくWeb制作・LP制作",
-    description:
-      "心理学の知見を活かし、信頼形成、相談ボタン、フォーム、公開後の改善まで含めてWebサイトとLPを設計します。",
-    path: "/pricing/#web-production",
-    serviceType: "Web design and landing page production",
-    priceFrom: "64000",
+    name: "LINE × Salesforce 連携構築",
+    description: "LIFF開発・Messaging API・Salesforce連携を一気通貫で構築。設計から実装・テストまで1社で対応します。",
+    path: "/pricing/",
+    serviceType: "LINE LIFF development and Salesforce integration",
+    priceFrom: "400000",
   }),
-  createServiceSchema({
-    name: "LP改善入口診断",
-    description:
-      "既存LPを対象に、ファーストビュー、相談ボタン、料金表、フォーム前の不安、スマホ表示、AI検索で拾われる構造を確認し、改善優先度を整理します。",
-    path: "/pricing/#lp-diagnosis",
-    serviceType: "Landing page improvement audit",
-    priceFrom: "15000",
-  }),
-  createServiceSchema({
-    name: "ビジネスの副操縦士（月額制戦略的パートナー）",
-    description:
-      "Web改善、AI・ICT活用、業務整理を月額で相談できる継続支援です。",
-    path: "/pricing/#copilot",
-    serviceType: "ICT consulting and business support",
-    priceFrom: "15000",
-  }),
-  createFAQSchema([
-    {
-      question: "相談だけで終わっても大丈夫ですか？",
-      answer: "大丈夫です。状況整理だけで十分な場合は、無理に制作や月額契約をおすすめしません。",
-    },
-    {
-      question: "まだ何を頼むか決まっていなくても相談できますか？",
-      answer:
-        "はい。Web制作、LP制作、AI・ICT活用、公開後の改善のうち、今どこから始めるべきか一緒に整理します。",
-    },
-    {
-      question: "15,000円でLPを作ってもらえますか？",
-      answer:
-        "15,000円は新規LP制作ではなく、既存LPを対象にした改善診断の入口価格です。新規LP制作はシンプルLP制作24,000円〜、選ばれる導線LP制作64,000円〜が目安です。",
-    },
-    {
-      question: "LP改善診断では何がわかりますか？",
-      answer:
-        "ファーストビュー、相談ボタン、料金表、フォーム前の不安、スマホでの読みやすさ、AI検索で拾われる構造を確認し、優先して直すべき点を整理します。",
-    },
-    {
-      question: "相談後に契約を迫られることはありますか？",
-      answer: "ありません。必要な範囲・費用・進め方を確認し、ご納得いただいた場合のみ正式に開始します。",
-    },
-    {
-      question: "不安を煽る表現や、強く誘導する導線も作れますか？",
-      answer:
-        "和-Nodeでは、いわゆるダーク心理学や、恐怖・断りにくさを利用して行動を迫る設計は行いません。一方で、見落としがちなリスクや機会損失は誠実に可視化し、訪問者が安心して比較・相談・判断できる導線を設計します。",
-    },
-  ]),
+  createFAQSchema(faqItems),
+];
+
+const includes = [
+  { icon: "handshake", text: "要件定義・ヒアリング" },
+  { icon: "architecture", text: "API設計・システム設計" },
+  { icon: "code", text: "実装（LIFF開発 / Salesforce連携設定 / Messaging API）" },
+  { icon: "phone_iphone", text: "実機テスト（iOS・Android LINE アプリ）" },
+  { icon: "rocket_launch", text: "本番移行・運用引継ぎメモ" },
+];
+
+const priceFactors = [
+  "連携するSalesforceオブジェクト・データ項目の種類と数",
+  "LIFF画面（LINEアプリ内ページ）の有無と画面数",
+  "既存Salesforce環境の設定状況",
+];
+
+const canDo = [
+  "LINEアプリ内で動くフォーム・ページ（LIFF）の開発",
+  "Messaging API による自動メッセージ送信の設定",
+  "SalesforceへのREST API連携（リード・取引先・カスタムオブジェクト）",
+  "必要範囲のSalesforceカスタム項目・APIユーザー設定",
+  "実機テスト・本番移行・引継ぎドキュメント作成",
+];
+
+const cannotDo = [
+  "ApexによるSalesforceカスタム開発",
+  "Salesforceの新規導入・ライセンス手配",
+  "LINE公式アカウントの運用代行・広告配信",
+  "予算40万円未満の案件",
 ];
 ---
 
-<BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
-  <main id="main" class="pricing-container" data-glossary-skip>
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <main id="main" class="pricing-page" data-glossary-skip>
+
+    <!-- Hero -->
     <section class="hero">
       <div class="hero-inner">
         <p class="eyebrow">Pricing</p>
-        <h1 class="premium-heading">料金プラン・制作費用</h1>
-        <p class="lead">ホームページ制作、LP制作・改善、戦略的パートナー契約（ビジネスの副操縦士）の料金目安です。ご予算に合わせた柔軟な提案も可能です。</p>
-        <p class="note">和-Nodeでは、心理学の知見を「不安を煽るため」ではなく、「安心して選べる導線をつくるため」に活用します。正式な制作・月額支援は、内容・範囲・追加作業の有無を確認し、費用にご納得いただいた後に開始します。</p>
-
-        <div class="premium-ann-banner reveal">
-          <div class="banner-inner">
-            <span class="banner-badge">1st ANNIVERSARY</span>
-            <div class="banner-main">
-              <strong>制作メニュー・オプション 20% OFF 実施中</strong>
-              <p>毎月3名様限定。丁寧な導線設計を、今だけの感謝価格で。 <span class="period">2026.7.31まで</span></p>
-            </div>
-            <a href="/campaign-anniversary/" class="banner-link">特設ページへ →</a>
-          </div>
-        </div>
+        <h1 class="page-heading">料金・費用の目安</h1>
+        <p class="lead">LINE × Salesforce 連携構築の費用目安をご案内します。<br>初回のご相談・要件整理は無料です。</p>
       </div>
     </section>
 
-    <section class="section choice-guide">
-      <p class="eyebrow">Start Here</p>
-      <h2 class="premium-heading">迷ったら、まずは4つからお選びください</h2>
-      <p class="choice-lead">細かなメニューを先に選ぶ必要はありません。今の目的に近い入口からご相談いただければ、最適なプランに整理します。</p>
-      <div class="choice-grid">
-        <a class="choice-card primary-choice card-border-gold" href="#web-production">
-          <span class="choice-label">一番人気</span>
-          <h3><span class="card-icon-window window-gold"><MaterialIcon name="language" /></span>ホームページを作りたい</h3>
-          <p class="choice-fit">まず信頼されるサイトを作りたい方へ</p>
-          <p>会社概要、サービス、料金、相談の流れなど、初見で信頼される事業の土台を整えます。</p>
-          <strong>HP制作 40,000円〜</strong>
-        </a>
-        <a class="choice-card card-border-green" href="#lp-diagnosis">
-          <span class="choice-label">診断入口</span>
-          <h3><span class="card-icon-window window-green"><MaterialIcon name="monitoring" /></span>今あるLPを改善したい</h3>
-          <p class="choice-fit">まず原因を見つけたい方へ</p>
-          <p>15,000円〜は新規制作ではなく、既存LPの迷いどころを確認して改善優先度を出す入口です。</p>
-          <strong>LP診断 15,000円〜</strong>
-        </a>
-        <a class="choice-card card-border-blue" href="#copilot">
-          <span class="choice-label">継続改善</span>
-          <h3><span class="card-icon-window window-blue"><MaterialIcon name="explore" /></span>作った後も相談したい</h3>
-          <p class="choice-fit">公開後も改善や判断を相談したい方へ</p>
-          <p>Web改善、AI活用、業務整理を月額で伴走する「ビジネスの副操縦士」です。</p>
-          <strong>月額 15,000円〜</strong>
-        </a>
-        <a class="choice-card card-border-red" href="#ict-ai">
-          <span class="choice-label">単発相談</span>
-          <h3><span class="card-icon-window window-red"><MaterialIcon name="tips_and_updates" /></span>AI・ICTで業務を整えたい</h3>
-          <p class="choice-fit">業務整理やAI活用から始めたい方へ</p>
-          <p>ChatGPT、LINE、業務ツール、簡単な自動化などをスポットで整理します。</p>
-          <strong>5,000円〜</strong>
-        </a>
-      </div>
-      <p class="choice-footnote">迷った場合は「ホームページを作りたい」または「今あるLPを改善したい」からで大丈夫です。新規LP制作は、下のLP制作タブから選べます。</p>
-      <div class="decision-guide" aria-label="目的別のおすすめ">
-        <h3>目的別のおすすめ</h3>
-        <div class="decision-grid">
-          <a href="#lp-diagnosis">
-            <span>LPの反応が鈍い理由を知りたい</span>
-            <strong>LP改善入口診断</strong>
-          </a>
-          <a href="#web-production">
-            <span>事業の土台を整えたい</span>
-            <strong>選ばれる導線HP制作</strong>
-          </a>
-          <a href="#copilot">
-            <span>公開後も改善したい</span>
-            <strong>ビジネスの副操縦士</strong>
-          </a>
-        </div>
-      </div>
-    </section>
+    <!-- 料金カード -->
+    <section class="section" aria-labelledby="price-card-heading">
+      <div class="section-inner">
+        <div class="price-card">
+          <h2 id="price-card-heading" class="price-card__title">LINE × Salesforce 連携構築</h2>
+          <p class="price-card__price"><span class="price-card__number">40</span><span class="price-card__unit">万円〜<small>（税別）</small></span></p>
 
-    <section class="section lp-diagnosis-section" id="lp-diagnosis">
-      <p class="eyebrow">Entry Diagnosis</p>
-      <h2 class="premium-heading">15,000円のLP改善診断で行うこと</h2>
-      <p class="lp-diagnosis-lead">
-        この15,000円〜は、LPを丸ごと新規制作する料金ではありません。すでにあるLPを前提に、
-        「どこで迷いが生まれているか」「先に直すべき場所はどこか」を短時間で切り分ける入口価格です。
-      </p>
+          <div class="price-card__details">
+            <h3 class="price-card__sub-heading">含まれるもの</h3>
+            <ul class="price-card__list">
+              {includes.map(item => (
+                <li>
+                  <MaterialIcon name={item.icon} />
+                  <span>{item.text}</span>
+                </li>
+              ))}
+            </ul>
 
-      <div class="lp-diagnosis-grid">
-        <article>
-          <span>01</span>
-          <h3>既存LPを前提にする</h3>
-          <p>ゼロから構成・デザイン・実装を作るのではなく、今あるページのファーストビュー、相談ボタン、料金表、フォーム前の不安を確認します。</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h3>見る場所を絞る</h3>
-          <p>色彩、読みやすさ、スマホ表示、AI検索で拾われる見出しやFAQなど、問い合わせ前の迷いに関わる部分へ絞って確認します。</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h3>成果物を軽くする</h3>
-          <p>詳細なデザインカンプや実装ではなく、優先順位つきの改善メモ、すぐ直せる文言案、次の見積り判断材料にまとめます。</p>
-        </article>
-      </div>
-
-      <div class="lp-diagnosis-price-box">
-        <div class="lp-diagnosis-price-copy">
-          <h3>価格が抑えられる理由</h3>
-          <p>
-            新規LP制作で発生する原稿整理、構成案、デザイン、コーディング、公開作業を含めず、
-            原因の切り分けと優先順位づけに集中するため、15,000円〜で始められます。
-          </p>
-        </div>
-        <div class="table-wrap mini lp-diagnosis-table">
-          <table>
-            <thead>
-              <tr><th>メニュー</th><th>料金</th><th>主な内容</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>LP改善入口診断</td><td>15,000円〜</td><td>既存LPの主要導線を確認し、改善優先度メモを作成</td></tr>
-              <tr><td>詳細導線診断</td><td>30,000円〜</td><td>競合・構成・CTA・料金表・フォームまで広げて確認</td></tr>
-              <tr><td>改善設計パック</td><td>50,000円〜</td><td>改善ラフ、文言案、実装範囲、次回見積り前提まで整理</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
-      <div class="lp-diagnosis-boundary" aria-label="含まれるものと含まれないもの">
-        <div>
-          <strong>含まれるもの</strong>
-          <p>現状LPの確認、改善優先度、文言・導線の方向性、制作へ進むかどうかの判断材料。</p>
-        </div>
-        <div>
-          <strong>含まれないもの</strong>
-          <p>新規LP制作、詳細デザインカンプ、コーディング、広告運用、問い合わせ数や順位の保証。</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="web-production">
-      <p class="eyebrow">01. Web & Lead Design</p>
-      <h2 class="premium-heading">行動心理に基づくWeb制作・LP制作</h2>
-      <p>「伝わらない」を減らし、相談につながりやすい情報設計へ。行動心理の視点を取り入れたWebサイトを制作します。</p>
-      <div class="campaign-notice-box">
-        <strong>【起業記念キャンペーン】制作費 20% OFF！</strong>
-        <p>以下の通常価格より20%割引いたします（毎月3名様限定）。</p>
-      </div>
-
-      <!-- アンカリング効果（市場相場との比較） -->
-      <div class="market-anchoring-box">
-        <h3 class="anchoring-title">Webサイト制作の参考価格帯と和-Nodeの価格</h3>
-        <p class="anchoring-intro">Web制作を依頼する際、「なぜこんなに安いの？」「品質は大丈夫？」と不安に思われるかもしれません。一般的な制作会社へ依頼する場合の参考価格帯と比べながら、和-Nodeが適正価格で丁寧に制作できる理由をご説明します。</p>
-        
-        <div class="anchoring-table-wrap">
-          <div class="anchoring-row header">
-            <div>制作タイプ</div>
-            <div>一般的な制作会社の参考価格帯</div>
-            <div>和-Node（キャンペーン価格）</div>
-          </div>
-          <div class="anchoring-row">
-            <div class="type-name">シンプルHP制作</div>
-            <div class="market-price">初期 30万〜50万円<br><span class="sub">保守：月額 1万〜3万円</span></div>
-            <div class="wa-price">初期 40,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
-          </div>
-          <div class="anchoring-row">
-            <div class="type-name">選ばれる導線LP（推奨）</div>
-            <div class="market-price">初期 15万〜50万円<br><span class="sub">保守：月額 1万〜3万円</span></div>
-            <div class="wa-price highlight">初期 64,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
-          </div>
-          <div class="anchoring-row">
-            <div class="type-name">選ばれる導線HP制作</div>
-            <div class="market-price">初期 50万〜120万円<br><span class="sub">保守：月額 1.5万〜5万円</span></div>
-            <div class="wa-price">初期 144,000円〜<br><span class="sub">保守：任意（月額 1万円）</span></div>
-          </div>
-        </div>
-        <p class="anchoring-caveat">※価格帯はページ数、原稿・画像の準備状況、予約・決済・CMSなどの機能、運用支援の範囲によって大きく変わります。条件が同じとは限らないため、比較の目安としてご覧ください。</p>
-
-        <div class="anchoring-reason">
-          <h4>和-Nodeが「丁寧な設計×適正価格」を実現できる理由</h4>
-          <ul>
-            <li><strong>余計な中間マージンや広告費のカット:</strong> 営業活動や過度なオフィス維持費を省き、紹介やWebからの直接依頼のみで運営しているため、余分なコストが上乗せされません。</li>
-            <li><strong>Vanilla CSSと自社開発テンプレートの最適化:</strong> 無駄な重いCMS（WordPressなど）や余計なシステムを使わず、高速・軽量なコードを自社で最適化して構築するため、エンジニアの作業工数を大幅に短縮しています。</li>
-            <li><strong>本質的な「選ばれる導線設計」に集中:</strong> 突飛な視覚効果や複雑すぎるデザインは省き、見込み客が迷わず安心して比較・相談しやすい設計に集中して構築します。</li>
-          </ul>
-        </div>
-      </div>
-
-      <!-- プラン切り替えスイッチ -->
-      <div class="plan-tabs-wrapper reveal">
-        <div class="plan-tabs" role="tablist">
-          <button class="plan-tab-btn active" data-plan-tab="hp" role="tab" aria-selected="true">
-            <MaterialIcon name="language" /> ホームページ（HP）制作
-          </button>
-          <button class="plan-tab-btn" data-plan-tab="lp" role="tab" aria-selected="false">
-            <MaterialIcon name="ads_click" /> ランディングページ（LP）制作
-          </button>
-        </div>
-      </div>
-
-      <!-- HP制作プランカード -->
-      <div id="plan-content-hp" class="plan-content active-plan">
-        <div class="recommended-price-grid">
-          <article class="recommended-price-card card-border-gold">
-            <span class="price-badge-ume">梅プラン</span>
-            <h3><span class="card-icon-window window-gold"><MaterialIcon name="article" /></span>シンプルHP制作</h3>
-            <p class="p-price">40,000円〜 <small>キャンペーン価格</small></p>
-            <div class="scope-badges" aria-label="最低価格で含まれる制作範囲">
-              <b>3ページまで</b>
-              <b>各1,500px程度</b>
-              <b>合計4,500px程度</b>
-            </div>
-            <p>3ページまで、PC幅1440px基準で各ページ縦1,500px程度・合計4,500px程度までの小規模なホームページです。</p>
-            <a class="scope-sample-link" href="/portfolio-lp/simple-hp-scope/index.html">3ページサンプルを見る →</a>
-          </article>
-          <article class="recommended-price-card highlight-take card-border-gold">
-            <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
-            <h3><span class="card-icon-window window-gold"><MaterialIcon name="star" /></span>選ばれる導線HP制作</h3>
-            <p class="p-price">144,000円〜 <small>キャンペーン価格</small></p>
-            <p>5ページ程度の標準的なホームページ。行動心理をふまえ、見込み客が迷わず安心して相談や購入を検討しやすい情報設計を整えます。</p>
-          </article>
-          <article class="recommended-price-card card-border-blue">
-            <span class="price-badge-matsu">松プラン</span>
-            <h3><span class="card-icon-window window-blue"><MaterialIcon name="layers" /></span>HPパッケージ「Business 7」</h3>
-            <p class="p-price">192,000円〜 <small>キャンペーン価格</small></p>
-            <p>7ページ構成の充実プラン。標準SEO、プレミアム仕上げ、複数のお問い合わせ動線を含む本格パッケージです。</p>
-          </article>
-        </div>
-      </div>
-
-      <!-- LP制作プランカード -->
-      <div id="plan-content-lp" class="plan-content">
-        <div class="recommended-price-grid">
-          <article class="recommended-price-card card-border-gold">
-            <span class="price-badge-ume">梅プラン</span>
-            <h3><span class="card-icon-window window-gold"><MaterialIcon name="article" /></span>シンプルLP制作</h3>
-            <p class="p-price">24,000円〜 <small>キャンペーン価格</small></p>
-            <div class="scope-badges" aria-label="最低価格で含まれる制作範囲">
-              <b>1ページ</b>
-              <b>縦2,500px程度</b>
-              <b>5セクションまで</b>
-            </div>
-            <p>1ページ、PC幅1440px基準で縦2,500px程度・5セクションまでの簡易的なランディングページです。</p>
-            <a class="scope-sample-link" href="/portfolio-lp/simple-lp-scope.html">2,500pxサンプルを見る →</a>
-          </article>
-          <article class="recommended-price-card highlight-take card-border-gold">
-            <span class="price-badge-take">竹プラン ★ 推奨・一番人気</span>
-            <h3><span class="card-icon-window window-gold"><MaterialIcon name="star" /></span>選ばれる導線LP制作</h3>
-            <p class="p-price">64,000円〜 <small>キャンペーン価格</small></p>
-            <p>行動心理をふまえ、最初に見える印象から信頼形成、相談ボタンまで一貫設計。相談・申込みにつながりやすい推奨プランです。</p>
-          </article>
-          <article class="recommended-price-card card-border-blue">
-            <span class="price-badge-matsu">松プラン</span>
-            <h3><span class="card-icon-window window-blue"><MaterialIcon name="layers" /></span>プレミアム選ばれる導線LP</h3>
-            <p class="p-price">120,000円〜 <small>キャンペーン価格</small></p>
-            <p>丁寧な導線LPに加え、問い合わせ後のGASメール自動送信やLINE連携などの自動化システム構築をセットにした業務効率化パックです。</p>
-          </article>
-        </div>
-      </div>
-      <section class="minimum-scope" aria-labelledby="minimum-scope-title">
-        <div class="minimum-scope-heading">
-          <p class="eyebrow">Minimum Scope</p>
-          <h3 id="minimum-scope-title">最低価格で含まれる制作範囲</h3>
-          <p>PC幅1440pxで見た縦の目安です。スマホ表示はレスポンシブ対応します。</p>
-        </div>
-        <div class="minimum-scope-grid">
-          <div class="minimum-scope-item">
-            <strong>シンプルLP制作 <span>24,000円〜</span></strong>
-            <dl>
-              <div><dt>ページ数</dt><dd>1ページ</dd></div>
-              <div><dt>縦の目安</dt><dd>2,500px程度まで</dd></div>
-              <div><dt>構成</dt><dd>5セクションまで</dd></div>
-            </dl>
-            <a class="minimum-scope-link" href="/portfolio-lp/simple-lp-scope.html">実際のサイズ感を見る →</a>
-          </div>
-          <div class="minimum-scope-item">
-            <strong>シンプルHP制作 <span>40,000円〜</span></strong>
-            <dl>
-              <div><dt>ページ数</dt><dd>3ページまで</dd></div>
-              <div><dt>縦の目安</dt><dd>各1,500px程度まで</dd></div>
-              <div><dt>合計</dt><dd>4,500px程度まで</dd></div>
-            </dl>
-            <a class="minimum-scope-link" href="/portfolio-lp/simple-hp-scope/index.html">実際の3ページ構成を見る →</a>
-          </div>
-        </div>
-        <p class="minimum-scope-note">原稿量・画像・表・フォーム・予約・ブログ・外部連携などで作業量が増える場合は、事前に追加範囲と費用をご案内します。</p>
-      </section>
-
-      <details class="site-type-cost-note">
-        <summary>料金が変わるポイント：静的サイト・動的サイトの違い</summary>
-        <div class="site-type-cost-body">
-          <div class="site-type-compare" aria-label="静的サイトと動的サイトの比較">
-            <div class="site-type-card site-type-card-static">
-              <span class="site-type-badge">静的サイト</span>
-              <strong>見せる・伝える中心</strong>
-              <div class="site-type-mini-flow" aria-hidden="true">
-                <span>情報</span>
-                <span>表示</span>
-                <span>相談</span>
-              </div>
-              <ul>
-                <li>会社案内・サービス紹介・料金表</li>
-                <li>LP、問い合わせ導線、実績紹介</li>
-                <li>更新頻度が低い固定ページ</li>
-              </ul>
-              <p class="site-type-result">表示が速く、費用と保守を抑えやすい</p>
-            </div>
-            <div class="site-type-card site-type-card-dynamic">
-              <span class="site-type-badge">動的サイト・連携機能</span>
-              <strong>保存・管理・個別処理が中心</strong>
-              <div class="site-type-mini-flow" aria-hidden="true">
-                <span>入力</span>
-                <span>保存</span>
-                <span>管理</span>
-              </div>
-              <ul>
-                <li>予約データの保存・自動返信</li>
-                <li>ログイン、会員機能、管理画面</li>
-                <li>CMS更新、DB連携、外部サービス連携</li>
-              </ul>
-              <p class="site-type-result">設計・保守・セキュリティ確認の範囲が広がる</p>
-            </div>
-          </div>
-          <div class="site-type-price-factors">
-            <strong>料金が上がりやすい条件</strong>
-            <ul>
-              <li>情報を「見せる」だけでなく、保存・検索・編集する</li>
-              <li>ユーザーごとに表示や操作できる内容を変える</li>
-              <li>LINE、予約システム、決済、メール自動送信などをつなぐ</li>
+            <h3 class="price-card__sub-heading">価格に影響する要素</h3>
+            <ul class="price-card__factors">
+              {priceFactors.map(text => (
+                <li>
+                  <MaterialIcon name="tune" />
+                  <span>{text}</span>
+                </li>
+              ))}
             </ul>
           </div>
-          <p>
-            どちらが必要か分からない段階でも大丈夫です。目的と運用方法を確認したうえで、過不足のない構成をご提案します。
-          </p>
-          <a href="/tech-stack/#site-type-title">静的・動的サイトの違いを詳しく見る</a>
-        </div>
-      </details>
 
-      <details class="addon-details price-details">
-        <summary>シンプル制作・保守・オプションを含む料金一覧を見る</summary>
-        <div class="table-wrap">
-          <table>
-            <thead>
-              <tr><th>サービス</th><th>通常価格</th><th>キャンペーン価格</th><th>内容</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>シンプルLP制作</td><td>30,000円〜</td><td class="price-campaign">24,000円〜</td><td>1ページ・PC幅1440px基準で縦2,500px程度・5セクションまで</td></tr>
-              <tr><td>シンプルHP制作</td><td>50,000円〜</td><td class="price-campaign">40,000円〜</td><td>3ページ・各ページ縦1,500px程度・合計4,500px程度まで</td></tr>
-              <tr><td>選ばれる導線LP制作</td><td>80,000円〜</td><td class="price-campaign">64,000円〜</td><td>行動心理をふまえた高品質LP（構成案から作成）</td></tr>
-              <tr><td>プレミアム選ばれる導線LP</td><td>150,000円〜</td><td class="price-campaign">120,000円〜</td><td>高品質LPに、問い合わせ後のGASメール自動送信やLINE連携などの自動化を追加</td></tr>
-              <tr><td>選ばれる導線HP制作</td><td>180,000円〜</td><td class="price-campaign">144,000円〜</td><td>5ページ程度の標準的なホームページ</td></tr>
-              <tr><td>HPパッケージ「Business 7」</td><td>240,000円〜</td><td class="price-campaign">192,000円〜</td><td>7ページ構成・標準SEO・プレミアム仕上げ</td></tr>
-              <tr><td>制作オプション</td><td>5,000円〜</td><td class="price-campaign">4,000円〜</td><td>図解作成、ブログ/CMS機能、診断ツール組み込み、相談ボタン・色彩チェック、AI検索/AEO内部対策等</td></tr>
-              <tr><td>Webサイト保守</td><td>月額 10,000円〜</td><td>-</td><td>安全な運用、セキュリティ管理、軽微な修正代行</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-
-      <div class="demo-price-guide reveal" aria-labelledby="demo-price-title">
-        <div class="demo-price-copy">
-          <p class="eyebrow">Demo Price Guide</p>
-          <h3 id="demo-price-title">デモを見ながら価格感をつかむ</h3>
-          <p>「このデモに近いものならいくら？」を相談前にイメージしやすいよう、制作例にも参考価格帯を載せています。</p>
-        </div>
-        <div class="demo-price-grid">
-          <a href="/lp-portfolio/" class="demo-price-card card-border-gold">
-            <span>LPサンプル</span>
-            <strong>24,000円〜120,000円前後</strong>
-            <small>業種別LP、キャンペーンLP、予約・申込導線など</small>
-          </a>
-          <a href="/salon-reservation-demo/" class="demo-price-card card-border-green">
-            <span>予約導線LP</span>
-            <strong>64,000円〜120,000円前後</strong>
-            <small>料金・初回説明・LINE予約などを整理した構成</small>
-          </a>
-          <a href="/ai-chat-demo/" class="demo-price-card card-border-blue">
-            <span>AI・診断ツール</span>
-            <strong>30,000円〜80,000円前後</strong>
-            <small>設問分岐、AI相談整理、簡易診断ツールなど</small>
-          </a>
-          <a href="/wasm-diagnosis/" class="demo-price-card card-border-blue">
-            <span>ブラウザ内診断</span>
-            <strong>40,000円〜100,000円前後</strong>
-            <small>配色チェック、公開前診断、相談前セルフチェックなど</small>
-          </a>
-        </div>
-      </div>
-      <div class="plan-picker" aria-label="梅竹松の選び方">
-        <div>
-          <span>梅</span>
-          <strong>名刺代わりに最低限</strong>
-          <p>まずWeb上の拠点を作りたい方向け。</p>
-        </div>
-        <div class="recommended">
-          <span>竹</span>
-          <strong>相談につなげたい</strong>
-          <p>料金・流れ・強みを整理し、初見の不安を減らす推奨ライン。</p>
-        </div>
-        <div>
-          <span>松</span>
-          <strong>連携・自動化まで</strong>
-          <p>予約、LINE、メール自動送信なども含めて整えたい方向け。</p>
+          <p class="price-card__note">正式なお見積りは、要件をヒアリングしたうえでご提示します。</p>
+          <a href="/contact/" class="cta-button">無料で費用感を聞く</a>
         </div>
       </div>
     </section>
 
-    <section class="section service-map-section" aria-labelledby="service-map-title">
-      <p class="eyebrow">Service Map</p>
-      <h2 id="service-map-title" class="premium-heading">制作・診断・保守・成長支援の違い</h2>
-      <p class="service-map-lead">
-        似た言葉に見えても、目的はそれぞれ違います。新しく作るのか、今あるものの原因を見つけるのか、
-        公開後を守るのか、毎月の判断まで伴走するのかで、選ぶメニューが変わります。
-      </p>
-      <div class="service-map-grid">
-        <a href="#web-production" class="service-map-card card-border-gold">
-          <span>作る</span>
-          <h3>LP・HP制作</h3>
-          <p>構成、デザイン、実装、公開まで含めて新しく形にします。</p>
-          <strong>LP 24,000円〜 / HP 40,000円〜</strong>
-        </a>
-        <a href="#lp-diagnosis" class="service-map-card card-border-green">
-          <span>見つける</span>
-          <h3>LP改善診断</h3>
-          <p>今あるLPの迷いどころを確認し、直す順番を整理します。</p>
-          <strong>15,000円〜</strong>
-        </a>
-        <a href="#copilot" class="service-map-card card-border-blue">
-          <span>守る</span>
-          <h3>保守・軽微修正</h3>
-          <p>公開後の安全な運用、軽微な修正、更新まわりを支えます。</p>
-          <strong>月額 10,000円〜</strong>
-        </a>
-        <a href="#copilot" class="service-map-card card-border-red">
-          <span>伸ばす</span>
-          <h3>副操縦士・AI/ICT支援</h3>
-          <p>Web改善、AI活用、業務整理を継続的に相談できます。</p>
-          <strong>月額 15,000円〜</strong>
-        </a>
+    <!-- 対応範囲 -->
+    <section class="section section--alt" aria-labelledby="scope-heading">
+      <div class="section-inner">
+        <h2 id="scope-heading" class="section-heading">対応できること・できないこと</h2>
+        <div class="scope-grid">
+          <div class="scope-col scope-col--can">
+            <h3 class="scope-col__heading scope-col__heading--can">
+              <MaterialIcon name="check_circle" />
+              対応できる
+            </h3>
+            <ul class="scope-list">
+              {canDo.map(text => (
+                <li>
+                  <MaterialIcon name="check" class="icon-can" />
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="scope-col scope-col--cannot">
+            <h3 class="scope-col__heading scope-col__heading--cannot">
+              <MaterialIcon name="cancel" />
+              対応できない
+            </h3>
+            <ul class="scope-list">
+              {cannotDo.map(text => (
+                <li>
+                  <MaterialIcon name="close" class="icon-cannot" />
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" aria-labelledby="faq-heading">
+      <div class="section-inner">
+        <h2 id="faq-heading" class="section-heading">よくあるご質問</h2>
+        <dl class="faq-list">
+          {faqItems.map(item => (
+            <div class="faq-item">
+              <dt class="faq-q">
+                <MaterialIcon name="help" class="faq-icon" />
+                {item.question}
+              </dt>
+              <dd class="faq-a">{item.answer}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </section>
 
-    <section class="section" id="copilot">
-      <p class="eyebrow">02. Ongoing Support & AI</p>
-      <h2 class="premium-heading">ビジネスの副操縦士（月額制戦略的パートナー）</h2>
-      <p>「作って終わり」にせず、現場の課題を継続的に整理・改善し、AIや自動化を無理なく定着させます。</p>
-      
-      <div class="pricing-grid-simple">
-        <div class="p-card-simple highlight card-border-blue">
-          <span class="p-tag">おすすめ・人気</span>
-          <h3><span class="card-icon-window window-blue"><MaterialIcon name="explore" /></span>ビジネスの副操縦士（ライトプラン）</h3>
-          <p class="p-price">15,000円〜 <small>/ 月</small></p>
-          <p class="p-desc">月1回のオンライン相談 + チャットでの随時相談。Web改善からAI活用まで幅広くサポート。</p>
-        </div>
-        <div class="p-card-simple card-border-green" id="ict-ai">
-          <h3><span class="card-icon-window window-green"><MaterialIcon name="forum" /></span>ICTスポット相談</h3>
-          <p class="p-price">5,000円 <small>/ 60分</small></p>
-          <p class="p-desc">ChatGPT、LINE、業務ツール、Webまわりの課題をピンポイントで解決します。</p>
-        </div>
-        <div class="p-card-simple card-border-gold">
-          <h3><span class="card-icon-window window-gold"><MaterialIcon name="auto_awesome" /></span>AI活用スタートパック</h3>
-          <p class="p-price">30,000円</p>
-          <p class="p-desc">ChatGPT等の初期設定、プロンプト雛形作成、実務での活用プランニング。</p>
-        </div>
-      </div>
-
-      <details class="addon-details">
-        <summary>その他のプラン・詳細オプションを表示する</summary>
-        <p class="details-lead">単発の診断だけでも利用できます。必要に応じて、制作・月額支援・AI/ICT活用へつなげます。</p>
-        <div class="table-wrap mini">
-          <table>
-            <thead>
-              <tr><th>メニュー名</th><th>料金</th><th>内容</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>ビジネスの副操縦士（スタンダード）</td><td>45,000円 / 月</td><td>月2回相談 + 改善提案 + 簡易マニュアル・プロンプト作成</td></tr>
-              <tr><td>業務整理ミニ診断</td><td>15,000円</td><td>90分相談 + 改善メモ。何を自動化すべきか優先順位を整理</td></tr>
-              <tr><td>LP改善入口診断</td><td>15,000円〜</td><td>既存LPを対象に、ファーストビュー、相談ボタン、料金表、フォーム前の不安、スマホ表示を確認。新規制作ではなく改善優先度を整理</td></tr>
-              <tr><td>詳細導線診断</td><td>30,000円〜</td><td>競合・構成・CTA・料金表・フォーム・AI検索で拾われる構造まで広げて、改善箇所を切り分け</td></tr>
-              <tr><td>改善設計パック</td><td>50,000円〜</td><td>改善ラフ、文言案、実装範囲、制作へ進む場合の見積り前提を整理</td></tr>
-              <tr><td>AI検索・AEO内部対策</td><td>15,000円〜</td><td>ChatGPT等のAI検索やGoogle AI Overviewsに拾われやすい見出し、FAQ、構造化データ、要約設計を確認</td></tr>
-              <tr><td>LP改善A/Bテスト設計</td><td>15,000円〜</td><td>見出し、相談ボタン、料金表、フォーム文言の改善案を2〜3案に整理し、アクセス解析で比べやすい形に設計</td></tr>
-              <tr><td>相談ボタン・色彩チェック</td><td>5,000円〜</td><td>ボタン色、文言、配置、文字の見やすさ、スマホでの押しやすさを確認</td></tr>
-              <tr><td>モーション/光のUXチェック</td><td>5,000円〜</td><td>動きすぎ、眩しさ、読みにくさなど、離脱につながる視覚負荷を確認</td></tr>
-              <tr><td>AI制作物チェック</td><td>10,000円〜</td><td>AIで作成した文章・LP案・サイト案を、導線・信頼感・表現リスクの観点から整理</td></tr>
-              <tr><td>Figma/AI試作品の本番化相談</td><td>15,000円〜</td><td>FigmaやAIツールで作った試作品を、本番公開に必要な構成・文言・実装方針へ整理</td></tr>
-              <tr><td>軽量CMS・更新導線相談</td><td>10,000円〜</td><td>お知らせやブログの更新頻度に合わせ、静的サイトと相性のよいCMS連携を検討</td></tr>
-              <tr><td>軽量CMS・お知らせ更新導線設計</td><td>30,000円〜80,000円</td><td>microCMS等を使い、公開後に自分で更新しやすいお知らせ・ブログ導線を設計</td></tr>
-              <tr><td>Webサイト保守ライト</td><td>月額 10,000円〜</td><td>公開後の安全な運用、軽微な修正、表示崩れやリンク切れの確認を代行</td></tr>
-              <tr><td>小規模DX設計パック</td><td>50,000円</td><td>業務フローの可視化、ツール選定、導入・定着のステップ作成</td></tr>
-              <tr><td>法人向けAI導入・研修</td><td>80,000円〜</td><td>社内レクチャー、運用ガイドライン作成、業務別活用設計</td></tr>
-              <tr><td>LINE公式アカウント設計</td><td>20,000円〜</td><td>登録から成約までの行動心理をふまえた初期構築</td></tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </section>
-
-    <section class="section">
-      <p class="eyebrow">03. Organization & Communication</p>
-      <h2 class="premium-heading">チームの相談設計・コミュニケーション支援</h2>
-      <p>心理学の専門知見を、職場の対話設計やチーム運用の整理に応用します。Web・ICT支援の補助線として必要な範囲で扱います。</p>
-      <details class="addon-details">
-        <summary>チーム支援・個別相談整理の料金を見る</summary>
-        <div class="table-wrap mini">
-          <table>
-            <tbody>
-              <tr>
-                <td>チームコミュニケーション設計</td>
-                <td>15,000円〜 / 月</td>
-                <td>小規模法人向け。相談導線の設計や、心理的安全性をふまえた運用サポート。</td>
-              </tr>
-              <tr>
-                <td>経営者・リーダーの相談整理</td>
-                <td>初回 5,000円 / 60分<br />通常 10,000円 / 60分</td>
-                <td>意思決定やチーム運用のための壁打ち・状況整理。初回は試しやすい価格でご相談いただけます。</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </details>
-    </section>
-
-    <section class="section pricing-faq" aria-labelledby="pricing-faq-title">
-      <p class="eyebrow">Before Consultation</p>
-      <h2 id="pricing-faq-title" class="premium-heading">無料相談前のよくある不安</h2>
-      <div class="faq-list">
-        <details>
-          <summary>相談だけで終わっても大丈夫ですか？</summary>
-          <p>大丈夫です。状況整理だけで十分な場合は、無理に制作や月額契約をおすすめしません。</p>
-        </details>
-        <details>
-          <summary>まだ何を頼むか決まっていなくても相談できますか？</summary>
-          <p>はい。Web制作、LP制作、AI・ICT活用、公開後の改善のうち、今どこから始めるべきか一緒に整理します。</p>
-        </details>
-        <details>
-          <summary>15,000円でLPを作ってもらえますか？</summary>
-          <p>15,000円〜は、新規LP制作ではなく既存LPの改善診断の入口価格です。今あるLPのファーストビュー、相談ボタン、料金表、フォーム前の不安などを確認し、先に直すべき場所を整理します。新規LP制作はシンプルLP制作24,000円〜、選ばれる導線LP制作64,000円〜が目安です。</p>
-        </details>
-        <details>
-          <summary>LP改善診断のあと、そのまま制作や修正も頼めますか？</summary>
-          <p>はい。診断で見つかった課題をもとに、軽微修正で足りるのか、LPを作り直した方がよいのか、必要な範囲と費用を分けてご提案します。診断だけで終了しても問題ありません。</p>
-        </details>
-        <details>
-          <summary>相談後に契約を迫られることはありますか？</summary>
-          <p>ありません。必要な範囲・費用・進め方を確認し、ご納得いただいた場合のみ正式に開始します。</p>
-        </details>
-        <details>
-          <summary>料金があとから大きく増えることはありますか？</summary>
-          <p>追加作業が必要な場合は、事前に内容と費用を確認します。合意のない追加請求は行いません。</p>
-        </details>
-        <details>
-          <summary>問い合わせ数やSEO順位は保証されますか？</summary>
-          <p>保証はしていません。検索順位・広告成果・問い合わせ数は状況によって変わります。和-Nodeでは、見出し、相談ボタン、料金表、FAQ、フォーム、アクセス解析の環境を整え、改善しやすい状態を作ります。</p>
-        </details>
-        <details>
-          <summary>不安を煽る表現や、強く誘導する導線も作れますか？</summary>
-          <p>和-Nodeでは、いわゆる「ダーク心理学」や、恐怖・断りにくさを利用して行動を迫る設計は行いません。一方で、見落としがちなリスクや機会損失は誠実に可視化し、お客様のブランドと信頼を守りながら、訪問者が安心して比較・相談・判断できる導線を設計します。</p>
-        </details>
-        <details>
-          <summary>AIや相談内容の扱いは安全ですか？</summary>
-          <p>不要な個人情報や機密情報は初回相談フォームに入力しないでください。AIや外部ツールを使う場合は、必要な範囲と扱い方を確認し、許可なく個人情報・機密情報を外部AIへ入力しません。</p>
-        </details>
-        <details>
-          <summary>Web制作だけでなく、公開後の改善も相談できますか？</summary>
-          <p>はい。公開後の問い合わせ状況、検索データ、アクセス解析、フォーム内容などを見ながら、月額の戦略的パートナー契約として継続改善も相談できます。</p>
-        </details>
+    <!-- CTA -->
+    <section class="section section--cta" aria-labelledby="cta-heading">
+      <div class="section-inner cta-inner">
+        <h2 id="cta-heading" class="cta-heading">まずは、30分の無料相談。</h2>
+        <p class="cta-lead">費用感だけでも知りたい方、要件がまだ固まっていない方、<br class="sp-hide">お気軽にご相談ください。</p>
+        <a href="/contact/" class="cta-button cta-button--large">無料相談を予約する</a>
+        <p class="cta-note">返信は営業日2日以内 / 相談後の契約義務はありません</p>
       </div>
     </section>
 
-    <ConsultationFlow />
-    <details class="flow-details reveal">
-      <summary>
-        <span>ご契約後の制作・サポートの流れを確認する</span>
-        <small>支払いタイミング、和-Nodeの作業、お客様にお願いする内容を開いて確認できます。</small>
-      </summary>
-      <ProjectExecutionFlow lang="ja" />
-    </details>
   </main>
 </BaseLayout>
 
-<script>
-  function initPlanTabs() {
-    const tabButtons = document.querySelectorAll('.plan-tab-btn');
-    const planContents = document.querySelectorAll('.plan-content');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function playPlanMotion(content) {
-      if (!content || reduceMotion) return;
-      const cards = content.querySelectorAll('.recommended-price-card');
-      cards.forEach((card, index) => {
-        card.style.setProperty('--motion-order', index);
-        card.classList.remove('plan-card-enter');
-        void card.offsetWidth;
-        card.classList.add('plan-card-enter');
-      });
-    }
-
-    tabButtons.forEach(button => {
-      if (button.dataset.planTabBound === 'true') return;
-      button.dataset.planTabBound = 'true';
-
-      button.addEventListener('click', () => {
-        const targetTab = button.getAttribute('data-plan-tab');
-
-        // Deactivate all buttons
-        tabButtons.forEach(btn => {
-          btn.classList.remove('active');
-          btn.setAttribute('aria-selected', 'false');
-        });
-
-        // Hide all contents
-        planContents.forEach(content => {
-          content.classList.remove('active-plan');
-        });
-
-        // Activate selected button & content
-        button.classList.add('active');
-        button.setAttribute('aria-selected', 'true');
-        
-        const targetContent = document.getElementById(`plan-content-${targetTab}`);
-        if (targetContent) {
-          targetContent.classList.add('active-plan');
-          playPlanMotion(targetContent);
-        }
-      });
-    });
-
-    playPlanMotion(document.querySelector('.plan-content.active-plan'));
+<style>
+  /* ---- Layout ---- */
+  .pricing-page {
+    color: var(--text);
   }
 
-  // Support page transition in Astro (swup/barba/native)
-  document.addEventListener('astro:page-load', initPlanTabs);
-  document.addEventListener('DOMContentLoaded', initPlanTabs);
-  initPlanTabs();
-</script>
-
-<style is:global>
-  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
-
-  :root {
-    --accent: #8c6b1f;
-    --accent-dark: #725719;
-    --accent-red: #c7352f;
-    --accent-red-dark: #b62f29;
-    --trust: #0f4c5c;
-    --trust-mid: #1f6f78;
-    --trust-line: rgba(15, 76, 92, 0.18);
-    --line: rgba(140, 107, 31, 0.2);
-    --base: #ffffff;
-    --surface: #ffffff;
-    --surface-strong: #fbfcfb;
-    --surface-cool: #eef5f2;
-    --card-border: rgba(15, 76, 92, 0.14);
-    --card-shadow: 0 16px 38px rgba(15, 76, 92, 0.075), 0 4px 14px rgba(70, 52, 32, 0.045);
-    --card-shadow-hover: 0 24px 52px rgba(15, 76, 92, 0.12), 0 8px 20px rgba(70, 52, 32, 0.07);
+  .section {
+    padding: 4rem 1.5rem;
   }
 
-  .premium-heading {
-    font-family: 'Shippori Mincho', serif !important;
-    font-weight: 800 !important;
-    letter-spacing: 0.05em;
+  .section--alt {
+    background: var(--surface-muted);
   }
 
-  .pricing-container {
-    background: linear-gradient(180deg, #ffffff 0%, #ffffff 52%, #f7faf8 100%);
-    font-family: 'Shippori Mincho', serif !important;
-  }
-
-  .hero { padding: 80px 0 60px; border-bottom: 1px solid var(--line); text-align: center; }
-  .hero-inner, .section { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-  
-  .premium-ann-banner { margin: 40px 0 0; }
-  .banner-inner {
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%); border: 1px solid var(--accent-red); border-radius: 24px;
-    padding: 24px 32px; display: flex; align-items: center; gap: 30px;
-    box-shadow: 0 15px 40px rgba(199, 53, 47, 0.08); position: relative;
-  }
-  .banner-badge {
-    background: var(--accent-red); color: #fff; font-size: 0.7rem; font-weight: 800;
-    padding: 4px 12px; border-radius: 4px; white-space: nowrap;
-  }
-  .banner-main { flex: 1; text-align: left; }
-  .banner-main strong { display: block; font-size: 1.3rem; color: var(--accent-red); margin-bottom: 4px; }
-  .banner-link {
-    font-size: 0.95rem; font-weight: 800; color: var(--accent-red); text-decoration: none;
-    padding: 12px 24px; border: 1px solid var(--accent-red); border-radius: 12px;
-    transition: 0.3s; white-space: nowrap;
-  }
-  .banner-link:hover { background: var(--accent-red); color: #fff; }
-
-  .lead { font-size: 1.1rem; color: #555; margin-bottom: 30px; }
-  .note { background: var(--surface); border: 1px solid var(--card-border); padding: 20px; border-radius: 15px; color: #666; font-size: 0.95rem; box-shadow: var(--card-shadow); }
-
-  .section { padding: 80px 20px; }
-  .eyebrow { font-size: 0.8rem; font-weight: 800; color: var(--accent); letter-spacing: 0.2em; margin-bottom: 10px; display: block; }
-  h2 { font-size: 2.2rem; margin-bottom: 20px; color: #2c2c2c; }
-
-  .choice-guide {
-    padding-top: 70px;
-    padding-bottom: 70px;
-    text-align: center;
-    border-bottom: 1px solid var(--line);
-  }
-  .choice-lead {
-    max-width: 720px;
-    margin: 0 auto 34px;
-    color: #555;
-    line-height: 1.8;
-  }
-  .choice-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 18px;
-    margin: 34px 0 20px;
-  }
-  .choice-card {
-    display: flex;
-    min-height: 260px;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 14px;
-    padding: 28px 24px;
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    background: linear-gradient(180deg, #fff 0%, var(--surface) 100%);
-    color: #333;
-    text-decoration: none;
-    text-align: left;
-    box-shadow: var(--card-shadow);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-  }
-  .choice-card:hover {
-    border-color: var(--trust-mid);
-    box-shadow: var(--card-shadow-hover);
-    transform: translateY(-3px);
-  }
-  .choice-card.primary-choice {
-    border: 2px solid var(--trust-line);
-    background: linear-gradient(135deg, rgba(238, 245, 242, 0.94), rgba(199, 53, 47, 0.045)), var(--surface);
-  }
-  .choice-label {
-    align-self: flex-start;
-    border-radius: 999px;
-    background: rgba(15, 76, 92, 0.08);
-    color: var(--trust);
-    font-size: 0.75rem;
-    font-weight: 800;
-    padding: 5px 12px;
-  }
-  .choice-card h3 {
-    margin: 0;
-    color: #2c2c2c;
-    font-size: 1.25rem;
-    line-height: 1.45;
-  }
-  .choice-card p {
-    margin: 0;
-    color: #666;
-    font-size: 0.92rem;
-    line-height: 1.7;
-  }
-  .choice-card .choice-fit {
-    display: inline-block;
-    align-self: flex-start;
-    margin: 0;
-    padding: 5px 12px;
-    border-radius: 999px;
-    background: rgba(15, 76, 92, 0.07);
-    color: var(--trust);
-    font-size: 0.78rem;
-    font-weight: 800;
-  }
-  .choice-card strong {
-    color: var(--trust);
-    font-size: 1.15rem;
-  }
-  .choice-footnote {
+  .section-inner {
+    max-width: 800px;
     margin: 0 auto;
-    max-width: 680px;
-    color: #777;
-    font-size: 0.92rem;
   }
-  .lp-diagnosis-section {
-    border-bottom: 1px solid var(--line);
-  }
-  .lp-diagnosis-lead,
-  .service-map-lead {
-    max-width: 780px;
-    color: #555;
-    line-height: 1.85;
-  }
-  .lp-diagnosis-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
-    margin: 34px 0 28px;
-  }
-  .lp-diagnosis-grid article {
-    padding: 26px 24px;
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
-    box-shadow: var(--card-shadow);
-  }
-  .lp-diagnosis-grid span,
-  .service-map-card span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 42px;
-    min-height: 30px;
-    margin-bottom: 14px;
-    border-radius: 999px;
-    background: rgba(15, 76, 92, 0.08);
-    color: var(--trust);
-    font-size: 0.78rem;
-    font-weight: 900;
-  }
-  .lp-diagnosis-grid h3,
-  .lp-diagnosis-price-copy h3,
-  .service-map-card h3 {
-    margin: 0 0 10px;
-    color: #2c2c2c;
-    font-size: 1.12rem;
-    font-weight: 900;
-  }
-  .lp-diagnosis-grid p,
-  .lp-diagnosis-price-copy p,
-  .lp-diagnosis-boundary p,
-  .service-map-card p {
-    margin: 0;
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.75;
-  }
-  .lp-diagnosis-price-box {
-    display: grid;
-    grid-template-columns: 0.85fr 1.35fr;
-    gap: 22px;
-    align-items: start;
-    margin: 28px 0 18px;
-    padding: 28px;
-    border: 1px solid var(--trust-line);
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(238, 245, 242, 0.86), rgba(255, 255, 255, 0.96));
-  }
-  .lp-diagnosis-price-copy h3 {
-    color: var(--trust);
-  }
-  .lp-diagnosis-table {
-    margin: 0;
-  }
-  .lp-diagnosis-boundary {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 14px;
-  }
-  .lp-diagnosis-boundary div {
-    padding: 20px 22px;
-    border: 1px dashed var(--line);
-    border-radius: 14px;
-    background: var(--surface);
-  }
-  .lp-diagnosis-boundary strong {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--accent-dark);
-    font-size: 0.95rem;
-    font-weight: 900;
-  }
-  .service-map-section {
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-  }
-  .service-map-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: 30px;
-  }
-  .service-map-card {
-    display: flex;
-    min-height: 230px;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 24px 20px;
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    background: var(--surface);
-    color: inherit;
-    text-decoration: none;
-    box-shadow: var(--card-shadow);
-    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-  }
-  .service-map-card:hover {
-    transform: translateY(-3px);
-    border-color: var(--trust-line);
-    box-shadow: var(--card-shadow-hover);
-  }
-  .service-map-card strong {
-    color: var(--trust);
-    font-size: 0.96rem;
-    line-height: 1.5;
-  }
-  .decision-guide {
-    margin: 30px auto 0;
-    max-width: 840px;
-    padding: 24px;
-    border: 1px solid var(--trust-line);
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(15, 76, 92, 0.05), rgba(255, 255, 255, 0.7)), var(--surface-cool);
-    text-align: left;
-  }
-  .decision-guide h3 {
-    margin: 0 0 16px;
-    color: #2c2c2c;
-    font-size: 1.05rem;
-    font-weight: 800;
-  }
-  .decision-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-  }
-  .decision-grid a {
-    display: block;
-    padding: 16px 18px;
-    border: 1px solid var(--trust-line);
-    border-radius: 14px;
-    background: var(--surface);
-    color: #333;
-    text-decoration: none;
-    transition: 0.25s ease;
-  }
-  .decision-grid a:hover {
-    border-color: var(--trust-mid);
-    transform: translateY(-2px);
-  }
-  .decision-grid span {
-    display: block;
-    color: #666;
-    font-size: 0.8rem;
+
+  .section-heading {
+    font-size: 1.5rem;
     font-weight: 700;
-    line-height: 1.5;
-  }
-  .decision-grid strong {
-    display: block;
-    margin-top: 4px;
+    text-align: center;
+    margin: 0 0 2.5rem;
     color: var(--trust);
-    font-size: 0.95rem;
-    line-height: 1.5;
   }
-  .plan-picker {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 14px;
-    max-width: 840px;
-    margin: 22px auto 0;
-  }
-  .plan-picker > div {
-    padding: 18px 18px 17px;
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    background: linear-gradient(180deg, #fff 0%, var(--surface-strong) 100%);
-    box-shadow: 0 10px 24px rgba(15, 76, 92, 0.045);
-    text-align: left;
-  }
-  .plan-picker > div.recommended {
-    border: 2px solid rgba(199, 53, 47, 0.35);
-    background: linear-gradient(135deg, rgba(199, 53, 47, 0.055), rgba(255, 255, 255, 0.96));
-  }
-  .plan-picker span {
-    display: inline-grid;
-    width: 34px;
-    height: 34px;
-    margin-bottom: 12px;
-    place-items: center;
-    border-radius: 50%;
+
+  /* ---- Hero ---- */
+  .hero {
     background: var(--trust);
-    color: #fff;
-    font-weight: 900;
-  }
-  .plan-picker .recommended span {
-    background: var(--accent-red);
-  }
-  .plan-picker strong {
-    display: block;
-    color: #2c2c2c;
-    font-size: 1rem;
-    line-height: 1.45;
-  }
-  .plan-picker p {
-    margin: 8px 0 0;
-    color: #666;
-    font-size: 0.84rem;
-    line-height: 1.7;
+    color: var(--white);
+    padding: 5rem 1.5rem 3.5rem;
+    text-align: center;
   }
 
-  .campaign-notice-box {
-    background: rgba(199, 53, 47, 0.035); border-left: 4px solid var(--accent-red);
-    padding: 20px; border-radius: 0 15px 15px 0; margin-bottom: 30px;
+  .hero-inner {
+    max-width: 720px;
+    margin: 0 auto;
   }
-  .campaign-notice-box strong { color: var(--accent-red); font-size: 1.1rem; }
 
-  .table-wrap { border: 1px solid var(--card-border); border-radius: 20px; overflow: hidden; background: var(--surface); margin-bottom: 40px; box-shadow: var(--card-shadow); }
-  table { width: 100%; border-collapse: collapse; }
-  th, td { padding: 20px; text-align: left; border-bottom: 1px solid var(--line); }
-  th { background: #f5eadc; color: var(--accent-dark); font-weight: 800; font-size: 0.85rem; }
-  .price-campaign { color: var(--accent-red); font-weight: 800; }
+  .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.75;
+    margin: 0 0 0.75rem;
+  }
 
-  .recommended-price-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 22px;
-    margin: 34px 0 18px;
-  }
-  .recommended-price-card {
-    position: relative;
-    overflow: hidden;
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
-    border: 1px solid var(--card-border);
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .recommended-price-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.72) 46%, transparent 62%);
-    opacity: 0;
-    transform: translateX(-55%);
-    transition: opacity 0.25s ease, transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-    pointer-events: none;
-  }
-  .recommended-price-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--card-shadow-hover);
-  }
-  .recommended-price-card:hover::before {
-    opacity: 0.55;
-    transform: translateX(55%);
-  }
-  .recommended-price-card.highlight-take {
-    border: 2px solid var(--accent-red);
-    background: linear-gradient(135deg, rgba(199, 53, 47, 0.045), rgba(15, 76, 92, 0.025)), var(--surface);
-    border-top: 5px solid var(--accent-red);
-    box-shadow: 0 20px 45px rgba(199, 53, 47, 0.1);
-  }
-  .recommended-price-card.highlight-take:hover {
-    transform: translateY(-3px);
-  }
-  .recommended-price-card.plan-card-enter {
-    animation: planCardEnter 0.46s cubic-bezier(0.22, 1, 0.36, 1) both;
-    animation-delay: calc(var(--motion-order, 0) * 70ms);
-  }
-  .recommended-price-card:hover .card-icon-window,
-  .p-card-simple:hover .card-icon-window {
-    transform: translateY(-2px) scale(1.04);
-  }
-  .price-badge-ume, .price-badge-take, .price-badge-matsu {
-    display: inline-block;
-    align-self: flex-start;
-    margin-bottom: 14px;
-    border-radius: 999px;
-    font-size: 0.78rem;
+  .page-heading {
+    font-size: 2rem;
     font-weight: 800;
-    padding: 5px 12px;
+    margin: 0 0 1.25rem;
+    line-height: 1.3;
   }
-  .price-badge-ume {
-    background: rgba(44, 44, 44, 0.08);
-    color: #555;
+
+  .lead {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    opacity: 0.92;
+    margin: 0;
   }
-  .price-badge-take {
-    background: var(--accent-red);
-    color: #fff;
+
+  /* ---- Price Card ---- */
+  .price-card {
+    background: var(--white);
+    border: 2px solid var(--trust);
+    border-radius: var(--radius);
+    padding: 2.5rem 2rem;
+    box-shadow: var(--shadow);
+    text-align: center;
   }
-  .price-badge-matsu {
-    background: rgba(140, 107, 31, 0.14);
-    color: var(--accent-dark);
-  }
-  .recommended-price-card span {
-    display: inline-block;
-    margin-bottom: 14px;
-    border-radius: 999px;
-    background: rgba(15, 76, 92, 0.08);
-    color: var(--trust);
-    font-size: 0.78rem;
-    font-weight: 800;
-    padding: 5px 12px;
-  }
-  .recommended-price-card h3 {
-    margin: 0 0 12px;
-    color: #2c2c2c;
+
+  .price-card__title {
     font-size: 1.25rem;
-    font-weight: 800;
-  }
-  .recommended-price-card p:last-child {
-    margin-bottom: 0;
-    color: #666;
-    line-height: 1.7;
-  }
-  .scope-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 7px;
-    margin: -2px 0 16px;
-  }
-  .scope-badges b {
-    display: inline-flex;
-    align-items: center;
-    min-height: 28px;
-    padding: 4px 9px;
-    border: 1px solid rgba(15, 76, 92, 0.16);
-    border-radius: 999px;
-    background: rgba(238, 245, 242, 0.92);
+    font-weight: 700;
     color: var(--trust);
-    font-size: 0.74rem;
-    font-weight: 900;
-    line-height: 1.35;
-  }
-  .scope-sample-link,
-  .minimum-scope-link {
-    display: inline-flex;
-    align-items: center;
-    width: fit-content;
-    margin-top: 14px;
-    color: var(--trust);
-    font-size: 0.86rem;
-    font-weight: 900;
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    transition: color 0.2s ease, transform 0.2s ease;
-  }
-  .scope-sample-link:hover,
-  .minimum-scope-link:hover {
-    color: var(--accent-red);
-    transform: translateX(2px);
+    margin: 0 0 1.25rem;
   }
 
-  .minimum-scope {
-    margin: 28px 0 22px;
-    overflow: hidden;
-    border: 1px solid var(--trust-line);
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(15, 76, 92, 0.055), rgba(255, 255, 255, 0.94));
+  .price-card__price {
+    margin: 0 0 2rem;
+    line-height: 1;
   }
-  .minimum-scope-heading {
-    padding: 24px 28px 18px;
+
+  .price-card__number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--trust);
+    letter-spacing: -0.02em;
   }
-  .minimum-scope-heading .eyebrow {
-    margin-bottom: 6px;
+
+  .price-card__unit {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--muted);
+    margin-left: 0.25rem;
   }
-  .minimum-scope-heading h3 {
-    margin: 0 0 8px;
+
+  .price-card__unit small {
+    font-weight: 400;
+    font-size: 0.9rem;
+  }
+
+  .price-card__details {
+    text-align: left;
+    margin-bottom: 1.5rem;
+  }
+
+  .price-card__sub-heading {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 1.5rem 0 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .price-card__list,
+  .price-card__factors {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .price-card__list li,
+  .price-card__factors li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.5rem 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .price-card__list li .material-icon,
+  .price-card__factors li .material-icon {
     color: var(--trust);
     font-size: 1.2rem;
-    font-weight: 900;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
   }
-  .minimum-scope-heading p:last-child {
-    margin: 0;
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.7;
+
+  .price-card__note {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin: 1rem 0 1.5rem;
   }
-  .minimum-scope-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    border-top: 1px solid var(--trust-line);
-  }
-  .minimum-scope-item {
-    padding: 22px 28px;
-  }
-  .minimum-scope-item + .minimum-scope-item {
-    border-left: 1px solid var(--trust-line);
-  }
-  .minimum-scope-item strong {
-    display: flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 12px;
-    color: #2c2c2c;
+
+  /* ---- CTA Button ---- */
+  .cta-button {
+    display: inline-block;
+    background: var(--trust);
+    color: var(--white);
     font-size: 1rem;
-  }
-  .minimum-scope-item strong span {
-    color: var(--accent-red);
-    font-size: 0.9rem;
-    white-space: nowrap;
-  }
-  .minimum-scope-item dl {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 8px 16px;
-    margin: 16px 0 0;
-    font-size: 0.88rem;
-    line-height: 1.5;
-  }
-  .minimum-scope-item dt {
-    color: #777;
-  }
-  .minimum-scope-item dd {
-    margin: 0;
-    color: var(--trust);
-    font-weight: 800;
-    text-align: right;
-  }
-  .minimum-scope-note {
-    margin: 0;
-    padding: 16px 28px;
-    border-top: 1px solid var(--trust-line);
-    color: #666;
-    font-size: 0.82rem;
-    line-height: 1.7;
-  }
-
-  .site-type-cost-note {
-    margin: 18px 0 22px;
-    border: 1px solid var(--trust-line);
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(238, 245, 242, 0.82), rgba(255, 255, 255, 0.96));
-    box-shadow: 0 10px 26px rgba(15, 76, 92, 0.045);
-    overflow: hidden;
-  }
-  .site-type-cost-note summary {
-    cursor: pointer;
-    padding: 18px 22px;
-    color: var(--trust);
-    font-weight: 900;
-    list-style: none;
-  }
-  .site-type-cost-note summary::-webkit-details-marker {
-    display: none;
-  }
-  .site-type-cost-note summary::after {
-    content: "+";
-    float: right;
-    color: var(--accent-red);
-    font-weight: 900;
-    transition: transform 0.25s ease;
-  }
-  .site-type-cost-note[open] summary::after {
-    content: "-";
-    transform: rotate(180deg);
-  }
-  .site-type-cost-body {
-    padding: 0 22px 20px;
-  }
-  .site-type-cost-note[open] .site-type-cost-body,
-  .addon-details[open] .table-wrap,
-  .flow-details[open] .execution-flow-section {
-    animation: detailReveal 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  .site-type-cost-body p {
-    margin: 0 0 12px;
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.8;
-  }
-  .site-type-compare {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-    margin: 2px 0 16px;
-  }
-  .site-type-card {
-    display: grid;
-    gap: 12px;
-    min-height: 100%;
-    padding: 18px;
-    border: 1px solid var(--trust-line);
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.9);
-  }
-  .site-type-card-static {
-    border-left: 5px solid var(--accent-green);
-  }
-  .site-type-card-dynamic {
-    border-left: 5px solid var(--accent-red);
-  }
-  .site-type-badge {
-    width: fit-content;
-    padding: 6px 10px;
-    border-radius: 999px;
-    background: rgba(15, 76, 92, 0.08);
-    color: var(--trust);
-    font-size: 0.78rem;
-    font-weight: 900;
-  }
-  .site-type-card strong {
-    color: var(--ink);
-    font-size: 1rem;
-    line-height: 1.45;
-  }
-  .site-type-mini-flow {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 8px;
-    align-items: center;
-  }
-  .site-type-mini-flow span {
-    position: relative;
-    min-height: 36px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 8px;
-    border-radius: 999px;
-    background: rgba(238, 245, 242, 0.92);
-    color: var(--trust);
-    font-size: 0.8rem;
-    font-weight: 900;
-    line-height: 1.2;
-    text-align: center;
-  }
-  .site-type-mini-flow span:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    right: -8px;
-    width: 8px;
-    height: 2px;
-    background: var(--trust-line);
-  }
-  .site-type-card ul,
-  .site-type-price-factors ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .site-type-card li,
-  .site-type-price-factors li {
-    position: relative;
-    padding-left: 18px;
-    color: #555;
-    font-size: 0.84rem;
-    line-height: 1.7;
-  }
-  .site-type-card li::before,
-  .site-type-price-factors li::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0.74em;
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--accent-green);
-  }
-  .site-type-card-dynamic li::before,
-  .site-type-price-factors li::before {
-    background: var(--accent-red);
-  }
-  .site-type-result {
-    margin: 0;
-    padding: 10px 12px;
-    border-radius: 10px;
-    background: rgba(15, 76, 92, 0.06);
-    color: var(--trust);
-    font-size: 0.82rem;
-    font-weight: 900;
-    line-height: 1.6;
-  }
-  .site-type-price-factors {
-    margin: 0 0 14px;
-    padding: 14px 16px;
-    border: 1px solid rgba(199, 46, 46, 0.18);
-    border-radius: 14px;
-    background: rgba(199, 46, 46, 0.045);
-  }
-  .site-type-price-factors strong {
-    display: block;
-    margin-bottom: 8px;
-    color: var(--accent-red);
-    font-size: 0.9rem;
-  }
-  .site-type-cost-body a {
-    color: var(--trust);
-    font-weight: 900;
-    text-decoration: underline;
-  }
-
-  .pricing-grid-simple {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    margin: 40px 0;
-  }
-
-  /* Plan Tabs */
-  .plan-tabs-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 40px;
-  }
-  .plan-tabs {
-    display: flex;
-    background: var(--surface);
-    border: 1px solid var(--card-border);
-    border-radius: 99px;
-    padding: 6px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-  }
-  .plan-tab-btn {
-    padding: 12px 28px;
-    border: none;
-    background: transparent;
-    color: #666;
-    font-size: 0.95rem;
-    font-weight: 800;
-    border-radius: 99px;
-    cursor: pointer;
-    font-family: 'Shippori Mincho', serif !important;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .plan-tab-btn.active {
-    background: var(--accent);
-    color: #fff;
-    box-shadow: 0 4px 12px rgba(140, 107, 31, 0.26);
-  }
-  
-  .plan-content {
-    display: none;
-    opacity: 0;
-    transform: translateY(15px);
-    transition: opacity 0.4s ease, transform 0.4s ease;
-  }
-  .plan-content.active-plan {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .p-card-simple {
-    overflow: hidden;
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    padding: 30px 20px;
-    text-align: center;
-    position: relative;
-    box-shadow: var(--card-shadow);
-    transition: 0.3s;
-  }
-  .p-card-simple:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--card-shadow-hover);
-  }
-  .p-card-simple.highlight {
-    border: 2px solid var(--trust-line);
-    background: linear-gradient(135deg, rgba(238, 245, 242, 0.94), rgba(199, 53, 47, 0.045)), var(--surface);
-    border-top: 5px solid var(--trust);
-    z-index: 1;
-  }
-  .p-tag {
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--accent-red);
-    color: #fff;
-    font-size: 0.7rem;
-    font-weight: 800;
-    padding: 2px 12px;
-    border-radius: 4px;
-  }
-  .p-card-simple h3 { font-size: 1.1rem; margin-bottom: 15px; font-weight: 800; }
-  .p-price { font-size: 1.6rem; font-weight: 800; color: var(--trust); margin-bottom: 15px; }
-  .p-price small { font-size: 0.8rem; font-weight: 400; color: #999; }
-  .p-desc { font-size: 0.85rem; color: #666; line-height: 1.5; }
-
-  .addon-details { margin-top: 20px; }
-  .addon-details summary {
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--accent);
-    font-weight: 800;
-    text-align: center;
-    list-style: none;
-    transition: color 0.2s ease, letter-spacing 0.2s ease;
-  }
-  .addon-details summary:hover {
-    color: var(--accent-red);
-    letter-spacing: 0.02em;
-  }
-  .details-lead {
-    max-width: 720px;
-    margin: 16px auto 0;
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.8;
-    text-align: center;
-  }
-  .table-wrap.mini { margin-top: 20px; }
-  .table-wrap.mini th, .table-wrap.mini td { padding: 12px 15px; font-size: 0.85rem; }
-
-  .flow-details {
-    max-width: 1100px;
-    margin: 0 auto 80px;
-    padding: 0 20px;
-  }
-  .flow-details > summary {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    cursor: pointer;
-    padding: 22px 26px;
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    background: linear-gradient(135deg, #fff 0%, var(--surface-strong) 100%);
-    color: var(--trust);
-    box-shadow: var(--card-shadow);
-    list-style: none;
-  }
-  .flow-details > summary::-webkit-details-marker { display: none; }
-  .flow-details > summary span { font-size: 1rem; font-weight: 900; }
-  .flow-details > summary small { color: #666; line-height: 1.6; }
-  .flow-details > summary::after {
-    content: "+";
-    align-self: flex-end;
-    margin-top: -36px;
-    color: var(--accent-red);
-    font-size: 1.4rem;
-    font-weight: 900;
-    transition: transform 0.25s ease;
-  }
-  .flow-details[open] > summary::after { content: "-"; }
-  .flow-details[open] > summary::after { transform: rotate(180deg); }
-  .flow-details .execution-flow-section {
-    margin-top: 18px;
-    border: 1px solid var(--line);
-    border-radius: 16px;
-    overflow: hidden;
-    padding: 80px 0;
-  }
-  .price-details .table-wrap {
-    margin-top: 20px;
-    margin-bottom: 0;
-  }
-  .demo-price-guide {
-    margin-top: 42px;
-    padding: 30px;
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    background: linear-gradient(135deg, rgba(238, 245, 242, 0.82), rgba(255, 255, 255, 0.96));
-    box-shadow: var(--card-shadow);
-  }
-  .demo-price-copy {
-    max-width: 720px;
-    margin-bottom: 22px;
-  }
-  .demo-price-copy h3 {
-    margin: 0 0 10px;
-    color: #2c2c2c;
-    font-size: 1.45rem;
-    font-weight: 900;
-  }
-  .demo-price-copy p:last-child {
-    margin: 0;
-    color: #666;
-    line-height: 1.8;
-  }
-  .demo-price-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 16px;
-  }
-  .demo-price-card {
-    display: flex;
-    min-height: 170px;
-    flex-direction: column;
-    gap: 10px;
-    justify-content: space-between;
-    padding: 20px;
-    border: 1px solid var(--card-border);
-    border-radius: 14px;
-    background: var(--surface);
-    color: inherit;
-    text-decoration: none;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-  .demo-price-card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--card-shadow-hover);
-  }
-  .demo-price-card span {
-    width: fit-content;
-    padding: 5px 10px;
-    border-radius: 999px;
-    background: rgba(199, 53, 47, 0.1);
-    color: var(--accent-red);
-    font-size: 0.74rem;
-    font-weight: 900;
-    letter-spacing: 0.08em;
-  }
-  .demo-price-card strong {
-    color: var(--trust);
-    font-size: 1.05rem;
-    line-height: 1.45;
-  }
-  .demo-price-card small {
-    color: #6f6a62;
-    font-size: 0.8rem;
     font-weight: 700;
-    line-height: 1.6;
+    padding: 0.9rem 2.25rem;
+    border-radius: 100px;
+    text-decoration: none;
+    transition: background 0.2s, box-shadow 0.2s;
   }
-  .pricing-faq {
-    border-top: 1px solid var(--line);
+
+  .cta-button:hover {
+    background: var(--trust-mid);
+    box-shadow: var(--shadow-hover);
   }
-  .faq-list {
+
+  .cta-button--large {
+    font-size: 1.1rem;
+    padding: 1rem 2.75rem;
+  }
+
+  /* ---- Scope Grid ---- */
+  .scope-grid {
     display: grid;
-    gap: 14px;
-    margin-top: 28px;
-  }
-  .faq-list details {
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    background: var(--surface);
-    box-shadow: 0 10px 26px rgba(15, 76, 92, 0.05);
-    padding: 0;
-    overflow: hidden;
-    transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
-  }
-  .faq-list details:hover {
-    transform: translateY(-2px);
-    border-color: var(--trust-line);
-    box-shadow: var(--card-shadow);
-  }
-  .faq-list summary {
-    cursor: pointer;
-    padding: 18px 20px;
-    color: #2c2c2c;
-    font-weight: 800;
-    list-style: none;
-  }
-  .faq-list summary::-webkit-details-marker {
-    display: none;
-  }
-  .faq-list summary::after {
-    content: "+";
-    float: right;
-    color: var(--trust);
-    font-weight: 900;
-    transition: transform 0.25s ease, color 0.25s ease;
-  }
-  .faq-list details[open] summary::after {
-    content: "-";
-    color: var(--accent-red);
-    transform: rotate(180deg);
-  }
-  .faq-list p {
-    margin: 0;
-    padding: 0 20px 18px;
-    color: #666;
-    line-height: 1.8;
-  }
-  .faq-list details[open] p {
-    animation: detailReveal 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
-  @keyframes planCardEnter {
-    from {
-      opacity: 0;
-      transform: translateY(14px) scale(0.985);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-  }
-  @keyframes detailReveal {
-    from {
-      opacity: 0;
-      transform: translateY(-8px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  @media (min-width: 640px) {
+    .scope-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
     }
   }
 
-  @media (max-width: 768px) {
-    .hero { padding: 56px 0 48px; }
-    .hero .premium-heading {
-      font-size: clamp(1.8rem, 8vw, 2.15rem);
-      line-height: 1.35;
-      letter-spacing: 0.02em;
-      word-break: keep-all;
-    }
-    .premium-ann-banner { margin-top: 30px; }
-    .banner-inner { flex-direction: column; text-align: center; padding: 20px 16px; gap: 10px; }
-    .banner-main { text-align: center; }
-    .banner-main strong { font-size: 1rem; }
-    .banner-main p { margin: 0; font-size: 0.86rem; }
-    .banner-link { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; }
-    h2 { font-size: 1.8rem; }
-    th, td { padding: 15px 10px; font-size: 0.9rem; }
-    .choice-grid,
-    .recommended-price-grid,
-    .lp-diagnosis-grid,
-    .site-type-compare,
-    .service-map-grid,
-    .demo-price-grid,
-    .pricing-grid-simple { grid-template-columns: 1fr; }
-    .recommended-price-card.highlight-take {
-      transform: none !important;
-    }
-    .choice-guide { text-align: left; }
-    .choice-lead,
-    .choice-footnote { margin-left: 0; }
-    .choice-card { min-height: auto; }
-    .decision-grid,
-    .plan-picker,
-    .lp-diagnosis-price-box,
-    .lp-diagnosis-boundary { grid-template-columns: 1fr; }
-    .minimum-scope-grid { grid-template-columns: 1fr; }
-    .minimum-scope-item + .minimum-scope-item {
-      border-top: 1px solid var(--trust-line);
-      border-left: 0;
-    }
-    .site-type-cost-note summary {
-      padding: 16px 18px;
-      line-height: 1.55;
-    }
-    .site-type-cost-body {
-      padding: 0 16px 18px;
-    }
-    .site-type-card {
-      padding: 16px;
-    }
-    .site-type-mini-flow span {
-      min-height: 34px;
-      font-size: 0.76rem;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .recommended-price-card,
-    .recommended-price-card::before,
-    .p-card-simple,
-    .faq-list details,
-    .site-type-cost-note[open] .site-type-cost-body,
-    .addon-details[open] .table-wrap,
-    .flow-details[open] .execution-flow-section,
-    .faq-list details[open] p {
-      animation: none !important;
-      transition: none !important;
-    }
-    .recommended-price-card:hover,
-    .p-card-simple:hover,
-    .faq-list details:hover {
-      transform: none;
-    }
+  .scope-col {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
   }
 
-  /* アンカリング効果（市場相場）のスタイル */
-  .market-anchoring-box {
-    background: linear-gradient(180deg, var(--surface) 0%, var(--surface-strong) 100%);
-    border: 1px solid var(--card-border);
-    border-radius: 24px;
-    padding: 36px;
-    margin-bottom: 40px;
-    box-shadow: var(--card-shadow);
-    text-align: left;
-  }
-  .anchoring-title {
-    font-size: 1.35rem;
-    color: var(--trust);
-    margin-top: 0;
-    margin-bottom: 12px;
-    font-weight: 800;
-  }
-  .anchoring-intro {
-    font-size: 0.92rem;
-    color: #666;
-    line-height: 1.6;
-    margin-bottom: 24px;
-  }
-  .anchoring-caveat {
-    margin: -8px 0 24px;
-    color: #666;
-    font-size: 0.78rem;
-    line-height: 1.7;
-  }
-  .anchoring-table-wrap {
-    border: 1px solid var(--card-border);
-    border-radius: 16px;
-    overflow: hidden;
-    margin-bottom: 24px;
-  }
-  .anchoring-row {
-    display: grid;
-    grid-template-columns: 1.2fr 1.4fr 1.4fr;
-    border-bottom: 1px solid var(--line);
+  .scope-col__heading {
+    display: flex;
     align-items: center;
+    gap: 0.4rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 1rem;
   }
-  .anchoring-row:last-child {
+
+  .scope-col__heading--can {
+    color: var(--trust);
+  }
+
+  .scope-col__heading--can .material-icon {
+    color: var(--trust);
+  }
+
+  .scope-col__heading--cannot {
+    color: var(--muted);
+  }
+
+  .scope-col__heading--cannot .material-icon {
+    color: var(--muted);
+  }
+
+  .scope-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .scope-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    padding: 0.45rem 0;
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .scope-list li .material-icon {
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    margin-top: 0.2rem;
+  }
+
+  .icon-can {
+    color: var(--trust);
+  }
+
+  .icon-cannot {
+    color: #b0a8a0;
+  }
+
+  /* ---- FAQ ---- */
+  .faq-list {
+    margin: 0;
+  }
+
+  .faq-item {
+    border-bottom: 1px solid var(--line);
+    padding: 1.25rem 0;
+  }
+
+  .faq-item:last-child {
     border-bottom: none;
   }
-  .anchoring-row.header {
-    background: rgba(15, 76, 92, 0.04);
-    color: var(--trust);
-    font-weight: 800;
-    font-size: 0.85rem;
-    padding: 14px 20px;
-  }
-  .anchoring-row:not(.header) {
-    padding: 16px 20px;
-    font-size: 0.92rem;
-  }
-  .anchoring-row .type-name {
-    font-weight: 800;
-    color: #333;
-  }
-  .anchoring-row .market-price {
-    color: #777;
-    line-height: 1.4;
-  }
-  .anchoring-row .market-price .sub, .anchoring-row .wa-price .sub {
-    font-size: 0.78rem;
-  }
-  .anchoring-row .wa-price {
-    color: var(--accent-dark);
-    font-weight: 800;
-    line-height: 1.4;
-  }
-  .anchoring-row .wa-price.highlight {
-    color: var(--accent-red);
-  }
-  .anchoring-reason {
-    background: rgba(140, 107, 31, 0.045);
-    border-radius: 16px;
-    padding: 24px;
-    border: 1px dashed var(--line);
-  }
-  .anchoring-reason h4 {
-    margin-top: 0;
-    margin-bottom: 14px;
-    color: var(--accent-dark);
-    font-size: 1rem;
-    font-weight: 800;
-  }
-  .anchoring-reason ul {
-    margin: 0;
-    padding-left: 20px;
+
+  .faq-q {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .anchoring-reason li {
-    font-size: 0.88rem;
-    color: #555;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 1rem;
     line-height: 1.6;
-    list-style-type: disc;
-  }
-  .anchoring-reason li strong {
-    color: #333;
+    margin: 0;
   }
 
-  @media (max-width: 600px) {
-    .market-anchoring-box {
-      padding: 24px 20px;
+  .faq-icon {
+    color: var(--trust);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    margin-top: 0.15rem;
+  }
+
+  .faq-a {
+    margin: 0.5rem 0 0 1.7rem;
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  /* ---- CTA Section ---- */
+  .section--cta {
+    background: var(--trust);
+    color: var(--white);
+    text-align: center;
+    padding: 4.5rem 1.5rem;
+  }
+
+  .cta-inner {
+    max-width: 600px;
+  }
+
+  .cta-heading {
+    font-size: 1.6rem;
+    font-weight: 800;
+    margin: 0 0 1rem;
+  }
+
+  .cta-lead {
+    font-size: 1rem;
+    line-height: 1.8;
+    opacity: 0.92;
+    margin: 0 0 2rem;
+  }
+
+  .section--cta .cta-button {
+    background: var(--white);
+    color: var(--trust);
+  }
+
+  .section--cta .cta-button:hover {
+    background: var(--surface-muted);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .cta-note {
+    font-size: 0.8rem;
+    opacity: 0.7;
+    margin: 1rem 0 0;
+  }
+
+  /* ---- Responsive ---- */
+  @media (min-width: 768px) {
+    .page-heading {
+      font-size: 2.5rem;
     }
-    .anchoring-row {
-      grid-template-columns: 1fr;
-      gap: 8px;
-      padding: 16px 20px;
+
+    .hero {
+      padding: 6rem 2rem 4rem;
     }
-    .anchoring-row.header {
-      display: none;
+
+    .section {
+      padding: 5rem 2rem;
     }
-    .anchoring-row:not(.header) {
-      border-bottom: 1px solid var(--line);
-    }
-    .anchoring-row .type-name {
-      font-size: 1rem;
-      border-bottom: 1px dashed var(--line);
-      padding-bottom: 6px;
-      margin-bottom: 4px;
-    }
-    .anchoring-row .market-price::before {
-      content: "参考価格帯: ";
-      font-size: 0.8rem;
-      color: #999;
-      font-weight: bold;
-    }
-    .anchoring-row .wa-price::before {
-      content: "和-Node: ";
-      font-size: 0.8rem;
-      color: #999;
-      font-weight: bold;
+
+    .cta-heading {
+      font-size: 1.8rem;
     }
   }
 
-  @media (min-width: 769px) and (max-width: 1100px) {
-    .demo-price-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+  .sp-hide {
+    display: none;
+  }
+
+  @media (min-width: 640px) {
+    .sp-hide {
+      display: inline;
     }
   }
 </style>
