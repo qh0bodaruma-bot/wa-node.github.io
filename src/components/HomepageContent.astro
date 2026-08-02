@@ -1,5 +1,6 @@
 ---
 import MaterialIcon from './MaterialIcon.astro';
+import LineFlowDiagram from './LineFlowDiagram.astro';
 
 interface Props {
   lang?: 'ja' | 'en' | 'fr';
@@ -206,6 +207,7 @@ const faqs = [
         <span class="eyebrow">Services</span>
         <h2 id="capabilities-title">設計から実装まで、一社で。</h2>
       </div>
+      <LineFlowDiagram />
       <div class="capabilities-grid">
         {capabilities.map((cap) => (
           <article class="capability-card">
