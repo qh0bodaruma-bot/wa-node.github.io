@@ -1,0 +1,470 @@
+---
+import LiffLayout from '../layouts/LiffLayout.astro';
+
+// ▼ LINE DevelopersコンソールでLIFFアプリ登録後に取得したLIFF IDに書き換えてください
+const LIFF_ID = '0000000000-xxxxxxxx';
+// ▼ GAS WebアプリのデプロイURL（GASデプロイ後に取得）に書き換えてください
+const GAS_URL = 'https://script.google.com/macros/s/XXXXXXXXXX/exec';
+---
+
+<LiffLayout title="和-Node | LINE無料相談フォーム" description="LINE連携の無料相談フォームです。">
+
+  <!-- ローディング画面 -->
+  <div id="screen-loading" class="screen">
+    <div class="brand">和-Node</div>
+    <div class="spinner" aria-label="読み込み中"></div>
+  </div>
+
+  <!-- フォーム画面 -->
+  <div id="screen-form" class="screen hidden">
+    <header class="form-header">
+      <div class="brand">和-Node</div>
+      <div class="brand-sub">LINE連携 無料相談</div>
+    </header>
+
+    <main class="form-main">
+      <p class="form-lead">
+        現在の状況をお聞かせください。<br />
+        2営業日以内にご返信します。
+      </p>
+
+      <form id="contact-form" novalidate>
+
+        <div class="field">
+          <label for="display-name">LINE表示名</label>
+          <input
+            type="text"
+            id="display-name"
+            name="displayName"
+            readonly
+            class="readonly"
+            placeholder="LINEから自動取得"
+          />
+        </div>
+
+        <div class="field">
+          <label for="email">
+            メールアドレス
+            <span class="req">必須</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="example@company.com"
+            autocomplete="email"
+          />
+          <p class="field-err hidden" id="err-email">メールアドレスを入力してください</p>
+        </div>
+
+        <div class="field">
+          <label for="system">連携したいシステム</label>
+          <select id="system" name="system">
+            <option value="">選択してください</option>
+            <option value="Salesforce">Salesforce</option>
+            <option value="kintone">kintone</option>
+            <option value="HubSpot">HubSpot</option>
+            <option value="Googleスプレッドシート">Googleスプレッドシート</option>
+            <option value="その他・未定">その他・未定</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">
+            現在の状況・相談内容
+            <span class="req">必須</span>
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            rows="5"
+            placeholder="現在の状況、困っていること、実現したいことなどをご記入ください。まだ整理できていなくても大丈夫です。"
+          ></textarea>
+          <p class="field-err hidden" id="err-message">相談内容を入力してください</p>
+        </div>
+
+        <div class="field">
+          <label for="method">希望連絡方法</label>
+          <select id="method" name="method">
+            <option value="">選択してください</option>
+            <option value="Google Meet">Google Meet</option>
+            <option value="Zoom">Zoom</option>
+            <option value="LINE">LINE</option>
+            <option value="電話">電話</option>
+          </select>
+        </div>
+
+        <button type="submit" id="submit-btn" class="btn-submit">
+          送信する
+        </button>
+
+        <p class="form-note">
+          送信後に必ず契約する必要はありません。<br />
+          まずは御社の状況を整理するところから始めましょう。
+        </p>
+      </form>
+    </main>
+  </div>
+
+  <!-- 送信完了画面 -->
+  <div id="screen-success" class="screen hidden">
+    <div class="result-wrap">
+      <div class="result-icon result-icon--ok" aria-hidden="true">✓</div>
+      <h2>送信完了しました</h2>
+      <p>2営業日以内にご連絡します。<br />しばらくお待ちください。</p>
+    </div>
+  </div>
+
+  <!-- エラー画面 -->
+  <div id="screen-error" class="screen hidden">
+    <div class="result-wrap">
+      <div class="result-icon result-icon--err" aria-hidden="true">!</div>
+      <h2>送信に失敗しました</h2>
+      <p>お手数ですが、時間をおいて<br />もう一度お試しください。</p>
+      <button class="btn-retry" onclick="location.reload()">もう一度試す</button>
+    </div>
+  </div>
+
+</LiffLayout>
+
+<script define:vars={{ LIFF_ID, GAS_URL }}>
+  let lineProfile = null;
+
+  function showScreen(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+    document.getElementById('screen-' + name).classList.remove('hidden');
+  }
+
+  async function init() {
+    try {
+      await liff.init({ liffId: LIFF_ID });
+
+      if (liff.isLoggedIn()) {
+        lineProfile = await liff.getProfile();
+        document.getElementById('display-name').value = lineProfile.displayName;
+      }
+    } catch (_) {
+      // 開発環境・LIFF外アクセス時はプロフィール取得をスキップ
+    }
+    showScreen('form');
+  }
+
+  document.getElementById('contact-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    let hasError = false;
+
+    document.getElementById('err-email').classList.add('hidden');
+    document.getElementById('err-message').classList.add('hidden');
+
+    if (!email) {
+      document.getElementById('err-email').classList.remove('hidden');
+      hasError = true;
+    }
+    if (!message) {
+      document.getElementById('err-message').classList.remove('hidden');
+      hasError = true;
+    }
+    if (hasError) return;
+
+    const btn = document.getElementById('submit-btn');
+    btn.disabled = true;
+    btn.textContent = '送信中…';
+
+    const payload = {
+      displayName: lineProfile ? lineProfile.displayName : '（未取得）',
+      userId:      lineProfile ? lineProfile.userId      : '（未取得）',
+      email:   email,
+      system:  document.getElementById('system').value,
+      message: message,
+      method:  document.getElementById('method').value,
+    };
+
+    try {
+      // Content-Type: text/plain で CORS プリフライトを回避
+      await fetch(GAS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+        body: JSON.stringify(payload),
+      });
+      showScreen('success');
+    } catch (_) {
+      btn.disabled = false;
+      btn.textContent = '送信する';
+      showScreen('error');
+    }
+  });
+
+  init();
+</script>
+
+<style>
+  /* ── ベース ───────────────────────── */
+  :root {
+    --trust: #0f4c5c;
+    --trust-light: #e8f3f5;
+    --line-green: #06C755;
+    --text: #1a1a1a;
+    --muted: #666;
+    --border: rgba(15, 76, 92, 0.18);
+    --radius: 12px;
+  }
+
+  .screen {
+    min-height: 100dvh;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  /* ── ローディング ──────────────────── */
+  #screen-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    background: var(--trust-light);
+  }
+
+  .spinner {
+    width: 32px;
+    height: 32px;
+    border: 3px solid var(--border);
+    border-top-color: var(--trust);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── ブランド ──────────────────────── */
+  .brand {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--trust);
+    letter-spacing: 0.05em;
+  }
+
+  .brand-sub {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 2px;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── ヘッダー ──────────────────────── */
+  .form-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px 16px;
+    border-bottom: 1px solid var(--border);
+    background: #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  /* ── フォーム本体 ─────────────────── */
+  .form-main {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 24px 20px 48px;
+  }
+
+  .form-lead {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  /* ── フィールド ──────────────────── */
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 20px;
+  }
+
+  label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .req {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #fff;
+    background: #c7352f;
+    padding: 1px 6px;
+    border-radius: 4px;
+    line-height: 1.6;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  select,
+  textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: var(--trust);
+    box-shadow: 0 0 0 3px rgba(15, 76, 92, 0.08);
+  }
+
+  input.readonly {
+    background: #f5f5f5;
+    color: var(--muted);
+    cursor: default;
+  }
+
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4 6l4 4 4-4' stroke='%23666' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px;
+    padding-right: 36px;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.7;
+  }
+
+  .field-err {
+    font-size: 0.78rem;
+    color: #c7352f;
+    margin: 0;
+  }
+
+  /* ── 送信ボタン ──────────────────── */
+  .btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--trust);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 8px;
+  }
+
+  .btn-submit:hover:not(:disabled) {
+    background: #1f6f78;
+  }
+
+  .btn-submit:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+
+  .btn-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .form-note {
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-align: center;
+    line-height: 1.7;
+    margin-top: 16px;
+  }
+
+  /* ── 完了・エラー画面 ────────────── */
+  #screen-success,
+  #screen-error {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .result-wrap {
+    text-align: center;
+    padding: 40px 24px;
+    max-width: 320px;
+  }
+
+  .result-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 auto 24px;
+  }
+
+  .result-icon--ok {
+    background: rgba(6, 199, 85, 0.12);
+    color: var(--line-green);
+    border: 2px solid rgba(6, 199, 85, 0.3);
+  }
+
+  .result-icon--err {
+    background: rgba(199, 53, 47, 0.1);
+    color: #c7352f;
+    border: 2px solid rgba(199, 53, 47, 0.25);
+  }
+
+  .result-wrap h2 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 12px;
+  }
+
+  .result-wrap p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    line-height: 1.8;
+  }
+
+  .btn-retry {
+    margin-top: 24px;
+    padding: 12px 32px;
+    background: var(--trust);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+</style>
