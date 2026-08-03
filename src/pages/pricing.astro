@@ -9,21 +9,21 @@ import {
   organizationSchema,
 } from '../data/structuredData';
 
-const title = "料金・費用の目安｜LINE×Salesforce連携構築｜和-Node";
-const description = "LINE×Salesforce連携構築の料金目安は40万円〜（税別）。要件定義・設計・実装・テストを含みます。初回相談は無料。費用の詳細はお気軽にご相談ください。";
+const title = "料金・費用の目安｜LINE連携構築（Salesforce・kintone・HubSpot等）｜和-Node";
+const description = "LINE連携構築の料金目安：Salesforce 40万円〜・kintone 25万円〜・HubSpot 20万円〜・Googleスプレッドシート 10万円〜（税別）。要件定義・設計・実装・テストを含みます。初回相談は無料。";
 
 const faqItems = [
   {
     question: "費用の目安を教えてください。",
-    answer: "LINE×Salesforce連携構築は40万円〜（税別）が目安です。要件定義・設計・実装・テストを含みます。連携するデータの種類や画面数により変動するため、まずヒアリングで範囲を確認したうえでお見積りします。",
+    answer: "連携先システムにより異なります。Salesforce連携は40万円〜、kintone連携は25万円〜、HubSpot連携は20万円〜、Googleスプレッドシート連携は10万円〜（いずれも税別）が目安です。要件定義・設計・実装・テストを含みます。連携するデータの種類や画面数により変動するため、まずヒアリングで範囲を確認したうえでお見積りします。",
   },
   {
     question: "何が価格に影響しますか？",
-    answer: "連携するSalesforceオブジェクト・データ項目の種類と数、LIFF画面（LINEアプリ内ページ）の有無と画面数、既存Salesforce環境の設定状況が主な変動要因です。",
+    answer: "連携するデータ項目の種類と数、LIFF画面（LINEアプリ内ページ）の有無と画面数、連携先システムの設定状況・API権限が主な変動要因です。",
   },
   {
-    question: "Salesforceを導入していないと依頼できませんか？",
-    answer: "Salesforceを導入済み、またはこれから導入予定の企業を対象としています。LINE公式アカウントはお持ちであれば問題ありません。",
+    question: "Salesforce以外のシステムでも対応してもらえますか？",
+    answer: "Salesforce・kintone・HubSpot・Googleスプレッドシートなど、各種システムに対応しています。LINE公式アカウントをお持ちであれば、連携先システムについてはご相談ください。",
   },
   {
     question: "初回相談は有料ですか？",
@@ -31,7 +31,7 @@ const faqItems = [
   },
   {
     question: "開発期間はどれくらいかかりますか？",
-    answer: "必要な情報・権限がそろった時点から4〜6週間が目安です。SalesforceのAPI権限やオブジェクト仕様が固まっているほど短くなります。",
+    answer: "必要な情報・権限がそろった時点から4〜6週間が目安です。連携先システムのAPI権限や仕様が固まっているほど短くなります。",
   },
 ];
 
@@ -43,11 +43,11 @@ const structuredData = [
     { name: "料金・費用の目安", path: "/pricing/" },
   ]),
   createServiceSchema({
-    name: "LINE × Salesforce 連携構築",
-    description: "LIFF開発・Messaging API・Salesforce連携を一気通貫で構築。設計から実装・テストまで1社で対応します。",
+    name: "LINE連携構築（Salesforce・kintone・HubSpot等）",
+    description: "LIFF開発・Messaging API・各種システム連携を一気通貫で構築。設計から実装・テストまで1社で対応します。",
     path: "/pricing/",
-    serviceType: "LINE LIFF development and Salesforce integration",
-    priceFrom: "400000",
+    serviceType: "LINE LIFF development and CRM/SFA integration",
+    priceFrom: "100000",
   }),
   createFAQSchema(faqItems),
 ];
@@ -55,30 +55,29 @@ const structuredData = [
 const includes = [
   { icon: "handshake", text: "要件定義・ヒアリング" },
   { icon: "architecture", text: "API設計・システム設計" },
-  { icon: "code", text: "実装（LIFF開発 / Salesforce連携設定 / Messaging API）" },
+  { icon: "code", text: "実装（LIFF開発 / 各システム連携設定 / Messaging API）" },
   { icon: "phone_iphone", text: "実機テスト（iOS・Android LINE アプリ）" },
   { icon: "rocket_launch", text: "本番移行・運用引継ぎメモ" },
 ];
 
 const priceFactors = [
-  "連携するSalesforceオブジェクト・データ項目の種類と数",
+  "連携するデータ項目の種類と数",
   "LIFF画面（LINEアプリ内ページ）の有無と画面数",
-  "既存Salesforce環境の設定状況",
+  "連携先システムの設定状況・API権限",
 ];
 
 const canDo = [
   "LINEアプリ内で動くフォーム・ページ（LIFF）の開発",
   "Messaging API による自動メッセージ送信の設定",
-  "SalesforceへのREST API連携（リード・取引先・カスタムオブジェクト）",
-  "必要範囲のSalesforceカスタム項目・APIユーザー設定",
+  "Salesforce・kintone・HubSpot・Googleスプレッドシート等へのREST API連携",
+  "連携に必要な範囲のシステム設定（カスタム項目・APIユーザー設定等）",
   "実機テスト・本番移行・引継ぎドキュメント作成",
 ];
 
 const cannotDo = [
-  "ApexによるSalesforceカスタム開発",
-  "Salesforceの新規導入・ライセンス手配",
+  "Salesforce ApexによるSalesforceカスタム開発・大規模改修",
+  "各システムの新規導入・ライセンス手配",
   "LINE公式アカウントの運用代行・広告配信",
-  "予算40万円未満の案件",
 ];
 ---
 
@@ -90,7 +89,7 @@ const cannotDo = [
       <div class="hero-inner">
         <p class="eyebrow">Pricing</p>
         <h1 class="page-heading">料金・費用の目安</h1>
-        <p class="lead">LINE × Salesforce 連携構築の費用目安をご案内します。<br>初回のご相談・要件整理は無料です。</p>
+        <p class="lead">LINE連携構築の費用目安をご案内します。<br>初回のご相談・要件整理は無料です。</p>
       </div>
     </section>
 
@@ -98,8 +97,26 @@ const cannotDo = [
     <section class="section" aria-labelledby="price-card-heading">
       <div class="section-inner">
         <div class="price-card">
-          <h2 id="price-card-heading" class="price-card__title">LINE × Salesforce 連携構築</h2>
-          <p class="price-card__price"><span class="price-card__number">40</span><span class="price-card__unit">万円〜<small>（税別）</small></span></p>
+          <h2 id="price-card-heading" class="price-card__title">LINE連携構築 料金目安</h2>
+          <p class="price-card__includes">要件定義・設計・実装・テストを含みます。</p>
+          <div class="price-tiers">
+            <div class="price-tier">
+              <span class="price-tier__label">Salesforce連携</span>
+              <span class="price-tier__price">40万円〜<small>（税別）</small></span>
+            </div>
+            <div class="price-tier">
+              <span class="price-tier__label">kintone連携</span>
+              <span class="price-tier__price">25万円〜<small>（税別）</small></span>
+            </div>
+            <div class="price-tier">
+              <span class="price-tier__label">HubSpot連携</span>
+              <span class="price-tier__price">20万円〜<small>（税別）</small></span>
+            </div>
+            <div class="price-tier">
+              <span class="price-tier__label">Googleスプレッドシート連携</span>
+              <span class="price-tier__price">10万円〜<small>（税別）</small></span>
+            </div>
+          </div>
 
           <div class="price-card__details">
             <h3 class="price-card__sub-heading">含まれるもの</h3>
@@ -273,31 +290,63 @@ const cannotDo = [
     font-size: 1.25rem;
     font-weight: 700;
     color: var(--trust);
-    margin: 0 0 1.25rem;
+    margin: 0 0 0.75rem;
   }
 
-  .price-card__price {
-    margin: 0 0 2rem;
-    line-height: 1;
-  }
-
-  .price-card__number {
-    font-size: 3.5rem;
-    font-weight: 800;
-    color: var(--trust);
-    letter-spacing: -0.02em;
-  }
-
-  .price-card__unit {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--muted);
-    margin-left: 0.25rem;
-  }
-
-  .price-card__unit small {
-    font-weight: 400;
+  .price-card__includes {
     font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0 0 1.25rem;
+    font-weight: 700;
+  }
+
+  .price-tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--trust);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .price-tier {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    padding: 0.75rem 1.25rem;
+    border-bottom: 1px solid rgba(15, 76, 92, 0.15);
+    gap: 1rem;
+  }
+
+  .price-tier:last-child {
+    border-bottom: none;
+  }
+
+  .price-tier:first-child {
+    background: rgba(15, 76, 92, 0.04);
+  }
+
+  .price-tier__label {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--trust);
+    flex-shrink: 0;
+  }
+
+  .price-tier__price {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--text-deep, #1a1a1a);
+    line-height: 1;
+    text-align: right;
+  }
+
+  .price-tier__price small {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--muted);
+    margin-left: 2px;
   }
 
   .price-card__details {
