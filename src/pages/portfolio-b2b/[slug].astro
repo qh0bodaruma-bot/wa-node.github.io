@@ -16,7 +16,7 @@ interface Props { page: B2BPage; index: number; }
 const { page, index } = Astro.props;
 ---
 
-<B2BShowcaseLayout
+<B2BShowcaseLayout noindex={true}
   title={`${page.title}｜${b2bCompany.name}`}
   description={page.lead}
   currentPath={`/portfolio-b2b/${page.slug}/`}
