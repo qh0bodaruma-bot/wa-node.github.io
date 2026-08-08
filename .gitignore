@@ -11,3 +11,6 @@ dist/
 *.local
 .env
 .env.*
+
+# 経営データ（金額・顧客名・実績）※このリポジトリは public のため必ず除外
+business-docs/private/
