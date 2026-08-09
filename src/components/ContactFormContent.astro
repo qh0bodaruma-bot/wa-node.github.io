@@ -14,11 +14,11 @@ const f = {
     ann_badge: "",
     ann_text: "",
     eyebrow: "Contact",
-    heading_part1: "LINEと各システムの",
-    heading_part2: "連携を、ご相談ください。",
-    lead: "「こんな連携はできるのか？」「費用はどれくらいか？」そんな段階からで構いません。まず現在の状況をお聞かせください。",
+    heading_part1: "LINE連携・アプリ開発を、",
+    heading_part2: "ご相談ください。",
+    lead: "「LINEとアプリのどちらが合う？」「費用はどれくらい？」という段階からで構いません。まず現在の状況をお聞かせください。",
     before_title: "ご相談の前に",
-    before_desc: "和-NodeはLINE連携構築の専門窓口です。Salesforce・kintone・HubSpot等、LINE側の開発も連携先システムの設定も、1社で対応します。",
+    before_desc: "和-Nodeは、LINE連携と業務・顧客接点アプリを扱う相談窓口です。Salesforce・kintone・HubSpot等との連携から、iOS・Androidアプリの構成整理まで、1社で対応します。",
     benefits: [
       "初回30分の無料相談",
       "費用感・実現可否をその場でお答えします",
@@ -29,9 +29,9 @@ const f = {
     line_btn: "LINEで相談する",
     form_heading: "無料相談フォーム",
     form_intro_title: "今の状況を、そのまま教えてください。",
-    form_intro_desc: "「まだ要件が固まっていない」「他社と比較中」という段階でも大丈夫です。LINEとお使いのシステムの連携について、現状と課題をお聞きし、実現可能な構成と概算費用をご提案します。",
-    server_note_title: "連携先システムの詳しい仕様がわからなくても大丈夫です",
-    server_note_desc: "使用中のシステム（Salesforce・kintone・HubSpot等）の設定詳細や、LINEのAPI設定状況は、無料相談の中で一緒に確認します。事前に技術仕様を整理しておく必要はありません。",
+    form_intro_desc: "「まだ要件が固まっていない」「LINEとアプリのどちらが合うか分からない」「他社と比較中」という段階でも大丈夫です。現状と課題を伺い、実現可能な構成と概算費用をご提案します。",
+    server_note_title: "連携先システムやアプリの詳しい仕様がわからなくても大丈夫です",
+    server_note_desc: "使用中のシステム（Salesforce・kintone・HubSpot等）、LINEのAPI設定、アプリで実現したいことは、無料相談の中で一緒に確認します。事前に技術仕様を整理しておく必要はありません。",
     submit_flow_desc: "送信後、通常2営業日以内にご返信します。日程確定後、オンラインまたはお電話で30分の無料相談を行い、連携の実現可否と概算費用をご提示します。正式な開発は、内容と費用にご納得いただいた後に開始します。",
     submit_flow_title: "送信後の流れ",
     submit_flow_steps: ["送信", "日程調整", "無料相談", "整理・提案", "正式開始"],
@@ -46,10 +46,12 @@ const f = {
     consult_examples: [
       "LINEで受けた問い合わせをSalesforce・kintoneに自動登録したい",
       "LIFFフォームからHubSpotのコンタクトに自動反映させたい",
-      "管理システムのステータス変化に応じてLINEメッセージを送りたい"
+      "管理システムのステータス変化に応じてLINEメッセージを送りたい",
+      "毎日使う現場業務を、iOS・Androidアプリにまとめたい",
+      "予約・会員向けの仕組みを、LINE・Web・アプリのどれで作るか相談したい"
     ],
     scope_note_title: "和-Nodeの対応範囲について",
-    scope_note_desc: "LINE連携構築に特化しています。Salesforce・kintone・HubSpot・Googleスプレッドシートなどへの連携に対応します。各システムの新規導入支援、Salesforce Apexカスタム開発、LINE公式アカウントの運用代行は対応範囲外です。",
+    scope_note_desc: "LINE連携と、業務・顧客接点向けiOS・Androidアプリに対応します。Salesforce・kintone・HubSpot・Googleスプレッドシートなどへの連携もご相談ください。各システムの新規導入支援、Salesforce Apexカスタム開発、LINE公式アカウントの運用代行、ストア審査通過の保証は対応範囲外です。",
     scope_note_closing: "対応範囲外の要件についても、初回相談で明確にお伝えします。他社への紹介が必要な場合はご案内します。",
     safety_note_title: "初回フォームに書かなくてよいこと",
     safety_note_desc: "Salesforceのログイン情報・API認証情報・顧客リストの詳細などは入力しないでください。必要になった場合のみ、相談後に安全な共有方法を確認します。",
@@ -61,6 +63,7 @@ const f = {
       vendor_split: "LINE側とシステム側の業者が別々で調整に困っている",
       tech_block: "自社で連携を試みたが技術的に行き詰まった",
       workflow: "LINEと各システムの連携フローを整理したい",
+      app_fit: "LINEでは扱いにくい業務を、アプリにするべきか整理したい",
       other: "まだうまく言語化できていない"
     },
     takeaways: {
@@ -83,6 +86,7 @@ const f = {
       line_hubspot: "LINE × HubSpot 連携構築",
       line_sheets: "LINE × Googleスプレッドシート 連携構築",
       liff_only: "LIFF単体での開発（システム連携なし）",
+      mobile_app: "iOS・Androidアプリ開発",
       consultation: "費用感・実現可否の確認のみ",
       other: "その他のお問い合わせ"
     },
@@ -116,8 +120,8 @@ const f = {
     date_2: "第二希望:",
     date_3: "第三希望:",
     date_desc: "※未定でも送信できます。オンライン（Google Meetなど）を基本としますが、Zoomやお電話等も可能です。平日の10:00〜18:00が基本ですが、夜間や土日も調整可能です。",
-    label_message: "ご相談内容（現在の状況・LINEとお使いのシステムの利用状況など）",
-    placeholder_message: "現在の状況、LINEとお使いのシステムの利用状況、実現したいこと、困っていることなどをご記入ください。まだ整理できていない場合もそのまま書いていただければ大丈夫です。",
+    label_message: "ご相談内容（現在の状況・LINE・アプリ・お使いのシステムの利用状況など）",
+    placeholder_message: "現在の状況、実現したいこと、LINE・アプリ・お使いのシステムの利用状況、困っていることなどをご記入ください。まだ整理できていない場合もそのまま書いていただければ大丈夫です。",
     consent_note: "送信前に、<a href='/terms/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>利用規約</a>、<a href='/privacy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>プライバシーポリシー</a>、および<a href='/cancel-policy/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>キャンセルポリシー</a>、<a href='/counseling-notes/' target='_blank' style='color: var(--accent-dark); text-decoration: underline; font-weight: 700;'>カウンセリング注意事項</a>をご確認ください。",
     consent_checkbox: "各規約および注意事項に同意します",
     btn_submit: "この内容で送信する"
@@ -455,6 +459,7 @@ const t = f[lang];
                   <option value="line_hubspot">{t.categories.line_hubspot}</option>
                   <option value="line_sheets">{t.categories.line_sheets}</option>
                   <option value="liff_only">{t.categories.liff_only}</option>
+                  <option value="mobile_app">{t.categories.mobile_app}</option>
                   <option value="consultation">{t.categories.consultation}</option>
                   <option value="other">{t.categories.other}</option>
                 </select>

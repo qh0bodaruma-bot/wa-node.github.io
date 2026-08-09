@@ -1,0 +1,257 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
+import {
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../data/structuredData';
+
+const title = '講座販売サイト ワイヤーフレーム｜制作例・デモ｜和-Node';
+const description = '講座比較、講座詳細、申込み、受講案内までの流れを確認できる、架空の講座販売サイトワイヤーフレームです。';
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: '/course-sales-demo/' }),
+  createBreadcrumbSchema([
+    { name: 'ホーム', path: '/' },
+    { name: '制作例・デモ', path: '/works/' },
+    { name: '講座販売サイト ワイヤーフレーム', path: '/course-sales-demo/' },
+  ]),
+];
+
+const courses = [
+  { id: 'marketing', label: 'マーケティング', title: 'はじめてのWeb集客\n設計', period: '4週間', price: '19,800円', status: '募集中', text: '発信、LP、問い合わせ導線をつなげて、まず何から整えるかを学ぶ入門講座。', curriculum: ['集客の目的を整理する', '伝わる順番を設計する', '問い合わせ導線を見直す'] },
+  { id: 'design', label: 'デザイン', title: '伝わるバナー・LP\nデザイン基礎', period: '6週間', price: '29,800円', status: '募集中', text: '見た目だけで終わらせず、読み手が迷わない情報の置き方を身につける講座。', curriculum: ['情報の優先順位を決める', '余白と視線の流れを整える', 'スマホ表示で確認する'] },
+  { id: 'line', label: 'LINE活用', title: 'LINE公式アカウント\n実務入門', period: '3週間', price: '16,500円', status: '残席わずか', text: '問い合わせ、案内、予約確認に使うための、無理のないLINE運用を考える講座。', curriculum: ['導入前の目的整理', '配信と導線を設計する', '運用ルールを決める'] },
+  { id: 'automation', label: '業務改善', title: '小さな業務自動化\nはじめの一歩', period: '5週間', price: '24,800円', status: '募集準備中', text: '繰り返し作業を洗い出し、ツール導入前に確認したい業務整理を学ぶ講座。', curriculum: ['作業を棚卸しする', '自動化の向き不向きを判断する', '小さく試して改善する'] },
+];
+
+const faqItems = [
+  ['オンラインだけでも受講できますか？', 'はい。ライブ配信と録画視聴を組み合わせる想定です。講座ごとの受講方法は詳細ページで確認できます。'],
+  ['途中で参加できなくなった場合はどうなりますか？', '録画の有無、資料の閲覧期限、振替対応の可否を講座ごとに明記する設計です。'],
+  ['法人で申し込めますか？', '請求書払い、複数名受講、社内研修への切替などは、申込み前に相談できる導線を用意します。'],
+];
+---
+
+<BaseLayout noindex={true} showSiteChrome={false} title={title} description={description} structuredData={structuredData}>
+  <main id="main" class="course-demo" data-glossary-skip>
+    <div class="demo-banner">
+      <div class="course-shell"><MaterialIcon name="architecture" /> 和-Node 制作例: 架空の講座販売サイト ワイヤーフレーム</div>
+    </div>
+
+    <section class="course-hero">
+      <div class="course-shell course-hero-grid">
+        <div>
+          <p class="demo-kicker">ONLINE LEARNING PLATFORM</p>
+          <h1><span>学びたいことを、</span><span>迷わず選べる</span><span>講座サイト。</span></h1>
+          <p class="course-lead">対象者・学べること・期間・料金・受講方法を比較し、納得して申込みへ進める講座販売サイトの構成例です。</p>
+          <div class="course-actions">
+            <a href="#courses" class="course-button course-button-primary">講座を比較する <MaterialIcon name="arrow_downward" /></a>
+            <a href="#flow" class="course-button course-button-secondary">受講までの流れを見る</a>
+          </div>
+          <ul class="course-trust-list" aria-label="サイトの設計ポイント">
+            <li><MaterialIcon name="compare_arrows" /> 比較しやすい</li>
+            <li><MaterialIcon name="visibility" /> 受講方法が見える</li>
+            <li><MaterialIcon name="support_agent" /> 申込み前に相談できる</li>
+          </ul>
+        </div>
+        <div class="hero-wireframe" aria-label="講座比較画面のイメージ">
+          <div class="wireframe-top"><span></span><span></span><span></span></div>
+          <div class="wireframe-heading"><span></span><b></b></div>
+          <div class="wireframe-cards"><i></i><i></i><i></i></div>
+          <div class="wireframe-line"></div>
+          <div class="wireframe-cta"></div>
+          <p>COURSE LIST / DETAIL / APPLY</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="course-overview" aria-label="サイトの構成">
+      <div class="course-shell">
+        <p class="section-kicker">USER FLOW</p>
+        <h2>受講者が、次に何を見ればいいか分かる構成。</h2>
+        <ol class="course-flow-mini">
+          <li><span>01</span><strong>講座を知る</strong><small>対象者と学べること</small></li>
+          <li><span>02</span><strong>比較する</strong><small>期間・料金・受講方法</small></li>
+          <li><span>03</span><strong>詳細を読む</strong><small>カリキュラム・講師・FAQ</small></li>
+          <li><span>04</span><strong>申込む</strong><small>フォーム・外部決済へ</small></li>
+          <li><span>05</span><strong>受講する</strong><small>メール・学習サービスで案内</small></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="course-section" id="courses">
+      <div class="course-shell">
+        <div class="section-heading-row">
+          <div><p class="section-kicker">COURSE LIST</p><h2>自分に合う講座を、<br />比べて選ぶ。</h2></div>
+          <p>講座名だけでなく、対象者、期間、料金、募集状況を同じ位置で見せる想定です。</p>
+        </div>
+        <div class="course-grid">
+          {courses.map((course, index) => (
+            <article class:list={['course-card', { 'is-selected': index === 0 }]} data-course-card={course.id}>
+              <div class="course-card-top"><span>{course.label}</span><small class:list={{ 'is-limited': course.status === '残席わずか', 'is-closed': course.status === '募集準備中' }}>{course.status}</small></div>
+              <h3>{course.title}</h3>
+              <p>{course.text}</p>
+              <dl><div><dt>期間</dt><dd>{course.period}</dd></div><div><dt>受講料</dt><dd>{course.price}</dd></div></dl>
+              <button type="button" class="course-detail-button" data-course-select={course.id}>詳細を見る <MaterialIcon name="arrow_forward" /></button>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="course-section course-detail-section" id="detail">
+      <div class="course-shell detail-layout">
+        <div class="detail-copy">
+          <p class="section-kicker">COURSE DETAIL</p>
+          <p class="detail-label" id="detail-label">マーケティング</p>
+          <h2 id="detail-title">はじめてのWeb集客設計</h2>
+          <p id="detail-text">発信、LP、問い合わせ導線をつなげて、まず何から整えるかを学ぶ入門講座。</p>
+          <div class="detail-meta"><span><MaterialIcon name="calendar_month" /> <b id="detail-period">4週間</b></span><span><MaterialIcon name="payments" /> <b id="detail-price">19,800円</b></span></div>
+          <button type="button" class="course-button course-button-primary" data-apply-button>この講座を申し込む <MaterialIcon name="open_in_new" /></button>
+          <p class="detail-note">申込みボタンは、外部決済または既存の申込みフォームへ接続する想定です。</p>
+        </div>
+        <div class="curriculum-panel">
+          <p>CURRICULUM</p>
+          <h3>この講座で学ぶこと</h3>
+          <ol id="detail-curriculum">
+            {courses[0].curriculum.map((item, index) => <li><span>{String(index + 1).padStart(2, '0')}</span>{item}</li>)}
+          </ol>
+          <a href="#faq">よくある質問を見る <MaterialIcon name="arrow_downward" /></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="course-section course-feature-section">
+      <div class="course-shell">
+        <p class="section-kicker">WHAT THE ADMIN UPDATES</p>
+        <h2>運営者が更新する情報を、<br />最初から整理する。</h2>
+        <div class="admin-grid">
+          <article><MaterialIcon name="edit_note" /><h3>講座の基本情報</h3><p>講座名、対象者、説明文、画像、カリキュラム</p></article>
+          <article><MaterialIcon name="event_available" /><h3>開催・募集情報</h3><p>開催日、期間、料金、募集状況、申込み先URL</p></article>
+          <article><MaterialIcon name="manage_accounts" /><h3>受講後の案内</h3><p>メール文面、学習サービス、資料、問い合わせ先</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="course-section course-flow-section" id="flow">
+      <div class="course-shell flow-layout">
+        <div><p class="section-kicker">HOW TO ENROLL</p><h2>申込み後まで、<br />不安を残さない。</h2><p>購入の前後で「何が起きるか」を短く明示します。受講方法や案内の時期が分かると、申込み前の迷いを減らせます。</p></div>
+        <ol class="enroll-steps">
+          <li><span>1</span><div><h3>講座を選ぶ</h3><p>対象者、内容、料金、日程を確認します。</p></div></li>
+          <li><span>2</span><div><h3>申込み・決済</h3><p>フォームまたは外部サービスで手続きします。</p></div></li>
+          <li><span>3</span><div><h3>受講案内を受け取る</h3><p>メールまたは学習サービスから案内が届きます。</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="course-section" id="faq">
+      <div class="course-shell faq-layout">
+        <div><p class="section-kicker">FAQ</p><h2>よくある質問</h2></div>
+        <div class="course-faqs">
+          {faqItems.map(([question, answer]) => <details><summary>{question}<MaterialIcon name="add" /></summary><p>{answer}</p></details>)}
+        </div>
+      </div>
+    </section>
+
+    <section class="course-section instructor-section">
+      <div class="course-shell instructor-grid">
+        <div class="instructor-avatar" aria-hidden="true"><MaterialIcon name="school" /></div>
+        <div><p class="section-kicker">INSTRUCTOR</p><h2>講師・運営者情報も、判断材料として見せる。</h2><p>専門分野、実務経験、講座づくりの方針、問い合わせ先を明記する想定です。初めての受講者が「誰から学ぶのか」を確認できます。</p><a href="#contact">運営者への問い合わせ <MaterialIcon name="arrow_forward" /></a></div>
+      </div>
+    </section>
+
+    <section class="course-cta" id="contact">
+      <div class="course-shell course-cta-inner">
+        <div><p class="section-kicker">APPLICATION</p><h2>必要な情報を確認してから、<br />申込みへ。</h2><p>このワイヤーフレームでは、フォーム、外部決済、会員機能などを段階的に接続する想定です。</p></div>
+        <div class="cta-actions"><button type="button" class="course-button course-button-primary" data-apply-button>講座に申し込む <MaterialIcon name="open_in_new" /></button><a href="/contact/?source=course_sales_demo" class="course-button course-button-secondary">この構成で制作を相談する</a></div>
+      </div>
+    </section>
+
+    <footer class="course-demo-footer"><div class="course-shell"><strong>Learnory</strong><span>架空の講座販売サイトワイヤーフレーム</span><small>利用規約　プライバシーポリシー　特定商取引法に基づく表記</small></div></footer>
+  </main>
+
+  <dialog class="application-dialog" id="application-dialog" aria-labelledby="application-dialog-title">
+    <button type="button" class="dialog-close" data-dialog-close aria-label="閉じる"><MaterialIcon name="close" /></button>
+    <p class="section-kicker">DEMO ACTION</p>
+    <h2 id="application-dialog-title">申込み先へ進む前の確認画面</h2>
+    <p>実案件では、この位置から既存フォーム、外部決済、会員登録などへ接続できます。講座名、金額、受講方法、キャンセル規定を確認してから進む設計です。</p>
+    <button type="button" class="course-button course-button-primary" data-dialog-close>デモを閉じる</button>
+  </dialog>
+
+  <script define:vars={{ courses }}>
+    const byId = (id) => document.getElementById(id);
+    const dialog = byId('application-dialog');
+    const title = byId('detail-title');
+    const label = byId('detail-label');
+    const text = byId('detail-text');
+    const period = byId('detail-period');
+    const price = byId('detail-price');
+    const curriculum = byId('detail-curriculum');
+
+    document.querySelectorAll('[data-course-select]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const course = courses.find((item) => item.id === button.dataset.courseSelect);
+        if (!course) return;
+        document.querySelectorAll('[data-course-card]').forEach((card) => card.classList.toggle('is-selected', card.dataset.courseCard === course.id));
+        label.textContent = course.label;
+        title.textContent = course.title;
+        text.textContent = course.text;
+        period.textContent = course.period;
+        price.textContent = course.price;
+        curriculum.replaceChildren(...course.curriculum.map((item, index) => {
+          const itemElement = document.createElement('li');
+          const number = document.createElement('span');
+          number.textContent = String(index + 1).padStart(2, '0');
+          itemElement.append(number, item);
+          return itemElement;
+        }));
+        byId('detail').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    document.querySelectorAll('[data-apply-button]').forEach((button) => button.addEventListener('click', () => dialog.showModal()));
+    document.querySelectorAll('[data-dialog-close]').forEach((button) => button.addEventListener('click', () => dialog.close()));
+  </script>
+</BaseLayout>
+
+<style>
+  .course-demo { --course-ink: #18323b; --course-muted: #607078; --course-paper: #f8faf8; --course-warm: #e8a65a; --course-lime: #b7d77c; --course-line: #d7e2de; background: var(--course-paper); color: var(--course-ink); }
+  .course-shell { width: min(1120px, calc(100% - 48px)); margin: 0 auto; }
+  .demo-banner { background: #18323b; color: #fff; font-size: .82rem; letter-spacing: .04em; padding: 10px 0; }
+  .demo-banner .course-shell { display: flex; align-items: center; gap: 8px; }
+  .demo-banner :global(.material-icon) { color: var(--course-lime); }
+  .course-hero { padding: 100px 0 88px; background: linear-gradient(125deg, #f7f8f4 0%, #ecf5ef 68%, #dceee9 100%); border-bottom: 1px solid var(--course-line); }
+  .course-hero-grid { display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 62px; }
+  .demo-kicker, .section-kicker { color: #518b76; font-size: .76rem; font-weight: 800; letter-spacing: .16em; margin: 0 0 15px; }
+  .course-hero h1, .course-demo h2, .course-demo h3, .course-demo p { margin-top: 0; }
+  .course-hero h1 { font-size: clamp(2.55rem, 5vw, 4.6rem); line-height: 1.17; letter-spacing: .01em; margin-bottom: 26px; }.course-hero h1 span { display: block; white-space: nowrap; }
+  .course-lead { max-width: 620px; color: var(--course-muted); font-size: 1.08rem; line-height: 1.9; margin-bottom: 31px; }
+  .course-actions, .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .course-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 50px; padding: 12px 20px; border: 1px solid transparent; border-radius: 7px; font: inherit; font-weight: 800; cursor: pointer; text-decoration: none; transition: transform .2s ease, box-shadow .2s ease; }
+  .course-button:hover { transform: translateY(-2px); opacity: 1; }
+  .course-button-primary { background: var(--course-ink); color: #fff; box-shadow: 0 10px 20px rgba(24,50,59,.17); }
+  .course-button-primary:hover { color: #fff; box-shadow: 0 14px 28px rgba(24,50,59,.22); }
+  .course-button-secondary { background: #fff; color: var(--course-ink); border-color: #b8cdc5; }
+  .course-button-secondary:hover { color: var(--course-ink); }
+  .course-trust-list { display: flex; flex-wrap: wrap; gap: 14px 20px; list-style: none; padding: 0; margin: 31px 0 0; color: #48615c; font-size: .88rem; font-weight: 700; }
+  .course-trust-list li { display: inline-flex; align-items: center; gap: 5px; }
+  .course-trust-list :global(.material-icon) { color: #669b80; font-size: 1.1rem; }
+  .hero-wireframe { min-height: 360px; padding: 24px; background: #fff; border: 1px solid #bfd3cb; border-radius: 12px; box-shadow: 20px 22px 0 #d7e8dd; transform: rotate(1.7deg); }
+  .wireframe-top { display: flex; gap: 6px; padding-bottom: 16px; border-bottom: 1px solid #e3ece7; }
+  .wireframe-top span { display: block; width: 8px; height: 8px; border-radius: 50%; background: #bfd4c8; }.wireframe-top span:first-child { background: var(--course-warm); }
+  .wireframe-heading { margin: 30px 0 26px; }.wireframe-heading span, .wireframe-heading b { display: block; height: 13px; border-radius: 999px; background: #dce9e2; }.wireframe-heading span { width: 28%; margin-bottom: 12px; }.wireframe-heading b { width: 76%; height: 26px; background: #315a5c; }
+  .wireframe-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }.wireframe-cards i { display: block; height: 104px; border: 1px solid #dce7e1; border-radius: 6px; background: linear-gradient(180deg, #eff7f1 0 22%, transparent 22% 46%, #dfece5 46% 55%, transparent 55%); }.wireframe-cards i:nth-child(2) { background-color: #fff4e5; }
+  .wireframe-line { width: 45%; height: 9px; background: #e1ebe6; margin: 25px 0 14px; border-radius: 999px; }.wireframe-cta { width: 36%; height: 34px; background: var(--course-warm); border-radius: 5px; }.hero-wireframe p { margin: 24px 0 0; color: #739187; font-size: .64rem; letter-spacing: .13em; text-align: right; }
+  .course-overview { padding: 50px 0; background: #fff; }.course-overview h2 { font-size: clamp(1.55rem, 3vw, 2.35rem); margin-bottom: 28px; }.course-flow-mini { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; list-style: none; margin: 0; padding: 0; }.course-flow-mini li { position: relative; min-height: 106px; padding: 13px 14px; background: #f4f8f5; border-left: 3px solid #7db391; }.course-flow-mini span { display: block; color: #7eaa7b; font-size: .75rem; font-weight: 800; margin-bottom: 8px; }.course-flow-mini strong { display: block; font-size: .98rem; }.course-flow-mini small { display: block; margin-top: 7px; color: var(--course-muted); line-height: 1.5; }
+  .course-section { padding: 92px 0; }.section-heading-row { display: grid; grid-template-columns: 1fr .72fr; gap: 50px; align-items: end; margin-bottom: 36px; }.course-demo h2 { font-size: clamp(1.9rem, 3.6vw, 3.15rem); line-height: 1.3; margin-bottom: 0; }.section-heading-row > p { color: var(--course-muted); line-height: 1.8; margin-bottom: 5px; }
+  .course-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }.course-card { display: flex; flex-direction: column; padding: 22px; min-height: 365px; background: #fff; border: 1px solid var(--course-line); border-radius: 9px; transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease; }.course-card:hover, .course-card.is-selected { border-color: #619b80; transform: translateY(-3px); box-shadow: 0 16px 28px rgba(31,65,56,.08); }.course-card-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }.course-card-top > span { color: #477b70; font-size: .75rem; font-weight: 800; }.course-card-top small { padding: 4px 8px; color: #497b61; background: #e6f0e7; border-radius: 999px; font-size: .68rem; font-weight: 800; white-space: nowrap; }.course-card-top small.is-limited { color: #9b6318; background: #fff0d9; }.course-card-top small.is-closed { color: #66777a; background: #e9eeee; }.course-card h3 { font-size: 1.35rem; line-height: 1.45; margin: 25px 0 12px; white-space: pre-line; }.course-card > p { color: var(--course-muted); font-size: .9rem; line-height: 1.75; flex: 1; }.course-card dl { display: flex; margin: 12px 0 20px; border-top: 1px solid #e1e9e5; border-bottom: 1px solid #e1e9e5; }.course-card dl div { flex: 1; padding: 11px 0; }.course-card dl div + div { padding-left: 14px; border-left: 1px solid #e1e9e5; }.course-card dt { color: #778783; font-size: .7rem; }.course-card dd { margin: 2px 0 0; font-size: .88rem; font-weight: 800; }.course-detail-button { display: inline-flex; justify-content: space-between; align-items: center; width: 100%; padding: 0; color: var(--course-ink); background: transparent; border: 0; font: inherit; font-weight: 800; cursor: pointer; }.course-detail-button :global(.material-icon) { color: #609c82; }
+  .course-detail-section { background: #eaf3ee; }.detail-layout { display: grid; grid-template-columns: 1fr .85fr; gap: 70px; align-items: center; }.detail-copy > p:not(.section-kicker):not(.detail-label):not(.detail-note) { max-width: 560px; color: var(--course-muted); line-height: 1.9; }.detail-label { margin: 26px 0 6px; color: #518b76; font-size: .85rem; font-weight: 800; }.detail-meta { display: flex; gap: 22px; margin: 28px 0; }.detail-meta span { display: inline-flex; align-items: center; gap: 7px; color: #49605a; }.detail-meta :global(.material-icon) { color: #639a7d; }.detail-note { margin: 13px 0 0; color: #6e7f79; font-size: .8rem; }.curriculum-panel { padding: 35px; background: #fff; border: 1px solid #c8dad1; border-radius: 9px; }.curriculum-panel > p { color: #619679; font-size: .72rem; font-weight: 800; letter-spacing: .14em; }.curriculum-panel h3 { font-size: 1.35rem; margin-bottom: 24px; }.curriculum-panel ol { list-style: none; padding: 0; margin: 0 0 26px; }.curriculum-panel li { display: flex; gap: 14px; align-items: center; padding: 13px 0; border-top: 1px solid #e2eae5; font-weight: 700; }.curriculum-panel li span { color: #7fac86; font-size: .77rem; }.curriculum-panel a, .instructor-grid a { display: inline-flex; align-items: center; gap: 6px; color: #3f7e68; font-weight: 800; }
+  .course-feature-section { background: #fff; }.course-feature-section > .course-shell > h2 { max-width: 680px; margin-bottom: 36px; }.admin-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }.admin-grid article { padding: 28px; background: #f7faf8; border: 1px solid #dce8e1; border-radius: 8px; }.admin-grid :global(.material-icon) { color: #5e9a7a; font-size: 2rem; }.admin-grid h3 { margin: 20px 0 10px; font-size: 1.2rem; }.admin-grid p { margin: 0; color: var(--course-muted); line-height: 1.75; }
+  .course-flow-section { background: #193b3c; color: #fff; }.course-flow-section .section-kicker { color: #c6e7a2; }.course-flow-section p { color: #d6e4e0; line-height: 1.85; }.flow-layout { display: grid; grid-template-columns: .8fr 1fr; gap: 90px; align-items: center; }.enroll-steps { list-style: none; padding: 0; margin: 0; }.enroll-steps li { display: flex; gap: 20px; padding: 21px 0; border-top: 1px solid rgba(255,255,255,.2); }.enroll-steps span { display: grid; flex: 0 0 33px; width: 33px; height: 33px; place-items: center; color: #18323b; background: #c5e6a4; border-radius: 50%; font-size: .8rem; font-weight: 900; }.enroll-steps h3 { margin: 0 0 5px; font-size: 1.15rem; }.enroll-steps p { margin: 0; font-size: .92rem; }
+  .faq-layout { display: grid; grid-template-columns: .75fr 1fr; gap: 72px; }.course-faqs details { border-top: 1px solid #d9e4de; }.course-faqs summary { display: flex; justify-content: space-between; gap: 16px; padding: 20px 0; color: var(--course-ink); font-weight: 800; cursor: pointer; list-style: none; }.course-faqs summary::-webkit-details-marker { display: none; }.course-faqs summary :global(.material-icon) { color: #619b7f; }.course-faqs details[open] summary :global(.material-icon) { transform: rotate(45deg); }.course-faqs p { max-width: 660px; color: var(--course-muted); padding: 0 0 20px; margin: 0; line-height: 1.8; }
+  .instructor-section { padding-top: 20px; }.instructor-grid { display: grid; grid-template-columns: 210px 1fr; gap: 48px; align-items: center; padding: 48px; background: #fff6ea; border-radius: 11px; }.instructor-avatar { display: grid; width: 180px; aspect-ratio: 1; place-items: center; background: #f0bc77; border-radius: 50%; color: #fff; }.instructor-avatar :global(.material-icon) { font-size: 5.4rem; }.instructor-grid h2 { max-width: 710px; margin-bottom: 18px; }.instructor-grid p:not(.section-kicker) { max-width: 750px; color: #675d50; line-height: 1.85; }.course-cta { padding: 80px 0; background: #dceee4; }.course-cta-inner { display: flex; align-items: center; justify-content: space-between; gap: 44px; }.course-cta h2 { margin-bottom: 15px; }.course-cta p:not(.section-kicker) { margin-bottom: 0; color: #556a63; }.course-demo-footer { padding: 28px 0; color: #fff; background: #18323b; }.course-demo-footer .course-shell { display: flex; align-items: center; justify-content: space-between; gap: 18px; }.course-demo-footer strong { font-size: 1.25rem; }.course-demo-footer span, .course-demo-footer small { color: #bfd1ca; font-size: .78rem; }.application-dialog { width: min(560px, calc(100% - 40px)); padding: 38px; color: var(--course-ink); border: 0; border-radius: 12px; box-shadow: 0 25px 70px rgba(0,0,0,.28); }.application-dialog::backdrop { background: rgba(13,29,30,.55); }.application-dialog h2 { font-size: 1.7rem; margin-bottom: 15px; }.application-dialog p:not(.section-kicker) { color: var(--course-muted); line-height: 1.8; }.dialog-close { position: absolute; top: 13px; right: 13px; display: grid; width: 38px; height: 38px; place-items: center; color: var(--course-ink); background: #edf3ef; border: 0; border-radius: 50%; cursor: pointer; }
+  @media (max-width: 900px) { .course-hero-grid, .detail-layout, .flow-layout, .faq-layout, .section-heading-row { grid-template-columns: 1fr; gap: 34px; }.course-grid { grid-template-columns: repeat(2, 1fr); }.course-flow-mini { grid-template-columns: repeat(3, 1fr); }.course-cta-inner { display: block; }.cta-actions { margin-top: 25px; } }
+  @media (max-width: 640px) { .course-shell { width: min(100% - 36px, 1120px); }.course-hero { padding: 70px 0 58px; }.course-hero h1 { font-size: 2.55rem; }.hero-wireframe { min-height: 290px; transform: none; box-shadow: 10px 11px 0 #d7e8dd; }.course-section { padding: 64px 0; }.course-flow-mini, .course-grid, .admin-grid { grid-template-columns: 1fr; }.course-flow-mini li { min-height: auto; }.course-card { min-height: 0; }.instructor-grid { grid-template-columns: 1fr; padding: 30px; gap: 25px; }.instructor-avatar { width: 122px; }.course-demo-footer .course-shell { display: grid; gap: 10px; }.course-actions .course-button, .cta-actions .course-button { width: 100%; }.application-dialog { padding: 30px 24px; } }
+  @media print { @page { size: A4; margin: 10mm; }.course-demo, .course-demo * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }.course-hero { padding: 64px 0 58px; }.course-section { padding: 54px 0; }.course-cta { padding: 56px 0; }.course-demo-footer { padding: 20px 0; break-before: avoid-page; }.course-card, .admin-grid article, .curriculum-panel, .instructor-grid, .course-faqs details { break-inside: avoid-page; } }
+</style>

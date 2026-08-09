@@ -14,6 +14,7 @@ interface Props {
   url?: string;
   lang?: 'ja' | 'en' | 'fr';
   noindex?: boolean;
+  showSiteChrome?: boolean;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
 }
 
@@ -24,6 +25,7 @@ const {
   url = Astro.url.href,
   lang = 'ja',
   noindex = false,
+  showSiteChrome = true,
   structuredData
 } = Astro.props;
 
@@ -168,11 +170,11 @@ const getLocalizedHref = (l: string) => {
     </script>
   </head>
   <body>
-    <div id="global-progress-bar" class="global-progress-bar" aria-hidden="true"></div>
-    <a class="skip-link" href="#main">{skipLinkLabel}</a>
-    <Header lang={currentLang} />
+    {showSiteChrome && <div id="global-progress-bar" class="global-progress-bar" aria-hidden="true"></div>}
+    {showSiteChrome && <a class="skip-link" href="#main">{skipLinkLabel}</a>}
+    {showSiteChrome && <Header lang={currentLang} />}
     <slot />
-    <Footer lang={currentLang} />
+    {showSiteChrome && <Footer lang={currentLang} />}
     <GlossaryEnhancer />
   </body>
 </html>

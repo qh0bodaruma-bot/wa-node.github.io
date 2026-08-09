@@ -9,21 +9,29 @@ import {
   organizationSchema,
 } from '../data/structuredData';
 
-const title = "料金・費用の目安｜LINE連携構築（Salesforce・kintone・HubSpot等）｜和-Node";
-const description = "LINE連携構築の料金目安：Salesforce 40万円〜・kintone 25万円〜・HubSpot 20万円〜・Googleスプレッドシート 10万円〜（税別）。要件定義・設計・実装・テストを含みます。初回相談は無料。";
+const title = "料金・費用の目安｜LINE連携・iOS/Androidアプリ開発｜和-Node";
+const description = "LINE連携構築とiOS/Androidアプリ開発の料金目安。Salesforce・kintone・HubSpot等との連携、業務・顧客接点アプリの要件整理から実装・テスト・公開支援まで対応します。初回相談は無料。";
 
 const faqItems = [
   {
     question: "費用の目安を教えてください。",
-    answer: "連携先システムにより異なります。Salesforce連携は40万円〜、kintone連携は25万円〜、HubSpot連携は20万円〜、Googleスプレッドシート連携は10万円〜（いずれも税別）が目安です。要件定義・設計・実装・テストを含みます。連携するデータの種類や画面数により変動するため、まずヒアリングで範囲を確認したうえでお見積りします。",
+    answer: "LINE連携は、Salesforce連携40万円〜、kintone連携25万円〜、HubSpot連携20万円〜、Googleスプレッドシート連携10万円〜（いずれも税別）が目安です。iOS・Androidアプリは、小規模業務アプリ80万円〜、顧客向けアプリの初期版150万円〜が目安です。必要な画面数や連携内容を確認したうえで、正式なお見積りをご提示します。",
   },
   {
     question: "何が価格に影響しますか？",
-    answer: "連携するデータ項目の種類と数、LIFF画面（LINEアプリ内ページ）の有無と画面数、連携先システムの設定状況・API権限が主な変動要因です。",
+    answer: "LINE連携では、データ項目、LIFF画面、連携先システムの設定状況・API権限が主な変動要因です。アプリでは、画面数、ユーザー種別、ログイン・通知・決済の有無、外部システム連携、ストア公開支援の範囲が費用に影響します。",
   },
   {
     question: "Salesforce以外のシステムでも対応してもらえますか？",
-    answer: "Salesforce・kintone・HubSpot・Googleスプレッドシートなど、各種システムに対応しています。LINE公式アカウントをお持ちであれば、連携先システムについてはご相談ください。",
+    answer: "Salesforce・kintone・HubSpot・Googleスプレッドシートなど、各種システムとの連携をご相談いただけます。LINE連携だけでなく、業務・顧客接点アプリからこれらのシステムを利用する構成も、要件に応じて検討します。",
+  },
+  {
+    question: "LINEとアプリのどちらが向いていますか？",
+    answer: "友だち追加済みの方への案内や簡単なフォームはLINE・LIFFが向いています。毎日使う業務、会員向け機能、複数手順の操作などはアプリが向く場合があります。要件が固まっていない段階でも、目的と使う人を伺って一緒に整理します。",
+  },
+  {
+    question: "App Store・Google Playへの公開も依頼できますか？",
+    answer: "公開準備と申請手続きの支援に対応します。Apple・Googleの開発者アカウントは原則としてお客様名義で管理いただき、登録費用・外部サービス利用料は制作費とは別にご負担いただきます。ストア審査の通過そのものは保証できません。",
   },
   {
     question: "初回相談は有料ですか？",
@@ -49,6 +57,13 @@ const structuredData = [
     serviceType: "LINE LIFF development and CRM/SFA integration",
     priceFrom: "100000",
   }),
+  createServiceSchema({
+    name: "業務・顧客接点アプリ開発（iOS / Android）",
+    description: "業務利用・顧客接点に必要なiOS・Androidアプリを、要件整理、画面設計、実装、実機テスト、公開準備まで対応します。",
+    path: "/pricing/",
+    serviceType: "iOS and Android business application development",
+    priceFrom: "800000",
+  }),
   createFAQSchema(faqItems),
 ];
 
@@ -60,10 +75,25 @@ const includes = [
   { icon: "rocket_launch", text: "本番移行・運用引継ぎメモ" },
 ];
 
+const appIncludes = [
+  { icon: "handshake", text: "要件整理・利用者と業務フローの確認" },
+  { icon: "dashboard", text: "画面構成・操作導線の設計" },
+  { icon: "phone_iphone", text: "iOS・Android向けアプリ実装" },
+  { icon: "sync_alt", text: "必要に応じた既存システム・API連携" },
+  { icon: "fact_check", text: "実機テスト・公開準備・引継ぎメモ" },
+];
+
 const priceFactors = [
   "連携するデータ項目の種類と数",
   "LIFF画面（LINEアプリ内ページ）の有無と画面数",
   "連携先システムの設定状況・API権限",
+];
+
+const appPriceFactors = [
+  "画面数・利用者の種類・主要な業務フローの数",
+  "ログイン、通知、カメラ、決済などの機能",
+  "連携先システム・API・既存データの状態",
+  "App Store・Google Play公開支援と公開後の保守範囲",
 ];
 
 const canDo = [
@@ -72,12 +102,18 @@ const canDo = [
   "Salesforce・kintone・HubSpot・Googleスプレッドシート等へのREST API連携",
   "連携に必要な範囲のシステム設定（カスタム項目・APIユーザー設定等）",
   "実機テスト・本番移行・引継ぎドキュメント作成",
+  "業務・顧客接点向けのiOS・Androidアプリ開発",
+  "アプリからの既存システム・API連携",
+  "ストア公開準備・申請手続きの支援",
 ];
 
 const cannotDo = [
   "Salesforce ApexによるSalesforceカスタム開発・大規模改修",
   "各システムの新規導入・ライセンス手配",
   "LINE公式アカウントの運用代行・広告配信",
+  "App Store・Google Playの審査通過保証",
+  "Apple・Google開発者アカウント費用や外部サービス利用料の立替",
+  "医療・金融など、高度な規制対応を要するアプリの単独判断",
 ];
 ---
 
@@ -89,7 +125,33 @@ const cannotDo = [
       <div class="hero-inner">
         <p class="eyebrow">Pricing</p>
         <h1 class="page-heading">料金・費用の目安</h1>
-        <p class="lead">LINE連携構築の費用目安をご案内します。<br>初回のご相談・要件整理は無料です。</p>
+        <p class="lead">LINE連携と、iOS・Androidアプリ開発の費用目安をご案内します。<br>どの手段が合うかの整理から、初回無料でご相談いただけます。</p>
+      </div>
+    </section>
+
+    <!-- 手段の選び方 -->
+    <section class="section" aria-labelledby="choice-heading">
+      <div class="section-inner">
+        <p class="section-kicker">Choose the right channel</p>
+        <h2 id="choice-heading" class="section-heading">LINE・Web・アプリ。目的から選べます。</h2>
+        <div class="choice-grid">
+          <article class="choice-card">
+            <MaterialIcon name="chat" />
+            <h3>LINE・LIFF</h3>
+            <p>友だち追加済みの方へ案内する、簡単なフォームを届ける、既存システムへ情報をつなぐ場合。</p>
+          </article>
+          <article class="choice-card">
+            <MaterialIcon name="language" />
+            <h3>Webサイト・LP</h3>
+            <p>初めて訪れる方へ、サービス・料金・相談方法を分かりやすく伝える場合。</p>
+          </article>
+          <article class="choice-card">
+            <MaterialIcon name="phone_iphone" />
+            <h3>iOS・Androidアプリ</h3>
+            <p>毎日使う業務、会員向け機能、複数手順の操作を分かりやすくまとめる場合。</p>
+          </article>
+        </div>
+        <p class="choice-note">どれが合うか決まっていない場合も、利用者・目的・今の業務をもとに整理します。</p>
       </div>
     </section>
 
@@ -142,6 +204,56 @@ const cannotDo = [
 
           <p class="price-card__note">正式なお見積りは、要件をヒアリングしたうえでご提示します。</p>
           <a href="/contact/" class="cta-button">無料で費用感を聞く</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- アプリ開発料金カード -->
+    <section class="section section--alt" aria-labelledby="app-price-card-heading">
+      <div class="section-inner">
+        <div class="price-card price-card--app">
+          <p class="service-kicker"><MaterialIcon name="phone_iphone" /> iOS / Android App</p>
+          <h2 id="app-price-card-heading" class="price-card__title">業務・顧客接点アプリ開発 料金目安</h2>
+          <p class="price-card__includes">日常的に使う業務や、会員・予約などの顧客接点をアプリとして整える初期版の目安です。</p>
+          <div class="price-tiers">
+            <div class="price-tier">
+              <span class="price-tier__label">小規模業務アプリ</span>
+              <span class="price-tier__price">80万円〜<small>（税別）</small></span>
+            </div>
+            <div class="price-tier">
+              <span class="price-tier__label">顧客向けアプリ MVP</span>
+              <span class="price-tier__price">150万円〜<small>（税別）</small></span>
+            </div>
+            <div class="price-tier">
+              <span class="price-tier__label">ストア公開支援</span>
+              <span class="price-tier__price">15万円〜<small>（税別）</small></span>
+            </div>
+          </div>
+
+          <div class="price-card__details">
+            <h3 class="price-card__sub-heading">含まれるもの</h3>
+            <ul class="price-card__list">
+              {appIncludes.map(item => (
+                <li>
+                  <MaterialIcon name={item.icon} />
+                  <span>{item.text}</span>
+                </li>
+              ))}
+            </ul>
+
+            <h3 class="price-card__sub-heading">価格に影響する要素</h3>
+            <ul class="price-card__factors">
+              {appPriceFactors.map(text => (
+                <li>
+                  <MaterialIcon name="tune" />
+                  <span>{text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <p class="price-card__note">Apple・Googleの開発者アカウント費、クラウド・外部APIなどの利用料は制作費に含まれません。公開後の保守は内容に応じて別途お見積りします。</p>
+          <a href="/contact/?source=pricing_app" class="cta-button">アプリ化の費用感を聞く</a>
         </div>
       </div>
     </section>
@@ -286,6 +398,28 @@ const cannotDo = [
     text-align: center;
   }
 
+  .price-card--app {
+    border-color: #4f8c79;
+  }
+
+  .service-kicker,
+  .section-kicker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin: 0 0 0.65rem;
+    color: #3f7867;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .service-kicker .material-icon {
+    font-size: 1rem;
+  }
+
   .price-card__title {
     font-size: 1.25rem;
     font-weight: 700;
@@ -394,6 +528,43 @@ const cannotDo = [
     margin: 1rem 0 1.5rem;
   }
 
+  .choice-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .choice-card {
+    padding: 1.4rem;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--white);
+  }
+
+  .choice-card .material-icon {
+    color: var(--trust);
+    font-size: 1.8rem;
+  }
+
+  .choice-card h3 {
+    margin: 0.8rem 0 0.45rem;
+    color: var(--trust);
+    font-size: 1.05rem;
+  }
+
+  .choice-card p,
+  .choice-note {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .choice-note {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
   /* ---- CTA Button ---- */
   .cta-button {
     display: inline-block;
@@ -428,6 +599,10 @@ const cannotDo = [
     .scope-grid {
       grid-template-columns: 1fr 1fr;
       gap: 2rem;
+    }
+
+    .choice-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
@@ -587,6 +762,37 @@ const cannotDo = [
 
     .cta-heading {
       font-size: 1.8rem;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .section {
+      padding: 3.25rem 1rem;
+    }
+
+    .price-card {
+      padding: 2rem 1rem;
+    }
+
+    .price-card__title,
+    .section-heading,
+    .page-heading {
+      overflow-wrap: anywhere;
+    }
+
+    .price-tier {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 0.8rem 1rem;
+    }
+
+    .price-tier__label {
+      white-space: normal;
+    }
+
+    .price-tier__price {
+      text-align: left;
     }
   }
 
