@@ -141,6 +141,20 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"blog": {
+"2026-08-03_line-salesforce-liff.md": {
+	id: "2026-08-03_line-salesforce-liff.md";
+  slug: "2026-08-03_line-salesforce-liff";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
+"2026-08-03_salesforce-line-integration.md": {
+	id: "2026-08-03_salesforce-line-integration.md";
+  slug: "2026-08-03_salesforce-line-integration";
+  body: string;
+  collection: "blog";
+  data: InferEntrySchema<"blog">
+} & { render(): Render[".md"] };
 "first-post.md": {
 	id: "first-post.md";
   slug: "first-post";

@@ -84,6 +84,7 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
             <div class="phone__screen">
               <section class="phone-panel is-active" id="pet-panel" role="tabpanel" aria-labelledby="pet-tab" data-app-panel="pet">
                 <div class="status-bar" aria-hidden="true"><span>9:41</span><span><MaterialIcon name="signal_cellular_alt" /><MaterialIcon name="wifi" /><MaterialIcon name="battery_full" /></span></div>
+                <div class="phone-view is-active" data-pet-view="home">
                 <header class="pet-header">
                   <div><span>おはよう、サンプルさん</span><h2>ルナの健康手帳</h2></div>
                   <button type="button" class="round-button" aria-label="通知を見る"><MaterialIcon name="notifications" /><i></i></button>
@@ -108,7 +109,24 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
                   <MaterialIcon name="chevron_right" />
                 </section>
                 <button type="button" class="primary-phone-button" id="pet-record-button"><MaterialIcon name="edit_note" /> 今日の記録を追加する</button>
-                <nav class="phone-nav" aria-label="ペット健康手帳のメニュー"><button type="button" class="is-current"><MaterialIcon name="home" /><span>ホーム</span></button><button type="button"><MaterialIcon name="timeline" /><span>記録</span></button><button type="button"><MaterialIcon name="calendar_month" /><span>予定</span></button><button type="button"><MaterialIcon name="person" /><span>設定</span></button></nav>
+                </div>
+                <div class="phone-view" data-pet-view="records" hidden>
+                  <header class="screen-header"><div><span>ルナの健康手帳</span><h2>記録</h2></div><button type="button" class="round-button" data-pet-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="screen-summary"><strong>今週の記録</strong><span><b id="pet-record-count">3</b>件</span></div>
+                  <div class="record-list" id="pet-record-list" aria-live="polite"></div>
+                  <button type="button" class="secondary-phone-button" id="pet-record-from-list"><MaterialIcon name="add" /> 今日の記録を追加</button>
+                </div>
+                <div class="phone-view" data-pet-view="schedule" hidden>
+                  <header class="screen-header"><div><span>ルナの健康手帳</span><h2>予定</h2></div><button type="button" class="round-button" data-pet-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="schedule-card schedule-card--next"><span>次の予定</span><strong>8月18日（月）</strong><p>ワクチン相談<br /><small>さくら動物クリニック 10:30</small></p><button type="button" id="schedule-complete"><MaterialIcon name="task_alt" /> 完了にする</button></div>
+                  <div class="schedule-list"><p>これからの予定</p><div><b>9月02日（火）</b><span>トリミング</span></div><div><b>9月16日（火）</b><span>フィラリア予防</span></div></div>
+                </div>
+                <div class="phone-view" data-pet-view="settings" hidden>
+                  <header class="screen-header"><div><span>ルナの健康手帳</span><h2>設定</h2></div><button type="button" class="round-button" data-pet-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="settings-group"><p>通知</p><label><span>ケア予定のお知らせ</span><input type="checkbox" checked /></label><label><span>記録リマインド</span><input type="checkbox" checked /></label></div>
+                  <div class="settings-group"><p>このデモについて</p><span>入力内容はこのブラウザだけに保存されます。</span><button type="button" id="reset-pet-demo"><MaterialIcon name="restart_alt" /> デモを初期化する</button></div>
+                </div>
+                <nav class="phone-nav" aria-label="ペット健康手帳のメニュー"><button type="button" class="is-current" data-pet-nav="home"><MaterialIcon name="home" /><span>ホーム</span></button><button type="button" data-pet-nav="records"><MaterialIcon name="timeline" /><span>記録</span></button><button type="button" data-pet-nav="schedule"><MaterialIcon name="calendar_month" /><span>予定</span></button><button type="button" data-pet-nav="settings"><MaterialIcon name="person" /><span>設定</span></button></nav>
                 <div class="phone-modal" id="pet-record-modal" hidden>
                   <div class="phone-modal__sheet" role="dialog" aria-modal="true" aria-labelledby="pet-record-title">
                     <div class="sheet-handle" aria-hidden="true"></div>
@@ -122,6 +140,7 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
 
               <section class="phone-panel" id="subscription-panel" role="tabpanel" aria-labelledby="subscription-tab" data-app-panel="subscription" hidden>
                 <div class="status-bar" aria-hidden="true"><span>9:41</span><span><MaterialIcon name="signal_cellular_alt" /><MaterialIcon name="wifi" /><MaterialIcon name="battery_full" /></span></div>
+                <div class="phone-view is-active" data-subscription-view="home">
                 <header class="subscription-header"><div class="subscription-brand"><span class="subscription-brand__mark">F</span><strong>Flow Pantry</strong></div><button type="button" class="round-button" aria-label="お知らせを見る"><MaterialIcon name="notifications" /><i></i></button></header>
                 <div class="subscription-greeting"><span>サンプルさんの定期便</span><h2>次回のお届けを確認</h2></div>
                 <section class="delivery-card">
@@ -136,7 +155,23 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
                 </section>
                 <section class="subscription-plan"><div><span>現在のプラン</span><strong id="plan-name">月1回・2袋コース</strong><small>次回から、いつでも変更できます</small></div><MaterialIcon name="chevron_right" /></section>
                 <p class="subscription-note"><MaterialIcon name="info" /> スキップ後も、次々回からは通常どおりお届けします。</p>
-                <nav class="phone-nav phone-nav--subscription" aria-label="サブスクFlowのメニュー"><button type="button" class="is-current"><MaterialIcon name="home" /><span>ホーム</span></button><button type="button"><MaterialIcon name="inventory_2" /><span>お届け</span></button><button type="button"><MaterialIcon name="receipt_long" /><span>履歴</span></button><button type="button"><MaterialIcon name="person" /><span>マイページ</span></button></nav>
+                </div>
+                <div class="phone-view" data-subscription-view="deliveries" hidden>
+                  <header class="screen-header"><div><span>Flow Pantry</span><h2>お届け</h2></div><button type="button" class="round-button" data-subscription-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="screen-summary"><strong>次回お届け</strong><span id="delivery-summary-state">配送予定</span></div>
+                  <div class="delivery-list"><article><span>8月17日（日）</span><strong>朝のコーヒー便</strong><small id="delivery-list-detail">深煎りブレンド 200g × 2袋</small><em id="delivery-list-state">配送予定</em></article><article><span>9月17日（水）</span><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small><em>予定</em></article></div>
+                  <button type="button" class="secondary-phone-button" id="delivery-to-home"><MaterialIcon name="tune" /> 次回配送を変更する</button>
+                </div>
+                <div class="phone-view" data-subscription-view="history" hidden>
+                  <header class="screen-header"><div><span>Flow Pantry</span><h2>お届け履歴</h2></div><button type="button" class="round-button" data-subscription-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="history-list"><article><span>7月17日（木）</span><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small><b>お届け済み</b></article><article><span>6月17日（火）</span><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small><b>お届け済み</b></article><article><span>5月17日（土）</span><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small><b>お届け済み</b></article></div>
+                </div>
+                <div class="phone-view" data-subscription-view="account" hidden>
+                  <header class="screen-header"><div><span>Flow Pantry</span><h2>マイページ</h2></div><button type="button" class="round-button" data-subscription-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="account-profile"><span><MaterialIcon name="person" /></span><strong>サンプル 花子</strong><small>sample@example.com</small></div>
+                  <div class="settings-group"><p>ご利用情報</p><button type="button"><span>お届け先</span><MaterialIcon name="chevron_right" /></button><button type="button"><span>お支払い方法</span><MaterialIcon name="chevron_right" /></button><button type="button" id="reset-subscription-demo"><span>デモを初期化する</span><MaterialIcon name="restart_alt" /></button></div>
+                </div>
+                <nav class="phone-nav phone-nav--subscription" aria-label="サブスクFlowのメニュー"><button type="button" class="is-current" data-subscription-nav="home"><MaterialIcon name="home" /><span>ホーム</span></button><button type="button" data-subscription-nav="deliveries"><MaterialIcon name="inventory_2" /><span>お届け</span></button><button type="button" data-subscription-nav="history"><MaterialIcon name="receipt_long" /><span>履歴</span></button><button type="button" data-subscription-nav="account"><MaterialIcon name="person" /><span>マイページ</span></button></nav>
                 <div class="phone-modal" id="subscription-modal" hidden>
                   <div class="phone-modal__sheet" role="dialog" aria-modal="true" aria-labelledby="subscription-modal-title">
                     <div class="sheet-handle" aria-hidden="true"></div>
@@ -174,6 +209,28 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
     const appPanels = document.querySelectorAll('[data-app-panel]');
     const copyPanels = document.querySelectorAll('[data-copy-panel]');
     const demoStatus = document.querySelector('#demo-status');
+    const storageKey = 'wa-node-mobile-app-demo-state';
+    const defaultState = {
+      petRecords: [
+        { date: '昨日 20:18', condition: '元気です' },
+        { date: '8月8日（金）', condition: '元気です' },
+        { date: '8月7日（木）', condition: '少し気になる' },
+      ],
+      deliveryState: '配送予定',
+      planName: '月1回・2袋コース',
+    };
+    let demoState = { ...defaultState };
+
+    try {
+      const saved = JSON.parse(localStorage.getItem(storageKey));
+      if (saved && Array.isArray(saved.petRecords)) demoState = { ...defaultState, ...saved };
+    } catch {
+      demoState = { ...defaultState };
+    }
+
+    function saveState() {
+      localStorage.setItem(storageKey, JSON.stringify(demoState));
+    }
 
     function showApp(app) {
       appChoices.forEach((button) => {
@@ -191,6 +248,41 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
       demoStatus.textContent = app === 'pet' ? 'ペット健康手帳のデモを表示しています。' : 'サブスクFlowのデモを表示しています。';
     }
 
+    function showPetView(view) {
+      document.querySelectorAll('[data-pet-view]').forEach((panel) => {
+        const selected = panel.dataset.petView === view;
+        panel.hidden = !selected;
+        panel.classList.toggle('is-active', selected);
+      });
+      document.querySelectorAll('[data-pet-nav]').forEach((button) => button.classList.toggle('is-current', button.dataset.petNav === view));
+    }
+
+    function showSubscriptionView(view) {
+      document.querySelectorAll('[data-subscription-view]').forEach((panel) => {
+        const selected = panel.dataset.subscriptionView === view;
+        panel.hidden = !selected;
+        panel.classList.toggle('is-active', selected);
+      });
+      document.querySelectorAll('[data-subscription-nav]').forEach((button) => button.classList.toggle('is-current', button.dataset.subscriptionNav === view));
+    }
+
+    function renderPetRecords() {
+      const list = document.querySelector('#pet-record-list');
+      const count = document.querySelector('#pet-record-count');
+      const current = demoState.petRecords[0];
+      list.innerHTML = demoState.petRecords.map((record) => `<article><span>${record.date}</span><strong>${record.condition}</strong><small>${record.condition === '元気です' ? '食事・排泄ともに記録済み' : 'あとで様子を見返せます'}</small><i class="material-symbols-rounded">chevron_right</i></article>`).join('');
+      count.textContent = String(demoState.petRecords.length);
+      document.querySelector('#pet-condition').textContent = current.condition;
+    }
+
+    function renderSubscription() {
+      document.querySelector('#delivery-state').textContent = demoState.deliveryState;
+      document.querySelector('#delivery-summary-state').textContent = demoState.deliveryState;
+      document.querySelector('#delivery-list-state').textContent = demoState.deliveryState;
+      document.querySelector('#plan-name').textContent = demoState.planName;
+      document.querySelector('#delivery-list-detail').textContent = demoState.planName.includes('1袋') ? '深煎りブレンド 200g × 1袋' : '深煎りブレンド 200g × 2袋';
+    }
+
     appChoices.forEach((button) => {
       button.addEventListener('click', () => showApp(button.dataset.appChoice));
       button.addEventListener('keydown', (event) => {
@@ -204,10 +296,17 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
       });
     });
 
+    document.querySelectorAll('[data-pet-nav]').forEach((button) => button.addEventListener('click', () => showPetView(button.dataset.petNav)));
+    document.querySelectorAll('[data-pet-to-home]').forEach((button) => button.addEventListener('click', () => showPetView('home')));
+    document.querySelectorAll('[data-subscription-nav]').forEach((button) => button.addEventListener('click', () => showSubscriptionView(button.dataset.subscriptionNav)));
+    document.querySelectorAll('[data-subscription-to-home]').forEach((button) => button.addEventListener('click', () => showSubscriptionView('home')));
+    document.querySelector('#delivery-to-home').addEventListener('click', () => showSubscriptionView('home'));
+
     const petModal = document.querySelector('#pet-record-modal');
-    const petCondition = document.querySelector('#pet-condition');
     let selectedCondition = '元気です';
-    document.querySelector('#pet-record-button').addEventListener('click', () => { petModal.hidden = false; });
+    function openPetRecordModal() { petModal.hidden = false; }
+    document.querySelector('#pet-record-button').addEventListener('click', openPetRecordModal);
+    document.querySelector('#pet-record-from-list').addEventListener('click', openPetRecordModal);
     document.querySelector('#pet-record-close').addEventListener('click', () => { petModal.hidden = true; });
     document.querySelectorAll('[data-condition]').forEach((button) => {
       button.addEventListener('click', () => {
@@ -217,9 +316,24 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
       });
     });
     document.querySelector('#pet-record-save').addEventListener('click', () => {
-      petCondition.textContent = selectedCondition;
+      demoState.petRecords.unshift({ date: 'たった今', condition: selectedCondition });
+      demoState.petRecords = demoState.petRecords.slice(0, 6);
+      saveState();
+      renderPetRecords();
       petModal.hidden = true;
-      demoStatus.textContent = `ルナの「${selectedCondition}」という記録を、このデモ画面に反映しました。`;
+      demoStatus.textContent = `ルナの「${selectedCondition}」という記録を追加しました。記録画面でも確認できます。`;
+    });
+    document.querySelector('#schedule-complete').addEventListener('click', (event) => {
+      event.currentTarget.textContent = '完了にしました';
+      event.currentTarget.disabled = true;
+      demoStatus.textContent = 'ワクチン相談を完了にするサンプル操作を反映しました。';
+    });
+    document.querySelector('#reset-pet-demo').addEventListener('click', () => {
+      demoState.petRecords = [...defaultState.petRecords];
+      saveState();
+      renderPetRecords();
+      showPetView('home');
+      demoStatus.textContent = 'ペット健康手帳のデモを初期状態に戻しました。';
     });
 
     const subscriptionModal = document.querySelector('#subscription-modal');
@@ -242,14 +356,27 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
     document.querySelector('#subscription-modal-close').addEventListener('click', () => { subscriptionModal.hidden = true; });
     subscriptionModalSave.addEventListener('click', () => {
       if (subscriptionAction === 'skip') {
-        document.querySelector('#delivery-state').textContent = '今回をスキップ';
-        demoStatus.textContent = '次回配送をスキップするサンプル操作を、このデモ画面に反映しました。';
+        demoState.deliveryState = '今回をスキップ';
+        demoStatus.textContent = '次回配送をスキップするサンプル操作を反映しました。お届け画面でも確認できます。';
       } else {
-        document.querySelector('#plan-name').textContent = '月1回・1袋コース';
-        demoStatus.textContent = 'プラン変更のサンプル操作を、このデモ画面に反映しました。';
+        demoState.planName = '月1回・1袋コース';
+        demoStatus.textContent = 'プラン変更のサンプル操作を反映しました。次回お届けの内容も更新されています。';
       }
+      saveState();
+      renderSubscription();
       subscriptionModal.hidden = true;
     });
+    document.querySelector('#reset-subscription-demo').addEventListener('click', () => {
+      demoState.deliveryState = defaultState.deliveryState;
+      demoState.planName = defaultState.planName;
+      saveState();
+      renderSubscription();
+      showSubscriptionView('home');
+      demoStatus.textContent = 'サブスクFlowのデモを初期状態に戻しました。';
+    });
+
+    renderPetRecords();
+    renderSubscription();
   </script>
 </BaseLayout>
 
@@ -282,7 +409,7 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
   .feature-list { display:grid; gap:12px; margin:30px 0 0; }.feature-list div { display:grid; grid-template-columns:42px 1fr; gap:12px; align-items:start; }.feature-list dt { width:42px; height:42px; display:grid; place-items:center; background:#fff; color:var(--teal); border:1px solid var(--line); }.feature-list dd { margin:0; }.feature-list strong,.feature-list span { display:block; }.feature-list span { margin-top:4px; color:var(--muted); font-size:.87rem; line-height:1.55; }
   .app-scope { margin-top:36px; padding:20px 22px; border-left:4px solid var(--coral); background:#fff; }.app-scope > span { color:var(--teal); font-size:.78rem; font-weight:900; }.app-scope p { margin:9px 0 15px; color:var(--muted); line-height:1.7; font-size:.88rem; }.app-scope a { display:inline-flex; gap:6px; align-items:center; color:var(--teal); font-weight:900; text-decoration:none; }.app-scope a:hover { text-decoration:underline; }.app-scope .material-icon { font-size:1.1rem; }
   .phone-area { display:grid; justify-items:center; }.phone { position:relative; width:min(100%,380px); padding:10px; border:9px solid #16282d; border-radius:40px; background:#16282d; box-shadow:0 30px 54px rgba(18,59,67,.25); }.phone__speaker { position:absolute; z-index:2; top:18px; left:50%; width:94px; height:20px; border-radius:0 0 16px 16px; background:#16282d; transform:translateX(-50%); }.phone__screen { position:relative; min-height:702px; overflow:hidden; border-radius:25px; background:#f7faf8; }.phone__home-bar { width:118px; height:4px; margin:8px auto 0; border-radius:99px; background:#b9c2c4; }.phone-caption { display:flex; align-items:center; gap:7px; margin:18px 0 0; color:var(--muted); font-size:.82rem; }.phone-caption .material-icon { color:var(--teal); }.phone-status { min-height:20px; margin:8px 0 0; color:var(--teal); font-size:.78rem; font-weight:800; text-align:center; }
-  .phone-panel { min-height:702px; position:relative; padding:0 18px 72px; }.phone-panel[hidden] { display:none; }.status-bar { display:flex; justify-content:space-between; align-items:center; min-height:37px; padding:0 8px; color:#264249; font-size:.7rem; font-weight:900; }.status-bar > span:last-child { display:flex; gap:3px; }.status-bar .material-icon { font-size:.92rem; }
+  .phone-panel { min-height:702px; position:relative; padding:0 18px 72px; }.phone-panel[hidden],.phone-view[hidden] { display:none; }.phone-view { min-height:593px; }.status-bar { display:flex; justify-content:space-between; align-items:center; min-height:37px; padding:0 8px; color:#264249; font-size:.7rem; font-weight:900; }.status-bar > span:last-child { display:flex; gap:3px; }.status-bar .material-icon { font-size:.92rem; }
   .pet-header,.subscription-header { display:flex; justify-content:space-between; align-items:start; }.pet-header span,.subscription-greeting span { color:var(--muted); font-size:.76rem; }.pet-header h2,.subscription-greeting h2 { margin:3px 0 0; font-size:1.34rem; }.round-button { position:relative; width:39px; height:39px; display:grid; place-items:center; border:0; border-radius:50%; background:#e7f0ec; color:var(--teal); cursor:pointer; }.round-button i { position:absolute; top:8px; right:8px; width:6px; height:6px; border-radius:50%; background:var(--coral); }
   .pet-profile { display:flex; gap:11px; align-items:center; margin-top:20px; padding:12px; background:#fff; border:1px solid #e4ece8; }.pet-avatar { width:46px; height:46px; display:grid; place-items:center; border-radius:50%; background:#f5ddd6; color:#c55443; }.pet-profile strong,.pet-profile span { display:block; }.pet-profile strong { font-size:.92rem; }.pet-profile span { margin-top:2px; color:var(--muted); font-size:.7rem; }.pet-switch { margin-left:auto; border:0; background:transparent; color:var(--muted); cursor:pointer; }
   .pet-summary { margin-top:15px; padding:18px; border-radius:18px; background:linear-gradient(135deg,#1e7574,#13505d); color:#fff; }.pet-summary p { margin:0; color:#c4e3dc; font-size:.74rem; }.pet-summary > div { display:flex; justify-content:space-between; align-items:center; margin-top:7px; }.pet-summary strong { font-size:1.3rem; }.pet-summary span { display:inline-flex; align-items:center; gap:3px; padding:5px 7px; background:rgba(255,255,255,.15); font-size:.66rem; }.pet-summary span .material-icon { font-size:.86rem; }.pet-summary > small { display:block; margin-top:10px; color:#c4e3dc; font-size:.68rem; }
@@ -291,6 +418,7 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
   .primary-phone-button,.modal-save { width:100%; min-height:49px; display:flex; justify-content:center; align-items:center; gap:8px; margin-top:15px; border:0; background:var(--coral); color:#fff; font:inherit; font-size:.83rem; font-weight:900; cursor:pointer; }.primary-phone-button:hover,.modal-save:hover { background:#b83f35; }.primary-phone-button .material-icon { font-size:1.1rem; }
   .phone-nav { position:absolute; right:0; bottom:0; left:0; display:grid; grid-template-columns:repeat(4,1fr); min-height:62px; border-top:1px solid #e0e9e5; background:#fff; }.phone-nav button { display:grid; place-content:center; gap:2px; border:0; background:#fff; color:#8a9998; font:inherit; font-size:.58rem; cursor:pointer; }.phone-nav .material-icon { font-size:1.25rem; }.phone-nav button.is-current { color:var(--teal); font-weight:900; }
   .phone-modal { position:absolute; z-index:4; inset:0; display:flex; align-items:end; background:rgba(14,34,39,.35); }.phone-modal[hidden] { display:none; }.phone-modal__sheet { position:relative; width:100%; padding:12px 20px 24px; border-radius:24px 24px 0 0; background:#fff; animation:sheet-in .2s ease-out; }.sheet-handle { width:40px; height:4px; margin:0 auto 15px; border-radius:99px; background:#ccd7d4; }.modal-close { position:absolute; top:20px; right:16px; border:0; background:transparent; color:var(--muted); cursor:pointer; }.phone-modal__sheet p { margin:0; color:var(--muted); font-size:.72rem; }.phone-modal__sheet h3 { margin:4px 0 19px; font-size:1.16rem; }.condition-options { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }.condition-options button { display:grid; gap:5px; place-items:center; min-height:78px; border:1px solid var(--line); background:#fff; color:var(--muted); font:inherit; font-size:.68rem; cursor:pointer; }.condition-options button.is-selected { border:2px solid var(--teal); background:#edf8f4; color:var(--teal); }.condition-options .material-icon { font-size:1.45rem; }.modal-description { padding:14px; background:#f3f7f5; color:var(--muted); font-size:.8rem; line-height:1.7; }.modal-save { margin-top:16px; }
+  .screen-header { display:flex; justify-content:space-between; align-items:start; padding-top:5px; }.screen-header span { color:var(--muted); font-size:.7rem; }.screen-header h2 { margin:3px 0 0; font-size:1.35rem; }.screen-summary { display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding:12px 14px; background:#e9f4ef; color:var(--teal); font-size:.76rem; }.screen-summary span { color:#347564; }.screen-summary b { font-size:1.05rem; }.record-list,.delivery-list,.history-list,.schedule-list { display:grid; gap:8px; margin-top:12px; }.record-list article,.delivery-list article,.history-list article { position:relative; padding:14px 31px 14px 14px; border:1px solid #e0e9e5; background:#fff; }.record-list span,.delivery-list span,.history-list span { display:block; color:var(--muted); font-size:.66rem; }.record-list strong,.delivery-list strong,.history-list strong { display:block; margin:3px 0; font-size:.82rem; }.record-list small,.delivery-list small,.history-list small { display:block; color:var(--muted); font-size:.66rem; }.record-list i { position:absolute; top:50%; right:9px; color:var(--muted); font-style:normal; transform:translateY(-50%); }.delivery-list em { position:absolute; top:14px; right:11px; padding:4px 6px; background:#e8f3ed; color:#237057; font-size:.6rem; font-style:normal; font-weight:800; }.history-list b { position:absolute; top:14px; right:11px; color:#267158; font-size:.6rem; }.secondary-phone-button { width:100%; min-height:46px; display:flex; justify-content:center; align-items:center; gap:7px; margin-top:16px; border:1px solid var(--teal); background:#fff; color:var(--teal); font:inherit; font-size:.79rem; font-weight:900; cursor:pointer; }.schedule-card { margin-top:20px; padding:18px; border:1px solid #dce8e3; background:#fff; }.schedule-card > span { color:var(--muted); font-size:.68rem; }.schedule-card strong { display:block; margin-top:4px; color:var(--teal); font-size:1.2rem; }.schedule-card p { margin:10px 0 14px; font-size:.82rem; line-height:1.6; }.schedule-card p small { color:var(--muted); }.schedule-card button { min-height:38px; display:flex; align-items:center; gap:6px; border:0; background:#e9f4ef; color:#267158; font:inherit; font-size:.72rem; font-weight:800; cursor:pointer; }.schedule-card button:disabled { color:var(--muted); }.schedule-list > p,.settings-group > p { margin:20px 0 8px; color:var(--muted); font-size:.7rem; font-weight:800; }.schedule-list > div { display:flex; justify-content:space-between; padding:13px; border-bottom:1px solid #e3ebe7; background:#fff; font-size:.74rem; }.schedule-list span { color:var(--muted); }.settings-group { display:grid; margin-top:18px; }.settings-group p { grid-column:1 / -1; }.settings-group label,.settings-group button { min-height:48px; display:flex; justify-content:space-between; align-items:center; padding:0 13px; border:1px solid #e1eae6; background:#fff; color:var(--ink); font:inherit; font-size:.75rem; }.settings-group label + label,.settings-group button + button { border-top:0; }.settings-group > span { padding:13px; border:1px solid #e1eae6; background:#fff; color:var(--muted); font-size:.72rem; line-height:1.6; }.settings-group > span + button { border-top:0; color:var(--coral); cursor:pointer; }.settings-group input { accent-color:var(--teal); }.account-profile { display:grid; justify-items:center; gap:5px; margin-top:24px; padding:23px; border:1px solid #dce8e3; background:#fff; }.account-profile > span { width:48px; height:48px; display:grid; place-items:center; border-radius:50%; background:#e9f4ef; color:var(--teal); }.account-profile strong { margin-top:4px; font-size:.87rem; }.account-profile small { color:var(--muted); font-size:.68rem; }
   .subscription-header { align-items:center; }.subscription-brand { display:flex; gap:8px; align-items:center; }.subscription-brand__mark { width:29px; height:29px; display:grid; place-items:center; background:#16746c; color:#fff; font-family:Georgia,serif; font-weight:800; }.subscription-brand strong { font-size:1rem; letter-spacing:0; }.subscription-greeting { margin-top:23px; }.delivery-card { margin-top:17px; padding:17px; border:1px solid #d8e5df; background:#fff; box-shadow:0 8px 20px rgba(18,59,67,.05); }.delivery-card__top { display:grid; grid-template-columns:1fr auto; gap:2px 10px; align-items:center; }.delivery-card__top span { color:var(--muted); font-size:.68rem; }.delivery-card__top strong { font-size:1rem; }.delivery-card__top em { grid-column:2; grid-row:1; padding:4px 7px; background:#e8f3ed; color:#237057; font-size:.61rem; font-style:normal; font-weight:800; }.delivery-progress { display:grid; grid-template-columns:auto 1fr auto 1fr auto; align-items:center; margin:22px 5px 3px; }.delivery-progress i { width:24px; height:24px; display:grid; place-items:center; border-radius:50%; background:#e3ebe8; color:#98a9a6; font-style:normal; }.delivery-progress i.is-done,.delivery-progress i.is-current { background:#27786e; color:#fff; }.delivery-progress .material-icon { font-size:.82rem; }.delivery-progress span { height:2px; background:#d8e5df; }.delivery-progress span:first-of-type { background:#27786e; }.delivery-progress__labels { display:grid; grid-template-columns:repeat(3,1fr); margin:0 -6px; color:var(--muted); font-size:.59rem; text-align:center; }.delivery-product { display:flex; gap:10px; align-items:center; margin-top:20px; padding-top:14px; border-top:1px solid #e6eeea; }.product-thumb { width:38px; height:38px; display:grid; place-items:center; background:#ead9bd; color:#8b5d22; }.delivery-product div { flex:1; }.delivery-product strong,.delivery-product small { display:block; }.delivery-product strong { font-size:.76rem; }.delivery-product small { margin-top:3px; color:var(--muted); font-size:.65rem; }.delivery-product > .material-icon { color:var(--muted); }
   .subscription-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:13px; }.subscription-actions button { padding:12px 8px; border:1px solid #d8e5df; background:#fff; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }.subscription-actions button:hover,.subscription-actions button:focus-visible { border-color:var(--teal); outline:none; }.subscription-actions button span { width:29px; height:29px; display:grid; place-items:center; margin-bottom:8px; background:#edf6f2; color:var(--teal); }.subscription-actions strong,.subscription-actions small { display:block; }.subscription-actions strong { font-size:.73rem; }.subscription-actions small { margin-top:3px; color:var(--muted); font-size:.62rem; }.subscription-plan { display:flex; align-items:center; gap:12px; margin-top:13px; padding:14px; border:1px solid #d8e5df; background:#fff; }.subscription-plan div { flex:1; }.subscription-plan span,.subscription-plan small { display:block; color:var(--muted); font-size:.66rem; }.subscription-plan strong { display:block; margin:2px 0; font-size:.82rem; }.subscription-plan > .material-icon { color:var(--muted); }.subscription-note { display:flex; gap:5px; margin:13px 2px 0; color:var(--muted); font-size:.64rem; line-height:1.5; }.subscription-note .material-icon { color:var(--teal); font-size:.95rem; }
   .demo-after { padding:88px 0; background:#fff; text-align:center; }.demo-after h2 { font-size:clamp(2rem,3.8vw,3.5rem); }.demo-after__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:40px; text-align:left; }.demo-after__grid article { padding:24px; border:1px solid var(--line); background:#fcfdfc; }.demo-after__grid .material-icon { color:var(--teal); font-size:2rem; }.demo-after__grid h3 { margin:12px 0 8px; font-size:1.05rem; }.demo-after__grid p { margin:0; color:var(--muted); font-size:.9rem; line-height:1.75; }
