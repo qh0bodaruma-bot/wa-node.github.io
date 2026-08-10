@@ -2,8 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MaterialIcon from '../components/MaterialIcon.astro';
 
-const title = 'Androidアプリ体験デモ｜ペット健康手帳・サブスクFlow｜和-Node';
-const description = 'ペット健康手帳とサブスクFlowを題材にした、iOS・Androidアプリの自主制作・架空デモです。記録、確認、配送管理など、日常的に使う画面の流れをブラウザで体験できます。';
+const title = 'Androidアプリ体験デモ｜ペット健康手帳・Flow｜和-Node';
+const description = 'ペット健康手帳とサブスク管理アプリFlowの自主制作デモです。体重・ワクチン記録・病院持参、サブスク費用の一覧・カレンダー・支出分析など、日常利用の画面をブラウザで体験できます。';
 ---
 
 <BaseLayout title={title} description={description} noindex={true}>
@@ -21,11 +21,11 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
         <div class="demo-hero__copy">
           <p class="eyebrow">MOBILE APP INTERACTIVE DEMO</p>
           <h1>毎日使う流れを、<br />アプリで分かりやすく。</h1>
-          <p>「ペット健康手帳」と「サブスクFlow」を題材に、利用者が確認・記録・変更を迷わず進めるための画面を用意しました。スマートフォンらしい画面遷移と、業務側で必要になる情報のまとまりを確認できます。</p>
+          <p>「ペット健康手帳」と「Flow（サブスク管理）」を実際に開発したアプリをベースにしたデモです。スマートフォンらしい画面遷移と、利用者・運用者に必要な情報のまとまりを確認できます。</p>
           <dl class="demo-hero__points">
-            <div><dt><MaterialIcon name="touch_app" /></dt><dd><strong>操作できる</strong><span>画面を切り替え、記録・スキップを試せます</span></dd></div>
+            <div><dt><MaterialIcon name="touch_app" /></dt><dd><strong>操作できる</strong><span>画面を切り替え、記録・分析を試せます</span></dd></div>
             <div><dt><MaterialIcon name="smartphone" /></dt><dd><strong>Android風UI</strong><span>実機の利用場面を想定した縦長の画面構成です</span></dd></div>
-            <div><dt><MaterialIcon name="account_tree" /></dt><dd><strong>用途別の設計</strong><span>顧客向け機能と継続利用の流れを比較できます</span></dd></div>
+            <div><dt><MaterialIcon name="account_tree" /></dt><dd><strong>用途別の設計</strong><span>記録・管理・分析の異なる目的を比較できます</span></dd></div>
           </dl>
         </div>
 
@@ -34,16 +34,16 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
           <div class="app-choice-list" role="tablist" aria-label="アプリデモの切り替え">
             <button type="button" class="app-choice is-active" role="tab" aria-selected="true" aria-controls="pet-panel" id="pet-tab" data-app-choice="pet">
               <span class="app-choice__icon app-choice__icon--pet"><MaterialIcon name="pets" /></span>
-              <span><strong>ペット健康手帳</strong><small>記録・確認・ケア予定</small></span>
+              <span><strong>ペット健康手帳</strong><small>体重・ワクチン・通院・病院持参</small></span>
               <MaterialIcon name="arrow_forward" />
             </button>
-            <button type="button" class="app-choice" role="tab" aria-selected="false" aria-controls="subscription-panel" id="subscription-tab" data-app-choice="subscription" tabindex="-1">
-              <span class="app-choice__icon app-choice__icon--subscription"><MaterialIcon name="autorenew" /></span>
-              <span><strong>サブスクFlow</strong><small>配送・スキップ・プラン管理</small></span>
+            <button type="button" class="app-choice" role="tab" aria-selected="false" aria-controls="flow-panel" id="flow-tab" data-app-choice="flow" tabindex="-1">
+              <span class="app-choice__icon app-choice__icon--flow"><MaterialIcon name="receipt_long" /></span>
+              <span><strong>Flow（サブスク管理）</strong><small>費用管理・カレンダー・支出分析</small></span>
               <MaterialIcon name="arrow_forward" />
             </button>
           </div>
-          <p class="demo-selector__note"><MaterialIcon name="info" /> どちらも架空のサービスを題材にした、アプリ開発の画面・導線サンプルです。</p>
+          <p class="demo-selector__note"><MaterialIcon name="info" /> どちらも実際に開発中のAndroidアプリをベースにした画面・導線サンプルです。</p>
         </div>
       </div>
     </section>
@@ -54,21 +54,21 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
           <div class="app-explanation__panel" data-copy-panel="pet">
             <p class="section-kicker">PET HEALTH NOTE</p>
             <h2>気になる変化を、<br />いつもの記録にする。</h2>
-            <p>体重・食事・体調など、飼い主が日常で確認したい情報を一画面へ整理。次のケア予定も同じ場所で確認でき、記録の抜けを減らします。</p>
+            <p>体重・ワクチン・通院など、飼い主と動物病院が共有したい情報を整理。「病院へ持参する」機能で、診察時にそのまま画面を見せられます。400円買い切り・広告なし。</p>
             <dl class="feature-list">
-              <div><dt><MaterialIcon name="monitor_weight" /></dt><dd><strong>今日の記録</strong><span>入力する項目を少なく、次の行動を明確に</span></dd></div>
-              <div><dt><MaterialIcon name="history" /></dt><dd><strong>変化の確認</strong><span>数値と体調メモを時間軸で見返せる構成</span></dd></div>
-              <div><dt><MaterialIcon name="event" /></dt><dd><strong>ケア予定</strong><span>通院・お手入れの予定を見落としにくく表示</span></dd></div>
+              <div><dt><MaterialIcon name="monitor_weight" /></dt><dd><strong>記録</strong><span>体重・体調・通院を最大3タップで記録</span></dd></div>
+              <div><dt><MaterialIcon name="event" /></dt><dd><strong>予定</strong><span>ワクチン・通院の期限を見落としにくく表示</span></dd></div>
+              <div><dt><MaterialIcon name="local_hospital" /></dt><dd><strong>病院持参</strong><span>アレルギー・体重・次回予定をフルスクリーンで表示</span></dd></div>
             </dl>
           </div>
-          <div class="app-explanation__panel" data-copy-panel="subscription" hidden>
-            <p class="section-kicker">SUBSCRIPTION FLOW</p>
-            <h2>続ける・止める・変えるを、<br />自分で選べる。</h2>
-            <p>次回配送、スキップ、プラン変更を、問い合わせ前に利用者自身で確認・変更できる構成です。継続利用の不安と事務側の確認負担を一緒に減らします。</p>
+          <div class="app-explanation__panel" data-copy-panel="flow" hidden>
+            <p class="section-kicker">FLOW — SUBSCRIPTION MANAGER</p>
+            <h2>払っているものを、<br />全部把握する。</h2>
+            <p>Netflix・Spotify・Adobe CCなど複数のサブスクを登録し、月間支出・請求日・カテゴリ別の内訳を一画面で確認。無料トライアルの期限も自動で警告します。</p>
             <dl class="feature-list">
-              <div><dt><MaterialIcon name="local_shipping" /></dt><dd><strong>次回配送</strong><span>いつ届くか、何が届くかを先に確認</span></dd></div>
-              <div><dt><MaterialIcon name="skip_next" /></dt><dd><strong>スキップ</strong><span>無理なく休止できる選択肢を同じ画面に</span></dd></div>
-              <div><dt><MaterialIcon name="tune" /></dt><dd><strong>プラン管理</strong><span>数量・周期・届け先の変更を迷わせない</span></dd></div>
+              <div><dt><MaterialIcon name="payments" /></dt><dd><strong>費用管理</strong><span>月払い・年払いをまとめて把握、月間¥X,XXX換算</span></dd></div>
+              <div><dt><MaterialIcon name="calendar_month" /></dt><dd><strong>請求カレンダー</strong><span>いつ何が引き落とされるかを月単位で確認</span></dd></div>
+              <div><dt><MaterialIcon name="bar_chart" /></dt><dd><strong>支出分析</strong><span>月別・カテゴリ別の傾向とトライアル期限を管理</span></dd></div>
             </dl>
           </div>
           <div class="app-scope">
@@ -82,106 +82,355 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
           <div class="phone" aria-label="Androidアプリのサンプル画面">
             <div class="phone__speaker" aria-hidden="true"></div>
             <div class="phone__screen">
+
+              <!-- ペット健康手帳 -->
               <section class="phone-panel is-active" id="pet-panel" role="tabpanel" aria-labelledby="pet-tab" data-app-panel="pet">
                 <div class="status-bar" aria-hidden="true"><span>9:41</span><span><MaterialIcon name="signal_cellular_alt" /><MaterialIcon name="wifi" /><MaterialIcon name="battery_full" /></span></div>
+
+                <!-- ホーム -->
                 <div class="phone-view is-active" data-pet-view="home">
-                <header class="pet-header">
-                  <div><span>おはよう、サンプルさん</span><h2>ルナの健康手帳</h2></div>
-                  <button type="button" class="round-button" aria-label="通知を見る"><MaterialIcon name="notifications" /><i></i></button>
-                </header>
-                <div class="pet-profile">
-                  <div class="pet-avatar" aria-hidden="true"><MaterialIcon name="pets" /></div>
-                  <div><strong>ルナ</strong><span>トイプードル / 4歳</span></div>
-                  <button type="button" class="pet-switch" aria-label="ペットを切り替える"><MaterialIcon name="keyboard_arrow_down" /></button>
+                  <header class="pet-header">
+                    <div><span>おはよう、サンプルさん</span><h2>ルナの健康手帳</h2></div>
+                    <button type="button" class="round-button" aria-label="通知を見る"><MaterialIcon name="notifications" /><i></i></button>
+                  </header>
+                  <div class="pet-profile">
+                    <div class="pet-avatar" aria-hidden="true"><MaterialIcon name="pets" /></div>
+                    <div><strong>ルナ</strong><span>トイプードル / 4歳</span></div>
+                    <button type="button" class="pet-switch" aria-label="ペットを切り替える"><MaterialIcon name="keyboard_arrow_down" /></button>
+                  </div>
+                  <div class="pet-summary">
+                    <p>今日の様子</p>
+                    <div><strong id="pet-condition">元気です</strong><span><MaterialIcon name="sentiment_satisfied" /> 記録済み</span></div>
+                    <small>前回の記録：昨日 20:18</small>
+                  </div>
+                  <section class="pet-card pet-card--weight" aria-label="体重の記録">
+                    <div><span>体重</span><strong id="pet-weight">4.2<small>kg</small></strong><small class="weight-change"><MaterialIcon name="trending_down" /> 前回から -0.1kg</small></div>
+                    <div class="mini-chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                  </section>
+                  <section class="pet-card pet-card--care" aria-label="次のケア予定">
+                    <span class="pet-card__icon"><MaterialIcon name="event" /></span>
+                    <div><small>次のケア予定</small><strong>8月18日（月） ワクチン相談</strong><span>さくら動物クリニック 10:30</span></div>
+                    <MaterialIcon name="chevron_right" />
+                  </section>
+                  <button type="button" class="primary-phone-button" id="pet-record-button"><MaterialIcon name="edit_note" /> 今日の記録を追加する</button>
                 </div>
-                <div class="pet-summary">
-                  <p>今日の様子</p>
-                  <div><strong id="pet-condition">元気です</strong><span><MaterialIcon name="sentiment_satisfied" /> 記録済み</span></div>
-                  <small>前回の記録：昨日 20:18</small>
-                </div>
-                <section class="pet-card pet-card--weight" aria-label="体重の記録">
-                  <div><span>体重</span><strong id="pet-weight">4.2<small>kg</small></strong><small class="weight-change"><MaterialIcon name="trending_down" /> 前回から -0.1kg</small></div>
-                  <div class="mini-chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-                </section>
-                <section class="pet-card pet-card--care" aria-label="次のケア予定">
-                  <span class="pet-card__icon"><MaterialIcon name="event" /></span>
-                  <div><small>次のケア予定</small><strong>8月18日（月） ワクチン相談</strong><span>さくら動物クリニック 10:30</span></div>
-                  <MaterialIcon name="chevron_right" />
-                </section>
-                <button type="button" class="primary-phone-button" id="pet-record-button"><MaterialIcon name="edit_note" /> 今日の記録を追加する</button>
-                </div>
+
+                <!-- 記録タブ -->
                 <div class="phone-view" data-pet-view="records" hidden>
                   <header class="screen-header"><div><span>ルナの健康手帳</span><h2>記録</h2></div><button type="button" class="round-button" data-pet-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
                   <div class="screen-summary"><strong>今週の記録</strong><span><b id="pet-record-count">3</b>件</span></div>
                   <div class="record-list" id="pet-record-list" aria-live="polite"></div>
                   <button type="button" class="secondary-phone-button" id="pet-record-from-list"><MaterialIcon name="add" /> 今日の記録を追加</button>
                 </div>
+
+                <!-- 予定タブ -->
                 <div class="phone-view" data-pet-view="schedule" hidden>
                   <header class="screen-header"><div><span>ルナの健康手帳</span><h2>予定</h2></div><button type="button" class="round-button" data-pet-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
                   <div class="schedule-card schedule-card--next"><span>次の予定</span><strong>8月18日（月）</strong><p>ワクチン相談<br /><small>さくら動物クリニック 10:30</small></p><button type="button" id="schedule-complete"><MaterialIcon name="task_alt" /> 完了にする</button></div>
                   <div class="schedule-list"><p>これからの予定</p><div><b>9月02日（火）</b><span>トリミング</span></div><div><b>9月16日（火）</b><span>フィラリア予防</span></div></div>
                 </div>
-                <div class="phone-view" data-pet-view="settings" hidden>
-                  <header class="screen-header"><div><span>ルナの健康手帳</span><h2>設定</h2></div><button type="button" class="round-button" data-pet-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
-                  <div class="settings-group"><p>通知</p><label><span>ケア予定のお知らせ</span><input type="checkbox" checked /></label><label><span>記録リマインド</span><input type="checkbox" checked /></label></div>
-                  <div class="settings-group"><p>このデモについて</p><span>入力内容はこのブラウザだけに保存されます。</span><button type="button" id="reset-pet-demo"><MaterialIcon name="restart_alt" /> デモを初期化する</button></div>
+
+                <!-- 情報タブ -->
+                <div class="phone-view" data-pet-view="info" hidden>
+                  <header class="screen-header"><div><span>ルナの健康手帳</span><h2>情報</h2></div><button type="button" class="round-button" data-pet-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="pet-allergy-box">
+                    <p><MaterialIcon name="warning" /> アレルギー・禁忌薬</p>
+                    <div><span>アレルギー</span><strong>なし</strong></div>
+                    <div><span>禁忌薬</span><strong>なし</strong></div>
+                  </div>
+                  <div class="pet-info-group">
+                    <p>基本情報</p>
+                    <div><span>名前</span><strong>ルナ</strong></div>
+                    <div><span>種別</span><strong>トイプードル・メス</strong></div>
+                    <div><span>年齢</span><strong>4歳</strong></div>
+                    <div><span>去勢・避妊</span><strong>済</strong></div>
+                    <div><span>最終体重</span><strong>4.2 kg</strong></div>
+                    <div><span>次回通院</span><strong>8月18日（ワクチン）</strong></div>
+                  </div>
+                  <button type="button" class="primary-phone-button" id="pet-hospital-button"><MaterialIcon name="local_hospital" /> 病院へ持参する</button>
+                  <div class="settings-group" style="margin-top:14px"><p>このデモについて</p><span>入力内容はこのブラウザだけに保存されます。</span><button type="button" id="reset-pet-demo"><MaterialIcon name="restart_alt" /> デモを初期化する</button></div>
                 </div>
-                <nav class="phone-nav" aria-label="ペット健康手帳のメニュー"><button type="button" class="is-current" data-pet-nav="home"><MaterialIcon name="home" /><span>ホーム</span></button><button type="button" data-pet-nav="records"><MaterialIcon name="timeline" /><span>記録</span></button><button type="button" data-pet-nav="schedule"><MaterialIcon name="calendar_month" /><span>予定</span></button><button type="button" data-pet-nav="settings"><MaterialIcon name="person" /><span>設定</span></button></nav>
+
+                <nav class="phone-nav" aria-label="ペット健康手帳のメニュー">
+                  <button type="button" class="is-current" data-pet-nav="home"><MaterialIcon name="home" /><span>ホーム</span></button>
+                  <button type="button" data-pet-nav="records"><MaterialIcon name="timeline" /><span>記録</span></button>
+                  <button type="button" data-pet-nav="schedule"><MaterialIcon name="calendar_month" /><span>予定</span></button>
+                  <button type="button" data-pet-nav="info"><MaterialIcon name="info" /><span>情報</span></button>
+                </nav>
+
+                <!-- 記録入力モーダル -->
                 <div class="phone-modal" id="pet-record-modal" hidden>
                   <div class="phone-modal__sheet" role="dialog" aria-modal="true" aria-labelledby="pet-record-title">
                     <div class="sheet-handle" aria-hidden="true"></div>
                     <button type="button" class="modal-close" id="pet-record-close" aria-label="記録画面を閉じる"><MaterialIcon name="close" /></button>
                     <p>8月10日（日）</p><h3 id="pet-record-title">今日の様子を記録</h3>
-                    <div class="condition-options" role="group" aria-label="今日の様子"><button type="button" class="is-selected" data-condition="元気です"><MaterialIcon name="sentiment_satisfied" /><span>元気</span></button><button type="button" data-condition="少し気になる"><MaterialIcon name="sentiment_neutral" /><span>ふつう</span></button><button type="button" data-condition="気になることあり"><MaterialIcon name="sentiment_dissatisfied" /><span>気になる</span></button></div>
+                    <div class="condition-options" role="group" aria-label="今日の様子">
+                      <button type="button" class="is-selected" data-condition="元気です"><MaterialIcon name="sentiment_satisfied" /><span>元気</span></button>
+                      <button type="button" data-condition="少し気になる"><MaterialIcon name="sentiment_neutral" /><span>ふつう</span></button>
+                      <button type="button" data-condition="気になることあり"><MaterialIcon name="sentiment_dissatisfied" /><span>気になる</span></button>
+                    </div>
+                    <div class="modal-weight-row">
+                      <label for="pet-weight-input">体重（任意）</label>
+                      <div class="modal-weight-input-wrap">
+                        <input type="number" id="pet-weight-input" step="0.1" min="0" max="99" placeholder="4.2" />
+                        <span>kg</span>
+                      </div>
+                    </div>
                     <button type="button" class="modal-save" id="pet-record-save">この内容で記録する</button>
+                  </div>
+                </div>
+
+                <!-- 病院モーダル -->
+                <div class="phone-modal" id="pet-hospital-modal" hidden>
+                  <div class="hospital-mode" role="dialog" aria-modal="true" aria-labelledby="hospital-title">
+                    <div class="hospital-mode__inner">
+                      <p class="hospital-mode__label">病院持参モード</p>
+                      <h3 id="hospital-title">ルナ</h3>
+                      <p class="hospital-mode__sub">トイプードル・メス・4歳</p>
+                      <div class="hospital-allergy">
+                        <p><MaterialIcon name="warning" /> アレルギー・禁忌薬</p>
+                        <div><span>アレルギー</span><strong>なし</strong></div>
+                        <div><span>禁忌薬</span><strong>なし</strong></div>
+                      </div>
+                      <div class="hospital-stats">
+                        <div><span>最終体重</span><strong>4.2 kg</strong></div>
+                        <div><span>最終通院</span><strong>2026/07/20</strong></div>
+                        <div><span>服用中の薬</span><strong>なし</strong></div>
+                        <div><span>次回予定</span><strong>8/18 ワクチン</strong></div>
+                      </div>
+                      <button type="button" id="pet-hospital-close" class="hospital-close-btn">閉じる</button>
+                    </div>
                   </div>
                 </div>
               </section>
 
-              <section class="phone-panel" id="subscription-panel" role="tabpanel" aria-labelledby="subscription-tab" data-app-panel="subscription" hidden>
-                <div class="status-bar" aria-hidden="true"><span>9:41</span><span><MaterialIcon name="signal_cellular_alt" /><MaterialIcon name="wifi" /><MaterialIcon name="battery_full" /></span></div>
-                <div class="phone-view is-active" data-subscription-view="home">
-                <header class="subscription-header"><div class="subscription-brand"><span class="subscription-brand__mark">F</span><strong>Flow Pantry</strong></div><button type="button" class="round-button" aria-label="お知らせを見る"><MaterialIcon name="notifications" /><i></i></button></header>
-                <div class="subscription-greeting"><span>サンプルさんの定期便</span><h2>次回のお届けを確認</h2></div>
-                <section class="delivery-card">
-                  <div class="delivery-card__top"><span>次回お届け</span><strong>8月17日（日）</strong><em id="delivery-state">配送予定</em></div>
-                  <div class="delivery-progress" aria-label="注文処理中"><i class="is-done"><MaterialIcon name="check" /></i><span></span><i class="is-current"><MaterialIcon name="inventory_2" /></i><span></span><i><MaterialIcon name="local_shipping" /></i></div>
-                  <div class="delivery-progress__labels"><span>注文確定</span><span>準備中</span><span>お届け</span></div>
-                  <div class="delivery-product"><span class="product-thumb" aria-hidden="true"><MaterialIcon name="coffee" /></span><div><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small></div><MaterialIcon name="chevron_right" /></div>
-                </section>
-                <section class="subscription-actions" aria-label="次回配送の変更">
-                  <button type="button" id="skip-delivery"><span><MaterialIcon name="skip_next" /></span><strong>次回をスキップ</strong><small>1回だけお休みする</small></button>
-                  <button type="button" id="change-plan"><span><MaterialIcon name="tune" /></span><strong>プランを変更</strong><small>数量・周期を見直す</small></button>
-                </section>
-                <section class="subscription-plan"><div><span>現在のプラン</span><strong id="plan-name">月1回・2袋コース</strong><small>次回から、いつでも変更できます</small></div><MaterialIcon name="chevron_right" /></section>
-                <p class="subscription-note"><MaterialIcon name="info" /> スキップ後も、次々回からは通常どおりお届けします。</p>
+              <!-- Flow（サブスク管理）-->
+              <section class="phone-panel flow-panel" id="flow-panel" role="tabpanel" aria-labelledby="flow-tab" data-app-panel="flow" hidden>
+                <div class="status-bar flow-status-bar" aria-hidden="true"><span>9:41</span><span><MaterialIcon name="signal_cellular_alt" /><MaterialIcon name="wifi" /><MaterialIcon name="battery_full" /></span></div>
+
+                <!-- ホーム -->
+                <div class="phone-view is-active" data-flow-view="home">
+                  <header class="flow-header">
+                    <strong class="flow-logo">Flow</strong>
+                    <button type="button" class="round-button flow-round-btn" id="flow-trial-bell" aria-label="トライアル期限を確認">
+                      <MaterialIcon name="notifications_none" /><i></i>
+                    </button>
+                  </header>
+
+                  <div class="flow-summary-card">
+                    <div class="flow-summary-top">
+                      <span>今月の支出</span>
+                      <span class="flow-badge">3件登録中</span>
+                    </div>
+                    <strong class="flow-amount">¥3,978</strong>
+                    <span class="flow-yearly">年間換算 ¥47,736</span>
+                    <div class="flow-weekly-alert">
+                      <i class="flow-dot-warn"></i>
+                      <span>今週 2件の請求予定</span>
+                      <span class="flow-weekly-total">¥1,970</span>
+                    </div>
+                  </div>
+
+                  <div class="flow-upcoming-section">
+                    <p class="flow-section-label">今週の請求</p>
+                    <div class="flow-upcoming-list">
+                      <div class="flow-upcoming-card flow-upcoming-urgent">
+                        <div class="flow-upcoming-top">
+                          <span class="flow-emoji">🎬</span>
+                          <span class="flow-due-tag flow-due-urgent">あと3日</span>
+                        </div>
+                        <span class="flow-upcoming-name">Netflix</span>
+                        <strong class="flow-upcoming-price flow-color-video">¥990</strong>
+                      </div>
+                      <div class="flow-upcoming-card">
+                        <div class="flow-upcoming-top">
+                          <span class="flow-emoji">🎵</span>
+                          <span class="flow-due-tag flow-due-normal">あと5日</span>
+                        </div>
+                        <span class="flow-upcoming-name">Spotify</span>
+                        <strong class="flow-upcoming-price flow-color-music">¥980</strong>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="flow-filter-row" role="group" aria-label="カテゴリフィルター">
+                    <button class="flow-chip is-active" data-flow-cat="all">すべて</button>
+                    <button class="flow-chip" data-flow-cat="video">🎬 動画</button>
+                    <button class="flow-chip" data-flow-cat="music">🎵 音楽</button>
+                    <button class="flow-chip" data-flow-cat="work">💼 作業</button>
+                  </div>
+
+                  <p class="flow-list-title" id="flow-list-title">すべてのサービス（3件）</p>
+                  <div class="flow-service-list">
+                    <div class="flow-service-card" data-flow-service-cat="video">
+                      <span class="flow-service-icon flow-icon-video">🎬</span>
+                      <div class="flow-service-info">
+                        <strong>Netflix</strong>
+                        <small>毎月15日 · クレカ</small>
+                      </div>
+                      <div class="flow-service-price">
+                        <strong>¥990</strong><small>/月</small>
+                      </div>
+                    </div>
+                    <div class="flow-service-card" data-flow-service-cat="music">
+                      <span class="flow-service-icon flow-icon-music">🎵</span>
+                      <div class="flow-service-info">
+                        <strong>Spotify</strong>
+                        <small>毎月17日 · 銀行</small>
+                      </div>
+                      <div class="flow-service-price">
+                        <strong>¥980</strong><small>/月</small>
+                      </div>
+                    </div>
+                    <div class="flow-service-card" data-flow-service-cat="work">
+                      <span class="flow-service-icon flow-icon-work">💼</span>
+                      <div class="flow-service-info">
+                        <strong>Adobe CC</strong>
+                        <small>毎月26日 · クレカ</small>
+                        <span class="flow-trial-tag">⚡ トライアル 残り12日</span>
+                      </div>
+                      <div class="flow-service-price">
+                        <strong>¥2,728</strong><small>/月</small>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                <div class="phone-view" data-subscription-view="deliveries" hidden>
-                  <header class="screen-header"><div><span>Flow Pantry</span><h2>お届け</h2></div><button type="button" class="round-button" data-subscription-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
-                  <div class="screen-summary"><strong>次回お届け</strong><span id="delivery-summary-state">配送予定</span></div>
-                  <div class="delivery-list"><article><span>8月17日（日）</span><strong>朝のコーヒー便</strong><small id="delivery-list-detail">深煎りブレンド 200g × 2袋</small><em id="delivery-list-state">配送予定</em></article><article><span>9月17日（水）</span><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small><em>予定</em></article></div>
-                  <button type="button" class="secondary-phone-button" id="delivery-to-home"><MaterialIcon name="tune" /> 次回配送を変更する</button>
+
+                <!-- カレンダー -->
+                <div class="phone-view" data-flow-view="calendar" hidden>
+                  <header class="screen-header flow-screen-header"><div><span>Flow</span><h2>請求カレンダー</h2></div><button type="button" class="round-button flow-round-btn" data-flow-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="flow-calendar">
+                    <div class="flow-cal-header">
+                      <span>2026年8月</span>
+                    </div>
+                    <div class="flow-cal-dow">
+                      <span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span>
+                    </div>
+                    <div class="flow-cal-grid">
+                      <span></span><span></span><span></span><span></span><span></span><span></span>
+                      <button data-flow-day="1">1</button>
+                      <button data-flow-day="2">2</button>
+                      <button data-flow-day="3">3</button>
+                      <button data-flow-day="4">4</button>
+                      <button data-flow-day="5">5</button>
+                      <button data-flow-day="6">6</button>
+                      <button data-flow-day="7">7</button>
+                      <button data-flow-day="8">8</button>
+                      <button data-flow-day="9">9</button>
+                      <button class="flow-cal-today" data-flow-day="10">10</button>
+                      <button data-flow-day="11">11</button>
+                      <button data-flow-day="12">12</button>
+                      <button data-flow-day="13">13</button>
+                      <button data-flow-day="14">14</button>
+                      <button class="flow-cal-event" data-flow-day="15">15</button>
+                      <button data-flow-day="16">16</button>
+                      <button class="flow-cal-event" data-flow-day="17">17</button>
+                      <button data-flow-day="18">18</button>
+                      <button data-flow-day="19">19</button>
+                      <button data-flow-day="20">20</button>
+                      <button data-flow-day="21">21</button>
+                      <button data-flow-day="22">22</button>
+                      <button data-flow-day="23">23</button>
+                      <button data-flow-day="24">24</button>
+                      <button data-flow-day="25">25</button>
+                      <button class="flow-cal-event" data-flow-day="26">26</button>
+                      <button data-flow-day="27">27</button>
+                      <button data-flow-day="28">28</button>
+                      <button data-flow-day="29">29</button>
+                      <button data-flow-day="30">30</button>
+                      <button data-flow-day="31">31</button>
+                    </div>
+                  </div>
+                  <div class="flow-cal-detail">
+                    <p id="flow-cal-label" class="flow-cal-label-text">日付をタップすると請求が表示されます</p>
+                    <div id="flow-cal-events"></div>
+                  </div>
                 </div>
-                <div class="phone-view" data-subscription-view="history" hidden>
-                  <header class="screen-header"><div><span>Flow Pantry</span><h2>お届け履歴</h2></div><button type="button" class="round-button" data-subscription-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
-                  <div class="history-list"><article><span>7月17日（木）</span><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small><b>お届け済み</b></article><article><span>6月17日（火）</span><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small><b>お届け済み</b></article><article><span>5月17日（土）</span><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small><b>お届け済み</b></article></div>
+
+                <!-- 分析 -->
+                <div class="phone-view" data-flow-view="analytics" hidden>
+                  <header class="screen-header flow-screen-header"><div><span>Flow</span><h2>支出分析</h2></div><button type="button" class="round-button flow-round-btn" data-flow-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="flow-analytics-total">
+                    <div>
+                      <span>月間合計</span>
+                      <strong>¥3,978</strong>
+                    </div>
+                    <div class="flow-analytics-divider"></div>
+                    <div>
+                      <span>年間合計</span>
+                      <strong class="flow-color-primary">¥47,736</strong>
+                    </div>
+                  </div>
+                  <p class="flow-section-label" style="margin-top:20px">月別支出</p>
+                  <div class="flow-bar-chart" aria-label="月別支出グラフ">
+                    <div class="flow-bars">
+                      <div class="flow-bar" style="--h:42%"><span>3月</span></div>
+                      <div class="flow-bar" style="--h:60%"><span>4月</span></div>
+                      <div class="flow-bar" style="--h:52%"><span>5月</span></div>
+                      <div class="flow-bar" style="--h:75%"><span>6月</span></div>
+                      <div class="flow-bar" style="--h:68%"><span>7月</span></div>
+                      <div class="flow-bar flow-bar-current" style="--h:100%"><span>8月</span></div>
+                    </div>
+                  </div>
+                  <p class="flow-section-label" style="margin-top:20px">カテゴリ内訳</p>
+                  <div class="flow-breakdown">
+                    <div><span class="flow-dot" style="background:#7c5cfc"></span><span>💼 作業</span><span>¥2,728</span><span>68%</span></div>
+                    <div><span class="flow-dot" style="background:#e50914"></span><span>🎬 動画</span><span>¥990</span><span>25%</span></div>
+                    <div><span class="flow-dot" style="background:#1db954"></span><span>🎵 音楽</span><span>¥980</span><span>25%</span></div>
+                  </div>
+                  <div class="flow-trial-card">
+                    <div class="flow-trial-card-top">
+                      <span>💼</span>
+                      <div>
+                        <strong>Adobe CC</strong>
+                        <small>無料トライアル — 残り12日</small>
+                      </div>
+                      <span class="flow-trial-remain">残り12日</span>
+                    </div>
+                    <div class="flow-trial-bar"><div class="flow-trial-bar-fill" style="width:60%"></div></div>
+                    <small class="flow-trial-note">終了後 ¥2,728/月 の請求が始まります</small>
+                  </div>
+                  <div class="flow-insight">
+                    <span>💡</span>
+                    <p>3件のサービスを登録中。年間¥47,736を払っています。</p>
+                  </div>
                 </div>
-                <div class="phone-view" data-subscription-view="account" hidden>
-                  <header class="screen-header"><div><span>Flow Pantry</span><h2>マイページ</h2></div><button type="button" class="round-button" data-subscription-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
-                  <div class="account-profile"><span><MaterialIcon name="person" /></span><strong>サンプル 花子</strong><small>sample@example.com</small></div>
-                  <div class="settings-group"><p>ご利用情報</p><button type="button"><span>お届け先</span><MaterialIcon name="chevron_right" /></button><button type="button"><span>お支払い方法</span><MaterialIcon name="chevron_right" /></button><button type="button" id="reset-subscription-demo"><span>デモを初期化する</span><MaterialIcon name="restart_alt" /></button></div>
+
+                <!-- 設定 -->
+                <div class="phone-view" data-flow-view="settings" hidden>
+                  <header class="screen-header flow-screen-header"><div><span>Flow</span><h2>設定</h2></div><button type="button" class="round-button flow-round-btn" data-flow-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
+                  <div class="settings-group flow-settings-group">
+                    <p>クレジットカード</p>
+                    <button type="button"><span>三井住友カード</span><MaterialIcon name="chevron_right" /></button>
+                    <button type="button"><span>楽天カード</span><MaterialIcon name="chevron_right" /></button>
+                  </div>
+                  <div class="settings-group flow-settings-group" style="margin-top:14px">
+                    <p>このデモについて</p>
+                    <span>入力内容はこのブラウザだけに保存されます。</span>
+                    <button type="button" id="reset-flow-demo"><span>デモを初期化する</span><MaterialIcon name="restart_alt" /></button>
+                  </div>
                 </div>
-                <nav class="phone-nav phone-nav--subscription" aria-label="サブスクFlowのメニュー"><button type="button" class="is-current" data-subscription-nav="home"><MaterialIcon name="home" /><span>ホーム</span></button><button type="button" data-subscription-nav="deliveries"><MaterialIcon name="inventory_2" /><span>お届け</span></button><button type="button" data-subscription-nav="history"><MaterialIcon name="receipt_long" /><span>履歴</span></button><button type="button" data-subscription-nav="account"><MaterialIcon name="person" /><span>マイページ</span></button></nav>
-                <div class="phone-modal" id="subscription-modal" hidden>
-                  <div class="phone-modal__sheet" role="dialog" aria-modal="true" aria-labelledby="subscription-modal-title">
+
+                <nav class="phone-nav phone-nav--flow" aria-label="Flowのメニュー">
+                  <button type="button" class="is-current" data-flow-nav="home"><MaterialIcon name="home" /><span>ホーム</span></button>
+                  <button type="button" data-flow-nav="calendar"><MaterialIcon name="calendar_month" /><span>カレンダー</span></button>
+                  <button type="button" data-flow-nav="analytics"><MaterialIcon name="bar_chart" /><span>分析</span></button>
+                  <button type="button" data-flow-nav="settings"><MaterialIcon name="settings" /><span>設定</span></button>
+                </nav>
+
+                <!-- トライアル通知モーダル -->
+                <div class="phone-modal" id="flow-trial-modal" hidden>
+                  <div class="phone-modal__sheet flow-modal-sheet" role="dialog" aria-modal="true" aria-labelledby="flow-trial-title">
                     <div class="sheet-handle" aria-hidden="true"></div>
-                    <button type="button" class="modal-close" id="subscription-modal-close" aria-label="変更画面を閉じる"><MaterialIcon name="close" /></button>
-                    <p id="subscription-modal-label">次回配送</p><h3 id="subscription-modal-title">次回をスキップしますか？</h3>
-                    <div class="modal-description" id="subscription-modal-description">8月17日のお届けを1回だけお休みします。次々回は通常どおりお届けします。</div>
-                    <button type="button" class="modal-save" id="subscription-modal-save">スキップする</button>
+                    <button type="button" class="modal-close" id="flow-trial-modal-close" aria-label="閉じる"><MaterialIcon name="close" /></button>
+                    <p>⚡ トライアル期限</p>
+                    <h3 id="flow-trial-title">Adobe CC のトライアルが終了します</h3>
+                    <div class="modal-description">残り12日で無料トライアルが終了します。終了後は ¥2,728/月 の請求が自動で始まります。</div>
+                    <button type="button" class="modal-save flow-modal-save" id="flow-trial-ok">確認しました</button>
                   </div>
                 </div>
               </section>
+
             </div>
             <div class="phone__home-bar" aria-hidden="true"></div>
           </div>
@@ -196,7 +445,7 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
         <p class="section-kicker">WHAT TO BUILD</p>
         <h2>画面だけで終わらせず、<br />運用までつながる形を考えます。</h2>
         <div class="demo-after__grid">
-          <article><MaterialIcon name="groups" /><h3>利用者の画面</h3><p>記録・予約・会員情報・配送変更など、使う人が迷わない順番を整えます。</p></article>
+          <article><MaterialIcon name="groups" /><h3>利用者の画面</h3><p>記録・予約・会員情報・費用管理など、使う人が迷わない順番を整えます。</p></article>
           <article><MaterialIcon name="dashboard" /><h3>運用する画面</h3><p>確認、対応、通知、データ出力など、担当者の作業も一緒に整理します。</p></article>
           <article><MaterialIcon name="sync_alt" /><h3>必要な連携</h3><p>LINE、既存サイト、予約・顧客システム、外部APIとのつなぎ方を検討します。</p></article>
         </div>
@@ -209,15 +458,13 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
     const appPanels = document.querySelectorAll('[data-app-panel]');
     const copyPanels = document.querySelectorAll('[data-copy-panel]');
     const demoStatus = document.querySelector('#demo-status');
-    const storageKey = 'wa-node-mobile-app-demo-state';
+    const storageKey = 'wa-node-mobile-app-demo-state-v2';
     const defaultState = {
       petRecords: [
-        { date: '昨日 20:18', condition: '元気です' },
-        { date: '8月8日（金）', condition: '元気です' },
-        { date: '8月7日（木）', condition: '少し気になる' },
+        { date: '昨日 20:18', condition: '元気です', weight: '4.2' },
+        { date: '8月8日（金）', condition: '元気です', weight: '4.1' },
+        { date: '8月7日（木）', condition: '少し気になる', weight: '4.3' },
       ],
-      deliveryState: '配送予定',
-      planName: '月1回・2袋コース',
     };
     let demoState = { ...defaultState };
 
@@ -245,9 +492,10 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
         panel.classList.toggle('is-active', selected);
       });
       copyPanels.forEach((panel) => { panel.hidden = panel.dataset.copyPanel !== app; });
-      demoStatus.textContent = app === 'pet' ? 'ペット健康手帳のデモを表示しています。' : 'サブスクFlowのデモを表示しています。';
+      demoStatus.textContent = app === 'pet' ? 'ペット健康手帳のデモを表示しています。' : 'Flowのデモを表示しています。';
     }
 
+    /* ---------- ペット ---------- */
     function showPetView(view) {
       document.querySelectorAll('[data-pet-view]').forEach((panel) => {
         const selected = panel.dataset.petView === view;
@@ -257,30 +505,17 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
       document.querySelectorAll('[data-pet-nav]').forEach((button) => button.classList.toggle('is-current', button.dataset.petNav === view));
     }
 
-    function showSubscriptionView(view) {
-      document.querySelectorAll('[data-subscription-view]').forEach((panel) => {
-        const selected = panel.dataset.subscriptionView === view;
-        panel.hidden = !selected;
-        panel.classList.toggle('is-active', selected);
-      });
-      document.querySelectorAll('[data-subscription-nav]').forEach((button) => button.classList.toggle('is-current', button.dataset.subscriptionNav === view));
-    }
-
     function renderPetRecords() {
       const list = document.querySelector('#pet-record-list');
       const count = document.querySelector('#pet-record-count');
       const current = demoState.petRecords[0];
-      list.innerHTML = demoState.petRecords.map((record) => `<article><span>${record.date}</span><strong>${record.condition}</strong><small>${record.condition === '元気です' ? '食事・排泄ともに記録済み' : 'あとで様子を見返せます'}</small><i class="material-symbols-rounded">chevron_right</i></article>`).join('');
+      list.innerHTML = demoState.petRecords.map((record) =>
+        `<article><span>${record.date}</span><strong>${record.condition}</strong><small>${record.weight ? '体重 ' + record.weight + ' kg' : '体調記録済み'}</small><i class="material-symbols-rounded">chevron_right</i></article>`
+      ).join('');
       count.textContent = String(demoState.petRecords.length);
       document.querySelector('#pet-condition').textContent = current.condition;
-    }
-
-    function renderSubscription() {
-      document.querySelector('#delivery-state').textContent = demoState.deliveryState;
-      document.querySelector('#delivery-summary-state').textContent = demoState.deliveryState;
-      document.querySelector('#delivery-list-state').textContent = demoState.deliveryState;
-      document.querySelector('#plan-name').textContent = demoState.planName;
-      document.querySelector('#delivery-list-detail').textContent = demoState.planName.includes('1袋') ? '深煎りブレンド 200g × 1袋' : '深煎りブレンド 200g × 2袋';
+      const weightEl = document.querySelector('#pet-weight');
+      if (current.weight) weightEl.innerHTML = current.weight + '<small>kg</small>';
     }
 
     appChoices.forEach((button) => {
@@ -298,9 +533,6 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
 
     document.querySelectorAll('[data-pet-nav]').forEach((button) => button.addEventListener('click', () => showPetView(button.dataset.petNav)));
     document.querySelectorAll('[data-pet-to-home]').forEach((button) => button.addEventListener('click', () => showPetView('home')));
-    document.querySelectorAll('[data-subscription-nav]').forEach((button) => button.addEventListener('click', () => showSubscriptionView(button.dataset.subscriptionNav)));
-    document.querySelectorAll('[data-subscription-to-home]').forEach((button) => button.addEventListener('click', () => showSubscriptionView('home')));
-    document.querySelector('#delivery-to-home').addEventListener('click', () => showSubscriptionView('home'));
 
     const petModal = document.querySelector('#pet-record-modal');
     let selectedCondition = '元気です';
@@ -316,67 +548,106 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
       });
     });
     document.querySelector('#pet-record-save').addEventListener('click', () => {
-      demoState.petRecords.unshift({ date: 'たった今', condition: selectedCondition });
+      const weightVal = document.querySelector('#pet-weight-input').value.trim();
+      demoState.petRecords.unshift({ date: 'たった今', condition: selectedCondition, weight: weightVal || null });
       demoState.petRecords = demoState.petRecords.slice(0, 6);
       saveState();
       renderPetRecords();
       petModal.hidden = true;
-      demoStatus.textContent = `ルナの「${selectedCondition}」という記録を追加しました。記録画面でも確認できます。`;
+      document.querySelector('#pet-weight-input').value = '';
+      demoStatus.textContent = `ルナの「${selectedCondition}」${weightVal ? '・体重' + weightVal + 'kg' : ''}を記録しました。記録画面でも確認できます。`;
     });
+
     document.querySelector('#schedule-complete').addEventListener('click', (event) => {
       event.currentTarget.textContent = '完了にしました';
       event.currentTarget.disabled = true;
       demoStatus.textContent = 'ワクチン相談を完了にするサンプル操作を反映しました。';
     });
+
+    const petHospitalModal = document.querySelector('#pet-hospital-modal');
+    document.querySelector('#pet-hospital-button').addEventListener('click', () => { petHospitalModal.hidden = false; demoStatus.textContent = '病院持参モードを開きました。画面をそのまま受付に見せられます。'; });
+    document.querySelector('#pet-hospital-close').addEventListener('click', () => { petHospitalModal.hidden = true; });
+
     document.querySelector('#reset-pet-demo').addEventListener('click', () => {
-      demoState.petRecords = [...defaultState.petRecords];
+      demoState.petRecords = defaultState.petRecords.map((r) => ({ ...r }));
       saveState();
       renderPetRecords();
       showPetView('home');
       demoStatus.textContent = 'ペット健康手帳のデモを初期状態に戻しました。';
     });
 
-    const subscriptionModal = document.querySelector('#subscription-modal');
-    const subscriptionModalLabel = document.querySelector('#subscription-modal-label');
-    const subscriptionModalTitle = document.querySelector('#subscription-modal-title');
-    const subscriptionModalDescription = document.querySelector('#subscription-modal-description');
-    const subscriptionModalSave = document.querySelector('#subscription-modal-save');
-    let subscriptionAction = 'skip';
-    function openSubscriptionModal(action) {
-      subscriptionAction = action;
-      const isSkip = action === 'skip';
-      subscriptionModalLabel.textContent = isSkip ? '次回配送' : '現在のプラン';
-      subscriptionModalTitle.textContent = isSkip ? '次回をスキップしますか？' : 'プランを変更しますか？';
-      subscriptionModalDescription.textContent = isSkip ? '8月17日のお届けを1回だけお休みします。次々回は通常どおりお届けします。' : '次回から、月1回・1袋コースへ変更するサンプル操作です。';
-      subscriptionModalSave.textContent = isSkip ? 'スキップする' : '1袋コースに変更する';
-      subscriptionModal.hidden = false;
+    /* ---------- Flow ---------- */
+    function showFlowView(view) {
+      document.querySelectorAll('[data-flow-view]').forEach((panel) => {
+        const selected = panel.dataset.flowView === view;
+        panel.hidden = !selected;
+        panel.classList.toggle('is-active', selected);
+      });
+      document.querySelectorAll('[data-flow-nav]').forEach((button) => button.classList.toggle('is-current', button.dataset.flowNav === view));
     }
-    document.querySelector('#skip-delivery').addEventListener('click', () => openSubscriptionModal('skip'));
-    document.querySelector('#change-plan').addEventListener('click', () => openSubscriptionModal('plan'));
-    document.querySelector('#subscription-modal-close').addEventListener('click', () => { subscriptionModal.hidden = true; });
-    subscriptionModalSave.addEventListener('click', () => {
-      if (subscriptionAction === 'skip') {
-        demoState.deliveryState = '今回をスキップ';
-        demoStatus.textContent = '次回配送をスキップするサンプル操作を反映しました。お届け画面でも確認できます。';
-      } else {
-        demoState.planName = '月1回・1袋コース';
-        demoStatus.textContent = 'プラン変更のサンプル操作を反映しました。次回お届けの内容も更新されています。';
-      }
-      saveState();
-      renderSubscription();
-      subscriptionModal.hidden = true;
+
+    document.querySelectorAll('[data-flow-nav]').forEach((button) => button.addEventListener('click', () => showFlowView(button.dataset.flowNav)));
+    document.querySelectorAll('[data-flow-to-home]').forEach((button) => button.addEventListener('click', () => showFlowView('home')));
+
+    // カテゴリフィルター
+    document.querySelectorAll('[data-flow-cat]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-flow-cat]').forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+        const cat = btn.dataset.flowCat;
+        let count = 0;
+        document.querySelectorAll('[data-flow-service-cat]').forEach((card) => {
+          const show = cat === 'all' || card.dataset.flowServiceCat === cat;
+          card.hidden = !show;
+          if (show) count++;
+        });
+        const label = cat === 'all' ? 'すべてのサービス' : btn.textContent.trim();
+        document.querySelector('#flow-list-title').textContent = `${label}（${count}件）`;
+      });
     });
-    document.querySelector('#reset-subscription-demo').addEventListener('click', () => {
-      demoState.deliveryState = defaultState.deliveryState;
-      demoState.planName = defaultState.planName;
-      saveState();
-      renderSubscription();
-      showSubscriptionView('home');
-      demoStatus.textContent = 'サブスクFlowのデモを初期状態に戻しました。';
+
+    // カレンダー
+    const calEvents = {
+      15: [{ emoji: '🎬', name: 'Netflix', cat: '動画', price: '¥990' }],
+      17: [{ emoji: '🎵', name: 'Spotify', cat: '音楽', price: '¥980' }],
+      26: [{ emoji: '💼', name: 'Adobe CC', cat: '作業', price: '¥2,728' }],
+    };
+    document.querySelectorAll('[data-flow-day]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-flow-day]').forEach((b) => b.classList.remove('flow-cal-selected'));
+        btn.classList.add('flow-cal-selected');
+        const day = parseInt(btn.dataset.flowDay);
+        const events = calEvents[day] || [];
+        const labelEl = document.querySelector('#flow-cal-label');
+        const eventsEl = document.querySelector('#flow-cal-events');
+        labelEl.textContent = `8月${day}日の請求`;
+        if (events.length === 0) {
+          eventsEl.innerHTML = '<p class="flow-cal-empty">この日に請求なし</p>';
+        } else {
+          eventsEl.innerHTML = events.map((e) =>
+            `<div class="flow-cal-event-row"><span>${e.emoji}</span><div><strong>${e.name}</strong><small>${e.cat}</small></div><strong>${e.price}</strong></div>`
+          ).join('');
+        }
+        demoStatus.textContent = `8月${day}日の請求を確認しています。`;
+      });
+    });
+
+    // トライアルモーダル
+    const flowTrialModal = document.querySelector('#flow-trial-modal');
+    document.querySelector('#flow-trial-bell').addEventListener('click', () => { flowTrialModal.hidden = false; });
+    document.querySelector('#flow-trial-modal-close').addEventListener('click', () => { flowTrialModal.hidden = true; });
+    document.querySelector('#flow-trial-ok').addEventListener('click', () => { flowTrialModal.hidden = true; demoStatus.textContent = 'トライアル期限を確認しました。'; });
+
+    // Flowデモ初期化
+    document.querySelector('#reset-flow-demo').addEventListener('click', () => {
+      document.querySelectorAll('[data-flow-cat]').forEach((b) => b.classList.toggle('is-active', b.dataset.flowCat === 'all'));
+      document.querySelectorAll('[data-flow-service-cat]').forEach((c) => { c.hidden = false; });
+      document.querySelector('#flow-list-title').textContent = 'すべてのサービス（3件）';
+      showFlowView('home');
+      demoStatus.textContent = 'Flowのデモを初期状態に戻しました。';
     });
 
     renderPetRecords();
-    renderSubscription();
   </script>
 </BaseLayout>
 
@@ -401,7 +672,7 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
   .app-choice-list { display:grid; gap:10px; }
   .app-choice { width:100%; min-height:90px; display:grid; grid-template-columns:auto 1fr auto; gap:13px; align-items:center; padding:13px; border:1px solid var(--line); background:#fff; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }
   .app-choice:hover,.app-choice:focus-visible,.app-choice.is-active { border-color:var(--teal); background:#f2faf7; outline:none; }
-  .app-choice__icon { width:48px; height:48px; display:grid; place-items:center; color:#fff; }.app-choice__icon--pet { background:#d56a57; }.app-choice__icon--subscription { background:#27786e; }
+  .app-choice__icon { width:48px; height:48px; display:grid; place-items:center; color:#fff; }.app-choice__icon--pet { background:#d56a57; }.app-choice__icon--flow { background:#5c3fc8; }
   .app-choice strong,.app-choice small { display:block; }.app-choice strong { font-size:1rem; }.app-choice small { margin-top:4px; color:var(--muted); font-size:.78rem; }.app-choice > .material-icon { color:var(--teal); }
   .demo-selector__note { display:flex; gap:7px; margin:16px 0 0; color:var(--muted); font-size:.76rem; line-height:1.55; }.demo-selector__note .material-icon { color:var(--teal); font-size:1.1rem; }
   .demo-stage { padding:78px 0; background:#edf4f1; }.demo-stage__grid { display:grid; grid-template-columns:minmax(0,.9fr) minmax(390px,.85fr); gap:76px; align-items:center; }
@@ -410,7 +681,9 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
   .app-scope { margin-top:36px; padding:20px 22px; border-left:4px solid var(--coral); background:#fff; }.app-scope > span { color:var(--teal); font-size:.78rem; font-weight:900; }.app-scope p { margin:9px 0 15px; color:var(--muted); line-height:1.7; font-size:.88rem; }.app-scope a { display:inline-flex; gap:6px; align-items:center; color:var(--teal); font-weight:900; text-decoration:none; }.app-scope a:hover { text-decoration:underline; }.app-scope .material-icon { font-size:1.1rem; }
   .phone-area { display:grid; justify-items:center; }.phone { position:relative; width:min(100%,380px); padding:10px; border:9px solid #16282d; border-radius:40px; background:#16282d; box-shadow:0 30px 54px rgba(18,59,67,.25); }.phone__speaker { position:absolute; z-index:2; top:18px; left:50%; width:94px; height:20px; border-radius:0 0 16px 16px; background:#16282d; transform:translateX(-50%); }.phone__screen { position:relative; min-height:702px; overflow:hidden; border-radius:25px; background:#f7faf8; }.phone__home-bar { width:118px; height:4px; margin:8px auto 0; border-radius:99px; background:#b9c2c4; }.phone-caption { display:flex; align-items:center; gap:7px; margin:18px 0 0; color:var(--muted); font-size:.82rem; }.phone-caption .material-icon { color:var(--teal); }.phone-status { min-height:20px; margin:8px 0 0; color:var(--teal); font-size:.78rem; font-weight:800; text-align:center; }
   .phone-panel { min-height:702px; position:relative; padding:0 18px 72px; }.phone-panel[hidden],.phone-view[hidden] { display:none; }.phone-view { min-height:593px; }.status-bar { display:flex; justify-content:space-between; align-items:center; min-height:37px; padding:0 8px; color:#264249; font-size:.7rem; font-weight:900; }.status-bar > span:last-child { display:flex; gap:3px; }.status-bar .material-icon { font-size:.92rem; }
-  .pet-header,.subscription-header { display:flex; justify-content:space-between; align-items:start; }.pet-header span,.subscription-greeting span { color:var(--muted); font-size:.76rem; }.pet-header h2,.subscription-greeting h2 { margin:3px 0 0; font-size:1.34rem; }.round-button { position:relative; width:39px; height:39px; display:grid; place-items:center; border:0; border-radius:50%; background:#e7f0ec; color:var(--teal); cursor:pointer; }.round-button i { position:absolute; top:8px; right:8px; width:6px; height:6px; border-radius:50%; background:var(--coral); }
+
+  /* ペット */
+  .pet-header,.subscription-header { display:flex; justify-content:space-between; align-items:start; }.pet-header span { color:var(--muted); font-size:.76rem; }.pet-header h2 { margin:3px 0 0; font-size:1.34rem; }.round-button { position:relative; width:39px; height:39px; display:grid; place-items:center; border:0; border-radius:50%; background:#e7f0ec; color:var(--teal); cursor:pointer; }.round-button i { position:absolute; top:8px; right:8px; width:6px; height:6px; border-radius:50%; background:var(--coral); }
   .pet-profile { display:flex; gap:11px; align-items:center; margin-top:20px; padding:12px; background:#fff; border:1px solid #e4ece8; }.pet-avatar { width:46px; height:46px; display:grid; place-items:center; border-radius:50%; background:#f5ddd6; color:#c55443; }.pet-profile strong,.pet-profile span { display:block; }.pet-profile strong { font-size:.92rem; }.pet-profile span { margin-top:2px; color:var(--muted); font-size:.7rem; }.pet-switch { margin-left:auto; border:0; background:transparent; color:var(--muted); cursor:pointer; }
   .pet-summary { margin-top:15px; padding:18px; border-radius:18px; background:linear-gradient(135deg,#1e7574,#13505d); color:#fff; }.pet-summary p { margin:0; color:#c4e3dc; font-size:.74rem; }.pet-summary > div { display:flex; justify-content:space-between; align-items:center; margin-top:7px; }.pet-summary strong { font-size:1.3rem; }.pet-summary span { display:inline-flex; align-items:center; gap:3px; padding:5px 7px; background:rgba(255,255,255,.15); font-size:.66rem; }.pet-summary span .material-icon { font-size:.86rem; }.pet-summary > small { display:block; margin-top:10px; color:#c4e3dc; font-size:.68rem; }
   .pet-card { display:flex; margin-top:13px; padding:15px; background:#fff; border:1px solid #e4ece8; }.pet-card--weight { justify-content:space-between; align-items:center; }.pet-card--weight span { display:block; color:var(--muted); font-size:.72rem; }.pet-card--weight strong { display:block; margin-top:2px; color:var(--teal); font-size:1.65rem; }.pet-card--weight strong small { font-size:.76rem; }.weight-change { display:flex; align-items:center; gap:3px; margin-top:3px; color:#488461; font-size:.65rem; }.weight-change .material-icon { font-size:.85rem; }.mini-chart { height:62px; display:flex; align-items:end; gap:4px; }.mini-chart i { display:block; width:8px; background:#a8d6c0; }.mini-chart i:nth-child(1){height:28px}.mini-chart i:nth-child(2){height:40px}.mini-chart i:nth-child(3){height:34px}.mini-chart i:nth-child(4){height:50px}.mini-chart i:nth-child(5){height:44px}.mini-chart i:nth-child(6){height:55px}.mini-chart i:nth-child(7){height:52px;background:var(--teal)}
@@ -418,9 +691,144 @@ const description = 'ペット健康手帳とサブスクFlowを題材にした�
   .primary-phone-button,.modal-save { width:100%; min-height:49px; display:flex; justify-content:center; align-items:center; gap:8px; margin-top:15px; border:0; background:var(--coral); color:#fff; font:inherit; font-size:.83rem; font-weight:900; cursor:pointer; }.primary-phone-button:hover,.modal-save:hover { background:#b83f35; }.primary-phone-button .material-icon { font-size:1.1rem; }
   .phone-nav { position:absolute; right:0; bottom:0; left:0; display:grid; grid-template-columns:repeat(4,1fr); min-height:62px; border-top:1px solid #e0e9e5; background:#fff; }.phone-nav button { display:grid; place-content:center; gap:2px; border:0; background:#fff; color:#8a9998; font:inherit; font-size:.58rem; cursor:pointer; }.phone-nav .material-icon { font-size:1.25rem; }.phone-nav button.is-current { color:var(--teal); font-weight:900; }
   .phone-modal { position:absolute; z-index:4; inset:0; display:flex; align-items:end; background:rgba(14,34,39,.35); }.phone-modal[hidden] { display:none; }.phone-modal__sheet { position:relative; width:100%; padding:12px 20px 24px; border-radius:24px 24px 0 0; background:#fff; animation:sheet-in .2s ease-out; }.sheet-handle { width:40px; height:4px; margin:0 auto 15px; border-radius:99px; background:#ccd7d4; }.modal-close { position:absolute; top:20px; right:16px; border:0; background:transparent; color:var(--muted); cursor:pointer; }.phone-modal__sheet p { margin:0; color:var(--muted); font-size:.72rem; }.phone-modal__sheet h3 { margin:4px 0 19px; font-size:1.16rem; }.condition-options { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }.condition-options button { display:grid; gap:5px; place-items:center; min-height:78px; border:1px solid var(--line); background:#fff; color:var(--muted); font:inherit; font-size:.68rem; cursor:pointer; }.condition-options button.is-selected { border:2px solid var(--teal); background:#edf8f4; color:var(--teal); }.condition-options .material-icon { font-size:1.45rem; }.modal-description { padding:14px; background:#f3f7f5; color:var(--muted); font-size:.8rem; line-height:1.7; }.modal-save { margin-top:16px; }
-  .screen-header { display:flex; justify-content:space-between; align-items:start; padding-top:5px; }.screen-header span { color:var(--muted); font-size:.7rem; }.screen-header h2 { margin:3px 0 0; font-size:1.35rem; }.screen-summary { display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding:12px 14px; background:#e9f4ef; color:var(--teal); font-size:.76rem; }.screen-summary span { color:#347564; }.screen-summary b { font-size:1.05rem; }.record-list,.delivery-list,.history-list,.schedule-list { display:grid; gap:8px; margin-top:12px; }.record-list article,.delivery-list article,.history-list article { position:relative; padding:14px 31px 14px 14px; border:1px solid #e0e9e5; background:#fff; }.record-list span,.delivery-list span,.history-list span { display:block; color:var(--muted); font-size:.66rem; }.record-list strong,.delivery-list strong,.history-list strong { display:block; margin:3px 0; font-size:.82rem; }.record-list small,.delivery-list small,.history-list small { display:block; color:var(--muted); font-size:.66rem; }.record-list i { position:absolute; top:50%; right:9px; color:var(--muted); font-style:normal; transform:translateY(-50%); }.delivery-list em { position:absolute; top:14px; right:11px; padding:4px 6px; background:#e8f3ed; color:#237057; font-size:.6rem; font-style:normal; font-weight:800; }.history-list b { position:absolute; top:14px; right:11px; color:#267158; font-size:.6rem; }.secondary-phone-button { width:100%; min-height:46px; display:flex; justify-content:center; align-items:center; gap:7px; margin-top:16px; border:1px solid var(--teal); background:#fff; color:var(--teal); font:inherit; font-size:.79rem; font-weight:900; cursor:pointer; }.schedule-card { margin-top:20px; padding:18px; border:1px solid #dce8e3; background:#fff; }.schedule-card > span { color:var(--muted); font-size:.68rem; }.schedule-card strong { display:block; margin-top:4px; color:var(--teal); font-size:1.2rem; }.schedule-card p { margin:10px 0 14px; font-size:.82rem; line-height:1.6; }.schedule-card p small { color:var(--muted); }.schedule-card button { min-height:38px; display:flex; align-items:center; gap:6px; border:0; background:#e9f4ef; color:#267158; font:inherit; font-size:.72rem; font-weight:800; cursor:pointer; }.schedule-card button:disabled { color:var(--muted); }.schedule-list > p,.settings-group > p { margin:20px 0 8px; color:var(--muted); font-size:.7rem; font-weight:800; }.schedule-list > div { display:flex; justify-content:space-between; padding:13px; border-bottom:1px solid #e3ebe7; background:#fff; font-size:.74rem; }.schedule-list span { color:var(--muted); }.settings-group { display:grid; margin-top:18px; }.settings-group p { grid-column:1 / -1; }.settings-group label,.settings-group button { min-height:48px; display:flex; justify-content:space-between; align-items:center; padding:0 13px; border:1px solid #e1eae6; background:#fff; color:var(--ink); font:inherit; font-size:.75rem; }.settings-group label + label,.settings-group button + button { border-top:0; }.settings-group > span { padding:13px; border:1px solid #e1eae6; background:#fff; color:var(--muted); font-size:.72rem; line-height:1.6; }.settings-group > span + button { border-top:0; color:var(--coral); cursor:pointer; }.settings-group input { accent-color:var(--teal); }.account-profile { display:grid; justify-items:center; gap:5px; margin-top:24px; padding:23px; border:1px solid #dce8e3; background:#fff; }.account-profile > span { width:48px; height:48px; display:grid; place-items:center; border-radius:50%; background:#e9f4ef; color:var(--teal); }.account-profile strong { margin-top:4px; font-size:.87rem; }.account-profile small { color:var(--muted); font-size:.68rem; }
-  .subscription-header { align-items:center; }.subscription-brand { display:flex; gap:8px; align-items:center; }.subscription-brand__mark { width:29px; height:29px; display:grid; place-items:center; background:#16746c; color:#fff; font-family:Georgia,serif; font-weight:800; }.subscription-brand strong { font-size:1rem; letter-spacing:0; }.subscription-greeting { margin-top:23px; }.delivery-card { margin-top:17px; padding:17px; border:1px solid #d8e5df; background:#fff; box-shadow:0 8px 20px rgba(18,59,67,.05); }.delivery-card__top { display:grid; grid-template-columns:1fr auto; gap:2px 10px; align-items:center; }.delivery-card__top span { color:var(--muted); font-size:.68rem; }.delivery-card__top strong { font-size:1rem; }.delivery-card__top em { grid-column:2; grid-row:1; padding:4px 7px; background:#e8f3ed; color:#237057; font-size:.61rem; font-style:normal; font-weight:800; }.delivery-progress { display:grid; grid-template-columns:auto 1fr auto 1fr auto; align-items:center; margin:22px 5px 3px; }.delivery-progress i { width:24px; height:24px; display:grid; place-items:center; border-radius:50%; background:#e3ebe8; color:#98a9a6; font-style:normal; }.delivery-progress i.is-done,.delivery-progress i.is-current { background:#27786e; color:#fff; }.delivery-progress .material-icon { font-size:.82rem; }.delivery-progress span { height:2px; background:#d8e5df; }.delivery-progress span:first-of-type { background:#27786e; }.delivery-progress__labels { display:grid; grid-template-columns:repeat(3,1fr); margin:0 -6px; color:var(--muted); font-size:.59rem; text-align:center; }.delivery-product { display:flex; gap:10px; align-items:center; margin-top:20px; padding-top:14px; border-top:1px solid #e6eeea; }.product-thumb { width:38px; height:38px; display:grid; place-items:center; background:#ead9bd; color:#8b5d22; }.delivery-product div { flex:1; }.delivery-product strong,.delivery-product small { display:block; }.delivery-product strong { font-size:.76rem; }.delivery-product small { margin-top:3px; color:var(--muted); font-size:.65rem; }.delivery-product > .material-icon { color:var(--muted); }
-  .subscription-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:13px; }.subscription-actions button { padding:12px 8px; border:1px solid #d8e5df; background:#fff; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }.subscription-actions button:hover,.subscription-actions button:focus-visible { border-color:var(--teal); outline:none; }.subscription-actions button span { width:29px; height:29px; display:grid; place-items:center; margin-bottom:8px; background:#edf6f2; color:var(--teal); }.subscription-actions strong,.subscription-actions small { display:block; }.subscription-actions strong { font-size:.73rem; }.subscription-actions small { margin-top:3px; color:var(--muted); font-size:.62rem; }.subscription-plan { display:flex; align-items:center; gap:12px; margin-top:13px; padding:14px; border:1px solid #d8e5df; background:#fff; }.subscription-plan div { flex:1; }.subscription-plan span,.subscription-plan small { display:block; color:var(--muted); font-size:.66rem; }.subscription-plan strong { display:block; margin:2px 0; font-size:.82rem; }.subscription-plan > .material-icon { color:var(--muted); }.subscription-note { display:flex; gap:5px; margin:13px 2px 0; color:var(--muted); font-size:.64rem; line-height:1.5; }.subscription-note .material-icon { color:var(--teal); font-size:.95rem; }
+  .screen-header { display:flex; justify-content:space-between; align-items:start; padding-top:5px; }.screen-header span { color:var(--muted); font-size:.7rem; }.screen-header h2 { margin:3px 0 0; font-size:1.35rem; }.screen-summary { display:flex; justify-content:space-between; align-items:center; margin-top:20px; padding:12px 14px; background:#e9f4ef; color:var(--teal); font-size:.76rem; }.screen-summary span { color:#347564; }.screen-summary b { font-size:1.05rem; }.record-list { display:grid; gap:8px; margin-top:12px; }.record-list article { position:relative; padding:14px 31px 14px 14px; border:1px solid #e0e9e5; background:#fff; }.record-list span { display:block; color:var(--muted); font-size:.66rem; }.record-list strong { display:block; margin:3px 0; font-size:.82rem; }.record-list small { display:block; color:var(--muted); font-size:.66rem; }.record-list i { position:absolute; top:50%; right:9px; color:var(--muted); font-style:normal; transform:translateY(-50%); }.secondary-phone-button { width:100%; min-height:46px; display:flex; justify-content:center; align-items:center; gap:7px; margin-top:16px; border:1px solid var(--teal); background:#fff; color:var(--teal); font:inherit; font-size:.79rem; font-weight:900; cursor:pointer; }.schedule-card { margin-top:20px; padding:18px; border:1px solid #dce8e3; background:#fff; }.schedule-card > span { color:var(--muted); font-size:.68rem; }.schedule-card strong { display:block; margin-top:4px; color:var(--teal); font-size:1.2rem; }.schedule-card p { margin:10px 0 14px; font-size:.82rem; line-height:1.6; }.schedule-card p small { color:var(--muted); }.schedule-card button { min-height:38px; display:flex; align-items:center; gap:6px; border:0; background:#e9f4ef; color:#267158; font:inherit; font-size:.72rem; font-weight:800; cursor:pointer; }.schedule-card button:disabled { color:var(--muted); }.schedule-list > p,.settings-group > p { margin:20px 0 8px; color:var(--muted); font-size:.7rem; font-weight:800; }.schedule-list > div { display:flex; justify-content:space-between; padding:13px; border-bottom:1px solid #e3ebe7; background:#fff; font-size:.74rem; }.schedule-list span { color:var(--muted); }.settings-group { display:grid; margin-top:18px; }.settings-group p { grid-column:1 / -1; }.settings-group label,.settings-group button { min-height:48px; display:flex; justify-content:space-between; align-items:center; padding:0 13px; border:1px solid #e1eae6; background:#fff; color:var(--ink); font:inherit; font-size:.75rem; }.settings-group label + label,.settings-group button + button { border-top:0; }.settings-group > span { padding:13px; border:1px solid #e1eae6; background:#fff; color:var(--muted); font-size:.72rem; line-height:1.6; }.settings-group > span + button { border-top:0; color:var(--coral); cursor:pointer; }.settings-group input { accent-color:var(--teal); }
+
+  /* 体重入力 */
+  .modal-weight-row { display:flex; justify-content:space-between; align-items:center; margin:14px 0 0; padding:12px; border:1px solid var(--line); background:#f8faf9; }.modal-weight-row label { color:var(--muted); font-size:.76rem; font-weight:700; }.modal-weight-input-wrap { display:flex; align-items:center; gap:5px; }.modal-weight-input-wrap input { width:70px; padding:6px 8px; border:1px solid var(--line); background:#fff; color:var(--ink); font:inherit; font-size:.86rem; text-align:right; }.modal-weight-input-wrap span { color:var(--muted); font-size:.76rem; }
+
+  /* ペット情報タブ */
+  .pet-allergy-box { margin-top:18px; padding:13px 14px; border:1.5px solid #f8a48b; border-radius:3px; background:#fff9f6; }.pet-allergy-box > p { margin:0 0 8px; display:flex; align-items:center; gap:5px; color:#b05030; font-size:.72rem; font-weight:800; }.pet-allergy-box > p .material-icon { font-size:1rem; }.pet-allergy-box > div { display:flex; justify-content:space-between; padding:6px 0; border-top:1px solid #f5e2d9; }.pet-allergy-box > div span { color:var(--muted); font-size:.72rem; }.pet-allergy-box > div strong { color:var(--ink); font-size:.76rem; }
+  .pet-info-group { margin-top:13px; }.pet-info-group > p { margin:0 0 6px; color:var(--muted); font-size:.7rem; font-weight:800; }.pet-info-group > div { display:flex; justify-content:space-between; align-items:center; padding:10px 13px; border:1px solid #e1eae6; background:#fff; font-size:.76rem; }.pet-info-group > div + div { border-top:0; }.pet-info-group span { color:var(--muted); }.pet-info-group strong { color:var(--ink); }
+
+  /* 病院モード */
+  .hospital-mode { position:absolute; inset:0; z-index:5; display:flex; align-items:stretch; background:#fff; }.hospital-mode__inner { display:flex; flex-direction:column; width:100%; padding:28px 22px 24px; overflow-y:auto; }.hospital-mode__label { margin:0 0 2px; color:var(--teal); font-size:.7rem; font-weight:900; letter-spacing:.06em; }.hospital-mode__inner h3 { margin:0; font-size:1.7rem; }.hospital-mode__sub { margin:4px 0 18px; color:var(--muted); font-size:.82rem; }.hospital-allergy { padding:14px; border:2px solid #f08060; background:#fff8f5; }.hospital-allergy > p { margin:0 0 8px; display:flex; align-items:center; gap:5px; color:#c04020; font-size:.74rem; font-weight:900; }.hospital-allergy > p .material-icon { font-size:1rem; }.hospital-allergy > div { display:flex; justify-content:space-between; padding:5px 0; border-top:1px solid #f5ddd5; }.hospital-allergy > div span { color:var(--muted); font-size:.76rem; }.hospital-allergy > div strong { font-size:.8rem; }
+  .hospital-stats { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:14px; background:#e0e9e5; border:1px solid #e0e9e5; }.hospital-stats > div { display:flex; flex-direction:column; gap:3px; padding:11px 12px; background:#fff; }.hospital-stats span { color:var(--muted); font-size:.68rem; }.hospital-stats strong { font-size:.88rem; }
+  .hospital-close-btn { margin-top:auto; padding-top:22px; width:100%; min-height:46px; border:1px solid var(--line); background:#f5f8f6; color:var(--muted); font:inherit; font-size:.82rem; cursor:pointer; }
+
+  /* Flow ダークテーマ */
+  .flow-panel { background:#12121e; color:#e8e8f0; }
+  .flow-status-bar { color:#a0a0c0; }
+  .flow-screen-header span { color:#888; }.flow-screen-header h2 { color:#e8e8f0; }
+  .flow-round-btn { background:#2a2a3e; color:#c0b0ff; }
+  .flow-round-btn i { background:#f4a261; }
+  .flow-header { display:flex; justify-content:space-between; align-items:center; }
+  .flow-logo { color:#e8e8f0; font-size:1.2rem; letter-spacing:-.02em; }
+
+  .flow-summary-card { margin-top:16px; padding:20px; border-radius:20px; background:linear-gradient(135deg,#2d1b69,#1c1c2e); border:1px solid rgba(124,92,252,.3); }
+  .flow-summary-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; }
+  .flow-summary-top > span { color:#9090b0; font-size:.72rem; }
+  .flow-badge { padding:3px 8px; border-radius:20px; background:rgba(124,92,252,.2); color:#a890ff; font-size:.64rem; font-weight:700; }
+  .flow-amount { display:block; color:#e8e8f0; font-size:2.1rem; font-weight:800; letter-spacing:-.04em; line-height:1.1; }
+  .flow-yearly { display:block; margin-top:2px; color:#7878a0; font-size:.72rem; }
+  .flow-weekly-alert { display:flex; align-items:center; gap:6px; margin-top:14px; font-size:.72rem; }
+  .flow-dot-warn { width:8px; height:8px; border-radius:50%; background:#f4a261; flex-shrink:0; }
+  .flow-weekly-alert > span:nth-child(2) { color:#f4a261; flex:1; }
+  .flow-weekly-total { color:#f4a261; font-weight:700; }
+
+  .flow-upcoming-section { margin-top:18px; }
+  .flow-section-label { margin:0 0 10px; color:#8888a8; font-size:.72rem; font-weight:800; }
+  .flow-upcoming-list { display:flex; gap:8px; overflow-x:auto; padding-bottom:2px; }
+  .flow-upcoming-card { flex-shrink:0; width:102px; padding:11px; border-radius:14px; background:#1e1e2e; border:1px solid rgba(255,255,255,.08); }
+  .flow-upcoming-urgent { border-color:rgba(244,162,97,.4); }
+  .flow-upcoming-top { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .flow-emoji { font-size:1.35rem; }
+  .flow-due-tag { padding:2px 6px; border-radius:5px; font-size:.6rem; font-weight:700; }
+  .flow-due-urgent { background:rgba(244,162,97,.2); color:#f4a261; }
+  .flow-due-normal { background:rgba(124,92,252,.2); color:#a890ff; }
+  .flow-upcoming-name { display:block; color:#e8e8f0; font-size:.72rem; font-weight:600; }
+  .flow-upcoming-price { display:block; font-size:.82rem; }
+  .flow-color-video { color:#ff6b6b; }
+  .flow-color-music { color:#1db954; }
+  .flow-color-primary { color:#a890ff; }
+
+  .flow-filter-row { display:flex; gap:6px; margin-top:16px; overflow-x:auto; padding-bottom:2px; }
+  .flow-chip { flex-shrink:0; padding:5px 12px; border-radius:20px; border:1px solid rgba(255,255,255,.1); background:#1e1e2e; color:#8888a8; font:inherit; font-size:.68rem; font-weight:600; cursor:pointer; }
+  .flow-chip.is-active { background:rgba(124,92,252,.2); border-color:rgba(124,92,252,.6); color:#c0b0ff; }
+
+  .flow-list-title { margin:14px 0 8px; color:#e8e8f0; font-size:.78rem; font-weight:700; }
+  .flow-service-list { display:grid; gap:1px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.06); border-radius:12px; overflow:hidden; }
+  .flow-service-card { display:flex; gap:10px; align-items:center; padding:12px 13px; background:#1e1e2e; }
+  .flow-service-card[hidden] { display:none; }
+  .flow-service-icon { width:36px; height:36px; display:grid; place-items:center; border-radius:10px; font-size:1.2rem; flex-shrink:0; }
+  .flow-icon-video { background:rgba(229,9,20,.15); }
+  .flow-icon-music { background:rgba(29,185,84,.15); }
+  .flow-icon-work { background:rgba(124,92,252,.15); }
+  .flow-service-info { flex:1; min-width:0; }
+  .flow-service-info strong { display:block; color:#e8e8f0; font-size:.82rem; }
+  .flow-service-info small { display:block; color:#6868a0; font-size:.64rem; margin-top:1px; }
+  .flow-trial-tag { display:inline-block; margin-top:3px; padding:2px 6px; border-radius:4px; background:rgba(244,162,97,.15); color:#f4a261; font-size:.6rem; font-weight:700; }
+  .flow-service-price { text-align:right; flex-shrink:0; }
+  .flow-service-price strong { display:block; color:#e8e8f0; font-size:.88rem; font-weight:700; }
+  .flow-service-price small { color:#6868a0; font-size:.62rem; }
+
+  /* Flow カレンダー */
+  .flow-calendar { margin-top:16px; padding:14px; border-radius:16px; background:#1e1e2e; border:1px solid rgba(255,255,255,.06); }
+  .flow-cal-header { text-align:center; color:#e8e8f0; font-size:.88rem; font-weight:700; margin-bottom:12px; }
+  .flow-cal-dow { display:grid; grid-template-columns:repeat(7,1fr); margin-bottom:4px; }
+  .flow-cal-dow span { text-align:center; color:#6868a0; font-size:.62rem; padding:4px 0; }
+  .flow-cal-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; }
+  .flow-cal-grid button,.flow-cal-grid span { width:100%; aspect-ratio:1; display:grid; place-items:center; border:0; border-radius:6px; background:transparent; color:#b0b0d0; font:inherit; font-size:.68rem; cursor:pointer; position:relative; }
+  .flow-cal-grid span { cursor:default; }
+  .flow-cal-grid button:hover { background:rgba(124,92,252,.15); color:#c0b0ff; }
+  .flow-cal-today { background:rgba(124,92,252,.25) !important; color:#c0b0ff !important; font-weight:800 !important; }
+  .flow-cal-event::after { content:''; position:absolute; bottom:3px; left:50%; width:4px; height:4px; border-radius:50%; background:#f4a261; transform:translateX(-50%); }
+  .flow-cal-selected { background:rgba(124,92,252,.35) !important; color:#e8e8f0 !important; }
+  .flow-cal-detail { margin-top:12px; min-height:60px; }
+  .flow-cal-label-text { color:#6868a0; font-size:.72rem; margin:0 0 8px; }
+  .flow-cal-event-row { display:flex; gap:9px; align-items:center; padding:10px 12px; border-radius:10px; background:#1e1e2e; border:1px solid rgba(255,255,255,.06); margin-bottom:6px; }
+  .flow-cal-event-row span:first-child { font-size:1.1rem; }
+  .flow-cal-event-row div { flex:1; }
+  .flow-cal-event-row div strong { display:block; color:#e8e8f0; font-size:.8rem; }
+  .flow-cal-event-row div small { color:#6868a0; font-size:.64rem; }
+  .flow-cal-event-row strong:last-child { color:#e8e8f0; font-size:.82rem; }
+  .flow-cal-empty { color:#6868a0; font-size:.72rem; text-align:center; padding:10px 0; margin:0; }
+
+  /* Flow 分析 */
+  .flow-analytics-total { display:flex; align-items:center; margin-top:16px; padding:16px; border-radius:14px; background:#1e1e2e; border:1px solid rgba(255,255,255,.06); }
+  .flow-analytics-total > div { flex:1; }
+  .flow-analytics-total span { display:block; color:#6868a0; font-size:.68rem; }
+  .flow-analytics-total strong { display:block; font-size:1.3rem; color:#e8e8f0; font-weight:800; margin-top:3px; }
+  .flow-analytics-divider { width:1px; height:40px; background:rgba(255,255,255,.1); margin:0 14px; }
+  .flow-bar-chart { padding:10px; border-radius:12px; background:#1e1e2e; border:1px solid rgba(255,255,255,.06); }
+  .flow-bars { display:flex; align-items:flex-end; gap:6px; height:90px; }
+  .flow-bar { flex:1; border-radius:4px 4px 0 0; background:rgba(124,92,252,.3); height:var(--h); display:flex; flex-direction:column; justify-content:flex-end; }
+  .flow-bar span { display:block; text-align:center; color:#6868a0; font-size:.56rem; padding:3px 0; }
+  .flow-bar-current { background:#7c5cfc; }
+  .flow-breakdown { display:grid; gap:8px; padding:12px; border-radius:12px; background:#1e1e2e; border:1px solid rgba(255,255,255,.06); }
+  .flow-breakdown > div { display:flex; align-items:center; gap:8px; font-size:.72rem; }
+  .flow-dot { width:9px; height:9px; border-radius:50%; flex-shrink:0; }
+  .flow-breakdown span:nth-child(2) { flex:1; color:#e8e8f0; }
+  .flow-breakdown span:nth-child(3) { color:#e8e8f0; font-weight:600; }
+  .flow-breakdown span:nth-child(4) { width:28px; text-align:right; color:#6868a0; }
+  .flow-trial-card { margin-top:12px; padding:13px; border-radius:12px; background:#1e1e2e; border:1px solid rgba(244,162,97,.3); }
+  .flow-trial-card-top { display:flex; gap:8px; align-items:center; }
+  .flow-trial-card-top > span:first-child { font-size:1.1rem; }
+  .flow-trial-card-top > div { flex:1; }
+  .flow-trial-card-top strong { display:block; color:#e8e8f0; font-size:.8rem; }
+  .flow-trial-card-top small { color:#6868a0; font-size:.64rem; }
+  .flow-trial-remain { padding:3px 7px; border-radius:6px; background:rgba(244,162,97,.15); color:#f4a261; font-size:.64rem; font-weight:700; }
+  .flow-trial-bar { height:4px; border-radius:4px; background:#2a2a3e; margin:10px 0 5px; }
+  .flow-trial-bar-fill { height:100%; border-radius:4px; background:#f4a261; }
+  .flow-trial-note { color:#6868a0; font-size:.64rem; }
+  .flow-insight { display:flex; gap:8px; align-items:flex-start; margin-top:12px; padding:12px; border-radius:12px; background:rgba(244,162,97,.08); border:1px solid rgba(244,162,97,.2); }
+  .flow-insight span { font-size:1rem; }
+  .flow-insight p { margin:0; color:#a09060; font-size:.7rem; line-height:1.6; }
+
+  /* Flow 設定 */
+  .flow-settings-group { background:#12121e; }
+  .flow-settings-group > p { color:#6868a0; }
+  .flow-settings-group label,.flow-settings-group button { background:#1e1e2e; color:#e8e8f0; border-color:rgba(255,255,255,.06); }
+  .flow-settings-group > span { background:#1e1e2e; color:#6868a0; border-color:rgba(255,255,255,.06); }
+  .flow-settings-group > span + button { color:#f4a261; border-top:0; }
+
+  /* Flow BottomNav */
+  .phone-nav--flow { background:#1e1e2e; border-top:1px solid rgba(255,255,255,.06); }
+  .phone-nav--flow button { background:#1e1e2e; color:#6868a0; }
+  .phone-nav--flow button.is-current { color:#a890ff; }
+
+  /* Flow モーダル */
+  .flow-modal-sheet { background:#1e1e2e; }.flow-modal-sheet h3 { color:#e8e8f0; }.flow-modal-sheet p { color:#8888a8; }.flow-modal-save { background:#7c5cfc; }.flow-modal-save:hover { background:#6a4ee0; }.flow-modal-sheet .modal-description { background:#2a2a3e; color:#8888a8; }.flow-modal-sheet .sheet-handle { background:#3a3a5e; }.flow-modal-sheet .modal-close { color:#6868a0; }
+
   .demo-after { padding:88px 0; background:#fff; text-align:center; }.demo-after h2 { font-size:clamp(2rem,3.8vw,3.5rem); }.demo-after__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:40px; text-align:left; }.demo-after__grid article { padding:24px; border:1px solid var(--line); background:#fcfdfc; }.demo-after__grid .material-icon { color:var(--teal); font-size:2rem; }.demo-after__grid h3 { margin:12px 0 8px; font-size:1.05rem; }.demo-after__grid p { margin:0; color:var(--muted); font-size:.9rem; line-height:1.75; }
   @keyframes sheet-in { from { transform:translateY(14px); opacity:0; } to { transform:translateY(0); opacity:1; } }
   @media (max-width: 820px) { .demo-hero__grid,.demo-stage__grid { grid-template-columns:1fr; gap:44px; }.demo-hero__points { max-width:660px; }.phone-area { order:-1; }.app-explanation { max-width:680px; }.demo-selector { max-width:600px; }.demo-after__grid { grid-template-columns:1fr; }.demo-after__grid article { text-align:center; } }
