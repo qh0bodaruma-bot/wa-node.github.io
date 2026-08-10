@@ -253,6 +253,7 @@ const cannotDo = [
           </div>
 
           <p class="price-card__note">Apple・Googleの開発者アカウント費、クラウド・外部APIなどの利用料は制作費に含まれません。公開後の保守は内容に応じて別途お見積りします。</p>
+          <a href="/mobile-app-demo/" class="app-demo-link"><MaterialIcon name="phone_iphone" /> Androidアプリの操作デモを見る</a>
           <a href="/contact/?source=pricing_app" class="cta-button">アプリ化の費用感を聞く</a>
         </div>
       </div>
@@ -401,6 +402,29 @@ const cannotDo = [
   .price-card--app {
     border-color: #4f8c79;
   }
+
+  .app-demo-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .45rem;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 1.2rem;
+    border: 1px solid #3c7665;
+    color: #285d4e;
+    font-weight: 800;
+    text-decoration: none;
+  }
+
+  .app-demo-link:hover,
+  .app-demo-link:focus-visible {
+    background: #edf7f1;
+    outline: 3px solid rgba(47, 132, 107, .18);
+    outline-offset: 2px;
+  }
+
+  .app-demo-link .material-icon { font-size: 1.2rem; }
 
   .service-kicker,
   .section-kicker {

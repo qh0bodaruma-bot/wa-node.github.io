@@ -93,11 +93,27 @@ const structuredData = [
       <section class="priority-works reveal" aria-labelledby="priority-works-title">
         <div class="priority-copy">
           <span class="eyebrow">First View</span>
-          <h2 id="priority-works-title" class="premium-heading">迷ったら、まずはこの4つをご覧ください</h2>
-          <p>まずはWeb制作・LP制作の見え方を中心に、必要に応じてAI・ICTの実装力も確認できます。</p>
+          <h2 id="priority-works-title" class="premium-heading">まずはこの5つをご覧ください</h2>
+          <p>主力のLINE連携構築から、Web制作・LP制作・業務システムまで、代表的な制作例を揃えています。</p>
         </div>
-        <div class="priority-grid">
-          <a href="/lab/" class="priority-card main card-border-green">
+        <div class="priority-grid priority-grid--5">
+          <a href="/case-studies/line-kintone-demo/" class="priority-card main card-border-line">
+            <div class="priority-visual" aria-hidden="true">
+              <strong style="background: #06C755;">LINE連携</strong>
+              <small>問い合わせ → 自動登録 → 担当割当</small>
+            </div>
+            <span>主力サービス・体験デモ</span>
+            <h3>
+              <span class="card-icon-window window-line">
+                <MaterialIcon name="sync_alt" />
+              </span>
+              LINE × kintone 問い合わせ管理
+            </h3>
+            <ul class="priority-tags"><li>LINE連携</li><li>kintone</li><li>自動化</li></ul>
+            <p>LINEの問い合わせをkintoneに自動登録。担当者割り当てから完了通知まで操作できるデモです。</p>
+            <div class="priority-price"><span>参考価格</span><strong>LINE連携構築 25万円〜</strong></div>
+          </a>
+          <a href="/lab/" class="priority-card card-border-green">
             <div class="priority-visual" aria-hidden="true">
               <strong>改善</strong>
               <small>観察 → 仮説 → 検証</small>
@@ -170,6 +186,7 @@ const structuredData = [
       <!-- Filter Tabs -->
       <nav class="filter-nav" id="filter-nav">
         <button class="filter-btn active" data-filter="all">すべて</button>
+        <button class="filter-btn" data-filter="line">LINE連携</button>
         <button class="filter-btn" data-filter="web">Web & LP</button>
         <button class="filter-btn" data-filter="tool">診断・ツール</button>
         <button class="filter-btn" data-filter="system">AI・システム</button>
@@ -177,6 +194,158 @@ const structuredData = [
       </nav>
 
       <div class="works-grid" id="works-grid">
+
+        <!-- Category: LINE Integration (kintone) -->
+        <article class="work-card reveal card-border-line" data-category="line">
+          <div class="card-visual-wrap">
+            <div class="card-visual portfolio-process-visual portfolio-process-visual--line">
+              <span class="category-tag demo"><span class="live-dot"></span>LINE連携デモ</span>
+              <div aria-hidden="true">
+                <span><MaterialIcon name="chat" />LINE</span><MaterialIcon name="sync_alt" /><span><MaterialIcon name="grid_view" />kintone</span>
+              </div>
+              <small>問い合わせ受信 → 自動登録 → 担当割当</small>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">LINE × kintone / BtoB Integration</div>
+            <h3>
+              <span class="card-icon-window window-line">
+                <MaterialIcon name="sync_alt" />
+              </span>
+              LINE × kintone 問い合わせ管理
+            </h3>
+            <div class="work-snapshot">
+              <span>見るポイント</span>
+              <strong>LINEの問い合わせがkintoneに自動で届く</strong>
+            </div>
+            <dl class="design-chart">
+              <div><dt>課題</dt><dd>LINEを手作業で確認してkintoneに転記する工数が積み重なる</dd></div>
+              <div><dt>工夫</dt><dd>Webhook連携で問い合わせ受信〜担当者割り当てまでを自動化</dd></div>
+            </dl>
+            <ul class="work-chips"><li>LINE公式</li><li>kintone API</li><li>自動登録</li></ul>
+            <p class="card-text">問い合わせ受信からkintone自動登録・担当者割り当て・対応完了通知まで、一連のフローをインタラクティブデモで体験できるケーススタディです。</p>
+            <div class="price-hint"><span>参考価格</span><strong>LINE連携構築 25万円〜</strong><small>連携先・通知設計・管理画面カスタマイズで変動</small></div>
+            <div class="card-footer">
+              <span class="tech-tag">LINE API</span>
+              <span class="tech-tag">kintone</span>
+              <a href="/case-studies/line-kintone-demo/" class="card-link">デモを体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: LINE Integration (Salesforce) -->
+        <article class="work-card reveal card-border-line" data-category="line">
+          <div class="card-visual-wrap">
+            <div class="card-visual portfolio-process-visual portfolio-process-visual--line">
+              <span class="category-tag demo"><span class="live-dot"></span>LINE連携デモ</span>
+              <div aria-hidden="true">
+                <span><MaterialIcon name="chat" />LINE</span><MaterialIcon name="sync_alt" /><span><MaterialIcon name="cloud" />Salesforce</span>
+              </div>
+              <small>問い合わせ受信 → リード登録 → 担当者割当</small>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">LINE × Salesforce / BtoB CRM Integration</div>
+            <h3>
+              <span class="card-icon-window window-line">
+                <MaterialIcon name="sync_alt" />
+              </span>
+              LINE × Salesforce リード管理
+            </h3>
+            <div class="work-snapshot">
+              <span>見るポイント</span>
+              <strong>LINEの問い合わせがSalesforceのリードになる</strong>
+            </div>
+            <dl class="design-chart">
+              <div><dt>課題</dt><dd>LINEとSalesforceが独立し、手入力でリード登録する工数が積み重なる</dd></div>
+              <div><dt>工夫</dt><dd>Webhook連携でリード自動登録・担当者割り当て・商談転換まで自動化</dd></div>
+            </dl>
+            <ul class="work-chips"><li>LINE公式</li><li>Salesforce API</li><li>リード管理</li></ul>
+            <p class="card-text">問い合わせ受信からSalesforceリード自動登録・担当者割り当て・商談ステータス管理まで、一連のフローをインタラクティブデモで体験できるケーススタディです。</p>
+            <div class="price-hint"><span>参考価格</span><strong>LINE連携構築 40万円〜</strong><small>Salesforceカスタマイズ量・連携範囲で変動</small></div>
+            <div class="card-footer">
+              <span class="tech-tag">LINE API</span>
+              <span class="tech-tag">Salesforce</span>
+              <a href="/case-studies/line-salesforce-demo/" class="card-link">デモを体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: LINE Integration (HubSpot) -->
+        <article class="work-card reveal card-border-line" data-category="line">
+          <div class="card-visual-wrap">
+            <div class="card-visual portfolio-process-visual portfolio-process-visual--line">
+              <span class="category-tag demo"><span class="live-dot"></span>LINE連携デモ</span>
+              <div aria-hidden="true">
+                <span><MaterialIcon name="chat" />LINE</span><MaterialIcon name="sync_alt" /><span><MaterialIcon name="hub" />HubSpot</span>
+              </div>
+              <small>問い合わせ受信 → コンタクト登録 → MA連動</small>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">LINE × HubSpot / MA Integration</div>
+            <h3>
+              <span class="card-icon-window window-line">
+                <MaterialIcon name="sync_alt" />
+              </span>
+              LINE × HubSpot コンタクト管理
+            </h3>
+            <div class="work-snapshot">
+              <span>見るポイント</span>
+              <strong>LINEがMAの入口になる</strong>
+            </div>
+            <dl class="design-chart">
+              <div><dt>課題</dt><dd>LINEとHubSpotが独立し、MAフローにLINE由来のコンタクトが乗らない</dd></div>
+              <div><dt>工夫</dt><dd>コンタクト自動登録・スコアリング・ワークフロー連動をLINEに拡張</dd></div>
+            </dl>
+            <ul class="work-chips"><li>LINE公式</li><li>HubSpot API</li><li>MA連動</li></ul>
+            <p class="card-text">問い合わせ受信からHubSpotコンタクト自動登録・スコアリング・MA配信連動まで、一連のフローをインタラクティブデモで体験できるケーススタディです。</p>
+            <div class="price-hint"><span>参考価格</span><strong>LINE連携構築 20万円〜</strong><small>ワークフロー設計量・MA連動範囲で変動</small></div>
+            <div class="card-footer">
+              <span class="tech-tag">LINE API</span>
+              <span class="tech-tag">HubSpot</span>
+              <a href="/case-studies/line-hubspot-demo/" class="card-link">デモを体験する →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: LINE Integration (Google Spreadsheet) -->
+        <article class="work-card reveal card-border-line" data-category="line">
+          <div class="card-visual-wrap">
+            <div class="card-visual portfolio-process-visual portfolio-process-visual--line">
+              <span class="category-tag demo"><span class="live-dot"></span>LINE連携デモ</span>
+              <div aria-hidden="true">
+                <span><MaterialIcon name="chat" />LINE</span><MaterialIcon name="sync_alt" /><span><MaterialIcon name="table_chart" />スプレッドシート</span>
+              </div>
+              <small>問い合わせ受信 → シート自動記録 → 担当者通知</small>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">LINE × Googleスプレッドシート / Simple Integration</div>
+            <h3>
+              <span class="card-icon-window window-line">
+                <MaterialIcon name="sync_alt" />
+              </span>
+              LINE × スプレッドシート 問い合わせ記録
+            </h3>
+            <div class="work-snapshot">
+              <span>見るポイント</span>
+              <strong>今あるシートをそのまま活かして自動化</strong>
+            </div>
+            <dl class="design-chart">
+              <div><dt>課題</dt><dd>LINEを手作業で確認してスプレッドシートに転記する負担が続いている</dd></div>
+              <div><dt>工夫</dt><dd>既存シートへの列追加のみで対応開始。スモールスタートで自動化を始める</dd></div>
+            </dl>
+            <ul class="work-chips"><li>LINE公式</li><li>Google Sheets</li><li>GAS</li></ul>
+            <p class="card-text">問い合わせ受信からスプレッドシート自動記録・担当者通知まで、一連のフローをインタラクティブデモで体験できるケーススタディです。10万円〜のスモールスタートに最適。</p>
+            <div class="price-hint"><span>参考価格</span><strong>LINE連携構築 10万円〜</strong><small>記録項目数・通知設定の複雑さで変動</small></div>
+            <div class="card-footer">
+              <span class="tech-tag">LINE API</span>
+              <span class="tech-tag">Google Sheets</span>
+              <a href="/case-studies/line-spreadsheet-demo/" class="card-link">デモを体験する →</a>
+            </div>
+          </div>
+        </article>
 
         <!-- Category: Web (Course Sales Wireframe) -->
         <article class="work-card reveal card-border-gold" data-category="web">
@@ -346,6 +515,38 @@ const structuredData = [
             <div class="card-footer">
               <span class="tech-tag">LocalStorage</span><span class="tech-tag">Admin UI</span>
               <a href="/case-studies/reservation-operations/" class="card-link">設計意図を見る →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Category: System (Mobile App Interaction Demo) -->
+        <article class="work-card reveal card-border-green" data-category="system">
+          <div class="card-visual-wrap">
+            <div class="card-visual portfolio-process-visual" style="background: linear-gradient(135deg, #eaf5ee 0%, #ffffff 55%, #f9e9dd 100%);">
+              <span class="category-tag demo"><span class="live-dot"></span>Android風・操作デモ</span>
+              <div aria-hidden="true">
+                <span><MaterialIcon name="pets" />記録</span><MaterialIcon name="arrow_forward" /><span><MaterialIcon name="autorenew" />継続利用</span>
+              </div>
+              <small>ペット健康手帳 / サブスクFlow</small>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="expert-label">Mobile App / UX Flow / Customer Experience</div>
+            <h3>
+              <span class="card-icon-window window-green"><MaterialIcon name="phone_iphone" /></span>
+              Androidアプリ体験デモ
+            </h3>
+            <div class="work-snapshot"><span>見るポイント</span><strong>日常利用の記録・変更を、迷わず完了できる</strong></div>
+            <dl class="design-chart">
+              <div><dt>課題</dt><dd>毎日使う記録や、定期便の変更が分かりにくいと、利用も問い合わせ対応も止まりやすい</dd></div>
+              <div><dt>工夫</dt><dd>必要な情報・次の行動・変更の影響を、一画面ごとに整理して表示</dd></div>
+            </dl>
+            <ul class="work-chips"><li>iOS・Android想定</li><li>会員向け</li><li>操作デモ</li></ul>
+            <p class="card-text">架空のペット健康手帳とサブスクFlowを題材に、記録、ケア予定、配送スキップ、プラン変更をブラウザ内で体験できる自主制作デモです。</p>
+            <div class="price-hint"><span>参考価格</span><strong>小規模業務アプリ 80万円〜</strong><small>画面数・通知・認証・外部連携・ストア公開支援で変動</small></div>
+            <div class="card-footer">
+              <span class="tech-tag">Mobile UX</span><span class="tech-tag">Interactive</span>
+              <a href="/mobile-app-demo/" class="card-link">アプリを体験する →</a>
             </div>
           </div>
         </article>
@@ -702,6 +903,8 @@ const structuredData = [
     @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
 
     :root {
+      --line-green: #06C755;
+      --line-dark: #00B449;
       --accent: #8c6b1f;
       --accent-dark: #725719;
       --accent-red: #c7352f;
@@ -880,6 +1083,9 @@ const structuredData = [
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
+    }
+    .priority-grid--5 {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
     }
     .priority-card {
       display: flex;
@@ -1250,6 +1456,15 @@ const structuredData = [
       background: var(--accent-red);
       box-shadow: 0 4px 12px rgba(199, 53, 47, 0.2);
     }
+    .card-border-line { border-top: 3px solid var(--line-green); }
+    .card-border-line .card-link, .card-border-line .premium-link {
+      background: var(--line-green);
+      box-shadow: 0 4px 12px rgba(6, 199, 85, 0.25);
+    }
+    .window-line { background: rgba(6, 199, 85, 0.12); color: var(--line-dark); }
+    .portfolio-process-visual--line {
+      background: linear-gradient(135deg, #1a3a2a, #06C755);
+    }
 
     .packages-cta { margin-top: 100px; }
     .glass-panel {
@@ -1287,6 +1502,10 @@ const structuredData = [
 
     @media (min-width: 769px) and (max-width: 1100px) {
       .priority-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .priority-grid--5 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    }
+    @media (min-width: 1101px) and (max-width: 1400px) {
+      .priority-grid--5 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     }
 </style>
 

@@ -1,0 +1,301 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import MaterialIcon from '../components/MaterialIcon.astro';
+
+const title = 'Androidアプリ体験デモ｜ペット健康手帳・サブスクFlow｜和-Node';
+const description = 'ペット健康手帳とサブスクFlowを題材にした、iOS・Androidアプリの自主制作・架空デモです。記録、確認、配送管理など、日常的に使う画面の流れをブラウザで体験できます。';
+---
+
+<BaseLayout title={title} description={description} noindex={true}>
+  <main id="main" class="app-demo" data-glossary-skip>
+    <section class="demo-notice" aria-label="デモについての注意">
+      <div class="demo-shell demo-notice__inner">
+        <span>自主制作・架空アプリデモ</span>
+        <p>画面内の情報はすべてサンプルです。操作内容はブラウザ内だけで反映され、送信・課金・保存は行われません。</p>
+        <a href="/works/">制作例へ戻る</a>
+      </div>
+    </section>
+
+    <section class="demo-hero">
+      <div class="demo-shell demo-hero__grid">
+        <div class="demo-hero__copy">
+          <p class="eyebrow">MOBILE APP INTERACTIVE DEMO</p>
+          <h1>毎日使う流れを、<br />アプリで分かりやすく。</h1>
+          <p>「ペット健康手帳」と「サブスクFlow」を題材に、利用者が確認・記録・変更を迷わず進めるための画面を用意しました。スマートフォンらしい画面遷移と、業務側で必要になる情報のまとまりを確認できます。</p>
+          <dl class="demo-hero__points">
+            <div><dt><MaterialIcon name="touch_app" /></dt><dd><strong>操作できる</strong><span>画面を切り替え、記録・スキップを試せます</span></dd></div>
+            <div><dt><MaterialIcon name="smartphone" /></dt><dd><strong>Android風UI</strong><span>実機の利用場面を想定した縦長の画面構成です</span></dd></div>
+            <div><dt><MaterialIcon name="account_tree" /></dt><dd><strong>用途別の設計</strong><span>顧客向け機能と継続利用の流れを比較できます</span></dd></div>
+          </dl>
+        </div>
+
+        <div class="demo-selector" aria-labelledby="app-selector-title">
+          <p class="demo-selector__label" id="app-selector-title">体験するアプリを選ぶ</p>
+          <div class="app-choice-list" role="tablist" aria-label="アプリデモの切り替え">
+            <button type="button" class="app-choice is-active" role="tab" aria-selected="true" aria-controls="pet-panel" id="pet-tab" data-app-choice="pet">
+              <span class="app-choice__icon app-choice__icon--pet"><MaterialIcon name="pets" /></span>
+              <span><strong>ペット健康手帳</strong><small>記録・確認・ケア予定</small></span>
+              <MaterialIcon name="arrow_forward" />
+            </button>
+            <button type="button" class="app-choice" role="tab" aria-selected="false" aria-controls="subscription-panel" id="subscription-tab" data-app-choice="subscription" tabindex="-1">
+              <span class="app-choice__icon app-choice__icon--subscription"><MaterialIcon name="autorenew" /></span>
+              <span><strong>サブスクFlow</strong><small>配送・スキップ・プラン管理</small></span>
+              <MaterialIcon name="arrow_forward" />
+            </button>
+          </div>
+          <p class="demo-selector__note"><MaterialIcon name="info" /> どちらも架空のサービスを題材にした、アプリ開発の画面・導線サンプルです。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-stage" aria-label="Androidアプリ体験">
+      <div class="demo-shell demo-stage__grid">
+        <aside class="app-explanation">
+          <div class="app-explanation__panel" data-copy-panel="pet">
+            <p class="section-kicker">PET HEALTH NOTE</p>
+            <h2>気になる変化を、<br />いつもの記録にする。</h2>
+            <p>体重・食事・体調など、飼い主が日常で確認したい情報を一画面へ整理。次のケア予定も同じ場所で確認でき、記録の抜けを減らします。</p>
+            <dl class="feature-list">
+              <div><dt><MaterialIcon name="monitor_weight" /></dt><dd><strong>今日の記録</strong><span>入力する項目を少なく、次の行動を明確に</span></dd></div>
+              <div><dt><MaterialIcon name="history" /></dt><dd><strong>変化の確認</strong><span>数値と体調メモを時間軸で見返せる構成</span></dd></div>
+              <div><dt><MaterialIcon name="event" /></dt><dd><strong>ケア予定</strong><span>通院・お手入れの予定を見落としにくく表示</span></dd></div>
+            </dl>
+          </div>
+          <div class="app-explanation__panel" data-copy-panel="subscription" hidden>
+            <p class="section-kicker">SUBSCRIPTION FLOW</p>
+            <h2>続ける・止める・変えるを、<br />自分で選べる。</h2>
+            <p>次回配送、スキップ、プラン変更を、問い合わせ前に利用者自身で確認・変更できる構成です。継続利用の不安と事務側の確認負担を一緒に減らします。</p>
+            <dl class="feature-list">
+              <div><dt><MaterialIcon name="local_shipping" /></dt><dd><strong>次回配送</strong><span>いつ届くか、何が届くかを先に確認</span></dd></div>
+              <div><dt><MaterialIcon name="skip_next" /></dt><dd><strong>スキップ</strong><span>無理なく休止できる選択肢を同じ画面に</span></dd></div>
+              <div><dt><MaterialIcon name="tune" /></dt><dd><strong>プラン管理</strong><span>数量・周期・届け先の変更を迷わせない</span></dd></div>
+            </dl>
+          </div>
+          <div class="app-scope">
+            <span>制作時に整理すること</span>
+            <p>利用者、必要な記録、通知、会員情報、外部システム連携、管理画面、公開後の保守範囲を、必要な順番で確認します。</p>
+            <a href="/contact/?source=mobile_app_demo">近いアプリについて相談する <MaterialIcon name="arrow_forward" /></a>
+          </div>
+        </aside>
+
+        <div class="phone-area">
+          <div class="phone" aria-label="Androidアプリのサンプル画面">
+            <div class="phone__speaker" aria-hidden="true"></div>
+            <div class="phone__screen">
+              <section class="phone-panel is-active" id="pet-panel" role="tabpanel" aria-labelledby="pet-tab" data-app-panel="pet">
+                <div class="status-bar" aria-hidden="true"><span>9:41</span><span><MaterialIcon name="signal_cellular_alt" /><MaterialIcon name="wifi" /><MaterialIcon name="battery_full" /></span></div>
+                <header class="pet-header">
+                  <div><span>おはよう、サンプルさん</span><h2>ルナの健康手帳</h2></div>
+                  <button type="button" class="round-button" aria-label="通知を見る"><MaterialIcon name="notifications" /><i></i></button>
+                </header>
+                <div class="pet-profile">
+                  <div class="pet-avatar" aria-hidden="true"><MaterialIcon name="pets" /></div>
+                  <div><strong>ルナ</strong><span>トイプードル / 4歳</span></div>
+                  <button type="button" class="pet-switch" aria-label="ペットを切り替える"><MaterialIcon name="keyboard_arrow_down" /></button>
+                </div>
+                <div class="pet-summary">
+                  <p>今日の様子</p>
+                  <div><strong id="pet-condition">元気です</strong><span><MaterialIcon name="sentiment_satisfied" /> 記録済み</span></div>
+                  <small>前回の記録：昨日 20:18</small>
+                </div>
+                <section class="pet-card pet-card--weight" aria-label="体重の記録">
+                  <div><span>体重</span><strong id="pet-weight">4.2<small>kg</small></strong><small class="weight-change"><MaterialIcon name="trending_down" /> 前回から -0.1kg</small></div>
+                  <div class="mini-chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                </section>
+                <section class="pet-card pet-card--care" aria-label="次のケア予定">
+                  <span class="pet-card__icon"><MaterialIcon name="event" /></span>
+                  <div><small>次のケア予定</small><strong>8月18日（月） ワクチン相談</strong><span>さくら動物クリニック 10:30</span></div>
+                  <MaterialIcon name="chevron_right" />
+                </section>
+                <button type="button" class="primary-phone-button" id="pet-record-button"><MaterialIcon name="edit_note" /> 今日の記録を追加する</button>
+                <nav class="phone-nav" aria-label="ペット健康手帳のメニュー"><button type="button" class="is-current"><MaterialIcon name="home" /><span>ホーム</span></button><button type="button"><MaterialIcon name="timeline" /><span>記録</span></button><button type="button"><MaterialIcon name="calendar_month" /><span>予定</span></button><button type="button"><MaterialIcon name="person" /><span>設定</span></button></nav>
+                <div class="phone-modal" id="pet-record-modal" hidden>
+                  <div class="phone-modal__sheet" role="dialog" aria-modal="true" aria-labelledby="pet-record-title">
+                    <div class="sheet-handle" aria-hidden="true"></div>
+                    <button type="button" class="modal-close" id="pet-record-close" aria-label="記録画面を閉じる"><MaterialIcon name="close" /></button>
+                    <p>8月10日（日）</p><h3 id="pet-record-title">今日の様子を記録</h3>
+                    <div class="condition-options" role="group" aria-label="今日の様子"><button type="button" class="is-selected" data-condition="元気です"><MaterialIcon name="sentiment_satisfied" /><span>元気</span></button><button type="button" data-condition="少し気になる"><MaterialIcon name="sentiment_neutral" /><span>ふつう</span></button><button type="button" data-condition="気になることあり"><MaterialIcon name="sentiment_dissatisfied" /><span>気になる</span></button></div>
+                    <button type="button" class="modal-save" id="pet-record-save">この内容で記録する</button>
+                  </div>
+                </div>
+              </section>
+
+              <section class="phone-panel" id="subscription-panel" role="tabpanel" aria-labelledby="subscription-tab" data-app-panel="subscription" hidden>
+                <div class="status-bar" aria-hidden="true"><span>9:41</span><span><MaterialIcon name="signal_cellular_alt" /><MaterialIcon name="wifi" /><MaterialIcon name="battery_full" /></span></div>
+                <header class="subscription-header"><div class="subscription-brand"><span class="subscription-brand__mark">F</span><strong>Flow Pantry</strong></div><button type="button" class="round-button" aria-label="お知らせを見る"><MaterialIcon name="notifications" /><i></i></button></header>
+                <div class="subscription-greeting"><span>サンプルさんの定期便</span><h2>次回のお届けを確認</h2></div>
+                <section class="delivery-card">
+                  <div class="delivery-card__top"><span>次回お届け</span><strong>8月17日（日）</strong><em id="delivery-state">配送予定</em></div>
+                  <div class="delivery-progress" aria-label="注文処理中"><i class="is-done"><MaterialIcon name="check" /></i><span></span><i class="is-current"><MaterialIcon name="inventory_2" /></i><span></span><i><MaterialIcon name="local_shipping" /></i></div>
+                  <div class="delivery-progress__labels"><span>注文確定</span><span>準備中</span><span>お届け</span></div>
+                  <div class="delivery-product"><span class="product-thumb" aria-hidden="true"><MaterialIcon name="coffee" /></span><div><strong>朝のコーヒー便</strong><small>深煎りブレンド 200g × 2袋</small></div><MaterialIcon name="chevron_right" /></div>
+                </section>
+                <section class="subscription-actions" aria-label="次回配送の変更">
+                  <button type="button" id="skip-delivery"><span><MaterialIcon name="skip_next" /></span><strong>次回をスキップ</strong><small>1回だけお休みする</small></button>
+                  <button type="button" id="change-plan"><span><MaterialIcon name="tune" /></span><strong>プランを変更</strong><small>数量・周期を見直す</small></button>
+                </section>
+                <section class="subscription-plan"><div><span>現在のプラン</span><strong id="plan-name">月1回・2袋コース</strong><small>次回から、いつでも変更できます</small></div><MaterialIcon name="chevron_right" /></section>
+                <p class="subscription-note"><MaterialIcon name="info" /> スキップ後も、次々回からは通常どおりお届けします。</p>
+                <nav class="phone-nav phone-nav--subscription" aria-label="サブスクFlowのメニュー"><button type="button" class="is-current"><MaterialIcon name="home" /><span>ホーム</span></button><button type="button"><MaterialIcon name="inventory_2" /><span>お届け</span></button><button type="button"><MaterialIcon name="receipt_long" /><span>履歴</span></button><button type="button"><MaterialIcon name="person" /><span>マイページ</span></button></nav>
+                <div class="phone-modal" id="subscription-modal" hidden>
+                  <div class="phone-modal__sheet" role="dialog" aria-modal="true" aria-labelledby="subscription-modal-title">
+                    <div class="sheet-handle" aria-hidden="true"></div>
+                    <button type="button" class="modal-close" id="subscription-modal-close" aria-label="変更画面を閉じる"><MaterialIcon name="close" /></button>
+                    <p id="subscription-modal-label">次回配送</p><h3 id="subscription-modal-title">次回をスキップしますか？</h3>
+                    <div class="modal-description" id="subscription-modal-description">8月17日のお届けを1回だけお休みします。次々回は通常どおりお届けします。</div>
+                    <button type="button" class="modal-save" id="subscription-modal-save">スキップする</button>
+                  </div>
+                </div>
+              </section>
+            </div>
+            <div class="phone__home-bar" aria-hidden="true"></div>
+          </div>
+          <p class="phone-caption"><MaterialIcon name="touch_app" /> デモ画面を操作して、日常利用の流れをご確認ください。</p>
+          <p class="phone-status" id="demo-status" role="status" aria-live="polite"></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-after">
+      <div class="demo-shell">
+        <p class="section-kicker">WHAT TO BUILD</p>
+        <h2>画面だけで終わらせず、<br />運用までつながる形を考えます。</h2>
+        <div class="demo-after__grid">
+          <article><MaterialIcon name="groups" /><h3>利用者の画面</h3><p>記録・予約・会員情報・配送変更など、使う人が迷わない順番を整えます。</p></article>
+          <article><MaterialIcon name="dashboard" /><h3>運用する画面</h3><p>確認、対応、通知、データ出力など、担当者の作業も一緒に整理します。</p></article>
+          <article><MaterialIcon name="sync_alt" /><h3>必要な連携</h3><p>LINE、既存サイト、予約・顧客システム、外部APIとのつなぎ方を検討します。</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const appChoices = document.querySelectorAll('[data-app-choice]');
+    const appPanels = document.querySelectorAll('[data-app-panel]');
+    const copyPanels = document.querySelectorAll('[data-copy-panel]');
+    const demoStatus = document.querySelector('#demo-status');
+
+    function showApp(app) {
+      appChoices.forEach((button) => {
+        const selected = button.dataset.appChoice === app;
+        button.classList.toggle('is-active', selected);
+        button.setAttribute('aria-selected', String(selected));
+        button.tabIndex = selected ? 0 : -1;
+      });
+      appPanels.forEach((panel) => {
+        const selected = panel.dataset.appPanel === app;
+        panel.hidden = !selected;
+        panel.classList.toggle('is-active', selected);
+      });
+      copyPanels.forEach((panel) => { panel.hidden = panel.dataset.copyPanel !== app; });
+      demoStatus.textContent = app === 'pet' ? 'ペット健康手帳のデモを表示しています。' : 'サブスクFlowのデモを表示しています。';
+    }
+
+    appChoices.forEach((button) => {
+      button.addEventListener('click', () => showApp(button.dataset.appChoice));
+      button.addEventListener('keydown', (event) => {
+        if (!['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+        event.preventDefault();
+        const buttons = [...appChoices];
+        const current = buttons.indexOf(button);
+        const next = event.key === 'ArrowRight' ? (current + 1) % buttons.length : (current - 1 + buttons.length) % buttons.length;
+        buttons[next].focus();
+        showApp(buttons[next].dataset.appChoice);
+      });
+    });
+
+    const petModal = document.querySelector('#pet-record-modal');
+    const petCondition = document.querySelector('#pet-condition');
+    let selectedCondition = '元気です';
+    document.querySelector('#pet-record-button').addEventListener('click', () => { petModal.hidden = false; });
+    document.querySelector('#pet-record-close').addEventListener('click', () => { petModal.hidden = true; });
+    document.querySelectorAll('[data-condition]').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('[data-condition]').forEach((item) => item.classList.remove('is-selected'));
+        button.classList.add('is-selected');
+        selectedCondition = button.dataset.condition;
+      });
+    });
+    document.querySelector('#pet-record-save').addEventListener('click', () => {
+      petCondition.textContent = selectedCondition;
+      petModal.hidden = true;
+      demoStatus.textContent = `ルナの「${selectedCondition}」という記録を、このデモ画面に反映しました。`;
+    });
+
+    const subscriptionModal = document.querySelector('#subscription-modal');
+    const subscriptionModalLabel = document.querySelector('#subscription-modal-label');
+    const subscriptionModalTitle = document.querySelector('#subscription-modal-title');
+    const subscriptionModalDescription = document.querySelector('#subscription-modal-description');
+    const subscriptionModalSave = document.querySelector('#subscription-modal-save');
+    let subscriptionAction = 'skip';
+    function openSubscriptionModal(action) {
+      subscriptionAction = action;
+      const isSkip = action === 'skip';
+      subscriptionModalLabel.textContent = isSkip ? '次回配送' : '現在のプラン';
+      subscriptionModalTitle.textContent = isSkip ? '次回をスキップしますか？' : 'プランを変更しますか？';
+      subscriptionModalDescription.textContent = isSkip ? '8月17日のお届けを1回だけお休みします。次々回は通常どおりお届けします。' : '次回から、月1回・1袋コースへ変更するサンプル操作です。';
+      subscriptionModalSave.textContent = isSkip ? 'スキップする' : '1袋コースに変更する';
+      subscriptionModal.hidden = false;
+    }
+    document.querySelector('#skip-delivery').addEventListener('click', () => openSubscriptionModal('skip'));
+    document.querySelector('#change-plan').addEventListener('click', () => openSubscriptionModal('plan'));
+    document.querySelector('#subscription-modal-close').addEventListener('click', () => { subscriptionModal.hidden = true; });
+    subscriptionModalSave.addEventListener('click', () => {
+      if (subscriptionAction === 'skip') {
+        document.querySelector('#delivery-state').textContent = '今回をスキップ';
+        demoStatus.textContent = '次回配送をスキップするサンプル操作を、このデモ画面に反映しました。';
+      } else {
+        document.querySelector('#plan-name').textContent = '月1回・1袋コース';
+        demoStatus.textContent = 'プラン変更のサンプル操作を、このデモ画面に反映しました。';
+      }
+      subscriptionModal.hidden = true;
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .app-demo { --ink:#183134; --muted:#657579; --line:#d6e1e0; --mint:#eaf5ee; --teal:#12636c; --deep:#123b43; --coral:#d95245; --gold:#b88433; background:#fff; color:var(--ink); }
+  .demo-shell { width:min(1180px, calc(100% - 40px)); margin:0 auto; }
+  .demo-notice { background:#143b42; color:#fff; }
+  .demo-notice__inner { min-height:48px; display:grid; grid-template-columns:auto 1fr auto; gap:18px; align-items:center; font-size:.8rem; }
+  .demo-notice span { padding:5px 9px; background:var(--coral); font-weight:800; }
+  .demo-notice p { margin:0; color:#d4e5e4; }
+  .demo-notice a { color:#fff; font-weight:800; text-decoration:underline; text-underline-offset:4px; }
+  .demo-hero { padding:84px 0 72px; background:linear-gradient(130deg,#f5faf8 0%,#fff 58%,#fbf2e8 100%); border-bottom:1px solid var(--line); }
+  .demo-hero__grid { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(360px,.75fr); gap:72px; align-items:center; }
+  .eyebrow,.section-kicker { margin:0 0 11px; color:var(--coral); font-size:.75rem; font-weight:900; letter-spacing:.08em; }
+  .demo-hero h1,.app-explanation h2,.demo-after h2 { margin:0; font-family:'Shippori Mincho',serif; font-size:clamp(2.25rem,4.4vw,4.1rem); line-height:1.3; letter-spacing:0; }
+  .demo-hero__copy > p:not(.eyebrow) { max-width:720px; margin:24px 0 0; color:var(--muted); line-height:1.9; }
+  .demo-hero__points { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:32px 0 0; }
+  .demo-hero__points div { padding:13px; border:1px solid var(--line); background:rgba(255,255,255,.76); }
+  .demo-hero__points dt { color:var(--teal); }.demo-hero__points dd { margin:9px 0 0; }.demo-hero__points strong,.demo-hero__points span { display:block; }.demo-hero__points span { margin-top:4px; color:var(--muted); font-size:.76rem; line-height:1.5; }
+  .demo-selector { padding:24px; border:1px solid var(--line); background:#fff; box-shadow:0 22px 54px rgba(18,59,67,.09); }
+  .demo-selector__label { margin:0 0 12px; color:var(--muted); font-size:.78rem; font-weight:800; }
+  .app-choice-list { display:grid; gap:10px; }
+  .app-choice { width:100%; min-height:90px; display:grid; grid-template-columns:auto 1fr auto; gap:13px; align-items:center; padding:13px; border:1px solid var(--line); background:#fff; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }
+  .app-choice:hover,.app-choice:focus-visible,.app-choice.is-active { border-color:var(--teal); background:#f2faf7; outline:none; }
+  .app-choice__icon { width:48px; height:48px; display:grid; place-items:center; color:#fff; }.app-choice__icon--pet { background:#d56a57; }.app-choice__icon--subscription { background:#27786e; }
+  .app-choice strong,.app-choice small { display:block; }.app-choice strong { font-size:1rem; }.app-choice small { margin-top:4px; color:var(--muted); font-size:.78rem; }.app-choice > .material-icon { color:var(--teal); }
+  .demo-selector__note { display:flex; gap:7px; margin:16px 0 0; color:var(--muted); font-size:.76rem; line-height:1.55; }.demo-selector__note .material-icon { color:var(--teal); font-size:1.1rem; }
+  .demo-stage { padding:78px 0; background:#edf4f1; }.demo-stage__grid { display:grid; grid-template-columns:minmax(0,.9fr) minmax(390px,.85fr); gap:76px; align-items:center; }
+  .app-explanation h2 { font-size:clamp(2rem,3.4vw,3.3rem); }.app-explanation__panel > p:not(.section-kicker) { margin:20px 0 0; color:var(--muted); line-height:1.9; }
+  .feature-list { display:grid; gap:12px; margin:30px 0 0; }.feature-list div { display:grid; grid-template-columns:42px 1fr; gap:12px; align-items:start; }.feature-list dt { width:42px; height:42px; display:grid; place-items:center; background:#fff; color:var(--teal); border:1px solid var(--line); }.feature-list dd { margin:0; }.feature-list strong,.feature-list span { display:block; }.feature-list span { margin-top:4px; color:var(--muted); font-size:.87rem; line-height:1.55; }
+  .app-scope { margin-top:36px; padding:20px 22px; border-left:4px solid var(--coral); background:#fff; }.app-scope > span { color:var(--teal); font-size:.78rem; font-weight:900; }.app-scope p { margin:9px 0 15px; color:var(--muted); line-height:1.7; font-size:.88rem; }.app-scope a { display:inline-flex; gap:6px; align-items:center; color:var(--teal); font-weight:900; text-decoration:none; }.app-scope a:hover { text-decoration:underline; }.app-scope .material-icon { font-size:1.1rem; }
+  .phone-area { display:grid; justify-items:center; }.phone { position:relative; width:min(100%,380px); padding:10px; border:9px solid #16282d; border-radius:40px; background:#16282d; box-shadow:0 30px 54px rgba(18,59,67,.25); }.phone__speaker { position:absolute; z-index:2; top:18px; left:50%; width:94px; height:20px; border-radius:0 0 16px 16px; background:#16282d; transform:translateX(-50%); }.phone__screen { position:relative; min-height:702px; overflow:hidden; border-radius:25px; background:#f7faf8; }.phone__home-bar { width:118px; height:4px; margin:8px auto 0; border-radius:99px; background:#b9c2c4; }.phone-caption { display:flex; align-items:center; gap:7px; margin:18px 0 0; color:var(--muted); font-size:.82rem; }.phone-caption .material-icon { color:var(--teal); }.phone-status { min-height:20px; margin:8px 0 0; color:var(--teal); font-size:.78rem; font-weight:800; text-align:center; }
+  .phone-panel { min-height:702px; position:relative; padding:0 18px 72px; }.phone-panel[hidden] { display:none; }.status-bar { display:flex; justify-content:space-between; align-items:center; min-height:37px; padding:0 8px; color:#264249; font-size:.7rem; font-weight:900; }.status-bar > span:last-child { display:flex; gap:3px; }.status-bar .material-icon { font-size:.92rem; }
+  .pet-header,.subscription-header { display:flex; justify-content:space-between; align-items:start; }.pet-header span,.subscription-greeting span { color:var(--muted); font-size:.76rem; }.pet-header h2,.subscription-greeting h2 { margin:3px 0 0; font-size:1.34rem; }.round-button { position:relative; width:39px; height:39px; display:grid; place-items:center; border:0; border-radius:50%; background:#e7f0ec; color:var(--teal); cursor:pointer; }.round-button i { position:absolute; top:8px; right:8px; width:6px; height:6px; border-radius:50%; background:var(--coral); }
+  .pet-profile { display:flex; gap:11px; align-items:center; margin-top:20px; padding:12px; background:#fff; border:1px solid #e4ece8; }.pet-avatar { width:46px; height:46px; display:grid; place-items:center; border-radius:50%; background:#f5ddd6; color:#c55443; }.pet-profile strong,.pet-profile span { display:block; }.pet-profile strong { font-size:.92rem; }.pet-profile span { margin-top:2px; color:var(--muted); font-size:.7rem; }.pet-switch { margin-left:auto; border:0; background:transparent; color:var(--muted); cursor:pointer; }
+  .pet-summary { margin-top:15px; padding:18px; border-radius:18px; background:linear-gradient(135deg,#1e7574,#13505d); color:#fff; }.pet-summary p { margin:0; color:#c4e3dc; font-size:.74rem; }.pet-summary > div { display:flex; justify-content:space-between; align-items:center; margin-top:7px; }.pet-summary strong { font-size:1.3rem; }.pet-summary span { display:inline-flex; align-items:center; gap:3px; padding:5px 7px; background:rgba(255,255,255,.15); font-size:.66rem; }.pet-summary span .material-icon { font-size:.86rem; }.pet-summary > small { display:block; margin-top:10px; color:#c4e3dc; font-size:.68rem; }
+  .pet-card { display:flex; margin-top:13px; padding:15px; background:#fff; border:1px solid #e4ece8; }.pet-card--weight { justify-content:space-between; align-items:center; }.pet-card--weight span { display:block; color:var(--muted); font-size:.72rem; }.pet-card--weight strong { display:block; margin-top:2px; color:var(--teal); font-size:1.65rem; }.pet-card--weight strong small { font-size:.76rem; }.weight-change { display:flex; align-items:center; gap:3px; margin-top:3px; color:#488461; font-size:.65rem; }.weight-change .material-icon { font-size:.85rem; }.mini-chart { height:62px; display:flex; align-items:end; gap:4px; }.mini-chart i { display:block; width:8px; background:#a8d6c0; }.mini-chart i:nth-child(1){height:28px}.mini-chart i:nth-child(2){height:40px}.mini-chart i:nth-child(3){height:34px}.mini-chart i:nth-child(4){height:50px}.mini-chart i:nth-child(5){height:44px}.mini-chart i:nth-child(6){height:55px}.mini-chart i:nth-child(7){height:52px;background:var(--teal)}
+  .pet-card--care { align-items:center; gap:10px; }.pet-card__icon { width:36px; height:36px; display:grid; place-items:center; background:#fbe9d9; color:#b97129; }.pet-card--care > div { min-width:0; flex:1; }.pet-card--care small,.pet-card--care span { display:block; color:var(--muted); font-size:.66rem; }.pet-card--care strong { display:block; margin:2px 0; font-size:.76rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }.pet-card--care > .material-icon { color:var(--muted); }
+  .primary-phone-button,.modal-save { width:100%; min-height:49px; display:flex; justify-content:center; align-items:center; gap:8px; margin-top:15px; border:0; background:var(--coral); color:#fff; font:inherit; font-size:.83rem; font-weight:900; cursor:pointer; }.primary-phone-button:hover,.modal-save:hover { background:#b83f35; }.primary-phone-button .material-icon { font-size:1.1rem; }
+  .phone-nav { position:absolute; right:0; bottom:0; left:0; display:grid; grid-template-columns:repeat(4,1fr); min-height:62px; border-top:1px solid #e0e9e5; background:#fff; }.phone-nav button { display:grid; place-content:center; gap:2px; border:0; background:#fff; color:#8a9998; font:inherit; font-size:.58rem; cursor:pointer; }.phone-nav .material-icon { font-size:1.25rem; }.phone-nav button.is-current { color:var(--teal); font-weight:900; }
+  .phone-modal { position:absolute; z-index:4; inset:0; display:flex; align-items:end; background:rgba(14,34,39,.35); }.phone-modal[hidden] { display:none; }.phone-modal__sheet { position:relative; width:100%; padding:12px 20px 24px; border-radius:24px 24px 0 0; background:#fff; animation:sheet-in .2s ease-out; }.sheet-handle { width:40px; height:4px; margin:0 auto 15px; border-radius:99px; background:#ccd7d4; }.modal-close { position:absolute; top:20px; right:16px; border:0; background:transparent; color:var(--muted); cursor:pointer; }.phone-modal__sheet p { margin:0; color:var(--muted); font-size:.72rem; }.phone-modal__sheet h3 { margin:4px 0 19px; font-size:1.16rem; }.condition-options { display:grid; grid-template-columns:repeat(3,1fr); gap:7px; }.condition-options button { display:grid; gap:5px; place-items:center; min-height:78px; border:1px solid var(--line); background:#fff; color:var(--muted); font:inherit; font-size:.68rem; cursor:pointer; }.condition-options button.is-selected { border:2px solid var(--teal); background:#edf8f4; color:var(--teal); }.condition-options .material-icon { font-size:1.45rem; }.modal-description { padding:14px; background:#f3f7f5; color:var(--muted); font-size:.8rem; line-height:1.7; }.modal-save { margin-top:16px; }
+  .subscription-header { align-items:center; }.subscription-brand { display:flex; gap:8px; align-items:center; }.subscription-brand__mark { width:29px; height:29px; display:grid; place-items:center; background:#16746c; color:#fff; font-family:Georgia,serif; font-weight:800; }.subscription-brand strong { font-size:1rem; letter-spacing:0; }.subscription-greeting { margin-top:23px; }.delivery-card { margin-top:17px; padding:17px; border:1px solid #d8e5df; background:#fff; box-shadow:0 8px 20px rgba(18,59,67,.05); }.delivery-card__top { display:grid; grid-template-columns:1fr auto; gap:2px 10px; align-items:center; }.delivery-card__top span { color:var(--muted); font-size:.68rem; }.delivery-card__top strong { font-size:1rem; }.delivery-card__top em { grid-column:2; grid-row:1; padding:4px 7px; background:#e8f3ed; color:#237057; font-size:.61rem; font-style:normal; font-weight:800; }.delivery-progress { display:grid; grid-template-columns:auto 1fr auto 1fr auto; align-items:center; margin:22px 5px 3px; }.delivery-progress i { width:24px; height:24px; display:grid; place-items:center; border-radius:50%; background:#e3ebe8; color:#98a9a6; font-style:normal; }.delivery-progress i.is-done,.delivery-progress i.is-current { background:#27786e; color:#fff; }.delivery-progress .material-icon { font-size:.82rem; }.delivery-progress span { height:2px; background:#d8e5df; }.delivery-progress span:first-of-type { background:#27786e; }.delivery-progress__labels { display:grid; grid-template-columns:repeat(3,1fr); margin:0 -6px; color:var(--muted); font-size:.59rem; text-align:center; }.delivery-product { display:flex; gap:10px; align-items:center; margin-top:20px; padding-top:14px; border-top:1px solid #e6eeea; }.product-thumb { width:38px; height:38px; display:grid; place-items:center; background:#ead9bd; color:#8b5d22; }.delivery-product div { flex:1; }.delivery-product strong,.delivery-product small { display:block; }.delivery-product strong { font-size:.76rem; }.delivery-product small { margin-top:3px; color:var(--muted); font-size:.65rem; }.delivery-product > .material-icon { color:var(--muted); }
+  .subscription-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; margin-top:13px; }.subscription-actions button { padding:12px 8px; border:1px solid #d8e5df; background:#fff; color:var(--ink); text-align:left; font:inherit; cursor:pointer; }.subscription-actions button:hover,.subscription-actions button:focus-visible { border-color:var(--teal); outline:none; }.subscription-actions button span { width:29px; height:29px; display:grid; place-items:center; margin-bottom:8px; background:#edf6f2; color:var(--teal); }.subscription-actions strong,.subscription-actions small { display:block; }.subscription-actions strong { font-size:.73rem; }.subscription-actions small { margin-top:3px; color:var(--muted); font-size:.62rem; }.subscription-plan { display:flex; align-items:center; gap:12px; margin-top:13px; padding:14px; border:1px solid #d8e5df; background:#fff; }.subscription-plan div { flex:1; }.subscription-plan span,.subscription-plan small { display:block; color:var(--muted); font-size:.66rem; }.subscription-plan strong { display:block; margin:2px 0; font-size:.82rem; }.subscription-plan > .material-icon { color:var(--muted); }.subscription-note { display:flex; gap:5px; margin:13px 2px 0; color:var(--muted); font-size:.64rem; line-height:1.5; }.subscription-note .material-icon { color:var(--teal); font-size:.95rem; }
+  .demo-after { padding:88px 0; background:#fff; text-align:center; }.demo-after h2 { font-size:clamp(2rem,3.8vw,3.5rem); }.demo-after__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:40px; text-align:left; }.demo-after__grid article { padding:24px; border:1px solid var(--line); background:#fcfdfc; }.demo-after__grid .material-icon { color:var(--teal); font-size:2rem; }.demo-after__grid h3 { margin:12px 0 8px; font-size:1.05rem; }.demo-after__grid p { margin:0; color:var(--muted); font-size:.9rem; line-height:1.75; }
+  @keyframes sheet-in { from { transform:translateY(14px); opacity:0; } to { transform:translateY(0); opacity:1; } }
+  @media (max-width: 820px) { .demo-hero__grid,.demo-stage__grid { grid-template-columns:1fr; gap:44px; }.demo-hero__points { max-width:660px; }.phone-area { order:-1; }.app-explanation { max-width:680px; }.demo-selector { max-width:600px; }.demo-after__grid { grid-template-columns:1fr; }.demo-after__grid article { text-align:center; } }
+  @media (max-width: 560px) { .demo-shell { width:min(100% - 28px,1180px); }.demo-notice__inner { grid-template-columns:1fr; gap:6px; padding:10px 0; }.demo-notice a { margin-top:3px; }.demo-hero { padding:52px 0; }.demo-hero h1,.app-explanation h2,.demo-after h2 { font-size:2.08rem; }.demo-hero__points { grid-template-columns:1fr; }.demo-hero__points div { display:grid; grid-template-columns:28px 1fr; gap:8px; }.demo-hero__points dt { grid-row:span 2; }.demo-hero__points dd { margin:0; }.demo-stage { padding:46px 0; }.phone { width:100%; max-width:360px; padding:7px; border-width:7px; border-radius:32px; }.phone__screen,.phone-panel { min-height:674px; }.phone-panel { padding-right:14px; padding-left:14px; }.demo-after { padding:58px 0; } }
+  @media (prefers-reduced-motion: reduce) { .phone-modal__sheet { animation:none; } }
+</style>
