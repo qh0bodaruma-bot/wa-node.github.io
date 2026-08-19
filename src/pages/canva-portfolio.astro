@@ -1,0 +1,341 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  createBreadcrumbSchema,
+  createWebPageSchema,
+  organizationSchema,
+} from '../data/structuredData';
+
+const title = "Canva制作サンプル｜同じ内容で印象を変えた3パターン｜和-Node";
+const description = "和-Node自身のサービス紹介を題材に、同じ文章・同じ情報量のまま装飾だけを変えたCanva制作サンプル3パターンです。ミニマル、上質、訴求型それぞれの仕上がりを比較できます。";
+const image = "/images/works-canva.webp";
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path: "/canva-portfolio/", type: "CollectionPage" }),
+  createBreadcrumbSchema([
+    { name: "ホーム", path: "/" },
+    { name: "制作例・デモ", path: "/works/" },
+    { name: "Canva制作サンプル", path: "/canva-portfolio/" },
+  ]),
+];
+
+const patterns = [
+  {
+    id: 'a',
+    label: 'Pattern A',
+    name: 'ミニマル',
+    src: '/images/canva-a.webp',
+    alt: '和-NodeのサービスをCanvaで制作したサンプル。白と生成りを基調に、細い罫線と余白で構成したミニマルな縦型ページ。',
+    summary: '罫線と余白だけで整える',
+    colors: ['生成り', '深緑', '墨'],
+    detail: '装飾をほとんど使わず、余白・罫線・文字の大きさだけで情報を区切っています。読ませたい情報が多いページや、落ち着いた印象を優先する業種に向きます。',
+    fit: '士業・BtoB・医療',
+  },
+  {
+    id: 'b',
+    label: 'Pattern B',
+    name: '上質・華やか',
+    src: '/images/canva-b.webp',
+    alt: '同じ内容を濃紺とゴールドで構成したCanva制作サンプル。金の罫線と枠飾りで装飾密度を高めた縦型ページ。',
+    summary: '金の罫線と枠飾りで密度を上げる',
+    colors: ['濃紺', 'ゴールド', '生成り'],
+    detail: '枠飾り、区切り罫、番号バッジを重ねて装飾密度を上げています。同じ文章量でも「手をかけた感じ」が出るため、価格帯を伝えたい場面に向きます。',
+    fit: 'サロン・美容・ブランド',
+  },
+  {
+    id: 'c',
+    label: 'Pattern C',
+    name: '訴求型',
+    src: '/images/canva-c.webp',
+    alt: '同じ内容を墨色とライムグリーンの高コントラストで構成したCanva制作サンプル。図解を中心に据えた縦型ページ。',
+    summary: '高コントラストと図解で押し出す',
+    colors: ['墨', 'ライム', '白'],
+    detail: '色面を大きく分け、見出しを極端に大きく扱っています。仕組みの説明を図解に置き換えているため、サービス内容が一目で伝わる構成です。',
+    fit: 'IT・スタートアップ・広告',
+  },
+];
+
+const notes = [
+  {
+    title: 'Canvaが向いている場合',
+    items: [
+      '公開後にご自身で文言や写真を差し替えたい',
+      '短期間で形にして、まず反応を見たい',
+      '紙・SNS用の派生物も同じデータから作りたい',
+    ],
+  },
+  {
+    title: 'コード実装のほうが向いている場合',
+    items: [
+      '検索から集客したい（本文がテキストとして扱われる必要がある）',
+      'スクリーンリーダーやキーボード操作への対応が必要',
+      '入力フォームや外部システムとの連携を組み込みたい',
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} image={image} structuredData={structuredData}>
+  <main id="main" class="canva-page">
+
+    <section class="section canva-hero">
+      <div class="container narrow">
+        <span class="eyebrow">Canva Design Samples</span>
+        <h1>同じ内容で、印象はここまで変わる。</h1>
+        <p class="lead">
+          和-Node自身のサービス紹介を題材に、<strong>文章も情報量も変えずに装飾だけを差し替えた</strong>Canva制作サンプルです。
+          「どのくらい飾るか」を、言葉ではなく現物で比べていただくために用意しました。
+        </p>
+        <p class="self-made">
+          いずれも受注案件ではなく、弊社サイトを題材にした<strong>自主制作</strong>の制作例です。
+        </p>
+      </div>
+    </section>
+
+    <section class="section canva-list">
+      <div class="container">
+        {patterns.map((p) => (
+          <article class="pattern" id={p.id}>
+            <div class="pattern-visual">
+              <img
+                src={p.src}
+                alt={p.alt}
+                width="900"
+                height="1273"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+            <div class="pattern-body">
+              <span class="pattern-label">{p.label}</span>
+              <h2>{p.name}</h2>
+              <p class="pattern-summary">{p.summary}</p>
+              <p class="pattern-detail">{p.detail}</p>
+              <dl class="pattern-meta">
+                <div>
+                  <dt>配色</dt>
+                  <dd>{p.colors.join('・')}</dd>
+                </div>
+                <div>
+                  <dt>向く業種</dt>
+                  <dd>{p.fit}</dd>
+                </div>
+              </dl>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <section class="section canva-notes">
+      <div class="container narrow">
+        <h2>Canvaで作るか、コードで作るか</h2>
+        <p class="notes-lead">
+          どちらが良いかは目的で変わります。判断材料として、現時点で分かっていることをそのまま書きます。
+        </p>
+        <div class="notes-grid">
+          {notes.map((n) => (
+            <div class="note-card">
+              <h3>{n.title}</h3>
+              <ul>
+                {n.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p class="notes-caution">
+          Canvaは日本語の扱いに癖があり、文字が画像として埋め込まれてしまう箇所が出ることがあります。
+          検索対策や読み上げ対応が必要なページでは、そこを確認したうえでご提案します。
+        </p>
+      </div>
+    </section>
+
+    <section class="section canva-cta">
+      <div class="container narrow">
+        <h2>どの方向で作るか、一緒に決めましょう。</h2>
+        <p>
+          お手持ちの原稿や写真を見せていただければ、この3つのどれに近い方向が合うかをお伝えします。
+          料金と期間の目安もあわせてご案内します。
+        </p>
+        <a class="cta-btn" href="/contact/?source=canva-portfolio">無料で相談する</a>
+        <p class="cta-sub"><a href="/works/">ほかの制作例・デモを見る</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <style>
+    .canva-page { padding-bottom: 80px; }
+
+    .canva-hero { padding: 72px 0 40px; text-align: center; }
+    .canva-hero h1 {
+      font-size: clamp(1.9rem, 4.4vw, 3rem);
+      line-height: 1.35;
+      margin: 0 0 24px;
+      font-weight: 800;
+    }
+    .canva-hero .lead {
+      font-size: 1.05rem;
+      line-height: 2;
+      color: var(--muted);
+      margin: 0 auto 20px;
+      max-width: 46em;
+    }
+    .canva-hero .lead strong { color: var(--text); }
+    .self-made {
+      display: inline-block;
+      font-size: 0.92rem;
+      color: var(--muted);
+      background: var(--surface-muted);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 10px 20px;
+      margin: 0;
+    }
+    .self-made strong { color: var(--accent); }
+
+    .canva-list { padding-top: 20px; }
+    .pattern {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: center;
+      padding: 48px 0;
+      border-top: 1px solid var(--line);
+    }
+    .pattern:first-child { border-top: none; }
+    .pattern:nth-child(even) .pattern-visual { order: 2; }
+
+    .pattern-visual {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-soft);
+      background: var(--surface-muted);
+    }
+    .pattern-visual img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .pattern-label {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+    .pattern-body h2 {
+      font-size: clamp(1.5rem, 3vw, 2.1rem);
+      margin: 0 0 12px;
+      font-weight: 800;
+    }
+    .pattern-summary {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--trust);
+      margin: 0 0 16px;
+    }
+    .pattern-detail {
+      line-height: 1.95;
+      color: var(--muted);
+      margin: 0 0 24px;
+    }
+
+    .pattern-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 32px;
+      margin: 0;
+      padding-top: 20px;
+      border-top: 1px solid var(--line);
+    }
+    .pattern-meta div { display: flex; align-items: baseline; gap: 10px; }
+    .pattern-meta dt {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin: 0;
+    }
+    .pattern-meta dd { margin: 0; font-weight: 700; }
+
+    .canva-notes { background: var(--surface-muted); }
+    .canva-notes h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      text-align: center;
+      margin: 0 0 16px;
+      font-weight: 800;
+    }
+    .notes-lead {
+      text-align: center;
+      color: var(--muted);
+      line-height: 1.9;
+      margin: 0 0 36px;
+    }
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .note-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 28px;
+    }
+    .note-card h3 {
+      font-size: 1.05rem;
+      margin: 0 0 16px;
+      font-weight: 800;
+    }
+    .note-card ul { margin: 0; padding-left: 1.2em; }
+    .note-card li { line-height: 1.9; color: var(--muted); margin-bottom: 8px; }
+    .note-card li:last-child { margin-bottom: 0; }
+
+    .notes-caution {
+      margin: 28px 0 0;
+      padding: 20px 24px;
+      background: var(--surface);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 12px 12px 0;
+      font-size: 0.94rem;
+      line-height: 1.9;
+      color: var(--muted);
+    }
+
+    .canva-cta { text-align: center; }
+    .canva-cta h2 {
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      margin: 0 0 16px;
+      font-weight: 800;
+    }
+    .canva-cta p { color: var(--muted); line-height: 1.95; margin: 0 auto 28px; max-width: 40em; }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 40px;
+      border-radius: 999px;
+      background: var(--trust);
+      color: #fff;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+    .cta-sub { margin-top: 20px; font-size: 0.94rem; }
+
+    @media (max-width: 860px) {
+      .pattern {
+        grid-template-columns: 1fr;
+        gap: 28px;
+        padding: 36px 0;
+      }
+      .pattern:nth-child(even) .pattern-visual { order: 0; }
+      .pattern-visual { max-width: 520px; margin: 0 auto; }
+    }
+  </style>
+</BaseLayout>
