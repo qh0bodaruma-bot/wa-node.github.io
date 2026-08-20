@@ -29,6 +29,12 @@ function getLocalizedLink(path: string) {
   const fallbackPath = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
   return `${fallbackPath}?lang=${lang}`;
 }
+
+function isCurrentPage(path: string) {
+  const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
+  const targetPath = new URL(getLocalizedLink(path), Astro.url.origin).pathname.replace(/\/+$/, '') || '/';
+  return currentPath === targetPath;
+}
 ---
 <header class="site-header" id="site-header">
   <div class="header-inner">
@@ -51,10 +57,10 @@ function getLocalizedLink(path: string) {
 
     <nav class="nav" id="site-nav">
       <div class="nav-links">
-        <a href={getLocalizedLink('/lab')}>{lang === 'ja' ? '改善ラボ' : lang === 'en' ? 'Improvement Lab' : 'Lab d’amélioration'}</a>
-        <a href={getLocalizedLink('/works')}>{t.nav.works[lang]}</a>
-        <a href={getLocalizedLink('/pricing')}>{t.nav.pricing[lang]}</a>
-        <a href={getLocalizedLink('/about')}>{t.nav.about[lang]}</a>
+        <a href={getLocalizedLink('/lab')} class:list={{ 'nav-active': isCurrentPage('/lab') }} aria-current={isCurrentPage('/lab') ? 'page' : undefined}>{lang === 'ja' ? '改善ラボ' : lang === 'en' ? 'Improvement Lab' : 'Lab d’amélioration'}</a>
+        <a href={getLocalizedLink('/works')} class:list={{ 'nav-active': isCurrentPage('/works') }} aria-current={isCurrentPage('/works') ? 'page' : undefined}>{t.nav.works[lang]}</a>
+        <a href={getLocalizedLink('/pricing')} class:list={{ 'nav-active': isCurrentPage('/pricing') }} aria-current={isCurrentPage('/pricing') ? 'page' : undefined}>{t.nav.pricing[lang]}</a>
+        <a href={getLocalizedLink('/about')} class:list={{ 'nav-active': isCurrentPage('/about') }} aria-current={isCurrentPage('/about') ? 'page' : undefined}>{t.nav.about[lang]}</a>
         <a href={getLocalizedLink('/contact')} class="nav-cta">{t.nav.cta[lang]}</a>
         <LanguageSwitcher lang={lang} />
       </div>
@@ -139,6 +145,9 @@ function getLocalizedLink(path: string) {
   .nav-links a:not(.nav-cta):hover::after {
     width: 100%;
   }
+
+  .nav-links a.nav-active { color: #8a5a32; }
+  .nav-links a.nav-active::after { width: 100%; }
 
   .nav-links a:hover {
     color: #8a5a32;

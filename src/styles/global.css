@@ -303,6 +303,11 @@ a:hover { opacity: 0.7; }
   transform: translateY(0);
 }
 
+.reveal-heading {
+  transform: translateY(12px);
+  transition-duration: 0.55s;
+}
+
 /*
   revealはJSで .active（BaseLayout）または .visible（各ページ）が付くまで不可視。
   JSが動かない環境で本文が消えないよう、BaseLayoutが reveal-ready を付けるまでは表示しておく。

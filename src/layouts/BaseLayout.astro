@@ -114,6 +114,14 @@ const getLocalizedHref = (l: string) => {
       document.addEventListener('astro:after-swap', markRevealReady);
 
       let revealObserver = null;
+      function markHeadingRevealTargets() {
+        document.querySelectorAll('.section-title, .issues-head').forEach((element) => {
+          if (!element.closest('[data-reveal="off"]')) {
+            element.classList.add('reveal', 'reveal-heading');
+          }
+        });
+      }
+
       function markCardRevealTargets() {
         document.querySelectorAll('[class]').forEach((element) => {
           const isCard = Array.from(element.classList).some((className) => (
@@ -132,6 +140,7 @@ const getLocalizedHref = (l: string) => {
         if (revealObserver) revealObserver.disconnect();
 
         // カードはページごとの記述漏れが起きないよう、共通でスクロール表示の対象にする。
+        markHeadingRevealTargets();
         markCardRevealTargets();
 
         revealObserver = new IntersectionObserver((entries) => {
