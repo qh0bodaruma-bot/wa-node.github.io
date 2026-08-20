@@ -87,6 +87,30 @@ const devSteps = [
   },
 ];
 
+const caseGuides = [
+  {
+    label: 'LINE × CRM',
+    title: '問い合わせを、転記せずに次の対応へつなぐ',
+    challenge: 'LINEで受けた内容を、担当者が管理システムへ手入力している。',
+    design: '受付・自動登録・担当割り当てを、一つの流れとして設計する。',
+    href: '/case-studies/line-kintone-demo/',
+  },
+  {
+    label: 'WEB IMPROVEMENT',
+    title: '見た目ではなく、判断しやすさから整える',
+    challenge: '何を優先して直すべきかが曖昧で、改善が止まりやすい。',
+    design: '事実・仮説・変更・確認方法を分け、比較できる形にする。',
+    href: '/lab/',
+  },
+  {
+    label: 'OPERATION DESIGN',
+    title: '受付後の作業まで含めて考える',
+    challenge: '申込み画面だけを整えても、裏側の確認・管理が残っている。',
+    design: '利用者と運用者それぞれが終えたいことから、必要な画面を絞る。',
+    href: '/case-studies/reservation-operations/',
+  },
+];
+
 const faqs = [
   {
     q: '費用の目安を教えてください。',
@@ -139,23 +163,6 @@ const faqs = [
         </div>
       </div>
       <div class="hero-visual">
-        <svg class="hero-visual-defs" width="0" height="0" aria-hidden="true" focusable="false">
-          <defs>
-            <clipPath id="hero-photo-clip" clipPathUnits="objectBoundingBox">
-              <path d="M0.035,0.058 C0.30,0.018 0.70,0.048 0.966,0.030 C0.986,0.35 0.980,0.66 0.970,0.956 C0.70,0.986 0.30,0.958 0.040,0.974 C0.020,0.66 0.026,0.35 0.035,0.058 Z" />
-            </clipPath>
-          </defs>
-        </svg>
-        <svg class="hero-visual-frame" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
-          <path
-            class="hero-frame-line hero-frame-line-1"
-            d="M16,24 C58,13 98,25 142,17 C188,9 230,23 276,14 C314,7 352,19 384,12 C391,50 384,88 388,126 C392,166 384,202 387,240 C389,264 384,278 386,289 C346,296 304,285 260,293 C212,300 166,287 120,295 C84,300 52,287 17,294 C11,255 18,219 14,181 C10,141 17,105 12,67 C11,49 13,34 16,24 Z"
-          />
-          <path
-            class="hero-frame-line hero-frame-line-2"
-            d="M16,24 C58,13 98,25 142,17 C188,9 230,23 276,14 C314,7 352,19 384,12 C391,50 384,88 388,126 C392,166 384,202 387,240 C389,264 384,278 386,289 C346,296 304,285 260,293 C212,300 166,287 120,295 C84,300 52,287 17,294 C11,255 18,219 14,181 C10,141 17,105 12,67 C11,49 13,34 16,24 Z"
-          />
-        </svg>
         <img
           class="hero-visual-photo"
           src="/images/hero-meeting.webp"
@@ -280,20 +287,28 @@ const faqs = [
     </div>
   </section>
 
-  <!-- 実績・事例 -->
+  <!-- 公開ケース -->
   <section class="section cases-section" aria-labelledby="cases-title">
     <div class="section-inner">
       <div class="section-title">
-        <span class="eyebrow">Cases</span>
-        <h2 id="cases-title">連携事例のご紹介。</h2>
-        <p class="section-subtitle">LINE連携の構築事例は、現在個別にご紹介しています。<br />自社の課題に当てはまるか、ぜひご相談ください。</p>
+        <span class="eyebrow">Case Walkthrough</span>
+        <h2 id="cases-title">相談前に、設計の考え方を確かめる。</h2>
+        <p class="section-subtitle">以下は公開デモ・自主制作のケースです。実在案件の成果を示すものではなく、<br class="pc-only" />課題をどう整理し、何をつくり、どこまで確認するかをご覧いただけます。</p>
       </div>
-      <div class="cases-placeholder">
-        <p class="cases-placeholder-text">現在、掲載許可をいただいた実績から順次公開を進めています。<br />具体的な導入事例をお知りになりたい場合は、個別にご説明いたします。</p>
-        <a class="btn secondary" href={getLocalizedLink('/contact')}>
-          <span>事例について相談する</span><span aria-hidden="true">→</span>
-        </a>
+      <div class="case-guide-grid">
+        {caseGuides.map((caseGuide, index) => (
+          <article class="case-guide-card">
+            <div class="case-guide-topline"><span>0{index + 1}</span><p>{caseGuide.label}</p></div>
+            <h3>{caseGuide.title}</h3>
+            <dl>
+              <div><dt>課題</dt><dd>{caseGuide.challenge}</dd></div>
+              <div><dt>設計</dt><dd>{caseGuide.design}</dd></div>
+            </dl>
+            <a href={getLocalizedLink(caseGuide.href)}>ケースを見る <span aria-hidden="true">→</span></a>
+          </article>
+        ))}
       </div>
+      <p class="cases-note">自社の状況と近いケースがない場合も、現状を伺ったうえで、対応可否・必要な範囲・次の確認事項を整理します。</p>
     </div>
   </section>
 
@@ -417,7 +432,7 @@ const faqs = [
     font-family: 'Shippori Mincho', serif;
     color: var(--text);
     line-height: 1.8;
-    background: linear-gradient(180deg, #ffffff 0%, #ffffff 54%, #f7faf8 100%);
+    background: #ffffff;
   }
 
   .home-content {
@@ -453,12 +468,11 @@ const faqs = [
   /* ── Hero ── */
   .hero {
     padding: 58px 0;
-    background:
-      radial-gradient(120% 90% at 82% 50%, var(--surface-cool) 0%, rgba(255,255,255,0) 62%),
-      #fff;
+    background: #fff;
     min-height: 650px;
     display: flex;
     align-items: center;
+    border-top: 6px solid var(--home-action);
     border-bottom: 1px solid var(--trust-line);
   }
   .hero-inner {
@@ -472,74 +486,20 @@ const faqs = [
     align-items: center;
   }
   .hero-visual {
-    position: relative;
     justify-self: end;
     width: 100%;
     max-width: 520px;
     aspect-ratio: 4 / 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden;
+    border: 1px solid var(--trust);
+    box-shadow: 10px 10px 0 var(--home-cool);
   }
-  .hero-visual-frame {
-    position: absolute;
-    inset: -10px;
-    width: calc(100% + 20px);
-    height: calc(100% + 20px);
-    overflow: visible;
-    pointer-events: none;
-    animation: hero-frame-drift 13s ease-in-out infinite;
-  }
-  .hero-frame-line {
-    fill: none;
-    stroke: var(--accent);
-    stroke-linejoin: round;
-    stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-  .hero-frame-line-1 {
-    stroke-width: 2.4;
-    opacity: 0.8;
-    animation: hero-frame-puddle 16s ease-in-out infinite;
-  }
-  .hero-frame-line-2 {
-    stroke-width: 1.3;
-    opacity: 0.45;
-    transform: translate(5px, -4px) rotate(0.4deg);
-    animation: hero-frame-puddle 19s ease-in-out -6s infinite;
-  }
-  .hero-visual-defs { position: absolute; width: 0; height: 0; pointer-events: none; }
   .hero-visual-photo {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    clip-path: url(#hero-photo-clip);
-    filter: drop-shadow(0 10px 24px rgba(15, 76, 92, 0.16));
-    animation: hero-photo-drift 9s ease-in-out infinite;
-  }
-  #hero-photo-clip path { animation: hero-photo-clip-morph 11s ease-in-out infinite; }
-
-  @keyframes hero-photo-clip-morph {
-    0%, 100% { d: path("M0.035,0.058 C0.30,0.018 0.70,0.048 0.966,0.030 C0.986,0.35 0.980,0.66 0.970,0.956 C0.70,0.986 0.30,0.958 0.040,0.974 C0.020,0.66 0.026,0.35 0.035,0.058 Z"); }
-    36%       { d: path("M0.028,0.036 C0.32,0.056 0.68,0.020 0.974,0.046 C0.958,0.36 0.988,0.64 0.964,0.972 C0.68,0.954 0.32,0.988 0.032,0.960 C0.040,0.65 0.014,0.34 0.028,0.036 Z"); }
-    69%       { d: path("M0.044,0.028 C0.28,0.040 0.72,0.062 0.958,0.022 C0.988,0.34 0.962,0.67 0.976,0.966 C0.70,0.990 0.30,0.950 0.026,0.978 C0.026,0.68 0.018,0.33 0.044,0.028 Z"); }
-  }
-  @keyframes hero-frame-puddle {
-    0%, 100% { d: path("M16,24 C58,13 98,25 142,17 C188,9 230,23 276,14 C314,7 352,19 384,12 C391,50 384,88 388,126 C392,166 384,202 387,240 C389,264 384,278 386,289 C346,296 304,285 260,293 C212,300 166,287 120,295 C84,300 52,287 17,294 C11,255 18,219 14,181 C10,141 17,105 12,67 C11,49 13,34 16,24 Z"); }
-    34%       { d: path("M12,18 C56,26 100,12 144,24 C190,32 234,11 280,20 C318,27 356,10 380,20 C386,56 378,92 384,132 C390,172 380,206 385,246 C388,268 382,282 384,292 C344,286 302,297 258,287 C210,276 164,299 118,289 C82,281 48,296 21,286 C17,246 24,214 20,176 C16,136 21,100 16,62 C15,44 9,28 12,18 Z"); }
-    67%       { d: path("M20,28 C62,18 94,30 138,20 C184,10 228,28 274,18 C312,10 348,24 386,14 C393,54 388,84 391,122 C394,162 387,198 390,236 C392,260 388,274 389,286 C350,292 308,282 264,290 C216,297 170,284 124,292 C88,297 56,284 20,291 C14,252 21,216 17,178 C13,138 20,102 15,64 C14,46 17,36 20,28 Z"); }
-  }
-  @keyframes hero-frame-drift {
-    0%, 100% { transform: rotate(-1.1deg) translate(0, 0); }
-    37%       { transform: rotate(0.8deg) translate(5px, -7px); }
-    68%       { transform: rotate(-0.3deg) translate(-4px, 5px); }
-  }
-  @keyframes hero-photo-drift {
-    0%, 100% { transform: rotate(0.5deg) translate(0, 0); }
-    45%       { transform: rotate(-0.7deg) translate(-3px, 6px); }
-    72%       { transform: rotate(0.3deg) translate(4px, -4px); }
+    filter: none;
   }
 
   .hero-content {
@@ -605,8 +565,8 @@ const faqs = [
     padding: 20px 24px;
     border: 1px solid var(--trust-line);
     border-radius: var(--radius);
-    background: linear-gradient(180deg, #fff 0%, var(--surface-strong) 100%);
-    box-shadow: var(--card-shadow);
+    background: #fff;
+    box-shadow: none;
   }
   .issue-item p { margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.75; color: var(--text-deep); }
   .issue-check {
@@ -645,12 +605,12 @@ const faqs = [
   .capability-card {
     padding: 32px;
     border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    background: linear-gradient(180deg, #fff 0%, var(--surface-strong) 100%);
-    box-shadow: var(--card-shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 4px;
+    background: #fff;
+    box-shadow: none;
+    transition: border-color 0.2s ease;
   }
-  .capability-card:hover { transform: translateY(-4px); box-shadow: var(--card-shadow-hover); }
+  .capability-card:hover { border-color: var(--trust); }
   .capability-icon {
     display: grid;
     place-items: center;
@@ -776,7 +736,7 @@ const faqs = [
 
   /* ── CTA ── */
   .cta-section {
-    background: linear-gradient(135deg, var(--trust) 0%, #1f6f78 100%);
+    background: var(--trust);
     border-bottom: none;
   }
   .cta-inner { text-align: center; max-width: 680px; }
@@ -865,15 +825,22 @@ const faqs = [
   .section-subtitle { margin: 8px 0 0; color: var(--muted); font-size: 1rem; line-height: 1.8; }
 
   /* ── Cases ── */
-  .cases-section { background: #fff; border-bottom: 1px solid var(--trust-line); }
-  .cases-placeholder {
-    padding: 48px 40px;
-    border: 2px dashed var(--trust-line);
-    border-radius: var(--radius);
-    text-align: center;
-    background: var(--surface-strong);
-  }
-  .cases-placeholder-text { margin: 0 0 28px; color: var(--muted); font-size: 1rem; line-height: 1.85; font-weight: 700; }
+  .cases-section { position: relative; overflow: hidden; background: #fff; border-bottom: 1px solid var(--trust-line); }
+  .cases-section::before { content: ''; position: absolute; top: 54px; left: calc(50% - min(50vw, 780px)); width: min(50vw, 780px); height: 1px; background: var(--home-gold); }
+  .case-guide-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+  .case-guide-card { display: flex; flex-direction: column; min-height: 360px; padding: 28px; border: 1px solid var(--trust-line); border-radius: 4px; background: #fff; box-shadow: none; }
+  .case-guide-topline { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid var(--trust-line); }
+  .case-guide-topline span { color: var(--home-gold); font-family: 'Shippori Mincho', serif; font-size: 1.5rem; font-weight: 800; line-height: 1; }
+  .case-guide-topline p { margin: 0; color: var(--trust); font-size: .68rem; font-weight: 900; letter-spacing: .12em; text-align: right; }
+  .case-guide-card h3 { margin: 26px 0 22px; color: var(--text-deep); font-family: 'Shippori Mincho', serif; font-size: 1.35rem; line-height: 1.6; }
+  .case-guide-card dl { display: grid; gap: 13px; margin: 0; }
+  .case-guide-card dl div { display: grid; grid-template-columns: 42px 1fr; gap: 10px; }
+  .case-guide-card dt { color: var(--home-gold-dark); font-size: .73rem; font-weight: 900; }
+  .case-guide-card dd { margin: 0; color: var(--muted); font-size: .84rem; font-weight: 700; line-height: 1.7; }
+  .case-guide-card a { display: inline-flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 22px; color: var(--trust); font-size: .88rem; font-weight: 900; }
+  .case-guide-card a span { font-size: 1.2rem; transition: transform .25s ease; }
+  .case-guide-card:hover a span, .case-guide-card:focus-within a span { transform: translateX(5px); }
+  .cases-note { max-width: 860px; margin: 24px auto 0; color: var(--muted); font-size: .86rem; font-weight: 700; line-height: 1.8; text-align: center; }
 
   /* ── Pricing ── */
   .pricing-section { background: var(--surface-cool); border-bottom: 1px solid var(--trust-line); }
@@ -908,20 +875,13 @@ const faqs = [
   @media (max-width: 768px) {
     .strength-item { grid-template-columns: 48px minmax(0, 1fr); gap: 16px; }
     .strength-num { width: 44px; height: 44px; font-size: 0.88rem; }
-    .cases-placeholder { padding: 32px 20px; }
+    .case-guide-grid { grid-template-columns: 1fr; }
+    .case-guide-card { min-height: 0; padding: 24px 20px; }
     .pricing-card { padding: 28px 20px; }
     .pricing-card .btn { min-width: auto; width: 100%; box-sizing: border-box; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-visual-frame,
-    .hero-frame-line,
-    .hero-visual-photo,
-    #hero-photo-clip path {
-      animation: none !important;
-    }
-    .hero-visual-frame { transform: rotate(-1.1deg); }
-    .hero-visual-photo { transform: rotate(0.5deg); }
     .capability-card { transition: none !important; }
     .sub-service-link { transition: none !important; }
   }
