@@ -23,14 +23,28 @@ function run(command, args, { allowFailure = false } = {}) {
   return result.status ?? 1;
 }
 
+// このスクリプトは常に「ローカルの main」を push する。
+// main 以外で作業していると、その内容は送られないまま push が成功し、
+// 「デプロイしたのに反映されない」になる（TRB-202608-013）。先に止める。
+const branch = spawnSync('git', ['rev-parse', '--abbrev-ref', 'HEAD'], {
+  encoding: 'utf8',
+}).stdout.trim();
+
+if (branch !== 'main') {
+  console.error(`\n現在のブランチは ${branch} です。このスクリプトは main を push します。`);
+  console.error('main に切り替えるか、変更を main へ取り込んでから実行してください。');
+  process.exit(1);
+}
+
 // -A で、対象ディレクトリ内の削除も含めてステージする
 run('git', [...gitBaseArgs, 'add', '-A', '--', ...deployPaths]);
 
-// 変更が無ければ commit は失敗する。その場合は push せず正常終了。
+// 変更が無ければ commit は失敗する。ただし「コミット済みだが未 push」の状態が
+// ありうるため、ここで終了せず push まで進める。push するものが無ければ
+// git が Everything up-to-date と言って何もしない。
 const committed = run('git', [...gitBaseArgs, 'commit', '-m', 'deploy'], { allowFailure: true });
 if (committed !== 0) {
-  console.log('\nコミットする変更がありません。すでにデプロイ済みです。');
-  process.exit(0);
+  console.log('\n新しくコミットする変更はありません。未 push の分がないか確認します。');
 }
 
 run('git', [...gitBaseArgs, 'push', 'origin', 'main']);
