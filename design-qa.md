@@ -6,9 +6,9 @@
   - `C:/Users/hiroz/.codex/generated_images/019e1619-ec71-7d10-9b1d-b5bd9ba321d8/exec-f05a5192-f6e1-4b8a-a6d5-ce3a39714db0.png` (consultation guidance)
 - implementation URL: `http://127.0.0.1:4323/`
 - implementation screenshots:
-  - `E:/個人用データ/wa-node-design-concepts/qa/home-desktop-1440x1024-final.png`
-  - `E:/個人用データ/wa-node-design-concepts/qa/home-mobile-390x844-final.png`
-- combined comparison: `E:/個人用データ/wa-node-design-concepts/qa/desktop-comparison-board-final.png`
+  - `E:/個人用データ/99_アーカイブ/2026/wa-node-design-concepts/qa/home-desktop-1440x1024-final.png`
+  - `E:/個人用データ/99_アーカイブ/2026/wa-node-design-concepts/qa/home-mobile-390x844-final.png`
+- combined comparison: `E:/個人用データ/99_アーカイブ/2026/wa-node-design-concepts/qa/desktop-comparison-board-final.png`
 - viewports: 1440 x 1024, 390 x 844
 - state: Japanese homepage, initial load; Before/After toggle also tested
 

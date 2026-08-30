@@ -14,3 +14,6 @@ dist/
 
 # 経営データ（金額・顧客名・実績）※このリポジトリは public のため必ず除外
 business-docs/private/
+
+# 制作中の書き出し（クライアント資料・数百MB）※このリポジトリは public のため必ず除外
+output/

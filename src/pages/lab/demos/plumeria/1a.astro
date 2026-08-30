@@ -1,0 +1,819 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+
+/*
+  プルメリア 総合トップ ラフ「1a 信頼感」（/lab/demos/plumeria/1a）
+  - 出典ワイヤー: Claude Design project 6994e837-c54f-420d-a714-f1832f1ebef0
+      ／「プルメリア 1a 信頼感.dc.html」（index 総合トップ・PC/SP）
+  - デザイン参照: https://c-morinosato.com/（クリニック杜の里）から実測したトークンを適用
+  - 用途: プルメリア様への提出用ラフ。写真・電話番号・空室状況はすべて仮
+  - 制約: JavaScript非依存 / 常時アニメーションなし / AI生成画像なし
+  - 案を増やす場合はこのフォルダに 1b.astro（遊び心）/ 1c.astro（ふざけ倒し）を並べる
+  - 下層ページはこのラフの対象外。導線はすべて # のダミーリンク
+*/
+
+const title = 'プルメリア｜サービス付き高齢者向け住宅・ショートステイ・訪問看護';
+const description =
+  'プルメリアは、サービス付き高齢者向け住宅・ショートステイ・訪問看護・レンタル介護用品を運営しています。見学・入居のご相談を承ります。';
+
+// ── 差し替え枠：法人情報 ─────────────────────────────────
+const corp = {
+  name: 'プルメリア',
+  nameEn: 'PLUMERIA',
+  tel: '000-000-0000',
+  telHref: 'tel:0000000000',
+  contactHref: '#contact',
+  address: '○○県○○市○○ 0-0-0（住所は差し替え枠）',
+};
+
+// ── 差し替え枠：5つのサービス ────────────────────────────
+// tone は写真枠の地色だけに使う。枠線・文字・ボタンは teal / ink に統一する
+const services = [
+  { name: 'プルメリアⅠ', kind: 'サービス付き高齢者向け住宅', status: '空室あり', open: true, tone: 'green', id: 'service-1' },
+  { name: 'プルメリアⅡ', kind: 'サービス付き高齢者向け住宅', status: '満室', open: false, tone: 'green', id: 'service-2' },
+  { name: 'プルメリアⅢ', kind: 'ショートステイ', status: '受入可', open: true, tone: 'blue', id: 'service-3' },
+  { name: '訪問看護', kind: '看護師がご自宅へ訪問します', status: '', open: null, tone: 'blue', id: 'service-4' },
+  { name: 'レンタル介護用品', kind: '福祉用具貸与', status: '', open: null, tone: 'beige', id: 'service-5' },
+];
+
+// ── 差し替え枠：更新枠 ───────────────────────────────────
+const news = [
+  { date: '2026.08.00', text: '（お知らせの見出しが入ります）' },
+  { date: '2026.07.00', text: '（お知らせの見出しが入ります）' },
+  { date: '2026.07.00', text: '（お知らせの見出しが入ります）' },
+];
+
+const vacancy = [
+  { name: 'プルメリアⅠ', status: '空室あり', open: true },
+  { name: 'プルメリアⅡ', status: '満室', open: false },
+  { name: 'プルメリアⅢ', status: '受入可', open: true },
+];
+
+const footerLinks = [
+  { label: 'アクセス・地図', href: '#access' },
+  { label: '料金・重要事項説明書', href: '#price' },
+  { label: '法人概要', href: '#company' },
+  { label: 'プライバシーポリシー', href: '#privacy' },
+];
+---
+
+<BaseLayout title={title} description={description} noindex={true} showSiteChrome={false}>
+  {/* data-reveal="off": BaseLayout の共通スクロール表示スクリプトが .pl-card を
+      自動で対象にしてしまうため除外する。このラフはJavaScript非依存を条件にしている。 */}
+  <div class="pl" data-reveal="off">
+    <p class="pl-notice">
+      これはご提案用のラフです。写真・電話番号・空室状況・お知らせはすべて仮置きの枠として配置しています。
+    </p>
+
+    <!-- ヘッダー -->
+    <header class="pl-head">
+      <div class="pl-head-inner">
+        <a class="pl-brand" href="#top">
+          <span class="pl-brand-name">{corp.name}</span>
+          <span class="pl-brand-en">{corp.nameEn}</span>
+        </a>
+
+        <nav class="pl-nav" aria-label="サービス">
+          {services.map((s) => <a href={`#${s.id}`}>{s.name}</a>)}
+        </nav>
+
+        <a class="pl-btn pl-btn-fill pl-btn-sm pl-head-cta" href={corp.contactHref}>
+          <span aria-hidden="true">☎</span> お問い合わせ
+        </a>
+
+        <details class="pl-menu">
+          <summary aria-label="メニューを開く"><span class="pl-menu-bars" aria-hidden="true"></span></summary>
+          <nav class="pl-menu-list" aria-label="メニュー（モバイル）">
+            {services.map((s) => <a href={`#${s.id}`}>{s.name}</a>)}
+            <a href="#news">お知らせ</a>
+            <a href="#vacancy">空室・受入状況</a>
+            <a href="#recruit">採用情報</a>
+            <a href="#access">アクセス</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- ヒーロー -->
+      <section class="pl-hero">
+        <div class="pl-ph pl-hero-photo" role="img" aria-label="メイン写真：外観またはスタッフ">
+          <span>［メイン写真：外観／スタッフ］</span>
+        </div>
+        <div class="pl-wrap pl-hero-inner">
+          <div class="pl-hero-copy">
+            <p class="pl-eyebrow"><span class="pl-leaf" aria-hidden="true"></span>{corp.nameEn}</p>
+            <h1 class="pl-h1">温かい心と笑顔で、<br />安らぎの毎日を。</h1>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA -->
+      <section class="pl-cta-band">
+        <div class="pl-wrap">
+          <div class="pl-btn-row">
+            <a class="pl-btn pl-btn-fill" href={corp.contactHref}>見学・入居のご相談</a>
+            <a class="pl-btn pl-btn-line" href={corp.telHref}>
+              <span class="pl-btn-label"><span aria-hidden="true">☎</span> お電話でのご相談</span>
+              <span class="pl-num-face pl-btn-tel-no">{corp.tel}</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5つのサービス -->
+      <section class="pl-sec" id="services">
+        <div class="pl-wrap">
+          <h2 class="pl-h2">
+            5つのサービス
+            <span class="pl-h2-en">SERVICES</span>
+          </h2>
+          <ul class="pl-grid-3 pl-services">
+            {services.map((s) => (
+              <li id={s.id}>
+                <a class="pl-card pl-svc" href={`#${s.id}`}>
+                  <span class={`pl-ph pl-svc-ph pl-tone-${s.tone}`} aria-hidden="true"></span>
+                  <span class="pl-svc-name">{s.name}</span>
+                  <span class="pl-svc-kind">{s.kind}</span>
+                  {s.status && (
+                    <span class={s.open ? 'pl-badge pl-badge-open' : 'pl-badge pl-badge-full'}>{s.status}</span>
+                  )}
+                </a>
+              </li>
+            ))}
+            <li>
+              <div class="pl-card pl-svc pl-svc-more">
+                <span class="pl-svc-name">訪問介護・居宅介護支援</span>
+                <span class="pl-svc-kind">下層ページでご紹介します</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 更新枠 -->
+      <section class="pl-sec pl-sec-tint">
+        <div class="pl-wrap">
+          <div class="pl-grid-3 pl-updates">
+            <section class="pl-card" id="news">
+              <h2 class="pl-h3">お知らせ<span class="pl-h3-en">NEWS</span></h2>
+              <ul class="pl-news">
+                {news.map((n) => (
+                  <li>
+                    <span class="pl-num-face pl-news-date">{n.date}</span>
+                    <span class="pl-news-text">{n.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <a class="pl-more" href="#news-index">お知らせ一覧</a>
+            </section>
+
+            <section class="pl-card" id="vacancy">
+              <h2 class="pl-h3">空室・受入状況<span class="pl-h3-en">VACANCY</span></h2>
+              <ul class="pl-vacancy">
+                {vacancy.map((v) => (
+                  <li>
+                    <span class="pl-vacancy-name">{v.name}</span>
+                    <span class={v.open ? 'pl-badge pl-badge-open' : 'pl-badge pl-badge-full'}>{v.status}</span>
+                  </li>
+                ))}
+              </ul>
+              <p class="pl-note">更新日：2026.08.00（更新枠）</p>
+            </section>
+
+            <section class="pl-card" id="recruit">
+              <h2 class="pl-h3">採用情報<span class="pl-h3-en">RECRUIT</span></h2>
+              <p class="pl-body">介護スタッフ・看護師を募集しています。見学だけでもお気軽にお越しください。</p>
+              <a class="pl-more" href="#recruit-index">募集要項</a>
+            </section>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="pl-foot">
+      <div class="pl-wrap pl-foot-inner">
+        <div class="pl-foot-brand">
+          <p class="pl-brand-name pl-foot-name">{corp.name}</p>
+          <p class="pl-brand-en">{corp.nameEn}</p>
+          <p class="pl-note">{corp.address}</p>
+          <a class="pl-num-face pl-foot-tel" href={corp.telHref}>{corp.tel}</a>
+        </div>
+        <nav class="pl-foot-links" aria-label="サイト情報">
+          {footerLinks.map((l) => <a href={l.href}>{l.label}</a>)}
+        </nav>
+      </div>
+    </footer>
+
+    <!-- モバイル固定CTA -->
+    <div class="pl-sticky">
+      <a class="pl-btn pl-btn-fill pl-btn-sm pl-sticky-main" href={corp.contactHref}>相談フォーム</a>
+      <a class="pl-btn pl-btn-tel pl-btn-sm" href={corp.telHref}><span aria-hidden="true">☎</span> 電話</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Roboto+Condensed:wght@400;500;600&display=swap');
+
+  /* c-morinosato.com（クリニック杜の里）から実測したトークン */
+  .pl {
+    --bg: #f5f5ee;         /* 温かみのあるアイボリー。白は使わない */
+    --surface: #fdfdfc;    /* カード地。地色との差はごく僅か */
+    --tint: #edf7f5;       /* セクション交互背景の薄いミント */
+    --ink: #002a1d;        /* 極端に暗い緑。黒は使わない */
+    --teal: #349f87;       /* 主色。塗り・罫線・大きな見出し用 */
+    --teal-deep: #257562;  /* 小さい文字用。#349f87 は 14px で 3.2:1 しか出ない */
+    --muted: #5a746a;      /* 参照サイトの #7b8f85 では 14px で 4.5:1 に届かないため暗く取る */
+    --line: rgba(123, 143, 133, 0.34);
+
+    /* サービス区分。写真枠の地色だけに使う */
+    --svc-green: #dfe9e4;
+    --svc-blue: #dde6ec;
+    --svc-beige: #ece7dc;
+
+    --wrap: 1200px;
+    --radius: 10px;
+
+    font-family: 'Zen Kaku Gothic New', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro',
+      'Yu Gothic Medium', 'YuGothic', Meiryo, sans-serif;
+    font-size: 17px;   /* 入居検討者とご家族が読むため参照サイトより大きく取る */
+    line-height: 2;
+    color: var(--ink);
+    background: var(--bg);
+    padding-bottom: 92px; /* モバイル固定CTAの逃げ */
+  }
+
+  .pl :is(h1, h2, h3, p, ul, ol, figure) {
+    margin: 0;
+  }
+  .pl ul {
+    padding: 0;
+    list-style: none;
+  }
+  /* :not([class]) を付けないと、後段のボタン色（.pl-btn-fill など）に
+     `.pl a` のほうが高い詳細度で勝ってしまう */
+  .pl a:not([class]) {
+    color: inherit;
+  }
+  .pl-brand,
+  .pl-nav a,
+  .pl-menu-list a,
+  .pl-foot-links a {
+    color: inherit;
+  }
+
+  /* 数字・英字は Roboto Condensed（参照サイトと同じ扱い） */
+  .pl-num-face {
+    font-family: 'Roboto Condensed', 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+
+  .pl-wrap {
+    width: min(100% - 40px, var(--wrap));
+    margin-inline: auto;
+  }
+
+  .pl-notice {
+    background: var(--ink);
+    color: var(--bg);
+    font-size: 13px;
+    line-height: 1.7;
+    text-align: center;
+    padding: 10px 20px;
+  }
+
+  /* ── ヘッダー ───────────────────────────── */
+  .pl-head {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+  }
+  .pl-head-inner {
+    width: min(100% - 32px, var(--wrap));
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    min-height: 78px;
+  }
+  .pl-brand {
+    display: grid;
+    text-decoration: none;
+    line-height: 1.3;
+  }
+  .pl-brand-name {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+  .pl-brand-en {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    color: var(--teal-deep);
+  }
+  .pl-nav {
+    display: flex;
+    gap: 20px;
+    margin-inline: auto;
+    font-size: 15px;
+    font-weight: 500;
+  }
+  .pl-nav a {
+    text-decoration: none;
+    padding: 6px 0;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+  }
+  .pl-nav a:hover {
+    color: var(--teal-deep);
+    border-bottom-color: var(--teal);
+  }
+
+  /* ── ボタン ─────────────────────────────── */
+  .pl-btn {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    min-height: 60px;
+    min-width: 260px;
+    padding: 10px 26px;
+    border-radius: var(--radius);
+    border: 1.5px solid transparent;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-align: center;
+    transition: opacity 0.2s ease;
+  }
+  .pl-btn:hover {
+    opacity: 0.84;
+  }
+  .pl-btn-sm {
+    min-height: 50px;
+    min-width: 0;
+    padding: 8px 18px;
+    font-size: 15px;
+  }
+  /* 塗りは --teal ではなく --teal-deep。#349f87 に白文字だと 3.25:1 しか出ず、
+     参照サイトも同じ状態だが、読み手が高齢のご家族なのでここは合わせない */
+  .pl-btn-fill {
+    background: var(--teal-deep);
+    border-color: var(--teal-deep);
+    color: #fff;
+  }
+  .pl-btn-tel {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: #fff;
+  }
+  .pl-btn-line {
+    background: var(--surface);
+    border-color: var(--teal-deep);
+    color: var(--teal-deep);
+  }
+  .pl-btn-label {
+    font-size: 13px;
+    letter-spacing: 0.1em;
+  }
+  .pl-btn-tel-no {
+    font-size: 30px;   /* 電話番号は大きく。高齢のご家族が読む */
+    line-height: 1.2;
+  }
+  .pl-btn-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    justify-content: center;
+  }
+  .pl-head-cta {
+    flex: none;
+  }
+
+  /* ── モバイルメニュー ─────────────────────── */
+  .pl-menu {
+    display: none;
+    position: relative;
+    margin-left: auto;
+  }
+  .pl-menu > summary {
+    list-style: none;
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  .pl-menu > summary::-webkit-details-marker {
+    display: none;
+  }
+  .pl-menu-bars,
+  .pl-menu-bars::before,
+  .pl-menu-bars::after {
+    display: block;
+    width: 20px;
+    height: 1.5px;
+    background: var(--ink);
+    content: '';
+  }
+  .pl-menu-bars {
+    position: relative;
+  }
+  .pl-menu-bars::before {
+    position: absolute;
+    top: -6px;
+  }
+  .pl-menu-bars::after {
+    position: absolute;
+    top: 6px;
+  }
+  /* display を明示しないと、details が閉じていても中身が描画されたままになる。
+     UA の details 非表示（::details-content の content-visibility）は
+     子要素に display を指定した時点で効かなくなるため、開閉を自分で書く。 */
+  .pl-menu-list {
+    display: none;
+  }
+  .pl-menu[open] .pl-menu-list {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 8px);
+    display: grid;
+    min-width: 230px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .pl-menu-list a {
+    padding: 14px 18px;
+    font-size: 15px;
+    text-decoration: none;
+    border-bottom: 1px solid var(--line);
+  }
+  .pl-menu-list a:last-child {
+    border-bottom: 0;
+  }
+
+  /* ── ヒーロー ───────────────────────────── */
+  .pl-hero {
+    position: relative;
+  }
+  .pl-hero-photo {
+    height: clamp(280px, 34vw, 440px);
+    border-radius: 0;
+  }
+  .pl-hero-inner {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    align-items: center;
+  }
+  .pl-hero-copy {
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    border-left: 4px solid var(--teal);
+    padding: 28px clamp(20px, 3vw, 44px);
+    max-width: 30em;
+  }
+  .pl-h1 {
+    font-size: clamp(26px, 3.4vw, 42px);
+    font-weight: 700;
+    line-height: 1.5;
+    letter-spacing: 0.06em;
+    margin-top: 10px;
+  }
+  .pl-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    color: var(--teal-deep);
+  }
+  .pl-leaf {
+    width: 14px;
+    height: 14px;
+    border-radius: 0 100% 0 100%;
+    background: var(--teal);
+    display: inline-block;
+  }
+
+  /* ── CTA帯 ──────────────────────────────── */
+  .pl-cta-band {
+    border-bottom: 1px solid var(--line);
+    padding-block: 28px;
+  }
+
+  /* ── セクション ─────────────────────────── */
+  .pl-sec {
+    padding-block: clamp(56px, 7vw, 96px);
+  }
+  .pl-sec-tint {
+    background: var(--tint);
+  }
+  .pl-h2 {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    text-align: center;
+    font-size: clamp(22px, 2.6vw, 27px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    line-height: 1.6;
+  }
+  .pl-h2::before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 0 100% 0 100%;
+    background: var(--teal);
+    margin-bottom: 6px;
+  }
+  .pl-h2-en,
+  .pl-h3-en {
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.24em;
+    color: var(--teal-deep);
+  }
+  .pl-h2-en {
+    font-size: 12px;
+  }
+  .pl-h3 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    line-height: 1.6;
+  }
+  .pl-h3-en {
+    font-size: 11px;
+    margin-left: 10px;
+  }
+  .pl-body {
+    font-size: 16px;
+    line-height: 1.95;
+  }
+  .pl-note {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+
+  /* ── カード・グリッド ───────────────────── */
+  .pl-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .pl-services {
+    margin-top: 44px;
+  }
+  .pl-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 26px 24px;
+    display: grid;
+    align-content: start;
+    gap: 12px;
+  }
+
+  /* ── サービスカード ─────────────────────── */
+  .pl-svc {
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+    gap: 8px;
+    transition: border-color 0.2s ease;
+  }
+  a.pl-svc:hover {
+    border-color: var(--teal);
+  }
+  .pl-svc-ph {
+    display: block;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    padding: 0;
+  }
+  .pl-tone-green { background: var(--svc-green); }
+  .pl-tone-blue { background: var(--svc-blue); }
+  .pl-tone-beige { background: var(--svc-beige); }
+  .pl-svc-name {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+  .pl-svc-kind {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .pl-svc-more {
+    border-style: dashed;
+    background: transparent;
+    align-content: center;
+    justify-items: center;
+    text-align: center;
+  }
+  .pl-svc-more .pl-svc-name {
+    font-size: 17px;
+  }
+
+  /* 受入状況。色に頼らず必ず文字でも示す */
+  .pl-badge {
+    justify-self: start;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border-radius: 4px;
+    padding: 3px 12px;
+    border: 1.5px solid currentColor;
+    line-height: 1.7;
+  }
+  .pl-badge-open {
+    color: var(--teal-deep);
+    background: var(--tint);
+  }
+  .pl-badge-full {
+    color: var(--muted);
+    background: transparent;
+  }
+
+  /* ── 更新枠 ─────────────────────────────── */
+  .pl-news,
+  .pl-vacancy {
+    display: grid;
+    gap: 12px;
+  }
+  .pl-news > li {
+    display: grid;
+    gap: 2px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+    line-height: 1.7;
+  }
+  .pl-news-date {
+    font-size: 14px;
+    color: var(--teal-deep);
+  }
+  .pl-vacancy > li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+  }
+  .pl-more {
+    justify-self: start;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--teal-deep);
+    text-decoration: none;
+    border-bottom: 1px solid currentColor;
+    padding-bottom: 2px;
+  }
+
+  /* ── 写真枠（差し替え用プレースホルダ）───── */
+  .pl-ph {
+    display: grid;
+    place-items: center;
+    background: var(--svc-beige);
+    color: var(--ink);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-align: center;
+    padding: 16px;
+    border-radius: 0; /* 参照サイトは写真の角丸なし */
+  }
+
+  /* ── フッター ───────────────────────────── */
+  .pl-foot {
+    background: var(--ink);
+    color: var(--bg);
+    padding-block: 48px;
+  }
+  .pl-foot-inner {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .pl-foot-name {
+    font-size: 24px;
+  }
+  .pl-foot .pl-brand-en,
+  .pl-foot .pl-note {
+    color: #a9c2b8;
+  }
+  .pl-foot-tel {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 30px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .pl-foot-links {
+    display: grid;
+    gap: 12px;
+    font-size: 15px;
+  }
+  .pl-foot-links a {
+    justify-self: start;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(245, 245, 238, 0.3);
+    padding-bottom: 3px;
+  }
+  .pl-foot-links a:hover {
+    border-bottom-color: currentColor;
+  }
+
+  /* ── モバイル固定CTA ────────────────────── */
+  .pl-sticky {
+    display: none;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    gap: 8px;
+    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
+    border-top: 1px solid var(--line);
+  }
+  .pl-sticky .pl-btn {
+    flex: 1;
+  }
+  .pl-sticky-main {
+    flex: 1.6;
+  }
+
+  /* ── レスポンシブ ───────────────────────── */
+  @media (max-width: 1000px) {
+    .pl-nav,
+    .pl-head-cta {
+      display: none;
+    }
+    .pl-menu {
+      display: block;
+    }
+    .pl-sticky {
+      display: flex;
+    }
+    .pl-grid-3 {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .pl {
+      line-height: 1.9;
+    }
+    .pl-hero-inner {
+      position: static;
+      margin-top: -48px;
+    }
+    .pl-hero-copy {
+      max-width: none;
+      background: var(--bg);
+    }
+    .pl-grid-3 {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+    .pl-services {
+      margin-top: 32px;
+    }
+    .pl-btn {
+      min-width: 100%;
+    }
+    .pl-btn-sm {
+      min-width: 0;
+    }
+    .pl-foot-inner {
+      gap: 28px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pl * {
+      transition: none !important;
+    }
+  }
+</style>
