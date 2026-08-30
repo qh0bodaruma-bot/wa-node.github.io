@@ -5,11 +5,14 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
   プルメリア 総合トップ ラフ「1a 信頼感」（/lab/demos/plumeria/1a）
   - 出典ワイヤー: Claude Design project 6994e837-c54f-420d-a714-f1832f1ebef0
       ／「プルメリア 1a 信頼感.dc.html」（index 総合トップ・PC/SP）
-  - デザイン参照: https://c-morinosato.com/（クリニック杜の里）から実測したトークンを適用
+  - デザイン参照: https://c-morinosato.com/（クリニック杜の里）を実測して再現
+      葉／雲のモチーフ・水色の背景帯・マスクで切り抜いたヒーロー・
+      負マージンで重ねる帯・グラデーション1px下線・色だけ0.3秒の遷移
   - 用途: プルメリア様への提出用ラフ。写真・電話番号・空室状況はすべて仮
   - 制約: JavaScript非依存 / 常時アニメーションなし / AI生成画像なし
-  - 案を増やす場合はこのフォルダに 1b.astro（遊び心）/ 1c.astro（ふざけ倒し）を並べる
-  - 下層ページはこのラフの対象外。導線はすべて # のダミーリンク
+      （装飾はすべて手書きのインラインSVG。画像ファイルは使っていない）
+  - 大きさの方針: 施設カード（.pl-svc）は基準サイズを維持し、それ以外を一段落とす。
+      施設を主役にするため。本文は可読性の下限として16pxで止めている。
 */
 
 const title = 'プルメリア｜サービス付き高齢者向け住宅・ショートステイ・訪問看護';
@@ -28,12 +31,37 @@ const corp = {
 
 // ── 差し替え枠：5つのサービス ────────────────────────────
 // tone は写真枠の地色だけに使う。枠線・文字・ボタンは teal / ink に統一する
+// icon はヘッダーメニューとカードで共用する
 const services = [
-  { name: 'プルメリアⅠ', kind: 'サービス付き高齢者向け住宅', status: '空室あり', open: true, tone: 'green', id: 'service-1' },
-  { name: 'プルメリアⅡ', kind: 'サービス付き高齢者向け住宅', status: '満室', open: false, tone: 'green', id: 'service-2' },
-  { name: 'プルメリアⅢ', kind: 'ショートステイ', status: '受入可', open: true, tone: 'blue', id: 'service-3' },
-  { name: '訪問看護', kind: '看護師がご自宅へ訪問します', status: '', open: null, tone: 'blue', id: 'service-4' },
-  { name: 'レンタル介護用品', kind: '福祉用具貸与', status: '', open: null, tone: 'beige', id: 'service-5' },
+  { name: 'プルメリアⅠ', short: 'Ⅰ', kind: 'サービス付き高齢者向け住宅', status: '空室あり', open: true, tone: 'green', icon: 'home', id: 'service-1' },
+  { name: 'プルメリアⅡ', short: 'Ⅱ', kind: 'サービス付き高齢者向け住宅', status: '満室', open: false, tone: 'green', icon: 'home', id: 'service-2' },
+  { name: 'プルメリアⅢ', short: 'Ⅲ', kind: 'ショートステイ', status: '受入可', open: true, tone: 'blue', icon: 'bed', id: 'service-3' },
+  { name: '訪問看護', short: '訪問看護', kind: '看護師がご自宅へ訪問します', status: '', open: null, tone: 'blue', icon: 'care', id: 'service-4' },
+  { name: 'レンタル介護用品', short: 'レンタル', kind: '福祉用具貸与', status: '', open: null, tone: 'beige', icon: 'chair', id: 'service-5' },
+];
+
+// ── 差し替え枠：受付時間 ─────────────────────────────────
+const hours = [
+  { label: '見学・ご相談の受付', weekday: '9:00〜18:00', saturday: '9:00〜12:00', sunday: '－' },
+  { label: 'お電話でのお問い合わせ', weekday: '9:00〜18:00', saturday: '9:00〜17:00', sunday: '－' },
+  { label: '訪問看護', weekday: '9:00〜17:00', saturday: '要相談', sunday: '要相談' },
+];
+
+// ── 差し替え枠：選ばれる理由（図形で埋めている枠）───────
+const reasons = [
+  { icon: 'staff', title: '常駐スタッフがいます', body: '日中は職員が常駐し、困りごとにその場で対応します。（体制の詳細は差し替え枠）' },
+  { icon: 'care', title: '医療との連携', body: '訪問看護を自社で運営しています。連携先医療機関は差し替え枠。' },
+  { icon: 'chair', title: '用品まで一箇所で', body: '福祉用具のレンタルまで同じ窓口で承ります。取扱品目は差し替え枠。' },
+];
+
+// ── 差し替え枠：一日の流れ（図形で埋めている枠）─────────
+const day = [
+  { time: '7:00', label: '起床・朝食' },
+  { time: '10:00', label: '健康チェック' },
+  { time: '12:00', label: '昼食' },
+  { time: '15:00', label: '自由時間・レク' },
+  { time: '18:00', label: '夕食' },
+  { time: '21:00', label: '消灯' },
 ];
 
 // ── 差し替え枠：更新枠 ───────────────────────────────────
@@ -49,6 +77,11 @@ const vacancy = [
   { name: 'プルメリアⅢ', status: '受入可', open: true },
 ];
 
+const access = [
+  { key: 'お車', body: '○○インターより約0分。駐車場0台（差し替え枠）' },
+  { key: '電車・バス', body: '○○線 ○○駅より徒歩0分／○○バス停下車すぐ（差し替え枠）' },
+];
+
 const footerLinks = [
   { label: 'アクセス・地図', href: '#access' },
   { label: '料金・重要事項説明書', href: '#price' },
@@ -61,20 +94,63 @@ const footerLinks = [
   {/* data-reveal="off": BaseLayout の共通スクロール表示スクリプトが .pl-card を
       自動で対象にしてしまうため除外する。このラフはJavaScript非依存を条件にしている。 */}
   <div class="pl" data-reveal="off">
+    {/* 装飾用の定義。ヒーローの切り抜きマスクと、繰り返し使うアイコン。 */}
+    <svg class="pl-defs" aria-hidden="true" focusable="false">
+      <defs>
+        {/* 参照サイトはヒーローをSVGマスクで切り抜いている。写真を長方形で置かない */}
+        <clipPath id="pl-hero-clip" clipPathUnits="objectBoundingBox">
+          <path d="M0,0 H1 V0.80 C0.74,0.99 0.30,0.88 0,1 Z" />
+        </clipPath>
+
+        <symbol id="pl-i-home" viewBox="0 0 24 24">
+          <path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z" />
+        </symbol>
+        <symbol id="pl-i-bed" viewBox="0 0 24 24">
+          <path d="M3 18v-9M3 13h18v5M21 18v-4a3 3 0 0 0-3-3h-6v2" />
+          <circle cx="7.5" cy="11.5" r="2" />
+        </symbol>
+        <symbol id="pl-i-care" viewBox="0 0 24 24">
+          <path d="M12 20s-6.5-4.2-6.5-8.6A3.6 3.6 0 0 1 12 9a3.6 3.6 0 0 1 6.5 2.4C18.5 15.8 12 20 12 20Z" />
+          <path d="M9.5 13h1.6l.9-1.8.9 3.2.9-1.4h1.7" />
+        </symbol>
+        <symbol id="pl-i-chair" viewBox="0 0 24 24">
+          <circle cx="10" cy="17" r="4" />
+          <path d="M10 4v9h6l3 5M8 7h4" />
+        </symbol>
+        <symbol id="pl-i-staff" viewBox="0 0 24 24">
+          <circle cx="12" cy="8" r="3.2" />
+          <path d="M5 20a7 7 0 0 1 14 0" />
+        </symbol>
+        <symbol id="pl-i-leaf" viewBox="0 0 24 24">
+          <path d="M5 19C5 11 10 5 19 5c0 9-6 14-14 14Z" />
+          <path d="M5 19c3-5 6-8 11-10" />
+        </symbol>
+      </defs>
+    </svg>
+
     <p class="pl-notice">
-      これはご提案用のラフです。写真・電話番号・空室状況・お知らせはすべて仮置きの枠として配置しています。
+      これはご提案用のラフです。写真・電話番号・空室状況・お知らせはすべて仮置きの枠で、
+      情報が未確定のセクションは図形とプレースホルダで構成しています。
     </p>
 
     <!-- ヘッダー -->
     <header class="pl-head">
       <div class="pl-head-inner">
         <a class="pl-brand" href="#top">
-          <span class="pl-brand-name">{corp.name}</span>
-          <span class="pl-brand-en">{corp.nameEn}</span>
+          <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>
+          <span class="pl-brand-text">
+            <span class="pl-brand-name">{corp.name}</span>
+            <span class="pl-brand-en">{corp.nameEn}</span>
+          </span>
         </a>
 
         <nav class="pl-nav" aria-label="サービス">
-          {services.map((s) => <a href={`#${s.id}`}>{s.name}</a>)}
+          {services.map((s) => (
+            <a href={`#${s.id}`}>
+              <span class="pl-nav-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
+              <span class="pl-nav-label">{s.short}</span>
+            </a>
+          ))}
         </nav>
 
         <a class="pl-btn pl-btn-fill pl-btn-sm pl-head-cta" href={corp.contactHref}>
@@ -84,55 +160,102 @@ const footerLinks = [
         <details class="pl-menu">
           <summary aria-label="メニューを開く"><span class="pl-menu-bars" aria-hidden="true"></span></summary>
           <nav class="pl-menu-list" aria-label="メニュー（モバイル）">
-            {services.map((s) => <a href={`#${s.id}`}>{s.name}</a>)}
-            <a href="#news">お知らせ</a>
-            <a href="#vacancy">空室・受入状況</a>
-            <a href="#recruit">採用情報</a>
-            <a href="#access">アクセス</a>
+            {services.map((s) => (
+              <a href={`#${s.id}`}>
+                <span class="pl-nav-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
+                {s.name}
+              </a>
+            ))}
+            <a href="#about"><span class="pl-nav-icon" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>プルメリアについて</a>
+            <a href="#news"><span class="pl-nav-icon" aria-hidden="true"><svg><use href="#pl-i-staff" /></svg></span>お知らせ・空室状況</a>
+            <a href="#access"><span class="pl-nav-icon" aria-hidden="true"><svg><use href="#pl-i-home" /></svg></span>アクセス</a>
           </nav>
         </details>
       </div>
     </header>
 
     <main id="top">
-      <!-- ヒーロー -->
+      <!-- 01 ヒーロー：マスクで切り抜く -->
       <section class="pl-hero">
-        <div class="pl-ph pl-hero-photo" role="img" aria-label="メイン写真：外観またはスタッフ">
-          <span>［メイン写真：外観／スタッフ］</span>
+        <div class="pl-hero-media">
+          <div class="pl-ph pl-hero-photo" role="img" aria-label="メイン写真：外観またはスタッフ">
+            <span>［メイン写真：外観／スタッフ］</span>
+          </div>
         </div>
         <div class="pl-wrap pl-hero-inner">
           <div class="pl-hero-copy">
-            <p class="pl-eyebrow"><span class="pl-leaf" aria-hidden="true"></span>{corp.nameEn}</p>
+            <p class="pl-eyebrow"><span class="pl-leaf" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>{corp.nameEn}</p>
             <h1 class="pl-h1">温かい心と笑顔で、<br />安らぎの毎日を。</h1>
+            <div class="pl-btn-row">
+              <a class="pl-btn pl-btn-fill" href={corp.contactHref}>見学・入居のご相談</a>
+              <a class="pl-btn pl-btn-line" href={corp.telHref}>
+                <span class="pl-btn-label"><span aria-hidden="true">☎</span> お電話</span>
+                <span class="pl-num-face pl-btn-tel-no">{corp.tel}</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- CTA -->
-      <section class="pl-cta-band">
+      <!-- 02 受付時間 -->
+      <section class="pl-sec pl-sec-tight" id="hours">
         <div class="pl-wrap">
-          <div class="pl-btn-row">
-            <a class="pl-btn pl-btn-fill" href={corp.contactHref}>見学・入居のご相談</a>
-            <a class="pl-btn pl-btn-line" href={corp.telHref}>
-              <span class="pl-btn-label"><span aria-hidden="true">☎</span> お電話でのご相談</span>
-              <span class="pl-num-face pl-btn-tel-no">{corp.tel}</span>
-            </a>
+          <h2 class="pl-h2">受付時間<span class="pl-h2-en">HOURS</span></h2>
+          <div class="pl-table-wrap">
+            <table class="pl-table">
+              <thead>
+                <tr><th scope="col">　</th><th scope="col">平日</th><th scope="col">土曜</th><th scope="col">日・祝</th></tr>
+              </thead>
+              <tbody>
+                {hours.map((h) => (
+                  <tr>
+                    <th scope="row">{h.label}</th>
+                    <td>{h.weekday}</td>
+                    <td>{h.saturday}</td>
+                    <td>{h.sunday}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
+          <p class="pl-note">※ 時間は仮置きです。確定後にこの枠を差し替えてください。</p>
         </div>
       </section>
 
-      <!-- 5つのサービス -->
-      <section class="pl-sec" id="services">
+      <!-- 03 ABOUT：雲の帯 -->
+      <section class="pl-about" id="about">
+        <div class="pl-clouds" aria-hidden="true">
+          <svg viewBox="0 0 1265 161" preserveAspectRatio="none" class="pl-cloud pl-cloud-1">
+            <path d="M0 161c120-10 150-70 250-70s130 40 240 20 160-80 300-60 200 90 320 70 155-40 155-40v80H0z" />
+          </svg>
+          <svg viewBox="0 0 1265 161" preserveAspectRatio="none" class="pl-cloud pl-cloud-2">
+            <path d="M0 161c180-30 220-60 330-45s180 55 300 35 190-70 330-45 305 55 305 55v0H0z" />
+          </svg>
+        </div>
+        <div class="pl-wrap pl-about-inner">
+          <p class="pl-eyebrow pl-eyebrow-accent">ABOUT US</p>
+          <h2 class="pl-about-catch">住まいと看護と用品を、<br />ひとつづきでお預かりします。</h2>
+          <p class="pl-body pl-about-body">
+            住まい、日々の看護、暮らしに要る用品。別々の窓口で揃えるのは、ご本人にもご家族にも負担がかかります。
+            プルメリアは5つのサービスをひとつの窓口でお預かりします。
+          </p>
+          <p class="pl-note">※ 理念・沿革はご提供いただいた内容に差し替えます。</p>
+        </div>
+      </section>
+
+      <!-- 04 5つのサービス：ここだけ基準サイズを維持 -->
+      <section class="pl-sec pl-services-sec" id="services">
+        <div class="pl-leaf-deco pl-leaf-left" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></div>
+        <div class="pl-leaf-deco pl-leaf-right" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></div>
         <div class="pl-wrap">
-          <h2 class="pl-h2">
-            5つのサービス
-            <span class="pl-h2-en">SERVICES</span>
-          </h2>
+          <h2 class="pl-h2">5つのサービス<span class="pl-h2-en">SERVICES</span></h2>
           <ul class="pl-grid-3 pl-services">
             {services.map((s) => (
               <li id={s.id}>
                 <a class="pl-card pl-svc" href={`#${s.id}`}>
-                  <span class={`pl-ph pl-svc-ph pl-tone-${s.tone}`} aria-hidden="true"></span>
+                  <span class={`pl-ph pl-svc-ph pl-tone-${s.tone}`} aria-hidden="true">
+                    <svg class="pl-svc-icon"><use href={`#pl-i-${s.icon}`} /></svg>
+                  </span>
                   <span class="pl-svc-name">{s.name}</span>
                   <span class="pl-svc-kind">{s.kind}</span>
                   {s.status && (
@@ -151,7 +274,40 @@ const footerLinks = [
         </div>
       </section>
 
-      <!-- 更新枠 -->
+      <!-- 05 選ばれる理由 -->
+      <section class="pl-sec pl-sec-tint" id="reasons">
+        <div class="pl-wrap">
+          <h2 class="pl-h2">プルメリアの3つの安心<span class="pl-h2-en">FEATURE</span></h2>
+          <ul class="pl-grid-3 pl-reasons">
+            {reasons.map((r) => (
+              <li class="pl-card pl-reason">
+                <span class="pl-reason-icon" aria-hidden="true"><svg><use href={`#pl-i-${r.icon}`} /></svg></span>
+                <h3 class="pl-h3">{r.title}</h3>
+                <p class="pl-body">{r.body}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- 06 一日の流れ -->
+      <section class="pl-sec" id="day">
+        <div class="pl-wrap">
+          <h2 class="pl-h2">一日の流れ<span class="pl-h2-en">A DAY</span></h2>
+          <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は施設ごとに差し替えます。</p>
+          <ol class="pl-day">
+            {day.map((d) => (
+              <li class="pl-day-item">
+                <span class="pl-day-dot" aria-hidden="true"></span>
+                <span class="pl-num-face pl-day-time">{d.time}</span>
+                <span class="pl-day-label">{d.label}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <!-- 07 更新枠 -->
       <section class="pl-sec pl-sec-tint">
         <div class="pl-wrap">
           <div class="pl-grid-3 pl-updates">
@@ -189,6 +345,64 @@ const footerLinks = [
           </div>
         </div>
       </section>
+
+      <!-- 08 アクセス -->
+      <section class="pl-sec" id="access">
+        <div class="pl-wrap">
+          <h2 class="pl-h2">アクセス<span class="pl-h2-en">ACCESS</span></h2>
+          <div class="pl-access">
+            <div class="pl-ph pl-ph-map" role="img" aria-label="地図の差し替え枠"><span>［地図］</span></div>
+            <div class="pl-access-text">
+              <p class="pl-access-addr">{corp.address}</p>
+              <dl class="pl-access-list">
+                {access.map((a) => (
+                  <div>
+                    <dt>{a.key}</dt>
+                    <dd>{a.body}</dd>
+                  </div>
+                ))}
+              </dl>
+              <a class="pl-btn pl-btn-line pl-btn-sm" href={corp.telHref}>
+                <span class="pl-btn-label">お電話</span>
+                <span class="pl-num-face">{corp.tel}</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 連携先：図形で埋める -->
+      <section class="pl-partner">
+        <div class="pl-clouds pl-clouds-bottom" aria-hidden="true">
+          <svg viewBox="0 0 1265 161" preserveAspectRatio="none" class="pl-cloud pl-cloud-1">
+            <path d="M0 161c150-20 190-60 300-45s170 50 290 30 200-65 340-40 335 55 335 55v0H0z" />
+          </svg>
+        </div>
+        <div class="pl-wrap">
+          <h2 class="pl-h2">連携している医療機関<span class="pl-h2-en">PARTNER</span></h2>
+          <p class="pl-sec-lead">掲載許可をいただいた機関名に差し替えます。現在は枠のみ配置しています。</p>
+          <ul class="pl-partner-list">
+            {[1, 2, 3, 4, 5, 6].map(() => (
+              <li class="pl-partner-item" aria-hidden="true"><span></span></li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- 10 最終CTA -->
+      <section class="pl-cta" id="contact">
+        <div class="pl-wrap">
+          <p class="pl-cta-lead">まずは見学から。ご相談だけでも構いません。</p>
+          <h2 class="pl-cta-title">見学・入居のご相談</h2>
+          <div class="pl-btn-row pl-btn-row-center">
+            <a class="pl-btn pl-btn-fill" href={corp.contactHref}>相談フォーム</a>
+            <a class="pl-btn pl-btn-ghost" href={corp.telHref}>
+              <span class="pl-btn-label">お電話</span>
+              <span class="pl-num-face pl-btn-tel-no">{corp.tel}</span>
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
 
     <!-- フッター -->
@@ -198,7 +412,6 @@ const footerLinks = [
           <p class="pl-brand-name pl-foot-name">{corp.name}</p>
           <p class="pl-brand-en">{corp.nameEn}</p>
           <p class="pl-note">{corp.address}</p>
-          <a class="pl-num-face pl-foot-tel" href={corp.telHref}>{corp.tel}</a>
         </div>
         <nav class="pl-foot-links" aria-label="サイト情報">
           {footerLinks.map((l) => <a href={l.href}>{l.label}</a>)}
@@ -217,43 +430,50 @@ const footerLinks = [
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Roboto+Condensed:wght@400;500;600&display=swap');
 
-  /* c-morinosato.com（クリニック杜の里）から実測したトークン */
+  /* c-morinosato.com（クリニック杜の里）を実測したトークン */
   .pl {
     --bg: #f5f5ee;         /* 温かみのあるアイボリー。白は使わない */
-    --surface: #fdfdfc;    /* カード地。地色との差はごく僅か */
-    --tint: #edf7f5;       /* セクション交互背景の薄いミント */
+    --surface: #fdfdfc;
+    --tint: #edf7f5;
     --ink: #002a1d;        /* 極端に暗い緑。黒は使わない */
-    --teal: #349f87;       /* 主色。塗り・罫線・大きな見出し用 */
-    --teal-deep: #257562;  /* 小さい文字用。#349f87 は 14px で 3.2:1 しか出ない */
-    --muted: #5a746a;      /* 参照サイトの #7b8f85 では 14px で 4.5:1 に届かないため暗く取る */
+    --teal: #349f87;       /* 装飾用。罫線・アイコン・大きな見出し */
+    --teal-deep: #257562;  /* 文字・塗り用。#349f87 は14pxで3.2:1しか出ない */
+    --muted: #5a746a;
     --line: rgba(123, 143, 133, 0.34);
+    --accent: #efa661;     /* 参照サイトでは ABOUT US の英字1箇所だけ */
+
+    /* 背景の水色帯。参照サイトは rgba(200,239,240,.5) 付近を縦グラデで敷く */
+    --aqua: rgba(200, 239, 240, 0.5);
+    --aqua-soft: rgba(175, 226, 214, 0.3);
 
     /* サービス区分。写真枠の地色だけに使う */
     --svc-green: #dfe9e4;
     --svc-blue: #dde6ec;
     --svc-beige: #ece7dc;
 
+    /* 影はゼロではない。極薄で、かつ緑がかっている */
+    --shadow: 0 2px 10px rgba(73, 120, 103, 0.05);
+
     --wrap: 1200px;
     --radius: 10px;
 
     font-family: 'Zen Kaku Gothic New', 'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro',
       'Yu Gothic Medium', 'YuGothic', Meiryo, sans-serif;
-    font-size: 17px;   /* 入居検討者とご家族が読むため参照サイトより大きく取る */
-    line-height: 2;
+    font-size: 16px;
+    line-height: 1.95;
     color: var(--ink);
     background: var(--bg);
-    padding-bottom: 92px; /* モバイル固定CTAの逃げ */
+    padding-bottom: 88px;
+    overflow-x: hidden;   /* 葉・雲の装飾がはみ出すため */
   }
 
-  .pl :is(h1, h2, h3, p, ul, ol, figure) {
+  .pl :is(h1, h2, h3, p, ul, ol, dl, dd, figure, table) {
     margin: 0;
   }
-  .pl ul {
+  .pl :is(ul, ol) {
     padding: 0;
     list-style: none;
   }
-  /* :not([class]) を付けないと、後段のボタン色（.pl-btn-fill など）に
-     `.pl a` のほうが高い詳細度で勝ってしまう */
   .pl a:not([class]) {
     color: inherit;
   }
@@ -263,8 +483,25 @@ const footerLinks = [
   .pl-foot-links a {
     color: inherit;
   }
+  .pl-defs {
+    position: absolute;
+    width: 0;
+    height: 0;
+  }
+  /* アイコンは線画。参照サイトと同じ扱い */
+  .pl svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .pl-cloud,
+  .pl-cloud path {
+    fill: currentColor;
+    stroke: none;
+  }
 
-  /* 数字・英字は Roboto Condensed（参照サイトと同じ扱い） */
   .pl-num-face {
     font-family: 'Roboto Condensed', 'Zen Kaku Gothic New', sans-serif;
     font-weight: 600;
@@ -279,10 +516,10 @@ const footerLinks = [
   .pl-notice {
     background: var(--ink);
     color: var(--bg);
-    font-size: 13px;
+    font-size: 12px;
     line-height: 1.7;
     text-align: center;
-    padding: 10px 20px;
+    padding: 9px 20px;
   }
 
   /* ── ヘッダー ───────────────────────────── */
@@ -298,42 +535,77 @@ const footerLinks = [
     margin-inline: auto;
     display: flex;
     align-items: center;
-    gap: 24px;
-    min-height: 78px;
+    gap: 20px;
+    min-height: 70px;
   }
   .pl-brand {
-    display: grid;
+    display: flex;
+    align-items: center;
+    gap: 9px;
     text-decoration: none;
-    line-height: 1.3;
+    line-height: 1.25;
+  }
+  .pl-brand-mark {
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--tint);
+    color: var(--teal-deep);
+    flex: none;
+  }
+  .pl-brand-mark svg {
+    width: 18px;
+    height: 18px;
+  }
+  .pl-brand-text {
+    display: grid;
   }
   .pl-brand-name {
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 700;
     letter-spacing: 0.1em;
   }
   .pl-brand-en {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 500;
-    letter-spacing: 0.24em;
+    letter-spacing: 0.22em;
     color: var(--teal-deep);
   }
+
+  /* 条件1: メニューは文字＋SVGアイコン */
   .pl-nav {
     display: flex;
-    gap: 20px;
+    gap: 4px;
     margin-inline: auto;
-    font-size: 15px;
-    font-weight: 500;
   }
   .pl-nav a {
+    display: grid;
+    justify-items: center;
+    gap: 3px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
     text-decoration: none;
-    padding: 6px 0;
-    border-bottom: 2px solid transparent;
     white-space: nowrap;
+    transition: background-color 0.3s, color 0.3s;
   }
   .pl-nav a:hover {
+    background: var(--tint);
     color: var(--teal-deep);
-    border-bottom-color: var(--teal);
+  }
+  .pl-nav-icon {
+    display: grid;
+    place-items: center;
+    color: var(--teal-deep);
+  }
+  .pl-nav-icon svg {
+    width: 21px;
+    height: 21px;
   }
 
   /* ── ボタン ─────────────────────────────── */
@@ -342,34 +614,33 @@ const footerLinks = [
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 2px;
-    min-height: 60px;
-    min-width: 260px;
-    padding: 10px 26px;
+    gap: 1px;
+    min-height: 52px;
+    min-width: 220px;
+    padding: 8px 22px;
     border-radius: var(--radius);
     border: 1.5px solid transparent;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.05em;
     text-decoration: none;
     text-align: center;
-    transition: opacity 0.2s ease;
-  }
-  .pl-btn:hover {
-    opacity: 0.84;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
   }
   .pl-btn-sm {
-    min-height: 50px;
+    min-height: 44px;
     min-width: 0;
-    padding: 8px 18px;
-    font-size: 15px;
+    padding: 7px 16px;
+    font-size: 13px;
   }
-  /* 塗りは --teal ではなく --teal-deep。#349f87 に白文字だと 3.25:1 しか出ず、
-     参照サイトも同じ状態だが、読み手が高齢のご家族なのでここは合わせない */
   .pl-btn-fill {
     background: var(--teal-deep);
     border-color: var(--teal-deep);
     color: #fff;
+  }
+  .pl-btn-fill:hover {
+    background: var(--ink);
+    border-color: var(--ink);
   }
   .pl-btn-tel {
     background: var(--ink);
@@ -381,18 +652,34 @@ const footerLinks = [
     border-color: var(--teal-deep);
     color: var(--teal-deep);
   }
+  .pl-btn-line:hover {
+    background: var(--teal-deep);
+    color: #fff;
+  }
+  .pl-btn-ghost {
+    background: transparent;
+    border-color: rgba(245, 245, 238, 0.5);
+    color: var(--bg);
+  }
+  .pl-btn-ghost:hover {
+    background: var(--bg);
+    color: var(--ink);
+  }
   .pl-btn-label {
-    font-size: 13px;
-    letter-spacing: 0.1em;
+    font-size: 11px;
+    letter-spacing: 0.12em;
   }
   .pl-btn-tel-no {
-    font-size: 30px;   /* 電話番号は大きく。高齢のご家族が読む */
+    font-size: 22px;
     line-height: 1.2;
   }
   .pl-btn-row {
     display: flex;
     flex-wrap: wrap;
-    gap: 16px;
+    gap: 12px;
+    margin-top: 22px;
+  }
+  .pl-btn-row-center {
     justify-content: center;
   }
   .pl-head-cta {
@@ -407,8 +694,8 @@ const footerLinks = [
   }
   .pl-menu > summary {
     list-style: none;
-    width: 48px;
-    height: 48px;
+    width: 46px;
+    height: 46px;
     display: grid;
     place-items: center;
     border: 1px solid var(--line);
@@ -430,17 +717,10 @@ const footerLinks = [
   .pl-menu-bars {
     position: relative;
   }
-  .pl-menu-bars::before {
-    position: absolute;
-    top: -6px;
-  }
-  .pl-menu-bars::after {
-    position: absolute;
-    top: 6px;
-  }
-  /* display を明示しないと、details が閉じていても中身が描画されたままになる。
-     UA の details 非表示（::details-content の content-visibility）は
-     子要素に display を指定した時点で効かなくなるため、開閉を自分で書く。 */
+  .pl-menu-bars::before { position: absolute; top: -6px; }
+  .pl-menu-bars::after { position: absolute; top: 6px; }
+
+  /* display を明示すると details 既定の非表示が効かなくなるため [open] で分岐する */
   .pl-menu-list {
     display: none;
   }
@@ -449,76 +729,91 @@ const footerLinks = [
     right: 0;
     top: calc(100% + 8px);
     display: grid;
-    min-width: 230px;
+    min-width: 250px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
+    box-shadow: var(--shadow);
     overflow: hidden;
   }
   .pl-menu-list a {
-    padding: 14px 18px;
-    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
     text-decoration: none;
     border-bottom: 1px solid var(--line);
   }
   .pl-menu-list a:last-child {
     border-bottom: 0;
   }
+  .pl-menu-list .pl-nav-icon svg {
+    width: 19px;
+    height: 19px;
+  }
 
-  /* ── ヒーロー ───────────────────────────── */
+  /* ── ヒーロー：SVGマスクで切り抜く ────────── */
   .pl-hero {
     position: relative;
+    padding-bottom: 40px;
+  }
+  .pl-hero-media {
+    background: linear-gradient(var(--bg) 0%, var(--aqua) 55%, var(--bg) 100%);
   }
   .pl-hero-photo {
-    height: clamp(280px, 34vw, 440px);
-    border-radius: 0;
+    height: clamp(230px, 30vw, 380px);
+    clip-path: url(#pl-hero-clip);   /* 参照サイトと同じく長方形で置かない */
+    align-items: start;
+    padding-top: 24px;
   }
   .pl-hero-inner {
-    position: absolute;
-    inset: 0;
-    display: grid;
-    align-items: center;
+    margin-top: -56px;
+    position: relative;
   }
   .pl-hero-copy {
-    background: color-mix(in srgb, var(--bg) 92%, transparent);
-    border-left: 4px solid var(--teal);
-    padding: 28px clamp(20px, 3vw, 44px);
-    max-width: 30em;
+    background: var(--bg);
+    border-top: 3px solid var(--teal);
+    padding: 26px clamp(20px, 3vw, 40px) 30px;
+    max-width: 720px;
   }
   .pl-h1 {
-    font-size: clamp(26px, 3.4vw, 42px);
+    font-size: clamp(22px, 2.8vw, 34px);
     font-weight: 700;
-    line-height: 1.5;
+    line-height: 1.55;
     letter-spacing: 0.06em;
-    margin-top: 10px;
+    margin-top: 8px;
   }
   .pl-eyebrow {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
+    gap: 7px;
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 500;
     letter-spacing: 0.24em;
     color: var(--teal-deep);
   }
+  .pl-eyebrow-accent {
+    color: #9a5b24;   /* --accent(#efa661) は地色に対し 1.9:1。11px で 4.5:1 を満たす所まで暗く取る */
+  }
   .pl-leaf {
-    width: 14px;
-    height: 14px;
-    border-radius: 0 100% 0 100%;
-    background: var(--teal);
-    display: inline-block;
+    display: grid;
+    place-items: center;
+    color: var(--teal-deep);
+  }
+  .pl-leaf svg {
+    width: 15px;
+    height: 15px;
   }
 
-  /* ── CTA帯 ──────────────────────────────── */
-  .pl-cta-band {
-    border-bottom: 1px solid var(--line);
-    padding-block: 28px;
-  }
-
-  /* ── セクション ─────────────────────────── */
+  /* ── セクション共通 ─────────────────────── */
   .pl-sec {
-    padding-block: clamp(56px, 7vw, 96px);
+    padding-block: clamp(44px, 5.5vw, 76px);
+    position: relative;
+  }
+  .pl-sec-tight {
+    padding-block: clamp(34px, 4vw, 52px);
   }
   .pl-sec-tint {
     background: var(--tint);
@@ -526,20 +821,19 @@ const footerLinks = [
   .pl-h2 {
     display: grid;
     justify-items: center;
-    gap: 8px;
+    gap: 5px;
     text-align: center;
-    font-size: clamp(22px, 2.6vw, 27px);
+    font-size: clamp(18px, 2vw, 22px);
     font-weight: 700;
     letter-spacing: 0.08em;
     line-height: 1.6;
   }
   .pl-h2::before {
     content: '';
-    width: 16px;
-    height: 16px;
-    border-radius: 0 100% 0 100%;
+    width: 26px;
+    height: 2px;
     background: var(--teal);
-    margin-bottom: 6px;
+    margin-bottom: 10px;
   }
   .pl-h2-en,
   .pl-h3-en {
@@ -548,126 +842,295 @@ const footerLinks = [
     letter-spacing: 0.24em;
     color: var(--teal-deep);
   }
-  .pl-h2-en {
-    font-size: 12px;
+  .pl-h2-en { font-size: 11px; }
+  .pl-h3-en { font-size: 10px; margin-left: 9px; }
+  .pl-sec-lead {
+    margin-top: 14px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
   }
   .pl-h3 {
-    font-size: 19px;
+    font-size: 16px;
     font-weight: 700;
     letter-spacing: 0.06em;
     line-height: 1.6;
   }
-  .pl-h3-en {
-    font-size: 11px;
-    margin-left: 10px;
-  }
   .pl-body {
-    font-size: 16px;
+    font-size: 14px;
     line-height: 1.95;
   }
   .pl-note {
-    font-size: 14px;
+    font-size: 13px;
     line-height: 1.8;
     color: var(--muted);
   }
 
-  /* ── カード・グリッド ───────────────────── */
+  /* ── 受付時間テーブル ───────────────────── */
+  .pl-table-wrap {
+    margin-top: 26px;
+    overflow-x: auto;
+  }
+  .pl-table {
+    width: 100%;
+    min-width: 560px;
+    border-collapse: collapse;
+    font-size: 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .pl-table :is(th, td) {
+    padding: 11px 14px;
+    border-bottom: 1px solid var(--line);
+    text-align: center;
+  }
+  .pl-table thead th {
+    background: var(--tint);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal-deep);
+  }
+  .pl-table tbody th {
+    text-align: left;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .pl-table tbody tr:last-child :is(th, td) {
+    border-bottom: 0;
+  }
+
+  /* ── ABOUT：雲の帯。負マージンで重ねる ────── */
+  .pl-about {
+    position: relative;
+    padding-block: clamp(64px, 8vw, 108px);
+    margin-block: -24px;
+    background: linear-gradient(var(--bg) 14%, var(--aqua-soft) 45%, var(--bg) 100%);
+    overflow: hidden;
+  }
+  .pl-clouds {
+    position: absolute;
+    inset: auto 0 0;
+    height: 150px;
+    color: var(--surface);
+    pointer-events: none;
+  }
+  .pl-clouds-bottom {
+    inset: 0 0 auto;
+    transform: scaleY(-1);
+  }
+  .pl-cloud {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 1265px;
+    height: 150px;
+    margin-left: -632px;
+  }
+  .pl-cloud-1 { opacity: 0.55; }
+  .pl-cloud-2 { opacity: 0.35; bottom: 18px; }
+  .pl-about-inner {
+    position: relative;
+    text-align: center;
+  }
+  .pl-about-catch {
+    margin-top: 10px;
+    font-size: clamp(19px, 2.3vw, 26px);
+    font-weight: 700;
+    line-height: 1.65;
+    letter-spacing: 0.06em;
+    color: var(--teal-deep);
+  }
+  .pl-about-body {
+    margin: 18px auto 12px;
+    max-width: 40em;
+  }
+
+  /* ── サービス：ここだけ基準サイズを維持 ───── */
+  .pl-services-sec {
+    overflow: hidden;
+  }
+  .pl-leaf-deco {
+    position: absolute;
+    top: 50%;
+    width: 300px;
+    height: 300px;
+    margin-top: -150px;
+    color: var(--teal);
+    opacity: 0.08;
+    pointer-events: none;
+  }
+  .pl-leaf-deco svg {
+    width: 100%;
+    height: 100%;
+    stroke-width: 0.7;
+  }
+  .pl-leaf-left { left: -78px; }
+  .pl-leaf-right { right: -78px; transform: scaleX(-1); }
+
   .pl-grid-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
   }
   .pl-services {
-    margin-top: 44px;
+    margin-top: 36px;
+    position: relative;
   }
   .pl-card {
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: var(--radius);
-    padding: 26px 24px;
+    box-shadow: var(--shadow);
+    padding: 22px 20px;
     display: grid;
     align-content: start;
-    gap: 12px;
+    gap: 10px;
   }
-
-  /* ── サービスカード ─────────────────────── */
   .pl-svc {
     height: 100%;
+    padding: 26px 24px;   /* 基準サイズ維持 */
+    gap: 8px;
     text-decoration: none;
     color: inherit;
-    gap: 8px;
-    transition: border-color 0.2s ease;
+    transition: border-color 0.3s, background-color 0.3s;
   }
   a.pl-svc:hover {
     border-color: var(--teal);
+    background: var(--tint);
   }
   .pl-svc-ph {
-    display: block;
+    display: grid;
+    place-items: center;
     aspect-ratio: 16 / 9;
     border-radius: 6px;
     margin-bottom: 6px;
     padding: 0;
   }
+  .pl-svc-icon {
+    width: 42px;
+    height: 42px;
+    color: var(--teal-deep);
+    opacity: 0.5;
+  }
   .pl-tone-green { background: var(--svc-green); }
   .pl-tone-blue { background: var(--svc-blue); }
   .pl-tone-beige { background: var(--svc-beige); }
   .pl-svc-name {
-    font-size: 19px;
+    font-size: 19px;      /* 基準サイズ維持 */
     font-weight: 700;
     letter-spacing: 0.06em;
   }
   .pl-svc-kind {
-    font-size: 15px;
+    font-size: 15px;      /* 基準サイズ維持 */
     color: var(--muted);
     line-height: 1.7;
   }
   .pl-svc-more {
     border-style: dashed;
     background: transparent;
+    box-shadow: none;
     align-content: center;
     justify-items: center;
     text-align: center;
   }
-  .pl-svc-more .pl-svc-name {
-    font-size: 17px;
-  }
+  .pl-svc-more .pl-svc-name { font-size: 17px; }
 
-  /* 受入状況。色に頼らず必ず文字でも示す */
+  /* 受入状況。色だけに頼らず必ず文字でも示す */
   .pl-badge {
     justify-self: start;
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.06em;
     border-radius: 4px;
-    padding: 3px 12px;
+    padding: 2px 11px;
     border: 1.5px solid currentColor;
     line-height: 1.7;
   }
-  .pl-badge-open {
-    color: var(--teal-deep);
-    background: var(--tint);
+  .pl-badge-open { color: var(--teal-deep); background: var(--tint); }
+  .pl-badge-full { color: var(--muted); background: transparent; }
+
+  /* ── 選ばれる理由 ───────────────────────── */
+  .pl-reasons {
+    margin-top: 32px;
   }
-  .pl-badge-full {
+  .pl-reason {
+    justify-items: center;
+    text-align: center;
+    gap: 12px;
+  }
+  .pl-reason-icon {
+    width: 62px;
+    height: 62px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--tint);
+    color: var(--teal-deep);
+  }
+  .pl-reason-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* ── 一日の流れ ─────────────────────────── */
+  .pl-day {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    position: relative;
+  }
+  .pl-day::before {
+    content: '';
+    position: absolute;
+    left: 8%;
+    right: 8%;
+    top: 7px;
+    height: 1px;
+    background: var(--line);
+  }
+  .pl-day-item {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    text-align: center;
+    position: relative;
+  }
+  .pl-day-dot {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 2px solid var(--teal);
+  }
+  .pl-day-time {
+    font-size: 17px;
+    color: var(--teal-deep);
+    line-height: 1.2;
+  }
+  .pl-day-label {
+    font-size: 13px;
     color: var(--muted);
-    background: transparent;
+    line-height: 1.6;
   }
 
   /* ── 更新枠 ─────────────────────────────── */
   .pl-news,
   .pl-vacancy {
     display: grid;
-    gap: 12px;
+    gap: 10px;
   }
   .pl-news > li {
     display: grid;
-    gap: 2px;
-    padding-bottom: 12px;
+    gap: 1px;
+    padding-bottom: 10px;
     border-bottom: 1px solid var(--line);
-    font-size: 15px;
+    font-size: 14px;
     line-height: 1.7;
   }
   .pl-news-date {
-    font-size: 14px;
+    font-size: 13px;
     color: var(--teal-deep);
   }
   .pl-vacancy > li {
@@ -675,73 +1138,152 @@ const footerLinks = [
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    padding-bottom: 10px;
+    padding-bottom: 9px;
     border-bottom: 1px solid var(--line);
-    font-size: 16px;
+    font-size: 15px;
   }
+  /* 下線は border ではなくグラデーション（参照サイトの .u-hoverLine と同じ） */
   .pl-more {
     justify-self: start;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 500;
     color: var(--teal-deep);
     text-decoration: none;
-    border-bottom: 1px solid currentColor;
-    padding-bottom: 2px;
+    padding-bottom: 3px;
+    background-image: linear-gradient(to top, currentColor 1px, transparent 1px);
   }
 
-  /* ── 写真枠（差し替え用プレースホルダ）───── */
+  /* ── アクセス ───────────────────────────── */
+  .pl-access {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .pl-ph-map {
+    aspect-ratio: 16 / 10;
+  }
+  .pl-access-text {
+    display: grid;
+    gap: 16px;
+    justify-items: start;
+  }
+  .pl-access-addr {
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+  .pl-access-list {
+    display: grid;
+    gap: 12px;
+  }
+  .pl-access-list dt {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--teal-deep);
+    letter-spacing: 0.08em;
+  }
+  .pl-access-list dd {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  /* ── 連携先：図形で埋める ───────────────── */
+  .pl-partner {
+    position: relative;
+    padding-block: clamp(64px, 8vw, 104px) clamp(44px, 5.5vw, 76px);
+    margin-top: -24px;
+    background: linear-gradient(var(--bg) 10%, var(--aqua) 50%, var(--bg) 100%);
+    overflow: hidden;
+  }
+  .pl-partner > .pl-wrap {
+    position: relative;
+  }
+  .pl-partner-list {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+  .pl-partner-item {
+    aspect-ratio: 3 / 2;
+    display: grid;
+    place-items: center;
+    background: var(--surface);
+    border: 1px dashed var(--line);
+    border-radius: var(--radius);
+  }
+  .pl-partner-item > span {
+    width: 46%;
+    height: 6px;
+    border-radius: 3px;
+    background: var(--line);
+  }
+
+  /* ── 写真枠 ─────────────────────────────── */
   .pl-ph {
     display: grid;
     place-items: center;
     background: var(--svc-beige);
     color: var(--ink);
-    font-size: 14px;
+    font-size: 13px;
     letter-spacing: 0.1em;
     text-align: center;
-    padding: 16px;
-    border-radius: 0; /* 参照サイトは写真の角丸なし */
+    padding: 14px;
+    border-radius: 0;
+  }
+
+  /* ── 最終CTA ────────────────────────────── */
+  .pl-cta {
+    background: var(--ink);
+    color: var(--bg);
+    padding-block: clamp(44px, 5.5vw, 72px);
+    text-align: center;
+  }
+  .pl-cta-lead {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    color: #a9c2b8;
+  }
+  .pl-cta-title {
+    margin-top: 8px;
+    font-size: clamp(20px, 2.4vw, 26px);
+    font-weight: 700;
+    letter-spacing: 0.1em;
   }
 
   /* ── フッター ───────────────────────────── */
   .pl-foot {
     background: var(--ink);
     color: var(--bg);
-    padding-block: 48px;
+    border-top: 1px solid rgba(245, 245, 238, 0.16);
+    padding-block: 36px;
   }
   .pl-foot-inner {
     display: flex;
     flex-wrap: wrap;
-    gap: 32px;
+    gap: 28px;
     justify-content: space-between;
     align-items: flex-start;
   }
-  .pl-foot-name {
-    font-size: 24px;
-  }
+  .pl-foot-name { font-size: 20px; }
   .pl-foot .pl-brand-en,
-  .pl-foot .pl-note {
-    color: #a9c2b8;
-  }
-  .pl-foot-tel {
-    display: inline-block;
-    margin-top: 6px;
-    font-size: 30px;
-    color: inherit;
-    text-decoration: none;
-  }
+  .pl-foot .pl-note { color: #a9c2b8; }
   .pl-foot-links {
     display: grid;
-    gap: 12px;
-    font-size: 15px;
+    gap: 10px;
+    font-size: 14px;
   }
   .pl-foot-links a {
     justify-self: start;
     text-decoration: none;
-    border-bottom: 1px solid rgba(245, 245, 238, 0.3);
     padding-bottom: 3px;
+    background-image: linear-gradient(to top, rgba(245, 245, 238, 0.35) 1px, transparent 1px);
+    transition: background-image 0.3s;
   }
   .pl-foot-links a:hover {
-    border-bottom-color: currentColor;
+    background-image: linear-gradient(to top, currentColor 1px, transparent 1px);
   }
 
   /* ── モバイル固定CTA ────────────────────── */
@@ -753,67 +1295,47 @@ const footerLinks = [
     bottom: 0;
     z-index: 40;
     gap: 8px;
-    padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+    padding: 9px 12px calc(9px + env(safe-area-inset-bottom));
     background: color-mix(in srgb, var(--bg) 94%, transparent);
     border-top: 1px solid var(--line);
   }
-  .pl-sticky .pl-btn {
-    flex: 1;
-  }
-  .pl-sticky-main {
-    flex: 1.6;
-  }
+  .pl-sticky .pl-btn { flex: 1; }
+  .pl-sticky-main { flex: 1.6; }
 
   /* ── レスポンシブ ───────────────────────── */
+  @media (max-width: 1100px) {
+    .pl-nav a { padding: 6px 7px; font-size: 11px; }
+    .pl-nav-icon svg { width: 19px; height: 19px; }
+  }
+
   @media (max-width: 1000px) {
     .pl-nav,
-    .pl-head-cta {
-      display: none;
-    }
-    .pl-menu {
-      display: block;
-    }
-    .pl-sticky {
-      display: flex;
-    }
-    .pl-grid-3 {
-      grid-template-columns: 1fr 1fr;
-    }
+    .pl-head-cta { display: none; }
+    .pl-menu { display: block; }
+    .pl-sticky { display: flex; }
+    .pl-grid-3 { grid-template-columns: 1fr 1fr; }
+    .pl-day { grid-template-columns: repeat(3, 1fr); row-gap: 24px; }
+    .pl-day::before { display: none; }
+    .pl-partner-list { grid-template-columns: repeat(3, 1fr); }
+    .pl-leaf-deco { width: 210px; height: 210px; margin-top: -105px; }
   }
 
   @media (max-width: 720px) {
-    .pl {
-      line-height: 1.9;
-    }
-    .pl-hero-inner {
-      position: static;
-      margin-top: -48px;
-    }
-    .pl-hero-copy {
-      max-width: none;
-      background: var(--bg);
-    }
-    .pl-grid-3 {
-      grid-template-columns: 1fr;
-      gap: 16px;
-    }
-    .pl-services {
-      margin-top: 32px;
-    }
-    .pl-btn {
-      min-width: 100%;
-    }
-    .pl-btn-sm {
-      min-width: 0;
-    }
-    .pl-foot-inner {
-      gap: 28px;
-    }
+    .pl { line-height: 1.85; }
+    .pl-hero-inner { margin-top: -34px; }
+    .pl-hero-copy { max-width: none; padding: 22px 18px 26px; }
+    .pl-grid-3 { grid-template-columns: 1fr; gap: 14px; }
+    .pl-services, .pl-reasons { margin-top: 26px; }
+    .pl-day { grid-template-columns: repeat(2, 1fr); }
+    .pl-access { grid-template-columns: 1fr; gap: 22px; }
+    .pl-partner-list { grid-template-columns: repeat(2, 1fr); }
+    .pl-btn { min-width: 100%; }
+    .pl-btn-sm { min-width: 0; }
+    .pl-leaf-deco { display: none; }
+    .pl-foot-inner { gap: 22px; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .pl * {
-      transition: none !important;
-    }
+    .pl * { transition: none !important; }
   }
 </style>
