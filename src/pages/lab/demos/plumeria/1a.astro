@@ -14,7 +14,10 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
       元PNG 26.1MB を WebP へ変換して public/images/plumeria/ に配置（合計 497KB）。
       これらは「イメージ写真」であり、実際の施設・スタッフではない。
       提案時にその旨を明示すること。
-  - 制約: JavaScript非依存 / 常時アニメーションなし
+  - 制約: JavaScript非依存（スクロール連動も CSS の animation-timeline: view() で実装）
+  - アニメーション: ボス指示により解禁。モチーフに沿った3種のみ（木漏れ日／葉のゆらぎ／立ち上がり）。
+      ブリーフの「過度なアニメーション」を避けるため振れ幅は最小限。
+      prefers-reduced-motion: reduce で全停止する。
   - 大きさの方針: 施設カード（.pl-svc）は基準サイズを維持し、それ以外を一段落とす。
 
   【ブリーフとの相違点（1点だけ・意図的）】
@@ -1061,8 +1064,100 @@ const footerLinks = [
     .pl-foot-inner { gap: 24px; }
   }
 
+  /* ══════════════════════════════════════════════════════════
+     アニメーション
+
+     方針：モチーフ（木漏れ日・葉・見守る）に沿った3種類だけ。
+     ブリーフの「過度なアニメーション」「派手な変形」を避けるため、
+     振れ幅は肉眼でぎりぎり分かる程度に抑えている。
+
+     JavaScript は使わない。スクロール連動は CSS の animation-timeline: view()。
+     未対応ブラウザ（Firefox・一部Safari）では @supports が効かず
+     アニメーションが付かないだけで、要素は最初から見えている。
+     ── 初期状態を透明にしないのはこのため。消えたまま戻らない事故を防ぐ。
+     ══════════════════════════════════════════════════════════ */
+
+  /* ① 木漏れ日：ヒーローの光がゆっくり移ろう */
+  .pl-hero-media { position: relative; }
+  .pl-hero-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    clip-path: url(#pl-hero-clip);
+    background:
+      radial-gradient(38% 46% at 22% 16%, rgba(255, 255, 255, 0.34), transparent 62%),
+      radial-gradient(26% 34% at 70% 6%, rgba(255, 251, 232, 0.3), transparent 66%),
+      radial-gradient(20% 26% at 46% 30%, rgba(255, 255, 255, 0.2), transparent 70%);
+    mix-blend-mode: soft-light;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+
+  /* ② 葉と花のゆらぎ：風がわずかに触れる程度 */
+  @keyframes pl-sway {
+    from { rotate: -1.2deg; }
+    to   { rotate: 1.4deg; }
+  }
+  @keyframes pl-komorebi {
+    from { opacity: 0.5; transform: translate3d(0, 0, 0) scale(1); }
+    to   { opacity: 0.95; transform: translate3d(2.6%, 1.6%, 0) scale(1.06); }
+  }
+  /* ③ スクロールでの立ち上がり：下から静かに現れる */
+  @keyframes pl-rise {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .pl-hero-media::after {
+      animation: pl-komorebi 19s ease-in-out infinite alternate;
+    }
+    .pl-deco-flower-bl { transform-origin: 12% 88%; animation: pl-sway 11s ease-in-out infinite alternate; }
+    .pl-deco-flower-tr { transform-origin: 88% 12%; animation: pl-sway 13s ease-in-out -4s infinite alternate; }
+    .pl-deco-leaf-l    { transform-origin: 20% 80%; animation: pl-sway 15s ease-in-out -2s infinite alternate; }
+    .pl-deco-leaf-r    { transform-origin: 80% 80%; animation: pl-sway 17s ease-in-out -7s infinite alternate; }
+    .pl-deco-bird      { transform-origin: 50% 70%; animation: pl-sway 9s  ease-in-out -3s infinite alternate; }
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .pl-h2,
+      .pl-sec-lead,
+      .pl-about-text,
+      .pl-about-photo,
+      .pl-card,
+      .pl-day-photo,
+      .pl-day-item,
+      .pl-news > li,
+      .pl-ph-map,
+      .pl-access-text,
+      .pl-cta-lead,
+      .pl-cta-title,
+      .pl-cta .pl-btn-row {
+        animation-name: pl-rise;
+        animation-fill-mode: both;
+        animation-duration: auto;       /* 一括指定だと 0s に戻るため個別に書く */
+        animation-timeline: view();
+        animation-range: entry 4% cover 24%;
+      }
+      /* 横並びは左から順に。まとめて出るより視線が流れる */
+      .pl-grid-3 > *:nth-child(2) .pl-card,
+      .pl-grid-3 > *:nth-child(2).pl-card { animation-range: entry 4% cover 30%; }
+      .pl-grid-3 > *:nth-child(3) .pl-card,
+      .pl-grid-3 > *:nth-child(3).pl-card { animation-range: entry 4% cover 36%; }
+      .pl-day-item:nth-child(2) { animation-range: entry 4% cover 28%; }
+      .pl-day-item:nth-child(3) { animation-range: entry 4% cover 32%; }
+      .pl-day-item:nth-child(4) { animation-range: entry 4% cover 36%; }
+      .pl-day-item:nth-child(5) { animation-range: entry 4% cover 40%; }
+      .pl-day-item:nth-child(6) { animation-range: entry 4% cover 44%; }
+      .pl-news > li:nth-child(2) { animation-range: entry 4% cover 30%; }
+      .pl-news > li:nth-child(3) { animation-range: entry 4% cover 36%; }
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .pl * { transition: none !important; }
+    .pl * { transition: none !important; animation: none !important; }
     .pl-btn:hover, a.pl-svc:hover { transform: none; }
+    .pl-hero-media::after { opacity: 0.6; }
   }
 </style>

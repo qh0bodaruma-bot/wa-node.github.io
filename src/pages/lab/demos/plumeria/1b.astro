@@ -1,0 +1,1571 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+
+/*
+  プルメリア 総合トップ ラフ「1b 法人グループ型」（/lab/demos/plumeria/1b）
+
+  - 出典: 2026-08-31 にボスから支給されたデザインブリーフ
+      （地域密着型の福祉法人・介護施設グループ公式サイト／
+        「施設に預ける」ではなく「本人らしい暮らしを地域と家族で支える」）
+  - 1a との違い:
+      1a = c-morinosato.com 系。teal 1色・生成り地・情報を1本の導線に絞る。
+      1b = 白を大きく使う法人グループ型。自然色を4系統（生成り・ベージュ・淡緑・淡青）に
+           広げ、深緑とネイビーの2アクセント。導線を「施設を探す／サービスを探す／
+           目的別の相談窓口」の3本に分ける。
+  - 【注意】task.md の 1b は「遊び心」だったが、本ブリーフは
+      「かわいすぎず、清潔感・専門性」で方向が異なるため、ブリーフを優先した。
+      旧「遊び心」案が必要なら 1c で別に作る。
+  - 写真: 1a と同じ支給画像（public/images/plumeria/）。
+      いずれも生成された「イメージ写真」であり、実在の施設・利用者・職員ではない。
+      提案時に必ずその旨を明示すること。
+  - 制約: JavaScript非依存 / 常時アニメーションなし / 実績・利用者の声は創作しない
+  - 数値・固有情報はすべて差し替え枠（○）。ブリーフの
+      「実績数値には対象時点・対象者・算出範囲を添える」に従い、注記の枠も置いてある。
+*/
+
+const title = 'プルメリア｜住まい・在宅支援・福祉用具を地域で支える';
+const description =
+  'プルメリアは、サービス付き高齢者向け住宅、ショートステイ、訪問看護、訪問介護・居宅介護支援、福祉用具貸与を運営しています。施設・サービスのご相談、見学・資料請求を承ります。';
+
+// ── 差し替え枠：法人情報 ─────────────────────────────────
+const corp = {
+  name: 'プルメリア',
+  nameEn: 'PLUMERIA',
+  kind: '介護サービスグループ',
+  tel: '000-000-0000',
+  telHref: 'tel:0000000000',
+  telHours: '受付 9:00〜18:00（日祝を除く）',
+  address: '○○県○○市○○ 0-0-0（差し替え枠）',
+  founded: '○○○○年',
+};
+
+// ── 差し替え枠：最優先の3導線 ────────────────────────────
+const primaryPaths = [
+  { icon: 'home', label: '施設を探す', body: '住まい・短期の泊まりから選ぶ', href: '#facilities' },
+  { icon: 'care', label: 'サービスを探す', body: 'お困りごとから選ぶ', href: '#services' },
+  { icon: 'doc', label: '見学・資料請求', body: '目的別の相談窓口へ', href: '#contact' },
+];
+
+// ── 差し替え枠：大切にしていること（3項目）─────────────────
+const values = [
+  {
+    icon: 'home',
+    en: 'LIVING',
+    title: '暮らしの場をつくる',
+    body:
+      '居室・食堂・浴室・共用部の使い方を、ご本人の生活時間に合わせます。起きる時間も、お風呂の順番も、こちらの都合で決めません。',
+    img: '/images/plumeria/feature-01.webp',
+    alt: '窓辺の椅子に座る入居者と、同じ目線の高さで話すスタッフ',
+  },
+  {
+    icon: 'care',
+    en: 'SUPPORT',
+    title: '誠実に支援する',
+    body:
+      'できることは奪わず、できないことだけをお手伝いします。ご家族には、良い変化も良くない変化も同じ温度でお伝えします。',
+    img: '/images/plumeria/feature-02.webp',
+    alt: 'テーブルを囲んで、ご家族と職員が手元の画面を見ながら話し合っている様子',
+  },
+  {
+    icon: 'shield',
+    en: 'SAFETY',
+    title: '安心と安全を守る',
+    body:
+      '事故・急変時の連絡経路と、夜間の対応体制を決めています。防災訓練と感染対策の実施記録は施設ごとに公開します。',
+    img: '/images/plumeria/feature-03.webp',
+    alt: '職員2名が記録端末を見ながら情報を共有している様子。奥の窓辺で入居者が過ごしている',
+  },
+];
+
+// ── 差し替え枠：法人の客観情報 ───────────────────────────
+// ブリーフの指定どおり、数値には対象時点・算出範囲を添える枠を必ず持たせる
+const facts = [
+  { num: '○○○○', unit: '年', label: '設立', note: '（登記上の設立年）' },
+  { num: '○', unit: '拠点', label: '運営する施設・事業所', note: '（○○○○年○月現在）' },
+  { num: '○○', unit: '名', label: '職員数', note: '（○○○○年○月現在・常勤換算）' },
+  { num: '○○', unit: '名', label: '有資格者', label2: '介護福祉士・看護師など', note: '（○○○○年○月現在・重複計上なし）' },
+];
+
+// ── 差し替え枠：施設を探す ───────────────────────────────
+const facilities = [
+  {
+    id: 'f-1',
+    name: 'プルメリアⅠ',
+    kind: 'サービス付き高齢者向け住宅',
+    tone: 'mint',
+    icon: 'home',
+    area: '○○市○○（差し替え枠）',
+    status: '空室あり',
+    statusTone: 'open',
+    body: 'ご自身の生活のペースを保ちながら住み替えたい方へ。安否確認と生活相談が付いた住まいです。',
+    img: '/images/plumeria/services-01.webp',
+    alt: '光の入る居室で、入居者が自分の椅子に座って過ごしている様子',
+  },
+  {
+    id: 'f-2',
+    name: 'プルメリアⅡ',
+    kind: 'サービス付き高齢者向け住宅',
+    tone: 'mint',
+    icon: 'home',
+    area: '○○市○○（差し替え枠）',
+    status: '満室（空室待ちのご相談を承ります）',
+    statusTone: 'full',
+    body: '共用のラウンジを中心にした住まいです。入居者どうしの距離感は、無理に近づけません。',
+    img: '/images/plumeria/services-02.webp',
+    alt: '共用ラウンジで入居者どうしが穏やかに会話している様子',
+  },
+  {
+    id: 'f-3',
+    name: 'プルメリアⅢ',
+    kind: 'ショートステイ（短期入所）',
+    tone: 'beige',
+    icon: 'bed',
+    area: '○○市○○（差し替え枠）',
+    status: '受入可',
+    statusTone: 'open',
+    body: 'ご家族の休息や、急な用事のときに。数日からお預かりします。ご利用前の見学もできます。',
+    img: '/images/plumeria/services-03.webp',
+    alt: '短期滞在の方を居室の入口で迎えているスタッフ',
+  },
+];
+
+// ── 差し替え枠：サービスを探す（困りごとから）───────────────
+const services = [
+  {
+    id: 'sv-1', icon: 'care', cat: '在宅支援',
+    name: '訪問看護',
+    body: '看護師がご自宅へ伺い、健康状態の確認や医療的な処置を行います。主治医と連携します。',
+    trouble: '自宅で療養したいが、体調の変化が不安',
+    img: '/images/plumeria/services-04.webp',
+    alt: 'ご自宅のリビングで看護師が健康状態を確認している様子',
+  },
+  {
+    id: 'sv-2', icon: 'staff', cat: '在宅支援',
+    name: '訪問介護',
+    body: 'ご自宅での身体介護と生活援助を行います。曜日・時間はケアプランに沿って調整します。',
+    trouble: '入浴や食事の準備を、ひとりでは続けられない',
+    img: '',
+    alt: '',
+  },
+  {
+    id: 'sv-3', icon: 'doc', cat: '相談',
+    name: '居宅介護支援（ケアプラン作成）',
+    body: 'ケアマネジャーが、利用できる制度とサービスを整理し、ケアプランをつくります。',
+    trouble: '何から相談すればよいのか分からない',
+    img: '',
+    alt: '',
+  },
+  {
+    id: 'sv-4', icon: 'chair', cat: '住まいの環境',
+    name: '福祉用具貸与（レンタル介護用品）',
+    body: 'ベッド・車いす・歩行器などを、お住まいの状況に合わせてご用意します。',
+    trouble: '段差や立ち上がりが、家の中で危ない',
+    img: '/images/plumeria/services-05.webp',
+    alt: '歩行器の使い方をスタッフが説明している様子',
+  },
+];
+
+// ── 差し替え枠：目的別の相談窓口 ─────────────────────────
+// ブリーフの「窓口を一つにまとめない」に対応。窓口ごとに担当・電話・受付時間を分ける
+const desks = [
+  {
+    icon: 'home',
+    tone: 'green',
+    title: '入居・見学のご相談',
+    target: 'サービス付き高齢者向け住宅／ショートステイ',
+    tel: '000-000-0000',
+    telHref: 'tel:0000000000',
+    hours: '9:00〜18:00（日祝を除く）',
+    staff: '担当：入居相談窓口（差し替え枠）',
+    ctaLabel: '見学を申し込む',
+  },
+  {
+    icon: 'care',
+    tone: 'navy',
+    title: '在宅サービス・ケアプランのご相談',
+    target: '訪問看護／訪問介護／居宅介護支援',
+    tel: '000-000-0000',
+    telHref: 'tel:0000000000',
+    hours: '9:00〜17:00（日祝を除く）',
+    staff: '担当：ケアマネジャー・看護師（差し替え枠）',
+    ctaLabel: '在宅の相談をする',
+  },
+  {
+    icon: 'chair',
+    tone: 'beige',
+    title: '福祉用具・住まいの環境のご相談',
+    target: '福祉用具貸与／住宅改修のご相談',
+    tel: '000-000-0000',
+    telHref: 'tel:0000000000',
+    hours: '9:00〜17:00（日祝を除く）',
+    staff: '担当：福祉用具専門相談員（差し替え枠）',
+    ctaLabel: '用品について相談する',
+  },
+];
+
+// ── 差し替え枠：資料請求で届くもの ───────────────────────
+const docItems = [
+  'パンフレット（施設のご案内）',
+  '料金表・重要事項説明書',
+  '見学の申込書',
+];
+
+// ── 差し替え枠：受付時間 ─────────────────────────────────
+const hours = [
+  { label: '見学・入居のご相談', weekday: '9:00〜18:00', saturday: '9:00〜12:00', sunday: '－' },
+  { label: '在宅サービスのご相談', weekday: '9:00〜17:00', saturday: '要相談', sunday: '要相談' },
+  { label: '訪問看護（緊急時の連絡）', weekday: '24時間', saturday: '24時間', sunday: '24時間' },
+];
+
+// ── 差し替え枠：お知らせ ─────────────────────────────────
+const news = [
+  { date: '2026.08.00', cat: 'お知らせ', catTone: 'green', text: '（お知らせの見出しが入ります）' },
+  { date: '2026.08.00', cat: '空室情報', catTone: 'beige', text: '（空室・受入状況の更新見出しが入ります）' },
+  { date: '2026.07.00', cat: '採用', catTone: 'navy', text: '（採用に関する見出しが入ります）' },
+  { date: '2026.07.00', cat: '行事', catTone: 'green', text: '（施設の行事の見出しが入ります）' },
+];
+
+// ── 差し替え枠：採用 ─────────────────────────────────────
+const recruitFacts = [
+  { num: '○', unit: '年', label: '平均勤続年数', note: '（○○○○年○月現在・全職種）' },
+  { num: '○○', unit: '%', label: '資格取得支援の利用率', note: '（○○○○年度・対象は常勤職員）' },
+  { num: '○', unit: '日', label: '年間休日', note: '（○○○○年度・シフト制）' },
+];
+
+const recruitPolicy = [
+  '本人の暮らしを、こちらの都合で決めない',
+  '気づいたことは、その日のうちに共有する',
+  '分からないことは、分からないと言える',
+];
+
+const recruitSupport = [
+  { title: '研修', body: '入職時研修と、年間の内部研修（差し替え枠）。未経験の方は先輩職員が付きます。' },
+  { title: '資格取得支援', body: '介護福祉士・実務者研修などの受講費用の支援制度（内容は差し替え枠）。' },
+  { title: '働き方', body: '常勤・非常勤、日勤のみの勤務など（勤務形態の詳細は差し替え枠）。' },
+];
+
+const jobs = [
+  { name: '介護職員', place: 'プルメリアⅠ・Ⅱ・Ⅲ', type: '常勤／非常勤' },
+  { name: '看護師', place: '訪問看護', type: '常勤／非常勤' },
+  { name: 'ケアマネジャー', place: '居宅介護支援', type: '常勤' },
+];
+
+const footerGroups = [
+  {
+    heading: '施設を探す',
+    links: [
+      { label: 'プルメリアⅠ（サ高住）', href: '#f-1' },
+      { label: 'プルメリアⅡ（サ高住）', href: '#f-2' },
+      { label: 'プルメリアⅢ（ショートステイ）', href: '#f-3' },
+    ],
+  },
+  {
+    heading: 'サービスを探す',
+    links: [
+      { label: '訪問看護', href: '#sv-1' },
+      { label: '訪問介護', href: '#sv-2' },
+      { label: '居宅介護支援', href: '#sv-3' },
+      { label: '福祉用具貸与', href: '#sv-4' },
+    ],
+  },
+  {
+    heading: '法人について',
+    links: [
+      { label: '法人概要・沿革', href: '#company' },
+      { label: '大切にしていること', href: '#values' },
+      { label: 'お知らせ', href: '#news' },
+      { label: '採用情報', href: '#recruit' },
+    ],
+  },
+  {
+    heading: 'ご相談',
+    links: [
+      { label: '入居・見学のご相談', href: '#contact' },
+      { label: '在宅サービスのご相談', href: '#contact' },
+      { label: '資料請求', href: '#contact' },
+      { label: 'アクセス・地図', href: '#access' },
+    ],
+  },
+];
+---
+
+<BaseLayout title={title} description={description} noindex={true} showSiteChrome={false}>
+  {/* data-reveal="off": BaseLayout の共通スクロール表示スクリプトの対象から外す。
+      このラフは JavaScript 非依存を条件にしている。 */}
+  <div class="pb" data-reveal="off">
+    {/* モチーフはこのファイル内で書き起こした線画。外部のロゴ・イラストは使わない。 */}
+    <svg class="pb-defs" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="pb-i-home" viewBox="0 0 24 24">
+          <path d="M4 10.6 12 4.4l8 6.2V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" />
+          <path d="M9.6 20v-5.2h4.8V20" />
+        </symbol>
+        <symbol id="pb-i-bed" viewBox="0 0 24 24">
+          <path d="M3 18v-7.4h13.4A4.6 4.6 0 0 1 21 15.2V18" />
+          <path d="M3 18h18M3 13.4V7" />
+          <circle cx="7.4" cy="8.6" r="1.9" />
+        </symbol>
+        <symbol id="pb-i-care" viewBox="0 0 24 24">
+          <path d="M12 20s-6.6-4-6.6-8.6A3.4 3.4 0 0 1 12 9.4a3.4 3.4 0 0 1 6.6 2c0 4.6-6.6 8.6-6.6 8.6Z" />
+          <path d="M12 12.2v3.4M10.3 13.9h3.4" />
+        </symbol>
+        <symbol id="pb-i-chair" viewBox="0 0 24 24">
+          <path d="M7 4.6h10l-.8 7.2H7.8Z" />
+          <path d="M6.4 11.8h11.2M8.6 11.8 8 19.4M15.4 11.8l.6 7.6M8.2 16h7.6" />
+        </symbol>
+        <symbol id="pb-i-staff" viewBox="0 0 24 24">
+          <circle cx="12" cy="8.4" r="3.3" />
+          <path d="M5.4 19.6c.7-3.4 3.4-5.2 6.6-5.2s5.9 1.8 6.6 5.2" />
+        </symbol>
+        <symbol id="pb-i-doc" viewBox="0 0 24 24">
+          <path d="M6.4 3.6h7.2L18 8v12a.4.4 0 0 1-.4.4H6.4a.4.4 0 0 1-.4-.4V4a.4.4 0 0 1 .4-.4Z" />
+          <path d="M13.4 3.8V8.2H17.8M8.8 12.4h6.4M8.8 15.8h6.4" />
+        </symbol>
+        <symbol id="pb-i-shield" viewBox="0 0 24 24">
+          <path d="M12 3.6 19 6v6c0 4-3 6.9-7 8.4-4-1.5-7-4.4-7-8.4V6Z" />
+          <path d="m9.2 12 2 2 3.6-3.8" />
+        </symbol>
+        <symbol id="pb-i-phone" viewBox="0 0 24 24">
+          <path d="M6.2 4.4h3l1.5 3.7-2 1.5a10.6 10.6 0 0 0 5.7 5.7l1.5-2 3.7 1.5v3a1.6 1.6 0 0 1-1.7 1.6C10.6 19 5 13.4 4.6 6.1a1.6 1.6 0 0 1 1.6-1.7Z" />
+        </symbol>
+        <symbol id="pb-i-map" viewBox="0 0 24 24">
+          <path d="M12 20.4s-5.6-5-5.6-9a5.6 5.6 0 1 1 11.2 0c0 4-5.6 9-5.6 9Z" />
+          <circle cx="12" cy="11.2" r="2.1" />
+        </symbol>
+        <symbol id="pb-i-leaf" viewBox="0 0 24 24">
+          <path d="M19.4 4.6C11 4.2 5.2 7.4 5.2 13.4a5.4 5.4 0 0 0 5.4 5.4c5.6 0 8.8-5.8 8.8-14.2Z" />
+          <path d="M8.2 19.6c1.6-4.2 4.4-7.4 8.2-9.6" />
+        </symbol>
+        <symbol id="pb-i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8.2" />
+          <path d="M12 7.4V12l3.2 1.9" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <p class="pb-notice">
+      これはご提案用のラフです。写真は雰囲気を確認するためのイメージで、実在の施設・利用者・職員では
+      ありません。電話番号・住所・空室状況・数値・お知らせはすべて仮置きの差し替え枠です。
+    </p>
+
+    <!-- ヘッダー -->
+    <header class="pb-head">
+      <div class="pb-head-inner">
+        <a class="pb-brand" href="#top">
+          <span class="pb-brand-mark" aria-hidden="true"><svg><use href="#pb-i-leaf" /></svg></span>
+          <span class="pb-brand-text">
+            <span class="pb-brand-name">{corp.name}</span>
+            <span class="pb-brand-sub">{corp.kind}</span>
+          </span>
+        </a>
+
+        <nav class="pb-nav" aria-label="メインメニュー">
+          <a href="#facilities">施設を探す</a>
+          <a href="#services">サービスを探す</a>
+          <a href="#values">法人について</a>
+          <a href="#news">お知らせ</a>
+          <a href="#recruit">採用情報</a>
+        </nav>
+
+        <div class="pb-head-cta">
+          <a class="pb-headtel" href={corp.telHref}>
+            <span class="pb-headtel-icon" aria-hidden="true"><svg><use href="#pb-i-phone" /></svg></span>
+            <span class="pb-headtel-body">
+              <span class="pb-num pb-headtel-no">{corp.tel}</span>
+              <span class="pb-headtel-hours">{corp.telHours}</span>
+            </span>
+          </a>
+          <a class="pb-btn pb-btn-green pb-btn-sm" href="#contact">見学・資料請求</a>
+        </div>
+
+        <details class="pb-menu">
+          <summary aria-label="メニューを開く"><span class="pb-menu-bars" aria-hidden="true"></span></summary>
+          <nav class="pb-menu-list" aria-label="メニュー（モバイル）">
+            <a href="#facilities"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-home" /></svg></span>施設を探す</a>
+            <a href="#services"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-care" /></svg></span>サービスを探す</a>
+            <a href="#values"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-leaf" /></svg></span>大切にしていること</a>
+            <a href="#company"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-shield" /></svg></span>法人概要・体制</a>
+            <a href="#contact"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-doc" /></svg></span>見学・資料請求・ご相談</a>
+            <a href="#news"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-clock" /></svg></span>お知らせ</a>
+            <a href="#recruit"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-staff" /></svg></span>採用情報</a>
+            <a href="#access"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-map" /></svg></span>アクセス</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- 01 メインビジュアル -->
+      <section class="pb-hero">
+        <div class="pb-wrap">
+          <div class="pb-hero-grid">
+            <div class="pb-hero-media">
+              <img class="pb-hero-photo" src="/images/plumeria/hero-01.webp"
+                   alt="建物のエントランス付近で、入居者とスタッフが穏やかに話している様子"
+                   width="1600" height="900" fetchpriority="high" decoding="async" />
+            </div>
+            <div class="pb-hero-copy">
+              <p class="pb-eyebrow">
+                <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-leaf" /></svg></span>
+                地域とご家族とともに
+              </p>
+              <h1 class="pb-h1">その人らしい暮らしを、<br />地域と家族で支える。</h1>
+              <p class="pb-hero-lead">
+                住まい、在宅での看護と介護、暮らしの道具。<br class="pb-br-pc" />
+                預かる場所ではなく、暮らしが続く場所をつくっています。
+              </p>
+            </div>
+          </div>
+
+          <!-- 最優先の3導線 -->
+          <ul class="pb-paths">
+            {primaryPaths.map((p) => (
+              <li>
+                <a class="pb-path" href={p.href}>
+                  <span class="pb-path-icon" aria-hidden="true"><svg><use href={`#pb-i-${p.icon}`} /></svg></span>
+                  <span class="pb-path-text">
+                    <span class="pb-path-label">{p.label}</span>
+                    <span class="pb-path-body">{p.body}</span>
+                  </span>
+                  <span class="pb-path-arrow" aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- 02 法人の想い -->
+      <section class="pb-sec pb-mind" id="mind">
+        <div class="pb-wrap pb-mind-grid">
+          <div class="pb-mind-media">
+            <img src="/images/plumeria/about-01.webp"
+                 alt="窓辺の椅子に座る入居者とスタッフが穏やかに話している共用リビング"
+                 width="1100" height="733" loading="lazy" decoding="async" />
+          </div>
+          <div class="pb-mind-text">
+            <p class="pb-eyebrow"><span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-leaf" /></svg></span>法人の想い</p>
+            <h2 class="pb-h2">「もう家では無理かもしれない」<br />そう思った日から、一緒に考えます。</h2>
+            <div class="pb-mind-body">
+              <p>
+                介護が必要になったとき、多くのご家族はまず自分を責めます。
+                もっと早く気づけたのではないか、自分が仕事を辞めればよいのではないか、と。
+              </p>
+              <p>
+                けれど、暮らしを支える方法はひとつではありません。
+                住み替えるという選択もあれば、自宅のまま看護と介護を入れる方法もあります。
+                短い期間だけお預かりして、ご家族が休むという使い方もできます。
+              </p>
+              <p>
+                私たちは、そのどれかを勧めるためではなく、
+                <strong>ご本人が「これまでの自分」を手放さずにいられる形</strong>を一緒に探すために、
+                地域で複数のサービスを続けてきました。
+              </p>
+            </div>
+            <p class="pb-sign">{corp.name}　代表　○○ ○○（差し替え枠）</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 03 大切にしていること -->
+      <section class="pb-sec pb-values" id="values">
+        <div class="pb-wrap">
+          <div class="pb-head2">
+            <p class="pb-eyebrow"><span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-leaf" /></svg></span>VALUES</p>
+            <h2 class="pb-h2">大切にしていること</h2>
+            <p class="pb-lead">言葉だけにならないよう、3つに絞って、やっていることを書いています。</p>
+          </div>
+
+          <ul class="pb-value-list">
+            {values.map((v, i) => (
+              <li class="pb-value">
+                <div class="pb-value-media">
+                  <img src={v.img} alt={v.alt} width="900" height="600" loading="lazy" decoding="async" />
+                  <span class="pb-value-icon" aria-hidden="true"><svg><use href={`#pb-i-${v.icon}`} /></svg></span>
+                </div>
+                <div class="pb-value-text">
+                  <p class="pb-value-en"><span class="pb-num">0{i + 1}</span>　{v.en}</p>
+                  <h3 class="pb-h3">{v.title}</h3>
+                  <p class="pb-body">{v.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- 04 法人の歩みと体制（信頼性） -->
+      <section class="pb-sec pb-facts" id="company">
+        <div class="pb-wrap">
+          <div class="pb-head2">
+            <p class="pb-eyebrow"><span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-shield" /></svg></span>ABOUT US</p>
+            <h2 class="pb-h2">法人の歩みと体制</h2>
+            <p class="pb-lead">確認できる事実だけを載せます。数値は対象時点と算出範囲を添えて出します。</p>
+          </div>
+
+          <ul class="pb-fact-list">
+            {facts.map((f) => (
+              <li class="pb-fact">
+                <p class="pb-fact-num"><span class="pb-num">{f.num}</span><span class="pb-fact-unit">{f.unit}</span></p>
+                <p class="pb-fact-label">{f.label}</p>
+                {f.label2 && <p class="pb-fact-label2">{f.label2}</p>}
+                <p class="pb-fact-note">{f.note}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div class="pb-fact-cols">
+            <dl class="pb-deflist">
+              <div><dt>資格・研修</dt><dd>介護福祉士・看護師・ケアマネジャーなどの配置状況と、年間の研修計画を掲載します（内容は差し替え枠）。</dd></div>
+              <div><dt>安全への対応</dt><dd>事故発生時の連絡経路、夜間の対応体制、防災訓練と感染対策の実施記録を施設ごとに公開します（差し替え枠）。</dd></div>
+              <div><dt>地域とのつながり</dt><dd>地域の行事、実習生の受け入れ、連携する医療機関などを掲載します（差し替え枠）。</dd></div>
+            </dl>
+            <p class="pb-note">
+              ※ 法人概要（名称・設立・所在地・代表者・事業所一覧）は下層ページにまとめます。
+              このラフでは枠のみ置いています。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 05 施設を探す -->
+      <section class="pb-sec pb-facilities" id="facilities">
+        <div class="pb-wrap">
+          <div class="pb-head2">
+            <p class="pb-eyebrow"><span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-home" /></svg></span>FACILITIES</p>
+            <h2 class="pb-h2">施設を探す</h2>
+            <p class="pb-lead">住まいと、短期の泊まり。受入状況は色だけでなく必ず文字で示しています。</p>
+          </div>
+
+          <ul class="pb-fac-list">
+            {facilities.map((f) => (
+              <li class={`pb-fac pb-tone-${f.tone}`} id={f.id}>
+                <div class="pb-fac-media">
+                  <img src={f.img} alt={f.alt} width="760" height="570" loading="lazy" decoding="async" />
+                </div>
+                <div class="pb-fac-text">
+                  <p class="pb-fac-kind">
+                    <span class="pb-fac-icon" aria-hidden="true"><svg><use href={`#pb-i-${f.icon}`} /></svg></span>
+                    {f.kind}
+                  </p>
+                  <h3 class="pb-fac-name">{f.name}</h3>
+                  <p class="pb-fac-area"><span class="pb-fac-area-icon" aria-hidden="true"><svg><use href="#pb-i-map" /></svg></span>{f.area}</p>
+                  <p class={`pb-status pb-status-${f.statusTone}`}>{f.status}</p>
+                  <p class="pb-body">{f.body}</p>
+                  <div class="pb-fac-links">
+                    <a class="pb-btn pb-btn-outline pb-btn-sm" href="#">施設のページを見る</a>
+                    <a class="pb-btn pb-btn-green pb-btn-sm" href="#contact">見学を申し込む</a>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <p class="pb-note pb-note-center">
+            ※ 空室・受入状況は○○○○年○月○日時点の予定です。更新のタイミングと担当は運用時に決めます。
+          </p>
+        </div>
+      </section>
+
+      <!-- 06 サービスを探す -->
+      <section class="pb-sec pb-services" id="services">
+        <div class="pb-wrap">
+          <div class="pb-head2">
+            <p class="pb-eyebrow"><span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-care" /></svg></span>SERVICES</p>
+            <h2 class="pb-h2">サービスを探す</h2>
+            <p class="pb-lead">「いま困っていること」から選べるようにしています。</p>
+          </div>
+
+          <ul class="pb-sv-list">
+            {services.map((s) => (
+              <li class="pb-sv" id={s.id}>
+                {s.img ? (
+                  <div class="pb-sv-media">
+                    <img src={s.img} alt={s.alt} width="760" height="570" loading="lazy" decoding="async" />
+                  </div>
+                ) : (
+                  /* 写真が未支給のサービスは、同じ比率の図形で埋めて並びを崩さない */
+                  <div class="pb-sv-media pb-sv-blank" aria-hidden="true">
+                    <span class="pb-sv-blank-icon"><svg><use href={`#pb-i-${s.icon}`} /></svg></span>
+                    <span class="pb-sv-blank-label">写真は差し替え枠</span>
+                  </div>
+                )}
+                <div class="pb-sv-text">
+                  <p class="pb-sv-cat">{s.cat}</p>
+                  <h3 class="pb-h3 pb-sv-name">
+                    <span class="pb-sv-icon" aria-hidden="true"><svg><use href={`#pb-i-${s.icon}`} /></svg></span>
+                    {s.name}
+                  </h3>
+                  <p class="pb-sv-trouble">「{s.trouble}」という方へ</p>
+                  <p class="pb-body">{s.body}</p>
+                  <a class="pb-more" href="#">くわしく見る</a>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <p class="pb-note pb-note-center">
+            ※ 上記以外の事業（障がい児者支援など）を行っている場合は、この並びに追加します。
+            当方で内容を推測して書かないため、実施事業をご教示ください。
+          </p>
+        </div>
+      </section>
+
+      <!-- 07 見学・資料請求・お問い合わせ -->
+      <section class="pb-sec pb-contact" id="contact">
+        <div class="pb-wrap">
+          <div class="pb-head2">
+            <p class="pb-eyebrow"><span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-doc" /></svg></span>CONTACT</p>
+            <h2 class="pb-h2">見学・資料請求・ご相談</h2>
+            <p class="pb-lead">ご用件によって担当が変わります。近いものをお選びください。</p>
+          </div>
+
+          <ul class="pb-desk-list">
+            {desks.map((d) => (
+              <li class={`pb-desk pb-desk-${d.tone}`}>
+                <p class="pb-desk-title">
+                  <span class="pb-desk-icon" aria-hidden="true"><svg><use href={`#pb-i-${d.icon}`} /></svg></span>
+                  {d.title}
+                </p>
+                <p class="pb-desk-target">{d.target}</p>
+                <a class="pb-desk-tel" href={d.telHref}>
+                  <span class="pb-desk-tel-icon" aria-hidden="true"><svg><use href="#pb-i-phone" /></svg></span>
+                  <span class="pb-num pb-desk-tel-no">{d.tel}</span>
+                </a>
+                <p class="pb-desk-hours">
+                  <span class="pb-desk-hours-icon" aria-hidden="true"><svg><use href="#pb-i-clock" /></svg></span>
+                  受付 {d.hours}
+                </p>
+                <p class="pb-desk-staff">{d.staff}</p>
+                <a class="pb-btn pb-btn-green pb-btn-block" href="#form">{d.ctaLabel}</a>
+              </li>
+            ))}
+          </ul>
+
+          <div class="pb-form-block" id="form">
+            <div class="pb-form-text">
+              <h3 class="pb-h3">フォームでのお申し込み</h3>
+              <p class="pb-body">
+                お名前・ご連絡先・ご用件をお送りいただければ、担当から折り返しご連絡します。
+                お急ぎの場合はお電話のほうが早くつながります。
+              </p>
+              <p class="pb-form-doc-title">資料請求でお届けするもの</p>
+              <ul class="pb-doclist">
+                {docItems.map((d) => (
+                  <li><span class="pb-doclist-mark" aria-hidden="true"><svg><use href="#pb-i-doc" /></svg></span>{d}</li>
+                ))}
+              </ul>
+              <p class="pb-note">※ フォームは実装時に設置します。このラフでは動作しません。</p>
+            </div>
+
+            {/* 見た目の確認用。送信はしない */}
+            <div class="pb-form-mock" aria-hidden="true">
+              <p class="pb-form-mock-label">ご用件</p>
+              <p class="pb-form-mock-field">見学のお申し込み　▼</p>
+              <p class="pb-form-mock-label">お名前</p>
+              <p class="pb-form-mock-field"></p>
+              <p class="pb-form-mock-label">お電話番号</p>
+              <p class="pb-form-mock-field"></p>
+              <p class="pb-form-mock-label">ご相談内容</p>
+              <p class="pb-form-mock-field pb-form-mock-area"></p>
+              <p class="pb-form-mock-btn">送信する</p>
+            </div>
+          </div>
+
+          <div class="pb-hours" id="access">
+            <h3 class="pb-h3">受付時間とアクセス</h3>
+            <div class="pb-hours-grid">
+              <div class="pb-table-wrap">
+                <table class="pb-table">
+                  <thead>
+                    <tr><th scope="col">窓口</th><th scope="col">平日</th><th scope="col">土曜</th><th scope="col">日・祝</th></tr>
+                  </thead>
+                  <tbody>
+                    {hours.map((h) => (
+                      <tr>
+                        <th scope="row">{h.label}</th>
+                        <td class="pb-num">{h.weekday}</td>
+                        <td class="pb-num">{h.saturday}</td>
+                        <td class="pb-num">{h.sunday}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="pb-access">
+                <dl class="pb-deflist pb-deflist-sm">
+                  <div><dt>所在地</dt><dd>{corp.address}</dd></div>
+                  <div><dt>電車・バス</dt><dd>○○線 ○○駅より徒歩○分／○○バス停下車すぐ（差し替え枠）</dd></div>
+                  <div><dt>お車</dt><dd>○○インターより約○分。駐車場○台（差し替え枠）</dd></div>
+                </dl>
+                <div class="pb-map" aria-hidden="true">
+                  <span class="pb-map-icon"><svg><use href="#pb-i-map" /></svg></span>
+                  <span class="pb-map-label">地図（実装時に埋め込み）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 08 お知らせ -->
+      <section class="pb-sec pb-news" id="news">
+        <div class="pb-wrap">
+          <div class="pb-head2">
+            <p class="pb-eyebrow"><span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-clock" /></svg></span>NEWS</p>
+            <h2 class="pb-h2">お知らせ</h2>
+          </div>
+          <ul class="pb-news-list">
+            {news.map((n) => (
+              <li>
+                <a href="#">
+                  <span class="pb-num pb-news-date">{n.date}</span>
+                  <span class={`pb-cat pb-cat-${n.catTone}`}>{n.cat}</span>
+                  <span class="pb-news-text">{n.text}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+          <a class="pb-more" href="#">お知らせ一覧</a>
+        </div>
+      </section>
+
+      <!-- 09 採用情報 -->
+      <section class="pb-sec pb-recruit" id="recruit">
+        <div class="pb-wrap">
+          <div class="pb-head2">
+            <p class="pb-eyebrow"><span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-staff" /></svg></span>RECRUIT</p>
+            <h2 class="pb-h2">採用情報</h2>
+            <p class="pb-lead">求人票の前に、ここで働き続けられるかを判断できる材料を置きます。</p>
+          </div>
+
+          <div class="pb-rec-top">
+            <div class="pb-rec-media">
+              <img src="/images/plumeria/recruit-01.webp"
+                   alt="申し送りの時間に、職員どうしが記録を見ながら話している様子"
+                   width="900" height="600" loading="lazy" decoding="async" />
+            </div>
+            <div class="pb-rec-interview">
+              <p class="pb-rec-tag">職員インタビュー</p>
+              <blockquote class="pb-quote">
+                （職員の方のお話がここに入ります。入職の理由、いま担当していること、
+                働き方について、120〜200字ほど。当方で創作しないため、取材の枠のみ置いています。）
+              </blockquote>
+              <p class="pb-rec-who">○○ ○○／介護職員／勤続○年（差し替え枠）</p>
+              <a class="pb-more" href="#">ほかの職員の話を読む</a>
+            </div>
+          </div>
+
+          <div class="pb-rec-cols">
+            <div class="pb-rec-policy">
+              <h3 class="pb-h3">行動指針</h3>
+              <ul class="pb-checklist">
+                {recruitPolicy.map((p) => (
+                  <li><span class="pb-check" aria-hidden="true"><svg><use href="#pb-i-shield" /></svg></span>{p}</li>
+                ))}
+              </ul>
+              <p class="pb-note">※ 実際の行動指針・クレドがあれば差し替えます。</p>
+            </div>
+
+            <div class="pb-rec-support">
+              <h3 class="pb-h3">研修・資格・働き方</h3>
+              <dl class="pb-deflist pb-deflist-sm">
+                {recruitSupport.map((s) => (
+                  <div><dt>{s.title}</dt><dd>{s.body}</dd></div>
+                ))}
+              </dl>
+            </div>
+          </div>
+
+          <ul class="pb-fact-list pb-fact-list-sm">
+            {recruitFacts.map((f) => (
+              <li class="pb-fact">
+                <p class="pb-fact-num"><span class="pb-num">{f.num}</span><span class="pb-fact-unit">{f.unit}</span></p>
+                <p class="pb-fact-label">{f.label}</p>
+                <p class="pb-fact-note">{f.note}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div class="pb-jobs">
+            <h3 class="pb-h3">募集職種</h3>
+            <div class="pb-table-wrap">
+              <table class="pb-table">
+                <thead>
+                  <tr><th scope="col">職種</th><th scope="col">勤務先</th><th scope="col">雇用形態</th><th scope="col"></th></tr>
+                </thead>
+                <tbody>
+                  {jobs.map((j) => (
+                    <tr>
+                      <th scope="row">{j.name}</th>
+                      <td>{j.place}</td>
+                      <td>{j.type}</td>
+                      <td><a class="pb-more pb-more-inline" href="#">募集要項</a></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div class="pb-rec-cta">
+              <a class="pb-btn pb-btn-navy" href="#">採用情報のページへ</a>
+              <a class="pb-btn pb-btn-outline" href="#">見学・職場体験のご相談</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="pb-foot">
+      <img class="pb-foot-deco" src="/images/plumeria/decoration-tr.webp" alt=""
+           width="520" height="541" loading="lazy" decoding="async" aria-hidden="true" />
+      <div class="pb-wrap">
+        <div class="pb-foot-top">
+          <div class="pb-foot-brand">
+            <span class="pb-brand-mark" aria-hidden="true"><svg><use href="#pb-i-leaf" /></svg></span>
+            <p class="pb-foot-name">{corp.name}</p>
+            <p class="pb-foot-en">{corp.nameEn}</p>
+            <p class="pb-foot-addr">{corp.address}</p>
+            <p class="pb-foot-founded">設立 {corp.founded}（差し替え枠）</p>
+            <a class="pb-foot-tel" href={corp.telHref}>
+              <span class="pb-desk-tel-icon" aria-hidden="true"><svg><use href="#pb-i-phone" /></svg></span>
+              <span class="pb-num pb-desk-tel-no">{corp.tel}</span>
+            </a>
+            <p class="pb-foot-hours">{corp.telHours}</p>
+          </div>
+
+          <div class="pb-foot-nav">
+            {footerGroups.map((g) => (
+              <div class="pb-foot-group">
+                <p class="pb-foot-heading">{g.heading}</p>
+                <ul>
+                  {g.links.map((l) => (<li><a href={l.href}>{l.label}</a></li>))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="pb-foot-bottom">
+          <ul class="pb-foot-legal">
+            <li><a href="#">プライバシーポリシー</a></li>
+            <li><a href="#">個人情報の取り扱い</a></li>
+            <li><a href="#">運営規程・重要事項説明書</a></li>
+          </ul>
+          <p class="pb-copy">© {corp.name}</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- モバイル固定CTA -->
+    <div class="pb-sticky">
+      <a class="pb-btn pb-btn-navy pb-btn-sticky" href={corp.telHref}>電話する</a>
+      <a class="pb-btn pb-btn-green pb-btn-sticky" href="#contact">見学・資料請求</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Roboto+Condensed:wght@400;500;600&display=swap');
+
+  .pb {
+    /* ── 配色 ───────────────────────────────────────
+       白を主役にし、自然色は「面」だけに使う。彩度の高い色は使わない。   */
+    --paper: #ffffff;       /* 主役の白 */
+    --bg: #fbfaf6;          /* 生成り */
+    --beige: #f4efe4;       /* 淡いベージュ */
+    --mint: #eaf2ec;        /* 淡いグリーン */
+    --sky: #e9f0f5;         /* やわらかいブルー */
+
+    --ink: #1e2b26;         /* 本文 */
+    --green: #1f5140;       /* 深緑（主アクセント・主CTA） */
+    --navy: #223c55;        /* ネイビー（副アクセント・電話） */
+    --leaf: #2b7159;        /* 小さい文字にも使える緑。淡青・ベージュの上でも4.5:1を超える値にしてある */
+    --muted: #55655d;       /* 補助文字（白地で6.2:1） */
+    --line: rgba(30, 43, 38, 0.14);
+    --line-soft: rgba(30, 43, 38, 0.08);
+
+    /* 影は「わずかに浮く」程度。黒い強い影は使わない */
+    --shadow: 0 2px 14px rgba(31, 81, 64, 0.06);
+    --shadow-lift: 0 6px 22px rgba(31, 81, 64, 0.12);
+
+    --wrap: 1160px;
+    --r: 18px;              /* 丸みのある形 */
+    --r-sm: 12px;
+
+    font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', 'ヒラギノ角ゴ Pro W3',
+      'Hiragino Kaku Gothic Pro', 'Yu Gothic Medium', 'YuGothic', Meiryo, sans-serif;
+    font-size: 17px;        /* 高齢のご家族が読むため大きめ */
+    line-height: 2;
+    letter-spacing: 0.03em;
+    color: var(--ink);
+    background: var(--paper);
+    padding-bottom: 96px;
+    overflow-x: hidden;
+  }
+
+  .pb :is(h1, h2, h3, p, ul, ol, dl, dd, figure, table, blockquote) { margin: 0; }
+  .pb :is(ul, ol) { padding: 0; list-style: none; }
+  .pb blockquote { padding: 0; }
+  .pb a:not([class]) { color: inherit; }
+  .pb img { max-width: 100%; display: block; }
+  .pb-defs { position: absolute; width: 0; height: 0; }
+
+  .pb svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .pb-num {
+    font-family: 'Roboto Condensed', 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .pb-wrap { width: min(100% - 40px, var(--wrap)); margin-inline: auto; }
+  .pb-body { font-size: 16px; color: var(--ink); }
+  .pb-note { font-size: 13px; line-height: 1.9; color: var(--muted); }
+  .pb-note-center { text-align: center; margin-top: 28px; }
+
+  .pb-notice {
+    background: var(--green);
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.8;
+    text-align: center;
+    padding: 10px 20px;
+  }
+
+  /* ── ヘッダー ───────────────────────────────── */
+  .pb-head {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid var(--line-soft);
+  }
+  .pb-head-inner {
+    width: min(100% - 40px, 1320px);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    min-height: 78px;
+  }
+  .pb-brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: inherit; }
+  .pb-brand-mark {
+    width: 42px; height: 42px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--mint);
+    color: var(--green);
+    flex: none;
+  }
+  .pb-brand-mark svg { width: 24px; height: 24px; }
+  .pb-brand-text { display: grid; line-height: 1.35; }
+  .pb-brand-name { font-size: 21px; font-weight: 700; letter-spacing: 0.06em; }
+  .pb-brand-sub { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+
+  .pb-nav { display: flex; gap: 24px; margin-left: 8px; }
+  .pb-nav a {
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+    padding: 6px 0;
+    background-image: linear-gradient(to top, var(--leaf) 2px, transparent 2px);
+    background-repeat: no-repeat;
+    background-size: 0 100%;
+    transition: background-size 0.3s, color 0.3s;
+  }
+  .pb-nav a:hover { color: var(--leaf); background-size: 100% 100%; }
+
+  .pb-head-cta { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+  .pb-headtel { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--navy); }
+  .pb-headtel-icon { width: 22px; height: 22px; flex: none; }
+  .pb-headtel-icon svg { width: 22px; height: 22px; }
+  .pb-headtel-body { display: grid; line-height: 1.3; }
+  .pb-headtel-no { font-size: 24px; font-weight: 600; }
+  .pb-headtel-hours { font-size: 11px; color: var(--muted); letter-spacing: 0.02em; }
+
+  /* ── ボタン ─────────────────────────────────── */
+  .pb-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 58px;
+    padding: 0 30px;
+    border-radius: 999px;          /* やわらかなフレーム */
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: center;
+    text-decoration: none;
+    border: 1.5px solid transparent;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .pb-btn-green { background: var(--green); color: #fff; }
+  .pb-btn-navy { background: var(--navy); color: #fff; }
+  .pb-btn-outline { background: var(--paper); color: var(--green); border-color: var(--green); }
+  .pb-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+  .pb-btn-green:hover { background: #2a6b53; }
+  .pb-btn-navy:hover { background: #2e4f6e; }
+  .pb-btn-outline:hover { background: var(--mint); }
+  .pb-btn-sm { min-height: 48px; padding: 0 20px; font-size: 15px; }
+  .pb-btn-block { display: flex; width: 100%; }
+
+  .pb-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--leaf);
+    text-decoration: none;
+    background-image: linear-gradient(to top, currentColor 1px, transparent 1px);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    transition: color 0.3s;
+  }
+  .pb-more::after { content: '→'; }
+  .pb-more:hover { color: var(--green); }
+  .pb-more-inline { font-size: 14px; }
+
+  /* ── 見出し ─────────────────────────────────── */
+  .pb-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    color: var(--leaf);
+  }
+  .pb-eyebrow-mark { width: 20px; height: 20px; }
+  .pb-eyebrow-mark svg { width: 20px; height: 20px; }
+
+  .pb-h1 {
+    font-size: clamp(27px, 3vw, 38px);
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: 0.04em;
+    margin-top: 14px;
+  }
+  .pb-h2 {
+    font-size: clamp(23px, 2.6vw, 32px);
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    margin-top: 12px;
+  }
+  .pb-h3 { font-size: 19px; font-weight: 700; line-height: 1.7; letter-spacing: 0.04em; }
+  .pb-lead { font-size: 16px; color: var(--muted); margin-top: 14px; }
+  .pb-head2 { text-align: center; margin-bottom: 46px; }
+  .pb-head2 .pb-lead { max-width: 40em; margin-inline: auto; }
+
+  .pb-sec { padding-block: clamp(64px, 8vw, 104px); }
+
+  /* ── 01 ヒーロー ─────────────────────────────── */
+  .pb-hero { padding-top: clamp(34px, 4vw, 56px); padding-bottom: clamp(48px, 6vw, 78px); background: var(--paper); }
+  .pb-hero-grid { display: grid; gap: 34px; }
+  .pb-hero-media { border-radius: 26px; overflow: hidden; background: var(--mint); }
+  .pb-hero-photo { width: 100%; height: clamp(260px, 46vw, 520px); object-fit: cover; object-position: 35% center; }
+  .pb-hero-lead { font-size: 17px; color: var(--muted); margin-top: 18px; }
+  .pb-br-pc { display: none; }
+
+  .pb-paths { display: grid; gap: 16px; margin-top: 42px; }
+  .pb-path {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 22px;
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    background: var(--paper);
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.3s, border-color 0.3s, transform 0.3s, box-shadow 0.3s;
+  }
+  .pb-path:hover { background: var(--mint); border-color: var(--green); transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+  .pb-path-icon {
+    width: 58px; height: 58px; flex: none;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--mint);
+    color: var(--green);
+  }
+  .pb-path-icon svg { width: 28px; height: 28px; }
+  .pb-path-text { display: grid; gap: 2px; min-width: 0; }
+  .pb-path-label { font-size: 19px; font-weight: 700; line-height: 1.5; }
+  .pb-path-body { font-size: 14px; color: var(--muted); line-height: 1.6; }
+  .pb-path-arrow { margin-left: auto; color: var(--green); font-size: 20px; }
+
+  /* ── 02 法人の想い ───────────────────────────── */
+  .pb-mind { background: var(--bg); }
+  .pb-mind-grid { display: grid; gap: 40px; align-items: center; }
+  .pb-mind-media { border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
+  .pb-mind-media img { width: 100%; height: 100%; object-fit: cover; }
+  .pb-mind-body { display: grid; gap: 20px; margin-top: 24px; font-size: 16px; }
+  .pb-mind-body strong { font-weight: 700; color: var(--green); }
+  .pb-sign { margin-top: 26px; font-size: 15px; color: var(--muted); }
+
+  /* ── 03 大切にしていること ───────────────────── */
+  .pb-values { background: var(--paper); }
+  .pb-value-list { display: grid; gap: 26px; }
+  .pb-value {
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r);
+    background: var(--paper);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .pb-value-media { position: relative; }
+  .pb-value-media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .pb-value-icon {
+    position: absolute;
+    left: 22px;
+    bottom: -26px;
+    width: 56px; height: 56px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--green);
+    border: 1px solid var(--line-soft);
+    box-shadow: var(--shadow);
+  }
+  .pb-value-icon svg { width: 26px; height: 26px; }
+  .pb-value-text { padding: 40px 24px 30px; }
+  .pb-value-en { font-size: 12px; letter-spacing: 0.16em; color: var(--leaf); }
+  .pb-value-text .pb-h3 { margin-top: 6px; }
+  .pb-value-text .pb-body { margin-top: 12px; }
+
+  /* ── 04 法人の歩みと体制 ─────────────────────── */
+  .pb-facts { background: var(--sky); }
+  .pb-fact-list { display: grid; gap: 14px; }
+  .pb-fact {
+    background: var(--paper);
+    border-radius: var(--r);
+    padding: 26px 20px;
+    text-align: center;
+  }
+  .pb-fact-num { color: var(--navy); line-height: 1.2; }
+  .pb-fact-num .pb-num { font-size: 40px; font-weight: 600; }
+  .pb-fact-unit { font-size: 16px; margin-left: 4px; }
+  .pb-fact-label { font-size: 15px; font-weight: 700; margin-top: 8px; line-height: 1.6; }
+  .pb-fact-label2 { font-size: 13px; color: var(--muted); line-height: 1.6; }
+  .pb-fact-note { font-size: 12px; color: var(--muted); line-height: 1.7; margin-top: 6px; }
+
+  .pb-fact-cols { margin-top: 34px; display: grid; gap: 22px; }
+  .pb-deflist { display: grid; gap: 16px; }
+  .pb-deflist > div {
+    background: var(--paper);
+    border-radius: var(--r-sm);
+    padding: 18px 20px;
+  }
+  .pb-deflist dt { font-size: 15px; font-weight: 700; color: var(--green); }
+  .pb-deflist dd { font-size: 15px; line-height: 1.9; margin-top: 4px; }
+  .pb-deflist-sm > div { background: transparent; padding: 0; border-bottom: 1px solid var(--line-soft); padding-bottom: 14px; }
+
+  /* ── 05 施設を探す ───────────────────────────── */
+  .pb-facilities { background: var(--paper); }
+  .pb-fac-list { display: grid; gap: 22px; }
+  .pb-fac {
+    border: 1px solid var(--line-soft);
+    border-radius: var(--r);
+    overflow: hidden;
+    background: var(--paper);
+    box-shadow: var(--shadow);
+  }
+  .pb-fac-media { background: var(--mint); }
+  .pb-tone-beige .pb-fac-media { background: var(--beige); }
+  .pb-fac-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .pb-fac-text { padding: 24px 22px 26px; }
+  .pb-fac-kind { display: flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 500; color: var(--leaf); }
+  .pb-fac-icon { width: 20px; height: 20px; }
+  .pb-fac-icon svg { width: 20px; height: 20px; }
+  .pb-fac-name { font-size: 24px; font-weight: 700; line-height: 1.5; letter-spacing: 0.06em; margin-top: 4px; }
+  .pb-fac-area { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); margin-top: 6px; }
+  .pb-fac-area-icon { width: 18px; height: 18px; flex: none; }
+  .pb-fac-area-icon svg { width: 18px; height: 18px; }
+  .pb-fac-text .pb-body { margin-top: 12px; }
+  .pb-fac-links { display: grid; gap: 10px; margin-top: 20px; }
+
+  /* 受入状況は色に頼らず、必ず文字でも示す */
+  .pb-status {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 5px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  .pb-status-open { background: var(--green); color: #fff; }
+  .pb-status-full { background: var(--paper); color: var(--muted); border: 1px solid var(--line); }
+
+  /* ── 06 サービスを探す ───────────────────────── */
+  .pb-services { background: var(--bg); }
+  .pb-sv-list { display: grid; gap: 20px; }
+  .pb-sv {
+    background: var(--paper);
+    border-radius: var(--r);
+    overflow: hidden;
+    border: 1px solid var(--line-soft);
+    display: grid;
+  }
+  .pb-sv-media img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+  .pb-sv-blank {
+    aspect-ratio: 4 / 3;
+    background: var(--mint);
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    gap: 10px;
+    color: var(--green);
+  }
+  .pb-sv:nth-child(even) .pb-sv-blank { background: var(--beige); }
+  .pb-sv-blank-icon { width: 56px; height: 56px; }
+  .pb-sv-blank-icon svg { width: 56px; height: 56px; stroke-width: 1.1; }
+  .pb-sv-blank-label { font-size: 13px; color: var(--muted); letter-spacing: 0.06em; }
+  .pb-sv-text { padding: 22px 22px 26px; }
+  .pb-sv-cat {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--navy);
+    background: var(--sky);
+    border-radius: 999px;
+    padding: 3px 12px;
+  }
+  .pb-sv-name { display: flex; align-items: center; gap: 9px; margin-top: 10px; }
+  .pb-sv-icon { width: 34px; height: 34px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--mint); color: var(--green); }
+  .pb-sv-icon svg { width: 19px; height: 19px; }
+  .pb-sv-trouble { font-size: 15px; font-weight: 500; color: var(--green); margin-top: 10px; line-height: 1.8; }
+  .pb-sv-text .pb-body { margin-top: 6px; }
+  .pb-sv-text .pb-more { margin-top: 14px; }
+
+  /* ── 07 見学・資料請求 ───────────────────────── */
+  .pb-contact { background: var(--mint); }
+  .pb-desk-list { display: grid; gap: 18px; }
+  .pb-desk {
+    background: var(--paper);
+    border-radius: var(--r);
+    padding: 26px 22px 24px;
+    border-top: 5px solid var(--green);
+    box-shadow: var(--shadow);
+    /* 見出しの行数が窓口ごとに違うため、CTAは下端で揃える */
+    display: flex;
+    flex-direction: column;
+  }
+  .pb-desk-navy { border-top-color: var(--navy); }
+  .pb-desk-beige { border-top-color: #b09a6f; }
+  .pb-desk-title { display: flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 700; line-height: 1.6; }
+  .pb-desk-icon { width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 50%; background: var(--mint); color: var(--green); }
+  .pb-desk-navy .pb-desk-icon { background: var(--sky); color: var(--navy); }
+  .pb-desk-beige .pb-desk-icon { background: var(--beige); color: var(--green); }
+  .pb-desk-icon svg { width: 20px; height: 20px; }
+  .pb-desk-target { font-size: 14px; color: var(--muted); margin-top: 8px; line-height: 1.8; }
+  .pb-desk-tel { display: flex; align-items: center; gap: 8px; margin-top: 14px; text-decoration: none; color: var(--navy); }
+  .pb-desk-tel-icon { width: 24px; height: 24px; flex: none; }
+  .pb-desk-tel-icon svg { width: 24px; height: 24px; }
+  .pb-desk-tel-no { font-size: 30px; font-weight: 600; line-height: 1.3; }
+  .pb-desk-hours { display: flex; align-items: center; gap: 6px; font-size: 14px; color: var(--muted); }
+  .pb-desk-hours-icon { width: 18px; height: 18px; flex: none; }
+  .pb-desk-hours-icon svg { width: 18px; height: 18px; }
+  .pb-desk-staff { font-size: 13px; color: var(--muted); line-height: 1.8; }
+  .pb-desk .pb-btn { margin-top: auto; }
+  .pb-desk-staff { margin-bottom: 16px; }
+
+  .pb-form-block {
+    margin-top: 30px;
+    background: var(--paper);
+    border-radius: var(--r);
+    padding: 30px 24px;
+    display: grid;
+    gap: 28px;
+  }
+  .pb-form-doc-title { font-size: 15px; font-weight: 700; margin-top: 20px; }
+  .pb-doclist { display: grid; gap: 8px; margin-top: 8px; }
+  .pb-doclist li { display: flex; align-items: flex-start; gap: 9px; font-size: 15px; line-height: 1.8; }
+  .pb-doclist-mark { width: 20px; height: 20px; flex: none; color: var(--leaf); margin-top: 4px; }
+  .pb-doclist-mark svg { width: 20px; height: 20px; }
+  .pb-form-text .pb-note { margin-top: 16px; }
+
+  .pb-form-mock { background: var(--bg); border-radius: var(--r-sm); padding: 22px 20px; }
+  .pb-form-mock-label { font-size: 13px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+  .pb-form-mock-field {
+    height: 46px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--paper);
+    margin-bottom: 14px;
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 46px;
+    padding-inline: 12px;
+  }
+  .pb-form-mock-area { height: 96px; }
+  .pb-form-mock-btn {
+    height: 54px;
+    border-radius: 999px;
+    background: var(--green);
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 54px;
+  }
+
+  .pb-hours { margin-top: 34px; background: var(--paper); border-radius: var(--r); padding: 28px 24px; }
+  .pb-hours-grid { display: grid; gap: 26px; margin-top: 18px; }
+  .pb-table-wrap { overflow-x: auto; }
+  .pb-table { width: 100%; border-collapse: collapse; min-width: 460px; font-size: 15px; }
+  .pb-table :is(th, td) { padding: 12px 14px; border-bottom: 1px solid var(--line-soft); text-align: left; line-height: 1.7; }
+  .pb-table thead th { background: var(--mint); font-size: 14px; font-weight: 700; white-space: nowrap; }
+  .pb-table tbody th { font-weight: 500; }
+  .pb-map {
+    margin-top: 16px;
+    height: 190px;
+    border: 1px dashed var(--line);
+    border-radius: var(--r-sm);
+    background: var(--bg);
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 6px;
+    color: var(--muted);
+  }
+  .pb-map-icon { width: 30px; height: 30px; }
+  .pb-map-icon svg { width: 30px; height: 30px; }
+  .pb-map-label { font-size: 13px; }
+
+  /* ── 08 お知らせ ─────────────────────────────── */
+  .pb-news { background: var(--paper); }
+  .pb-news .pb-head2 { margin-bottom: 30px; }
+  .pb-news-list { border-top: 1px solid var(--line-soft); margin-bottom: 24px; }
+  .pb-news-list li { border-bottom: 1px solid var(--line-soft); }
+  .pb-news-list a {
+    display: grid;
+    gap: 4px 16px;
+    padding: 18px 6px;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .pb-news-list a:hover { background: var(--bg); color: var(--green); }
+  .pb-news-date { font-size: 15px; color: var(--muted); }
+  .pb-cat {
+    justify-self: start;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border-radius: 999px;
+    padding: 3px 13px;
+    line-height: 1.7;
+  }
+  .pb-cat-green { background: var(--mint); color: var(--green); }
+  .pb-cat-navy { background: var(--sky); color: var(--navy); }
+  .pb-cat-beige { background: var(--beige); color: #6b4f1d; }
+  .pb-news-text { font-size: 16px; line-height: 1.8; }
+
+  /* ── 09 採用 ─────────────────────────────────── */
+  .pb-recruit { background: var(--beige); }
+  .pb-rec-top { display: grid; gap: 26px; }
+  .pb-rec-media { border-radius: var(--r); overflow: hidden; box-shadow: var(--shadow); }
+  .pb-rec-media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; }
+  .pb-rec-interview { background: var(--paper); border-radius: var(--r); padding: 26px 24px; }
+  .pb-rec-tag {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--green);
+    background: var(--mint);
+    border-radius: 999px;
+    padding: 3px 13px;
+  }
+  .pb-quote { font-size: 17px; line-height: 2; margin-top: 14px; padding-left: 16px; border-left: 3px solid var(--green); }
+  .pb-rec-who { font-size: 14px; color: var(--muted); margin-top: 12px; }
+  .pb-rec-interview .pb-more { margin-top: 12px; }
+
+  .pb-rec-cols { display: grid; gap: 22px; margin-top: 26px; }
+  .pb-rec-policy, .pb-rec-support { background: var(--paper); border-radius: var(--r); padding: 26px 24px; }
+  .pb-checklist { display: grid; gap: 12px; margin-top: 14px; }
+  .pb-checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 16px; line-height: 1.8; }
+  .pb-check { width: 24px; height: 24px; flex: none; color: var(--green); margin-top: 4px; }
+  .pb-check svg { width: 24px; height: 24px; }
+  .pb-rec-policy .pb-note { margin-top: 14px; }
+  .pb-rec-support .pb-deflist { margin-top: 14px; }
+
+  .pb-fact-list-sm { margin-top: 26px; }
+  .pb-fact-list-sm .pb-fact-num .pb-num { font-size: 34px; }
+  .pb-jobs { background: var(--paper); border-radius: var(--r); padding: 26px 24px; margin-top: 26px; }
+  .pb-jobs .pb-table-wrap { margin-top: 16px; }
+  .pb-rec-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+  /* ── フッター ───────────────────────────────── */
+  .pb-foot {
+    position: relative;
+    background: var(--bg);
+    border-top: 1px solid var(--line-soft);
+    padding-block: 54px 30px;
+    overflow: hidden;
+  }
+  .pb-foot-deco {
+    position: absolute;
+    top: -70px;
+    right: -60px;
+    width: clamp(160px, 22vw, 280px);
+    height: auto;
+    opacity: 0.4;
+    pointer-events: none;
+  }
+  .pb-foot-top { display: grid; gap: 34px; position: relative; }
+  .pb-foot-brand .pb-brand-mark { margin-bottom: 12px; }
+  .pb-foot-name { font-size: 22px; font-weight: 700; letter-spacing: 0.06em; }
+  .pb-foot-en { font-size: 12px; letter-spacing: 0.18em; color: var(--muted); }
+  .pb-foot-addr, .pb-foot-founded { font-size: 14px; color: var(--muted); line-height: 1.9; }
+  .pb-foot-addr { margin-top: 12px; }
+  .pb-foot-tel { display: flex; align-items: center; gap: 8px; margin-top: 12px; text-decoration: none; color: var(--navy); }
+  .pb-foot-hours { font-size: 13px; color: var(--muted); }
+
+  .pb-foot-nav { display: grid; gap: 24px; }
+  .pb-foot-heading { font-size: 15px; font-weight: 700; color: var(--green); margin-bottom: 8px; }
+  .pb-foot-nav ul { display: grid; gap: 7px; }
+  .pb-foot-nav a {
+    font-size: 14px;
+    color: var(--ink);
+    text-decoration: none;
+    background-image: linear-gradient(to top, currentColor 1px, transparent 1px);
+    background-repeat: no-repeat;
+    background-size: 0 100%;
+    transition: background-size 0.3s, color 0.3s;
+  }
+  .pb-foot-nav a:hover { color: var(--green); background-size: 100% 100%; }
+
+  .pb-foot-bottom {
+    margin-top: 34px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
+    display: grid;
+    gap: 12px;
+  }
+  .pb-foot-legal { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  .pb-foot-legal a { font-size: 13px; color: var(--muted); text-decoration: none; }
+  .pb-foot-legal a:hover { color: var(--green); }
+  .pb-copy { font-size: 12px; color: var(--muted); }
+
+  /* ── モバイル固定CTA ─────────────────────────── */
+  .pb-sticky {
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    z-index: 50;
+    display: flex;
+    gap: 10px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(255, 255, 255, 0.97);
+    border-top: 1px solid var(--line-soft);
+  }
+  .pb-btn-sticky { flex: 1; min-height: 56px; padding: 0 12px; font-size: 16px; }
+
+  /* ── モバイルメニュー ────────────────────────
+     .pb-menu-list に display を直接書くと <details> の既定の非表示が効かなくなる。
+     必ず none と [open] で分ける（1a で踏んだ不具合）。 */
+  .pb-menu { position: relative; margin-left: auto; }
+  .pb-menu summary {
+    list-style: none;
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+  }
+  .pb-menu summary::-webkit-details-marker { display: none; }
+  .pb-menu-bars, .pb-menu-bars::before, .pb-menu-bars::after {
+    display: block;
+    width: 22px; height: 2px;
+    background: var(--ink);
+    border-radius: 2px;
+  }
+  .pb-menu-bars { position: relative; }
+  .pb-menu-bars::before, .pb-menu-bars::after { content: ''; position: absolute; left: 0; }
+  .pb-menu-bars::before { top: -7px; }
+  .pb-menu-bars::after { top: 7px; }
+  .pb-menu-list { display: none; }
+  .pb-menu[open] .pb-menu-list {
+    display: grid;
+    position: absolute;
+    right: 0;
+    top: calc(100% + 10px);
+    width: min(84vw, 320px);
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-lift);
+    padding: 8px;
+    max-height: 74vh;
+    overflow-y: auto;
+  }
+  .pb-menu-list a {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-height: 56px;
+    padding: 0 12px;
+    font-size: 16px;
+    text-decoration: none;
+    color: inherit;
+    border-radius: var(--r-sm);
+  }
+  .pb-menu-list a:hover { background: var(--mint); }
+  .pb-mi { width: 24px; height: 24px; flex: none; color: var(--green); }
+  .pb-mi svg { width: 24px; height: 24px; }
+
+  /* ── ブレイクポイント ────────────────────────── */
+  @media (min-width: 700px) {
+    .pb-paths { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-fact-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .pb-fact-list-sm { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-sv-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pb-value-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-desk-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-rec-cols { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pb-foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pb-news-list a { grid-template-columns: auto auto minmax(0, 1fr); align-items: center; }
+  }
+
+  @media (min-width: 1000px) {
+    .pb-br-pc { display: inline; }
+    .pb-hero-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: 44px; }
+    .pb-hero-photo { height: clamp(360px, 34vw, 520px); }
+    .pb-mind-grid { grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 54px; }
+    .pb-fact-cols { grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: start; gap: 30px; }
+    .pb-fac-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-sv-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pb-form-block { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 40px; padding: 36px 34px; }
+    .pb-hours-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+    .pb-rec-top { grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); align-items: center; }
+    .pb-foot-top { grid-template-columns: minmax(0, 0.85fr) minmax(0, 2fr); gap: 44px; }
+    .pb-foot-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .pb-foot-bottom { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+    .pb-sticky { display: none; }
+    .pb { padding-bottom: 0; }
+  }
+
+  @media (max-width: 1099px) {
+    .pb-nav, .pb-head-cta { display: none; }
+  }
+  @media (min-width: 1100px) {
+    .pb-menu { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pb * { transition: none !important; }
+  }
+</style>
