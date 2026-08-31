@@ -9,8 +9,12 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
   - デザイン方針: 支給されたデザインブリーフ（森・木漏れ日・地域拠点／やさしい安心感）に準拠。
       参照サイト c-morinosato.com は「雰囲気の参考」であり、ロゴ・木の形・イラスト・写真・
       文言は一切複製していない。モチーフはすべてこのファイル内で書き起こしたオリジナルSVG。
-  - 用途: プルメリア様への提出用ラフ。写真・電話番号・空室状況はすべて仮
-  - 制約: JavaScript非依存 / 常時アニメーションなし / AI生成画像なし
+  - 用途: プルメリア様への提出用ラフ。電話番号・空室状況・お知らせは仮
+  - 写真: ボスが用意したプロンプトで生成された画像を支給。
+      元PNG 26.1MB を WebP へ変換して public/images/plumeria/ に配置（合計 497KB）。
+      これらは「イメージ写真」であり、実際の施設・スタッフではない。
+      提案時にその旨を明示すること。
+  - 制約: JavaScript非依存 / 常時アニメーションなし
   - 大きさの方針: 施設カード（.pl-svc）は基準サイズを維持し、それ以外を一段落とす。
 
   【ブリーフとの相違点（1点だけ・意図的）】
@@ -38,11 +42,16 @@ const corp = {
 // ── 差し替え枠：5つのサービス ────────────────────────────
 // tone は写真枠の地色だけに使う。枠線・文字・ボタンは緑と濃色に統一する
 const services = [
-  { name: 'プルメリアⅠ', short: 'Ⅰ', kind: 'サービス付き高齢者向け住宅', status: '空室あり', open: true, tone: 'mint', icon: 'home', id: 'service-1' },
-  { name: 'プルメリアⅡ', short: 'Ⅱ', kind: 'サービス付き高齢者向け住宅', status: '満室', open: false, tone: 'mint', icon: 'home', id: 'service-2' },
-  { name: 'プルメリアⅢ', short: 'Ⅲ', kind: 'ショートステイ', status: '受入可', open: true, tone: 'beige', icon: 'bed', id: 'service-3' },
-  { name: '訪問看護', short: '訪問看護', kind: '看護師がご自宅へ訪問します', status: '', open: null, tone: 'mint', icon: 'care', id: 'service-4' },
-  { name: 'レンタル介護用品', short: 'レンタル', kind: '福祉用具貸与', status: '', open: null, tone: 'beige', icon: 'chair', id: 'service-5' },
+  { name: 'プルメリアⅠ', short: 'Ⅰ', kind: 'サービス付き高齢者向け住宅', status: '空室あり', open: true, tone: 'mint', icon: 'home', id: 'service-1',
+    img: '/images/plumeria/services-01.webp', alt: '窓から光の入る居室で、入居者が自分らしく過ごしている様子' },
+  { name: 'プルメリアⅡ', short: 'Ⅱ', kind: 'サービス付き高齢者向け住宅', status: '満室', open: false, tone: 'mint', icon: 'home', id: 'service-2',
+    img: '/images/plumeria/services-02.webp', alt: '共用ラウンジで入居者どうしが穏やかに会話している様子' },
+  { name: 'プルメリアⅢ', short: 'Ⅲ', kind: 'ショートステイ', status: '受入可', open: true, tone: 'beige', icon: 'bed', id: 'service-3',
+    img: '/images/plumeria/services-03.webp', alt: '短期滞在の方を居室の入口で迎えているスタッフ' },
+  { name: '訪問看護', short: '訪問看護', kind: '看護師がご自宅へ訪問します', status: '', open: null, tone: 'mint', icon: 'care', id: 'service-4',
+    img: '/images/plumeria/services-04.webp', alt: 'ご自宅のリビングで看護師が健康状態を確認している様子' },
+  { name: 'レンタル介護用品', short: 'レンタル', kind: '福祉用具貸与', status: '', open: null, tone: 'beige', icon: 'chair', id: 'service-5',
+    img: '/images/plumeria/services-05.webp', alt: '歩行器の使い方をスタッフが説明している様子' },
 ];
 
 // ── 差し替え枠：対応時間 ─────────────────────────────────
@@ -54,9 +63,12 @@ const hours = [
 
 // ── 差し替え枠：強み（3項目）─────────────────────────────
 const reasons = [
-  { icon: 'staff', title: '寄り添う対応', body: '日中は職員が常駐しています。困りごとをその場でうかがい、ご家族にもお伝えします。（体制の詳細は差し替え枠）' },
-  { icon: 'care', title: '専門的な支援', body: '訪問看護を自社で運営しています。看護と介護を切り離さずにお預かりできます。（連携先は差し替え枠）' },
-  { icon: 'sprout', title: '自宅からの相談', body: 'ご来所前に、お電話とフォームでご相談いただけます。用品のレンタルまで同じ窓口で承ります。' },
+  { icon: 'staff', title: '寄り添う対応', body: '日中は職員が常駐しています。困りごとをその場でうかがい、ご家族にもお伝えします。（体制の詳細は差し替え枠）',
+    img: '/images/plumeria/feature-01.webp', alt: '入居者とスタッフが同じ目線の高さで話している様子' },
+  { icon: 'care', title: '専門的な支援', body: '訪問看護を自社で運営しています。看護と介護を切り離さずにお預かりできます。（連携先は差し替え枠）',
+    img: '/images/plumeria/feature-02.webp', alt: '看護師と介護スタッフが情報を共有している様子' },
+  { icon: 'sprout', title: '自宅からの相談', body: 'ご来所前に、お電話とフォームでご相談いただけます。用品のレンタルまで同じ窓口で承ります。',
+    img: '/images/plumeria/feature-03.webp', alt: 'ご家族が自宅のダイニングで相談している様子' },
 ];
 
 // ── 差し替え枠：一日の流れ ───────────────────────────────
@@ -211,9 +223,9 @@ const footerLinks = [
       <!-- 01 ファーストビュー -->
       <section class="pl-hero">
         <div class="pl-hero-media">
-          <div class="pl-ph pl-hero-photo" role="img" aria-label="メイン写真：自然光の入る外観またはスタッフ">
-            <span>［メイン写真：自然光の入る外観／スタッフ］</span>
-          </div>
+          {/* 被写体が左寄りで右に余白のある構図。見出しは右側に置く */}
+          <img class="pl-hero-photo" src="/images/plumeria/hero-01.webp" alt="建物のエントランス付近で、入居者とスタッフが穏やかに話している様子"
+               width="1600" height="900" fetchpriority="high" decoding="async" />
         </div>
         <div class="pl-wrap pl-hero-inner">
           <div class="pl-hero-copy">
@@ -258,18 +270,24 @@ const footerLinks = [
 
       <!-- 03 プルメリアについて -->
       <section class="pl-about" id="about">
-        <span class="pl-deco pl-deco-tree" aria-hidden="true"><svg><use href="#pl-i-tree" /></svg></span>
+        {/* 社名のプルメリアを実際の植物画で。抽象SVGの木より brand に近い */}
+        <img class="pl-deco-flower pl-deco-flower-bl" src="/images/plumeria/decoration-bl.webp" alt=""
+             width="520" height="515" loading="lazy" decoding="async" aria-hidden="true" />
         <span class="pl-deco pl-deco-bird" aria-hidden="true"><svg><use href="#pl-i-bird" /></svg></span>
         <span class="pl-deco pl-deco-sun" aria-hidden="true"><svg><use href="#pl-i-sun" /></svg></span>
         <div class="pl-wrap pl-about-inner">
-          <p class="pl-eyebrow pl-eyebrow-center"><span class="pl-eyebrow-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>ABOUT</p>
-          <h2 class="pl-about-catch">住まい、看護、暮らしの道具。<br />別々にしないほうが、たぶん楽です。</h2>
-          <p class="pl-body pl-about-body">
-            住む場所を探し、看護の相談先を探し、用品の手配先を探す。
-            ご本人にもご家族にも、その往復はけっこうな負担になります。
-            プルメリアは5つのサービスを、ひとつの窓口でお預かりしています。
-          </p>
-          <p class="pl-note">※ 理念・沿革はご提供いただいた内容に差し替えます。</p>
+          <div class="pl-about-text">
+            <p class="pl-eyebrow"><span class="pl-eyebrow-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>ABOUT</p>
+            <h2 class="pl-about-catch">住まい、看護、暮らしの道具。<br />別々にしないほうが、たぶん楽です。</h2>
+            <p class="pl-body pl-about-body">
+              住む場所を探し、看護の相談先を探し、用品の手配先を探す。
+              ご本人にもご家族にも、その往復はけっこうな負担になります。
+              プルメリアは5つのサービスを、ひとつの窓口でお預かりしています。
+            </p>
+            <p class="pl-note">※ 理念・沿革はご提供いただいた内容に差し替えます。</p>
+          </div>
+          <img class="pl-about-photo" src="/images/plumeria/about-01.webp" alt="窓辺の椅子に座る入居者とスタッフが穏やかに話している共用リビング"
+               width="1100" height="733" loading="lazy" decoding="async" />
         </div>
       </section>
 
@@ -287,10 +305,11 @@ const footerLinks = [
             {services.map((s) => (
               <li id={s.id}>
                 <a class="pl-card pl-svc" href={`#${s.id}`}>
-                  <span class={`pl-svc-ph pl-tone-${s.tone}`} aria-hidden="true">
-                    <svg class="pl-svc-icon"><use href={`#pl-i-${s.icon}`} /></svg>
+                  <img class="pl-svc-ph" src={s.img} alt={s.alt} width="760" height="570" loading="lazy" decoding="async" />
+                  <span class="pl-svc-name">
+                    <span class="pl-svc-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
+                    {s.name}
                   </span>
-                  <span class="pl-svc-name">{s.name}</span>
                   <span class="pl-svc-kind">{s.kind}</span>
                   {s.status && (
                     <span class={s.open ? 'pl-badge pl-badge-open' : 'pl-badge pl-badge-full'}>{s.status}</span>
@@ -315,6 +334,7 @@ const footerLinks = [
           <ul class="pl-grid-3 pl-reasons">
             {reasons.map((r) => (
               <li class="pl-card pl-reason">
+                <img class="pl-reason-photo" src={r.img} alt={r.alt} width="900" height="600" loading="lazy" decoding="async" />
                 <span class="pl-reason-icon" aria-hidden="true"><svg><use href={`#pl-i-${r.icon}`} /></svg></span>
                 <h3 class="pl-h3">{r.title}</h3>
                 <p class="pl-body">{r.body}</p>
@@ -329,6 +349,8 @@ const footerLinks = [
         <div class="pl-wrap">
           <h2 class="pl-h2"><span class="pl-h2-en">A DAY</span>一日の流れ</h2>
           <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は施設ごとに差し替えます。</p>
+          <img class="pl-day-photo" src="/images/plumeria/aday-01.webp" alt="午後の共用スペースで、入居者がそれぞれ読書やお茶をして過ごしている様子"
+               width="1600" height="900" loading="lazy" decoding="async" />
           <ol class="pl-day">
             {day.map((d) => (
               <li class="pl-day-item">
@@ -362,7 +384,9 @@ const footerLinks = [
               <p class="pl-note">更新日：2026.08.00（更新枠）</p>
             </section>
 
-            <section class="pl-card" id="recruit">
+            <section class="pl-card pl-recruit" id="recruit">
+              <img class="pl-recruit-photo" src="/images/plumeria/recruit-01.webp" alt="施設内で仕事の合間に会話しているスタッフたち"
+                   width="900" height="600" loading="lazy" decoding="async" />
               <h2 class="pl-h3">いっしょに働く方を探しています<span class="pl-h3-en">RECRUIT</span></h2>
               <p class="pl-body">介護スタッフ・看護師を募集しています。見学だけでもお気軽にお越しください。</p>
               <a class="pl-more" href="#recruit-index">募集要項</a>
@@ -429,6 +453,8 @@ const footerLinks = [
       <div class="pl-hill pl-hill-foot" aria-hidden="true">
         <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0 70V30c240-30 470 16 730 8s470-40 710-18v50Z" /></svg>
       </div>
+      <img class="pl-deco-flower pl-deco-flower-tr" src="/images/plumeria/decoration-tr.webp" alt=""
+           width="520" height="541" loading="lazy" decoding="async" aria-hidden="true" />
       <div class="pl-wrap pl-foot-inner">
         <div class="pl-foot-brand">
           <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>
@@ -488,6 +514,7 @@ const footerLinks = [
   .pl :is(h1, h2, h3, p, ul, ol, dl, dd, figure, table) { margin: 0; }
   .pl :is(ul, ol) { padding: 0; list-style: none; }
   .pl a:not([class]) { color: inherit; }
+  .pl img { max-width: 100%; }
   .pl-brand, .pl-nav a, .pl-menu-list a, .pl-foot-links a { color: inherit; }
   .pl-defs { position: absolute; width: 0; height: 0; }
 
@@ -660,17 +687,20 @@ const footerLinks = [
   .pl-hero { position: relative; }
   .pl-hero-media { background: linear-gradient(var(--mint) 0%, var(--bg) 100%); }
   .pl-hero-photo {
-    height: clamp(250px, 32vw, 420px);
+    display: block;
+    width: 100%;
+    height: clamp(280px, 38vw, 520px);
+    object-fit: cover;
+    object-position: 30% center;     /* 被写体が左寄りなので左に寄せて拾う */
     clip-path: url(#pl-hero-clip);   /* 下辺をゆるやかな丘で切る */
-    align-items: start;
-    padding-top: 26px;
   }
-  .pl-hero-inner { margin-top: -70px; position: relative; }
+  .pl-hero-inner { margin-top: -78px; position: relative; }
   .pl-hero-copy {
-    background: color-mix(in srgb, var(--bg) 93%, transparent);
+    background: color-mix(in srgb, var(--bg) 94%, transparent);
     border-radius: var(--radius);
     padding: 30px clamp(22px, 3vw, 46px) 34px;
-    max-width: 640px;          /* 文字を詰め込まず余白を確保 */
+    max-width: 600px;          /* 文字を詰め込まず余白を確保 */
+    margin-left: auto;         /* 写真の余白が右側にあるため見出しも右へ */
   }
   .pl-h1 {
     font-size: clamp(23px, 2.9vw, 35px);
@@ -698,7 +728,14 @@ const footerLinks = [
   /* ── セクション共通 ─────────────────────── */
   .pl-sec { padding-block: clamp(52px, 6.5vw, 88px); position: relative; }
   .pl-sec-tight { padding-block: clamp(38px, 4.5vw, 58px); }
-  .pl-sec-beige { background: var(--beige); }
+  /* 和紙テクスチャ。地色をフォールバックに敷き、写真と文字の邪魔をしない濃度で重ねる。
+     繰り返すと継ぎ目が出るため cover で1枚だけ伸ばす。 */
+  .pl-sec-beige {
+    background-color: var(--beige);
+    background-image: url('/images/plumeria/background-01.webp');
+    background-size: cover;
+    background-position: center;
+  }
   .pl-h2 {
     display: grid; justify-items: center; gap: 4px;
     text-align: center;
@@ -756,19 +793,41 @@ const footerLinks = [
     padding-block: clamp(48px, 6vw, 84px);
     overflow: hidden;
   }
-  .pl-about-inner { position: relative; display: grid; justify-items: center; text-align: center; }
+  .pl-about-inner {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(28px, 4vw, 56px);
+    align-items: center;
+  }
+  .pl-about-text { display: grid; justify-items: start; }
   .pl-about-catch {
     margin-top: 12px;
-    font-size: clamp(19px, 2.3vw, 26px);
+    font-size: clamp(19px, 2.1vw, 25px);
     font-weight: 700; line-height: 1.75; letter-spacing: 0.06em;
     color: var(--ink);
   }
-  .pl-about-body { margin: 20px auto 14px; max-width: 38em; }
+  .pl-about-body { margin: 18px 0 14px; }
+  .pl-about-photo {
+    display: block; width: 100%; height: auto;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
 
   /* 装飾モチーフ。うるさくならない濃度で置く */
   .pl-deco { position: absolute; color: var(--green); pointer-events: none; }
   .pl-deco svg { width: 100%; height: 100%; stroke-width: 0.7; }
-  .pl-deco-tree { left: 3%; bottom: 8%; width: 118px; height: 118px; opacity: 0.16; }
+  /* 社名のプルメリア。透過PNG由来なので地色の上にそのまま置ける。
+     主役の写真とテキストにかからない外周の角にだけ、控えめな濃度で置く。 */
+  .pl-deco-flower {
+    position: absolute;
+    pointer-events: none;
+    user-select: none;
+    opacity: 0.5;
+    height: auto;
+  }
+  .pl-deco-flower-bl { left: -40px; bottom: -34px; width: clamp(170px, 20vw, 290px); }
+  .pl-deco-flower-tr { right: -30px; top: -26px; width: clamp(150px, 17vw, 250px); opacity: 0.45; }
   .pl-deco-bird { right: 7%; top: 14%; width: 54px; height: 54px; opacity: 0.24; }
   .pl-deco-sun  { right: 16%; bottom: 12%; width: 72px; height: 72px; opacity: 0.13; color: var(--accent); }
   .pl-deco-leaf-l { left: -54px; top: 46%; width: 230px; height: 230px; opacity: 0.09; }
@@ -798,14 +857,22 @@ const footerLinks = [
   }
   a.pl-svc:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: var(--shadow-lift); }
   .pl-svc-ph {
-    display: grid; place-items: center;
-    aspect-ratio: 16 / 9;
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 3;       /* 支給画像の比率に合わせる */
+    object-fit: cover;
     border-radius: var(--radius-sm);
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    background: var(--mint);   /* 読み込み前の下地 */
   }
-  .pl-svc-icon { width: 46px; height: 46px; color: var(--green-deep); opacity: 0.55; }
-  .pl-tone-mint  { background: var(--mint); }
-  .pl-tone-beige { background: var(--beige); }
+  .pl-svc-icon {
+    display: inline-grid; place-items: center;
+    width: 26px; height: 26px;
+    color: var(--green-deep);
+    vertical-align: -6px;
+    margin-right: 4px;
+  }
+  .pl-svc-icon svg { width: 22px; height: 22px; }
   .pl-svc-name { font-size: 19px; font-weight: 700; letter-spacing: 0.06em; }
   .pl-svc-kind { font-size: 15px; color: var(--muted); line-height: 1.75; }
   .pl-svc-more {
@@ -826,18 +893,43 @@ const footerLinks = [
 
   /* ── 3つの強み ──────────────────────────── */
   .pl-reasons { margin-top: 36px; }
-  .pl-reason { justify-items: center; text-align: center; gap: 13px; }
+  .pl-reason { justify-items: center; text-align: center; gap: 13px; padding-top: 0; overflow: hidden; }
+  /* .pl img[cid] は (0,2,1)。クラス単体 (0,2,0) では負けるので .pl を前置する */
+  .pl .pl-reason-photo {
+    display: block;
+    width: calc(100% + 44px);        /* カードの左右パディング分を打ち消して全幅に */
+    max-width: none;                 /* .pl img の max-width:100% を上書きしないと効かない */
+    margin: -24px -22px 0;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    background: var(--mint);
+  }
+  /* 写真の下端に少し重ねて、丸アイコンを橋渡しにする */
   .pl-reason-icon {
-    width: 70px; height: 70px;
+    width: 66px; height: 66px;
+    margin-top: -33px;
     display: grid; place-items: center;
     border-radius: 50%;
-    background: var(--mint);
+    background: var(--surface);
+    border: 3px solid var(--surface);
+    box-shadow: var(--shadow);
     color: var(--green-deep);
+    position: relative;
   }
-  .pl-reason-icon svg { width: 33px; height: 33px; }
+  .pl-reason-icon svg { width: 31px; height: 31px; }
 
   /* ── 一日の流れ ─────────────────────────── */
-  .pl-day { margin-top: 36px; display: grid; grid-template-columns: repeat(6, 1fr); position: relative; }
+  .pl-day-photo {
+    display: block;
+    width: 100%;
+    margin-top: 30px;
+    aspect-ratio: 16 / 7;
+    object-fit: cover;
+    object-position: center 42%;
+    border-radius: var(--radius);
+    background: var(--mint);
+  }
+  .pl-day { margin-top: 34px; display: grid; grid-template-columns: repeat(6, 1fr); position: relative; }
   .pl-day::before {
     content: ''; position: absolute; left: 8%; right: 8%; top: 8px;
     height: 1px; background: var(--line);
@@ -849,6 +941,16 @@ const footerLinks = [
 
   /* ── 空室・採用 ─────────────────────────── */
   .pl-vac-sec { background: var(--mint); padding-block: clamp(40px, 5vw, 66px); }
+  .pl-recruit { overflow: hidden; }
+  .pl .pl-recruit-photo {
+    display: block;
+    width: calc(100% + 44px);
+    max-width: none;                 /* .pl img の max-width:100% を上書き */
+    margin: -24px -22px 4px;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    background: var(--mint);
+  }
   .pl-vacancy { display: grid; gap: 10px; }
   .pl-vacancy > li {
     display: flex; align-items: center; justify-content: space-between; gap: 12px;
@@ -887,7 +989,14 @@ const footerLinks = [
   .pl-table tbody tr:last-child :is(th, td) { border-bottom: 0; }
 
   /* ── フッター：明るい生成りを基調にする ────── */
-  .pl-foot { background: var(--beige); position: relative; }
+  .pl-foot {
+    background-color: var(--beige);
+    background-image: url('/images/plumeria/background-01.webp');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;   /* 角の花がはみ出さないように */
+  }
   .pl-hill-foot { margin-top: -1px; }
   .pl-foot-inner {
     display: flex; flex-wrap: wrap; gap: 30px;
@@ -938,7 +1047,9 @@ const footerLinks = [
     .pl { line-height: 1.9; }
     .pl-hero-inner { margin-top: -44px; }
     .pl-hero-copy { max-width: none; padding: 24px 20px 28px; }
-    .pl-grid-3, .pl-grid-2, .pl-access { grid-template-columns: 1fr; gap: 16px; }
+    .pl-grid-3, .pl-grid-2, .pl-access, .pl-about-inner { grid-template-columns: 1fr; gap: 16px; }
+    .pl-about-inner { gap: 26px; }
+    .pl-day-photo { aspect-ratio: 16 / 10; }
     .pl-access { gap: 24px; }
     .pl-services, .pl-reasons { margin-top: 28px; }
     .pl-day { grid-template-columns: repeat(2, 1fr); }

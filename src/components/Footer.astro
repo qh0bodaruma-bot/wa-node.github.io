@@ -132,7 +132,10 @@ function getLocalizedLink(path: string) {
     align-items: center;
   }
   .footer-badges img {
+    /* 320x320の正方形バッジ。flex内では width:auto が0に潰れるため実寸で指定する */
+    width: 60px;
     height: 60px;
+    object-fit: contain;
   }
   .copyright {
     font-size: 0.85rem;
