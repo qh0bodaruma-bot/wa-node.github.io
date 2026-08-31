@@ -41,7 +41,8 @@ const corp = {
   telHours: '受付 9:00〜18:00（日祝を除く）',
   address: '○○県○○市○○ 0-0-0（差し替え枠）',
   founded: '○○○○年',
-  catch: 'あなたの暮らしの、となりに。',
+  // 幅に任せて折り返すと「となりに／。」のように句点だけ落ちる。行は明示的に分ける
+  catchLines: ['あなたの暮らしの、', 'となりに。'],
 };
 
 // ヒーローの数字バッジ（○は差し替え枠）
@@ -230,6 +231,23 @@ const footerGroups = [
   ]},
 ];
 
+// ── FVマーキーのタイル（参照サイトの帯を再現）─────────────
+// 参照サイト実測：ユニーク11枚を2周ぶん複製、表示76〜168px、1:1が7枚・6:5が4枚、
+// 縦位置もバラバラ。写真が支給されるまでは、同じ枠にブロブと線画を入れて動きだけ先に作る。
+const kvTiles = [
+  { icon: 'care',   tone: 'green', w: 166, ratio: 1,    top: 12,  label: '職員と入居者' },
+  { icon: 'home',   tone: 'mint',  w: 99,  ratio: 1,    top: 96,  label: '居室' },
+  { icon: 'chair',  tone: 'beige', w: 82,  ratio: 1.19, top: 40,  label: '福祉用具' },
+  { icon: 'staff',  tone: 'green', w: 152, ratio: 1,    top: 70,  label: '申し送り' },
+  { icon: 'doc',    tone: 'mint',  w: 108, ratio: 1.21, top: 6,   label: 'ご家族との相談' },
+  { icon: 'leaf',   tone: 'beige', w: 79,  ratio: 1,    top: 130, label: '窓辺' },
+  { icon: 'flower', tone: 'green', w: 168, ratio: 1,    top: 50,  label: '行事' },
+  { icon: 'bed',    tone: 'mint',  w: 136, ratio: 1,    top: 0,   label: 'ショートステイ' },
+  { icon: 'hands',  tone: 'beige', w: 113, ratio: 1.19, top: 92,  label: '手を添える' },
+  { icon: 'tree',   tone: 'green', w: 76,  ratio: 1,    top: 22,  label: '中庭' },
+  { icon: 'clock',  tone: 'mint',  w: 123, ratio: 1.21, top: 118, label: 'お茶の時間' },
+];
+
 // 1文字ずつのスタガー表示用。空白は幅が潰れないよう nbsp に置き換える
 const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
 ---
@@ -302,6 +320,32 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
         <symbol id="pb-i-arrow" viewBox="0 0 24 24">
           <path d="M5.6 12h12.2M13 7.2 17.8 12 13 16.8" />
         </symbol>
+
+        {/* ── パラパラ用の第2フレーム ──────────────────
+            参照サイトは同じイラストの微妙に違う絵を800msで差し替えて
+            「手描きが少し動く」感じを出している。その手法をSVGで再現する。 */}
+        <symbol id="pb-i-flower-b" viewBox="0 0 24 24">
+          <path d="M12 4.6c1.9-.2 3.2 1.2 3.1 3.1 1.8-.8 3.5 0 3.9 1.8.4 1.9-.9 3.3-2.8 3.3 1.4 1.3 1.2 3.3-.4 4.3-1.6 1-3.4.3-4.1-1.5-.9 1.6-2.8 2-4.2.7-1.4-1.3-1.2-3.3.4-4.3-1.9-.4-2.9-2.1-2.1-3.9.8-1.7 2.7-2.1 4.3-1-.1-1.9 1.3-3.2 3.2-3.1Z" />
+          <circle cx="11.8" cy="12.6" r="1.7" />
+        </symbol>
+        <symbol id="pb-i-home-b" viewBox="0 0 24 24">
+          <path d="M4 10.8 12 4.6l8 6.2V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" />
+          <path d="M9.6 20v-5.6h4.8V20" />
+          <path d="M16.4 7.6V4.8h1.8v4.2" />
+        </symbol>
+        <symbol id="pb-i-tree-b" viewBox="0 0 24 24">
+          <path d="M11.6 3.6c3.2 0 5.6 2.3 5.6 5.2 1.3.7 2 2 2 3.3 0 2.2-1.9 3.9-4.2 3.9H8.4c-2.3 0-4.2-1.7-4.2-3.9 0-1.3.7-2.6 2-3.3 0-2.9 2.2-5.2 5.4-5.2Z" />
+          <path d="M12 15.8v4.8M12 17.6l2.8-1.6M12 19.2l-2.6-2" />
+        </symbol>
+        <symbol id="pb-i-hands-b" viewBox="0 0 24 24">
+          <path d="M3.8 12.8 7.2 9.6l3.4 2.8 3-.6" />
+          <path d="M20.2 12.8 16.8 9.6l-3.2 2.8" />
+          <path d="M6.8 13.2 9.6 16.6c.8.9 2 1.4 3.2 1.4 1.5 0 2.8-.8 3.6-2l1.2-1.9" />
+        </symbol>
+        <symbol id="pb-i-leaf-b" viewBox="0 0 24 24">
+          <path d="M19.6 4.4C11.2 4.2 5 7.8 5 13.6a5.4 5.4 0 0 0 5.4 5.4c5.8 0 9.2-6 9.2-14.6Z" />
+          <path d="M8.6 19.4c1.4-4.4 4.2-7.8 8-10.2" />
+        </symbol>
       </defs>
     </svg>
 
@@ -369,19 +413,34 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
             <span class="pb-blob pb-blob-a"></span>
             <span class="pb-blob pb-blob-b"></span>
             <span class="pb-blob pb-blob-c"></span>
-            <span class="pb-art pb-art-flower" style="--ai:0"><svg><use href="#pb-i-flower" /></svg></span>
-            <span class="pb-art pb-art-home" style="--ai:1"><svg><use href="#pb-i-home" /></svg></span>
-            <span class="pb-art pb-art-tree" style="--ai:2"><svg><use href="#pb-i-tree" /></svg></span>
-            <span class="pb-art pb-art-hands" style="--ai:3"><svg><use href="#pb-i-hands" /></svg></span>
-            <span class="pb-art pb-art-leaf" style="--ai:4"><svg><use href="#pb-i-leaf" /></svg></span>
+            {/* data-para: 2枚を交互に出してパラパラ漫画にする（参照サイトの baseParaparaImage 相当） */}
+            <span class="pb-art pb-art-flower" style="--ai:0" data-para>
+              <svg class="pb-f1"><use href="#pb-i-flower" /></svg><svg class="pb-f2"><use href="#pb-i-flower-b" /></svg>
+            </span>
+            <span class="pb-art pb-art-home" style="--ai:1" data-para>
+              <svg class="pb-f1"><use href="#pb-i-home" /></svg><svg class="pb-f2"><use href="#pb-i-home-b" /></svg>
+            </span>
+            <span class="pb-art pb-art-tree" style="--ai:2" data-para>
+              <svg class="pb-f1"><use href="#pb-i-tree" /></svg><svg class="pb-f2"><use href="#pb-i-tree-b" /></svg>
+            </span>
+            <span class="pb-art pb-art-hands" style="--ai:3" data-para>
+              <svg class="pb-f1"><use href="#pb-i-hands" /></svg><svg class="pb-f2"><use href="#pb-i-hands-b" /></svg>
+            </span>
+            <span class="pb-art pb-art-leaf" style="--ai:4" data-para>
+              <svg class="pb-f1"><use href="#pb-i-leaf" /></svg><svg class="pb-f2"><use href="#pb-i-leaf-b" /></svg>
+            </span>
           </div>
 
           <div class="pb-hero-copy" data-rv>
             <h1 class="pb-hero-catch">
-              <span class="pb-split">
-                <span class="pb-sr">{corp.catch}</span>
-                {chars(corp.catch).map((o) => (<span aria-hidden="true" style={`--i:${o.i}`}>{o.c}</span>))}
-              </span>
+              <span class="pb-sr">{corp.catchLines.join('')}</span>
+              {corp.catchLines.map((lineText, li) => (
+                <span class="pb-split pb-catch-line">
+                  {chars(lineText).map((o) => (
+                    <span aria-hidden="true" style={`--i:${li * 9 + o.i}`}>{o.c}</span>
+                  ))}
+                </span>
+              ))}
             </h1>
 
             <p class="pb-hero-sub">
@@ -398,6 +457,23 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        {/* FVマーキー：ユニーク11タイル × 2周。CSSで右→左に流す。
+            写真が支給されたら、この枠の中身を <img> に差し替えるだけで済む。 */}
+        <div class="pb-kv" data-rv>
+          <div class="pb-kv-track">
+            {[0, 1].map((copy) => (
+              <ul class="pb-kv-row" aria-hidden={copy === 1 ? 'true' : undefined}>
+                {kvTiles.map((t) => (
+                  <li class={`pb-kv-item pb-tone-${t.tone}`} style={`--w:${t.w}; --r:${t.ratio}; --t:${t.top}`}>
+                    <span class="pb-kv-icon" aria-hidden="true"><svg><use href={`#pb-i-${t.icon}`} /></svg></span>
+                    <span class="pb-sr">{t.label}（写真の差し替え枠）</span>
+                  </li>
+                ))}
+              </ul>
+            ))}
           </div>
         </div>
 
@@ -443,17 +519,17 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
             <span class="pb-eyebrow-ja">法人の想い</span>
           </p>
 
-          <div class="pb-mind-body">
-            <p class="pb-mind-line" data-rv style="--d:0ms">介護が必要になったとき、</p>
-            <p class="pb-mind-line" data-rv style="--d:90ms">多くのご家族は、まず自分を責めます。</p>
-            <p class="pb-mind-line" data-rv style="--d:180ms">もっと早く気づけたのではないか、と。</p>
-            <p class="pb-mind-line pb-mind-gap" data-rv style="--d:0ms">けれど、暮らしを支える方法はひとつではありません。</p>
-            <p class="pb-mind-line" data-rv style="--d:90ms">住み替えるという選択も、</p>
-            <p class="pb-mind-line" data-rv style="--d:180ms">自宅のまま看護と介護を入れる方法もあります。</p>
-            <p class="pb-mind-line" data-rv style="--d:270ms">短い期間だけお預かりして、ご家族が休むこともできます。</p>
-            <p class="pb-mind-line pb-mind-gap pb-mind-strong" data-rv style="--d:0ms">私たちは、そのどれかを勧めるためではなく、</p>
-            <p class="pb-mind-line pb-mind-strong" data-rv style="--d:90ms">ご本人が「これまでの自分」を手放さずにいられる形を、</p>
-            <p class="pb-mind-line pb-mind-strong" data-rv style="--d:180ms">一緒に探すためにここにいます。</p>
+          <div class="pb-mind-body" data-paint>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:0ms">介護が必要になったとき、</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:90ms">多くのご家族は、まず自分を責めます。</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:180ms">もっと早く気づけたのではないか、と。</p>
+            <p class="pb-mind-line pb-mind-gap" data-paint-line data-rv style="--d:0ms">けれど、暮らしを支える方法はひとつではありません。</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:90ms">住み替えるという選択も、</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:180ms">自宅のまま看護と介護を入れる方法もあります。</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:270ms">短い期間だけお預かりして、ご家族が休むこともできます。</p>
+            <p class="pb-mind-line pb-mind-gap pb-mind-strong" data-paint-line data-rv style="--d:0ms">私たちは、そのどれかを勧めるためではなく、</p>
+            <p class="pb-mind-line pb-mind-strong" data-paint-line data-rv style="--d:90ms">ご本人が「これまでの自分」を手放さずにいられる形を、</p>
+            <p class="pb-mind-line pb-mind-strong" data-paint-line data-rv style="--d:180ms">一緒に探すためにここにいます。</p>
           </div>
 
           <p class="pb-sign" data-rv>{corp.name}　代表　○○ ○○（差し替え枠）</p>
@@ -965,6 +1041,94 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
       if (delivered) return;
       targets.forEach((el) => el.classList.add('is-in'));
     }, 2500);
+
+    // ══ パラパラ漫画 ════════════════════════════════════════
+    // 参照サイトの baseParaparaImage(800, false) 相当。
+    // 同じモチーフの少し違う絵を800msで入れ替えて、手描きが動いて見えるようにする。
+    // 画面内にあるときだけ動かす（見えていないところでタイマーを回さない）。
+    const paras = root.querySelectorAll('[data-para]');
+    if (paras.length) {
+      let frame = 0;
+      let timer = null;
+      const onScreen = new Set();
+      const tick = () => {
+        frame ^= 1;
+        paras.forEach((el) => el.setAttribute('data-f', String(frame)));
+      };
+      const start = () => { if (!timer && !document.hidden) timer = window.setInterval(tick, 800); };
+      const stop = () => { if (timer) { window.clearInterval(timer); timer = null; } };
+
+      // まず動かす。監視は「画面外に出たら止める」ためだけに使う。
+      // （監視の初回発火を待つ作りにすると、発火しない環境で永久に動かない）
+      paras.forEach((el) => el.setAttribute('data-f', '0'));
+      start();
+
+      if ('IntersectionObserver' in window) {
+        const vis = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            e.isIntersecting ? onScreen.add(e.target) : onScreen.delete(e.target);
+          });
+          onScreen.size ? start() : stop();
+        });
+        paras.forEach((el) => vis.observe(el));
+      }
+
+      // タブが非表示のあいだは止める
+      document.addEventListener('visibilitychange', () => {
+        document.hidden ? stop() : start();
+      });
+    }
+
+    // ══ スクロール連動（塗り上げ／スケール）═══════════════════
+    // 参照サイトの data-js-ssp-child（文章が塗られていく）と
+    // data-js-scale（イラストがゆっくり拡大）に相当する。
+    const paintBlocks = [...root.querySelectorAll('[data-paint]')].map((block) => ({
+      block,
+      lines: [...block.querySelectorAll('[data-paint-line]')],
+    }));
+    const heroArt = root.querySelector('.pb-hero-art');
+
+    if (paintBlocks.length || heroArt) {
+      root.classList.add('is-scroll');
+      const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+      let queued = false;
+
+      const update = () => {
+        queued = false;
+        const vh = window.innerHeight || 1;
+
+        paintBlocks.forEach(({ block, lines }) => {
+          if (!lines.length) return;
+          const r = block.getBoundingClientRect();
+          // 塊の上端が画面の8割位置に来てから、下端が2割位置を抜けるまでで 0→1
+          const span = r.height + vh * 0.6;
+          const prog = clamp((vh * 0.8 - r.top) / span);
+          const step = 1 / lines.length;
+          lines.forEach((line, i) => {
+            line.style.setProperty('--p', clamp((prog - i * step) / step).toFixed(3));
+          });
+        });
+
+        if (heroArt) {
+          const r = heroArt.getBoundingClientRect();
+          const prog = clamp((vh - r.top) / (vh + r.height));
+          // 1 → 1.12。参照サイトの data-js-scale="1.1" / "1.2" と同じ幅に収める
+          heroArt.style.setProperty('--sc', (1 + prog * 0.12).toFixed(4));
+        }
+      };
+
+      const onScroll = () => {
+        if (queued) return;
+        queued = true;
+        window.requestAnimationFrame(update);
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
+      // 描画されないタブでは rAF が回らないので、初期値だけは同期で入れておく
+      window.setTimeout(update, 300);
+    }
   })();
 </script>
 
@@ -1007,6 +1171,16 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     padding-bottom: 96px;
     overflow-x: hidden;
   }
+
+  /* このページに限りアンカー移動をなめらかにする。
+     参照サイトは Lenis でホイールごと乗っ取っているが、ここではやらない（理由は下記コメント）。 */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html) { scroll-behavior: smooth; }
+  }
+
+  /* アンカー移動をなめらかにする（Lenis のようなホイール乗っ取りはしない）。
+     固定ヘッダーに隠れないよう scroll-margin を取る。 */
+  .pb [id] { scroll-margin-top: 96px; }
 
   .pb :is(h1, h2, h3, p, ul, ol, dl, dd, figure, table, blockquote) { margin: 0; }
   .pb :is(ul, ol) { padding: 0; list-style: none; }
@@ -1069,12 +1243,15 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
       opacity 0.5s var(--e2) calc(var(--i, 0) * 34ms + var(--d, 0ms));
   }
   .pb .is-in .pb-split > span:not(.pb-sr) { transform: none; opacity: 1; }
-  /* ヒーロー下部の Scroll だけは監視対象外なので最初から出す */
-  .pb.is-js .pb-split-static > span { transform: none; opacity: 1; }
+  /* ヒーロー下部の Scroll だけは監視対象外なので最初から出す。
+     上の隠す指定と同じ詳細度(0,4,1)にしないと負けるため :not() を付ける */
+  .pb.is-js .pb-split-static > span:not(.pb-sr) { transform: none; opacity: 1; }
 
   @media (prefers-reduced-motion: reduce) {
     .pb [data-rv], .pb .pb-split > span { transition: none !important; opacity: 1 !important; transform: none !important; }
     .pb * { animation: none !important; }
+    /* 帯は動かさず、そのまま並んだ状態で見せる */
+    .pb-kv-track { transform: none !important; }
   }
 
   /* ══ 有機的なブロブ ══════════════════════════════
@@ -1088,13 +1265,24 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   /* 常時ループはしない。参照サイトも無限アニメーションは使っていない。
      表示された瞬間に一度だけ、形とスケールが落ち着く。 */
   .pb-hero-art .pb-blob {
-    transition: border-radius 1.6s var(--e), transform 1.2s var(--e), opacity 0.9s var(--e2);
+    /* transform はスクロール連動スケールが使うので、表示は opacity と角丸で行う */
+    transition: border-radius 1.6s var(--e), opacity 0.9s var(--e2);
   }
-  .pb.is-js .pb-hero-art .pb-blob { transform: scale(0.9); }
-  .pb .pb-hero-art.is-in .pb-blob { transform: none; }
   .pb .pb-hero-art.is-in .pb-blob-a { border-radius: 63% 37% 41% 59% / 38% 60% 40% 62%; }
   .pb .pb-hero-art.is-in .pb-blob-b { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
   .pb .pb-hero-art.is-in .pb-blob-c { border-radius: 52% 48% 58% 42% / 60% 45% 55% 40%; }
+
+  /* ══ パラパラ漫画（2フレーム交互）══════════════════════
+     data-f が 0/1 で入れ替わる。JSが動かなければ1枚目だけ出す。 */
+  .pb-art .pb-f1 { display: block; }
+  .pb-art .pb-f2 { display: none; }
+  .pb-art[data-f="1"] .pb-f1 { display: none; }
+  .pb-art[data-f="1"] .pb-f2 { display: block; }
+
+  /* ══ スクロール連動のスケール（data-js-scale 相当）══════ */
+  .pb-hero-art .pb-blob { transform: scale(var(--sc, 1)); }
+  .pb.is-js .pb-hero-art .pb-blob { opacity: 0; }
+  .pb .pb-hero-art.is-in .pb-blob { opacity: 1; }
 
   /* 線画は面より少し遅れて出す */
   .pb-hero-art .pb-art { opacity: 0; transform: translateY(10px); }
@@ -1281,11 +1469,14 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
 
   .pb-hero-copy { display: grid; justify-items: start; gap: 22px; }
   .pb-hero-catch {
-    font-size: clamp(27px, 3.8vw, 42px);
+    font-size: clamp(27px, 3.4vw, 40px);
     font-weight: 700;
     line-height: 1.55;
     letter-spacing: 0.1em;
   }
+  .pb-catch-line { display: flex; }   /* 1行ぶんのブロックにする（折り返させない） */
+  .pb-hero-catch { display: grid; justify-items: start; }
+
   .pb-hero-sub { font-size: 16px; color: var(--muted); line-height: 2.1; }
   .pb-br-pc { display: none; }
 
@@ -1301,6 +1492,47 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     transition: transform 0.5s var(--e) calc(var(--i) * 120ms + 400ms);
   }
   .pb .is-in .pb-hero-dot { transform: scale(1); }
+
+  /* ══ FVマーキー（参照サイトの帯）════════════════════════
+     ユニーク11枚を2周ぶん並べ、全体を -50% ずらすと継ぎ目なく回る。
+     JSは使わない（CSSアニメーションのほうが確実で軽い）。 */
+  .pb-kv {
+    --kvs: 0.62;                 /* タイル寸法の倍率。実測値(76〜168px)を基準にする */
+    margin-top: clamp(30px, 4vw, 52px);
+    height: calc(246px * var(--kvs));
+    overflow: hidden;
+    position: relative;
+  }
+  .pb-kv-track {
+    display: flex;
+    width: max-content;
+    animation: pb-marquee 60s linear infinite;   /* ゆっくり。1周60秒 */
+  }
+  .pb-kv:hover .pb-kv-track,
+  .pb-kv:focus-within .pb-kv-track { animation-play-state: paused; }
+  @keyframes pb-marquee { to { transform: translateX(-50%); } }
+
+  .pb-kv-row { display: flex; align-items: flex-start; }
+  .pb-kv-item {
+    flex: none;
+    width: calc(var(--w) * 1px * var(--kvs));
+    aspect-ratio: var(--r);
+    margin-top: calc(var(--t) * 1px * var(--kvs));
+    margin-right: calc(18px * var(--kvs) + 8px);
+    background: var(--mint);
+    display: grid;
+    place-items: center;
+    color: var(--green-deep);
+    /* 参照サイトの帯だけは角丸ゼロの四角。他の雲形との対比がリズムを作る */
+    border-radius: 0;
+    /* 写真が入るまでのプレースホルダなので、枠線を足して「ここに入る」と分かるようにする。
+       写真を敷いたらこの1行は外す。 */
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
+  }
+  .pb-kv-item.pb-tone-green { background: #d6efd0; }
+  .pb-kv-item.pb-tone-beige { background: var(--beige); }
+  .pb-kv-icon { width: 46%; max-width: 64px; aspect-ratio: 1; }
+  .pb-kv-icon svg { width: 100%; height: 100%; stroke-width: 1.15; }
 
   .pb-scroll {
     position: absolute;
@@ -1392,6 +1624,40 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   .pb-mind-inner { position: relative; }
   .pb-mind-body { margin-top: 32px; display: grid; gap: 2px; }
   .pb-mind-line { font-size: clamp(17px, 1.8vw, 21px); line-height: 2.1; letter-spacing: 0.06em; }
+
+  /* ══ 文章の塗り上げ（参照サイトの data-js-ssp-child 相当）══
+     文字を透明にし、背景のグラデーションを background-clip: text で抜く。
+     JSが --p（0→1）をスクロール進行で更新すると、左から濃くなっていく。
+     JSが無い／background-clip 非対応なら、ふつうの黒文字のまま。 */
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .pb.is-js.is-scroll [data-paint-line] {
+      color: transparent;
+      /* 【参照サイトからの意図的なズラし】
+         参照サイトの未塗り部分は地色に対し約1.4:1で、スクロールするまで読めない。
+         ここは入居検討中のご本人・ご家族が読む本文なので、
+         未塗りでも 5.5:1 を確保できる rgba(0,0,0,.6) を下限にした。
+         演出は弱くなるが、読めない文章を出すよりよい。 */
+      background-image: linear-gradient(
+        90deg,
+        var(--ink) 0 45%,
+        rgba(0, 0, 0, 0.6) 55% 100%
+      );
+      background-size: 260% 100%;
+      background-position: calc((1 - var(--p, 0)) * 100%) 0;
+      background-repeat: no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      transition: background-position 0.15s linear;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pb [data-paint-line] {
+      color: var(--ink) !important;
+      background-image: none !important;
+      -webkit-background-clip: border-box !important;
+      background-clip: border-box !important;
+    }
+  }
   .pb-mind-gap { margin-top: 26px; }
   .pb-mind-strong { font-weight: 700; }
   .pb-sign { margin-top: 28px; font-size: 15px; color: var(--muted); }
@@ -1821,6 +2087,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     .pb-br-pc { display: inline; }
     .pb-hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr); align-items: center; gap: 40px; }
     .pb-hero-art { height: clamp(380px, 32vw, 470px); }
+    .pb-kv { --kvs: 1; }
     .pb-mind-inner { padding-right: 22%; }
     .pb-rec-top { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
     .pb-form-block { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 40px; padding: 36px 34px; }
