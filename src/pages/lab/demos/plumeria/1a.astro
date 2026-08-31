@@ -553,10 +553,14 @@ const footerLinks = [
     color: var(--green-deep);
   }
 
-  .pl-nav { display: flex; gap: 2px; margin-inline: auto; }
+  /* メニューは右寄せ。各項目は同じ幅にそろえ、
+     ヘッダーCTA「見学のご予約」（実測 116.7×58.5px）より一回り小さく取る。
+     最長ラベル「訪問看護」は実測49.9pxなので 100px 幅に余裕で収まる。 */
+  .pl-nav { display: flex; gap: 2px; margin-left: auto; }
   .pl-nav a {
-    display: grid; justify-items: center; gap: 3px;
-    padding: 7px 11px;
+    display: grid; justify-items: center; gap: 2px;
+    width: 100px;
+    padding: 5px 4px;
     border-radius: var(--radius-sm);
     font-size: 12px; font-weight: 500;
     text-decoration: none; white-space: nowrap;
@@ -564,7 +568,7 @@ const footerLinks = [
   }
   .pl-nav a:hover { background: var(--mint); color: var(--green-deep); }
   .pl-nav-icon { display: grid; place-items: center; color: var(--green-deep); }
-  .pl-nav-icon svg { width: 22px; height: 22px; }
+  .pl-nav-icon svg { width: 20px; height: 20px; }
 
   .pl-head-cta { display: flex; gap: 8px; flex: none; }
   .pl-head-tel { font-size: 17px; line-height: 1.15; }
@@ -915,8 +919,8 @@ const footerLinks = [
 
   /* ── レスポンシブ ───────────────────────── */
   @media (max-width: 1180px) {
-    .pl-nav a { padding: 7px 7px; font-size: 11px; }
-    .pl-nav-icon svg { width: 20px; height: 20px; }
+    .pl-nav a { width: 84px; padding: 5px 4px; font-size: 11px; }
+    .pl-nav-icon svg { width: 18px; height: 18px; }
     .pl-head-tel { font-size: 15px; }
   }
 
