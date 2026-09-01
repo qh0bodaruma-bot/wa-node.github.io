@@ -31,6 +31,8 @@ const title = 'プルメリア｜住まい・在宅支援・福祉用具を地�
 const description =
   'プルメリアは、サービス付き高齢者向け住宅、ショートステイ、訪問看護、訪問介護・居宅介護支援、福祉用具貸与を運営しています。施設・サービスのご相談、見学・資料請求を承ります。';
 
+const V2 = '/images/plumeria/v2/';
+
 // ── 差し替え枠：法人情報 ─────────────────────────────────
 const corp = {
   name: 'プルメリア',
@@ -61,7 +63,7 @@ const primaryPaths = [
 // ── 差し替え枠：大切にしていること（3項目）─────────────────
 const values = [
   {
-    no: '01', en: 'Living', icon: 'home', tone: 'green',
+    no: '01', img: '/images/plumeria/v2/value-01.webp', alt: '木製のテーブルと椅子が並ぶ、明るく整えられた食堂', en: 'Living', icon: 'home', tone: 'green',
     title: '暮らしの場をつくる',
     lines: [
       '居室・食堂・浴室・共用部を清潔に保つ',
@@ -70,7 +72,7 @@ const values = [
     ],
   },
   {
-    no: '02', en: 'Honesty', icon: 'staff', tone: 'mint',
+    no: '02', img: '/images/plumeria/v2/value-02.webp', alt: '職員がしゃがんで、女性入居者の話を同じ目線で聞いている', en: 'Honesty', icon: 'staff', tone: 'mint',
     title: '誠実に支援する',
     lines: [
       'できることは奪わず、できないことだけを手伝う',
@@ -79,7 +81,7 @@ const values = [
     ],
   },
   {
-    no: '03', en: 'Safety', icon: 'shield', tone: 'beige',
+    no: '03', img: '/images/plumeria/v2/value-03.webp', alt: '明るい廊下で、手すりに手を添えて歩く入居者を職員が後ろから見守っている', en: 'Safety', icon: 'shield', tone: 'beige',
     title: '安心と安全を守る',
     lines: [
       '事故・急変時の連絡経路を決めて共有する',
@@ -107,19 +109,19 @@ const structure = [
 // ── 差し替え枠：施設を探す ───────────────────────────────
 const facilities = [
   {
-    id: 'f-1', name: 'プルメリアⅠ', kind: 'サービス付き高齢者向け住宅',
+    id: 'f-1', img: '/images/plumeria/v2/fac-01.webp', alt: '窓辺に椅子と丸テーブルを置いた明るい個室。読みかけの本とマグカップが置かれている', name: 'プルメリアⅠ', kind: 'サービス付き高齢者向け住宅',
     tone: 'green', icon: 'home', area: '○○市○○（差し替え枠）',
     status: '空室あり', statusTone: 'open',
     body: 'ご自身の生活のペースを保ちながら住み替えたい方へ。安否確認と生活相談が付いた住まいです。',
   },
   {
-    id: 'f-2', name: 'プルメリアⅡ', kind: 'サービス付き高齢者向け住宅',
+    id: 'f-2', img: '/images/plumeria/v2/fac-02.webp', alt: '共用ラウンジで、入居者が本を読んだり静かに会話したりしている', name: 'プルメリアⅡ', kind: 'サービス付き高齢者向け住宅',
     tone: 'mint', icon: 'home', area: '○○市○○（差し替え枠）',
     status: '満室（空室待ちのご相談を承ります）', statusTone: 'full',
     body: '共用のラウンジを中心にした住まいです。入居者どうしの距離感は、無理に近づけません。',
   },
   {
-    id: 'f-3', name: 'プルメリアⅢ', kind: 'ショートステイ（短期入所）',
+    id: 'f-3', img: '/images/plumeria/v2/fac-03.webp', alt: '玄関で、バッグを持って訪れた方を職員が迎えている', name: 'プルメリアⅢ', kind: 'ショートステイ（短期入所）',
     tone: 'beige', icon: 'bed', area: '○○市○○（差し替え枠）',
     status: '受入可', statusTone: 'open',
     body: 'ご家族の休息や、急な用事のときに。数日からお預かりします。ご利用前の見学もできます。',
@@ -128,16 +130,16 @@ const facilities = [
 
 // ── 差し替え枠：サービスを探す（困りごとから）───────────────
 const services = [
-  { id: 'sv-1', icon: 'care', cat: '在宅支援', tone: 'green', name: '訪問看護',
+  { id: 'sv-1', img: '/images/plumeria/v2/sv-01.webp', alt: '自宅のリビングで看護師が利用者の血圧を測っている', icon: 'care', cat: '在宅支援', tone: 'green', name: '訪問看護',
     trouble: '自宅で療養したいが、体調の変化が不安',
     body: '看護師がご自宅へ伺い、健康状態の確認や医療的な処置を行います。主治医と連携します。' },
-  { id: 'sv-2', icon: 'staff', cat: '在宅支援', tone: 'mint', name: '訪問介護',
+  { id: 'sv-2', img: '/images/plumeria/v2/sv-02.webp', alt: '台所で職員と利用者が一緒に食事の支度をしている', icon: 'staff', cat: '在宅支援', tone: 'mint', name: '訪問介護',
     trouble: '入浴や食事の準備を、ひとりでは続けられない',
     body: 'ご自宅での身体介護と生活援助を行います。曜日・時間はケアプランに沿って調整します。' },
-  { id: 'sv-3', icon: 'doc', cat: '相談', tone: 'beige', name: '居宅介護支援（ケアプラン作成）',
+  { id: 'sv-3', img: '/images/plumeria/v2/sv-03.webp', alt: 'ダイニングでケアマネジャーが利用者とご家族に書類を見せて説明している', icon: 'doc', cat: '相談', tone: 'beige', name: '居宅介護支援（ケアプラン作成）',
     trouble: '何から相談すればよいのか分からない',
     body: 'ケアマネジャーが、利用できる制度とサービスを整理し、ケアプランをつくります。' },
-  { id: 'sv-4', icon: 'chair', cat: '住まいの環境', tone: 'green', name: '福祉用具貸与（レンタル介護用品）',
+  { id: 'sv-4', img: '/images/plumeria/v2/sv-04.webp', alt: '職員が利用者に歩行器の使い方を説明している', icon: 'chair', cat: '住まいの環境', tone: 'green', name: '福祉用具貸与（レンタル介護用品）',
     trouble: '段差や立ち上がりが、家の中で危ない',
     body: 'ベッド・車いす・歩行器などを、お住まいの状況に合わせてご用意します。' },
 ];
@@ -173,11 +175,14 @@ const access = [
 ];
 
 // ── 差し替え枠：お知らせ ─────────────────────────────────
+// サムネイルは記事にある場合だけ付く（参照サイトも有無が混在している）
 const news = [
-  { date: '2026.08.00', cat: 'お知らせ', catTone: 'green', text: '（お知らせの見出しが入ります）' },
+  { date: '2026.08.00', cat: 'お知らせ', catTone: 'green', text: '（お知らせの見出しが入ります）',
+    img: V2 + 'news-sample.webp', alt: 'テーブルを囲んで入居者と職員が花を生けている' },
   { date: '2026.08.00', cat: '空室情報', catTone: 'beige', text: '（空室・受入状況の更新見出しが入ります）' },
   { date: '2026.07.00', cat: '採用', catTone: 'sky', text: '（採用に関する見出しが入ります）' },
-  { date: '2026.07.00', cat: '行事', catTone: 'green', text: '（施設の行事の見出しが入ります）' },
+  { date: '2026.07.00', cat: '行事', catTone: 'green', text: '（施設の行事の見出しが入ります）',
+    img: V2 + 'kv-07.webp', alt: 'テーブルに飾られた花と湯呑み、折り紙' },
 ];
 
 // ── 差し替え枠：採用 ─────────────────────────────────────
@@ -234,18 +239,19 @@ const footerGroups = [
 // ── FVマーキーのタイル（参照サイトの帯を再現）─────────────
 // 参照サイト実測：ユニーク11枚を2周ぶん複製、表示76〜168px、1:1が7枚・6:5が4枚、
 // 縦位置もバラバラ。写真が支給されるまでは、同じ枠にブロブと線画を入れて動きだけ先に作る。
+// alt は支給された画像を実際に見て書いている（プロンプトの文面ではない）
 const kvTiles = [
-  { icon: 'care',   tone: 'green', w: 166, ratio: 1,    top: 12,  label: '職員と入居者' },
-  { icon: 'home',   tone: 'mint',  w: 99,  ratio: 1,    top: 96,  label: '居室' },
-  { icon: 'chair',  tone: 'beige', w: 82,  ratio: 1.19, top: 40,  label: '福祉用具' },
-  { icon: 'staff',  tone: 'green', w: 152, ratio: 1,    top: 70,  label: '申し送り' },
-  { icon: 'doc',    tone: 'mint',  w: 108, ratio: 1.21, top: 6,   label: 'ご家族との相談' },
-  { icon: 'leaf',   tone: 'beige', w: 79,  ratio: 1,    top: 130, label: '窓辺' },
-  { icon: 'flower', tone: 'green', w: 168, ratio: 1,    top: 50,  label: '行事' },
-  { icon: 'bed',    tone: 'mint',  w: 136, ratio: 1,    top: 0,   label: 'ショートステイ' },
-  { icon: 'hands',  tone: 'beige', w: 113, ratio: 1.19, top: 92,  label: '手を添える' },
-  { icon: 'tree',   tone: 'green', w: 76,  ratio: 1,    top: 22,  label: '中庭' },
-  { icon: 'clock',  tone: 'mint',  w: 123, ratio: 1.21, top: 118, label: 'お茶の時間' },
+  { img: 'kv-01', w: 166, ratio: 1,    top: 12,  alt: '職員と入居者が並んで笑顔で話している' },
+  { img: 'kv-02', w: 99,  ratio: 1,    top: 96,  alt: '木製トレーに和食を配膳する職員の手と、受け取る入居者の手' },
+  { img: 'kv-03', w: 108, ratio: 1.2,  top: 40,  alt: '共用ラウンジで入居者がそれぞれの距離で過ごしている' },
+  { img: 'kv-04', w: 152, ratio: 1,    top: 70,  alt: '窓辺に置かれた観葉植物と椅子' },
+  { img: 'kv-05', w: 123, ratio: 1.2,  top: 6,   alt: '看護師が利用者の血圧を測っている' },
+  { img: 'kv-06', w: 79,  ratio: 1,    top: 130, alt: '職員がしゃがんで男性入居者と同じ目線で話を聞いている' },
+  { img: 'kv-07', w: 168, ratio: 1,    top: 50,  alt: 'テーブルに飾られた花と湯呑み、折り紙' },
+  { img: 'kv-08', w: 113, ratio: 1.2,  top: 0,   alt: '廊下の手すりに手を添えて歩く入居者の手元' },
+  { img: 'kv-09', w: 136, ratio: 1,    top: 92,  alt: 'ご家族と職員がテーブルで書類を一緒に見ている' },
+  { img: 'kv-10', w: 82,  ratio: 1.2,  top: 22,  alt: '職員3人が記録を見ながら申し送りをしている' },
+  { img: 'kv-11', w: 123, ratio: 1,    top: 118, alt: '湯呑みに手を伸ばす入居者と職員の手元' },
 ];
 
 // 1文字ずつのスタガー表示用。空白は幅が潰れないよう nbsp に置き換える
@@ -350,8 +356,8 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     </svg>
 
     <p class="pb-notice">
-      これはご提案用のラフです。写真は入れていません（面はすべて図形と線画で作っています）。
-      電話番号・住所・空室状況・数値・お知らせはすべて仮置きの差し替え枠です。
+      これはご提案用のラフです。掲載している写真はすべて雰囲気を確認するためのイメージで、
+      実在の施設・利用者・職員ではありません。電話番号・住所・空室状況・数値・お知らせも仮置きの差し替え枠です。
     </p>
 
     <!-- ヘッダー -->
@@ -466,10 +472,13 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
           <div class="pb-kv-track">
             {[0, 1].map((copy) => (
               <ul class="pb-kv-row" aria-hidden={copy === 1 ? 'true' : undefined}>
-                {kvTiles.map((t) => (
-                  <li class={`pb-kv-item pb-tone-${t.tone}`} style={`--w:${t.w}; --r:${t.ratio}; --t:${t.top}`}>
-                    <span class="pb-kv-icon" aria-hidden="true"><svg><use href={`#pb-i-${t.icon}`} /></svg></span>
-                    <span class="pb-sr">{t.label}（写真の差し替え枠）</span>
+                {kvTiles.map((t, i) => (
+                  <li class="pb-kv-item" style={`--w:${t.w}; --r:${t.ratio}; --t:${t.top}`}>
+                    <img src={`${V2}${t.img}.webp`} alt={copy === 0 ? t.alt : ''}
+                         width={t.ratio === 1 ? 600 : 660} height={t.ratio === 1 ? 600 : 550}
+                         {/* 帯は横に流れるので、遅延させると走行中に空タイルが出る。全部先に読む
+                             （ユニーク11枚・計約250KBで、2周目はキャッシュから出る） */}
+                         loading="eager" decoding="async" />
                   </li>
                 ))}
               </ul>
@@ -510,6 +519,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
       <section class="pb-sec pb-mind" id="mind">
         <span class="pb-blob pb-blob-mind" aria-hidden="true"></span>
         <div class="pb-wrap pb-mind-inner">
+          <div class="pb-mind-text">
           <p class="pb-eyebrow" data-rv>
             <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-flower" /></svg></span>
             <span class="pb-split">
@@ -533,6 +543,14 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
           </div>
 
           <p class="pb-sign" data-rv>{corp.name}　代表　○○ ○○（差し替え枠）</p>
+          </div>
+
+          <figure class="pb-mind-figure" data-rv>
+            <span class="pb-blob pb-blob-photo">
+              <img src={V2 + 'mind-01.webp'} alt="ご家族と職員が木製テーブルを挟んで、書類を見ながら話している"
+                   width="1200" height="1200" loading="lazy" decoding="async" />
+            </span>
+          </figure>
         </div>
       </section>
 
@@ -554,9 +572,11 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
           <ul class="pb-value-list">
             {values.map((v, i) => (
               <li class={`pb-value pb-tone-${v.tone}`} data-rv style={`--d:${i * 110}ms`}>
-                <div class="pb-value-art" aria-hidden="true">
-                  <span class="pb-blob pb-blob-value"></span>
-                  <span class="pb-value-icon"><svg><use href={`#pb-i-${v.icon}`} /></svg></span>
+                <div class="pb-value-art">
+                  <span class="pb-blob pb-blob-value">
+                    <img src={v.img} alt={v.alt} width="900" height="900" loading="lazy" decoding="async" />
+                  </span>
+                  <span class="pb-value-icon" aria-hidden="true"><svg><use href={`#pb-i-${v.icon}`} /></svg></span>
                 </div>
                 <div class="pb-value-text">
                   <p class="pb-value-no"><span class="pb-num">{v.no}</span><span class="pb-en">{v.en}</span></p>
@@ -627,10 +647,11 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
           <ul class="pb-fac-list">
             {facilities.map((f, i) => (
               <li class={`pb-fac pb-tone-${f.tone}`} id={f.id} data-rv style={`--d:${i * 110}ms`}>
-                <div class="pb-fac-art" aria-hidden="true">
-                  <span class="pb-blob pb-blob-fac"></span>
-                  <span class="pb-fac-icon"><svg><use href={`#pb-i-${f.icon}`} /></svg></span>
-                  <span class="pb-fac-leaf"><svg><use href="#pb-i-leaf" /></svg></span>
+                <div class="pb-fac-art">
+                  <span class="pb-blob pb-blob-fac">
+                    <img src={f.img} alt={f.alt} width="1000" height="750" loading="lazy" decoding="async" />
+                  </span>
+                  <span class="pb-fac-leaf" aria-hidden="true"><svg><use href="#pb-i-leaf" /></svg></span>
                 </div>
                 <div class="pb-fac-text">
                   <p class="pb-fac-kind">{f.kind}</p>
@@ -680,9 +701,10 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
             {services.map((s, i) => (
               <li class={`pb-sv pb-tone-${s.tone}`} id={s.id} data-rv style={`--d:${(i % 2) * 110}ms`}>
                 <a class="pb-sv-link" href="#">
-                  <span class="pb-sv-art" aria-hidden="true">
-                    <span class="pb-blob pb-blob-sv"></span>
-                    <span class="pb-sv-icon"><svg><use href={`#pb-i-${s.icon}`} /></svg></span>
+                  <span class="pb-sv-art">
+                    <span class="pb-blob pb-blob-sv">
+                      <img src={s.img} alt={s.alt} width="700" height="700" loading="lazy" decoding="async" />
+                    </span>
                   </span>
                   <span class="pb-sv-text">
                     <span class="pb-sv-cat">{s.cat}</span>
@@ -837,6 +859,9 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
             {news.map((n, i) => (
               <li data-rv style={`--d:${i * 70}ms`}>
                 <a href="#">
+                  {n.img
+                    ? <span class="pb-news-thumb"><img src={n.img} alt={n.alt} width="700" height="525" loading="lazy" decoding="async" /></span>
+                    : <span class="pb-news-thumb pb-news-thumb-none" aria-hidden="true"></span>}
                   <span class="pb-num pb-news-date">{n.date}</span>
                   <span class={`pb-cat pb-cat-${n.catTone}`}>{n.cat}</span>
                   <span class="pb-news-text">{n.text}</span>
@@ -867,6 +892,12 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
 
           <div class="pb-rec-top">
             <div class="pb-rec-interview" data-rv>
+              <figure class="pb-rec-figure">
+                <span class="pb-blob pb-blob-photo pb-blob-wide">
+                  <img src={V2 + 'recruit-01.webp'} alt="職員4人が記録端末と用紙を見ながら申し送りをしている"
+                       width="1200" height="800" loading="lazy" decoding="async" />
+                </span>
+              </figure>
               <p class="pb-rec-tag">職員インタビュー</p>
               <blockquote class="pb-quote">
                 （職員の方のお話がここに入ります。入職の理由、いま担当していること、
@@ -1262,6 +1293,9 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     pointer-events: none;
     border-radius: 58% 42% 47% 53% / 44% 51% 49% 56%;
   }
+  /* 写真は雲形で切り抜く。四隅が落ちる前提の構図で生成してある */
+  .pb-blob > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pb-blob:has(> img) { overflow: hidden; }
   /* 常時ループはしない。参照サイトも無限アニメーションは使っていない。
      表示された瞬間に一度だけ、形とスケールが落ち着く。 */
   .pb-hero-art .pb-blob {
@@ -1520,19 +1554,11 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     margin-top: calc(var(--t) * 1px * var(--kvs));
     margin-right: calc(18px * var(--kvs) + 8px);
     background: var(--mint);
-    display: grid;
-    place-items: center;
-    color: var(--green-deep);
-    /* 参照サイトの帯だけは角丸ゼロの四角。他の雲形との対比がリズムを作る */
+    overflow: hidden;
+    /* 参照サイトの帯だけは角丸ゼロの四角。他セクションの雲形との対比がリズムを作る */
     border-radius: 0;
-    /* 写真が入るまでのプレースホルダなので、枠線を足して「ここに入る」と分かるようにする。
-       写真を敷いたらこの1行は外す。 */
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.07);
   }
-  .pb-kv-item.pb-tone-green { background: #d6efd0; }
-  .pb-kv-item.pb-tone-beige { background: var(--beige); }
-  .pb-kv-icon { width: 46%; max-width: 64px; aspect-ratio: 1; }
-  .pb-kv-icon svg { width: 100%; height: 100%; stroke-width: 1.15; }
+  .pb-kv-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .pb-scroll {
     position: absolute;
@@ -1621,7 +1647,17 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     background: var(--mint);
     opacity: 0.7;
   }
-  .pb-mind-inner { position: relative; }
+  .pb-mind-inner { position: relative; display: grid; gap: 34px; }
+  .pb-mind-figure { position: relative; }
+  .pb-blob-photo {
+    position: relative;          /* 図版として置くブロブは通常フロー */
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--mint);
+    transition: border-radius 1.2s var(--e);
+  }
+  .pb-mind-figure:hover .pb-blob-photo { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
   .pb-mind-body { margin-top: 32px; display: grid; gap: 2px; }
   .pb-mind-line { font-size: clamp(17px, 1.8vw, 21px); line-height: 2.1; letter-spacing: 0.06em; }
 
@@ -1671,19 +1707,26 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     transition: transform 0.5s var(--e);
   }
   .pb-value:hover { transform: translateY(-4px); }
-  .pb-value-art { position: relative; height: 164px; display: grid; place-items: center; }
+  .pb-value-art { position: relative; height: 200px; padding: 14px 16px 0; }
   .pb-blob-value {
     position: absolute;
-    width: 124px; aspect-ratio: 1;
+    inset: 14px 16px 0;
     background: var(--mint);
-    transition: border-radius 0.9s var(--e), transform 0.6s var(--e);
+    transition: border-radius 0.9s var(--e);
   }
-  .pb-tone-green .pb-blob-value { background: #d6efd0; }
-  .pb-tone-beige .pb-blob-value { background: var(--beige); }
-  .pb-value:hover .pb-blob-value { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; transform: scale(1.06); }
-  .pb-value-icon { position: relative; width: 50px; height: 50px; color: var(--green-deep); }
-  .pb-value-icon svg { width: 50px; height: 50px; stroke-width: 1.2; }
-  .pb-value-text { padding: 4px 24px 30px; }
+  .pb-value:hover .pb-blob-value { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
+  /* 丸アイコンは写真の下端に重ねて、写真とテキストの橋渡しにする */
+  .pb-value-icon {
+    position: absolute; left: 26px; bottom: -22px; z-index: 1;
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--green-deep);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  }
+  .pb-value-icon svg { width: 26px; height: 26px; stroke-width: 1.3; }
+  .pb-value-text { padding: 34px 24px 30px; }
   .pb-value-no { display: flex; align-items: baseline; gap: 10px; }
   .pb-value-no .pb-num { font-size: 20px; color: var(--green-deep); }
   .pb-value-text .pb-h3 { margin-top: 4px; }
@@ -1730,23 +1773,19 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     transition: transform 0.5s var(--e);
   }
   .pb-fac:hover { transform: translateY(-4px); }
-  .pb-fac-art { position: relative; height: 172px; display: grid; place-items: center; overflow: hidden; }
+  .pb-fac-art { position: relative; height: 214px; padding: 14px 16px 0; }
   .pb-blob-fac {
     position: absolute;
-    width: 164px; aspect-ratio: 1.1;
+    inset: 14px 16px 0;
     background: var(--mint);
-    transition: border-radius 0.9s var(--e), transform 0.6s var(--e);
+    transition: border-radius 0.9s var(--e);
   }
-  .pb-tone-green .pb-blob-fac { background: #d6efd0; }
-  .pb-tone-beige .pb-blob-fac { background: var(--beige); }
-  .pb-fac:hover .pb-blob-fac { border-radius: 63% 37% 41% 59% / 38% 60% 40% 62%; transform: scale(1.05); }
-  .pb-fac-icon { position: relative; width: 54px; height: 54px; color: var(--green-deep); }
-  .pb-fac-icon svg { width: 54px; height: 54px; stroke-width: 1.15; }
+  .pb-fac:hover .pb-blob-fac { border-radius: 63% 37% 41% 59% / 38% 60% 40% 62%; }
   .pb-fac-leaf {
-    position: absolute; right: 22px; bottom: 16px;
-    width: 28px; height: 28px; color: var(--green-soft);
+    position: absolute; right: 8px; bottom: 0;
+    width: 26px; height: 26px; color: var(--green-soft);
   }
-  .pb-fac-leaf svg { width: 28px; height: 28px; stroke-width: 1.2; }
+  .pb-fac-leaf svg { width: 26px; height: 26px; stroke-width: 1.2; }
   .pb-fac-text { padding: 22px 22px 26px; }
   .pb-fac-kind { font-size: 13px; font-weight: 500; color: var(--green-deep); }
   .pb-fac-name { font-size: 24px; font-weight: 700; line-height: 1.5; letter-spacing: 0.08em; margin-top: 3px; }
@@ -1779,17 +1818,13 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     transition: transform 0.5s var(--e);
   }
   .pb-sv-link:hover { transform: translateY(-3px); }
-  .pb-sv-art { position: relative; flex: none; width: 92px; height: 92px; display: grid; place-items: center; }
+  .pb-sv-art { position: relative; flex: none; width: 108px; height: 108px; }
   .pb-blob-sv {
     position: absolute; inset: 0;
     background: var(--mint);
     transition: border-radius 0.9s var(--e), transform 0.6s var(--e);
   }
-  .pb-tone-green .pb-blob-sv { background: #d6efd0; }
-  .pb-tone-beige .pb-blob-sv { background: var(--beige); }
-  .pb-sv-link:hover .pb-blob-sv { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; transform: scale(1.06); }
-  .pb-sv-icon { position: relative; width: 40px; height: 40px; color: var(--green-deep); }
-  .pb-sv-icon svg { width: 40px; height: 40px; stroke-width: 1.2; }
+  .pb-sv-link:hover .pb-blob-sv { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
   .pb-sv-text { display: grid; gap: 4px; min-width: 0; }
   .pb-sv-cat {
     justify-self: start;
@@ -1915,6 +1950,17 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   }
   .pb-news-list a:hover { color: var(--green-deep); }
   .pb-news-list a:hover .pb-news-dot { transform: translateX(3px); }
+  .pb-news-thumb {
+    width: 96px; aspect-ratio: 4 / 3;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    background: var(--mint);
+    flex: none;
+  }
+  .pb-news-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* サムネイルの無い記事も列を揃える（並びが崩れると読みにくい） */
+  .pb-news-thumb-none { background: transparent; }
+
   .pb-news-date { font-size: 14px; color: var(--muted); }
   .pb-cat {
     justify-self: start;
@@ -1938,6 +1984,13 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     background: var(--beige); opacity: 0.7;
   }
   .pb-recruit .pb-wrap { position: relative; }
+  .pb-rec-figure { margin-bottom: 20px; }
+  .pb-rec-figure .pb-blob-photo { width: 100%; }
+  /* 3:2のまま置くと縦に伸びてセクションを占拠するので、帯状に切り詰める。
+     被写体（職員4人）の顔が上寄りなので object-position で上を残す */
+  .pb-blob-wide { aspect-ratio: 16 / 9; }
+  .pb-blob-wide > img { object-position: center 38%; }
+  .pb-rec-interview:hover .pb-blob-photo { border-radius: 63% 37% 41% 59% / 38% 60% 40% 62%; }
   .pb-rec-top { display: grid; gap: 20px; align-items: start; }
   .pb-rec-interview, .pb-rec-policy, .pb-rec-support, .pb-jobs {
     background: var(--paper); border-radius: var(--r); padding: 26px 24px;
@@ -2079,7 +2132,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     .pb-desk-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .pb-fact-def { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .pb-foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .pb-news-list a { grid-template-columns: auto auto minmax(0, 1fr) auto; align-items: center; }
+    .pb-news-list a { grid-template-columns: auto auto auto minmax(0, 1fr) auto; align-items: center; }
     .pb-rec-cta { grid-auto-flow: column; justify-content: start; }
   }
 
@@ -2088,7 +2141,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     .pb-hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr); align-items: center; gap: 40px; }
     .pb-hero-art { height: clamp(380px, 32vw, 470px); }
     .pb-kv { --kvs: 1; }
-    .pb-mind-inner { padding-right: 22%; }
+    .pb-mind-inner { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 48px; align-items: center; }
     .pb-rec-top { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
     .pb-form-block { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 40px; padding: 36px 34px; }
     .pb-hours-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }

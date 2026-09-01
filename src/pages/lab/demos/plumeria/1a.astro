@@ -14,7 +14,10 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
       元PNG 26.1MB を WebP へ変換して public/images/plumeria/ に配置（合計 497KB）。
       これらは「イメージ写真」であり、実際の施設・スタッフではない。
       提案時にその旨を明示すること。
-  - 制約: JavaScript非依存（スクロール連動も CSS の animation-timeline: view() で実装）
+  - JavaScript: ヒーロースライダーのためだけに解禁（自前・素のJS。jQuery / slick は使わない）。
+      それ以外は引き続きJSなし。スクロール連動は CSS の animation-timeline: view()、
+      モバイルメニューは <details> のまま。
+      JSが落ちてもヒーローは1枚目が出て、操作UIは隠れたままになる。
   - アニメーション: ボス指示により解禁。モチーフに沿った3種のみ（木漏れ日／葉のゆらぎ／立ち上がり）。
       ブリーフの「過度なアニメーション」を避けるため振れ幅は最小限。
       prefers-reduced-motion: reduce で全停止する。
@@ -41,6 +44,21 @@ const corp = {
   contactHref: '#contact',
   address: '○○県○○市○○ 0-0-0（住所は差し替え枠）',
 };
+
+// ── ヒーロースライダー ───────────────────────────────────
+// 参照サイトと同じ「4枚・フェード・5秒・切替0.7秒・ドット・矢印なし」の挙動。
+// 実装は自前の素のJS（jQuery / slick は使わない）。
+// 1枚目だけ即読み込み、2枚目以降は初回描画が終わってから data-src を差し込む。
+const heroSlides = [
+  { img: '/images/plumeria/hero-01.webp', label: '入居者とスタッフ',
+    alt: '建物のエントランス付近で、入居者とスタッフが穏やかに話している様子' },
+  { img: '/images/plumeria/hero-02.webp', label: '建物の外観',
+    alt: '朝の光のなか、植栽に囲まれた低層の建物とアプローチ' },
+  { img: '/images/plumeria/hero-03.webp', label: '共用リビング',
+    alt: '明るい共用リビングで、入居者がそれぞれ読書やお茶をして過ごしている様子' },
+  { img: '/images/plumeria/hero-04.webp', label: 'スタッフ',
+    alt: '施設の廊下で、介護スタッフ3名が仕事の合間に会話している様子' },
+];
 
 // ── 差し替え枠：5つのサービス ────────────────────────────
 // tone は写真枠の地色だけに使う。枠線・文字・ボタンは緑と濃色に統一する
@@ -226,9 +244,41 @@ const footerLinks = [
       <!-- 01 ファーストビュー -->
       <section class="pl-hero">
         <div class="pl-hero-media">
-          {/* 被写体が左寄りで右に余白のある構図。見出しは右側に置く */}
-          <img class="pl-hero-photo" src="/images/plumeria/hero-01.webp" alt="建物のエントランス付近で、入居者とスタッフが穏やかに話している様子"
-               width="1600" height="900" fetchpriority="high" decoding="async" />
+          {/* いずれも被写体が左寄りで右に余白のある構図。見出しは右側に置く。
+              JSが動かない場合は1枚目だけが見える静止ヒーローになる（ドットも出ない）。 */}
+          <div class="pl-slider" data-pl-slider>
+            {heroSlides.map((s, i) => (
+              <img
+                class={i === 0 ? 'pl-hero-photo is-on' : 'pl-hero-photo'}
+                src={i === 0 ? s.img : undefined}
+                data-src={i === 0 ? undefined : s.img}
+                alt={s.alt}
+                width="1600"
+                height="900"
+                fetchpriority={i === 0 ? 'high' : undefined}
+                decoding="async"
+                aria-hidden={i === 0 ? undefined : 'true'}
+              />
+            ))}
+
+            <div class="pl-slider-ui">
+              <ul class="pl-dots">
+                {heroSlides.map((s, i) => (
+                  <li>
+                    <button type="button" class={i === 0 ? 'pl-dot is-on' : 'pl-dot'}
+                            data-pl-dot={String(i)} aria-current={i === 0 ? 'true' : 'false'}>
+                      <span class="pl-sr">{s.label}を表示</span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              {/* 自動で切り替わる内容は止められる必要がある（WCAG 2.2.2） */}
+              <button type="button" class="pl-slider-toggle" data-pl-toggle data-playing="true">
+                <span class="pl-slider-toggle-icon" aria-hidden="true"></span>
+                <span class="pl-sr" data-pl-toggle-label>スライドショーを停止</span>
+              </button>
+            </div>
+          </div>
         </div>
         <div class="pl-wrap pl-hero-inner">
           <div class="pl-hero-copy">
@@ -479,6 +529,89 @@ const footerLinks = [
   </div>
 </BaseLayout>
 
+<script>
+  /*
+    ヒーロースライダー。参照サイトの挙動（4枚・フェード・5秒・切替0.7秒・ドット）を
+    自前の素のJSで再現する。jQuery / slick は使わない。
+
+    JSが動かない場合は1枚目だけが見える静止ヒーローになる。
+    HTML側で1枚目に is-on を付け、操作UIは `.is-ready` が付くまでCSSで隠してあるため、
+    「ドットは出ているのに押しても何も起きない」状態にはならない。
+  */
+  const initHeroSlider = () => {
+    const root = document.querySelector('[data-pl-slider]');
+    if (!root || root.dataset.plReady === '1') return;
+
+    const slides = Array.from(root.querySelectorAll('.pl-hero-photo'));
+    const dots = Array.from(root.querySelectorAll('[data-pl-dot]'));
+    const toggle = root.querySelector('[data-pl-toggle]');
+    const toggleLabel = root.querySelector('[data-pl-toggle-label]');
+    if (slides.length < 2 || !toggle) return;
+    root.dataset.plReady = '1';
+
+    const INTERVAL = 5000;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let index = 0;
+    let wantPlay = false;
+    let timer = null;
+
+    const render = () => {
+      slides.forEach((el, i) => {
+        el.classList.toggle('is-on', i === index);
+        if (i === index) el.removeAttribute('aria-hidden');
+        else el.setAttribute('aria-hidden', 'true');
+      });
+      dots.forEach((el, i) => {
+        el.classList.toggle('is-on', i === index);
+        el.setAttribute('aria-current', i === index ? 'true' : 'false');
+      });
+    };
+
+    // 裏タブでタイマーを回し続けない
+    const arm = () => {
+      if (timer) { clearInterval(timer); timer = null; }
+      if (!wantPlay || document.hidden) return;
+      timer = window.setInterval(() => {
+        index = (index + 1) % slides.length;
+        render();
+      }, INTERVAL);
+    };
+
+    const setPlay = (on) => {
+      wantPlay = on;
+      toggle.setAttribute('data-playing', on ? 'true' : 'false');
+      if (toggleLabel) {
+        toggleLabel.textContent = on ? 'スライドショーを停止' : 'スライドショーを再生';
+      }
+      arm();
+    };
+
+    dots.forEach((el, i) => {
+      el.addEventListener('click', () => { index = i; render(); arm(); });
+    });
+    toggle.addEventListener('click', () => setPlay(!wantPlay));
+    document.addEventListener('visibilitychange', arm);
+    reduce.addEventListener('change', (e) => setPlay(!e.matches));
+
+    // 2枚目以降は初回描画が終わってから取りに行く。重ねて置いてあるので
+    // loading="lazy" では遅延しない（どれもビューポート内と判定されるため）
+    const loadRest = () => slides.forEach((el) => {
+      const src = el.dataset.src;
+      if (src) { el.src = src; delete el.dataset.src; }
+    });
+    if (document.readyState === 'complete') loadRest();
+    else window.addEventListener('load', loadRest, { once: true });
+
+    root.classList.add('is-ready');
+    render();
+    setPlay(!reduce.matches);   // 動きを減らす設定なら1枚目で止める
+  };
+
+  initHeroSlider();
+  // BaseLayout が ViewTransitions を使うため、遷移後にも初期化する（二重初期化は上で弾く）
+  document.addEventListener('astro:page-load', initHeroSlider);
+</script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Roboto+Condensed:wght@400;500;600&display=swap');
 
@@ -689,13 +822,101 @@ const footerLinks = [
   /* ── ファーストビュー ───────────────────── */
   .pl-hero { position: relative; }
   .pl-hero-media { background: linear-gradient(var(--mint) 0%, var(--bg) 100%); }
+  /* ── ヒーロースライダー ─────────────────────────── */
+  .pl-slider { position: relative; }
   .pl-hero-photo {
     display: block;
     width: 100%;
     height: clamp(280px, 38vw, 520px);
     object-fit: cover;
-    object-position: 30% center;     /* 被写体が左寄りなので左に寄せて拾う */
+    /* 器が 16:9 より横長になるため上下が切れる。顔が残る高さに寄せる */
+    object-position: center 40%;
     clip-path: url(#pl-hero-clip);   /* 下辺をゆるやかな丘で切る */
+  }
+  /* 1枚目だけ流れに残して高さを作り、2枚目以降を上に重ねる */
+  .pl-hero-photo + .pl-hero-photo {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+  }
+  .pl-slider .pl-hero-photo {
+    opacity: 0;
+    transition: opacity 0.7s ease;
+  }
+  .pl-slider .pl-hero-photo.is-on { opacity: 1; }
+
+  /* 操作UIはJSが動いたときだけ出す（`is-ready` はJSが付ける） */
+  .pl-slider-ui {
+    display: none;
+    position: absolute;
+    right: clamp(16px, 3vw, 34px);
+    bottom: clamp(46px, 7vw, 84px);   /* 丘の切り抜きに食われない高さ */
+    align-items: center;
+    gap: 14px;
+    z-index: 2;
+  }
+  .pl-slider.is-ready .pl-slider-ui { display: flex; }
+  .pl-dots { display: flex; gap: 9px; }
+  .pl-dot {
+    width: 30px;
+    height: 30px;                      /* タップ領域は確保し、見た目だけ小さくする */
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+  }
+  .pl-dot::before {
+    content: '';
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--ink) 30%, transparent);
+    border: 1px solid color-mix(in srgb, var(--bg) 70%, transparent);
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  .pl-dot.is-on::before { background: var(--green); transform: scale(1.35); }
+  .pl-dot:hover::before { background: var(--green-deep); }
+
+  .pl-slider-toggle {
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 1px solid color-mix(in srgb, var(--bg) 70%, transparent);
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    color: var(--ink);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background-color 0.3s;
+  }
+  .pl-slider-toggle:hover { background: var(--bg); }
+  /* 再生中は「一時停止」の形、停止中は「再生」の形にする */
+  .pl-slider-toggle-icon {
+    width: 10px;
+    height: 11px;
+    border-left: 3px solid currentColor;
+    border-right: 3px solid currentColor;
+  }
+  .pl-slider-toggle[data-playing='false'] .pl-slider-toggle-icon {
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-left: 10px solid currentColor;
+    margin-left: 3px;
+  }
+
+  /* 読み上げ専用 */
+  .pl-sr {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border: 0;
   }
   .pl-hero-inner { margin-top: -78px; position: relative; }
   .pl-hero-copy {
