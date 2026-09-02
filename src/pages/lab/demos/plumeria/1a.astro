@@ -288,24 +288,16 @@ const footerLinks = [
               </a>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- 02 サービスへのタイルメニュー
-           ヘッダーメニューと同じ5項目。ここが画面から出たらヘッダーをハンバーガーへ切り替える
-           （切り替えは data-pl-tiles を見張るJSが担当。JSが動かなければ常時ナビ表示のまま） -->
-      <section class="pl-tiles-sec" data-pl-tiles>
-        <span class="pl-deco pl-deco-leaf-l" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>
-        <span class="pl-deco pl-deco-leaf-r" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>
-        <div class="pl-wrap">
-          <nav aria-label="サービス">
+          {/* キャッチコピーの隣に置く入口。ここが画面から出たら
+              ヘッダー右上にハンバーガーを出す（JSが is-condensed を付ける） */}
+          <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービス">
             <ul class="pl-tiles">
               {services.map((s) => (
                 <li id={s.id}>
                   <a class="pl-tile" href={`#${s.id}`}>
                     <span class="pl-tile-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
                     <span class="pl-tile-label">{s.name}</span>
-                    <span class="pl-tile-kind">{s.kind}</span>
                   </a>
                 </li>
               ))}
@@ -313,7 +305,6 @@ const footerLinks = [
                 <a class="pl-tile" href="#recruit">
                   <span class="pl-tile-icon" aria-hidden="true"><svg><use href="#pl-i-staff" /></svg></span>
                   <span class="pl-tile-label">職員募集</span>
-                  <span class="pl-tile-kind">介護スタッフ・看護師</span>
                 </a>
               </li>
             </ul>
@@ -321,7 +312,7 @@ const footerLinks = [
         </div>
       </section>
 
-      <!-- 03 お知らせ -->
+      <!-- 02 お知らせ -->
       <section class="pl-sec pl-sec-tight" id="news">
         <div class="pl-wrap">
           <h2 class="pl-h2"><span class="pl-h2-en">NEWS</span>お知らせ</h2>
@@ -343,7 +334,7 @@ const footerLinks = [
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V44c220-34 430 20 700 12S1230 8 1440 30v60Z" /></svg>
       </div>
 
-      <!-- 04 プルメリアについて -->
+      <!-- 03 プルメリアについて -->
       <section class="pl-about" id="about">
         {/* 社名のプルメリアを実際の植物画で。抽象SVGの木より brand に近い */}
         <img class="pl-deco-flower pl-deco-flower-bl" src="/images/plumeria/decoration-bl.webp" alt=""
@@ -370,7 +361,7 @@ const footerLinks = [
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 0v40c250 30 470-24 740-14S1220 82 1440 56V0Z" /></svg>
       </div>
 
-      <!-- 05 3つの強み -->
+      <!-- 04 3つの強み -->
       <section class="pl-sec pl-sec-beige" id="reasons">
         <div class="pl-wrap">
           <h2 class="pl-h2"><span class="pl-h2-en">FEATURE</span>プルメリアの3つの安心</h2>
@@ -387,7 +378,7 @@ const footerLinks = [
         </div>
       </section>
 
-      <!-- 06 一日の流れ -->
+      <!-- 05 一日の流れ -->
       <section class="pl-sec" id="day">
         <div class="pl-wrap">
           <h2 class="pl-h2"><span class="pl-h2-en">A DAY</span>一日の流れ</h2>
@@ -410,7 +401,7 @@ const footerLinks = [
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V52c210-40 450 14 720 6s500-46 720-22v54Z" /></svg>
       </div>
 
-      <!-- 07 空室・受入状況／採用 -->
+      <!-- 06 空室・受入状況／採用 -->
       <section class="pl-vac-sec">
         <div class="pl-wrap">
           <div class="pl-grid-2">
@@ -442,7 +433,7 @@ const footerLinks = [
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 0v34c230 36 460-18 730-8S1210 76 1440 48V0Z" /></svg>
       </div>
 
-      <!-- 08 アクセス・対応時間・連絡導線をここに集約 -->
+      <!-- 07 アクセス・対応時間・連絡導線をここに集約 -->
       <section class="pl-sec" id="access">
         <div class="pl-wrap">
           <h2 class="pl-h2"><span class="pl-h2-en">ACCESS</span>アクセス・対応時間</h2>
@@ -611,16 +602,24 @@ const footerLinks = [
     if (!head || !tiles || head.dataset.plCondense === '1') return;
     head.dataset.plCondense = '1';
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          head.classList.toggle('is-condensed', !entry.isIntersecting);
-        }
-      },
-      // 追従ヘッダーの下に隠れた分は「見えていない」と扱う
-      { rootMargin: '-78px 0px 0px 0px', threshold: 0 }
-    );
-    observer.observe(tiles);
+    /*
+      判定はスクロールのたびに矩形を測るだけの同期処理にする。
+
+      IntersectionObserver と requestAnimationFrame は、どちらもタブが非表示のあいだ
+      止まる。前者で組んだときに切り替わらない事象が出たため、
+      どちらにも依存しない形にした。測るのは getBoundingClientRect 1回だけなので、
+      間引きを入れなくても負担にならない。
+    */
+    const HEADER = 78;              // 追従ヘッダーの高さ
+
+    const update = () => {
+      // タイルの下端が追従ヘッダーの下に隠れたら畳む
+      head.classList.toggle('is-condensed', tiles.getBoundingClientRect().bottom <= HEADER);
+    };
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();                       // 読み込み直後の位置でも一度判定する
   };
 
   const initAll = () => { initHeroSlider(); initHeaderCondense(); };
@@ -925,13 +924,19 @@ const footerLinks = [
     white-space: nowrap;
     border: 0;
   }
-  .pl-hero-inner { margin-top: -78px; position: relative; }
+  /* キャッチコピーのカードと、サービスへのタイルを横に並べる */
+  .pl-hero-inner {
+    margin-top: -78px;
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 336px;
+    gap: clamp(14px, 1.8vw, 26px);
+    align-items: start;
+  }
   .pl-hero-copy {
     background: color-mix(in srgb, var(--bg) 94%, transparent);
     border-radius: var(--radius);
-    padding: 30px clamp(22px, 3vw, 46px) 34px;
-    max-width: 600px;          /* 文字を詰め込まず余白を確保 */
-    margin-left: auto;         /* 写真の余白が右側にあるため見出しも右へ */
+    padding: 30px clamp(22px, 3vw, 40px) 34px;
   }
   .pl-h1 {
     font-size: clamp(23px, 2.9vw, 35px);
@@ -1077,35 +1082,27 @@ const footerLinks = [
   }
 
   /* ── サービスへのタイルメニュー ──────────────
-     FVの直下に置く入口。ヘッダーメニューと同じ5項目＋下層送りの1枚。
-     ここが画面から出たらヘッダーをハンバーガーへ切り替える。 */
-  .pl-tiles-sec {
-    position: relative;
-    overflow: hidden;
-    padding-block: clamp(34px, 4.5vw, 60px);
-  }
+     キャッチコピーの隣に置く入口。横2×縦3。
+     ここが画面から出たらヘッダー右上にハンバーガーを出す。 */
   .pl-tiles {
-    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;   /* 横2×縦3 */
-    gap: 16px;
-    max-width: 620px;                 /* 全幅だと1枚が大きくなりすぎるので絞る */
-    margin-inline: auto;
+    gap: 10px;
   }
   .pl-tile {
     height: 100%;
     display: grid;
     justify-items: center;
     align-content: center;
-    gap: 8px;
+    gap: 6px;
     text-align: center;
     text-decoration: none;
     color: inherit;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: var(--radius);
+    border-radius: var(--radius-sm);
     box-shadow: var(--shadow);
-    padding: 22px 16px;
+    padding: 14px 8px;
     transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s, background-color 0.3s;
   }
   .pl-tile:hover {
@@ -1117,17 +1114,16 @@ const footerLinks = [
   .pl-tile-icon {
     display: grid;
     place-items: center;
-    width: 54px;
-    height: 54px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background: var(--mint);
     color: var(--green-deep);
     transition: background-color 0.3s;
   }
   .pl-tile:hover .pl-tile-icon { background: var(--surface); }
-  .pl-tile-icon svg { width: 28px; height: 28px; }
-  .pl-tile-label { font-size: 16px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.5; }
-  .pl-tile-kind { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .pl-tile-icon svg { width: 22px; height: 22px; }
+  .pl-tile-label { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.45; }
 
   /* 受入状況。色だけに頼らず必ず文字でも示す */
   .pl-badge {
@@ -1286,6 +1282,12 @@ const footerLinks = [
   .pl-head.is-condensed .pl-menu { display: block; }
 
   @media (max-width: 1000px) {
+    /* 横に並べる幅がないので、コピーの下にタイルを置く */
+    .pl-hero-inner { grid-template-columns: 1fr; gap: 16px; }
+    .pl-tile { padding: 16px 10px; }
+    .pl-tile-icon { width: 44px; height: 44px; }
+    .pl-tile-icon svg { width: 24px; height: 24px; }
+    .pl-tile-label { font-size: 14px; }
     .pl-head-cta { display: none; }
     .pl-menu { margin-left: auto; }   /* CTAが消えるぶん、自分で右端へ寄る */
     .pl-sticky { display: flex; }
@@ -1301,12 +1303,11 @@ const footerLinks = [
     .pl-hero-copy { max-width: none; padding: 24px 20px 28px; }
     .pl-grid-3, .pl-grid-2, .pl-access, .pl-about-inner { grid-template-columns: 1fr; gap: 16px; }
     /* スクショと同じ2列。1列にすると縦に伸びすぎて入口として機能しない */
-    .pl-tiles { grid-template-columns: 1fr 1fr; gap: 10px; }
-    .pl-tile { padding: 18px 10px; gap: 6px; }
-    .pl-tile-icon { width: 46px; height: 46px; }
-    .pl-tile-icon svg { width: 24px; height: 24px; }
-    .pl-tile-label { font-size: 14px; }
-    .pl-tile-kind { display: none; }
+    .pl-tiles { gap: 8px; }
+    .pl-tile { padding: 14px 8px; gap: 5px; }
+    .pl-tile-icon { width: 40px; height: 40px; }
+    .pl-tile-icon svg { width: 22px; height: 22px; }
+    .pl-tile-label { font-size: 13px; }
     .pl-about-inner { gap: 26px; }
     .pl-day-photo { aspect-ratio: 16 / 10; }
     .pl-access { gap: 24px; }
