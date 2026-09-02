@@ -134,9 +134,10 @@ const footerLinks = [
     {/* モチーフはすべてここで定義したオリジナルの線画。外部画像は使わない。 */}
     <svg class="pl-defs" aria-hidden="true" focusable="false">
       <defs>
-        {/* ヒーローの下辺をゆるやかな丘の線で切り抜く */}
+        {/* ヒーローの輪郭。上辺はゆるやかな弧、下辺は右へ長く伸びる葉先のカーブ。
+            左右対称にしないことで、既製のカーブ切り抜きに見えないようにしている。 */}
         <clipPath id="pl-hero-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0,0 H1 V0.82 C0.78,0.97 0.56,0.86 0.34,0.93 C0.20,0.97 0.09,1 0,1 Z" />
+          <path d="M0,0.075 C0.22,0.004 0.58,0.004 1,0.042 V0.80 C0.74,0.99 0.44,0.85 0.20,0.94 C0.11,0.975 0.05,0.995 0,1 Z" />
         </clipPath>
 
         <symbol id="pl-i-home" viewBox="0 0 24 24">
@@ -204,8 +205,18 @@ const footerLinks = [
           </span>
         </a>
 
-        {/* ヘッダーのメニューは持たない。上部の入口はFV直下のタイルメニューが担い、
-            それが画面から出たら右上にハンバーガーを出す（JSが is-condensed を付ける）。 */}
+        {/* PC：上部はFVのタイルが入口なのでナビを隠し、タイルが隠れたら出す。
+            JSが動かない場合は常時表示のまま（行き止まりを作らない）。
+            スマホ：ナビは使わず、常にハンバーガーを出す。 */}
+        <nav class="pl-nav" aria-label="サービス">
+          {services.map((s) => (
+            <a href={`#${s.id}`}>
+              <span class="pl-nav-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
+              <span class="pl-nav-label">{s.short}</span>
+            </a>
+          ))}
+        </nav>
+
         <div class="pl-head-cta">
           {/* 緊急性のある連絡手段は濃いフォレストグリーンで別枠にする */}
           <a class="pl-btn pl-btn-ink pl-btn-sm" href={corp.telHref}>
@@ -271,6 +282,18 @@ const footerLinks = [
               </button>
             </div>
           </div>
+
+          {/* 輪郭をなぞる線。上辺は写真の内側に白、下辺は写真の外側にグリーン。
+              上下で呼応させて「手で引いた枠」に見せる。
+              vector-effect で、器がどれだけ横に伸びても線幅は一定に保つ。 */}
+          <svg class="pl-hero-frame" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+            <path class="pl-hero-frame-top" vector-effect="non-scaling-stroke"
+                  transform="translate(0,0.05)"
+                  d="M0,0.075 C0.22,0.004 0.58,0.004 1,0.042" />
+            <path class="pl-hero-frame-bottom" vector-effect="non-scaling-stroke"
+                  transform="translate(0,0.028)"
+                  d="M1,0.80 C0.74,0.99 0.44,0.85 0.20,0.94 C0.11,0.975 0.05,0.995 0,1" />
+          </svg>
         </div>
         <div class="pl-wrap pl-hero-inner">
           <div class="pl-hero-copy">
@@ -289,8 +312,9 @@ const footerLinks = [
             </div>
           </div>
 
-          {/* キャッチコピーの隣に置く入口。ここが画面から出たら
-              ヘッダー右上にハンバーガーを出す（JSが is-condensed を付ける） */}
+          {/* キャッチコピーの隣に置く入口。ここが画面から隠れたら
+              PCはヘッダーメニューを出す（JSが is-condensed を付ける）。
+              スマホは幅が足りないので、最初から常にハンバーガー。 */}
           <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービス">
             <ul class="pl-tiles">
               {services.map((s) => (
@@ -610,6 +634,10 @@ const footerLinks = [
       どちらにも依存しない形にした。測るのは getBoundingClientRect 1回だけなので、
       間引きを入れなくても負担にならない。
     */
+    // ここまで来たらJSは生きている。CSS側はこのクラスを見て出し分ける。
+    // 付かなければPCのナビは出たままなので、JSが落ちてもメニューが消えない。
+    head.classList.add('is-js');
+
     const HEADER = 78;              // 追従ヘッダーの高さ
 
     const update = () => {
@@ -736,6 +764,18 @@ const footerLinks = [
   /* メニューは右寄せ。各項目は同じ幅にそろえ、
      ヘッダーCTA「見学のご予約」（実測 116.7×58.5px）より一回り小さく取る。
      最長ラベル「訪問看護」は実測49.9pxなので 100px 幅に余裕で収まる。 */
+  /* 既定はナビ表示。JSが動かなくてもPCでは行き止まりにならない */
+  .pl-nav { display: flex; gap: 2px; margin-left: auto; }
+  .pl-nav a {
+    display: grid; justify-items: center; gap: 2px;
+    width: 100px;
+    padding: 5px 4px;
+    border-radius: var(--radius-sm);
+    font-size: 12px; font-weight: 500;
+    text-decoration: none; white-space: nowrap;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .pl-nav a:hover { background: var(--mint); color: var(--green-deep); }
   .pl-nav-icon { display: grid; place-items: center; color: var(--green-deep); }
   .pl-nav-icon svg { width: 20px; height: 20px; }
 
@@ -925,6 +965,27 @@ const footerLinks = [
     border: 0;
   }
   /* キャッチコピーのカードと、サービスへのタイルを横に並べる */
+  /* 輪郭をなぞる線。基底の `.pl svg` を上書きするため .pl を前置する */
+  .pl .pl-hero-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;      /* 下辺の線は写真の外へ出す */
+    pointer-events: none;
+    z-index: 1;
+  }
+  .pl .pl-hero-frame path { fill: none; }
+  .pl .pl-hero-frame-top {
+    stroke: rgba(255, 255, 255, 0.62);
+    stroke-width: 1.5;
+  }
+  .pl .pl-hero-frame-bottom {
+    stroke: var(--green);
+    stroke-width: 2;
+    stroke-linecap: round;
+  }
+
   .pl-hero-inner {
     margin-top: -78px;
     position: relative;
@@ -1275,11 +1336,12 @@ const footerLinks = [
     .pl-head-tel { font-size: 15px; }
   }
 
-  /* 上部ではヘッダーにメニューを置かない（入口はFV直下のタイル）。
-     タイルが画面から出たら右上にハンバーガーを出す。`is-condensed` はJSが付ける。
-     JSが動かなければハンバーガーは出ないが、タイルメニューとフッターから全ページへ行ける。 */
-  .pl-head-cta { margin-left: auto; }
-  .pl-head.is-condensed .pl-menu { display: block; }
+  /* PCの出し分け。
+     `is-js` はJSが初期化できたときだけ付く。付いていなければナビは出たままなので、
+     JSが落ちてもメニューが消えることはない。
+     `is-condensed` はFVのタイルが画面から隠れたときに付く。 */
+  .pl-head.is-js .pl-nav { display: none; }
+  .pl-head.is-js.is-condensed .pl-nav { display: flex; }
 
   @media (max-width: 1000px) {
     /* 横に並べる幅がないので、コピーの下にタイルを置く */
@@ -1288,8 +1350,10 @@ const footerLinks = [
     .pl-tile-icon { width: 44px; height: 44px; }
     .pl-tile-icon svg { width: 24px; height: 24px; }
     .pl-tile-label { font-size: 14px; }
+    /* スマホは常にハンバーガー。ナビは幅が足りないので使わない */
+    .pl-nav, .pl-head.is-js.is-condensed .pl-nav { display: none; }
+    .pl-menu { display: block; margin-left: auto; }
     .pl-head-cta { display: none; }
-    .pl-menu { margin-left: auto; }   /* CTAが消えるぶん、自分で右端へ寄る */
     .pl-sticky { display: flex; }
     .pl-grid-3 { grid-template-columns: 1fr 1fr; }
     .pl-day { grid-template-columns: repeat(3, 1fr); row-gap: 26px; }
