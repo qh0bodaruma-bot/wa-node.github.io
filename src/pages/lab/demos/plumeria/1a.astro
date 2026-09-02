@@ -204,15 +204,8 @@ const footerLinks = [
           </span>
         </a>
 
-        <nav class="pl-nav" aria-label="サービス">
-          {services.map((s) => (
-            <a href={`#${s.id}`}>
-              <span class="pl-nav-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
-              <span class="pl-nav-label">{s.short}</span>
-            </a>
-          ))}
-        </nav>
-
+        {/* ヘッダーのメニューは持たない。上部の入口はFV直下のタイルメニューが担い、
+            それが画面から出たら右上にハンバーガーを出す（JSが is-condensed を付ける）。 */}
         <div class="pl-head-cta">
           {/* 緊急性のある連絡手段は濃いフォレストグリーンで別枠にする */}
           <a class="pl-btn pl-btn-ink pl-btn-sm" href={corp.telHref}>
@@ -317,10 +310,10 @@ const footerLinks = [
                 </li>
               ))}
               <li>
-                <a class="pl-tile" href="#contact">
+                <a class="pl-tile" href="#recruit">
                   <span class="pl-tile-icon" aria-hidden="true"><svg><use href="#pl-i-staff" /></svg></span>
-                  <span class="pl-tile-label">訪問介護・居宅介護支援</span>
-                  <span class="pl-tile-kind">下層ページでご紹介します</span>
+                  <span class="pl-tile-label">職員募集</span>
+                  <span class="pl-tile-kind">介護スタッフ・看護師</span>
                 </a>
               </li>
             </ul>
@@ -605,11 +598,12 @@ const footerLinks = [
   };
 
   /*
-    タイルメニューが画面から出たら、ヘッダーのナビ5項目を畳んでハンバーガーに替える。
-    上部ではタイルが入口の役目を果たすのでヘッダーは素のまま、
+    タイルメニューが画面から出たら、ヘッダー右上にハンバーガーを出す。
+    上部ではタイルが入口を務めるのでヘッダーにメニューを置かず、
     タイルが流れ去ったらヘッダーが入口を引き受ける、という分担。
 
-    JSが動かなければ `is-condensed` が付かず、常時ナビ表示のまま（現状の挙動）。
+    JSが動かない場合はハンバーガーが出ない。その場合でもタイルメニューと
+    フッターのリンクから各所へ行けるため、行き止まりにはならない。
   */
   const initHeaderCondense = () => {
     const head = document.querySelector('.pl-head');
@@ -675,7 +669,7 @@ const footerLinks = [
   .pl :is(ul, ol) { padding: 0; list-style: none; }
   .pl a:not([class]) { color: inherit; }
   .pl img { max-width: 100%; }
-  .pl-brand, .pl-nav a, .pl-menu-list a, .pl-foot-links a { color: inherit; }
+  .pl-brand, .pl-menu-list a, .pl-foot-links a { color: inherit; }
   .pl-defs { position: absolute; width: 0; height: 0; }
 
   /* アイコンは細めの線画で統一し、角張らせない */
@@ -743,17 +737,6 @@ const footerLinks = [
   /* メニューは右寄せ。各項目は同じ幅にそろえ、
      ヘッダーCTA「見学のご予約」（実測 116.7×58.5px）より一回り小さく取る。
      最長ラベル「訪問看護」は実測49.9pxなので 100px 幅に余裕で収まる。 */
-  .pl-nav { display: flex; gap: 2px; margin-left: auto; }
-  .pl-nav a {
-    display: grid; justify-items: center; gap: 2px;
-    width: 100px;
-    padding: 5px 4px;
-    border-radius: var(--radius-sm);
-    font-size: 12px; font-weight: 500;
-    text-decoration: none; white-space: nowrap;
-    transition: background-color 0.3s, color 0.3s;
-  }
-  .pl-nav a:hover { background: var(--mint); color: var(--green-deep); }
   .pl-nav-icon { display: grid; place-items: center; color: var(--green-deep); }
   .pl-nav-icon svg { width: 20px; height: 20px; }
 
@@ -806,7 +789,7 @@ const footerLinks = [
   .pl-btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
 
   /* ── モバイルメニュー ─────────────────────── */
-  .pl-menu { display: none; position: relative; margin-left: auto; }
+  .pl-menu { display: none; position: relative; margin-left: 12px; }
   .pl-menu > summary {
     list-style: none;
     width: 50px; height: 50px;
@@ -1104,8 +1087,10 @@ const footerLinks = [
   .pl-tiles {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr 1fr;   /* 横2×縦3 */
     gap: 16px;
+    max-width: 620px;                 /* 全幅だと1枚が大きくなりすぎるので絞る */
+    margin-inline: auto;
   }
   .pl-tile {
     height: 100%;
@@ -1291,23 +1276,18 @@ const footerLinks = [
 
   /* ── レスポンシブ ───────────────────────── */
   @media (max-width: 1180px) {
-    .pl-nav a { width: 84px; padding: 5px 4px; font-size: 11px; }
-    .pl-nav-icon svg { width: 18px; height: 18px; }
     .pl-head-tel { font-size: 15px; }
   }
 
-  /* タイルメニューが画面から出たら、ヘッダーのナビ5項目を畳んでハンバーガーに替える。
-     `is-condensed` はJSが付ける。JSが動かなければ常時ナビ表示のままで破綻しない。 */
-  @media (min-width: 1001px) {
-    .pl-head.is-condensed .pl-nav { display: none; }
-    .pl-head.is-condensed .pl-head-cta { margin-left: auto; }
-    .pl-head.is-condensed .pl-menu { display: block; margin-left: 0; }
-  }
+  /* 上部ではヘッダーにメニューを置かない（入口はFV直下のタイル）。
+     タイルが画面から出たら右上にハンバーガーを出す。`is-condensed` はJSが付ける。
+     JSが動かなければハンバーガーは出ないが、タイルメニューとフッターから全ページへ行ける。 */
+  .pl-head-cta { margin-left: auto; }
+  .pl-head.is-condensed .pl-menu { display: block; }
 
   @media (max-width: 1000px) {
-    .pl-tiles { grid-template-columns: 1fr 1fr; gap: 12px; }
-    .pl-nav, .pl-head-cta { display: none; }
-    .pl-menu { display: block; }
+    .pl-head-cta { display: none; }
+    .pl-menu { margin-left: auto; }   /* CTAが消えるぶん、自分で右端へ寄る */
     .pl-sticky { display: flex; }
     .pl-grid-3 { grid-template-columns: 1fr 1fr; }
     .pl-day { grid-template-columns: repeat(3, 1fr); row-gap: 26px; }
