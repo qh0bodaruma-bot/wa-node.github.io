@@ -21,7 +21,6 @@ import BaseLayout from '../../../../layouts/BaseLayout.astro';
   - アニメーション: ボス指示により解禁。モチーフに沿った3種のみ（木漏れ日／葉のゆらぎ／立ち上がり）。
       ブリーフの「過度なアニメーション」を避けるため振れ幅は最小限。
       prefers-reduced-motion: reduce で全停止する。
-  - 大きさの方針: 施設カード（.pl-svc）は基準サイズを維持し、それ以外を一段落とす。
 
   【ブリーフとの相違点（1点だけ・意図的）】
   ブリーフは「メインCTAはミントグリーン(#349F87)＋白文字」だが、この組み合わせは
@@ -299,7 +298,37 @@ const footerLinks = [
         </div>
       </section>
 
-      <!-- 02 お知らせ -->
+      <!-- 02 サービスへのタイルメニュー
+           ヘッダーメニューと同じ5項目。ここが画面から出たらヘッダーをハンバーガーへ切り替える
+           （切り替えは data-pl-tiles を見張るJSが担当。JSが動かなければ常時ナビ表示のまま） -->
+      <section class="pl-tiles-sec" data-pl-tiles>
+        <span class="pl-deco pl-deco-leaf-l" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>
+        <span class="pl-deco pl-deco-leaf-r" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>
+        <div class="pl-wrap">
+          <nav aria-label="サービス">
+            <ul class="pl-tiles">
+              {services.map((s) => (
+                <li id={s.id}>
+                  <a class="pl-tile" href={`#${s.id}`}>
+                    <span class="pl-tile-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
+                    <span class="pl-tile-label">{s.name}</span>
+                    <span class="pl-tile-kind">{s.kind}</span>
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a class="pl-tile" href="#contact">
+                  <span class="pl-tile-icon" aria-hidden="true"><svg><use href="#pl-i-staff" /></svg></span>
+                  <span class="pl-tile-label">訪問介護・居宅介護支援</span>
+                  <span class="pl-tile-kind">下層ページでご紹介します</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </section>
+
+      <!-- 03 お知らせ -->
       <section class="pl-sec pl-sec-tight" id="news">
         <div class="pl-wrap">
           <h2 class="pl-h2"><span class="pl-h2-en">NEWS</span>お知らせ</h2>
@@ -321,7 +350,7 @@ const footerLinks = [
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V44c220-34 430 20 700 12S1230 8 1440 30v60Z" /></svg>
       </div>
 
-      <!-- 03 プルメリアについて -->
+      <!-- 04 プルメリアについて -->
       <section class="pl-about" id="about">
         {/* 社名のプルメリアを実際の植物画で。抽象SVGの木より brand に近い */}
         <img class="pl-deco-flower pl-deco-flower-bl" src="/images/plumeria/decoration-bl.webp" alt=""
@@ -347,38 +376,6 @@ const footerLinks = [
       <div class="pl-hill pl-hill-from-mint" aria-hidden="true">
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 0v40c250 30 470-24 740-14S1220 82 1440 56V0Z" /></svg>
       </div>
-
-      <!-- 04 5つのサービス -->
-      <section class="pl-sec pl-services-sec" id="services">
-        <span class="pl-deco pl-deco-leaf-l" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>
-        <span class="pl-deco pl-deco-leaf-r" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>
-        <div class="pl-wrap">
-          <h2 class="pl-h2"><span class="pl-h2-en">SERVICES</span>5つのサービス</h2>
-          <ul class="pl-grid-3 pl-services">
-            {services.map((s) => (
-              <li id={s.id}>
-                <a class="pl-card pl-svc" href={`#${s.id}`}>
-                  <img class="pl-svc-ph" src={s.img} alt={s.alt} width="760" height="570" loading="lazy" decoding="async" />
-                  <span class="pl-svc-name">
-                    <span class="pl-svc-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
-                    {s.name}
-                  </span>
-                  <span class="pl-svc-kind">{s.kind}</span>
-                  {s.status && (
-                    <span class={s.open ? 'pl-badge pl-badge-open' : 'pl-badge pl-badge-full'}>{s.status}</span>
-                  )}
-                </a>
-              </li>
-            ))}
-            <li>
-              <div class="pl-card pl-svc pl-svc-more">
-                <span class="pl-svc-name">訪問介護・居宅介護支援</span>
-                <span class="pl-svc-kind">下層ページでご紹介します</span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </section>
 
       <!-- 05 3つの強み -->
       <section class="pl-sec pl-sec-beige" id="reasons">
@@ -607,9 +604,36 @@ const footerLinks = [
     setPlay(!reduce.matches);   // 動きを減らす設定なら1枚目で止める
   };
 
-  initHeroSlider();
+  /*
+    タイルメニューが画面から出たら、ヘッダーのナビ5項目を畳んでハンバーガーに替える。
+    上部ではタイルが入口の役目を果たすのでヘッダーは素のまま、
+    タイルが流れ去ったらヘッダーが入口を引き受ける、という分担。
+
+    JSが動かなければ `is-condensed` が付かず、常時ナビ表示のまま（現状の挙動）。
+  */
+  const initHeaderCondense = () => {
+    const head = document.querySelector('.pl-head');
+    const tiles = document.querySelector('[data-pl-tiles]');
+    if (!head || !tiles || head.dataset.plCondense === '1') return;
+    head.dataset.plCondense = '1';
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          head.classList.toggle('is-condensed', !entry.isIntersecting);
+        }
+      },
+      // 追従ヘッダーの下に隠れた分は「見えていない」と扱う
+      { rootMargin: '-78px 0px 0px 0px', threshold: 0 }
+    );
+    observer.observe(tiles);
+  };
+
+  const initAll = () => { initHeroSlider(); initHeaderCondense(); };
+
+  initAll();
   // BaseLayout が ViewTransitions を使うため、遷移後にも初期化する（二重初期化は上で弾く）
-  document.addEventListener('astro:page-load', initHeroSlider);
+  document.addEventListener('astro:page-load', initAll);
 </script>
 
 <style>
@@ -1060,7 +1084,6 @@ const footerLinks = [
   /* ── カード・グリッド ───────────────────── */
   .pl-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
   .pl-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-  .pl-services { margin-top: 40px; position: relative; }
   .pl-card {
     background: var(--surface);
     border: 1px solid var(--line);
@@ -1070,40 +1093,56 @@ const footerLinks = [
     display: grid; align-content: start; gap: 11px;
   }
 
-  /* ── サービスカード（基準サイズを維持）────── */
-  .pl-services-sec { overflow: hidden; }
-  .pl-svc {
+  /* ── サービスへのタイルメニュー ──────────────
+     FVの直下に置く入口。ヘッダーメニューと同じ5項目＋下層送りの1枚。
+     ここが画面から出たらヘッダーをハンバーガーへ切り替える。 */
+  .pl-tiles-sec {
+    position: relative;
+    overflow: hidden;
+    padding-block: clamp(34px, 4.5vw, 60px);
+  }
+  .pl-tiles {
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .pl-tile {
     height: 100%;
-    padding: 26px 24px;
+    display: grid;
+    justify-items: center;
+    align-content: center;
     gap: 8px;
-    text-decoration: none; color: inherit;
-    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 22px 16px;
+    transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s, background-color 0.3s;
   }
-  a.pl-svc:hover { border-color: var(--green); transform: translateY(-2px); box-shadow: var(--shadow-lift); }
-  .pl-svc-ph {
-    display: block;
-    width: 100%;
-    aspect-ratio: 4 / 3;       /* 支給画像の比率に合わせる */
-    object-fit: cover;
-    border-radius: var(--radius-sm);
-    margin-bottom: 8px;
-    background: var(--mint);   /* 読み込み前の下地 */
+  .pl-tile:hover {
+    border-color: var(--green);
+    background: var(--mint);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lift);
   }
-  .pl-svc-icon {
-    display: inline-grid; place-items: center;
-    width: 26px; height: 26px;
+  .pl-tile-icon {
+    display: grid;
+    place-items: center;
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: var(--mint);
     color: var(--green-deep);
-    vertical-align: -6px;
-    margin-right: 4px;
+    transition: background-color 0.3s;
   }
-  .pl-svc-icon svg { width: 22px; height: 22px; }
-  .pl-svc-name { font-size: 19px; font-weight: 700; letter-spacing: 0.06em; }
-  .pl-svc-kind { font-size: 15px; color: var(--muted); line-height: 1.75; }
-  .pl-svc-more {
-    border-style: dashed; background: transparent; box-shadow: none;
-    align-content: center; justify-items: center; text-align: center;
-  }
-  .pl-svc-more .pl-svc-name { font-size: 17px; }
+  .pl-tile:hover .pl-tile-icon { background: var(--surface); }
+  .pl-tile-icon svg { width: 28px; height: 28px; }
+  .pl-tile-label { font-size: 16px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.5; }
+  .pl-tile-kind { font-size: 13px; color: var(--muted); line-height: 1.7; }
 
   /* 受入状況。色だけに頼らず必ず文字でも示す */
   .pl-badge {
@@ -1257,7 +1296,16 @@ const footerLinks = [
     .pl-head-tel { font-size: 15px; }
   }
 
+  /* タイルメニューが画面から出たら、ヘッダーのナビ5項目を畳んでハンバーガーに替える。
+     `is-condensed` はJSが付ける。JSが動かなければ常時ナビ表示のままで破綻しない。 */
+  @media (min-width: 1001px) {
+    .pl-head.is-condensed .pl-nav { display: none; }
+    .pl-head.is-condensed .pl-head-cta { margin-left: auto; }
+    .pl-head.is-condensed .pl-menu { display: block; margin-left: 0; }
+  }
+
   @media (max-width: 1000px) {
+    .pl-tiles { grid-template-columns: 1fr 1fr; gap: 12px; }
     .pl-nav, .pl-head-cta { display: none; }
     .pl-menu { display: block; }
     .pl-sticky { display: flex; }
@@ -1272,10 +1320,17 @@ const footerLinks = [
     .pl-hero-inner { margin-top: -44px; }
     .pl-hero-copy { max-width: none; padding: 24px 20px 28px; }
     .pl-grid-3, .pl-grid-2, .pl-access, .pl-about-inner { grid-template-columns: 1fr; gap: 16px; }
+    /* スクショと同じ2列。1列にすると縦に伸びすぎて入口として機能しない */
+    .pl-tiles { grid-template-columns: 1fr 1fr; gap: 10px; }
+    .pl-tile { padding: 18px 10px; gap: 6px; }
+    .pl-tile-icon { width: 46px; height: 46px; }
+    .pl-tile-icon svg { width: 24px; height: 24px; }
+    .pl-tile-label { font-size: 14px; }
+    .pl-tile-kind { display: none; }
     .pl-about-inner { gap: 26px; }
     .pl-day-photo { aspect-ratio: 16 / 10; }
     .pl-access { gap: 24px; }
-    .pl-services, .pl-reasons { margin-top: 28px; }
+    .pl-reasons { margin-top: 28px; }
     .pl-day { grid-template-columns: repeat(2, 1fr); }
     .pl-news > li { grid-template-columns: auto 1fr; gap: 8px 12px; }
     .pl-news-text { grid-column: 1 / -1; }
@@ -1378,7 +1433,7 @@ const footerLinks = [
 
   @media (prefers-reduced-motion: reduce) {
     .pl * { transition: none !important; animation: none !important; }
-    .pl-btn:hover, a.pl-svc:hover { transform: none; }
+    .pl-btn:hover, .pl-tile:hover { transform: none; }
     .pl-hero-media::after { opacity: 0.6; }
   }
 </style>
