@@ -142,10 +142,12 @@ const footerLinks = [
 
         <symbol id="pl-i-home" viewBox="0 0 24 24">
           <path d="M4 10.8 12 4.5l8 6.3V19a1.6 1.6 0 0 1-1.6 1.6h-3.2v-5.4H8.8v5.4H5.6A1.6 1.6 0 0 1 4 19z" />
+          <path opacity="0.5" d="M7.4 9.3h9.2" />
         </symbol>
         <symbol id="pl-i-bed" viewBox="0 0 24 24">
           <path d="M3 18.5v-9M3 13.2h18v5.3M21 18.5v-4.1a3 3 0 0 0-3-3h-5.6v1.8" />
           <circle cx="7.4" cy="11.4" r="1.9" />
+          <path opacity="0.5" d="M11 15.6h7.4" />
         </symbol>
         <symbol id="pl-i-care" viewBox="0 0 24 24">
           <path d="M12 19.6s-6.3-4.1-6.3-8.4A3.5 3.5 0 0 1 12 8.8a3.5 3.5 0 0 1 6.3 2.4c0 4.3-6.3 8.4-6.3 8.4Z" />
@@ -154,10 +156,12 @@ const footerLinks = [
         <symbol id="pl-i-chair" viewBox="0 0 24 24">
           <circle cx="10" cy="16.8" r="3.9" />
           <path d="M10 4.4v8.9h5.9l2.9 4.9M8.1 7.2h3.9" />
+          <path opacity="0.5" d="M10 13v7.6M6.3 16.8h7.4" />
         </symbol>
         <symbol id="pl-i-staff" viewBox="0 0 24 24">
           <circle cx="12" cy="8" r="3.1" />
           <path d="M5.2 19.8a6.8 6.8 0 0 1 13.6 0" />
+          <path opacity="0.5" d="M12 15.4v2.6" />
         </symbol>
         {/* 葉。主脈1本に、薄い側脈を2本足して密度を出す */}
         <symbol id="pl-i-leaf" viewBox="0 0 24 24">
@@ -783,8 +787,14 @@ const footerLinks = [
     transition: background-color 0.3s, color 0.3s;
   }
   .pl-nav a:hover { background: var(--mint); color: var(--green-deep); }
-  .pl-nav-icon { display: grid; place-items: center; color: var(--green-deep); }
-  .pl-nav-icon svg { width: 20px; height: 20px; }
+  .pl-nav-icon {
+    display: grid; place-items: center;
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--mint);
+    color: var(--green-deep);
+  }
+  .pl-nav-icon svg { width: 18px; height: 18px; }
 
   .pl-head-cta { display: flex; gap: 8px; flex: none; }
   .pl-head-tel { font-size: 17px; line-height: 1.15; }
@@ -870,7 +880,7 @@ const footerLinks = [
     border-bottom: 1px solid var(--line);
   }
   .pl-menu-list a:last-child { border-bottom: 0; }
-  .pl-menu-list .pl-nav-icon svg { width: 20px; height: 20px; }
+  .pl-menu-list .pl-nav-icon svg { width: 18px; height: 18px; }
 
   /* ── ファーストビュー ───────────────────── */
   .pl-hero { position: relative; }
