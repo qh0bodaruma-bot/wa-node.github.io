@@ -305,18 +305,22 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
           <circle cx="12" cy="12" r="8.2" />
           <path d="M12 7.4V12l3.2 1.9" />
         </symbol>
-        {/* 社名にちなんだ花（プルメリアは5弁）。ブランドマークと装飾に使う */}
+        {/* 社名にちなんだ花（プルメリアは5弁）。ブランドマークと装飾に使う。
+            中心から放射する4本の短い脈を薄く足して花芯の密度を出す */}
         <symbol id="pb-i-flower" viewBox="0 0 24 24">
           <path d="M12 4.2c2 0 3.3 1.5 3 3.4 1.7-1 3.6-.4 4.2 1.4.6 1.9-.6 3.5-2.5 3.7 1.5 1.2 1.5 3.2 0 4.4-1.5 1.2-3.4.6-4.2-1.1-.8 1.7-2.7 2.3-4.2 1.1-1.5-1.2-1.5-3.2 0-4.4-1.9-.2-3.1-1.8-2.5-3.7.6-1.8 2.5-2.4 4.2-1.4-.3-1.9 1-3.4 3-3.4Z" />
           <circle cx="12" cy="12.4" r="1.5" />
+          <path opacity="0.5" d="M12 8.8v1.6M16 12.4h-1.6M12 16v-1.6M8 12.4h1.6" />
         </symbol>
         <symbol id="pb-i-leaf" viewBox="0 0 24 24">
           <path d="M19.4 4.6C11 4.2 5.2 7.4 5.2 13.4a5.4 5.4 0 0 0 5.4 5.4c5.6 0 8.8-5.8 8.8-14.2Z" />
           <path d="M8.2 19.6c1.6-4.2 4.4-7.4 8.2-9.6" />
+          <path opacity="0.5" d="M11.4 15c1.6-.9 2.9-.9 4.3-.3M13.6 11.8c1.3-.6 2.4-.6 3.6-.2" />
         </symbol>
         <symbol id="pb-i-tree" viewBox="0 0 24 24">
           <path d="M12 3.4c3.2 0 5.6 2.3 5.6 5.2 1.3.7 2 2 2 3.3 0 2.2-1.9 3.9-4.2 3.9H8.6c-2.3 0-4.2-1.7-4.2-3.9 0-1.3.7-2.6 2-3.3 0-2.9 2.4-5.2 5.6-5.2Z" />
           <path d="M12 15.8v4.8M12 18l2.4-2M12 19l-2.2-1.8" />
+          <path opacity="0.5" d="M9.4 9.6c.9-.7 1.8-1 2.8-1M14.6 9.6c-.9-.7-1.8-1-2.8-1" />
         </symbol>
         <symbol id="pb-i-hands" viewBox="0 0 24 24">
           <path d="M3.6 13.4 7 10.2l3.4 2.6 3.2-.6" />
@@ -333,6 +337,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
         <symbol id="pb-i-flower-b" viewBox="0 0 24 24">
           <path d="M12 4.6c1.9-.2 3.2 1.2 3.1 3.1 1.8-.8 3.5 0 3.9 1.8.4 1.9-.9 3.3-2.8 3.3 1.4 1.3 1.2 3.3-.4 4.3-1.6 1-3.4.3-4.1-1.5-.9 1.6-2.8 2-4.2.7-1.4-1.3-1.2-3.3.4-4.3-1.9-.4-2.9-2.1-2.1-3.9.8-1.7 2.7-2.1 4.3-1-.1-1.9 1.3-3.2 3.2-3.1Z" />
           <circle cx="11.8" cy="12.6" r="1.7" />
+          <path opacity="0.5" d="M9.5 10.1l1.1 1.1M15.3 10.1l-1.1 1.1M9.5 15.5l1.1-1.1M15.3 15.5l-1.1-1.1" />
         </symbol>
         <symbol id="pb-i-home-b" viewBox="0 0 24 24">
           <path d="M4 10.8 12 4.6l8 6.2V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" />
@@ -342,6 +347,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
         <symbol id="pb-i-tree-b" viewBox="0 0 24 24">
           <path d="M11.6 3.6c3.2 0 5.6 2.3 5.6 5.2 1.3.7 2 2 2 3.3 0 2.2-1.9 3.9-4.2 3.9H8.4c-2.3 0-4.2-1.7-4.2-3.9 0-1.3.7-2.6 2-3.3 0-2.9 2.2-5.2 5.4-5.2Z" />
           <path d="M12 15.8v4.8M12 17.6l2.8-1.6M12 19.2l-2.6-2" />
+          <path opacity="0.5" d="M9 9.4c1-.6 2-.9 3-.9M15 9.4c-1-.6-2-.9-3-.9" />
         </symbol>
         <symbol id="pb-i-hands-b" viewBox="0 0 24 24">
           <path d="M3.8 12.8 7.2 9.6l3.4 2.8 3-.6" />
@@ -351,6 +357,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
         <symbol id="pb-i-leaf-b" viewBox="0 0 24 24">
           <path d="M19.6 4.4C11.2 4.2 5 7.8 5 13.6a5.4 5.4 0 0 0 5.4 5.4c5.8 0 9.2-6 9.2-14.6Z" />
           <path d="M8.6 19.4c1.4-4.4 4.2-7.8 8-10.2" />
+          <path opacity="0.5" d="M11.8 15.2c1.6-1 3-1 4.4-.4M14 11.9c1.3-.7 2.5-.7 3.7-.3" />
         </symbol>
       </defs>
     </svg>
@@ -1187,6 +1194,13 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     --r: 14px;
     --r-sm: 7px;
 
+    /* 影は4段階の奥行きで使い分ける。ブランドグリーンをかすかに帯びさせ、
+       黒い強いドロップシャドウは使わない */
+    --shadow-xs: 0 2px 10px rgba(29, 167, 0, 0.07);     /* 小さな丸アイコン */
+    --shadow: 0 10px 28px rgba(29, 167, 0, 0.08);       /* カードの通常状態 */
+    --shadow-md: 0 20px 44px rgba(19, 122, 0, 0.14);    /* ドロップダウン */
+    --shadow-lift: 0 26px 54px rgba(19, 122, 0, 0.18);  /* ホバーのリフト */
+
     /* 参照サイトで支配的だったイージング */
     --e: cubic-bezier(0.26, 0.06, 0, 1);
     --e2: cubic-bezier(0.47, 0.16, 0.24, 1);
@@ -1445,6 +1459,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     border-radius: 58% 42% 47% 53% / 44% 51% 49% 56%;   /* ロゴ枠も雲形にする */
     background: var(--green);
     color: #fff;
+    box-shadow: var(--shadow-xs);
     transition: border-radius 0.6s var(--e);
   }
   .pb-brand:hover .pb-brand-mark { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
@@ -1623,8 +1638,14 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     font-family: 'Archivo', sans-serif;
     font-size: 13px; font-weight: 600; letter-spacing: 0.16em; color: var(--green-deep);
   }
-  .pb-eyebrow-mark { width: 19px; height: 19px; flex: none; color: var(--green-deep); }
-  .pb-eyebrow-mark svg { width: 19px; height: 19px; }
+  .pb-eyebrow-mark {
+    display: grid; place-items: center;
+    width: 26px; height: 26px; flex: none;
+    border-radius: 58% 42% 47% 53% / 44% 51% 49% 56%;   /* ブランドマークと同じ雲形バッジ */
+    background: var(--mint);
+    color: var(--green-deep);
+  }
+  .pb-eyebrow-mark svg { width: 15px; height: 15px; }
   .pb-eyebrow-ja { font-size: 13px; color: var(--muted); }
 
   .pb-h2 {
@@ -1704,9 +1725,10 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     background: var(--paper);
     border-radius: var(--r);
     overflow: hidden;
-    transition: transform 0.5s var(--e);
+    box-shadow: var(--shadow);
+    transition: transform 0.5s var(--e), box-shadow 0.5s var(--e);
   }
-  .pb-value:hover { transform: translateY(-4px); }
+  .pb-value:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
   .pb-value-art { position: relative; height: 200px; padding: 14px 16px 0; }
   .pb-blob-value {
     position: absolute;
@@ -1723,7 +1745,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     border-radius: 50%;
     background: var(--paper);
     color: var(--green-deep);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    box-shadow: var(--shadow-xs);
   }
   .pb-value-icon svg { width: 26px; height: 26px; stroke-width: 1.3; }
   .pb-value-text { padding: 34px 24px 30px; }
@@ -1741,7 +1763,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
 
   /* ── 05 法人の歩みと体制 ─────────────────────── */
   .pb-fact-list { display: grid; gap: 14px; }
-  .pb-fact { background: var(--paper); border-radius: var(--r); padding: 26px 20px; }
+  .pb-fact { background: var(--paper); border-radius: var(--r); padding: 26px 20px; box-shadow: var(--shadow); }
   .pb-fact-num { display: flex; align-items: baseline; gap: 4px; line-height: 1.15; }
   .pb-fact-num .pb-num { font-size: 36px; font-weight: 700; }
   .pb-fact-unit { font-size: 15px; }
@@ -1758,7 +1780,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
 
   .pb-deflist { display: grid; gap: 14px; }
   .pb-fact-def { margin-top: 28px; align-items: start; }
-  .pb-fact-def > div { background: var(--paper); border-radius: var(--r); padding: 20px 22px; }
+  .pb-fact-def > div { background: var(--paper); border-radius: var(--r); padding: 20px 22px; box-shadow: var(--shadow); }
   .pb-deflist dt { font-size: 15px; font-weight: 700; color: var(--green-deep); }
   .pb-deflist dd { font-size: 15px; line-height: 1.95; margin-top: 4px; }
   .pb-deflist-sm > div { padding: 0 0 14px; border-bottom: 1px solid var(--line-soft); background: transparent; }
@@ -1770,9 +1792,10 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     background: var(--paper);
     border-radius: var(--r);
     overflow: hidden;
-    transition: transform 0.5s var(--e);
+    box-shadow: var(--shadow);
+    transition: transform 0.5s var(--e), box-shadow 0.5s var(--e);
   }
-  .pb-fac:hover { transform: translateY(-4px); }
+  .pb-fac:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
   .pb-fac-art { position: relative; height: 214px; padding: 14px 16px 0; }
   .pb-blob-fac {
     position: absolute;
@@ -1815,9 +1838,10 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     background: var(--paper);
     text-decoration: none;
     color: inherit;
-    transition: transform 0.5s var(--e);
+    box-shadow: var(--shadow);
+    transition: transform 0.5s var(--e), box-shadow 0.5s var(--e);
   }
-  .pb-sv-link:hover { transform: translateY(-3px); }
+  .pb-sv-link:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
   .pb-sv-art { position: relative; flex: none; width: 108px; height: 108px; }
   .pb-blob-sv {
     position: absolute; inset: 0;
@@ -1854,9 +1878,10 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     padding: 24px 22px;
     display: flex;
     flex-direction: column;
-    transition: transform 0.5s var(--e);
+    box-shadow: var(--shadow);
+    transition: transform 0.5s var(--e), box-shadow 0.5s var(--e);
   }
-  .pb-desk:hover { transform: translateY(-4px); }
+  .pb-desk:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
   .pb-desk-head { display: flex; align-items: center; gap: 11px; }
   .pb-desk-icon {
     width: 46px; height: 46px; flex: none;
@@ -1889,6 +1914,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     display: grid;
     gap: 28px;
     align-items: start;
+    box-shadow: var(--shadow);
   }
   .pb-form-en { display: block; margin-bottom: 4px; }
   .pb-form-doc-title { font-size: 15px; font-weight: 700; margin-top: 20px; }
@@ -1898,7 +1924,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   .pb-doclist-mark svg { width: 19px; height: 19px; }
   .pb-form-text .pb-note { margin-top: 16px; }
 
-  .pb-form-mock { background: var(--bg); border-radius: var(--r); padding: 22px 20px; }
+  .pb-form-mock { background: var(--bg); border-radius: var(--r); padding: 22px 20px; box-shadow: var(--shadow-xs); }
   .pb-form-mock-label { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
   .pb-form-mock-field {
     height: 46px;
@@ -1917,7 +1943,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     font-size: 19px; font-weight: 700; text-align: center; line-height: 54px;
   }
 
-  .pb-hours { margin-top: 26px; background: var(--paper); border-radius: var(--r); padding: 28px 24px; }
+  .pb-hours { margin-top: 26px; background: var(--paper); border-radius: var(--r); padding: 28px 24px; box-shadow: var(--shadow); }
   .pb-hours-grid { display: grid; gap: 26px; margin-top: 18px; }
   .pb-table-wrap { overflow-x: auto; }
   .pb-table { width: 100%; border-collapse: collapse; min-width: 460px; font-size: 15px; }
@@ -2106,7 +2132,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     width: min(84vw, 320px);
     background: var(--paper);
     border-radius: var(--r);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--shadow-md);
     padding: 8px;
     max-height: 74vh; overflow-y: auto;
   }
