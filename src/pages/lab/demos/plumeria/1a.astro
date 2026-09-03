@@ -409,11 +409,13 @@ const footerLinks = [
           <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は施設ごとに差し替えます。</p>
           <img class="pl-day-photo" src="/images/plumeria/aday-01.webp" alt="午後の共用スペースで、入居者がそれぞれ読書やお茶をして過ごしている様子"
                width="1600" height="900" loading="lazy" decoding="async" />
+          {/* 時間のラベルが写真の下辺にまたがる。
+              ドットと見出しは写真の外（地色の上）に出して読みやすさを保つ。 */}
           <ol class="pl-day">
             {day.map((d) => (
               <li class="pl-day-item">
-                <span class="pl-day-dot" aria-hidden="true"></span>
                 <span class="pl-num-face pl-day-time">{d.time}</span>
+                <span class="pl-day-dot" aria-hidden="true"></span>
                 <span class="pl-day-label">{d.label}</span>
               </li>
             ))}
@@ -989,6 +991,9 @@ const footerLinks = [
   .pl-hero-inner {
     margin-top: -78px;
     position: relative;
+    /* なぞり線（.pl-hero-frame は z-index:1）より上に置く。
+       線はカードの下を通り抜けて見える。 */
+    z-index: 2;
     display: grid;
     grid-template-columns: minmax(0, 1fr) 336px;
     gap: clamp(14px, 1.8vw, 26px);
@@ -1234,14 +1239,39 @@ const footerLinks = [
     border-radius: var(--radius);
     background: var(--mint);
   }
-  .pl-day { margin-top: 34px; display: grid; grid-template-columns: repeat(6, 1fr); position: relative; }
+  /* 時間のラベルは高さを固定する。下の目盛り線の位置をこの値から決めるため。 */
+  .pl-day {
+    --day-pill-h: 32px; --day-gap: 9px;
+    display: grid; grid-template-columns: repeat(6, 1fr);
+    position: relative;
+    z-index: 2;                    /* 写真より上のレイヤー */
+  }
+  /* ラベルの上半分を写真に重ねる。
+     `.pl :is(ul, ol) { margin: 0 }` のほうが詳細度が高いので、
+     要素名を足して打ち消す（Astroのスコープ属性が両方に付くため）。
+     列数はメディアクエリ側の `.pl-day` で上書きするので、ここには書かない。 */
+  .pl ol.pl-day { margin-top: calc(var(--day-pill-h) * -0.5); }
   .pl-day::before {
-    content: ''; position: absolute; left: 8%; right: 8%; top: 8px;
+    content: ''; position: absolute; left: 8%; right: 8%;
+    /* ラベル + 隙間 + ドットの半径 = ドットの中心 */
+    top: calc(var(--day-pill-h) + var(--day-gap) + 8px);
     height: 1px; background: var(--line);
   }
-  .pl-day-item { display: grid; justify-items: center; gap: 9px; text-align: center; position: relative; }
+  .pl-day-item {
+    display: grid; justify-items: center; gap: var(--day-gap);
+    text-align: center; position: relative;
+  }
   .pl-day-dot { width: 17px; height: 17px; border-radius: 50%; background: var(--bg); border: 2px solid var(--green); }
-  .pl-day-time { font-size: 17px; color: var(--green-deep); line-height: 1.2; font-weight: 600; }
+  .pl-day-time {
+    display: inline-flex; align-items: center;
+    height: var(--day-pill-h); padding-inline: 15px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow);
+    font-size: 16px; font-weight: 600; line-height: 1;
+    color: var(--green-deep);
+  }
   .pl-day-label { font-size: 13px; color: var(--muted); line-height: 1.7; }
 
   /* ── 空室・採用 ─────────────────────────── */
@@ -1256,12 +1286,25 @@ const footerLinks = [
     object-fit: cover;
     background: var(--mint);
   }
-  .pl-vacancy { display: grid; gap: 10px; }
-  .pl-vacancy > li {
-    display: flex; align-items: center; justify-content: space-between; gap: 12px;
-    padding-bottom: 10px; border-bottom: 1px solid var(--line);
-    font-size: 15px;
+  /* 施設ごとのタイルを横に並べる。3つの状態を一目で見比べられるようにする。
+     幅が足りなくなったら auto-fit が自動で折り返す。 */
+  .pl-vacancy {
+    /* 3つ並ぶ幅があれば1行、足りなければ折り返す。
+       flex にしているのは、折り返した最後の1枚が空きマスを残さず
+       行いっぱいに伸びてくれるため（grid だと穴が空く）。 */
+    display: flex; flex-wrap: wrap; gap: 10px;
   }
+  .pl-vacancy > li {
+    flex: 1 1 118px;
+    display: grid; justify-items: center; align-content: start; gap: 11px;
+    padding: 17px 10px 19px;
+    border: 1px solid var(--line); border-radius: var(--radius-sm);
+    background: var(--bg);
+    text-align: center;
+  }
+  .pl-vacancy-name { font-size: 14px; font-weight: 700; letter-spacing: 0.02em; }
+  /* .pl-badge の justify-self:start を打ち消してタイル中央に置く */
+  .pl-vacancy .pl-badge { justify-self: center; }
 
   /* ── アクセス ───────────────────────────── */
   .pl-access { margin-top: 34px; display: grid; grid-template-columns: 1fr 1fr; gap: 36px; align-items: start; }
