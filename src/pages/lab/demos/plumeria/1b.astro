@@ -1780,7 +1780,8 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   .pb-fact-note { font-size: 12px; color: var(--muted); line-height: 1.8; margin-top: 8px; }
 
   .pb-deflist { display: grid; gap: 14px; }
-  .pb-fact-def { margin-top: 28px; column-gap: 20px; row-gap: 28px; align-items: start; }
+  /* dl の全体リセット（.pb :is(..., dl)）より詳細度を上げ、上段カードとの間隔を保証する */
+  .pb .pb-fact-def { margin-top: 32px; column-gap: 20px; row-gap: 28px; align-items: start; }
   .pb-fact-def > div { background: var(--paper); border-radius: var(--r); padding: 20px 22px; box-shadow: var(--shadow); }
   .pb-deflist dt { font-size: 15px; font-weight: 700; color: var(--green-deep); }
   .pb-deflist dd { font-size: 15px; line-height: 1.95; margin-top: 10px; }
@@ -2037,7 +2038,8 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   .pb-check { width: 23px; height: 23px; flex: none; color: var(--green-deep); margin-top: 5px; }
   .pb-check svg { width: 23px; height: 23px; }
   .pb-rec-policy .pb-note { margin-top: 14px; }
-  .pb-fact-list-sm { margin-top: 20px; }
+  /* ul の全体リセットに打ち消されないよう、職員インタビュー下のカード列も明示する */
+  .pb .pb-fact-list-sm { margin-top: 32px; }
   .pb-fact-list-sm .pb-fact-num .pb-num { font-size: 32px; }
   .pb-rec-support { margin-top: 20px; }
   .pb-rec-support .pb-deflist { margin-top: 14px; }

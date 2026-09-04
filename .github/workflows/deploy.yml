@@ -30,7 +30,9 @@ jobs:
           cache: "npm"
 
       - name: Install dependencies
-        run: npm ci
+        # setup-node の npm キャッシュを優先し、公開に不要な監査・基金案内通信を省く
+        # node_modules の丸ごとキャッシュは npm ci が毎回削除するため使わない
+        run: npm ci --prefer-offline --no-audit --fund=false
 
       - name: Build Astro
         env:

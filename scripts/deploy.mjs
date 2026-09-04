@@ -4,6 +4,8 @@ import { spawnSync } from 'node:child_process';
 // public/ を外すと、新規追加した画像・favicon 等が push されず本番で 404 になる（TRB-202608-006）。
 // dist/ と business-docs/private/ は .gitignore で除外済みのため列挙しない。
 const deployPaths = [
+  // GitHub Actions の公開手順も本番構成。ここを外すと workflow の改善が push されない。
+  '.github',
   'src',
   'public',
   'scripts',
