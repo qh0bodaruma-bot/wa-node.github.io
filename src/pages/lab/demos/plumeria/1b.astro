@@ -1720,7 +1720,8 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   .pb-sign { margin-top: 28px; font-size: 15px; color: var(--muted); }
 
   /* ── 04 大切にしていること ───────────────────── */
-  .pb-value-list { display: grid; gap: 20px; }
+  /* カード同士が影と白地でつながって見えないよう、縦方向は常に明確に空ける */
+  .pb-value-list { display: grid; column-gap: 20px; row-gap: 28px; }
   .pb-value {
     background: var(--paper);
     border-radius: var(--r);
@@ -1762,7 +1763,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   }
 
   /* ── 05 法人の歩みと体制 ─────────────────────── */
-  .pb-fact-list { display: grid; gap: 20px; }
+  .pb-fact-list { display: grid; column-gap: 20px; row-gap: 28px; }
   .pb-fact { background: var(--paper); border-radius: var(--r); padding: 26px 20px; box-shadow: var(--shadow); }
   .pb-fact-num { display: flex; align-items: baseline; gap: 4px; line-height: 1.15; }
   .pb-fact-num .pb-num { font-size: 36px; font-weight: 700; }
@@ -1779,7 +1780,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   .pb-fact-note { font-size: 12px; color: var(--muted); line-height: 1.8; margin-top: 8px; }
 
   .pb-deflist { display: grid; gap: 14px; }
-  .pb-fact-def { margin-top: 28px; gap: 20px; align-items: start; }
+  .pb-fact-def { margin-top: 28px; column-gap: 20px; row-gap: 28px; align-items: start; }
   .pb-fact-def > div { background: var(--paper); border-radius: var(--r); padding: 20px 22px; box-shadow: var(--shadow); }
   .pb-deflist dt { font-size: 15px; font-weight: 700; color: var(--green-deep); }
   .pb-deflist dd { font-size: 15px; line-height: 1.95; margin-top: 10px; }
@@ -1787,7 +1788,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   .pb-facts .pb-note { margin-top: 18px; }
 
   /* ── 06 施設を探す ───────────────────────────── */
-  .pb-fac-list { display: grid; gap: 20px; }
+  .pb-fac-list { display: grid; column-gap: 20px; row-gap: 28px; }
   .pb-fac {
     background: var(--paper);
     border-radius: var(--r);
@@ -1827,7 +1828,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
   .pb-status-full { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
 
   /* ── 07 サービスを探す ───────────────────────── */
-  .pb-sv-list { display: grid; gap: 16px; }
+  .pb-sv-list { display: grid; column-gap: 16px; row-gap: 28px; }
   .pb-sv-link {
     position: relative;
     display: flex;
@@ -1871,7 +1872,7 @@ const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
     opacity: 0.8;
   }
   .pb-contact .pb-wrap { position: relative; }
-  .pb-desk-list { display: grid; gap: 16px; }
+  .pb-desk-list { display: grid; column-gap: 16px; row-gap: 28px; }
   .pb-desk {
     background: var(--paper);
     border-radius: var(--r);
