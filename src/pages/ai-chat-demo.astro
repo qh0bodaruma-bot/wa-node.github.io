@@ -157,6 +157,7 @@ const description = "和-NodeのAI活用実績として公開している「相�
           })
         });
 
+        if (response.status === 503) { inner.textContent = "AI相談ナビは現在準備中です。無料相談フォームまたはLINEからご相談ください。"; return; }
         if (!response.ok) throw new Error();
 
         inner.innerHTML = '';

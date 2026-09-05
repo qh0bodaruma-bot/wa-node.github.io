@@ -1,4 +1,4 @@
-export const SITE_URL = "https://www.wa-node.com";
+export const SITE_URL = (import.meta.env.SITE || "https://www.wa-node.com").replace(/\/$/, "");
 
 type BreadcrumbItem = {
   name: string;
@@ -46,10 +46,12 @@ export const organizationSchema = {
   logo: absoluteUrl("/apple-touch-icon.png"),
   image: absoluteUrl("/images/ogp-service.png"),
   description:
-    "和-Nodeは、心理学の知見を活かしたWeb制作・LP改善、AI・ICT活用、公開後の継続改善を支援する相談窓口です。",
+    "和-Nodeは、LINEと業務システムの連携、iOS・Androidアプリ開発、Web・LP制作を、心理学と開発の知見から支援します。",
   areaServed: "JP",
   founder: { "@id": `${SITE_URL}/about/#person` },
   knowsAbout: [
+    "LINE連携",
+    "iOS・Androidアプリ開発",
     "Web制作",
     "LP制作",
     "行動心理に基づく導線設計",

@@ -1,957 +1,142 @@
 ---
 import MaterialIcon from './MaterialIcon.astro';
-import LineFlowDiagram from './LineFlowDiagram.astro';
-
-interface Props {
-  lang?: 'ja' | 'en' | 'fr';
-}
-
+import { localizedPath, servicePrices, startingPrice, serviceLabels, type SiteLanguage } from '../data/services';
+import { flowPaidTotal, flowProjectedTotal, demoYen } from '../data/flowDemo';
+import '../styles/service-pages.css';
+interface Props { lang?: SiteLanguage }
 const { lang = 'ja' } = Astro.props;
-
-function getLocalizedLink(path: string) {
-  const cleanPath = path.replace(/\/+/g, '/');
-  if (lang === 'ja') {
-    return cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
-  }
-  const validPages = ['/', '', '/contact', '/works', '/pricing', '/about', '/kdp_books', '/psychology-demo', '/ai-chat-demo', '/simulator', '/demos', '/barrier_free', '/mental_care', '/corporate-mental', '/lp-portfolio'];
-  const basePage = cleanPath.split(/[?#]/)[0];
-  if (validPages.includes(basePage)) {
-    const langPath = basePage === '/' || basePage === '' ? `/${lang}/` : `/${lang}${cleanPath}/`;
-    return langPath.replace(/\/+/g, '/');
-  }
-  const fallbackPath = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
-  return `${fallbackPath}?lang=${lang}`;
-}
-
-const trustSignals = [
-  { value: 'LINE連携', label: 'Salesforce・kintone・HubSpot等に対応' },
-  { value: 'LIFF開発', label: 'LINEアプリ内フォーム・ツール開発' },
-  { value: '20年以上', label: 'IT・Web・開発の現場経験' },
-  { value: 'SECURITY ACTION', label: '情報管理への取り組みを宣言' },
-];
-
-const issues = [
-  'LINEで受けた問い合わせ情報を、毎回管理システムに手入力している（二重入力）',
-  'LINE側の開発会社とシステム側の担当が別々で、要件がかみ合わない（ベンダー分断）',
-  '自社でAPI（システム同士をつなぐ仕組み）の連携を試みたが、技術的に行き詰まった（技術の壁）',
-];
-
-const capabilities = [
-  {
-    icon: 'link',
-    title: 'LIFF（LINE内フォーム）の開発',
-    desc: 'LINEアプリ内で動くWebページ（LIFF）を使った申込・問い合わせフォームを開発します。ノーコードでは難しいブランドに合ったデザインにも対応。',
+const href = (path: string) => localizedPath(path, lang);
+const labels = serviceLabels[lang];
+const c = {
+  ja: {
+    eyebrow: '人に寄り添う、仕組みづくり。', title: ['つながる仕組みを。', '使いつづけられる', 'アプリを。'],
+    lead: 'LINEと業務システムの連携から、iOS・Androidアプリまで。使う人の迷いと、現場の手間を減らす仕組みを、要件整理から公開まで一緒につくります。',
+    view: '動く制作例を見る', assurance: '構想段階でも大丈夫です。まずは目的と必要な範囲から。',
+    preview: '仕組みを、小さく体験', sample: 'サンプル画面・外部送信なし', received: 'LINEで問い合わせ', message: '見積りについて相談したいです。', record: '顧客管理に登録', waiting: 'フォームの内容を連携', ready: '連携を試す', done: '登録・担当通知が完了', reset: 'もう一度試す', fullLine: 'LINE × kintoneのデモへ', fullApp: 'アプリの画面を操作する',
+    flowSub: 'サブスクを、ひと目で。', monthly: '有料契約の月額合計', trial: '無料トライアル中の1件を除く', projected: '全件が有料になると', next: '次の請求', notice: 'トライアル終了前に確認',
+    trust: [['20年以上', 'IT・開発の現場経験'], ['心理学 × ICT × AI', '使う人の視点で設計'], ['相談から公開まで', '同じ窓口で対応']],
+    servicesTitle: 'やりたいことから、選べます。', servicesLead: '手段がまだ決まっていなくても、今の業務や使う人に合わせて整理します。',
+    lineTitle: 'LINEの情報を、日々の業務へ。', lineDesc: '申込・問い合わせを受け付け、必要な情報を管理システムへ自動登録。転記や確認の往復を減らします。', lineFit: 'Salesforce / kintone / HubSpot / Google Sheets',
+    appTitle: '毎日の操作を、使いやすいアプリに。', appDesc: '業務の記録、会員サービス、予定や費用の管理。iOS・Androidで繰り返し使う画面と機能を設計します。', appFit: '業務アプリ / 顧客向けアプリ / ストア公開支援',
+    scope: '費用と対応範囲を見る', webTitle: 'Webサイト・LPの制作や改善も。', webDesc: '事業の説明から料金の比較、問い合わせまで。読み手が判断しやすい順番に整えます。', webLink: 'Web制作の料金を見る',
+    worksTitle: '説明を読む前に、触ってみる。', worksLead: '以下は自主制作のデモ・サンプルです。実在のお客様の導入実績や成果数値ではありません。', allWorks: 'すべての制作例', demo: '自主制作デモ', sampleSite: '自主制作サンプル',
+    works: [['LINE × kintone', '受付・自動登録・担当通知の流れを体験。'], ['ペット健康手帳・Flow', '記録、予定、サブスクの支出管理を操作。'], ['BtoB企業サイト', '製品・技術の説明から、相談までの導線。']],
+    approachTitle: 'つくる前に、使う場面から考える。', approachLead: '技術を選ぶ前に、誰が、いつ、何のために使うのか。心理学と開発の両面から、情報の順番と操作の流れを組み立てます。', about: '和-Nodeについて',
+    steps: [['整理する', '現状と目的を伺い、必要な機能と優先順位を確認。'], ['見える形にする', '画面・連携範囲・費用・期間を具体化してから着手。'], ['確かめて、届ける', '操作と連携を確認し、公開・運用の引継ぎまで対応。']],
+    finalTitle: 'その「できるかな」から、話しましょう。', finalDesc: '必要なことも、まだ決まっていないことも。そのまま聞かせてください。',
   },
-  {
-    icon: 'sync_alt',
-    title: '各種システムへの自動連携設定',
-    desc: 'フォーム送信データをSalesforce・kintone・HubSpot等のシステムへ即時反映。手入力・CSV出力の手間をゼロにします。',
+  en: {
+    eyebrow: 'Thoughtful systems, built around people.', title: ['Connected systems.', 'Apps people', 'keep using.'],
+    lead: 'From LINE and business system integration to iOS and Android apps. We work with you from defining requirements to launch, making daily work and everyday interactions easier.',
+    view: 'Explore working demos', assurance: 'An early idea is enough. Start with your goals and the scope you need.',
+    preview: 'Try a small interaction', sample: 'Sample interface · no data sent', received: 'A LINE inquiry arrives', message: 'I would like to discuss a quote.', record: 'Add to customer management', waiting: 'Transfer the form details', ready: 'Try the integration', done: 'Record added · team notified', reset: 'Try again', fullLine: 'Explore the LINE × kintone demo', fullApp: 'Try the app screens',
+    flowSub: 'Your subscriptions, at a glance.', monthly: 'Paid subscriptions per month', trial: 'Excludes one free trial', projected: 'If all become paid', next: 'Next payment', notice: 'Check before the trial ends',
+    trust: [['20+ years', 'Experience in IT & development'], ['Psychology × ICT × AI', 'Designed around the user'], ['From idea to launch', 'One point of contact']],
+    servicesTitle: 'Start with what you want to do.', servicesLead: 'No need to choose a technology first. We clarify what fits your workflow and users.',
+    lineTitle: 'Connect LINE to everyday work.', lineDesc: 'Capture requests and inquiries, then register the relevant details in your business system. Reduce repeated entry and back-and-forth checks.', lineFit: 'Salesforce / kintone / HubSpot / Google Sheets',
+    appTitle: 'Make everyday tasks easier in an app.', appDesc: 'Work records, member services, schedules and expense tracking. We design iOS and Android interfaces for regular use.', appFit: 'Business apps / Customer apps / Store submission support',
+    scope: 'View scope and pricing', webTitle: 'Websites and landing pages, too.', webDesc: 'Clear information from understanding your business to comparing prices and making an inquiry.', webLink: 'View web design pricing',
+    worksTitle: 'See how it works. Try it yourself.', worksLead: 'These are independently built demos and samples, not client deployments or measured business results.', allWorks: 'All projects & demos', demo: 'Independent demo', sampleSite: 'Independent sample',
+    works: [['LINE × kintone', 'Try inquiry capture, record creation and team notifications.'], ['Pet Health Note & Flow', 'Explore records, schedules and subscription expenses.'], ['B2B company website', 'Follow the path from products and technology to an inquiry.']],
+    approachTitle: 'Begin with how people will use it.', approachLead: 'Who uses it, when, and why? We bring psychology and development together to shape clear information and intuitive interactions.', about: 'About Wa-Node',
+    steps: [['Understand', 'Clarify the current situation, goals and priorities.'], ['Make it concrete', 'Agree on screens, scope, cost and timing before work begins.'], ['Check and deliver', 'Verify interactions and integrations, then support launch and handover.']],
+    finalTitle: 'Start with “could this work?”', finalDesc: 'Tell us what you know and what you are still figuring out.',
   },
-  {
-    icon: 'chat',
-    title: 'Messaging APIによる自動応答',
-    desc: '申込・問い合わせ後にLINEで自動確認メッセージを送信。各システムのステータス変更に連動したLINE通知にも対応します。',
+  fr: {
+    eyebrow: 'Des outils pensés pour les personnes.', title: ['Des systèmes reliés.', 'Des applications', 'utiles au quotidien.'],
+    lead: 'De l’intégration LINE aux applications iOS et Android, nous vous accompagnons de la définition des besoins au lancement pour simplifier le travail et les usages du quotidien.',
+    view: 'Essayer les démonstrations', assurance: 'Une première idée suffit. Partons de vos objectifs et du périmètre nécessaire.',
+    preview: 'Essayez une interaction', sample: 'Interface fictive · aucun envoi', received: 'Une demande arrive sur LINE', message: 'Je souhaite discuter d’un devis.', record: 'Ajout à la gestion clients', waiting: 'Transférer les informations', ready: 'Tester l’intégration', done: 'Fiche créée · équipe informée', reset: 'Réessayer', fullLine: 'Voir la démo LINE × kintone', fullApp: 'Essayer les écrans des applications',
+    flowSub: 'Vos abonnements en un regard.', monthly: 'Total mensuel des abonnements payants', trial: 'Un essai gratuit non inclus', projected: 'Si tous deviennent payants', next: 'Prochain paiement', notice: 'Vérifier avant la fin de l’essai',
+    trust: [['Plus de 20 ans', 'D’expérience en informatique'], ['Psychologie × TIC × IA', 'Une conception centrée sur l’usage'], ['De l’idée au lancement', 'Un interlocuteur unique']],
+    servicesTitle: 'Partons de ce que vous voulez faire.', servicesLead: 'Inutile de choisir la technologie au départ. Nous clarifions les besoins de votre activité et de vos utilisateurs.',
+    lineTitle: 'Relier LINE à votre activité.', lineDesc: 'Recevez les demandes et inscrivez les informations utiles dans votre système de gestion pour limiter les doubles saisies et les vérifications répétées.', lineFit: 'Salesforce / kintone / HubSpot / Google Sheets',
+    appTitle: 'Simplifier les gestes du quotidien.', appDesc: 'Suivi d’activité, services aux membres, agendas et dépenses : des applications iOS et Android conçues pour un usage régulier.', appFit: 'Applications métier / Services clients / Publication',
+    scope: 'Voir le périmètre et les tarifs', webTitle: 'Sites web et pages de vente aussi.', webDesc: 'Des informations claires pour comprendre votre activité, comparer les offres et vous contacter.', webLink: 'Voir les tarifs web',
+    worksTitle: 'Découvrez le fonctionnement en l’essayant.', worksLead: 'Ces créations sont des démonstrations et exemples indépendants, sans résultats clients ni déploiements réels revendiqués.', allWorks: 'Toutes les créations', demo: 'Démo indépendante', sampleSite: 'Exemple indépendant',
+    works: [['LINE × kintone', 'Tester la réception, la création de fiche et les notifications.'], ['Pet Health Note & Flow', 'Découvrir les dossiers, les agendas et le suivi des abonnements.'], ['Site d’entreprise BtoB', 'Parcourir les produits et les technologies jusqu’à la prise de contact.']],
+    approachTitle: 'Penser aux usages avant de développer.', approachLead: 'Qui l’utilise, quand et pourquoi ? Nous associons psychologie et développement pour organiser des informations claires et des interactions simples.', about: 'À propos de Wa-Node',
+    steps: [['Comprendre', 'Clarifier la situation, les objectifs et les priorités.'], ['Concrétiser', 'Définir les écrans, le périmètre, le coût et les délais avant de commencer.'], ['Vérifier et livrer', 'Vérifier les interactions, puis accompagner le lancement et la prise en main.']],
+    finalTitle: 'Commençons par votre idée.', finalDesc: 'Dites-nous ce qui est défini et ce qui reste à préciser.',
   },
-  {
-    icon: 'verified',
-    title: '設計から実装・テストまで一社で',
-    desc: '要件整理・API設計・開発・実機テスト・本番移行まで和-Nodeが一括対応。ベンダー間の調整コストが発生しません。',
-  },
-];
-
-const devSteps = [
-  {
-    num: 'STEP 1',
-    title: '無料ヒアリング（30〜45分）',
-    desc: '実現したいこと・現在のLINE環境・連携先システムを確認します。この段階でスコープ外の要件も明確にします。',
-  },
-  {
-    num: 'STEP 2',
-    title: '要件整理・お見積り',
-    desc: 'ヒアリング内容をもとに、開発範囲・費用・期間をまとめた見積書をご提出します。不明点があれば再調整します。',
-  },
-  {
-    num: 'STEP 3',
-    title: '契約・着手',
-    desc: 'テスト用LINEアカウントで開発を開始します。Figmaデータ・システムのAPI権限など必要な素材をご提供いただきます。',
-  },
-  {
-    num: 'STEP 4',
-    title: 'テスト・確認',
-    desc: '実機（iOS・AndroidのLINEアプリ）での動作確認を行い、修正対応します。軽微な修正は2回まで含みます。',
-  },
-  {
-    num: 'STEP 5',
-    title: '本番移行・納品',
-    desc: 'テスト環境で確認が取れたら、本番アカウントへ移行します。操作・運用の引継ぎメモをセットでお渡しします。',
-  },
-];
-
-const caseGuides = [
-  {
-    label: 'LINE × CRM',
-    title: '問い合わせを、転記せずに次の対応へつなぐ',
-    challenge: 'LINEで受けた内容を、担当者が管理システムへ手入力している。',
-    design: '受付・自動登録・担当割り当てを、一つの流れとして設計する。',
-    href: '/case-studies/line-kintone-demo/',
-  },
-  {
-    label: 'WEB IMPROVEMENT',
-    title: '見た目ではなく、判断しやすさから整える',
-    challenge: '何を優先して直すべきかが曖昧で、改善が止まりやすい。',
-    design: '事実・仮説・変更・確認方法を分け、比較できる形にする。',
-    href: '/lab/',
-  },
-  {
-    label: 'OPERATION DESIGN',
-    title: '受付後の作業まで含めて考える',
-    challenge: '申込み画面だけを整えても、裏側の確認・管理が残っている。',
-    design: '利用者と運用者それぞれが終えたいことから、必要な画面を絞る。',
-    href: '/case-studies/reservation-operations/',
-  },
-];
-
-const faqs = [
-  {
-    q: '費用の目安を教えてください。',
-    a: '連携先システムにより異なります。Salesforce連携は40万円〜、kintone連携は25万円〜、HubSpot連携は20万円〜、Googleスプレッドシート連携は10万円〜（いずれも税別）が目安です。要件定義・設計・実装・テストを含みます。連携するデータの種類や画面数により変動するため、まずヒアリングで範囲を確認したうえでお見積りします。',
-  },
-  {
-    q: '開発期間はどのくらいかかりますか？',
-    a: '必要な情報・権限がそろった時点から4〜6週間が目安です。連携先システムのAPI権限や仕様が固まっているほど短くなります。',
-  },
-  {
-    q: '連携先システムの設定変更も対応してもらえますか？',
-    a: '連携に必要な範囲のシステム設定（カスタム項目・APIユーザー設定等）は対応します。Salesforce Apexカスタム開発・各システムの大規模な改修は対応外です。',
-  },
-  {
-    q: 'Salesforce以外のシステムでも対応してもらえますか？',
-    a: 'Salesforce・kintone・HubSpot・Googleスプレッドシートなど、各種システムに対応しています。LINE公式アカウントをお持ちであれば、連携先システムについてはご相談ください。',
-  },
-  {
-    q: '適格請求書（インボイス）は発行できますか？',
-    a: 'インボイス登録済みです。番号確定後、正式な適格請求書を発行します。',
-  },
-  {
-    q: '公開後の保守・修正はお願いできますか？',
-    a: '別途お見積りで対応します。月額での継続サポートもご相談いただけます。',
-  },
-];
+}[lang];
+const workLinks = ['/case-studies/line-kintone-demo/', '/mobile-app-demo/', '/case-studies/b2b-corporate-renewal/'];
 ---
-
-<main id="main" class="home-content">
-
-  <!-- 1. Hero Section -->
-  <section class="section hero">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-editorial-rule" aria-hidden="true"></div>
-        <div class="hero-copy">
-          <h1>
-            <span class="hero-title-main">LINEと業務を、<br />つなごう。</span>
-          </h1>
-          <div class="hero-divider" aria-hidden="true"></div>
-          <p class="lead">LINE公式アカウントの顧客データを、お使いのシステムへ自動連携。<br /><strong>Salesforce・kintone・HubSpot等に対応。二重入力をなくし、対応漏れを防ぐ仕組みを構築します。</strong></p>
-          <div class="btns">
-            <a class="btn primary" href={getLocalizedLink('/contact')}>
-              <span>無料で相談する</span><span aria-hidden="true">→</span>
-            </a>
-            <a class="btn secondary" href={getLocalizedLink('/pricing')}>
-              <span>料金・期間の目安</span><span aria-hidden="true">→</span>
-            </a>
-          </div>
+<main id="main" class="service-page home-refresh" data-glossary-skip data-reveal="off">
+  <section class="home-hero">
+    <div class="s-shell hero-layout">
+      <div class="hero-copy">
+        <p class="s-eyebrow">{c.eyebrow}</p>
+        <h1>{c.title.map(line => <span>{line}</span>)}</h1>
+        <p class="s-intro">{c.lead}</p>
+        <div class="s-actions"><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-button secondary" href="#selected-works">{c.view}</a></div>
+        <p class="s-note">{c.assurance}</p>
+      </div>
+      <div class="hero-demo" data-home-demo>
+        <div class="demo-title"><span>{c.preview}</span><span class="demo-count" aria-hidden="true">01 / 02</span></div>
+        <div class="preview-tabs" role="tablist" aria-label={c.preview}>
+          <button type="button" id="preview-line-tab" role="tab" aria-selected="true" aria-controls="preview-line" data-preview-tab="line"><MaterialIcon name="forum" />{labels.line}</button>
+          <button type="button" id="preview-app-tab" role="tab" aria-selected="false" aria-controls="preview-app" tabindex="-1" data-preview-tab="app"><MaterialIcon name="smartphone" />{labels.app}</button>
         </div>
-      </div>
-      <div class="hero-visual">
-        <svg class="hero-visual-defs" width="0" height="0" aria-hidden="true" focusable="false">
-          <defs>
-            <clipPath id="hero-photo-clip" clipPathUnits="objectBoundingBox">
-              <path d="M0.035,0.058 C0.30,0.018 0.70,0.048 0.966,0.030 C0.986,0.35 0.980,0.66 0.970,0.956 C0.70,0.986 0.30,0.958 0.040,0.974 C0.020,0.66 0.026,0.35 0.035,0.058 Z" />
-            </clipPath>
-          </defs>
-        </svg>
-        <svg class="hero-visual-frame" viewBox="0 0 400 300" preserveAspectRatio="none" aria-hidden="true">
-          <path class="hero-frame-line hero-frame-line-1" d="M16,24 C58,13 98,25 142,17 C188,9 230,23 276,14 C314,7 352,19 384,12 C391,50 384,88 388,126 C392,166 384,202 387,240 C389,264 384,278 386,289 C346,296 304,285 260,293 C212,300 166,287 120,295 C84,300 52,287 17,294 C11,255 18,219 14,181 C10,141 17,105 12,67 C11,49 13,34 16,24 Z" />
-          <path class="hero-frame-line hero-frame-line-2" d="M16,24 C58,13 98,25 142,17 C188,9 230,23 276,14 C314,7 352,19 384,12 C391,50 384,88 388,126 C392,166 384,202 387,240 C389,264 384,278 386,289 C346,296 304,285 260,293 C212,300 166,287 120,295 C84,300 52,287 17,294 C11,255 18,219 14,181 C10,141 17,105 12,67 C11,49 13,34 16,24 Z" />
-        </svg>
-        <img
-          class="hero-visual-photo"
-          src="/images/hero-meeting.webp"
-          alt="打ち合わせの席で、資料と画面を見ながら和やかに方向性を話し合っている様子"
-          width="1448"
-          height="1086"
-          fetchpriority="high"
-          decoding="async"
-        />
-      </div>
-    </div>
-  </section>
-
-  <!-- Trust Strip -->
-  <section class="trust-strip" aria-label="和-Nodeの対応領域">
-    <div class="trust-strip-inner">
-      {trustSignals.map((signal) => (
-        <div class="trust-signal">
-          <strong>{signal.value}</strong>
-          <span>{signal.label}</span>
+        <div id="preview-line" role="tabpanel" aria-labelledby="preview-line-tab" class="preview-panel" tabindex="0">
+          <div class="connection-source"><span class="source-icon">LINE</span><div><strong>{c.received}</strong><p>{c.message}</p></div></div>
+          <div class="connection-track" aria-hidden="true"><MaterialIcon name="south" /><span>LINE → kintone</span></div>
+          <div class="connection-target"><span class="target-icon"><MaterialIcon name="inventory_2" /></span><div><strong>{c.record}</strong><p data-integration-status role="status" aria-live="polite" data-waiting={c.waiting} data-done={c.done}>{c.waiting}</p></div><MaterialIcon name="check_circle" class="integration-check" /></div>
+          <button type="button" class="preview-run" data-run-integration data-ready={c.ready} data-reset={c.reset}>{c.ready}<MaterialIcon name="arrow_forward" /></button>
+          <a class="preview-detail" href={href(workLinks[0])}>{c.fullLine} <span aria-hidden="true">↗</span></a>
         </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- 2. 課題共感セクション -->
-  <section class="section issues-section" aria-labelledby="issues-title">
-    <div class="section-inner">
-      <div class="issues-head">
-        <span class="eyebrow">Issues</span>
-        <h2 id="issues-title">こんな状況、続いていませんか。</h2>
-      </div>
-      <ul class="issues-list">
-        {issues.map((issue) => (
-          <li class="issue-item reveal">
-            <span class="issue-check" aria-hidden="true">✓</span>
-            <p>{issue}</p>
-          </li>
-        ))}
-      </ul>
-      <p class="issues-footer">「LINEには届いている。でもCRMには残っていない。」そんな状況のまま、週次報告の件数を手集計していませんか。IT担当者が1人で抱えがちな、この「仕組みの隙間」から着手します。</p>
-    </div>
-  </section>
-
-  <!-- 3. 開発できること -->
-  <section class="section capabilities-section" aria-labelledby="capabilities-title">
-    <div class="section-inner">
-      <div class="section-title">
-        <span class="eyebrow">Services</span>
-        <h2 id="capabilities-title">設計から実装まで、一社で。</h2>
-      </div>
-      <LineFlowDiagram />
-      <div class="capabilities-grid">
-        {capabilities.map((cap) => (
-          <article class="capability-card reveal">
-            <div class="capability-icon">
-              <MaterialIcon name={cap.icon} />
-            </div>
-            <h3>{cap.title}</h3>
-            <p>{cap.desc}</p>
-          </article>
-        ))}
-      </div>
-      <p class="capabilities-note">※ 対応できない要件（Salesforceカスタム開発・大規模Apex等）は初回ヒアリングで明確にお伝えします。</p>
-    </div>
-  </section>
-
-  <!-- 強み -->
-  <section class="section strengths-section" aria-labelledby="strengths-title">
-    <div class="section-inner">
-      <div class="section-title">
-        <span class="eyebrow">Why Us</span>
-        <h2 id="strengths-title">なぜ和-Nodeに頼むのか。</h2>
-        <p class="section-subtitle">大手SIerでもなく、LINE単体の開発会社でもない。<br />LINE連携構築に特化した専門パートナーです。</p>
-      </div>
-      <div class="strengths-list">
-        <div class="strength-item reveal">
-          <div class="strength-num" aria-hidden="true">01</div>
-          <div class="strength-body">
-            <h3>ベンダー間の調整が不要。窓口は1つだけ。</h3>
-            <p>LINE側の開発も連携先システムの設定も、和-Nodeが一括対応します。「LINE会社とシステム会社の言っていることが食い違う」問題が起きません。</p>
-          </div>
+        <div id="preview-app" role="tabpanel" aria-labelledby="preview-app-tab" class="preview-panel" tabindex="0" hidden>
+          <div class="flow-brand">Flow <span>{c.flowSub}</span></div>
+          <div class="flow-mini-total"><span>{c.monthly}</span><strong>{demoYen(flowPaidTotal)}</strong><small>{c.trial}</small></div>
+          <div class="flow-mini-row"><span>{c.projected}</span><b>{demoYen(flowProjectedTotal)}</b></div>
+          <div class="flow-mini-row"><span>Spotify <small>{c.next}</small></span><b>¥980</b></div>
+          <div class="flow-mini-trial"><MaterialIcon name="notifications_active" /><span>{c.notice}<small>Adobe CC · {lang === 'ja' ? '残り12日' : lang === 'en' ? '12 days left' : '12 jours restants'}</small></span></div>
+          <a class="preview-detail" href={href(workLinks[1])}>{c.fullApp} <span aria-hidden="true">↗</span></a>
         </div>
-        <div class="strength-item reveal">
-          <div class="strength-num" aria-hidden="true">02</div>
-          <div class="strength-body">
-            <h3>設計・実装・テストまで一気通貫。</h3>
-            <p>「要件定義だけして開発は別会社」にはなりません。動く仕組みとして納品するまで、同じ担当者が責任を持ちます。</p>
-          </div>
-        </div>
-        <div class="strength-item reveal">
-          <div class="strength-num" aria-hidden="true">03</div>
-          <div class="strength-body">
-            <h3>必要な範囲を適正価格で。</h3>
-            <p>大手SIerのような大規模体制は持っていません。その分、中間コストを省いた適正価格で、LINE連携構築に特化した対応が可能です。</p>
-          </div>
-        </div>
+        <p class="demo-disclosure">{c.sample}</p>
       </div>
     </div>
   </section>
-
-  <!-- 4. 開発の流れ -->
-  <section class="section dev-flow-section" aria-labelledby="dev-flow-title">
-    <div class="section-inner">
-      <div class="section-title">
-        <span class="eyebrow">Process</span>
-        <h2 id="dev-flow-title">ご依頼から納品までの流れ</h2>
-      </div>
-      <ol class="dev-flow-list">
-        {devSteps.map((step, i) => (
-          <li class="dev-flow-item reveal">
-            <div class="dev-flow-num" aria-hidden="true">{String(i + 1).padStart(2, '0')}</div>
-            <div class="dev-flow-body">
-              <span class="dev-flow-step-label">{step.num}</span>
-              <h3>{step.title}</h3>
-              <p>{step.desc}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-      <p class="dev-flow-note">必要な情報・権限がそろい次第、目安4〜6週間で納品します。</p>
+  <div class="trust-strip s-shell">{c.trust.map(([value, label]) => <div><strong>{value}</strong><span>{label}</span></div>)}</div>
+  <section class="s-section" id="services"><div class="s-shell">
+    <div class="s-section-head"><div><p class="s-eyebrow">Services</p><h2>{c.servicesTitle}</h2><p class="s-intro">{c.servicesLead}</p></div></div>
+    <div class="s-grid-two service-choices">
+      {[{id:'line',icon:'forum',label:labels.line,title:c.lineTitle,desc:c.lineDesc,fit:c.lineFit,price:servicePrices.lineSheets},{id:'app',icon:'smartphone',label:labels.app,title:c.appTitle,desc:c.appDesc,fit:c.appFit,price:servicePrices.businessApp}].map((item,i) => <article class="service-choice"><div class="choice-label"><span class="s-number">0{i+1}</span><MaterialIcon name={item.icon}/><span>{item.label}</span></div><h3>{item.title}</h3><p>{item.desc}</p><p class="service-fit">{item.fit}</p><div class="service-choice-foot"><strong>{startingPrice(item.price,lang)}</strong><a class="s-link" href={href(`/pricing/#${item.id}`)}>{c.scope}<span aria-hidden="true">→</span></a></div></article>)}
     </div>
-  </section>
-
-  <!-- 公開ケース -->
-  <section class="section cases-section" aria-labelledby="cases-title">
-    <div class="section-inner">
-      <div class="section-title">
-        <span class="eyebrow">Case Walkthrough</span>
-        <h2 id="cases-title">相談前に、設計の考え方を確かめる。</h2>
-        <p class="section-subtitle">以下は公開デモ・自主制作のケースです。実在案件の成果を示すものではなく、<br class="pc-only" />課題をどう整理し、何をつくり、どこまで確認するかをご覧いただけます。</p>
-      </div>
-      <div class="case-guide-grid">
-        {caseGuides.map((caseGuide, index) => (
-          <article class="case-guide-card reveal">
-            <div class="case-guide-topline"><span>0{index + 1}</span><p>{caseGuide.label}</p></div>
-            <h3>{caseGuide.title}</h3>
-            <dl>
-              <div><dt>課題</dt><dd>{caseGuide.challenge}</dd></div>
-              <div><dt>設計</dt><dd>{caseGuide.design}</dd></div>
-            </dl>
-            <a href={getLocalizedLink(caseGuide.href)}>ケースを見る <span aria-hidden="true">→</span></a>
-          </article>
-        ))}
-      </div>
-      <p class="cases-note">自社の状況と近いケースがない場合も、現状を伺ったうえで、対応可否・必要な範囲・次の確認事項を整理します。</p>
-    </div>
-  </section>
-
-  <!-- 5. FAQ -->
-  <section class="section faq-section" aria-labelledby="faq-title">
-    <div class="section-inner faq-inner">
-      <div class="section-title">
-        <span class="eyebrow">FAQ</span>
-        <h2 id="faq-title">よくあるご質問</h2>
-      </div>
-      <dl class="faq-list">
-        {faqs.map((faq) => (
-          <div class="faq-item reveal">
-            <dt class="faq-q">
-              <span class="faq-mark faq-q-mark" aria-hidden="true">Q</span>
-              {faq.q}
-            </dt>
-            <dd class="faq-a">
-              <span class="faq-mark faq-a-mark" aria-hidden="true">A</span>
-              {faq.a}
-            </dd>
-          </div>
-        ))}
-      </dl>
-    </div>
-  </section>
-
-  <!-- 6. 料金 -->
-  <section class="section pricing-section" aria-labelledby="pricing-title">
-    <div class="section-inner pricing-inner">
-      <div class="section-title">
-        <span class="eyebrow">Pricing</span>
-        <h2 id="pricing-title">まず費用感を知りたい方へ。</h2>
-        <p class="section-subtitle">「いくらかかるかわからない」が相談のハードルになっていませんか。<br />目安価格と料金の決まり方をお伝えします。</p>
-      </div>
-      <div class="pricing-card reveal">
-        <p class="pricing-includes">要件定義・設計・実装・テストを含みます。</p>
-        <div class="pricing-main">
-          <span class="pricing-label">Salesforce連携</span>
-          <span class="pricing-price">40万円〜<small>（税別）</small></span>
-        </div>
-        <div class="pricing-main" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(15, 76, 92, 0.15);">
-          <span class="pricing-label">kintone連携</span>
-          <span class="pricing-price">25万円〜<small>（税別）</small></span>
-        </div>
-        <div class="pricing-main" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(15, 76, 92, 0.15);">
-          <span class="pricing-label">HubSpot連携</span>
-          <span class="pricing-price">20万円〜<small>（税別）</small></span>
-        </div>
-        <div class="pricing-main" style="margin-top: 8px; padding-top: 8px; border-top: 1px dashed rgba(15, 76, 92, 0.15);">
-          <span class="pricing-label">Googleスプレッドシート連携</span>
-          <span class="pricing-price">10万円〜<small>（税別）</small></span>
-        </div>
-        <ul class="pricing-vars" style="margin-top: 16px;">
-          <li>連携するデータ項目の種類・数</li>
-          <li>LIFF画面（LINEアプリ内ページ）の有無・画面数</li>
-          <li>連携先システムの設定状況・API権限</li>
-        </ul>
-        <p class="pricing-note">上記により最終費用は変動します。「自社の場合いくらになるか」を知るための初回相談は無料です。</p>
-        <a class="btn primary" href={getLocalizedLink('/contact')}>
-          <span>無料で費用感を聞く</span><span aria-hidden="true">→</span>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. CTA -->
-  <section class="section cta-section" aria-labelledby="cta-title">
-    <div class="section-inner cta-inner">
-      <h2 id="cta-title">まずは、30分の無料相談。</h2>
-      <p class="cta-lead">「こんな連携はできるのか？」「自社の場合、費用はどれくらいか？」<br />そんな段階からで構いません。ご相談後に必ず契約する必要はありません。</p>
-      <a class="btn primary cta-btn" href={getLocalizedLink('/contact')}>
-        <span>無料相談を予約する</span><span aria-hidden="true">→</span>
-      </a>
-      <p class="cta-note">月の新規受付には限りがあります。気になる方はお早めに。<br />返信は営業日2日以内 ／ オンラインまたはお電話で対応</p>
-    </div>
-  </section>
-
+    <div class="web-option"><div><h3>{c.webTitle}</h3><p>{c.webDesc}</p></div><a class="s-link" href={href('/pricing/#web')}>{c.webLink} <span aria-hidden="true">→</span></a></div>
+    <p class="s-note">{labels.tax}</p>
+  </div></section>
+  <section class="s-section works-section" id="selected-works"><div class="s-shell">
+    <div class="s-section-head"><div><p class="s-eyebrow">Selected works</p><h2>{c.worksTitle}</h2></div><a class="s-link" href={href('/works/')}>{c.allWorks}<span aria-hidden="true">→</span></a></div>
+    <div class="s-grid selected-grid">{c.works.map(([title,desc],i) => <a class="selected-work" href={href(workLinks[i])}>
+      <div class:list={['work-preview',`work-preview-${i}`]} aria-hidden="true">{i===0 ? <><span class="mini-line">LINE</span><MaterialIcon name="east"/><span class="mini-crm">kintone</span><small>FORM → RECORD → NOTIFY</small></> : i===1 ? <><div class="mini-app"><MaterialIcon name="pets"/><span>Pet Health Note</span></div><div class="mini-app flow"><span>Flow</span><strong>{demoYen(flowPaidTotal)}</strong></div></> : <img src="/images/case-studies/b2b/hokushin-factory-hero.webp" alt="" width="720" height="480" loading="lazy" decoding="async"/>}</div>
+      <div class="work-caption"><span>{i===2?c.sampleSite:c.demo}</span><h3>{title}<MaterialIcon name="north_east"/></h3><p>{desc}</p></div>
+    </a>)}</div><p class="s-note">{c.worksLead}</p>
+  </div></section>
+  <section class="s-section"><div class="s-shell approach-layout"><div><p class="s-eyebrow">Our approach</p><h2>{c.approachTitle}</h2><p class="s-intro">{c.approachLead}</p><a class="s-link" href={href('/about/')}>{c.about}<span aria-hidden="true">→</span></a></div><ol class="approach-steps">{c.steps.map(([title,desc],i) => <li><span class="s-number">0{i+1}</span><div><h3>{title}</h3><p>{desc}</p></div></li>)}</ol></div></section>
+  <section class="s-contact-band"><div class="s-shell"><div><h2>{c.finalTitle}</h2><p>{c.finalDesc}</p></div><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward"/></a></div></section>
 </main>
-
-<script is:inline>
-  function initHomeInteractions() {
-    const root = document.querySelector('.home-content');
-    if (!root || root.dataset.homeInteractionsReady === 'true') return;
-    root.dataset.homeInteractionsReady = 'true';
-  }
-  document.addEventListener('DOMContentLoaded', initHomeInteractions);
-  document.addEventListener('astro:page-load', initHomeInteractions);
-  initHomeInteractions();
-</script>
-
-<style is:global>
-  @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;700;800&display=swap');
-
-  :root {
-    --accent: #8c6b1f;
-    --accent-dark: #725719;
-    --accent2: #c7352f;
-    --accent2-dark: #b62f29;
-    --trust: #0f4c5c;
-    --trust-mid: #1f6f78;
-    --trust-line: rgba(15, 76, 92, 0.18);
-    --text: #333;
-    --text-deep: #1a1a1a;
-    --muted: #666;
-    --line: rgba(140, 107, 31, 0.2);
-    --soft: #f3f7f5;
-    --white: #ffffff;
-    --paper: #ffffff;
-    --surface: #ffffff;
-    --surface-strong: #fbfcfb;
-    --surface-cool: #eef5f2;
-    --card-border: rgba(15, 76, 92, 0.14);
-    --card-border-warm: rgba(140, 107, 31, 0.24);
-    --card-shadow: 0 16px 38px rgba(15, 76, 92, 0.075), 0 4px 14px rgba(70, 52, 32, 0.045);
-    --card-shadow-hover: 0 24px 52px rgba(15, 76, 92, 0.12), 0 8px 20px rgba(70, 52, 32, 0.07);
-    --radius: 16px;
-  }
-
-  body {
-    font-family: 'Shippori Mincho', serif;
-    color: var(--text);
-    line-height: 1.8;
-    background: #ffffff;
-  }
-
-  .home-content {
-    --home-action: #c7352f;
-    --home-action-dark: #b62f29;
-    --home-gold: #8c6b1f;
-    --home-gold-dark: #725719;
-    --home-cool: #eef5f2;
-  }
-
-  .section { padding: 80px 0; }
-  .section-inner { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
-
-  h1, h2, h3, h4 { font-family: 'Shippori Mincho', serif; font-weight: 800; color: var(--text-deep); }
-  h1 { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.2; margin: 0 0 24px; }
-  h2 { font-size: clamp(1.8rem, 4vw, 2.5rem); margin-bottom: 32px; }
-
-  .lead { font-size: 1.2rem; color: var(--muted); margin-bottom: 40px; max-width: 700px; }
-  .lead strong { color: var(--accent); }
-
-  .btns { display: flex; gap: 16px; margin-top: 40px; }
-  .btn { padding: 18px 36px; border-radius: 6px; font-weight: 800; text-decoration: none; transition: all 0.3s ease; text-align: center; }
-  .btn.primary { background: var(--home-action); color: white; border: 1px solid var(--home-action); box-shadow: 0 10px 25px rgba(199, 53, 47, 0.24); }
-  .btn.primary:hover { background: var(--home-action-dark); border-color: var(--home-action-dark); transform: translateY(-2px); box-shadow: 0 12px 30px rgba(199, 53, 47, 0.32); }
-  .btn.secondary { border: 1px solid rgba(140, 107, 31, 0.5); color: var(--home-gold); background: transparent; }
-  .btn.secondary:hover { border-color: var(--home-gold); background: rgba(140, 107, 31, 0.06); transform: translateY(-1px); }
-
-  .eyebrow { font-size: 0.85rem; font-weight: 800; color: var(--accent); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 12px; display: block; }
-
-  .section-title { margin-bottom: 48px; }
-  .section-title h2 { margin-bottom: 0; }
-
-  /* ── Hero ── */
-  .hero {
-    padding: 58px 0;
-    background-color: #fff;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%238c6b1f' stroke-width='1.5' stroke-opacity='0.35'%3E%3Ccircle cx='0' cy='0' r='40'/%3E%3Ccircle cx='80' cy='0' r='40'/%3E%3Ccircle cx='0' cy='80' r='40'/%3E%3Ccircle cx='80' cy='80' r='40'/%3E%3Ccircle cx='40' cy='40' r='40'/%3E%3C/g%3E%3C/svg%3E");
-    background-repeat: repeat;
-    background-size: 80px 80px;
-    min-height: 650px;
-    display: flex;
-    align-items: center;
-    border-top: 6px solid var(--home-action);
-    border-bottom: 1px solid var(--trust-line);
-  }
-  .hero-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 40px;
-    width: 100%;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 520px);
-    column-gap: 48px;
-    align-items: center;
-  }
-  .hero-visual {
-    position: relative;
-    justify-self: end;
-    width: 100%;
-    max-width: 520px;
-    aspect-ratio: 4 / 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero-visual-frame {
-    position: absolute;
-    inset: -10px;
-    width: calc(100% + 20px);
-    height: calc(100% + 20px);
-    overflow: visible;
-    pointer-events: none;
-    animation: hero-frame-drift 13s ease-in-out infinite;
-  }
-  .hero-frame-line {
-    fill: none;
-    stroke: var(--accent);
-    stroke-linejoin: round;
-    stroke-linecap: round;
-    vector-effect: non-scaling-stroke;
-    transform-box: fill-box;
-    transform-origin: center;
-  }
-  .hero-frame-line-1 {
-    stroke-width: 2.4;
-    opacity: 0.8;
-    animation: hero-frame-puddle 16s ease-in-out infinite;
-  }
-  .hero-frame-line-2 {
-    stroke-width: 1.3;
-    opacity: 0.45;
-    transform: translate(5px, -4px) rotate(0.4deg);
-    animation: hero-frame-puddle 19s ease-in-out -6s infinite;
-  }
-  .hero-visual-defs { position: absolute; width: 0; height: 0; pointer-events: none; }
-  .hero-visual-photo {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    clip-path: url(#hero-photo-clip);
-    filter: drop-shadow(0 10px 24px rgba(15, 76, 92, 0.16));
-    animation: hero-photo-drift 9s ease-in-out infinite;
-  }
-  #hero-photo-clip path { animation: hero-photo-clip-morph 11s ease-in-out infinite; }
-
-  @keyframes hero-photo-clip-morph {
-    0%, 100% { d: path("M0.035,0.058 C0.30,0.018 0.70,0.048 0.966,0.030 C0.986,0.35 0.980,0.66 0.970,0.956 C0.70,0.986 0.30,0.958 0.040,0.974 C0.020,0.66 0.026,0.35 0.035,0.058 Z"); }
-    36% { d: path("M0.028,0.036 C0.32,0.056 0.68,0.020 0.974,0.046 C0.958,0.36 0.988,0.64 0.964,0.972 C0.68,0.954 0.32,0.988 0.032,0.960 C0.040,0.65 0.014,0.34 0.028,0.036 Z"); }
-    69% { d: path("M0.044,0.028 C0.28,0.040 0.72,0.062 0.958,0.022 C0.988,0.34 0.962,0.67 0.976,0.966 C0.70,0.990 0.30,0.950 0.026,0.978 C0.026,0.68 0.018,0.33 0.044,0.028 Z"); }
-  }
-  @keyframes hero-frame-puddle {
-    0%, 100% { d: path("M16,24 C58,13 98,25 142,17 C188,9 230,23 276,14 C314,7 352,19 384,12 C391,50 384,88 388,126 C392,166 384,202 387,240 C389,264 384,278 386,289 C346,296 304,285 260,293 C212,300 166,287 120,295 C84,300 52,287 17,294 C11,255 18,219 14,181 C10,141 17,105 12,67 C11,49 13,34 16,24 Z"); }
-    34% { d: path("M12,18 C56,26 100,12 144,24 C190,32 234,11 280,20 C318,27 356,10 380,20 C386,56 378,92 384,132 C390,172 380,206 385,246 C388,268 382,282 384,292 C344,286 302,297 258,287 C210,276 164,299 118,289 C82,281 48,296 21,286 C17,246 24,214 20,176 C16,136 21,100 16,62 C15,44 9,28 12,18 Z"); }
-    67% { d: path("M20,28 C62,18 94,30 138,20 C184,10 228,28 274,18 C312,10 348,24 386,14 C393,54 388,84 391,122 C394,162 387,198 390,236 C392,260 388,274 389,286 C350,292 308,282 264,290 C216,297 170,284 124,292 C88,297 56,284 20,291 C14,252 21,216 17,178 C13,138 20,102 15,64 C14,46 17,36 20,28 Z"); }
-  }
-  @keyframes hero-frame-drift {
-    0%, 100% { transform: rotate(-1.1deg) translate(0, 0); }
-    37% { transform: rotate(0.8deg) translate(5px, -7px); }
-    68% { transform: rotate(-0.3deg) translate(-4px, 5px); }
-  }
-  @keyframes hero-photo-drift {
-    0%, 100% { transform: rotate(0.5deg) translate(0, 0); }
-    45% { transform: rotate(-0.7deg) translate(-3px, 6px); }
-    72% { transform: rotate(0.3deg) translate(4px, -4px); }
-  }
-
-  .hero-content {
-    position: relative;
-    display: grid;
-    grid-template-columns: 4px minmax(0, 720px);
-    column-gap: 30px;
-    max-width: 770px;
-  }
-  .hero-editorial-rule {
-    grid-column: 1;
-    grid-row: 1;
-    width: 4px;
-    height: 100%;
-    background: var(--home-action);
-  }
-  .hero-copy { display: contents; }
-  .hero h1    { grid-column: 2; grid-row: 1; min-width: 0; margin-bottom: 0; }
-  .hero-divider { grid-column: 2; grid-row: 2; width: min(100%, 760px); height: 2px; margin: 20px 0 22px; background: var(--trust); }
-  .hero .lead { grid-column: 2; grid-row: 3; margin-top: 0; margin-bottom: 20px; }
-  .hero .btns { grid-column: 2; grid-row: 4; justify-content: flex-start; margin-top: 0; }
-  .hero .btn  { display: inline-flex; min-width: 230px; align-items: center; justify-content: space-between; gap: 28px; }
-
-  .hero-title-main {
-    font-size: clamp(2.4rem, 5vw, 4rem);
-    font-weight: 900;
-    color: var(--text-deep);
-    line-height: 1.2;
-  }
-
-  /* ── Trust Strip ── */
-  .trust-strip {
-    background: var(--surface-cool);
-    border-bottom: 1px solid var(--trust-line);
-    padding: 12px 20px;
-  }
-  .trust-strip-inner {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    max-width: 1000px;
-    margin: 0 auto;
-    gap: 8px;
-  }
-  .trust-signal {
-    padding: 10px 12px;
-    border: 1px solid rgba(18, 82, 92, 0.12);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.72);
-    text-align: center;
-  }
-  .trust-signal strong { display: block; color: var(--trust); font-size: 0.95rem; font-weight: 900; line-height: 1.25; }
-  .trust-signal span   { display: block; margin-top: 2px; color: var(--muted); font-size: 0.72rem; font-weight: 700; line-height: 1.35; }
-
-  /* ── Issues ── */
-  .issues-section { background: #fff; border-bottom: 1px solid var(--trust-line); }
-  .issues-head { margin-bottom: 40px; }
-  .issues-head h2 { margin-bottom: 0; }
-  .issues-list { list-style: none; margin: 0 0 32px; padding: 0; display: flex; flex-direction: column; gap: 16px; }
-  .issue-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 20px 24px;
-    border: 1px solid var(--trust-line);
-    border-radius: var(--radius);
-    background: #fff;
-    box-shadow: none;
-  }
-  .issue-item p { margin: 0; font-size: 1rem; font-weight: 700; line-height: 1.75; color: var(--text-deep); }
-  .issue-check {
-    flex-shrink: 0;
-    display: grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--trust);
-    color: #fff;
-    font-size: 0.85rem;
-    font-weight: 900;
-    margin-top: 2px;
-  }
-  .issues-footer {
-    margin: 0;
-    padding: 20px 24px;
-    border-left: 4px solid var(--home-action);
-    background: rgba(199, 53, 47, 0.04);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-deep);
-    line-height: 1.75;
-  }
-
-  /* ── Capabilities ── */
-  .capabilities-section { background: var(--surface-cool); border-bottom: 1px solid var(--trust-line); }
-  .capabilities-grid {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 24px;
-    margin-bottom: 24px;
-  }
-  .capability-card {
-    padding: 32px;
-    border: 1px solid var(--card-border);
-    border-radius: 4px;
-    background: #fff;
-    box-shadow: none;
-    transition: border-color 0.2s ease;
-  }
-  .capability-card:hover { border-color: var(--trust); }
-  .capability-icon {
-    display: grid;
-    place-items: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 12px;
-    background: var(--trust);
-    color: #fff;
-    margin-bottom: 18px;
-  }
-  .capability-icon :global(.material-symbols-rounded) { font-size: 1.5rem; }
-  .capability-card h3 { font-size: 1.1rem; margin: 0 0 12px; line-height: 1.55; }
-  .capability-card p  { margin: 0; font-size: 0.92rem; color: var(--muted); line-height: 1.8; }
-  .capabilities-note { margin: 0; font-size: 0.85rem; color: var(--muted); font-weight: 700; }
-
-  /* ── Dev Flow ── */
-  .dev-flow-section { background: #fff; border-bottom: 1px solid var(--trust-line); }
-  .dev-flow-list { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-direction: column; gap: 0; }
-  .dev-flow-item {
-    display: grid;
-    grid-template-columns: 64px minmax(0, 1fr);
-    gap: 24px;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--trust-line);
-    align-items: start;
-  }
-  .dev-flow-item:last-child { border-bottom: 0; }
-  .dev-flow-num {
-    display: grid;
-    place-items: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--trust);
-    color: #fff;
-    font-family: 'Shippori Mincho', serif;
-    font-size: 1rem;
-    font-weight: 900;
-    flex-shrink: 0;
-    box-shadow: 0 8px 20px rgba(15, 76, 92, 0.14);
-  }
-  .dev-flow-step-label {
-    display: inline-block;
-    margin-bottom: 6px;
-    padding: 3px 10px;
-    border-radius: 999px;
-    background: rgba(15, 76, 92, 0.08);
-    color: var(--trust);
-    font-size: 0.75rem;
-    font-weight: 900;
-  }
-  .dev-flow-body h3 { margin: 0 0 8px; font-size: 1.1rem; line-height: 1.5; }
-  .dev-flow-body p  { margin: 0; font-size: 0.92rem; color: var(--muted); line-height: 1.8; }
-  .dev-flow-note { margin: 0; font-size: 0.9rem; font-weight: 700; color: var(--trust); }
-
-  /* ── FAQ ── */
-  .faq-section { background: var(--surface-cool); border-bottom: 1px solid var(--trust-line); }
-  .faq-inner { max-width: 800px; }
-  .faq-list { display: flex; flex-direction: column; gap: 16px; }
-  .faq-item {
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius);
-    background: #fff;
-    overflow: hidden;
-  }
-  .faq-q, .faq-a {
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-    padding: 20px 24px;
-    margin: 0;
-    font-size: 0.97rem;
-    line-height: 1.75;
-  }
-  .faq-q { border-bottom: 1px solid var(--trust-line); font-weight: 800; color: var(--text-deep); }
-  .faq-a { color: var(--muted); font-weight: 700; background: var(--surface-strong); }
-  .faq-mark {
-    flex-shrink: 0;
-    display: grid;
-    place-items: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    font-size: 0.85rem;
-    font-weight: 900;
-    margin-top: 1px;
-  }
-  .faq-q-mark { background: var(--trust); color: #fff; }
-  .faq-a-mark { background: rgba(140, 107, 31, 0.12); color: var(--accent); }
-
-  /* ── Sub Services ── */
-  .sub-services-section { background: #fff; border-bottom: 1px solid var(--trust-line); }
-  .sub-services-inner { text-align: center; max-width: 700px; }
-  .sub-services-inner h2 { margin-bottom: 16px; }
-  .sub-services-lead {
-    margin: 0 0 36px;
-    color: var(--muted);
-    font-size: 1rem;
-    line-height: 1.85;
-  }
-  .sub-services-links {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .sub-service-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 20px;
-    border: 1px solid var(--card-border);
-    border-radius: 999px;
-    background: var(--surface-cool);
-    color: var(--trust);
-    font-size: 0.9rem;
-    font-weight: 800;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-  .sub-service-link:hover { border-color: var(--trust); background: #fff; transform: translateY(-2px); box-shadow: var(--card-shadow); }
-  .sub-service-link :global(.material-symbols-rounded) { font-size: 1.1rem; }
-
-  /* ── CTA ── */
-  .cta-section {
-    background: var(--trust);
-    border-bottom: none;
-  }
-  .cta-inner { text-align: center; max-width: 680px; }
-  .cta-inner h2 { color: #fff; margin-bottom: 16px; }
-  .cta-lead {
-    margin: 0 0 36px;
-    color: rgba(255, 255, 255, 0.85);
-    font-size: 1.05rem;
-    line-height: 1.85;
-  }
-  .cta-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 28px;
-    min-width: 280px;
-    background: #fff;
-    color: var(--trust) !important;
-    border: 1px solid #fff !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18) !important;
-  }
-  .cta-btn:hover {
-    background: rgba(255, 255, 255, 0.92) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 14px 36px rgba(0, 0, 0, 0.22) !important;
-  }
-  .cta-note {
-    margin: 20px 0 0;
-    color: rgba(255, 255, 255, 0.65);
-    font-size: 0.85rem;
-    font-weight: 700;
-  }
-
-  /* ── Responsive ── */
-  @media (max-width: 768px) {
-    .hero {
-      padding: 58px 0 72px;
-      background:
-        radial-gradient(120% 60% at 50% 100%, var(--surface-cool) 0%, rgba(255,255,255,0) 70%),
-        #fff;
-      min-height: auto;
-      overflow-x: hidden;
-    }
-    .hero-inner { grid-template-columns: minmax(0, 1fr); row-gap: 38px; padding: 0 20px; width: 100%; box-sizing: border-box; }
-    .hero-visual { justify-self: center; max-width: 100%; }
-    .hero-content { grid-template-columns: 3px minmax(0, 1fr); gap: 18px; width: 100%; max-width: 430px; margin: 0; box-sizing: border-box; }
-    .hero .btns { flex-direction: column; width: 100%; margin: 0; box-sizing: border-box; align-items: stretch; gap: 12px; }
-    .hero .btn { width: 100%; min-width: 0; padding: 16px 22px; }
-    .trust-strip-inner { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .capabilities-grid { grid-template-columns: 1fr; }
-    .dev-flow-item { grid-template-columns: 48px minmax(0, 1fr); gap: 16px; }
-    .dev-flow-num { width: 44px; height: 44px; font-size: 0.88rem; }
-    .sub-services-links { flex-direction: column; align-items: center; }
-    .cta-btn { min-width: auto; width: 100%; box-sizing: border-box; }
-  }
-
-  /* ── Strengths ── */
-  .strengths-section { background: var(--surface-cool); border-bottom: 1px solid var(--trust-line); }
-  .strengths-list { display: flex; flex-direction: column; gap: 0; }
-  .strength-item {
-    display: grid;
-    grid-template-columns: 64px minmax(0, 1fr);
-    gap: 24px;
-    padding: 28px 0;
-    border-bottom: 1px solid var(--trust-line);
-    align-items: start;
-  }
-  .strength-item:last-child { border-bottom: 0; }
-  .strength-num {
-    display: grid;
-    place-items: center;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    font-family: 'Shippori Mincho', serif;
-    font-size: 1rem;
-    font-weight: 900;
-    flex-shrink: 0;
-    box-shadow: 0 8px 20px rgba(140, 107, 31, 0.18);
-  }
-  .strength-body h3 { margin: 0 0 8px; font-size: 1.1rem; line-height: 1.5; }
-  .strength-body p  { margin: 0; font-size: 0.92rem; color: var(--muted); line-height: 1.8; }
-
-  .section-subtitle { margin: 8px 0 0; color: var(--muted); font-size: 1rem; line-height: 1.8; }
-
-  /* ── Cases ── */
-  .cases-section { position: relative; overflow: hidden; background: #fff; border-bottom: 1px solid var(--trust-line); }
-  .cases-section::before { content: ''; position: absolute; top: 54px; left: calc(50% - min(50vw, 780px)); width: min(50vw, 780px); height: 1px; background: var(--home-gold); }
-  .case-guide-grid { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .case-guide-card { display: flex; flex-direction: column; min-height: 360px; padding: 28px; border: 1px solid var(--trust-line); border-radius: 4px; background: #fff; box-shadow: none; }
-  .case-guide-topline { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding-bottom: 18px; border-bottom: 1px solid var(--trust-line); }
-  .case-guide-topline span { color: var(--home-gold); font-family: 'Shippori Mincho', serif; font-size: 1.5rem; font-weight: 800; line-height: 1; }
-  .case-guide-topline p { margin: 0; color: var(--trust); font-size: .68rem; font-weight: 900; letter-spacing: .12em; text-align: right; }
-  .case-guide-card h3 { margin: 26px 0 22px; color: var(--text-deep); font-family: 'Shippori Mincho', serif; font-size: 1.35rem; line-height: 1.6; }
-  .case-guide-card dl { display: grid; gap: 13px; margin: 0; }
-  .case-guide-card dl div { display: grid; grid-template-columns: 42px 1fr; gap: 10px; }
-  .case-guide-card dt { color: var(--home-gold-dark); font-size: .73rem; font-weight: 900; }
-  .case-guide-card dd { margin: 0; color: var(--muted); font-size: .84rem; font-weight: 700; line-height: 1.7; }
-  .case-guide-card a { display: inline-flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 22px; color: var(--trust); font-size: .88rem; font-weight: 900; }
-  .case-guide-card a span { font-size: 1.2rem; transition: transform .25s ease; }
-  .case-guide-card:hover a span, .case-guide-card:focus-within a span { transform: translateX(5px); }
-  .cases-note { max-width: 860px; margin: 24px auto 0; color: var(--muted); font-size: .86rem; font-weight: 700; line-height: 1.8; text-align: center; }
-
-  /* ── Pricing ── */
-  .pricing-section { background: var(--surface-cool); border-bottom: 1px solid var(--trust-line); }
-  .pricing-inner { max-width: 700px; }
-  .pricing-card {
-    padding: 40px;
-    border: 1px solid var(--card-border-warm);
-    border-radius: var(--radius);
-    background: #fff;
-    box-shadow: var(--card-shadow);
-  }
-  .pricing-main { display: flex; align-items: baseline; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
-  .pricing-label { font-size: 1rem; font-weight: 800; color: var(--trust); }
-  .pricing-price { font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; color: var(--text-deep); line-height: 1; }
-  .pricing-price small { font-size: 0.9rem; font-weight: 700; color: var(--muted); margin-left: 4px; }
-  .pricing-includes { margin: 0 0 20px; font-size: 0.95rem; font-weight: 700; color: var(--muted); }
-  .pricing-vars {
-    margin: 0 0 16px;
-    padding: 16px 20px;
-    background: var(--surface-cool);
-    border-radius: 8px;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .pricing-vars li { font-size: 0.9rem; font-weight: 700; color: var(--muted); padding-left: 1em; position: relative; }
-  .pricing-vars li::before { content: '・'; position: absolute; left: 0; }
-  .pricing-note { margin: 0 0 28px; font-size: 0.9rem; color: var(--muted); line-height: 1.75; font-weight: 700; }
-  .pricing-card .btn { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-width: 240px; }
-
-  @media (max-width: 768px) {
-    .strength-item { grid-template-columns: 48px minmax(0, 1fr); gap: 16px; }
-    .strength-num { width: 44px; height: 44px; font-size: 0.88rem; }
-    .case-guide-grid { grid-template-columns: 1fr; }
-    .case-guide-card { min-height: 0; padding: 24px 20px; }
-    .pricing-card { padding: 28px 20px; }
-    .pricing-card .btn { min-width: auto; width: 100%; box-sizing: border-box; }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .capability-card { transition: none !important; }
-    .sub-service-link { transition: none !important; }
-  }
+<style>
+.home-refresh .home-hero{padding:76px 0 56px}.hero-layout{display:grid;grid-template-columns:1.12fr 1fr;gap:64px;align-items:center}.hero-copy h1 span{display:block}.hero-copy h1 span:last-child{color:var(--deep)}.hero-demo{min-width:0;background:var(--deep);padding:24px;border-radius:12px;color:#fff;box-shadow:16px 18px 0 #e4e9df}.demo-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:18px;font-size:.79rem;letter-spacing:.06em}.demo-count{color:#b1d0c1;font-size:.73rem}.preview-tabs{display:flex;gap:4px;border-bottom:1px solid #46726b;padding-bottom:12px}.preview-tabs button{display:flex;align-items:center;justify-content:center;gap:8px;flex:1;background:transparent;border:1px solid transparent;color:#e1eae2;border-radius:5px;padding:10px 8px;cursor:pointer;font:inherit;font-size:.85rem;line-height:1.6}.preview-tabs button[aria-selected=true]{background:#edf2e9;color:#153d36}.preview-panel{background:#f7f8f1;color:var(--ink);border-radius:6px;margin-top:16px;padding:26px 22px;min-height:322px}.connection-source,.connection-target{display:flex;align-items:center;gap:12px}.source-icon{display:grid;place-items:center;width:42px;height:42px;flex-shrink:0;background:#167849;color:white;font-size:.69rem;font-weight:700;border-radius:10px}.connection-source strong,.connection-target strong{font-size:.82rem}.connection-source p,.connection-target p{font-size:.72rem;margin:3px 0 0;color:var(--quiet)}.connection-track{display:flex;gap:14px;align-items:center;color:#658075;font-size:.67rem;letter-spacing:.1em;padding:16px 0 16px 9px}.target-icon{display:grid;place-items:center;background:#e9e5c6;border-radius:8px;width:42px;height:42px;flex-shrink:0;color:#635828}.connection-target{padding:14px 10px;background:#ecefe5;border:1px solid #d9dfd1;border-radius:6px}.connection-target :global(.integration-check){display:none;color:#176640;margin-left:auto}.is-complete .connection-target{background:#e1efdd;border-color:#99b68c}.is-complete .connection-target :global(.integration-check){display:inline-block}.preview-run{width:100%;margin-top:22px;padding:10px 12px;border:1px solid #b7c6b5;border-radius:5px;background:white;color:var(--deep);font:inherit;font-size:.79rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:12px;cursor:pointer}.preview-run:hover{background:#e7eddf}.preview-detail{display:flex;justify-content:space-between;gap:10px;color:var(--deep)!important;text-decoration:none;font-size:.74rem;font-weight:700;margin-top:18px;padding-top:14px;border-top:1px solid #d5ddcf}.demo-disclosure{text-align:center;font-size:.64rem;color:#d3e3d8;margin:14px 0 0!important}.flow-brand{font-size:1.3rem;font-weight:700;display:flex;gap:12px;align-items:center}.flow-brand span{font-size:.68rem;color:var(--quiet);font-weight:400}.flow-mini-total{display:grid;padding:14px 0 8px}.flow-mini-total>span{font-size:.68rem;color:var(--quiet)}.flow-mini-total>strong{font-size:2.6rem;font-weight:600;line-height:1.4}.flow-mini-total>small{font-size:.64rem;color:var(--quiet)}.flow-mini-row{display:flex;justify-content:space-between;gap:8px;font-size:.7rem;padding:9px 0;border-top:1px solid #dce1d6}.flow-mini-row small{margin-left:7px;color:var(--quiet);font-size:.6rem}.flow-mini-trial{display:flex;gap:8px;background:#efead8;padding:8px 10px;border-radius:5px;font-size:.68rem}.flow-mini-trial small{display:block;font-size:.6rem;color:var(--quiet)}.trust-strip{display:grid;grid-template-columns:repeat(3,1fr);padding:30px 0 36px;gap:24px}.trust-strip>div{border-left:1px solid #d2d6ca;padding-left:24px;display:grid;gap:4px}.trust-strip strong{font-size:1rem;font-weight:600}.trust-strip span{font-size:.73rem;color:var(--quiet)}.service-choice{padding:30px;border:1px solid var(--rule);border-radius:8px;background:#fffefa;display:flex;flex-direction:column}.choice-label{display:flex;gap:12px;align-items:center;color:var(--deep);font-size:.8rem;font-weight:700;margin-bottom:26px}.choice-label .s-number{margin-right:auto}.service-choice h3{font-size:1.4rem;font-family:'Shippori Mincho',serif}.service-choice>p{font-size:.9rem;color:var(--quiet);margin-bottom:20px}.service-choice .service-fit{font-size:.71rem;line-height:1.8;border-top:1px solid var(--rule);padding-top:18px;margin-top:auto}.service-choice-foot{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}.service-choice-foot strong{font-size:1.35rem}.service-choice-foot a{font-size:.75rem}.web-option{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:26px;padding:24px 0;border-bottom:1px solid var(--rule)}.web-option h3{font-size:1rem;margin-bottom:6px}.web-option p{font-size:.86rem;color:var(--quiet);margin-bottom:0}.web-option a{font-size:.79rem;flex-shrink:0}.works-section{background:#f2f3eb}.selected-work{text-decoration:none}.work-preview{aspect-ratio:1.7;background:#e3ece0;display:flex;align-items:center;justify-content:center;gap:16px;position:relative;border-radius:6px;overflow:hidden;border:1px solid #d8dfd1}.work-preview>small{position:absolute;bottom:20px;font-size:.6rem;letter-spacing:.13em;color:#52755e}.mini-line,.mini-crm{display:grid;place-items:center;min-height:60px;min-width:75px;padding:12px;background:white;border-radius:12px;font-size:.84rem;font-weight:700}.mini-line{background:#23754e;color:#fff}.mini-crm{background:#f0df97;color:#494225}.work-preview-1{background:#e7e4ed}.mini-app{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;background:#fff8e9;border:5px solid #44473f;border-bottom:0;border-radius:14px 14px 0 0;width:102px;height:145px;transform:translateY(26px)}.mini-app span{font-size:.6rem}.mini-app.flow{background:#23213d;color:#fff;transform:translateY(10px);height:159px}.mini-app.flow span{font-size:1.1rem}.mini-app strong{font-size:.9rem}.work-preview img{width:100%;height:100%;object-fit:cover}.work-caption{padding:20px 0 0}.work-caption>span{font-size:.65rem;color:var(--quiet)}.work-caption h3{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:1.06rem;margin:6px 0 10px}.work-caption p{font-size:.82rem;color:var(--quiet);margin:0}.selected-work:hover .work-caption h3{color:var(--vermillion)}.approach-layout{display:grid;grid-template-columns:1fr 1fr;gap:70px}.approach-steps{list-style:none;margin:0;padding:0}.approach-steps li{display:flex;gap:24px;border-top:1px solid var(--rule);padding:22px 0}.approach-steps h3{font-size:1.06rem;margin-bottom:7px}.approach-steps p{color:var(--quiet);font-size:.86rem;margin:0}
+@media(min-width:821px){.hero-copy .s-actions .s-button{padding:12px 16px;font-size:.8rem}.hero-copy h1{font-size:clamp(2.4rem,3.5vw,3.45rem)}}
+@media(max-width:1000px){.hero-layout{gap:32px}.hero-demo{padding:18px}.preview-panel{padding:20px 16px}.hero-copy h1{font-size:2.6rem}.approach-layout{gap:35px}}
+@media(max-width:820px){.home-refresh .home-hero{padding:46px 0 40px}.hero-layout{grid-template-columns:1fr;gap:40px}.hero-copy h1 span:nth-child(2),.hero-copy h1 span:last-child{display:inline}.hero-copy h1{font-size:clamp(2.2rem,5.8vw,3.2rem)}.hero-demo{width:100%;max-width:520px;margin-inline:auto}.trust-strip{gap:12px}.trust-strip>div{padding-left:14px}.trust-strip strong{font-size:.85rem}.trust-strip span{font-size:.68rem}.approach-layout{grid-template-columns:1fr}.selected-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px}.mini-app{width:70px;height:110px}.mini-app.flow{height:124px}.work-preview{gap:6px}.mini-line,.mini-crm{min-width:48px;min-height:45px;font-size:.65rem}.work-preview>small{display:none}.work-caption h3{font-size:.93rem}}
+@media(max-width:560px){.hero-copy h1 span{display:inline!important}.hero-copy h1 span:first-child{display:block!important}.hero-demo{box-shadow:8px 9px 0 #e4e9df}.trust-strip{grid-template-columns:1fr;padding:22px 0;gap:16px}.trust-strip>div{grid-template-columns:1fr 1.2fr;gap:8px}.service-choice{padding:24px}.web-option{align-items:start;flex-direction:column;gap:16px}.selected-grid{grid-template-columns:1fr!important;gap:30px}.work-preview{aspect-ratio:1.8}.mini-line,.mini-crm{min-width:82px;min-height:65px;font-size:.9rem}.mini-app{width:110px;height:150px}.mini-app.flow{height:170px}.work-preview>small{display:block}.work-caption{padding-top:14px}}
 </style>
+<script>
+function initHomeDemo() {
+  const demo = document.querySelector<HTMLElement>('[data-home-demo]');
+  if (!demo || demo.dataset.initialized) return;
+  demo.dataset.initialized = 'true';
+  const tabs = [...demo.querySelectorAll<HTMLButtonElement>('[data-preview-tab]')];
+  function select(index: number) {
+    tabs.forEach((tab, i) => { const active = i === index; tab.setAttribute('aria-selected', String(active)); tab.tabIndex = active ? 0 : -1; const panel = document.getElementById(tab.getAttribute('aria-controls')!); if (panel) panel.hidden = !active; });
+    const count = demo!.querySelector('.demo-count'); if (count) count.textContent = `0${index+1} / 02`;
+  }
+  tabs.forEach((tab, i) => { tab.addEventListener('click', () => select(i)); tab.addEventListener('keydown', event => { let next = i; if (event.key === 'ArrowRight') next = (i+1)%tabs.length; else if (event.key === 'ArrowLeft') next = (i+tabs.length-1)%tabs.length; else if (event.key === 'Home') next = 0; else if (event.key === 'End') next = tabs.length-1; else return; event.preventDefault(); select(next); tabs[next].focus(); }); });
+  const run = demo.querySelector<HTMLButtonElement>('[data-run-integration]'); const status = demo.querySelector<HTMLElement>('[data-integration-status]');
+  run?.addEventListener('click', () => { const complete = demo.classList.toggle('is-complete'); if(status) status.textContent = complete ? status.dataset.done! : status.dataset.waiting!; run.firstChild!.textContent = complete ? run.dataset.reset! : run.dataset.ready!; });
+}
+initHomeDemo();
+document.addEventListener('astro:page-load', initHomeDemo);
+</script>

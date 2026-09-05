@@ -2,12 +2,18 @@ import OpenAI from 'openai';
 
 export const prerender = false;
 
-export async function POST({ request }) {
-  const { messages } = await request.json();
-  const apiKey = process.env.OPENAI_API_KEY;
+export async function POST({ request, locals }) {
+  let messages;
+  try { ({ messages } = await request.json()); } catch {
+    return Response.json({ error: 'Invalid request' }, { status: 400 });
+  }
+  if (!Array.isArray(messages) || messages.length > 30 || messages.some(message => !['user','assistant'].includes(message.role) || typeof message.content !== 'string' || message.content.length > 10000)) {
+    return Response.json({ error: 'Invalid messages' }, { status: 400 });
+  }
+  const apiKey = locals?.runtime?.env?.OPENAI_API_KEY || process.env.OPENAI_API_KEY;
 
   if (!apiKey) {
-    return new Response(JSON.stringify({ error: 'API key not configured' }), { status: 500 });
+    return Response.json({ error: 'chat_unavailable', message: 'AI相談ナビは現在準備中です。無料相談フォームまたはLINEをご利用ください。' }, { status: 503 });
   }
 
   const openai = new OpenAI({ apiKey });
@@ -22,9 +28,10 @@ export async function POST({ request }) {
 あなたの役割は、ユーザーのビジネスの悩みを聞き、和-Nodeが提供する「Web制作」「AI/ICT活用」「選ばれる導線設計」の視点から課題を整理することです。
 
 【和-Nodeの主軸】
-1. 行動心理に基づくWeb制作：訪問者の不安や迷いを減らし、成果につながるHP/LP制作。
-2. ビジネスの副操縦士（月額制戦略的パートナー）：ChatGPT等のAI活用やICTツールによる業務改善をスマートに継続支援。
-3. ICT・アプリ連携：LINE Mini Appや予約導線、自動化ツールの実装。
+1. LINE連携：LINE・LIFFとSalesforce、kintone、HubSpot、Googleスプレッドシート等をつなぐ仕組み。
+2. アプリ開発：iOS・Androidの業務・顧客向けアプリを、要件整理から実装・公開準備まで支援。
+3. Web・LP制作：使う人が理解・比較・相談しやすい構成と操作の設計。
+初回相談は30分無料。費用・期間・対応範囲は正式な見積りで確認する。
 
 【回答のガイドライン】
 - 丁寧で、心理的安全性を感じさせる誠実なトーンで話してください。

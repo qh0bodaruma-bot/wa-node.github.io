@@ -1,17 +1,21 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MaterialIcon from '../components/MaterialIcon.astro';
+import { flowSubscriptions, flowPaidTotal, flowProjectedTotal, flowPaidBreakdown, flowSampleDay, flowMonthlyHistory, demoYen } from '../data/flowDemo';
+const trial = flowSubscriptions.find(item => item.trial)!;
+const flowCats = { netflix:'video', spotify:'music', adobe:'work' };
+const flowEmoji = { netflix:'🎬', spotify:'🎵', adobe:'💼' };
 
 const title = 'Androidアプリ体験デモ｜ペット健康手帳・Flow｜和-Node';
 const description = 'ペット健康手帳とサブスク管理アプリFlowの自主制作デモです。体重・ワクチン記録・病院持参、サブスク費用の一覧・カレンダー・支出分析など、日常利用の画面をブラウザで体験できます。';
 ---
 
 <BaseLayout title={title} description={description} noindex={true}>
-  <main id="main" class="app-demo" data-glossary-skip>
+  <main id="main" class="app-demo" data-glossary-skip data-reveal="off">
     <section class="demo-notice" aria-label="デモについての注意">
       <div class="demo-shell demo-notice__inner">
         <span>自主制作・架空アプリデモ</span>
-        <p>画面内の情報はすべてサンプルです。操作内容はブラウザ内だけで反映され、送信・課金・保存は行われません。</p>
+        <p>画面内の情報はすべてサンプルです。ペットの記録はこのブラウザに保存されます。外部への送信・課金は行われません。金額・日付はサンプルです。</p>
         <a href="/works/">制作例へ戻る</a>
       </div>
     </section>
@@ -20,7 +24,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
       <div class="demo-shell demo-hero__grid">
         <div class="demo-hero__copy">
           <p class="eyebrow">MOBILE APP INTERACTIVE DEMO</p>
-          <h1>毎日使う流れを、<br />アプリで分かりやすく。</h1>
+          <h1>毎日の記録と管理を、<br />使いやすいアプリに。</h1>
           <p>「ペット健康手帳」と「Flow（サブスク管理）」を実際に開発したアプリをベースにしたデモです。スマートフォンらしい画面遷移と、利用者・運用者に必要な情報のまとまりを確認できます。</p>
           <dl class="demo-hero__points">
             <div><dt><MaterialIcon name="touch_app" /></dt><dd><strong>操作できる</strong><span>画面を切り替え、記録・分析を試せます</span></dd></div>
@@ -66,7 +70,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
             <h2>払っているものを、<br />全部把握する。</h2>
             <p>Netflix・Spotify・Adobe CCなど複数のサブスクを登録し、月間支出・請求日・カテゴリ別の内訳を一画面で確認。無料トライアルの期限も自動で警告します。</p>
             <dl class="feature-list">
-              <div><dt><MaterialIcon name="payments" /></dt><dd><strong>費用管理</strong><span>月払い・年払いをまとめて把握、月間¥X,XXX換算</span></dd></div>
+              <div><dt><MaterialIcon name="payments" /></dt><dd><strong>費用管理</strong><span>月払い・年払いをまとめて把握、月額換算で比較</span></dd></div>
               <div><dt><MaterialIcon name="calendar_month" /></dt><dd><strong>請求カレンダー</strong><span>いつ何が引き落とされるかを月単位で確認</span></dd></div>
               <div><dt><MaterialIcon name="bar_chart" /></dt><dd><strong>支出分析</strong><span>月別・カテゴリ別の傾向とトライアル期限を管理</span></dd></div>
             </dl>
@@ -148,7 +152,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
                     <div><span>次回通院</span><strong>8月18日（ワクチン）</strong></div>
                   </div>
                   <button type="button" class="primary-phone-button" id="pet-hospital-button"><MaterialIcon name="local_hospital" /> 病院へ持参する</button>
-                  <div class="settings-group" style="margin-top:14px"><p>このデモについて</p><span>入力内容はこのブラウザだけに保存されます。</span><button type="button" id="reset-pet-demo"><MaterialIcon name="restart_alt" /> デモを初期化する</button></div>
+                  <div class="settings-group" style="margin-top:14px"><p>このデモについて</p><span>Flowは操作を体験するデモです。費用データの変更・保存は行いません。</span><button type="button" id="reset-pet-demo"><MaterialIcon name="restart_alt" /> デモを初期化する</button></div>
                 </div>
 
                 <nav class="phone-nav" aria-label="ペット健康手帳のメニュー">
@@ -219,37 +223,23 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
 
                   <div class="flow-summary-card">
                     <div class="flow-summary-top">
-                      <span>今月の支出</span>
-                      <span class="flow-badge">3件登録中</span>
+                      <span>有料契約の月額合計</span>
+                      <span class="flow-badge">{flowSubscriptions.length}件登録中・1件試用</span>
                     </div>
-                    <strong class="flow-amount">¥3,978</strong>
-                    <span class="flow-yearly">年間換算 ¥47,736</span>
+                    <strong class="flow-amount">{demoYen(flowPaidTotal)}</strong>
+                    <span class="flow-yearly">年間換算 {demoYen(flowPaidTotal * 12)}（試用中を除く）</span>
+                    <span class="flow-yearly">試用後も全件継続した場合 {demoYen(flowProjectedTotal)}/月</span>
                     <div class="flow-weekly-alert">
                       <i class="flow-dot-warn"></i>
                       <span>今週 2件の請求予定</span>
-                      <span class="flow-weekly-total">¥1,970</span>
+                      <span class="flow-weekly-total">{demoYen(flowPaidTotal)}</span>
                     </div>
                   </div>
 
                   <div class="flow-upcoming-section">
                     <p class="flow-section-label">今週の請求</p>
                     <div class="flow-upcoming-list">
-                      <div class="flow-upcoming-card flow-upcoming-urgent">
-                        <div class="flow-upcoming-top">
-                          <span class="flow-emoji">🎬</span>
-                          <span class="flow-due-tag flow-due-urgent">あと3日</span>
-                        </div>
-                        <span class="flow-upcoming-name">Netflix</span>
-                        <strong class="flow-upcoming-price flow-color-video">¥990</strong>
-                      </div>
-                      <div class="flow-upcoming-card">
-                        <div class="flow-upcoming-top">
-                          <span class="flow-emoji">🎵</span>
-                          <span class="flow-due-tag flow-due-normal">あと5日</span>
-                        </div>
-                        <span class="flow-upcoming-name">Spotify</span>
-                        <strong class="flow-upcoming-price flow-color-music">¥980</strong>
-                      </div>
+                      {flowSubscriptions.filter(item => !item.trial).map(item => <div class="flow-upcoming-card"><div class="flow-upcoming-top"><span class="flow-emoji">{flowEmoji[item.id]}</span><span class="flow-due-tag flow-due-normal">あと{item.day-flowSampleDay}日</span></div><span class="flow-upcoming-name">{item.name}</span><strong class="flow-upcoming-price">{demoYen(item.amount)}</strong></div>)}
                     </div>
                   </div>
 
@@ -262,37 +252,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
 
                   <p class="flow-list-title" id="flow-list-title">すべてのサービス（3件）</p>
                   <div class="flow-service-list">
-                    <div class="flow-service-card" data-flow-service-cat="video">
-                      <span class="flow-service-icon flow-icon-video">🎬</span>
-                      <div class="flow-service-info">
-                        <strong>Netflix</strong>
-                        <small>毎月15日 · クレカ</small>
-                      </div>
-                      <div class="flow-service-price">
-                        <strong>¥990</strong><small>/月</small>
-                      </div>
-                    </div>
-                    <div class="flow-service-card" data-flow-service-cat="music">
-                      <span class="flow-service-icon flow-icon-music">🎵</span>
-                      <div class="flow-service-info">
-                        <strong>Spotify</strong>
-                        <small>毎月17日 · 銀行</small>
-                      </div>
-                      <div class="flow-service-price">
-                        <strong>¥980</strong><small>/月</small>
-                      </div>
-                    </div>
-                    <div class="flow-service-card" data-flow-service-cat="work">
-                      <span class="flow-service-icon flow-icon-work">💼</span>
-                      <div class="flow-service-info">
-                        <strong>Adobe CC</strong>
-                        <small>毎月26日 · クレカ</small>
-                        <span class="flow-trial-tag">⚡ トライアル 残り12日</span>
-                      </div>
-                      <div class="flow-service-price">
-                        <strong>¥2,728</strong><small>/月</small>
-                      </div>
-                    </div>
+                    {flowSubscriptions.map(item => <div class="flow-service-card" data-flow-service-cat={flowCats[item.id]}><span class={`flow-service-icon flow-icon-${flowCats[item.id]}`}>{flowEmoji[item.id]}</span><div class="flow-service-info"><strong>{item.name}</strong><small>毎月{item.day}日{item.trial?'（継続時）':''}</small>{item.trial&&<span class="flow-trial-tag">トライアル 残り{item.day-flowSampleDay}日</span>}</div><div class="flow-service-price"><strong>{demoYen(item.amount)}</strong><small>{item.trial?'試用終了後 / 月':'/ 月'}</small></div></div>)}
                   </div>
                 </div>
 
@@ -301,46 +261,17 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
                   <header class="screen-header flow-screen-header"><div><span>Flow</span><h2>請求カレンダー</h2></div><button type="button" class="round-button flow-round-btn" data-flow-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
                   <div class="flow-calendar">
                     <div class="flow-cal-header">
-                      <span>2026年8月</span>
+                      <span>2026年8月 · {flowSampleDay}日時点のサンプル</span>
                     </div>
                     <div class="flow-cal-dow">
                       <span>日</span><span>月</span><span>火</span><span>水</span><span>木</span><span>金</span><span>土</span>
                     </div>
                     <div class="flow-cal-grid">
-                      <span></span><span></span><span></span><span></span><span></span><span></span>
-                      <button data-flow-day="1">1</button>
-                      <button data-flow-day="2">2</button>
-                      <button data-flow-day="3">3</button>
-                      <button data-flow-day="4">4</button>
-                      <button data-flow-day="5">5</button>
-                      <button data-flow-day="6">6</button>
-                      <button data-flow-day="7">7</button>
-                      <button data-flow-day="8">8</button>
-                      <button data-flow-day="9">9</button>
-                      <button class="flow-cal-today" data-flow-day="10">10</button>
-                      <button data-flow-day="11">11</button>
-                      <button data-flow-day="12">12</button>
-                      <button data-flow-day="13">13</button>
-                      <button data-flow-day="14">14</button>
-                      <button class="flow-cal-event" data-flow-day="15">15</button>
-                      <button data-flow-day="16">16</button>
-                      <button class="flow-cal-event" data-flow-day="17">17</button>
-                      <button data-flow-day="18">18</button>
-                      <button data-flow-day="19">19</button>
-                      <button data-flow-day="20">20</button>
-                      <button data-flow-day="21">21</button>
-                      <button data-flow-day="22">22</button>
-                      <button data-flow-day="23">23</button>
-                      <button data-flow-day="24">24</button>
-                      <button data-flow-day="25">25</button>
-                      <button class="flow-cal-event" data-flow-day="26">26</button>
-                      <button data-flow-day="27">27</button>
-                      <button data-flow-day="28">28</button>
-                      <button data-flow-day="29">29</button>
-                      <button data-flow-day="30">30</button>
-                      <button data-flow-day="31">31</button>
+                      {Array.from({length:6},()=> <span aria-hidden="true"></span>)}
+                      {Array.from({length:31},(_,i)=>i+1).map(day=><button type="button" class:list={{'flow-cal-today':day===flowSampleDay,'flow-cal-event':flowSubscriptions.some(item=>item.day===day)}} data-flow-day={day} aria-label={`8月${day}日${flowSubscriptions.some(item=>item.day===day)?'・請求予定あり':''}`}>{day}</button>)}
                     </div>
                   </div>
+
                   <div class="flow-cal-detail">
                     <p id="flow-cal-label" class="flow-cal-label-text">日付をタップすると請求が表示されます</p>
                     <div id="flow-cal-events"></div>
@@ -352,47 +283,34 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
                   <header class="screen-header flow-screen-header"><div><span>Flow</span><h2>支出分析</h2></div><button type="button" class="round-button flow-round-btn" data-flow-to-home aria-label="ホームへ戻る"><MaterialIcon name="close" /></button></header>
                   <div class="flow-analytics-total">
                     <div>
-                      <span>月間合計</span>
-                      <strong>¥3,978</strong>
+                      <span>有料契約の月額</span>
+                      <strong>{demoYen(flowPaidTotal)}</strong>
                     </div>
                     <div class="flow-analytics-divider"></div>
                     <div>
-                      <span>年間合計</span>
-                      <strong class="flow-color-primary">¥47,736</strong>
+                      <span>年間換算</span>
+                      <strong class="flow-color-primary">{demoYen(flowPaidTotal * 12)}</strong>
                     </div>
                   </div>
-                  <p class="flow-section-label" style="margin-top:20px">月別支出</p>
-                  <div class="flow-bar-chart" aria-label="月別支出グラフ">
-                    <div class="flow-bars">
-                      <div class="flow-bar" style="--h:42%"><span>3月</span></div>
-                      <div class="flow-bar" style="--h:60%"><span>4月</span></div>
-                      <div class="flow-bar" style="--h:52%"><span>5月</span></div>
-                      <div class="flow-bar" style="--h:75%"><span>6月</span></div>
-                      <div class="flow-bar" style="--h:68%"><span>7月</span></div>
-                      <div class="flow-bar flow-bar-current" style="--h:100%"><span>8月</span></div>
-                    </div>
-                  </div>
-                  <p class="flow-section-label" style="margin-top:20px">カテゴリ内訳</p>
-                  <div class="flow-breakdown">
-                    <div><span class="flow-dot" style="background:#7c5cfc"></span><span>💼 作業</span><span>¥2,728</span><span>68%</span></div>
-                    <div><span class="flow-dot" style="background:#e50914"></span><span>🎬 動画</span><span>¥990</span><span>25%</span></div>
-                    <div><span class="flow-dot" style="background:#1db954"></span><span>🎵 音楽</span><span>¥980</span><span>25%</span></div>
-                  </div>
+                  <p class="flow-section-label" style="margin-top:20px">月別支出（サンプル）</p>
+                  <div class="flow-bar-chart" role="img" aria-label={flowMonthlyHistory.map(item=>`${item.month}月 ${demoYen(item.amount)}`).join('、')}><div class="flow-bars">{flowMonthlyHistory.map(item=><div class:list={['flow-bar',{'flow-bar-current':item.month===8}]} style={`--h:${Math.round(item.amount/Math.max(...flowMonthlyHistory.map(row=>row.amount))*100)}%`} title={demoYen(item.amount)}><span>{item.month}月</span></div>)}</div></div>
+                  <p class="flow-section-label" style="margin-top:20px">カテゴリ内訳（有料契約のみ）</p>
+                  <div class="flow-breakdown">{flowPaidBreakdown.map(item=><div><span class="flow-dot" style={`background:${item.color}`}></span><span>{flowEmoji[item.id]} {item.category}</span><span>{demoYen(item.amount)}</span><span>{item.percent}%</span></div>)}</div>
                   <div class="flow-trial-card">
                     <div class="flow-trial-card-top">
                       <span>💼</span>
                       <div>
                         <strong>Adobe CC</strong>
-                        <small>無料トライアル — 残り12日</small>
+                        <small>無料トライアル — 残り{trial.day-flowSampleDay}日</small>
                       </div>
-                      <span class="flow-trial-remain">残り12日</span>
+                      <span class="flow-trial-remain">残り{trial.day-flowSampleDay}日</span>
                     </div>
                     <div class="flow-trial-bar"><div class="flow-trial-bar-fill" style="width:60%"></div></div>
-                    <small class="flow-trial-note">終了後 ¥2,728/月 の請求が始まります</small>
+                    <small class="flow-trial-note">継続した場合、終了後 {demoYen(trial.amount)}/月</small>
                   </div>
                   <div class="flow-insight">
                     <span>💡</span>
-                    <p>3件のサービスを登録中。年間¥47,736を払っています。</p>
+                    <p>有料契約2件の年間換算は{demoYen(flowPaidTotal * 12)}。試用中の1件は含みません。</p>
                   </div>
                 </div>
 
@@ -406,7 +324,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
                   </div>
                   <div class="settings-group flow-settings-group" style="margin-top:14px">
                     <p>このデモについて</p>
-                    <span>入力内容はこのブラウザだけに保存されます。</span>
+                    <span>Flowは操作を体験するデモです。費用データの変更・保存は行いません。</span>
                     <button type="button" id="reset-flow-demo"><span>デモを初期化する</span><MaterialIcon name="restart_alt" /></button>
                   </div>
                 </div>
@@ -425,7 +343,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
                     <button type="button" class="modal-close" id="flow-trial-modal-close" aria-label="閉じる"><MaterialIcon name="close" /></button>
                     <p>⚡ トライアル期限</p>
                     <h3 id="flow-trial-title">Adobe CC のトライアルが終了します</h3>
-                    <div class="modal-description">残り12日で無料トライアルが終了します。終了後は ¥2,728/月 の請求が自動で始まります。</div>
+                    <div class="modal-description">残り{trial.day-flowSampleDay}日で無料トライアルが終了します。継続した場合、終了後は {demoYen(trial.amount)}/月になります。</div>
                     <button type="button" class="modal-save flow-modal-save" id="flow-trial-ok">確認しました</button>
                   </div>
                 </div>
@@ -454,6 +372,11 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
   </main>
 
   <script>
+    import { flowSubscriptions, demoYen } from "../data/flowDemo";
+    function initMobileDemo() {
+    const demoRoot = document.querySelector<HTMLElement>(".app-demo");
+    if (!demoRoot || demoRoot.dataset.initialized) return;
+    demoRoot.dataset.initialized = "true";
     const appChoices = document.querySelectorAll('[data-app-choice]');
     const appPanels = document.querySelectorAll('[data-app-panel]');
     const copyPanels = document.querySelectorAll('[data-copy-panel]');
@@ -476,7 +399,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
     }
 
     function saveState() {
-      localStorage.setItem(storageKey, JSON.stringify(demoState));
+      try { localStorage.setItem(storageKey, JSON.stringify(demoState)); } catch { demoStatus.textContent = 'このブラウザでは保存できません。ページを閉じるまで操作を体験できます。'; }
     }
 
     function showApp(app) {
@@ -607,11 +530,8 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
     });
 
     // カレンダー
-    const calEvents = {
-      15: [{ emoji: '🎬', name: 'Netflix', cat: '動画', price: '¥990' }],
-      17: [{ emoji: '🎵', name: 'Spotify', cat: '音楽', price: '¥980' }],
-      26: [{ emoji: '💼', name: 'Adobe CC', cat: '作業', price: '¥2,728' }],
-    };
+    const emojis = { netflix:'🎬', spotify:'🎵', adobe:'💼' };
+    const calEvents = Object.fromEntries(flowSubscriptions.map(item => [item.day, [{emoji:emojis[item.id],name:item.name,cat:item.trial?'試用終了・継続した場合':item.category,price:demoYen(item.amount)}]]));
     document.querySelectorAll('[data-flow-day]').forEach((btn) => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('[data-flow-day]').forEach((b) => b.classList.remove('flow-cal-selected'));
@@ -648,6 +568,9 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
     });
 
     renderPetRecords();
+    }
+    initMobileDemo();
+    document.addEventListener("astro:page-load", initMobileDemo);
   </script>
 </BaseLayout>
 
@@ -662,7 +585,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
   .demo-hero { padding:84px 0 72px; background:linear-gradient(130deg,#f5faf8 0%,#fff 58%,#fbf2e8 100%); border-bottom:1px solid var(--line); }
   .demo-hero__grid { display:grid; grid-template-columns:minmax(0,1.05fr) minmax(360px,.75fr); gap:72px; align-items:center; }
   .eyebrow,.section-kicker { margin:0 0 11px; color:var(--coral); font-size:.75rem; font-weight:900; letter-spacing:.08em; }
-  .demo-hero h1,.app-explanation h2,.demo-after h2 { margin:0; font-family:'Shippori Mincho',serif; font-size:clamp(2.25rem,4.4vw,4.1rem); line-height:1.3; letter-spacing:0; }
+  .demo-hero h1,.app-explanation h2,.demo-after h2 { margin:0; font-family:'Shippori Mincho',serif; font-size:clamp(2.15rem,3.6vw,3.4rem);text-wrap:balance; line-height:1.3; letter-spacing:0; }
   .demo-hero__copy > p:not(.eyebrow) { max-width:720px; margin:24px 0 0; color:var(--muted); line-height:1.9; }
   .demo-hero__points { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:32px 0 0; }
   .demo-hero__points div { padding:13px; border:1px solid var(--line); background:rgba(255,255,255,.76); }

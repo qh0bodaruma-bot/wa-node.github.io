@@ -161,6 +161,7 @@ const description = "Interactive demo showcase of Wa-Node's AI development capab
           })
         });
 
+        if (response.status === 503) { inner.textContent = "The AI assistant is currently unavailable. Please use the consultation form or contact us on LINE."; return; }
         if (!response.ok) throw new Error();
 
         inner.innerHTML = '';

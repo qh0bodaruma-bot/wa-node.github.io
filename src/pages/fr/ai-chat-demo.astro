@@ -161,6 +161,7 @@ const description = "Démo interactive des compétences de développement d'IA d
           })
         });
 
+        if (response.status === 503) { inner.textContent = "L’assistant IA est indisponible. Utilisez le formulaire de consultation ou contactez-nous sur LINE."; return; }
         if (!response.ok) throw new Error();
 
         inner.innerHTML = '';
