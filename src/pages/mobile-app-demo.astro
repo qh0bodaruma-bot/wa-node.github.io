@@ -24,7 +24,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
       <div class="demo-shell demo-hero__grid">
         <div class="demo-hero__copy">
           <p class="eyebrow">MOBILE APP INTERACTIVE DEMO</p>
-          <h1>毎日の記録と管理を、<br />使いやすいアプリに。</h1>
+          <h1>毎日の記録と管理を、使いやすいアプリに。</h1>
           <p>「ペット健康手帳」と「Flow（サブスク管理）」を実際に開発したアプリをベースにしたデモです。スマートフォンらしい画面遷移と、利用者・運用者に必要な情報のまとまりを確認できます。</p>
           <dl class="demo-hero__points">
             <div><dt><MaterialIcon name="touch_app" /></dt><dd><strong>操作できる</strong><span>画面を切り替え、記録・分析を試せます</span></dd></div>
@@ -47,6 +47,15 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
               <MaterialIcon name="arrow_forward" />
             </button>
           </div>
+          <div class="task-selector" aria-label="やってみることを選ぶ">
+            <p class="task-selector__label">やってみることを選ぶ</p>
+            <div class="task-choice-list">
+              <button type="button" data-task="pet-record"><MaterialIcon name="monitor_weight" />体重を記録する</button>
+              <button type="button" data-task="pet-hospital"><MaterialIcon name="local_hospital" />病院で見せる情報を見る</button>
+              <button type="button" data-task="flow-cost"><MaterialIcon name="payments" />月の支出を確認する</button>
+              <button type="button" data-task="flow-calendar"><MaterialIcon name="calendar_month" />次の請求日を見る</button>
+            </div>
+          </div>
           <p class="demo-selector__note"><MaterialIcon name="info" /> どちらも実際に開発中のAndroidアプリをベースにした画面・導線サンプルです。</p>
         </div>
       </div>
@@ -54,34 +63,6 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
 
     <section class="demo-stage" aria-label="Androidアプリ体験">
       <div class="demo-shell demo-stage__grid">
-        <aside class="app-explanation">
-          <div class="app-explanation__panel" data-copy-panel="pet">
-            <p class="section-kicker">PET HEALTH NOTE</p>
-            <h2>気になる変化を、<br />いつもの記録にする。</h2>
-            <p>体重・ワクチン・通院など、飼い主と動物病院が共有したい情報を整理。「病院へ持参する」機能で、診察時にそのまま画面を見せられます。400円買い切り・広告なし。</p>
-            <dl class="feature-list">
-              <div><dt><MaterialIcon name="monitor_weight" /></dt><dd><strong>記録</strong><span>体重・体調・通院を最大3タップで記録</span></dd></div>
-              <div><dt><MaterialIcon name="event" /></dt><dd><strong>予定</strong><span>ワクチン・通院の期限を見落としにくく表示</span></dd></div>
-              <div><dt><MaterialIcon name="local_hospital" /></dt><dd><strong>病院持参</strong><span>アレルギー・体重・次回予定をフルスクリーンで表示</span></dd></div>
-            </dl>
-          </div>
-          <div class="app-explanation__panel" data-copy-panel="flow" hidden>
-            <p class="section-kicker">FLOW — SUBSCRIPTION MANAGER</p>
-            <h2>払っているものを、<br />全部把握する。</h2>
-            <p>Netflix・Spotify・Adobe CCなど複数のサブスクを登録し、月間支出・請求日・カテゴリ別の内訳を一画面で確認。無料トライアルの期限も自動で警告します。</p>
-            <dl class="feature-list">
-              <div><dt><MaterialIcon name="payments" /></dt><dd><strong>費用管理</strong><span>月払い・年払いをまとめて把握、月額換算で比較</span></dd></div>
-              <div><dt><MaterialIcon name="calendar_month" /></dt><dd><strong>請求カレンダー</strong><span>いつ何が引き落とされるかを月単位で確認</span></dd></div>
-              <div><dt><MaterialIcon name="bar_chart" /></dt><dd><strong>支出分析</strong><span>月別・カテゴリ別の傾向とトライアル期限を管理</span></dd></div>
-            </dl>
-          </div>
-          <div class="app-scope">
-            <span>制作時に整理すること</span>
-            <p>利用者、必要な記録、通知、会員情報、外部システム連携、管理画面、公開後の保守範囲を、必要な順番で確認します。</p>
-            <a href="/contact/?source=mobile_app_demo">近いアプリについて相談する <MaterialIcon name="arrow_forward" /></a>
-          </div>
-        </aside>
-
         <div class="phone-area">
           <div class="phone" aria-label="Androidアプリのサンプル画面">
             <div class="phone__speaker" aria-hidden="true"></div>
@@ -224,7 +205,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
                   <div class="flow-summary-card">
                     <div class="flow-summary-top">
                       <span>有料契約の月額合計</span>
-                      <span class="flow-badge">{flowSubscriptions.length}件登録中・1件試用</span>
+                      <span class="flow-badge">{flowSubscriptions.length}件登録中・{flowSubscriptions.filter(item => item.trial).length}件試用</span>
                     </div>
                     <strong class="flow-amount">{demoYen(flowPaidTotal)}</strong>
                     <span class="flow-yearly">年間換算 {demoYen(flowPaidTotal * 12)}（試用中を除く）</span>
@@ -250,7 +231,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
                     <button class="flow-chip" data-flow-cat="work">💼 作業</button>
                   </div>
 
-                  <p class="flow-list-title" id="flow-list-title">すべてのサービス（3件）</p>
+                  <p class="flow-list-title" id="flow-list-title">すべてのサービス（{flowSubscriptions.length}件）</p>
                   <div class="flow-service-list">
                     {flowSubscriptions.map(item => <div class="flow-service-card" data-flow-service-cat={flowCats[item.id]}><span class={`flow-service-icon flow-icon-${flowCats[item.id]}`}>{flowEmoji[item.id]}</span><div class="flow-service-info"><strong>{item.name}</strong><small>毎月{item.day}日{item.trial?'（継続時）':''}</small>{item.trial&&<span class="flow-trial-tag">トライアル 残り{item.day-flowSampleDay}日</span>}</div><div class="flow-service-price"><strong>{demoYen(item.amount)}</strong><small>{item.trial?'試用終了後 / 月':'/ 月'}</small></div></div>)}
                   </div>
@@ -355,6 +336,34 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
           <p class="phone-caption"><MaterialIcon name="touch_app" /> デモ画面を操作して、日常利用の流れをご確認ください。</p>
           <p class="phone-status" id="demo-status" role="status" aria-live="polite"></p>
         </div>
+
+        <aside class="app-explanation">
+          <div class="app-explanation__panel" data-copy-panel="pet">
+            <p class="section-kicker">PET HEALTH NOTE</p>
+            <h2>気になる変化を、いつもの記録にする。</h2>
+            <p>体重・ワクチン・通院など、飼い主と動物病院が共有したい情報を整理。「病院へ持参する」機能で、診察時にそのまま画面を見せられます。</p>
+            <dl class="feature-list">
+              <div><dt><MaterialIcon name="monitor_weight" /></dt><dd><strong>記録</strong><span>体重・体調・通院を最大3タップで記録</span></dd></div>
+              <div><dt><MaterialIcon name="event" /></dt><dd><strong>予定</strong><span>ワクチン・通院の期限を見落としにくく表示</span></dd></div>
+              <div><dt><MaterialIcon name="local_hospital" /></dt><dd><strong>病院持参</strong><span>アレルギー・体重・次回予定をフルスクリーンで表示</span></dd></div>
+            </dl>
+          </div>
+          <div class="app-explanation__panel" data-copy-panel="flow" hidden>
+            <p class="section-kicker">FLOW — SUBSCRIPTION MANAGER</p>
+            <h2>払っているものを、全部把握する。</h2>
+            <p>Netflix・Spotify・Adobe CCなど複数のサブスクを登録し、月間支出・請求日・カテゴリ別の内訳を一画面で確認。無料トライアルの期限が近づくと、通知アイコンに印が付きます。</p>
+            <dl class="feature-list">
+              <div><dt><MaterialIcon name="payments" /></dt><dd><strong>費用管理</strong><span>月払い・年払いをまとめて把握、月額換算で比較</span></dd></div>
+              <div><dt><MaterialIcon name="calendar_month" /></dt><dd><strong>請求カレンダー</strong><span>いつ何が引き落とされるかを月単位で確認</span></dd></div>
+              <div><dt><MaterialIcon name="bar_chart" /></dt><dd><strong>支出分析</strong><span>月別・カテゴリ別の傾向とトライアル期限を管理</span></dd></div>
+            </dl>
+          </div>
+          <div class="app-scope">
+            <span>制作時に整理すること</span>
+            <p>利用者、必要な記録、通知、会員情報、外部システム連携、管理画面、公開後の保守範囲を、必要な順番で確認します。</p>
+            <a href="/contact/?source=mobile_app_demo">近いアプリについて相談する <MaterialIcon name="arrow_forward" /></a>
+          </div>
+        </aside>
       </div>
     </section>
 
@@ -372,7 +381,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
   </main>
 
   <script>
-    import { flowSubscriptions, demoYen } from "../data/flowDemo";
+    import { flowSubscriptions, flowSampleDay, demoYen } from "../data/flowDemo";
     function initMobileDemo() {
     const demoRoot = document.querySelector<HTMLElement>(".app-demo");
     if (!demoRoot || demoRoot.dataset.initialized) return;
@@ -389,17 +398,56 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
         { date: '8月7日（木）', condition: '少し気になる', weight: '4.3' },
       ],
     };
-    let demoState = { ...defaultState };
+    const allowedConditions = ['元気です', '少し気になる', '気になることあり'];
+    function cloneDefaultRecords() { return defaultState.petRecords.map((r) => ({ ...r })); }
+    function isValidWeight(weight) {
+      if (weight === null || weight === undefined || weight === '') return true;
+      const n = Number(weight);
+      return Number.isFinite(n) && n > 0 && n <= 200;
+    }
+    function sanitizeRecords(records) {
+      if (!Array.isArray(records)) return null;
+      const valid = records.filter((r) => r && typeof r.date === 'string' && allowedConditions.includes(r.condition) && isValidWeight(r.weight));
+      return valid.length ? valid.slice(0, 6) : null;
+    }
+    let demoState = { petRecords: cloneDefaultRecords() };
 
     try {
       const saved = JSON.parse(localStorage.getItem(storageKey));
-      if (saved && Array.isArray(saved.petRecords)) demoState = { ...defaultState, ...saved };
+      const sanitized = saved && sanitizeRecords(saved.petRecords);
+      if (sanitized) demoState = { petRecords: sanitized };
     } catch {
-      demoState = { ...defaultState };
+      demoState = { petRecords: cloneDefaultRecords() };
     }
 
     function saveState() {
       try { localStorage.setItem(storageKey, JSON.stringify(demoState)); } catch { demoStatus.textContent = 'このブラウザでは保存できません。ページを閉じるまで操作を体験できます。'; }
+    }
+
+    /* ---------- モーダル共通（フォーカス管理） ---------- */
+    function getFocusable(modalEl) {
+      return [...modalEl.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')]
+        .filter((el) => !el.disabled && el.offsetParent !== null);
+    }
+    function openModal(modalEl) {
+      modalEl._trigger = document.activeElement;
+      modalEl.hidden = false;
+      getFocusable(modalEl)[0]?.focus();
+      modalEl._keydownHandler = (event) => {
+        if (event.key === 'Escape') { event.preventDefault(); closeModal(modalEl); return; }
+        if (event.key !== 'Tab') return;
+        const list = getFocusable(modalEl);
+        if (!list.length) return;
+        const first = list[0], last = list[list.length - 1];
+        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+      };
+      document.addEventListener('keydown', modalEl._keydownHandler);
+    }
+    function closeModal(modalEl) {
+      modalEl.hidden = true;
+      if (modalEl._keydownHandler) { document.removeEventListener('keydown', modalEl._keydownHandler); modalEl._keydownHandler = null; }
+      modalEl._trigger?.focus();
     }
 
     function showApp(app) {
@@ -459,10 +507,10 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
 
     const petModal = document.querySelector('#pet-record-modal');
     let selectedCondition = '元気です';
-    function openPetRecordModal() { petModal.hidden = false; }
+    function openPetRecordModal() { openModal(petModal); }
     document.querySelector('#pet-record-button').addEventListener('click', openPetRecordModal);
     document.querySelector('#pet-record-from-list').addEventListener('click', openPetRecordModal);
-    document.querySelector('#pet-record-close').addEventListener('click', () => { petModal.hidden = true; });
+    document.querySelector('#pet-record-close').addEventListener('click', () => { closeModal(petModal); });
     document.querySelectorAll('[data-condition]').forEach((button) => {
       button.addEventListener('click', () => {
         document.querySelectorAll('[data-condition]').forEach((item) => item.classList.remove('is-selected'));
@@ -476,7 +524,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
       demoState.petRecords = demoState.petRecords.slice(0, 6);
       saveState();
       renderPetRecords();
-      petModal.hidden = true;
+      closeModal(petModal);
       document.querySelector('#pet-weight-input').value = '';
       demoStatus.textContent = `ルナの「${selectedCondition}」${weightVal ? '・体重' + weightVal + 'kg' : ''}を記録しました。記録画面でも確認できます。`;
     });
@@ -488,11 +536,12 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
     });
 
     const petHospitalModal = document.querySelector('#pet-hospital-modal');
-    document.querySelector('#pet-hospital-button').addEventListener('click', () => { petHospitalModal.hidden = false; demoStatus.textContent = '病院持参モードを開きました。画面をそのまま受付に見せられます。'; });
-    document.querySelector('#pet-hospital-close').addEventListener('click', () => { petHospitalModal.hidden = true; });
+    function openPetHospitalModal() { openModal(petHospitalModal); demoStatus.textContent = '病院持参モードを開きました。画面をそのまま受付に見せられます。'; }
+    document.querySelector('#pet-hospital-button').addEventListener('click', openPetHospitalModal);
+    document.querySelector('#pet-hospital-close').addEventListener('click', () => { closeModal(petHospitalModal); });
 
     document.querySelector('#reset-pet-demo').addEventListener('click', () => {
-      demoState.petRecords = defaultState.petRecords.map((r) => ({ ...r }));
+      demoState.petRecords = cloneDefaultRecords();
       saveState();
       renderPetRecords();
       showPetView('home');
@@ -554,17 +603,36 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
 
     // トライアルモーダル
     const flowTrialModal = document.querySelector('#flow-trial-modal');
-    document.querySelector('#flow-trial-bell').addEventListener('click', () => { flowTrialModal.hidden = false; });
-    document.querySelector('#flow-trial-modal-close').addEventListener('click', () => { flowTrialModal.hidden = true; });
-    document.querySelector('#flow-trial-ok').addEventListener('click', () => { flowTrialModal.hidden = true; demoStatus.textContent = 'トライアル期限を確認しました。'; });
+    document.querySelector('#flow-trial-bell').addEventListener('click', () => { openModal(flowTrialModal); });
+    document.querySelector('#flow-trial-modal-close').addEventListener('click', () => { closeModal(flowTrialModal); });
+    document.querySelector('#flow-trial-ok').addEventListener('click', () => { closeModal(flowTrialModal); demoStatus.textContent = 'トライアル期限を確認しました。'; });
 
     // Flowデモ初期化
     document.querySelector('#reset-flow-demo').addEventListener('click', () => {
       document.querySelectorAll('[data-flow-cat]').forEach((b) => b.classList.toggle('is-active', b.dataset.flowCat === 'all'));
       document.querySelectorAll('[data-flow-service-cat]').forEach((c) => { c.hidden = false; });
-      document.querySelector('#flow-list-title').textContent = 'すべてのサービス（3件）';
+      document.querySelector('#flow-list-title').textContent = `すべてのサービス（${flowSubscriptions.length}件）`;
       showFlowView('home');
       demoStatus.textContent = 'Flowのデモを初期状態に戻しました。';
+    });
+
+    // 目的から選ぶタスク
+    function focusPhone() {
+      document.querySelector('.phone')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+    }
+    function selectNearestFlowDay() {
+      const eventDays = flowSubscriptions.map((item) => item.day).sort((a, b) => a - b);
+      const target = eventDays.find((day) => day >= flowSampleDay) ?? eventDays[0];
+      document.querySelector(`[data-flow-day="${target}"]`)?.click();
+    }
+    const taskRunners = {
+      'pet-record': () => { showApp('pet'); showPetView('records'); openPetRecordModal(); },
+      'pet-hospital': () => { showApp('pet'); showPetView('info'); openPetHospitalModal(); },
+      'flow-cost': () => { showApp('flow'); showFlowView('home'); demoStatus.textContent = '月の支出を確認しています。'; },
+      'flow-calendar': () => { showApp('flow'); showFlowView('calendar'); selectNearestFlowDay(); },
+    };
+    document.querySelectorAll('[data-task]').forEach((button) => {
+      button.addEventListener('click', () => { taskRunners[button.dataset.task]?.(); focusPhone(); });
     });
 
     renderPetRecords();
@@ -598,7 +666,8 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
   .app-choice__icon { width:48px; height:48px; display:grid; place-items:center; color:#fff; }.app-choice__icon--pet { background:#d56a57; }.app-choice__icon--flow { background:#5c3fc8; }
   .app-choice strong,.app-choice small { display:block; }.app-choice strong { font-size:1rem; }.app-choice small { margin-top:4px; color:var(--muted); font-size:.78rem; }.app-choice > .material-icon { color:var(--teal); }
   .demo-selector__note { display:flex; gap:7px; margin:16px 0 0; color:var(--muted); font-size:.76rem; line-height:1.55; }.demo-selector__note .material-icon { color:var(--teal); font-size:1.1rem; }
-  .demo-stage { padding:78px 0; background:#edf4f1; }.demo-stage__grid { display:grid; grid-template-columns:minmax(0,.9fr) minmax(390px,.85fr); gap:76px; align-items:center; }
+  .task-selector { margin-top:18px; padding-top:18px; border-top:1px solid var(--line); }.task-selector__label { margin:0 0 10px; color:var(--muted); font-size:.78rem; font-weight:800; }.task-choice-list { display:grid; grid-template-columns:1fr 1fr; gap:8px; }.task-choice-list button { display:flex; align-items:center; gap:7px; min-height:44px; padding:9px 11px; border:1px solid var(--line); background:#fff; color:var(--ink); font:inherit; font-size:.76rem; font-weight:700; text-align:left; cursor:pointer; }.task-choice-list button:hover,.task-choice-list button:focus-visible { border-color:var(--teal); background:#f2faf7; outline:none; }.task-choice-list .material-icon { color:var(--teal); font-size:1.15rem; flex-shrink:0; }
+  .demo-stage { padding:78px 0; background:#edf4f1; }.demo-stage__grid { display:grid; grid-template-columns:minmax(390px,.85fr) minmax(0,.9fr); gap:76px; align-items:start; }
   .app-explanation h2 { font-size:clamp(2rem,3.4vw,3.3rem); }.app-explanation__panel > p:not(.section-kicker) { margin:20px 0 0; color:var(--muted); line-height:1.9; }
   .feature-list { display:grid; gap:12px; margin:30px 0 0; }.feature-list div { display:grid; grid-template-columns:42px 1fr; gap:12px; align-items:start; }.feature-list dt { width:42px; height:42px; display:grid; place-items:center; background:#fff; color:var(--teal); border:1px solid var(--line); }.feature-list dd { margin:0; }.feature-list strong,.feature-list span { display:block; }.feature-list span { margin-top:4px; color:var(--muted); font-size:.87rem; line-height:1.55; }
   .app-scope { margin-top:36px; padding:20px 22px; border-left:4px solid var(--coral); background:#fff; }.app-scope > span { color:var(--teal); font-size:.78rem; font-weight:900; }.app-scope p { margin:9px 0 15px; color:var(--muted); line-height:1.7; font-size:.88rem; }.app-scope a { display:inline-flex; gap:6px; align-items:center; color:var(--teal); font-weight:900; text-decoration:none; }.app-scope a:hover { text-decoration:underline; }.app-scope .material-icon { font-size:1.1rem; }
@@ -754,7 +823,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
 
   .demo-after { padding:88px 0; background:#fff; text-align:center; }.demo-after h2 { font-size:clamp(2rem,3.8vw,3.5rem); }.demo-after__grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:40px; text-align:left; }.demo-after__grid article { padding:24px; border:1px solid var(--line); background:#fcfdfc; }.demo-after__grid .material-icon { color:var(--teal); font-size:2rem; }.demo-after__grid h3 { margin:12px 0 8px; font-size:1.05rem; }.demo-after__grid p { margin:0; color:var(--muted); font-size:.9rem; line-height:1.75; }
   @keyframes sheet-in { from { transform:translateY(14px); opacity:0; } to { transform:translateY(0); opacity:1; } }
-  @media (max-width: 820px) { .demo-hero__grid,.demo-stage__grid { grid-template-columns:1fr; gap:44px; }.demo-hero__points { max-width:660px; }.phone-area { order:-1; }.app-explanation { max-width:680px; }.demo-selector { max-width:600px; }.demo-after__grid { grid-template-columns:1fr; }.demo-after__grid article { text-align:center; } }
+  @media (max-width: 820px) { .demo-hero__grid,.demo-stage__grid { grid-template-columns:1fr; gap:44px; }.demo-hero__points { max-width:660px; }.app-explanation { max-width:680px; }.demo-selector { max-width:600px; }.task-choice-list { grid-template-columns:1fr; }.demo-after__grid { grid-template-columns:1fr; }.demo-after__grid article { text-align:center; } }
   @media (max-width: 560px) { .demo-shell { width:min(100% - 28px,1180px); }.demo-notice__inner { grid-template-columns:1fr; gap:6px; padding:10px 0; }.demo-notice a { margin-top:3px; }.demo-hero { padding:52px 0; }.demo-hero h1,.app-explanation h2,.demo-after h2 { font-size:2.08rem; }.demo-hero__points { grid-template-columns:1fr; }.demo-hero__points div { display:grid; grid-template-columns:28px 1fr; gap:8px; }.demo-hero__points dt { grid-row:span 2; }.demo-hero__points dd { margin:0; }.demo-stage { padding:46px 0; }.phone { width:100%; max-width:360px; padding:7px; border-width:7px; border-radius:32px; }.phone__screen,.phone-panel { min-height:674px; }.phone-panel { padding-right:14px; padding-left:14px; }.demo-after { padding:58px 0; } }
   @media (prefers-reduced-motion: reduce) { .phone-modal__sheet { animation:none; } }
 </style>
