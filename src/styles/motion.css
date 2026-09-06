@@ -1,0 +1,46 @@
+/* 和-Node モーション共通トークン（アニメーション設計書 v1 準拠） */
+:root {
+  --motion-press: 100ms;
+  --motion-ui: 160ms;
+  --motion-feedback: 180ms;
+  --motion-panel: 200ms;
+  --motion-trace: 240ms;
+  --motion-heading: 360ms;
+  --motion-enter: 420ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* M01 登場：初期状態は不可視。JSが対象を確定してから .is-visible を付ける */
+[data-motion-enter] {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity var(--motion-enter) ease-out, transform var(--motion-enter) var(--motion-ease);
+}
+[data-motion-enter="heading"] {
+  transform: translateY(4px);
+  transition-duration: var(--motion-heading);
+}
+[data-motion-enter].is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* JS未実行・IntersectionObserver非対応では即時表示（フェイルオープン） */
+html:not(.motion-ready) [data-motion-enter] {
+  opacity: 1 !important;
+  transform: none !important;
+  transition: none !important;
+}
+
+@media (max-width: 820px) {
+  [data-motion-enter="block"] { transform: translateY(4px); }
+  [data-motion-enter="heading"] { transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-motion-enter] {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

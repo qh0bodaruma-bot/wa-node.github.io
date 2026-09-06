@@ -382,6 +382,13 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
 
   <script>
     import { flowSubscriptions, flowSampleDay, demoYen } from "../data/flowDemo";
+    import { isReducedMotion } from "../scripts/motion";
+    function fadeInPanel(panel: HTMLElement | null) {
+      if (!panel || isReducedMotion()) return;
+      panel.classList.add('panel-enter');
+      void panel.offsetWidth;
+      panel.classList.remove('panel-enter');
+    }
     function initMobileDemo() {
     const demoRoot = document.querySelector<HTMLElement>(".app-demo");
     if (!demoRoot || demoRoot.dataset.initialized) return;
@@ -459,8 +466,10 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
       });
       appPanels.forEach((panel) => {
         const selected = panel.dataset.appPanel === app;
+        const wasHidden = panel.hidden;
         panel.hidden = !selected;
         panel.classList.toggle('is-active', selected);
+        if (selected && wasHidden) fadeInPanel(panel);
       });
       copyPanels.forEach((panel) => { panel.hidden = panel.dataset.copyPanel !== app; });
       demoStatus.textContent = app === 'pet' ? 'ペット健康手帳のデモを表示しています。' : 'Flowのデモを表示しています。';
@@ -470,8 +479,10 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
     function showPetView(view) {
       document.querySelectorAll('[data-pet-view]').forEach((panel) => {
         const selected = panel.dataset.petView === view;
+        const wasHidden = panel.hidden;
         panel.hidden = !selected;
         panel.classList.toggle('is-active', selected);
+        if (selected && wasHidden) fadeInPanel(panel);
       });
       document.querySelectorAll('[data-pet-nav]').forEach((button) => button.classList.toggle('is-current', button.dataset.petNav === view));
     }
@@ -552,8 +563,10 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
     function showFlowView(view) {
       document.querySelectorAll('[data-flow-view]').forEach((panel) => {
         const selected = panel.dataset.flowView === view;
+        const wasHidden = panel.hidden;
         panel.hidden = !selected;
         panel.classList.toggle('is-active', selected);
+        if (selected && wasHidden) fadeInPanel(panel);
       });
       document.querySelectorAll('[data-flow-nav]').forEach((button) => button.classList.toggle('is-current', button.dataset.flowNav === view));
     }
@@ -672,7 +685,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
   .feature-list { display:grid; gap:12px; margin:30px 0 0; }.feature-list div { display:grid; grid-template-columns:42px 1fr; gap:12px; align-items:start; }.feature-list dt { width:42px; height:42px; display:grid; place-items:center; background:#fff; color:var(--teal); border:1px solid var(--line); }.feature-list dd { margin:0; }.feature-list strong,.feature-list span { display:block; }.feature-list span { margin-top:4px; color:var(--muted); font-size:.87rem; line-height:1.55; }
   .app-scope { margin-top:36px; padding:20px 22px; border-left:4px solid var(--coral); background:#fff; }.app-scope > span { color:var(--teal); font-size:.78rem; font-weight:900; }.app-scope p { margin:9px 0 15px; color:var(--muted); line-height:1.7; font-size:.88rem; }.app-scope a { display:inline-flex; gap:6px; align-items:center; color:var(--teal); font-weight:900; text-decoration:none; }.app-scope a:hover { text-decoration:underline; }.app-scope .material-icon { font-size:1.1rem; }
   .phone-area { display:grid; justify-items:center; }.phone { position:relative; width:min(100%,380px); padding:10px; border:9px solid #16282d; border-radius:40px; background:#16282d; box-shadow:0 30px 54px rgba(18,59,67,.25); }.phone__speaker { position:absolute; z-index:2; top:18px; left:50%; width:94px; height:20px; border-radius:0 0 16px 16px; background:#16282d; transform:translateX(-50%); }.phone__screen { position:relative; min-height:702px; overflow:hidden; border-radius:25px; background:#f7faf8; }.phone__home-bar { width:118px; height:4px; margin:8px auto 0; border-radius:99px; background:#b9c2c4; }.phone-caption { display:flex; align-items:center; gap:7px; margin:18px 0 0; color:var(--muted); font-size:.82rem; }.phone-caption .material-icon { color:var(--teal); }.phone-status { min-height:20px; margin:8px 0 0; color:var(--teal); font-size:.78rem; font-weight:800; text-align:center; }
-  .phone-panel { min-height:702px; position:relative; padding:0 18px 72px; }.phone-panel[hidden],.phone-view[hidden] { display:none; }.phone-view { min-height:593px; }.status-bar { display:flex; justify-content:space-between; align-items:center; min-height:37px; padding:0 8px; color:#264249; font-size:.7rem; font-weight:900; }.status-bar > span:last-child { display:flex; gap:3px; }.status-bar .material-icon { font-size:.92rem; }
+  .phone-panel { min-height:702px; position:relative; padding:0 18px 72px; opacity:1; transition:opacity var(--motion-ui,160ms) ease-out; }.phone-panel[hidden],.phone-view[hidden] { display:none; }.phone-panel.panel-enter,.phone-view.panel-enter { opacity:.92; }.phone-view { min-height:593px; opacity:1; transition:opacity var(--motion-ui,160ms) ease-out; }.status-bar { display:flex; justify-content:space-between; align-items:center; min-height:37px; padding:0 8px; color:#264249; font-size:.7rem; font-weight:900; }.status-bar > span:last-child { display:flex; gap:3px; }.status-bar .material-icon { font-size:.92rem; }
 
   /* ペット */
   .pet-header,.subscription-header { display:flex; justify-content:space-between; align-items:start; }.pet-header span { color:var(--muted); font-size:.76rem; }.pet-header h2 { margin:3px 0 0; font-size:1.34rem; }.round-button { position:relative; width:39px; height:39px; display:grid; place-items:center; border:0; border-radius:50%; background:#e7f0ec; color:var(--teal); cursor:pointer; }.round-button i { position:absolute; top:8px; right:8px; width:6px; height:6px; border-radius:50%; background:var(--coral); }

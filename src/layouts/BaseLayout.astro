@@ -6,6 +6,7 @@ import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 import { ViewTransitions } from 'astro:transitions';
 import { MULTILANG_PAGES } from '../i18n/navigation';
 import '../styles/global.css';
+import '../styles/motion.css';
 
 interface Props {
   title?: string;
@@ -191,6 +192,18 @@ const getLocalizedHref = (l: string) => {
           }
         });
       })();
+    </script>
+    <script>
+      import { initMotion, watchReducedMotion } from '../scripts/motion';
+      watchReducedMotion();
+      let disposeMotion: (() => void) | null = null;
+      function runMotion() {
+        disposeMotion?.();
+        disposeMotion = initMotion(document);
+      }
+      document.addEventListener('DOMContentLoaded', runMotion);
+      document.addEventListener('astro:page-load', runMotion);
+      document.addEventListener('astro:before-swap', () => { disposeMotion?.(); disposeMotion = null; });
     </script>
   </head>
   <body>
