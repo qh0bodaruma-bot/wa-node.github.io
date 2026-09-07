@@ -31,7 +31,6 @@
     color: var(--ink);
     background: var(--bg);
     padding-bottom: 92px;
-    overflow-x: hidden;
   }
 
   .pl :is(h1, h2, h3, p, ul, ol, dl, dd, figure, table) { margin: 0; }
@@ -742,6 +741,35 @@
      `is-condensed` はFVのタイルが画面から隠れたときに付く。 */
   .pl-head.is-js .pl-nav { display: none; }
   .pl-head.is-js.is-condensed .pl-nav { display: flex; }
+
+  /* FVのタイルが見えている間は、ヘッダー内のブランドも隠して重複させない（PCのみ）。
+     電話・見学CTAは常時フロートのまま残す（追従）。スマホは常時ハンバーガーのため対象外。 */
+  @media (min-width: 1001px) {
+    .pl-head.is-js:not(.is-condensed) .pl-brand { display: none; }
+    .pl-head.is-js:not(.is-condensed) .pl-head-inner { justify-content: flex-end; }
+  }
+
+  /* FV左上に浮かせるブランドカード。ヘッダー内ブランドが隠れている間の代わりに表示する。
+     表示・非表示はJSがヘッダーと同期して切り替える（is-hero クラス）。
+     ヒーロー自体はスクロールで流れるので、隠れたあとに再度出てくることはない。 */
+  .pl-hero-brand-card {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 6;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-radius: var(--radius);
+    background: color-mix(in srgb, var(--bg) 90%, transparent);
+    box-shadow: var(--shadow-xs);
+    text-decoration: none;
+    line-height: 1.25;
+  }
+  @media (min-width: 1001px) {
+    .pl-hero-brand-card.is-hero-visible { display: flex; }
+  }
 
   @media (max-width: 1000px) {
     /* 横に並べる幅がないので、コピーの下にタイルを置く */

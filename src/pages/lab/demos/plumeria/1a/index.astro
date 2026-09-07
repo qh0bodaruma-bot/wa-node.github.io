@@ -40,6 +40,13 @@ const entrances = [...services, recruitEntry];
 <PlumeriaLayout title={title} description={description} currentPath={routes.top}>
   <!-- 01 ファーストビュー + 6つの入口 -->
   <section class="pl-hero">
+    <a class="pl-hero-brand-card" href={routes.top} aria-label={`${corp.name} トップへ戻る`}>
+      <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>
+      <span class="pl-brand-text">
+        <span class="pl-brand-name">{corp.name}</span>
+        <span class="pl-brand-en">{corp.nameEn}</span>
+      </span>
+    </a>
     <div class="pl-hero-media">
       <div class="pl-slider" data-pl-slider>
         {heroSlides.map((s, i) => (
@@ -303,5 +310,32 @@ const entrances = [...services, recruitEntry];
     });
 
     if (!reduced) startTimer();
+  })();
+
+  /*
+    PCのみ：FVのタイル（サービス入口）が画面内にある間は、ヘッダーの重複ナビを隠し、
+    代わりにFV左上のブランドカードを表示する。タイルが隠れたら（スクロール通過）ヘッダーの
+    ナビ・ブランドを通常どおり表示する。JSが動かない場合はヘッダーのナビは常時表示のまま
+    （is-jsが付かないため、CSSの既定＝表示状態が維持される）。
+  */
+  (function () {
+    const header = document.querySelector('.pl-head');
+    const tiles = document.querySelector('[data-pl-tiles]');
+    const heroBrandCard = document.querySelector('.pl-hero-brand-card');
+    if (!header || !tiles) return;
+    header.classList.add('is-js');
+    heroBrandCard?.classList.add('is-hero-visible');
+
+    if (!('IntersectionObserver' in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          header.classList.toggle('is-condensed', !entry.isIntersecting);
+          heroBrandCard?.classList.toggle('is-hero-visible', entry.isIntersecting);
+        });
+      },
+      { root: null, rootMargin: '-77px 0px 0px 0px', threshold: 0 }
+    );
+    io.observe(tiles);
   })();
 </script>
