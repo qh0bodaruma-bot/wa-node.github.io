@@ -1,0 +1,36 @@
+---
+import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
+import { routes } from '../../../../../../data/plumeria';
+---
+<PlumeriaServicePage
+  title="訪問介護｜プルメリア（修正版ラフ）"
+  description="プルメリアの訪問介護は、ホームヘルパーがご自宅を訪問し、身体介護・生活援助を行います。"
+  currentPath={routes.homeCare}
+  breadcrumbLabel="訪問介護"
+  heroTitle="訪問介護"
+  heroLead="ホームヘルパーがご自宅を訪問し、身体介護・生活援助を行います。"
+  heroImg="/images/plumeria/feature-01.webp"
+  heroAlt="入居者とスタッフが同じ目線の高さで話している様子（イメージ）"
+  fitFor={[
+    'ご自宅での入浴・排せつ・食事の介助が必要な方',
+    '掃除・洗濯・調理などの生活援助が必要な方',
+    'ご家族の介護負担を減らしたい方',
+  ]}
+  content={[
+    { label: '身体介護', body: '入浴・排せつ・食事・移動などの介助を行います。' },
+    { label: '生活援助', body: '掃除・洗濯・調理・買い物などをお手伝いします。' },
+    { label: '相談対応', body: 'ケアマネジャーと連携し、状況に応じてご相談に応じます。' },
+  ]}
+  targetInfo={[
+    { label: '対象となる方', body: '要介護・要支援の認定を受けている方（詳細は確認中）' },
+    { label: '対応地域', body: '確認中' },
+    { label: '利用条件', body: '確認中。介護保険の利用有無等により異なります。' },
+  ]}
+  costInfo="介護保険の自己負担割合等により異なります。正式な費用は個別にご案内します。（費用の目安は確認中）"
+  flowSteps={[
+    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
+    { title: 'ご相談・確認', body: '現在の状況、ケアプランの有無等を確認します。' },
+    { title: 'ご利用開始', body: '内容にご納得いただいたうえで、利用を開始します。' },
+  ]}
+  contactCategory="home-care"
+/>

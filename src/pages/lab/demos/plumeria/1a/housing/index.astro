@@ -1,0 +1,95 @@
+---
+import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
+import { routes, housingUnits } from '../../../../../../data/plumeria';
+
+const day = [
+  { time: '7:00', label: '起床・朝食' },
+  { time: '10:00', label: '健康チェック' },
+  { time: '12:00', label: '昼食' },
+  { time: '15:00', label: '自由時間' },
+  { time: '18:00', label: '夕食' },
+  { time: '21:00', label: '消灯' },
+];
+---
+<PlumeriaLayout
+  title="サービス付き高齢者向け住宅 Ⅰ・Ⅱ・Ⅲ 比較｜プルメリア（修正版ラフ）"
+  description="プルメリアが運営するサービス付き高齢者向け住宅Ⅰ・Ⅱ・Ⅲの比較・ご案内です。"
+  currentPath={routes.housing}
+>
+  <div class="pl-wrap" style="padding-top:28px">
+    <p class="pl-breadcrumb">
+      <a href={routes.top}>トップ</a>
+      <span aria-hidden="true">/</span>
+      <span>サービス付き高齢者向け住宅</span>
+    </p>
+  </div>
+
+  <section class="pl-sec pl-sec-tight">
+    <div class="pl-wrap">
+      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">サービス付き高齢者向け住宅 Ⅰ・Ⅱ・Ⅲ</h1>
+      <p class="pl-sec-lead">
+        安否確認と生活相談のあるバリアフリー住宅です。3つの住宅を同じ項目で比較できるようにご案内します。
+      </p>
+      <p class="pl-note">※ 正式なサービス区分（サービス付き高齢者向け住宅／ショートステイ等）は確認中です。今回はいただいた最新情報に沿ってⅠ・Ⅱ・Ⅲすべてを住宅としてご案内しています。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <div class="pl-compare-table-wrap">
+        <table class="pl-compare-table">
+          <thead>
+            <tr>
+              <th scope="col">住宅</th>
+              <th scope="col">所在地</th>
+              <th scope="col">特徴</th>
+              <th scope="col">居室</th>
+              <th scope="col">費用</th>
+              <th scope="col">状況</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            {housingUnits.map((u) => (
+              <tr>
+                <th scope="row">{u.name}</th>
+                <td>確認中</td>
+                <td>確認中</td>
+                <td>確認中</td>
+                <td>確認中</td>
+                <td><span class="pl-pending-note">{u.status ?? '確認中'}</span></td>
+                <td><a class="pl-more" href={routes.housingUnit(u.id)}>詳細を見る</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="pl-note" style="margin-top:12px">※ 比較項目はすべて確認中のため、優劣を示すものではありません。正式情報がそろい次第、内容を更新します。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap">
+      <h2 class="pl-h2"><span class="pl-h2-en">A DAY</span>一日の流れ（参考）</h2>
+      <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は住宅ごとに確認中です。</p>
+      <ol class="pl-day">
+        {day.map((d) => (
+          <li class="pl-day-item">
+            <span class="pl-num-face pl-day-time">{d.time}</span>
+            <span class="pl-day-dot" aria-hidden="true"></span>
+            <span class="pl-day-label">{d.label}</span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="pl-sec" style="text-align:center">
+    <div class="pl-wrap">
+      <h2 class="pl-h2" style="justify-content:center">見学・入居のご相談</h2>
+      <div class="pl-btn-row" style="justify-content:center">
+        <a class="pl-btn pl-btn-main" href={`${routes.contact}?service=housing`}>住宅について相談する</a>
+      </div>
+    </div>
+  </section>
+</PlumeriaLayout>

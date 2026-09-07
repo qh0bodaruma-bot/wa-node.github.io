@@ -1,0 +1,52 @@
+---
+import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
+import { routes, services } from '../../../../../../data/plumeria';
+---
+<PlumeriaLayout
+  title="サービス一覧・選び方｜プルメリア（修正版ラフ）"
+  description="プルメリアが提供する住まい・訪問介護・訪問看護・居宅介護支援・福祉用具の一覧と選び方のご案内です。"
+  currentPath={routes.services}
+>
+  <div class="pl-wrap" style="padding-top:28px">
+    <p class="pl-breadcrumb">
+      <a href={routes.top}>トップ</a>
+      <span aria-hidden="true">/</span>
+      <span>サービス一覧</span>
+    </p>
+  </div>
+
+  <section class="pl-sec pl-sec-tight">
+    <div class="pl-wrap">
+      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">サービス一覧・選び方</h1>
+      <p class="pl-sec-lead">
+        どのサービスが合うか決まっていない場合も、まずはご相談ください。
+        現在の状況をうかがいながら、一緒に整理します。
+      </p>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <div class="pl-service-intro-grid">
+        {services.map((s) => (
+          <a class="pl-card pl-service-intro-card" href={s.href}>
+            <img src={s.img} alt={s.alt} width="900" height="675" loading="lazy" decoding="async" />
+            <h2 class="pl-h3">{s.name}</h2>
+            <p class="pl-body">{s.tagline}</p>
+            <p class="pl-body">{s.summary}</p>
+            <span class="pl-service-intro-more">くわしく見る →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige" style="text-align:center">
+    <div class="pl-wrap">
+      <h2 class="pl-h2" style="justify-content:center">まだ決まっていない場合も、ご相談ください</h2>
+      <div class="pl-btn-row" style="justify-content:center">
+        <a class="pl-btn pl-btn-main" href={`${routes.contact}?service=undecided`}>お問い合わせ・ご相談へ</a>
+      </div>
+    </div>
+  </section>
+</PlumeriaLayout>

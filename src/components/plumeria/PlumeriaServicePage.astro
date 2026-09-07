@@ -1,0 +1,121 @@
+---
+import PlumeriaLayout from '../../layouts/PlumeriaLayout.astro';
+import { routes, genericFaqs, type PlumeriaFaq } from '../../data/plumeria';
+
+interface Props {
+  title: string;
+  description: string;
+  currentPath: string;
+  breadcrumbLabel: string;
+  heroTitle: string;
+  heroLead: string;
+  heroImg: string;
+  heroAlt: string;
+  fitFor: string[];
+  content: { label: string; body: string }[];
+  targetInfo: { label: string; body: string }[];
+  costInfo: string;
+  flowSteps: { title: string; body: string }[];
+  faqs?: PlumeriaFaq[];
+  contactCategory: string;
+}
+
+const {
+  title, description, currentPath, breadcrumbLabel,
+  heroTitle, heroLead, heroImg, heroAlt, fitFor, content, targetInfo, costInfo, flowSteps,
+  faqs = genericFaqs, contactCategory,
+} = Astro.props;
+
+const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCategory)}`;
+---
+<PlumeriaLayout title={title} description={description} currentPath={currentPath}>
+  <div class="pl-wrap" style="padding-top:28px">
+    <p class="pl-breadcrumb">
+      <a href={routes.top}>トップ</a>
+      <span aria-hidden="true">/</span>
+      <span>{breadcrumbLabel}</span>
+    </p>
+  </div>
+
+  <section class="pl-sec pl-sec-tight">
+    <div class="pl-wrap">
+      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">{heroTitle}</h1>
+      <p class="pl-sec-lead">{heroLead}</p>
+      <img src={heroImg} alt={heroAlt} width="1200" height="675" loading="eager" decoding="async"
+           style="width:100%;border-radius:16px;aspect-ratio:16/9;object-fit:cover;margin:18px 0" />
+      <p class="pl-photo-note">※ 掲載写真はイメージ写真です。実際の施設・スタッフではありません。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">どのような相談に向いているか</h2>
+      <ul class="pl-body">
+        {fitFor.map((f) => <li>{f}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">提供内容</h2>
+      <div class="pl-grid-3">
+        {content.map((c) => (
+          <div class="pl-card">
+            <h3 class="pl-h3">{c.label}</h3>
+            <p class="pl-body">{c.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">対象となる方・対応地域・利用条件</h2>
+      <dl class="pl-access-list">
+        {targetInfo.map((t) => (
+          <div><dt>{t.label}</dt><dd>{t.body}</dd></div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">費用について</h2>
+      <p class="pl-body">{costInfo}</p>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">利用までの流れ</h2>
+      <ol class="pl-body" style="counter-reset:pl-step">
+        {flowSteps.map((step, i) => (
+          <li style="margin-bottom:14px"><strong>{i + 1}. {step.title}</strong><br />{step.body}</li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">よくあるご質問</h2>
+      <div class="pl-faq-list">
+        {faqs.map((f) => (
+          <details><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pl-sec" style="text-align:center">
+    <div class="pl-wrap">
+      <h2 class="pl-h2" style="justify-content:center">{breadcrumbLabel}について相談する</h2>
+      <div class="pl-btn-row" style="justify-content:center">
+        <a class="pl-btn pl-btn-main" href={contactHref}>{breadcrumbLabel}について相談する</a>
+      </div>
+    </div>
+  </section>
+</PlumeriaLayout>

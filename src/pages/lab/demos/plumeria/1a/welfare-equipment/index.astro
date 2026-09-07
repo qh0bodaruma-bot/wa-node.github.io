@@ -1,0 +1,36 @@
+---
+import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
+import { routes } from '../../../../../../data/plumeria';
+---
+<PlumeriaServicePage
+  title="福祉用具｜プルメリア（修正版ラフ）"
+  description="プルメリアの福祉用具は、歩行器や介護ベッドなど、暮らしに合う用具をご提案します。"
+  currentPath={routes.welfareEquipment}
+  breadcrumbLabel="福祉用具"
+  heroTitle="福祉用具"
+  heroLead="歩行器や介護ベッドなど、暮らしに合う福祉用具をご提案します。"
+  heroImg="/images/plumeria/services-05.webp"
+  heroAlt="歩行器の使い方をスタッフが説明している様子（イメージ）"
+  fitFor={[
+    '歩行や移動に不安がある方',
+    'ご自宅のベッド・手すり等を見直したい方',
+    'どの用具が合うか分からず相談したい方',
+  ]}
+  content={[
+    { label: '用具の選定相談', body: '生活状況に合わせて、必要な用具をご提案します。' },
+    { label: '貸与', body: '福祉用具のレンタルに対応します。（販売等の対応範囲は確認中）' },
+    { label: '使い方の説明', body: 'スタッフが用具の使い方をご説明します。' },
+  ]}
+  targetInfo={[
+    { label: '対象となる方', body: '要介護・要支援の認定を受けている方（詳細は確認中）' },
+    { label: '対応地域', body: '確認中' },
+    { label: '利用条件', body: '確認中' },
+  ]}
+  costInfo="介護保険の利用有無、用具の種類により異なります。正式な費用は個別にご案内します。（費用の目安は確認中）"
+  flowSteps={[
+    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
+    { title: 'ご相談', body: '生活状況をうかがい、適した用具をご提案します。' },
+    { title: 'ご利用開始', body: '用具の搬入・使い方の説明を行い、利用を開始します。' },
+  ]}
+  contactCategory="welfare-equipment"
+/>

@@ -1,0 +1,36 @@
+---
+import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
+import { routes } from '../../../../../../data/plumeria';
+---
+<PlumeriaServicePage
+  title="訪問看護｜プルメリア（修正版ラフ）"
+  description="プルメリアの訪問看護は、看護師がご自宅を訪問し、健康状態の確認や医療的なケアを行います。"
+  currentPath={routes.homeNursing}
+  breadcrumbLabel="訪問看護"
+  heroTitle="訪問看護"
+  heroLead="看護師がご自宅を訪問し、健康状態の確認や医療的なケアを行います。"
+  heroImg="/images/plumeria/services-04.webp"
+  heroAlt="ご自宅のリビングで看護師が健康状態を確認している様子（イメージ）"
+  fitFor={[
+    '通院が難しく、ご自宅での医療的なケアが必要な方',
+    '持病の管理や服薬について相談したい方',
+    'ご家族が医療面のケアに不安を感じている方',
+  ]}
+  content={[
+    { label: '健康観察', body: 'バイタルサイン等の確認と、体調の変化の把握を行います。' },
+    { label: '医療処置', body: '医師の指示に基づく処置を行います。（対応範囲は確認中）' },
+    { label: '連携', body: '訪問介護・居宅介護支援と連携してご案内します。' },
+  ]}
+  targetInfo={[
+    { label: '対象となる方', body: '主治医の指示のもとで訪問看護が必要な方（詳細は確認中）' },
+    { label: '対応地域', body: '確認中' },
+    { label: '利用条件', body: '医療保険・介護保険いずれの利用かにより異なります。（詳細は確認中）' },
+  ]}
+  costInfo="医療保険・介護保険の適用状況等により異なります。正式な費用は個別にご案内します。（費用の目安は確認中）"
+  flowSteps={[
+    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
+    { title: '主治医への確認', body: '主治医の指示書等、必要な手続きをご案内します。' },
+    { title: 'ご利用開始', body: '訪問スケジュールを調整し、利用を開始します。' },
+  ]}
+  contactCategory="home-nursing"
+/>

@@ -1,0 +1,307 @@
+---
+import PlumeriaLayout from '../../../../../layouts/PlumeriaLayout.astro';
+import { corp, services, recruitEntry, routes, news } from '../../../../../data/plumeria';
+
+/*
+  プルメリア 総合トップ 修正版ラフ（/lab/demos/plumeria/1a/）
+  作業指示書：Codex 2026-09-07 出力「プルメリア_1a修正_Claude作業指示書.md」に基づく修正。
+  元ラフ（1a.astro 単一ファイル）の配色・モチーフ・ヒーロースライダー・アクセシビリティ対応を維持しつつ、
+  介護事業部の単独サイトとして下層ページへ分割し、トップの構成を指示書の並び順に組み替えた。
+  写真はすべて生成画像の「イメージ写真」であり、実施設・実スタッフの記録ではない。
+*/
+
+const title = 'プルメリア｜サービス付き高齢者向け住宅・訪問介護・訪問看護（修正版ラフ）';
+const description =
+  'プルメリアは、サービス付き高齢者向け住宅（Ⅰ・Ⅱ・Ⅲ）・訪問介護・訪問看護・居宅介護支援・福祉用具を運営しています。見学・ご相談を承ります。';
+
+const heroSlides = [
+  { img: '/images/plumeria/hero-01.webp', label: '入居者とスタッフ',
+    alt: '建物のエントランス付近で、入居者とスタッフが穏やかに話している様子（イメージ）' },
+  { img: '/images/plumeria/hero-02.webp', label: '建物の外観',
+    alt: '朝の光のなか、植栽に囲まれた低層の建物とアプローチ（イメージ）' },
+  { img: '/images/plumeria/hero-03.webp', label: '共用リビング',
+    alt: '明るい共用リビングで、入居者がそれぞれ読書やお茶をして過ごしている様子（イメージ）' },
+  { img: '/images/plumeria/hero-04.webp', label: 'スタッフ',
+    alt: '施設の廊下で、介護スタッフ3名が仕事の合間に会話している様子（イメージ）' },
+];
+
+const reasons = [
+  { icon: 'staff', title: '寄り添う対応', body: '困りごとをその場でうかがい、ご家族にもお伝えする体制を整えています。（体制の詳細は確認中）',
+    img: '/images/plumeria/feature-01.webp', alt: '入居者とスタッフが同じ目線の高さで話している様子（イメージ）' },
+  { icon: 'care', title: '専門的な支援', body: '訪問看護と訪問介護を同じグループで運営しています。看護と介護を切り離さずにご相談いただけます。',
+    img: '/images/plumeria/feature-02.webp', alt: '看護師と介護スタッフが情報を共有している様子（イメージ）' },
+  { icon: 'sprout', title: '自宅からの相談', body: 'ご来所前に、お電話とフォームでご相談いただけます。福祉用具のご相談まで同じ窓口で承ります。',
+    img: '/images/plumeria/feature-03.webp', alt: 'ご家族が自宅のダイニングで相談している様子（イメージ）' },
+];
+
+const entrances = [...services, recruitEntry];
+---
+
+<PlumeriaLayout title={title} description={description} currentPath={routes.top}>
+  <!-- 01 ファーストビュー + 6つの入口 -->
+  <section class="pl-hero">
+    <div class="pl-hero-media">
+      <div class="pl-slider" data-pl-slider>
+        {heroSlides.map((s, i) => (
+          <img
+            class={i === 0 ? 'pl-hero-photo is-on' : 'pl-hero-photo'}
+            src={i === 0 ? s.img : undefined}
+            data-src={i === 0 ? undefined : s.img}
+            alt={s.alt}
+            width="1600"
+            height="900"
+            fetchpriority={i === 0 ? 'high' : undefined}
+            decoding="async"
+            aria-hidden={i === 0 ? undefined : 'true'}
+          />
+        ))}
+        <div class="pl-slider-ui">
+          <ul class="pl-dots">
+            {heroSlides.map((s, i) => (
+              <li>
+                <button type="button" class={i === 0 ? 'pl-dot is-on' : 'pl-dot'}
+                        data-pl-dot={String(i)} aria-current={i === 0 ? 'true' : 'false'}>
+                  <span class="pl-sr">{s.label}を表示</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <button type="button" class="pl-slider-toggle" data-pl-toggle data-playing="true">
+            <span class="pl-slider-toggle-icon" aria-hidden="true"></span>
+            <span class="pl-sr" data-pl-toggle-label>スライドショーを停止</span>
+          </button>
+        </div>
+      </div>
+      <svg class="pl-hero-frame" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="pl-hero-frame-top" vector-effect="non-scaling-stroke" transform="translate(0,0.05)"
+              d="M0,0.075 C0.22,0.004 0.58,0.004 1,0.042" />
+        <path class="pl-hero-frame-bottom" vector-effect="non-scaling-stroke" transform="translate(0,0.028)"
+              d="M1,0.80 C0.74,0.99 0.44,0.85 0.20,0.94 C0.11,0.975 0.05,0.995 0,1" />
+      </svg>
+      <div class="pl-motes" aria-hidden="true">
+        <span class="pl-mote pl-mote-1"></span><span class="pl-mote pl-mote-2"></span>
+        <span class="pl-mote pl-mote-3"></span><span class="pl-mote pl-mote-4"></span>
+        <span class="pl-mote pl-mote-5"></span><span class="pl-mote pl-mote-6"></span>
+      </div>
+    </div>
+    <div class="pl-wrap pl-hero-inner">
+      <div class="pl-hero-copy">
+        <p class="pl-eyebrow">
+          <span class="pl-eyebrow-mark" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>
+          地域で暮らしを見守る
+        </p>
+        <h1 class="pl-h1">温かい心と笑顔で、<br />安らぎの毎日を。</h1>
+        <p class="pl-hero-lead">住まいと看護と用品を、ひとつづきでお預かりします。</p>
+        <p class="pl-photo-note">※ 掲載写真はすべてイメージ写真です。実際の施設・スタッフではありません。</p>
+      </div>
+      <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービスと採用情報">
+        <ul class="pl-tiles">
+          {entrances.map((s) => (
+            <li>
+              <a class="pl-tile" href={s.href}
+                 data-pl-gtag={s.id === 'recruit' ? 'recruit_click' : 'service_select'}
+                 data-pl-service={s.id} data-pl-cta="hero_tile">
+                <span class="pl-tile-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
+                <span class="pl-tile-label">{s.name}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <div class="pl-hill pl-hill-to-mint" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V44c220-34 430 20 700 12S1230 8 1440 30v60Z" /></svg>
+  </div>
+
+  <!-- 02 プルメリアについて／大切にしていること -->
+  <section class="pl-about" id="about">
+    <img class="pl-deco-flower pl-deco-flower-bl" src="/images/plumeria/decoration-bl.webp" alt=""
+         width="520" height="515" loading="lazy" decoding="async" aria-hidden="true" />
+    <span class="pl-deco pl-deco-bird" aria-hidden="true"><svg><use href="#pl-i-bird" /></svg></span>
+    <span class="pl-deco pl-deco-sun" aria-hidden="true"><svg><use href="#pl-i-sun" /></svg></span>
+    <div class="pl-wrap pl-about-inner">
+      <div class="pl-about-text">
+        <p class="pl-eyebrow"><span class="pl-eyebrow-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>ABOUT</p>
+        <h2 class="pl-about-catch">住まい、看護、暮らしの道具。<br />別々にしないほうが、たぶん楽です。</h2>
+        <p class="pl-body pl-about-body">
+          住む場所を探し、看護の相談先を探し、用品の手配先を探す。
+          ご本人にもご家族にも、その往復はけっこうな負担になります。
+          プルメリアは複数のサービスを、ひとつの窓口でお預かりしています。
+        </p>
+        <p class="pl-note">※ 理念・沿革はご提供いただいた内容に差し替えます。運営法人・グループの正式表記は確認中です。</p>
+      </div>
+      <img class="pl-about-photo" src="/images/plumeria/about-01.webp"
+           alt="窓辺の椅子に座る入居者とスタッフが穏やかに話している共用リビング（イメージ）"
+           width="1100" height="733" loading="lazy" decoding="async" />
+    </div>
+  </section>
+
+  <div class="pl-hill pl-hill-from-mint" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 0v40c250 30 470-24 740-14S1220 82 1440 56V0Z" /></svg>
+  </div>
+
+  <section class="pl-sec pl-sec-beige" id="reasons">
+    <div class="pl-wrap">
+      <h2 class="pl-h2"><span class="pl-h2-en">FEATURE</span>プルメリアが大切にしていること</h2>
+      <ul class="pl-grid-3 pl-reasons">
+        {reasons.map((r) => (
+          <li class="pl-card pl-reason">
+            <img class="pl-reason-photo" src={r.img} alt={r.alt} width="900" height="600" loading="lazy" decoding="async" />
+            <span class="pl-reason-icon" aria-hidden="true"><svg><use href={`#pl-i-${r.icon}`} /></svg></span>
+            <h3 class="pl-h3">{r.title}</h3>
+            <p class="pl-body">{r.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <div class="pl-hill pl-hill-to-mint" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V52c210-40 450 14 720 6s500-46 720-22v54Z" /></svg>
+  </div>
+
+  <!-- 03 各サービスの短い紹介 -->
+  <section class="pl-sec" id="services">
+    <div class="pl-wrap">
+      <h2 class="pl-h2"><span class="pl-h2-en">SERVICES</span>サービスのご案内</h2>
+      <p class="pl-sec-lead">住まい・訪問介護・訪問看護・居宅介護支援・福祉用具の5つを、目的に合わせてご案内します。</p>
+      <div class="pl-service-intro-grid">
+        {services.map((s) => (
+          <a class="pl-card pl-service-intro-card" href={s.href}
+             data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="service_intro_card">
+            <img src={s.img} alt={s.alt} width="900" height="675" loading="lazy" decoding="async" />
+            <h3 class="pl-h3">{s.name}</h3>
+            <p class="pl-body">{s.summary}</p>
+            <span class="pl-service-intro-more">くわしく見る →</span>
+          </a>
+        ))}
+      </div>
+      <p class="pl-note" style="margin-top:16px"><a class="pl-more" href={routes.services}>サービス一覧・選び方を見る</a></p>
+    </div>
+  </section>
+
+  <div class="pl-hill pl-hill-from-mint" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 0v34c230 36 460-18 730-8S1210 76 1440 48V0Z" /></svg>
+  </div>
+
+  <!-- 04 採用紹介 -->
+  <section class="pl-vac-sec" id="recruit">
+    <div class="pl-wrap">
+      <div class="pl-card pl-recruit">
+        <img class="pl-recruit-photo" src="/images/plumeria/recruit-01.webp"
+             alt="施設内で仕事の合間に会話しているスタッフたち（イメージ）"
+             width="900" height="600" loading="lazy" decoding="async" />
+        <h2 class="pl-h3">いっしょに働く方を探しています<span class="pl-h3-en">RECRUIT</span></h2>
+        <p class="pl-body">介護スタッフ・看護師を募集しています。見学だけでもお気軽にお越しください。</p>
+        <a class="pl-more" href={routes.recruit} data-pl-gtag="recruit_click" data-pl-cta="top_recruit_section">募集要項を見る</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="pl-hill pl-hill-to-mint" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V44c220-34 430 20 700 12S1230 8 1440 30v60Z" /></svg>
+  </div>
+
+  <!-- 05 お知らせ -->
+  <section class="pl-sec pl-sec-tight" id="news">
+    <div class="pl-wrap">
+      <h2 class="pl-h2"><span class="pl-h2-en">NEWS</span>お知らせ</h2>
+      {news.length > 0 ? (
+        <ul class="pl-news">
+          {news.map((n) => (
+            <li>
+              <span class="pl-num-face pl-news-date">{n.date}</span>
+              <span class={`pl-cat pl-cat-${n.catTone}`}>{n.cat}</span>
+              <span class="pl-news-text">{n.text}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="pl-body">掲載準備中です。</p>
+      )}
+    </div>
+  </section>
+
+  <div class="pl-hill pl-hill-from-mint" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 0v40c250 30 470-24 740-14S1220 82 1440 56V0Z" /></svg>
+  </div>
+
+  <!-- 06 お問い合わせ・ご相談 -->
+  <section class="pl-sec" id="contact-cta">
+    <div class="pl-wrap" style="text-align:center">
+      <h2 class="pl-h2" style="justify-content:center"><span class="pl-h2-en">CONTACT</span>お問い合わせ・ご相談</h2>
+      <p class="pl-sec-lead">見学・入居のご相談、各サービスについてのご質問はこちらから承ります。</p>
+      <div class="pl-btn-row" style="justify-content:center">
+        <a class="pl-btn pl-btn-main" href={routes.contact}>お問い合わせ・ご相談へ</a>
+        <a class="pl-btn pl-btn-outline" href={routes.recruit}>採用情報を見る</a>
+      </div>
+    </div>
+  </section>
+</PlumeriaLayout>
+
+<script>
+  /*
+    ヒーロースライダー。フェード・5秒・切替0.7秒・ドット・停止ボタン。
+    自前の素のJS。JSが動かなくても1枚目が静止画として表示される（フェイルオープン）。
+  */
+  (function () {
+    const root = document.querySelector<HTMLElement>('[data-pl-slider]');
+    if (!root) return;
+    const photos = [...root.querySelectorAll<HTMLImageElement>('.pl-hero-photo')];
+    const dots = [...root.querySelectorAll<HTMLButtonElement>('[data-pl-dot]')];
+    const toggle = root.querySelector<HTMLButtonElement>('[data-pl-toggle]');
+    const toggleLabel = root.querySelector<HTMLElement>('[data-pl-toggle-label]');
+    if (photos.length < 2) return;
+
+    let index = 0;
+    let playing = true;
+    let timer: number | null = null;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function loadIfNeeded(img: HTMLImageElement) {
+      if (img.dataset.src && !img.src) {
+        img.src = img.dataset.src;
+      }
+    }
+
+    function show(next: number) {
+      photos[index].classList.remove('is-on');
+      photos[index].setAttribute('aria-hidden', 'true');
+      index = next;
+      loadIfNeeded(photos[index]);
+      photos[index].classList.add('is-on');
+      photos[index].removeAttribute('aria-hidden');
+      dots.forEach((dot, i) => {
+        const on = i === index;
+        dot.classList.toggle('is-on', on);
+        dot.setAttribute('aria-current', String(on));
+      });
+    }
+
+    function next() { show((index + 1) % photos.length); }
+
+    function startTimer() {
+      if (reduced || !playing) return;
+      stopTimer();
+      timer = window.setInterval(next, 5000);
+    }
+    function stopTimer() {
+      if (timer !== null) { window.clearInterval(timer); timer = null; }
+    }
+
+    dots.forEach((dot, i) => {
+      dot.addEventListener('click', () => { show(i); if (playing) startTimer(); });
+    });
+
+    toggle?.addEventListener('click', () => {
+      playing = !playing;
+      toggle.dataset.playing = String(playing);
+      if (toggleLabel) toggleLabel.textContent = playing ? 'スライドショーを停止' : 'スライドショーを再生';
+      if (playing) startTimer(); else stopTimer();
+    });
+
+    if (!reduced) startTimer();
+  })();
+</script>

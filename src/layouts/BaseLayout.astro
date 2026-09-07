@@ -17,17 +17,23 @@ interface Props {
   noindex?: boolean;
   showSiteChrome?: boolean;
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  gaMeasurementId?: string;
+  gaEnabled?: boolean;
+  siteName?: string;
 }
 
-const { 
-  title = "和-Node｜心理学 × ICT × AI で、ビジネスと心を整えるコンサルティング", 
+const {
+  title = "和-Node｜心理学 × ICT × AI で、ビジネスと心を整えるコンサルティング",
   description = "和-Nodeは、心理学を応用して「伝わるWeb導線」「続くICT活用」「安心できる相談支援」をプロデュースするコンサルティングサービスです。技術と心理の両面から、あなたと組織の課題を整えます。",
   image = "/images/ogp-service.jpg",
   url = Astro.url.href,
   lang = 'ja',
   noindex = false,
   showSiteChrome = true,
-  structuredData
+  structuredData,
+  gaMeasurementId,
+  gaEnabled = true,
+  siteName = 'wa-node'
 } = Astro.props;
 
 const structuredDataItems = structuredData
@@ -76,7 +82,7 @@ const getLocalizedHref = (l: string) => {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={new URL(image, Astro.url)} />
-    <meta property="og:site_name" content="wa-node" />
+    <meta property="og:site_name" content={siteName} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -100,7 +106,7 @@ const getLocalizedHref = (l: string) => {
     {structuredDataItems.map((item) => (
       <script type="application/ld+json" set:html={JSON.stringify(item)} />
     ))}
-    <GoogleAnalytics />
+    <GoogleAnalytics measurementId={gaMeasurementId} enabled={gaEnabled} />
     <ViewTransitions />
     <script is:inline>
       // IntersectionObserverが使える環境でだけ .reveal を隠す。

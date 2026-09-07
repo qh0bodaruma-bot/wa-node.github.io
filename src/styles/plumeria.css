@@ -1,682 +1,3 @@
----
-import BaseLayout from '../../../../layouts/BaseLayout.astro';
-
-/*
-  プルメリア 総合トップ ラフ「1a 信頼感」（/lab/demos/plumeria/1a）
-
-  - 出典ワイヤー: Claude Design project 6994e837-c54f-420d-a714-f1832f1ebef0
-      ／「プルメリア 1a 信頼感.dc.html」（index 総合トップ・PC/SP）
-  - デザイン方針: 支給されたデザインブリーフ（森・木漏れ日・地域拠点／やさしい安心感）に準拠。
-      参照サイト c-morinosato.com は「雰囲気の参考」であり、ロゴ・木の形・イラスト・写真・
-      文言は一切複製していない。モチーフはすべてこのファイル内で書き起こしたオリジナルSVG。
-  - 用途: プルメリア様への提出用ラフ。電話番号・空室状況・お知らせは仮
-  - 写真: ボスが用意したプロンプトで生成された画像を支給。
-      元PNG 26.1MB を WebP へ変換して public/images/plumeria/ に配置（合計 497KB）。
-      これらは「イメージ写真」であり、実際の施設・スタッフではない。
-      提案時にその旨を明示すること。
-  - JavaScript: ヒーロースライダーのためだけに解禁（自前・素のJS。jQuery / slick は使わない）。
-      それ以外は引き続きJSなし。スクロール連動は CSS の animation-timeline: view()、
-      モバイルメニューは <details> のまま。
-      JSが落ちてもヒーローは1枚目が出て、操作UIは隠れたままになる。
-  - アニメーション: ボス指示により解禁。モチーフに沿った3種のみ（木漏れ日／葉のゆらぎ／立ち上がり）。
-      ブリーフの「過度なアニメーション」を避けるため振れ幅は最小限。
-      prefers-reduced-motion: reduce で全停止する。
-
-  【ブリーフとの相違点（1点だけ・意図的）】
-  ブリーフは「メインCTAはミントグリーン(#349F87)＋白文字」だが、この組み合わせは
-  コントラスト比 3.25:1 で通常サイズの文字ではWCAG AAに届かない。
-  大きい文字（18.66px以上の太字）なら3:1基準を満たすため、
-  主要CTAは #349F87 のまま文字を19px/700に拡大して両立させている。
-  文字が小さくなるヘッダーCTAだけは同系の濃いめ #257562 を使う。
-*/
-
-const title = 'プルメリア｜サービス付き高齢者向け住宅・ショートステイ・訪問看護';
-const description =
-  'プルメリアは、サービス付き高齢者向け住宅・ショートステイ・訪問看護・レンタル介護用品を運営しています。見学・入居のご相談を承ります。';
-
-// ── 差し替え枠：法人情報 ─────────────────────────────────
-const corp = {
-  name: 'プルメリア',
-  nameEn: 'PLUMERIA',
-  tel: '000-000-0000',
-  telHref: 'tel:0000000000',
-  contactHref: '#contact',
-  address: '○○県○○市○○ 0-0-0（住所は差し替え枠）',
-};
-
-// ── ヒーロースライダー ───────────────────────────────────
-// 参照サイトと同じ「4枚・フェード・5秒・切替0.7秒・ドット・矢印なし」の挙動。
-// 実装は自前の素のJS（jQuery / slick は使わない）。
-// 1枚目だけ即読み込み、2枚目以降は初回描画が終わってから data-src を差し込む。
-const heroSlides = [
-  { img: '/images/plumeria/hero-01.webp', label: '入居者とスタッフ',
-    alt: '建物のエントランス付近で、入居者とスタッフが穏やかに話している様子' },
-  { img: '/images/plumeria/hero-02.webp', label: '建物の外観',
-    alt: '朝の光のなか、植栽に囲まれた低層の建物とアプローチ' },
-  { img: '/images/plumeria/hero-03.webp', label: '共用リビング',
-    alt: '明るい共用リビングで、入居者がそれぞれ読書やお茶をして過ごしている様子' },
-  { img: '/images/plumeria/hero-04.webp', label: 'スタッフ',
-    alt: '施設の廊下で、介護スタッフ3名が仕事の合間に会話している様子' },
-];
-
-// ── 差し替え枠：5つのサービス ────────────────────────────
-// tone は写真枠の地色だけに使う。枠線・文字・ボタンは緑と濃色に統一する
-const services = [
-  { name: 'プルメリアⅠ', short: 'Ⅰ', kind: 'サービス付き高齢者向け住宅', status: '空室あり', open: true, tone: 'mint', icon: 'home', id: 'service-1',
-    img: '/images/plumeria/services-01.webp', alt: '窓から光の入る居室で、入居者が自分らしく過ごしている様子' },
-  { name: 'プルメリアⅡ', short: 'Ⅱ', kind: 'サービス付き高齢者向け住宅', status: '満室', open: false, tone: 'mint', icon: 'home', id: 'service-2',
-    img: '/images/plumeria/services-02.webp', alt: '共用ラウンジで入居者どうしが穏やかに会話している様子' },
-  { name: 'プルメリアⅢ', short: 'Ⅲ', kind: 'ショートステイ', status: '受入可', open: true, tone: 'beige', icon: 'bed', id: 'service-3',
-    img: '/images/plumeria/services-03.webp', alt: '短期滞在の方を居室の入口で迎えているスタッフ' },
-  { name: '訪問看護', short: '訪問看護', kind: '看護師がご自宅へ訪問します', status: '', open: null, tone: 'mint', icon: 'care', id: 'service-4',
-    img: '/images/plumeria/services-04.webp', alt: 'ご自宅のリビングで看護師が健康状態を確認している様子' },
-  { name: 'レンタル介護用品', short: 'レンタル', kind: '福祉用具貸与', status: '', open: null, tone: 'beige', icon: 'chair', id: 'service-5',
-    img: '/images/plumeria/services-05.webp', alt: '歩行器の使い方をスタッフが説明している様子' },
-];
-
-// ── 差し替え枠：対応時間 ─────────────────────────────────
-const hours = [
-  { label: '見学・ご相談の受付', weekday: '9:00〜18:00', saturday: '9:00〜12:00', sunday: '－' },
-  { label: 'お電話でのお問い合わせ', weekday: '9:00〜18:00', saturday: '9:00〜17:00', sunday: '－' },
-  { label: '訪問看護', weekday: '9:00〜17:00', saturday: '要相談', sunday: '要相談' },
-];
-
-// ── 差し替え枠：強み（3項目）─────────────────────────────
-const reasons = [
-  { icon: 'staff', title: '寄り添う対応', body: '日中は職員が常駐しています。困りごとをその場でうかがい、ご家族にもお伝えします。（体制の詳細は差し替え枠）',
-    img: '/images/plumeria/feature-01.webp', alt: '入居者とスタッフが同じ目線の高さで話している様子' },
-  { icon: 'care', title: '専門的な支援', body: '訪問看護を自社で運営しています。看護と介護を切り離さずにお預かりできます。（連携先は差し替え枠）',
-    img: '/images/plumeria/feature-02.webp', alt: '看護師と介護スタッフが情報を共有している様子' },
-  { icon: 'sprout', title: '自宅からの相談', body: 'ご来所前に、お電話とフォームでご相談いただけます。用品のレンタルまで同じ窓口で承ります。',
-    img: '/images/plumeria/feature-03.webp', alt: 'ご家族が自宅のダイニングで相談している様子' },
-];
-
-// ── 差し替え枠：一日の流れ ───────────────────────────────
-const day = [
-  { time: '7:00', label: '起床・朝食' },
-  { time: '10:00', label: '健康チェック' },
-  { time: '12:00', label: '昼食' },
-  { time: '15:00', label: '自由時間' },
-  { time: '18:00', label: '夕食' },
-  { time: '21:00', label: '消灯' },
-];
-
-// ── 差し替え枠：お知らせ（カテゴリ付き）──────────────────
-const news = [
-  { date: '2026.08.00', cat: 'お知らせ', catTone: 'green', text: '（お知らせの見出しが入ります）' },
-  { date: '2026.07.00', cat: '空室情報', catTone: 'accent', text: '（お知らせの見出しが入ります）' },
-  { date: '2026.07.00', cat: '採用', catTone: 'beige', text: '（お知らせの見出しが入ります）' },
-];
-
-const vacancy = [
-  { name: 'プルメリアⅠ', status: '空室あり', open: true },
-  { name: 'プルメリアⅡ', status: '満室', open: false },
-  { name: 'プルメリアⅢ', status: '受入可', open: true },
-];
-
-const access = [
-  { key: 'お車でお越しの方', body: '○○インターより約0分。駐車場0台（差し替え枠）' },
-  { key: '電車・バスでお越しの方', body: '○○線 ○○駅より徒歩0分／○○バス停下車すぐ（差し替え枠）' },
-];
-
-const footerLinks = [
-  { label: 'アクセス・地図', href: '#access' },
-  { label: '料金・重要事項説明書', href: '#price' },
-  { label: '法人概要', href: '#company' },
-  { label: 'プライバシーポリシー', href: '#privacy' },
-];
----
-
-<BaseLayout title={title} description={description} noindex={true} showSiteChrome={false}>
-  {/* data-reveal="off": BaseLayout の共通スクロール表示スクリプトが .pl-card を
-      自動で対象にしてしまうため除外する。このラフはJavaScript非依存を条件にしている。 */}
-  <div class="pl" data-reveal="off">
-    {/* モチーフはすべてここで定義したオリジナルの線画。外部画像は使わない。 */}
-    <svg class="pl-defs" aria-hidden="true" focusable="false">
-      <defs>
-        {/* ヒーローの輪郭。上辺はゆるやかな弧、下辺は右へ長く伸びる葉先のカーブ。
-            左右対称にしないことで、既製のカーブ切り抜きに見えないようにしている。 */}
-        <clipPath id="pl-hero-clip" clipPathUnits="objectBoundingBox">
-          <path d="M0,0.075 C0.22,0.004 0.58,0.004 1,0.042 V0.80 C0.74,0.99 0.44,0.85 0.20,0.94 C0.11,0.975 0.05,0.995 0,1 Z" />
-        </clipPath>
-
-        <symbol id="pl-i-home" viewBox="0 0 24 24">
-          <path d="M4 10.8 12 4.5l8 6.3V19a1.6 1.6 0 0 1-1.6 1.6h-3.2v-5.4H8.8v5.4H5.6A1.6 1.6 0 0 1 4 19z" />
-          <path opacity="0.5" d="M7.4 9.3h9.2" />
-        </symbol>
-        <symbol id="pl-i-bed" viewBox="0 0 24 24">
-          <path d="M3 18.5v-9M3 13.2h18v5.3M21 18.5v-4.1a3 3 0 0 0-3-3h-5.6v1.8" />
-          <circle cx="7.4" cy="11.4" r="1.9" />
-          <path opacity="0.5" d="M11 15.6h7.4" />
-        </symbol>
-        <symbol id="pl-i-care" viewBox="0 0 24 24">
-          <path d="M12 19.6s-6.3-4.1-6.3-8.4A3.5 3.5 0 0 1 12 8.8a3.5 3.5 0 0 1 6.3 2.4c0 4.3-6.3 8.4-6.3 8.4Z" />
-          <path d="M9.4 12.8h1.5l.9-1.7.9 3.1.9-1.4h1.6" />
-        </symbol>
-        <symbol id="pl-i-chair" viewBox="0 0 24 24">
-          <circle cx="10" cy="16.8" r="3.9" />
-          <path d="M10 4.4v8.9h5.9l2.9 4.9M8.1 7.2h3.9" />
-          <path opacity="0.5" d="M10 13v7.6M6.3 16.8h7.4" />
-        </symbol>
-        <symbol id="pl-i-staff" viewBox="0 0 24 24">
-          <circle cx="12" cy="8" r="3.1" />
-          <path d="M5.2 19.8a6.8 6.8 0 0 1 13.6 0" />
-          <path opacity="0.5" d="M12 15.4v2.6" />
-        </symbol>
-        {/* 葉。主脈1本に、薄い側脈を2本足して密度を出す */}
-        <symbol id="pl-i-leaf" viewBox="0 0 24 24">
-          <path d="M5 19.2C5 11.4 9.8 5.4 19 5.4c0 9.2-6.1 13.8-14 13.8Z" />
-          <path d="M5 19.2c2.9-4.9 6-7.9 10.9-9.8" />
-          <path opacity="0.55" d="M9.4 14.4c1.7-1 3.1-1 4.6-.3M12 11c1.4-.7 2.6-.7 3.9-.2" />
-        </symbol>
-        {/* 若葉・芽吹き。左右の葉に薄い側脈を足す */}
-        <symbol id="pl-i-sprout" viewBox="0 0 24 24">
-          <path d="M12 20.5v-7.2" />
-          <path d="M12 13.3C12 9.6 9.4 7 5.7 7c0 3.7 2.6 6.3 6.3 6.3Z" />
-          <path d="M12 12.4c0-3.2 2.2-5.4 5.4-5.4 0 3.2-2.2 5.4-5.4 5.4Z" />
-          <path opacity="0.55" d="M8.6 10.4c1 .4 1.8 1 2.3 1.7M14.4 9.7c-.9.4-1.6 1-2.1 1.7" />
-        </symbol>
-        {/* 木 */}
-        <symbol id="pl-i-tree" viewBox="0 0 24 24">
-          <path d="M12 20.6v-6.4" />
-          <path d="M12 14.2 8.2 10.7M12 12.4l3.5-3.2" />
-          <path d="M12 3.6c3.6 0 6.2 2.6 6.2 5.7 0 3-2.6 5.2-6.2 5.2S5.8 12.3 5.8 9.3c0-3.1 2.6-5.7 6.2-5.7Z" />
-        </symbol>
-        {/* 小鳥 */}
-        <symbol id="pl-i-bird" viewBox="0 0 24 24">
-          <path d="M4.2 14.6c0-3.1 2.5-5.6 5.6-5.6h3.4l3.1-2.6v2.6h2.1c.9 0 1.6.7 1.6 1.6 0 2.1-1.7 3.8-3.8 3.8h-1.1l-2.6 5.1H9.8l1-3.6a5.6 5.6 0 0 1-6.6-1.3Z" />
-          <path d="M16.2 10.4h.02" />
-        </symbol>
-        {/* 木漏れ日（丸の集まり） */}
-        <symbol id="pl-i-sun" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="4.2" />
-          <path d="M12 3.4v2.1M12 18.5v2.1M3.4 12h2.1M18.5 12h2.1M6 6l1.5 1.5M16.5 16.5 18 18M18 6l-1.5 1.5M7.5 16.5 6 18" />
-        </symbol>
-      </defs>
-    </svg>
-
-    <p class="pl-notice">
-      これはご提案用のラフです。写真・電話番号・空室状況・お知らせはすべて仮置きの枠で、
-      情報が未確定のセクションは図形とプレースホルダで構成しています。
-    </p>
-
-    <!-- ヘッダー -->
-    <header class="pl-head">
-      <div class="pl-head-inner">
-        <a class="pl-brand" href="#top">
-          <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>
-          <span class="pl-brand-text">
-            <span class="pl-brand-name">{corp.name}</span>
-            <span class="pl-brand-en">{corp.nameEn}</span>
-          </span>
-        </a>
-
-        {/* PC：上部はFVのタイルが入口なのでナビを隠し、タイルが隠れたら出す。
-            JSが動かない場合は常時表示のまま（行き止まりを作らない）。
-            スマホ：ナビは使わず、常にハンバーガーを出す。 */}
-        <nav class="pl-nav" aria-label="サービス">
-          {services.map((s) => (
-            <a href={`#${s.id}`}>
-              <span class="pl-nav-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
-              <span class="pl-nav-label">{s.short}</span>
-            </a>
-          ))}
-        </nav>
-
-        <div class="pl-head-cta">
-          {/* 緊急性のある連絡手段は濃いフォレストグリーンで別枠にする */}
-          <a class="pl-btn pl-btn-ink pl-btn-sm" href={corp.telHref}>
-            <span class="pl-btn-label">お電話</span>
-            <span class="pl-num-face pl-head-tel">{corp.tel}</span>
-          </a>
-          <a class="pl-btn pl-btn-deep pl-btn-sm" href={corp.contactHref}>見学のご予約</a>
-        </div>
-
-        <details class="pl-menu">
-          <summary aria-label="メニューを開く"><span class="pl-menu-bars" aria-hidden="true"></span></summary>
-          <nav class="pl-menu-list" aria-label="メニュー（モバイル）">
-            {services.map((s) => (
-              <a href={`#${s.id}`}>
-                <span class="pl-nav-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
-                {s.name}
-              </a>
-            ))}
-            <a href="#about"><span class="pl-nav-icon" aria-hidden="true"><svg><use href="#pl-i-tree" /></svg></span>プルメリアについて</a>
-            <a href="#news"><span class="pl-nav-icon" aria-hidden="true"><svg><use href="#pl-i-bird" /></svg></span>お知らせ</a>
-            <a href="#access"><span class="pl-nav-icon" aria-hidden="true"><svg><use href="#pl-i-home" /></svg></span>アクセス・対応時間</a>
-          </nav>
-        </details>
-      </div>
-    </header>
-
-    <main id="top">
-      <!-- 01 ファーストビュー -->
-      <section class="pl-hero">
-        <div class="pl-hero-media">
-          {/* いずれも被写体が左寄りで右に余白のある構図。見出しは右側に置く。
-              JSが動かない場合は1枚目だけが見える静止ヒーローになる（ドットも出ない）。 */}
-          <div class="pl-slider" data-pl-slider>
-            {heroSlides.map((s, i) => (
-              <img
-                class={i === 0 ? 'pl-hero-photo is-on' : 'pl-hero-photo'}
-                src={i === 0 ? s.img : undefined}
-                data-src={i === 0 ? undefined : s.img}
-                alt={s.alt}
-                width="1600"
-                height="900"
-                fetchpriority={i === 0 ? 'high' : undefined}
-                decoding="async"
-                aria-hidden={i === 0 ? undefined : 'true'}
-              />
-            ))}
-
-            <div class="pl-slider-ui">
-              <ul class="pl-dots">
-                {heroSlides.map((s, i) => (
-                  <li>
-                    <button type="button" class={i === 0 ? 'pl-dot is-on' : 'pl-dot'}
-                            data-pl-dot={String(i)} aria-current={i === 0 ? 'true' : 'false'}>
-                      <span class="pl-sr">{s.label}を表示</span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              {/* 自動で切り替わる内容は止められる必要がある（WCAG 2.2.2） */}
-              <button type="button" class="pl-slider-toggle" data-pl-toggle data-playing="true">
-                <span class="pl-slider-toggle-icon" aria-hidden="true"></span>
-                <span class="pl-sr" data-pl-toggle-label>スライドショーを停止</span>
-              </button>
-            </div>
-          </div>
-
-          {/* 輪郭をなぞる線。上辺は写真の内側に白、下辺は写真の外側にグリーン。
-              上下で呼応させて「手で引いた枠」に見せる。
-              vector-effect で、器がどれだけ横に伸びても線幅は一定に保つ。 */}
-          <svg class="pl-hero-frame" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" focusable="false">
-            <path class="pl-hero-frame-top" vector-effect="non-scaling-stroke"
-                  transform="translate(0,0.05)"
-                  d="M0,0.075 C0.22,0.004 0.58,0.004 1,0.042" />
-            <path class="pl-hero-frame-bottom" vector-effect="non-scaling-stroke"
-                  transform="translate(0,0.028)"
-                  d="M1,0.80 C0.74,0.99 0.44,0.85 0.20,0.94 C0.11,0.975 0.05,0.995 0,1" />
-          </svg>
-
-          {/* 木漏れ日の中を漂う光の粒。komorebiの光の演出に空気感を足す。
-              常時ゆっくり動くが、reduced-motionでは静止した薄い点として残る。 */}
-          <div class="pl-motes" aria-hidden="true">
-            <span class="pl-mote pl-mote-1"></span>
-            <span class="pl-mote pl-mote-2"></span>
-            <span class="pl-mote pl-mote-3"></span>
-            <span class="pl-mote pl-mote-4"></span>
-            <span class="pl-mote pl-mote-5"></span>
-            <span class="pl-mote pl-mote-6"></span>
-          </div>
-        </div>
-        <div class="pl-wrap pl-hero-inner">
-          <div class="pl-hero-copy">
-            <p class="pl-eyebrow">
-              <span class="pl-eyebrow-mark" aria-hidden="true"><svg><use href="#pl-i-leaf" /></svg></span>
-              地域で暮らしを見守る
-            </p>
-            <h1 class="pl-h1">温かい心と笑顔で、<br />安らぎの毎日を。</h1>
-            <p class="pl-hero-lead">住まいと看護と用品を、ひとつづきでお預かりします。</p>
-            <div class="pl-btn-row">
-              <a class="pl-btn pl-btn-main" href={corp.contactHref}>見学・入居のご相談</a>
-              <a class="pl-btn pl-btn-outline" href={corp.telHref}>
-                <span class="pl-btn-label">お電話でのご相談</span>
-                <span class="pl-num-face pl-btn-tel-no">{corp.tel}</span>
-              </a>
-            </div>
-          </div>
-
-          {/* キャッチコピーの隣に置く入口。ここが画面から隠れたら
-              PCはヘッダーメニューを出す（JSが is-condensed を付ける）。
-              スマホは幅が足りないので、最初から常にハンバーガー。 */}
-          <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービス">
-            <ul class="pl-tiles">
-              {services.map((s) => (
-                <li id={s.id}>
-                  <a class="pl-tile" href={`#${s.id}`}>
-                    <span class="pl-tile-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
-                    <span class="pl-tile-label">{s.name}</span>
-                  </a>
-                </li>
-              ))}
-              <li>
-                <a class="pl-tile" href="#recruit">
-                  <span class="pl-tile-icon" aria-hidden="true"><svg><use href="#pl-i-staff" /></svg></span>
-                  <span class="pl-tile-label">職員募集</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </section>
-
-      <!-- 02 お知らせ -->
-      <section class="pl-sec pl-sec-tight" id="news">
-        <div class="pl-wrap">
-          <h2 class="pl-h2"><span class="pl-h2-en">NEWS</span>お知らせ</h2>
-          <ul class="pl-news">
-            {news.map((n) => (
-              <li>
-                <span class="pl-num-face pl-news-date">{n.date}</span>
-                <span class={`pl-cat pl-cat-${n.catTone}`}>{n.cat}</span>
-                <span class="pl-news-text">{n.text}</span>
-              </li>
-            ))}
-          </ul>
-          <a class="pl-more" href="#news-index">お知らせ一覧</a>
-        </div>
-      </section>
-
-      <!-- 丘の切り替え -->
-      <div class="pl-hill pl-hill-to-mint" aria-hidden="true">
-        <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V44c220-34 430 20 700 12S1230 8 1440 30v60Z" /></svg>
-      </div>
-
-      <!-- 03 プルメリアについて -->
-      <section class="pl-about" id="about">
-        {/* 社名のプルメリアを実際の植物画で。抽象SVGの木より brand に近い */}
-        <img class="pl-deco-flower pl-deco-flower-bl" src="/images/plumeria/decoration-bl.webp" alt=""
-             width="520" height="515" loading="lazy" decoding="async" aria-hidden="true" />
-        <span class="pl-deco pl-deco-bird" aria-hidden="true"><svg><use href="#pl-i-bird" /></svg></span>
-        <span class="pl-deco pl-deco-sun" aria-hidden="true"><svg><use href="#pl-i-sun" /></svg></span>
-        <div class="pl-wrap pl-about-inner">
-          <div class="pl-about-text">
-            <p class="pl-eyebrow"><span class="pl-eyebrow-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>ABOUT</p>
-            <h2 class="pl-about-catch">住まい、看護、暮らしの道具。<br />別々にしないほうが、たぶん楽です。</h2>
-            <p class="pl-body pl-about-body">
-              住む場所を探し、看護の相談先を探し、用品の手配先を探す。
-              ご本人にもご家族にも、その往復はけっこうな負担になります。
-              プルメリアは5つのサービスを、ひとつの窓口でお預かりしています。
-            </p>
-            <p class="pl-note">※ 理念・沿革はご提供いただいた内容に差し替えます。</p>
-          </div>
-          <img class="pl-about-photo" src="/images/plumeria/about-01.webp" alt="窓辺の椅子に座る入居者とスタッフが穏やかに話している共用リビング"
-               width="1100" height="733" loading="lazy" decoding="async" />
-        </div>
-      </section>
-
-      <div class="pl-hill pl-hill-from-mint" aria-hidden="true">
-        <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 0v40c250 30 470-24 740-14S1220 82 1440 56V0Z" /></svg>
-      </div>
-
-      <!-- 04 3つの強み -->
-      <section class="pl-sec pl-sec-beige" id="reasons">
-        <div class="pl-wrap">
-          <h2 class="pl-h2"><span class="pl-h2-en">FEATURE</span>プルメリアの3つの安心</h2>
-          <ul class="pl-grid-3 pl-reasons">
-            {reasons.map((r) => (
-              <li class="pl-card pl-reason">
-                <img class="pl-reason-photo" src={r.img} alt={r.alt} width="900" height="600" loading="lazy" decoding="async" />
-                <span class="pl-reason-icon" aria-hidden="true"><svg><use href={`#pl-i-${r.icon}`} /></svg></span>
-                <h3 class="pl-h3">{r.title}</h3>
-                <p class="pl-body">{r.body}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      <!-- 05 一日の流れ -->
-      <section class="pl-sec" id="day">
-        <div class="pl-wrap">
-          <h2 class="pl-h2"><span class="pl-h2-en">A DAY</span>一日の流れ</h2>
-          <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は施設ごとに差し替えます。</p>
-          <img class="pl-day-photo" src="/images/plumeria/aday-01.webp" alt="午後の共用スペースで、入居者がそれぞれ読書やお茶をして過ごしている様子"
-               width="1600" height="900" loading="lazy" decoding="async" />
-          {/* 時間のラベルが写真の下辺にまたがる。
-              ドットと見出しは写真の外（地色の上）に出して読みやすさを保つ。 */}
-          <ol class="pl-day">
-            {day.map((d) => (
-              <li class="pl-day-item">
-                <span class="pl-num-face pl-day-time">{d.time}</span>
-                <span class="pl-day-dot" aria-hidden="true"></span>
-                <span class="pl-day-label">{d.label}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      <div class="pl-hill pl-hill-to-mint" aria-hidden="true">
-        <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V52c210-40 450 14 720 6s500-46 720-22v54Z" /></svg>
-      </div>
-
-      <!-- 06 空室・受入状況／採用 -->
-      <section class="pl-vac-sec">
-        <div class="pl-wrap">
-          <div class="pl-grid-2">
-            <section class="pl-card" id="vacancy">
-              <h2 class="pl-h3">空室・受入状況<span class="pl-h3-en">VACANCY</span></h2>
-              <ul class="pl-vacancy">
-                {vacancy.map((v) => (
-                  <li>
-                    <span class="pl-vacancy-name">{v.name}</span>
-                    <span class={v.open ? 'pl-badge pl-badge-open' : 'pl-badge pl-badge-full'}>{v.status}</span>
-                  </li>
-                ))}
-              </ul>
-              <p class="pl-note">更新日：2026.08.00（更新枠）</p>
-            </section>
-
-            <section class="pl-card pl-recruit" id="recruit">
-              <img class="pl-recruit-photo" src="/images/plumeria/recruit-01.webp" alt="施設内で仕事の合間に会話しているスタッフたち"
-                   width="900" height="600" loading="lazy" decoding="async" />
-              <h2 class="pl-h3">いっしょに働く方を探しています<span class="pl-h3-en">RECRUIT</span></h2>
-              <p class="pl-body">介護スタッフ・看護師を募集しています。見学だけでもお気軽にお越しください。</p>
-              <a class="pl-more" href="#recruit-index">募集要項</a>
-            </section>
-          </div>
-        </div>
-      </section>
-
-      <div class="pl-hill pl-hill-from-mint" aria-hidden="true">
-        <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 0v34c230 36 460-18 730-8S1210 76 1440 48V0Z" /></svg>
-      </div>
-
-      <!-- 07 アクセス・対応時間・連絡導線をここに集約 -->
-      <section class="pl-sec" id="access">
-        <div class="pl-wrap">
-          <h2 class="pl-h2"><span class="pl-h2-en">ACCESS</span>アクセス・対応時間</h2>
-          <div class="pl-access">
-            <div class="pl-ph pl-ph-map" role="img" aria-label="地図の差し替え枠"><span>［地図］</span></div>
-            <div class="pl-access-text">
-              <p class="pl-access-addr">{corp.address}</p>
-              <dl class="pl-access-list">
-                {access.map((a) => (
-                  <div>
-                    <dt>{a.key}</dt>
-                    <dd>{a.body}</dd>
-                  </div>
-                ))}
-              </dl>
-
-              <div class="pl-table-wrap">
-                <table class="pl-table">
-                  <thead>
-                    <tr><th scope="col">対応時間</th><th scope="col">平日</th><th scope="col">土曜</th><th scope="col">日・祝</th></tr>
-                  </thead>
-                  <tbody>
-                    {hours.map((h) => (
-                      <tr>
-                        <th scope="row">{h.label}</th>
-                        <td>{h.weekday}</td>
-                        <td>{h.saturday}</td>
-                        <td>{h.sunday}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-              <p class="pl-note">※ 時間は仮置きです。確定後にこの枠を差し替えてください。</p>
-
-              <div class="pl-btn-row">
-                <a class="pl-btn pl-btn-main" href={corp.contactHref}>見学のご予約</a>
-                <a class="pl-btn pl-btn-outline" href={corp.telHref}>
-                  <span class="pl-btn-label">お電話</span>
-                  <span class="pl-num-face pl-btn-tel-no">{corp.tel}</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- フッター：明るい生成りを基調にする -->
-    <footer class="pl-foot">
-      <div class="pl-hill pl-hill-foot" aria-hidden="true">
-        <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0 70V30c240-30 470 16 730 8s470-40 710-18v50Z" /></svg>
-      </div>
-      <img class="pl-deco-flower pl-deco-flower-tr" src="/images/plumeria/decoration-tr.webp" alt=""
-           width="520" height="541" loading="lazy" decoding="async" aria-hidden="true" />
-      <div class="pl-wrap pl-foot-inner">
-        <div class="pl-foot-brand">
-          <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>
-          <p class="pl-brand-name pl-foot-name">{corp.name}</p>
-          <p class="pl-brand-en">{corp.nameEn}</p>
-          <p class="pl-note">{corp.address}</p>
-        </div>
-        <nav class="pl-foot-links" aria-label="サイト情報">
-          {footerLinks.map((l) => <a href={l.href}>{l.label}</a>)}
-        </nav>
-      </div>
-    </footer>
-
-    <!-- モバイル固定CTA -->
-    <div class="pl-sticky">
-      <a class="pl-btn pl-btn-main pl-btn-sticky pl-sticky-main" href={corp.contactHref}>見学のご予約</a>
-      <a class="pl-btn pl-btn-ink pl-btn-sticky" href={corp.telHref}>お電話</a>
-    </div>
-  </div>
-</BaseLayout>
-
-<script>
-  /*
-    ヒーロースライダー。参照サイトの挙動（4枚・フェード・5秒・切替0.7秒・ドット）を
-    自前の素のJSで再現する。jQuery / slick は使わない。
-
-    JSが動かない場合は1枚目だけが見える静止ヒーローになる。
-    HTML側で1枚目に is-on を付け、操作UIは `.is-ready` が付くまでCSSで隠してあるため、
-    「ドットは出ているのに押しても何も起きない」状態にはならない。
-  */
-  const initHeroSlider = () => {
-    const root = document.querySelector('[data-pl-slider]');
-    if (!root || root.dataset.plReady === '1') return;
-
-    const slides = Array.from(root.querySelectorAll('.pl-hero-photo'));
-    const dots = Array.from(root.querySelectorAll('[data-pl-dot]'));
-    const toggle = root.querySelector('[data-pl-toggle]');
-    const toggleLabel = root.querySelector('[data-pl-toggle-label]');
-    if (slides.length < 2 || !toggle) return;
-    root.dataset.plReady = '1';
-
-    const INTERVAL = 5000;
-    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-    let index = 0;
-    let wantPlay = false;
-    let timer = null;
-
-    const render = () => {
-      slides.forEach((el, i) => {
-        el.classList.toggle('is-on', i === index);
-        if (i === index) el.removeAttribute('aria-hidden');
-        else el.setAttribute('aria-hidden', 'true');
-      });
-      dots.forEach((el, i) => {
-        el.classList.toggle('is-on', i === index);
-        el.setAttribute('aria-current', i === index ? 'true' : 'false');
-      });
-    };
-
-    // 裏タブでタイマーを回し続けない
-    const arm = () => {
-      if (timer) { clearInterval(timer); timer = null; }
-      if (!wantPlay || document.hidden) return;
-      timer = window.setInterval(() => {
-        index = (index + 1) % slides.length;
-        render();
-      }, INTERVAL);
-    };
-
-    const setPlay = (on) => {
-      wantPlay = on;
-      toggle.setAttribute('data-playing', on ? 'true' : 'false');
-      if (toggleLabel) {
-        toggleLabel.textContent = on ? 'スライドショーを停止' : 'スライドショーを再生';
-      }
-      arm();
-    };
-
-    dots.forEach((el, i) => {
-      el.addEventListener('click', () => { index = i; render(); arm(); });
-    });
-    toggle.addEventListener('click', () => setPlay(!wantPlay));
-    document.addEventListener('visibilitychange', arm);
-    reduce.addEventListener('change', (e) => setPlay(!e.matches));
-
-    // 2枚目以降は初回描画が終わってから取りに行く。重ねて置いてあるので
-    // loading="lazy" では遅延しない（どれもビューポート内と判定されるため）
-    const loadRest = () => slides.forEach((el) => {
-      const src = el.dataset.src;
-      if (src) { el.src = src; delete el.dataset.src; }
-    });
-    if (document.readyState === 'complete') loadRest();
-    else window.addEventListener('load', loadRest, { once: true });
-
-    root.classList.add('is-ready');
-    render();
-    setPlay(!reduce.matches);   // 動きを減らす設定なら1枚目で止める
-  };
-
-  /*
-    タイルメニューが画面から出たら、ヘッダー右上にハンバーガーを出す。
-    上部ではタイルが入口を務めるのでヘッダーにメニューを置かず、
-    タイルが流れ去ったらヘッダーが入口を引き受ける、という分担。
-
-    JSが動かない場合はハンバーガーが出ない。その場合でもタイルメニューと
-    フッターのリンクから各所へ行けるため、行き止まりにはならない。
-  */
-  const initHeaderCondense = () => {
-    const head = document.querySelector('.pl-head');
-    const tiles = document.querySelector('[data-pl-tiles]');
-    if (!head || !tiles || head.dataset.plCondense === '1') return;
-    head.dataset.plCondense = '1';
-
-    /*
-      判定はスクロールのたびに矩形を測るだけの同期処理にする。
-
-      IntersectionObserver と requestAnimationFrame は、どちらもタブが非表示のあいだ
-      止まる。前者で組んだときに切り替わらない事象が出たため、
-      どちらにも依存しない形にした。測るのは getBoundingClientRect 1回だけなので、
-      間引きを入れなくても負担にならない。
-    */
-    // ここまで来たらJSは生きている。CSS側はこのクラスを見て出し分ける。
-    // 付かなければPCのナビは出たままなので、JSが落ちてもメニューが消えない。
-    head.classList.add('is-js');
-
-    const HEADER = 78;              // 追従ヘッダーの高さ
-
-    const update = () => {
-      // タイルの下端が追従ヘッダーの下に隠れたら畳む
-      head.classList.toggle('is-condensed', tiles.getBoundingClientRect().bottom <= HEADER);
-    };
-
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-    update();                       // 読み込み直後の位置でも一度判定する
-  };
-
-  const initAll = () => { initHeroSlider(); initHeaderCondense(); };
-
-  initAll();
-  // BaseLayout が ViewTransitions を使うため、遷移後にも初期化する（二重初期化は上で弾く）
-  document.addEventListener('astro:page-load', initAll);
-</script>
-
-<style>
   @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Roboto+Condensed:wght@400;500;600&display=swap');
 
   .pl {
@@ -1611,4 +932,93 @@ const footerLinks = [
     .pl-btn:hover, .pl-tile:hover { transform: none; }
     .pl-hero-media::after { opacity: 0.6; }
   }
-</style>
+
+/* 修正版ラフ追加分：電話番号未確定時のプレースホルダ、確認待ち表示、共通レイアウト部品 */
+.pl-btn-pending {
+  opacity: 0.62;
+  cursor: default;
+  pointer-events: none;
+}
+.pl-pending-note {
+  display: inline-block;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: rgba(0,0,0,0.06);
+  color: var(--ink, #2b2b26);
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+.pl-photo-note {
+  margin-top: 6px;
+  font-size: 0.72rem;
+  color: var(--muted, #6b6b62);
+}
+.pl-breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+  font-size: 0.8rem;
+  color: var(--muted, #6b6b62);
+  margin: 0 0 18px;
+}
+.pl-breadcrumb a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.pl-breadcrumb span[aria-hidden] { opacity: 0.6; }
+
+.pl-service-intro-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.pl-service-intro-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+}
+.pl-service-intro-card .pl-h3 { margin: 12px 0 6px; }
+.pl-service-intro-card img { border-radius: 14px; aspect-ratio: 4/3; object-fit: cover; }
+.pl-service-intro-more { margin-top: auto; padding-top: 10px; font-weight: 700; color: var(--forest, #1f5c46); }
+
+.pl-compare-table-wrap { overflow-x: auto; }
+.pl-compare-table { width: 100%; border-collapse: collapse; min-width: 640px; }
+.pl-compare-table th, .pl-compare-table td { padding: 12px 14px; border-bottom: 1px solid rgba(0,0,0,0.08); text-align: left; font-size: 0.88rem; vertical-align: top; }
+.pl-compare-table thead th { color: var(--forest, #1f5c46); font-weight: 700; }
+
+.pl-form-field { display: grid; gap: 6px; margin-bottom: 18px; }
+.pl-form-field label { font-weight: 700; font-size: 0.88rem; }
+.pl-form-field .pl-required { color: #b3453a; font-size: 0.72rem; margin-left: 6px; }
+.pl-form-field input, .pl-form-field select, .pl-form-field textarea {
+  padding: 11px 13px;
+  border: 1px solid rgba(0,0,0,0.18);
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+  color: inherit;
+}
+.pl-form-field input:focus-visible, .pl-form-field select:focus-visible, .pl-form-field textarea:focus-visible {
+  outline: 3px solid #1f5c46;
+  outline-offset: 1px;
+}
+.pl-form-error-text { color: #b3453a; font-size: 0.8rem; margin-top: 4px; }
+.pl-form-note { font-size: 0.82rem; color: var(--muted, #6b6b62); margin-top: 6px; }
+.pl-form-disabled-banner {
+  padding: 14px 16px;
+  border: 1px solid rgba(179,69,58,0.35);
+  background: rgba(179,69,58,0.06);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  margin-bottom: 20px;
+}
+.pl-form-success[hidden], .pl-form-error[hidden] { display: none; }
+.pl-form-success { padding: 14px 16px; border-radius: 10px; background: rgba(31,92,70,0.08); color: #1f5c46; font-weight: 700; }
+.pl-form-error { padding: 14px 16px; border-radius: 10px; background: rgba(179,69,58,0.08); color: #b3453a; font-weight: 700; }
+
+.pl-faq-list { border-top: 1px solid rgba(0,0,0,0.1); }
+.pl-faq-list details { border-bottom: 1px solid rgba(0,0,0,0.1); padding: 16px 0; }
+.pl-faq-list summary { cursor: pointer; font-weight: 700; }
+.pl-faq-list p { margin: 12px 0 0; color: var(--muted, #6b6b62); }
+
+@media (max-width: 720px) {
+  .pl-service-intro-grid { grid-template-columns: 1fr; }
+}

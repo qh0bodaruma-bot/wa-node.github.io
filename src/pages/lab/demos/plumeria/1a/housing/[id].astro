@@ -1,0 +1,80 @@
+---
+import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
+import { routes, housingUnits, genericFaqs } from '../../../../../../data/plumeria';
+
+export function getStaticPaths() {
+  return housingUnits.map((u) => ({ params: { id: u.id }, props: { unit: u } }));
+}
+
+const { unit } = Astro.props;
+const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
+---
+<PlumeriaLayout
+  title={`${unit.name}｜プルメリア（修正版ラフ）`}
+  description={`${unit.name}（${unit.kind}）のご案内です。`}
+  currentPath={routes.housingUnit(unit.id)}
+>
+  <div class="pl-wrap" style="padding-top:28px">
+    <p class="pl-breadcrumb">
+      <a href={routes.top}>トップ</a>
+      <span aria-hidden="true">/</span>
+      <a href={routes.housing}>サービス付き高齢者向け住宅</a>
+      <span aria-hidden="true">/</span>
+      <span>{unit.name}</span>
+    </p>
+  </div>
+
+  <section class="pl-sec pl-sec-tight">
+    <div class="pl-wrap">
+      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">{unit.name}</h1>
+      <p class="pl-sec-lead">{unit.kind}</p>
+      <img src={unit.img} alt={unit.alt} width="1200" height="675" loading="eager" decoding="async"
+           style="width:100%;border-radius:16px;aspect-ratio:16/9;object-fit:cover;margin:18px 0" />
+      <p class="pl-photo-note">※ 掲載写真はイメージ写真です。実際の施設・スタッフではありません。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">住宅の概要</h2>
+      <dl class="pl-access-list">
+        <div><dt>所在地</dt><dd>確認中</dd></div>
+        <div><dt>居室</dt><dd>確認中</dd></div>
+        <div><dt>費用</dt><dd>確認中</dd></div>
+        <div><dt>空室状況</dt><dd><span class="pl-pending-note">{unit.status ?? '確認中'}</span>（{new Date().getFullYear()}年時点の仮表示。最新状況はお問い合わせください）</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">見学の流れ</h2>
+      <ol class="pl-body">
+        <li style="margin-bottom:10px"><strong>1. お問い合わせ</strong><br />電話またはフォームでご連絡ください。</li>
+        <li style="margin-bottom:10px"><strong>2. 見学日程の調整</strong><br />ご都合の良い日時を調整します。</li>
+        <li style="margin-bottom:10px"><strong>3. ご見学・ご相談</strong><br />居室・共用部をご案内し、ご不明点にお答えします。</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">よくあるご質問</h2>
+      <div class="pl-faq-list">
+        {genericFaqs.map((f) => (
+          <details><summary>{f.q}</summary><p>{f.a}</p></details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige" style="text-align:center">
+    <div class="pl-wrap">
+      <h2 class="pl-h2" style="justify-content:center">{unit.name}を見学・相談する</h2>
+      <div class="pl-btn-row" style="justify-content:center">
+        <a class="pl-btn pl-btn-main" href={contactHref}>{unit.name}について相談する</a>
+        <a class="pl-btn pl-btn-outline" href={routes.housing}>他の住宅と比較する</a>
+      </div>
+    </div>
+  </section>
+</PlumeriaLayout>

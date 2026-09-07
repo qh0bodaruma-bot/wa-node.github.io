@@ -1,0 +1,36 @@
+---
+import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
+import { routes } from '../../../../../../data/plumeria';
+---
+<PlumeriaServicePage
+  title="居宅介護支援｜プルメリア（修正版ラフ）"
+  description="プルメリアの居宅介護支援では、ケアマネジャーが介護サービス全体の計画・調整をお手伝いします。"
+  currentPath={routes.careManagement}
+  breadcrumbLabel="居宅介護支援"
+  heroTitle="居宅介護支援"
+  heroLead="ケアマネジャーが、介護サービス全体の計画・調整をお手伝いします。"
+  heroImg="/images/plumeria/feature-03.webp"
+  heroAlt="ご家族が自宅のダイニングで相談している様子（イメージ）"
+  fitFor={[
+    '介護保険サービスの利用方法が分からない方',
+    '複数の介護サービスを組み合わせたい方',
+    'ケアプランの見直しを相談したい方',
+  ]}
+  content={[
+    { label: 'ケアプラン作成', body: 'ご本人・ご家族の希望をうかがい、ケアプランを作成します。' },
+    { label: 'サービス調整', body: '訪問介護・訪問看護・福祉用具等の事業所と調整します。' },
+    { label: '継続的な相談', body: '状況の変化に応じて、プランを見直します。' },
+  ]}
+  targetInfo={[
+    { label: '対象となる方', body: '要介護認定を受けている方（詳細は確認中）' },
+    { label: '対応地域', body: '確認中' },
+    { label: '利用条件', body: '確認中' },
+  ]}
+  costInfo="居宅介護支援は介護保険により自己負担なくご利用いただける場合があります。（詳細は確認中）"
+  flowSteps={[
+    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
+    { title: 'ご相談', body: '現在の状況、ご希望をうかがいます。' },
+    { title: 'ケアプラン作成', body: 'ご本人・ご家族と相談のうえ、プランを作成します。' },
+  ]}
+  contactCategory="care-management"
+/>

@@ -1,13 +1,31 @@
 ---
-const GA_MEASUREMENT_ID = 'G-B4FD0GJGW5';
+interface Props {
+  measurementId?: string;
+  enabled?: boolean;
+}
+
+const { measurementId: GA_MEASUREMENT_ID = 'G-B4FD0GJGW5', enabled = true } = Astro.props;
 ---
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
-<script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+{enabled ? (
+  <>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}></script>
+    <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
 
-  gtag('config', GA_MEASUREMENT_ID);
-</script>
+      gtag('config', GA_MEASUREMENT_ID);
+    </script>
+  </>
+) : (
+  <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+    // 無効化中：本番タグは読み込まず、window.gtag をローカル確認用のログ出力に置き換える。
+    // Wa-Node既定IDへのフォールバックはしない（明示的な無効状態として扱う）。
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { console.info('[GA disabled] would send to', GA_MEASUREMENT_ID, arguments); }
+    window.gtag = gtag;
+  </script>
+)}
