@@ -68,22 +68,30 @@
     padding: 9px 20px;
   }
 
-  /* ── ヘッダー ───────────────────────────── */
+  /* ── ヘッダー（ダイナミックアイランド風の浮遊ピル） ─────────── */
   .pl-head {
     position: sticky;
-    top: 0;
+    top: 12px;
     z-index: 30;
-    background: color-mix(in srgb, var(--bg) 96%, transparent);
-    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: center;
+    pointer-events: none;   /* ピルの外側は下のコンテンツのクリックを邪魔しない */
   }
   .pl-head-inner {
-    width: min(100% - 32px, var(--wrap));
-    margin-inline: auto;
+    pointer-events: auto;
+    width: auto;
+    max-width: min(100% - 32px, var(--wrap));
     display: flex;
     align-items: center;
-    gap: 18px;
-    min-height: 76px;
+    gap: 14px;
+    padding: 8px 18px 8px 10px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ink) 92%, transparent);
+    color: var(--bg);
+    box-shadow: var(--shadow-md);
+    transition: padding 0.3s ease, gap 0.3s ease;
   }
+  .pl-head-inner .pl-brand-en { color: color-mix(in srgb, var(--bg) 65%, transparent); }
   .pl-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; line-height: 1.25; }
   .pl-brand-mark {
     width: 34px; height: 34px;
@@ -127,9 +135,6 @@
   }
   .pl-nav-icon svg { width: 18px; height: 18px; }
 
-  .pl-head-cta { display: flex; gap: 8px; flex: none; }
-  .pl-head-tel { font-size: 17px; line-height: 1.15; }
-
   /* ── ボタン ─────────────────────────────── */
   .pl-btn {
     display: inline-flex; flex-direction: column;
@@ -147,7 +152,6 @@
   .pl-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
 
   .pl-btn-sm { min-height: 46px; min-width: 0; padding: 7px 16px; font-size: 13px; border-radius: 999px; }
-  .pl-btn-sticky { min-height: 54px; min-width: 0; padding: 8px 14px; font-size: 16px; font-weight: 700; }
 
   /* メインCTA: ブリーフ指定の #349f87 ＋白文字。
      19px/700 にして「大きい文字」の 3:1 基準を満たす（3.25:1）。 */
@@ -176,25 +180,25 @@
   .pl-btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
 
   /* ── モバイルメニュー ─────────────────────── */
-  .pl-menu { display: none; position: relative; margin-left: 12px; }
+  .pl-menu { display: none; position: relative; margin-left: 4px; }
   .pl-menu > summary {
     list-style: none;
-    width: 50px; height: 50px;
+    width: 44px; height: 44px;
     display: grid; place-items: center;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
+    border: 1px solid color-mix(in srgb, var(--bg) 35%, transparent);
+    border-radius: 50%;
     cursor: pointer;
   }
   .pl-menu > summary::-webkit-details-marker { display: none; }
   .pl-menu-bars, .pl-menu-bars::before, .pl-menu-bars::after {
-    display: block; width: 21px; height: 1.5px; background: var(--ink); content: '';
+    display: block; width: 18px; height: 1.5px; background: currentColor; content: '';
   }
   .pl-menu-bars { position: relative; }
   .pl-menu-bars::before { position: absolute; top: -6px; }
   .pl-menu-bars::after { position: absolute; top: 6px; }
 
   /* display を明示すると details 既定の非表示が効かなくなるため [open] で分岐する */
-  .pl-menu-list { display: none; }
+  .pl-menu-list { display: none; color: var(--ink); }
   .pl-menu[open] .pl-menu-list {
     position: absolute; right: 0; top: calc(100% + 8px);
     display: grid; min-width: 262px;
@@ -718,21 +722,24 @@
   }
   .pl-foot-links a:hover { color: var(--green-deep); background-image: linear-gradient(to top, currentColor 1px, transparent 1px); }
 
-  /* ── モバイル固定CTA ────────────────────── */
-  .pl-sticky {
-    display: none;
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
-    gap: 9px;
-    padding: 10px 13px calc(10px + env(safe-area-inset-bottom));
-    background: color-mix(in srgb, var(--bg) 95%, transparent);
-    border-top: 1px solid var(--line);
+  /* ── 右下フロートCTA（電話・見学予約） ────────── */
+  /* ヘッダーの表示状態に関わらず、常に画面右下に固定して目立たせる */
+  .pl-float-cta {
+    position: fixed;
+    right: clamp(14px, 3vw, 26px);
+    bottom: calc(clamp(14px, 3vw, 26px) + env(safe-area-inset-bottom));
+    z-index: 45;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
   }
-  .pl-sticky .pl-btn { flex: 1; }
-  .pl-sticky-main { flex: 1.7; }
-
-  /* ── レスポンシブ ───────────────────────── */
-  @media (max-width: 1180px) {
-    .pl-head-tel { font-size: 15px; }
+  .pl-float-btn { min-width: 0; box-shadow: var(--shadow-lift); }
+  .pl-float-btn-tel { min-height: 44px; padding: 6px 18px; font-size: 12px; }
+  .pl-float-btn-main { min-height: 58px; padding: 10px 26px; font-size: 17px; font-weight: 700; }
+  @media (max-width: 480px) {
+    .pl-float-btn-tel { min-height: 38px; padding: 5px 14px; font-size: 11px; }
+    .pl-float-btn-main { min-height: 50px; padding: 8px 20px; font-size: 15px; }
   }
 
   /* PCの出し分け。
@@ -742,11 +749,11 @@
   .pl-head.is-js .pl-nav { display: none; }
   .pl-head.is-js.is-condensed .pl-nav { display: flex; }
 
-  /* FVのタイルが見えている間は、ヘッダー内のブランドも隠して重複させない（PCのみ）。
-     電話・見学CTAは常時フロートのまま残す（追従）。スマホは常時ハンバーガーのため対象外。 */
+  /* FVのタイルが見えている間は、ヘッダーのアイランド自体を隠す（PCのみ）。
+     電話・見学CTAはヘッダーと切り離して右下に常時フロートしているので影響を受けない。
+     スマホは常時ハンバーガーのため対象外。 */
   @media (min-width: 1001px) {
-    .pl-head.is-js:not(.is-condensed) .pl-brand { display: none; }
-    .pl-head.is-js:not(.is-condensed) .pl-head-inner { justify-content: flex-end; }
+    .pl-head.is-js:not(.is-condensed) .pl-head-inner { display: none; }
   }
 
   /* FV左上に浮かせるブランドカード。ヘッダー内ブランドが隠れている間の代わりに表示する。
@@ -781,8 +788,6 @@
     /* スマホは常にハンバーガー。ナビは幅が足りないので使わない */
     .pl-nav, .pl-head.is-js.is-condensed .pl-nav { display: none; }
     .pl-menu { display: block; margin-left: auto; }
-    .pl-head-cta { display: none; }
-    .pl-sticky { display: flex; }
     .pl-grid-3 { grid-template-columns: 1fr 1fr; }
     .pl-day { grid-template-columns: repeat(3, 1fr); row-gap: 26px; }
     .pl-day::before { display: none; }
@@ -808,7 +813,7 @@
     .pl-news > li { grid-template-columns: auto 1fr; gap: 8px 12px; }
     .pl-news-text { grid-column: 1 / -1; }
     .pl-btn { min-width: 100%; }
-    .pl-btn-sm, .pl-btn-sticky { min-width: 0; }
+    .pl-btn-sm, .pl-float-btn { min-width: 0; }
     .pl-deco-leaf-l, .pl-deco-leaf-r, .pl-deco-sun { display: none; }
     .pl-foot-inner { gap: 24px; }
   }

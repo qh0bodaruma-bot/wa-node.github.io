@@ -102,11 +102,6 @@ const navEntries = [...services, recruitEntry];
           ))}
         </nav>
 
-        <div class="pl-head-cta">
-          <PlumeriaTelCta class="pl-btn pl-btn-ink pl-btn-sm" />
-          <a class="pl-btn pl-btn-deep pl-btn-sm" href={routes.contact}>見学のご予約</a>
-        </div>
-
         <details class="pl-menu">
           <summary aria-label="メニューを開く"><span class="pl-menu-bars" aria-hidden="true"></span></summary>
           <nav class="pl-menu-list" aria-label="メニュー（モバイル）">
@@ -159,9 +154,9 @@ const navEntries = [...services, recruitEntry];
       </div>
     </footer>
 
-    <div class="pl-sticky">
-      <a class="pl-btn pl-btn-main pl-btn-sticky pl-sticky-main" href={routes.contact}>見学のご予約</a>
-      <PlumeriaTelCta class="pl-btn pl-btn-ink pl-btn-sticky" />
+    <div class="pl-float-cta">
+      <PlumeriaTelCta class="pl-btn pl-btn-ink pl-float-btn pl-float-btn-tel" />
+      <a class="pl-btn pl-btn-main pl-float-btn pl-float-btn-main" href={routes.contact}>見学のご予約</a>
     </div>
   </div>
 </BaseLayout>
