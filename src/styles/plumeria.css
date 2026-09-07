@@ -723,23 +723,51 @@
   .pl-foot-links a:hover { color: var(--green-deep); background-image: linear-gradient(to top, currentColor 1px, transparent 1px); }
 
   /* ── 右下フロートCTA（電話・見学予約） ────────── */
-  /* ヘッダーの表示状態に関わらず、常に画面右下に固定して目立たせる */
+  /* ヘッダーの表示状態に関わらず、常に画面右下に固定して目立たせる。
+     動画サイトの「高評価｜低評価」ボタンのように、1つのカプセルを
+     区切り線で2分割する形にまとめている。 */
   .pl-float-cta {
     position: fixed;
     right: clamp(14px, 3vw, 26px);
     bottom: calc(clamp(14px, 3vw, 26px) + env(safe-area-inset-bottom));
     z-index: 45;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 10px;
+    align-items: stretch;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--ink) 94%, transparent);
+    box-shadow: var(--shadow-lift);
+    overflow: hidden;
   }
-  .pl-float-btn { min-width: 0; box-shadow: var(--shadow-lift); }
-  .pl-float-btn-tel { min-height: 44px; padding: 6px 18px; font-size: 12px; }
-  .pl-float-btn-main { min-height: 58px; padding: 10px 26px; font-size: 17px; font-weight: 700; }
+  .pl-float-seg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    min-height: 54px;
+    padding: 6px 20px;
+    color: var(--bg);
+    text-decoration: none;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.3s;
+  }
+  .pl-float-seg:hover { background: color-mix(in srgb, var(--bg) 14%, transparent); }
+  .pl-float-seg-tel { position: relative; font-size: 12px; }
+  .pl-float-seg-tel::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 22%;
+    bottom: 22%;
+    width: 1px;
+    background: color-mix(in srgb, var(--bg) 25%, transparent);
+  }
+  .pl-float-seg-main { font-size: 15px; font-weight: 700; }
   @media (max-width: 480px) {
-    .pl-float-btn-tel { min-height: 38px; padding: 5px 14px; font-size: 11px; }
-    .pl-float-btn-main { min-height: 50px; padding: 8px 20px; font-size: 15px; }
+    .pl-float-seg { min-height: 46px; padding: 5px 15px; }
+    .pl-float-seg-tel { font-size: 11px; }
+    .pl-float-seg-main { font-size: 13px; }
   }
 
   /* PCの出し分け。
@@ -813,7 +841,7 @@
     .pl-news > li { grid-template-columns: auto 1fr; gap: 8px 12px; }
     .pl-news-text { grid-column: 1 / -1; }
     .pl-btn { min-width: 100%; }
-    .pl-btn-sm, .pl-float-btn { min-width: 0; }
+    .pl-btn-sm { min-width: 0; }
     .pl-deco-leaf-l, .pl-deco-leaf-r, .pl-deco-sun { display: none; }
     .pl-foot-inner { gap: 24px; }
   }
