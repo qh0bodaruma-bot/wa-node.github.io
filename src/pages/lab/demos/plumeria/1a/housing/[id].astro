@@ -28,8 +28,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
     <div class="pl-wrap">
       <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">{unit.name}</h1>
       <p class="pl-sec-lead">サービス付き高齢者向け住宅（{unit.kind}）</p>
-      <img src={unit.img} alt={unit.alt} width="1200" height="675" loading="eager" decoding="async"
-           style="width:100%;border-radius:16px;aspect-ratio:16/9;object-fit:cover;margin:18px 0" />
+      <img class="pl-page-photo" src={unit.img} alt={unit.alt} width="1200" height="675" loading="eager" decoding="async" />
       <p class="pl-photo-note">※ 掲載写真はイメージ写真です。実際の施設・スタッフではありません。</p>
     </div>
   </section>
@@ -63,7 +62,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
     <div class="pl-wrap">
       <h2 class="pl-h2">よくあるご質問</h2>
       <div class="pl-faq-list">
-        {genericFaqs.filter((f) => !f.q.includes('対応エリア')).map((f) => (
+        {genericFaqs.slice(0, 2).map((f) => (
           <details><summary>{f.q}</summary><p>{f.a}</p></details>
         ))}
       </div>

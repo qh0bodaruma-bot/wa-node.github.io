@@ -43,6 +43,9 @@ jobs:
       - name: Generate sitemap
         run: node scripts/generate-sitemap.mjs
 
+      - name: Check Plumeria demo safety and links
+        run: node scripts/check-plumeria.mjs
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

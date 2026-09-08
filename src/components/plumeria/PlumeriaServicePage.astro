@@ -44,8 +44,7 @@ const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCateg
       <nav class="pl-page-nav" aria-label="このページの内容">
         <a href="#support">できること</a><a href="#conditions">対象・費用</a><a href="#flow">利用の流れ</a><a href="#questions">よくある質問</a>
       </nav>
-      <img src={heroImg} alt={heroAlt} width="1200" height="675" loading="eager" decoding="async"
-           style="width:100%;border-radius:16px;aspect-ratio:16/9;object-fit:cover;margin:18px 0" />
+      <img class="pl-page-photo" src={heroImg} alt={heroAlt} width="1200" height="675" loading="eager" decoding="async" />
       <p class="pl-photo-note">※ 掲載写真はイメージ写真です。実際の施設・スタッフではありません。</p>
     </div>
   </section>
@@ -112,7 +111,7 @@ const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCateg
 
   <section class="pl-sec" style="text-align:center">
     <div class="pl-wrap">
-      <h2 class="pl-h2" style="justify-content:center">{breadcrumbLabel}について相談する</h2>
+      <h2 class="pl-h2" style="justify-content:center">ご利用を検討されている方へ</h2>
       <div class="pl-btn-row" style="justify-content:center">
         <a class="pl-btn pl-btn-main" href={contactHref}>{breadcrumbLabel}について相談する</a>
       </div>

@@ -1,20 +1,19 @@
 ---
 import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes, shortStayTel } from '../../../../../../data/plumeria';
+import { routes, shortStayTel, genericFaqs } from '../../../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="ショートステイ｜プルメリア（修正版ラフ）"
-  description="プルメリアⅢのショートステイは、リゾートのような雰囲気で数日からお過ごしいただける短期入所です。"
+  description="プルメリアⅢは、短期間宿泊して介護を受けられるショートステイです。対象・費用・利用の流れをご案内します。"
   currentPath={routes.shortStay}
   breadcrumbLabel="ショートステイ"
   heroTitle="ショートステイ（プルメリアⅢ）"
-  heroLead="リゾートのような雰囲気で、数日からお過ごしいただける短期入所です。"
+  heroLead="ご家族の休息や外出の間、短期間宿泊して介護を受けられます。"
   heroImg="/images/plumeria/services-03.webp"
   heroAlt="共用スペースの入口で入居者を迎えているスタッフ（イメージ）"
   fitFor={[
-    'ご家族の休息やご旅行・出張などで、数日お預かりが必要な方',
-    '要支援1・2、要介護1〜5の認定を受けている方',
-    '施設らしさを感じにくい滞在先を探している方',
+    '介護するご家族が休息を取りたいとき',
+    'ご家族の旅行・出張などで、一時的な宿泊先が必要なとき',
   ]}
   content={[
     { label: '居室', body: '洋室・和室の個室があります。お部屋の希望や空き状況はご相談ください。' },
@@ -27,9 +26,10 @@ import { routes, shortStayTel } from '../../../../../../data/plumeria';
   ]}
   costInfo="費用は、介護保険の自己負担分と、滞在費・食費などの合計です。負担割合や利用日数によって変わるため、ご希望の日程に合わせた総額をご確認ください。"
   flowSteps={[
-    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
+    { title: 'お問い合わせ', body: '相談窓口へ、ご希望の日程と支援内容をお伝えください。' },
     { title: '面談・ご相談', body: 'ご本人の状況をうかがい、ご利用日程を調整します。' },
     { title: 'ご利用開始', body: '契約後、ご利用を開始します。' },
   ]}
   contactCategory="short-stay"
+  faqs={genericFaqs.slice(0, 2)}
 />

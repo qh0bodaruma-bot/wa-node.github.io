@@ -1,6 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes, corp, shortStayTel } from '../../../../../../data/plumeria';
+import { routes } from '../../../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="居宅介護支援｜プルメリア（修正版ラフ）"
@@ -23,15 +23,17 @@ import { routes, corp, shortStayTel } from '../../../../../../data/plumeria';
   ]}
   targetInfo={[
     { label: '対象となる方', body: '要支援・要介護の認定を受けている方、これから申請予定の方' },
-    { label: '対応地域', body: '岐阜県可児市周辺' },
-    { label: 'お問い合わせ（住宅）', body: `${corp.tel}（平日10:00〜17:30）` },
-    { label: 'お問い合わせ（ショートステイ）', body: `${shortStayTel}（平日10:00〜17:30）` },
+    { label: '対応地域', body: 'お住まいの地域で利用できるかは、窓口にご確認ください。' },
   ]}
-  costInfo="介護保険により、自己負担なくご利用いただけます。"
+  costInfo="介護保険によるケアプラン作成の自己負担はありません。プランに組み込む介護サービスの利用料は別途かかります。"
   flowSteps={[
-    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
+    { title: 'お問い合わせ', body: '相談窓口へ、現在お困りのことをお伝えください。' },
     { title: 'ご相談', body: '現在の状況、ご希望をうかがいます。' },
     { title: 'ケアプラン作成', body: 'ご本人・ご家族と相談のうえ、プランを作成します。' },
   ]}
   contactCategory="care-management"
+  faqs={[
+    { q: '認定を受ける前でも相談できますか？', a: 'これから介護保険の認定を申請する方も対象です。現在お困りのことをお伝えください。' },
+    { q: '介護サービスもすべて無料ですか？', a: '自己負担がないのは、介護保険によるケアプランの作成です。訪問介護やショートステイなどの利用料は、それぞれ確認が必要です。' },
+  ]}
 />

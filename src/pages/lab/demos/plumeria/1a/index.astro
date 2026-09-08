@@ -74,7 +74,7 @@ const heroSlides = [
         <a class="pl-more" href="#guide">どこに相談するか迷ったら →</a>
         <p class="pl-photo-note">写真はイメージです。実際の施設・スタッフとは異なります。</p>
       </div>
-      <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービスと採用情報">
+      <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービス・採用・重要事項説明">
         <ul class="pl-tiles">
           {entrances.map((s) => (
             <li><a class="pl-tile" href={s.href}
@@ -161,7 +161,11 @@ const heroSlides = [
     header.classList.add('is-js');
     heroBrandCard?.classList.add('is-hero-visible');
 
-    if (!('IntersectionObserver' in window)) return;
+    if (!('IntersectionObserver' in window)) {
+      header.classList.remove('is-js');
+      heroBrandCard?.classList.remove('is-hero-visible');
+      return;
+    }
     plHeroHeaderObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -174,4 +178,5 @@ const heroSlides = [
     plHeroHeaderObserver.observe(tiles);
   }
   document.addEventListener('astro:page-load', initPlumeriaHeroHeaderSync);
+  document.addEventListener('astro:before-swap', () => plHeroHeaderObserver?.disconnect());
 </script>

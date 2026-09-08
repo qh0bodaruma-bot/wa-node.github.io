@@ -1,6 +1,6 @@
 // プルメリア 修正版ラフ 共通データモデル
 // 実在サイト（https://home-plumeria.jp/ 、2026年時点の公開情報）を基に事実情報を反映している。
-// 福祉用具（welfare-equipment）は同サイト未掲載の新サービスで、ボスからの直接の指摘に基づく（2026年時点）。
+// 福祉用具はクライアントの6事業の説明に基づく。開設時期・取扱範囲は未確認。
 // 出典に記載のない項目は null または「確認中」表記のままとし、確定した事実として扱わない。
 // 写真はすべて生成画像の「イメージ写真」であり、実際の施設・スタッフの記録ではない。
 
@@ -56,7 +56,7 @@ export const housingUnits: PlumeriaHousingUnit[] = [
     roomSize: '居室36.00〜45.80㎡（ベランダ別）',
     priceFrom: '月額 100,540円〜',
     deposit: '敷金 300,000〜360,000円',
-    target: '60歳以上の方',
+    target: '原則60歳以上（その他は応相談）',
     img: '/images/plumeria/services-01.webp',
     alt: '窓から光の入る居室で、入居者が自分らしく過ごしている様子（イメージ）',
   },
@@ -67,7 +67,7 @@ export const housingUnits: PlumeriaHousingUnit[] = [
     roomSize: '25.16㎡',
     priceFrom: '月額 150,400円〜（1名）',
     deposit: '敷金 300,000円',
-    target: '要介護1以上の方',
+    target: '要介護1以上（要支援は応相談）',
     img: '/images/plumeria/services-02.webp',
     alt: '共用ラウンジで入居者どうしが穏やかに会話している様子（イメージ）',
   },
@@ -161,7 +161,7 @@ export interface PlumeriaFaq { q: string; a: string }
 export const genericFaqs: PlumeriaFaq[] = [
   { q: '相談だけでも利用できますか？', a: 'はい。ご利用が未定の段階でもご相談いただけます。まずは現在の状況をお聞かせください。' },
   { q: '費用はどのくらいかかりますか？', a: '内容や介護度によって異なります。正式なご案内は個別にご説明します。' },
-  { q: '対応エリアはどこまでですか？', a: '岐阜県可児市周辺が中心です。詳しい対応可否はお問い合わせください。' },
+  { q: '自宅でも利用できますか？', a: '対応する地域や条件はサービスによって異なります。お住まいの市町村と、ご希望の支援内容を窓口へお伝えください。' },
 ];
 
 export const news: { date: string; cat: string; catTone: 'green' | 'accent' | 'beige'; text: string }[] = [

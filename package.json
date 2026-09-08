@@ -10,6 +10,7 @@
     "postbuild": "node scripts/generate-sitemap.mjs",
     "preview": "astro preview",
     "astro": "astro",
+    "check:plumeria": "node scripts/check-plumeria.mjs",
     "deploy": "node scripts/deploy.mjs"
   },
   "dependencies": {

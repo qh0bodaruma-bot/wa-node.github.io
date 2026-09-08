@@ -1167,7 +1167,10 @@
 
 /* 2026-09 review: readable service guide and compact, keyboard-safe controls. */
 .pl [hidden] { display: none !important; }
-.pl { --green: #257562; padding-bottom: 170px; overflow-wrap: anywhere; }
+.pl { --green: #257562; padding-bottom: 100px; overflow-wrap: anywhere; }
+.pl a:hover { opacity: 1; }
+/* Keep essential copy visible at every scroll position, including find-in-page. */
+.pl[data-reveal="off"] :is(.pl-h2, .pl-sec-lead, .pl-card) { animation: none; opacity: 1; transform: none; }
 .pl :is(a, button, summary, [tabindex]):focus-visible { outline: 3px solid #a34d12; outline-offset: 4px; }
 .pl :is(section[id], div[id], main[id]) { scroll-margin-top: 120px; }
 .pl-head { z-index: 50; }
@@ -1184,11 +1187,21 @@
 .pl-note, .pl-photo-note { font-size: 13px; }
 .pl-sec { padding-block: clamp(32px, 4.5vw, 58px); }
 .pl-sec-tight { padding-block: 28px; }
-.pl-h2 { margin-bottom: 22px; }
+.pl .pl-h2 { margin-bottom: 22px; }
 .pl .pl-sec-lead { margin-bottom: 24px; }
 .pl-reading { max-width: 760px; }
-.pl-reading > * + * { margin-top: 18px; }
-.pl-page-photo { width: 100%; max-height: 340px; border-radius: 16px; aspect-ratio: 16/9; object-fit: cover; }
+.pl .pl-reading > * + * { margin-top: 18px; }
+.pl .pl-h1 + .pl-sec-lead { margin-top: 12px; }
+.pl-page-photo { width: 100%; max-height: 340px; border-radius: 16px; aspect-ratio: 16/9; object-fit: cover; object-position: center 25%; }
+.pl-hero-media { height: clamp(280px, 30vw, 390px); }
+.pl-slider { height: 100%; }
+.pl-slider .pl-hero-photo { height: 100%; object-position: center 25%; }
+.pl-slider-ui { bottom: 84px; }
+.pl-hero-inner { grid-template-columns: minmax(0, 1fr) minmax(380px, 0.85fr); }
+.pl-hero-tiles .pl-tile { padding: 12px 10px; gap: 5px; }
+.pl-hero-tiles .pl-tile-icon { width: 34px; height: 34px; }
+.pl-hero-tiles .pl-tile-icon svg { width: 22px; height: 22px; }
+.pl-hero-tiles .pl-tile-label { font-size: 14px; }
 .pl-tile-sub { font-size: 12px; color: var(--muted); }
 .pl-hero-copy .pl-more { display: inline-block; margin-top: 18px; }
 .pl-recruit-strip { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-block: 28px 4px; border-radius: 14px; padding: 18px 24px; background: #f5e7d5; color: var(--ink); text-decoration: none; }
@@ -1227,8 +1240,7 @@
   margin-left: 4px;
   transform-origin: 70% 90%;
 }
-/* タップ可能だと直感的に伝わるよう、指アイコンを「トン、トン」と2回叩いて
-   長めに静止する、を繰り返す。連続で揺れ続けると気が散るため休符を長めに取る。 */
+/* 開閉できることを伝える動きは初回だけ。条件を読む間は動かさない。 */
 @keyframes pl-job-hint-tap {
   0%, 55%, 100% { transform: translateY(0) rotate(0deg); }
   10% { transform: translateY(3px) rotate(-10deg); }
@@ -1237,7 +1249,7 @@
   40% { transform: translateY(0) rotate(0deg); }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .pl-job-hint-icon { animation: pl-job-hint-tap 2.6s ease-in-out infinite; }
+  .pl-job-hint-icon { animation: pl-job-hint-tap 2.6s ease-in-out 1; }
 }
 .pl-job-detail { margin: 16px 0; }
 @media (max-width: 720px) {
@@ -1264,18 +1276,25 @@
 .pl-desk strong { font-size: 21px; }
 .pl-float-cta { bottom: calc(12px + env(safe-area-inset-bottom)); right: 16px; border-radius: 18px; }
 .pl-float-seg { min-height: 64px; padding: 10px 20px; gap: 8px; font-size: 15px; }
+.pl-float-seg { justify-content: center; }
+.pl-float-seg-icon { display: none; }
+.pl :is(a, button, summary, input, select, textarea) { scroll-margin-block: 130px; }
+.pl:has(.pl-form-fields :focus) .pl-float-cta { visibility: hidden; }
 .pl-float-cta .pl-btn-tel-no { font-size: 19px; }
 .pl-print-tools { padding-block: 18px; text-align: right; }
 .pl-print-button { padding: 10px 16px; border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--ink); font: inherit; cursor: pointer; }
 .pl-compare-table caption { text-align: left; padding: 8px 14px; color: var(--muted); }
 @media (max-width: 1100px) {
-  .pl-nav { display: none; }
+  .pl-nav, .pl-head.is-js.is-condensed .pl-nav { display: none; }
   .pl-menu { display: block; }
 }
 @media (max-width: 1000px) {
   .pl-hero-inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
+  .pl-hero-media { height: 210px; }
+  .pl-hero-copy { padding: 20px; }
+  .pl-hero-lead br { display: none; }
   .pl-head-inner { padding: 6px 10px; width: calc(100% - 24px); }
   .pl-brand-name { font-size: 16px; }
   .pl-brand { gap: 6px; }

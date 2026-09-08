@@ -2,37 +2,15 @@
 import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
 import { routes } from '../../../../../../data/plumeria';
 ---
-<PlumeriaLayout
-  title="個人情報の取扱いについて（確認用）｜プルメリア（修正版ラフ）"
-  description="プルメリアにおける個人情報の取扱いについての確認用ページです。正式な方針は策定中です。"
-  currentPath={routes.privacy}
->
-  <div class="pl-wrap" style="padding-top:28px">
-    <p class="pl-breadcrumb">
-      <a href={routes.top}>トップ</a>
-      <span aria-hidden="true">/</span>
-      <span>個人情報の取扱いについて</span>
-    </p>
-  </div>
-
+<PlumeriaLayout title="個人情報の取扱いについて｜プルメリア（デモ）" description="このデモの入力内容の取扱いと、正式なご相談窓口をご案内します。" currentPath={routes.privacy}>
+  <div class="pl-wrap" style="padding-top:28px"><p class="pl-breadcrumb"><a href={routes.top}>トップ</a><span aria-hidden="true">/</span><span>個人情報の取扱いについて</span></p></div>
   <section class="pl-sec pl-sec-tight">
-    <div class="pl-wrap" style="max-width:760px">
-      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">個人情報の取扱いについて（確認用）</h1>
-      <p class="pl-body">
-        このページは修正版ラフの確認用であり、正式な個人情報保護方針ではありません。
-        本番公開までに、運営法人としての正式な方針・問い合わせ受信先・保管期間・第三者提供の有無等を
-        確定し、あらためて掲載します。
-      </p>
-      <h2 class="pl-h2" style="margin-top:32px">確認中の項目</h2>
-      <ul class="pl-body">
-        <li>個人情報の利用目的（お問い合わせ対応・採用選考等）</li>
-        <li>取得する情報の範囲（氏名・連絡先・相談内容・健康に関する情報を含む場合の取扱い）</li>
-        <li>委託先・第三者提供の有無</li>
-        <li>保管期間・廃棄方法</li>
-        <li>開示・訂正・削除等のご請求窓口</li>
-        <li>運営法人・グループとしての正式な表記</li>
-      </ul>
-      <p class="pl-note">※ このラフのフォームは実際に送信されないため、個人情報の取得・保存は行われません。</p>
+    <div class="pl-wrap pl-reading">
+      <h1 class="pl-h1">個人情報の取扱いについて</h1>
+      <p class="pl-body">このサイトはご提案用のデモです。フォームの入力内容は送信されず、このデモからサーバーへの保存も行いません。動作確認には架空の内容をお使いください。</p>
+      <h2 class="pl-h2">正式なご相談について</h2>
+      <p class="pl-body">実際のお問い合わせは、<a href="https://home-plumeria.jp/contact/input">現在の公式お問い合わせ窓口</a>をご利用ください。</p>
+      <p class="pl-note">本番サイトに掲載する個人情報保護方針は、運営法人の正式な文書を確認したうえで掲載します。このページは、その方針に代わるものではありません。</p>
     </div>
   </section>
 </PlumeriaLayout>

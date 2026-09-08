@@ -1,6 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes, corp, shortStayTel } from '../../../../../../data/plumeria';
+import { routes } from '../../../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="訪問介護｜プルメリア（修正版ラフ）"
@@ -23,13 +23,11 @@ import { routes, corp, shortStayTel } from '../../../../../../data/plumeria';
   ]}
   targetInfo={[
     { label: '対象となる方', body: '要介護・要支援の認定を受けている方' },
-    { label: '対応地域', body: '岐阜県可児市周辺' },
-    { label: 'お問い合わせ（住宅）', body: `${corp.tel}（平日10:00〜17:00）` },
-    { label: 'お問い合わせ（ショートステイ）', body: `${shortStayTel}（平日10:00〜17:00）` },
+    { label: '対応地域', body: 'お住まいの地域で利用できるかは、窓口にご確認ください。' },
   ]}
-  costInfo="介護保険の自己負担割合等により異なります。保険外の独自サービスにも対応しています。正式な費用は個別にご案内します。"
+  costInfo="自己負担割合や支援内容によって異なります。保険外の支援は、対応できる内容と料金を事前にご確認ください。"
   flowSteps={[
-    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
+    { title: 'お問い合わせ', body: '相談窓口へ、ご希望の支援内容をお伝えください。' },
     { title: 'ご相談・確認', body: '現在の状況、ケアプランの有無等を確認します。' },
     { title: 'ご利用開始', body: '内容にご納得いただいたうえで、利用を開始します。' },
   ]}

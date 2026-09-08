@@ -1,36 +1,28 @@
 ---
-import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
+import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
 import { routes } from '../../../../../../data/plumeria';
 ---
-<PlumeriaServicePage
-  title="福祉用具｜プルメリア（修正版ラフ）"
-  description="暮らしに合う福祉用具のご相談について。取扱品目・利用条件は確認中です。"
-  currentPath={routes.welfareEquipment}
-  breadcrumbLabel="福祉用具"
-  heroTitle="福祉用具"
-  heroLead="暮らしに合う用具を相談するサービスです。取扱品目・貸与や販売の対応範囲は、現在確認中です。"
-  heroImg="/images/plumeria/services-05.webp"
-  heroAlt="歩行器の使い方をスタッフが説明している様子（イメージ）"
-  fitFor={[
-    '歩行や移動に不安がある方',
-    'ご自宅のベッド・手すり等を見直したい方',
-    'どの用具が合うか分からず相談したい方',
-  ]}
-  content={[
-    { label: '用具の選定相談', body: '生活状況に合わせて、必要な用具をご提案します。' },
-    { label: '貸与・販売', body: 'レンタル・購入の取扱範囲や品目は、窓口の確認後に掲載します。' },
-    { label: '使い方の説明', body: 'スタッフが用具の使い方をご説明します。' },
-  ]}
-  targetInfo={[
-    { label: '対象となる方', body: '要介護・要支援の認定を受けている方（詳細は確認中）' },
-    { label: '対応地域', body: '提供エリアは確認中です。' },
-    { label: '利用条件', body: '確認中' },
-  ]}
-  costInfo="介護保険の利用有無、用具の種類により異なります。正式な費用は個別にご案内します。（費用の目安は確認中）"
-  flowSteps={[
-    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
-    { title: 'ご相談', body: '生活状況をうかがい、適した用具をご提案します。' },
-    { title: 'ご利用開始', body: '用具の搬入・使い方の説明を行い、利用を開始します。' },
-  ]}
-  contactCategory="welfare-equipment"
-/>
+<PlumeriaLayout title="福祉用具｜プルメリア（デモ）" description="福祉用具事業のご案内です。取扱品目・費用・相談窓口は確認後に掲載します。" currentPath={routes.welfareEquipment}>
+  <div class="pl-wrap" style="padding-top:28px"><p class="pl-breadcrumb"><a href={routes.top}>トップ</a><span aria-hidden="true">/</span><span>福祉用具</span></p></div>
+  <section class="pl-sec pl-sec-tight">
+    <div class="pl-wrap pl-reading">
+      <h1 class="pl-h1">福祉用具</h1>
+      <p class="pl-sec-lead">歩行器や介護ベッドなど、暮らしに合う用具を相談するサービスです。</p>
+      <img class="pl-page-photo" src="/images/plumeria/services-05.webp" alt="歩行器の使い方をスタッフが説明する様子（イメージ）" width="1200" height="675" decoding="async" />
+      <p class="pl-photo-note">写真はイメージです。実際の取扱製品・スタッフとは異なります。</p>
+    </div>
+  </section>
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">詳しいご案内は準備中です</h2>
+      <p class="pl-body">福祉用具はプルメリアの6つの事業の一つです。次の内容は、事業所に確認したうえで掲載します。</p>
+      <ul class="pl-body pl-check-list">
+        <li>取扱品目と、レンタル・購入の対応範囲</li>
+        <li>利用できる方・対応地域・費用</li>
+        <li>専用の相談窓口と利用までの流れ</li>
+      </ul>
+      <p class="pl-note">このデモでは、用具の申込みや予約は受け付けていません。</p>
+      <a class="pl-more" href={routes.services}>他のサービスも確認する →</a>
+    </div>
+  </section>
+</PlumeriaLayout>

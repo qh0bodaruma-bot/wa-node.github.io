@@ -1,6 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes, corp, shortStayTel } from '../../../../../../data/plumeria';
+import { routes } from '../../../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="訪問看護｜プルメリア（修正版ラフ）"
@@ -23,13 +23,11 @@ import { routes, corp, shortStayTel } from '../../../../../../data/plumeria';
   ]}
   targetInfo={[
     { label: '対象となる方', body: '主治医の指示のもとで訪問看護が必要な方' },
-    { label: '対応地域', body: '岐阜県可児市周辺' },
-    { label: 'お問い合わせ（住宅）', body: `${corp.tel}（平日10:00〜17:00）` },
-    { label: 'お問い合わせ（ショートステイ）', body: `${shortStayTel}（平日10:00〜17:00）` },
+    { label: '対応地域', body: 'お住まいの地域で利用できるかは、窓口にご確認ください。' },
   ]}
   costInfo="医療保険・介護保険いずれの適用かにより異なります。正式な費用は個別にご案内します。"
   flowSteps={[
-    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
+    { title: 'お問い合わせ', body: '相談窓口へ、ご希望の支援内容をお伝えください。' },
     { title: '主治医への確認', body: '主治医の指示書等、必要な手続きをご案内します。' },
     { title: 'ご利用開始', body: '訪問スケジュールを調整し、利用を開始します。' },
   ]}

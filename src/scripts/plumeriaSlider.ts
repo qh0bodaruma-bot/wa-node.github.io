@@ -44,8 +44,16 @@ export function initPlumeriaSlider() {
   dots.forEach((dot, i) => dot.addEventListener('click', () => {
     playing = false; update(); void show(i);
   }, options));
+  // A pointer click focuses the pause button before click. Do not turn that
+  // same click into "play" by pausing inside focusin first.
+  let pointerFocus = false;
+  root.addEventListener('pointerdown', () => { pointerFocus = true; }, options);
+  root.addEventListener('pointerup', () => { pointerFocus = false; }, options);
+  root.addEventListener('pointercancel', () => { pointerFocus = false; }, options);
   toggle?.addEventListener('click', () => { playing = !playing; update(); }, options);
-  root.addEventListener('focusin', () => { playing = false; update(); }, options);
+  root.addEventListener('focusin', () => {
+    if (!pointerFocus) { playing = false; update(); }
+  }, options);
   document.addEventListener('visibilitychange', update, options);
   reduced.addEventListener('change', () => { if (reduced.matches) { playing = false; update(); } }, options);
   root.classList.add('is-ready');
