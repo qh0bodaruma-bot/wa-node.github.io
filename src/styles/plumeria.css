@@ -1204,8 +1204,8 @@
 .pl-slider-ui { bottom: 84px; }
 .pl-hero-inner { grid-template-columns: minmax(0, 1fr) minmax(380px, 0.85fr); }
 .pl-hero-tiles .pl-tile { padding: 12px 10px; gap: 5px; }
-.pl-hero-tiles .pl-tile-icon { width: 34px; height: 34px; }
-.pl-hero-tiles .pl-tile-icon svg { width: 22px; height: 22px; }
+.pl-hero-tiles .pl-tile-icon { width: 51px; height: 51px; }
+.pl-hero-tiles .pl-tile-icon svg { width: 33px; height: 33px; }
 .pl-hero-tiles .pl-tile-label { font-size: 14px; }
 .pl-tile-sub { font-size: 12px; color: var(--muted); }
 .pl-hero-copy .pl-more { display: inline-block; margin-top: 18px; }
@@ -1281,8 +1281,6 @@
 .pl-desk strong { font-size: 21px; }
 .pl-float-cta { bottom: calc(12px + env(safe-area-inset-bottom)); right: 16px; border-radius: 18px; }
 .pl-float-seg { min-height: 64px; padding: 10px 20px; gap: 8px; font-size: 15px; }
-.pl-float-seg { justify-content: center; }
-.pl-float-seg-icon { display: none; }
 .pl :is(a, button, summary, input, select, textarea) { scroll-margin-block: 130px; }
 .pl:has(.pl-form-fields :focus) .pl-float-cta { visibility: hidden; }
 .pl-float-cta .pl-btn-tel-no { font-size: 19px; }
@@ -1402,3 +1400,18 @@
     animation: pl-quiz-step-in 0.35s ease;
   }
 }
+
+/* ── サービス別アイコンカラー ─────────────────────────────
+   目的：同じ緑一色だと一覧で見分けがつかないため、サービスごとに色を割り当てる。
+   彩度は既存のミント（#eef6f2）・ベージュ（#f4efe3）帯に合わせて意図的に低く抑え、
+   「色で見分けられるが、介護施設のサイトとして落ち着いて見える」範囲に収めている。
+   線の太さも 1.4 → 1.8 に上げ、小さいサイズでの視認性を確保する。 */
+.pl :is(.pl-tile-icon, .pl-nav-icon) svg { stroke-width: 1.8; }
+.pl [data-pl-service='housing'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e4f0ea; color: #256b56; }
+.pl [data-pl-service='short-stay'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ece9f4; color: #5f5186; }
+.pl [data-pl-service='home-care'] :is(.pl-tile-icon, .pl-nav-icon) { background: #fbeddd; color: #a05f24; }
+.pl [data-pl-service='home-nursing'] :is(.pl-tile-icon, .pl-nav-icon) { background: #f7e9e9; color: #9b5252; }
+.pl [data-pl-service='care-management'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e6eef5; color: #416385; }
+.pl [data-pl-service='welfare-equipment'] :is(.pl-tile-icon, .pl-nav-icon) { background: #eef0e0; color: #676f38; }
+.pl [data-pl-service='recruit'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e2eff1; color: #296b79; }
+.pl [data-pl-service='important-matters'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ecebe6; color: #63635a; }

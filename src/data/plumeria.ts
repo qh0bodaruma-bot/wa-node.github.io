@@ -116,7 +116,7 @@ export const services: PlumeriaService[] = [
   },
   {
     id: 'care-management', name: '居宅介護支援', short: '居宅介護支援', tagline: 'ケアプランの作成・相談',
-    icon: 'sprout', href: `${PLUMERIA_BASE}/care-management/`,
+    icon: 'clipboard', href: `${PLUMERIA_BASE}/care-management/`,
     summary: 'ケアマネジャーが介護サービス全体の計画・調整をお手伝いします。',
     img: '/images/plumeria/feature-03.webp',
     alt: 'ご家族が自宅のダイニングで相談している様子（イメージ）',
@@ -135,7 +135,7 @@ export const recruitEntry = {
   name: '採用情報',
   short: '採用情報',
   tagline: 'いっしょに働く方を募集しています',
-  icon: 'bird',
+  icon: 'people',
   href: `${PLUMERIA_BASE}/recruit/`,
   summary: '介護職員・看護師を募集しています。見学だけでもお気軽にお越しください。',
 };
