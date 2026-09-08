@@ -72,6 +72,7 @@ const day = [
     <div class="pl-wrap">
       <h2 class="pl-h2"><span class="pl-h2-en">A DAY</span>一日の流れ（参考）</h2>
       <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は住宅ごとに確認中です。</p>
+      <p class="pl-note" style="text-align:center">※ 太陽の位置は、ご覧いただいている今の時刻に合わせて表示しています。</p>
       <div class="pl-day-wrap">
         <span class="pl-day-sun" aria-hidden="true"><svg><use href="#pl-i-sun" /></svg></span>
         <ol class="pl-day">
@@ -96,3 +97,50 @@ const day = [
     </div>
   </section>
 </PlumeriaLayout>
+
+<script>
+  // 一日の流れ：太陽の位置と各ドットの点灯を、閲覧している今の時刻と連動させる。
+  // View Transitions でこのページに戻ってくるたびに astro:page-load が発火するので、
+  // トップレベルIIFEではなく名前付き関数として束ね、毎回タイマーを張り直す。
+  let plDayClockTimer: number | null = null;
+
+  function initPlumeriaDayClock() {
+    if (plDayClockTimer !== null) { window.clearInterval(plDayClockTimer); plDayClockTimer = null; }
+
+    const sun = document.querySelector<HTMLElement>('.pl-day-sun');
+    const items = [...document.querySelectorAll<HTMLElement>('.pl-day-item')];
+    if (!sun || !items.length) return;
+
+    const minutesOf = (item: HTMLElement): number | null => {
+      const label = item.querySelector('.pl-day-time')?.textContent?.trim() ?? '';
+      const [h, m] = label.split(':').map((v) => Number(v));
+      return Number.isFinite(h) ? h * 60 + (Number.isFinite(m) ? m : 0) : null;
+    };
+
+    const times = items.map(minutesOf);
+    if (times.some((t) => t === null) || times.length < 2) return;
+
+    const first = times[0] as number;
+    const last = times[times.length - 1] as number;
+    if (last <= first) return;
+
+    function update() {
+      const now = new Date();
+      const nowMinutes = now.getHours() * 60 + now.getMinutes();
+      const clamped = Math.min(Math.max(nowMinutes, first), last);
+      const ratio = (clamped - first) / (last - first);
+      const percent = 8 + ratio * (92 - 8);
+      sun!.style.left = `${percent}%`;
+
+      items.forEach((item, i) => {
+        const dot = item.querySelector('.pl-day-dot');
+        dot?.classList.toggle('is-past', (times[i] as number) <= nowMinutes);
+      });
+    }
+
+    update();
+    plDayClockTimer = window.setInterval(update, 60000);
+  }
+
+  document.addEventListener('astro:page-load', initPlumeriaDayClock);
+</script>

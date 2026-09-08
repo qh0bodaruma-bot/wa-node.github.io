@@ -626,9 +626,17 @@
     display: grid; justify-items: center; gap: var(--day-gap);
     text-align: center; position: relative;
   }
-  .pl-day-dot { width: 17px; height: 17px; border-radius: 50%; background: var(--bg); border: 2px solid var(--green); }
-  /* 太陽が時間の線をたどっていく演出。JSは使わず、線と同じ位置計算（8%〜92%）を静止状態にも適用する
-     ので、アニメーション非対応環境でも「朝の位置」として自然に見える（消えたまま戻らない事故を防ぐ）。 */
+  .pl-day-dot {
+    width: 17px; height: 17px; border-radius: 50%;
+    background: var(--bg); border: 2px solid var(--green);
+    transition: background-color 0.4s, transform 0.4s;
+  }
+  /* 現在の時刻を過ぎた項目は点灯させる（JSが現在時刻と照らし合わせて is-past を付ける）。
+     JSが動かない場合は全項目とも未点灯のまま＝安全な既定状態（誤った情報を出さない）。 */
+  .pl-day-dot.is-past { background: var(--green); transform: scale(1.15); }
+  /* 太陽は現在時刻に合わせてJSが left（8%〜92%）を直接セットする。
+     ここではスクロールとは無関係な「朝の位置」を静止時の既定値として置いておく
+     （JS非対応環境でも消えたまま戻らない事故を防ぐ、フェイルオープンの初期値）。 */
   .pl-day-sun {
     position: absolute;
     left: 8%;
@@ -637,6 +645,7 @@
     margin: -13px 0 0 -13px;
     display: grid; place-items: center;
     border-radius: 50%;
+    transition: left 0.6s ease;
     background: var(--surface);
     color: var(--accent);
     box-shadow: var(--shadow-xs);
@@ -944,16 +953,6 @@
     from { transform: translateY(5px); }
     to   { transform: translateY(-5px); }
   }
-  /* 一日の流れ：太陽が朝から夜へ線をたどる */
-  @keyframes pl-day-sun-travel {
-    from { left: 8%; }
-    to   { left: 92%; }
-  }
-  @keyframes pl-day-dot-light {
-    from { background: var(--bg); transform: scale(1); }
-    to   { background: var(--green); transform: scale(1.15); }
-  }
-
   @media (prefers-reduced-motion: no-preference) {
     .pl-hero-media::after {
       animation: pl-komorebi 19s ease-in-out infinite alternate;
@@ -1004,22 +1003,6 @@
       .pl-day-item:nth-child(6) { animation-range: entry 4% cover 44%; }
       .pl-news > li:nth-child(2) { animation-range: entry 4% cover 30%; }
       .pl-news > li:nth-child(3) { animation-range: entry 4% cover 36%; }
-
-      /* 太陽は行全体の出現が終わるところまでを一続きでたどる。
-         各ドットは自分の項目が現れるタイミングで点灯し、太陽が通り過ぎた跡のように見せる。 */
-      .pl-day-sun {
-        animation-name: pl-day-sun-travel;
-        animation-fill-mode: both;
-        animation-duration: auto;
-        animation-timeline: view();
-        animation-range: entry 4% cover 44%;
-      }
-      .pl-day-item:nth-child(1) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 24%; }
-      .pl-day-item:nth-child(2) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 28%; }
-      .pl-day-item:nth-child(3) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 32%; }
-      .pl-day-item:nth-child(4) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 36%; }
-      .pl-day-item:nth-child(5) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 40%; }
-      .pl-day-item:nth-child(6) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 44%; }
 
       /* 丘のディバイダ：通り過ぎる速さをわずかにずらして奥行きを出す。
          幅5pxに抑えているのは、地色と隣接色が近いソフトな配色のため、
