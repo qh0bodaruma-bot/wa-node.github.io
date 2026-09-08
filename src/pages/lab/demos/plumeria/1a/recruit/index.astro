@@ -46,6 +46,10 @@ const positions = [
           <summary>
             <span class="pl-h3">{p.name}</span>
             <span class="pl-body pl-job-employment">{p.employment}</span>
+            <span class="pl-job-hint" aria-hidden="true">
+              <span class="pl-job-hint-closed">タップして詳しい条件を見る</span>
+              <span class="pl-job-hint-open">タップして閉じる</span>
+            </span>
           </summary>
           <dl class="pl-access-list pl-job-detail">
             <div><dt>給与</dt><dd>{p.pay}</dd></div>

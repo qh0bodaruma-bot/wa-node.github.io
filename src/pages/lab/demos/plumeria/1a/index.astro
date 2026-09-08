@@ -1,7 +1,9 @@
 ---
 import PlumeriaLayout from '../../../../../layouts/PlumeriaLayout.astro';
 import PlumeriaGuideQuiz from '../../../../../components/plumeria/PlumeriaGuideQuiz.astro';
-import { services, routes, corp } from '../../../../../data/plumeria';
+import { services, recruitEntry, routes, corp } from '../../../../../data/plumeria';
+
+const entrances = [...services, recruitEntry];
 
 const heroSlides = [
   { img: '/images/plumeria/hero-01.webp', label: '入居者とスタッフ', alt: '入居者とスタッフが穏やかに話す様子（イメージ）' },
@@ -16,6 +18,13 @@ const heroSlides = [
   currentPath={routes.top}
 >
   <section class="pl-hero">
+    <a class="pl-hero-brand-card" href={routes.top} aria-label={`${corp.name} トップへ戻る`}>
+      <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>
+      <span class="pl-brand-text">
+        <span class="pl-brand-name">{corp.name}</span>
+        <span class="pl-brand-en">{corp.nameEn}</span>
+      </span>
+    </a>
     <div class="pl-hero-media">
       <div class="pl-slider" data-pl-slider>
         {heroSlides.map((s, i) => (
@@ -39,6 +48,17 @@ const heroSlides = [
           </button>
         </div>
       </div>
+      <svg class="pl-hero-frame" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="pl-hero-frame-top" vector-effect="non-scaling-stroke" transform="translate(0,0.05)"
+              d="M0,0.075 C0.22,0.004 0.58,0.004 1,0.042" />
+        <path class="pl-hero-frame-bottom" vector-effect="non-scaling-stroke" transform="translate(0,0.028)"
+              d="M1,0.80 C0.74,0.99 0.44,0.85 0.20,0.94 C0.11,0.975 0.05,0.995 0,1" />
+      </svg>
+      <div class="pl-motes" aria-hidden="true">
+        <span class="pl-mote pl-mote-1"></span><span class="pl-mote pl-mote-2"></span>
+        <span class="pl-mote pl-mote-3"></span><span class="pl-mote pl-mote-4"></span>
+        <span class="pl-mote pl-mote-5"></span><span class="pl-mote pl-mote-6"></span>
+      </div>
     </div>
     <div class="pl-wrap pl-hero-inner">
       <div class="pl-hero-copy">
@@ -48,10 +68,12 @@ const heroSlides = [
         <a class="pl-more" href="#guide">どこに相談するか迷ったら →</a>
         <p class="pl-photo-note">写真はイメージです。実際の施設・スタッフとは異なります。</p>
       </div>
-      <nav class="pl-hero-tiles" aria-label="6つのサービス">
+      <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービスと採用情報">
         <ul class="pl-tiles">
-          {services.map((s) => (
-            <li><a class="pl-tile" href={s.href} data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="hero_tile">
+          {entrances.map((s) => (
+            <li><a class="pl-tile" href={s.href}
+                 data-pl-gtag={s.id === 'recruit' ? 'recruit_click' : 'service_select'}
+                 data-pl-service={s.id} data-pl-cta="hero_tile">
               <span class="pl-tile-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
               <span class="pl-tile-label">{s.name}</span>
               {['housing', 'short-stay'].includes(s.id) && <span class="pl-tile-sub">{s.tagline}</span>}
@@ -112,4 +134,38 @@ const heroSlides = [
   initPlumeriaSlider();
   document.addEventListener('astro:page-load', initPlumeriaSlider);
   document.addEventListener('astro:before-swap', disposePlumeriaSlider);
+
+  /*
+    PCのみ：FVのタイル（サービス入口）が画面内にある間は、ヘッダーの重複ナビを隠し、
+    代わりにFV左上のブランドカードを表示する。タイルが隠れたら（スクロール通過）ヘッダーの
+    ナビ・ブランドを通常どおり表示する。View Transitions でこのページに戻ってくるたびに
+    astro:page-load が発火するので、名前付き関数として束ね、毎回作り直す。
+  */
+  let plHeroHeaderObserver: IntersectionObserver | null = null;
+  function initPlumeriaHeroHeaderSync() {
+    const header = document.querySelector('.pl-head');
+    const tiles = document.querySelector('[data-pl-tiles]');
+    const heroBrandCard = document.querySelector('.pl-hero-brand-card');
+
+    plHeroHeaderObserver?.disconnect();
+    plHeroHeaderObserver = null;
+
+    if (!header || !tiles) return;
+    header.classList.remove('is-condensed');
+    header.classList.add('is-js');
+    heroBrandCard?.classList.add('is-hero-visible');
+
+    if (!('IntersectionObserver' in window)) return;
+    plHeroHeaderObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          header.classList.toggle('is-condensed', !entry.isIntersecting);
+          heroBrandCard?.classList.toggle('is-hero-visible', entry.isIntersecting);
+        });
+      },
+      { root: null, rootMargin: '-77px 0px 0px 0px', threshold: 0 }
+    );
+    plHeroHeaderObserver.observe(tiles);
+  }
+  document.addEventListener('astro:page-load', initPlumeriaHeroHeaderSync);
 </script>

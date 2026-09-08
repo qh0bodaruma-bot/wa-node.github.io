@@ -176,7 +176,10 @@ const contactHref = isRecruit ? `${routes.recruit}#application` : activeService 
 
     <div class="pl-float-cta">
       {phone ? <PlumeriaTelCta class="pl-float-seg pl-float-seg-tel" tel={phone} label={phoneLabel} service={isRecruit ? 'recruit' : activeService?.id} /> :
-        <a class="pl-float-seg pl-float-seg-tel" href={`${routes.contact}#contact-desks`}>電話窓口を確認</a>}
+        <a class="pl-float-seg pl-float-seg-tel" href={`${routes.contact}#contact-desks`}>
+          <span class="pl-float-seg-icon" aria-hidden="true"><svg><use href="#pl-i-phone" /></svg></span>
+          電話窓口を確認
+        </a>}
       <a class="pl-float-seg pl-float-seg-main" href={contactHref}>
         <span class="pl-float-seg-icon" aria-hidden="true"><svg><use href="#pl-i-calendar" /></svg></span>
         {isRecruit ? '応募方法を見る' : '見学・ご相談'}
