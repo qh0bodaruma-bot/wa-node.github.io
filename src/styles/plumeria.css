@@ -602,7 +602,10 @@
   /* 時間のラベルは高さを固定する。下の目盛り線の位置をこの値から決めるため。
      `.pl-day-wrap` に置くのは、兄弟要素の `.pl-day-sun`（太陽）からも同じ値を参照するため
      （カスタムプロパティは子孫にしか継承されず、`.pl-day` 自身に置くと兄弟からは見えない）。 */
-  .pl-day-wrap { position: relative; --day-pill-h: 32px; --day-gap: 9px; }
+  /* `display: flow-root` で内部の負のマージン（.pl-day の巻き上げ）を封じ込め、
+     上の説明文と時間タグが重ならないよう margin-top で確実に余白を確保する。
+     封じ込めないと、負のマージンが外側の説明文の余白と相殺されて重なってしまう。 */
+  .pl-day-wrap { position: relative; display: flow-root; margin-top: 32px; --day-pill-h: 32px; --day-gap: 9px; }
   .pl-day {
     display: grid; grid-template-columns: repeat(6, 1fr);
     position: relative;
