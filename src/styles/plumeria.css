@@ -605,10 +605,9 @@
   /* `display: flow-root` で内部の負のマージン（.pl-day の巻き上げ）を封じ込め、
      上の説明文と時間タグが重ならないよう margin-top で確実に余白を確保する。
      封じ込めないと、負のマージンが外側の説明文の余白と相殺されて重なってしまう。
-     `padding-top` は太陽専用の帯（説明文と時間タグの間）を作るためのもの。
-     `.pl ol.pl-day` 側に -16px の巻き上げがあるため、実際の時間タグの開始位置は
-     padding-top から 16px 分だけ早まる（72px の場合、タグは 56px の位置から始まる）。 */
-  .pl-day-wrap { position: relative; display: flow-root; margin-top: 32px; padding-top: 72px; --day-pill-h: 32px; --day-gap: 9px; }
+     `--day-gap` は時間タグとドットの実際の間隔そのもの。ここを広げることで、
+     太陽を「時間タグ」と「目盛りの線」の間の空間に収める余白を作っている。 */
+  .pl-day-wrap { position: relative; display: flow-root; margin-top: 32px; --day-pill-h: 32px; --day-gap: 40px; }
   .pl-day {
     display: grid; grid-template-columns: repeat(6, 1fr);
     position: relative;
@@ -642,12 +641,15 @@
      （JS非対応環境でも消えたまま戻らない事故を防ぐ、フェイルオープンの初期値）。
      暖色のグラデーション＋外側のグロー＋点滅する光暈で、一目で「太陽＝今の時刻」と
      わかるようにしている（点滅は prefers-reduced-motion: reduce で止まる）。
-     縦位置は時間の線の上ではなく、`.pl-day-wrap` の padding-top で確保した
-     「太陽専用の帯」（説明文と時間タグの間）の中央に置く。 */
+     縦位置は「時間タグ」と「目盛りの線」のちょうど中間。
+     `.pl-day-sun` は `.pl-day-wrap` を基準に絶対配置されるが、`<ol class="pl-day">` 自身は
+     `margin-top: calc(var(--day-pill-h) * -0.5)` で上に巻き上がっているため、
+     タグ下端は wrap基準で `var(--day-pill-h)/2`、線は wrap基準で
+     `var(--day-gap) + 8px + var(--day-pill-h)/2` の位置に来る。その中間点がこの式。 */
   .pl-day-sun {
     position: absolute;
     left: 8%;
-    top: 28px;
+    top: calc((var(--day-pill-h) + var(--day-gap) + 8px) / 2);
     width: 40px; height: 40px;
     margin: -20px 0 0 -20px;
     display: grid; place-items: center;
