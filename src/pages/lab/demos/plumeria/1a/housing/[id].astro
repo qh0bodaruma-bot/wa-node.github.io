@@ -44,7 +44,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
         <div><dt>費用</dt><dd>{unit.priceFrom}（{unit.deposit}）</dd></div>
         <div><dt>空室状況</dt><dd><span class="pl-pending-note">確認中</span>（お手数ですがお問い合わせください）</dd></div>
       </dl>
-      <p class="pl-note" style="margin-top:10px">※ 費用は公開情報を基にした目安です。正式な金額は個別にご案内します。</p>
+      <p class="pl-note" style="margin-top:10px">月額基本料金の目安です。食費や介護保険自己負担分などは別途ご確認ください。<a href="https://home-plumeria.jp/plumeria0102/fee.html">公式の料金内訳</a>（2026年9月8日確認）</p>
     </div>
   </section>
 
@@ -52,7 +52,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
     <div class="pl-wrap">
       <h2 class="pl-h2">見学の流れ</h2>
       <ol class="pl-body">
-        <li style="margin-bottom:10px"><strong>1. お問い合わせ</strong><br />電話またはフォームでご連絡ください。</li>
+        <li style="margin-bottom:10px"><strong>1. お問い合わせ</strong><br />相談窓口から、見学したい住宅をお伝えください。</li>
         <li style="margin-bottom:10px"><strong>2. 見学日程の調整</strong><br />ご都合の良い日時を調整します。</li>
         <li style="margin-bottom:10px"><strong>3. ご見学・ご相談</strong><br />居室・共用部をご案内し、ご不明点にお答えします。</li>
       </ol>
@@ -63,7 +63,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
     <div class="pl-wrap">
       <h2 class="pl-h2">よくあるご質問</h2>
       <div class="pl-faq-list">
-        {genericFaqs.map((f) => (
+        {genericFaqs.filter((f) => !f.q.includes('対応エリア')).map((f) => (
           <details><summary>{f.q}</summary><p>{f.a}</p></details>
         ))}
       </div>

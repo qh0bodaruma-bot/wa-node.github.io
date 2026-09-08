@@ -1,150 +1,77 @@
 ---
 import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
-import { routes } from '../../../../../../data/plumeria';
-
+import PlumeriaDemoForm from '../../../../../../components/plumeria/PlumeriaDemoForm.astro';
+import { routes, corp } from '../../../../../../data/plumeria';
 const positions = [
-  { name: '介護職員・ヘルパー', employment: 'パート・アルバイト', location: '岐阜県可児市' },
-  { name: '看護師', employment: '正社員', location: '岐阜県可児市' },
+  {
+    name: '介護職員・ヘルパー', employment: 'パート',
+    pay: '時給1,065円〜1,250円（処遇改善手当等あり、昇給・賞与あり）',
+    hours: '夜勤フルタイム 22:00〜翌7:00／朝食帯 6:00〜10:00（3〜4時間程度）／夕食帯 16:30〜19:00（2時間〜程度）。シフト交代制で、勤務時間・曜日は応相談。',
+    holiday: '週休2日制（希望休申請制度あり）',
+    requirement: '介護福祉士／介護職員初任者研修修了／ホームヘルパー2級のいずれか',
+    benefits: '交通費支給、有給休暇あり',
+    jobContent: 'サービス付き高齢者向け住宅でのケア業務全般',
+    contact: '採用担当：冨田・山本',
+    url: 'https://home-plumeria.jp/recruit/detail/masterid/10/',
+  },
+  {
+    name: '看護師（施設内）', employment: '正社員・フルパート・パート',
+    pay: '月給25万〜27万円程度（経験考慮）／時給1,300〜1,400円程度',
+    hours: '8:00〜17:00／9:00〜18:00／その他応相談',
+    holiday: '週休2日制（毎週）、年間休日120日前後',
+    requirement: '看護師または准看護師の資格',
+    benefits: '交通費支給、有給休暇、賞与年2回、育児・介護休業／時短制度、研修・資格取得支援制度',
+    jobContent: 'ショートステイ内での看護・介護業務',
+    contact: '採用担当：山本・日比野',
+    url: 'https://home-plumeria.jp/recruit/detail/masterid/9/',
+  },
 ];
 ---
-<PlumeriaLayout
-  title="採用情報｜プルメリア（修正版ラフ）"
-  description="プルメリアの採用情報です。介護スタッフ・看護師を募集しています。"
-  currentPath={routes.recruit}
->
-  <div class="pl-wrap" style="padding-top:28px">
-    <p class="pl-breadcrumb">
-      <a href={routes.top}>トップ</a>
-      <span aria-hidden="true">/</span>
-      <span>採用情報</span>
-    </p>
-  </div>
-
+<PlumeriaLayout title="採用情報｜プルメリア（デモ）" description="プルメリアの介護職・看護職の募集情報と応募窓口をご案内します。" currentPath={routes.recruit}>
+  <div class="pl-wrap" style="padding-top:28px"><p class="pl-breadcrumb"><a href={routes.top}>トップ</a><span aria-hidden="true">/</span><span>採用情報</span></p></div>
   <section class="pl-sec pl-sec-tight">
     <div class="pl-wrap">
-      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">採用情報</h1>
-      <p class="pl-sec-lead">介護スタッフ・看護師を募集しています。見学だけでもお気軽にお越しください。</p>
-      <img src="/images/plumeria/recruit-01.webp" alt="施設内で仕事の合間に会話しているスタッフたち（イメージ）"
-           width="1200" height="675" loading="eager" decoding="async"
-           style="width:100%;border-radius:16px;aspect-ratio:16/9;object-fit:cover;margin:18px 0" />
-      <p class="pl-photo-note">※ 掲載写真はイメージ写真です。実際のスタッフではありません。</p>
+      <h1 class="pl-h1">プルメリアで働く</h1>
+      <p class="pl-sec-lead">介護職・看護職の募集情報をご案内します。</p>
+      <img class="pl-page-photo" src="/images/plumeria/recruit-01.webp" alt="スタッフどうしが会話する様子（イメージ）" width="1200" height="675" decoding="async" />
+      <p class="pl-photo-note">写真はイメージです。実際のスタッフとは異なります。</p>
     </div>
   </section>
-
   <section class="pl-sec">
     <div class="pl-wrap">
       <h2 class="pl-h2">募集職種</h2>
-      <div class="pl-compare-table-wrap">
-        <table class="pl-compare-table">
-          <thead><tr><th scope="col">職種</th><th scope="col">雇用形態</th><th scope="col">勤務地</th></tr></thead>
-          <tbody>
-            {positions.map((p) => (
-              <tr><th scope="row">{p.name}</th><td>{p.employment}</td><td>{p.location}</td></tr>
-            ))}
-          </tbody>
-        </table>
+      <p class="pl-sec-lead">現在の公式サイトに掲載されている職種です。クリックすると詳しい条件が開きます。募集状況・勤務条件はご応募前にご確認ください。</p>
+      <div class="pl-job-list">
+        {positions.map((p) => <details class="pl-purpose-guide pl-job-card">
+          <summary>
+            <span class="pl-h3">{p.name}</span>
+            <span class="pl-body pl-job-employment">{p.employment}</span>
+          </summary>
+          <dl class="pl-access-list pl-job-detail">
+            <div><dt>給与</dt><dd>{p.pay}</dd></div>
+            <div><dt>勤務時間</dt><dd>{p.hours}</dd></div>
+            <div><dt>休日</dt><dd>{p.holiday}</dd></div>
+            <div><dt>応募資格</dt><dd>{p.requirement}</dd></div>
+            <div><dt>待遇</dt><dd>{p.benefits}</dd></div>
+            <div><dt>仕事内容</dt><dd>{p.jobContent}</dd></div>
+            <div><dt>採用担当</dt><dd>{p.contact}</dd></div>
+          </dl>
+          <a class="pl-more" href={p.url} data-astro-reload>公式の募集要項を見る →</a>
+        </details>)}
       </div>
-      <p class="pl-note">※ 給与・待遇・勤務条件は確認中です。正式な募集要項は個別にご案内します。</p>
+      <p class="pl-note">掲載元の更新日：2025年11月12日／本デモでの確認日：2026年9月8日</p>
     </div>
   </section>
-
-  <section class="pl-sec pl-sec-beige">
-    <div class="pl-wrap">
-      <h2 class="pl-h2">職場のご紹介</h2>
-      <p class="pl-body">
-        住まい・ショートステイ・訪問介護・訪問看護・居宅介護支援・福祉用具を同じグループで運営しています。
-        職場の雰囲気や働きやすさについては、見学時に直接ご確認いただけます。
-        （職員の声・具体的な職場紹介は確認中です）
-      </p>
-    </div>
-  </section>
-
-  <section class="pl-sec">
-    <div class="pl-wrap" style="max-width:640px">
-      <h2 class="pl-h2">応募方法</h2>
-      <div class="pl-form-disabled-banner">
-        <strong>このフォームからは送信されません。</strong><br />
-        修正版ラフの確認用フォームです。一般のお問い合わせとは別の応募専用枠として設けています。
-        実際の送信・保存・外部送信は行われません。
-      </div>
-
-      <form id="pl-recruit-form" novalidate data-pl-recruit-form>
-        <div class="pl-form-field">
-          <label for="pl-r-name">お名前<span class="pl-required">必須</span></label>
-          <input type="text" id="pl-r-name" name="name" required autocomplete="name" />
-          <p class="pl-form-error-text" data-error-for="name" hidden></p>
-        </div>
-        <div class="pl-form-field">
-          <label for="pl-r-contact">ご連絡先（電話番号またはメールアドレス）<span class="pl-required">必須</span></label>
-          <input type="text" id="pl-r-contact" name="contactInfo" required />
-          <p class="pl-form-error-text" data-error-for="contactInfo" hidden></p>
-        </div>
-        <div class="pl-form-field">
-          <label for="pl-r-position">希望職種<span class="pl-required">必須</span></label>
-          <select id="pl-r-position" name="position" required>
-            <option value="">選択してください</option>
-            <option value="care-staff">介護スタッフ</option>
-            <option value="nurse">看護師</option>
-            <option value="undecided">まだ決まっていない</option>
-          </select>
-          <p class="pl-form-error-text" data-error-for="position" hidden></p>
-        </div>
-        <div class="pl-form-field">
-          <label for="pl-r-message">メッセージ（任意）</label>
-          <textarea id="pl-r-message" name="message" rows="4"></textarea>
-        </div>
-        <button type="submit" class="pl-btn pl-btn-main" style="width:100%;justify-content:center;margin-top:10px">
-          この内容を確認する
-        </button>
-        <p class="pl-form-success" role="status" hidden data-pl-success>
-          入力内容の確認ができました。このラフでは実際の送信は行われません。
-        </p>
-        <p class="pl-form-error" role="alert" hidden data-pl-form-error>
-          未入力の必須項目があります。エラー表示の項目をご確認ください。
-        </p>
-      </form>
+  <section class="pl-sec pl-sec-beige" id="application">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">応募・職場見学について</h2>
+      <p class="pl-body">ご希望の職種を添えて、採用窓口へお問い合わせください。</p>
+      <a class="pl-desk" href={`tel:${corp.tel?.replaceAll('-', '')}`} data-pl-gtag="phone_click" data-pl-service="recruit" data-pl-cta="recruit_desk"><span>採用窓口</span><strong>{corp.tel}</strong></a>
+      <p class="pl-note">公式募集要項の受付時間：平日10:00〜17:30</p>
+      <details class="pl-purpose-guide">
+        <summary>応募フォームの入力デモを見る</summary>
+        <PlumeriaDemoForm kind="recruit" />
+      </details>
     </div>
   </section>
 </PlumeriaLayout>
-
-<script>
-  function initRecruitForm() {
-    const form = document.querySelector<HTMLFormElement>('[data-pl-recruit-form]');
-    if (!form || form.dataset.initialized) return;
-    form.dataset.initialized = 'true';
-    const successEl = form.querySelector<HTMLElement>('[data-pl-success]');
-    const formErrorEl = form.querySelector<HTMLElement>('[data-pl-form-error]');
-
-    function fieldError(name: string): HTMLElement | null {
-      return form!.querySelector(`[data-error-for="${name}"]`);
-    }
-    function validate(): boolean {
-      let firstInvalid: HTMLElement | null = null;
-      let ok = true;
-      const fields: [string, string][] = [
-        ['name', 'お名前を入力してください。'],
-        ['contactInfo', 'ご連絡先を入力してください。'],
-        ['position', '希望職種を選択してください。'],
-      ];
-      fields.forEach(([name, message]) => {
-        const el = form!.querySelector<HTMLInputElement | HTMLSelectElement>(`[name="${name}"]`);
-        const errorEl = fieldError(name);
-        const invalid = !el || !el.value.trim();
-        if (errorEl) { errorEl.textContent = invalid ? message : ''; errorEl.hidden = !invalid; }
-        if (invalid) { ok = false; if (!firstInvalid && el) firstInvalid = el; }
-      });
-      if (firstInvalid) (firstInvalid as HTMLElement).focus();
-      return ok;
-    }
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (successEl) successEl.hidden = true;
-      if (formErrorEl) formErrorEl.hidden = true;
-      if (!validate()) { if (formErrorEl) formErrorEl.hidden = false; return; }
-      if (successEl) successEl.hidden = false;
-    });
-  }
-  initRecruitForm();
-  document.addEventListener('astro:page-load', initRecruitForm);
-</script>

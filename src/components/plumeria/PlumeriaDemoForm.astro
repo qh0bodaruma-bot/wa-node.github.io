@@ -1,0 +1,60 @@
+---
+import { contactCategories, routes } from '../../data/plumeria';
+interface Props { kind: 'contact' | 'recruit' }
+const { kind } = Astro.props;
+const recruit = kind === 'recruit';
+const prefix = `pl-${kind}`;
+const choices = recruit ? [
+  { value: 'care-staff', label: '介護職員・ヘルパー' },
+  { value: 'nurse', label: '看護師' },
+  { value: 'undecided', label: 'まだ決まっていない' },
+] : contactCategories;
+---
+<div class="pl-form-disabled-banner">
+  <strong>入力を試せるデモです。送信はされません。</strong>
+  <p>実際の氏名・連絡先・病歴などは入力せず、架空の内容でお試しください。</p>
+</div>
+<noscript><p class="pl-note">入力デモにはJavaScriptが必要です。実際のご連絡は、上記の公式窓口をご利用ください。</p></noscript>
+<form data-pl-demo-form={kind} id={prefix} novalidate>
+  <fieldset disabled class="pl-form-fields">
+    <legend class="pl-sr">{recruit ? '応募' : '相談'}フォームの入力デモ</legend>
+    <div class="pl-form-field">
+      <label for={`${prefix}-name`}>お名前<span class="pl-required">必須</span></label>
+      <input id={`${prefix}-name`} name="name" required autocomplete="off" maxlength="100" aria-describedby={`${prefix}-name-error`} />
+      <p id={`${prefix}-name-error`} class="pl-form-error-text" data-error-for="name" hidden></p>
+    </div>
+    <div class="pl-form-field">
+      <label for={`${prefix}-contact`}>電話番号またはメールアドレス<span class="pl-required">必須</span></label>
+      <input id={`${prefix}-contact`} name="contactInfo" required autocomplete="off" maxlength="254" aria-describedby={`${prefix}-contact-error`} />
+      <p id={`${prefix}-contact-error`} class="pl-form-error-text" data-error-for="contactInfo" hidden></p>
+    </div>
+    <div class="pl-form-field">
+      <label for={`${prefix}-category`}>{recruit ? '希望職種' : 'ご相談したいサービス'}<span class="pl-required">必須</span></label>
+      <select id={`${prefix}-category`} name="category" required aria-describedby={`${prefix}-category-error`}>
+        <option value="">選択してください</option>
+        {choices.map((c) => <option value={c.value}>{c.label}</option>)}
+      </select>
+      <p id={`${prefix}-category-error`} class="pl-form-error-text" data-error-for="category" hidden></p>
+    </div>
+    {!recruit && <div class="pl-form-field" data-pl-unit-field hidden>
+      <label for={`${prefix}-unit`}>ご希望の住宅（任意）</label>
+      <select id={`${prefix}-unit`} name="unit">
+        <option value="">まだ決まっていない</option><option value="1">プルメリアⅠ</option><option value="2">プルメリアⅡ</option>
+      </select>
+    </div>}
+    <div class="pl-form-field">
+      <label for={`${prefix}-message`}>{recruit ? 'メッセージ（任意）' : 'ご相談内容'}{!recruit && <span class="pl-required">必須</span>}</label>
+      <textarea id={`${prefix}-message`} name="message" rows="4" required={!recruit} maxlength="2000" aria-describedby={`${prefix}-message-error`}></textarea>
+      <p id={`${prefix}-message-error`} class="pl-form-error-text" data-error-for="message" hidden></p>
+    </div>
+    <p class="pl-form-note"><a href={routes.privacy}>個人情報の取扱いについて（確認用）</a></p>
+    <button type="button" class="pl-btn pl-btn-main" data-pl-check>入力内容をチェック（送信なし）</button>
+    <p class="pl-form-success" role="status" tabindex="-1" hidden data-pl-success>入力内容を確認できました。デモのため送信・予約・応募は完了していません。</p>
+    <p class="pl-form-error" role="alert" hidden data-pl-form-error>入力内容をご確認ください。該当する項目に説明を表示しています。</p>
+  </fieldset>
+</form>
+<script>
+  import { initPlumeriaForms } from '../../scripts/plumeriaForms';
+  initPlumeriaForms();
+  document.addEventListener('astro:page-load', initPlumeriaForms);
+</script>

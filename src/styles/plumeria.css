@@ -162,11 +162,11 @@
     font-size: 19px;
     font-weight: 700;
   }
-  .pl-btn-main:hover { background: #3cb096; border-color: #3cb096; }
+  .pl-btn-main:hover { background: #1d6151; border-color: #1d6151; }
 
   /* 小さい文字のCTAは同系の濃いめ。白文字で 5.5:1 */
   .pl-btn-deep { background: var(--green-deep); border-color: var(--green-deep); color: #fff; }
-  .pl-btn-deep:hover { background: var(--green); border-color: var(--green); }
+  .pl-btn-deep:hover { background: #1d6151; border-color: #1d6151; }
 
   /* 電話・緊急連絡は濃いフォレストグリーン */
   .pl-btn-ink { background: var(--ink); border-color: var(--ink); color: #fff; }
@@ -809,11 +809,12 @@
   .pl-float-seg:hover { background: color-mix(in srgb, var(--bg) 14%, transparent); }
   .pl-float-seg-icon {
     display: grid; place-items: center;
-    width: 30px; height: 30px;
+    width: 60px; height: 60px;
     border-radius: 50%;
-    background: color-mix(in srgb, var(--bg) 18%, transparent);
+    background: var(--bg);
+    color: var(--green-deep);
   }
-  .pl-float-seg-icon svg { width: 17px; height: 17px; }
+  .pl-float-seg-icon svg { width: 34px; height: 34px; }
   .pl-float-seg-tel { position: relative; font-size: 13px; }
   .pl-float-seg-tel::after {
     content: '';
@@ -827,8 +828,8 @@
   .pl-float-seg-main { font-size: 17px; font-weight: 700; }
   @media (max-width: 480px) {
     .pl-float-seg { min-height: 92px; padding: 12px 18px; gap: 5px; }
-    .pl-float-seg-icon { width: 26px; height: 26px; }
-    .pl-float-seg-icon svg { width: 15px; height: 15px; }
+    .pl-float-seg-icon { width: 52px; height: 52px; }
+    .pl-float-seg-icon svg { width: 30px; height: 30px; }
     .pl-float-seg-tel { font-size: 12px; }
     .pl-float-seg-main { font-size: 15px; }
   }
@@ -847,8 +848,7 @@
   @media (prefers-reduced-motion: no-preference) {
     .pl-float-cta {
       animation:
-        pl-float-cta-in 0.55s cubic-bezier(.2, .8, .3, 1.2) both,
-        pl-float-cta-breathe 3.2s ease-in-out 0.55s infinite;
+        pl-float-cta-in 0.35s ease-out both;
     }
   }
 
@@ -1165,7 +1165,111 @@
   .pl-service-intro-grid { grid-template-columns: 1fr; }
 }
 
-/* ── かんたん案内チェック（診断ウィジェット） ─────── */
+/* 2026-09 review: readable service guide and compact, keyboard-safe controls. */
+.pl [hidden] { display: none !important; }
+.pl { --green: #257562; padding-bottom: 170px; overflow-wrap: anywhere; }
+.pl :is(a, button, summary, [tabindex]):focus-visible { outline: 3px solid #a34d12; outline-offset: 4px; }
+.pl :is(section[id], div[id], main[id]) { scroll-margin-top: 120px; }
+.pl-head { z-index: 50; }
+.pl-head-inner { max-width: calc(100% - 24px); gap: 10px; }
+.pl-nav a { width: 88px; color: inherit; }
+.pl-nav a:last-child { display: none; }
+.pl-nav a[aria-current="page"] { background: var(--mint); color: var(--green-deep); }
+.pl-head-recruit { color: var(--ink); background: #f5cba3; border-radius: 999px; padding: 9px 16px; text-decoration: none; white-space: nowrap; font-size: 14px; font-weight: 700; }
+.pl-menu[open] .pl-menu-list { max-height: calc(100dvh - 180px); overflow-y: auto; max-width: calc(100vw - 36px); min-width: min(290px, calc(100vw - 36px)); }
+.pl-menu-list a { white-space: normal; }
+.pl-skip { position: fixed; left: 16px; top: -100px; z-index: 100; background: white; color: var(--ink); padding: 12px 20px; }
+.pl-skip:focus { top: 12px; }
+.pl-body, .pl-sec-lead, .pl-access-list dd { font-size: 16px; line-height: 1.85; }
+.pl-note, .pl-photo-note { font-size: 13px; }
+.pl-sec { padding-block: clamp(32px, 4.5vw, 58px); }
+.pl-sec-tight { padding-block: 28px; }
+.pl-h2 { margin-bottom: 22px; }
+.pl .pl-sec-lead { margin-bottom: 24px; }
+.pl-reading { max-width: 760px; }
+.pl-reading > * + * { margin-top: 18px; }
+.pl-page-photo { width: 100%; max-height: 340px; border-radius: 16px; aspect-ratio: 16/9; object-fit: cover; }
+.pl-hero-photo { height: clamp(240px, 27vw, 360px); }
+.pl-hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); margin-top: -40px; }
+.pl-tile-sub { font-size: 12px; color: var(--muted); }
+.pl-hero-copy .pl-more { display: inline-block; margin-top: 18px; }
+.pl-recruit-strip { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-block: 28px 4px; border-radius: 14px; padding: 18px 24px; background: #f5e7d5; color: var(--ink); text-decoration: none; }
+.pl-recruit-strip > span:first-child { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: baseline; }
+.pl-recruit-strip > span:last-child { font-weight: 700; }
+.pl-purpose-guide { padding: 18px 22px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+.pl-purpose-guide > summary { cursor: pointer; font-size: 17px; font-weight: 700; min-height: 44px; align-content: center; }
+.pl-job-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
+.pl-job-card > summary { display: flex; flex-direction: column; gap: 4px; }
+.pl-job-employment { font-weight: 400; color: var(--muted, #6b6b62); }
+.pl-job-detail { margin: 16px 0; }
+@media (max-width: 720px) {
+  .pl-job-list { grid-template-columns: 1fr; }
+}
+.pl-guide-hint { font-size: 13px; font-weight: 400; margin-left: 12px; }
+.pl-purpose-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-block: 16px !important; }
+.pl-purpose-list a { display: grid; gap: 8px; height: 100%; padding: 16px; background: var(--mint); border-radius: 10px; text-decoration: none; }
+.pl-purpose-list strong { color: var(--green-deep); }
+.pl-page-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block: 18px; }
+.pl-page-nav a { border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; text-decoration: none; font-size: 14px; }
+.pl-check-list { list-style: disc !important; padding-left: 1.4em !important; }
+.pl-cost-summary { margin-top: 22px; padding: 20px; background: var(--mint); border-radius: 12px; }
+.pl-service-intro-grid { margin-top: 24px; }
+.pl-service-intro-card img { max-height: 210px; width: 100%; }
+.pl-service-intro-card:hover { outline: 1px solid var(--green-deep); }
+.pl-form-fields { padding: 0; margin: 0; border: 0; min-width: 0; }
+.pl-form-field :is(input, select, textarea) { width: 100%; min-width: 0; }
+.pl-form-field [aria-invalid="true"] { border: 2px solid #a12f24; }
+.pl-form-error-text { color: #a12f24; }
+.pl-form-fields [data-pl-check] { width: 100%; margin-block: 16px; }
+.pl-contact-desks { scroll-margin-top: 120px; }
+.pl-desk { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; padding: 18px 20px; margin-block: 14px; color: var(--ink); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; background: white; }
+.pl-desk strong { font-size: 21px; }
+.pl-float-cta { bottom: calc(12px + env(safe-area-inset-bottom)); right: 16px; border-radius: 18px; }
+.pl-float-seg { min-height: 64px; padding: 10px 20px; gap: 8px; font-size: 15px; }
+.pl-float-cta .pl-btn-tel-no { font-size: 19px; }
+.pl-print-tools { padding-block: 18px; text-align: right; }
+.pl-print-button { padding: 10px 16px; border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--ink); font: inherit; cursor: pointer; }
+.pl-compare-table caption { text-align: left; padding: 8px 14px; color: var(--muted); }
+@media (max-width: 1100px) {
+  .pl-nav { display: none; }
+  .pl-menu { display: block; }
+}
+@media (max-width: 1000px) {
+  .pl-hero-inner { grid-template-columns: 1fr; }
+  .pl-hero-photo { height: 250px; }
+}
+@media (max-width: 600px) {
+  .pl-head-inner { padding: 6px 10px; width: calc(100% - 24px); }
+  .pl-brand-name { font-size: 16px; }
+  .pl-brand { gap: 6px; }
+  .pl-head-recruit { margin-left: auto; padding: 9px 12px; font-size: 13px; }
+  .pl-menu { margin-left: 0; }
+  .pl-head { top: 6px; }
+  .pl-hero-photo { height: 220px; }
+  .pl-purpose-list { grid-template-columns: 1fr; }
+  .pl-recruit-strip { align-items: start; flex-direction: column; padding: 16px 20px; }
+  .pl-float-cta { left: 12px; right: 12px; }
+  .pl-float-seg { flex: 1; min-width: 0; padding: 10px 6px; font-size: 14px; }
+  .pl-float-cta .pl-btn-tel-no { font-size: 18px; }
+  .pl-guide-hint { display: block; margin-left: 0; }
+}
+@media print {
+  .pl { padding: 0; background: white; color: #111; font-size: 11pt; }
+  .pl :is(.pl-head, .pl-float-cta, .pl-print-tools, .pl-skip, .pl-hill, .pl-deco-flower, .pl-slider-ui, .pl-page-nav, form, .pl-form-disabled-banner) { display: none !important; }
+  .pl * { animation: none !important; transition: none !important; opacity: 1 !important; transform: none !important; box-shadow: none !important; }
+  .pl-wrap { width: 100%; max-width: none; }
+  .pl-sec { padding-block: 12px; background: white; }
+  .pl img { max-height: 160px; object-fit: cover; }
+  .pl-compare-table-wrap { overflow: visible; }
+  .pl-compare-table { min-width: 0; }
+  .pl :is(h1, h2, h3) { break-after: avoid; }
+  .pl :is(tr, .pl-card, .pl-access-list > div) { break-inside: avoid; }
+  .pl .pl-foot { padding-block: 20px; background: white; }
+  .pl details > * { display: block; }
+  .pl details::details-content { content-visibility: visible; }
+}
+
+/* Legacy quiz styling retained for isolated older demos. */
 .pl-quiz { max-width: 620px; margin: 32px auto 0; }
 .pl-quiz-fallback { text-align: center; }
 .pl-quiz-app {

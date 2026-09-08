@@ -53,7 +53,7 @@ export const housingUnits: PlumeriaHousingUnit[] = [
     id: '1', name: 'プルメリアⅠ',
     kind: '自立・介護予防向け',
     roomType: '1DK・1LDK（A/B/Cタイプ）',
-    roomSize: '40.50〜49.05㎡',
+    roomSize: '居室36.00〜45.80㎡（ベランダ別）',
     priceFrom: '月額 100,540円〜',
     deposit: '敷金 300,000〜360,000円',
     target: '60歳以上の方',
@@ -96,7 +96,7 @@ export const services: PlumeriaService[] = [
   {
     id: 'short-stay', name: 'ショートステイ', short: 'ショートステイ', tagline: 'プルメリアⅢ（短期入所）',
     icon: 'bed', href: `${PLUMERIA_BASE}/short-stay/`,
-    summary: '数日からの短期入所です。ご家族の休息やご用事の間、お預かりします。',
+    summary: 'ご家族の休息や外出の間、短期間宿泊して介護を受けられます。',
     img: '/images/plumeria/services-03.webp',
     alt: '共用スペースの入口で入居者を迎えているスタッフ（イメージ）',
   },
@@ -110,7 +110,7 @@ export const services: PlumeriaService[] = [
   {
     id: 'home-nursing', name: '訪問看護', short: '訪問看護', tagline: '看護師がご自宅へ訪問します',
     icon: 'care', href: `${PLUMERIA_BASE}/home-nursing/`,
-    summary: '看護師がご自宅を訪問し、健康状態の確認や医療的なケアを行います。24時間365日対応。',
+    summary: '看護師がご自宅で、体調の確認や医師の指示に基づくケアを行います。',
     img: '/images/plumeria/services-04.webp',
     alt: 'ご自宅のリビングで看護師が健康状態を確認している様子（イメージ）',
   },
@@ -122,9 +122,9 @@ export const services: PlumeriaService[] = [
     alt: 'ご家族が自宅のダイニングで相談している様子（イメージ）',
   },
   {
-    id: 'welfare-equipment', name: '福祉用具', short: '福祉用具', tagline: '新サービス：用具の貸与・選定相談',
+    id: 'welfare-equipment', name: '福祉用具', short: '福祉用具', tagline: '用具選びのご相談',
     icon: 'chair', href: `${PLUMERIA_BASE}/welfare-equipment/`,
-    summary: '歩行器や介護ベッドなど、暮らしに合う福祉用具をご提案します。新しく始めたサービスです。',
+    summary: '歩行器や介護ベッドなど、暮らしに合う用具を相談するサービスです。',
     img: '/images/plumeria/services-05.webp',
     alt: '歩行器の使い方をスタッフが説明している様子（イメージ）',
   },
@@ -174,6 +174,6 @@ export const contactCategories = [
   { value: 'home-care', label: '訪問介護' },
   { value: 'home-nursing', label: '訪問看護' },
   { value: 'care-management', label: '居宅介護支援' },
-  { value: 'welfare-equipment', label: '福祉用具（新サービス）' },
+  { value: 'welfare-equipment', label: '福祉用具' },
   { value: 'undecided', label: 'まだ決まっていない' },
 ] as const;

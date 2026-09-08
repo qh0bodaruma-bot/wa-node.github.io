@@ -41,16 +41,19 @@ const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCateg
     <div class="pl-wrap">
       <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">{heroTitle}</h1>
       <p class="pl-sec-lead">{heroLead}</p>
+      <nav class="pl-page-nav" aria-label="このページの内容">
+        <a href="#support">できること</a><a href="#conditions">対象・費用</a><a href="#flow">利用の流れ</a><a href="#questions">よくある質問</a>
+      </nav>
       <img src={heroImg} alt={heroAlt} width="1200" height="675" loading="eager" decoding="async"
            style="width:100%;border-radius:16px;aspect-ratio:16/9;object-fit:cover;margin:18px 0" />
       <p class="pl-photo-note">※ 掲載写真はイメージ写真です。実際の施設・スタッフではありません。</p>
     </div>
   </section>
 
-  <section class="pl-sec">
+  <section class="pl-sec" id="support">
     <div class="pl-wrap">
-      <h2 class="pl-h2">どのような相談に向いているか</h2>
-      <ul class="pl-body">
+      <h2 class="pl-h2">こんなときにご相談ください</h2>
+      <ul class="pl-body pl-check-list">
         {fitFor.map((f) => <li>{f}</li>)}
       </ul>
     </div>
@@ -70,25 +73,22 @@ const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCateg
     </div>
   </section>
 
-  <section class="pl-sec">
+  <section class="pl-sec" id="conditions">
     <div class="pl-wrap">
-      <h2 class="pl-h2">対象となる方・対応地域・利用条件</h2>
+      <h2 class="pl-h2">対象・利用条件</h2>
       <dl class="pl-access-list">
         {targetInfo.map((t) => (
           <div><dt>{t.label}</dt><dd>{t.body}</dd></div>
         ))}
       </dl>
+      <div class="pl-cost-summary">
+        <h3 class="pl-h3">費用の目安</h3>
+        <p class="pl-body">{costInfo}</p>
+      </div>
     </div>
   </section>
 
-  <section class="pl-sec pl-sec-beige">
-    <div class="pl-wrap">
-      <h2 class="pl-h2">費用について</h2>
-      <p class="pl-body">{costInfo}</p>
-    </div>
-  </section>
-
-  <section class="pl-sec">
+  <section class="pl-sec pl-sec-beige" id="flow">
     <div class="pl-wrap">
       <h2 class="pl-h2">利用までの流れ</h2>
       <ol class="pl-body" style="counter-reset:pl-step">
@@ -99,7 +99,7 @@ const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCateg
     </div>
   </section>
 
-  <section class="pl-sec pl-sec-beige">
+  <section class="pl-sec" id="questions">
     <div class="pl-wrap">
       <h2 class="pl-h2">よくあるご質問</h2>
       <div class="pl-faq-list">

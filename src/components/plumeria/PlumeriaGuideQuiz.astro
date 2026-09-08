@@ -1,225 +1,27 @@
 ---
-// かんたん案内チェック：3問の質問に答えると、合いそうなサービスをその場でご案内する。
-// 個人情報は一切収集せず、回答はブラウザ内の条件分岐のみで完結する（送信・保存なし）。
-import { services, routes } from '../../data/plumeria';
-
-const quizPayload = {
-  services: services.map((s) => ({
-    id: s.id,
-    name: s.name,
-    summary: s.summary,
-    href: s.href,
-  })),
-  contactBase: routes.contact,
-};
+import { routes } from '../../data/plumeria';
+const choices = [
+  { text: '暮らしを見守ってもらえる住まいを探したい', label: '住宅Ⅰ・Ⅱ', href: routes.housing, id: 'housing' },
+  { text: '家族の休息や外出の間、短期間泊まりたい', label: 'ショートステイⅢ', href: routes.shortStay, id: 'short-stay' },
+  { text: '自宅での入浴・食事や家事を手伝ってほしい', label: '訪問介護', href: routes.homeCare, id: 'home-care' },
+  { text: '自宅で体調管理や医療的なケアを受けたい', label: '訪問看護', href: routes.homeNursing, id: 'home-nursing' },
+  { text: '介護の手続きやサービスの組み合わせを相談したい', label: '居宅介護支援', href: routes.careManagement, id: 'care-management' },
+  { text: '歩行器や介護ベッドなどを相談したい', label: '福祉用具', href: routes.welfareEquipment, id: 'welfare-equipment' },
+];
 ---
-<section class="pl-sec pl-sec-beige" id="guide">
+<section class="pl-sec pl-sec-tight" id="guide">
   <div class="pl-wrap">
-    <h2 class="pl-h2"><span class="pl-h2-en">GUIDE</span>かんたん案内チェック</h2>
-    <p class="pl-sec-lead">3つの質問に答えると、合いそうなサービスの目安をご案内します。詳しいご案内はあらためて個別にご相談ください。</p>
-
-    <div class="pl-quiz" data-pl-quiz>
-      <div class="pl-quiz-fallback" data-pl-quiz-fallback>
-        <p class="pl-body">ご案内チェックの準備中です。すぐに知りたい方はサービス一覧からお選びください。</p>
-        <a class="pl-more" href={routes.services}>サービス一覧を見る →</a>
-      </div>
-
-      <div class="pl-quiz-app" data-pl-quiz-app hidden>
-        <script type="application/json" data-pl-quiz-data set:html={JSON.stringify(quizPayload)} />
-
-        <p class="pl-quiz-step-label" data-pl-quiz-progress aria-live="polite"></p>
-
-        <fieldset class="pl-quiz-step" data-pl-quiz-step="0">
-          <legend class="pl-quiz-question">今、一番知りたいことは？</legend>
-          <div class="pl-quiz-options">
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="housing" /><span>住む場所について</span></label>
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="visit" /><span>自宅での介護・看護について</span></label>
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="shortstay" /><span>数日だけ泊まれる場所を探している</span></label>
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="equipment" /><span>車椅子や介護ベッドなど道具について</span></label>
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="unsure" /><span>何から相談したらいいか分からない</span></label>
-          </div>
-        </fieldset>
-
-        <fieldset class="pl-quiz-step" data-pl-quiz-step="1" hidden>
-          <legend class="pl-quiz-question">生活の中で気になっているのは？</legend>
-          <div class="pl-quiz-options">
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q2" value="dailycare" /><span>食事・入浴・トイレなど日常の介助</span></label>
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q2" value="medical" /><span>体調管理や医療的なケア</span></label>
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q2" value="stayhome" /><span>今の住まいのままで大丈夫か</span></label>
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q2" value="unsure" /><span>特に決まっていない</span></label>
-          </div>
-        </fieldset>
-
-        <fieldset class="pl-quiz-step" data-pl-quiz-step="2" hidden>
-          <legend class="pl-quiz-question">今の状況に近いのは？</legend>
-          <div class="pl-quiz-options">
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q3" value="info" /><span>まずは情報だけ知りたい</span></label>
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q3" value="soon" /><span>近いうちに見学・相談したい</span></label>
-            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q3" value="now" /><span>すぐにでも相談したい</span></label>
-          </div>
-        </fieldset>
-
-        <div class="pl-quiz-nav" data-pl-quiz-nav>
-          <button type="button" class="pl-btn pl-btn-outline pl-btn-sm" data-pl-quiz-back hidden>戻る</button>
-          <button type="button" class="pl-btn pl-btn-main pl-btn-sm" data-pl-quiz-next disabled>次へ</button>
-        </div>
-
-        <div class="pl-quiz-result" data-pl-quiz-result hidden></div>
-      </div>
-    </div>
+    <details class="pl-purpose-guide">
+      <summary><span>どのサービスか迷ったら</span><span class="pl-guide-hint">目的から探す</span></summary>
+      <p class="pl-note">今のお困りごとに近いものから、サービスの説明をご覧ください。</p>
+      <ul class="pl-purpose-list">
+        {choices.map((c) => (
+          <li><a href={c.href} data-pl-gtag="service_select" data-pl-service={c.id} data-pl-cta="purpose_guide">
+            <span>{c.text}</span><strong>{c.label} →</strong>
+          </a></li>
+        ))}
+      </ul>
+      <p class="pl-note">サービスの利用条件は、各窓口でご確認ください。</p>
+    </details>
   </div>
 </section>
-
-<script>
-  import { initPlumeriaClickTracking } from '../../scripts/plumeriaAnalytics';
-
-  interface QuizService { id: string; name: string; summary: string; href: string }
-  interface QuizPayload { services: QuizService[]; contactBase: string }
-
-  (function () {
-    const root = document.querySelector<HTMLElement>('[data-pl-quiz]');
-    if (!root) return;
-    const fallback = root.querySelector<HTMLElement>('[data-pl-quiz-fallback]');
-    const app = root.querySelector<HTMLElement>('[data-pl-quiz-app]');
-    const dataEl = root.querySelector<HTMLScriptElement>('[data-pl-quiz-data]');
-    if (!fallback || !app || !dataEl) return;
-
-    let payload: QuizPayload;
-    try {
-      payload = JSON.parse(dataEl.textContent || '{}');
-    } catch {
-      return;
-    }
-    if (!Array.isArray(payload.services) || !payload.contactBase) return;
-
-    const steps = [...app.querySelectorAll<HTMLElement>('[data-pl-quiz-step]')];
-    const nav = app.querySelector<HTMLElement>('[data-pl-quiz-nav]');
-    const nextBtn = app.querySelector<HTMLButtonElement>('[data-pl-quiz-next]');
-    const backBtn = app.querySelector<HTMLButtonElement>('[data-pl-quiz-back]');
-    const progress = app.querySelector<HTMLElement>('[data-pl-quiz-progress]');
-    const resultEl = app.querySelector<HTMLElement>('[data-pl-quiz-result]');
-    if (!steps.length || !nav || !nextBtn || !backBtn || !progress || !resultEl) return;
-
-    const answers: Record<string, string | null> = { 'pl-quiz-q1': null, 'pl-quiz-q2': null, 'pl-quiz-q3': null };
-    let current = 0;
-
-    function playEnter(el: HTMLElement) {
-      el.classList.remove('is-entering');
-      void el.offsetWidth;
-      el.classList.add('is-entering');
-    }
-
-    function updateNextEnabled() {
-      const name = steps[current].querySelector('input')?.getAttribute('name');
-      const checked = name ? app!.querySelector<HTMLInputElement>(`input[name="${name}"]:checked`) : null;
-      nextBtn!.disabled = !checked;
-    }
-
-    function showStep(i: number) {
-      steps.forEach((s, idx) => { s.hidden = idx !== i; });
-      backBtn!.hidden = i === 0;
-      progress!.textContent = `質問 ${i + 1} / ${steps.length}`;
-      nextBtn!.textContent = i === steps.length - 1 ? '結果を見る' : '次へ';
-      updateNextEnabled();
-      playEnter(steps[i]);
-    }
-
-    app.addEventListener('change', (e) => {
-      const target = e.target;
-      if (target instanceof HTMLInputElement && target.type === 'radio') {
-        answers[target.name] = target.value;
-        updateNextEnabled();
-      }
-    });
-
-    function computeRecommendation(): string {
-      const score: Record<string, number> = {
-        housing: 0, 'short-stay': 0, 'home-care': 0, 'home-nursing': 0, 'care-management': 0, 'welfare-equipment': 0,
-      };
-      const q1 = answers['pl-quiz-q1'];
-      const q2 = answers['pl-quiz-q2'];
-      if (q1 === 'housing') score.housing += 2;
-      if (q1 === 'visit') { score['home-care'] += 1; score['home-nursing'] += 1; }
-      if (q1 === 'shortstay') score['short-stay'] += 2;
-      if (q1 === 'equipment') score['welfare-equipment'] += 2;
-      if (q1 === 'unsure') score['care-management'] += 2;
-      if (q2 === 'dailycare') score['home-care'] += 2;
-      if (q2 === 'medical') score['home-nursing'] += 2;
-      if (q2 === 'stayhome') { score.housing += 1; score['welfare-equipment'] += 1; }
-      if (q2 === 'unsure') score['care-management'] += 1;
-
-      const order = ['housing', 'short-stay', 'home-care', 'home-nursing', 'care-management', 'welfare-equipment'];
-      let best = order[0];
-      for (const id of order) {
-        if (score[id] > score[best]) best = id;
-      }
-      return best;
-    }
-
-    function renderResult() {
-      const id = computeRecommendation();
-      const svc = payload.services.find((s) => s.id === id);
-      if (!svc) return;
-
-      const urgency = answers['pl-quiz-q3'];
-      const ctaLabel = urgency === 'now' ? 'すぐに相談する' : urgency === 'soon' ? '見学・相談を申し込む' : '詳しく相談してみる';
-      const contactHref = `${payload.contactBase}?service=${id}`;
-
-      resultEl!.innerHTML = `
-        <p class="pl-quiz-result-label">こちらが合いそうです</p>
-        <h3 class="pl-h3">${svc.name}</h3>
-        <p class="pl-body">${svc.summary}</p>
-        <div class="pl-btn-row">
-          <a class="pl-btn pl-btn-main pl-btn-sm" href="${contactHref}" data-pl-gtag="service_select" data-pl-service="${id}" data-pl-cta="guide_quiz_result">${ctaLabel}</a>
-          <a class="pl-btn pl-btn-outline pl-btn-sm" href="${svc.href}" data-pl-gtag="service_select" data-pl-service="${id}" data-pl-cta="guide_quiz_result_detail">${svc.name}を詳しく見る</a>
-        </div>
-        <p class="pl-note">※ これは簡易的な目安です。実際の状況に応じて、あらためてご相談ください。</p>
-        <button type="button" class="pl-quiz-restart" data-pl-quiz-restart>はじめからやり直す</button>
-      `;
-      steps.forEach((s) => { s.hidden = true; });
-      nav!.hidden = true;
-      progress!.hidden = true;
-      resultEl!.hidden = false;
-      playEnter(resultEl!);
-      initPlumeriaClickTracking(resultEl!);
-    }
-
-    function resetQuiz() {
-      Object.keys(answers).forEach((k) => { answers[k] = null; });
-      app!.querySelectorAll<HTMLInputElement>('input[type="radio"]').forEach((el) => { el.checked = false; });
-      current = 0;
-      resultEl!.hidden = true;
-      resultEl!.innerHTML = '';
-      nav!.hidden = false;
-      progress!.hidden = false;
-      showStep(0);
-    }
-
-    nextBtn.addEventListener('click', () => {
-      if (current < steps.length - 1) {
-        current += 1;
-        showStep(current);
-      } else {
-        renderResult();
-      }
-    });
-
-    backBtn.addEventListener('click', () => {
-      if (current > 0) {
-        current -= 1;
-        showStep(current);
-      }
-    });
-
-    resultEl.addEventListener('click', (e) => {
-      const target = e.target;
-      if (target instanceof HTMLElement && target.closest('[data-pl-quiz-restart]')) {
-        resetQuiz();
-      }
-    });
-
-    fallback.hidden = true;
-    app.hidden = false;
-    showStep(0);
-  })();
-</script>

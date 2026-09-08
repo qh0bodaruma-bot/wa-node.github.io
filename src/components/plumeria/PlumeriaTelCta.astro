@@ -1,13 +1,13 @@
 ---
 import { corp } from '../../data/plumeria';
-interface Props { class?: string; label?: string }
-const { class: className = '', label = 'お電話' } = Astro.props;
+interface Props { class?: string; label?: string; tel?: string | null; service?: string }
+const { class: className = '', label = '住宅', tel = corp.tel, service = 'housing' } = Astro.props;
 ---
-{corp.tel ? (
-  <a class={className} href={`tel:${corp.tel.replace(/[^0-9]/g, '')}`} data-pl-gtag="phone_click">
+{tel ? (
+  <a class={className} href={`tel:${tel.replace(/[^0-9]/g, '')}`} data-pl-gtag="phone_click" data-pl-service={service} data-pl-cta="sticky_contact">
     <span class="pl-float-seg-icon" aria-hidden="true"><svg><use href="#pl-i-phone" /></svg></span>
     <span class="pl-btn-label">{label}</span>
-    <span class="pl-num-face pl-btn-tel-no">{corp.tel}</span>
+    <span class="pl-num-face pl-btn-tel-no">{tel}</span>
   </a>
 ) : (
   <span class={`${className} pl-btn-pending`} aria-disabled="true">

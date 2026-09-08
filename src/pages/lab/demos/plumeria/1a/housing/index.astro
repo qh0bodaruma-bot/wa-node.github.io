@@ -2,14 +2,7 @@
 import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
 import { routes, housingUnits, corp } from '../../../../../../data/plumeria';
 
-const day = [
-  { time: '7:00', label: '起床・朝食' },
-  { time: '10:00', label: '健康チェック' },
-  { time: '12:00', label: '昼食' },
-  { time: '15:00', label: '自由時間' },
-  { time: '18:00', label: '夕食' },
-  { time: '21:00', label: '消灯' },
-];
+
 ---
 <PlumeriaLayout
   title="サービス付き高齢者向け住宅 Ⅰ・Ⅱ 比較｜プルメリア（修正版ラフ）"
@@ -38,6 +31,7 @@ const day = [
     <div class="pl-wrap">
       <div class="pl-compare-table-wrap">
         <table class="pl-compare-table">
+          <caption>住宅Ⅰ・Ⅱの比較（横にスクロールできます）</caption>
           <thead>
             <tr>
               <th scope="col">住宅</th>
@@ -45,7 +39,7 @@ const day = [
               <th scope="col">居室</th>
               <th scope="col">費用</th>
               <th scope="col">状況</th>
-              <th scope="col"></th>
+              <th scope="col">詳しいご案内</th>
             </tr>
           </thead>
           <tbody>
@@ -56,33 +50,26 @@ const day = [
                 <td>{u.roomType}<br />{u.roomSize}</td>
                 <td>{u.priceFrom}</td>
                 <td><span class="pl-pending-note">確認中</span></td>
-                <td><a class="pl-more" href={routes.housingUnit(u.id)}>詳細を見る</a></td>
+                <td><a class="pl-more" href={routes.housingUnit(u.id)}>{u.name}を見る</a></td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p class="pl-note" style="margin-top:12px">※ 所在地はいずれも{corp.address}。費用は公開情報を基にした目安です。空室状況・正式な金額は個別にご案内します。</p>
+      <p class="pl-note"><a href="https://home-plumeria.jp/plumeria0102/fee.html">公式の料金内訳を見る</a>（2026年9月8日確認）</p>
+      <p class="pl-note" style="margin-top:12px">※ 所在地はいずれも{corp.address}。金額は月額基本料金の目安で、生活費の総額ではありません。食費や介護保険自己負担分など、別途必要な費用をご確認ください。</p>
     </div>
   </section>
 
   <section class="pl-sec pl-sec-beige">
-    <div class="pl-wrap">
-      <h2 class="pl-h2"><span class="pl-h2-en">A DAY</span>一日の流れ（参考）</h2>
-      <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は住宅ごとに確認中です。</p>
-      <p class="pl-note" style="text-align:center">※ 太陽が示しているのは「今」の時刻です。すでに過ぎた時間はドットが緑色に点灯します。</p>
-      <div class="pl-day-wrap">
-        <span class="pl-day-sun" aria-hidden="true"><svg><use href="#pl-i-sun" /></svg></span>
-        <ol class="pl-day">
-          {day.map((d) => (
-            <li class="pl-day-item">
-              <span class="pl-num-face pl-day-time">{d.time}</span>
-              <span class="pl-day-dot" aria-hidden="true"></span>
-              <span class="pl-day-label">{d.label}</span>
-            </li>
-          ))}
-        </ol>
-      </div>
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">見学で確かめたいこと</h2>
+      <ul class="pl-body pl-check-list">
+        <li>居室の広さや設備が、ご自身の生活に合うか</li>
+        <li>必要な介護・看護を利用できるか</li>
+        <li>食事・光熱費・介護サービスを含めた月々の総額</li>
+      </ul>
+      <p class="pl-note">暮らし方や支援内容は、住宅とご本人の状況によって異なります。</p>
     </div>
   </section>
 
@@ -96,49 +83,3 @@ const day = [
   </section>
 </PlumeriaLayout>
 
-<script>
-  // 一日の流れ：太陽の位置と各ドットの点灯を、閲覧している今の時刻と連動させる。
-  // View Transitions でこのページに戻ってくるたびに astro:page-load が発火するので、
-  // トップレベルIIFEではなく名前付き関数として束ね、毎回タイマーを張り直す。
-  let plDayClockTimer: number | null = null;
-
-  function initPlumeriaDayClock() {
-    if (plDayClockTimer !== null) { window.clearInterval(plDayClockTimer); plDayClockTimer = null; }
-
-    const sun = document.querySelector<HTMLElement>('.pl-day-sun');
-    const items = [...document.querySelectorAll<HTMLElement>('.pl-day-item')];
-    if (!sun || !items.length) return;
-
-    const minutesOf = (item: HTMLElement): number | null => {
-      const label = item.querySelector('.pl-day-time')?.textContent?.trim() ?? '';
-      const [h, m] = label.split(':').map((v) => Number(v));
-      return Number.isFinite(h) ? h * 60 + (Number.isFinite(m) ? m : 0) : null;
-    };
-
-    const times = items.map(minutesOf);
-    if (times.some((t) => t === null) || times.length < 2) return;
-
-    const first = times[0] as number;
-    const last = times[times.length - 1] as number;
-    if (last <= first) return;
-
-    function update() {
-      const now = new Date();
-      const nowMinutes = now.getHours() * 60 + now.getMinutes();
-      const clamped = Math.min(Math.max(nowMinutes, first), last);
-      const ratio = (clamped - first) / (last - first);
-      const percent = 8 + ratio * (92 - 8);
-      sun!.style.left = `${percent}%`;
-
-      items.forEach((item, i) => {
-        const dot = item.querySelector('.pl-day-dot');
-        dot?.classList.toggle('is-past', (times[i] as number) <= nowMinutes);
-      });
-    }
-
-    update();
-    plDayClockTimer = window.setInterval(update, 60000);
-  }
-
-  document.addEventListener('astro:page-load', initPlumeriaDayClock);
-</script>

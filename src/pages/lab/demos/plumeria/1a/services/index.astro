@@ -19,8 +19,7 @@ import { routes, services } from '../../../../../../data/plumeria';
     <div class="pl-wrap">
       <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">サービス一覧・選び方</h1>
       <p class="pl-sec-lead">
-        どのサービスが合うか決まっていない場合も、まずはご相談ください。
-        現在の状況をうかがいながら、一緒に整理します。
+        住まい・短期宿泊・ご自宅での支援からお選びください。
       </p>
     </div>
   </section>
@@ -29,7 +28,7 @@ import { routes, services } from '../../../../../../data/plumeria';
     <div class="pl-wrap">
       <div class="pl-service-intro-grid">
         {services.map((s) => (
-          <a class="pl-card pl-service-intro-card" href={s.href}>
+          <a class="pl-card pl-service-intro-card" href={s.href} data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="services_list">
             <img src={s.img} alt={s.alt} width="900" height="675" loading="lazy" decoding="async" />
             <h2 class="pl-h3">{s.name}</h2>
             <p class="pl-body">{s.tagline}</p>

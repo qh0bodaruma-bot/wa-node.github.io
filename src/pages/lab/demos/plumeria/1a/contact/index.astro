@@ -1,151 +1,28 @@
 ---
 import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
-import { routes, contactCategories } from '../../../../../../data/plumeria';
+import PlumeriaDemoForm from '../../../../../../components/plumeria/PlumeriaDemoForm.astro';
+import { routes, corp, shortStayTel } from '../../../../../../data/plumeria';
 ---
-<PlumeriaLayout
-  title="お問い合わせ・ご相談｜プルメリア（修正版ラフ）"
-  description="プルメリアへのお問い合わせ・ご相談フォームです。住宅・ショートステイ・訪問介護・訪問看護・居宅介護支援・福祉用具についてご相談いただけます。"
-  currentPath={routes.contact}
->
-  <div class="pl-wrap" style="padding-top:28px">
-    <p class="pl-breadcrumb">
-      <a href={routes.top}>トップ</a>
-      <span aria-hidden="true">/</span>
-      <span>お問い合わせ・ご相談</span>
-    </p>
-  </div>
-
+<PlumeriaLayout title="お問い合わせ・ご相談｜プルメリア（デモ）" description="住宅・ショートステイの電話窓口と、各サービスの相談方法をご案内します。" currentPath={routes.contact}>
+  <div class="pl-wrap" style="padding-top:28px"><p class="pl-breadcrumb"><a href={routes.top}>トップ</a><span aria-hidden="true">/</span><span>お問い合わせ・ご相談</span></p></div>
   <section class="pl-sec pl-sec-tight">
-    <div class="pl-wrap">
-      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">お問い合わせ・ご相談</h1>
-      <p class="pl-sec-lead">
-        見学・入居のご相談、各サービスについてのご質問はこちらから承ります。
-        まだ内容が決まっていない場合もお気軽にご相談ください。
-      </p>
+    <div class="pl-wrap pl-reading">
+      <h1 class="pl-h1">見学・ご相談の窓口</h1>
+      <p class="pl-sec-lead">知りたいサービスと、現在お困りのことをお伝えください。</p>
+      <div id="contact-desks" class="pl-contact-desks">
+        <h2 class="pl-h2">お電話でのお問い合わせ</h2>
+        <p class="pl-note">公式お問い合わせページの受付時間：平日10:00〜17:00</p>
+        <a class="pl-desk" href={`tel:${corp.tel?.replaceAll('-', '')}`} data-pl-gtag="phone_click" data-pl-service="housing" data-pl-cta="contact_desk"><span>住宅 プルメリアⅠ・Ⅱ</span><strong>{corp.tel}</strong></a>
+        <a class="pl-desk" href={`tel:${shortStayTel.replaceAll('-', '')}`} data-pl-gtag="phone_click" data-pl-service="short-stay" data-pl-cta="contact_desk"><span>ショートステイ プルメリアⅢ</span><strong>{shortStayTel}</strong></a>
+        <p class="pl-note">訪問介護・訪問看護・居宅介護支援については、<a href="https://home-plumeria.jp/contact/input" data-astro-reload>現在の公式お問い合わせ窓口</a>をご確認ください。福祉用具の専用窓口は確認中です。</p>
+        <p class="pl-note">採用については<a href={routes.recruit}>採用情報</a>をご覧ください。</p>
+      </div>
     </div>
   </section>
-
-  <section class="pl-sec">
-    <div class="pl-wrap" style="max-width:640px">
-      <div class="pl-form-disabled-banner">
-        <strong>このフォームからは送信されません。</strong><br />
-        修正版ラフの確認用フォームです。入力・入力エラーの表示までご確認いただけますが、
-        実際の送信・保存・外部送信は行われません。本番の受信先は確認中です。
-      </div>
-
-      <form id="pl-contact-form" novalidate data-pl-form>
-        <div class="pl-form-field">
-          <label for="pl-name">お名前<span class="pl-required">必須</span></label>
-          <input type="text" id="pl-name" name="name" required autocomplete="name" />
-          <p class="pl-form-error-text" data-error-for="name" hidden></p>
-        </div>
-
-        <div class="pl-form-field">
-          <label for="pl-contact-info">ご連絡先（電話番号またはメールアドレス）<span class="pl-required">必須</span></label>
-          <input type="text" id="pl-contact-info" name="contactInfo" required autocomplete="tel" />
-          <p class="pl-form-error-text" data-error-for="contactInfo" hidden></p>
-        </div>
-
-        <div class="pl-form-field">
-          <label for="pl-category">ご相談内容の分類<span class="pl-required">必須</span></label>
-          <select id="pl-category" name="category" required>
-            <option value="">選択してください</option>
-            {contactCategories.map((c) => <option value={c.value}>{c.label}</option>)}
-          </select>
-          <p class="pl-form-error-text" data-error-for="category" hidden></p>
-        </div>
-
-        <div class="pl-form-field">
-          <label for="pl-message">ご相談内容<span class="pl-required">必須</span></label>
-          <textarea id="pl-message" name="message" rows="5" required></textarea>
-          <p class="pl-form-error-text" data-error-for="message" hidden></p>
-        </div>
-
-        <p class="pl-form-note">
-          入力いただいた内容は、<a href={routes.privacy}>個人情報の取扱いについて</a>に沿って取り扱います（本番の運用方針は確認中です）。
-        </p>
-
-        <button type="submit" class="pl-btn pl-btn-main" style="width:100%;justify-content:center;margin-top:10px">
-          この内容を確認する
-        </button>
-
-        <p class="pl-form-success" role="status" hidden data-pl-success>
-          入力内容の確認ができました。このラフでは実際の送信は行われません。
-        </p>
-        <p class="pl-form-error" role="alert" hidden data-pl-form-error>
-          未入力の項目があります。エラー表示の項目をご確認ください。
-        </p>
-      </form>
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">相談フォーム（入力デモ）</h2>
+      <PlumeriaDemoForm kind="contact" />
     </div>
   </section>
 </PlumeriaLayout>
-
-<script>
-  import { contactCategories } from '../../../../../../data/plumeria';
-
-  function preselectCategory() {
-    const select = document.querySelector<HTMLSelectElement>('#pl-category');
-    if (!select) return;
-    const params = new URLSearchParams(window.location.search);
-    const service = params.get('service');
-    if (!service) return;
-    const match = contactCategories.find((c) => c.value === service);
-    if (match) select.value = match.value;
-  }
-
-  function initContactForm() {
-    const form = document.querySelector<HTMLFormElement>('[data-pl-form]');
-    if (!form || form.dataset.initialized) return;
-    form.dataset.initialized = 'true';
-
-    const successEl = form.querySelector<HTMLElement>('[data-pl-success]');
-    const formErrorEl = form.querySelector<HTMLElement>('[data-pl-form-error]');
-
-    function fieldError(name: string): HTMLElement | null {
-      return form!.querySelector(`[data-error-for="${name}"]`);
-    }
-
-    function validate(): boolean {
-      let firstInvalid: HTMLElement | null = null;
-      let ok = true;
-      const fields: [string, string][] = [
-        ['name', 'お名前を入力してください。'],
-        ['contactInfo', 'ご連絡先を入力してください。'],
-        ['category', 'ご相談内容の分類を選択してください。'],
-        ['message', 'ご相談内容を入力してください。'],
-      ];
-      fields.forEach(([name, message]) => {
-        const el = form!.querySelector<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>(`[name="${name}"]`);
-        const errorEl = fieldError(name);
-        const invalid = !el || !el.value.trim();
-        if (errorEl) {
-          errorEl.textContent = invalid ? message : '';
-          errorEl.hidden = !invalid;
-        }
-        if (invalid) {
-          ok = false;
-          if (!firstInvalid && el) firstInvalid = el;
-        }
-      });
-      if (firstInvalid) (firstInvalid as HTMLElement).focus();
-      return ok;
-    }
-
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      if (successEl) successEl.hidden = true;
-      if (formErrorEl) formErrorEl.hidden = true;
-      const valid = validate();
-      if (!valid) {
-        if (formErrorEl) formErrorEl.hidden = false;
-        return;
-      }
-      // ラフのため実際の送信は行わない。個人情報の保存・外部送信もしない。
-      if (successEl) successEl.hidden = false;
-    });
-  }
-
-  preselectCategory();
-  initContactForm();
-  document.addEventListener('astro:page-load', () => { preselectCategory(); initContactForm(); });
-</script>
