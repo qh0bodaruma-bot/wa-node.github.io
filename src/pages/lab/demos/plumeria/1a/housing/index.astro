@@ -1,6 +1,6 @@
 ---
 import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
-import { routes, housingUnits } from '../../../../../../data/plumeria';
+import { routes, housingUnits, corp } from '../../../../../../data/plumeria';
 
 const day = [
   { time: '7:00', label: '起床・朝食' },
@@ -12,8 +12,8 @@ const day = [
 ];
 ---
 <PlumeriaLayout
-  title="サービス付き高齢者向け住宅 Ⅰ・Ⅱ・Ⅲ 比較｜プルメリア（修正版ラフ）"
-  description="プルメリアが運営するサービス付き高齢者向け住宅Ⅰ・Ⅱ・Ⅲの比較・ご案内です。"
+  title="サービス付き高齢者向け住宅 Ⅰ・Ⅱ 比較｜プルメリア（修正版ラフ）"
+  description="プルメリアが運営するサービス付き高齢者向け住宅Ⅰ・Ⅱの比較・ご案内です。"
   currentPath={routes.housing}
 >
   <div class="pl-wrap" style="padding-top:28px">
@@ -26,11 +26,11 @@ const day = [
 
   <section class="pl-sec pl-sec-tight">
     <div class="pl-wrap">
-      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">サービス付き高齢者向け住宅 Ⅰ・Ⅱ・Ⅲ</h1>
+      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">サービス付き高齢者向け住宅 Ⅰ・Ⅱ</h1>
       <p class="pl-sec-lead">
-        安否確認と生活相談のあるバリアフリー住宅です。3つの住宅を同じ項目で比較できるようにご案内します。
+        安否確認と生活相談のある住宅です。自立向けのⅠと、介護対応型のⅡを比較してご案内します。
       </p>
-      <p class="pl-note">※ 正式なサービス区分（サービス付き高齢者向け住宅／ショートステイ等）は確認中です。今回はいただいた最新情報に沿ってⅠ・Ⅱ・Ⅲすべてを住宅としてご案内しています。</p>
+      <p class="pl-note">※ 短期入所（ショートステイ）をお探しの方は<a href={routes.shortStay}>プルメリアⅢ（ショートステイ）</a>をご覧ください。</p>
     </div>
   </section>
 
@@ -41,8 +41,7 @@ const day = [
           <thead>
             <tr>
               <th scope="col">住宅</th>
-              <th scope="col">所在地</th>
-              <th scope="col">特徴</th>
+              <th scope="col">タイプ</th>
               <th scope="col">居室</th>
               <th scope="col">費用</th>
               <th scope="col">状況</th>
@@ -53,18 +52,17 @@ const day = [
             {housingUnits.map((u) => (
               <tr>
                 <th scope="row">{u.name}</th>
-                <td>確認中</td>
-                <td>確認中</td>
-                <td>確認中</td>
-                <td>確認中</td>
-                <td><span class="pl-pending-note">{u.status ?? '確認中'}</span></td>
+                <td>{u.kind}<br />対象：{u.target}</td>
+                <td>{u.roomType}<br />{u.roomSize}</td>
+                <td>{u.priceFrom}</td>
+                <td><span class="pl-pending-note">確認中</span></td>
                 <td><a class="pl-more" href={routes.housingUnit(u.id)}>詳細を見る</a></td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
-      <p class="pl-note" style="margin-top:12px">※ 比較項目はすべて確認中のため、優劣を示すものではありません。正式情報がそろい次第、内容を更新します。</p>
+      <p class="pl-note" style="margin-top:12px">※ 所在地はいずれも{corp.address}。費用は公開情報を基にした目安です。空室状況・正式な金額は個別にご案内します。</p>
     </div>
   </section>
 

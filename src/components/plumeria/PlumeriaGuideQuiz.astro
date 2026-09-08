@@ -34,6 +34,7 @@ const quizPayload = {
           <div class="pl-quiz-options">
             <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="housing" /><span>住む場所について</span></label>
             <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="visit" /><span>自宅での介護・看護について</span></label>
+            <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="shortstay" /><span>数日だけ泊まれる場所を探している</span></label>
             <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="equipment" /><span>車椅子や介護ベッドなど道具について</span></label>
             <label class="pl-quiz-option"><input type="radio" name="pl-quiz-q1" value="unsure" /><span>何から相談したらいいか分からない</span></label>
           </div>
@@ -133,12 +134,13 @@ const quizPayload = {
 
     function computeRecommendation(): string {
       const score: Record<string, number> = {
-        housing: 0, 'home-care': 0, 'home-nursing': 0, 'care-management': 0, 'welfare-equipment': 0,
+        housing: 0, 'short-stay': 0, 'home-care': 0, 'home-nursing': 0, 'care-management': 0, 'welfare-equipment': 0,
       };
       const q1 = answers['pl-quiz-q1'];
       const q2 = answers['pl-quiz-q2'];
       if (q1 === 'housing') score.housing += 2;
       if (q1 === 'visit') { score['home-care'] += 1; score['home-nursing'] += 1; }
+      if (q1 === 'shortstay') score['short-stay'] += 2;
       if (q1 === 'equipment') score['welfare-equipment'] += 2;
       if (q1 === 'unsure') score['care-management'] += 2;
       if (q2 === 'dailycare') score['home-care'] += 2;
@@ -146,7 +148,7 @@ const quizPayload = {
       if (q2 === 'stayhome') { score.housing += 1; score['welfare-equipment'] += 1; }
       if (q2 === 'unsure') score['care-management'] += 1;
 
-      const order = ['housing', 'home-care', 'home-nursing', 'care-management', 'welfare-equipment'];
+      const order = ['housing', 'short-stay', 'home-care', 'home-nursing', 'care-management', 'welfare-equipment'];
       let best = order[0];
       for (const id of order) {
         if (score[id] > score[best]) best = id;

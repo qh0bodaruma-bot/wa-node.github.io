@@ -13,7 +13,7 @@ import { corp, services, recruitEntry, routes, news } from '../../../../../data/
 
 const title = 'プルメリア｜サービス付き高齢者向け住宅・訪問介護・訪問看護（修正版ラフ）';
 const description =
-  'プルメリアは、サービス付き高齢者向け住宅（Ⅰ・Ⅱ・Ⅲ）・訪問介護・訪問看護・居宅介護支援・福祉用具を運営しています。見学・ご相談を承ります。';
+  'プルメリアは、サービス付き高齢者向け住宅（Ⅰ・Ⅱ）・ショートステイ（Ⅲ）・訪問介護・訪問看護・居宅介護支援・福祉用具を運営しています。見学・ご相談を承ります。';
 
 const heroSlides = [
   { img: '/images/plumeria/hero-01.webp', label: '入居者とスタッフ',
@@ -31,7 +31,7 @@ const reasons = [
     img: '/images/plumeria/feature-01.webp', alt: '入居者とスタッフが同じ目線の高さで話している様子（イメージ）' },
   { icon: 'care', title: '専門的な支援', body: '訪問看護と訪問介護を同じグループで運営しています。看護と介護を切り離さずにご相談いただけます。',
     img: '/images/plumeria/feature-02.webp', alt: '看護師と介護スタッフが情報を共有している様子（イメージ）' },
-  { icon: 'sprout', title: '自宅からの相談', body: 'ご来所前に、お電話とフォームでご相談いただけます。福祉用具のご相談まで同じ窓口で承ります。',
+  { icon: 'sprout', title: '自宅からの相談', body: 'ご来所前に、お電話とフォームでご相談いただけます。ショートステイのご相談も同じ窓口で承ります。',
     img: '/images/plumeria/feature-03.webp', alt: 'ご家族が自宅のダイニングで相談している様子（イメージ）' },
 ];
 
@@ -132,13 +132,13 @@ const entrances = [...services, recruitEntry];
     <div class="pl-wrap pl-about-inner">
       <div class="pl-about-text">
         <p class="pl-eyebrow"><span class="pl-eyebrow-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>ABOUT</p>
-        <h2 class="pl-about-catch">住まい、看護、暮らしの道具。<br />別々にしないほうが、たぶん楽です。</h2>
+        <h2 class="pl-about-catch">住まいも、看護も、ケアプランも。<br />別々にしないほうが、たぶん楽です。</h2>
         <p class="pl-body pl-about-body">
-          住む場所を探し、看護の相談先を探し、用品の手配先を探す。
+          住む場所を探し、看護の相談先を探し、ケアの相談先を探す。
           ご本人にもご家族にも、その往復はけっこうな負担になります。
           プルメリアは複数のサービスを、ひとつの窓口でお預かりしています。
         </p>
-        <p class="pl-note">※ 理念・沿革はご提供いただいた内容に差し替えます。運営法人・グループの正式表記は確認中です。</p>
+        <p class="pl-note">※ 運営：{corp.groupName}（{corp.address}）。理念・沿革の詳細は個別にご確認ください。</p>
       </div>
       <img class="pl-about-photo" src="/images/plumeria/about-01.webp"
            alt="窓辺の椅子に座る入居者とスタッフが穏やかに話している共用リビング（イメージ）"
@@ -181,7 +181,7 @@ const entrances = [...services, recruitEntry];
   <section class="pl-sec" id="services">
     <div class="pl-wrap">
       <h2 class="pl-h2"><span class="pl-h2-en">SERVICES</span>サービスのご案内</h2>
-      <p class="pl-sec-lead">住まい・訪問介護・訪問看護・居宅介護支援・福祉用具の5つを、目的に合わせてご案内します。</p>
+      <p class="pl-sec-lead">住まい・ショートステイ・訪問介護・訪問看護・居宅介護支援・福祉用具の6つを、目的に合わせてご案内します。</p>
       <div class="pl-service-intro-grid">
         {services.map((s) => (
           <a class="pl-card pl-service-intro-card" href={s.href}

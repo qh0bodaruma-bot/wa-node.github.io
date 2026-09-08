@@ -1,6 +1,6 @@
 ---
 import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
-import { routes, housingUnits, genericFaqs } from '../../../../../../data/plumeria';
+import { routes, housingUnits, genericFaqs, corp } from '../../../../../../data/plumeria';
 
 export function getStaticPaths() {
   return housingUnits.map((u) => ({ params: { id: u.id }, props: { unit: u } }));
@@ -27,7 +27,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
   <section class="pl-sec pl-sec-tight">
     <div class="pl-wrap">
       <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">{unit.name}</h1>
-      <p class="pl-sec-lead">{unit.kind}</p>
+      <p class="pl-sec-lead">サービス付き高齢者向け住宅（{unit.kind}）</p>
       <img src={unit.img} alt={unit.alt} width="1200" height="675" loading="eager" decoding="async"
            style="width:100%;border-radius:16px;aspect-ratio:16/9;object-fit:cover;margin:18px 0" />
       <p class="pl-photo-note">※ 掲載写真はイメージ写真です。実際の施設・スタッフではありません。</p>
@@ -38,11 +38,13 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
     <div class="pl-wrap">
       <h2 class="pl-h2">住宅の概要</h2>
       <dl class="pl-access-list">
-        <div><dt>所在地</dt><dd>確認中</dd></div>
-        <div><dt>居室</dt><dd>確認中</dd></div>
-        <div><dt>費用</dt><dd>確認中</dd></div>
-        <div><dt>空室状況</dt><dd><span class="pl-pending-note">{unit.status ?? '確認中'}</span>（{new Date().getFullYear()}年時点の仮表示。最新状況はお問い合わせください）</dd></div>
+        <div><dt>タイプ</dt><dd>{unit.kind}（対象：{unit.target}）</dd></div>
+        <div><dt>所在地</dt><dd>{corp.address ?? '確認中'}</dd></div>
+        <div><dt>居室</dt><dd>{unit.roomType}／{unit.roomSize}</dd></div>
+        <div><dt>費用</dt><dd>{unit.priceFrom}（{unit.deposit}）</dd></div>
+        <div><dt>空室状況</dt><dd><span class="pl-pending-note">確認中</span>（お手数ですがお問い合わせください）</dd></div>
       </dl>
+      <p class="pl-note" style="margin-top:10px">※ 費用は公開情報を基にした目安です。正式な金額は個別にご案内します。</p>
     </div>
   </section>
 

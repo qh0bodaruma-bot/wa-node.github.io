@@ -1,62 +1,75 @@
 // プルメリア 修正版ラフ 共通データモデル
-// 将来の拡張（独立サイト化・CMS化）に備え、サービス識別子・ルート・文言を一箇所に集約する。
-// 未確定の値は null または「確認中」表記とし、確定した事実として扱わない。
+// 実在サイト（https://home-plumeria.jp/ 、2026年時点の公開情報）を基に事実情報を反映している。
+// 福祉用具（welfare-equipment）は同サイト未掲載の新サービスで、ボスからの直接の指摘に基づく（2026年時点）。
+// 出典に記載のない項目は null または「確認中」表記のままとし、確定した事実として扱わない。
+// 写真はすべて生成画像の「イメージ写真」であり、実際の施設・スタッフの記録ではない。
 
 export const PLUMERIA_BASE = '/lab/demos/plumeria/1a';
 
 export interface PlumeriaCorp {
   name: string;
   nameEn: string;
-  tel: string | null; // 確認中は null。ダミー番号は使わない。
+  tel: string | null; // サービス付き高齢者向け住宅（プルメリアⅠ・Ⅱ）の窓口
   address: string | null;
-  groupName: string | null; // 正式なグループ表記が未確定のため null
-  currentSiteUrl: string | null; // 現HPの確認済みURLが未確定のため null
+  groupName: string | null;
+  currentSiteUrl: string | null;
 }
 
 export const corp: PlumeriaCorp = {
   name: 'プルメリア',
   nameEn: 'PLUMERIA',
-  tel: null,
-  address: null,
-  groupName: null,
-  currentSiteUrl: null,
+  tel: '0574-61-1201',
+  address: '岐阜県可児市今渡1880番地',
+  groupName: 'DS TOKAI株式会社',
+  currentSiteUrl: 'https://home-plumeria.jp/',
 };
+
+// ショートステイ（プルメリアⅢ）は建物・受付が別のため、専用の電話番号を持つ。
+export const shortStayTel = '0574-48-8311';
 
 export type PlumeriaServiceId =
   | 'housing'
+  | 'short-stay'
   | 'home-care'
   | 'home-nursing'
   | 'care-management'
   | 'welfare-equipment';
 
 export interface PlumeriaHousingUnit {
-  id: '1' | '2' | '3';
+  id: '1' | '2';
   name: string;
-  kind: string; // サービス付き高齢者向け住宅
-  status: string | null; // 空室あり／満室等。仮値のため運用時に確定情報へ差し替える
-  open: boolean | null;
+  kind: string;
+  roomType: string;
+  roomSize: string;
+  priceFrom: string;
+  deposit: string;
+  target: string;
   img: string;
   alt: string;
 }
 
 export const housingUnits: PlumeriaHousingUnit[] = [
   {
-    id: '1', name: 'プルメリアⅠ', kind: 'サービス付き高齢者向け住宅',
-    status: '確認中', open: null,
+    id: '1', name: 'プルメリアⅠ',
+    kind: '自立・介護予防向け',
+    roomType: '1DK・1LDK（A/B/Cタイプ）',
+    roomSize: '40.50〜49.05㎡',
+    priceFrom: '月額 100,540円〜',
+    deposit: '敷金 300,000〜360,000円',
+    target: '60歳以上の方',
     img: '/images/plumeria/services-01.webp',
     alt: '窓から光の入る居室で、入居者が自分らしく過ごしている様子（イメージ）',
   },
   {
-    id: '2', name: 'プルメリアⅡ', kind: 'サービス付き高齢者向け住宅',
-    status: '確認中', open: null,
+    id: '2', name: 'プルメリアⅡ',
+    kind: '介護対応型',
+    roomType: 'ワンルーム',
+    roomSize: '25.16㎡',
+    priceFrom: '月額 150,400円〜（1名）',
+    deposit: '敷金 300,000円',
+    target: '要介護1以上の方',
     img: '/images/plumeria/services-02.webp',
     alt: '共用ラウンジで入居者どうしが穏やかに会話している様子（イメージ）',
-  },
-  {
-    id: '3', name: 'プルメリアⅢ', kind: 'サービス付き高齢者向け住宅',
-    status: '確認中', open: null,
-    img: '/images/plumeria/services-03.webp',
-    alt: '共用スペースの入口で入居者を迎えているスタッフ（イメージ）',
   },
 ];
 
@@ -74,11 +87,18 @@ export interface PlumeriaService {
 
 export const services: PlumeriaService[] = [
   {
-    id: 'housing', name: 'サービス付き高齢者向け住宅', short: '住宅', tagline: 'プルメリアⅠ・Ⅱ・Ⅲ',
+    id: 'housing', name: 'サービス付き高齢者向け住宅', short: '住宅', tagline: 'プルメリアⅠ・Ⅱ',
     icon: 'home', href: `${PLUMERIA_BASE}/housing/`,
-    summary: '安否確認と生活相談のあるバリアフリー住宅です。3つの住宅の特徴を比較してご案内します。',
+    summary: '安否確認と生活相談のある住宅です。自立向け（Ⅰ）と介護対応型（Ⅱ）があります。',
     img: '/images/plumeria/services-01.webp',
     alt: '窓から光の入る居室で、入居者が自分らしく過ごしている様子（イメージ）',
+  },
+  {
+    id: 'short-stay', name: 'ショートステイ', short: 'ショートステイ', tagline: 'プルメリアⅢ（短期入所）',
+    icon: 'bed', href: `${PLUMERIA_BASE}/short-stay/`,
+    summary: '数日からの短期入所です。ご家族の休息やご用事の間、お預かりします。',
+    img: '/images/plumeria/services-03.webp',
+    alt: '共用スペースの入口で入居者を迎えているスタッフ（イメージ）',
   },
   {
     id: 'home-care', name: '訪問介護', short: '訪問介護', tagline: 'ご自宅での身体介護・生活援助',
@@ -90,7 +110,7 @@ export const services: PlumeriaService[] = [
   {
     id: 'home-nursing', name: '訪問看護', short: '訪問看護', tagline: '看護師がご自宅へ訪問します',
     icon: 'care', href: `${PLUMERIA_BASE}/home-nursing/`,
-    summary: '看護師がご自宅を訪問し、健康状態の確認や医療的なケアを行います。',
+    summary: '看護師がご自宅を訪問し、健康状態の確認や医療的なケアを行います。24時間365日対応。',
     img: '/images/plumeria/services-04.webp',
     alt: 'ご自宅のリビングで看護師が健康状態を確認している様子（イメージ）',
   },
@@ -102,9 +122,9 @@ export const services: PlumeriaService[] = [
     alt: 'ご家族が自宅のダイニングで相談している様子（イメージ）',
   },
   {
-    id: 'welfare-equipment', name: '福祉用具', short: '福祉用具', tagline: '用具の貸与・選定相談',
+    id: 'welfare-equipment', name: '福祉用具', short: '福祉用具', tagline: '新サービス：用具の貸与・選定相談',
     icon: 'chair', href: `${PLUMERIA_BASE}/welfare-equipment/`,
-    summary: '歩行器や介護ベッドなど、暮らしに合う福祉用具をご提案します。',
+    summary: '歩行器や介護ベッドなど、暮らしに合う福祉用具をご提案します。新しく始めたサービスです。',
     img: '/images/plumeria/services-05.webp',
     alt: '歩行器の使い方をスタッフが説明している様子（イメージ）',
   },
@@ -117,7 +137,7 @@ export const recruitEntry = {
   tagline: 'いっしょに働く方を募集しています',
   icon: 'bird',
   href: `${PLUMERIA_BASE}/recruit/`,
-  summary: '介護スタッフ・看護師を募集しています。見学だけでもお気軽にお越しください。',
+  summary: '介護職員・看護師を募集しています。見学だけでもお気軽にお越しください。',
 };
 
 export const routes = {
@@ -125,6 +145,7 @@ export const routes = {
   services: `${PLUMERIA_BASE}/services/`,
   housing: `${PLUMERIA_BASE}/housing/`,
   housingUnit: (id: string) => `${PLUMERIA_BASE}/housing/${id}/`,
+  shortStay: `${PLUMERIA_BASE}/short-stay/`,
   homeCare: `${PLUMERIA_BASE}/home-care/`,
   homeNursing: `${PLUMERIA_BASE}/home-nursing/`,
   careManagement: `${PLUMERIA_BASE}/care-management/`,
@@ -139,8 +160,8 @@ export interface PlumeriaFaq { q: string; a: string }
 
 export const genericFaqs: PlumeriaFaq[] = [
   { q: '相談だけでも利用できますか？', a: 'はい。ご利用が未定の段階でもご相談いただけます。まずは現在の状況をお聞かせください。' },
-  { q: '費用はどのくらいかかりますか？', a: '内容によって異なるため、正式なご案内は個別にご説明します。（費用の目安は確認中）' },
-  { q: '対応エリアはどこまでですか？', a: '対応地域は確認中です。まずはお問い合わせください。' },
+  { q: '費用はどのくらいかかりますか？', a: '内容や介護度によって異なります。正式なご案内は個別にご説明します。' },
+  { q: '対応エリアはどこまでですか？', a: '岐阜県可児市周辺が中心です。詳しい対応可否はお問い合わせください。' },
 ];
 
 export const news: { date: string; cat: string; catTone: 'green' | 'accent' | 'beige'; text: string }[] = [
@@ -148,10 +169,11 @@ export const news: { date: string; cat: string; catTone: 'green' | 'accent' | 'b
 ];
 
 export const contactCategories = [
-  { value: 'housing', label: 'サービス付き高齢者向け住宅（Ⅰ／Ⅱ／Ⅲ）' },
+  { value: 'housing', label: 'サービス付き高齢者向け住宅（Ⅰ／Ⅱ）' },
+  { value: 'short-stay', label: 'ショートステイ（Ⅲ）' },
   { value: 'home-care', label: '訪問介護' },
   { value: 'home-nursing', label: '訪問看護' },
   { value: 'care-management', label: '居宅介護支援' },
-  { value: 'welfare-equipment', label: '福祉用具' },
+  { value: 'welfare-equipment', label: '福祉用具（新サービス）' },
   { value: 'undecided', label: 'まだ決まっていない' },
 ] as const;

@@ -1,6 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes } from '../../../../../../data/plumeria';
+import { routes, corp, shortStayTel } from '../../../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="居宅介護支援｜プルメリア（修正版ラフ）"
@@ -18,15 +18,16 @@ import { routes } from '../../../../../../data/plumeria';
   ]}
   content={[
     { label: 'ケアプラン作成', body: 'ご本人・ご家族の希望をうかがい、ケアプランを作成します。' },
-    { label: 'サービス調整', body: '訪問介護・訪問看護・福祉用具等の事業所と調整します。' },
-    { label: '継続的な相談', body: '状況の変化に応じて、プランを見直します。' },
+    { label: '申請サポート', body: '要介護認定の申請手続きをサポートします。' },
+    { label: '相談・調整', body: '介護保険サービス全般のご相談と、事業所との調整を行います。' },
   ]}
   targetInfo={[
-    { label: '対象となる方', body: '要介護認定を受けている方（詳細は確認中）' },
-    { label: '対応地域', body: '確認中' },
-    { label: '利用条件', body: '確認中' },
+    { label: '対象となる方', body: '要支援・要介護の認定を受けている方、これから申請予定の方' },
+    { label: '対応地域', body: '岐阜県可児市周辺' },
+    { label: 'お問い合わせ（住宅）', body: `${corp.tel}（平日10:00〜17:30）` },
+    { label: 'お問い合わせ（ショートステイ）', body: `${shortStayTel}（平日10:00〜17:30）` },
   ]}
-  costInfo="居宅介護支援は介護保険により自己負担なくご利用いただける場合があります。（詳細は確認中）"
+  costInfo="介護保険により、自己負担なくご利用いただけます。"
   flowSteps={[
     { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
     { title: 'ご相談', body: '現在の状況、ご希望をうかがいます。' },

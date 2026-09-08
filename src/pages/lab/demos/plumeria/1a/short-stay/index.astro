@@ -1,0 +1,36 @@
+---
+import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
+import { routes, shortStayTel } from '../../../../../../data/plumeria';
+---
+<PlumeriaServicePage
+  title="ショートステイ｜プルメリア（修正版ラフ）"
+  description="プルメリアⅢのショートステイは、リゾートのような雰囲気で数日からお過ごしいただける短期入所です。"
+  currentPath={routes.shortStay}
+  breadcrumbLabel="ショートステイ"
+  heroTitle="ショートステイ（プルメリアⅢ）"
+  heroLead="リゾートのような雰囲気で、数日からお過ごしいただける短期入所です。"
+  heroImg="/images/plumeria/services-03.webp"
+  heroAlt="共用スペースの入口で入居者を迎えているスタッフ（イメージ）"
+  fitFor={[
+    'ご家族の休息やご旅行・出張などで、数日お預かりが必要な方',
+    '要支援1・2、要介護1〜5の認定を受けている方',
+    '施設らしさを感じにくい滞在先を探している方',
+  ]}
+  content={[
+    { label: '居室', body: '洋室・和室の個室（全40室）からお選びいただけます。' },
+    { label: '生活支援', body: '食事・入浴・排せつの介助やレクリエーションを行います。' },
+    { label: '共用スペース', body: '大浴場やイベントホールで、季節の催しも行っています。' },
+  ]}
+  targetInfo={[
+    { label: '対象となる方', body: '要支援1・2、要介護1〜5の認定を受けている方' },
+    { label: '定員', body: '40名（個室40室）' },
+    { label: '専用のお問い合わせ先', body: `${shortStayTel}（平日 10:00〜17:00）` },
+  ]}
+  costInfo="介護度に応じた1日あたりの自己負担分（要支援1で561円〜要介護5で1,028円が目安）に、居住費・食費等が別途かかります。正式な金額は個別にご案内します。"
+  flowSteps={[
+    { title: 'お問い合わせ', body: '電話またはフォームでご連絡ください。' },
+    { title: '面談・ご相談', body: 'ご本人の状況をうかがい、ご利用日程を調整します。' },
+    { title: 'ご利用開始', body: '契約後、ご利用を開始します。' },
+  ]}
+  contactCategory="short-stay"
+/>

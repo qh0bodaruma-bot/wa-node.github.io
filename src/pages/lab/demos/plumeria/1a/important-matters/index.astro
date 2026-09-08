@@ -1,6 +1,6 @@
 ---
 import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
-import { routes } from '../../../../../../data/plumeria';
+import { routes, corp } from '../../../../../../data/plumeria';
 ---
 <PlumeriaLayout
   title="重要事項説明について（確認用）｜プルメリア（修正版ラフ）"
@@ -24,14 +24,17 @@ import { routes } from '../../../../../../data/plumeria';
         別途お渡しし、ご契約前に内容をご説明します。本番公開までに、以下の項目を運営法人として
         確定し、あらためて正式な文書・ページとして掲載します。
       </p>
+      <h2 class="pl-h2" style="margin-top:32px">公開情報で確認できている項目</h2>
+      <ul class="pl-body">
+        <li>事業主体：{corp.groupName}（{corp.address}）</li>
+        <li>サービス内容と料金の目安（初期費用・月額費用、ショートステイの介護保険自己負担分）</li>
+        <li>緊急時の体制の概要（24時間の緊急通報システム、協力医療機関との連携）</li>
+      </ul>
       <h2 class="pl-h2" style="margin-top:32px">確認中の項目</h2>
       <ul class="pl-body">
-        <li>事業主体の概要（法人名・所在地・設立年月日・許可／届出番号）</li>
-        <li>施設概要（構造・設備・居室数・定員）</li>
+        <li>施設の詳細（設立年月日・許可／届出番号、居室数の内訳）</li>
         <li>職員体制（人員配置・有資格者数・夜間の対応体制）</li>
-        <li>サービス内容と利用料金（初期費用・月額費用の内訳、介護保険自己負担分を含む）</li>
         <li>契約期間・解除条件・返還金の有無</li>
-        <li>緊急時・体調急変時の対応体制、協力医療機関</li>
         <li>苦情・相談の受付窓口</li>
         <li>損害賠償責任保険の加入状況</li>
       </ul>
