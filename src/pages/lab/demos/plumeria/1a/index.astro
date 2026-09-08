@@ -1,5 +1,6 @@
 ---
 import PlumeriaLayout from '../../../../../layouts/PlumeriaLayout.astro';
+import PlumeriaGuideQuiz from '../../../../../components/plumeria/PlumeriaGuideQuiz.astro';
 import { corp, services, recruitEntry, routes, news } from '../../../../../data/plumeria';
 
 /*
@@ -167,6 +168,13 @@ const entrances = [...services, recruitEntry];
 
   <div class="pl-hill pl-hill-to-mint" aria-hidden="true">
     <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 90V52c210-40 450 14 720 6s500-46 720-22v54Z" /></svg>
+  </div>
+
+  <!-- 02.5 かんたん案内チェック -->
+  <PlumeriaGuideQuiz />
+
+  <div class="pl-hill pl-hill-from-mint" aria-hidden="true">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path d="M0 0v34c230 36 460-18 730-8S1210 76 1440 48V0Z" /></svg>
   </div>
 
   <!-- 03 各サービスの短い紹介 -->

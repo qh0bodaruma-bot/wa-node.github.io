@@ -132,6 +132,7 @@ export const routes = {
   contact: `${PLUMERIA_BASE}/contact/`,
   recruit: `${PLUMERIA_BASE}/recruit/`,
   privacy: `${PLUMERIA_BASE}/privacy/`,
+  importantMatters: `${PLUMERIA_BASE}/important-matters/`,
 };
 
 export interface PlumeriaFaq { q: string; a: string }

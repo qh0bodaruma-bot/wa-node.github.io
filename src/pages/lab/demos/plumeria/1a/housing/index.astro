@@ -72,15 +72,18 @@ const day = [
     <div class="pl-wrap">
       <h2 class="pl-h2"><span class="pl-h2-en">A DAY</span>一日の流れ（参考）</h2>
       <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は住宅ごとに確認中です。</p>
-      <ol class="pl-day">
-        {day.map((d) => (
-          <li class="pl-day-item">
-            <span class="pl-num-face pl-day-time">{d.time}</span>
-            <span class="pl-day-dot" aria-hidden="true"></span>
-            <span class="pl-day-label">{d.label}</span>
-          </li>
-        ))}
-      </ol>
+      <div class="pl-day-wrap">
+        <span class="pl-day-sun" aria-hidden="true"><svg><use href="#pl-i-sun" /></svg></span>
+        <ol class="pl-day">
+          {day.map((d) => (
+            <li class="pl-day-item">
+              <span class="pl-num-face pl-day-time">{d.time}</span>
+              <span class="pl-day-dot" aria-hidden="true"></span>
+              <span class="pl-day-label">{d.label}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   </section>
 

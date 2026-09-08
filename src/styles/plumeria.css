@@ -599,9 +599,11 @@
     border-radius: var(--radius);
     background: var(--mint);
   }
-  /* 時間のラベルは高さを固定する。下の目盛り線の位置をこの値から決めるため。 */
+  /* 時間のラベルは高さを固定する。下の目盛り線の位置をこの値から決めるため。
+     `.pl-day-wrap` に置くのは、兄弟要素の `.pl-day-sun`（太陽）からも同じ値を参照するため
+     （カスタムプロパティは子孫にしか継承されず、`.pl-day` 自身に置くと兄弟からは見えない）。 */
+  .pl-day-wrap { position: relative; --day-pill-h: 32px; --day-gap: 9px; }
   .pl-day {
-    --day-pill-h: 32px; --day-gap: 9px;
     display: grid; grid-template-columns: repeat(6, 1fr);
     position: relative;
     z-index: 2;                    /* 写真より上のレイヤー */
@@ -622,6 +624,22 @@
     text-align: center; position: relative;
   }
   .pl-day-dot { width: 17px; height: 17px; border-radius: 50%; background: var(--bg); border: 2px solid var(--green); }
+  /* 太陽が時間の線をたどっていく演出。JSは使わず、線と同じ位置計算（8%〜92%）を静止状態にも適用する
+     ので、アニメーション非対応環境でも「朝の位置」として自然に見える（消えたまま戻らない事故を防ぐ）。 */
+  .pl-day-sun {
+    position: absolute;
+    left: 8%;
+    top: calc(var(--day-pill-h) + var(--day-gap) + 8px);
+    width: 26px; height: 26px;
+    margin: -13px 0 0 -13px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--accent);
+    box-shadow: var(--shadow-xs);
+    z-index: 3;
+  }
+  .pl-day-sun svg { width: 15px; height: 15px; }
   .pl-day-time {
     display: inline-flex; align-items: center;
     height: var(--day-pill-h); padding-inline: 15px;
@@ -923,6 +941,15 @@
     from { transform: translateY(5px); }
     to   { transform: translateY(-5px); }
   }
+  /* 一日の流れ：太陽が朝から夜へ線をたどる */
+  @keyframes pl-day-sun-travel {
+    from { left: 8%; }
+    to   { left: 92%; }
+  }
+  @keyframes pl-day-dot-light {
+    from { background: var(--bg); transform: scale(1); }
+    to   { background: var(--green); transform: scale(1.15); }
+  }
 
   @media (prefers-reduced-motion: no-preference) {
     .pl-hero-media::after {
@@ -974,6 +1001,22 @@
       .pl-day-item:nth-child(6) { animation-range: entry 4% cover 44%; }
       .pl-news > li:nth-child(2) { animation-range: entry 4% cover 30%; }
       .pl-news > li:nth-child(3) { animation-range: entry 4% cover 36%; }
+
+      /* 太陽は行全体の出現が終わるところまでを一続きでたどる。
+         各ドットは自分の項目が現れるタイミングで点灯し、太陽が通り過ぎた跡のように見せる。 */
+      .pl-day-sun {
+        animation-name: pl-day-sun-travel;
+        animation-fill-mode: both;
+        animation-duration: auto;
+        animation-timeline: view();
+        animation-range: entry 4% cover 44%;
+      }
+      .pl-day-item:nth-child(1) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 24%; }
+      .pl-day-item:nth-child(2) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 28%; }
+      .pl-day-item:nth-child(3) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 32%; }
+      .pl-day-item:nth-child(4) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 36%; }
+      .pl-day-item:nth-child(5) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 40%; }
+      .pl-day-item:nth-child(6) .pl-day-dot { animation-name: pl-day-dot-light; animation-fill-mode: both; animation-duration: auto; animation-timeline: view(); animation-range: entry 4% cover 44%; }
 
       /* 丘のディバイダ：通り過ぎる速さをわずかにずらして奥行きを出す。
          幅5pxに抑えているのは、地色と隣接色が近いソフトな配色のため、
@@ -1082,4 +1125,78 @@
 
 @media (max-width: 720px) {
   .pl-service-intro-grid { grid-template-columns: 1fr; }
+}
+
+/* ── かんたん案内チェック（診断ウィジェット） ─────── */
+.pl-quiz { max-width: 620px; margin: 32px auto 0; }
+.pl-quiz-fallback { text-align: center; }
+.pl-quiz-app {
+  background: var(--surface, #fff);
+  border-radius: var(--radius, 14px);
+  box-shadow: var(--shadow, 0 6px 22px rgba(52,159,135,0.09));
+  padding: clamp(20px, 4vw, 34px);
+}
+.pl-quiz-step-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--green-deep, #257562);
+  margin: 0 0 14px;
+}
+.pl-quiz-step { border: 0; padding: 0; margin: 0; }
+.pl-quiz-question { font-size: 17px; font-weight: 700; padding: 0; margin: 0 0 16px; }
+.pl-quiz-options { display: grid; gap: 10px; }
+.pl-quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 16px;
+  border-radius: var(--radius-sm, 10px);
+  border: 1.5px solid var(--line, rgba(0,42,29,0.13));
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+.pl-quiz-option:hover { border-color: var(--green, #349f87); background: var(--mint, #eef6f2); }
+.pl-quiz-option input { width: 18px; height: 18px; flex: none; accent-color: var(--green, #349f87); }
+.pl-quiz-option:has(input:checked) {
+  border-color: var(--green, #349f87);
+  background: var(--mint, #eef6f2);
+  font-weight: 700;
+}
+.pl-quiz-nav { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
+.pl-quiz-nav[hidden], .pl-quiz-nav [hidden] { display: none; }
+.pl-quiz-nav [data-pl-quiz-next] { margin-left: auto; }
+.pl-quiz-nav .pl-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+.pl-quiz-nav .pl-btn:disabled:hover { transform: none; box-shadow: none; }
+.pl-quiz-result { text-align: center; }
+.pl-quiz-result-label {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--green-deep, #257562);
+  margin: 0 0 6px;
+}
+.pl-quiz-result .pl-btn-row { justify-content: center; margin-top: 18px; }
+.pl-quiz-restart {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--green-deep, #257562);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+@keyframes pl-quiz-step-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pl-quiz-step:not([hidden]).is-entering,
+  .pl-quiz-result:not([hidden]).is-entering {
+    animation: pl-quiz-step-in 0.35s ease;
+  }
 }
