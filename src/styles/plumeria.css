@@ -796,7 +796,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 6px;
     min-height: 108px;
     padding: 14px 24px;
@@ -1222,6 +1222,23 @@
 .pl-job-hint-open { display: none; }
 .pl-job-card[open] .pl-job-hint-closed { display: none; }
 .pl-job-card[open] .pl-job-hint-open { display: inline; }
+.pl-job-hint-icon {
+  display: inline-block;
+  margin-left: 4px;
+  transform-origin: 70% 90%;
+}
+/* タップ可能だと直感的に伝わるよう、指アイコンを「トン、トン」と2回叩いて
+   長めに静止する、を繰り返す。連続で揺れ続けると気が散るため休符を長めに取る。 */
+@keyframes pl-job-hint-tap {
+  0%, 55%, 100% { transform: translateY(0) rotate(0deg); }
+  10% { transform: translateY(3px) rotate(-10deg); }
+  20% { transform: translateY(0) rotate(0deg); }
+  30% { transform: translateY(3px) rotate(-10deg); }
+  40% { transform: translateY(0) rotate(0deg); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pl-job-hint-icon { animation: pl-job-hint-tap 2.6s ease-in-out infinite; }
+}
 .pl-job-detail { margin: 16px 0; }
 @media (max-width: 720px) {
   .pl-job-list { grid-template-columns: 1fr; }
