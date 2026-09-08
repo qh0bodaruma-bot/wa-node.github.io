@@ -258,10 +258,19 @@ const entrances = [...services, recruitEntry];
 
 <script>
   /*
+    View Transitions 対応：トップページはSPA的な画面遷移で再訪されるため、
+    トップレベルIIFEの一度きり実行では他ページ→トップ復帰時に再初期化されない
+    （モジュールは初回しか評価されないが、astro:page-load は遷移のたびに発火する）。
+    そのため関数化して astro:page-load に束ね、毎回作り直す。
+  */
+
+  let plSliderTimer: number | null = null;
+
+  /*
     ヒーロースライダー。フェード・5秒・切替0.7秒・ドット・停止ボタン。
     自前の素のJS。JSが動かなくても1枚目が静止画として表示される（フェイルオープン）。
   */
-  (function () {
+  function initPlumeriaHeroSlider() {
     const root = document.querySelector<HTMLElement>('[data-pl-slider]');
     if (!root) return;
     const photos = [...root.querySelectorAll<HTMLImageElement>('.pl-hero-photo')];
@@ -270,9 +279,10 @@ const entrances = [...services, recruitEntry];
     const toggleLabel = root.querySelector<HTMLElement>('[data-pl-toggle-label]');
     if (photos.length < 2) return;
 
+    if (plSliderTimer !== null) { window.clearInterval(plSliderTimer); plSliderTimer = null; }
+
     let index = 0;
     let playing = true;
-    let timer: number | null = null;
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     function loadIfNeeded(img: HTMLImageElement) {
@@ -300,10 +310,10 @@ const entrances = [...services, recruitEntry];
     function startTimer() {
       if (reduced || !playing) return;
       stopTimer();
-      timer = window.setInterval(next, 5000);
+      plSliderTimer = window.setInterval(next, 5000);
     }
     function stopTimer() {
-      if (timer !== null) { window.clearInterval(timer); timer = null; }
+      if (plSliderTimer !== null) { window.clearInterval(plSliderTimer); plSliderTimer = null; }
     }
 
     dots.forEach((dot, i) => {
@@ -318,7 +328,9 @@ const entrances = [...services, recruitEntry];
     });
 
     if (!reduced) startTimer();
-  })();
+  }
+
+  let plHeroHeaderObserver: IntersectionObserver | null = null;
 
   /*
     PCのみ：FVのタイル（サービス入口）が画面内にある間は、ヘッダーの重複ナビを隠し、
@@ -326,16 +338,21 @@ const entrances = [...services, recruitEntry];
     ナビ・ブランドを通常どおり表示する。JSが動かない場合はヘッダーのナビは常時表示のまま
     （is-jsが付かないため、CSSの既定＝表示状態が維持される）。
   */
-  (function () {
+  function initPlumeriaHeroHeaderSync() {
     const header = document.querySelector('.pl-head');
     const tiles = document.querySelector('[data-pl-tiles]');
     const heroBrandCard = document.querySelector('.pl-hero-brand-card');
+
+    plHeroHeaderObserver?.disconnect();
+    plHeroHeaderObserver = null;
+
     if (!header || !tiles) return;
+    header.classList.remove('is-condensed');
     header.classList.add('is-js');
     heroBrandCard?.classList.add('is-hero-visible');
 
     if (!('IntersectionObserver' in window)) return;
-    const io = new IntersectionObserver(
+    plHeroHeaderObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           header.classList.toggle('is-condensed', !entry.isIntersecting);
@@ -344,6 +361,9 @@ const entrances = [...services, recruitEntry];
       },
       { root: null, rootMargin: '-77px 0px 0px 0px', threshold: 0 }
     );
-    io.observe(tiles);
-  })();
+    plHeroHeaderObserver.observe(tiles);
+  }
+
+  document.addEventListener('astro:page-load', initPlumeriaHeroSlider);
+  document.addEventListener('astro:page-load', initPlumeriaHeroHeaderSync);
 </script>
