@@ -5,11 +5,13 @@ const { class: className = '', label = 'お電話' } = Astro.props;
 ---
 {corp.tel ? (
   <a class={className} href={`tel:${corp.tel.replace(/[^0-9]/g, '')}`} data-pl-gtag="phone_click">
+    <span class="pl-float-seg-icon" aria-hidden="true"><svg><use href="#pl-i-phone" /></svg></span>
     <span class="pl-btn-label">{label}</span>
     <span class="pl-num-face pl-btn-tel-no">{corp.tel}</span>
   </a>
 ) : (
   <span class={`${className} pl-btn-pending`} aria-disabled="true">
+    <span class="pl-float-seg-icon" aria-hidden="true"><svg><use href="#pl-i-phone" /></svg></span>
     <span class="pl-btn-label">{label}（電話番号確認中）</span>
   </span>
 )}

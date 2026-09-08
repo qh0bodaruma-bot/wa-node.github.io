@@ -797,9 +797,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1px;
-    min-height: 54px;
-    padding: 6px 20px;
+    gap: 6px;
+    min-height: 108px;
+    padding: 14px 24px;
     color: var(--bg);
     text-decoration: none;
     text-align: center;
@@ -807,21 +807,49 @@
     transition: background-color 0.3s;
   }
   .pl-float-seg:hover { background: color-mix(in srgb, var(--bg) 14%, transparent); }
-  .pl-float-seg-tel { position: relative; font-size: 12px; }
+  .pl-float-seg-icon {
+    display: grid; place-items: center;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: color-mix(in srgb, var(--bg) 18%, transparent);
+  }
+  .pl-float-seg-icon svg { width: 17px; height: 17px; }
+  .pl-float-seg-tel { position: relative; font-size: 13px; }
   .pl-float-seg-tel::after {
     content: '';
     position: absolute;
     right: 0;
-    top: 22%;
-    bottom: 22%;
+    top: 18%;
+    bottom: 18%;
     width: 1px;
     background: color-mix(in srgb, var(--bg) 25%, transparent);
   }
-  .pl-float-seg-main { font-size: 15px; font-weight: 700; }
+  .pl-float-seg-main { font-size: 17px; font-weight: 700; }
   @media (max-width: 480px) {
-    .pl-float-seg { min-height: 46px; padding: 5px 15px; }
-    .pl-float-seg-tel { font-size: 11px; }
-    .pl-float-seg-main { font-size: 13px; }
+    .pl-float-seg { min-height: 92px; padding: 12px 18px; gap: 5px; }
+    .pl-float-seg-icon { width: 26px; height: 26px; }
+    .pl-float-seg-icon svg { width: 15px; height: 15px; }
+    .pl-float-seg-tel { font-size: 12px; }
+    .pl-float-seg-main { font-size: 15px; }
+  }
+
+  /* 右下フロートCTAの演出：初回表示でふわっとせり上がって現れ（1回だけ）、
+     以後は控えめな「呼吸」アニメーションで存在をそっと知らせ続ける。
+     ホバー時のセグメント背景変化とは別プロパティ（transform/shadow）なので競合しない。 */
+  @keyframes pl-float-cta-in {
+    from { opacity: 0; transform: translateY(20px) scale(0.92); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes pl-float-cta-breathe {
+    0%, 100% { transform: scale(1); box-shadow: var(--shadow-lift); }
+    50% { transform: scale(1.035); box-shadow: 0 24px 52px rgba(0, 42, 29, 0.24); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .pl-float-cta {
+      animation:
+        pl-float-cta-in 0.55s cubic-bezier(.2, .8, .3, 1.2) both,
+        pl-float-cta-breathe 3.2s ease-in-out 0.55s infinite;
+    }
   }
 
   /* PCの出し分け。
