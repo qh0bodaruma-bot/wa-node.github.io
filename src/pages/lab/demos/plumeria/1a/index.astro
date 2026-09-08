@@ -3,7 +3,13 @@ import PlumeriaLayout from '../../../../../layouts/PlumeriaLayout.astro';
 import PlumeriaGuideQuiz from '../../../../../components/plumeria/PlumeriaGuideQuiz.astro';
 import { services, recruitEntry, routes, corp } from '../../../../../data/plumeria';
 
-const entrances = [...services, recruitEntry];
+// 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
+// services配列やヘッダーのnavEntriesには追加せず、FVの入口タイルにだけ足す。
+const entrances = [
+  ...services,
+  recruitEntry,
+  { id: 'important-matters', name: '重要事項説明', icon: 'document', href: routes.importantMatters },
+];
 
 const heroSlides = [
   { img: '/images/plumeria/hero-01.webp', label: '入居者とスタッフ', alt: '入居者とスタッフが穏やかに話す様子（イメージ）' },
