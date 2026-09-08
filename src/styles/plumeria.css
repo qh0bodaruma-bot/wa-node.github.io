@@ -347,13 +347,18 @@
     display: grid;
     grid-template-columns: minmax(0, 1fr) 336px;
     gap: clamp(14px, 1.8vw, 26px);
-    align-items: start;
+    /* コピーのカードと右のタイル一覧の高さをそろえる（背の高い方に合わせて伸びる）。
+       伸びた分の余白でコピーが上に偏らないよう、中身は縦中央に置く。 */
+    align-items: stretch;
   }
   .pl-hero-copy {
     background: color-mix(in srgb, var(--bg) 94%, transparent);
     border-radius: var(--radius);
     padding: 30px clamp(22px, 3vw, 40px) 34px;
     box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .pl-h1 {
     font-size: clamp(23px, 2.9vw, 35px);

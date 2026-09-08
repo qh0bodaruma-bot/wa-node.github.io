@@ -164,9 +164,15 @@ export const genericFaqs: PlumeriaFaq[] = [
   { q: '自宅でも利用できますか？', a: '対応する地域や条件はサービスによって異なります。お住まいの市町村と、ご希望の支援内容を窓口へお伝えください。' },
 ];
 
+// 公式サイトのお知らせ一覧（https://home-plumeria.jp/information/ 、2026年9月9日確認）の実掲載分。
+// 見出しは掲載元の表記のまま。本文はPDFのため、詳細は公式の一覧ページへ誘導する。
 export const news: { date: string; cat: string; catTone: 'green' | 'accent' | 'beige'; text: string }[] = [
-  // 実データ未提供のため空配列。表示側は「掲載準備中」を出す。
+  { date: '2026.08.28', cat: 'お知らせ', catTone: 'green', text: 'プルメリア便りが届きました' },
+  { date: '2026.07.29', cat: 'お知らせ', catTone: 'green', text: 'プルメリア便りが届きました' },
+  { date: '2026.06.23', cat: 'お知らせ', catTone: 'green', text: 'プルメリア便りが届きました' },
 ];
+
+export const newsListUrl = 'https://home-plumeria.jp/information/';
 
 export const contactCategories = [
   { value: 'housing', label: 'サービス付き高齢者向け住宅（Ⅰ／Ⅱ）' },

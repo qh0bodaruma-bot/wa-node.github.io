@@ -1,7 +1,7 @@
 ---
 import PlumeriaLayout from '../../../../../layouts/PlumeriaLayout.astro';
 import PlumeriaGuideQuiz from '../../../../../components/plumeria/PlumeriaGuideQuiz.astro';
-import { services, recruitEntry, routes, corp } from '../../../../../data/plumeria';
+import { services, recruitEntry, routes, corp, news, newsListUrl } from '../../../../../data/plumeria';
 
 // 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
 // services配列やヘッダーのnavEntriesには追加せず、FVの入口タイルにだけ足す。
@@ -87,6 +87,25 @@ const heroSlides = [
           ))}
         </ul>
       </nav>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-tight" id="news">
+    <div class="pl-wrap">
+      <h2 class="pl-h2"><span class="pl-h2-en">NEWS</span>お知らせ</h2>
+      <ul class="pl-news">
+        {news.map((n) => (
+          <li>
+            <span class="pl-num-face pl-news-date">{n.date}</span>
+            <span class={`pl-cat pl-cat-${n.catTone}`}>{n.cat}</span>
+            <span class="pl-news-text">{n.text}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="pl-note" style="margin-top:14px">
+        <a href={newsListUrl} data-astro-reload>お知らせ一覧を見る（現在の公式サイト）→</a>
+      </p>
+      <p class="pl-note">掲載元：公式サイトのお知らせ一覧（2026年9月9日確認）。本文はPDFで公開されています。</p>
     </div>
   </section>
 
