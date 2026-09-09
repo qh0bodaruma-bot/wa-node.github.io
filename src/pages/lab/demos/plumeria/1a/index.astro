@@ -1,7 +1,7 @@
 ---
 import PlumeriaLayout from '../../../../../layouts/PlumeriaLayout.astro';
 import PlumeriaGuideQuiz from '../../../../../components/plumeria/PlumeriaGuideQuiz.astro';
-import { services, recruitEntry, routes, corp, news, newsListUrl } from '../../../../../data/plumeria';
+import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl } from '../../../../../data/plumeria';
 
 // 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
 // services配列やヘッダーのnavEntriesには追加せず、FVの入口タイルにだけ足す。
@@ -72,7 +72,28 @@ const heroSlides = [
         <h1 class="pl-h1">これからの暮らしに、<br />必要な支えを。</h1>
         <p class="pl-hero-lead">住まいを探す方も、ご自宅での介護を考える方も。<br />知りたいサービスからご覧ください。</p>
         <a class="pl-more" href="#guide">どこに相談するか迷ったら →</a>
-        <p class="pl-photo-note">写真はイメージです。実際の施設・スタッフとは異なります。</p>
+        {/* 高さをそろえた分の余白は装飾ではなく実用情報で埋める。番号・受付時間は公式サイトの記載。 */}
+        <div class="pl-hero-desks">
+          <p class="pl-hero-desks-head">
+            お電話でのご相談<span class="pl-hero-desks-hours">受付：平日 10:00〜17:00</span>
+          </p>
+          <ul class="pl-hero-desk-list">
+            <li>
+              <a class="pl-hero-desk" href={`tel:${corp.tel?.replaceAll('-', '')}`}
+                 data-pl-gtag="phone_click" data-pl-service="housing" data-pl-cta="hero_desk">
+                <span class="pl-hero-desk-name">住まい（Ⅰ・Ⅱ）</span>
+                <strong class="pl-num-face">{corp.tel}</strong>
+              </a>
+            </li>
+            <li>
+              <a class="pl-hero-desk" href={`tel:${shortStayTel.replaceAll('-', '')}`}
+                 data-pl-gtag="phone_click" data-pl-service="short-stay" data-pl-cta="hero_desk">
+                <span class="pl-hero-desk-name">ショートステイ（Ⅲ）</span>
+                <strong class="pl-num-face">{shortStayTel}</strong>
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
       <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービス・採用・重要事項説明">
         <ul class="pl-tiles">
@@ -132,6 +153,25 @@ const heroSlides = [
           </a>
         ))}
       </div>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige" id="access">
+    <div class="pl-wrap">
+      <h2 class="pl-h2"><span class="pl-h2-en">ACCESS</span>所在地・アクセス</h2>
+      <div class="pl-grid-2">
+        <div class="pl-card">
+          <h3 class="pl-h3">プルメリアⅠ・Ⅱ</h3>
+          <p class="pl-body">岐阜県可児市今渡1880番地<br />名鉄 日本ライン今渡駅から徒歩3分<br />中央道 多治見ICから約20分／東海環状 可児御嵩ICから約10分</p>
+          <a class="pl-more" href="https://home-plumeria.jp/plumeria0102/">公式のアクセス案内を見る →</a>
+        </div>
+        <div class="pl-card">
+          <h3 class="pl-h3">プルメリアⅢ（ショートステイ）</h3>
+          <p class="pl-body">岐阜県可児郡御嵩町上恵土951-1<br />名鉄広見線 明智駅から徒歩15分<br />東海環状 可児御嵩ICから車で約5分</p>
+          <a class="pl-more" href="https://home-plumeria.jp/plumeria03/">公式のアクセス案内を見る →</a>
+        </div>
+      </div>
+      <p class="pl-note" style="margin-top:14px">交通案内は公式サイトを2026年9月9日に確認。見学時は各窓口へ事前にお問い合わせください。</p>
     </div>
   </section>
 

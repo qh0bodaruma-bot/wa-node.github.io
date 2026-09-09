@@ -36,7 +36,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
   <section class="pl-sec">
     <div class="pl-wrap">
       <h2 class="pl-h2">住宅の概要</h2>
-      <dl class="pl-access-list">
+      <dl class="pl-spec-list">
         <div><dt>タイプ</dt><dd>{unit.kind}（対象：{unit.target}）</dd></div>
         <div><dt>所在地</dt><dd>{corp.address ?? '確認中'}</dd></div>
         <div><dt>居室</dt><dd>{unit.roomType}／{unit.roomSize}</dd></div>
@@ -50,10 +50,18 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
   <section class="pl-sec pl-sec-beige">
     <div class="pl-wrap">
       <h2 class="pl-h2">見学の流れ</h2>
-      <ol class="pl-body">
-        <li style="margin-bottom:10px"><strong>1. お問い合わせ</strong><br />相談窓口から、見学したい住宅をお伝えください。</li>
-        <li style="margin-bottom:10px"><strong>2. 見学日程の調整</strong><br />ご都合の良い日時を調整します。</li>
-        <li style="margin-bottom:10px"><strong>3. ご見学・ご相談</strong><br />居室・共用部をご案内し、ご不明点にお答えします。</li>
+      <ol class="pl-auto-grid pl-auto-grid-3">
+        {[
+          { title: 'お問い合わせ', body: '相談窓口から、見学したい住宅をお伝えください。' },
+          { title: '見学日程の調整', body: 'ご都合の良い日時を調整します。' },
+          { title: 'ご見学・ご相談', body: '居室・共用部をご案内し、ご不明点にお答えします。' },
+        ].map((step, i) => (
+          <li class="pl-flow-card">
+            <span class="pl-num-face pl-flow-num" aria-hidden="true">{i + 1}</span>
+            <h3 class="pl-flow-title">{step.title}</h3>
+            <p class="pl-flow-body">{step.body}</p>
+          </li>
+        ))}
       </ol>
     </div>
   </section>

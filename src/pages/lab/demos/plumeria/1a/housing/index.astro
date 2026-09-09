@@ -2,7 +2,15 @@
 import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
 import { routes, housingUnits, corp } from '../../../../../../data/plumeria';
 
-
+// 一日の流れ（参考）。時刻は住宅ごとに確認中のため、公開情報ではなく一般的な一例として示す。
+const day = [
+  { time: '7:00', label: '起床・朝食' },
+  { time: '10:00', label: '健康チェック' },
+  { time: '12:00', label: '昼食' },
+  { time: '15:00', label: '自由時間' },
+  { time: '18:00', label: '夕食' },
+  { time: '21:00', label: '消灯' },
+];
 ---
 <PlumeriaLayout
   title="サービス付き高齢者向け住宅 Ⅰ・Ⅱ 比較｜プルメリア（修正版ラフ）"
@@ -62,6 +70,39 @@ import { routes, housingUnits, corp } from '../../../../../../data/plumeria';
   </section>
 
   <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap">
+      <h2 class="pl-h2"><span class="pl-h2-en">A DAY</span>一日の流れ（参考）</h2>
+      <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は住宅ごとに確認中です。</p>
+      <p class="pl-note" style="text-align:center">※ 太陽が示しているのは、ご覧いただいている「今」の時刻です。すでに過ぎた時間は印の色が変わります。</p>
+      <div class="pl-day-wrap">
+        <span class="pl-day-sun" aria-hidden="true"><svg><use href="#pl-i-sun" /></svg></span>
+        <ol class="pl-day">
+          {day.map((d) => (
+            <li class="pl-day-item">
+              <span class="pl-num-face pl-day-time">{d.time}</span>
+              <span class="pl-day-dot" aria-hidden="true"></span>
+              <span class="pl-day-label">{d.label}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">住宅Ⅰ・Ⅱの基礎サービス</h2>
+      <div class="pl-grid-2">
+        <div class="pl-card"><h3 class="pl-h3">状況把握・緊急通報</h3><p class="pl-body">24時間の状況把握と通報に対応。居室のリビング・トイレ・浴室に緊急通報ボタン、水センサーを備えています。</p></div>
+        <div class="pl-card"><h3 class="pl-h3">健康相談</h3><p class="pl-body">日々の健康について相談できる体制を整えています。対応範囲は見学・相談時にご確認ください。</p></div>
+        <div class="pl-card"><h3 class="pl-h3">フロントサービス</h3><p class="pl-body">365日、8:30〜17:00に対応。来訪者の受付、宅配便・郵便物の受け取り、情報案内などを行います。</p></div>
+        <div class="pl-card"><h3 class="pl-h3">セキュリティ</h3><p class="pl-body">セコムの防犯カメラとIDカードによる入館管理を採用しています。</p></div>
+      </div>
+      <p class="pl-note" style="margin-top:14px"><a href="https://home-plumeria.jp/plumeria0102/service.html">公式のサービス内容を見る</a>（2026年9月9日確認）</p>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
     <div class="pl-wrap pl-reading">
       <h2 class="pl-h2">見学で確かめたいこと</h2>
       <ul class="pl-body pl-check-list">
@@ -83,3 +124,52 @@ import { routes, housingUnits, corp } from '../../../../../../data/plumeria';
   </section>
 </PlumeriaLayout>
 
+<script>
+  // 一日の流れ：太陽の位置と各ドットの点灯を、閲覧している今の時刻と連動させる。
+  // View Transitions でこのページに戻ってくるたびに astro:page-load が発火するので、
+  // トップレベルIIFEではなく名前付き関数として束ね、毎回タイマーを張り直す。
+  let plDayClockTimer: number | null = null;
+
+  function initPlumeriaDayClock() {
+    if (plDayClockTimer !== null) { window.clearInterval(plDayClockTimer); plDayClockTimer = null; }
+
+    const sun = document.querySelector<HTMLElement>('.pl-day-sun');
+    const items = [...document.querySelectorAll<HTMLElement>('.pl-day-item')];
+    if (!sun || !items.length) return;
+
+    const minutesOf = (item: HTMLElement): number | null => {
+      const label = item.querySelector('.pl-day-time')?.textContent?.trim() ?? '';
+      const [h, m] = label.split(':').map((v) => Number(v));
+      return Number.isFinite(h) ? h * 60 + (Number.isFinite(m) ? m : 0) : null;
+    };
+
+    const times = items.map(minutesOf);
+    if (times.some((t) => t === null) || times.length < 2) return;
+
+    const first = times[0] as number;
+    const last = times[times.length - 1] as number;
+    if (last <= first) return;
+
+    function update() {
+      const now = new Date();
+      const nowMinutes = now.getHours() * 60 + now.getMinutes();
+      const clamped = Math.min(Math.max(nowMinutes, first), last);
+      const ratio = (clamped - first) / (last - first);
+      const percent = 8 + ratio * (92 - 8);
+      sun!.style.left = `${percent}%`;
+
+      items.forEach((item, i) => {
+        const dot = item.querySelector('.pl-day-dot');
+        dot?.classList.toggle('is-past', (times[i] as number) <= nowMinutes);
+      });
+    }
+
+    update();
+    plDayClockTimer = window.setInterval(update, 60000);
+  }
+
+  document.addEventListener('astro:page-load', initPlumeriaDayClock);
+  document.addEventListener('astro:before-swap', () => {
+    if (plDayClockTimer !== null) { window.clearInterval(plDayClockTimer); plDayClockTimer = null; }
+  });
+</script>

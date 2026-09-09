@@ -15,6 +15,7 @@ interface Props {
   content: { label: string; body: string }[];
   targetInfo: { label: string; body: string }[];
   costInfo: string;
+  costDetails?: { label: string; value: string }[];
   flowSteps: { title: string; body: string }[];
   faqs?: PlumeriaFaq[];
   contactCategory: string;
@@ -23,10 +24,12 @@ interface Props {
 const {
   title, description, currentPath, breadcrumbLabel,
   heroTitle, heroLead, heroImg, heroAlt, fitFor, content, targetInfo, costInfo, flowSteps,
-  faqs = genericFaqs, contactCategory,
+  faqs = genericFaqs, contactCategory, costDetails = [],
 } = Astro.props;
 
 const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCategory)}`;
+// カードの列数は件数から決める。auto-fit は最大幅が固定値だと列数を少なく見積もるため使わない。
+const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1), 4)}`;
 ---
 <PlumeriaLayout title={title} description={description} currentPath={currentPath}>
   <div class="pl-wrap" style="padding-top:28px">
@@ -52,8 +55,8 @@ const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCateg
   <section class="pl-sec" id="support">
     <div class="pl-wrap">
       <h2 class="pl-h2">こんなときにご相談ください</h2>
-      <ul class="pl-body pl-check-list">
-        {fitFor.map((f) => <li>{f}</li>)}
+      <ul class={cols(fitFor.length)}>
+        {fitFor.map((f) => <li class="pl-fit-item">{f}</li>)}
       </ul>
     </div>
   </section>
@@ -75,14 +78,19 @@ const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCateg
   <section class="pl-sec" id="conditions">
     <div class="pl-wrap">
       <h2 class="pl-h2">対象・利用条件</h2>
-      <dl class="pl-access-list">
+      <dl class={cols(targetInfo.length)}>
         {targetInfo.map((t) => (
-          <div><dt>{t.label}</dt><dd>{t.body}</dd></div>
+          <div class="pl-target-card"><dt>{t.label}</dt><dd>{t.body}</dd></div>
         ))}
       </dl>
       <div class="pl-cost-summary">
         <h3 class="pl-h3">費用の目安</h3>
         <p class="pl-body">{costInfo}</p>
+        {costDetails.length > 0 && (
+          <dl class="pl-cost-list">
+            {costDetails.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
+          </dl>
+        )}
       </div>
     </div>
   </section>
@@ -90,9 +98,13 @@ const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCateg
   <section class="pl-sec pl-sec-beige" id="flow">
     <div class="pl-wrap">
       <h2 class="pl-h2">利用までの流れ</h2>
-      <ol class="pl-body" style="counter-reset:pl-step">
+      <ol class={cols(flowSteps.length)}>
         {flowSteps.map((step, i) => (
-          <li style="margin-bottom:14px"><strong>{i + 1}. {step.title}</strong><br />{step.body}</li>
+          <li class="pl-flow-card">
+            <span class="pl-num-face pl-flow-num" aria-hidden="true">{i + 1}</span>
+            <h3 class="pl-flow-title">{step.title}</h3>
+            <p class="pl-flow-body">{step.body}</p>
+          </li>
         ))}
       </ol>
     </div>

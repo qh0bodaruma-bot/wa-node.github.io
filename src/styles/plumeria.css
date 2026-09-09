@@ -1,23 +1,26 @@
   @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Roboto+Condensed:wght@400;500;600&display=swap');
 
   .pl {
-    /* ── 配色（ブリーフ準拠）──────────────────────── */
-    --bg: #faf9f2;          /* やや黄みのあるオフホワイト／生成り */
+    /* ── 配色（現行サイト https://home-plumeria.jp/ 準拠）──────────
+       施設名の由来である南国の花プルメリアと、現行サイトのターコイズ／ピンクを基準にする。
+       生成り・深緑・木の実色といった和のトーンは、施設のブランドと合わないため使わない。 */
+    --bg: #f4fafc;          /* ごく淡い水色。水辺の抜け感を地色にする */
     --surface: #ffffff;     /* 白 */
-    --mint: #eef6f2;        /* ごく薄いミント */
-    --beige: #f4efe3;       /* 淡いベージュ */
-    --ink: #002a1d;         /* 深いフォレストグリーン */
-    --green: #349f87;       /* メインカラー */
-    --green-deep: #257562;  /* 小さい文字・小さいボタン用。#349f87 は14pxで3.2:1 */
-    --accent: #efa661;      /* 木の実色。面と装飾にのみ使う（文字には使わない） */
-    --muted: #566f66;
-    --line: rgba(0, 42, 29, 0.13);
+    --mint: #e2f2f6;        /* 淡いアクア */
+    --beige: #fdf4e6;       /* 淡いサンド。アクアと対にして浜辺の印象をつくる */
+    --ink: #083c4a;         /* 深いティール */
+    --green: #137792;       /* メインカラー。現行サイトのターコイズ。白文字で 5.2:1 */
+    --green-deep: #0d5a6f;  /* 濃い版。小さい文字・ホバー用。白文字で 7.6:1 */
+    --accent: #f2b437;      /* プルメリアの花芯の黄。面と装飾にのみ使う（文字には使わない） */
+    --coral: #e8608f;       /* ロゴ由来のピンク。差し色としてごく少量だけ使う */
+    --muted: #4c6a73;
+    --line: rgba(8, 60, 74, 0.14);
 
     /* 影は4段階の奥行きで使い分ける。黒い強いドロップシャドウは使わない */
-    --shadow-xs: 0 2px 8px rgba(52, 159, 135, 0.07);     /* 小さな丸アイコン・バッジ */
-    --shadow: 0 6px 22px rgba(52, 159, 135, 0.09);       /* カード・タイル・写真の通常状態 */
-    --shadow-md: 0 16px 38px rgba(0, 42, 29, 0.12);      /* 浮かせるカード・ドロップダウン */
-    --shadow-lift: 0 20px 44px rgba(37, 117, 98, 0.18);  /* ホバー時のリフト */
+    --shadow-xs: 0 2px 8px rgba(19, 119, 146, 0.08);     /* 小さな丸アイコン・バッジ */
+    --shadow: 0 6px 22px rgba(19, 119, 146, 0.10);       /* カード・タイル・写真の通常状態 */
+    --shadow-md: 0 16px 38px rgba(8, 60, 74, 0.13);      /* 浮かせるカード・ドロップダウン */
+    --shadow-lift: 0 20px 44px rgba(13, 90, 111, 0.20);  /* ホバー時のリフト */
 
     --wrap: 1160px;
     --radius: 14px;      /* 角張らせない */
@@ -35,6 +38,11 @@
 
   .pl :is(h1, h2, h3, p, ul, ol, dl, dd, figure, table) { margin: 0; }
   .pl :is(ul, ol) { padding: 0; list-style: none; }
+  /* 本体サイトの global.css が `a { color: var(--accent) }` を指定している。
+     .pl 内では --accent を別の色に上書きしているため、色を明示していないリンクが
+     すべてアクセント色になってしまう。:where() で詳細度を上げずに打ち消し、
+     クラス側の色指定（.pl-more など）は従来どおり効くようにする。 */
+  .pl :where(a) { color: inherit; }
   .pl a:not([class]) { color: inherit; }
   .pl img { max-width: 100%; }
   .pl-brand, .pl-menu-list a, .pl-foot-links a { color: inherit; }
@@ -153,8 +161,8 @@
 
   .pl-btn-sm { min-height: 46px; min-width: 0; padding: 7px 16px; font-size: 13px; border-radius: 999px; }
 
-  /* メインCTA: ブリーフ指定の #349f87 ＋白文字。
-     19px/700 にして「大きい文字」の 3:1 基準を満たす（3.25:1）。 */
+  /* メインCTA: 現行サイトのターコイズ #137792 ＋白文字で 5.2:1。
+     小さい文字でも本文基準の 4.5:1 を満たす。 */
   .pl-btn-main {
     background: var(--green);
     border-color: var(--green);
@@ -162,15 +170,15 @@
     font-size: 19px;
     font-weight: 700;
   }
-  .pl-btn-main:hover { background: #1d6151; border-color: #1d6151; }
+  .pl-btn-main:hover { background: #0d5a6f; border-color: #0d5a6f; }
 
-  /* 小さい文字のCTAは同系の濃いめ。白文字で 5.5:1 */
+  /* 小さい文字のCTAは同系の濃いめ。白文字で 7.6:1 */
   .pl-btn-deep { background: var(--green-deep); border-color: var(--green-deep); color: #fff; }
-  .pl-btn-deep:hover { background: #1d6151; border-color: #1d6151; }
+  .pl-btn-deep:hover { background: #09475a; border-color: #09475a; }
 
-  /* 電話・緊急連絡は濃いフォレストグリーン */
+  /* 電話・緊急連絡は最も濃いティール */
   .pl-btn-ink { background: var(--ink); border-color: var(--ink); color: #fff; }
-  .pl-btn-ink:hover { background: #0a4030; border-color: #0a4030; }
+  .pl-btn-ink:hover { background: #04252f; border-color: #04252f; }
 
   .pl-btn-outline { background: var(--surface); border-color: var(--green); color: var(--green-deep); }
   .pl-btn-outline:hover { background: var(--mint); }
@@ -360,6 +368,36 @@
     flex-direction: column;
     justify-content: center;
   }
+  /* 右のタイル一覧と高さをそろえた分の余白は、装飾ではなく電話窓口で埋める。
+     margin-top:auto でカード下端へ寄せ、余った高さは本文との間の余白になる。
+     高齢のご家族は電話で問い合わせることが多いため、FVの時点で番号を出す。 */
+  .pl-hero-desks {
+    margin-top: auto;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
+  .pl-hero-desks-head {
+    display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
+    font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+    color: var(--green-deep);
+  }
+  .pl-hero-desks-hours { font-size: 12px; font-weight: 400; color: var(--muted); }
+  .pl-hero-desk-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .pl-hero-desk {
+    display: grid; gap: 1px;
+    padding: 9px 13px;
+    border-radius: var(--radius-sm);
+    background: var(--mint);
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .pl-hero-desk:hover { background: color-mix(in srgb, var(--mint) 70%, var(--surface)); }
+  .pl-hero-desk-name { font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+  .pl-hero-desk strong { font-size: 19px; line-height: 1.3; letter-spacing: 0.01em; }
+  @media (max-width: 1000px) {
+    .pl-hero-desks { margin-top: 20px; }
+    .pl-hero-desk-list { grid-template-columns: 1fr; }
+  }
   .pl-h1 {
     font-size: clamp(23px, 2.9vw, 35px);
     font-weight: 700; line-height: 1.6; letter-spacing: 0.06em;
@@ -380,24 +418,21 @@
   }
   .pl-eyebrow-mark svg { width: 16px; height: 16px; }
 
-  /* ── 丘の切り替え（直線で分断しない）────────── */
+  /* ── 波形の切り替え（直線で分断しない）──────── */
   .pl-hill { line-height: 0; }
   .pl-hill svg { width: 100%; height: clamp(38px, 5vw, 80px); display: block; }
   .pl-hill-to-mint { color: var(--mint); }
   .pl-hill-from-mint { color: var(--mint); background: var(--bg); }
   .pl-hill-to-mint { background: var(--bg); }
-  .pl-hill-foot { color: var(--beige); background: var(--bg); }
+  .pl-hill-foot { color: var(--mint); background: var(--bg); }
 
   /* ── セクション共通 ─────────────────────── */
   .pl-sec { padding-block: clamp(52px, 6.5vw, 88px); position: relative; }
   .pl-sec-tight { padding-block: clamp(38px, 4.5vw, 58px); }
-  /* 和紙テクスチャ。地色をフォールバックに敷き、写真と文字の邪魔をしない濃度で重ねる。
-     繰り返すと継ぎ目が出るため cover で1枚だけ伸ばす。 */
+  /* 淡いサンドの帯。以前は和紙テクスチャ画像を重ねていたが、施設のブランド（南国・リゾート）
+     と合わないため画像は使わず、平面の地色だけにしている。 */
   .pl-sec-beige {
     background-color: var(--beige);
-    background-image: url('/images/plumeria/background-01.webp');
-    background-size: cover;
-    background-position: center;
   }
   .pl-h2 {
     display: grid; justify-items: center; gap: 4px;
@@ -441,7 +476,7 @@
     line-height: 1.7;
   }
   .pl-cat-green  { background: var(--green-deep); color: #fff; }
-  .pl-cat-accent { background: var(--accent); color: var(--ink); }   /* 木の実色は面で使う */
+  .pl-cat-accent { background: var(--accent); color: var(--ink); }   /* 花芯の黄は面で使う */
   .pl-cat-beige  { background: var(--beige); color: var(--ink); border: 1px solid var(--line); }
   .pl-news-text { line-height: 1.8; }
   .pl-more {
@@ -738,6 +773,8 @@
   .pl-access-text { display: grid; gap: 18px; justify-items: start; }
   .pl-access-addr { font-size: 17px; font-weight: 700; letter-spacing: 0.04em; }
   .pl-access-list { display: grid; gap: 13px; }
+  /* .pl-reading（760px）の中では項目名と値を横並びにして、右の空きを詰める */
+  .pl-reading .pl-access-list > div { display: grid; grid-template-columns: minmax(7em, 11em) 1fr; gap: 4px 18px; align-items: baseline; }
   .pl-access-list dt { font-size: 13px; font-weight: 700; color: var(--green-deep); letter-spacing: 0.08em; }
   .pl-access-list dd { font-size: 14px; line-height: 1.85; }
 
@@ -755,12 +792,10 @@
   .pl-table tbody th { text-align: left; font-weight: 500; white-space: nowrap; }
   .pl-table tbody tr:last-child :is(th, td) { border-bottom: 0; }
 
-  /* ── フッター：明るい生成りを基調にする ────── */
+  /* ── フッター：水辺のアクアを基調にする ────── */
   .pl-foot {
-    background-color: var(--beige);
-    background-image: url('/images/plumeria/background-01.webp');
-    background-size: cover;
-    background-position: center;
+    background-color: var(--mint);
+    background-image: linear-gradient(180deg, var(--mint) 0%, #d5eaf1 100%);
     position: relative;
     overflow: hidden;   /* 角の花がはみ出さないように */
   }
@@ -848,7 +883,7 @@
   }
   @keyframes pl-float-cta-breathe {
     0%, 100% { transform: scale(1); box-shadow: var(--shadow-lift); }
-    50% { transform: scale(1.035); box-shadow: 0 24px 52px rgba(0, 42, 29, 0.24); }
+    50% { transform: scale(1.035); box-shadow: 0 24px 52px rgba(8, 60, 74, 0.24); }
   }
   @media (prefers-reduced-motion: no-preference) {
     .pl-float-cta {
@@ -927,6 +962,7 @@
     .pl-day { grid-template-columns: repeat(2, 1fr); }
     .pl-news > li { grid-template-columns: auto 1fr; gap: 8px 12px; }
     .pl-news-text { grid-column: 1 / -1; }
+    .pl-cost-list > div { grid-template-columns: 1fr; gap: 2px; }
     .pl-btn { min-width: 100%; }
     .pl-btn-sm { min-width: 0; }
     .pl-deco-leaf-l, .pl-deco-leaf-r, .pl-deco-sun { display: none; }
@@ -1091,14 +1127,14 @@
   padding: 2px 10px;
   border-radius: 999px;
   background: rgba(0,0,0,0.06);
-  color: var(--ink, #2b2b26);
+  color: var(--ink);
   font-size: 0.72rem;
   font-weight: 600;
 }
 .pl-photo-note {
   margin-top: 6px;
   font-size: 0.72rem;
-  color: var(--muted, #6b6b62);
+  color: var(--muted);
 }
 .pl-breadcrumb {
   display: flex;
@@ -1106,7 +1142,7 @@
   gap: 6px;
   align-items: center;
   font-size: 0.8rem;
-  color: var(--muted, #6b6b62);
+  color: var(--muted);
   margin: 0 0 18px;
 }
 .pl-breadcrumb a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
@@ -1125,12 +1161,12 @@
 }
 .pl-service-intro-card .pl-h3 { margin: 12px 0 6px; }
 .pl-service-intro-card img { border-radius: 14px; aspect-ratio: 4/3; object-fit: cover; }
-.pl-service-intro-more { margin-top: auto; padding-top: 10px; font-weight: 700; color: var(--forest, #1f5c46); }
+.pl-service-intro-more { margin-top: auto; padding-top: 10px; font-weight: 700; color: var(--green-deep); }
 
 .pl-compare-table-wrap { overflow-x: auto; }
 .pl-compare-table { width: 100%; border-collapse: collapse; min-width: 640px; }
 .pl-compare-table th, .pl-compare-table td { padding: 12px 14px; border-bottom: 1px solid rgba(0,0,0,0.08); text-align: left; font-size: 0.88rem; vertical-align: top; }
-.pl-compare-table thead th { color: var(--forest, #1f5c46); font-weight: 700; }
+.pl-compare-table thead th { color: var(--green-deep); font-weight: 700; }
 
 .pl-form-field { display: grid; gap: 6px; margin-bottom: 18px; }
 .pl-form-field label { font-weight: 700; font-size: 0.88rem; }
@@ -1144,11 +1180,11 @@
   color: inherit;
 }
 .pl-form-field input:focus-visible, .pl-form-field select:focus-visible, .pl-form-field textarea:focus-visible {
-  outline: 3px solid #1f5c46;
+  outline: 3px solid var(--green-deep);
   outline-offset: 1px;
 }
 .pl-form-error-text { color: #b3453a; font-size: 0.8rem; margin-top: 4px; }
-.pl-form-note { font-size: 0.82rem; color: var(--muted, #6b6b62); margin-top: 6px; }
+.pl-form-note { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
 .pl-form-disabled-banner {
   padding: 14px 16px;
   border: 1px solid rgba(179,69,58,0.35);
@@ -1158,13 +1194,13 @@
   margin-bottom: 20px;
 }
 .pl-form-success[hidden], .pl-form-error[hidden] { display: none; }
-.pl-form-success { padding: 14px 16px; border-radius: 10px; background: rgba(31,92,70,0.08); color: #1f5c46; font-weight: 700; }
+.pl-form-success { padding: 14px 16px; border-radius: 10px; background: rgba(13,90,111,0.09); color: var(--green-deep); font-weight: 700; }
 .pl-form-error { padding: 14px 16px; border-radius: 10px; background: rgba(179,69,58,0.08); color: #b3453a; font-weight: 700; }
 
 .pl-faq-list { border-top: 1px solid rgba(0,0,0,0.1); }
 .pl-faq-list details { border-bottom: 1px solid rgba(0,0,0,0.1); padding: 16px 0; }
 .pl-faq-list summary { cursor: pointer; font-weight: 700; }
-.pl-faq-list p { margin: 12px 0 0; color: var(--muted, #6b6b62); }
+.pl-faq-list p { margin: 12px 0 0; color: var(--muted); }
 
 @media (max-width: 720px) {
   .pl-service-intro-grid { grid-template-columns: 1fr; }
@@ -1172,7 +1208,8 @@
 
 /* 2026-09 review: readable service guide and compact, keyboard-safe controls. */
 .pl [hidden] { display: none !important; }
-.pl { --green: #257562; padding-bottom: 100px; overflow-wrap: anywhere; }
+/* 右下のフローティングCTA（約108px）にフッターが隠れないだけの余白を確保する */
+.pl { padding-bottom: 170px; overflow-wrap: anywhere; }
 .pl a:hover { opacity: 1; }
 /* Keep essential copy visible at every scroll position, including find-in-page. */
 .pl[data-reveal="off"] :is(.pl-h2, .pl-sec-lead, .pl-card) { animation: none; opacity: 1; transform: none; }
@@ -1183,7 +1220,7 @@
 .pl-nav a { width: 88px; color: inherit; }
 .pl-nav a:last-child { display: none; }
 .pl-nav a[aria-current="page"] { background: var(--mint); color: var(--green-deep); }
-.pl-head-recruit { color: var(--ink); background: #f5cba3; border-radius: 999px; padding: 9px 16px; text-decoration: none; white-space: nowrap; font-size: 14px; font-weight: 700; }
+.pl-head-recruit { color: var(--ink); background: var(--accent); border-radius: 999px; padding: 9px 16px; text-decoration: none; white-space: nowrap; font-size: 14px; font-weight: 700; }
 .pl-menu[open] .pl-menu-list { max-height: calc(100dvh - 180px); overflow-y: auto; max-width: calc(100vw - 36px); min-width: min(290px, calc(100vw - 36px)); }
 .pl-menu-list a { white-space: normal; }
 .pl-skip { position: fixed; left: 16px; top: -100px; z-index: 100; background: white; color: var(--ink); padding: 12px 20px; }
@@ -1209,7 +1246,7 @@
 .pl-hero-tiles .pl-tile-label { font-size: 14px; }
 .pl-tile-sub { font-size: 12px; color: var(--muted); }
 .pl-hero-copy .pl-more { display: inline-block; margin-top: 18px; }
-.pl-recruit-strip { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-block: 28px 4px; border-radius: 14px; padding: 18px 24px; background: #f5e7d5; color: var(--ink); text-decoration: none; }
+.pl-recruit-strip { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-block: 28px 4px; border-radius: 14px; padding: 18px 24px; background: #fceedb; color: var(--ink); text-decoration: none; }
 .pl-recruit-strip > span:first-child { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: baseline; }
 .pl-recruit-strip > span:last-child { font-weight: 700; }
 .pl-purpose-guide { padding: 18px 22px; border: 1px solid var(--line); border-radius: 14px; background: white; transition: background-color 0.2s; }
@@ -1226,8 +1263,8 @@
   top: 50%; right: 2px;
   width: 12px; height: 12px;
   margin-top: -8px;
-  border-right: 3px solid var(--green-deep, #257562);
-  border-bottom: 3px solid var(--green-deep, #257562);
+  border-right: 3px solid var(--green-deep);
+  border-bottom: 3px solid var(--green-deep);
   transform: rotate(45deg);
   transition: transform 0.25s ease;
 }
@@ -1235,8 +1272,8 @@
 .pl-purpose-guide > summary:hover { background: var(--mint); }
 .pl-job-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
 .pl-job-card > summary { display: flex; flex-direction: column; gap: 4px; }
-.pl-job-employment { font-weight: 400; color: var(--muted, #6b6b62); }
-.pl-job-hint { display: block; font-size: 13px; font-weight: 400; color: var(--green-deep, #257562); }
+.pl-job-employment { font-weight: 400; color: var(--muted); }
+.pl-job-hint { display: block; font-size: 13px; font-weight: 400; color: var(--green-deep); }
 .pl-job-hint-open { display: none; }
 .pl-job-card[open] .pl-job-hint-closed { display: none; }
 .pl-job-card[open] .pl-job-hint-open { display: inline; }
@@ -1267,7 +1304,107 @@
 .pl-page-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block: 18px; }
 .pl-page-nav a { border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; text-decoration: none; font-size: 14px; }
 .pl-check-list { list-style: disc !important; padding-left: 1.4em !important; }
-.pl-cost-summary { margin-top: 22px; padding: 20px; background: var(--mint); border-radius: 12px; }
+
+/* ── 横長になりすぎる列の是正 ─────────────────────────────
+   短い項目を1160px幅いっぱいに1行ずつ並べると、実測で文字が23〜40%しか埋まらず、
+   右側に大きな空白が残って「読む列」として成立しない。
+   カードに区切ったうえで1枚の上限を420pxに抑え、行を中央に寄せて塊として読ませる。 */
+/* `.pl :is(ul, ol, dl) { margin: 0 }`（詳細度 0,1,1）に負けて中央寄せが効かないため、
+   `.pl` を前置して 0,2,0 にしている。 */
+.pl .pl-auto-grid {
+  display: grid;
+  gap: 18px;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+  margin-inline: auto;
+}
+.pl-auto-grid-1 { grid-template-columns: minmax(0, 520px); }
+.pl-auto-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 880px; }
+.pl-auto-grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.pl-auto-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1000px) {
+  .pl-auto-grid-3, .pl-auto-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: none; }
+}
+@media (max-width: 720px) {
+  .pl-auto-grid { grid-template-columns: minmax(0, 1fr); max-width: none; }
+}
+.pl-auto-grid > * {
+  padding: 20px;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-xs);
+}
+/* 「こんなときに」は該当するかを目で拾う項目なので、チェック印を添える */
+.pl-fit-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  font-size: 15px;
+  line-height: 1.85;
+}
+.pl-fit-item::before {
+  content: '✓';
+  display: grid; place-items: center;
+  width: 24px; height: 24px; margin-top: 3px;
+  border-radius: 50%;
+  background: var(--mint);
+  color: var(--green-deep);
+  font-size: 13px; font-weight: 700;
+}
+.pl-target-card dt {
+  font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+  color: var(--green-deep);
+}
+.pl-target-card dd { margin: 6px 0 0; font-size: 15px; line-height: 1.85; }
+.pl-flow-card { display: grid; gap: 4px; align-content: start; }
+.pl-flow-num {
+  justify-self: start;
+  display: grid; place-items: center;
+  width: 34px; height: 34px; margin-bottom: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--surface);
+  font-size: 17px; font-weight: 600;
+}
+.pl-flow-title { font-size: 16px; font-weight: 700; line-height: 1.6; }
+.pl-flow-body { font-size: 15px; line-height: 1.85; color: var(--muted); }
+/* Q&Aは開閉で高さが変わるため列に割らず、読み幅だけ本文として自然な長さに絞る */
+.pl-faq-list { max-width: 760px; margin-inline: auto; }
+
+/* 項目名と値を縦に積むと1160px幅に対して文字が2〜4割しか埋まらないため、
+   見出し列と値列の2列に組んで、表として読める幅に収める。 */
+.pl .pl-spec-list {
+  max-width: 880px;
+  margin: 0 auto;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.pl-spec-list > div {
+  display: grid;
+  grid-template-columns: minmax(7em, 12em) 1fr;
+  gap: 12px 20px;
+  padding: 13px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.pl-spec-list dt { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: var(--green-deep); align-self: center; }
+.pl-spec-list dd { margin: 0; font-size: 15px; line-height: 1.8; }
+@media (max-width: 720px) {
+  .pl-spec-list > div { grid-template-columns: 1fr; gap: 2px; }
+}
+/* お知らせは見出しが短く、1160px幅では右に大きな空きが出る。読み幅を絞って中央に置く */
+.pl .pl-news { max-width: 880px; margin-inline: auto; }
+/* 表・一覧の直後の注記は、本体と左端をそろえないと行がずれて見える */
+.pl-spec-list ~ .pl-note,
+.pl-news ~ .pl-note { max-width: 880px; margin-inline: auto; }
+.pl-cost-summary { max-width: 880px; margin: 22px auto 0; padding: 20px; background: var(--mint); border-radius: 12px; }
+.pl-cost-list { display: grid; gap: 9px; margin-top: 16px; }
+.pl-cost-list > div { display: grid; grid-template-columns: minmax(9em, 0.8fr) 1.2fr; gap: 12px; padding-top: 9px; border-top: 1px solid color-mix(in srgb, var(--green) 20%, transparent); }
+.pl-cost-list dt { font-weight: 700; color: var(--green-deep); }
+.pl-cost-list dd { margin: 0; }
 .pl-service-intro-grid { margin-top: 24px; }
 .pl-service-intro-card img { max-height: 210px; width: 100%; }
 .pl-service-intro-card:hover { outline: 1px solid var(--green-deep); }
@@ -1331,16 +1468,16 @@
 .pl-quiz { max-width: 620px; margin: 32px auto 0; }
 .pl-quiz-fallback { text-align: center; }
 .pl-quiz-app {
-  background: var(--surface, #fff);
+  background: var(--surface);
   border-radius: var(--radius, 14px);
-  box-shadow: var(--shadow, 0 6px 22px rgba(52,159,135,0.09));
+  box-shadow: var(--shadow);
   padding: clamp(20px, 4vw, 34px);
 }
 .pl-quiz-step-label {
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: var(--green-deep, #257562);
+  color: var(--green-deep);
   margin: 0 0 14px;
 }
 .pl-quiz-step { border: 0; padding: 0; margin: 0; }
@@ -1352,15 +1489,15 @@
   gap: 10px;
   padding: 13px 16px;
   border-radius: var(--radius-sm, 10px);
-  border: 1.5px solid var(--line, rgba(0,42,29,0.13));
+  border: 1.5px solid var(--line);
   cursor: pointer;
   transition: border-color 0.25s, background-color 0.25s;
 }
-.pl-quiz-option:hover { border-color: var(--green, #349f87); background: var(--mint, #eef6f2); }
-.pl-quiz-option input { width: 18px; height: 18px; flex: none; accent-color: var(--green, #349f87); }
+.pl-quiz-option:hover { border-color: var(--green); background: var(--mint); }
+.pl-quiz-option input { width: 18px; height: 18px; flex: none; accent-color: var(--green); }
 .pl-quiz-option:has(input:checked) {
-  border-color: var(--green, #349f87);
-  background: var(--mint, #eef6f2);
+  border-color: var(--green);
+  background: var(--mint);
   font-weight: 700;
 }
 .pl-quiz-nav { display: flex; align-items: center; gap: 12px; margin-top: 22px; }
@@ -1373,7 +1510,7 @@
   font-size: 13px;
   font-weight: 700;
   letter-spacing: 0.08em;
-  color: var(--green-deep, #257562);
+  color: var(--green-deep);
   margin: 0 0 6px;
 }
 .pl-quiz-result .pl-btn-row { justify-content: center; margin-top: 18px; }
@@ -1384,7 +1521,7 @@
   border: 0;
   background: none;
   font: inherit;
-  color: var(--green-deep, #257562);
+  color: var(--green-deep);
   text-decoration: underline;
   text-underline-offset: 3px;
   cursor: pointer;
@@ -1403,15 +1540,15 @@
 
 /* ── サービス別アイコンカラー ─────────────────────────────
    目的：同じ緑一色だと一覧で見分けがつかないため、サービスごとに色を割り当てる。
-   彩度は既存のミント（#eef6f2）・ベージュ（#f4efe3）帯に合わせて意図的に低く抑え、
+   彩度はアクア（#e2f2f6）・サンド（#fdf4e6）帯に合わせて抑えつつ、南国の明るさを残し、
    「色で見分けられるが、介護施設のサイトとして落ち着いて見える」範囲に収めている。
    線の太さも 1.4 → 1.8 に上げ、小さいサイズでの視認性を確保する。 */
 .pl :is(.pl-tile-icon, .pl-nav-icon) svg { stroke-width: 1.8; }
-.pl [data-pl-service='housing'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e4f0ea; color: #256b56; }
-.pl [data-pl-service='short-stay'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ece9f4; color: #5f5186; }
-.pl [data-pl-service='home-care'] :is(.pl-tile-icon, .pl-nav-icon) { background: #fbeddd; color: #a05f24; }
-.pl [data-pl-service='home-nursing'] :is(.pl-tile-icon, .pl-nav-icon) { background: #f7e9e9; color: #9b5252; }
-.pl [data-pl-service='care-management'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e6eef5; color: #416385; }
-.pl [data-pl-service='welfare-equipment'] :is(.pl-tile-icon, .pl-nav-icon) { background: #eef0e0; color: #676f38; }
-.pl [data-pl-service='recruit'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e2eff1; color: #296b79; }
-.pl [data-pl-service='important-matters'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ecebe6; color: #63635a; }
+.pl [data-pl-service='housing'] :is(.pl-tile-icon, .pl-nav-icon) { background: #d8eef4; color: #0f6d85; }
+.pl [data-pl-service='short-stay'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e7e6f6; color: #584f96; }
+.pl [data-pl-service='home-care'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ffe9d6; color: #a2541b; }
+.pl [data-pl-service='home-nursing'] :is(.pl-tile-icon, .pl-nav-icon) { background: #fde2ea; color: #a8355e; }
+.pl [data-pl-service='care-management'] :is(.pl-tile-icon, .pl-nav-icon) { background: #dfeaf7; color: #33608f; }
+.pl [data-pl-service='welfare-equipment'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ddf0e4; color: #20704a; }
+.pl [data-pl-service='recruit'] :is(.pl-tile-icon, .pl-nav-icon) { background: #fdf0cf; color: #8a6413; }
+.pl [data-pl-service='important-matters'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e7ecef; color: #4b5c66; }
