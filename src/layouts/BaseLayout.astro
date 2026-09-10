@@ -3,6 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import GlossaryEnhancer from '../components/GlossaryEnhancer.astro';
 import GoogleAnalytics from '../components/GoogleAnalytics.astro';
+import MicrosoftClarity from '../components/MicrosoftClarity.astro';
 import { ViewTransitions } from 'astro:transitions';
 import { MULTILANG_PAGES } from '../i18n/navigation';
 import '../styles/global.css';
@@ -19,6 +20,8 @@ interface Props {
   structuredData?: Record<string, unknown> | Record<string, unknown>[];
   gaMeasurementId?: string;
   gaEnabled?: boolean;
+  clarityProjectId?: string;
+  clarityEnabled?: boolean;
   siteName?: string;
 }
 
@@ -33,6 +36,8 @@ const {
   structuredData,
   gaMeasurementId,
   gaEnabled = true,
+  clarityProjectId,
+  clarityEnabled = true,
   siteName = 'wa-node'
 } = Astro.props;
 
@@ -107,6 +112,7 @@ const getLocalizedHref = (l: string) => {
       <script type="application/ld+json" set:html={JSON.stringify(item)} />
     ))}
     <GoogleAnalytics measurementId={gaMeasurementId} enabled={gaEnabled} />
+    <MicrosoftClarity projectId={clarityProjectId} enabled={clarityEnabled} />
     <ViewTransitions />
     <script is:inline>
       // IntersectionObserverが使える環境でだけ .reveal を隠す。
