@@ -1,0 +1,201 @@
+---
+import PlumeriaAdminLayout from '../../../../../layouts/PlumeriaAdminLayout.astro';
+
+const base = '/lab/demos/plumeria/admin/';
+
+const kpis = [
+  { t: '今月の訪問数', v: '128', u: '件', sub: '先月 104件', delta: '+24 前月比', up: true, bar: 62 },
+  { t: '空室情報まで見た方', v: '61', u: '件', sub: '訪問のうち 47.7%', delta: '+14 前月比', up: true, bar: 48 },
+  { t: 'スマートフォン', v: '68', u: '%', sub: 'パソコン 32%', delta: '前月と同じ', up: false, bar: 68 },
+  { t: '最終確認まち', v: '2', u: '件', sub: '最終権限者の操作を待っています', delta: '要対応', up: false, bar: 100, warn: true },
+];
+
+// 6か月の推移（デモ値）
+const months = ['4月', '5月', '6月', '7月', '8月', '9月'];
+const visits = [62, 78, 91, 85, 104, 128];
+const reached = [21, 30, 38, 33, 47, 61];
+const max = 140;
+const chartH = 230;
+const slot = 100;          // 1か月あたりの横幅
+const barW = 30;
+const chartW = slot * months.length;
+
+const vacancies = [
+  { name: 'プルメリアⅠ', sub: 'サービス付き高齢者向け住宅', state: '空きあり', updated: '9月10日 8:42 山本' },
+  { name: 'プルメリアⅡ', sub: 'サービス付き高齢者向け住宅', state: '満室', updated: '9月8日 17:20 武藤' },
+  { name: 'プルメリアⅢ', sub: 'ショートステイ', state: '残りわずか', updated: '9月10日 8:43 山本' },
+];
+const states = ['空きあり', '残りわずか', '満室'];
+
+const newPosts = [
+  { t: 'お知らせ', d: '行事の報告、施設からのご案内' },
+  { t: '事業課からの通知', d: '加算、料金改定、制度変更' },
+  { t: '採用情報', d: '募集職種の追加・募集終了' },
+  { t: 'コンプライアンス掲示', d: '重要事項説明、指定事業所番号' },
+];
+
+const mine = [
+  { title: '9月の行事予定について', cat: 'お知らせ', state: '承認待ち', badge: 'wait', date: '9月10日 9:15' },
+  { title: '介護保険負担割合証の更新のお願い', cat: '事業課からの通知', state: '下書き', badge: 'off', date: '9月9日 16:02' },
+  { title: '介護職員（正社員）募集', cat: '採用情報', state: '公開中', badge: 'live', date: '9月2日 10:30' },
+];
+---
+<PlumeriaAdminLayout
+  title="プルメリア 管理画面（ホーム）｜画面イメージ｜和-Node"
+  description="プルメリア様のホームページ更新機能について、管理画面ホームの画面イメージです。実際には動作しません。"
+  currentPath={base}
+>
+  {/* KPI */}
+  <section class="pa-sec">
+    <div class="pa-kpis">
+      {kpis.map((k) => (
+        <div class="pa-kpi">
+          <p class="pa-kpi-t">{k.t}</p>
+          <div><span class="pa-kpi-v">{k.v}</span><span class="pa-kpi-u">{k.u}</span></div>
+          <div class="pa-kpi-sub">
+            <span>{k.sub}</span>
+            <span class={`pa-delta ${k.up ? 'pa-delta-up' : 'pa-delta-flat'}`}>{k.delta}</span>
+          </div>
+          <div class="pa-bar"><i class={k.warn ? 'is-warn' : ''} style={`width:${k.bar}%`}></i></div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  {/* チャート＋インサイト */}
+  <section class="pa-sec pa-grid2">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">MONTHLY TREND</div>
+          <h2 class="pa-h2">訪問数と、空室情報まで見た方</h2>
+          <p class="pa-lead">ホームページ全体の訪問と、そのうち空室情報のページまで進んだ方の数です。</p>
+        </div>
+        <div class="pa-legend">
+          <span><i style="background:#137792"></i>訪問数</span>
+          <span><i style="background:#a8d3e0"></i>空室情報まで</span>
+        </div>
+      </div>
+
+      <svg class="pa-chart" viewBox={`0 0 ${chartW} ${chartH + 40}`} role="img" aria-label="訪問数と空室情報到達数の6か月推移（デモ値）">
+        {[0, 0.25, 0.5, 0.75, 1].map((r) => (
+          <line x1="0" x2={chartW} y1={chartH - chartH * r} y2={chartH - chartH * r} stroke="#e6eef1" stroke-width="1" />
+        ))}
+        {months.map((m, i) => {
+          const cx = i * slot + slot / 2;
+          const hv = (visits[i] / max) * chartH;
+          const hr = (reached[i] / max) * chartH;
+          return (
+            <g>
+              <rect x={cx - barW - 3} y={chartH - hv} width={barW} height={hv} rx="5" fill="#137792" />
+              <rect x={cx + 3} y={chartH - hr} width={barW} height={hr} rx="5" fill="#a8d3e0" />
+              <text x={cx - barW / 2 - 3} y={chartH - hv - 8} text-anchor="middle" font-size="12.5" fill="#083c4a" font-weight="700">{visits[i]}</text>
+              <text x={cx + barW / 2 + 3} y={chartH - hr - 8} text-anchor="middle" font-size="12.5" fill="#587680">{reached[i]}</text>
+              <text x={cx} y={chartH + 24} text-anchor="middle" font-size="13" fill="#587680">{m}</text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+
+    <div class="pa-card">
+      <div class="pa-eyebrow">CHECK</div>
+      <h2 class="pa-h2">今月の見どころ</h2>
+
+      <div class="pa-insight">
+        <div><span class="pa-insight-v">47.7%</span><span class="pa-insight-l">空室情報まで進んだ割合</span></div>
+        <p>
+          訪問された方の約半数が、空室情報のページまで進んでいます。
+          最も見られている情報のため、更新が止まると影響が大きい項目です。
+        </p>
+      </div>
+
+      <div class="pa-insight" style="background:#fdf4e6">
+        <div><span class="pa-insight-v" style="color:#8a5a00">68%</span><span class="pa-insight-l">スマートフォンからの閲覧</span></div>
+        <p>
+          ご家族の多くはスマートフォンでご覧になっています。
+          写真は横向きより縦向きのほうが見やすく表示されます。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {/* 空室情報 */}
+  <section class="pa-sec">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">DAILY</div>
+          <h2 class="pa-h2">空室情報</h2>
+          <p class="pa-lead">文章を書く必要はありません。3つから選ぶだけで、ホームページの表示が変わります。</p>
+        </div>
+        <span class="pa-badge pa-badge-now">承認なしで、選んだ瞬間に反映</span>
+      </div>
+
+      <div class="pa-vac">
+        {vacancies.map((v) => (
+          <div class="pa-vac-card">
+            <p class="pa-vac-name">{v.name}</p>
+            <p class="pa-vac-sub">{v.sub}</p>
+            <div class="pa-seg" role="group" aria-label={`${v.name}の空室状況`}>
+              {states.map((s) => (
+                <button type="button" aria-pressed={v.state === s ? 'true' : 'false'}>{s}</button>
+              ))}
+            </div>
+            <p class="pa-vac-meta">最終更新：{v.updated}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="pa-note">
+        <strong>毎日の更新を止めないための作りです。</strong>
+        空室情報だけは最終確認を挟まず、その場で反映されます。
+        料金の改定・制度の変更・コンプライアンス関係の掲示は、これまでどおり最終確認を通します。
+      </div>
+    </div>
+  </section>
+
+  {/* 新規投稿＋自分の投稿 */}
+  <section class="pa-sec pa-grid2">
+    <div class="pa-card">
+      <div class="pa-eyebrow">MY POSTS</div>
+      <h2 class="pa-h2">自分が書いたもの</h2>
+      <p class="pa-lead" style="margin-bottom:14px">下書き・承認待ち・公開中をまとめて確認できます。</p>
+      <table class="pa-table">
+        <thead>
+          <tr><th>タイトル</th><th>種類</th><th>状態</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+          {mine.map((m) => (
+            <tr>
+              <td class="pa-ttl">{m.title}<span class="pa-sub">{m.date}</span></td>
+              <td>{m.cat}</td>
+              <td><span class={`pa-badge pa-badge-${m.badge}`}>{m.state}</span></td>
+              <td>
+                <div class="pa-btn-row">
+                  <button type="button" class="pa-btn pa-btn-ghost">編集</button>
+                  {m.state === '公開中' && <button type="button" class="pa-btn pa-btn-warn">非公開</button>}
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div class="pa-note"><strong>「削除」はありません。</strong>消すのではなく「非公開にする」ため、誤って操作した場合でも元に戻せます。</div>
+    </div>
+
+    <div class="pa-card">
+      <div class="pa-eyebrow">NEW</div>
+      <h2 class="pa-h2">新しく書く</h2>
+      <p class="pa-lead" style="margin-bottom:14px">種類を選ぶと、その種類に合った入力画面が開きます。</p>
+      <div class="pa-new" style="grid-template-columns:1fr">
+        {newPosts.map((n) => (
+          <a href={`${base}post/`}>
+            <span class="pa-new-t">{n.t}</span>
+            <span class="pa-new-d">{n.d}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</PlumeriaAdminLayout>

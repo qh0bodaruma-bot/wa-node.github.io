@@ -1,0 +1,111 @@
+---
+import PlumeriaAdminLayout from '../../../../../../layouts/PlumeriaAdminLayout.astro';
+
+const base = '/lab/demos/plumeria/admin/';
+
+const waiting = [
+  { title: '9月の行事予定について', cat: 'お知らせ', by: '山本', at: '9月10日 9:15', target: 'プルメリアⅠ・Ⅱ' },
+  { title: '利用料金改定のお知らせ', cat: '事業課からの通知', by: '武藤', at: '9月9日 18:40', target: '全事業所' },
+];
+
+const live = [
+  { title: '介護職員（正社員）募集', cat: '採用情報', at: '9月2日 公開', by: '山本' },
+  { title: '夏祭りを開催しました', cat: 'お知らせ', at: '8月26日 公開', by: '山本' },
+  { title: '重要事項説明書（プルメリアⅠ）', cat: 'コンプライアンス掲示', at: '7月1日 公開', by: '冨田' },
+];
+---
+<PlumeriaAdminLayout
+  title="プルメリア 管理画面（最終確認）｜画面イメージ｜和-Node"
+  description="プルメリア様のホームページ更新機能について、最終確認画面の画面イメージです。実際には動作しません。"
+  currentPath={`${base}approve/`}
+  hello="最終確認をお願いします"
+>
+  <section class="pa-sec">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">APPROVAL</div>
+          <h2 class="pa-h2">確認まちの2件</h2>
+          <p class="pa-lead">この画面は、最終確認権限をお持ちの方だけが開けます。ここで公開の操作をすると、ホームページに表示されます。</p>
+        </div>
+        <span class="pa-badge pa-badge-wait">2件</span>
+      </div>
+
+      <table class="pa-table">
+        <thead>
+          <tr><th>タイトル</th><th>種類</th><th>掲載先</th><th>申請</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+          {waiting.map((w) => (
+            <tr>
+              <td class="pa-ttl">{w.title}<span class="pa-sub">{w.at}</span></td>
+              <td>{w.cat}</td>
+              <td>{w.target}</td>
+              <td>{w.by}</td>
+              <td>
+                <div class="pa-btn-row">
+                  <button type="button" class="pa-btn pa-btn-ghost">内容を見る</button>
+                  <button type="button" class="pa-btn">公開する</button>
+                  <button type="button" class="pa-btn pa-btn-warn">差し戻す</button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <div class="pa-note">
+        <strong>差し戻すときは、理由を書いてお返しします。</strong>
+        書いた方の画面に理由が表示されるので、口頭で伝え直す必要がありません。
+      </div>
+    </div>
+  </section>
+
+  <section class="pa-sec pa-grid2">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">PUBLISHED</div>
+          <h2 class="pa-h2">いま公開されているもの</h2>
+          <p class="pa-lead">掲載を終える場合は「非公開にする」を押します。消えるのではなく、見えなくなるだけです。</p>
+        </div>
+        <span class="pa-badge pa-badge-live">3件</span>
+      </div>
+
+      <table class="pa-table">
+        <thead>
+          <tr><th>タイトル</th><th>種類</th><th>公開日</th><th>操作</th></tr>
+        </thead>
+        <tbody>
+          {live.map((l) => (
+            <tr>
+              <td class="pa-ttl">{l.title}<span class="pa-sub">作成：{l.by}</span></td>
+              <td>{l.cat}</td>
+              <td>{l.at}</td>
+              <td>
+                <div class="pa-btn-row">
+                  <button type="button" class="pa-btn pa-btn-ghost">編集</button>
+                  <button type="button" class="pa-btn pa-btn-warn">非公開にする</button>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pa-card">
+      <div class="pa-eyebrow">NOTE</div>
+      <h2 class="pa-h2">空室情報について</h2>
+      <div class="pa-insight" style="margin-top:14px">
+        <div><span class="pa-insight-v">この画面には</span></div>
+        <p style="margin-top:6px"><strong>空室情報は届きません。</strong></p>
+        <p>
+          毎日の更新を止めないため、空室情報だけは最終確認を挟まず、その場で反映される運用をご提案しています。
+          変更の記録は残るため、いつ誰が変えたかは後から確認できます。
+        </p>
+      </div>
+      <div style="margin-top:16px"><a class="pa-btn pa-btn-ghost" href={base}>ホームで空室情報を見る</a></div>
+    </div>
+  </section>
+</PlumeriaAdminLayout>

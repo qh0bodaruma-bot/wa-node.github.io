@@ -1,0 +1,99 @@
+---
+import PlumeriaAdminLayout from '../../../../../../layouts/PlumeriaAdminLayout.astro';
+
+const base = '/lab/demos/plumeria/admin/';
+
+const vacancies = [
+  { name: 'プルメリアⅠ', sub: 'サービス付き高齢者向け住宅', state: '空きあり', updated: '9月10日 8:42 山本' },
+  { name: 'プルメリアⅡ', sub: 'サービス付き高齢者向け住宅', state: '満室', updated: '9月8日 17:20 武藤' },
+  { name: 'プルメリアⅢ', sub: 'ショートステイ', state: '残りわずか', updated: '9月10日 8:43 山本' },
+];
+const states = ['空きあり', '残りわずか', '満室'];
+
+const history = [
+  { at: '9月10日 8:43', who: '山本', what: 'プルメリアⅢ', from: '空きあり', to: '残りわずか' },
+  { at: '9月10日 8:42', who: '山本', what: 'プルメリアⅠ', from: '残りわずか', to: '空きあり' },
+  { at: '9月8日 17:20', who: '武藤', what: 'プルメリアⅡ', from: '残りわずか', to: '満室' },
+];
+---
+<PlumeriaAdminLayout
+  title="プルメリア 管理画面（空室情報）｜画面イメージ｜和-Node"
+  description="プルメリア様のホームページ更新機能について、空室情報の更新画面の画面イメージです。実際には動作しません。"
+  currentPath={`${base}vacancy/`}
+  hello="空室情報を更新する"
+  showTop={false}
+>
+  <div class="pa-flow">
+    <span class="pa-flow-step"><span class="pa-n">1</span>番号を入れる</span>
+    <span class="pa-flow-arrow">→</span>
+    <span class="pa-flow-step" aria-current="step"><span class="pa-n">2</span><b>更新する</b></span>
+    <span class="pa-flow-arrow">→</span>
+    <span class="pa-flow-step" style="border-style:dashed"><span class="pa-n">✓</span>完了</span>
+  </div>
+
+  <section class="pa-sec">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">DAILY · 10 SECONDS</div>
+          <h2 class="pa-h2">空室情報</h2>
+          <p class="pa-lead">3つから選ぶだけです。押した瞬間にホームページの表示が変わります。</p>
+        </div>
+        <span class="pa-badge pa-badge-now">最終確認は不要</span>
+      </div>
+
+      <div class="pa-vac">
+        {vacancies.map((v) => (
+          <div class="pa-vac-card">
+            <p class="pa-vac-name">{v.name}</p>
+            <p class="pa-vac-sub">{v.sub}</p>
+            <div class="pa-seg" role="group" aria-label={`${v.name}の空室状況`}>
+              {states.map((s) => (
+                <button type="button" aria-pressed={v.state === s ? 'true' : 'false'}>{s}</button>
+              ))}
+            </div>
+            <p class="pa-vac-meta">最終更新：{v.updated}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="pa-note">
+        <strong>この画面だけをブックマークしていただけます。</strong>
+        ログイン済みの状態が続いている間は、ブックマークから開いてボタンを押すだけで更新が終わります。
+      </div>
+    </div>
+  </section>
+
+  <section class="pa-sec pa-grid2">
+    <div class="pa-card">
+      <div class="pa-eyebrow">HISTORY</div>
+      <h2 class="pa-h2">変更の記録</h2>
+      <p class="pa-lead" style="margin-bottom:14px">いつ・誰が・どう変えたかが残ります。最終確認を挟まないぶん、記録で追える形にしています。</p>
+      <table class="pa-table">
+        <thead>
+          <tr><th>日時</th><th>担当</th><th>対象</th><th>変更</th></tr>
+        </thead>
+        <tbody>
+          {history.map((h) => (
+            <tr>
+              <td>{h.at}</td>
+              <td>{h.who}</td>
+              <td class="pa-ttl">{h.what}</td>
+              <td>{h.from} → <strong>{h.to}</strong></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="pa-card">
+      <div class="pa-eyebrow">NEXT</div>
+      <h2 class="pa-h2">ほかの操作</h2>
+      <div class="pa-new" style="grid-template-columns:1fr;margin-top:14px">
+        <a href={base}><span class="pa-new-t">ホーム</span><span class="pa-new-d">アクセス分析と、投稿の一覧</span></a>
+        <a href={`${base}post/`}><span class="pa-new-t">お知らせを書く</span><span class="pa-new-d">行事の報告、施設からのご案内</span></a>
+        <a href={`${base}approve/`}><span class="pa-new-t">最終確認</span><span class="pa-new-d">確認まちの2件</span></a>
+      </div>
+    </div>
+  </section>
+</PlumeriaAdminLayout>

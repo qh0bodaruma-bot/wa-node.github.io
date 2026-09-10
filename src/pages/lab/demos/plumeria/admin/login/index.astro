@@ -1,0 +1,70 @@
+---
+// この画面は Cloudflare Access が表示するログイン画面のイメージ。
+// 実際にはこちらのサイトではなく Cloudflare 側が表示するため、左メニューは出ない。
+// その事実をそのまま再現している。
+import BaseLayout from '../../../../../../layouts/BaseLayout.astro';
+import '../../../../../../styles/plumeria-admin.css';
+
+const base = '/lab/demos/plumeria/admin/';
+---
+<BaseLayout
+  title="プルメリア 管理画面（ログイン）｜画面イメージ｜和-Node"
+  description="プルメリア様のホームページ更新機能について、ログイン画面の画面イメージです。実際には動作しません。"
+  noindex={true}
+  showSiteChrome={false}
+  siteName="プルメリア 管理画面（画面イメージ）"
+  gaEnabled={false}
+  clarityEnabled={false}
+>
+  <div class="pa" data-reveal="off">
+    <p class="pa-notice">これは画面イメージです。ボタンや入力欄は動作しません。</p>
+
+    <div class="pa-main" style="padding-top:22px">
+      <div class="pa-flow" style="max-width:900px;margin:0 auto 4px">
+        <span class="pa-flow-step" aria-current="step"><span class="pa-n">1</span><b>番号を入れる</b></span>
+        <span class="pa-flow-arrow">→</span>
+        <span class="pa-flow-step"><span class="pa-n">2</span>更新する</span>
+      </div>
+    </div>
+
+    <div class="pa-auth-page">
+      <div class="pa-auth">
+        <div class="pa-auth-card">
+          <div class="pa-auth-brand">PLUMERIA</div>
+          <div class="pa-auth-name">ホームページ管理</div>
+
+          <h2>メールアドレスを入力してください</h2>
+          <p class="pa-auth-lead">
+            ご登録のメールアドレス宛に、6桁の番号をお送りします。<br />
+            パスワードは必要ありません。
+          </p>
+
+          <input class="pa-input" type="text" value="yamamoto-michio@home-plumeria.jp" disabled />
+          <button type="button" class="pa-btn">番号を送る</button>
+
+          <p class="pa-auth-note">
+            届かない場合は、迷惑メールフォルダをご確認ください。
+          </p>
+        </div>
+
+        <div class="pa-auth-card" style="margin-top:18px">
+          <div class="pa-auth-brand">STEP 2</div>
+          <div class="pa-auth-name">届いた番号を入力</div>
+
+          <p class="pa-auth-lead">メールに記載された6桁の番号を入力してください。</p>
+
+          <div class="pa-pin" aria-hidden="true">
+            <span>4</span><span>1</span><span>7</span><span>2</span><span>9</span><span>6</span>
+          </div>
+          <a class="pa-btn" href={`${base}vacancy/`} style="display:block;text-align:center;text-decoration:none">ログインする</a>
+        </div>
+
+        <div class="pa-cf-caption">
+          <strong>この画面はCloudflareが表示します。</strong>
+          そのため、左側のメニューはこの画面には出ません。
+          番号を入力すると、直前に選んだ画面（この例では空室情報）へそのまま進みます。
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

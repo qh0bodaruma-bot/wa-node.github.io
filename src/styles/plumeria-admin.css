@@ -1,0 +1,302 @@
+/* プルメリア 管理画面モック。公開サイト（plumeria.css）とは独立。
+   これは画面イメージであり、実装ではない。 */
+
+.pa {
+  --bg: #eef4f7;
+  --surface: #ffffff;
+  --mint: #e2f2f6;
+  --beige: #fdf4e6;
+  --ink: #083c4a;
+  --green: #137792;
+  --green-deep: #0d5a6f;
+  --green-soft: #e8f3f7;
+  --accent: #f2b437;
+  --coral: #e8608f;
+  --ok: #1c8a52;
+  --muted: #587680;
+  --line: #dde7ea;
+  --radius: 16px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 2px rgba(8, 60, 74, .04), 0 8px 24px rgba(8, 60, 74, .06);
+  --side: 258px;
+
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, system-ui, sans-serif;
+  line-height: 1.7;
+  min-height: 100vh;
+}
+.pa * { box-sizing: border-box; }
+.pa a { color: inherit; }
+
+/* モック告知 */
+.pa-notice {
+  background: var(--accent); color: #4a3200; font-weight: 700; font-size: 13.5px;
+  text-align: center; padding: 9px 20px;
+}
+
+/* 全体レイアウト */
+.pa-shell { display: flex; align-items: flex-start; }
+
+/* ── サイドバー ── */
+.pa-side {
+  width: var(--side); flex: 0 0 var(--side); background: var(--surface);
+  border-right: 1px solid var(--line); min-height: calc(100vh - 36px);
+  padding: 24px 16px; position: sticky; top: 0;
+}
+.pa-brand { padding: 0 8px 18px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.pa-brand-eyebrow { font-size: 10.5px; letter-spacing: .16em; color: var(--muted); font-weight: 700; }
+.pa-brand-name { font-size: 19px; font-weight: 700; letter-spacing: .02em; margin-top: 2px; }
+.pa-demo-badge {
+  display: inline-flex; align-items: center; gap: 7px; margin: 14px 0 18px;
+  background: var(--green-soft); color: var(--green-deep);
+  font-size: 11.5px; font-weight: 700; letter-spacing: .1em;
+  padding: 6px 12px; border-radius: 999px;
+}
+.pa-demo-badge::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+
+.pa-nav { display: flex; flex-direction: column; gap: 2px; }
+.pa-nav a {
+  display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+  border-radius: 12px; text-decoration: none;
+}
+.pa-nav a:hover { background: #f4f9fb; }
+.pa-nav a[aria-current="page"] { background: var(--green-soft); }
+.pa-ico {
+  flex: 0 0 34px; width: 34px; height: 34px; border-radius: 50%;
+  background: #f0f5f7; color: var(--muted);
+  display: grid; place-items: center; font-size: 14px; font-weight: 700;
+}
+.pa-nav a[aria-current="page"] .pa-ico { background: var(--green); color: #fff; }
+.pa-nav-t { font-size: 14.5px; font-weight: 700; line-height: 1.3; }
+.pa-nav-s { font-size: 10.5px; color: var(--muted); letter-spacing: .06em; }
+.pa-nav a[aria-current="page"] .pa-nav-t { color: var(--green-deep); }
+
+.pa-side-sec { margin-top: 26px; padding: 0 10px; }
+.pa-side-h { font-size: 10.5px; letter-spacing: .14em; color: var(--muted); font-weight: 700; margin-bottom: 10px; }
+.pa-stat { display: flex; align-items: center; gap: 9px; font-size: 13px; padding: 5px 0; }
+.pa-stat .pa-dot { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 8px; }
+.pa-dot-ok { background: var(--ok); }
+.pa-dot-warn { background: var(--accent); }
+.pa-stat-v { margin-left: auto; font-weight: 700; font-size: 12.5px; color: var(--muted); }
+
+.pa-side-card {
+  margin-top: 26px; background: linear-gradient(160deg, var(--green), var(--green-deep));
+  color: #fff; border-radius: var(--radius); padding: 18px; font-size: 13px;
+}
+.pa-side-card b { display: block; font-size: 14.5px; margin-bottom: 6px; }
+.pa-side-card p { margin: 0; opacity: .9; line-height: 1.6; }
+
+/* ── メイン ── */
+.pa-main { flex: 1; min-width: 0; padding: 26px 30px 70px; }
+.pa-top { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; flex-wrap: wrap; margin-bottom: 24px; }
+.pa-hello { font-size: 22px; font-weight: 700; margin: 0; }
+.pa-date { color: var(--muted); font-size: 13.5px; margin: 2px 0 0; }
+.pa-filters { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.pa-filter {
+  display: flex; align-items: center; gap: 10px; background: var(--surface);
+  border: 1px solid var(--line); border-radius: 12px; padding: 8px 14px; font-size: 13.5px;
+}
+.pa-filter span { color: var(--muted); font-size: 12px; }
+.pa-filter b { font-weight: 700; }
+
+/* 見出し */
+.pa-eyebrow { font-size: 10.5px; letter-spacing: .16em; color: var(--green); font-weight: 700; }
+.pa-h2 { font-size: 18px; margin: 3px 0 0; }
+.pa-lead { color: var(--muted); font-size: 13.5px; margin: 5px 0 0; }
+.pa-sec { margin-bottom: 24px; }
+
+/* カード */
+.pa-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow); }
+.pa-card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 14px; margin-bottom: 18px; flex-wrap: wrap; }
+
+/* KPI */
+.pa-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 16px; }
+.pa-kpi { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px; box-shadow: var(--shadow); }
+.pa-kpi-t { font-size: 13px; color: var(--muted); font-weight: 700; margin: 0 0 8px; }
+.pa-kpi-v { font-size: 33px; font-weight: 700; line-height: 1.1; letter-spacing: -.01em; }
+.pa-kpi-u { font-size: 13px; font-weight: 700; color: var(--muted); margin-left: 5px; }
+.pa-kpi-sub { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12.5px; color: var(--muted); margin-top: 8px; }
+.pa-delta { font-weight: 700; }
+.pa-delta-up { color: var(--ok); }
+.pa-delta-flat { color: var(--muted); }
+.pa-bar { height: 5px; border-radius: 999px; background: #eef2f4; margin-top: 12px; overflow: hidden; }
+.pa-bar i { display: block; height: 100%; border-radius: 999px; background: var(--green); }
+.pa-bar i.is-warn { background: var(--accent); }
+
+/* 2カラム */
+.pa-grid2 { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 16px; }
+
+/* チャート */
+.pa-chart { width: 100%; height: auto; display: block; }
+.pa-legend { display: flex; gap: 16px; font-size: 12.5px; color: var(--muted); align-items: center; }
+.pa-legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; margin-right: 6px; }
+
+/* インサイト */
+.pa-insight { background: var(--green-soft); border-radius: var(--radius-sm); padding: 18px; margin-top: 16px; }
+.pa-insight-v { font-size: 30px; font-weight: 700; color: var(--green-deep); line-height: 1.1; }
+.pa-insight-l { font-size: 12.5px; color: var(--muted); font-weight: 700; margin-left: 8px; }
+.pa-insight p { font-size: 13px; color: var(--ink); margin: 10px 0 0; line-height: 1.65; }
+
+/* 空室 */
+.pa-vac { display: grid; grid-template-columns: repeat(auto-fit, minmax(228px, 1fr)); gap: 14px; }
+.pa-vac-card { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 16px; background: #fbfdfe; }
+.pa-vac-name { font-weight: 700; font-size: 15.5px; margin: 0; }
+.pa-vac-sub { color: var(--muted); font-size: 12.5px; margin: 1px 0 13px; }
+.pa-seg { display: flex; gap: 6px; }
+.pa-seg button {
+  flex: 1; padding: 9px 4px; font-size: 12.5px; font-weight: 700; cursor: default; font-family: inherit;
+  border: 1px solid var(--line); background: #fff; color: var(--muted); border-radius: 8px;
+}
+.pa-seg button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #fff; }
+.pa-vac-meta { color: var(--muted); font-size: 11.5px; margin: 11px 0 0; }
+
+/* バッジ */
+.pa-badge { display: inline-block; font-size: 11.5px; font-weight: 700; padding: 4px 11px; border-radius: 999px; white-space: nowrap; }
+.pa-badge-now { background: var(--green-soft); color: var(--green-deep); }
+.pa-badge-wait { background: var(--beige); color: #8a5a00; }
+.pa-badge-live { background: #e3f4e8; color: #1c6b36; }
+.pa-badge-off { background: #eef1f2; color: var(--muted); }
+
+/* テーブル */
+.pa-table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+.pa-table th, .pa-table td { padding: 12px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.pa-table th { color: var(--muted); font-size: 12px; white-space: nowrap; font-weight: 700; }
+.pa-table tr:last-child td { border-bottom: none; }
+.pa-table td.pa-ttl { font-weight: 700; }
+.pa-table .pa-sub { color: var(--muted); font-size: 12px; font-weight: 400; display: block; }
+
+/* ボタン */
+.pa-btn {
+  display: inline-block; padding: 8px 15px; font-size: 13px; font-weight: 700; border-radius: 9px;
+  border: 1px solid var(--green); background: var(--green); color: #fff; cursor: default;
+  font-family: inherit; text-decoration: none;
+}
+.pa-btn-ghost { background: #fff; color: var(--green-deep); }
+.pa-btn-warn { background: #fff; color: #a33; border-color: #e0bcbc; }
+.pa-btn-row { display: flex; gap: 7px; flex-wrap: wrap; }
+
+/* 投稿導線 */
+.pa-new { display: grid; grid-template-columns: repeat(auto-fit, minmax(198px, 1fr)); gap: 12px; }
+.pa-new a { display: block; border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 16px; text-decoration: none; background: #fbfdfe; }
+.pa-new a:hover { background: var(--green-soft); }
+.pa-new-t { font-weight: 700; font-size: 14.5px; display: block; }
+.pa-new-d { color: var(--muted); font-size: 12.5px; display: block; margin-top: 3px; }
+
+/* 注記 */
+.pa-note { background: var(--beige); border-radius: var(--radius-sm); padding: 15px 17px; font-size: 13px; color: #6b4e10; margin-top: 14px; }
+.pa-note strong { color: #4a3200; }
+
+/* フォーム */
+.pa-field { margin-bottom: 19px; }
+.pa-label { display: block; font-weight: 700; font-size: 13.5px; margin-bottom: 6px; }
+.pa-req { color: var(--coral); font-size: 11.5px; margin-left: 6px; }
+.pa-input, .pa-textarea, .pa-select {
+  width: 100%; padding: 10px 13px; font-size: 14px; font-family: inherit;
+  border: 1px solid var(--line); border-radius: 9px; background: #fbfdfe; color: var(--ink);
+}
+.pa-textarea { min-height: 145px; resize: vertical; }
+.pa-hint { color: var(--muted); font-size: 12px; margin: 5px 0 0; }
+.pa-checks { display: flex; gap: 15px; flex-wrap: wrap; }
+.pa-check { display: flex; align-items: center; gap: 6px; font-size: 13.5px; }
+.pa-drop { border: 2px dashed var(--line); border-radius: 9px; padding: 24px; text-align: center; color: var(--muted); font-size: 13.5px; background: #fbfdfe; }
+.pa-actions { display: flex; gap: 9px; justify-content: flex-end; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 18px; }
+
+/* アシストボタン */
+.pa-assist {
+  position: fixed; right: 26px; bottom: 26px; display: flex; align-items: center; gap: 10px;
+  background: var(--green-deep); color: #fff; border-radius: 999px; padding: 11px 20px;
+  box-shadow: 0 10px 30px rgba(13, 90, 111, .3); font-size: 13px; font-weight: 700;
+}
+.pa-assist small { display: block; font-weight: 400; opacity: .8; font-size: 11px; }
+
+@media (max-width: 1000px) {
+  .pa-shell { display: block; }
+  .pa-side { width: auto; position: static; min-height: 0; border-right: none; border-bottom: 1px solid var(--line); }
+  .pa-nav { flex-direction: row; flex-wrap: wrap; }
+  .pa-nav-s { display: none; }
+  .pa-grid2 { grid-template-columns: 1fr; }
+  .pa-main { padding: 22px 18px 70px; }
+  .pa-assist { display: none; }
+}
+
+/* ── 流れの表示（モック用の解説帯） ── */
+.pa-flow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.pa-flow-step {
+  display: flex; align-items: center; gap: 9px; background: var(--surface); border: 1px solid var(--line);
+  border-radius: 999px; padding: 7px 15px 7px 8px; font-size: 13px; color: var(--muted);
+}
+.pa-flow-step b { font-weight: 700; }
+.pa-flow-step .pa-n {
+  width: 24px; height: 24px; border-radius: 50%; background: #eef2f4; color: var(--muted);
+  display: grid; place-items: center; font-size: 12px; font-weight: 700; flex: 0 0 24px;
+}
+.pa-flow-step[aria-current="step"] { background: var(--green); border-color: var(--green); color: #fff; }
+.pa-flow-step[aria-current="step"] .pa-n { background: rgba(255,255,255,.25); color: #fff; }
+.pa-flow-arrow { color: #b9cbd2; font-size: 15px; }
+
+/* ── 入口ページ ── */
+.pa-entry { max-width: 640px; margin: 40px auto 0; text-align: center; }
+.pa-entry-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 40px 34px; box-shadow: var(--shadow); }
+.pa-entry h2 { font-size: 21px; margin: 0 0 8px; }
+.pa-entry-lead { color: var(--muted); font-size: 14px; margin: 0 0 28px; }
+.pa-entry-btns { display: grid; gap: 12px; }
+.pa-entry-btn {
+  display: flex; align-items: center; gap: 14px; text-align: left; text-decoration: none;
+  border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 16px 18px; background: #fbfdfe;
+}
+.pa-entry-btn:hover { background: var(--green-soft); }
+.pa-entry-btn.is-primary { background: var(--green); border-color: var(--green); color: #fff; }
+.pa-entry-btn .pa-ico { flex: 0 0 40px; width: 40px; height: 40px; font-size: 15px; }
+.pa-entry-btn.is-primary .pa-ico { background: rgba(255,255,255,.2); color: #fff; }
+.pa-entry-bt { font-weight: 700; font-size: 15.5px; display: block; }
+.pa-entry-bd { font-size: 12.5px; display: block; margin-top: 2px; opacity: .8; }
+
+/* ── 認証画面（Cloudflare が表示する画面のイメージ） ── */
+.pa-auth-page { background: #f5f8fa; min-height: 78vh; display: grid; place-items: start center; padding: 46px 20px 60px; }
+.pa-auth { width: 100%; max-width: 430px; }
+.pa-auth-card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 34px 30px; box-shadow: var(--shadow); text-align: center; }
+.pa-auth-brand { font-size: 10.5px; letter-spacing: .16em; color: var(--muted); font-weight: 700; }
+.pa-auth-name { font-size: 18px; font-weight: 700; margin: 3px 0 22px; }
+.pa-auth h2 { font-size: 16px; margin: 0 0 6px; }
+.pa-auth-lead { color: var(--muted); font-size: 13px; margin: 0 0 20px; line-height: 1.6; }
+.pa-auth .pa-input { text-align: left; margin-bottom: 14px; }
+.pa-auth .pa-btn { width: 100%; padding: 12px; font-size: 14px; }
+.pa-auth-note { font-size: 12px; color: var(--muted); margin-top: 16px; line-height: 1.6; }
+.pa-pin { display: flex; gap: 8px; justify-content: center; margin-bottom: 16px; }
+.pa-pin span {
+  width: 42px; height: 52px; border: 1px solid var(--line); border-radius: 9px; background: #fbfdfe;
+  display: grid; place-items: center; font-size: 21px; font-weight: 700;
+}
+.pa-cf-caption {
+  max-width: 430px; margin: 18px auto 0; background: var(--beige); border-radius: var(--radius-sm);
+  padding: 14px 16px; font-size: 12.5px; color: #6b4e10; line-height: 1.65;
+}
+.pa-cf-caption strong { color: #4a3200; }
+
+/* ── サイドバー常設：空室情報のクイック切替 ── */
+.pa-quick { margin-top: 22px; padding: 14px 12px; background: #f7fbfc; border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.pa-quick-h { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 11px; }
+.pa-quick-h .pa-side-h { margin: 0; }
+.pa-quick-h a { font-size: 11px; color: var(--green); font-weight: 700; text-decoration: none; white-space: nowrap; }
+.pa-quick-item + .pa-quick-item { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.pa-quick-name { font-size: 12.5px; font-weight: 700; margin: 0 0 6px; }
+.pa-quick-seg { display: flex; gap: 4px; }
+.pa-quick-seg button {
+  flex: 1; padding: 8px 2px; font-size: 10.5px; font-weight: 700; cursor: default; font-family: inherit;
+  border: 1px solid var(--line); background: #fff; color: var(--muted); border-radius: 7px; line-height: 1.2;
+}
+.pa-quick-seg button[aria-pressed="true"] { background: var(--green); border-color: var(--green); color: #fff; }
+.pa-quick-note { font-size: 10.5px; color: var(--muted); margin: 10px 0 0; line-height: 1.5; }
+
+/* ── 入口ページ：現在の空室状況（読み取りのみ） ── */
+.pa-entry-vac { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 16px 18px; background: #fbfdfe; margin-bottom: 18px; text-align: left; }
+.pa-entry-vac-h { font-size: 11px; letter-spacing: .12em; color: var(--muted); font-weight: 700; margin: 0 0 12px; }
+.pa-entry-vac-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 7px 0; }
+.pa-entry-vac-row + .pa-entry-vac-row { border-top: 1px solid var(--line); }
+.pa-entry-vac-n { font-size: 13.5px; font-weight: 700; }
+.pa-entry-vac-n small { display: block; font-weight: 400; font-size: 11.5px; color: var(--muted); }
+.pa-state { font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 999px; white-space: nowrap; }
+.pa-state-open { background: #e3f4e8; color: #1c6b36; }
+.pa-state-few { background: var(--beige); color: #8a5a00; }
+.pa-state-full { background: #f1eef0; color: #7c5866; }

@@ -1,0 +1,103 @@
+---
+import PlumeriaAdminLayout from '../../../../../../layouts/PlumeriaAdminLayout.astro';
+
+const base = '/lab/demos/plumeria/admin/';
+const targets = ['プルメリアⅠ', 'プルメリアⅡ', 'プルメリアⅢ', '訪問看護', '訪問介護・居宅介護支援', '福祉用具貸与'];
+---
+<PlumeriaAdminLayout
+  title="プルメリア 管理画面（お知らせを書く）｜画面イメージ｜和-Node"
+  description="プルメリア様のホームページ更新機能について、投稿画面の画面イメージです。実際には動作しません。"
+  currentPath={`${base}post/`}
+  hello="お知らせを書く"
+>
+  <section class="pa-sec pa-grid2">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">NEW POST</div>
+          <h2 class="pa-h2">お知らせを書く</h2>
+          <p class="pa-lead">写真とPDFは、この画面からそのまま添付できます。制作会社への依頼は不要です。</p>
+        </div>
+        <span class="pa-badge pa-badge-wait">書き終えたら最終確認へ</span>
+      </div>
+
+      <div class="pa-field">
+        <label class="pa-label" for="pa-cat">種類</label>
+        <select class="pa-select" id="pa-cat" disabled>
+          <option>お知らせ</option>
+          <option>事業課からの通知</option>
+          <option>採用情報</option>
+          <option>コンプライアンス掲示</option>
+        </select>
+        <p class="pa-hint">種類ごとに、ホームページ上の掲載場所が変わります。</p>
+      </div>
+
+      <div class="pa-field">
+        <label class="pa-label" for="pa-title">タイトル<span class="pa-req">必須</span></label>
+        <input class="pa-input" id="pa-title" type="text" value="9月の行事予定について" disabled />
+      </div>
+
+      <div class="pa-field">
+        <span class="pa-label">どの事業所のお知らせですか</span>
+        <div class="pa-checks">
+          {targets.map((t, i) => (
+            <label class="pa-check"><input type="checkbox" checked={i < 2} disabled />{t}</label>
+          ))}
+        </div>
+        <p class="pa-hint">選んだ事業所のページにも、同じお知らせが表示されます。</p>
+      </div>
+
+      <div class="pa-field">
+        <label class="pa-label" for="pa-body">本文<span class="pa-req">必須</span></label>
+        <textarea class="pa-textarea" id="pa-body" disabled>9月の行事予定をお知らせいたします。
+
+・9月15日（月）敬老会
+・9月22日（月）お誕生日会
+
+ご家族の皆さまのご参加をお待ちしております。</textarea>
+      </div>
+
+      <div class="pa-field">
+        <span class="pa-label">写真・PDF</span>
+        <div class="pa-drop">
+          ここにファイルをドラッグするか、クリックして選んでください<br />
+          <span class="pa-hint">写真は自動で軽くします。PDFはそのまま掲載されます。</span>
+        </div>
+      </div>
+
+      <div class="pa-field">
+        <label class="pa-label" for="pa-date">公開日</label>
+        <input class="pa-input" id="pa-date" type="text" value="2026年9月11日" disabled />
+        <p class="pa-hint">先の日付を指定すると、その日になってから表示されます。</p>
+      </div>
+
+      <div class="pa-actions">
+        <button type="button" class="pa-btn pa-btn-ghost">下書きとして保存</button>
+        <button type="button" class="pa-btn pa-btn-ghost">表示を確認する</button>
+        <button type="button" class="pa-btn">最終確認へ送る</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="pa-card">
+        <div class="pa-eyebrow">FLOW</div>
+        <h2 class="pa-h2">公開までの流れ</h2>
+        <div class="pa-insight" style="margin-top:14px">
+          <p style="margin:0"><strong>1. 書く</strong>（担当の6名）</p>
+          <p style="margin:6px 0 0"><strong>2. 最終確認へ送る</strong></p>
+          <p style="margin:6px 0 0"><strong>3. 最終権限者が公開する</strong></p>
+          <p style="margin:10px 0 0">この時点ではまだ公開されません。最終権限をお持ちの方が公開の操作をしたときに、はじめてホームページに表示されます。</p>
+        </div>
+      </div>
+
+      <div class="pa-card" style="margin-top:16px">
+        <div class="pa-eyebrow">TIPS</div>
+        <h2 class="pa-h2">見やすく載せるために</h2>
+        <div class="pa-note" style="margin-top:12px">
+          ご覧になる方の<strong>68%はスマートフォン</strong>です。
+          写真は縦向きのほうが大きく表示され、文章は1行を短めに区切ると読みやすくなります。
+        </div>
+      </div>
+    </div>
+  </section>
+</PlumeriaAdminLayout>

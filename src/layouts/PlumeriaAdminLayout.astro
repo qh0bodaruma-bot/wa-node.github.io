@@ -1,0 +1,127 @@
+---
+// プルメリア 管理画面のモック用レイアウト。
+// 公開サイト（PlumeriaLayout）とは別物。サイト共通のヘッダー・フッターも使わない。
+// これは画面イメージであり、実際には動作しない。計測も入れない。
+import BaseLayout from './BaseLayout.astro';
+import '../styles/plumeria-admin.css';
+
+interface Props {
+  title: string;
+  description: string;
+  currentPath?: string;
+  hello?: string;
+  showTop?: boolean;
+}
+const {
+  title, description, currentPath = '',
+  hello = 'こんにちは、プルメリアの皆さま',
+  showTop = true,
+} = Astro.props;
+
+const base = '/lab/demos/plumeria/admin/';
+// サイドバーに常設する空室情報のクイック切替（モックのため固定値）
+const quickVac = [
+  { name: 'プルメリアⅠ', state: '空きあり' },
+  { name: 'プルメリアⅡ', state: '満室' },
+  { name: 'プルメリアⅢ', state: '残りわずか' },
+];
+const vacStates = ['空きあり', '残りわずか', '満室'];
+
+const nav = [
+  { href: base, ico: 'home', t: 'ホーム', s: 'DASHBOARD' },
+  { href: `${base}vacancy/`, ico: '空', t: '空室情報', s: 'VACANCY' },
+  { href: `${base}post/`, ico: '知', t: 'お知らせ・通知', s: 'POSTS' },
+  { href: `${base}approve/`, ico: '認', t: '最終確認', s: 'APPROVAL' },
+  { href: `${base}post/`, ico: '採', t: '採用情報', s: 'RECRUIT' },
+  { href: `${base}post/`, ico: '掲', t: 'コンプライアンス掲示', s: 'NOTICES' },
+  { href: base, ico: '析', t: 'アクセス分析', s: 'ANALYTICS' },
+];
+---
+<BaseLayout
+  title={title}
+  description={description}
+  noindex={true}
+  showSiteChrome={false}
+  siteName="プルメリア 管理画面（画面イメージ）"
+  gaEnabled={false}
+  clarityEnabled={false}
+>
+  <div class="pa" data-reveal="off">
+    <p class="pa-notice">これは画面イメージです。ボタンや入力欄は動作しません。数値もすべて仮のものです。</p>
+
+    <div class="pa-shell">
+      <aside class="pa-side">
+        <div class="pa-brand">
+          <div class="pa-brand-eyebrow">PLUMERIA</div>
+          <div class="pa-brand-name">ホームページ管理</div>
+        </div>
+
+        <span class="pa-demo-badge">DEMO DATA</span>
+
+        <nav class="pa-nav" aria-label="管理メニュー">
+          {nav.map((n) => (
+            <a href={n.href} aria-current={currentPath === n.href && n.s !== 'VACANCY' && n.s !== 'ANALYTICS' && n.s !== 'RECRUIT' && n.s !== 'NOTICES' ? 'page' : undefined}>
+              <span class="pa-ico" aria-hidden="true">{n.ico === 'home' ? '⌂' : n.ico}</span>
+              <span>
+                <span class="pa-nav-t">{n.t}</span>
+                <span class="pa-nav-s">{n.s}</span>
+              </span>
+            </a>
+          ))}
+        </nav>
+
+        <div class="pa-quick">
+          <div class="pa-quick-h">
+            <div class="pa-side-h">空室情報をすぐ変える</div>
+            <a href={`${base}vacancy/`}>詳細</a>
+          </div>
+          {quickVac.map((v) => (
+            <div class="pa-quick-item">
+              <p class="pa-quick-name">{v.name}</p>
+              <div class="pa-quick-seg" role="group" aria-label={`${v.name}の空室状況`}>
+                {vacStates.map((s) => (
+                  <button type="button" aria-pressed={v.state === s ? 'true' : 'false'}>{s}</button>
+                ))}
+              </div>
+            </div>
+          ))}
+          <p class="pa-quick-note">どの画面からでも変更できます。押した瞬間に反映されます。</p>
+        </div>
+
+        <div class="pa-side-sec">
+          <div class="pa-side-h">いまの状況</div>
+          <div class="pa-stat"><span class="pa-dot pa-dot-warn"></span>最終確認まち<span class="pa-stat-v">2件</span></div>
+          <div class="pa-stat"><span class="pa-dot pa-dot-ok"></span>公開中<span class="pa-stat-v">3件</span></div>
+          <div class="pa-stat"><span class="pa-dot pa-dot-ok"></span>空室情報の更新<span class="pa-stat-v">本日済</span></div>
+        </div>
+
+        <div class="pa-side-card">
+          <b>更新でお困りのときは</b>
+          <p>操作の手順書をご用意しています。ご不明な点は和-Nodeまでご連絡ください。</p>
+        </div>
+      </aside>
+
+      <main class="pa-main">
+        {showTop && (
+          <div class="pa-top">
+            <div>
+              <h1 class="pa-hello">{hello}</h1>
+              <p class="pa-date">2026年9月10日（木曜日）</p>
+            </div>
+            <div class="pa-filters">
+              <div class="pa-filter"><span>事業所</span><b>すべて</b></div>
+              <div class="pa-filter"><span>期間</span><b>今月</b></div>
+              <button type="button" class="pa-btn">レポートを出す</button>
+            </div>
+          </div>
+        )}
+
+        <slot />
+      </main>
+    </div>
+
+    <div class="pa-assist" aria-hidden="true">
+      <span>更新のヘルプ<small>使い方を調べる</small></span>
+    </div>
+  </div>
+</BaseLayout>
