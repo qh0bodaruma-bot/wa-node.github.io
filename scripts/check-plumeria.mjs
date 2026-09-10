@@ -37,7 +37,14 @@ for (const [path, page] of pages) {
   assert(nodes.some(t => t.name === 'meta' && t.attrs.name === 'description' && t.attrs.content), `Description missing: ${path}`);
   assert(nodes.some(t => t.name === 'meta' && t.attrs.name === 'robots' && t.attrs.content?.includes('noindex')), `Demo must stay noindex: ${path}`);
   assert(nodes.some(t => t.attrs['data-pl-demo'] === 'true'), `Demo telemetry guard missing: ${path}`);
-  assert(!/<script\b[^>]*src=["'][^"']*(?:googletagmanager|google-analytics)/i.test(html), `Live analytics in demo: ${path}`);
+  // 計測は許可する（先方より新サイトのアクセス分析の依頼があるため）。
+  // ただし和-Node本体のプロパティへ混入させない。BaseLayout の既定値は本体側のIDのため、
+  // PlumeriaLayout で ID の指定が外れると本体へ送信されてしまう。それをここで止める。
+  assert(!html.includes('G-B4FD0GJGW5'), `Wa-Node main GA property leaked into demo: ${path}`);
+  assert(!html.includes('yfv3qj03ho'), `Wa-Node main Clarity project leaked into demo: ${path}`);
+  // 計測が黙って外れることも防ぐ（依頼された分析データを取り逃さないため）。
+  assert(html.includes('G-G8XKQBVK7D'), `Plumeria GA property missing: ${path}`);
+  assert(html.includes('yfv2ceb9ce'), `Plumeria Clarity project missing: ${path}`);
   const ids = nodes.filter(t => 'id' in t.attrs).map(t => t.attrs.id);
   assert.equal(new Set(ids).size, ids.length, `Duplicate IDs: ${path}`);
   for (const { name, attrs } of nodes) {
@@ -69,4 +76,4 @@ for (const [path, page] of pages) {
   }
 }
 assert.equal(forms, 2, 'Both demo forms must be present');
-console.log(`PASS Plumeria: ${pages.size} pages, ${links} internal links/anchors, ${assets} asset references, ${forms} protected demo forms. Noindex and analytics guards OK.`);
+console.log(`PASS Plumeria: ${pages.size} pages, ${links} internal links/anchors, ${assets} asset references, ${forms} protected demo forms. Noindex OK. Analytics scoped to Plumeria properties (no wa-node leakage).`);
