@@ -173,6 +173,7 @@
     "col4_item3": { "ja": "プライバシーポリシー", "en": "Privacy Policy", "fr": "Confidentialité" },
     "col4_item4": { "ja": "情報セキュリティ方針", "en": "Security Policy", "fr": "Sécurité" },
     "col4_item5": { "ja": "特定商取引法に基づく表記", "en": "Legal Notice", "fr": "Mentions Légales" },
-    "col4_item6": { "ja": "LINE Mini App 利用規約", "en": "LINE Mini App Terms", "fr": "Conditions LINE Mini App" }
+    "col4_item6": { "ja": "LINE Mini App 利用規約", "en": "LINE Mini App Terms", "fr": "Conditions LINE Mini App" },
+    "col4_item7": { "ja": "キャンセル・返金ポリシー", "en": "Cancellation & Refund Policy", "fr": "Politique d'Annulation et de Remboursement" }
   }
 }

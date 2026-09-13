@@ -58,6 +58,8 @@ function getLocalizedLink(path: string) {
         <h3>{lang === 'ja' ? '運営・規約' : lang === 'en' ? 'Policies' : 'Politiques'}</h3>
         <ul>
           <li><a href={getLocalizedLink('/terms')}>{t.footer.col4_item2[lang]}</a></li>
+          <li><a href={getLocalizedLink('/terms_miniapp')}>{t.footer.col4_item6[lang]}</a></li>
+          <li><a href={getLocalizedLink('/cancel-policy')}>{t.footer.col4_item7[lang]}</a></li>
           <li><a href={getLocalizedLink('/privacy')}>{t.footer.col4_item3[lang]}</a></li>
           <li><a href={getLocalizedLink('/security-policy')}>{t.footer.col4_item4[lang]}</a></li>
           <li><a href={getLocalizedLink('/tokutei')}>{t.footer.col4_item5[lang]}</a></li>
