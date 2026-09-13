@@ -11,7 +11,7 @@ const posts = response.contents;
 ---
 
 <BaseLayout title="コラム｜LINE連携の現場知見｜和-Node" description="LINEとSalesforce・kintone・HubSpot等の業務システム連携について、IT担当者向けに情報を発信しています。連携方法の比較・費用感・要件定義の進め方など。">
-  <main id="main" class="blog-index">
+  <main id="main" class="blog-index" data-reveal="off">
     <header class="blog-header">
       <div class="container">
         <span class="eyebrow">Insights & Column</span>
@@ -23,17 +23,11 @@ const posts = response.contents;
     <div class="container">
       <div class="post-grid">
         {posts.map((post) => (
-          <article class="post-card reveal">
+          <article class="post-card" data-motion-enter="block" data-motion-group="posts">
             <a href={`/blog/${post.id}/`}>
               <div class="post-image">
                 {post.eyecatch ? (
-                  <img
-                    src={post.eyecatch.url}
-                    alt={`${cleanBlogTitle(post.title)}のアイキャッチ画像`}
-                    width={post.eyecatch.width}
-                    height={post.eyecatch.height}
-                    loading="lazy"
-                    decoding="async"
+                  <img src={post.eyecatch.url} alt={`${cleanBlogTitle(post.title)}のアイキャッチ画像`} width={post.eyecatch.width} height={post.eyecatch.height} loading="lazy" decoding="async"
                   />
                 ) : (
                   <div class="image-placeholder">No Image</div>

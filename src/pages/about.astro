@@ -22,12 +22,12 @@ const structuredData = [
 ---
 
 <BaseLayout title={title} description={description} structuredData={structuredData}>
-  <main id="main">
+  <main id="main" data-reveal="off">
     <section class="section about-hero">
       <div class="section-inner">
         <span class="eyebrow">Professional Background</span>
         <h1>和-Nodeについて</h1>
-        <div class="name-origin-hero">
+        <div class="name-origin-hero" data-motion-enter="heading" data-motion-id="about-origin">
           <h2>和-Nodeという名前に込めたもの</h2>
           <p>「和」には、人と人、考えと仕組みのあいだに調和をつくる意味を。</p>
           <p>「Node」には、情報や技術、人をつなぐ結節点という意味があります。</p>
@@ -37,16 +37,13 @@ const structuredData = [
       </div>
     </section>
 
-    <BrandMovie
-      eyebrow="Wa-Node Concept"
-      title="LINEと業務システムの断絶を、自動化でつなぐ。"
-      body="和-Nodeが取り組むのは、LINEとSalesforce・kintone・HubSpotなどの業務システムの間にある「手作業の断絶」を、連携構築によって解消することです。"
+    <BrandMovie eyebrow="Wa-Node Concept" title="LINEと業務システムの断絶を、自動化でつなぐ。" body="和-Nodeが取り組むのは、LINEとSalesforce・kintone・HubSpotなどの業務システムの間にある「手作業の断絶」を、連携構築によって解消することです。"
       compact
     />
 
     <section class="section message">
       <div class="section-inner">
-        <div class="message-content reveal">
+        <div class="message-content" data-motion-enter="block" data-motion-id="about-message">
           <div class="content-left">
             <h2>代表挨拶</h2>
             <h3 class="catch-copy">「つながっていないから、<br class="sp-only"/>人が手を動かし続ける。」</h3>
@@ -67,19 +64,19 @@ const structuredData = [
 
     <section class="section profile-details">
       <div class="section-inner">
-        <div class="section-title">
+        <div class="section-title" data-motion-enter="heading">
           <span class="eyebrow">Profile & Skills</span>
           <h2>LINE連携の専門パートナーとして</h2>
         </div>
 
-        <div class="story-box reveal">
+        <div class="story-box">
           <h3>なぜLINE連携に専門特化したのか</h3>
           <p>20年以上のITエンジニアキャリアを通じて、業務システムの導入現場に数多く関わってきました。Salesforceを導入しても、LINEでの問い合わせは手で転記。kintoneを使っていても、LINE経由の申込みは別管理。「システムが増えるほど、人の手間も増える」という逆転現象を繰り返し目にしてきました。</p>
           <p>LINE公式アカウントは顧客との接点として強力ですが、単体で完結する場面は限られます。LINEと業務システムが正しくつながることで初めて、顧客対応の自動化・データの一元管理・対応漏れの防止が実現します。</p>
           <p>和-NodeはLINE連携構築に専門特化することで、要件定義から本番稼働・保守まで責任を持って対応します。</p>
         </div>
 
-        <div class="qual-grid reveal">
+        <div class="qual-grid">
           <div class="qual-item highlight-border">
             <h4>LINE連携構築</h4>
             <ul>
@@ -124,12 +121,12 @@ const structuredData = [
 
     <section class="section business-overview">
       <div class="section-inner">
-        <div class="section-title">
+        <div class="section-title" data-motion-enter="heading">
           <span class="eyebrow">Overview</span>
           <h2>事業所概要</h2>
         </div>
         
-        <div class="overview-table-wrap reveal">
+        <div class="overview-table-wrap">
           <table class="overview-table">
             <tbody>
               <tr>
@@ -172,7 +169,7 @@ const structuredData = [
 
     <section class="section reliability">
       <div class="section-inner">
-        <div class="reliability-box reveal">
+        <div class="reliability-box" data-motion-enter="block" data-motion-id="about-reliability">
           <h2>信頼と安全の基盤</h2>
           <div class="trust-grid">
             <div class="trust-item">
@@ -198,9 +195,9 @@ const structuredData = [
 
     <section class="section contact-teaser">
       <div class="section-inner text-center">
-        <h2 class="reveal">LINEと業務システムの連携、まずは現状を整理しましょう。</h2>
-        <p class="reveal">初回無料相談（30分）にて、現在のLINE・システム構成と「つなぎたいこと」をヒアリングします。<br />要件が曖昧な段階でも構いません。</p>
-        <div class="btns reveal" style="justify-content: center;">
+        <h2>LINEと業務システムの連携、まずは現状を整理しましょう。</h2>
+        <p>初回無料相談（30分）にて、現在のLINE・システム構成と「つなぎたいこと」をヒアリングします。<br />要件が曖昧な段階でも構いません。</p>
+        <div class="btns" style="justify-content: center;">
           <a href="/contact/" class="btn primary">無料相談でLINE連携の要件を整理する</a>
         </div>
       </div>
