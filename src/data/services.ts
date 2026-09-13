@@ -12,6 +12,12 @@ export const servicePrices = {
 export function startingPrice(amount: number, lang: SiteLanguage = 'ja') {
   return lang === 'ja' ? `${amount.toLocaleString('ja-JP')}円〜` : lang === 'en' ? `From ¥${amount.toLocaleString('en-US')}` : `Dès ${amount.toLocaleString('fr-FR')} ¥`;
 }
+/** 接続先によって価格差が大きいサービス向けの下限〜上限表示。
+ * 最安値だけを示すと、上位構成を想定した相談者との期待値がずれるため。
+ */
+export function priceRange(min: number, max: number, lang: SiteLanguage = 'ja') {
+  return lang === 'ja' ? `${min.toLocaleString('ja-JP')}〜${max.toLocaleString('ja-JP')}円` : lang === 'en' ? `¥${min.toLocaleString('en-US')} – ¥${max.toLocaleString('en-US')}` : `${min.toLocaleString('fr-FR')} – ${max.toLocaleString('fr-FR')} ¥`;
+}
 export function localizedPath(path: string, lang: SiteLanguage = 'ja') {
   const [pathname, ...suffix] = path.split(/(?=[?#])/);
   const rest = suffix.join('');

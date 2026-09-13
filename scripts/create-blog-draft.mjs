@@ -30,7 +30,7 @@ const readSection = (name, nextName) => {
 };
 
 const title = readSection('Title', 'Description');
-const content = readSection('Body HTML');
+const content = readSection('Body HTML', 'Image Prompt');
 
 if (!title || !content) {
   console.error('Draft must include non-empty "## Title" and "## Body HTML" sections.');
@@ -63,6 +63,7 @@ const client = createClient({
 const result = await client.create({
   endpoint: 'blogs',
   contentId,
+  isDraft: true,
   content: {
     title,
     content,

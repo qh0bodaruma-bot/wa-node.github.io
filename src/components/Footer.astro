@@ -103,9 +103,13 @@ function getLocalizedLink(path: string) {
     margin: 0;
   }
   .footer-col li {
-    margin-bottom: 12px;
+    margin-bottom: 0;
   }
   .footer-col a {
+    /* タップ領域を44px以上確保する（9役監査 HPビルダー監督の基準） */
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
     transition: 0.3s;
@@ -129,6 +133,11 @@ function getLocalizedLink(path: string) {
     padding-top: 40px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+  }
+  .footer-badges a {
+    /* inline のままだと画像の高さを取らずタップ領域が潰れる */
+    display: inline-flex;
     align-items: center;
   }
   .footer-badges img {
