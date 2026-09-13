@@ -20,42 +20,120 @@ function getLocalizedLink(path: string) {
   if (lang === 'ja') {
     return `${pathWithSlash}${search}${hash}`;
   }
-  
+
   // en or fr: For existing multi-language pages
   const validPages = [...MULTILANG_PAGES, ''];
   const basePage = cleanPath.replace(/\/$/, '');
-  
+
   if (validPages.includes(basePage)) {
     const langPath = basePage === '/' || basePage === '' ? `/${lang}/` : `/${lang}${pathWithSlash}`;
     return `${langPath.replace(/\/+/g, '/')}${search}${hash}`;
   }
-  
+
   // For other pages that do not have multi-language files, fallback to their Japanese counterpart with lang param
   const separator = search ? '&' : '?';
   return `${pathWithSlash}${search}${separator}lang=${lang}${hash}`;
 }
+
+const copy = {
+  ja: {
+    ctaPrimary: '無料相談を予約する',
+    ctaLine: 'LINEで相談する',
+    tagline: '技術と人をつなぐ、つなぎ手。',
+    about: 'LINE公式アカウントと、Salesforce・kintone・HubSpot・Googleスプレッドシートをつなぐ連携構築の専門パートナーです。',
+    areaLabel: '対応エリア',
+    area: '全国（オンライン完結可）／岐阜・愛知近郊（対面可）',
+    services: 'サービス',
+    resources: 'ご参考',
+    policies: '運営・規約',
+    connectLabel: '和-Nodeがつなぐもの',
+    systems: '業務システム',
+    sheets: 'スプレッドシート',
+    securityNote: 'IPA「SECURITY ACTION」一つ星を宣言しています',
+  },
+  en: {
+    ctaPrimary: 'Book a free consultation',
+    ctaLine: 'Contact us on LINE',
+    tagline: 'Connecting technology and people.',
+    about: 'A specialist partner for integrating LINE Official Accounts with Salesforce, kintone, HubSpot and Google Sheets.',
+    areaLabel: 'Service area',
+    area: 'Online across Japan / In person around Gifu and Aichi',
+    services: 'Services',
+    resources: 'Resources',
+    policies: 'Policies',
+    connectLabel: 'What Wa-Node connects',
+    systems: 'Business systems',
+    sheets: 'Sheets',
+    securityNote: 'Declared IPA "SECURITY ACTION" (one star)',
+  },
+  fr: {
+    ctaPrimary: 'Réserver un échange gratuit',
+    ctaLine: 'Nous contacter sur LINE',
+    tagline: 'Relier la technologie et les personnes.',
+    about: 'Partenaire spécialisé dans l’intégration des comptes officiels LINE avec Salesforce, kintone, HubSpot et Google Sheets.',
+    areaLabel: 'Zone',
+    area: 'En ligne dans tout le Japon / En personne autour de Gifu et Aichi',
+    services: 'Services',
+    resources: 'Ressources',
+    policies: 'Politiques',
+    connectLabel: 'Ce que Wa-Node relie',
+    systems: 'Outils métier',
+    sheets: 'Sheets',
+    securityNote: 'Engagement IPA « SECURITY ACTION » (une étoile)',
+  },
+}[lang];
 ---
 <footer class="footer">
+  <div class="footer-pattern" aria-hidden="true"></div>
   <div class="section-inner">
+    <figure class="footer-connect" aria-label={copy.connectLabel}>
+      <div class="connect-track" aria-hidden="true"><span class="connect-signal"></span></div>
+      <ol>
+        <li class="node node-line"><span class="node-dot"></span>LINE</li>
+        <li class="node node-hub"><span class="node-dot"></span>和-Node</li>
+        <li class="node node-sys"><span class="node-dot"></span>Salesforce</li>
+        <li class="node node-sys"><span class="node-dot"></span>kintone</li>
+        <li class="node node-sys"><span class="node-dot"></span>HubSpot</li>
+        <li class="node node-sys"><span class="node-dot"></span>{copy.sheets}</li>
+        <li class="node node-sys-summary"><span class="node-dot"></span>{copy.systems}</li>
+      </ol>
+    </figure>
+
     <div class="footer-grid">
-      <div class="footer-col">
-        <h3>{lang === 'ja' ? 'サービス' : lang === 'en' ? 'Services' : 'Services'}</h3>
+      <div class="footer-brand">
+        <a class="footer-wordmark" href={getLocalizedLink('/')}>和-Node</a>
+        <p class="footer-tagline">{copy.tagline}</p>
+        <p class="footer-about">{copy.about}</p>
+        <dl class="footer-area">
+          <dt>{copy.areaLabel}</dt>
+          <dd>{copy.area}</dd>
+        </dl>
+        <div class="footer-actions">
+          <a class="footer-btn footer-btn-primary" href={getLocalizedLink('/contact')}>{copy.ctaPrimary}<span aria-hidden="true">→</span></a>
+          <a class="footer-btn footer-btn-line" href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener">{copy.ctaLine}<span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+
+      <nav class="footer-col" aria-labelledby="footer-services">
+        <h3 id="footer-services"><span class="col-no">01</span>{copy.services}</h3>
         <ul>
           <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? 'LINE連携・業務アプリ開発' : lang === 'en' ? 'LINE Integration & Business Apps' : 'Intégration LINE et applications métier'}</a></li>
           <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? '料金・対応範囲' : lang === 'en' ? 'Pricing & Scope' : 'Tarifs & Périmètre'}</a></li>
           <li><a href={getLocalizedLink('/contact')}>{lang === 'ja' ? '無料相談（30分）' : lang === 'en' ? 'Free Consultation' : 'Consultation gratuite'}</a></li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h3>{lang === 'ja' ? 'ご参考' : lang === 'en' ? 'Resources' : 'Ressources'}</h3>
+      </nav>
+
+      <nav class="footer-col" aria-labelledby="footer-resources">
+        <h3 id="footer-resources"><span class="col-no">02</span>{copy.resources}</h3>
         <ul>
           <li><a href={getLocalizedLink('/blog')}>{lang === 'ja' ? 'ブログ' : 'Blog'}</a></li>
           <li><a href={getLocalizedLink('/about')}>{lang === 'ja' ? '和-Nodeについて' : lang === 'en' ? 'About Us' : 'À propos'}</a></li>
           <li><a href={getLocalizedLink('/portfolio-b2b')}>{lang === 'ja' ? 'BtoBサイト制作サンプル' : lang === 'en' ? 'B2B Website Sample' : 'Exemple de site BtoB'}</a></li>
         </ul>
-      </div>
-      <div class="footer-col">
-        <h3>{lang === 'ja' ? '運営・規約' : lang === 'en' ? 'Policies' : 'Politiques'}</h3>
+      </nav>
+
+      <nav class="footer-col" aria-labelledby="footer-policies">
+        <h3 id="footer-policies"><span class="col-no">03</span>{copy.policies}</h3>
         <ul>
           <li><a href={getLocalizedLink('/terms')}>{t.footer.col4_item2[lang]}</a></li>
           <li><a href={getLocalizedLink('/terms_miniapp')}>{t.footer.col4_item6[lang]}</a></li>
@@ -65,13 +143,14 @@ function getLocalizedLink(path: string) {
           <li><a href={getLocalizedLink('/tokutei')}>{t.footer.col4_item5[lang]}</a></li>
           <li><button type="button" class="cookie-settings" id="cookie-settings">{lang === 'ja' ? 'Cookie設定' : lang === 'en' ? 'Cookie settings' : 'Paramètres des cookies'}</button></li>
         </ul>
-      </div>
+      </nav>
     </div>
 
     <div class="footer-bottom">
-      <div class="footer-badges">
-        <a href="/security-policy/"><img src="/images/security-action-one-star.webp" alt="SECURITY ACTION 一つ星" width="160" height="160" loading="lazy" decoding="async"></a>
-      </div>
+      <a class="footer-badge" href={getLocalizedLink('/security-policy')}>
+        <img src="/images/security-action-one-star.webp" alt="SECURITY ACTION 一つ星" width="160" height="160" loading="lazy" decoding="async">
+        <span>{copy.securityNote}</span>
+      </a>
       <p class="copyright">© 2026 和-Node. All Rights Reserved.</p>
     </div>
   </div>
@@ -79,26 +158,191 @@ function getLocalizedLink(path: string) {
 
 <style>
   .footer {
-    --footer-accent: #d8b98c;
-    background-color: #0a0a0a;
-    color: #fff;
-    padding: 100px 0 40px;
+    --footer-bg: #0f3432;
+    --footer-bg-deep: #0a2624;
+    --footer-text: #eef3ee;
+    --footer-muted: rgba(238, 243, 238, 0.74);
+    --footer-rule: rgba(238, 243, 238, 0.14);
+    --footer-vermillion: #c7352f;
+    --footer-gold: #e2c48f;
+    --footer-line-green: #23754e;
+    --footer-mincho: 'Shippori Mincho', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(180deg, var(--footer-bg) 0%, var(--footer-bg-deep) 100%);
+    color: var(--footer-text);
+    padding-block: 88px 36px;
+  }
+  /* トップページのヒーローと同じ円の連なり（青海波）を、暗い地にごく薄く敷く */
+  .footer-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1.2' stroke-opacity='0.045'%3E%3Ccircle cx='0' cy='0' r='40'/%3E%3Ccircle cx='80' cy='0' r='40'/%3E%3Ccircle cx='0' cy='80' r='40'/%3E%3Ccircle cx='80' cy='80' r='40'/%3E%3Ccircle cx='40' cy='40' r='40'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 80px 80px;
+    -webkit-mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+    mask-image: linear-gradient(180deg, #000 0%, transparent 70%);
+    pointer-events: none;
   }
   .section-inner {
+    position: relative;
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
   }
+
+  .footer-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+  }
+  .footer-btn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 48px;
+    padding: 10px 18px;
+    border-radius: 6px;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: transform 160ms ease-out, background-color 160ms ease-out;
+  }
+  .footer-btn span { transition: transform 160ms ease-out; }
+  .footer-btn:hover span, .footer-btn:focus-visible span { transform: translateX(4px); }
+  .footer-btn-primary { background: var(--footer-vermillion); }
+  .footer-btn-primary:hover { background: #b62f29; }
+  .footer-btn-line { background: var(--footer-line-green); }
+  .footer-btn-line:hover { background: #1d6743; }
+  .footer-btn:focus-visible { outline: 2px solid #fff; outline-offset: 3px; }
+
+  /* 「つなぐ」を表す接続図。点が線の上を流れる */
+  .footer-connect {
+    position: relative;
+    margin: 0 0 56px;
+    padding: 0 0 32px;
+    border-bottom: 1px solid var(--footer-rule);
+  }
+  .connect-track {
+    position: absolute;
+    left: 4%;
+    right: 4%;
+    top: 8px;
+    height: 1px;
+    background: linear-gradient(90deg, rgba(79, 190, 125, 0.7), rgba(226, 196, 143, 0.7) 22%, rgba(238, 243, 238, 0.35));
+  }
+  .connect-signal {
+    position: absolute;
+    top: -3px;
+    left: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.55);
+    animation: footer-signal 6s linear infinite;
+  }
+  @keyframes footer-signal {
+    0% { left: 0; opacity: 0; }
+    8% { opacity: 1; }
+    92% { opacity: 1; }
+    100% { left: 100%; opacity: 0; }
+  }
+  .footer-connect ol {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    color: var(--footer-muted);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .node-dot {
+    width: 17px;
+    height: 17px;
+    border-radius: 50%;
+    background: var(--footer-bg);
+    border: 2px solid rgba(238, 243, 238, 0.55);
+  }
+  .node-line .node-dot { border-color: #4fbe7d; }
+  .node-line { color: #bfe8cf; }
+  .node-hub .node-dot {
+    background: var(--footer-vermillion);
+    border-color: var(--footer-vermillion);
+    box-shadow: 0 0 0 5px rgba(199, 53, 47, 0.22);
+  }
+  .node-hub {
+    color: #fff;
+    font-family: var(--footer-mincho);
+    font-weight: 700;
+    font-size: 0.9rem;
+  }
+  .node-sys-summary { display: none; }
+
+  /* ブランドとリンク */
   .footer-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: minmax(0, 1.35fr) repeat(3, minmax(0, 1fr));
     gap: 40px;
-    margin-bottom: 60px;
+    margin-bottom: 56px;
   }
-  .footer-col h3 {
+  .footer-wordmark {
+    display: inline-block;
+    color: #fff;
+    font-family: var(--footer-mincho);
+    font-size: 2.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+  }
+  .footer-tagline {
+    margin: 10px 0 18px;
+    color: var(--footer-gold);
+    font-family: var(--footer-mincho);
     font-size: 1rem;
-    color: var(--footer-accent);
-    margin-bottom: 20px;
+  }
+  .footer-about {
+    margin: 0 0 20px;
+    color: var(--footer-muted);
+    font-size: 0.85rem;
+    line-height: 1.9;
+  }
+  .footer-area {
+    margin: 0;
+    padding-top: 14px;
+    border-top: 1px solid var(--footer-rule);
+    font-size: 0.78rem;
+  }
+  .footer-area dt { color: var(--footer-gold); margin-bottom: 4px; }
+  .footer-area dd { margin: 0; color: var(--footer-muted); }
+
+  .footer-col h3 {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin: 0 0 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--footer-rule);
+    color: #fff;
+    font-size: 0.95rem;
+  }
+  .col-no {
+    color: var(--footer-vermillion);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
   }
   .footer-col ul {
     list-style: none;
@@ -110,78 +354,107 @@ function getLocalizedLink(path: string) {
   }
   .footer-col a {
     /* タップ領域を44px以上確保する（9役監査 HPビルダー監督の基準） */
+    position: relative;
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
-    transition: 0.3s;
+    color: var(--footer-muted);
+    font-size: 0.88rem;
+    text-decoration: none;
+    transition: color 160ms ease-out, transform 160ms ease-out;
   }
-  .footer-col a:hover {
+  .footer-col a::before {
+    content: "";
+    width: 0;
+    height: 1px;
+    margin-right: 0;
+    background: var(--footer-vermillion);
+    transition: width 160ms ease-out, margin-right 160ms ease-out;
+  }
+  .footer-col a:hover, .footer-col a:focus-visible {
     color: #fff;
+  }
+  .footer-col a:hover::before, .footer-col a:focus-visible::before {
+    width: 12px;
+    margin-right: 8px;
   }
   .cookie-settings {
     min-height: 44px;
     padding: 10px 0;
-    color: rgba(255, 255, 255, 0.75);
+    color: var(--footer-muted);
     background: transparent;
     border: 0;
     font: inherit;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     cursor: pointer;
   }
   .cookie-settings:hover, .cookie-settings:focus-visible { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
-  .footer-col .qual-list li {
-    color: #fff;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .qual-list li::before {
-    content: "✓";
-    color: var(--footer-accent);
-    font-weight: 900;
-  }
+
   .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 40px;
+    border-top: 1px solid var(--footer-rule);
+    padding-top: 28px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 20px;
   }
-  .footer-badges a {
-    /* inline のままだと画像の高さを取らずタップ領域が潰れる */
+  .footer-badge {
     display: inline-flex;
     align-items: center;
+    gap: 14px;
+    min-height: 44px;
+    color: var(--footer-muted);
+    font-size: 0.75rem;
+    text-decoration: none;
   }
-  .footer-badges img {
+  .footer-badge:hover span { color: #fff; }
+  .footer-badge img {
     /* 320x320の正方形バッジ。flex内では width:auto が0に潰れるため実寸で指定する */
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
     object-fit: contain;
+    border-radius: 4px;
+    background: #fff;
   }
   .copyright {
-    font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+    font-size: 0.8rem;
+    color: rgba(238, 243, 238, 0.55);
   }
 
+  @media (max-width: 960px) {
+    .footer-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    .footer-brand {
+      grid-column: 1 / -1;
+      max-width: 36em;
+    }
+    .node-sys { display: none; }
+    .node-sys-summary { display: flex; }
+    .connect-track { left: 12%; right: 12%; }
+  }
   @media (max-width: 768px) {
-    .brand-main {
-      max-width: 100%;
+    .footer {
+      padding-block: 64px 32px;
     }
     .footer-grid {
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
     .footer-bottom {
       flex-direction: column;
-      gap: 20px;
       text-align: center;
     }
   }
   @media (max-width: 480px) {
     .footer-grid {
       grid-template-columns: 1fr;
+      gap: 32px;
     }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .connect-signal { animation: none; opacity: 0; }
+    .footer-btn, .footer-btn span, .footer-col a, .footer-col a::before { transition: none; }
   }
 </style>
 
