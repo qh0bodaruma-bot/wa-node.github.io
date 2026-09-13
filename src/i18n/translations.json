@@ -8,7 +8,7 @@
   },
   "hero": {
     "badge": { "ja": "月3名まで丁寧に対応", "en": "Max 3 Clients / Month", "fr": "Max 3 Clients / Mois" },
-    "tagline": { "ja": "心理学 × ICT × 計測改善で、相談につながるWeb導線へ。", "en": "Psychology, ICT, and measurable improvement for websites that lead to inquiries.", "fr": "Psychologie, TIC et amélioration mesurable pour transformer le web en demandes." },
+    "tagline": { "ja": "LINEと業務システムをつないで、転記と確認の往復を減らす。", "en": "Connect LINE with your business systems and cut repeated data entry.", "fr": "Relier LINE à vos outils métier pour réduire les saisies répétées." },
     "title_part1": { "ja": "「選ばれる」には、", "en": "There is a ", "fr": "Il y a une " },
     "title_highlight": { "ja": "心理学", "en": "Psychological Reason", "fr": "Raison Psychologique" },
     "title_part2": { "ja": "的な根拠がある。", "en": " to be Chosen.", "fr": " d'être Choisi." },
@@ -141,9 +141,9 @@
   },
   "footer": {
     "tagline": {
-      "ja": "心理学×Web制作・ホームページ制作｜選ばれる導線と「ビジネスの副操縦士」で、ビジネスを整える。",
-      "en": "Psychology × Web Production & Homepage | Aligning business with optimal funnel design and business co-piloting.",
-      "fr": "Psychologie × Production Web & Site Internet | Alignement de l'entreprise avec des parcours optimisés et co-pilotage."
+      "ja": "LINE × 業務システム連携｜技術と人をつなぐ、つなぎ手。",
+      "en": "LINE × Business System Integration | Connecting technology and people.",
+      "fr": "Intégration LINE × outils métier | Relier la technologie et les personnes."
     },
     "founder": { "ja": "代表：高野 紘純", "en": "Founder: Hirozumi Takano", "fr": "Fondateur: Hirozumi Takano" },
     "col1": { "ja": "ホームページ制作・副操縦士", "en": "Web Design & Co-pilot", "fr": "Création Web & Co-pilote" },
