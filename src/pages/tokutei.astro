@@ -33,7 +33,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <th>電話番号</th>
                 <td>
                   080-3599-5388<br />
-                  <span class="small-text">※電話でのご連絡・ご相談は原則として受け付けておりません。お問い合わせフォームまたはLINEよりご連絡ください。</span>
+                  <span class="small-text">※予約のないお電話でのご連絡・ご相談は原則として受け付けておりません。お問い合わせフォームまたはLINEよりご連絡ください（電話での相談は、フォームから日時をご予約いただけます）。</span>
                 </td>
               </tr>
               <tr>
@@ -41,18 +41,23 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <td>contacts@wa-node.com</td>
               </tr>
               <tr>
+                <th>適格請求書発行事業者登録番号</th>
+                <td>T4810359320804</td>
+              </tr>
+              <tr>
                 <th>販売価格・サービス料金</th>
                 <td>
-                  各サービス・商品ごとに表示（詳細は<a href="/pricing/" class="link">料金ページ</a>をご参照ください）
+                  各サービスごとに税別の開始価格を表示しています（詳細は<a href="/pricing/" class="link">料金ページ</a>をご参照ください）。正式な金額は、仕様・作業範囲を確認したうえで見積書にて提示します。
                 </td>
               </tr>
               <tr>
                 <th>サービス料金以外の必要料金</th>
                 <td>
                   <ul>
+                    <li>消費税</li>
                     <li>銀行振込手数料（銀行振込決済の場合）</li>
                     <li>サーバー費用、ドメイン費用（Web制作・保守の場合）</li>
-                    <li>有料素材費、外部サービス利用料（LINE API使用料、有料API、決済手数料等が必要な場合）</li>
+                    <li>連携先システムのライセンス費用、LINE公式アカウントの利用料、有料素材費、外部API等の利用料（見積書に明記したものを除く）</li>
                   </ul>
                 </td>
               </tr>
@@ -67,19 +72,19 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <th>支払時期</th>
                 <td>
                   <ul>
-                    <li><strong>制作系サービス：</strong>ご契約時の着手金（50%）および納品前の残金（50%）</li>
-                    <li><strong>相談・カウンセリング：</strong>予約確定時に前払い</li>
-                    <li><strong>法人月額契約：</strong>翌月分の前払い（月末まで）</li>
-                    <li><strong>文章・プロンプト作成：</strong>着手前全額</li>
+                    <li><strong>開発・制作サービス：</strong>ご契約時の着手金（50%）および納品前の残金（50%）</li>
+                    <li><strong>月額契約（保守・運用支援等）：</strong>翌月分を当月末までに前払い</li>
+                    <li><strong>単発のレビュー・診断等：</strong>着手前に全額</li>
                   </ul>
+                  <span class="small-text">※個別契約で別途定めた場合は、その定めに従います。</span>
                 </td>
               </tr>
               <tr>
                 <th>サービス提供時期</th>
                 <td>
                   <ul>
-                    <li><strong>相談・カウンセリング：</strong>予約確定時に合意した日時</li>
-                    <li><strong>制作系サービス：</strong>契約後、個別に合意した制作期間に基づき納品（目安1〜1.5ヶ月）</li>
+                    <li><strong>開発・制作サービス：</strong>契約後、個別に合意した期間に基づき納品</li>
+                    <li><strong>月額契約：</strong>契約で定めた開始日から</li>
                   </ul>
                 </td>
               </tr>
@@ -87,15 +92,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
                 <th>キャンセル・返金</th>
                 <td>
                   <ul>
-                    <li><strong>制作・開発：</strong>着手前は全額返金（実費を除く）。着手後は進捗状況および外部費用に応じた実費を差し引き返金。初稿提出後は原則として返金不可。</li>
-                    <li><strong>カウンセリング：</strong>2日前までの日程変更・キャンセルは無料。前日の変更・キャンセルは料金の50%、当日・無断キャンセルは100%を申し受けます。詳細は<a href="/cancel-policy/" class="link">キャンセルポリシー</a>をご確認ください。</li>
+                    <li><strong>着手前：</strong>決済手数料・振込手数料等の実費を差し引いて返金します。</li>
+                    <li><strong>着手後・納品前：</strong>進捗段階に応じた作業対価（契約金額の20〜90%）と発生済みの外部費用を差し引いて返金します。作業対価と外部費用の合計が受領済みの料金を超える場合は、差額をご請求します。</li>
+                    <li><strong>納品後：</strong>役務の性質上、お客様のご都合による返金はお受けしておりません。</li>
+                    <li><strong>単発のレビュー・相談等：</strong>着手前は実費を差し引いて返金し、着手後の返金はお受けしておりません。</li>
                   </ul>
+                  <span class="small-text">詳細は<a href="/cancel-policy/" class="link">キャンセル・返金ポリシー</a>をご確認ください。</span>
                 </td>
               </tr>
               <tr>
                 <th>中途解約</th>
                 <td>
-                  顧問契約・月額相談プランについては、解約希望月の前月末までにお申し出いただくことで、翌月末をもって解約が可能です。日割り計算による返金は行っておりません。
+                  月額契約（保守・運用支援等）は、個別契約に別段の定めがない限り、最低契約期間を3ヶ月とします。解約希望月の前月末までにお申し出いただくことで、解約希望月の末日をもって解約できます。最低契約期間の途中で解約する場合は、残りの月数分の月額料金をお支払いいただきます。日割り計算による返金は行っておりません。
                 </td>
               </tr>
               <tr>
@@ -111,8 +119,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           </table>
         </div>
 
+        <p class="date">2026年9月13日 改定</p>
+
         <div class="btns">
-          <a href="/cancel-policy/" class="btn secondary">キャンセルポリシー</a>
+          <a href="/cancel-policy/" class="btn secondary">キャンセル・返金ポリシー</a>
           <a href="/contact/" class="btn">相談する</a>
         </div>
       </div>
@@ -138,6 +148,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .legal-table li:last-child { margin-bottom: 0; }
 
   .small-text { font-size: 0.8rem; opacity: 0.8; }
+  .date { margin: -16px 0 32px; text-align: right; color: var(--muted); font-size: 0.9rem; }
   .link { text-decoration: underline; color: var(--accent); font-weight: 700; }
 
   @media (max-width: 768px) {

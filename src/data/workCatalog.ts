@@ -307,23 +307,6 @@ export const workCatalog: WorkItem[] = [
   {
     "category": "tool",
     "title": {
-      "ja": "こころの疲労度診断",
-      "en": "Mental fatigue self-check",
-      "fr": "Auto-évaluation de la fatigue mentale"
-    },
-    "description": {
-      "ja": "産業カウンセラーの知見をシステム化。現在のストレス要因を可視化し、適切なケアへの気づきを促すインタラクティブな診断ツールです。",
-      "en": "An interactive example of presenting questions, branching results and supportive information.",
-      "fr": "Un exemple interactif de questions, de résultats conditionnels et d’informations de soutien."
-    },
-    "href": "/mental_care/",
-    "image": "/images/works-mental.webp",
-    "id": "work-18",
-    "featured": false
-  },
-  {
-    "category": "tool",
-    "title": {
       "ja": "セルフ・バリアフリー診断",
       "en": "Accessibility self-check",
       "fr": "Auto-évaluation de l’accessibilité"

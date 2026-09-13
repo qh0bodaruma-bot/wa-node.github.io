@@ -2,15 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="LINE Mini App サービス利用規約｜和-Node" description="和-Nodeが提供するLINE Mini App制作・体験デモ・関連サービスの利用規約です。" noindex={true}>
+<BaseLayout title="LINE Mini App サービス利用規約｜和-Node" description="和-Nodeが提供するLINE Mini App制作・関連サービスの利用規約です。" noindex={true}>
   <main id="main">
     <section class="hero">
       <div class="wrap">
         <p class="kicker">Terms of Service</p>
         <h1>LINE Mini App サービス利用規約</h1>
         <p class="lead">
-          和-Nodeが提供するLINE Mini App制作・体験デモ・関連サービスの利用条件を定めるものです。
-          LINE Mini Appは、予約・問診・ヒアリング・アンケートなどを、使い慣れたLINE上で扱いやすくするICT導線です。
+          和-Nodeが提供するLINE Mini App制作・関連サービスの利用条件を定めるものです。
+          LINE Mini Appは、予約・ヒアリング・アンケート・受付などを、使い慣れたLINE上で扱いやすくするICT導線です。
         </p>
         <div class="btns">
           <a class="btn primary" href="/privacy/">プライバシーポリシー</a>
@@ -22,8 +22,8 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     <section>
       <div class="wrap card intro-card">
         <p>
-          和-Node（以下、「当事業」）が提供するLINE Mini App制作例および関連サービス
-          （以下、「本サービス」）の利用条件を定めています。
+          和-Node（以下、「当事業」）が、LINE Mini Appの制作を依頼されるお客様（以下、「お客様」）に提供する
+          LINE Mini App制作および関連サービス（以下、「本サービス」）の利用条件を定めています。
         </p>
       </div>
     </section>
@@ -33,71 +33,70 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="card term-item">
           <h2>第1条（適用）</h2>
           <p>
-            本規約は、ユーザーと当事業との間の本サービスの利用に関わる一切の関係に適用されるものとします。
+            本規約は、お客様と当事業との間の本サービスの利用に関わる一切の関係に適用されるものとします。
             個別契約、見積書、発注書等で別途定めた事項がある場合は、その内容を優先します。
+            本規約に定めのない事項については、当事業の<a href="/terms/">利用規約</a>が適用されます。
           </p>
         </div>
 
         <div class="card term-item">
           <h2>第2条（サービス内容と利用環境）</h2>
           <p>
-            本サービスは、LINE株式会社が提供する「LINE」アプリ上で動作するWebアプリケーション
+            本サービスは、LINEヤフー株式会社が提供する「LINE」アプリ上で動作するWebアプリケーション
             （LINE Mini App）の企画・制作・保守等を行うものです。
           </p>
           <ul class="clean">
-            <li>本サービスの利用には、最新バージョンのLINEアプリがインストールされたスマートフォン端末が必要です。</li>
-            <li>LINEアプリの仕様変更、不具合、またはLINE株式会社によるサービス停止等により、本サービスの機能が制限される場合があります。</li>
-            <li>予約、問診、ヒアリング、アンケート、簡易診断、受付導線など、比較的シンプルで導入しやすいICT導線を主な対象とします。</li>
+            <li>LINE Mini Appの利用には、最新バージョンのLINEアプリがインストールされたスマートフォン端末が必要です。</li>
+            <li>LINEアプリの仕様変更、不具合、またはLINEヤフー株式会社によるサービス停止等により、LINE Mini Appの機能が制限される場合があります。</li>
+            <li>LINE Mini Appの審査通過、公開、および将来的な仕様変更への追従は、LINEヤフー株式会社の判断に依存するため、当事業はその結果を保証しません。</li>
+            <li>予約、ヒアリング、アンケート、受付導線など、比較的シンプルで導入しやすいICT導線を主な対象とします。</li>
           </ul>
         </div>
 
         <div class="card term-item">
           <h2>第3条（禁止事項）</h2>
-          <p>ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。</p>
+          <p>お客様は、本サービスおよび成果物の利用にあたり、以下の行為をしてはなりません。</p>
           <ul class="clean">
             <li>法令または公序良俗に違反する行為</li>
             <li>犯罪行為に関連する行為</li>
             <li>当事業のサーバーまたはネットワークの機能を破壊・妨害する行為</li>
-            <li>本サービスの運営を妨害するおそれのある行為</li>
-            <li>他のユーザーに関する個人情報等を不正に収集または蓄積する行為</li>
+            <li>エンドユーザーの個人情報を、利用目的を示さずに収集する行為、または不正に蓄積する行為</li>
+            <li>LINEヤフー株式会社の定める規約・ガイドラインに違反する用途で成果物を利用する行為</li>
             <li>反社会的勢力に対して直接または間接に利益を供与する行為</li>
-            <li>その他、当事業が不適切と判断する行為</li>
           </ul>
         </div>
 
         <div class="card term-item">
-          <h2>第4条（本サービスの提供停止等）</h2>
+          <h2>第4条（保守サービスの一時停止）</h2>
           <p>
-            当事業は、以下のいずれかの事由があると判断した場合、
-            ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断できるものとします。
+            当事業が保守・運用を受託している場合、以下のいずれかの事由があるときは、保守・運用の全部または一部を一時停止または中断することがあります。
+            この場合、当事業は可能な限り事前に、緊急の場合は事後速やかに、お客様に通知します。
           </p>
           <ul class="clean">
-            <li>本サービスに係るコンピュータシステムの保守点検または更新を行う場合</li>
+            <li>システムの保守点検または更新を行う場合</li>
             <li>地震、落雷、火災、停電、天災などの不可抗力により提供が困難となった場合</li>
             <li>コンピュータまたは通信回線等が事故により停止した場合</li>
             <li>LINEプラットフォーム、外部サービス、決済サービス等の仕様変更・障害・停止が発生した場合</li>
-            <li>その他、当事業が本サービスの提供が困難と判断した場合</li>
           </ul>
         </div>
 
         <div class="card term-item">
-          <h2>第5条（知的財産権および利用権）</h2>
+          <h2>第5条（知的財産権）</h2>
           <p>
-            1. 本サービスによって制作された成果物のうち、お客様固有の文章、画像、設定内容、画面構成、業務フロー等については、個別契約・見積書・仕様書で定める範囲において、お客様の事業目的の範囲で利用できるものとします。
-          </p>
-          <p>
-            2. ただし、制作に使用した汎用的なソースコード、テンプレート、共通部品、ノウハウ、制作過程のデータ等の権利は当事業に留保されます。
-          </p>
-          <p>
-            3. 納品後の通常利用、軽微な改変、保守移管については、お客様の事業目的の範囲内で可能です。ただし、再販売、第三者への再配布、汎用テンプレート化、別サービスへの転用等は、個別契約で定める場合を除きできません。
+            成果物の知的財産権の帰属および利用許諾は、<a href="/terms/">利用規約</a>第11条の定めに従います。
           </p>
         </div>
 
         <div class="card term-item">
           <h2>第6条（個人情報・外部サービス連携）</h2>
           <p>
-            本サービスにおいて、氏名、連絡先、予約情報、問診情報、アンケート回答、相談内容等の個人情報を扱う場合があります。
-            当事業は、取得した情報を必要最小限の範囲で取り扱い、プライバシーポリシーに従って管理します。
+            LINE Mini Appでは、エンドユーザーの氏名、連絡先、予約情報、アンケート回答等の個人情報を扱う場合があります。
+            これらの情報の利用目的の公表や同意の取得は、LINE Mini Appを運営するお客様の責任で行うものとします。
+            当事業が制作・保守のためにこれらの情報を取り扱う場合は、お客様からの委託の範囲内でのみ取り扱い、
+            <a href="/privacy/">プライバシーポリシー</a>に従って管理します。
+          </p>
+          <p>
+            病歴、健康状態その他の要配慮個人情報を取り扱う場合は、取得時の本人同意の方法と安全管理措置を、個別契約で定めます。
           </p>
           <p>
             Googleフォーム、スプレッドシート、Stripe、LINE公式アカウント、その他外部サービスと連携する場合は、
@@ -108,10 +107,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <div class="card term-item">
           <h2>第7条（免責事項）</h2>
           <ul class="clean">
-            <li>当事業は、本サービスに事実上または法律上の瑕疵がないことを保証しません。</li>
-            <li>当事業は、故意または重過失による場合を除き、本サービスに起因してユーザーに生じた損害について責任を負いません。</li>
+            <li>成果物の不具合への対応は、利用規約第10条（契約不適合責任・納品後サポート）の定めに従います。</li>
+            <li>当事業が損害賠償責任を負う場合の範囲および上限は、利用規約第21条（損害賠償）の定めに従います。</li>
             <li>LINEプラットフォームの仕様変更や規約変更に伴う不具合、停止、データ消失等について、当事業は責任を負いかねます。</li>
-            <li>予約数、売上、問い合わせ数、診断結果、回答精度等の成果を保証するものではありません。</li>
+            <li>予約数、売上、問い合わせ数、回答数等の成果を保証するものではありません。</li>
           </ul>
         </div>
 
@@ -124,10 +123,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         </div>
 
         <div class="card term-item">
-          <h2>第9条（利用規約の変更）</h2>
+          <h2>第9条（規約の変更）</h2>
           <p>
-            当事業は、必要と判断した場合には、ユーザーに通知することなく本規約を変更できるものとします。
-            規約変更後に本サービスを利用した場合、ユーザーは変更後の規約に同意したものとみなします。
+            当事業は、法令の変更、サービス内容の変更その他必要がある場合、本規約を変更できるものとします。
+            変更する場合は、変更後の内容と効力発生日を、効力発生日の相当期間前までに当サイトに掲載して周知します。
+            締結済みの個別契約には、お客様の同意がない限り、締結時の規約が適用されます。
           </p>
         </div>
 
@@ -135,9 +135,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <h2>第10条（準拠法・裁判管轄）</h2>
           <ul class="clean">
             <li>本規約の解釈にあたっては、日本法を準拠法とします。</li>
-            <li>本サービスに関して紛争が生じた場合には、当事業の所在地を管轄する裁判所を専属的合意管轄とします。</li>
+            <li>本サービスに関して紛争が生じた場合には、当事業の所在地を管轄する地方裁判所または簡易裁判所を第一審の専属的合意管轄裁判所とします。</li>
           </ul>
-          <p class="date">2026年4月30日 制定</p>
+          <p class="date">2026年4月30日 制定<br />2026年9月13日 改定</p>
         </div>
       </div>
     </section>
@@ -149,7 +149,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     .kicker { color: var(--accent2); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 12px; }
     h1 { font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; margin-bottom: 24px; font-weight: 800; }
     .lead { font-size: 1.1rem; color: var(--muted); max-width: 800px; margin: 0 auto; line-height: 1.8; }
-    
+
     .btns { display: flex; gap: 16px; justify-content: center; margin-top: 32px; }
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
@@ -166,12 +166,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       padding: 32px; box-shadow: var(--shadow);
     }
     .intro-card { margin-top: -40px; text-align: center; position: relative; z-index: 2; }
-    
+
     .terms-content { padding: 60px 0 100px; }
     .term-item { margin-bottom: 24px; }
     .term-item h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 20px; color: var(--text); border-bottom: 2px solid var(--accent2); display: inline-block; padding-bottom: 4px; }
     .term-item p { margin-bottom: 16px; }
-    
+
     .clean { list-style: none; padding: 0; margin-top: 16px; }
     .clean li { position: relative; padding-left: 24px; margin-bottom: 12px; }
     .clean li::before { content: "•"; position: absolute; left: 0; color: var(--accent2); font-weight: bold; font-size: 1.4rem; line-height: 1; }

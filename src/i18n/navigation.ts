@@ -9,8 +9,6 @@ export const MULTILANG_PAGES = [
   '/simulator',
   '/demos',
   '/barrier_free',
-  '/mental_care',
-  '/corporate-mental',
   '/lp-portfolio',
   '/tech-stack',
   '/thanks',
