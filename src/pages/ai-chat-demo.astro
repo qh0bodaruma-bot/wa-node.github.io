@@ -1,215 +1,46 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import MaterialIcon from '../components/MaterialIcon.astro';
 
-const title = "AI相談ナビ（体験デモ）｜心理学×Web制作の視点で課題を整理｜和-Node";
-const description = "和-NodeのAI活用実績として公開している「相談内容整理ナビ」のデモページです。Web制作、ICT活用、導線改善など、あなたの現在の状況をAIが専門的な視点で整理し、最適なアプローチを提案します。";
+const title = "AI相談ナビ（準備中）｜和-Node";
+const description = "和-NodeのAI相談ナビは、個人情報の取扱いと同意手続きを整備するため、現在入力機能を停止しています。";
 ---
 
 <BaseLayout title={title} description={description} noindex={true}>
   <main id="main" class="demo-page">
     <section class="section demo-hero">
       <div class="section-inner">
-        <span class="eyebrow">AI & ICT Solutions Demo</span>
+        <span class="eyebrow">AI & ICT Solutions</span>
         <h1>AI相談ナビ</h1>
-        <h2 class="demo-subheading">相談前のモヤモヤを、3分で整理する</h2>
-        <p class="lead">Web制作・AI活用・導線改善。あなたの状況に合わせた「最適な一歩」をAIがナビゲートします。</p>
-        <div class="demo-notice">
-          <p>※本ページは、和-NodeによるAIアプリケーション開発の実績を示す「体験デモ」です。<br/>AIが回答を生成しますが、確定的な見積りや契約判断、医療的診断を行うものではありません。個人情報・機密情報の詳細は入力しないでください。</p>
-        </div>
-      </div>
-    </section>
+        <h2>現在、入力・回答機能を停止しています</h2>
+        <p class="lead">
+          個人情報・機密情報の取扱いと同意手続きを整備するため、AIへの相談内容の送信機能を停止しました。
+          このページから入力内容が外部のAIサービスへ送信されることはありません。
+        </p>
 
-    <section class="section chat-demo-section">
-      <div class="section-inner">
-        <div class="chat-container glass-card">
-          <div class="chat-header">
-            <div class="header-info">
-              <span class="status-dot"></span>
-              <strong>AI相談ナビ（試作版）</strong>
-            </div>
-            <p class="header-sub">Web制作・ICT・導線整理の専門AI</p>
-          </div>
-          
-          <div class="chat-messages" id="chat-messages">
-            <div class="message ai">
-              <div class="message-inner">
-                和-NodeのAI相談ナビへようこそ。私は、あなたのビジネス課題を「Web導線」「ICT活用」「心理学的アプローチ」の3つの視点から整理するお手伝いをします。<br/><br/>
-                今、どのようなこと（Web制作、業務の自動化、集客の悩みなど）で迷われていますか？
-              </div>
-            </div>
-          </div>
-
-          <div class="chat-input-area">
-            <div class="input-wrap">
-              <textarea id="chat-input" placeholder="例：LPの成約率を上げたい、ChatGPTを業務で使いたい..." rows="1"></textarea>
-              <button id="send-btn" type="button" aria-label="相談内容を送信" disabled>
-                <MaterialIcon name="send" />
-              </button>
-            </div>
-          </div>
+        <div class="status-card">
+          <p class="status-label">現在の状態</p>
+          <p>入力欄と送信機能は利用できません。再開時は、送信先、利用目的、保存期間等を明示し、送信前に同意を確認します。</p>
         </div>
 
-        <div class="demo-footer-info">
-          <h3>このデモでできること</h3>
-          <ul>
-            <li>漠然とした「やりたいこと」の専門的視点での言語化</li>
-            <li>和-Nodeの各サービスメニューとの適合度チェック</li>
-            <li>無料相談前に「何を話せばいいか」の事前の整理</li>
-          </ul>
-          <div class="final-cta">
-            <p>整理が終わったら、実際の解決策は「無料相談」で一緒に作り上げましょう。</p>
-            <a href="/contact/?source=ai_chat_demo" class="btn primary">代表との無料相談（30-60分）へ</a>
-          </div>
+        <div class="final-cta">
+          <p>Web制作・AI活用・導線改善のご相談は、通常の無料相談フォームから承ります。</p>
+          <a href="/contact/?source=ai_chat_demo" class="btn primary">代表との無料相談（30分）へ</a>
         </div>
       </div>
     </section>
   </main>
 </BaseLayout>
 
-<style is:global>
-  .demo-page { background: #fdfcf9; }
-  .demo-hero { text-align: center; padding: 80px 0 40px; border-bottom: 1px solid var(--line); }
-  .demo-notice {
-    max-width: 700px; margin: 30px auto 0; padding: 20px;
-    background: rgba(197, 160, 89, 0.05); border-radius: 12px;
-    font-size: 0.85rem; color: var(--muted); line-height: 1.6;
-  }
-
-  .chat-demo-section { padding: 60px 0; }
-  .chat-container {
-    max-width: 800px; margin: 0 auto 40px;
-    height: 600px; display: flex; flex-direction: column;
-    border: 1px solid var(--line); overflow: hidden;
-    background: #fff; box-shadow: 0 30px 60px rgba(0,0,0,0.05);
-  }
-
-  .chat-header { padding: 24px; background: var(--soft); border-bottom: 1px solid var(--line); }
-  .header-info { display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-  .status-dot { width: 8px; height: 8px; background: #639922; border-radius: 50%; }
-  .header-sub { font-size: 0.8rem; color: var(--muted); margin: 0; }
-
-  .chat-messages { flex: 1; overflow-y: auto; padding: 30px; display: flex; flex-direction: column; gap: 20px; }
-  .message { max-width: 85%; line-height: 1.7; }
-  .message.ai { align-self: flex-start; }
-  .message.user { align-self: flex-end; }
-  .message-inner { padding: 16px 20px; border-radius: 20px; font-size: 0.95rem; }
-  .message.ai .message-inner { background: #f0f0f0; border-bottom-left-radius: 4px; color: #333; }
-  .message.user .message-inner { background: var(--accent); border-bottom-right-radius: 4px; color: #fff; }
-
-  .chat-input-area { padding: 24px; border-top: 1px solid var(--line); background: #fff; }
-  .input-wrap { display: flex; gap: 12px; align-items: flex-end; }
-  #chat-input {
-    flex: 1; border: 1px solid #ddd; border-radius: 12px; padding: 12px 16px;
-    font-family: inherit; font-size: 1rem; resize: none; min-height: 48px; max-height: 120px;
-    transition: 0.3s;
-  }
-  #chat-input:focus { border-color: var(--accent); outline: none; }
-  #send-btn {
-    width: 48px; height: 48px; border-radius: 12px; background: var(--accent); color: #fff;
-    border: none; cursor: pointer; display: flex; align-items: center; justify-content: center;
-    transition: 0.3s;
-  }
-  #send-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-
-  .demo-footer-info { max-width: 800px; margin: 0 auto; text-align: center; }
-  .demo-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 12px; }
-  .demo-subheading { font-size: 1.5rem; color: var(--accent); margin-bottom: 24px; font-weight: 800; }
-  .demo-footer-info ul { list-style: none; padding: 0; display: inline-block; text-align: left; margin-bottom: 40px; }
-  .demo-footer-info li { margin-bottom: 12px; font-size: 0.95rem; display: flex; gap: 10px; }
-  .demo-footer-info li::before { content: "✔"; color: var(--accent); font-weight: 800; }
-  .final-cta { padding: 40px; background: var(--soft); border-radius: 24px; border: 1px solid var(--line); }
-  .final-cta p { margin-bottom: 20px; font-weight: 800; }
+<style>
+  .demo-page { background: #fdfcf9; min-height: 70vh; }
+  .demo-hero { text-align: center; padding: 80px 0; }
+  .section-inner { max-width: 800px; margin: 0 auto; padding: 0 20px; }
+  .demo-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin: 12px 0; }
+  .demo-hero h2 { font-size: clamp(1.25rem, 3vw, 1.7rem); color: var(--accent); margin-bottom: 24px; }
+  .lead { font-size: 1.05rem; line-height: 1.9; }
+  .status-card { margin: 36px 0; padding: 28px; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 20px; }
+  .status-label { margin: 0 0 8px; font-weight: 800; color: var(--accent); }
+  .status-card p:last-child { margin: 0; }
+  .final-cta { padding: 36px; background: var(--soft); border: 1px solid var(--line); border-radius: 24px; }
+  .final-cta p { margin: 0 0 20px; font-weight: 700; }
 </style>
-
-<script is:inline>
-  function initDemoChat() {
-    const messages = document.getElementById('chat-messages');
-    const input = document.getElementById('chat-input');
-    const sendBtn = document.getElementById('send-btn');
-    let chatHistory = [];
-
-    input.addEventListener('input', () => {
-      sendBtn.disabled = !input.value.trim();
-      input.style.height = 'auto';
-      input.style.height = input.scrollHeight + 'px';
-    });
-
-    async function sendMessage() {
-      const text = input.value.trim();
-      if (!text) return;
-
-      // Add User Message
-      appendMessage('user', text);
-      input.value = '';
-      input.style.height = 'auto';
-      sendBtn.disabled = true;
-
-      const aiMsgDiv = appendMessage('ai', '思考中...');
-      const inner = aiMsgDiv.querySelector('.message-inner');
-
-      try {
-        const response = await fetch('/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ 
-            messages: [...chatHistory, { role: 'user', content: text }] 
-          })
-        });
-
-        if (response.status === 503) { inner.textContent = "AI相談ナビは現在準備中です。無料相談フォームまたはLINEからご相談ください。"; return; }
-        if (!response.ok) throw new Error();
-
-        inner.innerHTML = '';
-        const reader = response.body.getReader();
-        const decoder = new TextDecoder();
-        let fullContent = '';
-
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
-          const chunk = decoder.decode(value);
-          const lines = chunk.split('\n');
-          
-          for (const line of lines) {
-            if (line.startsWith('data: ')) {
-              const data = line.slice(6);
-              if (data === '[DONE]') continue;
-              try {
-                const parsed = JSON.parse(data);
-                const content = parsed.choices[0].delta.content || '';
-                fullContent += content;
-                inner.innerText = fullContent;
-                messages.scrollTop = messages.scrollHeight;
-              } catch (e) {}
-            }
-          }
-        }
-        chatHistory.push({ role: 'user', content: text });
-        chatHistory.push({ role: 'assistant', content: fullContent });
-
-      } catch (e) {
-        inner.innerText = '申し訳ありません。エラーが発生しました。時間を置いて再度お試しください。';
-      }
-    }
-
-    function appendMessage(role, text) {
-      const div = document.createElement('div');
-      div.className = `message ${role}`;
-      div.innerHTML = `<div class="message-inner">${text}</div>`;
-      messages.appendChild(div);
-      messages.scrollTop = messages.scrollHeight;
-      return div;
-    }
-
-    sendBtn.addEventListener('click', sendMessage);
-    input.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
-  }
-
-  document.addEventListener('astro:page-load', initDemoChat);
-</script>

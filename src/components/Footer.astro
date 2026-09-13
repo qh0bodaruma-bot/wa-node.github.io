@@ -61,6 +61,7 @@ function getLocalizedLink(path: string) {
           <li><a href={getLocalizedLink('/privacy')}>{t.footer.col4_item3[lang]}</a></li>
           <li><a href={getLocalizedLink('/security-policy')}>{t.footer.col4_item4[lang]}</a></li>
           <li><a href={getLocalizedLink('/tokutei')}>{t.footer.col4_item5[lang]}</a></li>
+          <li><button type="button" class="cookie-settings" id="cookie-settings">{lang === 'ja' ? 'Cookie設定' : lang === 'en' ? 'Cookie settings' : 'Paramètres des cookies'}</button></li>
         </ul>
       </div>
     </div>
@@ -117,6 +118,17 @@ function getLocalizedLink(path: string) {
   .footer-col a:hover {
     color: #fff;
   }
+  .cookie-settings {
+    min-height: 44px;
+    padding: 10px 0;
+    color: rgba(255, 255, 255, 0.75);
+    background: transparent;
+    border: 0;
+    font: inherit;
+    font-size: 0.9rem;
+    cursor: pointer;
+  }
+  .cookie-settings:hover, .cookie-settings:focus-visible { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
   .footer-col .qual-list li {
     color: #fff;
     display: flex;
@@ -170,3 +182,14 @@ function getLocalizedLink(path: string) {
     }
   }
 </style>
+
+<script>
+  function initCookieSettings() {
+    const button = document.getElementById('cookie-settings');
+    if (!button || button.dataset.initialized === 'true') return;
+    button.dataset.initialized = 'true';
+    button.addEventListener('click', () => document.dispatchEvent(new CustomEvent('wa-node:open-consent')));
+  }
+  initCookieSettings();
+  document.addEventListener('astro:page-load', initCookieSettings);
+</script>

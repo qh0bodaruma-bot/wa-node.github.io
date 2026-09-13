@@ -1,0 +1,176 @@
+---
+interface Props {
+  lang?: 'ja' | 'en' | 'fr';
+  gaMeasurementId?: string;
+  gaEnabled?: boolean;
+  clarityProjectId?: string;
+  clarityEnabled?: boolean;
+}
+
+const {
+  lang = 'ja',
+  gaMeasurementId = 'G-B4FD0GJGW5',
+  gaEnabled = true,
+  clarityProjectId = 'yfv3qj03ho',
+  clarityEnabled = true,
+} = Astro.props;
+
+const copy = {
+  ja: {
+    title: 'アクセス解析の設定',
+    body: 'サイト改善のため、Google AnalyticsとMicrosoft Clarityを利用します。「許可する」を選ぶまで解析ツールは読み込みません。',
+    allow: '解析を許可する',
+    deny: '許可しない',
+    policy: '詳しく見る',
+  },
+  en: {
+    title: 'Analytics settings',
+    body: 'We use Google Analytics and Microsoft Clarity to improve this site. Analytics tools are not loaded until you select “Allow analytics”.',
+    allow: 'Allow analytics',
+    deny: 'Do not allow',
+    policy: 'Learn more (Japanese)',
+  },
+  fr: {
+    title: 'Paramètres de mesure d’audience',
+    body: 'Nous utilisons Google Analytics et Microsoft Clarity pour améliorer ce site. Ces outils ne sont pas chargés avant votre autorisation.',
+    allow: 'Autoriser la mesure',
+    deny: 'Ne pas autoriser',
+    policy: 'En savoir plus (japonais)',
+  },
+}[lang];
+---
+
+<section
+  class="analytics-consent"
+  id="analytics-consent"
+  aria-labelledby="analytics-consent-title"
+  data-ga-id={gaMeasurementId}
+  data-ga-enabled={String(gaEnabled)}
+  data-clarity-id={clarityProjectId}
+  data-clarity-enabled={String(clarityEnabled)}
+  hidden
+>
+  <div class="analytics-consent-inner">
+    <div>
+      <h2 id="analytics-consent-title">{copy.title}</h2>
+      <p>{copy.body} <a href="/privacy/">{copy.policy}</a></p>
+    </div>
+    <div class="analytics-consent-actions">
+      <button type="button" class="consent-deny" data-consent="denied">{copy.deny}</button>
+      <button type="button" class="consent-allow" data-consent="granted">{copy.allow}</button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .analytics-consent { position: fixed; inset: auto 16px 16px; z-index: 10000; max-width: 920px; margin: 0 auto; padding: 20px; color: #1d211d; background: #fffefa; border: 1px solid #abb5a8; border-radius: 10px; box-shadow: 0 12px 40px rgba(0,0,0,.2); }
+  .analytics-consent[hidden] { display: none; }
+  .analytics-consent-inner { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 24px; align-items: center; }
+  .analytics-consent h2 { margin: 0 0 6px; font-family: inherit; font-size: 1rem; }
+  .analytics-consent p { margin: 0; font-size: .78rem; line-height: 1.7; }
+  .analytics-consent a { text-decoration: underline; text-underline-offset: 3px; }
+  .analytics-consent-actions { display: flex; gap: 10px; }
+  .analytics-consent button { min-height: 44px; padding: 9px 15px; border: 1px solid #315f48; border-radius: 5px; font: inherit; font-size: .76rem; font-weight: 700; cursor: pointer; }
+  .consent-deny { color: #315f48; background: #fff; }
+  .consent-allow { color: #fff; background: #315f48; }
+  @media (max-width: 680px) { .analytics-consent-inner { grid-template-columns: 1fr; gap: 16px; } .analytics-consent-actions { display: grid; grid-template-columns: 1fr 1fr; } }
+</style>
+
+<script is:inline>
+  (() => {
+    const STORAGE_KEY = 'wa-node-analytics-consent-v1';
+
+    function eraseAnalyticsCookies() {
+      document.cookie.split(';').forEach((entry) => {
+        const name = entry.split('=')[0].trim();
+        if (name === '_ga' || name.startsWith('_ga_') || name === '_clck' || name === '_clsk') {
+          document.cookie = `${name}=; Max-Age=0; path=/; SameSite=Lax`;
+        }
+      });
+    }
+
+    function setGoogleConsent(value) {
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+      window.gtag('consent', 'update', {
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        analytics_storage: value,
+      });
+    }
+
+    function loadAnalytics(root) {
+      const gaId = root.dataset.gaId;
+      if (root.dataset.gaEnabled === 'true' && gaId && !document.getElementById('wa-node-ga')) {
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = window.gtag || function(){ window.dataLayer.push(arguments); };
+        window.gtag('consent', 'default', {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'denied',
+        });
+        window.gtag('consent', 'update', { analytics_storage: 'granted' });
+        window.gtag('js', new Date());
+        window.gtag('config', gaId);
+        const script = document.createElement('script');
+        script.id = 'wa-node-ga';
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(gaId)}`;
+        document.head.appendChild(script);
+      }
+
+      const clarityId = root.dataset.clarityId;
+      if (root.dataset.clarityEnabled === 'true' && clarityId && !document.getElementById('wa-node-clarity')) {
+        window.clarity = window.clarity || function(){ (window.clarity.q = window.clarity.q || []).push(arguments); };
+        window.clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: 'granted' });
+        const script = document.createElement('script');
+        script.id = 'wa-node-clarity';
+        script.async = true;
+        script.src = `https://www.clarity.ms/tag/${encodeURIComponent(clarityId)}`;
+        document.head.appendChild(script);
+      }
+    }
+
+    function applyChoice(root, choice) {
+      if (choice === 'granted') {
+        loadAnalytics(root);
+      } else {
+        setGoogleConsent('denied');
+        if (typeof window.clarity === 'function') {
+          window.clarity('consentv2', { ad_Storage: 'denied', analytics_Storage: 'denied' });
+          window.clarity('consent', false);
+        }
+        eraseAnalyticsCookies();
+      }
+      root.hidden = true;
+    }
+
+    function initAnalyticsConsent() {
+      const root = document.getElementById('analytics-consent');
+      if (!root || root.dataset.initialized === 'true') return;
+      root.dataset.initialized = 'true';
+
+      let choice = null;
+      try { choice = localStorage.getItem(STORAGE_KEY); } catch {}
+      if (choice === 'granted' || choice === 'denied') applyChoice(root, choice);
+      else root.hidden = false;
+
+      root.querySelectorAll('[data-consent]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const next = button.dataset.consent;
+          const analyticsWasLoaded = Boolean(document.getElementById('wa-node-ga') || document.getElementById('wa-node-clarity'));
+          try { localStorage.setItem(STORAGE_KEY, next); } catch {}
+          applyChoice(root, next);
+          if (next === 'denied' && analyticsWasLoaded) window.location.reload();
+        });
+      });
+
+      document.addEventListener('wa-node:open-consent', () => { root.hidden = false; });
+    }
+
+    initAnalyticsConsent();
+    document.addEventListener('astro:page-load', initAnalyticsConsent);
+  })();
+</script>

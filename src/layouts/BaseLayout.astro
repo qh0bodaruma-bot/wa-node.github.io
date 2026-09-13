@@ -2,8 +2,7 @@
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import GlossaryEnhancer from '../components/GlossaryEnhancer.astro';
-import GoogleAnalytics from '../components/GoogleAnalytics.astro';
-import MicrosoftClarity from '../components/MicrosoftClarity.astro';
+import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 import { ViewTransitions } from 'astro:transitions';
 import { MULTILANG_PAGES } from '../i18n/navigation';
 import '../styles/global.css';
@@ -111,8 +110,6 @@ const getLocalizedHref = (l: string) => {
     {structuredDataItems.map((item) => (
       <script type="application/ld+json" set:html={JSON.stringify(item)} />
     ))}
-    <GoogleAnalytics measurementId={gaMeasurementId} enabled={gaEnabled} />
-    <MicrosoftClarity projectId={clarityProjectId} enabled={clarityEnabled} />
     <ViewTransitions />
     <script is:inline>
       // IntersectionObserverが使える環境でだけ .reveal を隠す。
@@ -224,6 +221,7 @@ const getLocalizedHref = (l: string) => {
     {showSiteChrome && <Header lang={currentLang} />}
     <slot />
     {showSiteChrome && <Footer lang={currentLang} />}
+    <AnalyticsConsent lang={currentLang} gaMeasurementId={gaMeasurementId} gaEnabled={gaEnabled} clarityProjectId={clarityProjectId} clarityEnabled={clarityEnabled} />
     <GlossaryEnhancer />
   </body>
 </html>
