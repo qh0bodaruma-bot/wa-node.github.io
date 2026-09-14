@@ -24,7 +24,7 @@ export function trackPlumeriaEvent(name: PlumeriaEventName, params: Record<strin
   if (!events.includes(name)) return;
   const allowed: Record<string, string[]> = {
     service_type: ['housing', 'short-stay', 'home-care', 'home-nursing', 'care-management', 'welfare-equipment', 'recruit', 'important-matters'],
-    cta_location: ['header_nav', 'header_recruit', 'mobile_menu', 'hero_tile', 'top_recruit_banner', 'service_intro_card', 'services_list', 'purpose_guide', 'contact_desk', 'recruit_desk', 'floating'],
+    cta_location: ['header_nav', 'header_recruit', 'mobile_menu', 'hero_tile', 'top_recruit_banner', 'service_intro_card', 'services_list', 'purpose_guide', 'contact_desk', 'recruit_desk', 'floating', 'footer_contact'],
     facility_id: ['1', '2', '3'],
   };
   const safe = Object.fromEntries(Object.entries(params).filter(([key, value]) => allowed[key]?.includes(value)));

@@ -17,6 +17,27 @@ const isRecruit = currentPath === routes.recruit;
 const phone = activeService?.id === 'short-stay' ? shortStayTel : activeService?.id === 'housing' || isRecruit ? corp.tel : null;
 const phoneLabel = isRecruit ? '採用' : activeService?.id === 'short-stay' ? 'Ⅲ' : 'Ⅰ・Ⅱ';
 const contactHref = isRecruit ? `${routes.recruit}#application` : activeService ? `${routes.contact}?service=${activeService.id}` : routes.contact;
+
+// フッターの電話窓口。番号が確認できている窓口だけを並べ、他のサービスはお問い合わせページの案内へ送る。
+const footDesks = [
+  { label: 'サービス付き高齢者向け住宅', sub: 'プルメリアⅠ・Ⅱ', tel: corp.tel, service: 'housing' },
+  { label: 'ショートステイ', sub: 'プルメリアⅢ', tel: shortStayTel, service: 'short-stay' },
+];
+const serviceLink = (id: string) => {
+  const s = services.find((item) => item.id === id);
+  return s ? { label: s.name, href: s.href } : null;
+};
+const footNavGroups = [
+  { title: '住まい', links: [serviceLink('housing'), serviceLink('short-stay')] },
+  { title: '在宅サービス', links: [serviceLink('home-care'), serviceLink('home-nursing'), serviceLink('care-management'), serviceLink('welfare-equipment')] },
+  { title: '法人・その他', links: [
+    { label: 'サービス一覧', href: routes.services },
+    { label: '採用情報', href: routes.recruit },
+    { label: 'お問い合わせ・ご相談', href: routes.contact },
+    { label: '重要事項説明について', href: routes.importantMatters },
+    { label: '個人情報の取扱いについて', href: routes.privacy },
+  ] },
+].map((group) => ({ ...group, links: group.links.filter((link): link is { label: string; href: string } => link !== null) }));
 ---
 <BaseLayout
   title={title}
@@ -165,6 +186,33 @@ const contactHref = isRecruit ? `${routes.recruit}#application` : activeService 
       </div>
       <img class="pl-deco-flower pl-deco-flower-tr" src="/images/plumeria/decoration-tr.webp" alt=""
            width="520" height="541" loading="lazy" decoding="async" aria-hidden="true" />
+      {currentPath !== routes.contact && (
+        <section class="pl-wrap pl-foot-contact" aria-labelledby="pl-foot-contact-title">
+          <div class="pl-foot-contact-head">
+            <h2 id="pl-foot-contact-title" class="pl-foot-contact-title">お電話でのご相談・見学のお申し込み</h2>
+            <p class="pl-note">公式お問い合わせページの受付時間：平日10:00〜17:00</p>
+          </div>
+          <div class="pl-foot-tels">
+            {footDesks.map((desk) => (
+              desk.tel ? (
+                <a class="pl-foot-tel" href={`tel:${desk.tel.replace(/[^0-9]/g, '')}`} data-pl-gtag="phone_click" data-pl-service={desk.service} data-pl-cta="footer_contact">
+                  <span class="pl-foot-tel-label">{desk.label}<small>{desk.sub}</small></span>
+                  <span class="pl-foot-tel-no pl-num-face"><svg aria-hidden="true"><use href="#pl-i-phone" /></svg>{desk.tel}</span>
+                </a>
+              ) : (
+                <p class="pl-foot-tel">
+                  <span class="pl-foot-tel-label">{desk.label}<small>{desk.sub}</small></span>
+                  <span class="pl-pending-note">電話番号確認中</span>
+                </p>
+              )
+            ))}
+          </div>
+          <div class="pl-foot-contact-more">
+            <a class="pl-btn pl-btn-sm pl-btn-deep" href={contactHref}>フォームで相談する</a>
+            <p class="pl-note">訪問介護・訪問看護・居宅介護支援・福祉用具のご相談は、<a href={`${routes.contact}#contact-desks`}>お問い合わせページの窓口案内</a>をご覧ください。</p>
+          </div>
+        </section>
+      )}
       <div class="pl-wrap pl-foot-inner">
         <div class="pl-foot-brand">
           <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>
@@ -181,13 +229,19 @@ const contactHref = isRecruit ? `${routes.recruit}#application` : activeService 
               : <span class="pl-pending-note">確認中</span>}
           </p>
         </div>
-        <nav class="pl-foot-links" aria-label="サイト情報">
-          <a href={routes.services}>サービス一覧</a>
-          <a href={routes.recruit}>採用情報</a>
-          <a href={routes.contact}>お問い合わせ・ご相談</a>
-          <a href={routes.privacy}>個人情報の取扱いについて</a>
-          <a href={routes.importantMatters}>重要事項説明について</a>
+        <nav class="pl-foot-nav" aria-label="フッターメニュー">
+          {footNavGroups.map((group) => (
+            <div class="pl-foot-group">
+              <p class="pl-foot-group-title">{group.title}</p>
+              <ul class="pl-foot-links">
+                {group.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+              </ul>
+            </div>
+          ))}
         </nav>
+      </div>
+      <div class="pl-wrap pl-foot-bottom">
+        <a class="pl-foot-totop" href="#top">ページの先頭へ</a>
       </div>
     </footer>
 

@@ -3,6 +3,14 @@ import path from 'node:path';
 import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import { TwitterApi } from 'twitter-api-v2';
+import {
+  contentHash,
+  findBlockingReason,
+  guardedPublish,
+  jstDate,
+  readLedger,
+  releaseRecord,
+} from './lib/x-post-ledger.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = path.resolve(__dirname, '..');
@@ -20,8 +28,9 @@ function usage() {
 Usage:
   node scripts/x-post.mjs verify [--env-file <path>]
   node scripts/x-post.mjs test [--env-file <path>]
-  node scripts/x-post.mjs dry-run --file <approved-draft.txt> [--env-file <path>]
-  node scripts/x-post.mjs post --file <approved-draft.txt> [--env-file <path>]
+  node scripts/x-post.mjs dry-run --file <approved-draft.txt> [--ledger <x_post_ledger.jsonl>] [--env-file <path>]
+  node scripts/x-post.mjs post --file <approved-draft.txt> --ledger <x_post_ledger.jsonl> [--env-file <path>]
+  node scripts/x-post.mjs release --ledger <x_post_ledger.jsonl> --id <record-id> --reason <text>
 
 Draft format:
   Separate posts with a line containing only ---
@@ -29,22 +38,23 @@ Draft format:
 Safety:
   - verify only checks the X account connection.
   - test creates one clearly labelled test post, then deletes it immediately.
-  - dry-run never contacts X.
-  - post publishes only the explicitly supplied, approved draft file.
+  - dry-run never contacts X. With --ledger it also reports whether the ledger would block the post.
+  - post publishes only the explicitly supplied, approved draft file, and refuses to run without --ledger.
+    It blocks a second post on the same JST date for the same account, content already recorded,
+    and concurrent runs. The record is written before contacting X.
+  - release never contacts X. Use it only after confirming on X that a started/failed record was not published.
 `);
 }
 
 function parseArgs(args) {
   const [command, ...rest] = args;
-  const options = { command, file: undefined, envFile: undefined };
+  const options = { command, file: undefined, envFile: undefined, ledger: undefined, id: undefined, reason: undefined };
+  const valueOptions = { '--file': 'file', '--env-file': 'envFile', '--ledger': 'ledger', '--id': 'id', '--reason': 'reason' };
 
   for (let index = 0; index < rest.length; index += 1) {
     const argument = rest[index];
-    if (argument === '--file') {
-      options.file = rest[index + 1];
-      index += 1;
-    } else if (argument === '--env-file') {
-      options.envFile = rest[index + 1];
+    if (argument in valueOptions) {
+      options[valueOptions[argument]] = rest[index + 1];
       index += 1;
     } else {
       throw new Error(`Unknown argument: ${argument}`);
@@ -158,15 +168,6 @@ async function runConnectionTest(client) {
   }
 }
 
-async function publishThread(client, posts) {
-  const user = await verify(client);
-  const published = await client.v2.tweetThread(posts);
-  const firstPostId = published[0]?.data?.id;
-
-  if (!firstPostId) throw new Error('X did not return an ID for the first post.');
-  console.log(`Published ${published.length} post(s): https://x.com/${user.username}/status/${firstPostId}`);
-}
-
 async function main() {
   let options;
   try {
@@ -178,7 +179,7 @@ async function main() {
     return;
   }
 
-  if (!['verify', 'test', 'dry-run', 'post'].includes(options.command)) {
+  if (!['verify', 'test', 'dry-run', 'post', 'release'].includes(options.command)) {
     usage();
     process.exitCode = 1;
     return;
@@ -189,7 +190,27 @@ async function main() {
       const posts = readThread(options.file);
       console.log(`Dry run passed. ${posts.length} post(s) are ready for review.`);
       posts.forEach((post, index) => console.log(`\n--- Post ${index + 1} (${post.length} chars) ---\n${post}`));
+      if (options.ledger) {
+        // dry-run は X に接続しないため、アカウントを問わず同日の記録で判定する
+        const reason = findBlockingReason(readLedger(options.ledger), {
+          account: undefined,
+          date: jstDate(),
+          hash: contentHash(posts),
+        });
+        console.log(reason ? `\nLedger check: BLOCKED. ${reason}` : '\nLedger check: OK (no post recorded today, content not posted before).');
+        if (reason) process.exitCode = 1;
+      }
       return;
+    }
+
+    if (options.command === 'release') {
+      const released = releaseRecord({ ledgerPath: options.ledger, id: options.id, reason: options.reason });
+      console.log(`Released ledger record ${released.id} (${released.status}, ${released.jstDate}).`);
+      return;
+    }
+
+    if (options.command === 'post' && !options.ledger) {
+      throw new Error('--ledger is required for post. Posting without the ledger is not allowed.');
     }
 
     loadConfiguredEnv(options.envFile);
@@ -205,7 +226,12 @@ async function main() {
       return;
     }
 
-    await publishThread(client, readThread(options.file));
+    await guardedPublish({
+      client,
+      posts: readThread(options.file),
+      ledgerPath: options.ledger,
+      draftFile: options.file,
+    });
   } catch (error) {
     console.error(`X post operation failed: ${error.message}`);
     process.exitCode = 1;

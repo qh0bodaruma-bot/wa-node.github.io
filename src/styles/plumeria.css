@@ -808,13 +808,65 @@
   .pl-foot-brand { display: grid; gap: 3px; justify-items: start; }
   .pl-foot-name { font-size: 20px; font-weight: 700; letter-spacing: 0.1em; }
   .pl-foot-brand .pl-brand-mark { background: var(--surface); margin-bottom: 6px; }
-  .pl-foot-links { display: grid; gap: 12px; font-size: 14px; }
+  .pl-foot-links { display: grid; gap: 10px; font-size: 14px; list-style: none; margin: 0; padding: 0; }
   .pl-foot-links a {
-    justify-self: start; text-decoration: none; padding-bottom: 3px;
+    display: inline-block; text-decoration: none; padding-bottom: 3px;
     background-image: linear-gradient(to top, var(--line) 1px, transparent 1px);
     transition: background-image 0.3s, color 0.3s;
   }
   .pl-foot-links a:hover { color: var(--green-deep); background-image: linear-gradient(to top, currentColor 1px, transparent 1px); }
+
+  /* 上段：電話窓口。カードを横に並べず、区切り線で分けた行として見せる */
+  .pl-foot-contact {
+    position: relative;
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px 48px;
+    align-items: start;
+    padding-top: 12px; padding-bottom: 36px; margin-bottom: 36px;
+    border-bottom: 1px solid var(--line);
+  }
+  .pl-foot-contact-title { font-size: 19px; font-weight: 700; letter-spacing: 0.06em; color: var(--ink); margin: 0 0 6px; }
+  .pl-foot-contact-head .pl-note { margin: 0; }
+  .pl-foot-tels { display: grid; border-top: 1px solid var(--line); }
+  .pl-foot-tel {
+    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 20px;
+    padding: 14px 4px; margin: 0;
+    border-bottom: 1px solid var(--line);
+    color: var(--ink); text-decoration: none;
+    transition: color 0.3s;
+  }
+  a.pl-foot-tel:hover { color: var(--green-deep); }
+  .pl-foot-tel-label { font-size: 14px; font-weight: 500; }
+  .pl-foot-tel-label small { display: block; font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
+  .pl-foot-tel-no { display: inline-flex; align-items: center; gap: 8px; font-size: 26px; line-height: 1.2; color: var(--green-deep); }
+  .pl-foot-tel-no svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+  .pl-foot-contact-more { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; }
+  .pl-foot-contact-more .pl-note { flex: 1 1 260px; margin: 0; }
+  .pl-foot-contact-more .pl-btn { min-width: 0; }
+
+  /* 中段：分類したリンク */
+  .pl-foot-nav { display: grid; grid-template-columns: repeat(3, auto); gap: 24px 56px; }
+  .pl-foot-group-title {
+    font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--green-deep);
+    margin: 0 0 12px;
+  }
+
+  /* 下段：ページの先頭へ */
+  .pl-foot-bottom { display: flex; justify-content: flex-end; padding-bottom: 28px; }
+  .pl-foot-totop { font-size: 13px; color: var(--ink); text-decoration: none; padding: 10px 0; }
+  .pl-foot-totop::after { content: "↑"; margin-left: 6px; }
+  .pl-foot-totop:hover { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+  @media (max-width: 1000px) {
+    .pl-foot-contact { grid-template-columns: 1fr; }
+    .pl-foot-contact-more { grid-column: auto; }
+    .pl-foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; }
+  }
+  @media (max-width: 480px) {
+    .pl-foot-nav { grid-template-columns: 1fr; }
+    .pl-foot-tel-no { font-size: 24px; }
+    .pl-foot-contact-more .pl-btn { width: 100%; }
+    .pl-foot-bottom { justify-content: center; }
+  }
 
   /* ── 右下フロートCTA（電話・見学予約） ────────── */
   /* ヘッダーの表示状態に関わらず、常に画面右下に固定して目立たせる。
