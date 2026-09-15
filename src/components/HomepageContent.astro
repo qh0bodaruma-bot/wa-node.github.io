@@ -9,28 +9,28 @@ const href = (path: string) => localizedPath(path, lang);
 const labels = serviceLabels[lang];
 const c = {
   ja: {
-    eyebrow: '人に寄り添う、仕組みづくり。', title: ['つながる仕組みを。', '使いつづけられる', 'アプリを。'],
+    eyebrow: 'LINE連携・業務アプリ開発', title: ['つながる仕組みを。', '使いつづけられる', 'アプリを。'],
     lead: 'LINEと業務システムの連携から、iOS・Androidアプリまで。使う人の迷いと、現場の手間を減らす仕組みを、要件整理から公開まで一緒につくります。',
     view: '動く制作例を見る', assurance: '構想段階でも大丈夫です。まずは目的と必要な範囲から。',
     preview: '仕組みを、小さく体験', sample: 'サンプル画面・外部送信なし', received: 'LINEで問い合わせ', message: '見積りについて相談したいです。', record: '顧客管理に登録', waiting: 'フォームの内容を連携', ready: '連携を試す', done: '登録・担当通知が完了', reset: 'もう一度試す', fullLine: 'LINE × kintoneのデモへ', fullApp: 'アプリの画面を操作する',
     flowSub: 'サブスクを、ひと目で。', monthly: '有料契約の月額合計', trial: '無料トライアル中の1件を除く', projected: '全件が有料になると', next: '次の請求', notice: 'トライアル終了前に確認',
     trust: [['20年以上', 'IT・開発の現場経験'], ['LINE連携の専門', '業務システム4種に対応'], ['相談から公開まで', '同じ窓口で対応']],
-    servicesTitle: 'やりたいことから、選べます。', servicesLead: '手段がまだ決まっていなくても、今の業務や使う人に合わせて整理します。',
+    servicesTitle: '対応サービスと料金の目安', servicesLead: '手段がまだ決まっていなくても、今の業務や使う人に合わせて整理します。',
     lineTitle: 'LINEの情報を、日々の業務へ。', lineDesc: '申込・問い合わせを受け付け、必要な情報を管理システムへ自動登録。転記や確認の往復を減らします。', lineFit: 'Salesforce / kintone / HubSpot / Google Sheets',
     appTitle: '毎日の操作を、使いやすいアプリに。', appDesc: '業務の記録、会員サービス、予定や費用の管理。iOS・Androidで繰り返し使う画面と機能を設計します。', appFit: '業務アプリ / 顧客向けアプリ / ストア公開支援',
     scope: '費用と対応範囲を見る', webTitle: 'Webサイト・LPの制作や改善も。', webDesc: '事業の説明から料金の比較、問い合わせまで。読み手が判断しやすい順番に整えます。', webLink: 'Web制作の料金を見る',
-    worksTitle: '説明を読む前に、触ってみる。', worksLead: '以下は自主制作のデモ・サンプルです。実在のお客様の導入実績や成果数値ではありません。', allWorks: 'すべての制作例', demo: '自主制作デモ', sampleSite: '自主制作サンプル',
+    worksTitle: '操作できる自主制作デモ', worksLead: '以下は自主制作のデモ・サンプルです。実在のお客様の導入実績や成果数値ではありません。', allWorks: 'すべての制作例', demo: '自主制作デモ', sampleSite: '自主制作サンプル',
     works: [['LINE × kintone', '受付・自動登録・担当通知の流れを体験。'], ['ペット健康手帳・Flow', '記録、予定、サブスクの支出管理を操作。'], ['BtoB企業サイト', '製品・技術の説明から、相談までの導線。']],
-    approachTitle: 'つくる前に、使う場面から考える。', approachLead: '技術を選ぶ前に、誰が、いつ、何のために使うのか。心理学と開発の両面から、情報の順番と操作の流れを組み立てます。', about: '和-Nodeについて',
+    approachTitle: '和-Nodeの進め方', approachLead: '技術を選ぶ前に、誰が、いつ、何のために使うのか。心理学と開発の両面から、情報の順番と操作の流れを組み立てます。', about: '和-Nodeについて',
     steps: [['整理する', '現状と目的を伺い、必要な機能と優先順位を確認。'], ['見える形にする', '画面・連携範囲・費用・期間を具体化してから着手。'], ['確かめて、届ける', '操作と連携を確認し、公開・運用の引継ぎまで対応。']],
-    scopeTitle: '向いているご相談と、お受けしていないこと。', scopeLead: '最初に線引きをお伝えします。合わないご相談に、お互いの時間を使わないためです。',
+    scopeTitle: 'ご相談をお受けする範囲', scopeLead: '最初に線引きをお伝えします。合わないご相談に、お互いの時間を使わないためです。',
     scopeYes: '向いているご相談', scopeNo: 'お受けしていないこと',
     scopeFor: ['LINEと業務システムを別々に運用していて、転記や二重入力が発生している', 'Salesforce・kintone・HubSpot・Googleスプレッドシートのいずれかを既に使っている', '社内に相談できるIT担当がいない、または手が足りていない'],
     scopeNot: ['連携先となる業務システムを、まだ導入していない', 'LINE公式アカウントの構築だけを希望している'],
-    finalTitle: 'その「できるかな」から、話しましょう。', finalDesc: '必要なことも、まだ決まっていないことも。そのまま聞かせてください。',
+    finalTitle: '構想段階からご相談いただけます', finalDesc: '必要なことも、まだ決まっていないことも。そのまま聞かせてください。',
   },
   en: {
-    eyebrow: 'Thoughtful systems, built around people.', title: ['Connected systems.', 'Apps people', 'keep using.'],
+    eyebrow: 'LINE integration & business apps', title: ['Connected systems.', 'Apps people', 'keep using.'],
     lead: 'From LINE and business system integration to iOS and Android apps. We work with you from defining requirements to launch, making daily work and everyday interactions easier.',
     view: 'Explore working demos', assurance: 'An early idea is enough. Start with your goals and the scope you need.',
     preview: 'Try a small interaction', sample: 'Sample interface · no data sent', received: 'A LINE inquiry arrives', message: 'I would like to discuss a quote.', record: 'Add to customer management', waiting: 'Transfer the form details', ready: 'Try the integration', done: 'Record added · team notified', reset: 'Try again', fullLine: 'Explore the LINE × kintone demo', fullApp: 'Try the app screens',
@@ -51,7 +51,7 @@ const c = {
     finalTitle: 'Start with “could this work?”', finalDesc: 'Tell us what you know and what you are still figuring out.',
   },
   fr: {
-    eyebrow: 'Des outils pensés pour les personnes.', title: ['Des systèmes reliés.', 'Des applications', 'utiles au quotidien.'],
+    eyebrow: 'Intégration LINE et applications métier', title: ['Des systèmes reliés.', 'Des applications', 'utiles au quotidien.'],
     lead: 'De l’intégration LINE aux applications iOS et Android, nous vous accompagnons de la définition des besoins au lancement pour simplifier le travail et les usages du quotidien.',
     view: 'Essayer les démonstrations', assurance: 'Une première idée suffit. Partons de vos objectifs et du périmètre nécessaire.',
     preview: 'Essayez une interaction', sample: 'Interface fictive · aucun envoi', received: 'Une demande arrive sur LINE', message: 'Je souhaite discuter d’un devis.', record: 'Ajout à la gestion clients', waiting: 'Transférer les informations', ready: 'Tester l’intégration', done: 'Fiche créée · équipe informée', reset: 'Réessayer', fullLine: 'Voir la démo LINE × kintone', fullApp: 'Essayer les écrans des applications',
@@ -111,28 +111,28 @@ const workLinks = ['/case-studies/line-kintone-demo/', '/mobile-app-demo/', '/ca
   </section>
   <div class="trust-strip s-shell">{c.trust.map(([value, label]) => <div><strong>{value}</strong><span>{label}</span></div>)}</div>
   <section class="s-section" id="services"><div class="s-shell">
-    <div class="s-section-head" data-motion-enter="heading" data-motion-id="services-heading"><div><p class="s-eyebrow">Services</p><h2>{c.servicesTitle}</h2><p class="s-intro">{c.servicesLead}</p></div></div>
+    <div class="s-section-head" data-motion-enter="heading" data-motion-id="services-heading"><div><h2>{c.servicesTitle}</h2><p class="s-intro">{c.servicesLead}</p></div></div>
     <div class="s-grid-two service-choices">
-      {[{id:'line',icon:'forum',label:labels.line,title:c.lineTitle,desc:c.lineDesc,fit:c.lineFit,priceText:priceRange(servicePrices.lineSheets,servicePrices.lineSalesforce,lang)},{id:'app',icon:'smartphone',label:labels.app,title:c.appTitle,desc:c.appDesc,fit:c.appFit,priceText:startingPrice(servicePrices.businessApp,lang)}].map((item,i) => <article class="service-choice" data-motion-enter="block" data-motion-group="services"><div class="choice-label"><span class="s-number">0{i+1}</span><MaterialIcon name={item.icon}/><span>{item.label}</span></div><h3>{item.title}</h3><p>{item.desc}</p><p class="service-fit">{item.fit}</p><div class="service-choice-foot"><strong>{item.priceText}</strong><a class="s-link" href={href(`/pricing/#${item.id}`)}>{c.scope}<span aria-hidden="true">→</span></a></div></article>)}
+      {[{id:'line',icon:'forum',label:labels.line,title:c.lineTitle,desc:c.lineDesc,fit:c.lineFit,priceText:priceRange(servicePrices.lineSheets,servicePrices.lineSalesforce,lang)},{id:'app',icon:'smartphone',label:labels.app,title:c.appTitle,desc:c.appDesc,fit:c.appFit,priceText:startingPrice(servicePrices.businessApp,lang)}].map((item,i) => <article class="service-choice" data-motion-enter="block" data-motion-group="services"><div class="choice-label"><MaterialIcon name={item.icon}/><span>{item.label}</span></div><h3>{item.title}</h3><p>{item.desc}</p><p class="service-fit">{item.fit}</p><div class="service-choice-foot"><strong>{item.priceText}</strong><a class="s-link" href={href(`/pricing/#${item.id}`)}>{c.scope}<span aria-hidden="true">→</span></a></div></article>)}
     </div>
     <div class="web-option"><div><h3>{c.webTitle}</h3><p>{c.webDesc}</p></div><a class="s-link" href={href('/pricing/#web')}>{c.webLink} <span aria-hidden="true">→</span></a></div>
     <p class="s-note">{labels.tax}</p>
   </div></section>
   <section class="s-section scope-section" id="scope"><div class="s-shell">
-    <div class="s-section-head" data-motion-enter="heading" data-motion-id="scope-heading"><div><p class="s-eyebrow">Scope</p><h2>{c.scopeTitle}</h2><p class="s-intro">{c.scopeLead}</p></div></div>
+    <div class="s-section-head" data-motion-enter="heading" data-motion-id="scope-heading"><div><h2>{c.scopeTitle}</h2><p class="s-intro">{c.scopeLead}</p></div></div>
     <div class="s-grid-two scope-split">
       <div class="scope-col scope-col-yes"><h3><MaterialIcon name="check_circle"/>{c.scopeYes}</h3><ul>{c.scopeFor.map(t => <li>{t}</li>)}</ul></div>
       <div class="scope-col scope-col-no"><h3><MaterialIcon name="do_not_disturb_on"/>{c.scopeNo}</h3><ul>{c.scopeNot.map(t => <li>{t}</li>)}</ul></div>
     </div>
   </div></section>
   <section class="s-section works-section" id="selected-works"><div class="s-shell">
-    <div class="s-section-head" data-motion-enter="heading" data-motion-id="works-heading"><div><p class="s-eyebrow">Selected works</p><h2>{c.worksTitle}</h2></div><a class="s-link" href={href('/works/')}>{c.allWorks}<span aria-hidden="true">→</span></a></div>
+    <div class="s-section-head" data-motion-enter="heading" data-motion-id="works-heading"><div><h2>{c.worksTitle}</h2></div><a class="s-link" href={href('/works/')}>{c.allWorks}<span aria-hidden="true">→</span></a></div>
     <div class="s-grid selected-grid">{c.works.map(([title,desc],i) => <a class="selected-work" href={href(workLinks[i])}>
-      <div class:list={['work-preview',`work-preview-${i}`]} aria-hidden="true">{i===0 ? <><span class="mini-line">LINE</span><MaterialIcon name="east"/><span class="mini-crm">kintone</span><small>FORM → RECORD → NOTIFY</small></> : i===1 ? <><div class="mini-app"><MaterialIcon name="pets"/><span>Pet Health Note</span></div><div class="mini-app flow"><span>Flow</span><strong>{demoYen(flowPaidTotal)}</strong></div></> : <img src="/images/case-studies/b2b/hokushin-factory-hero.webp" alt="" width="720" height="480" loading="lazy" decoding="async"/>}</div>
+      <div class:list={['work-preview',`work-preview-${i}`]} aria-hidden="true">{i===0 ? <><span class="mini-line">LINE</span><MaterialIcon name="east"/><span class="mini-crm">kintone</span><small>FORM → RECORD → NOTIFY</small></> : i===1 ? <><div class="mini-app"><MaterialIcon name="pets"/><span>Pet Health Note</span></div><div class="mini-app flow"><span>Flow</span><strong>{demoYen(flowPaidTotal)}</strong></div></> : <img src="/images/works/captures/work-08.webp" alt="" width="720" height="450" loading="lazy" decoding="async"/>}</div>
       <div class="work-caption"><span>{i===2?c.sampleSite:c.demo}</span><h3>{title}<MaterialIcon name="north_east"/></h3><p>{desc}</p></div>
     </a>)}</div><p class="s-note">{c.worksLead}</p>
   </div></section>
-  <section class="s-section"><div class="s-shell approach-layout"><div><p class="s-eyebrow">Our approach</p><h2>{c.approachTitle}</h2><p class="s-intro">{c.approachLead}</p><a class="s-link" href={href('/about/')}>{c.about}<span aria-hidden="true">→</span></a></div><ol class="approach-steps">{c.steps.map(([title,desc],i) => <li data-motion-enter="block" data-motion-group="approach"><span class="s-number">0{i+1}</span><div><h3>{title}</h3><p>{desc}</p></div></li>)}</ol></div></section>
+  <section class="s-section"><div class="s-shell approach-layout"><div><h2>{c.approachTitle}</h2><p class="s-intro">{c.approachLead}</p><a class="s-link" href={href('/about/')}>{c.about}<span aria-hidden="true">→</span></a></div><ol class="approach-steps">{c.steps.map(([title,desc],i) => <li data-motion-enter="block" data-motion-group="approach"><span class="s-number">0{i+1}</span><div><h3>{title}</h3><p>{desc}</p></div></li>)}</ol></div></section>
   <section class="s-contact-band"><div class="s-shell"><div><h2>{c.finalTitle}</h2><p>{c.finalDesc}</p></div><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward"/></a></div></section>
 </main>
 <style>

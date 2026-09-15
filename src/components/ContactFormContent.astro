@@ -8,7 +8,7 @@ const href = (path: string) => localizedPath(path,lang);
 const labels = serviceLabels[lang];
 const c = {
  ja: {
-  title:'今の状況から、聞かせてください。',lead:'LINE連携・アプリ開発・Web制作。「何が必要か」「いくらかかるか」を整理するところからご相談いただけます。',formTitle:'無料相談フォーム',required:'必須',optional:'任意',name:'お名前',nameExample:'和 太郎',email:'メールアドレス',category:'相談したい内容',undecided:'まだ決まっていない',message:'ご相談内容',messageHint:'現在の状況と、できるようにしたいことを、分かる範囲で。',
+  title:'無料相談・お問い合わせ',lead:'LINE連携・アプリ開発・Web制作。「何が必要か」「いくらかかるか」を整理するところからご相談いただけます。',formTitle:'無料相談フォーム',required:'必須',optional:'任意',name:'お名前',nameExample:'和 太郎',email:'メールアドレス',category:'相談したい内容',undecided:'まだ決まっていない',message:'ご相談内容',messageHint:'現在の状況と、できるようにしたいことを、分かる範囲で。',
   categories:{line_sf:'LINE × Salesforce連携',line_kintone:'LINE × kintone連携',line_hubspot:'LINE × HubSpot連携',line_sheets:'LINE × Googleスプレッドシート連携',liff_only:'LIFF（LINE内フォーム）の開発',mobile_app:'iOS・Androidアプリ開発',web_lp:'Webサイト・LPの制作／改善',web_system:'小規模Webシステム',consultation:'費用・実現可否の確認',other:'その他'},
   examples:{general:'例：予約や顧客管理を整理したいです。今はExcelとLINEを使っています。どんな方法が合うか相談したいです。',line:'例：LINEで受けた問い合わせを、kintoneに自動登録したいです。現在の受付方法と連携できる範囲を相談したいです。',app:'例：現場の作業記録をアプリにしたいです。使う人数や必要な機能、iOS・Androidの対応範囲から相談したいです。',web:'例：今のサイトでサービスが伝わりにくいと感じています。ページの見せ方と、問い合わせまでの流れを見直したいです。',system:'例：ブラウザで予約の受付・確認ができる小さな管理画面を作りたいです。'},
   schedule:'希望の相談方法・日時を追加する',scheduleHint:'未定のまま送信できます。返信後に調整します。',method:'相談方法',methods:{google_meet:'Google Meet',zoom:'Zoom',line_video:'LINEビデオ通話',phone:'電話',face_to_face:'対面（岐阜県可児市・近郊）',other:'その他（相談内容に記載）'},phone:'電話番号',line:'LINE表示名 または LINE ID',dates:'希望日時（日本時間）',dateLabels:['第一希望','第二希望','第三希望'],datesNote:'平日10:00〜18:00を基本に調整します。夜間・土日のご希望は相談内容にご記入ください。',
@@ -34,7 +34,7 @@ const unavailable = lang === 'fr'
  : { title:'Form temporarily unavailable', body:'We are preparing English and French versions of our legal notices. To avoid collecting consent based only on Japanese documents, this form is temporarily disabled.' };
 ---
 <main id="main" class="service-page contact-refresh" data-glossary-skip data-reveal="off">
- <header class="contact-heading s-shell"><p class="s-eyebrow">Contact</p><h1>{c.title}</h1><p class="s-intro">{c.lead}</p></header>
+ <header class="contact-heading s-shell"><h1>{c.title}</h1><p class="s-intro">{c.lead}</p></header>
  <div class="s-shell contact-layout">
   <section class="contact-form-panel" aria-labelledby="form-title"><div class="contact-form-heading"><h2 id="form-title">{c.formTitle}</h2><span>{labels.consultation}</span></div>
     {formAvailable ? <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" data-lang={lang} data-thanks={href('/thanks/')} data-error={c.error}>
@@ -55,7 +55,7 @@ const unavailable = lang === 'fr'
     <p class="form-error" role="alert" tabindex="-1" hidden></p><button type="submit" class="s-button submit-btn" data-submitting={c.sending}><span>{c.send}</span><MaterialIcon name="arrow_forward"/></button>
     </form> : <div class="form-unavailable" role="status"><h3>{unavailable.title}</h3><p>{unavailable.body}</p></div>}
   </section>
-  <aside class="contact-aside"><div data-motion-enter="heading" data-motion-id="contact-aside-heading"><p class="s-eyebrow">Next steps</p><h2>{c.afterTitle}</h2></div><ol>{c.steps.map(([title,desc],i)=><li data-motion-enter="block" data-motion-group="contact-steps"><span class="s-number">0{i+1}</span><div><h3>{title}</h3><p>{desc}</p></div></li>)}</ol><p class="contact-reassurance">{c.reassurance}</p><a class="s-link" href={href('/pricing/')}>{c.pricing}<span aria-hidden="true">→</span></a><div class="contact-line"><h3>{c.lineTitle}</h3><p>{c.lineDesc}</p><a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="line-contact-button">{c.lineButton}<MaterialIcon name="north_east"/></a></div></aside>
+  <aside class="contact-aside"><div data-motion-enter="heading" data-motion-id="contact-aside-heading"><h2>{c.afterTitle}</h2></div><ol>{c.steps.map(([title,desc],i)=><li data-motion-enter="block" data-motion-group="contact-steps"><span class="s-number">0{i+1}</span><div><h3>{title}</h3><p>{desc}</p></div></li>)}</ol><p class="contact-reassurance">{c.reassurance}</p><a class="s-link" href={href('/pricing/')}>{c.pricing}<span aria-hidden="true">→</span></a><div class="contact-line"><h3>{c.lineTitle}</h3><p>{c.lineDesc}</p><a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="line-contact-button">{c.lineButton}<MaterialIcon name="north_east"/></a></div></aside>
  </div>
 </main>
 <style>

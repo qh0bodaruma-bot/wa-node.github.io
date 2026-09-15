@@ -18,7 +18,7 @@ const {
   <div class="container narrow" data-motion-enter="block">
     <div class="brand-movie-shell">
       <div class="brand-movie-copy">
-        <span class="brand-movie-eyebrow">{eyebrow}</span>
+        {eyebrow && <span class="brand-movie-eyebrow">{eyebrow}</span>}
         <h2>{title}</h2>
         <p>{body}</p>
       </div>

@@ -115,7 +115,7 @@ const copy = {
       </div>
 
       <nav class="footer-col" aria-labelledby="footer-services">
-        <h3 id="footer-services"><span class="col-no">01</span>{copy.services}</h3>
+        <h3 id="footer-services">{copy.services}</h3>
         <ul>
           <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? 'LINE連携・業務アプリ開発' : lang === 'en' ? 'LINE Integration & Business Apps' : 'Intégration LINE et applications métier'}</a></li>
           <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? '料金・対応範囲' : lang === 'en' ? 'Pricing & Scope' : 'Tarifs & Périmètre'}</a></li>
@@ -124,7 +124,7 @@ const copy = {
       </nav>
 
       <nav class="footer-col" aria-labelledby="footer-resources">
-        <h3 id="footer-resources"><span class="col-no">02</span>{copy.resources}</h3>
+        <h3 id="footer-resources">{copy.resources}</h3>
         <ul>
           <li><a href={getLocalizedLink('/blog')}>{lang === 'ja' ? 'ブログ' : 'Blog'}</a></li>
           <li><a href={getLocalizedLink('/about')}>{lang === 'ja' ? '和-Nodeについて' : lang === 'en' ? 'About Us' : 'À propos'}</a></li>
@@ -133,7 +133,7 @@ const copy = {
       </nav>
 
       <nav class="footer-col" aria-labelledby="footer-policies">
-        <h3 id="footer-policies"><span class="col-no">03</span>{copy.policies}</h3>
+        <h3 id="footer-policies">{copy.policies}</h3>
         <ul>
           <li><a href={getLocalizedLink('/terms')}>{t.footer.col4_item2[lang]}</a></li>
           <li><a href={getLocalizedLink('/terms_miniapp')}>{t.footer.col4_item6[lang]}</a></li>

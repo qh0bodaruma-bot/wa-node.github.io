@@ -34,7 +34,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Explorer le parcours entre une demande LINE, son enregistrement et son suivi."
     },
     "href": "/case-studies/line-salesforce-demo/",
-    "image": "",
+    "image": "/images/works/captures/work-02.webp",
     "id": "work-02",
     "priceKey": "lineSalesforce",
     "featured": false
@@ -52,7 +52,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Tester la réception des demandes, la gestion des contacts et les notifications."
     },
     "href": "/case-studies/line-hubspot-demo/",
-    "image": "",
+    "image": "/images/works/captures/work-03.webp",
     "id": "work-03",
     "priceKey": "lineHubspot",
     "featured": false
@@ -70,7 +70,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Tester l’enregistrement dans un tableur et la notification de l’équipe."
     },
     "href": "/case-studies/line-spreadsheet-demo/",
-    "image": "",
+    "image": "/images/works/captures/work-04.webp",
     "id": "work-04",
     "priceKey": "lineSheets",
     "featured": false
@@ -88,7 +88,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Explorer l’organisation des cours, des tarifs et du parcours d’achat."
     },
     "href": "/course-sales-demo/",
-    "image": "",
+    "image": "/images/works/captures/work-05.webp",
     "id": "work-05",
     "featured": false
   },
@@ -105,7 +105,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Comparer trois directions de design modifiables selon les besoins d’une activité."
     },
     "href": "/canva-portfolio/",
-    "image": "/images/works-canva.webp",
+    "image": "/images/works/captures/work-06.webp",
     "id": "work-06",
     "featured": false
   },
@@ -122,7 +122,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Comparer les versions avant et après, les observations et les vérifications proposées."
     },
     "href": "/lab/",
-    "image": "/images/ogp-lab.png",
+    "image": "/images/works/captures/work-07.webp",
     "id": "work-07",
     "priceKey": "lpReview",
     "featured": false
@@ -140,7 +140,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Explorer une entreprise fictive, sa structure d’information et un fonctionnement CMS envisagé."
     },
     "href": "/case-studies/b2b-corporate-renewal/",
-    "image": "/images/case-studies/b2b/hokushin-factory-hero.webp",
+    "image": "/images/works/captures/work-08.webp",
     "id": "work-08",
     "priceKey": "website",
     "featured": true
@@ -158,7 +158,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Examiner ensemble annonces, pages, formulaires et qualité des demandes."
     },
     "href": "/case-studies/ad-lp-measurement/",
-    "image": "",
+    "image": "/images/works/captures/work-09.webp",
     "id": "work-09",
     "featured": false
   },
@@ -175,7 +175,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Tester la réservation côté client, le traitement des statuts et l’export CSV."
     },
     "href": "/case-studies/reservation-operations/",
-    "image": "",
+    "image": "/images/works/captures/work-10.webp",
     "id": "work-10",
     "priceKey": "webSystem",
     "featured": false
@@ -211,7 +211,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Explorer l’ordre des informations et les interactions qui facilitent les décisions."
     },
     "href": "/psychology-demo/",
-    "image": "/images/works-psy-demo.webp",
+    "image": "/images/works/captures/work-12.webp",
     "id": "work-12",
     "priceKey": "lp",
     "featured": false
@@ -229,7 +229,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Suivre un parcours de présentation du service jusqu’à la demande de réservation."
     },
     "href": "/salon-reservation-demo/",
-    "image": "/portfolio-lp/images/hero_sekkotsu.webp",
+    "image": "/images/works/captures/work-13.webp",
     "id": "work-13",
     "priceKey": "lp",
     "featured": false
@@ -247,7 +247,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Un exemple de présentation des services et de parcours de prise de contact."
     },
     "href": "/portfolio-lp/lp_clinic.html",
-    "image": "/portfolio-lp/images/hero_clinic.webp",
+    "image": "/images/works/captures/work-14.webp",
     "id": "work-14",
     "priceKey": "lp",
     "featured": false
@@ -265,7 +265,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Comparer des exemples de différents secteurs pour définir votre propre direction."
     },
     "href": "/lp-portfolio/",
-    "image": "/portfolio-lp/images/hero_corporate.webp",
+    "image": "/images/works/captures/work-15.webp",
     "id": "work-15",
     "priceKey": "lp",
     "featured": false
@@ -283,7 +283,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Une interaction IA pour organiser une première demande avant la consultation."
     },
     "href": "/ai-chat-demo/",
-    "image": "/images/works-system.webp",
+    "image": "/images/works/captures/work-16.webp",
     "id": "work-16",
     "featured": false
   },
@@ -300,7 +300,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Tester l’organisation des titres, des appels à l’action et des couleurs dans le navigateur."
     },
     "href": "/wasm-diagnosis/",
-    "image": "",
+    "image": "/images/works/captures/work-17.webp",
     "id": "work-17",
     "featured": false
   },
@@ -317,7 +317,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Explorer une interface présentant différents points d’attention sur l’accessibilité."
     },
     "href": "/barrier_free/",
-    "image": "/images/works-accessibility.webp",
+    "image": "/images/works/captures/work-19.webp",
     "id": "work-19",
     "featured": false
   },
@@ -334,7 +334,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Une liste de vérification pour organiser les pistes d’amélioration du site et de ses contenus."
     },
     "href": "/seo_check/",
-    "image": "/images/works-seo.webp",
+    "image": "/images/works/captures/work-20.webp",
     "id": "work-20",
     "priceKey": "lpReview",
     "featured": false
@@ -352,7 +352,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Découvrir les livres publiés et le travail de création de contenu associé."
     },
     "href": "/kdp_books/",
-    "image": "/images/works-kdp.webp",
+    "image": "/images/works/captures/work-21.webp",
     "id": "work-21",
     "featured": false
   }
