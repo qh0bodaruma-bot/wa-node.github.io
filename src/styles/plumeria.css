@@ -831,22 +831,31 @@
   }
   .pl-foot-contact-title { font-size: 19px; font-weight: 700; letter-spacing: 0.06em; color: var(--ink); margin: 0 0 6px; }
   .pl-foot-contact-head .pl-note { margin: 0; }
-  .pl-foot-tels { display: grid; border-top: 1px solid var(--line); }
-  .pl-foot-tel {
-    display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 20px;
-    padding: 14px 4px; margin: 0;
+  /* 窓口の行：3行とも「連絡方法ラベル／対象範囲／操作」の3列に揃え、操作の右端を一致させる */
+  .pl-foot-desks { display: grid; list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+  .pl-foot-desk {
+    display: grid; grid-template-columns: 76px minmax(0, 1fr) 200px; align-items: center; gap: 8px 20px;
+    min-height: 84px; padding: 12px 4px;
     border-bottom: 1px solid var(--line);
-    color: var(--ink); text-decoration: none;
-    transition: color 0.3s;
   }
-  a.pl-foot-tel:hover { color: var(--green-deep); }
-  .pl-foot-tel-label { font-size: 14px; font-weight: 500; }
-  .pl-foot-tel-label small { display: block; font-size: 12px; color: var(--muted); letter-spacing: 0.04em; }
-  .pl-foot-tel-no { display: inline-flex; align-items: center; gap: 8px; font-size: 26px; line-height: 1.2; color: var(--green-deep); }
+  .pl-foot-chip {
+    display: inline-flex; justify-content: center; align-items: center;
+    min-height: 26px; padding: 2px 10px; border-radius: 999px;
+    border: 1px solid var(--green-deep); color: var(--green-deep); background: var(--surface);
+    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.4;
+  }
+  .pl-foot-chip-form { border-color: var(--ink); color: var(--ink); }
+  .pl-foot-desk-scope { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.6; }
+  .pl-foot-desk-scope small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; }
+  .pl-foot-desk-action { justify-self: end; }
+  .pl-foot-tel-no {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 26px; line-height: 1.2; color: var(--green-deep); text-decoration: none;
+  }
+  .pl-foot-tel-no:hover { text-decoration: underline; text-underline-offset: 4px; }
   .pl-foot-tel-no svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; }
-  .pl-foot-contact-more { grid-column: 2; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px; }
-  .pl-foot-contact-more .pl-note { flex: 1 1 260px; margin: 0; }
-  .pl-foot-contact-more .pl-btn { min-width: 0; }
+  .pl-foot-desk .pl-btn { width: 200px; min-width: 0; }
+
 
   /* 中段：分類したリンク */
   .pl-foot-nav { display: grid; grid-template-columns: repeat(3, auto); gap: 24px 56px; }
@@ -869,13 +878,14 @@
 
   @media (max-width: 1000px) {
     .pl-foot-contact { grid-template-columns: 1fr; }
-    .pl-foot-contact-more { grid-column: auto; }
     .pl-foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; }
   }
   @media (max-width: 480px) {
     .pl-foot-nav { grid-template-columns: 1fr; }
-    .pl-foot-tel-no { font-size: 24px; }
-    .pl-foot-contact-more .pl-btn { width: 100%; }
+    .pl-foot-desk { grid-template-columns: 76px minmax(0, 1fr); gap: 10px 14px; }
+    .pl-foot-desk-action { grid-column: 1 / -1; justify-self: stretch; }
+    .pl-foot-tel-no { font-size: 24px; justify-content: flex-start; }
+    .pl-foot-desk .pl-btn { width: 100%; }
     .pl-foot-bottom { justify-content: center; }
   }
 

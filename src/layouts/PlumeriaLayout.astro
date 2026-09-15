@@ -190,28 +190,29 @@ const footNavGroups = [
       {currentPath !== routes.contact && (
         <section class="pl-wrap pl-foot-contact" aria-labelledby="pl-foot-contact-title">
           <div class="pl-foot-contact-head">
-            <h2 id="pl-foot-contact-title" class="pl-foot-contact-title">お電話でのご相談・見学のお申し込み</h2>
+            <h2 id="pl-foot-contact-title" class="pl-foot-contact-title">ご相談・見学のお申し込み</h2>
             <p class="pl-note">公式お問い合わせページの受付時間：平日10:00〜17:00</p>
           </div>
-          <div class="pl-foot-tels">
+          <ul class="pl-foot-desks">
             {footDesks.map((desk) => (
-              desk.tel ? (
-                <a class="pl-foot-tel" href={`tel:${desk.tel.replace(/[^0-9]/g, '')}`} data-pl-gtag="phone_click" data-pl-service={desk.service} data-pl-cta="footer_contact">
-                  <span class="pl-foot-tel-label">{desk.label}<small>{desk.sub}</small></span>
-                  <span class="pl-foot-tel-no pl-num-face"><svg aria-hidden="true"><use href="#pl-i-phone" /></svg>{desk.tel}</span>
-                </a>
-              ) : (
-                <p class="pl-foot-tel">
-                  <span class="pl-foot-tel-label">{desk.label}<small>{desk.sub}</small></span>
-                  <span class="pl-pending-note">電話番号確認中</span>
-                </p>
-              )
+              <li class="pl-foot-desk">
+                <span class="pl-foot-chip">電話</span>
+                <span class="pl-foot-desk-scope">{desk.label}<small>{desk.sub}</small></span>
+                {desk.tel ? (
+                  <a class="pl-foot-desk-action pl-foot-tel-no pl-num-face" href={`tel:${desk.tel.replace(/[^0-9]/g, '')}`} data-pl-gtag="phone_click" data-pl-service={desk.service} data-pl-cta="footer_contact" aria-label={`${desk.label}（${desk.sub}）に電話する ${desk.tel}`}>
+                    <svg aria-hidden="true"><use href="#pl-i-phone" /></svg>{desk.tel}
+                  </a>
+                ) : (
+                  <span class="pl-foot-desk-action pl-pending-note">電話番号確認中</span>
+                )}
+              </li>
             ))}
-          </div>
-          <div class="pl-foot-contact-more">
-            <a class="pl-btn pl-btn-sm pl-btn-deep" href={contactHref}>フォームで相談する</a>
-            <p class="pl-note">訪問介護・訪問看護・居宅介護支援・福祉用具のご相談は、<a href={`${routes.contact}#contact-desks`}>お問い合わせページの窓口案内</a>をご覧ください。</p>
-          </div>
+            <li class="pl-foot-desk">
+              <span class="pl-foot-chip pl-foot-chip-form">フォーム</span>
+              <span class="pl-foot-desk-scope">その他のサービス・見学のご相談<small>訪問介護・訪問看護・居宅介護支援・福祉用具など</small></span>
+              <a class="pl-foot-desk-action pl-btn pl-btn-sm pl-btn-deep" href={contactHref}>フォームで相談する</a>
+            </li>
+          </ul>
         </section>
       )}
       <div class="pl-wrap pl-foot-inner">
