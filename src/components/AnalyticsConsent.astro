@@ -7,6 +7,8 @@ interface Props {
   clarityEnabled?: boolean;
   /** 同意の説明として示すポリシーのURL。サイトごとに運営者のポリシーを指す */
   policyHref?: string;
+  /** 見た目。サイトのデザイントークンに合わせる */
+  theme?: 'wa-node' | 'plumeria';
 }
 
 const {
@@ -16,6 +18,7 @@ const {
   clarityProjectId = 'yfv3qj03ho',
   clarityEnabled = true,
   policyHref = "/privacy/",
+  theme = 'wa-node',
 } = Astro.props;
 
 const copy = {
@@ -46,6 +49,7 @@ const copy = {
 <section
   class="analytics-consent"
   id="analytics-consent"
+  data-theme={theme}
   aria-labelledby="analytics-consent-title"
   data-ga-id={gaMeasurementId}
   data-ga-enabled={String(gaEnabled)}
@@ -76,6 +80,14 @@ const copy = {
   .analytics-consent button { min-height: 44px; padding: 9px 15px; border: 1px solid #315f48; border-radius: 5px; font: inherit; font-size: .76rem; font-weight: 700; cursor: pointer; }
   .consent-deny { color: #315f48; background: #fff; }
   .consent-allow { color: #fff; background: #315f48; }
+  /* プルメリア：ターコイズ・丸型ボタン・Zen Kaku Gothic New、文字は補足14px以上 */
+  .analytics-consent[data-theme="plumeria"] { color: #083c4a; background: #ffffff; border-color: rgba(8, 60, 74, 0.14); border-radius: 14px; font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic Medium', 'Yu Gothic', Meiryo, sans-serif; }
+  .analytics-consent[data-theme="plumeria"] p { font-size: 14px; }
+  .analytics-consent[data-theme="plumeria"] h2 { font-size: 17px; }
+  .analytics-consent[data-theme="plumeria"] a { color: #0d5a6f; }
+  .analytics-consent[data-theme="plumeria"] button { min-height: 46px; padding: 9px 22px; border-color: #137792; border-radius: 999px; font-size: 15px; }
+  .analytics-consent[data-theme="plumeria"] .consent-deny { color: #0d5a6f; background: #fff; }
+  .analytics-consent[data-theme="plumeria"] .consent-allow { color: #fff; background: #137792; }
   @media (max-width: 680px) { .analytics-consent-inner { grid-template-columns: 1fr; gap: 16px; } .analytics-consent-actions { display: grid; grid-template-columns: 1fr 1fr; } }
 </style>
 

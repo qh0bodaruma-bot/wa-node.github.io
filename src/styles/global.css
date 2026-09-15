@@ -37,7 +37,8 @@ html {
 
 body {
   margin: 0;
-  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif;
+  /* 和文は端末のフォントで表示する。Windows の游ゴシックは標準の太さだと細くかすれやすいため Medium を明示する（2026-09-15） */
+  font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic Medium", "YuGothic", "Yu Gothic", Meiryo, sans-serif;
   background-color: var(--bg);
   background-image: none;
   color: var(--text);
@@ -115,7 +116,7 @@ a:hover { opacity: 0.7; }
   align-items: center;
   justify-content: center;
   padding: 16px 32px;
-  border-radius: 999px;
+  border-radius: 6px; /* ボタンの角丸は6pxに統一（2026-09-15） */
   background: var(--action);
   color: #fff;
   font-weight: 800;

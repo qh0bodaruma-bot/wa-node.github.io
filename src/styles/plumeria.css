@@ -71,7 +71,7 @@
   .pl-notice {
     background: var(--ink);
     color: var(--bg);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.7;
     text-align: center;
     padding: 9px 20px;
@@ -116,7 +116,7 @@
   .pl-brand-name { font-size: 18px; font-weight: 700; letter-spacing: 0.1em; }
   .pl-brand-en {
     font-family: 'Roboto Condensed', sans-serif;
-    font-size: 10px; font-weight: 500; letter-spacing: 0.22em;
+    font-size: 12px; font-weight: 500; letter-spacing: 0.22em;
     color: var(--green-deep);
   }
 
@@ -130,7 +130,7 @@
     width: 100px;
     padding: 5px 4px;
     border-radius: var(--radius-sm);
-    font-size: 12px; font-weight: 500;
+    font-size: 14px; font-weight: 500;
     text-decoration: none; white-space: nowrap;
     transition: background-color 0.3s, color 0.3s;
   }
@@ -160,7 +160,7 @@
   /* ホバーは派手に変えず、少し明るく・少し浮く */
   .pl-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
 
-  .pl-btn-sm { min-height: 46px; min-width: 0; padding: 7px 16px; font-size: 13px; border-radius: 999px; }
+  .pl-btn-sm { min-height: 46px; min-width: 0; padding: 7px 16px; font-size: 14px; border-radius: 999px; }
 
   /* メインCTA: 現行サイトのターコイズ #137792 ＋白文字で 5.2:1。
      小さい文字でも本文基準の 4.5:1 を満たす。 */
@@ -184,7 +184,7 @@
   .pl-btn-outline { background: var(--surface); border-color: var(--green); color: var(--green-deep); }
   .pl-btn-outline:hover { background: var(--mint); }
 
-  .pl-btn-label { font-size: 11px; letter-spacing: 0.14em; }
+  .pl-btn-label { font-size: 14px; letter-spacing: 0.14em; }
   .pl-btn-tel-no { font-size: 23px; line-height: 1.2; font-weight: 600; }
   .pl-btn-row { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 24px; }
 
@@ -379,10 +379,10 @@
   }
   .pl-hero-desks-head {
     display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px;
-    font-size: 13px; font-weight: 700; letter-spacing: 0.04em;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.04em;
     color: var(--green-deep);
   }
-  .pl-hero-desks-hours { font-size: 12px; font-weight: 400; color: var(--muted); }
+  .pl-hero-desks-hours { font-size: 14px; font-weight: 400; color: var(--muted); }
   .pl-hero-desk-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
   .pl-hero-desk {
     display: grid; gap: 1px;
@@ -393,7 +393,7 @@
     text-decoration: none;
   }
   .pl-hero-desk:hover { background: color-mix(in srgb, var(--mint) 70%, var(--surface)); }
-  .pl-hero-desk-name { font-size: 12px; color: var(--muted); letter-spacing: 0.02em; }
+  .pl-hero-desk-name { font-size: 14px; color: var(--muted); letter-spacing: 0.02em; }
   .pl-hero-desk strong { font-size: 19px; line-height: 1.3; letter-spacing: 0.01em; }
   @media (max-width: 1000px) {
     .pl-hero-desks { margin-top: 20px; }
@@ -404,10 +404,10 @@
     font-weight: 700; line-height: 1.6; letter-spacing: 0.06em;
     margin-top: 10px;
   }
-  .pl-hero-lead { margin-top: 14px; font-size: 15px; color: var(--muted); }
+  .pl-hero-lead { margin-top: 14px; font-size: 16px; color: var(--muted); }
   .pl-eyebrow {
     display: inline-flex; align-items: center; gap: 8px;
-    font-size: 12px; font-weight: 700; letter-spacing: 0.16em;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.16em;
     color: var(--green-deep);
   }
   .pl-eyebrow-center { justify-self: center; }
@@ -447,15 +447,15 @@
     color: var(--green-deep);
   }
   .pl-h2-en {
-    font-size: 11px;
+    font-size: 12px;
     padding-bottom: 6px;
     background-image: linear-gradient(to top, currentColor 1px, transparent 1px);
   }
-  .pl-h3-en { font-size: 10px; margin-left: 9px; }
+  .pl-h3-en { font-size: 12px; margin-left: 9px; }
   .pl-sec-lead { margin-top: 14px; text-align: center; font-size: 14px; color: var(--muted); }
   .pl-h3 { font-size: 16px; font-weight: 700; letter-spacing: 0.06em; line-height: 1.65; }
   .pl-body { font-size: 14px; line-height: 2; }
-  .pl-note { font-size: 13px; line-height: 1.85; color: var(--muted); }
+  .pl-note { font-size: 14px; line-height: 1.85; color: var(--muted); }
 
   /* ── お知らせ ───────────────────────────── */
   .pl-news { margin-top: 24px; display: grid; border-top: 1px solid var(--line); }
@@ -470,7 +470,7 @@
   }
   .pl-news-date { font-size: 14px; color: var(--muted); }
   .pl-cat {
-    font-size: 12px; font-weight: 700; letter-spacing: 0.06em;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.06em;
     border-radius: 999px;              /* 小さな角丸ラベル */
     padding: 3px 14px;
     white-space: nowrap;
@@ -567,7 +567,7 @@
     color: inherit;
     background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius);   /* カードと同じ角丸にそろえる（2026-09-15） */
     box-shadow: var(--shadow);
     padding: 14px 8px;
     transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s, background-color 0.3s;
@@ -590,7 +590,7 @@
   }
   .pl-tile:hover .pl-tile-icon { background: var(--surface); }
   .pl-tile-icon svg { width: 22px; height: 22px; }
-  .pl-tile-label { font-size: 13px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.45; }
+  .pl-tile-label { font-size: 14px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.45; }
 
   /* 受入状況。色だけに頼らず必ず文字でも示す */
   .pl-badge {
@@ -727,7 +727,7 @@
     font-size: 16px; font-weight: 600; line-height: 1;
     color: var(--green-deep);
   }
-  .pl-day-label { font-size: 13px; color: var(--muted); line-height: 1.7; }
+  .pl-day-label { font-size: 14px; color: var(--muted); line-height: 1.7; }
 
   /* ── 空室・採用 ─────────────────────────── */
   .pl-vac-sec { background: var(--mint); padding-block: clamp(40px, 5vw, 66px); }
@@ -767,7 +767,7 @@
     display: grid; place-items: center;
     background: var(--beige);
     color: var(--muted);
-    font-size: 13px; letter-spacing: 0.1em; text-align: center;
+    font-size: 14px; letter-spacing: 0.1em; text-align: center;
     padding: 14px;
   }
   .pl-ph-map { aspect-ratio: 4 / 3; border-radius: var(--radius); }
@@ -776,7 +776,7 @@
   .pl-access-list { display: grid; gap: 13px; }
   /* .pl-reading（760px）の中では項目名と値を横並びにして、右の空きを詰める */
   .pl-reading .pl-access-list > div { display: grid; grid-template-columns: minmax(7em, 11em) 1fr; gap: 4px 18px; align-items: baseline; }
-  .pl-access-list dt { font-size: 13px; font-weight: 700; color: var(--green-deep); letter-spacing: 0.08em; }
+  .pl-access-list dt { font-size: 14px; font-weight: 700; color: var(--green-deep); letter-spacing: 0.08em; }
   .pl-access-list dd { font-size: 14px; line-height: 1.85; }
 
   .pl-table-wrap { width: 100%; overflow-x: auto; }
@@ -789,7 +789,7 @@
     overflow: hidden;
   }
   .pl-table :is(th, td) { padding: 11px 13px; border-bottom: 1px solid var(--line); text-align: center; }
-  .pl-table thead th { background: var(--mint); font-size: 13px; font-weight: 700; color: var(--green-deep); }
+  .pl-table thead th { background: var(--mint); font-size: 14px; font-weight: 700; color: var(--green-deep); }
   .pl-table tbody th { text-align: left; font-weight: 500; white-space: nowrap; }
   .pl-table tbody tr:last-child :is(th, td) { border-bottom: 0; }
 
@@ -842,11 +842,11 @@
     display: inline-flex; justify-content: center; align-items: center;
     min-height: 26px; padding: 2px 10px; border-radius: 999px;
     border: 1px solid var(--green-deep); color: var(--green-deep); background: var(--surface);
-    font-size: 12px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.4;
+    font-size: 14px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.4;
   }
   .pl-foot-chip-form { border-color: var(--ink); color: var(--ink); }
   .pl-foot-desk-scope { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.6; }
-  .pl-foot-desk-scope small { display: block; font-size: 12px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; }
+  .pl-foot-desk-scope small { display: block; font-size: 14px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; }
   .pl-foot-desk-action { justify-self: end; }
   .pl-foot-tel-no {
     display: inline-flex; align-items: center; gap: 8px;
@@ -860,7 +860,7 @@
   /* 中段：分類したリンク */
   .pl-foot-nav { display: grid; grid-template-columns: repeat(3, auto); gap: 24px 56px; }
   .pl-foot-group-title {
-    font-size: 12px; font-weight: 700; letter-spacing: 0.12em; color: var(--green-deep);
+    font-size: 14px; font-weight: 700; letter-spacing: 0.12em; color: var(--green-deep);
     margin: 0 0 12px;
   }
 
@@ -869,10 +869,10 @@
   .pl-foot-bottom { display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: 4px 32px; padding-bottom: 28px; }
   .pl-foot-consent {
     min-height: 44px; padding: 10px 0;
-    background: transparent; border: 0; font: inherit; font-size: 13px; color: var(--ink); cursor: pointer;
+    background: transparent; border: 0; font: inherit; font-size: 14px; color: var(--ink); cursor: pointer;
   }
   .pl-foot-consent:hover, .pl-foot-consent:focus-visible { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
-  .pl-foot-totop { font-size: 13px; color: var(--ink); text-decoration: none; padding: 10px 0; }
+  .pl-foot-totop { font-size: 14px; color: var(--ink); text-decoration: none; padding: 10px 0; }
   .pl-foot-totop::after { content: "↑"; margin-left: 6px; }
   .pl-foot-totop:hover { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
 
@@ -928,7 +928,7 @@
     color: var(--green-deep);
   }
   .pl-float-seg-icon svg { width: 34px; height: 34px; }
-  .pl-float-seg-tel { position: relative; font-size: 13px; }
+  .pl-float-seg-tel { position: relative; font-size: 14px; }
   .pl-float-seg-tel::after {
     content: '';
     position: absolute;
@@ -943,7 +943,7 @@
     .pl-float-seg { min-height: 92px; padding: 12px 18px; gap: 5px; }
     .pl-float-seg-icon { width: 52px; height: 52px; }
     .pl-float-seg-icon svg { width: 30px; height: 30px; }
-    .pl-float-seg-tel { font-size: 12px; }
+    .pl-float-seg-tel { font-size: 14px; }
     .pl-float-seg-main { font-size: 15px; }
   }
 
@@ -1027,7 +1027,7 @@
     .pl-tile { padding: 14px 8px; gap: 5px; }
     .pl-tile-icon { width: 40px; height: 40px; }
     .pl-tile-icon svg { width: 22px; height: 22px; }
-    .pl-tile-label { font-size: 13px; }
+    .pl-tile-label { font-size: 14px; }
     .pl-about-inner { gap: 26px; }
     .pl-day-photo { aspect-ratio: 16 / 10; }
     .pl-access { gap: 24px; }
@@ -1201,12 +1201,12 @@
   border-radius: 999px;
   background: rgba(0,0,0,0.06);
   color: var(--ink);
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   font-weight: 600;
 }
 .pl-photo-note {
   margin-top: 6px;
-  font-size: 0.72rem;
+  font-size: 0.875rem;
   color: var(--muted);
 }
 .pl-breadcrumb {
@@ -1214,7 +1214,7 @@
   flex-wrap: wrap;
   gap: 6px;
   align-items: center;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   color: var(--muted);
   margin: 0 0 18px;
 }
@@ -1243,11 +1243,11 @@
 
 .pl-form-field { display: grid; gap: 6px; margin-bottom: 18px; }
 .pl-form-field label { font-weight: 700; font-size: 0.88rem; }
-.pl-form-field .pl-required { color: #b3453a; font-size: 0.72rem; margin-left: 6px; }
+.pl-form-field .pl-required { color: #b3453a; font-size: 0.875rem; margin-left: 6px; }
 .pl-form-field input, .pl-form-field select, .pl-form-field textarea {
   padding: 11px 13px;
   border: 1px solid rgba(0,0,0,0.18);
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
   font: inherit;
   background: #fff;
   color: inherit;
@@ -1256,19 +1256,19 @@
   outline: 3px solid var(--green-deep);
   outline-offset: 1px;
 }
-.pl-form-error-text { color: #b3453a; font-size: 0.8rem; margin-top: 4px; }
-.pl-form-note { font-size: 0.82rem; color: var(--muted); margin-top: 6px; }
+.pl-form-error-text { color: #b3453a; font-size: 0.875rem; margin-top: 4px; }
+.pl-form-note { font-size: 0.875rem; color: var(--muted); margin-top: 6px; }
 .pl-form-disabled-banner {
   padding: 14px 16px;
   border: 1px solid rgba(179,69,58,0.35);
   background: rgba(179,69,58,0.06);
-  border-radius: 10px;
-  font-size: 0.85rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
   margin-bottom: 20px;
 }
 .pl-form-success[hidden], .pl-form-error[hidden] { display: none; }
-.pl-form-success { padding: 14px 16px; border-radius: 10px; background: rgba(13,90,111,0.09); color: var(--green-deep); font-weight: 700; }
-.pl-form-error { padding: 14px 16px; border-radius: 10px; background: rgba(179,69,58,0.08); color: #b3453a; font-weight: 700; }
+.pl-form-success { padding: 14px 16px; border-radius: var(--radius-sm); background: rgba(13,90,111,0.09); color: var(--green-deep); font-weight: 700; }
+.pl-form-error { padding: 14px 16px; border-radius: var(--radius-sm); background: rgba(179,69,58,0.08); color: #b3453a; font-weight: 700; }
 
 .pl-faq-list { border-top: 1px solid rgba(0,0,0,0.1); }
 .pl-faq-list details { border-bottom: 1px solid rgba(0,0,0,0.1); padding: 16px 0; }
@@ -1300,7 +1300,7 @@
 .pl-skip { position: fixed; left: 16px; top: -100px; z-index: 100; background: white; color: var(--ink); padding: 12px 20px; }
 .pl-skip:focus { top: 12px; }
 .pl-body, .pl-sec-lead, .pl-access-list dd { font-size: 16px; line-height: 1.85; }
-.pl-note, .pl-photo-note { font-size: 13px; }
+.pl-note, .pl-photo-note { font-size: 14px; }
 .pl-sec { padding-block: clamp(32px, 4.5vw, 58px); }
 .pl-sec-tight { padding-block: 28px; }
 .pl .pl-h2 { margin-bottom: 22px; }
@@ -1308,7 +1308,7 @@
 .pl-reading { max-width: 760px; }
 .pl .pl-reading > * + * { margin-top: 18px; }
 .pl .pl-h1 + .pl-sec-lead { margin-top: 12px; }
-.pl-page-photo { width: 100%; max-height: 340px; border-radius: 16px; aspect-ratio: 16/9; object-fit: cover; object-position: center 25%; }
+.pl-page-photo { width: 100%; max-height: 340px; border-radius: var(--radius); aspect-ratio: 16/9; object-fit: cover; object-position: center 25%; }
 .pl-hero-media { height: clamp(280px, 30vw, 390px); }
 .pl-slider { height: 100%; }
 .pl-slider .pl-hero-photo { height: 100%; object-position: center 25%; }
@@ -1318,7 +1318,7 @@
 .pl-hero-tiles .pl-tile-icon { width: 51px; height: 51px; }
 .pl-hero-tiles .pl-tile-icon svg { width: 33px; height: 33px; }
 .pl-hero-tiles .pl-tile-label { font-size: 14px; }
-.pl-tile-sub { font-size: 12px; color: var(--muted); }
+.pl-tile-sub { font-size: 14px; color: var(--muted); }
 .pl-hero-copy .pl-more { display: inline-block; margin-top: 18px; }
 .pl-recruit-strip { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-block: 28px 4px; border-radius: 14px; padding: 18px 24px; background: #fceedb; color: var(--ink); text-decoration: none; }
 .pl-recruit-strip > span:first-child { display: flex; flex-wrap: wrap; gap: 4px 18px; align-items: baseline; }
@@ -1347,7 +1347,7 @@
 .pl-job-list { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
 .pl-job-card > summary { display: flex; flex-direction: column; gap: 4px; }
 .pl-job-employment { font-weight: 400; color: var(--muted); }
-.pl-job-hint { display: block; font-size: 13px; font-weight: 400; color: var(--green-deep); }
+.pl-job-hint { display: block; font-size: 14px; font-weight: 400; color: var(--green-deep); }
 .pl-job-hint-open { display: none; }
 .pl-job-card[open] .pl-job-hint-closed { display: none; }
 .pl-job-card[open] .pl-job-hint-open { display: inline; }
@@ -1371,9 +1371,9 @@
 @media (max-width: 720px) {
   .pl-job-list { grid-template-columns: 1fr; }
 }
-.pl-guide-hint { font-size: 13px; font-weight: 400; margin-left: 12px; }
+.pl-guide-hint { font-size: 14px; font-weight: 400; margin-left: 12px; }
 .pl-purpose-list { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-block: 16px !important; }
-.pl-purpose-list a { display: grid; gap: 8px; height: 100%; padding: 16px; background: var(--mint); border-radius: 10px; text-decoration: none; }
+.pl-purpose-list a { display: grid; gap: 8px; height: 100%; padding: 16px; background: var(--mint); border-radius: var(--radius-sm); text-decoration: none; }
 .pl-purpose-list strong { color: var(--green-deep); }
 .pl-page-nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-block: 18px; }
 .pl-page-nav a { border: 1px solid var(--line); border-radius: 999px; padding: 8px 14px; text-decoration: none; font-size: 14px; }
@@ -1426,13 +1426,13 @@
   border-radius: 50%;
   background: var(--mint);
   color: var(--green-deep);
-  font-size: 13px; font-weight: 700;
+  font-size: 14px; font-weight: 700;
 }
 .pl-target-card dt {
-  font-size: 13px; font-weight: 700; letter-spacing: 0.08em;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.08em;
   color: var(--green-deep);
 }
-.pl-target-card dd { margin: 6px 0 0; font-size: 15px; line-height: 1.85; }
+.pl-target-card dd { margin: 6px 0 0; font-size: 16px; line-height: 1.85; }
 .pl-flow-card { display: grid; gap: 4px; align-content: start; }
 .pl-flow-num {
   justify-self: start;
@@ -1444,7 +1444,7 @@
   font-size: 17px; font-weight: 600;
 }
 .pl-flow-title { font-size: 16px; font-weight: 700; line-height: 1.6; }
-.pl-flow-body { font-size: 15px; line-height: 1.85; color: var(--muted); }
+.pl-flow-body { font-size: 16px; line-height: 1.85; color: var(--muted); }
 /* Q&Aは開閉で高さが変わるため列に割らず、読み幅だけ本文として自然な長さに絞る */
 .pl-faq-list { max-width: 760px; margin-inline: auto; }
 
@@ -1464,8 +1464,8 @@
   padding: 13px 4px;
   border-bottom: 1px solid var(--line);
 }
-.pl-spec-list dt { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; color: var(--green-deep); align-self: center; }
-.pl-spec-list dd { margin: 0; font-size: 15px; line-height: 1.8; }
+.pl-spec-list dt { font-size: 14px; font-weight: 700; letter-spacing: 0.06em; color: var(--green-deep); align-self: center; }
+.pl-spec-list dd { margin: 0; font-size: 16px; line-height: 1.8; }
 @media (max-width: 720px) {
   .pl-spec-list > div { grid-template-columns: 1fr; gap: 2px; }
 }
@@ -1474,7 +1474,7 @@
 /* 表・一覧の直後の注記は、本体と左端をそろえないと行がずれて見える */
 .pl-spec-list ~ .pl-note,
 .pl-news ~ .pl-note { max-width: 880px; margin-inline: auto; }
-.pl-cost-summary { max-width: 880px; margin: 22px auto 0; padding: 20px; background: var(--mint); border-radius: 12px; }
+.pl-cost-summary { max-width: 880px; margin: 22px auto 0; padding: 20px; background: var(--mint); border-radius: var(--radius); }
 .pl-cost-list { display: grid; gap: 9px; margin-top: 16px; }
 .pl-cost-list > div { display: grid; grid-template-columns: minmax(9em, 0.8fr) 1.2fr; gap: 12px; padding-top: 9px; border-top: 1px solid color-mix(in srgb, var(--green) 20%, transparent); }
 .pl-cost-list dt { font-weight: 700; color: var(--green-deep); }
@@ -1488,15 +1488,15 @@
 .pl-form-error-text { color: #a12f24; }
 .pl-form-fields [data-pl-check] { width: 100%; margin-block: 16px; }
 .pl-contact-desks { scroll-margin-top: 120px; }
-.pl-desk { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; padding: 18px 20px; margin-block: 14px; color: var(--ink); border: 1px solid var(--line); border-radius: 12px; text-decoration: none; background: white; }
+.pl-desk { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; padding: 18px 20px; margin-block: 14px; color: var(--ink); border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; background: white; }
 .pl-desk strong { font-size: 21px; }
-.pl-float-cta { bottom: calc(12px + env(safe-area-inset-bottom)); right: 16px; border-radius: 18px; }
+.pl-float-cta { bottom: calc(12px + env(safe-area-inset-bottom)); right: 16px; border-radius: var(--radius); }
 .pl-float-seg { min-height: 64px; padding: 10px 20px; gap: 8px; font-size: 15px; }
 .pl :is(a, button, summary, input, select, textarea) { scroll-margin-block: 130px; }
 .pl:has(.pl-form-fields :focus) .pl-float-cta { visibility: hidden; }
 .pl-float-cta .pl-btn-tel-no { font-size: 19px; }
 .pl-print-tools { padding-block: 18px; text-align: right; }
-.pl-print-button { padding: 10px 16px; border: 1px solid var(--line); border-radius: 8px; background: white; color: var(--ink); font: inherit; cursor: pointer; }
+.pl-print-button { padding: 10px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: white; color: var(--ink); font: inherit; cursor: pointer; }
 .pl-compare-table caption { text-align: left; padding: 8px 14px; color: var(--muted); }
 @media (max-width: 1100px) {
   .pl-nav, .pl-head.is-js.is-condensed .pl-nav { display: none; }
@@ -1512,7 +1512,7 @@
   .pl-head-inner { padding: 6px 10px; width: calc(100% - 24px); }
   .pl-brand-name { font-size: 16px; }
   .pl-brand { gap: 6px; }
-  .pl-head-recruit { margin-left: auto; padding: 9px 12px; font-size: 13px; }
+  .pl-head-recruit { margin-left: auto; padding: 9px 12px; font-size: 14px; }
   .pl-menu { margin-left: 0; }
   .pl-head { top: 6px; }
   .pl-purpose-list { grid-template-columns: 1fr; }
@@ -1548,7 +1548,7 @@
   padding: clamp(20px, 4vw, 34px);
 }
 .pl-quiz-step-label {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.1em;
   color: var(--green-deep);
@@ -1581,7 +1581,7 @@
 .pl-quiz-nav .pl-btn:disabled:hover { transform: none; box-shadow: none; }
 .pl-quiz-result { text-align: center; }
 .pl-quiz-result-label {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.08em;
   color: var(--green-deep);
@@ -1626,3 +1626,19 @@
 .pl [data-pl-service='welfare-equipment'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ddf0e4; color: #20704a; }
 .pl [data-pl-service='recruit'] :is(.pl-tile-icon, .pl-nav-icon) { background: #fdf0cf; color: #8a6413; }
 .pl [data-pl-service='important-matters'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e7ecef; color: #4b5c66; }
+
+/* ══════════════════════════════════════════════════════════
+   操作要素の最小サイズ（2026-09-15 デザイン点検）
+   読み手に高齢の方と家族が多いため、押せる範囲を44px以上にする。
+   見た目の大きさは変えず、押せる範囲だけを広げる。
+   ══════════════════════════════════════════════════════════ */
+.pl .pl-dot,
+.pl .pl-slider-toggle { width: 44px; height: 44px; }
+.pl .pl-more { display: inline-flex; align-items: flex-end; min-height: 44px; }
+.pl .pl-foot-links { gap: 0; }
+.pl .pl-foot-links a { display: inline-flex; align-items: flex-end; min-height: 44px; }
+.pl .pl-foot-tel-no { min-height: 44px; }
+.pl .pl-brand { min-height: 44px; }
+.pl .pl-breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; }
+.pl .pl-faq-list summary { padding-block: 10px; }
+.pl .pl-foot-chip { letter-spacing: 0.02em; padding-inline: 6px; }
