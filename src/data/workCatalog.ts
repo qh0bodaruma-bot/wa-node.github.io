@@ -112,24 +112,6 @@ export const workCatalog: WorkItem[] = [
   {
     "category": "web",
     "title": {
-      "ja": "Web改善ラボ",
-      "en": "Website improvement lab",
-      "fr": "Laboratoire d’amélioration web"
-    },
-    "description": {
-      "ja": "相談型サービスLPを題材に、Hero・料金・FAQ・CTAの小さな説明不足を、読み手の判断材料へ変える過程を確認できます。",
-      "en": "Compare before and after versions with observations, proposed changes and verification ideas.",
-      "fr": "Comparer les versions avant et après, les observations et les vérifications proposées."
-    },
-    "href": "/lab/",
-    "image": "/images/works/captures/work-07.webp",
-    "id": "work-07",
-    "priceKey": "lpReview",
-    "featured": false
-  },
-  {
-    "category": "web",
-    "title": {
       "ja": "BtoB企業サイト再構成",
       "en": "B2B company website",
       "fr": "Site d’entreprise BtoB"
@@ -197,24 +179,6 @@ export const workCatalog: WorkItem[] = [
     "id": "work-11",
     "priceKey": "businessApp",
     "featured": true
-  },
-  {
-    "category": "web",
-    "title": {
-      "ja": "選ばれる導線デモ",
-      "en": "Psychology-informed website demo",
-      "fr": "Démo web inspirée de la psychologie"
-    },
-    "description": {
-      "ja": "なぜそのボタンはそこにあるのか？心理学的根拠に基づいた情報配置の「正解」を、解説付きで体験できる特別なデモページです。",
-      "en": "Explore information order and interactions designed to make decisions easier.",
-      "fr": "Explorer l’ordre des informations et les interactions qui facilitent les décisions."
-    },
-    "href": "/psychology-demo/",
-    "image": "/images/works/captures/work-12.webp",
-    "id": "work-12",
-    "priceKey": "lp",
-    "featured": false
   },
   {
     "category": "web",

@@ -14,7 +14,8 @@ const c = {
 }[lang];
 const categories = ['all','line','app','web','system','tool','kdp'] as const;
 const icons = {line:'forum',app:'smartphone',web:'web',system:'account_tree',tool:'tune',kdp:'menu_book'};
-const featured = [workCatalog[0],workCatalog[10],workCatalog[7]];
+// 代表の3件。並び順が変わっても崩れないようIDで指定する
+const featured = ['work-01','work-11','work-08'].map(id=>workCatalog.find(work=>work.id===id)!);
 ---
 <main id="main" class="service-page works-refresh" data-glossary-skip data-reveal="off" data-works-page>
  <section class="works-heading"><div class="s-shell"><h1>{c.title}</h1><p class="s-intro">{c.lead}</p><p class="s-note">{c.note}</p>
