@@ -33,7 +33,8 @@
     letter-spacing: 0.03em;    /* 字間を少しだけ広げる */
     color: var(--ink);
     background: var(--bg);
-    padding-bottom: 92px;
+    /* フローティングCTAぶんの余白は .pl-foot の padding-bottom で確保する（最下部をフッターと同じ色にするため） */
+    padding-bottom: 0;
   }
 
   .pl :is(h1, h2, h3, p, ul, ol, dl, dd, figure, table) { margin: 0; }
@@ -798,8 +799,12 @@
     background-image: linear-gradient(180deg, var(--mint) 0%, #d5eaf1 100%);
     position: relative;
     overflow: hidden;   /* 角の花がはみ出さないように */
+    /* 右下のフローティングCTA（約108px）に最下段が隠れないだけの余白。
+       .pl 側で取るとフッターの下に地色の帯が残るため、フッターの内側で確保する */
+    padding-bottom: 170px;
   }
   .pl-hill-foot { margin-top: -1px; }
+  .pl-hill-foot svg { margin-bottom: -1px; }
   .pl-foot-inner {
     display: flex; flex-wrap: wrap; gap: 30px;
     justify-content: space-between; align-items: flex-start;
@@ -851,7 +856,13 @@
   }
 
   /* 下段：ページの先頭へ */
-  .pl-foot-bottom { display: flex; justify-content: flex-end; padding-bottom: 28px; }
+  /* 右下はフローティングCTAと重なるため、左に寄せる */
+  .pl-foot-bottom { display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: 4px 32px; padding-bottom: 28px; }
+  .pl-foot-consent {
+    min-height: 44px; padding: 10px 0;
+    background: transparent; border: 0; font: inherit; font-size: 13px; color: var(--ink); cursor: pointer;
+  }
+  .pl-foot-consent:hover, .pl-foot-consent:focus-visible { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
   .pl-foot-totop { font-size: 13px; color: var(--ink); text-decoration: none; padding: 10px 0; }
   .pl-foot-totop::after { content: "↑"; margin-left: 6px; }
   .pl-foot-totop:hover { color: var(--green-deep); text-decoration: underline; text-underline-offset: 3px; }
@@ -1261,7 +1272,8 @@
 /* 2026-09 review: readable service guide and compact, keyboard-safe controls. */
 .pl [hidden] { display: none !important; }
 /* 右下のフローティングCTA（約108px）にフッターが隠れないだけの余白を確保する */
-.pl { padding-bottom: 170px; overflow-wrap: anywhere; }
+/* フローティングCTAぶんの余白は、ページ最下部がフッターと同じ色になるようフッター側で確保する（.pl-foot の padding-bottom） */
+.pl { overflow-wrap: anywhere; }
 .pl a:hover { opacity: 1; }
 /* Keep essential copy visible at every scroll position, including find-in-page. */
 .pl[data-reveal="off"] :is(.pl-h2, .pl-sec-lead, .pl-card) { animation: none; opacity: 1; transform: none; }

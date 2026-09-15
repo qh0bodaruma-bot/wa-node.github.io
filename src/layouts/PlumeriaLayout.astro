@@ -50,6 +50,7 @@ const footNavGroups = [
   gaEnabled={true}
   clarityProjectId="yfv2ceb9ce"
   clarityEnabled={true}
+  analyticsPolicyHref={routes.privacy}
 >
   <div class="pl" data-reveal="off" data-pl-demo="true">
     <a class="pl-skip" href="#top">本文へ進む</a>
@@ -241,6 +242,7 @@ const footNavGroups = [
         </nav>
       </div>
       <div class="pl-wrap pl-foot-bottom">
+        <button type="button" class="pl-foot-consent" data-pl-open-consent>アクセス解析の設定</button>
         <a class="pl-foot-totop" href="#top">ページの先頭へ</a>
       </div>
     </footer>
@@ -268,6 +270,12 @@ const footNavGroups = [
       button.dataset.ready = 'true';
       button.hidden = false;
       button.addEventListener('click', () => window.print());
+    });
+    // アクセス解析の同意バナー（AnalyticsConsent）を開き直す。和-Node本体フッターの「Cookie設定」と同じイベントを使う
+    document.querySelectorAll<HTMLButtonElement>('[data-pl-open-consent]').forEach((button) => {
+      if (button.dataset.ready) return;
+      button.dataset.ready = 'true';
+      button.addEventListener('click', () => document.dispatchEvent(new CustomEvent('wa-node:open-consent')));
     });
     const menu = document.querySelector<HTMLDetailsElement>('.pl-menu');
     if (menu && !menu.dataset.ready) {

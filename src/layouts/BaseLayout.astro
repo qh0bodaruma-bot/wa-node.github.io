@@ -21,6 +21,7 @@ interface Props {
   gaEnabled?: boolean;
   clarityProjectId?: string;
   clarityEnabled?: boolean;
+  analyticsPolicyHref?: string;
   siteName?: string;
 }
 
@@ -37,6 +38,7 @@ const {
   gaEnabled = true,
   clarityProjectId,
   clarityEnabled = true,
+  analyticsPolicyHref = "/privacy/",
   siteName = 'wa-node'
 } = Astro.props;
 
@@ -221,7 +223,7 @@ const getLocalizedHref = (l: string) => {
     {showSiteChrome && <Header lang={currentLang} />}
     <slot />
     {showSiteChrome && <Footer lang={currentLang} />}
-    <AnalyticsConsent lang={currentLang} gaMeasurementId={gaMeasurementId} gaEnabled={gaEnabled} clarityProjectId={clarityProjectId} clarityEnabled={clarityEnabled} />
+    <AnalyticsConsent lang={currentLang} gaMeasurementId={gaMeasurementId} gaEnabled={gaEnabled} clarityProjectId={clarityProjectId} clarityEnabled={clarityEnabled} policyHref={analyticsPolicyHref} />
     <GlossaryEnhancer />
   </body>
 </html>

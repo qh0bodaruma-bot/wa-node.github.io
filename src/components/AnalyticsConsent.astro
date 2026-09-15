@@ -5,6 +5,8 @@ interface Props {
   gaEnabled?: boolean;
   clarityProjectId?: string;
   clarityEnabled?: boolean;
+  /** 同意の説明として示すポリシーのURL。サイトごとに運営者のポリシーを指す */
+  policyHref?: string;
 }
 
 const {
@@ -13,6 +15,7 @@ const {
   gaEnabled = true,
   clarityProjectId = 'yfv3qj03ho',
   clarityEnabled = true,
+  policyHref = "/privacy/",
 } = Astro.props;
 
 const copy = {
@@ -53,7 +56,7 @@ const copy = {
   <div class="analytics-consent-inner">
     <div>
       <h2 id="analytics-consent-title">{copy.title}</h2>
-      <p>{copy.body} <a href="/privacy/">{copy.policy}</a></p>
+      <p>{copy.body} <a href={policyHref}>{copy.policy}</a></p>
     </div>
     <div class="analytics-consent-actions">
       <button type="button" class="consent-deny" data-consent="denied">{copy.deny}</button>

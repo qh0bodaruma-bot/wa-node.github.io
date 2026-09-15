@@ -36,7 +36,7 @@ for (const [path, page] of pages) {
   assert.equal(nodes.filter(t => t.name === 'h1').length, 1, `One H1 required: ${path}`);
   assert(nodes.some(t => t.name === 'meta' && t.attrs.name === 'description' && t.attrs.content), `Description missing: ${path}`);
   assert(nodes.some(t => t.name === 'meta' && t.attrs.name === 'robots' && t.attrs.content?.includes('noindex')), `Demo must stay noindex: ${path}`);
-  assert(nodes.some(t => t.attrs['data-pl-demo'] === 'true'), `Demo telemetry guard missing: ${path}`);
+  assert(nodes.some(t => t.attrs['data-pl-demo'] === 'true'), `Demo marker (data-pl-demo) missing: ${path}`);
   // 計測は許可する（先方より新サイトのアクセス分析の依頼があるため）。
   // ただし和-Node本体のプロパティへ混入させない。BaseLayout の既定値は本体側のIDのため、
   // PlumeriaLayout で ID の指定が外れると本体へ送信されてしまう。それをここで止める。

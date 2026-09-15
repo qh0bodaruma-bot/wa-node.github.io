@@ -1,8 +1,7 @@
 // プルメリア修正版ラフ：GA4計測ヘルパー。
-// ラフ段階ではGoogleAnalytics.astroのenabled=falseにより実送信は行われず、
-// window.gtagはconsole.infoへ差し替わっている（GoogleAnalytics.astro参照）。
-// デモのdata-pl-demoガードでも送信を止める。許可するパラメータは固定の識別子のみとし、
-// 氏名・連絡先・相談本文等は一切含めない。
+// 2026-09-15 ボス判断により、デモ（data-pl-demo）でもクリックイベントを送信する（先方からアクセス分析の依頼があるため）。
+// GAは AnalyticsConsent で「解析を許可する」が選ばれた後にだけ読み込まれ、それまで window.gtag は存在しないため、
+// 同意前・拒否時はここで送信されない。許可するパラメータは固定の識別子のみとし、氏名・連絡先・相談本文等は一切含めない。
 
 type PlumeriaEventName =
   | 'service_select'
@@ -17,8 +16,6 @@ declare global {
 
 export function trackPlumeriaEvent(name: PlumeriaEventName, params: Record<string, string> = {}) {
   if (typeof window === 'undefined') return;
-  // Hard stop for this proposal demo, even if another page left a live gtag on window.
-  if (document.querySelector('.pl[data-pl-demo="true"]')) return;
   if (typeof window.gtag !== 'function') return;
   const events = ['service_select', 'phone_click', 'recruit_click'];
   if (!events.includes(name)) return;
@@ -32,7 +29,7 @@ export function trackPlumeriaEvent(name: PlumeriaEventName, params: Record<strin
 }
 
 // リンク・ボタンに data-pl-gtag="service_select" data-pl-service="housing" data-pl-cta="hero_tile" 等を付けておくと、
-// 本番計測の開始には、承認済みの計測先・同意方針とデモガード解除の別途レビューが必要。
+// 計測先はプルメリア用プロパティ（PlumeriaLayout の gaMeasurementId）。同意の取得は AnalyticsConsent が担う。
 export function initPlumeriaClickTracking(root: ParentNode = document) {
   root.querySelectorAll<HTMLElement>('[data-pl-gtag]').forEach((el) => {
     if (el.dataset.plTracked) return;
