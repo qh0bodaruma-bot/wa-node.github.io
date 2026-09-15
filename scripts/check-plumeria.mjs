@@ -1,6 +1,6 @@
 // Read-only release gate for the proposal demo. No dependencies or network.
 // Run after `npx --no-install astro build`: node scripts/check-plumeria.mjs
-import { readFileSync, existsSync, statSync } from 'node:fs';
+import { readFileSync, readdirSync, existsSync, statSync } from 'node:fs';
 import { resolve, join, sep } from 'node:path';
 import assert from 'node:assert/strict';
 
@@ -76,4 +76,11 @@ for (const [path, page] of pages) {
   }
 }
 assert.equal(forms, 2, 'Both demo forms must be present');
-console.log(`PASS Plumeria: ${pages.size} pages, ${links} internal links/anchors, ${assets} asset references, ${forms} protected demo forms. Noindex OK. Analytics scoped to Plumeria properties (no wa-node leakage).`);
+// 空室APIの接続先に開発用URL（wrangler dev）が入ったまま公開されるのを防ぐ。
+// Astro はスクリプトを _astro/*.js に分けて出力するため、ページ本文と合わせて確認する。
+const devApi = /(?:localhost|127\.0\.0\.1|\[::1\])(?::\d+)?\/api\/vacancy/;
+const astroDir = join(root, '_astro');
+const bundles = existsSync(astroDir) ? readdirSync(astroDir).filter(f => f.endsWith('.js')).map(f => join(astroDir, f)) : [];
+for (const [path, page] of pages) assert(!devApi.test(page.html), `Development vacancy API URL in build: ${path}`);
+for (const file of bundles) assert(!devApi.test(readFileSync(file, 'utf8')), `Development vacancy API URL in build: ${file}`);
+console.log(`PASS Plumeria: ${pages.size} pages, ${links} internal links/anchors, ${assets} asset references, ${forms} protected demo forms. Noindex OK. Analytics scoped to Plumeria properties (no wa-node leakage). No development vacancy API URL (${bundles.length} bundles scanned).`);

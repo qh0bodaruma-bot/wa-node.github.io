@@ -1642,3 +1642,9 @@
 .pl .pl-breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; }
 .pl .pl-faq-list summary { padding-block: 10px; }
 .pl .pl-foot-chip { letter-spacing: 0.02em; padding-inline: 6px; }
+
+/* 空室状況（管理画面の公開APIから読み込んだ値） 2026-09-15 */
+.pl-vacancy-badge { display: inline-block; padding: 2px 12px; border-radius: 999px; font-size: 0.875rem; font-weight: 700; }
+.pl-vacancy-available { background: #dcefe3; color: #1c6b43; }
+.pl-vacancy-few { background: #fdf0cf; color: #7a560d; }
+.pl-vacancy-full { background: #fbe1e1; color: #9a2c2c; }

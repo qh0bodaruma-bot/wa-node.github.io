@@ -1,5 +1,6 @@
 ---
 import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
+import PlumeriaVacancyStatus from '../../../../../../components/plumeria/PlumeriaVacancyStatus.astro';
 import { routes, housingUnits, genericFaqs, corp } from '../../../../../../data/plumeria';
 
 export function getStaticPaths() {
@@ -41,7 +42,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
         <div><dt>所在地</dt><dd>{corp.address ?? '確認中'}</dd></div>
         <div><dt>居室</dt><dd>{unit.roomType}／{unit.roomSize}</dd></div>
         <div><dt>費用</dt><dd>{unit.priceFrom}（{unit.deposit}）</dd></div>
-        <div><dt>空室状況</dt><dd><span class="pl-pending-note">確認中</span>（お手数ですがお問い合わせください）</dd></div>
+        <div><dt>空室状況</dt><dd><PlumeriaVacancyStatus facilityId={`plumeria-${unit.id}`} /></dd></div>
       </dl>
       <p class="pl-note" style="margin-top:10px">月額基本料金の目安です。食費や介護保険自己負担分などは別途ご確認ください。<a href="https://home-plumeria.jp/plumeria0102/fee.html">公式の料金内訳</a>（2026年9月8日確認）</p>
     </div>

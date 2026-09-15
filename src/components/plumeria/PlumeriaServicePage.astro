@@ -1,5 +1,6 @@
 ---
 import PlumeriaLayout from '../../layouts/PlumeriaLayout.astro';
+import PlumeriaVacancyStatus from './PlumeriaVacancyStatus.astro';
 import { routes, genericFaqs, type PlumeriaFaq } from '../../data/plumeria';
 
 interface Props {
@@ -14,6 +15,8 @@ interface Props {
   fitFor: string[];
   content: { label: string; body: string }[];
   targetInfo: { label: string; body: string }[];
+  /** 空室状況を表示する施設（管理画面の施設ID）。指定したときだけ対象・利用条件に空室状況を加える */
+  vacancyFacilityId?: string;
   costInfo: string;
   costDetails?: { label: string; value: string }[];
   flowSteps: { title: string; body: string }[];
@@ -23,7 +26,7 @@ interface Props {
 
 const {
   title, description, currentPath, breadcrumbLabel,
-  heroTitle, heroLead, heroImg, heroAlt, fitFor, content, targetInfo, costInfo, flowSteps,
+  heroTitle, heroLead, heroImg, heroAlt, fitFor, content, targetInfo, vacancyFacilityId, costInfo, flowSteps,
   faqs = genericFaqs, contactCategory, costDetails = [],
 } = Astro.props;
 
@@ -78,7 +81,8 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
   <section class="pl-sec" id="conditions">
     <div class="pl-wrap">
       <h2 class="pl-h2">対象・利用条件</h2>
-      <dl class={cols(targetInfo.length)}>
+      <dl class={cols(targetInfo.length + (vacancyFacilityId ? 1 : 0))}>
+        {vacancyFacilityId && <div class="pl-target-card"><dt>空室状況</dt><dd><PlumeriaVacancyStatus facilityId={vacancyFacilityId} /></dd></div>}
         {targetInfo.map((t) => (
           <div class="pl-target-card"><dt>{t.label}</dt><dd>{t.body}</dd></div>
         ))}

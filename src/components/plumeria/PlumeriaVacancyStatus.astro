@@ -1,0 +1,45 @@
+---
+// 空室状況の表示。管理画面（E:\dev\plumeria-admin）の公開APIから読み込む。
+// PUBLIC_PLUMERIA_VACANCY_API が未設定のビルド、または読み込みに失敗した場合は「確認中」のまま表示する。
+interface Props { facilityId: string }
+const { facilityId } = Astro.props;
+---
+<span class="pl-vacancy-live" data-pl-vacancy={facilityId}>
+  <span class="pl-pending-note" data-pl-vacancy-label>確認中</span><span data-pl-vacancy-note>（お手数ですがお問い合わせください）</span>
+</span>
+
+<script>
+  const api = import.meta.env.PUBLIC_PLUMERIA_VACANCY_API as string | undefined;
+  const LABELS: Record<string, string> = { available: '空きあり', few: '残りわずか', full: '満室' };
+  const timeFormat = new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+  async function loadVacancy() {
+    const targets = [...document.querySelectorAll<HTMLElement>('[data-pl-vacancy]')];
+    if (!api || targets.length === 0) return;
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 4000);
+    try {
+      const response = await fetch(api, { signal: controller.signal, credentials: 'omit' });
+      if (!response.ok) return;
+      const data = await response.json() as { facilities?: { id: string; status: string; updatedAt: string | null; stale?: boolean }[] };
+      for (const el of targets) {
+        const item = data.facilities?.find((f) => f.id === el.dataset.plVacancy);
+        // 更新が途絶えて古くなった情報（stale）は出さず、「確認中」のままにする
+        if (!item || item.stale !== false || !Object.hasOwn(LABELS, item.status)) continue;
+        // 日時が不正な場合は、ラベルだけ書き換わって注記と食い違わないよう、その施設は「確認中」のままにする
+        const updated = item.updatedAt ? new Date(item.updatedAt) : null;
+        if (!updated || Number.isNaN(updated.getTime())) continue;
+        const label = el.querySelector<HTMLElement>('[data-pl-vacancy-label]');
+        const note = el.querySelector<HTMLElement>('[data-pl-vacancy-note]');
+        if (label) { label.textContent = LABELS[item.status]; label.className = `pl-vacancy-badge pl-vacancy-${item.status}`; }
+        if (note) note.textContent = `（${timeFormat.format(updated)} 時点）`;
+      }
+    } catch {
+      // 読み込めない場合は「確認中」の表示のまま
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  // ViewTransitions 環境では初回表示でも astro:page-load が発火するため、ここだけで読み込む
+  document.addEventListener('astro:page-load', loadVacancy);
+</script>
