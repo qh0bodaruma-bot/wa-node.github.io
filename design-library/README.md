@@ -41,7 +41,7 @@ IDは**削除しない**。使わなくなったパターンは `【非推奨】
 1. **`.reveal` で足りるなら新しい仕組みを作らない。** 既存のIntersectionObserverに乗せる。
 2. **色は必ずCSS変数を使う。** 生の16進数を新規に書かない。
 3. **すべての動きに `prefers-reduced-motion: reduce` の停止規則を書く。**
-   アクセシビリティは和-Nodeの差別化軸そのもの（`business-docs/roles/production/CLAUDE.md`）。
+   アクセシビリティは和-Nodeの差別化軸そのもの（`business-docs/roles/production/AGENTS.md`）。
 4. **依存パッケージの追加は、必要性を説明してからボスの承認を取る。** 同上の禁止事項。
 5. **キーボード操作とフォーカス可視化を壊さない。** ホバー専用の表現は必ず `:focus-visible` にも同じ指定を入れる。
 

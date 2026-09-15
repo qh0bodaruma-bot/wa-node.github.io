@@ -12,9 +12,9 @@ business-docs/
 ├─ context/
 │   └─ company-facts.md   ← 変わらない前提（金額を含まない）
 ├─ roles/                 ← 役割別ルール（3つ）
-│   ├─ management/CLAUDE.md
-│   ├─ marketing/CLAUDE.md
-│   └─ production/CLAUDE.md
+│   ├─ management/AGENTS.md
+│   ├─ marketing/AGENTS.md
+│   └─ production/AGENTS.md
 └─ private/               ← 【非公開・gitignore済】金額と実績はここだけ
     ├─ README.md
     ├─ plan-summary.md

@@ -188,7 +188,7 @@ document.querySelectorAll('.pin__step').forEach((el) => obs.observe(el));
 ### AN-09 数字のカウントアップ
 - **依存**: なし / **コスト**: 15分
 - **注意**: 【重要】カウントアップさせる数字は `business-docs/private/actuals-2026.md` に根拠のあるものだけ。
-  計画値を実績として動かすのは、ルート `CLAUDE.md` の禁止事項そのもの。
+  計画値を実績として動かすのは、ルート `AGENTS.md` の禁止事項そのもの。
 
 ```js
 function countUp(el) {
