@@ -95,10 +95,21 @@
     gap: 14px;
     padding: 8px 18px 8px 10px;
     border-radius: 999px;
-    background: color-mix(in srgb, var(--ink) 92%, transparent);
+    /* 地色は 50%。後ろのコンテンツが透けるが、`backdrop-filter` の brightness で
+       透けてくる側を暗く落としているため、白文字のコントラストは保たれる
+       （最も明るい地色 #faf9f2 の上で実測 7.4:1）。
+       brightness を外して単に 50% にすると 3.35:1 まで落ちてAA未達になる。 */
+    background: color-mix(in srgb, var(--ink) 50%, transparent);
+    backdrop-filter: blur(18px) brightness(0.55) saturate(1.3);
+    -webkit-backdrop-filter: blur(18px) brightness(0.55) saturate(1.3);
     color: var(--bg);
     box-shadow: var(--shadow-md);
     transition: padding 0.3s ease, gap 0.3s ease;
+  }
+  /* `backdrop-filter` 未対応の環境では透けた分だけ地色が明るくなり文字が読めなくなる。
+     その環境だけ従来どおり不透明に近い地色へ戻す。 */
+  @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+    .pl-head-inner { background: color-mix(in srgb, var(--ink) 92%, transparent); }
   }
   .pl-head-inner .pl-brand-en { color: color-mix(in srgb, var(--bg) 65%, transparent); }
   .pl-brand { display: flex; align-items: center; gap: 10px; text-decoration: none; line-height: 1.25; }
@@ -848,12 +859,12 @@
   .pl-foot-desk-scope { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.6; }
   .pl-foot-desk-scope small { display: block; font-size: 14px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; }
   .pl-foot-desk-action { justify-self: end; }
-  .pl-foot-tel-no {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-size: 26px; line-height: 1.2; color: var(--green-deep); text-decoration: none;
-  }
-  .pl-foot-tel-no:hover { text-decoration: underline; text-underline-offset: 4px; }
-  .pl-foot-tel-no svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.6; }
+  /* 電話窓口は「フォームで相談する」と同じピル（pl-btn pl-btn-sm pl-btn-deep）で並べる。
+     3行の操作列が同じ形・同じ幅でそろう。
+     数字だけは、読み上げる相手が高齢のご家族であることを考えてボタン既定の14pxより上げる。 */
+  /* 行の高さは既定（本文2.0）のままだとフォームのボタンより6px高くなり、
+     3行そろえたときに段差が出る。数字だけなので詰めてよい。 */
+  .pl-foot-tel-no { font-size: 18px; font-weight: 600; letter-spacing: 0.04em; line-height: 1.2; }
   .pl-foot-desk .pl-btn { width: 200px; min-width: 0; }
 
 
@@ -884,7 +895,6 @@
     .pl-foot-nav { grid-template-columns: 1fr; }
     .pl-foot-desk { grid-template-columns: 76px minmax(0, 1fr); gap: 10px 14px; }
     .pl-foot-desk-action { grid-column: 1 / -1; justify-self: stretch; }
-    .pl-foot-tel-no { font-size: 24px; justify-content: flex-start; }
     .pl-foot-desk .pl-btn { width: 100%; }
     .pl-foot-bottom { justify-content: center; }
   }
@@ -904,7 +914,12 @@
     background: color-mix(in srgb, var(--ink) 94%, transparent);
     box-shadow: var(--shadow-lift);
     overflow: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
   }
+  /* フッターの「ご相談・見学のお申し込み」が画面内に収まったら、同じ用件の
+     追従CTAは役目を終えるので消す。判定はJS（`is-away` を付け外しする）。
+     JSが動かない環境では付かないため、従来どおり出たままになる。 */
+  .pl-float-cta.is-away { opacity: 0; visibility: hidden; pointer-events: none; }
   .pl-float-seg {
     display: flex;
     flex-direction: column;
@@ -1637,7 +1652,8 @@
 .pl .pl-more { display: inline-flex; align-items: flex-end; min-height: 44px; }
 .pl .pl-foot-links { gap: 0; }
 .pl .pl-foot-links a { display: inline-flex; align-items: flex-end; min-height: 44px; }
-.pl .pl-foot-tel-no { min-height: 44px; }
+/* 電話窓口はボタン（pl-btn-sm）になり、最小高さ46pxをそちらが持つ。
+   ここで44pxを上書きすると「フォームで相談する」と2pxずれるため指定しない。 */
 .pl .pl-brand { min-height: 44px; }
 .pl .pl-breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; }
 .pl .pl-faq-list summary { padding-block: 10px; }

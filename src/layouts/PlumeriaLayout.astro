@@ -206,8 +206,8 @@ const footNavGroups = [
                 <span class="pl-foot-chip">電話</span>
                 <span class="pl-foot-desk-scope">{desk.label}<small>{desk.sub}</small></span>
                 {desk.tel ? (
-                  <a class="pl-foot-desk-action pl-foot-tel-no pl-num-face" href={`tel:${desk.tel.replace(/[^0-9]/g, '')}`} data-pl-gtag="phone_click" data-pl-service={desk.service} data-pl-cta="footer_contact" aria-label={`${desk.label}（${desk.sub}）に電話する ${desk.tel}`}>
-                    <svg aria-hidden="true"><use href="#pl-i-phone" /></svg>{desk.tel}
+                  <a class="pl-foot-desk-action pl-btn pl-btn-sm pl-btn-deep pl-foot-tel-no pl-num-face" href={`tel:${desk.tel.replace(/[^0-9]/g, '')}`} data-pl-gtag="phone_click" data-pl-service={desk.service} data-pl-cta="footer_contact" aria-label={`${desk.label}（${desk.sub}）に電話する ${desk.tel}`}>
+                    {desk.tel}
                   </a>
                 ) : (
                   <span class="pl-foot-desk-action pl-pending-note">電話番号確認中</span>
@@ -271,6 +271,57 @@ const footNavGroups = [
 
 <script>
   import { initPlumeriaClickTracking } from '../scripts/plumeriaAnalytics';
+
+  /*
+    フッターの「ご相談・見学のお申し込み」が画面内に全部見えたら、右下の追従CTAを消す。
+    同じ用件の導線が2つ並ぶのを避けるため。
+
+    IntersectionObserver の `threshold: 1` では判定できない。窓口ブロックが
+    ビューポートより高いと比率が 1 に届かず、永久に発火しないため。
+    スクロールと寸法変化のたびに矩形を1回測る方式にして、
+    「全部収まっている」か「画面を覆い尽くしている」かを見る。
+  */
+  let plFloatCtaCleanup: (() => void) | null = null;
+  function initFloatCtaHandoff() {
+    plFloatCtaCleanup?.();
+    plFloatCtaCleanup = null;
+
+    const cta = document.querySelector<HTMLElement>('.pl-float-cta');
+    const block = document.querySelector<HTMLElement>('.pl-foot-contact');
+    if (!cta) return;
+    cta.classList.remove('is-away');
+    // 窓口ブロックが無いページ（お問い合わせページ）は、従来どおり出したままにする
+    if (!block) return;
+
+    let frame = 0;
+    const measure = () => {
+      frame = 0;
+      const rect = block.getBoundingClientRect();
+      const vh = window.innerHeight || document.documentElement.clientHeight;
+      const fullyVisible = rect.top >= 0 && rect.bottom <= vh;
+      const coversViewport = rect.height > vh && rect.top <= 0 && rect.bottom >= vh;
+      cta.classList.toggle('is-away', fullyVisible || coversViewport);
+    };
+    const schedule = () => { if (!frame) frame = requestAnimationFrame(measure); };
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    const ro = 'ResizeObserver' in window ? new ResizeObserver(schedule) : null;
+    ro?.observe(block);
+    measure();
+
+    plFloatCtaCleanup = () => {
+      if (frame) cancelAnimationFrame(frame);
+      window.removeEventListener('scroll', schedule);
+      window.removeEventListener('resize', schedule);
+      ro?.disconnect();
+    };
+  }
+  document.addEventListener('astro:before-swap', () => {
+    plFloatCtaCleanup?.();
+    plFloatCtaCleanup = null;
+  });
+
   function run() {
     initPlumeriaClickTracking(document);
     document.querySelectorAll<HTMLButtonElement>('[data-pl-print]').forEach((button) => {
@@ -285,6 +336,7 @@ const footNavGroups = [
       button.dataset.ready = 'true';
       button.addEventListener('click', () => document.dispatchEvent(new CustomEvent('wa-node:open-consent')));
     });
+    initFloatCtaHandoff();
     const menu = document.querySelector<HTMLDetailsElement>('.pl-menu');
     if (menu && !menu.dataset.ready) {
       menu.dataset.ready = 'true';
