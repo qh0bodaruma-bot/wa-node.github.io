@@ -95,13 +95,14 @@
     gap: 14px;
     padding: 8px 18px 8px 10px;
     border-radius: 999px;
-    /* 地色は 50%。後ろのコンテンツが透けるが、`backdrop-filter` の brightness で
+    /* 地色は 35%。後ろのコンテンツが透けるが、`backdrop-filter` の brightness で
        透けてくる側を暗く落としているため、白文字のコントラストは保たれる
-       （最も明るい地色 #faf9f2 の上で実測 7.4:1）。
-       brightness を外して単に 50% にすると 3.35:1 まで落ちてAA未達になる。 */
-    background: color-mix(in srgb, var(--ink) 50%, transparent);
-    backdrop-filter: blur(18px) brightness(0.55) saturate(1.3);
-    -webkit-backdrop-filter: blur(18px) brightness(0.55) saturate(1.3);
+       （最も明るい背面＝白でも 5.1:1 以上）。brightness を外すと 2:1 台まで落ちてAA未達。
+       ぼかしは 8px。18px にすると背面が溶けて「透けている」ように見えず、
+       ただの濃いピルに見えてしまう。透過を感じさせるのは透過率よりぼかしの弱さ。 */
+    background: color-mix(in srgb, var(--ink) 35%, transparent);
+    backdrop-filter: blur(8px) brightness(0.55) saturate(1.25);
+    -webkit-backdrop-filter: blur(8px) brightness(0.55) saturate(1.25);
     color: var(--bg);
     box-shadow: var(--shadow-md);
     transition: padding 0.3s ease, gap 0.3s ease;
@@ -810,10 +811,15 @@
     background-image: linear-gradient(180deg, var(--mint) 0%, #d5eaf1 100%);
     position: relative;
     overflow: hidden;   /* 角の花がはみ出さないように */
-    /* 右下のフローティングCTA（約108px）に最下段が隠れないだけの余白。
-       .pl 側で取るとフッターの下に地色の帯が残るため、フッターの内側で確保する */
+    /* 既定は、右下のフローティングCTA（約108px）に最下段が隠れないだけの余白。
+       .pl 側で取るとフッターの下に地色の帯が残るため、フッターの内側で確保する。
+       JSが動かない環境と、CTAが消えないお問い合わせページではこの値のまま。 */
     padding-bottom: 170px;
   }
+  /* CTAの引き継ぎ（窓口ブロックが全部見えたらCTAを消す）が有効なページでは、
+     最下部でCTAは消えているため、170pxの余白は空白として残るだけになる。
+     JSが初期化に成功したときだけクラスが付くので、無効な環境では上の余白が維持される。 */
+  .pl.is-cta-handoff .pl-foot { padding-bottom: 44px; }
   .pl-hill-foot { margin-top: -1px; }
   .pl-hill-foot svg { margin-bottom: -1px; }
   .pl-foot-inner {
@@ -845,16 +851,20 @@
   /* 窓口の行：3行とも「連絡方法ラベル／対象範囲／操作」の3列に揃え、操作の右端を一致させる */
   .pl-foot-desks { display: grid; list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
   .pl-foot-desk {
-    display: grid; grid-template-columns: 76px minmax(0, 1fr) 200px; align-items: center; gap: 8px 20px;
+    /* 先頭列はアイコン（40px）の幅ちょうど。文字チップだった頃の76pxのままにすると、
+       間のテキスト列が36px損をする。 */
+    display: grid; grid-template-columns: 40px minmax(0, 1fr) 200px; align-items: center; gap: 8px 20px;
     min-height: 84px; padding: 12px 4px;
     border-bottom: 1px solid var(--line);
   }
+  /* 連絡方法はアイコンで示す。文字は読み上げ用に `pl-sr` で残しているため、
+     見た目から文言が消えても行の意味は失われない。 */
   .pl-foot-chip {
     display: inline-flex; justify-content: center; align-items: center;
-    min-height: 26px; padding: 2px 10px; border-radius: 999px;
+    width: 40px; height: 40px; border-radius: 50%;
     border: 1px solid var(--green-deep); color: var(--green-deep); background: var(--surface);
-    font-size: 14px; font-weight: 700; letter-spacing: 0.08em; line-height: 1.4;
   }
+  .pl-foot-chip svg { width: 22px; height: 22px; }
   .pl-foot-chip-form { border-color: var(--ink); color: var(--ink); }
   .pl-foot-desk-scope { font-size: 14px; font-weight: 500; color: var(--ink); line-height: 1.6; }
   .pl-foot-desk-scope small { display: block; font-size: 14px; font-weight: 400; color: var(--muted); letter-spacing: 0.04em; }
@@ -893,7 +903,7 @@
   }
   @media (max-width: 480px) {
     .pl-foot-nav { grid-template-columns: 1fr; }
-    .pl-foot-desk { grid-template-columns: 76px minmax(0, 1fr); gap: 10px 14px; }
+    .pl-foot-desk { grid-template-columns: 40px minmax(0, 1fr); gap: 10px 14px; }
     .pl-foot-desk-action { grid-column: 1 / -1; justify-self: stretch; }
     .pl-foot-desk .pl-btn { width: 100%; }
     .pl-foot-bottom { justify-content: center; }
@@ -1294,6 +1304,23 @@
   .pl-service-intro-grid { grid-template-columns: 1fr; }
 }
 
+/* フッター窓口の補足（訪問介護…／福祉用具など）の指定改行。
+   改行前の「訪問介護・訪問看護・居宅介護支援・」は約240px必要で、
+   対象の列がそれより狭いと前半がさらに自然折り返しして3行になる。
+   列幅はフッターのカラム数で段階的に変わるため、240pxを確保できる幅でだけ改行を出す。
+     ・1101px以上 …… 窓口ブロックが2カラム。列幅292px〜
+     ・721〜1000px … 窓口ブロックが1カラム。列幅374〜653px
+   それ以外（1001〜1100px、720px以下）は改行を出さず、自然な折り返しに任せる。
+   列幅が238px（改行前の文字幅）より広ければ自然折り返しでも同じ位置で折り返すため、
+   見え方はほぼ変わらない。 */
+.pl-foot-desk-scope small br { display: none; }
+@media (min-width: 721px) and (max-width: 1000px) {
+  .pl-foot-desk-scope small br { display: inline; }
+}
+@media (min-width: 1101px) {
+  .pl-foot-desk-scope small br { display: inline; }
+}
+
 /* 2026-09 review: readable service guide and compact, keyboard-safe controls. */
 .pl [hidden] { display: none !important; }
 /* 右下のフローティングCTA（約108px）にフッターが隠れないだけの余白を確保する */
@@ -1657,7 +1684,7 @@
 .pl .pl-brand { min-height: 44px; }
 .pl .pl-breadcrumb a { display: inline-flex; align-items: center; min-height: 44px; }
 .pl .pl-faq-list summary { padding-block: 10px; }
-.pl .pl-foot-chip { letter-spacing: 0.02em; padding-inline: 6px; }
+/* 連絡方法のチップは文字からアイコンに変えたため、文字向けの字間・内側余白は不要。 */
 
 /* 空室状況（管理画面の公開APIから読み込んだ値） 2026-09-15 */
 .pl-vacancy-badge { display: inline-block; padding: 2px 12px; border-radius: 999px; font-size: 0.875rem; font-weight: 700; }

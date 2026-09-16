@@ -203,7 +203,10 @@ const footNavGroups = [
           <ul class="pl-foot-desks">
             {footDesks.map((desk) => (
               <li class="pl-foot-desk">
-                <span class="pl-foot-chip">電話</span>
+                <span class="pl-foot-chip">
+                  <svg aria-hidden="true"><use href="#pl-i-phone" /></svg>
+                  <span class="pl-sr">電話</span>
+                </span>
                 <span class="pl-foot-desk-scope">{desk.label}<small>{desk.sub}</small></span>
                 {desk.tel ? (
                   <a class="pl-foot-desk-action pl-btn pl-btn-sm pl-btn-deep pl-foot-tel-no pl-num-face" href={`tel:${desk.tel.replace(/[^0-9]/g, '')}`} data-pl-gtag="phone_click" data-pl-service={desk.service} data-pl-cta="footer_contact" aria-label={`${desk.label}（${desk.sub}）に電話する ${desk.tel}`}>
@@ -215,8 +218,11 @@ const footNavGroups = [
               </li>
             ))}
             <li class="pl-foot-desk">
-              <span class="pl-foot-chip pl-foot-chip-form">フォーム</span>
-              <span class="pl-foot-desk-scope">その他のサービス・見学のご相談<small>訪問介護・訪問看護・居宅介護支援・福祉用具など</small></span>
+              <span class="pl-foot-chip pl-foot-chip-form">
+                <svg aria-hidden="true"><use href="#pl-i-document" /></svg>
+                <span class="pl-sr">フォーム</span>
+              </span>
+              <span class="pl-foot-desk-scope">その他のサービス・見学のご相談<small>訪問介護・訪問看護・居宅介護支援・<br />福祉用具など</small></span>
               <a class="pl-foot-desk-action pl-btn pl-btn-sm pl-btn-deep" href={contactHref}>フォームで相談する</a>
             </li>
           </ul>
@@ -286,12 +292,16 @@ const footNavGroups = [
     plFloatCtaCleanup?.();
     plFloatCtaCleanup = null;
 
+    const root = document.querySelector<HTMLElement>('.pl');
     const cta = document.querySelector<HTMLElement>('.pl-float-cta');
     const block = document.querySelector<HTMLElement>('.pl-foot-contact');
+    root?.classList.remove('is-cta-handoff');
     if (!cta) return;
     cta.classList.remove('is-away');
     // 窓口ブロックが無いページ（お問い合わせページ）は、従来どおり出したままにする
     if (!block) return;
+    // ここまで来たら最下部でCTAは消える。フッターが確保しているCTA用の余白を詰める
+    root?.classList.add('is-cta-handoff');
 
     let frame = 0;
     const measure = () => {
