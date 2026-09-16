@@ -819,13 +819,13 @@
   /* CTAの引き継ぎ（窓口ブロックが全部見えたらCTAを消す）が有効なページでは、
      最下部でCTAは消えているため、170pxの余白は空白として残るだけになる。
      JSが初期化に成功したときだけクラスが付くので、無効な環境では上の余白が維持される。 */
-  .pl.is-cta-handoff .pl-foot { padding-bottom: 44px; }
+  .pl.is-cta-handoff .pl-foot { padding-bottom: 8px; }
   .pl-hill-foot { margin-top: -1px; }
   .pl-hill-foot svg { margin-bottom: -1px; }
   .pl-foot-inner {
     display: flex; flex-wrap: wrap; gap: 30px;
     justify-content: space-between; align-items: flex-start;
-    padding-bottom: 40px;
+    padding-bottom: 28px;
   }
   .pl-foot-brand { display: grid; gap: 3px; justify-items: start; }
   .pl-foot-name { font-size: 20px; font-weight: 700; letter-spacing: 0.1em; }
@@ -843,7 +843,7 @@
     position: relative;
     display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px 48px;
     align-items: start;
-    padding-top: 12px; padding-bottom: 36px; margin-bottom: 36px;
+    padding-top: 0; padding-bottom: 20px; margin-bottom: 24px;
     border-bottom: 1px solid var(--line);
   }
   .pl-foot-contact-title { font-size: 19px; font-weight: 700; letter-spacing: 0.06em; color: var(--ink); margin: 0 0 6px; }
@@ -1333,7 +1333,12 @@
 .pl :is(section[id], div[id], main[id]) { scroll-margin-top: 120px; }
 .pl-head { z-index: 50; }
 .pl-head-inner { max-width: calc(100% - 24px); gap: 10px; }
-.pl-nav a { width: 88px; color: inherit; }
+/* ラベルが内寸より広いと、その項目だけグリッドの列が広がってアイコンが中心からずれる。
+   実測で「ショートステイ」が101px あり、88px 幅（内寸80px）では中心が約10pxずれていた。
+   ① 最長ラベルが収まる幅にする ② 列幅を内寸に固定して、長いラベルが列を広げられないようにする
+   の2つでアイコンの間隔をそろえる。将来ラベルが伸びても中心はずれず、はみ出し分だけが省略される。 */
+.pl-nav a { width: 112px; color: inherit; grid-template-columns: 100%; overflow: hidden; }
+.pl-nav-label { overflow: hidden; text-overflow: ellipsis; }
 .pl-nav a:last-child { display: none; }
 .pl-nav a[aria-current="page"] { background: var(--mint); color: var(--green-deep); }
 .pl-head-recruit { color: var(--ink); background: var(--accent); border-radius: 999px; padding: 9px 16px; text-decoration: none; white-space: nowrap; font-size: 14px; font-weight: 700; }
