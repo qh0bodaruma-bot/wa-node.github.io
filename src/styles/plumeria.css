@@ -95,14 +95,16 @@
     gap: 14px;
     padding: 8px 18px 8px 10px;
     border-radius: 999px;
-    /* 地色は 35%。後ろのコンテンツが透けるが、`backdrop-filter` の brightness で
-       透けてくる側を暗く落としているため、白文字のコントラストは保たれる
-       （最も明るい背面＝白でも 5.1:1 以上）。brightness を外すと 2:1 台まで落ちてAA未達。
-       ぼかしは 8px。18px にすると背面が溶けて「透けている」ように見えず、
-       ただの濃いピルに見えてしまう。透過を感じさせるのは透過率よりぼかしの弱さ。 */
-    background: color-mix(in srgb, var(--ink) 35%, transparent);
-    backdrop-filter: blur(8px) brightness(0.55) saturate(1.25);
-    -webkit-backdrop-filter: blur(8px) brightness(0.55) saturate(1.25);
+    /* 地色は 25%。後ろのコンテンツが透けるが、`backdrop-filter` の brightness で
+       透けてくる側を暗く落としているため、白文字のコントラストは保たれる。
+       最も明るい背面（白）でも 4.8:1 で、AA の 4.5:1 を満たす。
+       ── ここが透過の限界。地色を 25% より下げるか brightness を 0.53 より上げると
+       白い写真の上で 4.5:1 を割る。数値を動かすときは両方を同時に見ること。
+       ぼかしは 6px。大きくすると背面が溶けて「透けている」ように見えず、ただの濃い
+       ピルに見える。透過を感じさせるのは透過率よりぼかしの弱さ。 */
+    background: color-mix(in srgb, var(--ink) 25%, transparent);
+    backdrop-filter: blur(6px) brightness(0.53) saturate(1.25);
+    -webkit-backdrop-filter: blur(6px) brightness(0.53) saturate(1.25);
     color: var(--bg);
     box-shadow: var(--shadow-md);
     transition: padding 0.3s ease, gap 0.3s ease;
@@ -901,10 +903,18 @@
     .pl-foot-contact { grid-template-columns: 1fr; }
     .pl-foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; }
   }
+  /* 720px以下は操作ボタンを次の行へ送る。
+     3カラム（アイコン／テキスト／操作200px固定）のままだと、この帯でテキスト列が
+     実測153px（480〜560px付近）まで潰れ、3行とも見出しが折り返していた。
+     ボタンを下の行に送れば、テキスト列が幅いっぱいを使える。 */
+  @media (max-width: 720px) {
+    .pl-foot-desk { grid-template-columns: 40px minmax(0, 1fr); gap: 10px 14px; }
+    .pl-foot-desk-action { grid-column: 1 / -1; justify-self: end; }
+  }
   @media (max-width: 480px) {
     .pl-foot-nav { grid-template-columns: 1fr; }
-    .pl-foot-desk { grid-template-columns: 40px minmax(0, 1fr); gap: 10px 14px; }
-    .pl-foot-desk-action { grid-column: 1 / -1; justify-self: stretch; }
+    /* この幅ではボタンを右に寄せるより、幅いっぱいのほうが押しやすい */
+    .pl-foot-desk-action { justify-self: stretch; }
     .pl-foot-desk .pl-btn { width: 100%; }
     .pl-foot-bottom { justify-content: center; }
   }
@@ -1305,19 +1315,19 @@
 }
 
 /* フッター窓口の補足（訪問介護…／福祉用具など）の指定改行。
-   改行前の「訪問介護・訪問看護・居宅介護支援・」は約240px必要で、
-   対象の列がそれより狭いと前半がさらに自然折り返しして3行になる。
-   列幅はフッターのカラム数で段階的に変わるため、240pxを確保できる幅でだけ改行を出す。
-     ・1101px以上 …… 窓口ブロックが2カラム。列幅292px〜
-     ・721〜1000px … 窓口ブロックが1カラム。列幅374〜653px
-   それ以外（1001〜1100px、720px以下）は改行を出さず、自然な折り返しに任せる。
-   列幅が238px（改行前の文字幅）より広ければ自然折り返しでも同じ位置で折り返すため、
-   見え方はほぼ変わらない。 */
+   改行前の「訪問介護・訪問看護・居宅介護支援・」の実測幅は 247.5px。
+   対象の列がそれより狭いと前半がさらに自然折り返しして3行になるため、
+   247.5px を確保できる帯でだけ改行を出す（既定は出さない＝安全側）。
+     ・375〜1000px … 窓口ブロックが1カラム。列幅254〜653px
+     ・1040px以上 …… 窓口ブロックが2カラム。列幅は1040pxで約248pxに達する
+   除外される帯（374px以下、1001〜1039px）は自然な折り返しに任せて2行になる。
+   メディアクエリの幅はスクロールバーを含む innerWidth 基準で、端数のときは
+   どの帯にも入らないことがある。既定を display:none にしてあるので、その場合も3行にならない。 */
 .pl-foot-desk-scope small br { display: none; }
-@media (min-width: 721px) and (max-width: 1000px) {
+@media (min-width: 375px) and (max-width: 1000px) {
   .pl-foot-desk-scope small br { display: inline; }
 }
-@media (min-width: 1101px) {
+@media (min-width: 1040px) {
   .pl-foot-desk-scope small br { display: inline; }
 }
 
