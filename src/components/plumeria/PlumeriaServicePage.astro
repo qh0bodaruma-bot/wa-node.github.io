@@ -20,6 +20,8 @@ interface Props {
   costInfo: string;
   costDetails?: { label: string; value: string }[];
   flowSteps: { title: string; body: string }[];
+  /** 利用の流れの下に置く補足（申し込み時期・持ち物など） */
+  flowNotes?: string[];
   faqs?: PlumeriaFaq[];
   contactCategory: string;
 }
@@ -27,7 +29,7 @@ interface Props {
 const {
   title, description, currentPath, breadcrumbLabel,
   heroTitle, heroLead, heroImg, heroAlt, fitFor, content, targetInfo, vacancyFacilityId, costInfo, flowSteps,
-  faqs = genericFaqs, contactCategory, costDetails = [],
+  faqs = genericFaqs, contactCategory, costDetails = [], flowNotes = [],
 } = Astro.props;
 
 const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCategory)}`;
@@ -99,6 +101,9 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
     </div>
   </section>
 
+  {/* サービス固有の追加セクション（施設紹介・受け入れ条件など）。指定がなければ何も出ない */}
+  <slot name="extra" />
+
   <section class="pl-sec pl-sec-beige" id="flow">
     <div class="pl-wrap">
       <h2 class="pl-h2">利用までの流れ</h2>
@@ -111,6 +116,11 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
           </li>
         ))}
       </ol>
+      {flowNotes.length > 0 && (
+        <ul class="pl-note pl-check-list" style="margin-top:14px">
+          {flowNotes.map((note) => <li>{note}</li>)}
+        </ul>
+      )}
     </div>
   </section>
 

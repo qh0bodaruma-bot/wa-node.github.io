@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 
 const root = resolve(process.argv[2] || 'dist');
 const base = '/lab/demos/plumeria/1a/';
-const routes = ['', 'services/', 'housing/', 'housing/1/', 'housing/2/', 'short-stay/', 'home-care/', 'home-nursing/', 'care-management/', 'welfare-equipment/', 'recruit/', 'contact/', 'privacy/', 'important-matters/'];
+const routes = ['', 'services/', 'housing/', 'housing/1/', 'housing/2/', 'short-stay/', 'home-care/', 'home-nursing/', 'care-management/', 'welfare-equipment/', 'recruit/', 'contact/', 'privacy/', 'important-matters/', 'company/', 'magazine/', 'sitemap/'];
 // Restricted parser for Astro's generated start tags (not arbitrary user HTML).
 function tags(html) {
   return [...html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '').matchAll(/<([a-z][\w-]*)\b([^<>]*)>/gi)].map(([, name, text]) => ({

@@ -1,0 +1,86 @@
+---
+import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
+import { routes, companyProfile, parentCompany, brandOrigin } from '../../../../../../data/plumeria';
+---
+<PlumeriaLayout
+  title="会社概要｜プルメリア（デモ）"
+  description="DS TOKAI株式会社 介護事業部プルメリアの会社概要、事業内容、介護保険指定事業所番号、提携医療機関のご案内です。"
+  currentPath={routes.company}
+>
+  <div class="pl-wrap" style="padding-top:28px">
+    <p class="pl-breadcrumb">
+      <a href={routes.top}>トップ</a>
+      <span aria-hidden="true">/</span>
+      <span>会社概要</span>
+    </p>
+  </div>
+
+  <section class="pl-sec pl-sec-tight">
+    <div class="pl-wrap pl-reading">
+      <h1 class="pl-h1">会社概要</h1>
+      <p class="pl-sec-lead">プルメリアを運営する法人の概要です。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">会社案内</h2>
+      <dl class="pl-access-list">
+        {companyProfile.rows.map((row) => (
+          <div><dt>{row.label}</dt><dd>{row.value}</dd></div>
+        ))}
+        <div>
+          <dt>事業内容</dt>
+          <dd>
+            <ul class="pl-body pl-check-list">
+              {companyProfile.business.map((item) => <li>{item}</li>)}
+            </ul>
+          </dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">介護保険指定事業所番号</h2>
+      <dl class="pl-access-list">
+        {companyProfile.licenses.map((item) => (
+          <div><dt>{item.label}</dt><dd class="pl-num-face">{item.no}</dd></div>
+        ))}
+      </dl>
+      <p class="pl-note">{companyProfile.licenseNote}</p>
+      <p class="pl-note">サービスの内容・費用・契約条件は<a href={routes.importantMatters}>重要事項説明について</a>もあわせてご確認ください。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">提携医療機関</h2>
+      <p class="pl-sec-lead">定期的な往診や、急な体調の変化への対応で連携している医療機関です。</p>
+      <div class="pl-grid-2">
+        {companyProfile.partnerClinics.map((clinic) => (
+          <div class="pl-card">
+            <h3 class="pl-h3">{clinic.name}</h3>
+            <p class="pl-body">{clinic.address}</p>
+            <p class="pl-body">TEL <span class="pl-num-face">{clinic.tel}</span></p>
+            <a class="pl-more" href={clinic.url} data-astro-reload>医療機関のサイトを見る →</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">社名の由来</h2>
+      <p class="pl-body">{brandOrigin.body}</p>
+      <h2 class="pl-h2">運営法人について</h2>
+      <p class="pl-body">{parentCompany.body}</p>
+      <a class="pl-more" href={parentCompany.url} data-astro-reload>{parentCompany.name}のサイトを見る →</a>
+      <p class="pl-note" style="margin-top:14px">
+        掲載内容は<a href={companyProfile.sourceUrl} data-astro-reload>現在の公式サイトの会社概要</a>を2026年9月16日に確認したものです。本番サイトへの掲載にあたっては、運営法人に最新の内容をご確認いただきます。
+      </p>
+    </div>
+  </section>
+</PlumeriaLayout>

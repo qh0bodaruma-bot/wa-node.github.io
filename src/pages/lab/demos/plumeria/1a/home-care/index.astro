@@ -1,6 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes } from '../../../../../../data/plumeria';
+import { routes, homeCareTasks, homeCareStrengths } from '../../../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="訪問介護｜プルメリア（修正版ラフ）"
@@ -32,4 +32,38 @@ import { routes } from '../../../../../../data/plumeria';
     { title: 'ご利用開始', body: '内容にご納得いただいたうえで、利用を開始します。' },
   ]}
   contactCategory="home-care"
-/>
+>
+  <Fragment slot="extra">
+    <section class="pl-sec pl-sec-beige" id="tasks">
+      <div class="pl-wrap">
+        <h2 class="pl-h2">具体的なサービス内容</h2>
+        <div class="pl-grid-2">
+          {homeCareTasks.map((group) => (
+            <div class="pl-card">
+              <h3 class="pl-h3">{group.title}</h3>
+              <ul class="pl-body pl-check-list">
+                {group.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p class="pl-note" style="margin-top:14px">できることは継続していただき、買い物や薬の受け取りの代行など、ご本人・ご家族にとって難しいことをサポートします。</p>
+      </div>
+    </section>
+
+    <section class="pl-sec" id="strengths">
+      <div class="pl-wrap">
+        <h2 class="pl-h2">プルメリアの訪問介護の特長</h2>
+        <div class="pl-grid-2">
+          {homeCareStrengths.map((item) => (
+            <div class="pl-card">
+              <h3 class="pl-h3">{item.name}</h3>
+              <p class="pl-body">{item.body}</p>
+            </div>
+          ))}
+        </div>
+        <p class="pl-note" style="margin-top:14px"><a href="https://home-plumeria.jp/visit_care/" data-astro-reload>公式の訪問介護サービスのご案内を見る</a>（2026年9月16日確認）</p>
+      </div>
+    </section>
+  </Fragment>
+</PlumeriaServicePage>

@@ -1,6 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes } from '../../../../../../data/plumeria';
+import { routes, homeNursingTasks, homeNursingStrengths } from '../../../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="訪問看護｜プルメリア（修正版ラフ）"
@@ -19,8 +19,7 @@ import { routes } from '../../../../../../data/plumeria';
   content={[
     { label: '医療的なケア', body: '点滴・喀痰吸引・カテーテル管理など、医師の指示に基づく処置を行います。' },
     { label: '健康管理', body: '体調管理・服薬管理や、療養中の生活面のケアを行います。' },
-    { label: '緊急時の支援', body: '公式サイトでは24時間365日の緊急時対応を案内しています。利用条件や連絡方法は、ご契約時にご確認ください。' },
-    { label: '専門的な看護', body: '公式サイトでは、特定行為専門看護師が在籍していると案内しています。具体的な対応可否はご相談時にご確認ください。' },
+    { label: '緊急時の支援', body: '24時間365日の緊急時対応を行っています。利用条件や連絡方法は、ご契約時にご確認ください。' },
   ]}
   targetInfo={[
     { label: '対象となる方', body: '主治医の指示のもとで訪問看護が必要な方' },
@@ -33,4 +32,39 @@ import { routes } from '../../../../../../data/plumeria';
     { title: 'ご利用開始', body: '訪問スケジュールを調整し、利用を開始します。' },
   ]}
   contactCategory="home-nursing"
-/>
+>
+  <Fragment slot="extra">
+    <section class="pl-sec pl-sec-beige" id="tasks">
+      <div class="pl-wrap">
+        <h2 class="pl-h2">具体的なサービス内容</h2>
+        <p class="pl-sec-lead">訪問看護には「医療保険サービス」と「介護保険サービス」の2種類があります。</p>
+        <div class="pl-grid-2">
+          {homeNursingTasks.map((group) => (
+            <div class="pl-card">
+              <h3 class="pl-h3">{group.title}</h3>
+              <ul class="pl-body pl-check-list">
+                {group.items.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <p class="pl-note" style="margin-top:14px">どちらの保険が適用されるかは、主治医の指示内容やご本人の状況によって決まります。窓口へご相談ください。</p>
+      </div>
+    </section>
+
+    <section class="pl-sec" id="strengths">
+      <div class="pl-wrap">
+        <h2 class="pl-h2">プルメリアの訪問看護の特長</h2>
+        <div class="pl-grid-2">
+          {homeNursingStrengths.map((item) => (
+            <div class="pl-card">
+              <h3 class="pl-h3">{item.name}</h3>
+              <p class="pl-body">{item.body}</p>
+            </div>
+          ))}
+        </div>
+        <p class="pl-note" style="margin-top:14px"><a href="https://home-plumeria.jp/visit_nursing/" data-astro-reload>公式の訪問看護サービスのご案内を見る</a>（2026年9月16日確認）。具体的な対応可否はご相談時にご確認ください。</p>
+      </div>
+    </section>
+  </Fragment>
+</PlumeriaServicePage>

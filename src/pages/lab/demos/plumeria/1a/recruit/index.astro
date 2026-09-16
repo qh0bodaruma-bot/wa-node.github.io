@@ -11,6 +11,7 @@ const positions = [
     requirement: '介護福祉士／介護職員初任者研修修了／ホームヘルパー2級のいずれか',
     benefits: '交通費支給、有給休暇あり',
     jobContent: '具体的な業務内容は採用担当へご確認ください（公式ページの職種名と業務欄に食い違いがあるため）。',
+    others: '勤務時間・勤務曜日など、何でもご相談ください。',
     contact: '採用担当：冨田・山本',
     url: 'https://home-plumeria.jp/recruit/detail/masterid/10/',
   },
@@ -22,6 +23,7 @@ const positions = [
     requirement: '看護師または准看護師の資格',
     benefits: '交通費支給、有給休暇、賞与年2回、育児・介護休業／時短制度、研修・資格取得支援制度',
     jobContent: 'ショートステイ内での看護・介護業務',
+    others: '20代から80代までのスタッフが元気に働いています。',
     contact: '採用担当：山本・日比野',
     url: 'https://home-plumeria.jp/recruit/detail/masterid/9/',
   },
@@ -58,6 +60,7 @@ const positions = [
             <div><dt>応募資格</dt><dd>{p.requirement}</dd></div>
             <div><dt>待遇</dt><dd>{p.benefits}</dd></div>
             <div><dt>仕事内容</dt><dd>{p.jobContent}</dd></div>
+            <div><dt>その他</dt><dd>{p.others}</dd></div>
             <div><dt>採用担当</dt><dd>{p.contact}</dd></div>
           </dl>
           <a class="pl-more" href={p.url} data-astro-reload>公式の募集要項を見る →</a>

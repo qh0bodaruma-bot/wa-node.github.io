@@ -1,7 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import PlumeriaTelCta from '../components/plumeria/PlumeriaTelCta.astro';
-import { corp, services, recruitEntry, routes, shortStayTel } from '../data/plumeria';
+import { corp, services, recruitEntry, routes, shortStayTel, parentCompany } from '../data/plumeria';
 import '../styles/plumeria.css';
 
 interface Props {
@@ -32,10 +32,13 @@ const footNavGroups = [
   { title: '在宅サービス', links: [serviceLink('home-care'), serviceLink('home-nursing'), serviceLink('care-management'), serviceLink('welfare-equipment')] },
   { title: '法人・その他', links: [
     { label: 'サービス一覧', href: routes.services },
+    { label: '会社概要', href: routes.company },
+    { label: 'プルメリアだより', href: routes.magazine },
     { label: '採用情報', href: routes.recruit },
     { label: 'お問い合わせ・ご相談', href: routes.contact },
     { label: '重要事項説明について', href: routes.importantMatters },
     { label: '個人情報の取扱いについて', href: routes.privacy },
+    { label: 'サイトマップ', href: routes.sitemap },
   ] },
 ].map((group) => ({ ...group, links: group.links.filter((link): link is { label: string; href: string } => link !== null) }));
 ---
@@ -226,7 +229,7 @@ const footNavGroups = [
           <p class="pl-brand-en">{corp.nameEn}</p>
           <p class="pl-note">{corp.address ?? '住所：確認中'}</p>
           <p class="pl-note">
-            運営法人：<span class="pl-pending-note">{corp.groupName ?? '確認中'}</span>
+            運営法人：<a href={parentCompany.url} data-astro-reload>{corp.groupName ?? parentCompany.name}</a>
           </p>
           <p class="pl-note">
             現在の公式サイト：

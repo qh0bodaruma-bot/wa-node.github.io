@@ -1,7 +1,7 @@
 ---
 import PlumeriaLayout from '../../../../../layouts/PlumeriaLayout.astro';
 import PlumeriaGuideQuiz from '../../../../../components/plumeria/PlumeriaGuideQuiz.astro';
-import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl } from '../../../../../data/plumeria';
+import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin } from '../../../../../data/plumeria';
 
 // 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
 // services配列やヘッダーのnavEntriesには追加せず、FVの入口タイルにだけ足す。
@@ -124,6 +124,9 @@ const heroSlides = [
         ))}
       </ul>
       <p class="pl-note" style="margin-top:14px">
+        <a href={routes.magazine}>プルメリアだよりのバックナンバーを見る →</a>
+      </p>
+      <p class="pl-note">
         <a href={newsListUrl} data-astro-reload>お知らせ一覧を見る（現在の公式サイト）→</a>
       </p>
       <p class="pl-note">掲載元：公式サイトのお知らせ一覧（2026年9月9日確認）。本文はPDFで公開されています。</p>
@@ -179,8 +182,13 @@ const heroSlides = [
     <div class="pl-wrap pl-reading">
       <h2 class="pl-h2">プルメリアについて</h2>
       <p class="pl-body">プルメリアは、可児市で住まい・介護・看護を支える6つの事業を運営しています。ご本人の暮らし方や、ご家族の状況に合わせてサービスをご検討いただけます。</p>
+      <p class="pl-body">{brandOrigin.body}</p>
       <p class="pl-note">運営：{corp.groupName}</p>
-      <a class="pl-more" href={corp.currentSiteUrl}>施設のお知らせ・現在の公式サイトを見る →</a>
+      <div class="pl-btn-row" style="margin-top:14px">
+        <a class="pl-btn pl-btn-outline" href={routes.company}>会社概要を見る</a>
+        <a class="pl-btn pl-btn-outline" href={routes.magazine}>プルメリアだより</a>
+      </div>
+      <a class="pl-more" style="display:inline-block;margin-top:14px" href={corp.currentSiteUrl} data-astro-reload>現在の公式サイトを見る →</a>
     </div>
   </section>
 

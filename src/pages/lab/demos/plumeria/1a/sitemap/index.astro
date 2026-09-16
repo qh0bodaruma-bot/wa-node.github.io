@@ -1,0 +1,88 @@
+---
+import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
+import { routes, services, housingUnits } from '../../../../../../data/plumeria';
+
+const groups: { title: string; links: { label: string; href: string; children?: { label: string; href: string }[] }[] }[] = [
+  {
+    title: 'サービス',
+    links: [
+      { label: 'サービス一覧・選び方', href: routes.services },
+      {
+        label: 'サービス付き高齢者向け住宅 Ⅰ・Ⅱ',
+        href: routes.housing,
+        children: housingUnits.map((u) => ({ label: u.name, href: routes.housingUnit(u.id) })),
+      },
+      ...services
+        .filter((s) => s.id !== 'housing')
+        .map((s) => ({ label: s.name, href: s.href })),
+    ],
+  },
+  {
+    title: '法人・お知らせ',
+    links: [
+      { label: '会社概要', href: routes.company },
+      { label: 'プルメリアだより', href: routes.magazine },
+      { label: '重要事項説明について', href: routes.importantMatters },
+    ],
+  },
+  {
+    title: 'ご相談・採用',
+    links: [
+      { label: 'お問い合わせ・ご相談', href: routes.contact },
+      { label: '採用情報', href: routes.recruit },
+    ],
+  },
+  {
+    title: 'このサイトについて',
+    links: [
+      { label: '個人情報の取扱いについて', href: routes.privacy },
+      { label: 'サイトマップ', href: routes.sitemap },
+    ],
+  },
+];
+---
+<PlumeriaLayout
+  title="サイトマップ｜プルメリア（デモ）"
+  description="プルメリアのサイト内のページ一覧です。"
+  currentPath={routes.sitemap}
+>
+  <div class="pl-wrap" style="padding-top:28px">
+    <p class="pl-breadcrumb">
+      <a href={routes.top}>トップ</a>
+      <span aria-hidden="true">/</span>
+      <span>サイトマップ</span>
+    </p>
+  </div>
+
+  <section class="pl-sec pl-sec-tight">
+    <div class="pl-wrap pl-reading">
+      <h1 class="pl-h1">サイトマップ</h1>
+      <p class="pl-sec-lead">このサイトのページ一覧です。</p>
+      <p><a class="pl-more" href={routes.top}>トップページ</a></p>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <div class="pl-grid-2">
+        {groups.map((group) => (
+          <div class="pl-card">
+            <h2 class="pl-h3">{group.title}</h2>
+            <ul class="pl-body pl-check-list">
+              {group.links.map((link) => (
+                <li>
+                  <a href={link.href}>{link.label}</a>
+                  {link.children && (
+                    <ul class="pl-check-list">
+                      {link.children.map((child) => <li><a href={child.href}>{child.label}</a></li>)}
+                    </ul>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+</PlumeriaLayout>

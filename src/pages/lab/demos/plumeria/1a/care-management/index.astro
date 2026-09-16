@@ -1,6 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes } from '../../../../../../data/plumeria';
+import { routes, careManagementFlow } from '../../../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="居宅介護支援｜プルメリア（修正版ラフ）"
@@ -26,10 +26,10 @@ import { routes } from '../../../../../../data/plumeria';
     { label: '対応地域', body: 'お住まいの地域で利用できるかは、窓口にご確認ください。' },
   ]}
   costInfo="介護保険によるケアプラン作成の自己負担はありません。プランに組み込む介護サービスの利用料は別途かかります。"
-  flowSteps={[
-    { title: 'お問い合わせ', body: '相談窓口へ、現在お困りのことをお伝えください。' },
-    { title: 'ご相談', body: '現在の状況、ご希望をうかがいます。' },
-    { title: 'ケアプラン作成', body: 'ご本人・ご家族と相談のうえ、プランを作成します。' },
+  flowSteps={careManagementFlow}
+  flowNotes={[
+    '介護保険制度におけるサービス利用手続きの流れです。ケアプランの作成・相談・申請代行に自己負担はありません。',
+    'まずは相談窓口へ、現在お困りのことをお伝えください。',
   ]}
   contactCategory="care-management"
   faqs={[
