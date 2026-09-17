@@ -80,6 +80,18 @@ const copy = {
   .analytics-consent button { min-height: 44px; padding: 9px 15px; border: 1px solid #315f48; border-radius: 5px; font: inherit; font-size: .76rem; font-weight: 700; cursor: pointer; }
   .consent-deny { color: #315f48; background: #fff; }
   .consent-allow { color: #fff; background: #315f48; }
+  /* 和-Node：画面下の帯。見出しと説明を1つの段落として続けて表示し、初回表示でファーストビューを覆う面積を小さくする（文言・選択肢は共通） */
+  .analytics-consent[data-theme="wa-node"] { inset: auto 12px 12px; max-width: 1120px; padding: 10px 12px 10px 18px; border-radius: 8px; box-shadow: 0 6px 24px rgba(0,0,0,.14); }
+  .analytics-consent[data-theme="wa-node"] .analytics-consent-inner { gap: 16px; }
+  .analytics-consent[data-theme="wa-node"] h2 { display: inline; margin: 0 .6em 0 0; font-size: .8125rem; }
+  .analytics-consent[data-theme="wa-node"] p { display: inline; font-size: .8125rem; line-height: 1.6; }
+  .analytics-consent[data-theme="wa-node"] button { padding: 8px 14px; font-size: .8125rem; }
+  @media (max-width: 680px) {
+    .analytics-consent[data-theme="wa-node"] { inset: auto 8px 8px; padding: 10px 12px; }
+    .analytics-consent[data-theme="wa-node"] .analytics-consent-inner { gap: 8px; }
+    .analytics-consent[data-theme="wa-node"] p { line-height: 1.55; }
+    .analytics-consent[data-theme="wa-node"] .analytics-consent-actions { gap: 8px; }
+  }
   /* プルメリア：ターコイズ・丸型ボタン・Zen Kaku Gothic New、文字は補足14px以上 */
   .analytics-consent[data-theme="plumeria"] { color: #083c4a; background: #ffffff; border-color: rgba(8, 60, 74, 0.14); border-radius: 14px; font-family: 'Zen Kaku Gothic New', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic Medium', 'Yu Gothic', Meiryo, sans-serif; }
   .analytics-consent[data-theme="plumeria"] p { font-size: 14px; }
