@@ -100,7 +100,7 @@ const workLinks = ['/case-studies/line-kintone-demo/', '/mobile-app-demo/', '/ca
     <div class="s-shell hero-layout">
       <div class="hero-copy">
         <p class="s-eyebrow">{c.eyebrow}</p>
-        <h1>{c.title.map(line => <span>{line}</span>)}</h1>
+        <h1>{c.title.map((line, i) => <>{i > 0 && lang !== 'ja' && ' '}<span>{line}</span></>)}</h1>
         <p class="s-intro hero-lead">{c.lead}</p>
         <p class="s-intro hero-lead-short">{c.leadShort}</p>
         <div class="s-actions"><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-button secondary" href="#selected-works">{c.view}</a></div>
@@ -147,7 +147,7 @@ const workLinks = ['/case-studies/line-kintone-demo/', '/mobile-app-demo/', '/ca
   <section class="s-section why-section" id="why-wa-node" aria-labelledby="why-title"><div class="s-shell">
     <div class="why-head">
       <p class="s-eyebrow">{c.whyEyebrow}</p>
-      <h2 id="why-title">{c.whyTitle.map(line => <span>{line}</span>)}</h2>
+      <h2 id="why-title">{c.whyTitle.map((line, i) => <>{i > 0 && lang !== 'ja' && ' '}<span>{line}</span></>)}</h2>
       <p class="s-intro">{c.whyLead}</p>
     </div>
     <h3 class="why-list-title">{c.whyListTitle}</h3>

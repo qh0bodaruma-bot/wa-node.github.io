@@ -2,8 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorksContent from '../components/WorksContent.astro';
 import { createBreadcrumbSchema, createWebPageSchema, organizationSchema } from '../data/structuredData';
-const title='制作例・体験デモ｜LINE連携・アプリ・Web制作｜和-Node';
-const description='LINE連携、ペット健康手帳・Flow、BtoBサイトなど、和-Nodeの制作例とデモ。用途別に絞り込み、実際の画面と操作を体験できます。自主制作サンプルを含みます。';
+const title='制作例・体験デモ｜LINE×kintone連携などの自主制作デモ｜和-Node';
+const description='LINEの問い合わせをkintoneへ自動登録するデモなど、和-Nodeの制作例と操作できる自主制作デモ。アプリやWebサイトのサンプルも用途別に見られます。実在のお客様の導入実績ではありません。';
 const structuredData=[organizationSchema,createWebPageSchema({name:title,description,path:'/works/',type:'CollectionPage'}),createBreadcrumbSchema([{name:'ホーム',path:'/'},{name:'制作例・体験デモ',path:'/works/'}])];
 ---
 <BaseLayout title={title} description={description} image="/images/ogp-works.png" structuredData={structuredData}><WorksContent lang="ja"/></BaseLayout>

@@ -10,7 +10,7 @@ export const prerender = true;
 const kase = getLineCase('kintone');
 
 const title = 'LINE × kintone 問い合わせ自動登録デモ｜LINE連携構築｜和-Node';
-const description = 'LINEで受け取った問い合わせを自動でkintoneに登録し、担当者確認までをつなぐ連携構築のケーススタディです。インタラクティブデモで一連の流れを体験できます。';
+const description = 'LINEで受け取った問い合わせをkintoneへ自動登録し、担当者の確認までつなぐ流れを、ブラウザで操作できる自主制作デモで体験できます（架空データ・外部への送信なし）。';
 const structuredData = [
   organizationSchema,
   createWebPageSchema({ name: title, description, path: '/case-studies/line-kintone-demo/', type: 'CreativeWork' }),
@@ -43,7 +43,7 @@ const designPoints = [
 ];
 ---
 
-<BaseLayout noindex={true} title={title} description={description} structuredData={structuredData}>
+<BaseLayout title={title} description={description} structuredData={structuredData}>
   <main id="main" class="line-case" data-glossary-skip>
 
     <LineCaseDemo config={kase} />
