@@ -1,7 +1,7 @@
 ---
-import PlumeriaLayout from '../../../../../layouts/PlumeriaLayout.astro';
-import PlumeriaGuideQuiz from '../../../../../components/plumeria/PlumeriaGuideQuiz.astro';
-import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin } from '../../../../../data/plumeria';
+import PlumeriaLayout from '../../../../layouts/PlumeriaLayout.astro';
+import PlumeriaGuideQuiz from '../../../../components/plumeria/PlumeriaGuideQuiz.astro';
+import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin } from '../../../../data/plumeria';
 
 // 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
 // services配列やヘッダーのnavEntriesには追加せず、FVの入口タイルにだけ足す。
@@ -203,7 +203,7 @@ const heroSlides = [
   </section>
 </PlumeriaLayout>
 <script>
-  import { initPlumeriaSlider, disposePlumeriaSlider } from '../../../../../scripts/plumeriaSlider';
+  import { initPlumeriaSlider, disposePlumeriaSlider } from '../../../../scripts/plumeriaSlider';
   initPlumeriaSlider();
   document.addEventListener('astro:page-load', initPlumeriaSlider);
   document.addEventListener('astro:before-swap', disposePlumeriaSlider);

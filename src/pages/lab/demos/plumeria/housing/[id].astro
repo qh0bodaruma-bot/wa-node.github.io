@@ -1,7 +1,7 @@
 ---
-import PlumeriaLayout from '../../../../../../layouts/PlumeriaLayout.astro';
-import PlumeriaVacancyStatus from '../../../../../../components/plumeria/PlumeriaVacancyStatus.astro';
-import { routes, housingUnits, genericFaqs, corp } from '../../../../../../data/plumeria';
+import PlumeriaLayout from '../../../../../layouts/PlumeriaLayout.astro';
+import PlumeriaVacancyStatus from '../../../../../components/plumeria/PlumeriaVacancyStatus.astro';
+import { routes, housingUnits, genericFaqs, corp } from '../../../../../data/plumeria';
 
 export function getStaticPaths() {
   return housingUnits.map((u) => ({ params: { id: u.id }, props: { unit: u } }));
