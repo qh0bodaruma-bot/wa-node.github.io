@@ -1,0 +1,41 @@
+---
+// 旧URLから新URLへの転送ページ。
+// 2026-09-17 に 1a を /lab/demos/plumeria/1a/ → /lab/demos/plumeria/ → /lab/plumeria/ へ移した。
+// 先方へ旧URL（1a・管理画面モック）を案内済みのため、404 にせず新URLへ直接転送する（転送の多段化はしない）。
+// GitHub Pages は _redirects を解釈しないため、静的HTMLの meta refresh と location.replace で転送する。
+import { PLUMERIA_BASE, housingUnits } from '../../../../data/plumeria';
+
+export function getStaticPaths() {
+  const sitePaths = [
+    '', 'services', 'housing', 'short-stay', 'home-care', 'home-nursing', 'care-management',
+    'welfare-equipment', 'recruit', 'contact', 'privacy', 'important-matters', 'company',
+    'magazine', 'sitemap',
+    ...housingUnits.map((u) => `housing/${u.id}`),
+  ];
+  const adminPaths = ['admin', 'admin/approve', 'admin/login', 'admin/post', 'admin/vacancy'];
+  const entries = [
+    ...sitePaths.map((p) => ({ from: p, to: p })),
+    ...sitePaths.map((p) => ({ from: p ? `1a/${p}` : '1a', to: p })),
+    ...adminPaths.map((p) => ({ from: p, to: p })),
+  ];
+  return entries.map(({ from, to }) => ({ params: { path: from || undefined }, props: { to } }));
+}
+
+const to = `${PLUMERIA_BASE}/${Astro.props.to ? `${Astro.props.to}/` : ''}`;
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex" />
+    <title>ページを移動しました</title>
+    <link rel="canonical" href={new URL(to, Astro.site).href} />
+    <meta http-equiv="refresh" content={`0; url=${to}`} />
+    <script is:inline define:vars={{ to }}>
+      location.replace(to + location.search + location.hash);
+    </script>
+  </head>
+  <body>
+    <p>ページを移動しました。<a href={to}>こちら</a>からご覧ください。</p>
+  </body>
+</html>

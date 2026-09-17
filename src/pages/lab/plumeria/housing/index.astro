@@ -1,0 +1,293 @@
+---
+import PlumeriaLayout from '../../../../layouts/PlumeriaLayout.astro';
+import {
+  routes, housingUnits, corp,
+  housingFeeTable, housingAdmissionConditions, housingAdmissionCautions, housingAdmissionFlow,
+  housingCommonAreas, housingBasicServices, housingOptionalServices, housingSafetyItems, housingNeighborhood,
+} from '../../../../data/plumeria';
+
+// 一日の流れ（参考）。時刻は住宅ごとに確認中のため、公開情報ではなく一般的な一例として示す。
+const day = [
+  { time: '7:00', label: '起床・朝食' },
+  { time: '10:00', label: '健康チェック' },
+  { time: '12:00', label: '昼食' },
+  { time: '15:00', label: '自由時間' },
+  { time: '18:00', label: '夕食' },
+  { time: '21:00', label: '消灯' },
+];
+---
+<PlumeriaLayout
+  title="サービス付き高齢者向け住宅 Ⅰ・Ⅱ 比較｜プルメリア（修正版ラフ）"
+  description="プルメリアが運営するサービス付き高齢者向け住宅Ⅰ・Ⅱの比較・ご案内です。"
+  currentPath={routes.housing}
+>
+  <div class="pl-wrap" style="padding-top:28px">
+    <p class="pl-breadcrumb">
+      <a href={routes.top}>トップ</a>
+      <span aria-hidden="true">/</span>
+      <span>サービス付き高齢者向け住宅</span>
+    </p>
+  </div>
+
+  <section class="pl-sec pl-sec-tight">
+    <div class="pl-wrap">
+      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">サービス付き高齢者向け住宅 Ⅰ・Ⅱ</h1>
+      <p class="pl-sec-lead">
+        安否確認と生活相談のある住宅です。自立向けのⅠと、介護対応型のⅡを比較してご案内します。
+      </p>
+      <p class="pl-note">※ 短期入所（ショートステイ）をお探しの方は<a href={routes.shortStay}>プルメリアⅢ（ショートステイ）</a>をご覧ください。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <div class="pl-compare-table-wrap">
+        <table class="pl-compare-table">
+          <caption>住宅Ⅰ・Ⅱの比較（横にスクロールできます）</caption>
+          <thead>
+            <tr>
+              <th scope="col">住宅</th>
+              <th scope="col">タイプ</th>
+              <th scope="col">居室</th>
+              <th scope="col">費用</th>
+              <th scope="col">状況</th>
+              <th scope="col">詳しいご案内</th>
+            </tr>
+          </thead>
+          <tbody>
+            {housingUnits.map((u) => (
+              <tr>
+                <th scope="row">{u.name}</th>
+                <td>{u.kind}<br />対象：{u.target}</td>
+                <td>{u.roomType}<br />{u.roomSize}</td>
+                <td>{u.priceFrom}</td>
+                <td><span class="pl-pending-note">確認中</span></td>
+                <td><a class="pl-more" href={routes.housingUnit(u.id)}>{u.name}を見る</a></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="pl-note" style="margin-top:12px">※ 所在地はいずれも{corp.address}。金額は月額基本料金の目安で、生活費の総額ではありません。食費や介護保険自己負担分など、別途必要な費用をご確認ください。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige" id="fee">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">料金のご案内</h2>
+      <p class="pl-sec-lead">入居時の敷金と、月々の基本料金の内訳です。</p>
+      <div class="pl-compare-table-wrap">
+        <table class="pl-compare-table">
+          <caption>居室タイプ別の料金（横にスクロールできます）</caption>
+          <thead>
+            <tr>
+              <th scope="col">項目</th>
+              {housingFeeTable.columns.map((col) => <th scope="col">{col}</th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {housingFeeTable.rows.map((row) => (
+              <tr>
+                <th scope="row">{row.label}</th>
+                {row.values.map((value) => <td class="pl-num-face">{value}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <ul class="pl-note pl-check-list" style="margin-top:12px">
+        {housingFeeTable.notes.map((note) => <li>{note}</li>)}
+      </ul>
+      <p class="pl-note"><a href="https://home-plumeria.jp/plumeria0102/fee.html" data-astro-reload>公式の料金内訳を見る</a>（2026年9月16日確認）</p>
+    </div>
+  </section>
+
+  <section class="pl-sec" id="admission">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">入居のご案内</h2>
+      <p class="pl-sec-lead">ご入居にあたっては、次の条件を確認させていただきます。</p>
+      <div class="pl-grid-2">
+        {housingAdmissionConditions.map((group) => (
+          <div class="pl-card">
+            <h3 class="pl-h3">{group.title}</h3>
+            <ul class="pl-body pl-check-list">
+              {group.items.map((item) => <li>{item}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <ul class="pl-note pl-check-list" style="margin-top:14px">
+        {housingAdmissionCautions.map((note) => <li>{note}</li>)}
+      </ul>
+
+      <h3 class="pl-h3" style="margin-top:28px">入居までの流れ</h3>
+      <ol class="pl-auto-grid pl-auto-grid-3">
+        {housingAdmissionFlow.map((step, i) => (
+          <li class="pl-flow-card">
+            <span class="pl-num-face pl-flow-num" aria-hidden="true">{i + 1}</span>
+            <h4 class="pl-flow-title">{step}</h4>
+          </li>
+        ))}
+      </ol>
+      <p class="pl-note" style="margin-top:12px">見学のお申し込みから正式入居までの流れです。ご不明な点は、見学の際にお尋ねください。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige" id="facility">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">共用の施設</h2>
+      <p class="pl-sec-lead">入居者だけでなく、来訪されたご家族・ご友人にもお使いいただけます。</p>
+      <div class="pl-grid-2">
+        {housingCommonAreas.map((area) => (
+          <div class="pl-card">
+            <h3 class="pl-h3">{area.name}</h3>
+            <p class="pl-body">{area.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="pl-note" style="margin-top:14px">このほか、庭園・菜園・遊歩道・活動室・カラオケルームがあり、コンサートや寄席などのイベントも定期的に企画しています。地域の方にもお集まりいただけます。</p>
+      <p class="pl-note">居室の間取り・設備は、各住宅のページでご案内しています。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">一日の流れ（参考）</h2>
+      <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は住宅ごとに確認中です。</p>
+      <p class="pl-note" style="text-align:center">※ 太陽が示しているのは、ご覧いただいている「今」の時刻です。すでに過ぎた時間は印の色が変わります。</p>
+      <div class="pl-day-wrap">
+        <span class="pl-day-sun" aria-hidden="true"><svg><use href="#pl-i-sun" /></svg></span>
+        <ol class="pl-day">
+          {day.map((d) => (
+            <li class="pl-day-item">
+              <span class="pl-num-face pl-day-time">{d.time}</span>
+              <span class="pl-day-dot" aria-hidden="true"></span>
+              <span class="pl-day-label">{d.label}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="pl-sec">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">基礎サービス</h2>
+      <p class="pl-sec-lead">全入居者にご利用いただけるサービスです。ご利用料金はサービス管理費に含まれます。</p>
+      <div class="pl-grid-3">
+        {housingBasicServices.map((item) => (
+          <div class="pl-card">
+            <h3 class="pl-h3">{item.name}</h3>
+            <p class="pl-body">{item.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <h2 class="pl-h2" style="margin-top:34px">希望サービス</h2>
+      <p class="pl-sec-lead">基礎サービスに加えてご利用いただけます。要介護の認定を受けていない方もご相談いただけます。</p>
+      <div class="pl-grid-3">
+        {housingOptionalServices.map((item) => (
+          <div class="pl-card">
+            <h3 class="pl-h3">{item.name}</h3>
+            <p class="pl-body">{item.body}</p>
+          </div>
+        ))}
+      </div>
+      <p class="pl-note" style="margin-top:14px">希望サービスのご相談は1階の管理事務所で承ります。<a href="https://home-plumeria.jp/plumeria0102/service.html" data-astro-reload>公式のサービス内容を見る</a>（2026年9月16日確認）</p>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige" id="safety">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">安全への取り組み</h2>
+      <ul class="pl-auto-grid pl-auto-grid-4">
+        {housingSafetyItems.map((item) => <li class="pl-fit-item">{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="pl-sec" id="access">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">所在地・周辺環境</h2>
+      <p class="pl-body">{corp.address}</p>
+      <p class="pl-body">{housingNeighborhood}</p>
+      <dl class="pl-access-list">
+        <div><dt>名鉄でお越しの方</dt><dd>名鉄 日本ライン「今渡駅」から徒歩3分</dd></div>
+        <div><dt>JRでお越しの方</dt><dd>JR「名古屋駅」より約50分、「可児駅」下車・タクシーで約5分</dd></div>
+        <div><dt>お車でお越しの方</dt><dd>中央自動車道「多治見」ICから国道248号線経由で約20分／東海環状自動車道「可児御嵩」ICから国道21号線経由で約10分</dd></div>
+      </dl>
+      <a class="pl-more" href="https://home-plumeria.jp/plumeria0102/" data-astro-reload>公式の地図付きアクセス案内を見る →</a>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">見学で確かめたいこと</h2>
+      <ul class="pl-body pl-check-list">
+        <li>居室の広さや設備が、ご自身の生活に合うか</li>
+        <li>必要な介護・看護を利用できるか</li>
+        <li>食事・光熱費・介護サービスを含めた月々の総額</li>
+      </ul>
+      <p class="pl-note">暮らし方や支援内容は、住宅とご本人の状況によって異なります。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec" style="text-align:center">
+    <div class="pl-wrap">
+      <h2 class="pl-h2" style="justify-content:center">見学・入居のご相談</h2>
+      <div class="pl-btn-row" style="justify-content:center">
+        <a class="pl-btn pl-btn-main" href={`${routes.contact}?service=housing`}>住宅について相談する</a>
+      </div>
+    </div>
+  </section>
+</PlumeriaLayout>
+
+<script>
+  // 一日の流れ：太陽の位置と各ドットの点灯を、閲覧している今の時刻と連動させる。
+  // View Transitions でこのページに戻ってくるたびに astro:page-load が発火するので、
+  // トップレベルIIFEではなく名前付き関数として束ね、毎回タイマーを張り直す。
+  let plDayClockTimer: number | null = null;
+
+  function initPlumeriaDayClock() {
+    if (plDayClockTimer !== null) { window.clearInterval(plDayClockTimer); plDayClockTimer = null; }
+
+    const sun = document.querySelector<HTMLElement>('.pl-day-sun');
+    const items = [...document.querySelectorAll<HTMLElement>('.pl-day-item')];
+    if (!sun || !items.length) return;
+
+    const minutesOf = (item: HTMLElement): number | null => {
+      const label = item.querySelector('.pl-day-time')?.textContent?.trim() ?? '';
+      const [h, m] = label.split(':').map((v) => Number(v));
+      return Number.isFinite(h) ? h * 60 + (Number.isFinite(m) ? m : 0) : null;
+    };
+
+    const times = items.map(minutesOf);
+    if (times.some((t) => t === null) || times.length < 2) return;
+
+    const first = times[0] as number;
+    const last = times[times.length - 1] as number;
+    if (last <= first) return;
+
+    function update() {
+      const now = new Date();
+      const nowMinutes = now.getHours() * 60 + now.getMinutes();
+      const clamped = Math.min(Math.max(nowMinutes, first), last);
+      const ratio = (clamped - first) / (last - first);
+      const percent = 8 + ratio * (92 - 8);
+      sun!.style.left = `${percent}%`;
+
+      items.forEach((item, i) => {
+        const dot = item.querySelector('.pl-day-dot');
+        dot?.classList.toggle('is-past', (times[i] as number) <= nowMinutes);
+      });
+    }
+
+    update();
+    plDayClockTimer = window.setInterval(update, 60000);
+  }
+
+  document.addEventListener('astro:page-load', initPlumeriaDayClock);
+  document.addEventListener('astro:before-swap', () => {
+    if (plDayClockTimer !== null) { window.clearInterval(plDayClockTimer); plDayClockTimer = null; }
+  });
+</script>

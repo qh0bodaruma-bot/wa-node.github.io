@@ -4,7 +4,7 @@
 // 出典に記載のない項目は null または「確認中」表記のままとし、確定した事実として扱わない。
 // 写真はすべて生成画像の「イメージ写真」であり、実際の施設・スタッフの記録ではない。
 
-export const PLUMERIA_BASE = '/lab/demos/plumeria';
+export const PLUMERIA_BASE = '/lab/plumeria';
 
 export interface PlumeriaCorp {
   name: string;

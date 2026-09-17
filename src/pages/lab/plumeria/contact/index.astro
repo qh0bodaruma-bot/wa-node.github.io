@@ -1,0 +1,28 @@
+---
+import PlumeriaLayout from '../../../../layouts/PlumeriaLayout.astro';
+import PlumeriaDemoForm from '../../../../components/plumeria/PlumeriaDemoForm.astro';
+import { routes, corp, shortStayTel } from '../../../../data/plumeria';
+---
+<PlumeriaLayout title="お問い合わせ・ご相談｜プルメリア（デモ）" description="住宅・ショートステイの電話窓口と、各サービスの相談方法をご案内します。" currentPath={routes.contact}>
+  <div class="pl-wrap" style="padding-top:28px"><p class="pl-breadcrumb"><a href={routes.top}>トップ</a><span aria-hidden="true">/</span><span>お問い合わせ・ご相談</span></p></div>
+  <section class="pl-sec pl-sec-tight">
+    <div class="pl-wrap pl-reading">
+      <h1 class="pl-h1">見学・ご相談の窓口</h1>
+      <p class="pl-sec-lead">知りたいサービスと、現在お困りのことをお伝えください。</p>
+      <div id="contact-desks" class="pl-contact-desks">
+        <h2 class="pl-h2">お電話でのお問い合わせ</h2>
+        <p class="pl-note">公式お問い合わせページの受付時間：平日10:00〜17:00</p>
+        <a class="pl-desk" href={`tel:${corp.tel?.replaceAll('-', '')}`} data-pl-gtag="phone_click" data-pl-service="housing" data-pl-cta="contact_desk"><span>住宅 プルメリアⅠ・Ⅱ</span><strong>{corp.tel}</strong></a>
+        <a class="pl-desk" href={`tel:${shortStayTel.replaceAll('-', '')}`} data-pl-gtag="phone_click" data-pl-service="short-stay" data-pl-cta="contact_desk"><span>ショートステイ プルメリアⅢ</span><strong>{shortStayTel}</strong></a>
+        <p class="pl-note">訪問介護・訪問看護・居宅介護支援については、<a href="https://home-plumeria.jp/contact/input" data-astro-reload>現在の公式お問い合わせ窓口</a>をご確認ください。福祉用具の専用窓口は確認中です。</p>
+        <p class="pl-note">採用については<a href={routes.recruit}>採用情報</a>をご覧ください。</p>
+      </div>
+    </div>
+  </section>
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">相談フォーム（入力デモ）</h2>
+      <PlumeriaDemoForm kind="contact" />
+    </div>
+  </section>
+</PlumeriaLayout>

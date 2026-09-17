@@ -1,0 +1,2191 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+/*
+  プルメリア 総合トップ ラフ「1b 法人グループ型」（/lab/plumeria/1b）
+
+  ── 2026-08-31 改稿（第2版）─────────────────────────────
+  ボス指示：(1) 写真をいったん全削除 (2) https://www.yamatoen.or.jp/
+  （社会福祉法人 功有会）のテーマ・モチーフに寄せる (3) それに見合うアニメーションを付ける。
+
+  参照サイトから採ったのは「デザイン言語」だけで、素材は一切複製していない。
+  - 採った：地色 #f3f1ef／緑2色／純黒の本文／大きな余白／白カード＋緑の丸矢印／
+           「小さな英ラベル＋大きな和文」の見出し／縦組みの理念／数字＋緑の丸バッジ／
+           有機的な雲形ブロブ／1文字ずつのスタガー表示／
+           ボタンのホバーで下からアーチ状の塗りがせり上がり角丸が消える動き／
+           イージング cubic-bezier(0.26,0.06,0,1)
+  - 採っていない：功有会のロゴ、手描き人物イラスト、写真、コピー文、採用カードの並び。
+    モチーフはすべてこのファイル内で書き起こしたオリジナルSVG（社名にちなみ花・葉・木・家）。
+
+  【制約の変更】
+  - 写真：**全削除**。面はブロブと線画で作る。public/images/plumeria/ は参照していない。
+  - JavaScript：**解禁**（表示アニメーションに IntersectionObserver を使う）。
+    ただしJSが動かない環境でも内容は全て見える（`.pb.is-js` が付いたときだけ初期状態を隠す）。
+  - 常時アニメーションはヒーローのブロブの超低速モーフと Scroll ラベルのみ。
+    `prefers-reduced-motion` で全アニメーションを停止する。
+
+  数値・固有情報はすべて差し替え枠（○）。実績・利用者の声・職員インタビューは創作していない。
+*/
+
+const title = 'プルメリア｜住まい・在宅支援・福祉用具を地域で支える';
+const description =
+  'プルメリアは、サービス付き高齢者向け住宅、ショートステイ、訪問看護、訪問介護・居宅介護支援、福祉用具貸与を運営しています。施設・サービスのご相談、見学・資料請求を承ります。';
+
+const V2 = '/images/plumeria/v2/';
+
+// ── 差し替え枠：法人情報 ─────────────────────────────────
+const corp = {
+  name: 'プルメリア',
+  nameEn: 'PLUMERIA',
+  kind: '介護サービスグループ',
+  tel: '000-000-0000',
+  telHref: 'tel:0000000000',
+  telHours: '受付 9:00〜18:00（日祝を除く）',
+  address: '○○県○○市○○ 0-0-0（差し替え枠）',
+  founded: '○○○○年',
+  // 幅に任せて折り返すと「となりに／。」のように句点だけ落ちる。行は明示的に分ける
+  catchLines: ['あなたの暮らしの、', 'となりに。'],
+};
+
+// ヒーローの数字バッジ（○は差し替え枠）
+const heroCounts = [
+  { num: '○', unit: '施設' },
+  { num: '○', unit: 'サービス' },
+];
+
+// ── 差し替え枠：最優先の3導線 ────────────────────────────
+const primaryPaths = [
+  { icon: 'home', en: 'Facility', label: '施設を探す', body: '住まい・短期の泊まりから選ぶ', href: '#facilities' },
+  { icon: 'care', en: 'Service', label: 'サービスを探す', body: 'お困りごとから選ぶ', href: '#services' },
+  { icon: 'doc', en: 'Contact', label: '見学・資料請求', body: '目的別の相談窓口へ', href: '#contact' },
+];
+
+// ── 差し替え枠：大切にしていること（3項目）─────────────────
+const values = [
+  {
+    no: '01', img: '/images/plumeria/v2/value-01.webp', alt: '木製のテーブルと椅子が並ぶ、明るく整えられた食堂', en: 'Living', icon: 'home', tone: 'green',
+    title: '暮らしの場をつくる',
+    lines: [
+      '居室・食堂・浴室・共用部を清潔に保つ',
+      '起きる時間も入浴の順番も、ご本人の生活時間に合わせる',
+      '「これまでの自分」を続けられる場所にする',
+    ],
+  },
+  {
+    no: '02', img: '/images/plumeria/v2/value-02.webp', alt: '職員がしゃがんで、女性入居者の話を同じ目線で聞いている', en: 'Honesty', icon: 'staff', tone: 'mint',
+    title: '誠実に支援する',
+    lines: [
+      'できることは奪わず、できないことだけを手伝う',
+      '身体の変化と言葉を記録して次に活かす',
+      '良い変化も良くない変化も、同じ温度でご家族に伝える',
+    ],
+  },
+  {
+    no: '03', img: '/images/plumeria/v2/value-03.webp', alt: '明るい廊下で、手すりに手を添えて歩く入居者を職員が後ろから見守っている', en: 'Safety', icon: 'shield', tone: 'beige',
+    title: '安心と安全を守る',
+    lines: [
+      '事故・急変時の連絡経路を決めて共有する',
+      '夜間の対応体制を明示する',
+      '防災訓練と感染対策の実施記録を公開する',
+    ],
+  },
+];
+
+// ── 差し替え枠：法人の客観情報 ───────────────────────────
+// 数値には対象時点・算出範囲を必ず添える
+const facts = [
+  { num: '○○○○', unit: '年', label: '設立', note: '（登記上の設立年）' },
+  { num: '○', unit: '拠点', label: '運営する施設・事業所', note: '（○○○○年○月現在）' },
+  { num: '○○', unit: '名', label: '職員数', note: '（○○○○年○月現在・常勤換算）' },
+  { num: '○○', unit: '名', label: '有資格者', label2: '介護福祉士・看護師など', note: '（○○○○年○月現在・重複計上なし）' },
+];
+
+const structure = [
+  { dt: '資格・研修', dd: '介護福祉士・看護師・ケアマネジャーなどの配置状況と、年間の研修計画を掲載します（内容は差し替え枠）。' },
+  { dt: '安全への対応', dd: '事故発生時の連絡経路、夜間の対応体制、防災訓練と感染対策の実施記録を施設ごとに公開します（差し替え枠）。' },
+  { dt: '地域とのつながり', dd: '地域の行事、実習生の受け入れ、連携する医療機関などを掲載します（差し替え枠）。' },
+];
+
+// ── 差し替え枠：施設を探す ───────────────────────────────
+const facilities = [
+  {
+    id: 'f-1', img: '/images/plumeria/v2/fac-01.webp', alt: '窓辺に椅子と丸テーブルを置いた明るい個室。読みかけの本とマグカップが置かれている', name: 'プルメリアⅠ', kind: 'サービス付き高齢者向け住宅',
+    tone: 'green', icon: 'home', area: '○○市○○（差し替え枠）',
+    status: '空室あり', statusTone: 'open',
+    body: 'ご自身の生活のペースを保ちながら住み替えたい方へ。安否確認と生活相談が付いた住まいです。',
+  },
+  {
+    id: 'f-2', img: '/images/plumeria/v2/fac-02.webp', alt: '共用ラウンジで、入居者が本を読んだり静かに会話したりしている', name: 'プルメリアⅡ', kind: 'サービス付き高齢者向け住宅',
+    tone: 'mint', icon: 'home', area: '○○市○○（差し替え枠）',
+    status: '満室（空室待ちのご相談を承ります）', statusTone: 'full',
+    body: '共用のラウンジを中心にした住まいです。入居者どうしの距離感は、無理に近づけません。',
+  },
+  {
+    id: 'f-3', img: '/images/plumeria/v2/fac-03.webp', alt: '玄関で、バッグを持って訪れた方を職員が迎えている', name: 'プルメリアⅢ', kind: 'ショートステイ（短期入所）',
+    tone: 'beige', icon: 'bed', area: '○○市○○（差し替え枠）',
+    status: '受入可', statusTone: 'open',
+    body: 'ご家族の休息や、急な用事のときに。数日からお預かりします。ご利用前の見学もできます。',
+  },
+];
+
+// ── 差し替え枠：サービスを探す（困りごとから）───────────────
+const services = [
+  { id: 'sv-1', img: '/images/plumeria/v2/sv-01.webp', alt: '自宅のリビングで看護師が利用者の血圧を測っている', icon: 'care', cat: '在宅支援', tone: 'green', name: '訪問看護',
+    trouble: '自宅で療養したいが、体調の変化が不安',
+    body: '看護師がご自宅へ伺い、健康状態の確認や医療的な処置を行います。主治医と連携します。' },
+  { id: 'sv-2', img: '/images/plumeria/v2/sv-02.webp', alt: '台所で職員と利用者が一緒に食事の支度をしている', icon: 'staff', cat: '在宅支援', tone: 'mint', name: '訪問介護',
+    trouble: '入浴や食事の準備を、ひとりでは続けられない',
+    body: 'ご自宅での身体介護と生活援助を行います。曜日・時間はケアプランに沿って調整します。' },
+  { id: 'sv-3', img: '/images/plumeria/v2/sv-03.webp', alt: 'ダイニングでケアマネジャーが利用者とご家族に書類を見せて説明している', icon: 'doc', cat: '相談', tone: 'beige', name: '居宅介護支援（ケアプラン作成）',
+    trouble: '何から相談すればよいのか分からない',
+    body: 'ケアマネジャーが、利用できる制度とサービスを整理し、ケアプランをつくります。' },
+  { id: 'sv-4', img: '/images/plumeria/v2/sv-04.webp', alt: '職員が利用者に歩行器の使い方を説明している', icon: 'chair', cat: '住まいの環境', tone: 'green', name: '福祉用具貸与（レンタル介護用品）',
+    trouble: '段差や立ち上がりが、家の中で危ない',
+    body: 'ベッド・車いす・歩行器などを、お住まいの状況に合わせてご用意します。' },
+];
+
+// ── 差し替え枠：目的別の相談窓口 ─────────────────────────
+const desks = [
+  { icon: 'home', tone: 'green', en: 'Residence', title: '入居・見学のご相談',
+    target: 'サービス付き高齢者向け住宅／ショートステイ',
+    tel: '000-000-0000', telHref: 'tel:0000000000',
+    hours: '9:00〜18:00（日祝を除く）', staff: '担当：入居相談窓口（差し替え枠）', ctaLabel: '見学を申し込む' },
+  { icon: 'care', tone: 'mint', en: 'Home care', title: '在宅サービス・ケアプランのご相談',
+    target: '訪問看護／訪問介護／居宅介護支援',
+    tel: '000-000-0000', telHref: 'tel:0000000000',
+    hours: '9:00〜17:00（日祝を除く）', staff: '担当：ケアマネジャー・看護師（差し替え枠）', ctaLabel: '在宅の相談をする' },
+  { icon: 'chair', tone: 'beige', en: 'Equipment', title: '福祉用具・住まいの環境のご相談',
+    target: '福祉用具貸与／住宅改修のご相談',
+    tel: '000-000-0000', telHref: 'tel:0000000000',
+    hours: '9:00〜17:00（日祝を除く）', staff: '担当：福祉用具専門相談員（差し替え枠）', ctaLabel: '用品について相談する' },
+];
+
+const docItems = ['パンフレット（施設のご案内）', '料金表・重要事項説明書', '見学の申込書'];
+
+const hours = [
+  { label: '見学・入居のご相談', weekday: '9:00〜18:00', saturday: '9:00〜12:00', sunday: '－' },
+  { label: '在宅サービスのご相談', weekday: '9:00〜17:00', saturday: '要相談', sunday: '要相談' },
+  { label: '訪問看護（緊急時の連絡）', weekday: '24時間', saturday: '24時間', sunday: '24時間' },
+];
+
+const access = [
+  { dt: '所在地', dd: corp.address },
+  { dt: '電車・バス', dd: '○○線 ○○駅より徒歩○分／○○バス停下車すぐ（差し替え枠）' },
+  { dt: 'お車', dd: '○○インターより約○分。駐車場○台（差し替え枠）' },
+];
+
+// ── 差し替え枠：お知らせ ─────────────────────────────────
+// サムネイルは記事にある場合だけ付く（参照サイトも有無が混在している）
+const news = [
+  { date: '2026.08.00', cat: 'お知らせ', catTone: 'green', text: '（お知らせの見出しが入ります）',
+    img: V2 + 'news-sample.webp', alt: 'テーブルを囲んで入居者と職員が花を生けている' },
+  { date: '2026.08.00', cat: '空室情報', catTone: 'beige', text: '（空室・受入状況の更新見出しが入ります）' },
+  { date: '2026.07.00', cat: '採用', catTone: 'sky', text: '（採用に関する見出しが入ります）' },
+  { date: '2026.07.00', cat: '行事', catTone: 'green', text: '（施設の行事の見出しが入ります）',
+    img: V2 + 'kv-07.webp', alt: 'テーブルに飾られた花と湯呑み、折り紙' },
+];
+
+// ── 差し替え枠：採用 ─────────────────────────────────────
+const recruitFacts = [
+  { num: '○', unit: '年', label: '平均勤続年数', note: '（○○○○年○月現在・全職種）' },
+  { num: '○○', unit: '%', label: '資格取得支援の利用率', note: '（○○○○年度・対象は常勤職員）' },
+  { num: '○', unit: '日', label: '年間休日', note: '（○○○○年度・シフト制）' },
+];
+
+const recruitPolicy = [
+  '本人の暮らしを、こちらの都合で決めない',
+  '気づいたことは、その日のうちに共有する',
+  '分からないことは、分からないと言える',
+];
+
+const recruitSupport = [
+  { dt: '研修', dd: '入職時研修と、年間の内部研修（差し替え枠）。未経験の方は先輩職員が付きます。' },
+  { dt: '資格取得支援', dd: '介護福祉士・実務者研修などの受講費用の支援制度（内容は差し替え枠）。' },
+  { dt: '働き方', dd: '常勤・非常勤、日勤のみの勤務など（勤務形態の詳細は差し替え枠）。' },
+];
+
+const jobs = [
+  { name: '介護職員', place: 'プルメリアⅠ・Ⅱ・Ⅲ', type: '常勤／非常勤' },
+  { name: '看護師', place: '訪問看護', type: '常勤／非常勤' },
+  { name: 'ケアマネジャー', place: '居宅介護支援', type: '常勤' },
+];
+
+const footerGroups = [
+  { heading: '施設を探す', links: [
+    { label: 'プルメリアⅠ（サ高住）', href: '#f-1' },
+    { label: 'プルメリアⅡ（サ高住）', href: '#f-2' },
+    { label: 'プルメリアⅢ（ショートステイ）', href: '#f-3' },
+  ]},
+  { heading: 'サービスを探す', links: [
+    { label: '訪問看護', href: '#sv-1' },
+    { label: '訪問介護', href: '#sv-2' },
+    { label: '居宅介護支援', href: '#sv-3' },
+    { label: '福祉用具貸与', href: '#sv-4' },
+  ]},
+  { heading: '法人について', links: [
+    { label: '法人概要・沿革', href: '#company' },
+    { label: '大切にしていること', href: '#values' },
+    { label: 'お知らせ', href: '#news' },
+    { label: '採用情報', href: '#recruit' },
+  ]},
+  { heading: 'ご相談', links: [
+    { label: '入居・見学のご相談', href: '#contact' },
+    { label: '在宅サービスのご相談', href: '#contact' },
+    { label: '資料請求', href: '#contact' },
+    { label: 'アクセス・地図', href: '#access' },
+  ]},
+];
+
+// ── FVマーキーのタイル（参照サイトの帯を再現）─────────────
+// 参照サイト実測：ユニーク11枚を2周ぶん複製、表示76〜168px、1:1が7枚・6:5が4枚、
+// 縦位置もバラバラ。写真が支給されるまでは、同じ枠にブロブと線画を入れて動きだけ先に作る。
+// alt は支給された画像を実際に見て書いている（プロンプトの文面ではない）
+const kvTiles = [
+  { img: 'kv-01', w: 166, ratio: 1,    top: 12,  alt: '職員と入居者が並んで笑顔で話している' },
+  { img: 'kv-02', w: 99,  ratio: 1,    top: 96,  alt: '木製トレーに和食を配膳する職員の手と、受け取る入居者の手' },
+  { img: 'kv-03', w: 108, ratio: 1.2,  top: 40,  alt: '共用ラウンジで入居者がそれぞれの距離で過ごしている' },
+  { img: 'kv-04', w: 152, ratio: 1,    top: 70,  alt: '窓辺に置かれた観葉植物と椅子' },
+  { img: 'kv-05', w: 123, ratio: 1.2,  top: 6,   alt: '看護師が利用者の血圧を測っている' },
+  { img: 'kv-06', w: 79,  ratio: 1,    top: 130, alt: '職員がしゃがんで男性入居者と同じ目線で話を聞いている' },
+  { img: 'kv-07', w: 168, ratio: 1,    top: 50,  alt: 'テーブルに飾られた花と湯呑み、折り紙' },
+  { img: 'kv-08', w: 113, ratio: 1.2,  top: 0,   alt: '廊下の手すりに手を添えて歩く入居者の手元' },
+  { img: 'kv-09', w: 136, ratio: 1,    top: 92,  alt: 'ご家族と職員がテーブルで書類を一緒に見ている' },
+  { img: 'kv-10', w: 82,  ratio: 1.2,  top: 22,  alt: '職員3人が記録を見ながら申し送りをしている' },
+  { img: 'kv-11', w: 123, ratio: 1,    top: 118, alt: '湯呑みに手を伸ばす入居者と職員の手元' },
+];
+
+// 1文字ずつのスタガー表示用。空白は幅が潰れないよう nbsp に置き換える
+const chars = (s) => [...s].map((c, i) => ({ c: c === ' ' ? ' ' : c, i }));
+---
+
+<BaseLayout title={title} description={description} noindex={true} showSiteChrome={false}>
+  {/* data-reveal="off": BaseLayout 共通のスクロール表示スクリプトは使わない。
+      このページは自前の IntersectionObserver で制御する。 */}
+  <div class="pb" data-reveal="off">
+    {/* モチーフはすべてこのファイルで書き起こした線画。外部の画像・イラストは使わない。 */}
+    <svg class="pb-defs" aria-hidden="true" focusable="false">
+      <defs>
+        <symbol id="pb-i-home" viewBox="0 0 24 24">
+          <path d="M4 10.6 12 4.4l8 6.2V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" />
+          <path d="M9.6 20v-5.2h4.8V20" />
+        </symbol>
+        <symbol id="pb-i-bed" viewBox="0 0 24 24">
+          <path d="M3 18v-7.4h13.4A4.6 4.6 0 0 1 21 15.2V18" />
+          <path d="M3 18h18M3 13.4V7" />
+          <circle cx="7.4" cy="8.6" r="1.9" />
+        </symbol>
+        <symbol id="pb-i-care" viewBox="0 0 24 24">
+          <path d="M12 20s-6.6-4-6.6-8.6A3.4 3.4 0 0 1 12 9.4a3.4 3.4 0 0 1 6.6 2c0 4.6-6.6 8.6-6.6 8.6Z" />
+          <path d="M12 12.2v3.4M10.3 13.9h3.4" />
+        </symbol>
+        <symbol id="pb-i-chair" viewBox="0 0 24 24">
+          <path d="M7 4.6h10l-.8 7.2H7.8Z" />
+          <path d="M6.4 11.8h11.2M8.6 11.8 8 19.4M15.4 11.8l.6 7.6M8.2 16h7.6" />
+        </symbol>
+        <symbol id="pb-i-staff" viewBox="0 0 24 24">
+          <circle cx="12" cy="8.4" r="3.3" />
+          <path d="M5.4 19.6c.7-3.4 3.4-5.2 6.6-5.2s5.9 1.8 6.6 5.2" />
+        </symbol>
+        <symbol id="pb-i-doc" viewBox="0 0 24 24">
+          <path d="M6.4 3.6h7.2L18 8v12a.4.4 0 0 1-.4.4H6.4a.4.4 0 0 1-.4-.4V4a.4.4 0 0 1 .4-.4Z" />
+          <path d="M13.4 3.8V8.2H17.8M8.8 12.4h6.4M8.8 15.8h6.4" />
+        </symbol>
+        <symbol id="pb-i-shield" viewBox="0 0 24 24">
+          <path d="M12 3.6 19 6v6c0 4-3 6.9-7 8.4-4-1.5-7-4.4-7-8.4V6Z" />
+          <path d="m9.2 12 2 2 3.6-3.8" />
+        </symbol>
+        <symbol id="pb-i-phone" viewBox="0 0 24 24">
+          <path d="M6.2 4.4h3l1.5 3.7-2 1.5a10.6 10.6 0 0 0 5.7 5.7l1.5-2 3.7 1.5v3a1.6 1.6 0 0 1-1.7 1.6C10.6 19 5 13.4 4.6 6.1a1.6 1.6 0 0 1 1.6-1.7Z" />
+        </symbol>
+        <symbol id="pb-i-map" viewBox="0 0 24 24">
+          <path d="M12 20.4s-5.6-5-5.6-9a5.6 5.6 0 1 1 11.2 0c0 4-5.6 9-5.6 9Z" />
+          <circle cx="12" cy="11.2" r="2.1" />
+        </symbol>
+        <symbol id="pb-i-clock" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="8.2" />
+          <path d="M12 7.4V12l3.2 1.9" />
+        </symbol>
+        {/* 社名にちなんだ花（プルメリアは5弁）。ブランドマークと装飾に使う。
+            中心から放射する4本の短い脈を薄く足して花芯の密度を出す */}
+        <symbol id="pb-i-flower" viewBox="0 0 24 24">
+          <path d="M12 4.2c2 0 3.3 1.5 3 3.4 1.7-1 3.6-.4 4.2 1.4.6 1.9-.6 3.5-2.5 3.7 1.5 1.2 1.5 3.2 0 4.4-1.5 1.2-3.4.6-4.2-1.1-.8 1.7-2.7 2.3-4.2 1.1-1.5-1.2-1.5-3.2 0-4.4-1.9-.2-3.1-1.8-2.5-3.7.6-1.8 2.5-2.4 4.2-1.4-.3-1.9 1-3.4 3-3.4Z" />
+          <circle cx="12" cy="12.4" r="1.5" />
+          <path opacity="0.5" d="M12 8.8v1.6M16 12.4h-1.6M12 16v-1.6M8 12.4h1.6" />
+        </symbol>
+        <symbol id="pb-i-leaf" viewBox="0 0 24 24">
+          <path d="M19.4 4.6C11 4.2 5.2 7.4 5.2 13.4a5.4 5.4 0 0 0 5.4 5.4c5.6 0 8.8-5.8 8.8-14.2Z" />
+          <path d="M8.2 19.6c1.6-4.2 4.4-7.4 8.2-9.6" />
+          <path opacity="0.5" d="M11.4 15c1.6-.9 2.9-.9 4.3-.3M13.6 11.8c1.3-.6 2.4-.6 3.6-.2" />
+        </symbol>
+        <symbol id="pb-i-tree" viewBox="0 0 24 24">
+          <path d="M12 3.4c3.2 0 5.6 2.3 5.6 5.2 1.3.7 2 2 2 3.3 0 2.2-1.9 3.9-4.2 3.9H8.6c-2.3 0-4.2-1.7-4.2-3.9 0-1.3.7-2.6 2-3.3 0-2.9 2.4-5.2 5.6-5.2Z" />
+          <path d="M12 15.8v4.8M12 18l2.4-2M12 19l-2.2-1.8" />
+          <path opacity="0.5" d="M9.4 9.6c.9-.7 1.8-1 2.8-1M14.6 9.6c-.9-.7-1.8-1-2.8-1" />
+        </symbol>
+        <symbol id="pb-i-hands" viewBox="0 0 24 24">
+          <path d="M3.6 13.4 7 10.2l3.4 2.6 3.2-.6" />
+          <path d="M20.4 13.4 17 10.2l-3.4 2.6" />
+          <path d="M6.6 13.8 9.4 17c.8.9 2 1.4 3.2 1.4 1.5 0 2.8-.7 3.6-1.9l1.2-1.8" />
+        </symbol>
+        <symbol id="pb-i-arrow" viewBox="0 0 24 24">
+          <path d="M5.6 12h12.2M13 7.2 17.8 12 13 16.8" />
+        </symbol>
+
+        {/* ── パラパラ用の第2フレーム ──────────────────
+            参照サイトは同じイラストの微妙に違う絵を800msで差し替えて
+            「手描きが少し動く」感じを出している。その手法をSVGで再現する。 */}
+        <symbol id="pb-i-flower-b" viewBox="0 0 24 24">
+          <path d="M12 4.6c1.9-.2 3.2 1.2 3.1 3.1 1.8-.8 3.5 0 3.9 1.8.4 1.9-.9 3.3-2.8 3.3 1.4 1.3 1.2 3.3-.4 4.3-1.6 1-3.4.3-4.1-1.5-.9 1.6-2.8 2-4.2.7-1.4-1.3-1.2-3.3.4-4.3-1.9-.4-2.9-2.1-2.1-3.9.8-1.7 2.7-2.1 4.3-1-.1-1.9 1.3-3.2 3.2-3.1Z" />
+          <circle cx="11.8" cy="12.6" r="1.7" />
+          <path opacity="0.5" d="M9.5 10.1l1.1 1.1M15.3 10.1l-1.1 1.1M9.5 15.5l1.1-1.1M15.3 15.5l-1.1-1.1" />
+        </symbol>
+        <symbol id="pb-i-home-b" viewBox="0 0 24 24">
+          <path d="M4 10.8 12 4.6l8 6.2V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z" />
+          <path d="M9.6 20v-5.6h4.8V20" />
+          <path d="M16.4 7.6V4.8h1.8v4.2" />
+        </symbol>
+        <symbol id="pb-i-tree-b" viewBox="0 0 24 24">
+          <path d="M11.6 3.6c3.2 0 5.6 2.3 5.6 5.2 1.3.7 2 2 2 3.3 0 2.2-1.9 3.9-4.2 3.9H8.4c-2.3 0-4.2-1.7-4.2-3.9 0-1.3.7-2.6 2-3.3 0-2.9 2.2-5.2 5.4-5.2Z" />
+          <path d="M12 15.8v4.8M12 17.6l2.8-1.6M12 19.2l-2.6-2" />
+          <path opacity="0.5" d="M9 9.4c1-.6 2-.9 3-.9M15 9.4c-1-.6-2-.9-3-.9" />
+        </symbol>
+        <symbol id="pb-i-hands-b" viewBox="0 0 24 24">
+          <path d="M3.8 12.8 7.2 9.6l3.4 2.8 3-.6" />
+          <path d="M20.2 12.8 16.8 9.6l-3.2 2.8" />
+          <path d="M6.8 13.2 9.6 16.6c.8.9 2 1.4 3.2 1.4 1.5 0 2.8-.8 3.6-2l1.2-1.9" />
+        </symbol>
+        <symbol id="pb-i-leaf-b" viewBox="0 0 24 24">
+          <path d="M19.6 4.4C11.2 4.2 5 7.8 5 13.6a5.4 5.4 0 0 0 5.4 5.4c5.8 0 9.2-6 9.2-14.6Z" />
+          <path d="M8.6 19.4c1.4-4.4 4.2-7.8 8-10.2" />
+          <path opacity="0.5" d="M11.8 15.2c1.6-1 3-1 4.4-.4M14 11.9c1.3-.7 2.5-.7 3.7-.3" />
+        </symbol>
+      </defs>
+    </svg>
+
+    <p class="pb-notice">
+      これはご提案用のラフです。掲載している写真はすべて雰囲気を確認するためのイメージで、
+      実在の施設・利用者・職員ではありません。電話番号・住所・空室状況・数値・お知らせも仮置きの差し替え枠です。
+    </p>
+
+    <!-- ヘッダー -->
+    <header class="pb-head">
+      <div class="pb-head-inner">
+        <a class="pb-brand" href="#top">
+          <span class="pb-brand-mark" aria-hidden="true"><svg><use href="#pb-i-flower" /></svg></span>
+          <span class="pb-brand-text">
+            <span class="pb-brand-name">{corp.name}</span>
+            <span class="pb-brand-sub">{corp.nameEn}</span>
+          </span>
+        </a>
+
+        <nav class="pb-nav" aria-label="メインメニュー">
+          <a href="#facilities"><span>施設を探す</span></a>
+          <a href="#services"><span>サービスを探す</span></a>
+          <a href="#values"><span>法人について</span></a>
+          <a href="#news"><span>お知らせ</span></a>
+          <a href="#recruit"><span>採用情報</span></a>
+        </nav>
+
+        <div class="pb-head-cta">
+          <a class="pb-headtel" href={corp.telHref}>
+            <span class="pb-headtel-icon" aria-hidden="true"><svg><use href="#pb-i-phone" /></svg></span>
+            <span class="pb-headtel-body">
+              <span class="pb-num pb-headtel-no">{corp.tel}</span>
+              <span class="pb-headtel-hours">{corp.telHours}</span>
+            </span>
+          </a>
+          <a class="pb-btn pb-btn-green pb-btn-sm" href="#contact">
+            <span class="pb-btn-fill" aria-hidden="true"></span>
+            <span class="pb-btn-label">見学・資料請求</span>
+            <span class="pb-btn-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+          </a>
+        </div>
+
+        <details class="pb-menu">
+          <summary aria-label="メニューを開く"><span class="pb-menu-bars" aria-hidden="true"></span></summary>
+          <nav class="pb-menu-list" aria-label="メニュー（モバイル）">
+            <a href="#facilities"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-home" /></svg></span>施設を探す</a>
+            <a href="#services"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-care" /></svg></span>サービスを探す</a>
+            <a href="#values"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-flower" /></svg></span>大切にしていること</a>
+            <a href="#company"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-shield" /></svg></span>法人概要・体制</a>
+            <a href="#contact"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-doc" /></svg></span>見学・資料請求・ご相談</a>
+            <a href="#news"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-clock" /></svg></span>お知らせ</a>
+            <a href="#recruit"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-staff" /></svg></span>採用情報</a>
+            <a href="#access"><span class="pb-mi" aria-hidden="true"><svg><use href="#pb-i-map" /></svg></span>アクセス</a>
+          </nav>
+        </details>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- 01 ファーストビュー -->
+      <section class="pb-hero">
+        <div class="pb-wrap pb-hero-inner">
+          {/* 写真の代わりに、有機的なブロブと線画で面をつくる */}
+          <div class="pb-hero-art" aria-hidden="true" data-rv>
+            <span class="pb-blob pb-blob-a"></span>
+            <span class="pb-blob pb-blob-b"></span>
+            <span class="pb-blob pb-blob-c"></span>
+            {/* data-para: 2枚を交互に出してパラパラ漫画にする（参照サイトの baseParaparaImage 相当） */}
+            <span class="pb-art pb-art-flower" style="--ai:0" data-para>
+              <svg class="pb-f1"><use href="#pb-i-flower" /></svg><svg class="pb-f2"><use href="#pb-i-flower-b" /></svg>
+            </span>
+            <span class="pb-art pb-art-home" style="--ai:1" data-para>
+              <svg class="pb-f1"><use href="#pb-i-home" /></svg><svg class="pb-f2"><use href="#pb-i-home-b" /></svg>
+            </span>
+            <span class="pb-art pb-art-tree" style="--ai:2" data-para>
+              <svg class="pb-f1"><use href="#pb-i-tree" /></svg><svg class="pb-f2"><use href="#pb-i-tree-b" /></svg>
+            </span>
+            <span class="pb-art pb-art-hands" style="--ai:3" data-para>
+              <svg class="pb-f1"><use href="#pb-i-hands" /></svg><svg class="pb-f2"><use href="#pb-i-hands-b" /></svg>
+            </span>
+            <span class="pb-art pb-art-leaf" style="--ai:4" data-para>
+              <svg class="pb-f1"><use href="#pb-i-leaf" /></svg><svg class="pb-f2"><use href="#pb-i-leaf-b" /></svg>
+            </span>
+          </div>
+
+          <div class="pb-hero-copy" data-rv>
+            <h1 class="pb-hero-catch">
+              <span class="pb-sr">{corp.catchLines.join('')}</span>
+              {corp.catchLines.map((lineText, li) => (
+                <span class="pb-split pb-catch-line">
+                  {chars(lineText).map((o) => (
+                    <span aria-hidden="true" style={`--i:${li * 9 + o.i}`}>{o.c}</span>
+                  ))}
+                </span>
+              ))}
+            </h1>
+
+            <p class="pb-hero-sub">
+              私たちは、住まい・在宅での看護と介護・暮らしの道具を、<br class="pb-br-pc" />
+              ひとつの窓口でお預かりする{corp.kind}です。
+            </p>
+
+            <ul class="pb-hero-counts">
+              {heroCounts.map((c, i) => (
+                <li style={`--i:${i}`}>
+                  <span class="pb-num pb-hero-count-num">{c.num}</span>
+                  <span class="pb-hero-count-unit">{c.unit}</span>
+                  <span class="pb-hero-dot" aria-hidden="true"></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        {/* FVマーキー：ユニーク11タイル × 2周。CSSで右→左に流す。
+            写真が支給されたら、この枠の中身を <img> に差し替えるだけで済む。 */}
+        <div class="pb-kv" data-rv>
+          <div class="pb-kv-track">
+            {[0, 1].map((copy) => (
+              <ul class="pb-kv-row" aria-hidden={copy === 1 ? 'true' : undefined}>
+                {kvTiles.map((t, i) => (
+                  <li class="pb-kv-item" style={`--w:${t.w}; --r:${t.ratio}; --t:${t.top}`}>
+                    <img src={`${V2}${t.img}.webp`} alt={copy === 0 ? t.alt : ''}
+                         width={t.ratio === 1 ? 600 : 660} height={t.ratio === 1 ? 600 : 550}
+                         {/* 帯は横に流れるので、遅延させると走行中に空タイルが出る。全部先に読む
+                             （ユニーク11枚・計約250KBで、2周目はキャッシュから出る） */}
+                         loading="eager" decoding="async" />
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
+
+        <span class="pb-scroll" aria-hidden="true">
+          <span class="pb-split pb-split-static">
+            {chars('Scroll').map((o) => (<span style={`--i:${o.i}`}>{o.c}</span>))}
+          </span>
+        </span>
+      </section>
+
+      <!-- 02 最優先の3導線 -->
+      <section class="pb-sec pb-paths-sec">
+        <div class="pb-wrap">
+          <ul class="pb-paths">
+            {primaryPaths.map((p, i) => (
+              <li data-rv style={`--d:${i * 90}ms`}>
+                <a class="pb-path" href={p.href}>
+                  <span class="pb-path-fill" aria-hidden="true"></span>
+                  <span class="pb-path-icon" aria-hidden="true"><svg><use href={`#pb-i-${p.icon}`} /></svg></span>
+                  <span class="pb-path-text">
+                    <span class="pb-en">{p.en}</span>
+                    <span class="pb-path-label">{p.label}</span>
+                    <span class="pb-path-body">{p.body}</span>
+                  </span>
+                  <span class="pb-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- 03 法人の想い -->
+      <section class="pb-sec pb-mind" id="mind">
+        <span class="pb-blob pb-blob-mind" aria-hidden="true"></span>
+        <div class="pb-wrap pb-mind-inner">
+          <div class="pb-mind-text">
+          <p class="pb-eyebrow" data-rv>
+            <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-flower" /></svg></span>
+            <span class="pb-split">
+              <span class="pb-sr">Message</span>
+              {chars('Message').map((o) => (<span aria-hidden="true" style={`--i:${o.i}`}>{o.c}</span>))}
+            </span>
+            <span class="pb-eyebrow-ja">法人の想い</span>
+          </p>
+
+          <div class="pb-mind-body" data-paint>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:0ms">介護が必要になったとき、</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:90ms">多くのご家族は、まず自分を責めます。</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:180ms">もっと早く気づけたのではないか、と。</p>
+            <p class="pb-mind-line pb-mind-gap" data-paint-line data-rv style="--d:0ms">けれど、暮らしを支える方法はひとつではありません。</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:90ms">住み替えるという選択も、</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:180ms">自宅のまま看護と介護を入れる方法もあります。</p>
+            <p class="pb-mind-line" data-paint-line data-rv style="--d:270ms">短い期間だけお預かりして、ご家族が休むこともできます。</p>
+            <p class="pb-mind-line pb-mind-gap pb-mind-strong" data-paint-line data-rv style="--d:0ms">私たちは、そのどれかを勧めるためではなく、</p>
+            <p class="pb-mind-line pb-mind-strong" data-paint-line data-rv style="--d:90ms">ご本人が「これまでの自分」を手放さずにいられる形を、</p>
+            <p class="pb-mind-line pb-mind-strong" data-paint-line data-rv style="--d:180ms">一緒に探すためにここにいます。</p>
+          </div>
+
+          <p class="pb-sign" data-rv>{corp.name}　代表　○○ ○○（差し替え枠）</p>
+          </div>
+
+          <figure class="pb-mind-figure" data-rv>
+            <span class="pb-blob pb-blob-photo">
+              <img src={V2 + 'mind-01.webp'} alt="ご家族と職員が木製テーブルを挟んで、書類を見ながら話している"
+                   width="1200" height="1200" loading="lazy" decoding="async" />
+            </span>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 04 大切にしていること -->
+      <section class="pb-sec pb-values" id="values">
+        <div class="pb-wrap">
+          <div class="pb-head2" data-rv>
+            <p class="pb-eyebrow">
+              <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-leaf" /></svg></span>
+              <span class="pb-split">
+                <span class="pb-sr">Values</span>
+                {chars('Values').map((o) => (<span aria-hidden="true" style={`--i:${o.i}`}>{o.c}</span>))}
+              </span>
+            </p>
+            <h2 class="pb-h2">プルメリアの<br />大切にしていること</h2>
+            <p class="pb-lead">言葉だけにならないよう、3つに絞って、やっていることを書いています。</p>
+          </div>
+
+          <ul class="pb-value-list">
+            {values.map((v, i) => (
+              <li class={`pb-value pb-tone-${v.tone}`} data-rv style={`--d:${i * 110}ms`}>
+                <div class="pb-value-art">
+                  <span class="pb-blob pb-blob-value">
+                    <img src={v.img} alt={v.alt} width="900" height="900" loading="lazy" decoding="async" />
+                  </span>
+                  <span class="pb-value-icon" aria-hidden="true"><svg><use href={`#pb-i-${v.icon}`} /></svg></span>
+                </div>
+                <div class="pb-value-text">
+                  <p class="pb-value-no"><span class="pb-num">{v.no}</span><span class="pb-en">{v.en}</span></p>
+                  <h3 class="pb-h3">{v.title}</h3>
+                  <ul class="pb-value-lines">
+                    {v.lines.map((l) => (<li>{l}</li>))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- 05 法人の歩みと体制 -->
+      <section class="pb-sec pb-facts" id="company">
+        <div class="pb-wrap">
+          <div class="pb-head2" data-rv>
+            <p class="pb-eyebrow">
+              <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-shield" /></svg></span>
+              <span class="pb-split">
+                <span class="pb-sr">About us</span>
+                {chars('About us').map((o) => (<span aria-hidden="true" style={`--i:${o.i}`}>{o.c}</span>))}
+              </span>
+            </p>
+            <h2 class="pb-h2">法人の歩みと体制</h2>
+            <p class="pb-lead">確認できる事実だけを載せます。数値は対象時点と算出範囲を添えて出します。</p>
+          </div>
+
+          <ul class="pb-fact-list">
+            {facts.map((f, i) => (
+              <li class="pb-fact" data-rv style={`--d:${i * 80}ms`}>
+                <p class="pb-fact-num">
+                  <span class="pb-num">{f.num}</span><span class="pb-fact-unit">{f.unit}</span>
+                  <span class="pb-fact-dot" aria-hidden="true"></span>
+                </p>
+                <p class="pb-fact-label">{f.label}</p>
+                {f.label2 && <p class="pb-fact-label2">{f.label2}</p>}
+                <p class="pb-fact-note">{f.note}</p>
+              </li>
+            ))}
+          </ul>
+
+          <dl class="pb-deflist pb-fact-def" data-rv>
+            {structure.map((s) => (<div><dt>{s.dt}</dt><dd>{s.dd}</dd></div>))}
+          </dl>
+          <p class="pb-note" data-rv>
+            ※ 法人概要（名称・設立・所在地・代表者・事業所一覧）は下層ページにまとめます。このラフでは枠のみ置いています。
+          </p>
+        </div>
+      </section>
+
+      <!-- 06 施設を探す -->
+      <section class="pb-sec pb-facilities" id="facilities">
+        <div class="pb-wrap">
+          <div class="pb-head2" data-rv>
+            <p class="pb-eyebrow">
+              <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-home" /></svg></span>
+              <span class="pb-split">
+                <span class="pb-sr">Facility</span>
+                {chars('Facility').map((o) => (<span aria-hidden="true" style={`--i:${o.i}`}>{o.c}</span>))}
+              </span>
+            </p>
+            <h2 class="pb-h2">施設を探す</h2>
+            <p class="pb-lead">住まいと、短期の泊まり。受入状況は色だけでなく必ず文字でも示しています。</p>
+          </div>
+
+          <ul class="pb-fac-list">
+            {facilities.map((f, i) => (
+              <li class={`pb-fac pb-tone-${f.tone}`} id={f.id} data-rv style={`--d:${i * 110}ms`}>
+                <div class="pb-fac-art">
+                  <span class="pb-blob pb-blob-fac">
+                    <img src={f.img} alt={f.alt} width="1000" height="750" loading="lazy" decoding="async" />
+                  </span>
+                  <span class="pb-fac-leaf" aria-hidden="true"><svg><use href="#pb-i-leaf" /></svg></span>
+                </div>
+                <div class="pb-fac-text">
+                  <p class="pb-fac-kind">{f.kind}</p>
+                  <h3 class="pb-fac-name">{f.name}</h3>
+                  <p class="pb-fac-area"><span class="pb-fac-area-icon" aria-hidden="true"><svg><use href="#pb-i-map" /></svg></span>{f.area}</p>
+                  <p class={`pb-status pb-status-${f.statusTone}`}>{f.status}</p>
+                  <p class="pb-body">{f.body}</p>
+                  <div class="pb-fac-links">
+                    <a class="pb-btn pb-btn-outline pb-btn-sm" href="#">
+                      <span class="pb-btn-fill" aria-hidden="true"></span>
+                      <span class="pb-btn-label">施設のページを見る</span>
+                      <span class="pb-btn-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+                    </a>
+                    <a class="pb-btn pb-btn-green pb-btn-sm" href="#contact">
+                      <span class="pb-btn-fill" aria-hidden="true"></span>
+                      <span class="pb-btn-label">見学を申し込む</span>
+                      <span class="pb-btn-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ul>
+
+          <p class="pb-note pb-note-center" data-rv>
+            ※ 空室・受入状況は○○○○年○月○日時点の予定です。更新のタイミングと担当は運用時に決めます。
+          </p>
+        </div>
+      </section>
+
+      <!-- 07 サービスを探す -->
+      <section class="pb-sec pb-services" id="services">
+        <div class="pb-wrap">
+          <div class="pb-head2" data-rv>
+            <p class="pb-eyebrow">
+              <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-care" /></svg></span>
+              <span class="pb-split">
+                <span class="pb-sr">Service</span>
+                {chars('Service').map((o) => (<span aria-hidden="true" style={`--i:${o.i}`}>{o.c}</span>))}
+              </span>
+            </p>
+            <h2 class="pb-h2">サービスを探す</h2>
+            <p class="pb-lead">「いま困っていること」から選べるようにしています。</p>
+          </div>
+
+          <ul class="pb-sv-list">
+            {services.map((s, i) => (
+              <li class={`pb-sv pb-tone-${s.tone}`} id={s.id} data-rv style={`--d:${(i % 2) * 110}ms`}>
+                <a class="pb-sv-link" href="#">
+                  <span class="pb-sv-art">
+                    <span class="pb-blob pb-blob-sv">
+                      <img src={s.img} alt={s.alt} width="700" height="700" loading="lazy" decoding="async" />
+                    </span>
+                  </span>
+                  <span class="pb-sv-text">
+                    <span class="pb-sv-cat">{s.cat}</span>
+                    <span class="pb-sv-name">{s.name}</span>
+                    <span class="pb-sv-trouble">「{s.trouble}」という方へ</span>
+                    <span class="pb-sv-body">{s.body}</span>
+                  </span>
+                  <span class="pb-dot pb-sv-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <p class="pb-note pb-note-center" data-rv>
+            ※ 上記以外の事業（障がい児者支援など）を行っている場合は、この並びに追加します。
+            当方で内容を推測して書かないため、実施事業をご教示ください。
+          </p>
+        </div>
+      </section>
+
+      <!-- 08 見学・資料請求・お問い合わせ -->
+      <section class="pb-sec pb-contact" id="contact">
+        <span class="pb-blob pb-blob-contact" aria-hidden="true"></span>
+        <div class="pb-wrap">
+          <div class="pb-head2" data-rv>
+            <p class="pb-eyebrow">
+              <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-hands" /></svg></span>
+              <span class="pb-split">
+                <span class="pb-sr">Contact</span>
+                {chars('Contact').map((o) => (<span aria-hidden="true" style={`--i:${o.i}`}>{o.c}</span>))}
+              </span>
+            </p>
+            <h2 class="pb-h2">見学・資料請求・ご相談</h2>
+            <p class="pb-lead">ご用件によって担当が変わります。近いものをお選びください。</p>
+          </div>
+
+          <ul class="pb-desk-list">
+            {desks.map((d, i) => (
+              <li class={`pb-desk pb-tone-${d.tone}`} data-rv style={`--d:${i * 100}ms`}>
+                <p class="pb-desk-head">
+                  <span class="pb-desk-icon" aria-hidden="true"><svg><use href={`#pb-i-${d.icon}`} /></svg></span>
+                  <span class="pb-en">{d.en}</span>
+                </p>
+                <p class="pb-desk-title">{d.title}</p>
+                <p class="pb-desk-target">{d.target}</p>
+                <a class="pb-desk-tel" href={d.telHref}>
+                  <span class="pb-desk-tel-icon" aria-hidden="true"><svg><use href="#pb-i-phone" /></svg></span>
+                  <span class="pb-num pb-desk-tel-no">{d.tel}</span>
+                </a>
+                <p class="pb-desk-hours">
+                  <span class="pb-desk-hours-icon" aria-hidden="true"><svg><use href="#pb-i-clock" /></svg></span>
+                  受付 {d.hours}
+                </p>
+                <p class="pb-desk-staff">{d.staff}</p>
+                <a class="pb-btn pb-btn-green pb-btn-block" href="#form">
+                  <span class="pb-btn-fill" aria-hidden="true"></span>
+                  <span class="pb-btn-label">{d.ctaLabel}</span>
+                  <span class="pb-btn-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+                </a>
+              </li>
+            ))}
+          </ul>
+
+          <div class="pb-form-block" id="form" data-rv>
+            <div class="pb-form-text">
+              <p class="pb-en pb-form-en">Form</p>
+              <h3 class="pb-h3">フォームでのお申し込み</h3>
+              <p class="pb-body">
+                お名前・ご連絡先・ご用件をお送りいただければ、担当から折り返しご連絡します。
+                お急ぎの場合はお電話のほうが早くつながります。
+              </p>
+              <p class="pb-form-doc-title">資料請求でお届けするもの</p>
+              <ul class="pb-doclist">
+                {docItems.map((d) => (
+                  <li><span class="pb-doclist-mark" aria-hidden="true"><svg><use href="#pb-i-doc" /></svg></span>{d}</li>
+                ))}
+              </ul>
+              <p class="pb-note">※ フォームは実装時に設置します。このラフでは動作しません。</p>
+            </div>
+
+            {/* 見た目の確認用。送信はしない */}
+            <div class="pb-form-mock" aria-hidden="true">
+              <p class="pb-form-mock-label">ご用件</p>
+              <p class="pb-form-mock-field">見学のお申し込み　▼</p>
+              <p class="pb-form-mock-label">お名前</p>
+              <p class="pb-form-mock-field"></p>
+              <p class="pb-form-mock-label">お電話番号</p>
+              <p class="pb-form-mock-field"></p>
+              <p class="pb-form-mock-label">ご相談内容</p>
+              <p class="pb-form-mock-field pb-form-mock-area"></p>
+              <p class="pb-form-mock-btn">送信する</p>
+            </div>
+          </div>
+
+          <div class="pb-hours" id="access" data-rv>
+            <p class="pb-en pb-form-en">Access</p>
+            <h3 class="pb-h3">受付時間とアクセス</h3>
+            <div class="pb-hours-grid">
+              <div class="pb-table-wrap">
+                <table class="pb-table">
+                  <thead>
+                    <tr><th scope="col">窓口</th><th scope="col">平日</th><th scope="col">土曜</th><th scope="col">日・祝</th></tr>
+                  </thead>
+                  <tbody>
+                    {hours.map((h) => (
+                      <tr>
+                        <th scope="row">{h.label}</th>
+                        <td class="pb-num">{h.weekday}</td>
+                        <td class="pb-num">{h.saturday}</td>
+                        <td class="pb-num">{h.sunday}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="pb-access">
+                <dl class="pb-deflist pb-deflist-sm">
+                  {access.map((a) => (<div><dt>{a.dt}</dt><dd>{a.dd}</dd></div>))}
+                </dl>
+                <div class="pb-map" aria-hidden="true">
+                  <span class="pb-map-icon"><svg><use href="#pb-i-map" /></svg></span>
+                  <span class="pb-map-label">地図（実装時に埋め込み）</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 09 お知らせ -->
+      <section class="pb-sec pb-news" id="news">
+        <div class="pb-wrap">
+          <div class="pb-news-head" data-rv>
+            <div>
+              <p class="pb-eyebrow">
+                <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-clock" /></svg></span>
+                <span class="pb-split">
+                  <span class="pb-sr">News</span>
+                  {chars('News').map((o) => (<span aria-hidden="true" style={`--i:${o.i}`}>{o.c}</span>))}
+                </span>
+              </p>
+              <h2 class="pb-h2">お知らせ</h2>
+            </div>
+            <a class="pb-more" href="#">
+              <span>お知らせをすべて見る</span>
+              <span class="pb-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+            </a>
+          </div>
+
+          <ul class="pb-news-list">
+            {news.map((n, i) => (
+              <li data-rv style={`--d:${i * 70}ms`}>
+                <a href="#">
+                  {n.img
+                    ? <span class="pb-news-thumb"><img src={n.img} alt={n.alt} width="700" height="525" loading="lazy" decoding="async" /></span>
+                    : <span class="pb-news-thumb pb-news-thumb-none" aria-hidden="true"></span>}
+                  <span class="pb-num pb-news-date">{n.date}</span>
+                  <span class={`pb-cat pb-cat-${n.catTone}`}>{n.cat}</span>
+                  <span class="pb-news-text">{n.text}</span>
+                  <span class="pb-dot pb-news-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <!-- 10 採用情報 -->
+      <section class="pb-sec pb-recruit" id="recruit">
+        <span class="pb-blob pb-blob-rec-a" aria-hidden="true"></span>
+        <span class="pb-blob pb-blob-rec-b" aria-hidden="true"></span>
+        <div class="pb-wrap">
+          <div class="pb-head2" data-rv>
+            <p class="pb-eyebrow">
+              <span class="pb-eyebrow-mark" aria-hidden="true"><svg><use href="#pb-i-staff" /></svg></span>
+              <span class="pb-split">
+                <span class="pb-sr">Recruit</span>
+                {chars('Recruit').map((o) => (<span aria-hidden="true" style={`--i:${o.i}`}>{o.c}</span>))}
+              </span>
+            </p>
+            <h2 class="pb-h2">採用情報</h2>
+            <p class="pb-lead">求人票の前に、ここで働き続けられるかを判断できる材料を置きます。</p>
+          </div>
+
+          <div class="pb-rec-top">
+            <div class="pb-rec-interview" data-rv>
+              <figure class="pb-rec-figure">
+                <span class="pb-blob pb-blob-photo pb-blob-wide">
+                  <img src={V2 + 'recruit-01.webp'} alt="職員4人が記録端末と用紙を見ながら申し送りをしている"
+                       width="1200" height="800" loading="lazy" decoding="async" />
+                </span>
+              </figure>
+              <p class="pb-rec-tag">職員インタビュー</p>
+              <blockquote class="pb-quote">
+                （職員の方のお話がここに入ります。入職の理由、いま担当していること、
+                働き方について、120〜200字ほど。当方で創作しないため、取材の枠のみ置いています。）
+              </blockquote>
+              <p class="pb-rec-who">○○ ○○／介護職員／勤続○年（差し替え枠）</p>
+              <a class="pb-more" href="#"><span>ほかの職員の話を読む</span><span class="pb-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span></a>
+            </div>
+
+            <div class="pb-rec-policy" data-rv style="--d:110ms">
+              <p class="pb-en">Our promise</p>
+              <h3 class="pb-h3">行動指針</h3>
+              <ul class="pb-checklist">
+                {recruitPolicy.map((p) => (
+                  <li><span class="pb-check" aria-hidden="true"><svg><use href="#pb-i-shield" /></svg></span>{p}</li>
+                ))}
+              </ul>
+              <p class="pb-note">※ 実際の行動指針・クレドがあれば差し替えます。</p>
+            </div>
+          </div>
+
+          <ul class="pb-fact-list pb-fact-list-sm">
+            {recruitFacts.map((f, i) => (
+              <li class="pb-fact" data-rv style={`--d:${i * 80}ms`}>
+                <p class="pb-fact-num">
+                  <span class="pb-num">{f.num}</span><span class="pb-fact-unit">{f.unit}</span>
+                  <span class="pb-fact-dot" aria-hidden="true"></span>
+                </p>
+                <p class="pb-fact-label">{f.label}</p>
+                <p class="pb-fact-note">{f.note}</p>
+              </li>
+            ))}
+          </ul>
+
+          <div class="pb-rec-support" data-rv>
+            <h3 class="pb-h3">研修・資格・働き方</h3>
+            <dl class="pb-deflist pb-deflist-sm">
+              {recruitSupport.map((s) => (<div><dt>{s.dt}</dt><dd>{s.dd}</dd></div>))}
+            </dl>
+          </div>
+
+          <div class="pb-jobs" data-rv>
+            <h3 class="pb-h3">募集職種</h3>
+            <div class="pb-table-wrap">
+              <table class="pb-table">
+                <thead>
+                  <tr><th scope="col">職種</th><th scope="col">勤務先</th><th scope="col">雇用形態</th><th scope="col"></th></tr>
+                </thead>
+                <tbody>
+                  {jobs.map((j) => (
+                    <tr>
+                      <th scope="row">{j.name}</th>
+                      <td>{j.place}</td>
+                      <td>{j.type}</td>
+                      <td><a class="pb-more pb-more-inline" href="#"><span>募集要項</span><span class="pb-dot pb-dot-sm" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span></a></td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div class="pb-rec-cta">
+              <a class="pb-btn pb-btn-green" href="#">
+                <span class="pb-btn-fill" aria-hidden="true"></span>
+                <span class="pb-btn-label">採用情報のページへ</span>
+                <span class="pb-btn-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+              </a>
+              <a class="pb-btn pb-btn-outline" href="#">
+                <span class="pb-btn-fill" aria-hidden="true"></span>
+                <span class="pb-btn-label">見学・職場体験のご相談</span>
+                <span class="pb-btn-dot" aria-hidden="true"><svg><use href="#pb-i-arrow" /></svg></span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- フッター -->
+    <footer class="pb-foot">
+      <span class="pb-blob pb-blob-foot" aria-hidden="true"></span>
+      <span class="pb-art pb-art-foot" aria-hidden="true"><svg><use href="#pb-i-flower" /></svg></span>
+      <div class="pb-wrap">
+        <div class="pb-foot-top">
+          <div class="pb-foot-brand">
+            <span class="pb-brand-mark" aria-hidden="true"><svg><use href="#pb-i-flower" /></svg></span>
+            <p class="pb-foot-name">{corp.name}</p>
+            <p class="pb-foot-en">{corp.nameEn}</p>
+            <p class="pb-foot-addr">{corp.address}</p>
+            <p class="pb-foot-founded">設立 {corp.founded}（差し替え枠）</p>
+            <a class="pb-foot-tel" href={corp.telHref}>
+              <span class="pb-desk-tel-icon" aria-hidden="true"><svg><use href="#pb-i-phone" /></svg></span>
+              <span class="pb-num pb-desk-tel-no">{corp.tel}</span>
+            </a>
+            <p class="pb-foot-hours">{corp.telHours}</p>
+          </div>
+
+          <div class="pb-foot-nav">
+            {footerGroups.map((g) => (
+              <div class="pb-foot-group">
+                <p class="pb-foot-heading">{g.heading}</p>
+                <ul>
+                  {g.links.map((l) => (<li><a href={l.href}><span>{l.label}</span></a></li>))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div class="pb-foot-bottom">
+          <ul class="pb-foot-legal">
+            <li><a href="#"><span>プライバシーポリシー</span></a></li>
+            <li><a href="#"><span>個人情報の取り扱い</span></a></li>
+            <li><a href="#"><span>運営規程・重要事項説明書</span></a></li>
+          </ul>
+          <p class="pb-copy">© {corp.name}</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- モバイル固定CTA -->
+    <div class="pb-sticky">
+      <a class="pb-btn pb-btn-ink pb-btn-sticky" href={corp.telHref}>
+        <span class="pb-btn-fill" aria-hidden="true"></span>
+        <span class="pb-btn-label">電話する</span>
+      </a>
+      <a class="pb-btn pb-btn-green pb-btn-sticky" href="#contact">
+        <span class="pb-btn-fill" aria-hidden="true"></span>
+        <span class="pb-btn-label">見学・資料請求</span>
+      </a>
+    </div>
+  </div>
+</BaseLayout>
+
+<script>
+  // 表示アニメーション。JSが無い/失敗した場合は .is-js が付かず、初期状態を隠さないので
+  // 内容はすべて見える（プログレッシブエンハンスメント）。
+  (() => {
+    const root = document.querySelector('.pb');
+    if (!root) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    root.classList.add('is-js');
+
+    const targets = root.querySelectorAll('[data-rv]');
+    if (!('IntersectionObserver' in window)) {
+      targets.forEach((el) => el.classList.add('is-in'));
+      return;
+    }
+
+    let delivered = false;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          delivered = true;
+          e.target.classList.add('is-in');
+          io.unobserve(e.target); // 一度出したら戻さない（往復させると読みにくい）
+        });
+      },
+      { rootMargin: '0px 0px -10% 0px', threshold: 0.1 }
+    );
+    targets.forEach((el) => io.observe(el));
+
+    // ヒーローは監視を待たずに出す（requestAnimationFrame は
+    // 描画されていないタブで発火しないため、同期で付ける）
+    root.querySelectorAll('.pb-hero [data-rv]').forEach((el) => el.classList.add('is-in'));
+
+    // 安全弁：監視が一度も発火しない環境（描画されないタブ等）では
+    // 内容が隠れたままになるので、一定時間後にすべて表示する。
+    window.setTimeout(() => {
+      if (delivered) return;
+      targets.forEach((el) => el.classList.add('is-in'));
+    }, 2500);
+
+    // ══ パラパラ漫画 ════════════════════════════════════════
+    // 参照サイトの baseParaparaImage(800, false) 相当。
+    // 同じモチーフの少し違う絵を800msで入れ替えて、手描きが動いて見えるようにする。
+    // 画面内にあるときだけ動かす（見えていないところでタイマーを回さない）。
+    const paras = root.querySelectorAll('[data-para]');
+    if (paras.length) {
+      let frame = 0;
+      let timer = null;
+      const onScreen = new Set();
+      const tick = () => {
+        frame ^= 1;
+        paras.forEach((el) => el.setAttribute('data-f', String(frame)));
+      };
+      const start = () => { if (!timer && !document.hidden) timer = window.setInterval(tick, 800); };
+      const stop = () => { if (timer) { window.clearInterval(timer); timer = null; } };
+
+      // まず動かす。監視は「画面外に出たら止める」ためだけに使う。
+      // （監視の初回発火を待つ作りにすると、発火しない環境で永久に動かない）
+      paras.forEach((el) => el.setAttribute('data-f', '0'));
+      start();
+
+      if ('IntersectionObserver' in window) {
+        const vis = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            e.isIntersecting ? onScreen.add(e.target) : onScreen.delete(e.target);
+          });
+          onScreen.size ? start() : stop();
+        });
+        paras.forEach((el) => vis.observe(el));
+      }
+
+      // タブが非表示のあいだは止める
+      document.addEventListener('visibilitychange', () => {
+        document.hidden ? stop() : start();
+      });
+    }
+
+    // ══ スクロール連動（塗り上げ／スケール）═══════════════════
+    // 参照サイトの data-js-ssp-child（文章が塗られていく）と
+    // data-js-scale（イラストがゆっくり拡大）に相当する。
+    const paintBlocks = [...root.querySelectorAll('[data-paint]')].map((block) => ({
+      block,
+      lines: [...block.querySelectorAll('[data-paint-line]')],
+    }));
+    const heroArt = root.querySelector('.pb-hero-art');
+
+    if (paintBlocks.length || heroArt) {
+      root.classList.add('is-scroll');
+      const clamp = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
+      let queued = false;
+
+      const update = () => {
+        queued = false;
+        const vh = window.innerHeight || 1;
+
+        paintBlocks.forEach(({ block, lines }) => {
+          if (!lines.length) return;
+          const r = block.getBoundingClientRect();
+          // 塊の上端が画面の8割位置に来てから、下端が2割位置を抜けるまでで 0→1
+          const span = r.height + vh * 0.6;
+          const prog = clamp((vh * 0.8 - r.top) / span);
+          const step = 1 / lines.length;
+          lines.forEach((line, i) => {
+            line.style.setProperty('--p', clamp((prog - i * step) / step).toFixed(3));
+          });
+        });
+
+        if (heroArt) {
+          const r = heroArt.getBoundingClientRect();
+          const prog = clamp((vh - r.top) / (vh + r.height));
+          // 1 → 1.12。参照サイトの data-js-scale="1.1" / "1.2" と同じ幅に収める
+          heroArt.style.setProperty('--sc', (1 + prog * 0.12).toFixed(4));
+        }
+      };
+
+      const onScroll = () => {
+        if (queued) return;
+        queued = true;
+        window.requestAnimationFrame(update);
+      };
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      update();
+      // 描画されないタブでは rAF が回らないので、初期値だけは同期で入れておく
+      window.setTimeout(update, 300);
+    }
+  })();
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Archivo:wght@400;500;600;700&display=swap');
+
+  .pb {
+    /* ── 配色（参照サイトの実測値に寄せた）────────────────
+       白ではなく、わずかに温かいライトグレーを地色にする。          */
+    --bg: #f3f1ef;
+    --paper: #ffffff;
+    --mint: #eaf3e6;        /* 淡いグリーン */
+    --beige: #f2ece0;       /* 淡いベージュ */
+    --sky: #e8eff3;         /* やわらかいブルー */
+
+    --ink: #000000;         /* 本文は純黒。参照サイトと同じ */
+    --green: #1da700;       /* 主色（面と大きい文字にだけ使う） */
+    --green-soft: #62b850;  /* 副（装飾のみ） */
+    --green-deep: #137a00;  /* 小さい文字・小さいボタン用（白文字で5.5:1） */
+    --muted: #5f5f5f;       /* 補助文字（地色 #f3f1ef で5.7:1） */
+    --line: rgba(0, 0, 0, 0.12);
+    --line-soft: rgba(0, 0, 0, 0.07);
+
+    --wrap: 1160px;
+    --r: 14px;
+    --r-sm: 7px;
+
+    /* 影は4段階の奥行きで使い分ける。ブランドグリーンをかすかに帯びさせ、
+       黒い強いドロップシャドウは使わない */
+    --shadow-xs: 0 2px 10px rgba(29, 167, 0, 0.07);     /* 小さな丸アイコン */
+    --shadow: 0 10px 28px rgba(29, 167, 0, 0.08);       /* カードの通常状態 */
+    --shadow-md: 0 20px 44px rgba(19, 122, 0, 0.14);    /* ドロップダウン */
+    --shadow-lift: 0 26px 54px rgba(19, 122, 0, 0.18);  /* ホバーのリフト */
+
+    /* 参照サイトで支配的だったイージング */
+    --e: cubic-bezier(0.26, 0.06, 0, 1);
+    --e2: cubic-bezier(0.47, 0.16, 0.24, 1);
+    --e3: cubic-bezier(0.43, 0.05, 0.17, 1);
+
+    font-family: 'Noto Sans JP', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN',
+      'Yu Gothic Medium', 'YuGothic', Meiryo, sans-serif;
+    font-size: 17px;
+    line-height: 2;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    background: var(--bg);
+    padding-bottom: 96px;
+    overflow-x: hidden;
+  }
+
+  /* このページに限りアンカー移動をなめらかにする。
+     参照サイトは Lenis でホイールごと乗っ取っているが、ここではやらない（理由は下記コメント）。 */
+  @media (prefers-reduced-motion: no-preference) {
+    :global(html) { scroll-behavior: smooth; }
+  }
+
+  /* アンカー移動をなめらかにする（Lenis のようなホイール乗っ取りはしない）。
+     固定ヘッダーに隠れないよう scroll-margin を取る。 */
+  .pb [id] { scroll-margin-top: 96px; }
+
+  .pb :is(h1, h2, h3, p, ul, ol, dl, dd, figure, table, blockquote) { margin: 0; }
+  .pb :is(ul, ol) { padding: 0; list-style: none; }
+  .pb blockquote { padding: 0; }
+  .pb a:not([class]) { color: inherit; }
+  .pb-defs { position: absolute; width: 0; height: 0; }
+
+  .pb svg {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* 英字・数字は和文と別書体にする（参照サイトと同じ作法） */
+  .pb-num, .pb-en {
+    font-family: 'Archivo', 'Noto Sans JP', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+  }
+  .pb-en { font-size: 12px; letter-spacing: 0.14em; color: var(--green-deep); }
+
+  .pb-sr {
+    position: absolute; width: 1px; height: 1px;
+    margin: -1px; padding: 0; overflow: hidden;
+    clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
+
+  .pb-wrap { width: min(100% - 40px, var(--wrap)); margin-inline: auto; }
+  .pb-body { font-size: 16px; }
+  .pb-note { font-size: 13px; line-height: 1.9; color: var(--muted); }
+  .pb-note-center { text-align: center; margin-top: 30px; }
+
+  .pb-notice {
+    background: var(--ink);
+    color: #fff;
+    font-size: 12px;
+    line-height: 1.8;
+    text-align: center;
+    padding: 10px 20px;
+    letter-spacing: 0.02em;
+  }
+
+  /* ══ アニメーション ══════════════════════════════
+     JSが有効なときだけ初期状態を隠す。無ければ最初から見える。 */
+  .pb.is-js [data-rv] { opacity: 0; transform: translateY(26px); }
+  .pb [data-rv] {
+    transition: opacity 0.7s var(--e2) var(--d, 0ms), transform 0.8s var(--e) var(--d, 0ms);
+  }
+  .pb [data-rv].is-in { opacity: 1; transform: none; }
+
+  /* 1文字ずつのスタガー表示。行の下から立ち上がる */
+  .pb-split { display: inline-flex; flex-wrap: wrap; overflow: hidden; vertical-align: bottom; }
+  .pb-split > span { display: inline-block; }
+  .pb.is-js .pb-split > span:not(.pb-sr) { transform: translateY(110%); opacity: 0; }
+  .pb .pb-split > span:not(.pb-sr) {
+    transition:
+      transform 0.55s var(--e) calc(var(--i, 0) * 34ms + var(--d, 0ms)),
+      opacity 0.5s var(--e2) calc(var(--i, 0) * 34ms + var(--d, 0ms));
+  }
+  .pb .is-in .pb-split > span:not(.pb-sr) { transform: none; opacity: 1; }
+  /* ヒーロー下部の Scroll だけは監視対象外なので最初から出す。
+     上の隠す指定と同じ詳細度(0,4,1)にしないと負けるため :not() を付ける */
+  .pb.is-js .pb-split-static > span:not(.pb-sr) { transform: none; opacity: 1; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pb [data-rv], .pb .pb-split > span { transition: none !important; opacity: 1 !important; transform: none !important; }
+    .pb * { animation: none !important; }
+    /* 帯は動かさず、そのまま並んだ状態で見せる */
+    .pb-kv-track { transform: none !important; }
+  }
+
+  /* ══ 有機的なブロブ ══════════════════════════════
+     角丸の4隅を不揃いにして雲形をつくる。画像は使わない。 */
+  .pb-blob {
+    position: absolute;
+    display: block;
+    pointer-events: none;
+    border-radius: 58% 42% 47% 53% / 44% 51% 49% 56%;
+  }
+  /* 写真は雲形で切り抜く。四隅が落ちる前提の構図で生成してある */
+  .pb-blob > img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pb-blob:has(> img) { overflow: hidden; }
+  /* 常時ループはしない。参照サイトも無限アニメーションは使っていない。
+     表示された瞬間に一度だけ、形とスケールが落ち着く。 */
+  .pb-hero-art .pb-blob {
+    /* transform はスクロール連動スケールが使うので、表示は opacity と角丸で行う */
+    transition: border-radius 1.6s var(--e), opacity 0.9s var(--e2);
+  }
+  .pb .pb-hero-art.is-in .pb-blob-a { border-radius: 63% 37% 41% 59% / 38% 60% 40% 62%; }
+  .pb .pb-hero-art.is-in .pb-blob-b { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
+  .pb .pb-hero-art.is-in .pb-blob-c { border-radius: 52% 48% 58% 42% / 60% 45% 55% 40%; }
+
+  /* ══ パラパラ漫画（2フレーム交互）══════════════════════
+     data-f が 0/1 で入れ替わる。JSが動かなければ1枚目だけ出す。 */
+  .pb-art .pb-f1 { display: block; }
+  .pb-art .pb-f2 { display: none; }
+  .pb-art[data-f="1"] .pb-f1 { display: none; }
+  .pb-art[data-f="1"] .pb-f2 { display: block; }
+
+  /* ══ スクロール連動のスケール（data-js-scale 相当）══════ */
+  .pb-hero-art .pb-blob { transform: scale(var(--sc, 1)); }
+  .pb.is-js .pb-hero-art .pb-blob { opacity: 0; }
+  .pb .pb-hero-art.is-in .pb-blob { opacity: 1; }
+
+  /* 線画は面より少し遅れて出す */
+  .pb-hero-art .pb-art { opacity: 0; transform: translateY(10px); }
+  .pb.is-js .pb-hero-art .pb-art {
+    transition: opacity 0.7s var(--e2) calc(var(--ai, 0) * 110ms + 260ms),
+                transform 0.8s var(--e) calc(var(--ai, 0) * 110ms + 260ms);
+  }
+  .pb .pb-hero-art.is-in .pb-art { opacity: 1; transform: none; }
+  .pb:not(.is-js) .pb-hero-art .pb-art { opacity: 1; transform: none; }
+
+  /* ══ 丸い矢印（参照サイトのモチーフ）══════════════ */
+  .pb-dot {
+    width: 32px; height: 32px; flex: none;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--green);
+    color: #fff;
+    transition: background-color 0.3s var(--e), color 0.3s var(--e), transform 0.4s var(--e);
+  }
+  .pb-dot svg { width: 15px; height: 15px; stroke-width: 1.8; }
+  .pb-dot-sm { width: 22px; height: 22px; }
+  .pb-dot-sm svg { width: 11px; height: 11px; }
+
+  /* ══ ボタン ══════════════════════════════════════
+     ホバーで下からアーチ状の塗りがせり上がり、
+     上りきると角丸が消えて四角に収まる（参照サイトの動きの再現）。 */
+  .pb-btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 58px;
+    padding: 0 16px 0 22px;
+    border-radius: var(--r-sm);
+    font-size: 19px;                 /* #1da700 に白文字は「大きい文字」(3:1) で成立させる */
+    font-weight: 700;
+    line-height: 1.5;
+    text-decoration: none;
+    border: 1.5px solid transparent;
+    transition: color 0.3s var(--e), border-color 0.3s var(--e);
+  }
+  .pb-btn-fill {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    border-radius: 999px 999px 0 0 / 80px 80px 0 0;
+    transition: transform 0.5s var(--e), border-radius 0.4s var(--e3);
+  }
+  .pb-btn:hover .pb-btn-fill,
+  .pb-btn:focus-visible .pb-btn-fill { transform: scaleY(1); border-radius: 0; }
+  .pb-btn-label { flex: 1; }
+  .pb-btn-dot {
+    width: 30px; height: 30px; flex: none;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    transition: background-color 0.3s var(--e), color 0.3s var(--e), transform 0.4s var(--e);
+  }
+  .pb-btn-dot svg { width: 14px; height: 14px; stroke-width: 1.8; }
+  .pb-btn:hover .pb-btn-dot { transform: translateX(3px); }
+
+  .pb-btn-green { background: var(--green); color: #fff; }
+  .pb-btn-green .pb-btn-fill { background: var(--ink); }
+  .pb-btn-green .pb-btn-dot { background: #fff; color: var(--green-deep); }
+
+  .pb-btn-ink { background: var(--ink); color: #fff; }
+  .pb-btn-ink .pb-btn-fill { background: var(--green-deep); }
+
+  .pb-btn-outline { background: var(--paper); color: var(--green-deep); border-color: var(--green); }
+  .pb-btn-outline .pb-btn-fill { background: var(--green-deep); }
+  .pb-btn-outline:hover, .pb-btn-outline:focus-visible { color: #fff; }
+  .pb-btn-outline .pb-btn-dot { background: var(--green-deep); color: #fff; }
+  .pb-btn-outline:hover .pb-btn-dot { background: #fff; color: var(--green-deep); }
+
+  /* 小さいボタンは文字が18.66px未満になるので、濃い緑にして4.5:1を確保する */
+  .pb-btn-sm { min-height: 48px; padding: 0 10px 0 16px; font-size: 15px; gap: 10px; }
+  .pb-btn-sm .pb-btn-dot { width: 24px; height: 24px; }
+  .pb-btn-sm .pb-btn-dot svg { width: 12px; height: 12px; }
+  .pb-btn-green.pb-btn-sm { background: var(--green-deep); }
+  .pb-btn-green.pb-btn-sm .pb-btn-fill { background: var(--ink); }
+  .pb-btn-block { display: flex; width: 100%; }
+
+  .pb-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.3s var(--e);
+  }
+  .pb-more > span:first-child {
+    background-image: linear-gradient(to top, currentColor 1px, transparent 1px);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+  .pb-more:hover { color: var(--green-deep); }
+  .pb-more:hover .pb-dot { transform: translateX(3px); }
+  .pb-more-inline { font-size: 14px; gap: 7px; }
+
+  /* ── ヘッダー ───────────────────────────────── */
+  .pb-head {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    background: rgba(243, 241, 239, 0.94);
+    backdrop-filter: blur(6px);
+  }
+  .pb-head-inner {
+    width: min(100% - 40px, 1340px);
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    min-height: 80px;
+  }
+  .pb-brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: inherit; }
+  .pb-brand-mark {
+    width: 46px; height: 46px; flex: none;
+    display: grid; place-items: center;
+    border-radius: 58% 42% 47% 53% / 44% 51% 49% 56%;   /* ロゴ枠も雲形にする */
+    background: var(--green);
+    color: #fff;
+    box-shadow: var(--shadow-xs);
+    transition: border-radius 0.6s var(--e);
+  }
+  .pb-brand:hover .pb-brand-mark { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
+  .pb-brand-mark svg { width: 25px; height: 25px; }
+  .pb-brand-text { display: grid; line-height: 1.3; }
+  .pb-brand-name { font-size: 21px; font-weight: 700; letter-spacing: 0.1em; }
+  .pb-brand-sub {
+    font-family: 'Archivo', sans-serif;
+    font-size: 10px; letter-spacing: 0.3em; color: var(--muted);
+  }
+
+  .pb-nav { display: flex; gap: 26px; margin-left: 10px; }
+  .pb-nav a { font-size: 14px; font-weight: 500; text-decoration: none; color: inherit; }
+  .pb-nav a > span {
+    display: inline-block;
+    background-image: linear-gradient(to top, var(--green) 1.5px, transparent 1.5px);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 100%;
+    transition: background-size 0.4s var(--e), color 0.3s var(--e);
+  }
+  .pb-nav a:hover > span { background-size: 100% 100%; color: var(--green-deep); }
+
+  .pb-head-cta { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+  .pb-headtel { display: flex; align-items: center; gap: 8px; text-decoration: none; color: var(--ink); }
+  .pb-headtel-icon { width: 21px; height: 21px; flex: none; color: var(--green-deep); }
+  .pb-headtel-icon svg { width: 21px; height: 21px; }
+  .pb-headtel-body { display: grid; line-height: 1.25; }
+  .pb-headtel-no { font-size: 24px; font-weight: 700; }
+  .pb-headtel-hours { font-size: 10px; color: var(--muted); letter-spacing: 0.02em; }
+
+  /* ── 01 ファーストビュー ─────────────────────── */
+  .pb-hero { position: relative; padding-block: clamp(28px, 4vw, 56px) clamp(64px, 7vw, 104px); }
+  .pb-hero-inner { position: relative; display: grid; gap: 30px; }
+
+  .pb-hero-art { position: relative; height: clamp(280px, 44vw, 440px); }
+  .pb-blob-a {
+    width: 62%; aspect-ratio: 1.15; left: 4%; top: 4%;
+    background: var(--green);
+  }
+  .pb-blob-b {
+    width: 40%; aspect-ratio: 1; right: 2%; top: 26%;
+    background: var(--mint);
+  }
+  .pb-blob-c {
+    width: 26%; aspect-ratio: 1; left: 46%; bottom: -2%;
+    background: var(--beige);
+  }
+  .pb-art { position: absolute; display: block; color: var(--ink); }
+  .pb-art svg { width: 100%; height: 100%; stroke-width: 1.1; }
+  .pb-art-flower { width: clamp(58px, 8.4vw, 96px); aspect-ratio: 1; left: 15%; top: 20%; color: #fff; }
+  .pb-art-home   { width: clamp(46px, 6.6vw, 74px); aspect-ratio: 1; left: 36%; top: 46%; color: #fff; }
+  .pb-art-tree   { width: clamp(44px, 6vw, 68px);   aspect-ratio: 1; right: 13%; top: 36%; }
+  .pb-art-hands  { width: clamp(44px, 6vw, 68px);   aspect-ratio: 1; left: 49%; bottom: 6%; }
+  .pb-art-leaf   { width: clamp(34px, 4.6vw, 52px); aspect-ratio: 1; left: 7%; bottom: 10%; color: var(--green-soft); }
+
+  .pb-hero-copy { display: grid; justify-items: start; gap: 22px; }
+  .pb-hero-catch {
+    font-size: clamp(27px, 3.4vw, 40px);
+    font-weight: 700;
+    line-height: 1.55;
+    letter-spacing: 0.1em;
+  }
+  .pb-catch-line { display: flex; }   /* 1行ぶんのブロックにする（折り返させない） */
+  .pb-hero-catch { display: grid; justify-items: start; }
+
+  .pb-hero-sub { font-size: 16px; color: var(--muted); line-height: 2.1; }
+  .pb-br-pc { display: none; }
+
+  .pb-hero-counts { display: flex; gap: 26px; flex-wrap: wrap; }
+  .pb-hero-counts li { display: flex; align-items: baseline; gap: 5px; }
+  .pb-hero-count-num { font-size: 34px; font-weight: 700; line-height: 1; }
+  .pb-hero-count-unit { font-size: 13px; }
+  .pb-hero-dot {
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--green);
+    align-self: center;
+    transform: scale(0);
+    transition: transform 0.5s var(--e) calc(var(--i) * 120ms + 400ms);
+  }
+  .pb .is-in .pb-hero-dot { transform: scale(1); }
+
+  /* ══ FVマーキー（参照サイトの帯）════════════════════════
+     ユニーク11枚を2周ぶん並べ、全体を -50% ずらすと継ぎ目なく回る。
+     JSは使わない（CSSアニメーションのほうが確実で軽い）。 */
+  .pb-kv {
+    --kvs: 0.62;                 /* タイル寸法の倍率。実測値(76〜168px)を基準にする */
+    margin-top: clamp(30px, 4vw, 52px);
+    height: calc(246px * var(--kvs));
+    overflow: hidden;
+    position: relative;
+  }
+  .pb-kv-track {
+    display: flex;
+    width: max-content;
+    animation: pb-marquee 60s linear infinite;   /* ゆっくり。1周60秒 */
+  }
+  .pb-kv:hover .pb-kv-track,
+  .pb-kv:focus-within .pb-kv-track { animation-play-state: paused; }
+  @keyframes pb-marquee { to { transform: translateX(-50%); } }
+
+  .pb-kv-row { display: flex; align-items: flex-start; }
+  .pb-kv-item {
+    flex: none;
+    width: calc(var(--w) * 1px * var(--kvs));
+    aspect-ratio: var(--r);
+    margin-top: calc(var(--t) * 1px * var(--kvs));
+    margin-right: calc(18px * var(--kvs) + 8px);
+    background: var(--mint);
+    overflow: hidden;
+    /* 参照サイトの帯だけは角丸ゼロの四角。他セクションの雲形との対比がリズムを作る */
+    border-radius: 0;
+  }
+  .pb-kv-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  .pb-scroll {
+    position: absolute;
+    left: 22px; bottom: 16px;
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 15px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-family: 'Archivo', sans-serif;
+    font-size: 11px; letter-spacing: 0.16em; color: var(--muted);
+  }
+
+  /* ── 02 3導線 ──────────────────────────────── */
+  .pb-paths-sec { padding-block: 0 clamp(56px, 7vw, 96px); }
+  .pb-paths { display: grid; gap: 16px; }
+  .pb-path {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 20px 20px 22px;
+    border-radius: var(--r);
+    background: var(--paper);
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s var(--e);
+  }
+  .pb-path-fill {
+    position: absolute; inset: 0; z-index: -1;
+    background: var(--green-deep);
+    transform: scaleY(0);
+    transform-origin: bottom;
+    border-radius: 999px 999px 0 0 / 80px 80px 0 0;
+    transition: transform 0.5s var(--e), border-radius 0.4s var(--e3);
+  }
+  .pb-path:hover .pb-path-fill, .pb-path:focus-visible .pb-path-fill { transform: scaleY(1); border-radius: 0; }
+  .pb-path:hover { color: #fff; }
+  .pb-path:hover .pb-en, .pb-path:hover .pb-path-body { color: #fff; }
+  .pb-path:hover .pb-path-icon { background: rgba(255, 255, 255, 0.22); color: #fff; border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
+  .pb-path:hover .pb-dot { background: #fff; color: var(--green-deep); transform: translateX(3px); }
+  .pb-path-icon {
+    width: 56px; height: 56px; flex: none;
+    display: grid; place-items: center;
+    border-radius: 58% 42% 47% 53% / 44% 51% 49% 56%;
+    background: var(--mint);
+    color: var(--green-deep);
+    transition: background-color 0.3s var(--e), color 0.3s var(--e), border-radius 0.6s var(--e);
+  }
+  .pb-path-icon svg { width: 26px; height: 26px; }
+  .pb-path-text { display: grid; gap: 1px; min-width: 0; }
+  .pb-path-label { font-size: 19px; font-weight: 700; line-height: 1.6; }
+  .pb-path-body { font-size: 13px; color: var(--muted); line-height: 1.7; transition: color 0.3s var(--e); }
+  .pb-path .pb-dot { margin-left: auto; }
+
+  /* ── 見出し ─────────────────────────────────── */
+  .pb-sec { padding-block: clamp(60px, 7.5vw, 104px); position: relative; }
+  .pb-eyebrow { display: inline-flex; align-items: center; gap: 9px; }
+  .pb-eyebrow .pb-split {
+    font-family: 'Archivo', sans-serif;
+    font-size: 13px; font-weight: 600; letter-spacing: 0.16em; color: var(--green-deep);
+  }
+  .pb-eyebrow-mark {
+    display: grid; place-items: center;
+    width: 26px; height: 26px; flex: none;
+    border-radius: 58% 42% 47% 53% / 44% 51% 49% 56%;   /* ブランドマークと同じ雲形バッジ */
+    background: var(--mint);
+    color: var(--green-deep);
+  }
+  .pb-eyebrow-mark svg { width: 15px; height: 15px; }
+  .pb-eyebrow-ja { font-size: 13px; color: var(--muted); }
+
+  .pb-h2 {
+    font-size: clamp(24px, 2.8vw, 34px);
+    font-weight: 700;
+    line-height: 1.65;
+    letter-spacing: 0.06em;
+    margin-top: 12px;
+  }
+  .pb-h3 { font-size: 19px; font-weight: 700; line-height: 1.7; letter-spacing: 0.05em; }
+  .pb-lead { font-size: 16px; color: var(--muted); margin-top: 14px; }
+  .pb-head2 { margin-bottom: 44px; }
+  .pb-head2 .pb-lead { max-width: 40em; }
+
+  /* ── 03 法人の想い ───────────────────────────── */
+  .pb-mind { overflow: hidden; }
+  .pb-blob-mind {
+    width: min(52vw, 540px); aspect-ratio: 1.2;
+    right: -12%; top: 14%;
+    background: var(--mint);
+    opacity: 0.7;
+  }
+  .pb-mind-inner { position: relative; display: grid; gap: 34px; }
+  .pb-mind-figure { position: relative; }
+  .pb-blob-photo {
+    position: relative;          /* 図版として置くブロブは通常フロー */
+    display: block;
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--mint);
+    transition: border-radius 1.2s var(--e);
+  }
+  .pb-mind-figure:hover .pb-blob-photo { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
+  .pb-mind-body { margin-top: 32px; display: grid; gap: 2px; }
+  .pb-mind-line { font-size: clamp(17px, 1.8vw, 21px); line-height: 2.1; letter-spacing: 0.06em; }
+
+  /* ══ 文章の塗り上げ（参照サイトの data-js-ssp-child 相当）══
+     文字を透明にし、背景のグラデーションを background-clip: text で抜く。
+     JSが --p（0→1）をスクロール進行で更新すると、左から濃くなっていく。
+     JSが無い／background-clip 非対応なら、ふつうの黒文字のまま。 */
+  @supports ((-webkit-background-clip: text) or (background-clip: text)) {
+    .pb.is-js.is-scroll [data-paint-line] {
+      color: transparent;
+      /* 【参照サイトからの意図的なズラし】
+         参照サイトの未塗り部分は地色に対し約1.4:1で、スクロールするまで読めない。
+         ここは入居検討中のご本人・ご家族が読む本文なので、
+         未塗りでも 5.5:1 を確保できる rgba(0,0,0,.6) を下限にした。
+         演出は弱くなるが、読めない文章を出すよりよい。 */
+      background-image: linear-gradient(
+        90deg,
+        var(--ink) 0 45%,
+        rgba(0, 0, 0, 0.6) 55% 100%
+      );
+      background-size: 260% 100%;
+      background-position: calc((1 - var(--p, 0)) * 100%) 0;
+      background-repeat: no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      transition: background-position 0.15s linear;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .pb [data-paint-line] {
+      color: var(--ink) !important;
+      background-image: none !important;
+      -webkit-background-clip: border-box !important;
+      background-clip: border-box !important;
+    }
+  }
+  .pb-mind-gap { margin-top: 26px; }
+  .pb-mind-strong { font-weight: 700; }
+  .pb-sign { margin-top: 28px; font-size: 15px; color: var(--muted); }
+
+  /* ── 04 大切にしていること ───────────────────── */
+  /* カード同士が影と白地でつながって見えないよう、縦方向は常に明確に空ける */
+  .pb-value-list { display: grid; column-gap: 20px; row-gap: 28px; }
+  .pb-value {
+    background: var(--paper);
+    border-radius: var(--r);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.5s var(--e), box-shadow 0.5s var(--e);
+  }
+  .pb-value:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+  .pb-value-art { position: relative; height: 200px; padding: 14px 16px 0; }
+  .pb-blob-value {
+    position: absolute;
+    inset: 14px 16px 0;
+    background: var(--mint);
+    transition: border-radius 0.9s var(--e);
+  }
+  .pb-value:hover .pb-blob-value { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
+  /* 丸アイコンは写真の下端に重ねて、写真とテキストの橋渡しにする */
+  .pb-value-icon {
+    position: absolute; left: 26px; bottom: -22px; z-index: 1;
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--green-deep);
+    box-shadow: var(--shadow-xs);
+  }
+  .pb-value-icon svg { width: 26px; height: 26px; stroke-width: 1.3; }
+  .pb-value-text { padding: 34px 24px 30px; }
+  .pb-value-no { display: flex; align-items: baseline; gap: 10px; }
+  .pb-value-no .pb-num { font-size: 20px; color: var(--green-deep); }
+  .pb-value-text .pb-h3 { margin-top: 4px; }
+  .pb-value-lines { margin-top: 14px; display: grid; gap: 9px; }
+  .pb-value-lines li { position: relative; padding-left: 20px; font-size: 15px; line-height: 1.9; }
+  .pb-value-lines li::before {
+    content: '';
+    position: absolute; left: 2px; top: 12px;
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--green);
+  }
+
+  /* ── 05 法人の歩みと体制 ─────────────────────── */
+  .pb-fact-list { display: grid; column-gap: 20px; row-gap: 28px; }
+  .pb-fact { background: var(--paper); border-radius: var(--r); padding: 26px 20px; box-shadow: var(--shadow); }
+  .pb-fact-num { display: flex; align-items: baseline; gap: 4px; line-height: 1.15; }
+  .pb-fact-num .pb-num { font-size: 36px; font-weight: 700; }
+  .pb-fact-unit { font-size: 15px; }
+  .pb-fact-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: var(--green);
+    align-self: center; margin-left: 4px;
+    transform: scale(0);
+    transition: transform 0.5s var(--e) calc(var(--d, 0ms) + 320ms);
+  }
+  .pb .is-in .pb-fact-dot { transform: scale(1); }
+  .pb-fact-label { font-size: 15px; font-weight: 700; margin-top: 14px; line-height: 1.7; }
+  .pb-fact-label2 { font-size: 13px; color: var(--muted); line-height: 1.7; margin-top: 4px; }
+  .pb-fact-note { font-size: 12px; color: var(--muted); line-height: 1.8; margin-top: 8px; }
+
+  .pb-deflist { display: grid; gap: 14px; }
+  /* dl の全体リセット（.pb :is(..., dl)）より詳細度を上げ、上段カードとの間隔を保証する */
+  .pb .pb-fact-def { margin-top: 32px; column-gap: 20px; row-gap: 28px; align-items: start; }
+  .pb-fact-def > div { background: var(--paper); border-radius: var(--r); padding: 20px 22px; box-shadow: var(--shadow); }
+  .pb-deflist dt { font-size: 15px; font-weight: 700; color: var(--green-deep); }
+  .pb-deflist dd { font-size: 15px; line-height: 1.95; margin-top: 10px; }
+  .pb-deflist-sm > div { padding: 0 0 14px; border-bottom: 1px solid var(--line-soft); background: transparent; }
+  .pb-facts .pb-note { margin-top: 18px; }
+
+  /* ── 06 施設を探す ───────────────────────────── */
+  .pb-fac-list { display: grid; column-gap: 20px; row-gap: 28px; }
+  .pb-fac {
+    background: var(--paper);
+    border-radius: var(--r);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.5s var(--e), box-shadow 0.5s var(--e);
+  }
+  .pb-fac:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+  .pb-fac-art { position: relative; height: 214px; padding: 14px 16px 0; }
+  .pb-blob-fac {
+    position: absolute;
+    inset: 14px 16px 0;
+    background: var(--mint);
+    transition: border-radius 0.9s var(--e);
+  }
+  .pb-fac:hover .pb-blob-fac { border-radius: 63% 37% 41% 59% / 38% 60% 40% 62%; }
+  .pb-fac-leaf {
+    position: absolute; right: 8px; bottom: 0;
+    width: 26px; height: 26px; color: var(--green-soft);
+  }
+  .pb-fac-leaf svg { width: 26px; height: 26px; stroke-width: 1.2; }
+  .pb-fac-text { padding: 22px 22px 26px; }
+  .pb-fac-kind { font-size: 13px; font-weight: 500; color: var(--green-deep); }
+  .pb-fac-name { font-size: 24px; font-weight: 700; line-height: 1.5; letter-spacing: 0.08em; margin-top: 3px; }
+  .pb-fac-area { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .pb-fac-area-icon { width: 17px; height: 17px; flex: none; }
+  .pb-fac-area-icon svg { width: 17px; height: 17px; }
+  .pb-fac-text .pb-body { margin-top: 12px; }
+  .pb-fac-links { display: grid; gap: 10px; margin-top: 20px; }
+
+  .pb-status {
+    display: inline-block; margin-top: 12px;
+    padding: 4px 14px; border-radius: 999px;
+    font-size: 14px; font-weight: 700; line-height: 1.7;
+  }
+  .pb-status-open { background: var(--green-deep); color: #fff; }
+  .pb-status-full { background: var(--bg); color: var(--muted); border: 1px solid var(--line); }
+
+  /* ── 07 サービスを探す ───────────────────────── */
+  .pb-sv-list { display: grid; column-gap: 16px; row-gap: 28px; }
+  .pb-sv-link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 20px 18px;
+    border-radius: var(--r);
+    background: var(--paper);
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow);
+    transition: transform 0.5s var(--e), box-shadow 0.5s var(--e);
+  }
+  .pb-sv-link:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+  .pb-sv-art { position: relative; flex: none; width: 108px; height: 108px; }
+  .pb-blob-sv {
+    position: absolute; inset: 0;
+    background: var(--mint);
+    transition: border-radius 0.9s var(--e), transform 0.6s var(--e);
+  }
+  .pb-sv-link:hover .pb-blob-sv { border-radius: 44% 56% 62% 38% / 55% 42% 58% 45%; }
+  .pb-sv-text { display: grid; gap: 4px; min-width: 0; }
+  .pb-sv-cat {
+    justify-self: start;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    color: var(--green-deep); background: var(--mint);
+    border-radius: 999px; padding: 2px 11px; line-height: 1.8;
+  }
+  .pb-sv-name { font-size: 19px; font-weight: 700; line-height: 1.6; letter-spacing: 0.04em; }
+  .pb-sv-trouble { font-size: 15px; font-weight: 500; color: var(--green-deep); line-height: 1.85; }
+  .pb-sv-body { font-size: 15px; line-height: 1.9; }
+  .pb-sv-dot { align-self: center; }
+  .pb-sv-link:hover .pb-sv-dot { transform: translateX(3px); }
+
+  /* ── 08 見学・資料請求 ───────────────────────── */
+  .pb-contact { overflow: hidden; }
+  .pb-blob-contact {
+    width: min(46vw, 500px); aspect-ratio: 1.1;
+    left: -14%; top: 24%;
+    background: var(--sky);
+    opacity: 0.8;
+  }
+  .pb-contact .pb-wrap { position: relative; }
+  .pb-desk-list { display: grid; column-gap: 16px; row-gap: 28px; }
+  .pb-desk {
+    background: var(--paper);
+    border-radius: var(--r);
+    padding: 24px 22px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: var(--shadow);
+    transition: transform 0.5s var(--e), box-shadow 0.5s var(--e);
+  }
+  .pb-desk:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+  .pb-desk-head { display: flex; align-items: center; gap: 11px; }
+  .pb-desk-icon {
+    width: 46px; height: 46px; flex: none;
+    display: grid; place-items: center;
+    border-radius: 58% 42% 47% 53% / 44% 51% 49% 56%;
+    background: var(--mint); color: var(--green-deep);
+    transition: border-radius 0.7s var(--e);
+  }
+  .pb-tone-green .pb-desk-icon { background: #d6efd0; }
+  .pb-tone-beige .pb-desk-icon { background: var(--beige); }
+  .pb-desk:hover .pb-desk-icon { border-radius: 63% 37% 41% 59% / 38% 60% 40% 62%; }
+  .pb-desk-icon svg { width: 23px; height: 23px; }
+  .pb-desk-title { font-size: 18px; font-weight: 700; line-height: 1.65; margin-top: 12px; }
+  .pb-desk-target { font-size: 13px; color: var(--muted); margin-top: 6px; line-height: 1.85; }
+  .pb-desk-tel { display: flex; align-items: center; gap: 8px; margin-top: 14px; text-decoration: none; color: var(--green-deep); }
+  .pb-desk-tel-icon { width: 23px; height: 23px; flex: none; }
+  .pb-desk-tel-icon svg { width: 23px; height: 23px; }
+  .pb-desk-tel-no { font-size: 30px; font-weight: 700; line-height: 1.3; }
+  .pb-desk-hours { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+  .pb-desk-hours-icon { width: 17px; height: 17px; flex: none; }
+  .pb-desk-hours-icon svg { width: 17px; height: 17px; }
+  .pb-desk-staff { font-size: 12px; color: var(--muted); line-height: 1.85; margin-bottom: 16px; }
+  .pb-desk .pb-btn { margin-top: auto; }
+
+  .pb-form-block {
+    margin-top: 26px;
+    background: var(--paper);
+    border-radius: var(--r);
+    padding: 30px 24px;
+    display: grid;
+    gap: 28px;
+    align-items: start;
+    box-shadow: var(--shadow);
+  }
+  .pb-form-en { display: block; margin-bottom: 4px; }
+  .pb-form-doc-title { font-size: 15px; font-weight: 700; margin-top: 20px; }
+  .pb-doclist { display: grid; gap: 8px; margin-top: 8px; }
+  .pb-doclist li { display: flex; align-items: flex-start; gap: 9px; font-size: 15px; line-height: 1.85; }
+  .pb-doclist-mark { width: 19px; height: 19px; flex: none; color: var(--green-deep); margin-top: 5px; }
+  .pb-doclist-mark svg { width: 19px; height: 19px; }
+  .pb-form-text .pb-note { margin-top: 16px; }
+
+  .pb-form-mock { background: var(--bg); border-radius: var(--r); padding: 22px 20px; box-shadow: var(--shadow-xs); }
+  .pb-form-mock-label { font-size: 12px; font-weight: 700; color: var(--muted); margin-bottom: 6px; }
+  .pb-form-mock-field {
+    height: 46px;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    background: var(--paper);
+    margin-bottom: 14px;
+    font-size: 14px; color: var(--muted);
+    line-height: 46px; padding-inline: 12px;
+  }
+  .pb-form-mock-area { height: 96px; }
+  .pb-form-mock-btn {
+    height: 54px; border-radius: var(--r-sm);
+    background: var(--green); color: #fff;
+    /* #1da700 に白文字は「大きい文字」(18.66px以上・太字) でないとAAに届かない */
+    font-size: 19px; font-weight: 700; text-align: center; line-height: 54px;
+  }
+
+  .pb-hours { margin-top: 26px; background: var(--paper); border-radius: var(--r); padding: 28px 24px; box-shadow: var(--shadow); }
+  .pb-hours-grid { display: grid; gap: 26px; margin-top: 18px; }
+  .pb-table-wrap { overflow-x: auto; }
+  .pb-table { width: 100%; border-collapse: collapse; min-width: 460px; font-size: 15px; }
+  .pb-table :is(th, td) { padding: 12px 14px; border-bottom: 1px solid var(--line-soft); text-align: left; line-height: 1.7; }
+  .pb-table thead th { background: var(--mint); font-size: 13px; font-weight: 700; white-space: nowrap; }
+  .pb-table tbody th { font-weight: 500; }
+  .pb-map {
+    margin-top: 16px; height: 190px;
+    border: 1px dashed var(--line);
+    border-radius: var(--r);
+    background: var(--bg);
+    display: grid; place-items: center; align-content: center; gap: 6px;
+    color: var(--muted);
+  }
+  .pb-map-icon { width: 28px; height: 28px; }
+  .pb-map-icon svg { width: 28px; height: 28px; }
+  .pb-map-label { font-size: 13px; }
+
+  /* ── 09 お知らせ ─────────────────────────────── */
+  .pb-news-head { display: grid; gap: 18px; margin-bottom: 26px; }
+  .pb-news-list { border-top: 1px solid var(--line-soft); }
+  .pb-news-list li { border-bottom: 1px solid var(--line-soft); }
+  .pb-news-list a {
+    display: grid;
+    gap: 4px 16px;
+    padding: 18px 4px;
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s var(--e);
+  }
+  .pb-news-list a:hover { color: var(--green-deep); }
+  .pb-news-list a:hover .pb-news-dot { transform: translateX(3px); }
+  .pb-news-thumb {
+    width: 96px; aspect-ratio: 4 / 3;
+    border-radius: var(--r-sm);
+    overflow: hidden;
+    background: var(--mint);
+    flex: none;
+  }
+  .pb-news-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  /* サムネイルの無い記事も列を揃える（並びが崩れると読みにくい） */
+  .pb-news-thumb-none { background: transparent; }
+
+  .pb-news-date { font-size: 14px; color: var(--muted); }
+  .pb-cat {
+    justify-self: start;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+    border-radius: 999px; padding: 2px 12px; line-height: 1.8;
+  }
+  .pb-cat-green { background: var(--mint); color: var(--green-deep); }
+  .pb-cat-sky { background: var(--sky); color: #1f4a63; }
+  .pb-cat-beige { background: var(--beige); color: #6b4f1d; }
+  .pb-news-text { font-size: 16px; line-height: 1.85; }
+  .pb-news-dot { justify-self: end; align-self: center; }
+
+  /* ── 10 採用 ─────────────────────────────────── */
+  .pb-recruit { overflow: hidden; }
+  .pb-blob-rec-a {
+    width: min(40vw, 400px); aspect-ratio: 1; right: -10%; top: 10%;
+    background: var(--mint); opacity: 0.75;
+  }
+  .pb-blob-rec-b {
+    width: min(30vw, 280px); aspect-ratio: 1; left: -8%; bottom: 12%;
+    background: var(--beige); opacity: 0.7;
+  }
+  .pb-recruit .pb-wrap { position: relative; }
+  .pb-rec-figure { margin-bottom: 20px; }
+  .pb-rec-figure .pb-blob-photo { width: 100%; }
+  /* 3:2のまま置くと縦に伸びてセクションを占拠するので、帯状に切り詰める。
+     被写体（職員4人）の顔が上寄りなので object-position で上を残す */
+  .pb-blob-wide { aspect-ratio: 16 / 9; }
+  .pb-blob-wide > img { object-position: center 38%; }
+  .pb-rec-interview:hover .pb-blob-photo { border-radius: 63% 37% 41% 59% / 38% 60% 40% 62%; }
+  .pb-rec-top { display: grid; gap: 20px; align-items: start; }
+  .pb-rec-interview, .pb-rec-policy, .pb-rec-support, .pb-jobs {
+    background: var(--paper); border-radius: var(--r); padding: 26px 24px;
+  }
+  .pb-rec-tag {
+    display: inline-block;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.08em;
+    color: var(--green-deep); background: var(--mint);
+    border-radius: 999px; padding: 2px 12px;
+  }
+  .pb-quote { font-size: 17px; line-height: 2.05; margin-top: 14px; padding-left: 16px; border-left: 3px solid var(--green); }
+  .pb-rec-who { font-size: 14px; color: var(--muted); margin-top: 12px; }
+  .pb-rec-interview .pb-more { margin-top: 14px; }
+  .pb-rec-policy .pb-h3 { margin-top: 4px; }
+  .pb-checklist { display: grid; gap: 12px; margin-top: 14px; }
+  .pb-checklist li { display: flex; align-items: flex-start; gap: 10px; font-size: 16px; line-height: 1.85; }
+  .pb-check { width: 23px; height: 23px; flex: none; color: var(--green-deep); margin-top: 5px; }
+  .pb-check svg { width: 23px; height: 23px; }
+  .pb-rec-policy .pb-note { margin-top: 14px; }
+  /* ul の全体リセットに打ち消されないよう、職員インタビュー下のカード列も明示する */
+  .pb .pb-fact-list-sm { margin-top: 32px; }
+  .pb-fact-list-sm .pb-fact-num .pb-num { font-size: 32px; }
+  .pb-rec-support { margin-top: 20px; }
+  .pb-rec-support .pb-deflist { margin-top: 14px; }
+  .pb-jobs { margin-top: 20px; }
+  .pb-jobs .pb-table-wrap { margin-top: 16px; }
+  .pb-rec-cta { display: grid; gap: 12px; margin-top: 22px; }
+
+  /* ── フッター ───────────────────────────────── */
+  .pb-foot {
+    position: relative;
+    padding-block: 56px 30px;
+    overflow: hidden;
+    background: var(--paper);
+  }
+  .pb-blob-foot {
+    width: min(44vw, 440px); aspect-ratio: 1.15;
+    right: -12%; top: -18%;
+    background: var(--mint); opacity: 0.55;
+  }
+  .pb-art-foot { position: absolute; right: 6%; top: 7%; width: clamp(52px, 7vw, 88px); aspect-ratio: 1; color: var(--green-soft); }
+  .pb-foot .pb-wrap { position: relative; }
+  .pb-foot-top { display: grid; gap: 34px; }
+  .pb-foot-brand .pb-brand-mark { margin-bottom: 12px; }
+  .pb-foot-name { font-size: 22px; font-weight: 700; letter-spacing: 0.1em; }
+  .pb-foot-en { font-family: 'Archivo', sans-serif; font-size: 11px; letter-spacing: 0.3em; color: var(--muted); }
+  .pb-foot-addr, .pb-foot-founded { font-size: 14px; color: var(--muted); line-height: 1.95; }
+  .pb-foot-addr { margin-top: 12px; }
+  .pb-foot-tel { display: flex; align-items: center; gap: 8px; margin-top: 12px; text-decoration: none; color: var(--green-deep); }
+  .pb-foot-hours { font-size: 12px; color: var(--muted); }
+
+  .pb-foot-nav { display: grid; gap: 24px; }
+  .pb-foot-heading { font-size: 15px; font-weight: 700; color: var(--green-deep); margin-bottom: 8px; }
+  .pb-foot-nav ul { display: grid; gap: 7px; }
+  .pb-foot-nav a { font-size: 14px; color: var(--ink); text-decoration: none; }
+  .pb-foot-nav a > span, .pb-foot-legal a > span {
+    display: inline-block;
+    background-image: linear-gradient(to top, currentColor 1px, transparent 1px);
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    background-size: 0 100%;
+    transition: background-size 0.4s var(--e), color 0.3s var(--e);
+  }
+  .pb-foot-nav a:hover > span, .pb-foot-legal a:hover > span { background-size: 100% 100%; }
+  .pb-foot-nav a:hover { color: var(--green-deep); }
+
+  .pb-foot-bottom {
+    margin-top: 34px; padding-top: 20px;
+    border-top: 1px solid var(--line-soft);
+    display: grid; gap: 12px;
+  }
+  .pb-foot-legal { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  .pb-foot-legal a { font-size: 13px; color: var(--muted); text-decoration: none; }
+  .pb-foot-legal a:hover { color: var(--green-deep); }
+  .pb-copy { font-family: 'Archivo', sans-serif; font-size: 12px; color: var(--muted); }
+
+  /* ── モバイル固定CTA ─────────────────────────── */
+  .pb-sticky {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 50;
+    display: flex; gap: 10px;
+    padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
+    background: rgba(243, 241, 239, 0.96);
+    backdrop-filter: blur(6px);
+    border-top: 1px solid var(--line-soft);
+  }
+  .pb-btn-sticky { flex: 1; min-height: 56px; padding: 0 12px; font-size: 16px; justify-content: center; }
+  .pb-btn-sticky .pb-btn-label { flex: none; }
+  .pb-btn-green.pb-btn-sticky { background: var(--green-deep); }
+  .pb-btn-green.pb-btn-sticky .pb-btn-fill { background: var(--ink); }
+
+  /* ── モバイルメニュー ──────────────────────────
+     .pb-menu-list に display を直接書くと <details> の既定の非表示が効かなくなる。 */
+  .pb-menu { position: relative; margin-left: auto; }
+  .pb-menu summary {
+    list-style: none;
+    width: 52px; height: 52px;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    cursor: pointer;
+  }
+  .pb-menu summary::-webkit-details-marker { display: none; }
+  .pb-menu-bars, .pb-menu-bars::before, .pb-menu-bars::after {
+    display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px;
+  }
+  .pb-menu-bars { position: relative; }
+  .pb-menu-bars::before, .pb-menu-bars::after { content: ''; position: absolute; left: 0; }
+  .pb-menu-bars::before { top: -7px; }
+  .pb-menu-bars::after { top: 7px; }
+  .pb-menu-list { display: none; }
+  .pb-menu[open] .pb-menu-list {
+    display: grid;
+    position: absolute; right: 0; top: calc(100% + 10px);
+    width: min(84vw, 320px);
+    background: var(--paper);
+    border-radius: var(--r);
+    box-shadow: var(--shadow-md);
+    padding: 8px;
+    max-height: 74vh; overflow-y: auto;
+  }
+  .pb-menu-list a {
+    display: flex; align-items: center; gap: 11px;
+    min-height: 56px; padding: 0 12px;
+    font-size: 16px; text-decoration: none; color: inherit;
+    border-radius: var(--r-sm);
+    transition: background-color 0.3s var(--e);
+  }
+  .pb-menu-list a:hover { background: var(--mint); }
+  .pb-mi { width: 23px; height: 23px; flex: none; color: var(--green-deep); }
+  .pb-mi svg { width: 23px; height: 23px; }
+
+  /* ── ブレイクポイント ────────────────────────── */
+  @media (min-width: 700px) {
+    .pb-paths { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-fact-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .pb-fact-list-sm { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-value-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-fac-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-sv-list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pb-desk-list { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-fact-def { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .pb-foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .pb-news-list a { grid-template-columns: auto auto auto minmax(0, 1fr) auto; align-items: center; }
+    .pb-rec-cta { grid-auto-flow: column; justify-content: start; }
+  }
+
+  @media (min-width: 1000px) {
+    .pb-br-pc { display: inline; }
+    .pb-hero-inner { grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr); align-items: center; gap: 40px; }
+    .pb-hero-art { height: clamp(380px, 32vw, 470px); }
+    .pb-kv { --kvs: 1; }
+    .pb-mind-inner { grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr); gap: 48px; align-items: center; }
+    .pb-rec-top { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); }
+    .pb-form-block { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); gap: 40px; padding: 36px 34px; }
+    .pb-hours-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr); }
+    .pb-news-head { grid-template-columns: minmax(0, 1fr) auto; align-items: end; }
+    .pb-foot-top { grid-template-columns: minmax(0, 0.85fr) minmax(0, 2fr); gap: 44px; }
+    .pb-foot-nav { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .pb-foot-bottom { grid-template-columns: minmax(0, 1fr) auto; align-items: center; }
+    .pb-sticky { display: none; }
+    .pb { padding-bottom: 0; }
+  }
+
+  @media (max-width: 1099px) {
+    .pb-nav, .pb-head-cta { display: none; }
+  }
+  @media (min-width: 1100px) {
+    .pb-menu { display: none; }
+  }
+</style>

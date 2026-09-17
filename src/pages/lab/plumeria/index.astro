@@ -1,0 +1,249 @@
+---
+import PlumeriaLayout from '../../../layouts/PlumeriaLayout.astro';
+import PlumeriaGuideQuiz from '../../../components/plumeria/PlumeriaGuideQuiz.astro';
+import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin } from '../../../data/plumeria';
+
+// 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
+// services配列やヘッダーのnavEntriesには追加せず、FVの入口タイルにだけ足す。
+const entrances = [
+  ...services,
+  recruitEntry,
+  { id: 'important-matters', name: '重要事項説明', icon: 'document', href: routes.importantMatters },
+];
+
+const heroSlides = [
+  { img: '/images/plumeria/hero-01.webp', label: '入居者とスタッフ', alt: '入居者とスタッフが穏やかに話す様子（イメージ）' },
+  { img: '/images/plumeria/hero-02.webp', label: '建物の外観', alt: '植栽に囲まれた建物（イメージ）' },
+  { img: '/images/plumeria/hero-03.webp', label: '共用リビング', alt: '明るいリビングでくつろぐ様子（イメージ）' },
+  { img: '/images/plumeria/hero-04.webp', label: 'スタッフ', alt: 'スタッフが会話する様子（イメージ）' },
+];
+---
+<PlumeriaLayout
+  title="プルメリア｜可児市の住まい・介護・看護のご案内（デモ）"
+  description="岐阜県可児市のプルメリア。住まい、短期宿泊、ご自宅での介護・看護など、6つのサービスをご案内します。"
+  currentPath={routes.top}
+>
+  <section class="pl-hero">
+    <a class="pl-hero-brand-card" href={routes.top} aria-label={`${corp.name} トップへ戻る`}>
+      <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>
+      <span class="pl-brand-text">
+        <span class="pl-brand-name">{corp.name}</span>
+        <span class="pl-brand-en">{corp.nameEn}</span>
+      </span>
+    </a>
+    <div class="pl-hero-media">
+      <div class="pl-slider" data-pl-slider>
+        {heroSlides.map((s, i) => (
+          <img class={i === 0 ? 'pl-hero-photo is-on' : 'pl-hero-photo'}
+            src={i === 0 ? s.img : undefined} data-src={i === 0 ? undefined : s.img}
+            alt={s.alt} width="1600" height="900" fetchpriority={i === 0 ? 'high' : undefined}
+            decoding="async" aria-hidden={i === 0 ? undefined : 'true'} />
+        ))}
+        <div class="pl-slider-ui">
+          <ul class="pl-dots">
+            {heroSlides.map((s, i) => (
+              <li><button type="button" class={i === 0 ? 'pl-dot is-on' : 'pl-dot'}
+                data-pl-dot={String(i)} aria-current={i === 0 ? 'true' : 'false'}>
+                <span class="pl-sr">{s.label}を表示</span>
+              </button></li>
+            ))}
+          </ul>
+          <button type="button" class="pl-slider-toggle" data-pl-toggle data-playing="false">
+            <span class="pl-slider-toggle-icon" aria-hidden="true"></span>
+            <span class="pl-sr" data-pl-toggle-label>スライドショーを再生</span>
+          </button>
+        </div>
+      </div>
+      <svg class="pl-hero-frame" viewBox="0 0 1 1" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+        <path class="pl-hero-frame-top" vector-effect="non-scaling-stroke" transform="translate(0,0.05)"
+              d="M0,0.075 C0.22,0.004 0.58,0.004 1,0.042" />
+        <path class="pl-hero-frame-bottom" vector-effect="non-scaling-stroke" transform="translate(0,0.028)"
+              d="M1,0.80 C0.74,0.99 0.44,0.85 0.20,0.94 C0.11,0.975 0.05,0.995 0,1" />
+      </svg>
+      <div class="pl-motes" aria-hidden="true">
+        <span class="pl-mote pl-mote-1"></span><span class="pl-mote pl-mote-2"></span>
+        <span class="pl-mote pl-mote-3"></span><span class="pl-mote pl-mote-4"></span>
+        <span class="pl-mote pl-mote-5"></span><span class="pl-mote pl-mote-6"></span>
+      </div>
+    </div>
+    <div class="pl-wrap pl-hero-inner">
+      <div class="pl-hero-copy">
+        <p class="pl-eyebrow">岐阜県可児市｜介護事業部の総合案内</p>
+        <h1 class="pl-h1">これからの暮らしに、<br />必要な支えを。</h1>
+        <p class="pl-hero-lead">住まいを探す方も、ご自宅での介護を考える方も。<br />知りたいサービスからご覧ください。</p>
+        <a class="pl-more" href="#guide">どこに相談するか迷ったら →</a>
+        {/* 高さをそろえた分の余白は装飾ではなく実用情報で埋める。番号・受付時間は公式サイトの記載。 */}
+        <div class="pl-hero-desks">
+          <p class="pl-hero-desks-head">
+            お電話でのご相談<span class="pl-hero-desks-hours">受付：平日 10:00〜17:00</span>
+          </p>
+          <ul class="pl-hero-desk-list">
+            <li>
+              <a class="pl-hero-desk" href={`tel:${corp.tel?.replaceAll('-', '')}`}
+                 data-pl-gtag="phone_click" data-pl-service="housing" data-pl-cta="hero_desk">
+                <span class="pl-hero-desk-name">住まい（Ⅰ・Ⅱ）</span>
+                <strong class="pl-num-face">{corp.tel}</strong>
+              </a>
+            </li>
+            <li>
+              <a class="pl-hero-desk" href={`tel:${shortStayTel.replaceAll('-', '')}`}
+                 data-pl-gtag="phone_click" data-pl-service="short-stay" data-pl-cta="hero_desk">
+                <span class="pl-hero-desk-name">ショートステイ（Ⅲ）</span>
+                <strong class="pl-num-face">{shortStayTel}</strong>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービス・採用・重要事項説明">
+        <ul class="pl-tiles">
+          {entrances.map((s) => (
+            <li><a class="pl-tile" href={s.href}
+                 data-pl-gtag={s.id === 'recruit' ? 'recruit_click' : 'service_select'}
+                 data-pl-service={s.id} data-pl-cta="hero_tile">
+              <span class="pl-tile-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
+              <span class="pl-tile-label">{s.name}</span>
+              {['housing', 'short-stay'].includes(s.id) && <span class="pl-tile-sub">{s.tagline}</span>}
+            </a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-tight" id="news">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">お知らせ</h2>
+      <ul class="pl-news">
+        {news.map((n) => (
+          <li>
+            <span class="pl-num-face pl-news-date">{n.date}</span>
+            <span class={`pl-cat pl-cat-${n.catTone}`}>{n.cat}</span>
+            <span class="pl-news-text">{n.text}</span>
+          </li>
+        ))}
+      </ul>
+      <p class="pl-note" style="margin-top:14px">
+        <a href={routes.magazine}>プルメリアだよりのバックナンバーを見る →</a>
+      </p>
+      <p class="pl-note">
+        <a href={newsListUrl} data-astro-reload>お知らせ一覧を見る（現在の公式サイト）→</a>
+      </p>
+      <p class="pl-note">掲載元：公式サイトのお知らせ一覧（2026年9月9日確認）。本文はPDFで公開されています。</p>
+    </div>
+  </section>
+
+  <div class="pl-wrap">
+    <a class="pl-recruit-strip" href={routes.recruit} data-pl-gtag="recruit_click" data-pl-cta="top_recruit_banner">
+      <span><strong>プルメリアで働く</strong><span>介護職・看護職の募集情報</span></span>
+      <span>採用情報を見る →</span>
+    </a>
+  </div>
+
+  <PlumeriaGuideQuiz />
+
+  <section class="pl-sec" id="services">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">暮らしを支える6つのサービス</h2>
+      <p class="pl-sec-lead">対象となる方・費用・ご相談の流れを、各ページにまとめています。</p>
+      <div class="pl-service-intro-grid">
+        {services.map((s) => (
+          <a class="pl-card pl-service-intro-card" href={s.href} data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="service_intro_card">
+            <img src={s.img} alt={s.alt} width="900" height="675" loading="lazy" decoding="async" />
+            <h3 class="pl-h3">{s.name}</h3>
+            <p class="pl-body">{s.summary}</p>
+            <span class="pl-service-intro-more">くわしく見る →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige" id="access">
+    <div class="pl-wrap">
+      <h2 class="pl-h2">所在地・アクセス</h2>
+      <div class="pl-grid-2">
+        <div class="pl-card">
+          <h3 class="pl-h3">プルメリアⅠ・Ⅱ</h3>
+          <p class="pl-body">岐阜県可児市今渡1880番地<br />名鉄 日本ライン今渡駅から徒歩3分<br />中央道 多治見ICから約20分／東海環状 可児御嵩ICから約10分</p>
+          <a class="pl-more" href="https://home-plumeria.jp/plumeria0102/">公式のアクセス案内を見る →</a>
+        </div>
+        <div class="pl-card">
+          <h3 class="pl-h3">プルメリアⅢ（ショートステイ）</h3>
+          <p class="pl-body">岐阜県可児郡御嵩町上恵土951-1<br />名鉄広見線 明智駅から徒歩15分<br />東海環状 可児御嵩ICから車で約5分</p>
+          <a class="pl-more" href="https://home-plumeria.jp/plumeria03/">公式のアクセス案内を見る →</a>
+        </div>
+      </div>
+      <p class="pl-note" style="margin-top:14px">交通案内は公式サイトを2026年9月9日に確認。見学時は各窓口へ事前にお問い合わせください。</p>
+    </div>
+  </section>
+
+  <section class="pl-sec pl-sec-beige">
+    <div class="pl-wrap pl-reading">
+      <h2 class="pl-h2">プルメリアについて</h2>
+      <p class="pl-body">プルメリアは、可児市で住まい・介護・看護を支える6つの事業を運営しています。ご本人の暮らし方や、ご家族の状況に合わせてサービスをご検討いただけます。</p>
+      <p class="pl-body">{brandOrigin.body}</p>
+      <p class="pl-note">運営：{corp.groupName}</p>
+      <div class="pl-btn-row" style="margin-top:14px">
+        <a class="pl-btn pl-btn-outline" href={routes.company}>会社概要を見る</a>
+        <a class="pl-btn pl-btn-outline" href={routes.magazine}>プルメリアだより</a>
+      </div>
+      <a class="pl-more" style="display:inline-block;margin-top:14px" href={corp.currentSiteUrl} data-astro-reload>現在の公式サイトを見る →</a>
+    </div>
+  </section>
+
+  <section class="pl-sec" id="contact-cta">
+    <div class="pl-wrap" style="text-align:center">
+      <h2 class="pl-h2">見学・ご相談の窓口</h2>
+      <p class="pl-sec-lead">住宅とショートステイの電話窓口、各サービスの連絡先をご案内します。</p>
+      <div class="pl-btn-row" style="justify-content:center">
+        <a class="pl-btn pl-btn-main" href={routes.contact}>連絡先・相談方法を見る</a>
+      </div>
+    </div>
+  </section>
+</PlumeriaLayout>
+<script>
+  import { initPlumeriaSlider, disposePlumeriaSlider } from '../../../scripts/plumeriaSlider';
+  initPlumeriaSlider();
+  document.addEventListener('astro:page-load', initPlumeriaSlider);
+  document.addEventListener('astro:before-swap', disposePlumeriaSlider);
+
+  /*
+    PCのみ：FVのタイル（サービス入口）が画面内にある間は、ヘッダーの重複ナビを隠し、
+    代わりにFV左上のブランドカードを表示する。タイルが隠れたら（スクロール通過）ヘッダーの
+    ナビ・ブランドを通常どおり表示する。View Transitions でこのページに戻ってくるたびに
+    astro:page-load が発火するので、名前付き関数として束ね、毎回作り直す。
+  */
+  let plHeroHeaderObserver: IntersectionObserver | null = null;
+  function initPlumeriaHeroHeaderSync() {
+    const header = document.querySelector('.pl-head');
+    const tiles = document.querySelector('[data-pl-tiles]');
+    const heroBrandCard = document.querySelector('.pl-hero-brand-card');
+
+    plHeroHeaderObserver?.disconnect();
+    plHeroHeaderObserver = null;
+
+    if (!header || !tiles) return;
+    header.classList.remove('is-condensed');
+    header.classList.add('is-js');
+    heroBrandCard?.classList.add('is-hero-visible');
+
+    if (!('IntersectionObserver' in window)) {
+      header.classList.remove('is-js');
+      heroBrandCard?.classList.remove('is-hero-visible');
+      return;
+    }
+    plHeroHeaderObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          header.classList.toggle('is-condensed', !entry.isIntersecting);
+          heroBrandCard?.classList.toggle('is-hero-visible', entry.isIntersecting);
+        });
+      },
+      { root: null, rootMargin: '-77px 0px 0px 0px', threshold: 0 }
+    );
+    plHeroHeaderObserver.observe(tiles);
+  }
+  document.addEventListener('astro:page-load', initPlumeriaHeroHeaderSync);
+  document.addEventListener('astro:before-swap', () => plHeroHeaderObserver?.disconnect());
+</script>
