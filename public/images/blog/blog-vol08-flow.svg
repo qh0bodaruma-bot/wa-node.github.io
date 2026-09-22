@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">LINEの利用者と顧客情報をつなぐ仕組み</title>
+  <desc id="desc">LINEユーザーIDを、本人確認を含む連携処理と連携情報を介して、顧客管理システムの顧客IDへ紐づける関係図。</desc>
+  <defs>
+    <pattern id="paper" width="24" height="24" patternUnits="userSpaceOnUse">
+      <rect width="24" height="24" fill="#f7f1e3"/>
+      <circle cx="4" cy="6" r="1" fill="#e4dac2" opacity=".45"/>
+      <circle cx="18" cy="17" r=".8" fill="#e4dac2" opacity=".35"/>
+    </pattern>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#b89445"/>
+    </marker>
+    <style>
+      .jp { font-family: "Noto Sans JP", "Yu Gothic", sans-serif; }
+      .title { font-size: 58px; font-weight: 800; fill: #173f35; }
+      .lead { font-size: 27px; font-weight: 700; fill: #102a43; }
+      .box-title { font-size: 29px; font-weight: 800; fill: #173f35; }
+      .box-text { font-size: 23px; font-weight: 600; fill: #35465a; }
+      .note { font-size: 21px; font-weight: 600; fill: #6a5a3b; }
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#paper)"/>
+  <path d="M0 0h250c-32 36-53 77-63 123-51-15-112-13-187 7z" fill="#173f35" opacity=".07"/>
+  <path d="M1600 900h-270c32-38 55-82 66-132 57 17 125 13 204-10z" fill="#b89445" opacity=".12"/>
+
+  <text x="800" y="92" text-anchor="middle" class="jp title">LINEの利用者と顧客情報をつなぐ仕組み</text>
+  <rect x="278" y="128" width="1044" height="72" rx="36" fill="#fffdf8" stroke="#b89445" stroke-width="2"/>
+  <text x="800" y="174" text-anchor="middle" class="jp lead">ユーザーIDだけでは、自社のどの顧客かを確定できません</text>
+
+  <rect x="80" y="310" width="300" height="280" rx="26" fill="#fffdf8" stroke="#173f35" stroke-width="4"/>
+  <circle cx="230" cy="394" r="39" fill="#173f35"/>
+  <path d="M161 497c10-59 42-91 69-91s59 32 69 91" fill="#dce8df" stroke="#173f35" stroke-width="7"/>
+  <text x="230" y="545" text-anchor="middle" class="jp box-title">LINE上の利用者</text>
+  <text x="230" y="574" text-anchor="middle" class="jp box-text">ユーザーID</text>
+
+  <rect x="480" y="310" width="310" height="280" rx="26" fill="#fffdf8" stroke="#b89445" stroke-width="4"/>
+  <path d="M573 399h124v96H573z" fill="#efe3c6" stroke="#b89445" stroke-width="5"/>
+  <path d="M596 448l25 24 55-58" fill="none" stroke="#173f35" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="635" y="541" text-anchor="middle" class="jp box-title">本人確認を含む</text>
+  <text x="635" y="574" text-anchor="middle" class="jp box-title">連携処理</text>
+
+  <rect x="890" y="310" width="260" height="280" rx="26" fill="#fffdf8" stroke="#b89445" stroke-width="4"/>
+  <path d="M947 384h146v117H947z" fill="#edf3ef" stroke="#173f35" stroke-width="5"/>
+  <path d="M974 421h92M974 454h92" stroke="#b89445" stroke-width="8" stroke-linecap="round"/>
+  <text x="1020" y="541" text-anchor="middle" class="jp box-title">連携情報</text>
+  <text x="1020" y="574" text-anchor="middle" class="jp box-text">自社側で管理</text>
+
+  <rect x="1250" y="310" width="270" height="280" rx="26" fill="#fffdf8" stroke="#173f35" stroke-width="4"/>
+  <ellipse cx="1385" cy="391" rx="73" ry="30" fill="#173f35"/>
+  <path d="M1312 391v99c0 17 33 31 73 31s73-14 73-31v-99" fill="#dce8df" stroke="#173f35" stroke-width="5"/>
+  <path d="M1312 437c0 17 33 31 73 31s73-14 73-31" fill="none" stroke="#173f35" stroke-width="5"/>
+  <text x="1385" y="551" text-anchor="middle" class="jp box-title">顧客管理</text>
+  <text x="1385" y="581" text-anchor="middle" class="jp box-text">顧客ID</text>
+
+  <path d="M380 450h92" stroke="#b89445" stroke-width="8" marker-end="url(#arrow)"/>
+  <path d="M790 450h92" stroke="#b89445" stroke-width="8" marker-end="url(#arrow)"/>
+  <path d="M1150 450h92" stroke="#b89445" stroke-width="8" marker-end="url(#arrow)"/>
+
+  <rect x="145" y="680" width="1310" height="112" rx="20" fill="#173f35"/>
+  <text x="800" y="726" text-anchor="middle" class="jp" font-size="24" font-weight="800" fill="#fffdf8">確認ポイント</text>
+  <text x="800" y="764" text-anchor="middle" class="jp" font-size="22" font-weight="600" fill="#fffdf8">表示名は識別に使わない　／　プロバイダーが異なるとユーザーIDも異なる　／　誤紐づけを訂正できるようにする</text>
+</svg>

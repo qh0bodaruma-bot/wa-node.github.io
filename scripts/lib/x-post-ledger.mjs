@@ -6,6 +6,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const LOCK_SUFFIX = '.lock';
+// 日本語を含むパスでは Node のファイル削除がプロセスごと落ちるため（TRB-202609-054）、
+// ロックは削除ではなく中身の書き換えで解放する。解放前に落ちた場合に備えて有効期限も持つ。
+const LOCK_RELEASED = 'released';
+const LOCK_STALE_MS = 10 * 60 * 1000;
 // 投稿前に書く started と、結果が確定しなかった failed は、解除記録（released）があるまで投稿済みとみなす。
 const BLOCKING_STATUSES = new Set(['started', 'posted', 'failed']);
 
@@ -81,21 +85,39 @@ export function appendRecord(ledgerPath, record) {
   fs.appendFileSync(path.resolve(ledgerPath), `${JSON.stringify(record)}\n`, 'utf8');
 }
 
-export function acquireLock(ledgerPath) {
+export function acquireLock(ledgerPath, now = () => new Date()) {
   const lockPath = `${path.resolve(ledgerPath)}${LOCK_SUFFIX}`;
+  const stamp = () => `${process.pid} ${now().toISOString()}\n`;
+
   try {
     const handle = fs.openSync(lockPath, 'wx');
-    fs.writeSync(handle, `${process.pid} ${new Date().toISOString()}\n`);
+    fs.writeSync(handle, stamp());
     fs.closeSync(handle);
   } catch (error) {
-    if (error.code === 'EEXIST') {
+    if (error.code !== 'EEXIST') throw error;
+
+    const raw = fs.readFileSync(lockPath, 'utf8').trim();
+    const released = raw === '' || raw.startsWith(LOCK_RELEASED);
+    const heldSince = Date.parse(raw.split(/\s+/)[1] ?? '');
+    // 解放前に落ちたロックを残し続けない。10分を超えたものは引き継ぐ。
+    const stale = Number.isFinite(heldSince) && now().getTime() - heldSince > LOCK_STALE_MS;
+
+    if (!released && !stale) {
       throw new LedgerBlockedError(
-        `Another post operation holds the lock (${lockPath}). If no post is running, confirm on X first, then remove the lock file manually.`,
+        `Another post operation holds the lock (${lockPath}, "${raw}"). If no post is running, confirm on X first, then write "${LOCK_RELEASED}" into that file.`,
       );
     }
-    throw error;
+    fs.writeFileSync(lockPath, stamp(), 'utf8');
   }
-  return () => fs.rmSync(lockPath, { force: true });
+
+  // ロックの解放はファイル削除ではなく上書きで行う（TRB-202609-054）。
+  return () => {
+    try {
+      fs.writeFileSync(lockPath, `${LOCK_RELEASED} ${now().toISOString()}\n`, 'utf8');
+    } catch {
+      // 解放に失敗しても処理は止めない。次回は stale として引き継がれる。
+    }
+  };
 }
 
 function newId(now) {
@@ -153,6 +175,63 @@ export async function guardedPublish({ client, posts, ledgerPath, draftFile, now
   } finally {
     release();
   }
+}
+
+// X 以外の経路（ボスの手動投稿など）で公開済みの投稿を、台帳へ後から記録する。X には接続しない。
+// 下書きファイルの内容から contentSha256 を作るため、以後は同じ内容の再投稿を post 側が拒否できる。
+export function recordExternalPost({ ledgerPath, posts, draftFile, url, date, account, now = () => new Date() }) {
+  if (!url) throw new LedgerBlockedError('--url is required for record. Give the URL of the post that is already published.');
+  const parsed = parsePostUrl(url);
+  const recordedAccount = account ?? parsed.account;
+  if (!recordedAccount) {
+    throw new LedgerBlockedError('The account could not be read from --url. Pass --account explicitly.');
+  }
+
+  const recordedAt = now();
+  const recordDate = date ?? jstDate(recordedAt);
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(recordDate)) {
+    throw new LedgerBlockedError(`--date must be written as YYYY-MM-DD (JST). Received: ${recordDate}`);
+  }
+  if (recordDate > jstDate(recordedAt)) {
+    throw new LedgerBlockedError(`--date ${recordDate} is in the future (JST today is ${jstDate(recordedAt)}).`);
+  }
+
+  readLedger(ledgerPath);
+  const release = acquireLock(ledgerPath);
+  try {
+    const hash = contentHash(posts);
+    const records = readLedger(ledgerPath);
+    const reason = findBlockingReason(records, { account: recordedAccount, date: recordDate, hash });
+    // すでに同じ内容・同じ日の記録があるなら、二重に記録しない。
+    if (reason) throw new LedgerBlockedError(`Record blocked by ledger: ${reason}`);
+
+    const record = {
+      id: newId(recordedAt),
+      status: 'posted',
+      jstDate: recordDate,
+      account: recordedAccount,
+      source: 'manual-external',
+      draftFile: draftFile ? path.resolve(draftFile) : undefined,
+      contentSha256: hash,
+      postCount: posts.length,
+      recordedAt: recordedAt.toISOString(),
+      url,
+      postIds: [parsed.postId],
+      note: 'Published outside x-post.mjs and recorded afterwards. Not verified against X.',
+    };
+    appendRecord(ledgerPath, record);
+    return record;
+  } finally {
+    release();
+  }
+}
+
+function parsePostUrl(url) {
+  const match = /^https:\/\/(?:x|twitter)\.com\/([A-Za-z0-9_]{1,15})\/status\/(\d+)(?:[/?#].*)?$/.exec(url.trim());
+  if (!match) {
+    throw new LedgerBlockedError(`--url must look like https://x.com/<account>/status/<id>. Received: ${url}`);
+  }
+  return { account: match[1], postId: match[2] };
 }
 
 // 投稿されていないことを X 上で確認した started / failed 記録を解除する。posted は解除できない。

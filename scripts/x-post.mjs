@@ -9,6 +9,7 @@ import {
   guardedPublish,
   jstDate,
   readLedger,
+  recordExternalPost,
   releaseRecord,
 } from './lib/x-post-ledger.mjs';
 
@@ -30,6 +31,7 @@ Usage:
   node scripts/x-post.mjs test [--env-file <path>]
   node scripts/x-post.mjs dry-run --file <approved-draft.txt> [--ledger <x_post_ledger.jsonl>] [--env-file <path>]
   node scripts/x-post.mjs post --file <approved-draft.txt> --ledger <x_post_ledger.jsonl> [--env-file <path>]
+  node scripts/x-post.mjs record --file <approved-draft.txt> --ledger <x_post_ledger.jsonl> --url <post-url> [--date <YYYY-MM-DD>] [--account <name>]
   node scripts/x-post.mjs release --ledger <x_post_ledger.jsonl> --id <record-id> --reason <text>
 
 Draft format:
@@ -42,14 +44,35 @@ Safety:
   - post publishes only the explicitly supplied, approved draft file, and refuses to run without --ledger.
     It blocks a second post on the same JST date for the same account, content already recorded,
     and concurrent runs. The record is written before contacting X.
+  - record never contacts X. Use it when a draft was published outside this script (for example by hand)
+    so the ledger keeps blocking the same content later. --date defaults to today in JST.
   - release never contacts X. Use it only after confirming on X that a started/failed record was not published.
 `);
 }
 
 function parseArgs(args) {
   const [command, ...rest] = args;
-  const options = { command, file: undefined, envFile: undefined, ledger: undefined, id: undefined, reason: undefined };
-  const valueOptions = { '--file': 'file', '--env-file': 'envFile', '--ledger': 'ledger', '--id': 'id', '--reason': 'reason' };
+  const options = {
+    command,
+    file: undefined,
+    envFile: undefined,
+    ledger: undefined,
+    id: undefined,
+    reason: undefined,
+    url: undefined,
+    date: undefined,
+    account: undefined,
+  };
+  const valueOptions = {
+    '--file': 'file',
+    '--env-file': 'envFile',
+    '--ledger': 'ledger',
+    '--id': 'id',
+    '--reason': 'reason',
+    '--url': 'url',
+    '--date': 'date',
+    '--account': 'account',
+  };
 
   for (let index = 0; index < rest.length; index += 1) {
     const argument = rest[index];
@@ -179,7 +202,7 @@ async function main() {
     return;
   }
 
-  if (!['verify', 'test', 'dry-run', 'post', 'release'].includes(options.command)) {
+  if (!['verify', 'test', 'dry-run', 'post', 'record', 'release'].includes(options.command)) {
     usage();
     process.exitCode = 1;
     return;
@@ -200,6 +223,24 @@ async function main() {
         console.log(reason ? `\nLedger check: BLOCKED. ${reason}` : '\nLedger check: OK (no post recorded today, content not posted before).');
         if (reason) process.exitCode = 1;
       }
+      return;
+    }
+
+    if (options.command === 'record') {
+      if (!options.ledger) throw new Error('--ledger is required for record.');
+      const recorded = recordExternalPost({
+        ledgerPath: options.ledger,
+        posts: readThread(options.file),
+        draftFile: options.file,
+        url: options.url,
+        date: options.date,
+        account: options.account,
+      });
+      console.log(
+        `Recorded an already published post: ${recorded.id} (${recorded.jstDate} JST, @${recorded.account}, ${recorded.postCount} post(s)).`,
+      );
+      console.log(`Ledger: ${path.resolve(options.ledger)}`);
+      console.log('X was not contacted. The record relies on the URL you supplied.');
       return;
     }
 
