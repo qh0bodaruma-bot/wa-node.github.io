@@ -2,6 +2,7 @@
 import MaterialIcon from './MaterialIcon.astro';
 import { localizedPath, servicePrices, startingPrice, serviceLabels, type SiteLanguage } from '../data/services';
 import '../styles/service-pages.css';
+import '../styles/homepage-polish.css';
 interface Props { lang?: SiteLanguage }
 const { lang = 'ja' } = Astro.props;
 const href = (path: string) => localizedPath(path, lang);
@@ -104,7 +105,7 @@ const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', ser
         <h1>{c.title.map((line, i) => <>{i > 0 && lang !== 'ja' && ' '}<span>{line}</span></>)}</h1>
         <p class="s-intro hero-lead">{c.lead}</p>
         <p class="s-intro hero-lead-short">{c.leadShort}</p>
-        <div class="s-actions"><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-button secondary" href="#selected-works">{c.view}</a></div>
+        <div class="s-actions"><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-link hero-secondary" href="#selected-works">{c.view}<MaterialIcon name="arrow_forward" /></a></div>
         <p class="s-note">{c.assurance}</p>
       </div>
       <div class="hero-demo" data-home-demo>
