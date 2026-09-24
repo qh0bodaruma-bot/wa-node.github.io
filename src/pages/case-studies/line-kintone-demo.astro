@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MaterialIcon from '../../components/MaterialIcon.astro';
 import LineCaseDemo from '../../components/LineCaseDemo.astro';
+import LineCaseSetup from '../../components/LineCaseSetup.astro';
 import { getLineCase } from '../../data/lineCaseCatalog';
 import { createBreadcrumbSchema, createWebPageSchema, organizationSchema } from '../../data/structuredData';
 
@@ -100,6 +101,8 @@ const designPoints = [
       </div>
     </section>
 
+    <LineCaseSetup config={kase} />
+
     <!-- Implementation Scope -->
     <section class="case-section scope-section">
       <div class="container">
@@ -139,19 +142,19 @@ const designPoints = [
       <div class="container">
         <h2>他のシステムとも連携できます</h2>
         <div class="related-grid">
-          <a href="/pricing/" class="related-card">
+          <a href="/case-studies/line-salesforce-demo/" class="related-card">
             <span>Salesforce</span>
             <strong>LINE × Salesforce</strong>
             <p>商談・リード管理をLINEから操作。大規模な顧客管理基盤との連携。</p>
             <span class="related-price">40万円〜</span>
           </a>
-          <a href="/pricing/" class="related-card">
+          <a href="/case-studies/line-hubspot-demo/" class="related-card">
             <span>HubSpot</span>
             <strong>LINE × HubSpot</strong>
             <p>マーケティングオートメーションとLINEのステップ配信を連動。</p>
             <span class="related-price">20万円〜</span>
           </a>
-          <a href="/pricing/" class="related-card">
+          <a href="/case-studies/line-spreadsheet-demo/" class="related-card">
             <span>Googleスプレッドシート</span>
             <strong>LINE × スプレッドシート</strong>
             <p>既存の管理シートを活かしたシンプルな連携。スモールスタートに。</p>

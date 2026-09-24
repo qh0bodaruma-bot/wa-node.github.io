@@ -1,0 +1,64 @@
+---
+// 連携先ごとに「つなぐ前に決めること」と向き・不向きを示す。
+// 4つのデモページが同じ文章にならないよう、中身は lineCaseCatalog の連携先別データから出す
+import type { LineCaseConfig } from '../data/lineCaseCatalog';
+interface Props { config: LineCaseConfig }
+const { config } = Astro.props;
+---
+<section class="setup-section">
+  <div class="setup-container">
+    <h2>{config.vendorName}とつなぐときに、<br/>先に決めること。</h2>
+    <p class="setup-lead">画面が動くことと、業務で使い続けられることは別です。{config.vendorName}との連携で、着手前に確認している点をまとめました。</p>
+    <ol class="setup-list">
+      {config.setupPoints.map((point, i) => (
+        <li>
+          <span class="setup-num">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{point.title}</h3>
+            <p>{point.text}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+    <div class="setup-fit">
+      <div>
+        <h3>{config.vendorName}との連携が向いているケース</h3>
+        <ul>{config.fitCases.map((item) => <li>{item}</li>)}</ul>
+      </div>
+      <div>
+        <h3>別の方法も検討したいケース</h3>
+        <ul>{config.otherCases.map((item) => <li>{item}</li>)}</ul>
+      </div>
+    </div>
+    <div class="setup-sources">
+      <p>仕様は2026年9月時点の公開資料にもとづきます。契約プランや設定によって異なる場合があります。</p>
+      <ul>{config.sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener">{source.label}</a></li>)}</ul>
+    </div>
+  </div>
+</section>
+
+<style>
+  .setup-section { padding: 72px 0; border-top: 1px solid var(--trust-line, rgba(15, 76, 92, 0.18)); }
+  .setup-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+  .setup-section h2 { font-size: clamp(1.55rem, 2.8vw, 2.1rem); font-weight: 900; line-height: 1.4; margin-bottom: 16px; color: #1a1a1a; }
+  .setup-lead { color: #555; line-height: 1.9; max-width: 46em; margin-bottom: 32px; }
+  .setup-list { list-style: none; padding: 0; margin: 0 0 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .setup-list li { display: flex; gap: 16px; padding: 22px; background: #fff; border: 1px solid var(--trust-line, rgba(15, 76, 92, 0.18)); border-radius: 14px; }
+  .setup-num { flex-shrink: 0; font-weight: 900; color: var(--trust, #0f4c5c); font-size: 0.9rem; }
+  .setup-list h3 { font-size: 1rem; font-weight: 900; margin: 0 0 8px; color: #1a1a1a; }
+  .setup-list p { margin: 0; color: #555; font-size: 0.92rem; line-height: 1.85; }
+  .setup-fit { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .setup-fit > div { padding: 24px; border-radius: 14px; background: rgba(15, 76, 92, 0.04); }
+  .setup-fit > div + div { background: #f6f3ee; }
+  .setup-fit h3 { font-size: 0.98rem; font-weight: 900; margin: 0 0 12px; color: var(--trust, #0f4c5c); }
+  .setup-fit ul { margin: 0; padding-left: 1.2em; }
+  .setup-fit li { color: #444; font-size: 0.92rem; line-height: 1.85; margin-bottom: 6px; }
+  .setup-sources { font-size: 0.8rem; color: #666; }
+  .setup-sources p { margin: 0 0 6px; }
+  .setup-sources ul { margin: 0; padding-left: 1.2em; }
+  .setup-sources a { color: var(--trust, #0f4c5c); overflow-wrap: anywhere; }
+  @media (max-width: 820px) {
+    .setup-list, .setup-fit { grid-template-columns: 1fr; }
+    .setup-section { padding: 56px 0; }
+  }
+</style>

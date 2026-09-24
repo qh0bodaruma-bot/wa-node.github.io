@@ -2,6 +2,7 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MaterialIcon from '../../components/MaterialIcon.astro';
 import LineCaseDemo from '../../components/LineCaseDemo.astro';
+import LineCaseSetup from '../../components/LineCaseSetup.astro';
 import { getLineCase } from '../../data/lineCaseCatalog';
 import { createBreadcrumbSchema, createWebPageSchema, organizationSchema } from '../../data/structuredData';
 
@@ -43,7 +44,7 @@ const designPoints = [
 ];
 ---
 
-<BaseLayout noindex={true} title={title} description={description} structuredData={structuredData}>
+<BaseLayout title={title} description={description} structuredData={structuredData}>
   <main id="main" class="line-case" data-glossary-skip>
 
     <LineCaseDemo config={kase} />
@@ -99,6 +100,8 @@ const designPoints = [
         </div>
       </div>
     </section>
+
+    <LineCaseSetup config={kase} />
 
     <!-- Implementation Scope -->
     <section class="case-section scope-section">
