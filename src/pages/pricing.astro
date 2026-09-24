@@ -4,7 +4,7 @@ import PricingContent from '../components/PricingContent.astro';
 import { createBreadcrumbSchema, createServiceSchema, createWebPageSchema, organizationSchema } from '../data/structuredData';
 import { servicePrices } from '../data/services';
 const title = '料金・対応範囲｜LINE連携構築の費用目安｜和-Node';
-const description = 'LINE公式アカウントとGoogleスプレッドシート・HubSpot・kintone・Salesforceの連携構築は10万円〜。税別の開始価格、含まれる作業、別途費用、制作期間をまとめています。アプリ開発・LP制作の料金も掲載。初回30分の相談は無料です。';
+const description = 'LINE公式アカウントとGoogleスプレッドシート・HubSpot・kintone・Salesforceの連携構築は10万円〜。税別の開始価格、含まれる作業、別途費用、制作期間をまとめています。連携の先に専用アプリが必要な場合の目安も掲載。初回30分の相談は無料です。';
 const structuredData = [organizationSchema, createWebPageSchema({name:title,description,path:'/pricing/'}),createBreadcrumbSchema([{name:'ホーム',path:'/'},{name:'料金・対応範囲',path:'/pricing/'}]),createServiceSchema({name:'LINE連携構築',description:'LINEと業務システムの連携設計・実装・テスト・公開支援。',path:'/pricing/',serviceType:'LINE integration',priceFrom:String(servicePrices.lineSheets)}),createServiceSchema({name:'iOS・Androidアプリ開発',description:'業務・顧客向けアプリの設計・開発・実機確認・公開準備。',path:'/pricing/',serviceType:'Mobile application development',priceFrom:String(servicePrices.businessApp)})];
 ---
 <BaseLayout title={title} description={description} structuredData={structuredData}><PricingContent lang="ja"/></BaseLayout>

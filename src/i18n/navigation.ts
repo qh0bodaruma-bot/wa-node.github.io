@@ -2,6 +2,7 @@ export const MULTILANG_PAGES = [
   '/',
   '/about',
   '/works',
+  '/works/other',
   '/pricing',
   '/contact',
   '/ai-chat-demo',

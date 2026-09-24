@@ -12,6 +12,9 @@ export async function getStaticPaths() {
   }));
 }
 
+// LINE連携と関係の薄い過去記事。削除せず残すが、検索結果には出さない（2026-09-24 決定）
+const OFF_TOPIC_POSTS = ['xmt4y_gy-tei', 'z6zhzfpun', 'ekemcay7yl', 'lupuzniwy', 'zvl3xdhsb'];
+
 const { slug } = Astro.params;
 const post = await getBlogDetail(slug);
 const displayTitle = cleanBlogTitle(post.title);
@@ -28,7 +31,7 @@ const structuredData = createBlogPostingSchema({
 });
 ---
 
-<BaseLayout title={`${displayTitle}｜和-Node 知恵袋`} description={description} image={post.eyecatch?.url} structuredData={structuredData}>
+<BaseLayout noindex={OFF_TOPIC_POSTS.includes(slug)} title={`${displayTitle}｜和-Node コラム`} description={description} image={post.eyecatch?.url} structuredData={structuredData}>
   <main id="main">
   <article class="post-single">
     <div class="post-header">

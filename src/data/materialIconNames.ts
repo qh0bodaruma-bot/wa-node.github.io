@@ -38,4 +38,4 @@ export const materialIconNames = [
   'wc', 'web', 'web_traffic', 'width', 'wifi', 'work',
 ] as const;
 
-export const materialIconsHref = `https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&icon_names=${[...materialIconNames].sort().join(',')}&display=swap`;
+export const materialIconsHref = `https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&icon_names=${[...materialIconNames].sort().join(',')}&display=block`; // swapだと読込前に「arrow_forward」等の文字が一瞬見えるため

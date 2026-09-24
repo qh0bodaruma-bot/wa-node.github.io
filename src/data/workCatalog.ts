@@ -1,6 +1,8 @@
 import type { SiteLanguage } from './services';
 import { servicePrices } from './services';
 export type WorkCategory = 'line' | 'app' | 'web' | 'system' | 'tool' | 'kdp';
+// サイトの主軸（LINE連携とその先のアプリ）。それ以外は /works/other/ に載せる
+export const mainWorkCategories: WorkCategory[] = ['line', 'app'];
 export interface WorkItem { id:string; category:WorkCategory; title:Record<SiteLanguage,string>; description:Record<SiteLanguage,string>; href:string; image:string; priceKey?:keyof typeof servicePrices; featured:boolean }
 export const workCatalog: WorkItem[] = [
   {
@@ -37,7 +39,7 @@ export const workCatalog: WorkItem[] = [
     "image": "/images/works/captures/work-02.webp",
     "id": "work-02",
     "priceKey": "lineSalesforce",
-    "featured": false
+    "featured": true
   },
   {
     "category": "line",
@@ -55,7 +57,7 @@ export const workCatalog: WorkItem[] = [
     "image": "/images/works/captures/work-03.webp",
     "id": "work-03",
     "priceKey": "lineHubspot",
-    "featured": false
+    "featured": true
   },
   {
     "category": "line",
@@ -65,7 +67,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "LINE × Google Sheets : suivi des demandes"
     },
     "description": {
-      "ja": "問い合わせ受信からスプレッドシート自動記録・担当者通知まで、一連のフローをインタラクティブデモで体験できるケーススタディです。10万円〜のスモールスタートに最適。",
+      "ja": "問い合わせ受信からスプレッドシート自動記録・担当者通知まで、一連のフローをインタラクティブデモで体験できるケーススタディです。まず小さく始めたい場合の構成です。",
       "en": "Try recording inquiries in a spreadsheet and notifying the responsible team.",
       "fr": "Tester l’enregistrement dans un tableur et la notification de l’équipe."
     },
@@ -100,7 +102,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Trois exemples de sites Canva"
     },
     "description": {
-      "ja": "弊社サイトを題材にした自主制作の制作例です。編集できるひな形として納品する場合の仕上がりの幅を、現物で比較できます。",
+      "ja": "和-Nodeのサイトを題材にした自主制作の制作例です。編集できるひな形として納品する場合の仕上がりの幅を、現物で比較できます。",
       "en": "Compare three editable design approaches for different business needs.",
       "fr": "Comparer trois directions de design modifiables selon les besoins d’une activité."
     },
@@ -125,7 +127,7 @@ export const workCatalog: WorkItem[] = [
     "image": "/images/works/captures/work-08.webp",
     "id": "work-08",
     "priceKey": "website",
-    "featured": true
+    "featured": false
   },
   {
     "category": "tool",
@@ -178,7 +180,7 @@ export const workCatalog: WorkItem[] = [
     "image": "",
     "id": "work-11",
     "priceKey": "businessApp",
-    "featured": true
+    "featured": false
   },
   {
     "category": "web",
@@ -311,7 +313,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Publications Amazon KDP"
     },
     "description": {
-      "ja": "浮世絵や伝統文様をモチーフにした海外市場向け書籍制作。和の美しさを世界へ届けるブランディング支援の実績です。",
+      "ja": "浮世絵や伝統文様をモチーフにした、海外市場向けの書籍制作です。",
       "en": "Explore the published books and the associated content production work.",
       "fr": "Découvrir les livres publiés et le travail de création de contenu associé."
     },
