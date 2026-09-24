@@ -12,7 +12,8 @@
 
 #main.home-refresh .home-hero .hero-copy { min-width: 0; }
 #main.home-refresh .home-hero .hero-copy h1 {
-  font-size: clamp(2.25rem, 3.5vw, 3.45rem);
+  /* 上限は、1行目「LINEの問い合わせを」が左列（最大約540px）に収まる大きさ */
+  font-size: clamp(2.25rem, 3.5vw, 3.2rem);
   line-height: 1.5;
   letter-spacing: .025em;
   margin-bottom: 24px;
@@ -126,6 +127,8 @@
 }
 
 @media (max-width: 560px) {
+  /* 1行目「LINEの問い合わせを」を幅320pxでも1行に収める（10.5字分の幅） */
+  #main.home-refresh .home-hero .hero-copy h1 { font-size: clamp(1.5rem, 8vw, 2rem); }
   #main.home-refresh .home-hero .hero-demo { padding: 16px; }
   #main.home-refresh .home-hero .demo-title { padding-bottom: 10px; margin-bottom: 14px; }
   #main.home-refresh .home-hero .line-bubble { padding: 10px 12px; }
@@ -140,4 +143,11 @@
   }
   #main.home-refresh .home-hero .preview-detail { display: flex; }
   #main.home-refresh .home-hero .s-actions { gap: 8px 20px; }
+}
+
+/* 3列だと「サンプル商事」などが途中で折れる幅では、項目名と値を横並びの1列にする */
+@media (max-width: 374px) {
+  #main.home-refresh .home-hero .record-fields { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  #main.home-refresh .home-hero .record-field { grid-template-columns: 5.5em minmax(0, 1fr); gap: 8px; padding: 5px 0; }
+  #main.home-refresh .home-hero .record-field dd { overflow-wrap: normal; word-break: keep-all; }
 }
