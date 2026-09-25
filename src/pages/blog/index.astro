@@ -50,7 +50,7 @@ const posts = response.contents;
                 </div>
                 <h2>{cleanBlogTitle(post.title)}</h2>
                 <p>{post.description || createBlogExcerpt(post.content, 110)}</p>
-                <span class="read-more">詳しく見る →</span>
+                <span class="read-more">詳しく見る <span aria-hidden="true">→</span></span>
               </div>
             </a>
           </article>
