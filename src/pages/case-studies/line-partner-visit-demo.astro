@@ -1,0 +1,410 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
+import LineCaseSetup from '../../components/LineCaseSetup.astro';
+import { partnerVisitSetup } from '../../data/lineUsecaseCatalog';
+import { createBreadcrumbSchema, createWebPageSchema, organizationSchema } from '../../data/structuredData';
+import '../../styles/usecase-demo.css';
+
+export const prerender = true;
+
+const path = '/case-studies/line-partner-visit-demo/';
+const title = '代理店の訪問報告をLINEからSalesforceへ｜販売パートナー連携デモ｜和-Node';
+const description = 'Salesforceのアカウントを持たない代理店・販売パートナーの訪問報告を、LINEで開く入力画面から受けてSalesforceの活動に記録する流れを、ブラウザで操作できる自主制作デモで試せます（架空データ・外部への送信なし）。';
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path, type: 'CreativeWork' }),
+  createBreadcrumbSchema([
+    { name: 'ホーム', path: '/' },
+    { name: '制作例・デモ', path: '/works/' },
+    { name: '代理店の訪問報告（LINE × Salesforce）', path },
+  ]),
+];
+
+// デモ用の架空データ（この代理店が担当する取引先だけ）
+const accounts = [
+  { id: 'A-01', name: 'サンプル商事A' },
+  { id: 'A-02', name: 'サンプル工業B' },
+  { id: 'A-03', name: 'サンプル物流C' },
+];
+
+const fields = [
+  ['活動の種類', '完了済みのToDo「訪問報告」として記録する（行動として残す運用もある）', 'ToDo（完了）'],
+  ['関連先', '進行中の商談に関連付ける（取引先は商談からたどれる）。このデモでは、各取引先の商談を1件としている', 'サンプル商事A／更新提案'],
+  ['所有者', 'その取引先を担当する自社の営業にし、営業の「自分の活動」の一覧に出るようにする', '鈴木'],
+  ['報告した人', '作成者は連携ユーザーになるため、代理店名と担当者を別の項目に残す', 'サンプル販売 佐藤'],
+  ['訪問の目的・内容', '入力画面の内容をそのまま記録', '定期訪問／更新時期の確認'],
+  ['見込み', '代理店の見立て。商談の段階そのものは自社の担当者が変える', '提案中'],
+  ['次の予定', '新しいToDoとして、期日つきで作成', '10月8日 再訪問'],
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <main id="main" class="ucase" data-glossary-skip>
+
+    <section class="uc-hero">
+      <div class="uc-container">
+        <a href="/works/" class="uc-back"><MaterialIcon name="arrow_back" /> 制作例・デモ一覧</a>
+        <p class="uc-eyebrow">業務ごとのデモ｜代理店の訪問報告</p>
+        <h1><span class="ph">代理店の訪問報告を、</span><span class="ph">LINEからSalesforceへ。</span></h1>
+        <p class="uc-lead">販売を代理店にお願いしていると、訪問の状況が自社に届くのは遅くなりがちです。Salesforceのアカウントを持たない代理店の担当者でも、LINEで開く入力画面から報告でき、自社ではSalesforceの取引先や商談の記録として確認できます。</p>
+        <div class="uc-chips">
+          <span class="uc-line-mark">
+            <img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" class="uc-line-icon" />
+          </span>
+          <span class="uc-route">
+            <span class="uc-chip">LINE公式アカウント</span>
+            <MaterialIcon name="east" />
+            <span class="uc-chip uc-chip-sf">Salesforce</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <div class="uc-disclaimer">
+      <div class="uc-container">
+        <MaterialIcon name="info" />
+        <p><strong>自主制作・架空データのデモです。</strong>実在の会社・取引先・人物ではありません。操作してもLINE・Salesforceへの送信は行いません。</p>
+      </div>
+    </div>
+
+    <section class="uc-section">
+      <div class="uc-container uc-two">
+        <div>
+          <h2>なぜ、LINEで受けるのか。</h2>
+          <p>Salesforceは、使う人ごとの月額料金の体系です（多くのプランは年間契約）。代理店の担当者にも入力してもらうには、アカウントの用意や、パートナー向けの仕組みの契約と設定が必要になります。</p>
+          <p>LINEで開く入力画面なら、代理店の担当者はアプリを新しく入れずに報告できます。自社の営業は、いつものSalesforceで訪問の状況を確認できます。</p>
+        </div>
+        <dl class="uc-specs">
+          <div><dt>報告する人</dt><dd>代理店・販売パートナーの担当者</dd></div>
+          <div><dt>受け取る側</dt><dd>自社の営業担当（Salesforce）</dd></div>
+          <div><dt>向いている業務</dt><dd>代理店経由の販売、販売店の訪問・商談の報告</dd></div>
+          <div><dt>デモ仕様</dt><dd>ブラウザ内だけで動作（外部への送信なし）</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="uc-section uc-demo-section" id="demo" data-pv-root>
+      <div class="uc-container">
+        <h2>報告の流れを試す。</h2>
+        <p class="uc-note">場面を選ぶと、入力画面に例が入ります。そのまま、または書き換えて送ってください。結果は業務システム側の一覧と記録に表示されます。</p>
+        <div class="uc-scenarios" role="group" aria-label="試す場面を選ぶ">
+          <button type="button" class="is-active" aria-pressed="true" data-scenario="normal">通常の流れ</button>
+          <button type="button" aria-pressed="false" data-scenario="unknown">取引先が見つからないとき</button>
+          <button type="button" aria-pressed="false" data-scenario="quote">見込みを「見積提出」にしたとき</button>
+        </div>
+
+        <p class="uc-hint">場面を切り替えると、入力・報告一覧・確認待ちを初期化します。</p>
+        <noscript><p>デモの操作にはJavaScriptが必要です。下の説明はそのままお読みいただけます。</p></noscript>
+
+        <div class="uc-stage">
+          <div class="uc-phone">
+            <div class="uc-phone-head">
+              <img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" class="uc-line-icon" />
+              <span>LINEで開く入力画面（LIFF）</span>
+            </div>
+            <form class="uc-form" data-pv-form novalidate>
+              <p class="uc-form-title">訪問報告</p>
+              <p class="uc-form-who">報告者：サンプル販売 佐藤（代理店・架空）</p>
+              <fieldset class="uc-checks">
+                <legend>取引先</legend>
+                <div class="uc-account-list" data-pv-accounts>
+                  {accounts.map((account, i) => (
+                    <label class="uc-account"><input type="radio" name="account" value={account.id} data-name={account.name} checked={i === 0} /><span>{account.name}</span></label>
+                  ))}
+                  <label class="uc-account"><input type="radio" name="account" value="new" data-pv-new-radio /><span>一覧にない（新しい取引先）</span></label>
+                </div>
+                <label class="uc-field" data-pv-new-field hidden>
+                  <span>取引先名</span>
+                  <input type="text" name="newAccount" data-pv-new-name placeholder="例：サンプル建設D" />
+                </label>
+                <p class="uc-hint">表示されるのは、この代理店が担当する取引先だけです。</p>
+              </fieldset>
+              <label class="uc-field">
+                <span>訪問の目的</span>
+                <select name="purpose" data-pv-purpose>
+                  <option>定期訪問</option>
+                  <option>新規の提案</option>
+                  <option>不具合・問い合わせへの対応</option>
+                </select>
+              </label>
+              <label class="uc-field">
+                <span>内容</span>
+                <textarea name="note" rows="2" data-pv-note>更新時期（来年3月）を確認。後継機の資料を希望。</textarea>
+              </label>
+              <fieldset class="uc-checks">
+                <legend>見込み</legend>
+                <div class="uc-seg uc-seg-3">
+                  <label><input type="radio" name="stage" value="情報収集" /><span>情報収集</span></label>
+                  <label><input type="radio" name="stage" value="提案中" checked /><span>提案中</span></label>
+                  <label><input type="radio" name="stage" value="見積提出" /><span>見積提出</span></label>
+                </div>
+              </fieldset>
+              <label class="uc-field">
+                <span>次の予定</span>
+                <select name="next" data-pv-next>
+                  <option>10月8日 再訪問</option>
+                  <option>10月15日 見積の説明</option>
+                  <option>未定</option>
+                </select>
+              </label>
+              <button type="submit" class="uc-submit" data-pv-submit disabled>報告を送る</button>
+              <div class="uc-form-result" data-pv-result hidden></div>
+            </form>
+          </div>
+
+          <div class="uc-system">
+            <div class="uc-system-head">
+              <span class="uc-chip uc-chip-sf">Salesforce</span>
+              <span>自社側の記録（画面のイメージ）</span>
+            </div>
+            <h3>代理店からの訪問報告（活動）</h3>
+            <div class="uc-table-wrap" tabindex="0" role="region" aria-label="代理店からの訪問報告（横にスクロールできます）">
+              <table class="uc-table">
+                <thead><tr><th scope="col">取引先</th><th scope="col">内容</th><th scope="col">見込み</th></tr></thead>
+                <tbody data-pv-rows>
+                  <tr><td>サンプル工業B</td><td>定期訪問：稼働状況を確認</td><td>情報収集</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>自社の担当者の確認待ち</h3>
+            <ul class="uc-approvals" data-pv-approvals><li class="uc-empty">確認待ちはありません。</li></ul>
+            <h3>連携の記録</h3>
+            <ol class="uc-log" data-pv-log aria-live="polite"><li>報告を待っています。</li></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uc-section">
+      <div class="uc-container">
+        <h2>Salesforceに記録される項目。</h2>
+        <div class="uc-table-wrap" tabindex="0" role="region" aria-label="Salesforceに記録される項目（横にスクロールできます）">
+          <table class="uc-table uc-fields">
+            <thead><tr><th scope="col">項目</th><th scope="col">内容</th><th scope="col">例（架空）</th></tr></thead>
+            <tbody>{fields.map(([name, text, sample]) => <tr><th scope="row">{name}</th><td>{text}</td><td>{sample}</td></tr>)}</tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <LineCaseSetup config={partnerVisitSetup} />
+
+    <section class="uc-section">
+      <div class="uc-container uc-two">
+        <div>
+          <h2>この形で作る場合の費用。</h2>
+          <p>LINE × Salesforce連携（40万円〜・税別）の範囲でご案内します。取引先の検索、仮登録と確認の流れ、代理店ごとの表示範囲の設計は、代理店の数と運用を伺ったうえでお見積もりします。Apexによる独自開発は対象外です。</p>
+          <a href="/pricing/#line" class="uc-link">料金と対応範囲を見る<span aria-hidden="true">→</span></a>
+        </div>
+        <div>
+          <h2>ほかのデモ。</h2>
+          <ul class="uc-related">
+            <li><a href="/case-studies/line-salesforce-demo/">LINE × Salesforce リード管理</a></li>
+            <li><a href="/case-studies/line-field-report-demo/">協力会社の現場報告（LINE × kintone）</a></li>
+            <li><a href="/case-studies/line-seminar-booking-demo/">セミナー予約（LINE × HubSpot）</a></li>
+            <li><a href="/works/">制作例・デモの一覧</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="uc-cta">
+      <div class="uc-container">
+        <h2>代理店からの報告の受け方を、一緒に整理します。</h2>
+        <p>代理店との今のやり取りと、Salesforceの使い方を伺ったうえで、実現方法と費用の目安をお伝えします。</p>
+        <a href="/contact/?source=partner_visit_demo&category=line_sf" class="uc-button">初回30分・無料相談<MaterialIcon name="arrow_forward" /></a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  type Scenario = 'normal' | 'unknown' | 'quote';
+
+  function initPartnerVisitDemo() {
+    const root = document.querySelector<HTMLElement>('[data-pv-root]');
+    if (!root || root.dataset.initialized) return;
+    root.dataset.initialized = 'true';
+
+    const form = root.querySelector<HTMLFormElement>('[data-pv-form]')!;
+    const submit = root.querySelector<HTMLButtonElement>('[data-pv-submit]')!;
+    const result = root.querySelector<HTMLElement>('[data-pv-result]')!;
+    const rows = root.querySelector<HTMLElement>('[data-pv-rows]')!;
+    const approvals = root.querySelector<HTMLElement>('[data-pv-approvals]')!;
+    const log = root.querySelector<HTMLElement>('[data-pv-log]')!;
+    const newField = root.querySelector<HTMLElement>('[data-pv-new-field]')!;
+    const newName = root.querySelector<HTMLInputElement>('[data-pv-new-name]')!;
+    const note = root.querySelector<HTMLTextAreaElement>('[data-pv-note]')!;
+    const purpose = root.querySelector<HTMLSelectElement>('[data-pv-purpose]')!;
+    const next = root.querySelector<HTMLSelectElement>('[data-pv-next]')!;
+    const scenarioButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-scenario]')];
+    const initialRows = rows.innerHTML;
+
+    let running = false;
+    const wait = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms));
+    const setBusy = (busy: boolean) => {
+      running = busy;
+      submit.disabled = busy;
+      submit.textContent = busy ? '送信中…' : '報告を送る';
+      scenarioButtons.forEach((button) => { button.disabled = busy; });
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea').forEach((control) => { control.disabled = busy; });
+    };
+    const addLog = (text: string, tone: '' | 'ok' | 'warn' = '') => {
+      const li = document.createElement('li');
+      li.textContent = text;
+      if (tone) li.className = `is-${tone}`;
+      log.appendChild(li);
+    };
+    const showResult = (message: string) => {
+      result.hidden = false;
+      result.className = 'uc-form-result is-ok';
+      result.textContent = message;
+    };
+    const clearEmpty = () => approvals.querySelector('.uc-empty')?.remove();
+
+    const addApproval = (text: string, actionLabel: string, onApprove: () => void) => {
+      clearEmpty();
+      const li = document.createElement('li');
+      const span = document.createElement('span');
+      span.textContent = text;
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'uc-state-btn';
+      button.textContent = actionLabel;
+      button.addEventListener('click', () => {
+        onApprove();
+        li.classList.add('is-done');
+        button.disabled = true;
+        button.textContent = '確認済み';
+      });
+      li.append(span, button);
+      approvals.appendChild(li);
+    };
+
+    const addRow = (account: string, content: string, stage: string, pending: boolean) => {
+      const tr = document.createElement('tr');
+      tr.className = 'is-new';
+      [account, content, stage].forEach((text, i) => {
+        const td = document.createElement('td');
+        td.textContent = text;
+        if (i === 0 && pending) {
+          const badge = document.createElement('span');
+          badge.className = 'uc-badge ng';
+          badge.textContent = '仮登録';
+          td.append(' ', badge);
+        }
+        tr.appendChild(td);
+      });
+      rows.appendChild(tr);
+      return tr;
+    };
+
+    setBusy(false);
+    newField.hidden = true;
+    form.addEventListener('change', () => {
+      const selected = form.querySelector<HTMLInputElement>('input[name="account"]:checked');
+      newField.hidden = selected?.value !== 'new';
+    });
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (running) return;
+      const data = new FormData(form);
+      const selected = form.querySelector<HTMLInputElement>('input[name="account"]:checked')!;
+      const isNew = selected.value === 'new';
+      const accountName = isNew ? (newName.value.trim() || '名称未入力の取引先') : selected.dataset.name!;
+      const stage = String(data.get('stage'));
+      const content = `${purpose.value}：${note.value.trim() || '（内容なし）'}`;
+      const nextValue = next.value;
+
+      setBusy(true);
+      result.hidden = true;
+      log.innerHTML = '';
+      addLog('LINEで開く入力画面から訪問報告を受け取りました。');
+      await wait(350);
+      addLog('報告者の本人確認（IDトークンの検証）を行いました。');
+      await wait(350);
+
+      if (isNew) {
+        addLog(`「${accountName}」は、この代理店の担当する取引先に見つかりません。仮登録として保存しました。`, 'warn');
+        const row = addRow(accountName, content, stage, true);
+        await wait(250);
+        addLog('自社の担当者（鈴木）に、取引先の確認を依頼しました。次の予定のToDoは、取引先の確認後に作ります。');
+        addApproval(`仮登録：${accountName}`, '取引先として登録する', () => {
+          row.querySelector('.uc-badge')?.remove();
+          addLog(`自社の担当者が「${accountName}」を取引先として登録し、この代理店の担当として結び付けました。報告を関連付けました。${nextValue === '未定' ? '' : `次の予定「${nextValue}」をToDoとして作成しました。`}`, 'ok');
+        });
+        showResult('報告を送りました。新しい取引先のため、自社の担当者が確認してから正式に登録します。');
+      } else {
+        addLog(`取引先「${accountName}」は、この代理店の担当であることを確認しました。`);
+        await wait(250);
+        addLog(`完了済みのToDo「訪問報告」として、取引先「${accountName}」に記録しました。`, 'ok');
+        addRow(accountName, content, stage, false);
+        if (nextValue !== '未定') {
+          await wait(200);
+          addLog(`次の予定「${nextValue}」をToDoとして作成しました。`);
+        }
+        if (stage === '見積提出') {
+          await wait(250);
+          addLog('見込みが「見積提出」のため、商談の段階は変えず、自社の担当者に確認を依頼しました。', 'warn');
+          addApproval(`${accountName}：商談の段階を「見積提出」へ`, '確認して段階を変える', () => {
+            addLog(`自社の担当者が確認し、「${accountName}」の商談の段階を「見積提出」に変えました。`, 'ok');
+          });
+          showResult('報告を送りました。商談の段階は、自社の担当者が確認してから変わります。');
+        } else {
+          await wait(200);
+          addLog('自社の担当者（鈴木）に通知しました。');
+          showResult('報告を送りました。自社の担当者に届いています。');
+        }
+      }
+      setBusy(false);
+    });
+
+    const presets: Record<Scenario, () => void> = {
+      normal: () => {
+        form.querySelector<HTMLInputElement>('input[name="account"][value="A-01"]')!.checked = true;
+        purpose.value = '定期訪問';
+        note.value = '更新時期（来年3月）を確認。後継機の資料を希望。';
+        form.querySelector<HTMLInputElement>('input[name="stage"][value="提案中"]')!.checked = true;
+        next.selectedIndex = 0;
+      },
+      unknown: () => {
+        form.querySelector<HTMLInputElement>('input[name="account"][value="new"]')!.checked = true;
+        newName.value = 'サンプル建設D';
+        purpose.value = '新規の提案';
+        note.value = '紹介で初訪問。現行機の入れ替えを検討中。';
+        form.querySelector<HTMLInputElement>('input[name="stage"][value="情報収集"]')!.checked = true;
+        next.selectedIndex = 0;
+      },
+      quote: () => {
+        form.querySelector<HTMLInputElement>('input[name="account"][value="A-03"]')!.checked = true;
+        purpose.value = '新規の提案';
+        note.value = '台数と納期を確認し、見積を提出。';
+        form.querySelector<HTMLInputElement>('input[name="stage"][value="見積提出"]')!.checked = true;
+        next.selectedIndex = 1;
+      },
+    };
+
+    scenarioButtons.forEach((button) => button.addEventListener('click', () => {
+      if (running) return;
+      const scenario = button.dataset.scenario as Scenario;
+      form.reset();
+      presets[scenario]();
+      newField.hidden = scenario !== 'unknown';
+      scenarioButtons.forEach((other) => {
+        const active = other === button;
+        other.classList.toggle('is-active', active);
+        other.setAttribute('aria-pressed', String(active));
+      });
+      result.hidden = true;
+      log.innerHTML = '';
+      approvals.innerHTML = '<li class="uc-empty">確認待ちはありません。</li>';
+      rows.innerHTML = initialRows;
+      addLog('記録を初期化し、入力画面に例を入れました。報告を送ってください。');
+    }));
+  }
+
+  initPartnerVisitDemo();
+  document.addEventListener('astro:page-load', initPartnerVisitDemo);
+</script>

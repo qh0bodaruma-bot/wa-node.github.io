@@ -1,0 +1,423 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import MaterialIcon from '../../components/MaterialIcon.astro';
+import LineCaseSetup from '../../components/LineCaseSetup.astro';
+import { fieldReportSetup } from '../../data/lineUsecaseCatalog';
+import { createBreadcrumbSchema, createWebPageSchema, organizationSchema } from '../../data/structuredData';
+import '../../styles/usecase-demo.css';
+
+export const prerender = true;
+
+const path = '/case-studies/line-field-report-demo/';
+const title = '協力会社の現場報告をLINEからkintoneへ｜点検・日報の連携デモ｜和-Node';
+const description = 'kintoneのアカウントを持たない協力会社やパートの点検報告・日報を、LINEで開く入力画面から受けてkintoneに記録する流れを、ブラウザで操作できる自主制作デモで試せます（架空データ・外部への送信なし）。';
+const structuredData = [
+  organizationSchema,
+  createWebPageSchema({ name: title, description, path, type: 'CreativeWork' }),
+  createBreadcrumbSchema([
+    { name: 'ホーム', path: '/' },
+    { name: '制作例・デモ', path: '/works/' },
+    { name: '協力会社の現場報告（LINE × kintone）', path },
+  ]),
+];
+
+// デモ用の架空データ
+const sites = [
+  { id: 'S-101', name: '中央ビル 空調設備' },
+  { id: 'S-102', name: '北倉庫 給水ポンプ' },
+  { id: 'S-103', name: '南工場 非常用発電機' },
+];
+const checks = [
+  { id: 'motion', label: '動作' },
+  { id: 'noise', label: '異音' },
+  { id: 'leak', label: '漏れ' },
+  { id: 'clean', label: '清掃' },
+];
+
+const fields = [
+  ['報告ID', '入力画面で送信する前に作り、再送のときも同じIDを使う。kintoneでは「値の重複を禁止する」を設定し、同じIDの報告は受け付けない', 'R-20260924-0007（デモ用の表記）'],
+  ['報告者', 'LINEの利用者と協力会社の担当者を結び付けた記録から引く', 'サンプル設備サービス 山田'],
+  ['現場', '事務所側で管理している現場の一覧から選ぶ', '中央ビル 空調設備'],
+  ['点検結果', '項目ごとに「異常なし」「要対応」', '漏れ：要対応'],
+  ['写真', '添付ファイルとして保存', 'サンプル画像 1枚'],
+  ['状態', 'プロセス管理で「新着 → 対応中 → 完了」', '新着'],
+];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <main id="main" class="ucase" data-glossary-skip>
+
+    <section class="uc-hero">
+      <div class="uc-container">
+        <a href="/works/" class="uc-back"><MaterialIcon name="arrow_back" /> 制作例・デモ一覧</a>
+        <p class="uc-eyebrow">業務ごとのデモ｜現場報告</p>
+        <h1><span class="ph">協力会社の現場報告を、</span><span class="ph">LINEからkintoneへ。</span></h1>
+        <p class="uc-lead">点検や日報を、紙やメッセージの写真で受け取って事務所で転記していませんか。kintoneのアカウントを持たない協力会社やパートの方でも、LINEで開く入力画面から報告でき、事務所ではkintoneの一覧で確認できます。</p>
+        <div class="uc-chips">
+          <span class="uc-line-mark">
+            <img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" class="uc-line-icon" />
+          </span>
+          <span class="uc-route">
+            <span class="uc-chip">LINE公式アカウント</span>
+            <MaterialIcon name="east" />
+            <span class="uc-chip uc-chip-vendor">kintone</span>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <div class="uc-disclaimer">
+      <div class="uc-container">
+        <MaterialIcon name="info" />
+        <p><strong>自主制作・架空データのデモです。</strong>実在の会社・現場・人物ではありません。操作してもLINE・kintoneへの送信は行いません。</p>
+      </div>
+    </div>
+
+    <section class="uc-section">
+      <div class="uc-container uc-two">
+        <div>
+          <h2>なぜ、LINEで受けるのか。</h2>
+          <p>kintoneは、使う人ごとに契約する料金体系です。社外の人を招くゲストユーザーにも、1人ごとの料金がかかります（2026年9月時点）。報告のためだけに、協力会社やパートの方全員のアカウントを用意するのは負担になりがちです。</p>
+          <p>LINEで開く入力画面なら、報告する人はアプリを新しく入れる必要がありません。事務所側は、いつものkintoneで報告を受け取れます。</p>
+        </div>
+        <dl class="uc-specs">
+          <div><dt>報告する人</dt><dd>協力会社・パート・派遣スタッフ</dd></div>
+          <div><dt>受け取る側</dt><dd>事務所の担当者（kintone）</dd></div>
+          <div><dt>向いている業務</dt><dd>設備保守・清掃・建設などの点検報告や日報</dd></div>
+          <div><dt>デモ仕様</dt><dd>ブラウザ内だけで動作（外部への送信なし）</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="uc-section uc-demo-section" id="demo" data-fr-root>
+      <div class="uc-container">
+        <h2>報告の流れを試す。</h2>
+        <noscript><p>デモの操作にはJavaScriptが必要です。下の説明はそのままお読みいただけます。</p></noscript>
+        <p class="uc-note">場面を選んでから、入力画面で報告を送ってください。結果は業務システム側の一覧と記録に表示されます。</p>
+        <div class="uc-scenarios" role="group" aria-label="試す場面を選ぶ">
+          <button type="button" class="is-active" aria-pressed="true" data-scenario="normal">通常の流れ</button>
+          <button type="button" aria-pressed="false" data-scenario="network">送信に失敗したとき</button>
+          <button type="button" aria-pressed="false" data-scenario="double">二重に送ったとき</button>
+        </div>
+
+        <div class="uc-stage">
+          <div class="uc-phone">
+            <div class="uc-phone-head">
+              <img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" class="uc-line-icon" />
+              <span>LINEで開く入力画面（LIFF）</span>
+            </div>
+            <form class="uc-form" data-fr-form novalidate>
+              <p class="uc-form-title">点検報告</p>
+              <p class="uc-form-who">報告者：サンプル設備サービス 山田（架空）</p>
+              <label class="uc-field">
+                <span>現場</span>
+                <select name="site" data-fr-site>
+                  {sites.map((site) => <option value={site.id}>{site.name}</option>)}
+                </select>
+              </label>
+              <fieldset class="uc-checks">
+                <legend>点検項目</legend>
+                {checks.map((check) => (
+                  <div class="uc-check-row" role="group" aria-labelledby={`fr-check-${check.id}`}>
+                    <span id={`fr-check-${check.id}`}>{check.label}</span>
+                    <div class="uc-seg">
+                      <label><input type="radio" name={check.id} value="ok" checked /><span>異常なし</span></label>
+                      <label><input type="radio" name={check.id} value="ng" /><span>要対応</span></label>
+                    </div>
+                  </div>
+                ))}
+              </fieldset>
+              <div class="uc-field">
+                <span>写真</span>
+                <button type="button" class="uc-photo-btn" data-fr-photo aria-pressed="false"><MaterialIcon name="image" />サンプル画像を添付</button>
+                <div class="uc-photo-preview" data-fr-photo-preview hidden>
+                  <svg viewBox="0 0 120 72" role="img" aria-label="サンプル画像（写真の代わりの図）"><rect width="120" height="72" rx="6" fill="#e6ece8"/><rect x="18" y="16" width="44" height="40" rx="3" fill="#c9d6cf"/><circle cx="86" cy="30" r="10" fill="#c9d6cf"/><text x="60" y="66" font-size="8" text-anchor="middle" fill="#52665c">サンプル画像</text></svg>
+                </div>
+              </div>
+              <label class="uc-field">
+                <span>特記事項</span>
+                <textarea name="note" rows="2" data-fr-note placeholder="例：配管の継ぎ目に水滴あり"></textarea>
+              </label>
+              <button type="submit" class="uc-submit" data-fr-submit disabled>報告を送る</button>
+              <div class="uc-form-result" data-fr-result hidden></div>
+            </form>
+          </div>
+
+          <div class="uc-system">
+            <div class="uc-system-head">
+              <span class="uc-chip uc-chip-vendor">kintone</span>
+              <span>事務所側の一覧（画面のイメージ）</span>
+            </div>
+            <h3>本日の報告</h3>
+            <div class="uc-table-wrap" tabindex="0" role="region" aria-label="本日の報告一覧（横にスクロールできます）">
+              <table class="uc-table uc-hide-first-col">
+                <thead><tr><th scope="col">報告ID</th><th scope="col">現場</th><th scope="col">判定</th><th scope="col">状態</th></tr></thead>
+                <tbody data-fr-rows>
+                  <tr><td>R-0005</td><td>西ビル 受変電設備</td><td><span class="uc-badge ok">異常なし</span></td><td>完了</td></tr>
+                  <tr><td>R-0006</td><td>東倉庫 排水設備</td><td><span class="uc-badge ok">異常なし</span></td><td>完了</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <h3>未提出の現場</h3>
+            <ul class="uc-pending" data-fr-pending>
+              {sites.map((site) => <li data-site={site.id}>{site.name}</li>)}
+            </ul>
+            <h3>連携の記録</h3>
+            <ol class="uc-log" data-fr-log aria-live="polite"><li>報告を待っています。</li></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uc-section">
+      <div class="uc-container">
+        <h2>kintoneに登録される項目。</h2>
+        <div class="uc-table-wrap" tabindex="0" role="region" aria-label="kintoneに登録される項目（横にスクロールできます）">
+          <table class="uc-table uc-fields">
+            <thead><tr><th scope="col">項目</th><th scope="col">内容</th><th scope="col">例（架空）</th></tr></thead>
+            <tbody>{fields.map(([name, text, sample]) => <tr><th scope="row">{name}</th><td>{text}</td><td>{sample}</td></tr>)}</tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <LineCaseSetup config={fieldReportSetup} />
+
+    <section class="uc-section">
+      <div class="uc-container uc-two">
+        <div>
+          <h2>この形で作る場合の費用。</h2>
+          <p>LINE × kintone連携（25万円〜・税別）の範囲でご案内します。報告の様式が複数ある場合、写真の縮小や保存先の調整、催促の自動送信を入れる場合は、範囲を確認してお見積もりします。</p>
+          <a href="/pricing/#line" class="uc-link">料金と対応範囲を見る<span aria-hidden="true">→</span></a>
+        </div>
+        <div>
+          <h2>ほかのデモ。</h2>
+          <ul class="uc-related">
+            <li><a href="/case-studies/line-kintone-demo/">LINE × kintone 問い合わせ管理</a></li>
+            <li><a href="/case-studies/line-partner-visit-demo/">代理店の訪問報告（LINE × Salesforce）</a></li>
+            <li><a href="/case-studies/line-seminar-booking-demo/">セミナー予約（LINE × HubSpot）</a></li>
+            <li><a href="/works/">制作例・デモの一覧</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="uc-cta">
+      <div class="uc-container">
+        <h2>現場報告の受け方を、一緒に整理します。</h2>
+        <p>今の報告の受け取り方と、kintoneの使い方を伺ったうえで、実現方法と費用の目安をお伝えします。</p>
+        <a href="/contact/?source=field_report_demo&category=line_kintone" class="uc-button">初回30分・無料相談<MaterialIcon name="arrow_forward" /></a>
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<script>
+  type Scenario = 'normal' | 'network' | 'double';
+
+  function initFieldReportDemo() {
+    const root = document.querySelector<HTMLElement>('[data-fr-root]');
+    if (!root || root.dataset.initialized) return;
+    root.dataset.initialized = 'true';
+
+    const form = root.querySelector<HTMLFormElement>('[data-fr-form]')!;
+    const submit = root.querySelector<HTMLButtonElement>('[data-fr-submit]')!;
+    const result = root.querySelector<HTMLElement>('[data-fr-result]')!;
+    const rows = root.querySelector<HTMLElement>('[data-fr-rows]')!;
+    const pending = root.querySelector<HTMLElement>('[data-fr-pending]')!;
+    const log = root.querySelector<HTMLElement>('[data-fr-log]')!;
+    const site = root.querySelector<HTMLSelectElement>('[data-fr-site]')!;
+    const photoBtn = root.querySelector<HTMLButtonElement>('[data-fr-photo]')!;
+    const photoPreview = root.querySelector<HTMLElement>('[data-fr-photo-preview]')!;
+    const scenarioButtons = [...root.querySelectorAll<HTMLButtonElement>('[data-scenario]')];
+
+    let scenario: Scenario = 'normal';
+    let serial = 7;
+    let networkFailed = false;
+    let awaitingRetry = false;
+    let running = false;
+    const registered = new Set<string>();
+    const wait = (ms: number) => new Promise((resolve) => window.setTimeout(resolve, ms));
+    // 処理中は送信・再送・場面の切り替えを受け付けない（処理が重ならないようにする）
+    const setBusy = (busy: boolean) => {
+      running = busy;
+      submit.disabled = busy || awaitingRetry;
+      submit.textContent = busy ? '送信中…' : awaitingRetry ? '再送を待っています' : '報告を送る';
+      scenarioButtons.forEach((button) => { button.disabled = busy; });
+      form.querySelectorAll<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>('input, select, textarea').forEach((control) => { control.disabled = busy || awaitingRetry; });
+      photoBtn.disabled = busy || awaitingRetry;
+    };
+
+    const addLog = (text: string, tone: '' | 'ok' | 'warn' = '') => {
+      const li = document.createElement('li');
+      li.textContent = text;
+      if (tone) li.className = `is-${tone}`;
+      log.appendChild(li);
+    };
+    const resetLog = () => { log.innerHTML = ''; };
+
+    const showResult = (tone: 'ok' | 'error', message: string, action?: { label: string; run: () => void }) => {
+      result.hidden = false;
+      result.className = `uc-form-result is-${tone}`;
+      result.innerHTML = '';
+      const p = document.createElement('p');
+      p.style.margin = '0';
+      p.textContent = message;
+      result.appendChild(p);
+      if (action) {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = action.label;
+        button.addEventListener('click', async () => {
+          if (running) return;
+          button.disabled = true;
+          setBusy(true);
+          await action.run();
+          setBusy(false);
+        });
+        result.appendChild(button);
+      }
+    };
+
+    const readForm = () => {
+      const data = new FormData(form);
+      const ng = ['motion', 'noise', 'leak', 'clean'].filter((key) => data.get(key) === 'ng');
+      return { siteId: site.value, siteName: site.options[site.selectedIndex].text, ng, photo: photoBtn.getAttribute('aria-pressed') === 'true' };
+    };
+
+    const labels: Record<string, string> = { motion: '動作', noise: '異音', leak: '漏れ', clean: '清掃' };
+
+    const addRow = (reportId: string, siteId: string, siteName: string, ng: string[]) => {
+      const tr = document.createElement('tr');
+      tr.className = 'is-new';
+      tr.dataset.reportId = reportId;
+      const judge = ng.length ? `<span class="uc-badge ng">要対応：${ng.map((key) => labels[key]).join('・')}</span>` : '<span class="uc-badge ok">異常なし</span>';
+      tr.innerHTML = `<td>${reportId.replace('R-20260924-', 'R-')}</td><td></td><td>${judge}</td><td data-state></td>`;
+      (tr.children[1] as HTMLElement).textContent = siteName;
+      const stateCell = tr.querySelector<HTMLElement>('[data-state]')!;
+      if (ng.length) {
+        stateCell.textContent = '新着 ';
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'uc-state-btn';
+        button.textContent = '対応中にする';
+        button.addEventListener('click', () => {
+          if (button.textContent === '対応中にする') {
+            stateCell.firstChild!.textContent = '対応中 ';
+            button.textContent = '完了にする';
+            addLog(`${siteName}：担当者が「対応中」に進めました。`);
+          } else {
+            stateCell.textContent = '完了';
+            addLog(`${siteName}：担当者が「完了」にしました。`, 'ok');
+          }
+        });
+        stateCell.appendChild(button);
+      } else {
+        stateCell.textContent = '完了';
+      }
+      rows.appendChild(tr);
+      const done = [...pending.querySelectorAll<HTMLElement>('li')].find((li) => li.dataset.site === siteId);
+      if (done && !done.classList.contains('is-done')) {
+        done.classList.add('is-done');
+        const note = document.createElement('span');
+        note.className = 'uc-sr';
+        note.textContent = '（提出済み）';
+        done.appendChild(note);
+      }
+    };
+
+    const register = async (reportId: string, report: ReturnType<typeof readForm>, isRetry = false) => {
+      addLog(isRetry ? '端末に残っていた報告を再送しました。' : 'LINEで開く入力画面から報告を受け取りました。');
+      await wait(350);
+      addLog('報告者の本人確認（IDトークンの検証）を行いました。');
+      await wait(350);
+      if (registered.has(reportId)) {
+        addLog(`同じ報告ID（${reportId}）がすでに登録されています。新しく登録せず、1件のままにしました。`, 'warn');
+        const row = rows.querySelector<HTMLElement>(`[data-report-id="${reportId}"]`);
+        if (row) { row.classList.remove('is-new'); void row.offsetWidth; row.classList.add('is-new'); }
+        return false;
+      }
+      registered.add(reportId);
+      addLog(`報告ID ${reportId} でkintoneに登録しました。${report.photo ? '写真1枚を添付ファイルとして保存しました。' : ''}`, 'ok');
+      addRow(reportId, report.siteId, report.siteName, report.ng);
+      await wait(250);
+      addLog(report.ng.length ? '「要対応」があるため、事務所の担当者に通知しました。' : '異常がないため、通知は送っていません。');
+      return true;
+    };
+
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (running || awaitingRetry) return;
+      const report = readForm();
+      // 報告IDは送信前に端末側で作り、再送のときも同じ値を使う（デモでは読みやすい形にしている）
+      const reportId = `R-20260924-${String(serial).padStart(4, '0')}`;
+      setBusy(true);
+      result.hidden = true;
+      resetLog();
+      await wait(400);
+
+      if (scenario === 'network' && !networkFailed) {
+        networkFailed = true;
+        addLog('送信できませんでした（電波が不安定なため）。kintoneには何も登録されていません。', 'warn');
+        showResult('error', '電波が不安定なため、送信できませんでした。同じ内容を再送するまで入力欄は固定されます。内容を変えて試す場合は、場面を選び直してください。このデモの入力内容は再読み込みで消えます。', {
+          label: 'もう一度送る',
+          run: async () => {
+            const ok = await register(reportId, report, true);
+            serial += 1;
+            awaitingRetry = false;
+            showResult('ok', ok ? '報告を送りました。事務所の一覧に登録されています。' : 'この報告はすでに登録されていました。記録は1件のままです。');
+          },
+        });
+        // 再送を待つあいだは、フォームから別の内容を送れないようにする（端末に残した内容と食い違わないように）
+        awaitingRetry = true;
+        setBusy(false);
+        submit.disabled = true;
+        submit.textContent = '再送を待っています';
+        result.querySelector('button')?.focus();
+        return;
+      }
+
+      await register(reportId, report);
+      if (scenario === 'double') {
+        showResult('ok', '報告を送りました。通信が不安定なときなどに、同じ報告が2回届いた場合を試せます。', {
+          label: '同じ報告をもう一度送る',
+          run: async () => {
+            await register(reportId, report);
+            showResult('ok', '同じ報告がもう一度届きましたが、記録は1件のままです。');
+          },
+        });
+        result.querySelector('button')?.focus();
+      } else {
+        showResult('ok', '報告を送りました。事務所の一覧に登録されています。');
+      }
+      serial += 1;
+      setBusy(false);
+    });
+
+    setBusy(false);
+    photoBtn.addEventListener('click', () => {
+      const on = photoBtn.getAttribute('aria-pressed') !== 'true';
+      photoBtn.setAttribute('aria-pressed', String(on));
+      photoPreview.hidden = !on;
+    });
+
+    scenarioButtons.forEach((button) => button.addEventListener('click', () => {
+      scenario = button.dataset.scenario as Scenario;
+      networkFailed = false;
+      awaitingRetry = false;
+      setBusy(false);
+      scenarioButtons.forEach((other) => {
+        const active = other === button;
+        other.classList.toggle('is-active', active);
+        other.setAttribute('aria-pressed', String(active));
+      });
+      result.hidden = true;
+      resetLog();
+      addLog(scenario === 'network' ? '「送信に失敗したとき」を試せます。報告を送ってください。' : scenario === 'double' ? '「二重に送ったとき」を試せます。報告を送ってください。' : '報告を待っています。');
+    }));
+  }
+
+  initFieldReportDemo();
+  document.addEventListener('astro:page-load', initFieldReportDemo);
+</script>

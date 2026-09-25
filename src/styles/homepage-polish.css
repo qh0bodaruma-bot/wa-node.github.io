@@ -1,7 +1,25 @@
-/* トップ冒頭の調整。共通ページ・制作例ページには適用しない。 */
+/* トップ限定の技術的な洗練。共通ページ・制作例ページには適用しない。 */
+#main.home-refresh {
+  --paper: #f8faf9;
+  --ink: #1c302f;
+  --quiet: #526563;
+  --rule: #d8e2df;
+  --deep: #164f4d;
+  font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans',
+    'Hiragino Kaku Gothic ProN', 'Yu Gothic Medium', YuGothic, Meiryo, sans-serif;
+}
+
+#main.home-refresh h1,
+#main.home-refresh h2,
+#main.home-refresh h3 {
+  font-family: inherit;
+  letter-spacing: .01em;
+}
+
 #main.home-refresh .home-hero {
   padding: 80px 0 64px;
-  background: var(--paper);
+  background: #fff;
+  border-bottom: 1px solid var(--rule);
 }
 
 #main.home-refresh .home-hero .hero-layout {
@@ -14,8 +32,9 @@
 #main.home-refresh .home-hero .hero-copy h1 {
   /* 上限は、1行目「LINEの問い合わせを」が左列（最大約540px）に収まる大きさ */
   font-size: clamp(2.25rem, 3.5vw, 3.2rem);
-  line-height: 1.5;
-  letter-spacing: .025em;
+  line-height: 1.45;
+  font-weight: 700;
+  letter-spacing: .01em;
   margin-bottom: 24px;
 }
 #main.home-refresh .home-hero .hero-lead { line-height: 1.95; }
@@ -34,11 +53,11 @@
 /* 画面の中身を主役にし、罫線と淡い影で奥行きをつける。 */
 #main.home-refresh .home-hero .hero-demo {
   padding: 24px;
-  border: 1px solid #d5ded8;
-  border-radius: 10px;
-  background: #fffefa;
+  border: 1px solid #cddcd8;
+  border-radius: 8px;
+  background: #fff;
   color: var(--ink);
-  box-shadow: 0 20px 48px -24px rgba(22, 79, 77, .22),
+  box-shadow: 0 24px 56px -28px rgba(22, 79, 77, .2),
     0 3px 12px rgba(22, 79, 77, .04);
 }
 #main.home-refresh .home-hero .demo-title {
@@ -49,6 +68,10 @@
   font-weight: 600;
   letter-spacing: .04em;
   flex-wrap: wrap;
+}
+#main.home-refresh .home-hero .demo-title > span {
+  padding-left: 12px;
+  border-left: 2px solid var(--deep);
 }
 #main.home-refresh .home-hero .demo-toggle {
   color: var(--deep);
@@ -69,25 +92,27 @@
 #main.home-refresh .home-hero .line-bubble {
   min-width: 0;
   padding: 12px 16px;
-  background: #f1f5f0;
-  border-color: #dce4db;
-  border-radius: 4px 10px 10px 10px;
+  background: #f1f6f4;
+  border-color: #d6e2dd;
+  border-radius: 4px 8px 8px 8px;
 }
 #main.home-refresh .home-hero .source-icon { border-radius: 8px; }
 #main.home-refresh .home-hero .connection-track {
   justify-content: center;
   padding: 18px 0;
   color: var(--quiet);
+  font-family: ui-monospace, 'Cascadia Code', 'SFMono-Regular', Consolas, monospace;
+  letter-spacing: .02em;
 }
 #main.home-refresh .home-hero .connection-target {
   padding: 18px;
-  background: #fff;
+  background: #f8faf9;
   border-color: #d9dfd1;
   border-radius: 6px;
 }
 #main.home-refresh .home-hero .target-icon {
   color: var(--deep);
-  background: #edf2ee;
+  background: #e8f0ed;
   border-radius: 6px;
 }
 #main.home-refresh .home-hero .target-head { margin-bottom: 14px; }
@@ -107,6 +132,41 @@
   color: var(--quiet);
   text-align: left;
   line-height: 1.7;
+}
+
+/* 本文も同じ文字・罫線・面の扱いに揃える。 */
+#main.home-refresh .trust-strip { padding-block: 28px; }
+#main.home-refresh .trust-strip strong { font-weight: 700; }
+#main.home-refresh .service-choice,
+#main.home-refresh .scope-col {
+  background: #fff;
+  border-color: var(--rule);
+  border-radius: 6px;
+}
+#main.home-refresh .scope-col-no { background: #f1f5f3; }
+#main.home-refresh .connector-prices dd,
+#main.home-refresh .service-choice-foot strong { font-variant-numeric: tabular-nums; }
+#main.home-refresh .works-section { background: #edf3f1; }
+#main.home-refresh .work-preview {
+  background: #fff;
+  border-color: #d1dfda;
+  border-radius: 6px;
+}
+#main.home-refresh .mini-line,
+#main.home-refresh .mini-crm { border-radius: 6px; }
+#main.home-refresh .mini-crm {
+  color: var(--deep);
+  background: #edf3f1;
+  border: 1px solid #cddcd8;
+}
+#main.home-refresh .work-preview > small {
+  font-family: ui-monospace, 'Cascadia Code', 'SFMono-Regular', Consolas, monospace;
+  letter-spacing: .04em;
+  color: var(--quiet);
+}
+#main.home-refresh .s-contact-band {
+  background: #eaf1ee;
+  border-top: 1px solid var(--rule);
 }
 
 @media (max-width: 1000px) {

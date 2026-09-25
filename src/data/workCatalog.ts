@@ -6,6 +6,16 @@ export const mainWorkCategories: WorkCategory[] = ['line', 'app'];
 export interface WorkItem { id:string; category:WorkCategory; title:Record<SiteLanguage,string>; description:Record<SiteLanguage,string>; href:string; image:string; priceKey?:keyof typeof servicePrices; featured:boolean }
 export const workCatalog: WorkItem[] = [
   {
+    category: 'line',
+    title: { ja: 'セミナー予約（LINE × HubSpot）', en: 'Seminar booking (LINE × HubSpot)', fr: 'Réservation de séminaire (LINE × HubSpot)' },
+    description: {
+      ja: '申込みと参加状況を顧客情報につなげるデモです。満席・重複申込みへの対応、開催前の案内、参加後のフォローを試せます。',
+      en: 'Try booking, full sessions, duplicate prevention and attendee follow-up. The demo is in Japanese.',
+      fr: 'Tester les réservations, les sessions complètes, les doublons et le suivi des participants. Démo en japonais.',
+    },
+    href: '/case-studies/line-seminar-booking-demo/', image: '', id: 'work-24', priceKey: 'lineHubspot', featured: false,
+  },
+  {
     "category": "line",
     "title": {
       "ja": "LINE × kintone 問い合わせ管理",
@@ -75,6 +85,42 @@ export const workCatalog: WorkItem[] = [
     "image": "/images/works/captures/work-04.webp",
     "id": "work-04",
     "priceKey": "lineSheets",
+    "featured": false
+  },
+  {
+    "category": "line",
+    "title": {
+      "ja": "協力会社の現場報告（LINE × kintone）",
+      "en": "Field reports from partner staff (LINE × kintone)",
+      "fr": "Rapports de terrain des partenaires (LINE × kintone)"
+    },
+    "description": {
+      "ja": "kintoneのアカウントを持たない協力会社やパートの点検報告を、LINEで開く入力画面から受けてkintoneに記録する流れを試せます。送信の失敗や二重送信の場面も確認できます。",
+      "en": "Try receiving inspection reports from partner staff through a form opened in LINE and recording them in kintone. Some demo screens are in Japanese.",
+      "fr": "Tester la réception de rapports d’inspection via un formulaire ouvert dans LINE et leur enregistrement dans kintone. Certains écrans sont en japonais."
+    },
+    "href": "/case-studies/line-field-report-demo/",
+    "image": "",
+    "id": "work-22",
+    "priceKey": "lineKintone",
+    "featured": false
+  },
+  {
+    "category": "line",
+    "title": {
+      "ja": "代理店の訪問報告（LINE × Salesforce）",
+      "en": "Visit reports from sales partners (LINE × Salesforce)",
+      "fr": "Rapports de visite des partenaires (LINE × Salesforce)"
+    },
+    "description": {
+      "ja": "Salesforceのアカウントを持たない代理店の訪問報告を、LINEで開く入力画面から受けてSalesforceの活動に記録する流れを試せます。新しい取引先の仮登録や、商談の段階の確認も確認できます。",
+      "en": "Try receiving visit reports from sales partners through a form opened in LINE and recording them as Salesforce activities. Some demo screens are in Japanese.",
+      "fr": "Tester la réception de rapports de visite via un formulaire ouvert dans LINE et leur enregistrement comme activités Salesforce. Certains écrans sont en japonais."
+    },
+    "href": "/case-studies/line-partner-visit-demo/",
+    "image": "",
+    "id": "work-23",
+    "priceKey": "lineSalesforce",
     "featured": false
   },
   {

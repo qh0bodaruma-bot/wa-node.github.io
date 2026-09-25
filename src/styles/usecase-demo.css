@@ -1,0 +1,129 @@
+/* 用途別LINE連携デモ（/case-studies/line-*-demo/ の業務ごとの3本）の共通スタイル。クラスは uc- で始まる */
+  .ucase { background: #fbfcfb; color: var(--text, #1a1614); }
+  /* display を指定した要素にも hidden を効かせる（「取引先名」欄などの出し分け） */
+  .ucase [hidden] { display: none !important; }
+  .ucase :is(input, select, textarea, button, a, [tabindex]):focus-visible { outline: 3px solid #9b4c12; outline-offset: 3px; }
+  .uc-container { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+  .uc-hero { padding: 40px 0 48px; background: linear-gradient(180deg, #f4f7f5 0%, #fbfcfb 100%); border-bottom: 1px solid var(--line, #dce5e1); }
+  .uc-back { display: inline-flex; align-items: center; gap: 6px; color: var(--trust, #0f4c5c); font-size: .875rem; font-weight: 700; text-decoration: none; margin-bottom: 20px; }
+  .uc-eyebrow { color: var(--trust, #0f4c5c); font-size: .8125rem; font-weight: 700; letter-spacing: .08em; margin: 0 0 12px; }
+  .uc-hero h1 { font-size: clamp(1.375rem, 6.4vw, 2.6rem); line-height: 1.45; margin: 0 0 16px; }
+  /* 見出しはどの幅でも「協力会社の現場報告を、／LINEからkintoneへ。」の2行にそろえる */
+  .uc-hero h1 .ph { display: block; white-space: nowrap; }
+  .uc-lead { max-width: 44em; line-height: 1.9; color: var(--muted, #524a44); margin: 0 0 24px; }
+  .uc-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+  /* 公式アイコンは加工せず、周囲に余白をとって単独で置く */
+  .uc-line-mark { display: inline-flex; padding: 10px; background: #fff; border-radius: 8px; }
+  /* 原本は1001×1000px。縦横比を変えないよう高さは自動にする */
+  .uc-line-icon { width: 40px; height: auto; display: block; }
+  .uc-route { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+  .uc-chip { display: inline-flex; align-items: center; min-height: 36px; padding: 4px 14px; border: 1px solid var(--line, #dce5e1); border-radius: 999px; background: #fff; font-size: .875rem; font-weight: 700; }
+  .uc-chip-vendor { border-color: #0f4c81; color: #0f4c81; }
+  .uc-disclaimer { background: rgba(15, 76, 92, .05); border-bottom: 1px solid var(--line, #dce5e1); }
+  .uc-disclaimer .uc-container { display: flex; gap: 10px; align-items: flex-start; padding: 14px 0; color: var(--trust, #0f4c5c); font-size: .875rem; line-height: 1.8; }
+  .uc-disclaimer p { margin: 0; }
+  .uc-section { padding: 64px 0; border-top: 1px solid var(--line, #dce5e1); }
+  .uc-section h2, .uc-cta h2 { font-size: clamp(1.4rem, 2.6vw, 1.9rem); line-height: 1.45; margin: 0 0 16px; word-break: auto-phrase; text-wrap: balance; }
+  .uc-section p { line-height: 1.9; color: var(--muted, #524a44); }
+  .uc-two { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .uc-specs { margin: 0; display: grid; gap: 10px; }
+  .uc-specs > div { display: grid; grid-template-columns: 8em 1fr; gap: 12px; padding: 12px 16px; background: #fff; border: 1px solid var(--line, #dce5e1); border-radius: 10px; }
+  .uc-specs dt { font-size: .8125rem; font-weight: 700; color: var(--trust, #0f4c5c); }
+  .uc-specs dd { margin: 0; font-size: .9375rem; }
+  .uc-note { margin: 0 0 16px; }
+  .uc-scenarios { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+  .uc-scenarios button { min-height: 44px; padding: 8px 16px; border: 1px solid #c9d0c3; border-radius: 8px; background: #fff; font: inherit; font-size: .875rem; font-weight: 700; cursor: pointer; }
+  .uc-scenarios button:disabled, .uc-form-result button:disabled { opacity: .55; cursor: wait; }
+  .uc-scenarios button.is-active { background: var(--trust, #0f4c5c); border-color: var(--trust, #0f4c5c); color: #fff; }
+  .uc-stage { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 24px; align-items: start; }
+  .uc-phone { background: #fff; border: 1px solid #cfd8d2; border-radius: 22px; padding: 14px; box-shadow: 0 16px 36px -20px rgba(15, 76, 92, .35); }
+  .uc-phone-head { display: flex; align-items: center; gap: 14px; padding: 6px 6px 14px; border-bottom: 1px solid var(--line, #dce5e1); font-size: .8125rem; font-weight: 700; color: var(--muted, #524a44); }
+  .uc-form { padding: 14px 6px 6px; display: grid; gap: 14px; }
+  .uc-form-title { font-size: 1.05rem; font-weight: 800; margin: 0; color: var(--text, #1a1614) !important; }
+  .uc-form-who { font-size: .8125rem; margin: -8px 0 0; }
+  .uc-field { display: grid; gap: 6px; font-size: .875rem; font-weight: 700; }
+  .uc-field select, .uc-field textarea { width: 100%; min-height: 44px; padding: 10px; border: 1px solid #bfc7bd; border-radius: 8px; font: inherit; font-size: 16px; font-weight: 400; background: #fff; }
+  .uc-checks { border: 0; margin: 0; padding: 0; display: grid; gap: 8px; }
+  .uc-checks legend { font-size: .875rem; font-weight: 700; margin-bottom: 6px; }
+  .uc-check-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: .9375rem; }
+  .uc-seg { display: inline-flex; border: 1px solid #bfc7bd; border-radius: 8px; overflow: hidden; }
+  .uc-seg label { position: relative; }
+  .uc-seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .uc-seg span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 12px; font-size: .8125rem; font-weight: 700; background: #fff; }
+  .uc-seg input:checked + span { background: var(--trust, #0f4c5c); color: #fff; }
+  .uc-seg label:last-child input:checked + span { background: #b3372f; }
+  .uc-seg input:focus-visible + span { outline: 3px solid #9b4c12; outline-offset: -3px; }
+  .uc-photo-btn { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 8px 14px; border: 1px dashed #9aa79f; border-radius: 8px; background: #f7f9f8; font: inherit; font-size: .875rem; cursor: pointer; justify-self: start; }
+  .uc-photo-btn[aria-pressed="true"] { border-style: solid; border-color: var(--trust, #0f4c5c); }
+  .uc-photo-preview svg { width: 120px; height: 72px; display: block; }
+  .uc-submit, .uc-button { display: inline-flex; justify-content: center; align-items: center; gap: 10px; min-height: 48px; padding: 12px 20px; border: 0; border-radius: 8px; background: var(--action, #c7352f); color: #fff; font: inherit; font-weight: 800; cursor: pointer; text-decoration: none; }
+  .uc-submit[disabled] { opacity: .6; cursor: wait; }
+  .uc-form-result { padding: 12px; border-radius: 8px; font-size: .875rem; line-height: 1.7; display: grid; gap: 8px; }
+  .uc-form-result.is-ok { background: #e8f2ec; color: #1d5b3a; }
+  .uc-form-result.is-error { background: #fbebe6; color: #8b2925; }
+  .uc-form-result button { justify-self: start; min-height: 40px; padding: 6px 14px; border: 1px solid currentColor; border-radius: 8px; background: #fff; color: inherit; font: inherit; font-weight: 700; cursor: pointer; }
+  .uc-system { background: #fff; border: 1px solid var(--line, #dce5e1); border-radius: 14px; padding: 18px; min-width: 0; }
+  .uc-system-head { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: .8125rem; color: var(--muted, #524a44); padding-bottom: 12px; border-bottom: 1px solid var(--line, #dce5e1); }
+  .uc-system h3 { font-size: .9375rem; margin: 18px 0 8px; }
+  .uc-table-wrap { overflow-x: auto; }
+  .uc-table { width: 100%; border-collapse: collapse; font-size: .875rem; background: #fff; }
+  .uc-table th, .uc-table td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line, #dce5e1); vertical-align: top; }
+  .uc-table thead th { font-size: .75rem; color: var(--muted, #524a44); background: #f4f7f5; white-space: nowrap; }
+  .uc-table tr.is-new { background: #fff8e6; }
+  .uc-badge { display: inline-block; padding: 1px 8px; border-radius: 999px; font-size: .75rem; font-weight: 700; white-space: nowrap; }
+  .uc-badge.ok { background: #e8f2ec; color: #1d5b3a; }
+  .uc-badge.ng { background: #fbebe6; color: #8b2925; }
+  .uc-state-btn { min-height: 32px; padding: 2px 10px; border: 1px solid var(--trust, #0f4c5c); border-radius: 6px; background: #fff; color: var(--trust, #0f4c5c); font: inherit; font-size: .75rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
+  .uc-pending { margin: 0; padding-left: 1.2em; font-size: .875rem; line-height: 1.9; }
+  .uc-pending li.is-done { color: #8a948e; text-decoration: line-through; }
+  .uc-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .uc-log { margin: 0; padding-left: 1.4em; font-size: .8125rem; line-height: 1.9; color: var(--muted, #524a44); }
+  .uc-log li.is-warn { color: #8b2925; font-weight: 700; }
+  .uc-log li.is-ok { color: #1d5b3a; }
+  .uc-fields th[scope="row"] { white-space: nowrap; font-weight: 700; }
+  .uc-link { display: inline-flex; gap: 8px; color: var(--trust, #0f4c5c); font-weight: 700; }
+  .uc-related { margin: 0; padding-left: 1.2em; line-height: 2.1; }
+  .uc-related a { color: var(--trust, #0f4c5c); font-weight: 700; }
+  .uc-cta { padding: 56px 0 72px; background: #edf0e8; }
+  .uc-cta p { color: var(--muted, #524a44); margin: 0 0 20px; line-height: 1.9; }
+  @media (max-width: 820px) {
+    .uc-two, .uc-stage { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    .uc-stage { justify-items: stretch; }
+    .uc-phone { max-width: 420px; }
+  }
+  @media (max-width: 420px) {
+    .uc-specs > div { grid-template-columns: 1fr; gap: 2px; }
+    .uc-seg span { padding: 0 9px; }
+    .uc-section { padding: 48px 0; }
+    /* 狭い画面では一覧の報告IDを省く（IDは連携の記録に表示される） */
+    .uc-hide-first-col th:first-child, .uc-hide-first-col td:first-child { display: none; }
+  }
+  @media (max-width: 360px) {
+    .uc-route { gap: 6px; }
+    .uc-chip { padding-inline: 8px; font-size: .8125rem; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .uc-table tr.is-new { animation: uc-flash 1.2s ease-out; }
+    @keyframes uc-flash { from { background: #ffe9b0; } to { background: #fff8e6; } }
+  }
+
+/* 代理店の訪問報告デモ（Salesforce） */
+.uc-chip-sf { border-color: #0176a3; color: #0176a3; }
+.uc-field input[type="text"] { width: 100%; min-height: 44px; padding: 10px; border: 1px solid #bfc7bd; border-radius: 8px; font: inherit; font-size: 16px; font-weight: 400; }
+.uc-account-list { display: grid; gap: 6px; }
+.uc-account { position: relative; display: block; }
+.uc-account input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.uc-account span { display: flex; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid #bfc7bd; border-radius: 8px; font-size: .9375rem; background: #fff; }
+.uc-account input:checked + span { border-color: var(--trust, #0f4c5c); box-shadow: inset 0 0 0 1px var(--trust, #0f4c5c); background: #eef5f2; font-weight: 700; }
+.uc-account input:focus-visible + span { outline: 3px solid #9b4c12; outline-offset: 2px; }
+.uc-hint { font-size: .75rem; color: var(--muted, #524a44); margin: 4px 0 0; }
+.uc-seg-3 { display: flex; }
+.uc-seg-3 label { flex: 1; }
+.uc-seg-3 span { justify-content: center; width: 100%; }
+.uc-seg-3 label:last-child input:checked + span { background: var(--trust, #0f4c5c); }
+.uc-approvals { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: .875rem; }
+.uc-approvals li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border: 1px solid #f0d9a8; border-radius: 8px; background: #fff8e6; }
+.uc-approvals li.is-done { border-color: var(--line, #dce5e1); background: #f4f7f5; color: #5d6a63; }
+.uc-approvals li.uc-empty { border-style: dashed; border-color: var(--line, #dce5e1); background: transparent; color: var(--muted, #524a44); }
+.uc-done-note { font-size: .8125rem; }
+.uc-state-btn:disabled { opacity: .6; cursor: default; border-color: var(--line, #dce5e1); color: #5d6a63; }

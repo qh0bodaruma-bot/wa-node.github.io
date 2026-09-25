@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1672" height="941" viewBox="0 0 1672 941" role="img" aria-labelledby="title desc">
+  <title id="title">二重登録・登録漏れを防ぐ</title>
+  <desc id="desc">Webhookの再送と重複に備え、問い合わせを重複判定して1件のデータとして登録する概念図</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#062b55"/>
+      <stop offset="1" stop-color="#0c5ca2"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#001a35" flood-opacity=".35"/>
+    </filter>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M0 0 12 6 0 12Z" fill="#f5f7fb"/>
+    </marker>
+  </defs>
+  <rect width="1672" height="941" fill="url(#bg)"/>
+  <rect x="1040" y="0" width="632" height="941" fill="#0b4d88" opacity=".42"/>
+  <g fill="#fff" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-weight="800">
+    <text x="64" y="132" font-size="78">二重登録・</text>
+    <text x="64" y="222" font-size="78">登録漏れを防ぐ</text>
+  </g>
+  <text x="64" y="296" fill="#ffe33d" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="43" font-weight="800">Webhookの再送と重複に備える設計</text>
+  <rect x="58" y="332" width="850" height="74" rx="37" fill="#d7192f"/>
+  <text x="483" y="383" text-anchor="middle" fill="#fff" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="36" font-weight="800">再送・重複・失敗時の確認</text>
+
+  <g filter="url(#shadow)">
+    <rect x="78" y="486" width="270" height="155" rx="16" fill="#f7fbff"/>
+    <rect x="382" y="486" width="270" height="155" rx="16" fill="#f7fbff"/>
+  </g>
+  <g fill="#0a4e8c" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-weight="700" font-size="25">
+    <text x="106" y="534">問い合わせ</text><text x="410" y="534">問い合わせ</text>
+  </g>
+  <g fill="#75a8d5"><rect x="106" y="558" width="170" height="13" rx="6"/><rect x="106" y="588" width="210" height="13" rx="6"/><rect x="410" y="558" width="170" height="13" rx="6"/><rect x="410" y="588" width="210" height="13" rx="6"/></g>
+  <g fill="#8aa7c4" font-family="Arial, sans-serif" font-size="19"><text x="106" y="623">2026/09/25 10:00</text><text x="410" y="623">2026/09/25 10:00</text></g>
+  <path d="M348 564h31M652 564h155" stroke="#fff" stroke-width="9" fill="none" marker-end="url(#arrow)"/>
+  <rect x="260" y="687" width="220" height="58" rx="29" fill="#d7192f" stroke="#fff" stroke-width="5"/>
+  <text x="370" y="727" text-anchor="middle" fill="#fff" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="30" font-weight="800">重複判定</text>
+  <path d="M213 642v45M517 642v45M213 687h47M517 687h-37" stroke="#fff" stroke-width="5" fill="none"/>
+
+  <g filter="url(#shadow)">
+    <ellipse cx="902" cy="514" rx="118" ry="30" fill="#5bb2f5"/>
+    <rect x="784" y="514" width="236" height="128" fill="#1782c9"/>
+    <ellipse cx="902" cy="642" rx="118" ry="30" fill="#0e6cad"/>
+    <ellipse cx="902" cy="514" rx="118" ry="30" fill="#75c4ff" stroke="#fff" stroke-width="5"/>
+  </g>
+  <circle cx="1004" cy="626" r="44" fill="#24a36a" stroke="#fff" stroke-width="6"/>
+  <path d="m983 626 14 14 29-34" fill="none" stroke="#fff" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="902" y="726" text-anchor="middle" fill="#fff" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="31" font-weight="800">1件のデータとして登録</text>
+  <g opacity=".42" fill="none" stroke="#7bc4ff" stroke-width="5"><rect x="1127" y="198" width="410" height="230" rx="18"/><rect x="1190" y="472" width="310" height="128" rx="18"/></g>
+  <g fill="#a7d8ff" opacity=".65"><rect x="1170" y="252" width="260" height="18" rx="9"/><rect x="1170" y="296" width="200" height="18" rx="9"/><rect x="1232" y="530" width="190" height="18" rx="9"/></g>
+  <text x="1585" y="901" text-anchor="end" fill="#fff" font-family="Noto Sans JP, Yu Gothic, sans-serif" font-size="24">※イメージ</text>
+</svg>

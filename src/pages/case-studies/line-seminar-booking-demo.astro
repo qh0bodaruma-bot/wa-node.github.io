@@ -1,0 +1,253 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LineCaseSetup from '../../components/LineCaseSetup.astro';
+import { seminarBookingSetup } from '../../data/lineUsecaseCatalog';
+import { createBreadcrumbSchema, createWebPageSchema, organizationSchema } from '../../data/structuredData';
+import '../../styles/usecase-demo.css';
+
+export const prerender = true;
+const path = '/case-studies/line-seminar-booking-demo/';
+const title = 'セミナー予約をLINEからHubSpotへ｜申込み・参加後のフォローデモ｜和-Node';
+const description = 'LINEで開く入力画面からセミナーに申し込み、顧客情報と参加状況をHubSpotへつなぐ流れを体験。満席・重複申込み・参加後のフォローも試せる自主制作デモです（架空データ・外部への送信なし）。';
+const structuredData = [organizationSchema, createWebPageSchema({ name: title, description, path, type: 'CreativeWork' }), createBreadcrumbSchema([
+  { name: 'ホーム', path: '/' }, { name: '制作例・デモ', path: '/works/' }, { name: 'セミナー予約（LINE × HubSpot）', path },
+])];
+---
+
+<BaseLayout title={title} description={description} structuredData={structuredData}>
+  <main id="main" class="ucase uc-seminar" data-glossary-skip>
+    <section class="uc-hero"><div class="uc-container">
+      <a href="/works/" class="uc-back"><span aria-hidden="true">←</span> 制作例・デモ一覧</a>
+      <p class="uc-eyebrow">業務ごとのデモ｜セミナー予約</p>
+      <h1><span class="ph">セミナーの予約を、</span><span class="ph">LINEからHubSpotへ。</span></h1>
+      <p class="uc-lead">申込みの一覧と顧客情報が別々だと、参加後に誰へ何を案内するか迷いがちです。LINEで開く入力画面から予約を受け、開催回ごとの参加状況を顧客情報につなげる流れを試せます。</p>
+      <div class="uc-chips"><span class="uc-line-mark"><img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" class="uc-line-icon" /></span><span class="uc-route"><span class="uc-chip">LINE公式アカウント</span><span aria-hidden="true">→</span><span class="uc-chip">HubSpot</span></span></div>
+    </div></section>
+
+    <div class="uc-disclaimer"><div class="uc-container"><p><strong>自主制作・架空データのデモです。</strong>入力内容はこの画面内だけで使い、LINE・HubSpotへの登録やメッセージ送信は行いません。実際の個人情報は入力しないでください。</p></div></div>
+
+    <section class="uc-section"><div class="uc-container uc-two">
+      <div><h2>申込みを、次の対応につなげる。</h2><p>LINEで普段からお客様へ案内している企業を想定しています。申込みのために別のアプリを入れてもらわず、参加状況をHubSpotの顧客情報と一緒に確認する構成です。</p><p>予約確認や開催前の案内と、任意の販促案内は分けて扱います。販促案内を希望しなくても、セミナーには申し込めます。</p></div>
+      <dl class="uc-specs"><div><dt>申し込む人</dt><dd>顧客・見込み客</dd></div><div><dt>受け取る側</dt><dd>HubSpotを使う営業・運営担当者</dd></div><div><dt>向いている業務</dt><dd>セミナー・来場予約と参加後の対応</dd></div><div><dt>デモ仕様</dt><dd>ブラウザ内だけで動作。再読み込みで初期化</dd></div></dl>
+    </div></section>
+
+    <section class="uc-section uc-demo-section" id="demo" data-sb-root data-clarity-mask="true">
+      <div class="uc-container">
+        <h2>申込みから参加後まで試す。</h2>
+        <p class="uc-note">場面を選び「申し込む」を押してください。受付後は管理側のボタンで、開催前後の流れも試せます。場面を切り替えると入力と記録が初期化されます。</p>
+        <noscript><p>デモの操作にはJavaScriptが必要です。下の説明はそのままお読みいただけます。</p></noscript>
+        <div class="uc-scenarios" role="group" aria-label="試す場面を選ぶ">
+          <button type="button" data-sb-scenario="normal" class="is-active" aria-pressed="true">通常の申込み</button>
+          <button type="button" data-sb-scenario="full" aria-pressed="false">満席のとき</button>
+          <button type="button" data-sb-scenario="duplicate" aria-pressed="false">重複申込み</button>
+        </div>
+        <div class="uc-stage">
+          <div class="uc-phone">
+            <div class="uc-phone-head"><img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" class="uc-line-icon" /><span>LINEで開く入力画面（LIFF）</span></div>
+            <form class="uc-form" data-sb-form>
+              <p class="uc-form-title">業務改善セミナーの申込み</p>
+              <p class="uc-form-who">参加者：サンプル参加者A（架空・本人確認済みの想定）</p>
+              <label class="uc-field"><span>開催日時（必須・架空の日程）</span><select name="session" data-sb-session required><option value="morning">10月15日 10:00〜11:00</option><option value="afternoon">10月15日 14:00〜15:00</option></select></label>
+              <p class="uc-hint" data-sb-seats></p>
+              <label class="uc-field"><span>氏名（必須）</span><input type="text" name="participantName" value="サンプル参加者A" required maxlength="60" autocomplete="off" /></label>
+              <label class="uc-field"><span>メールアドレス（必須）</span><input type="email" name="email" value="sample-a@example.com" required maxlength="254" autocomplete="off" /></label>
+              <label class="uc-field"><span>会社名（任意）</span><input type="text" name="company" value="サンプル商事" maxlength="100" autocomplete="off" /></label>
+              <label class="sb-consent"><input type="checkbox" name="marketing" /><span>今後のセミナー・サービスの案内をLINEで受け取る（任意）</span></label>
+              <p class="uc-hint">予約確認・開催前の案内・参加資料の送付は申込みに伴う連絡として扱う想定です。上の希望とは分けて記録します。</p>
+              <button type="submit" class="uc-submit" data-sb-submit disabled>申し込む（デモ）</button>
+              <div class="uc-form-result" data-sb-result hidden tabindex="-1"><p data-sb-message></p><button type="button" data-sb-waitlist hidden>キャンセル待ちを希望する</button></div>
+            </form>
+          </div>
+          <div class="uc-system">
+            <div class="uc-system-head"><strong>HubSpotへの連携イメージ</strong><span>運営担当者側／独自の説明用画面</span></div>
+            <h3>今回の参加者の顧客情報</h3>
+            <dl class="sb-contact" data-sb-contact><div><dt>受付状況</dt><dd>まだ申込みがありません。</dd></div></dl>
+            <h3>開催回ごとの予約</h3>
+            <p class="uc-hint">定員・残席・キャンセル待ちは連携側で管理する想定です。HubSpotの標準予約画面ではありません。</p>
+            <div class="uc-table-wrap" tabindex="0" role="region" aria-label="開催回ごとの予約一覧（横にスクロールできます）"><table class="uc-table sb-bookings"><thead><tr><th scope="col">開催回</th><th scope="col">確定／定員</th><th scope="col">今回の参加者</th></tr></thead><tbody data-sb-rows></tbody></table></div>
+            <h3>開催前後の対応を試す</h3>
+            <p class="uc-hint" data-sb-action-hint>入力画面で選んでいる開催回の予約を操作します。予約確定後に使えます。</p>
+            <div class="sb-actions" aria-describedby="sb-action-note">
+              <button type="button" class="uc-state-btn" data-sb-reminder disabled>前日の案内を模擬送信</button>
+              <button type="button" class="uc-state-btn" data-sb-attend disabled>参加済みにする</button>
+              <button type="button" class="uc-state-btn" data-sb-follow disabled>参加後のフォローを試す</button>
+            </div>
+            <p id="sb-action-note" class="uc-hint">時間の経過・配信は模擬操作です。キャンセル待ちの方へ参加確定の案内は送りません。</p>
+            <h3>連携の記録（すべてデモ）</h3>
+            <ol class="uc-log" data-sb-log aria-live="polite" aria-relevant="additions"><li>申込みを待っています。</li></ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="uc-section"><div class="uc-container uc-two">
+      <div><h2>顧客と参加記録を分けて残す。</h2><p>氏名やメールアドレスは顧客情報として、申込み・参加は開催回ごとの記録として扱います。別の日程にも申し込んだとき、前の参加履歴を上書きしない設計です。</p><p>HubSpotのMarketing Events APIには、イベントに対するコンタクトの登録・参加・キャンセルを記録する仕組みがあります。このデモでは、その連携の考え方を独自の画面で示しています。</p></div>
+      <div><h2>満席と二重受付を防ぐ仕組み。</h2><p>予約の正本は連携側で管理し、同じ参加者・同じ開催回の重複を確認してから枠を確保する想定です。満席なら、希望した人だけをキャンセル待ちにします。</p><p>実運用では、同時申込みによる定員超過を防ぐ処理と、HubSpotへの記録に失敗した場合の再実行も必要です。このブラウザ内デモは、その通信や同時処理を検証するものではありません。</p></div>
+    </div></section>
+    <LineCaseSetup config={seminarBookingSetup} />
+    <section class="uc-section"><div class="uc-container uc-two">
+      <div><h2>必要な範囲から相談できます。</h2><p>開催回数、定員管理、キャンセル対応、今お使いのHubSpotのプランを伺い、連携方法と費用をご案内します。HubSpotやLINEの利用料と、連携の制作費は分けて確認します。</p><a href="/pricing/#line" class="uc-link">料金と対応範囲を見る<span aria-hidden="true">→</span></a></div>
+      <div><h2>ほかのデモ。</h2><ul class="uc-related"><li><a href="/case-studies/line-hubspot-demo/">LINE × HubSpot コンタクト管理</a></li><li><a href="/case-studies/line-field-report-demo/">協力会社の現場報告（LINE × kintone）</a></li><li><a href="/case-studies/line-partner-visit-demo/">代理店の訪問報告（LINE × Salesforce）</a></li></ul></div>
+    </div></section>
+    <section class="uc-cta"><div class="uc-container"><h2>申込みの受付と、その後の対応を一緒に整理します。</h2><p>現在の予約方法とHubSpotの使い方を伺い、必要な連携の範囲と費用の目安をお伝えします。</p><a href="/contact/?source=seminar_booking_demo&category=line_hubspot" class="uc-button">初回30分・無料相談<span aria-hidden="true">→</span></a></div></section>
+  </main>
+</BaseLayout>
+
+<style>
+  .uc-seminar input[type="email"] { width: 100%; min-height: 44px; padding: 10px; border: 1px solid #bfc7bd; border-radius: 8px; font: inherit; font-size: 16px; font-weight: 400; background: #fff; }
+  .uc-seminar input, .uc-seminar select { min-width: 0; max-width: 100%; box-sizing: border-box; }
+  .uc-seminar :is(input, select, button, a, [tabindex]):focus-visible { outline: 3px solid #9b4c12; outline-offset: 3px; }
+  .sb-consent { display: flex; align-items: flex-start; gap: 10px; font-size: .875rem; line-height: 1.8; cursor: pointer; padding: 8px 0; }
+  .sb-consent input { flex: 0 0 20px; width: 20px; height: 20px; margin-top: 3px; accent-color: #0f4c5c; }
+  .sb-contact { margin: 0; font-size: .875rem; }
+  .sb-contact :global(div) { display: grid; grid-template-columns: 6em minmax(0, 1fr); gap: 10px; padding: 8px 0; border-bottom: 1px solid #dce5e1; }
+  .sb-contact :global(dt) { font-weight: 700; }
+  .sb-contact :global(dd) { margin: 0; overflow-wrap: anywhere; }
+  .sb-bookings { min-width: 340px; }
+  .sb-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .sb-actions button { min-height: 44px; white-space: normal; }
+  .uc-form-result p { margin: 0; color: inherit; }
+  .uc-seminar :global(.uc-log li) { overflow-wrap: anywhere; }
+</style>
+
+<script>
+  type SessionId = 'morning' | 'afternoon';
+  type Booking = { state: 'reserved' | 'waiting' | 'attended'; reminder: boolean; followed: boolean; marketing: boolean };
+  type Contact = { name: string; email: string; company: string };
+
+  function initSeminarBookingDemo() {
+    const root = document.querySelector<HTMLElement>('[data-sb-root]');
+    if (!root || root.dataset.initialized) return;
+    root.dataset.initialized = 'true';
+    const form = root.querySelector<HTMLFormElement>('[data-sb-form]')!;
+    const session = root.querySelector<HTMLSelectElement>('[data-sb-session]')!;
+    const result = root.querySelector<HTMLElement>('[data-sb-result]')!;
+    const message = root.querySelector<HTMLElement>('[data-sb-message]')!;
+    const waitlist = root.querySelector<HTMLButtonElement>('[data-sb-waitlist]')!;
+    const reminder = root.querySelector<HTMLButtonElement>('[data-sb-reminder]')!;
+    const attend = root.querySelector<HTMLButtonElement>('[data-sb-attend]')!;
+    const follow = root.querySelector<HTMLButtonElement>('[data-sb-follow]')!;
+    const log = root.querySelector<HTMLOListElement>('[data-sb-log]')!;
+    const scenarios = [...root.querySelectorAll<HTMLButtonElement>('[data-sb-scenario]')];
+    const sessions: Record<SessionId, { label: string; capacity: number; existing: number }> = {
+      morning: { label: '10月15日 10:00', capacity: 2, existing: 1 },
+      afternoon: { label: '10月15日 14:00', capacity: 1, existing: 1 },
+    };
+    // 本人確認済みの参加者Aに固定。入力したメールアドレスを認証の代わりにはしない。
+    const bookings = new Map<SessionId, Booking>();
+    let contact: Contact | null = null;
+    const selected = () => session.value as SessionId;
+    const addLog = (text: string) => { const li = document.createElement('li'); li.textContent = text; log.append(li); };
+    const showResult = (text: string, waiting = false) => {
+      message.textContent = text;
+      result.className = `uc-form-result ${waiting ? 'is-error' : 'is-ok'}`;
+      result.hidden = false;
+      waitlist.hidden = !waiting;
+      if (waiting) waitlist.focus(); else result.focus();
+    };
+    const render = () => {
+      const rows = root.querySelector<HTMLElement>('[data-sb-rows]')!;
+      rows.replaceChildren();
+      for (const id of Object.keys(sessions) as SessionId[]) {
+        const entry = sessions[id];
+        const booking = bookings.get(id);
+        const count = entry.existing + (booking && booking.state !== 'waiting' ? 1 : 0);
+        const tr = document.createElement('tr');
+        const state = booking ? ({ reserved: '予約確定', waiting: 'キャンセル待ち', attended: '参加済み' }[booking.state]) : '未申込み';
+        [entry.label, `${count} / ${entry.capacity}`, state].forEach(text => { const td = document.createElement('td'); td.textContent = text; tr.append(td); });
+        rows.append(tr);
+        if (id === selected()) root.querySelector<HTMLElement>('[data-sb-seats]')!.textContent = `残席 ${entry.capacity - count}（定員 ${entry.capacity}・架空の設定）`;
+      }
+      const details = root.querySelector<HTMLElement>('[data-sb-contact]')!;
+      details.replaceChildren();
+      const booking = bookings.get(selected());
+      const pairs = contact ? [['氏名', contact.name], ['メール', contact.email], ['会社名', contact.company || '未入力'], ['販促案内', booking ? (booking.marketing ? '今回の受付で希望あり' : '今回の受付で希望なし') : '選択中の開催回は未申込み']] : [['受付状況', 'まだ申込みがありません。']];
+      pairs.forEach(([label, text]) => { const div = document.createElement('div'); const dt = document.createElement('dt'); const dd = document.createElement('dd'); dt.textContent = label; dd.textContent = text; div.append(dt, dd); details.append(div); });
+      reminder.disabled = !booking || booking.state !== 'reserved' || booking.reminder;
+      attend.disabled = !booking || booking.state !== 'reserved';
+      follow.disabled = !booking || booking.state !== 'attended' || booking.followed;
+      reminder.textContent = booking?.reminder ? '前日の案内：模擬送信済み' : '前日の案内を模擬送信';
+      attend.textContent = booking?.state === 'attended' ? '参加済み' : '参加済みにする';
+      follow.textContent = booking?.followed ? '参加後のフォロー：確認済み' : '参加後のフォローを試す';
+      root.querySelector<HTMLElement>('[data-sb-action-hint]')!.textContent = `${sessions[selected()].label} の予約が操作対象です。予約確定後に使えます。`;
+    };
+    const readContact = (): Contact | null => {
+      const name = form.elements.namedItem('participantName') as HTMLInputElement;
+      name.value = name.value.trim();
+      const email = form.elements.namedItem('email') as HTMLInputElement;
+      email.value = email.value.trim();
+      if (!form.reportValidity()) return null;
+      return { name: name.value, email: email.value, company: (form.elements.namedItem('company') as HTMLInputElement).value.trim() };
+    };
+    const book = (waiting: boolean) => {
+      const data = readContact();
+      if (!data) return;
+      const id = selected();
+      const existing = bookings.get(id);
+      if (existing) {
+        const state = existing.state === 'waiting' ? 'キャンセル待ちで受付済み' : existing.state === 'attended' ? '参加済み' : '予約受付済み';
+        addLog(`${sessions[id].label}：同じ参加者・同じ開催回のため追加しませんでした。顧客情報と案内の希望も変更しません。`);
+        showResult(`${state}です。申込みは増えていません。入力内容の変更は、このデモでは場面を選び直してお試しください。`);
+        return;
+      }
+      const full = sessions[id].existing >= sessions[id].capacity;
+      if (full && !waiting) {
+        addLog(`${sessions[id].label}：満席です。キャンセル待ちの希望はまだ登録していません。`);
+        showResult('満席です。希望する場合のみ、キャンセル待ちを登録できます。席の確保は約束されません。', true);
+        return;
+      }
+      const marketing = (form.elements.namedItem('marketing') as HTMLInputElement).checked;
+      bookings.set(id, { state: full ? 'waiting' : 'reserved', reminder: false, followed: false, marketing });
+      // 同じ参加者が別の回に申し込んでも、顧客情報は増やさず保持する。
+      const hadContact = !!contact;
+      contact ??= data;
+      addLog(hadContact ? 'デモ用参加者Aの既存の顧客情報に結び付けました。入力による顧客情報の上書きは行いません。' : 'デモ用参加者Aの顧客情報を作成した想定です。');
+      addLog(full ? `${sessions[id].label}：連携側のキャンセル待ちに登録しました。予約確定の参加記録には加えません。` : `${sessions[id].label}：枠を確保し、HubSpotの開催回別の参加記録へ「登録済み」として反映した想定です。`);
+      addLog(`販促案内：${marketing ? '希望あり' : '希望なし'}。予約に必要な連絡とは分けて記録しました。`);
+      render();
+      showResult(full ? 'キャンセル待ちを受け付けました。予約はまだ確定していません。' : '予約を受け付けました。管理側のボタンで、開催前後の対応を試せます。');
+    };
+    form.addEventListener('submit', event => { event.preventDefault(); book(false); });
+    waitlist.addEventListener('click', () => book(true));
+    form.addEventListener('input', () => { result.hidden = true; waitlist.hidden = true; });
+    session.addEventListener('change', render);
+    reminder.addEventListener('click', () => {
+      const booking = bookings.get(selected());
+      if (!booking || booking.state !== 'reserved' || booking.reminder) return;
+      booking.reminder = true;
+      addLog(`${sessions[selected()].label}：予約確定の方へ「明日の開催案内」を模擬送信しました。販促案内は含めません。`);
+      render();
+    });
+    attend.addEventListener('click', () => {
+      const booking = bookings.get(selected());
+      if (!booking || booking.state !== 'reserved') return;
+      booking.state = 'attended';
+      addLog(`${sessions[selected()].label}：運営担当者が出席を確認し、参加済みに変更しました。`);
+      render();
+    });
+    follow.addEventListener('click', () => {
+      const booking = bookings.get(selected());
+      if (!booking || booking.state !== 'attended' || booking.followed) return;
+      booking.followed = true;
+      addLog(`${sessions[selected()].label}：参加のお礼と当日の資料を模擬送信しました。`);
+      addLog(booking.marketing ? '販促案内の希望があるため、次回セミナーの案内も別のメッセージとして模擬送信しました。' : '販促案内の希望がないため、次回セミナー・サービスの案内は送りません。');
+      render();
+    });
+    scenarios.forEach(button => button.addEventListener('click', () => {
+      form.reset(); bookings.clear(); contact = null; result.hidden = true; waitlist.hidden = true; log.replaceChildren();
+      const scenario = button.dataset.sbScenario;
+      session.value = scenario === 'full' ? 'afternoon' : 'morning';
+      if (scenario === 'duplicate') {
+        contact = { name: 'サンプル参加者A', email: 'sample-a@example.com', company: 'サンプル商事' };
+        bookings.set('morning', { state: 'reserved', reminder: false, followed: false, marketing: false });
+      }
+      scenarios.forEach(other => { const active = other === button; other.classList.toggle('is-active', active); other.setAttribute('aria-pressed', String(active)); });
+      addLog(scenario === 'duplicate' ? '予約受付済みの例を用意しました。もう一度「申し込む」を押してください。' : '場面を初期化しました。「申し込む」を押してください。');
+      render();
+    }));
+    root.querySelector<HTMLButtonElement>('[data-sb-submit]')!.disabled = false;
+    render();
+  }
+  initSeminarBookingDemo();
+  document.addEventListener('astro:page-load', initSeminarBookingDemo);
+</script>

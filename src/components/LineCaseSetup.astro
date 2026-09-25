@@ -2,12 +2,14 @@
 // 連携先ごとに「つなぐ前に決めること」と向き・不向きを示す。
 // 4つのデモページが同じ文章にならないよう、中身は lineCaseCatalog の連携先別データから出す
 import type { LineCaseConfig } from '../data/lineCaseCatalog';
-interface Props { config: LineCaseConfig }
+// 用途別デモ（/case-studies/line-*-demo/ の業務ごとの3本）からも使うため、必要な項目だけを受け取る
+type SetupConfig = Pick<LineCaseConfig, 'vendorName' | 'setupPoints' | 'fitCases' | 'otherCases' | 'sources'>;
+interface Props { config: SetupConfig }
 const { config } = Astro.props;
 ---
 <section class="setup-section">
   <div class="setup-container">
-    <h2>{config.vendorName}とつなぐときに、<br/>先に決めること。</h2>
+    <h2><span class="nw">{config.vendorName}と</span><span class="nw">つなぐときに、</span><span class="nw">先に決めること。</span></h2>
     <p class="setup-lead">画面が動くことと、業務で使い続けられることは別です。{config.vendorName}との連携で、着手前に確認している点をまとめました。</p>
     <ol class="setup-list">
       {config.setupPoints.map((point, i) => (
@@ -40,7 +42,9 @@ const { config } = Astro.props;
 <style>
   .setup-section { padding: 72px 0; border-top: 1px solid var(--trust-line, rgba(15, 76, 92, 0.18)); }
   .setup-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-  .setup-section h2 { font-size: clamp(1.55rem, 2.8vw, 2.1rem); font-weight: 900; line-height: 1.4; margin-bottom: 16px; color: #1a1a1a; }
+  .setup-section h2 { font-size: clamp(1.3rem, 5.6vw, 2.1rem); font-weight: 900; line-height: 1.4; margin-bottom: 16px; color: #1a1a1a; }
+  /* 連携先の名前や文節の途中で改行しない（「Googleスプレッドシ／ート」を防ぐ） */
+  .setup-section h2 .nw { display: inline-block; white-space: nowrap; }
   .setup-lead { color: #555; line-height: 1.9; max-width: 46em; margin-bottom: 32px; }
   .setup-list { list-style: none; padding: 0; margin: 0 0 40px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
   .setup-list li { display: flex; gap: 16px; padding: 22px; background: #fff; border: 1px solid var(--trust-line, rgba(15, 76, 92, 0.18)); border-radius: 14px; }
