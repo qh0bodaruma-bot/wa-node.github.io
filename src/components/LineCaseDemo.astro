@@ -14,6 +14,7 @@ const c = config;
     <h1>{c.heroTitle}</h1>
     <p class="hero-desc">{c.heroDesc}</p>
     <div class="hero-chips">
+      <span class="lc-line-mark"><img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" /></span>
       <span class="chip-line">LINE公式アカウント</span>
       <MaterialIcon name="sync_alt" />
       <span class="chip-vendor" style={`border-color:${c.vendorColor};color:${c.vendorColorDark}`}>{c.vendorName}</span>
@@ -46,9 +47,8 @@ const c = config;
     <div class="demo-stage">
       <div class="demo-panel demo-panel--line">
         <div class="demo-panel-header demo-header-line">
-          <span class="demo-dot"></span>
-          <span>LINE 公式アカウント</span>
-          <span class="demo-live"><span class="live-dot"></span>デモ</span>
+          <img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" class="lc-panel-icon" />
+          <span>お客様とのやり取り（説明用の画面・LINEの実際の画面ではありません）</span>
         </div>
         <div class="demo-messages" data-lc-messages>
           <div class="demo-msg demo-msg--sent">
@@ -412,8 +412,6 @@ const c = config;
 
 <style is:global>
   :root {
-    --line-green: #06C755;
-    --line-dark: #00B449;
     --trust: #0f4c5c;
     --trust-line: rgba(15, 76, 92, 0.18);
     --accent-red: #c7352f;
@@ -435,40 +433,45 @@ const c = config;
   .case-disclaimer { background: rgba(15, 76, 92, 0.04); border-bottom: 1px solid var(--trust-line); }
   .disclaimer-inner { display: flex; align-items: flex-start; gap: 12px; padding: 16px 0; color: var(--trust); font-size: 0.88rem; line-height: 1.8; }
 
-  .demo-section { padding: 60px 0 80px; background: linear-gradient(135deg, rgba(15, 76, 92, 0.04), rgba(6, 199, 85, 0.03)); border-top: 1px solid var(--trust-line); border-bottom: 1px solid var(--trust-line); }
+  .demo-section { padding: 60px 0 80px; background: linear-gradient(135deg, rgba(15, 76, 92, 0.04), rgba(15, 76, 92, 0.02)); border-top: 1px solid var(--trust-line); border-bottom: 1px solid var(--trust-line); }
   .demo-header { text-align: center; margin-bottom: 32px; }
   .demo-header h2 { font-size: clamp(1.55rem, 3vw, 2.2rem); font-weight: 900; color: var(--text-deep); margin-bottom: 12px; }
   .demo-header p { color: #666; line-height: 1.8; }
   .demo-stage { display: grid; grid-template-columns: 1fr 64px 1fr; gap: 0; align-items: stretch; margin-bottom: 20px; border: 1px solid var(--trust-line); border-radius: 24px; overflow: hidden; box-shadow: var(--card-shadow); background: #fff; }
   .demo-panel { display: flex; flex-direction: column; min-height: 420px; }
   .demo-panel-header { display: flex; align-items: center; gap: 8px; padding: 12px 16px; font-size: 0.8rem; font-weight: 900; color: #fff; }
-  .demo-header-line { background: var(--line-green); }
+  .demo-header-line { background: #fff; color: #1a1a1a; border-bottom: 1px solid var(--trust-line); gap: 14px; padding: 12px 14px; line-height: 1.6; }
+  /* 公式アイコンは加工せず、動かさず、周囲に余白をとる */
+  .lc-panel-icon { width: 40px; height: auto; flex-shrink: 0; display: block; }
+  .lc-line-mark { display: inline-flex; padding: 10px; background: #fff; border-radius: 8px; }
+  .lc-line-mark img { display: block; width: 40px; height: auto; }
   .demo-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.5); }
   .demo-live { margin-left: auto; display: flex; align-items: center; gap: 5px; font-size: 0.7rem; opacity: 0.9; }
   .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #fff; opacity: 0.85; }
   .demo-messages { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; background: #f5f5f5; }
   .demo-msg { display: flex; flex-direction: column; }
+  .demo-messages { background: #f7f9f8; }
   .demo-msg--sent { align-items: flex-start; }
   .demo-msg--me { align-items: flex-end; }
-  .msg-bubble { max-width: 85%; padding: 10px 14px; border-radius: 18px; font-size: 0.88rem; line-height: 1.65; }
-  .msg-bubble.sent, .msg-bubble.received { background: #fff; border-radius: 4px 18px 18px 18px; color: #333; }
-  .msg-bubble.me-bubble { background: var(--line-green); color: #fff; border-radius: 18px 4px 18px 18px; }
+  .msg-bubble { max-width: 85%; padding: 10px 14px; border-radius: 8px; font-size: 0.88rem; line-height: 1.65; }
+  .msg-bubble.sent, .msg-bubble.received { background: #fff; border: 1px solid #dce5e1; color: #333; }
+  .msg-bubble.me-bubble { background: #eef5f2; border: 1px solid #c9dcd4; color: #1a1a1a; }
   .msg-time { font-size: 0.65rem; color: #999; margin-top: 4px; padding: 0 4px; }
   .demo-input-area { padding: 12px; background: #fff; border-top: 1px solid #e5e5e5; }
   .demo-input-options { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
-  .demo-preset { padding: 6px 12px; border: 1px solid var(--line-green); border-radius: 999px; background: rgba(6, 199, 85, 0.08); color: var(--line-dark); font-size: 0.75rem; font-weight: 800; cursor: pointer; transition: 0.2s; }
-  .demo-preset:hover, .demo-preset.selected { background: var(--line-green); color: #fff; }
+  .demo-preset { padding: 6px 12px; border: 1px solid var(--trust); border-radius: 999px; background: #eef5f2; color: var(--trust); font-size: 0.75rem; font-weight: 800; cursor: pointer; transition: 0.2s; }
+  .demo-preset:hover, .demo-preset.selected { background: var(--trust); color: #fff; }
   .demo-preset:disabled { opacity: 0.5; cursor: not-allowed; }
   .demo-send-row { display: flex; gap: 8px; align-items: center; }
   .demo-input-field { flex: 1; padding: 10px 14px; border: 1px solid #ddd; border-radius: 999px; font-size: 0.85rem; color: #aaa; background: #f9f9f9; min-height: 40px; display: flex; align-items: center; }
   .demo-input-field.has-text { color: #333; background: #fff; }
   .demo-send-btn { width: 42px; height: 42px; border-radius: 50%; border: none; background: #ccc; color: #fff; cursor: not-allowed; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
-  .demo-send-btn.ready { background: var(--line-green); cursor: pointer; }
-  .demo-send-btn.ready:hover { background: var(--line-dark); }
+  .demo-send-btn.ready { background: var(--trust); cursor: pointer; }
+  .demo-send-btn.ready:hover { background: #0b3a46; }
   .demo-connector { display: flex; align-items: center; justify-content: center; background: rgba(15, 76, 92, 0.03); border-left: 1px solid var(--trust-line); border-right: 1px solid var(--trust-line); }
   .connector-line { display: flex; flex-direction: column; align-items: center; gap: 6px; }
   .connector-arrow { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--trust); font-size: 0.7rem; font-weight: 900; opacity: 0.5; transform: translateX(0); transition: opacity var(--motion-trace,240ms) ease-out, color var(--motion-trace,240ms) ease-out, transform var(--motion-trace,240ms) var(--motion-ease,ease-out); }
-  .connector-arrow.active { opacity: 1; color: var(--line-green); transform: translateX(6px); }
+  .connector-arrow.active { opacity: 1; color: var(--trust); transform: translateX(6px); }
   @media (prefers-reduced-motion: reduce) { .connector-arrow { transition: opacity 1ms, color 1ms; transform: none !important; } }
   .demo-note { text-align: center; font-size: 0.8rem; color: #999; font-weight: 700; }
   .demo-reset-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border: 1px solid var(--trust-line); border-radius: 999px; background: #fff; color: #777; font-size: 0.8rem; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
@@ -479,7 +482,7 @@ const c = config;
   .lc-hero h1 { font-size: clamp(1.7rem, 3.2vw, 2.5rem); font-weight: 900; line-height: 1.4; color: var(--text-deep); margin-bottom: 16px; }
   .lc-hero .hero-desc { color: #555; line-height: 1.85; font-size: 1rem; margin-bottom: 22px; }
   .chip-line, .chip-vendor { padding: 8px 18px; border-radius: 999px; font-size: 0.86rem; font-weight: 900; border: 2px solid var(--trust-line); background: #fff; }
-  .chip-line { border-color: var(--line-green, #06C755); color: var(--line-dark, #00B449); }
+  .chip-line { border-color: var(--trust-line); color: var(--trust); }
 
   .scenario-selector { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
   .scenario-btn { padding: 10px 18px; border: 2px solid var(--trust-line); border-radius: 999px; background: #fff; color: #666; font-size: 0.85rem; font-weight: 800; cursor: pointer; transition: 0.2s; }

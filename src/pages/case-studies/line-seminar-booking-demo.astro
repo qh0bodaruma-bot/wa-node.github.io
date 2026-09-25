@@ -46,7 +46,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
             <div class="uc-phone-head"><img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" class="uc-line-icon" /><span>LINEで開く入力画面（LIFF）</span></div>
             <form class="uc-form" data-sb-form>
               <p class="uc-form-title">業務改善セミナーの申込み</p>
-              <p class="uc-form-who">参加者：サンプル参加者A（架空・本人確認済みの想定）</p>
+              <p class="uc-form-who">参加者：サンプル参加者A（架空・LINE利用者の確認済みの想定）</p>
               <label class="uc-field"><span>開催日時（必須・架空の日程）</span><select name="session" data-sb-session required><option value="morning">10月15日 10:00〜11:00</option><option value="afternoon">10月15日 14:00〜15:00</option></select></label>
               <p class="uc-hint" data-sb-seats></p>
               <label class="uc-field"><span>氏名（必須）</span><input type="text" name="participantName" value="サンプル参加者A" required maxlength="60" autocomplete="off" /></label>
@@ -55,7 +55,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
               <label class="sb-consent"><input type="checkbox" name="marketing" /><span>今後のセミナー・サービスの案内をLINEで受け取る（任意）</span></label>
               <p class="uc-hint">予約確認・開催前の案内・参加資料の送付は申込みに伴う連絡として扱う想定です。上の希望とは分けて記録します。</p>
               <button type="submit" class="uc-submit" data-sb-submit disabled>申し込む（デモ）</button>
-              <div class="uc-form-result" data-sb-result hidden tabindex="-1"><p data-sb-message></p><button type="button" data-sb-waitlist hidden>キャンセル待ちを希望する</button></div>
+              <div class="uc-form-result" data-sb-result hidden tabindex="-1"><p data-sb-message id="sb-result-message"></p><button type="button" data-sb-waitlist aria-describedby="sb-result-message" hidden>キャンセル待ちを希望する</button></div>
             </form>
           </div>
           <div class="uc-system">
@@ -112,8 +112,9 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
 
 <script>
   type SessionId = 'morning' | 'afternoon';
-  type Booking = { state: 'reserved' | 'waiting' | 'attended'; reminder: boolean; followed: boolean; marketing: boolean };
-  type Contact = { name: string; email: string; company: string };
+  type Booking = { state: 'reserved' | 'waiting' | 'attended'; reminder: boolean; followed: boolean };
+  // 販促案内の希望は申込みごとではなく顧客ごとに持ち、送る時点の最新の値で判定する
+  type Contact = { name: string; email: string; company: string; marketing: boolean };
 
   function initSeminarBookingDemo() {
     const root = document.querySelector<HTMLElement>('[data-sb-root]');
@@ -133,7 +134,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
       morning: { label: '10月15日 10:00', capacity: 2, existing: 1 },
       afternoon: { label: '10月15日 14:00', capacity: 1, existing: 1 },
     };
-    // 本人確認済みの参加者Aに固定。入力したメールアドレスを認証の代わりにはしない。
+    // LINE利用者の確認（IDトークンの検証）が済んだ参加者Aに固定。入力したメールアドレスを認証の代わりにはしない。
     const bookings = new Map<SessionId, Booking>();
     let contact: Contact | null = null;
     const selected = () => session.value as SessionId;
@@ -161,7 +162,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
       const details = root.querySelector<HTMLElement>('[data-sb-contact]')!;
       details.replaceChildren();
       const booking = bookings.get(selected());
-      const pairs = contact ? [['氏名', contact.name], ['メール', contact.email], ['会社名', contact.company || '未入力'], ['販促案内', booking ? (booking.marketing ? '今回の受付で希望あり' : '今回の受付で希望なし') : '選択中の開催回は未申込み']] : [['受付状況', 'まだ申込みがありません。']];
+      const pairs = contact ? [['氏名', contact.name], ['メール', contact.email], ['会社名', contact.company || '未入力'], ['販促案内', contact.marketing ? '希望あり（最新の希望）' : '希望なし（最新の希望）'], ['選択中の回', booking ? '申込みあり' : '未申込み']] : [['受付状況', 'まだ申込みがありません。']];
       pairs.forEach(([label, text]) => { const div = document.createElement('div'); const dt = document.createElement('dt'); const dd = document.createElement('dd'); dt.textContent = label; dd.textContent = text; div.append(dt, dd); details.append(div); });
       reminder.disabled = !booking || booking.state !== 'reserved' || booking.reminder;
       attend.disabled = !booking || booking.state !== 'reserved';
@@ -177,7 +178,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
       const email = form.elements.namedItem('email') as HTMLInputElement;
       email.value = email.value.trim();
       if (!form.reportValidity()) return null;
-      return { name: name.value, email: email.value, company: (form.elements.namedItem('company') as HTMLInputElement).value.trim() };
+      return { name: name.value, email: email.value, company: (form.elements.namedItem('company') as HTMLInputElement).value.trim(), marketing: (form.elements.namedItem('marketing') as HTMLInputElement).checked };
     };
     const book = (waiting: boolean) => {
       const data = readContact();
@@ -196,14 +197,18 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
         showResult('満席です。希望する場合のみ、キャンセル待ちを登録できます。席の確保は約束されません。', true);
         return;
       }
-      const marketing = (form.elements.namedItem('marketing') as HTMLInputElement).checked;
-      bookings.set(id, { state: full ? 'waiting' : 'reserved', reminder: false, followed: false, marketing });
-      // 同じ参加者が別の回に申し込んでも、顧客情報は増やさず保持する。
+      bookings.set(id, { state: full ? 'waiting' : 'reserved', reminder: false, followed: false });
+      // 同じ参加者が別の回に申し込んでも、顧客情報は増やさず保持する（氏名などは上書きしない）。
       const hadContact = !!contact;
-      contact ??= data;
-      addLog(hadContact ? 'デモ用参加者Aの既存の顧客情報に結び付けました。入力による顧客情報の上書きは行いません。' : 'デモ用参加者Aの顧客情報を作成した想定です。');
+      const previousMarketing = contact?.marketing;
+      if (contact) contact.marketing = data.marketing; else contact = data;
+      addLog(hadContact ? 'デモ用参加者Aの既存の顧客情報に結び付けました。氏名などの顧客情報は入力で上書きしません。' : 'デモ用参加者Aの顧客情報を作成した想定です。');
       addLog(full ? `${sessions[id].label}：連携側のキャンセル待ちに登録しました。予約確定の参加記録には加えません。` : `${sessions[id].label}：枠を確保し、HubSpotの開催回別の参加記録へ「登録済み」として反映した想定です。`);
-      addLog(`販促案内：${marketing ? '希望あり' : '希望なし'}。予約に必要な連絡とは分けて記録しました。`);
+      if (hadContact && previousMarketing !== data.marketing) {
+        addLog(`販促案内の希望を「${previousMarketing ? '希望あり' : '希望なし'}」から「${data.marketing ? '希望あり' : '希望なし'}」に変更し、変更した日時を履歴に残しました。以後はこの最新の希望で判定します。`);
+      } else {
+        addLog(`販促案内：${data.marketing ? '希望あり' : '希望なし'}。予約に必要な連絡とは分けて、顧客ごとに記録しました。`);
+      }
       render();
       showResult(full ? 'キャンセル待ちを受け付けました。予約はまだ確定していません。' : '予約を受け付けました。管理側のボタンで、開催前後の対応を試せます。');
     };
@@ -230,7 +235,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
       if (!booking || booking.state !== 'attended' || booking.followed) return;
       booking.followed = true;
       addLog(`${sessions[selected()].label}：参加のお礼と当日の資料を模擬送信しました。`);
-      addLog(booking.marketing ? '販促案内の希望があるため、次回セミナーの案内も別のメッセージとして模擬送信しました。' : '販促案内の希望がないため、次回セミナー・サービスの案内は送りません。');
+      addLog(contact?.marketing ? '送る時点の最新の希望を確認しました（希望あり）。次回セミナーの案内も別のメッセージとして模擬送信しました。' : '送る時点の最新の希望を確認しました（希望なし）。次回セミナー・サービスの案内は送りません。');
       render();
     });
     scenarios.forEach(button => button.addEventListener('click', () => {
@@ -238,8 +243,8 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
       const scenario = button.dataset.sbScenario;
       session.value = scenario === 'full' ? 'afternoon' : 'morning';
       if (scenario === 'duplicate') {
-        contact = { name: 'サンプル参加者A', email: 'sample-a@example.com', company: 'サンプル商事' };
-        bookings.set('morning', { state: 'reserved', reminder: false, followed: false, marketing: false });
+        contact = { name: 'サンプル参加者A', email: 'sample-a@example.com', company: 'サンプル商事', marketing: false };
+        bookings.set('morning', { state: 'reserved', reminder: false, followed: false });
       }
       scenarios.forEach(other => { const active = other === button; other.classList.toggle('is-active', active); other.setAttribute('aria-pressed', String(active)); });
       addLog(scenario === 'duplicate' ? '予約受付済みの例を用意しました。もう一度「申し込む」を押してください。' : '場面を初期化しました。「申し込む」を押してください。');

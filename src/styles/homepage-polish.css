@@ -94,9 +94,9 @@
   padding: 12px 16px;
   background: #f1f6f4;
   border-color: #d6e2dd;
-  border-radius: 4px 8px 8px 8px;
+  border-radius: 8px;
 }
-#main.home-refresh .home-hero .source-icon { border-radius: 8px; }
+/* 公式アイコンは加工しない（角丸・影・アニメーションを付けない） */
 #main.home-refresh .home-hero .connection-track {
   justify-content: center;
   padding: 18px 0;

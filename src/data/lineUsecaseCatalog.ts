@@ -13,11 +13,11 @@ export interface UsecaseSetup {
 export const seminarBookingSetup: UsecaseSetup = {
   vendorName: 'HubSpot',
   setupPoints: [
-    { title: '本人確認と、既存のお客様との結び付け', text: '実運用ではLIFFのIDトークンをサーバーで検証し、LINEの利用者を確かめます。入力されたメールアドレスだけで既存の顧客情報を上書きせず、メールでの確認などを経て結び付けます。このデモは本人確認済みの架空の参加者に固定しています。' },
+    { title: '本人確認と、既存のお客様との結び付け', text: '実運用ではLIFFのIDトークンをサーバーで検証し、LINEの利用者を確かめます。入力されたメールアドレスだけで既存の顧客情報を上書きせず、メールでの確認などを経て結び付けます。HubSpotへは照合済みのコンタクトIDで参加状況を記録します（メールアドレスで直接記録すると、コンタクトの作成や項目の更新が起きうるためです）。このデモはLINE利用者の確認が済んだ架空の参加者に固定しています。' },
     { title: '開催回ごとの記録の置き場所', text: '顧客情報と、開催回ごとの申込み・参加の記録を分けます。HubSpotのMarketing Events APIは、イベントへの登録・参加・キャンセルをコンタクトに関連付けて記録できます。定員やキャンセル待ちの管理は別に設計します。' },
     { title: '定員と、同じ申込みの再受付', text: '連携側に予約の正本を置き、参加者と開催回の組み合わせで重複を防ぎます。同時に申し込まれても定員を超えないように枠を確保し、HubSpotへの反映に失敗しても予約を増やさず再実行できる設計にします。' },
     { title: 'キャンセルと繰り上げの決め方', text: '取消しの期限、受付窓口、キャンセル待ちから案内する順番と回答期限を決めます。席が空いても自動で参加確定にせず、希望を確かめてから繰り上げる想定です。取消しと繰り上げの操作はこのデモには含みません。' },
-    { title: '案内の希望と、送れなかったときの対応', text: '予約に必要な連絡と任意の販促案内を分け、希望した日時と案内の種類、取り消した履歴を残します。実運用の配信時には最新の希望・停止状況を確認します。LINEのブロックや送信条件、通数上限で届かない場合もあるため、再送や別の連絡方法を決めます。' },
+    { title: '案内の希望と、送れなかったときの対応', text: '予約に必要な連絡と任意の販促案内を分け、希望した日時と案内の種類、取り消した履歴を残します。実運用の配信時には最新の希望・停止状況を確認します。LINEのブロックや送信条件、通数上限で届かない場合もあるため、再送や別の連絡方法を決めます。申込みのときに公式アカウントを友だち追加してもらう流れにするかも、あわせて決めます。' },
     { title: '契約プランと担当者の権限', text: 'HubSpot側で利用するAPIの権限、配信や自動処理に必要な契約、LINEの送信通数を確認してから範囲を決めます。顧客登録だけで販促配信に同意した扱いにはしません。予約情報を見られる担当者と保存期間も決めておきます。' },
   ],
   fitCases: [
@@ -32,7 +32,7 @@ export const seminarBookingSetup: UsecaseSetup = {
   sources: [
     { label: 'Marketing Events API（コンタクトの登録・参加・キャンセル）｜HubSpot Developers', url: 'https://developers.hubspot.com/docs/api-reference/marketing-marketing-events-v3/guide' },
     { label: 'LIFFアプリとサーバーでユーザー情報を利用する｜LINE Developers', url: 'https://developers.line.biz/ja/docs/liff/using-user-profile/' },
-    { label: 'メッセージを送信する（送信方法・料金・上限）｜LINE Developers', url: 'https://developers.line.biz/ja/docs/messaging-api/sending-messages/' },
+    { label: 'メッセージを送信する（送信方法・通数の数え方）｜LINE Developers', url: 'https://developers.line.biz/ja/docs/messaging-api/sending-messages/' },
   ],
 };
 
