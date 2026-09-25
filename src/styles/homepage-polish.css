@@ -205,6 +205,32 @@
   #main.home-refresh .home-hero .s-actions { gap: 8px 20px; }
 }
 
+/* 業務別の実画面と説明を対にし、連携先名も選択の手掛かりとして残す。 */
+#main.home-refresh .usecase-disclosure { max-width: 65em; margin: 0 0 28px; }
+#main.home-refresh .usecase-showcase { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; }
+#main.home-refresh .usecase-showcase .selected-work {
+  display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); align-items: center;
+  gap: clamp(24px, 4vw, 56px); padding: 32px 0;
+  border: 0; border-top: 1px solid var(--rule); border-radius: 0; background: transparent;
+}
+#main.home-refresh .usecase-showcase .work-preview {
+  display: block; width: 100%; aspect-ratio: 1.6; padding: 0;
+  overflow: hidden; border: 1px solid var(--rule); border-radius: 6px; background: #fff;
+}
+#main.home-refresh .usecase-showcase .work-preview img {
+  display: block; width: 100%; height: 100%; object-fit: cover; object-position: top;
+}
+#main.home-refresh .usecase-showcase .work-caption { min-width: 0; padding: 0; }
+#main.home-refresh .usecase-showcase h3 { margin: 10px 0; font-size: clamp(1.25rem, 2vw, 1.6rem); line-height: 1.5; }
+#main.home-refresh .usecase-showcase .work-system { color: var(--deep); font-size: .875rem; font-weight: 700; margin-bottom: 16px; }
+#main.home-refresh .usecase-showcase .work-action { display: flex; align-items: center; gap: 18px; color: var(--deep); font-size: .9375rem; font-weight: 700; margin-top: 20px; }
+#main.home-refresh .usecase-showcase .work-language { display: block; color: var(--quiet); margin-top: 8px; }
+#main.home-refresh .usecase-showcase .selected-work:hover .work-action { text-decoration: underline; text-underline-offset: 4px; }
+#main.home-refresh .usecase-showcase .selected-work:focus-visible { outline: 3px solid var(--deep); outline-offset: 5px; }
+@media (max-width: 680px) {
+  #main.home-refresh .usecase-showcase .selected-work { grid-template-columns: minmax(0, 1fr); gap: 22px; padding: 26px 0; }
+}
+
 /* 3列だと「サンプル商事」などが途中で折れる幅では、項目名と値を横並びの1列にする */
 @media (max-width: 374px) {
   #main.home-refresh .home-hero .record-fields { grid-template-columns: minmax(0, 1fr); gap: 0; }
