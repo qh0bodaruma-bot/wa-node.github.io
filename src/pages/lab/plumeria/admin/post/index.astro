@@ -1,7 +1,8 @@
 ---
 import PlumeriaAdminLayout from '../../../../../layouts/PlumeriaAdminLayout.astro';
+import { routes } from '../../../../../data/plumeria';
 
-const base = '/lab/plumeria/admin/';
+const base = routes.admin;
 const targets = ['プルメリアⅠ', 'プルメリアⅡ', 'プルメリアⅢ', '訪問看護', '訪問介護・居宅介護支援', '福祉用具貸与'];
 ---
 <PlumeriaAdminLayout

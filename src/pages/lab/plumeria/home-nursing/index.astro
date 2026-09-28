@@ -1,6 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes, homeNursingTasks, homeNursingStrengths } from '../../../../data/plumeria';
+import { routes, homeNursingTasks, homeNursingStrengths, plImg } from '../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="訪問看護｜プルメリア（修正版ラフ）"
@@ -9,7 +9,7 @@ import { routes, homeNursingTasks, homeNursingStrengths } from '../../../../data
   breadcrumbLabel="訪問看護"
   heroTitle="訪問看護"
   heroLead="看護師がご自宅で、体調の確認や医師の指示に基づくケアを行います。"
-  heroImg="/images/plumeria/services-04.webp"
+  heroImg={plImg('services-04.webp')}
   heroAlt="ご自宅のリビングで看護師が健康状態を確認している様子（イメージ）"
   fitFor={[
     '通院が難しく、ご自宅での医療的なケアが必要な方',

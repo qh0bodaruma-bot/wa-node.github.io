@@ -1,6 +1,6 @@
 ---
 import PlumeriaLayout from '../../../../layouts/PlumeriaLayout.astro';
-import { routes } from '../../../../data/plumeria';
+import { routes, plImg } from '../../../../data/plumeria';
 ---
 <PlumeriaLayout title="福祉用具｜プルメリア（デモ）" description="福祉用具事業のご案内です。取扱品目・費用・相談窓口は確認後に掲載します。" currentPath={routes.welfareEquipment}>
   <div class="pl-wrap" style="padding-top:28px"><p class="pl-breadcrumb"><a href={routes.top}>トップ</a><span aria-hidden="true">/</span><span>福祉用具</span></p></div>
@@ -8,7 +8,7 @@ import { routes } from '../../../../data/plumeria';
     <div class="pl-wrap pl-reading">
       <h1 class="pl-h1">福祉用具</h1>
       <p class="pl-sec-lead">歩行器や介護ベッドなど、暮らしに合う用具を相談するサービスです。</p>
-      <img class="pl-page-photo" src="/images/plumeria/services-05.webp" alt="歩行器の使い方をスタッフが説明する様子（イメージ）" width="1200" height="675" decoding="async" />
+      <img class="pl-page-photo" src={plImg('services-05.webp')} alt="歩行器の使い方をスタッフが説明する様子（イメージ）" width="1200" height="675" decoding="async" />
       <p class="pl-photo-note">写真はイメージです。実際の取扱製品・スタッフとは異なります。</p>
     </div>
   </section>

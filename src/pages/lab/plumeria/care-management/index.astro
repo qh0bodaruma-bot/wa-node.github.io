@@ -1,6 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../components/plumeria/PlumeriaServicePage.astro';
-import { routes, careManagementFlow } from '../../../../data/plumeria';
+import { routes, careManagementFlow, plImg } from '../../../../data/plumeria';
 ---
 <PlumeriaServicePage
   title="居宅介護支援｜プルメリア（修正版ラフ）"
@@ -9,7 +9,7 @@ import { routes, careManagementFlow } from '../../../../data/plumeria';
   breadcrumbLabel="居宅介護支援"
   heroTitle="居宅介護支援"
   heroLead="ケアマネジャーが、介護サービス全体の計画・調整をお手伝いします。"
-  heroImg="/images/plumeria/feature-03.webp"
+  heroImg={plImg('feature-03.webp')}
   heroAlt="ご家族が自宅のダイニングで相談している様子（イメージ）"
   fitFor={[
     '介護保険サービスの利用方法が分からない方',

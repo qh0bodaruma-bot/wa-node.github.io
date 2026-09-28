@@ -2,19 +2,16 @@
 // この画面は Cloudflare Access が表示するログイン画面のイメージ。
 // 実際にはこちらのサイトではなく Cloudflare 側が表示するため、左メニューは出ない。
 // その事実をそのまま再現している。
-import BaseLayout from '../../../../../layouts/BaseLayout.astro';
+import PlumeriaBaseLayout from '../../../../../layouts/PlumeriaBaseLayout.astro';
 import '../../../../../styles/plumeria-admin.css';
+import { routes } from '../../../../../data/plumeria';
 
-const base = '/lab/plumeria/admin/';
+const base = routes.admin;
 ---
-<BaseLayout
+<PlumeriaBaseLayout
   title="プルメリア 管理画面（ログイン）｜画面イメージ｜和-Node"
   description="プルメリア様のホームページ更新機能について、ログイン画面の画面イメージです。実際には動作しません。"
-  noindex={true}
-  showSiteChrome={false}
   siteName="プルメリア 管理画面（画面イメージ）"
-  gaEnabled={false}
-  clarityEnabled={false}
 >
   <div class="pa" data-reveal="off">
     <p class="pa-notice">これは画面イメージです。ボタンや入力欄は動作しません。</p>
@@ -67,4 +64,4 @@ const base = '/lab/plumeria/admin/';
       </div>
     </div>
   </div>
-</BaseLayout>
+</PlumeriaBaseLayout>

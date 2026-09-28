@@ -4,7 +4,10 @@
 // 出典に記載のない項目は null または「確認中」表記のままとし、確定した事実として扱わない。
 // 写真はすべて生成画像の「イメージ写真」であり、実際の施設・スタッフの記録ではない。
 
+// ページと画像の置き場所。サイトを移すときは、この2つを変えればリンクと画像が追従する。
 export const PLUMERIA_BASE = '/lab/plumeria';
+export const PLUMERIA_ASSETS = '/images/plumeria';
+export const plImg = (file: string) => `${PLUMERIA_ASSETS}/${file}`;
 
 export interface PlumeriaCorp {
   name: string;
@@ -81,7 +84,7 @@ export const housingUnits: PlumeriaHousingUnit[] = [
     priceFrom: '月額 100,540円〜',
     deposit: '敷金 300,000〜360,000円',
     target: '原則60歳以上（その他は応相談）',
-    img: '/images/plumeria/services-01.webp',
+    img: plImg('services-01.webp'),
     alt: '窓から光の入る居室で、入居者が自分らしく過ごしている様子（イメージ）',
     roomTypes: [
       {
@@ -112,7 +115,7 @@ export const housingUnits: PlumeriaHousingUnit[] = [
     priceFrom: '月額 150,400円〜（1名）',
     deposit: '敷金 300,000円',
     target: '要介護1以上（要支援は応相談）',
-    img: '/images/plumeria/services-02.webp',
+    img: plImg('services-02.webp'),
     alt: '共用ラウンジで入居者どうしが穏やかに会話している様子（イメージ）',
     roomTypes: [
       {
@@ -275,42 +278,42 @@ export const services: PlumeriaService[] = [
     id: 'housing', name: 'サービス付き高齢者向け住宅', short: '住宅', tagline: 'プルメリアⅠ・Ⅱ',
     icon: 'home', href: `${PLUMERIA_BASE}/housing/`,
     summary: '安否確認と生活相談のある住宅です。自立向け（Ⅰ）と介護対応型（Ⅱ）があります。',
-    img: '/images/plumeria/services-01.webp',
+    img: plImg('services-01.webp'),
     alt: '窓から光の入る居室で、入居者が自分らしく過ごしている様子（イメージ）',
   },
   {
     id: 'short-stay', name: 'ショートステイ', short: 'ショートステイ', tagline: 'プルメリアⅢ（短期入所）',
     icon: 'bed', href: `${PLUMERIA_BASE}/short-stay/`,
     summary: 'ご家族の休息や外出の間、短期間宿泊して介護を受けられます。',
-    img: '/images/plumeria/services-03.webp',
+    img: plImg('services-03.webp'),
     alt: '共用スペースの入口で入居者を迎えているスタッフ（イメージ）',
   },
   {
     id: 'home-care', name: '訪問介護', short: '訪問介護', tagline: 'ご自宅での身体介護・生活援助',
     icon: 'staff', href: `${PLUMERIA_BASE}/home-care/`,
     summary: 'ホームヘルパーがご自宅を訪問し、身体介護・生活援助を行います。',
-    img: '/images/plumeria/feature-01.webp',
+    img: plImg('feature-01.webp'),
     alt: '入居者とスタッフが同じ目線の高さで話している様子（イメージ）',
   },
   {
     id: 'home-nursing', name: '訪問看護', short: '訪問看護', tagline: '看護師がご自宅へ訪問します',
     icon: 'care', href: `${PLUMERIA_BASE}/home-nursing/`,
     summary: '看護師がご自宅で、体調の確認や医師の指示に基づくケアを行います。',
-    img: '/images/plumeria/services-04.webp',
+    img: plImg('services-04.webp'),
     alt: 'ご自宅のリビングで看護師が健康状態を確認している様子（イメージ）',
   },
   {
     id: 'care-management', name: '居宅介護支援', short: '居宅介護支援', tagline: 'ケアプランの作成・相談',
     icon: 'clipboard', href: `${PLUMERIA_BASE}/care-management/`,
     summary: 'ケアマネジャーが介護サービス全体の計画・調整をお手伝いします。',
-    img: '/images/plumeria/feature-03.webp',
+    img: plImg('feature-03.webp'),
     alt: 'ご家族が自宅のダイニングで相談している様子（イメージ）',
   },
   {
     id: 'welfare-equipment', name: '福祉用具', short: '福祉用具', tagline: '用具選びのご相談',
     icon: 'chair', href: `${PLUMERIA_BASE}/welfare-equipment/`,
     summary: '歩行器や介護ベッドなど、暮らしに合う用具を相談するサービスです。',
-    img: '/images/plumeria/services-05.webp',
+    img: plImg('services-05.webp'),
     alt: '歩行器の使い方をスタッフが説明している様子（イメージ）',
   },
 ];
@@ -342,6 +345,7 @@ export const routes = {
   company: `${PLUMERIA_BASE}/company/`,
   magazine: `${PLUMERIA_BASE}/magazine/`,
   sitemap: `${PLUMERIA_BASE}/sitemap/`,
+  admin: `${PLUMERIA_BASE}/admin/`,
 };
 
 export interface PlumeriaFaq { q: string; a: string }

@@ -1,7 +1,7 @@
 ---
 import PlumeriaServicePage from '../../../../components/plumeria/PlumeriaServicePage.astro';
 import {
-  routes, shortStayTel, genericFaqs,
+  routes, shortStayTel, genericFaqs, plImg,
   shortStayFacilities, shortStayMedicalCare, shortStayNotAccepted,
   shortStayReducedFees, shortStayOptionalFees, shortStayUseNotes,
 } from '../../../../data/plumeria';
@@ -18,7 +18,7 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
   breadcrumbLabel="ショートステイ"
   heroTitle="ショートステイ（プルメリアⅢ）"
   heroLead="ご家族の休息や外出の間、短期間宿泊して介護を受けられます。"
-  heroImg="/images/plumeria/services-03.webp"
+  heroImg={plImg('services-03.webp')}
   heroAlt="共用スペースの入口で入居者を迎えているスタッフ（イメージ）"
   fitFor={[
     '介護するご家族が休息を取りたいとき',

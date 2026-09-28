@@ -1,7 +1,7 @@
 ---
-import BaseLayout from './BaseLayout.astro';
+import PlumeriaBaseLayout from './PlumeriaBaseLayout.astro';
 import PlumeriaTelCta from '../components/plumeria/PlumeriaTelCta.astro';
-import { corp, services, recruitEntry, routes, shortStayTel, parentCompany } from '../data/plumeria';
+import { corp, services, recruitEntry, routes, shortStayTel, parentCompany, plImg } from '../data/plumeria';
 import '../styles/plumeria.css';
 
 interface Props {
@@ -42,22 +42,14 @@ const footNavGroups = [
   ] },
 ].map((group) => ({ ...group, links: group.links.filter((link): link is { label: string; href: string } => link !== null) }));
 ---
-<BaseLayout
+<PlumeriaBaseLayout
   title={title}
   description={description}
-  image="/images/plumeria/hero-01.webp"
-  noindex={true}
-  showSiteChrome={false}
   siteName="プルメリア（修正版ラフ）"
   gaMeasurementId="G-G8XKQBVK7D"
   gaEnabled={true}
   clarityProjectId="yfv2ceb9ce"
   clarityEnabled={true}
-  analyticsPolicyHref={routes.privacy}
-  faviconHref="/images/plumeria/favicon.svg"
-  appleTouchIconHref="/images/plumeria/apple-touch-icon.png"
-  loadSiteFonts={false}
-  consentTheme="plumeria"
 >
   <div class="pl" data-reveal="off" data-pl-demo="true">
     <a class="pl-skip" href="#top">本文へ進む</a>
@@ -192,7 +184,7 @@ const footNavGroups = [
       <div class="pl-hill pl-hill-foot" aria-hidden="true">
         <svg viewBox="0 0 1440 70" preserveAspectRatio="none"><path d="M0 70V30c240-30 470 16 730 8s470-40 710-18v50Z" /></svg>
       </div>
-      <img class="pl-deco-flower pl-deco-flower-tr" src="/images/plumeria/decoration-tr.webp" alt=""
+      <img class="pl-deco-flower pl-deco-flower-tr" src={plImg('decoration-tr.webp')} alt=""
            width="520" height="541" loading="lazy" decoding="async" aria-hidden="true" />
       {currentPath !== routes.contact && (
         <section class="pl-wrap pl-foot-contact" aria-labelledby="pl-foot-contact-title">
@@ -273,7 +265,7 @@ const footNavGroups = [
       </a>
     </div>
   </div>
-</BaseLayout>
+</PlumeriaBaseLayout>
 
 <script>
   import { initPlumeriaClickTracking } from '../scripts/plumeriaAnalytics';
@@ -344,7 +336,7 @@ const footNavGroups = [
     document.querySelectorAll<HTMLButtonElement>('[data-pl-open-consent]').forEach((button) => {
       if (button.dataset.ready) return;
       button.dataset.ready = 'true';
-      button.addEventListener('click', () => document.dispatchEvent(new CustomEvent('wa-node:open-consent')));
+      button.addEventListener('click', () => document.dispatchEvent(new CustomEvent('plumeria:open-consent')));
     });
     initFloatCtaHandoff();
     const menu = document.querySelector<HTMLDetailsElement>('.pl-menu');

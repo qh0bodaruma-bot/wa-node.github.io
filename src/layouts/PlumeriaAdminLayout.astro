@@ -2,8 +2,9 @@
 // プルメリア 管理画面のモック用レイアウト。
 // 公開サイト（PlumeriaLayout）とは別物。サイト共通のヘッダー・フッターも使わない。
 // これは画面イメージであり、実際には動作しない。計測も入れない。
-import BaseLayout from './BaseLayout.astro';
+import PlumeriaBaseLayout from './PlumeriaBaseLayout.astro';
 import '../styles/plumeria-admin.css';
+import { routes } from '../data/plumeria';
 
 interface Props {
   title: string;
@@ -18,7 +19,7 @@ const {
   showTop = true,
 } = Astro.props;
 
-const base = '/lab/plumeria/admin/';
+const base = routes.admin;
 // サイドバーに常設する空室情報のクイック切替（モックのため固定値）
 const quickVac = [
   { name: 'プルメリアⅠ', state: '空きあり' },
@@ -37,18 +38,10 @@ const nav = [
   { href: base, ico: '析', t: 'アクセス分析', s: 'ANALYTICS' },
 ];
 ---
-<BaseLayout
+<PlumeriaBaseLayout
   title={title}
   description={description}
-  noindex={true}
-  showSiteChrome={false}
   siteName="プルメリア 管理画面（画面イメージ）"
-  gaEnabled={false}
-  clarityEnabled={false}
-  faviconHref="/images/plumeria/favicon.svg"
-  appleTouchIconHref="/images/plumeria/apple-touch-icon.png"
-  loadSiteFonts={false}
-  consentTheme="plumeria"
 >
   <div class="pa" data-reveal="off">
     <p class="pa-notice">これは画面イメージです。ボタンや入力欄は動作しません。数値もすべて仮のものです。</p>
@@ -128,4 +121,4 @@ const nav = [
       <span>更新のヘルプ<small>使い方を調べる</small></span>
     </div>
   </div>
-</BaseLayout>
+</PlumeriaBaseLayout>

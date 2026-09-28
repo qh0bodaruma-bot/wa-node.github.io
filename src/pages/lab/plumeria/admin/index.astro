@@ -1,7 +1,8 @@
 ---
 import PlumeriaAdminLayout from '../../../../layouts/PlumeriaAdminLayout.astro';
+import { routes } from '../../../../data/plumeria';
 
-const base = '/lab/plumeria/admin/';
+const base = routes.admin;
 
 const kpis = [
   { t: '今月の訪問数', v: '128', u: '件', sub: '先月 104件', delta: '+24 前月比', up: true, bar: 62 },

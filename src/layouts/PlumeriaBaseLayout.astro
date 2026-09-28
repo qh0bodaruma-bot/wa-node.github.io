@@ -1,0 +1,75 @@
+---
+// プルメリア専用のページの土台（2026-09-28 に和-Node 共通の BaseLayout から分離）。
+// 公開サイト（PlumeriaLayout）と管理画面モック（PlumeriaAdminLayout）の両方がこれを使う。
+// 和-Node 本体のヘッダー・フッター・共通CSS・用語解説・スクロール演出は読み込まない。
+import { ViewTransitions } from 'astro:transitions';
+import PlumeriaAnalyticsConsent from '../components/plumeria/PlumeriaAnalyticsConsent.astro';
+import { routes, plImg } from '../data/plumeria';
+import '../styles/plumeria-base.css';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  siteName: string;
+  gaMeasurementId?: string;
+  gaEnabled?: boolean;
+  clarityProjectId?: string;
+  clarityEnabled?: boolean;
+}
+
+const {
+  title,
+  description,
+  image = plImg('hero-01.webp'),
+  siteName,
+  gaMeasurementId,
+  gaEnabled = false,
+  clarityProjectId,
+  clarityEnabled = false,
+} = Astro.props;
+
+const url = Astro.url.href;
+const imageUrl = new URL(image, Astro.url);
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <link rel="icon" href={plImg('favicon.svg')} />
+    <link rel="apple-touch-icon" href={plImg('apple-touch-icon.png')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:site_name" content={siteName} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={url} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={imageUrl} />
+
+    <link rel="canonical" href={url} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <ViewTransitions />
+  </head>
+  <body>
+    <slot />
+    <PlumeriaAnalyticsConsent
+      gaMeasurementId={gaMeasurementId}
+      gaEnabled={gaEnabled}
+      clarityProjectId={clarityProjectId}
+      clarityEnabled={clarityEnabled}
+      policyHref={routes.privacy}
+    />
+  </body>
+</html>

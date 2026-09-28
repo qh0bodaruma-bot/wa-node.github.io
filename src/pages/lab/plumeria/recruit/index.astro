@@ -1,7 +1,7 @@
 ---
 import PlumeriaLayout from '../../../../layouts/PlumeriaLayout.astro';
 import PlumeriaDemoForm from '../../../../components/plumeria/PlumeriaDemoForm.astro';
-import { routes, corp } from '../../../../data/plumeria';
+import { routes, corp, plImg } from '../../../../data/plumeria';
 const positions = [
   {
     name: '介護職員・ヘルパー', employment: 'パート',
@@ -35,7 +35,7 @@ const positions = [
     <div class="pl-wrap">
       <h1 class="pl-h1">プルメリアで働く</h1>
       <p class="pl-sec-lead">介護職・看護職の募集情報をご案内します。</p>
-      <img class="pl-page-photo" src="/images/plumeria/recruit-01.webp" alt="スタッフどうしが会話する様子（イメージ）" width="1200" height="675" decoding="async" />
+      <img class="pl-page-photo" src={plImg('recruit-01.webp')} alt="スタッフどうしが会話する様子（イメージ）" width="1200" height="675" decoding="async" />
       <p class="pl-photo-note">写真はイメージです。実際のスタッフとは異なります。</p>
     </div>
   </section>

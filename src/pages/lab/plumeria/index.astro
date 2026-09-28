@@ -1,7 +1,7 @@
 ---
 import PlumeriaLayout from '../../../layouts/PlumeriaLayout.astro';
 import PlumeriaGuideQuiz from '../../../components/plumeria/PlumeriaGuideQuiz.astro';
-import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin } from '../../../data/plumeria';
+import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin, plImg } from '../../../data/plumeria';
 
 // 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
 // services配列やヘッダーのnavEntriesには追加せず、FVの入口タイルにだけ足す。
@@ -12,10 +12,10 @@ const entrances = [
 ];
 
 const heroSlides = [
-  { img: '/images/plumeria/hero-01.webp', label: '入居者とスタッフ', alt: '入居者とスタッフが穏やかに話す様子（イメージ）' },
-  { img: '/images/plumeria/hero-02.webp', label: '建物の外観', alt: '植栽に囲まれた建物（イメージ）' },
-  { img: '/images/plumeria/hero-03.webp', label: '共用リビング', alt: '明るいリビングでくつろぐ様子（イメージ）' },
-  { img: '/images/plumeria/hero-04.webp', label: 'スタッフ', alt: 'スタッフが会話する様子（イメージ）' },
+  { img: plImg('hero-01.webp'), label: '入居者とスタッフ', alt: '入居者とスタッフが穏やかに話す様子（イメージ）' },
+  { img: plImg('hero-02.webp'), label: '建物の外観', alt: '植栽に囲まれた建物（イメージ）' },
+  { img: plImg('hero-03.webp'), label: '共用リビング', alt: '明るいリビングでくつろぐ様子（イメージ）' },
+  { img: plImg('hero-04.webp'), label: 'スタッフ', alt: 'スタッフが会話する様子（イメージ）' },
 ];
 ---
 <PlumeriaLayout
