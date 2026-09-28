@@ -1366,7 +1366,7 @@
 .pl .pl-reading > * + * { margin-top: 18px; }
 .pl .pl-h1 + .pl-sec-lead { margin-top: 12px; }
 .pl-page-photo { width: 100%; max-height: 340px; border-radius: var(--radius); aspect-ratio: 16/9; object-fit: cover; object-position: center 25%; }
-.pl-hero-media { height: clamp(280px, 30vw, 390px); }
+.pl-hero-media { height: clamp(320px, 40vw, 580px); }
 .pl-slider { height: 100%; }
 .pl-slider .pl-hero-photo { height: 100%; object-position: center 25%; }
 .pl-slider-ui { bottom: 84px; }
@@ -1563,7 +1563,7 @@
   .pl-hero-inner { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
-  .pl-hero-media { height: 210px; }
+  .pl-hero-media { height: 260px; }
   .pl-hero-copy { padding: 20px; }
   .pl-hero-lead br { display: none; }
   .pl-head-inner { padding: 6px 10px; width: calc(100% - 24px); }
@@ -1706,3 +1706,120 @@
 .pl-vacancy-available { background: #dcefe3; color: #1c6b43; }
 .pl-vacancy-few { background: #fdf0cf; color: #7a560d; }
 .pl-vacancy-full { background: #fbe1e1; color: #9a2c2c; }
+
+/* ══════════════════════════════════════════════════════════
+   リンクのホバー表現の強化（2026-09-28）
+   ボタン・タイルのように変化の大きいリンクはそのまま。
+   色や細い下線だけが変わっていたリンクに、面・太い下線・矢印の動きを足して
+   「押せる」と一目で分かるようにする。
+   ══════════════════════════════════════════════════════════ */
+
+/* 文中のリンク・パンくず：下線を太くし、薄い面を敷く */
+.pl a:not([class]):not(:is(.pl-foot-links, .pl-menu-list) a),
+.pl .pl-breadcrumb a {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  border-radius: 4px;
+  transition: background-color 0.2s, color 0.2s, text-decoration-thickness 0.2s;
+}
+.pl a:not([class]):not(:is(.pl-foot-links, .pl-menu-list) a):hover,
+.pl .pl-breadcrumb a:hover {
+  color: var(--green-deep);
+  background-color: color-mix(in srgb, var(--mint) 80%, var(--surface));
+  text-decoration-thickness: 2px;
+}
+
+/* 「もっと見る」系：ホバーで面と太い下線。矢印は文言側に含まれるものがあるため足さない */
+.pl .pl-more {
+  padding: 0 10px 3px;
+  margin-inline-start: -10px;
+  border-radius: 8px 8px 0 0;
+  transition: background-color 0.2s;
+  background-image: linear-gradient(to top, currentColor 1px, transparent 1px);
+}
+.pl .pl-more:hover {
+  background-color: color-mix(in srgb, var(--mint) 80%, var(--surface));
+  background-image: linear-gradient(to top, currentColor 3px, transparent 3px);
+}
+
+/* フッターのリンク一覧：3列を同じ幅にそろえ、各リンクを列幅いっぱいの行にする */
+.pl .pl-foot-nav { grid-template-columns: repeat(3, 232px); gap: 24px 32px; }
+.pl .pl-foot-links a {
+  display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  width: 100%; min-height: 44px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  background-image: linear-gradient(to top, var(--line) 1px, transparent 1px);
+  transition: background-color 0.2s, color 0.2s;
+}
+.pl .pl-foot-links a::after {
+  content: "›";
+  font-size: 18px; line-height: 1;
+  color: var(--green-deep);
+  opacity: 0.45;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.pl .pl-foot-links a:hover {
+  color: var(--green-deep);
+  font-weight: 700;
+  background-color: var(--surface);
+  background-image: linear-gradient(to top, currentColor 2px, transparent 2px);
+}
+.pl .pl-foot-links a:hover::after { opacity: 1; transform: translateX(4px); }
+
+/* フッター下段（解析の設定・先頭へ）も同じ面の表現にそろえる */
+.pl .pl-foot-consent,
+.pl .pl-foot-totop {
+  min-height: 44px; padding: 10px 12px; border-radius: 8px;
+  transition: background-color 0.2s, color 0.2s;
+}
+.pl .pl-foot-consent:hover,
+.pl .pl-foot-totop:hover {
+  color: var(--green-deep);
+  background-color: var(--surface);
+  text-decoration-thickness: 2px;
+}
+
+/* 見出しメニュー（ハンバーガー内）：面を敷く */
+.pl .pl-menu-list a { border-radius: 8px; transition: background-color 0.2s, color 0.2s; }
+.pl .pl-menu-list a:hover { background-color: var(--mint); color: var(--green-deep); }
+
+/* 面で押すリンク：浮き上がり＋枠で反応を大きくする */
+.pl .pl-hero-desk,
+.pl .pl-recruit-strip,
+.pl .pl-service-intro-card,
+.pl .pl-head-recruit {
+  transition: transform 0.2s, box-shadow 0.2s, background-color 0.2s, outline-color 0.2s;
+}
+.pl .pl-hero-desk:hover {
+  background: var(--surface);
+  outline: 2px solid var(--green-deep);
+  outline-offset: -2px;
+  box-shadow: var(--shadow-lift);
+}
+.pl .pl-recruit-strip > span:last-child { transition: transform 0.2s; }
+.pl .pl-recruit-strip:hover {
+  background: #f9e0bd;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lift);
+}
+.pl .pl-recruit-strip:hover > span:last-child { transform: translateX(4px); }
+.pl .pl-service-intro-card:hover {
+  outline: 2px solid var(--green-deep);
+  outline-offset: 6px;
+  border-radius: 14px;
+}
+.pl .pl-service-intro-card:hover .pl-service-intro-more { text-decoration: underline 2px; text-underline-offset: 4px; }
+.pl .pl-head-recruit:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); background: #f7c948; }
+
+@media (max-width: 1000px) {
+  .pl .pl-foot-nav { grid-template-columns: repeat(2, minmax(0, 232px)); }
+}
+@media (max-width: 720px) {
+  .pl .pl-foot-nav { grid-template-columns: minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .pl .pl-foot-links a::after,
+  .pl :is(.pl-recruit-strip, .pl-recruit-strip > span:last-child, .pl-head-recruit) { transform: none !important; }
+}
