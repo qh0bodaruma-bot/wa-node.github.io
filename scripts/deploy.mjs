@@ -11,6 +11,8 @@ const deployPaths = [
   'scripts',
   'astro.config.mjs',
   'package.json',
+  // CI の npm ci は package.json と lockfile の一致を要求する。片方だけ push すると公開が止まる。
+  'package-lock.json',
   'tsconfig.json',
   'wrangler.jsonc',
 ];
