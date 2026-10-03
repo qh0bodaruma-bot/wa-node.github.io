@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+<title id="title">接続キーの引き継ぎ用台帳の例</title>
+<desc id="desc">キーの値は書かず、用途、保管場所、権限、更新担当、交換時の影響を記録する台帳の例</desc>
+<defs>
+<style>.jp{font-family:'Noto Sans JP','Yu Gothic',sans-serif}.title{font-size:57px;font-weight:800;fill:#173f35}.sub{font-size:31px;font-weight:600;fill:#31554a}.head{font-size:30px;font-weight:800;fill:#fffdf8}.cell{font-size:29px;font-weight:700;fill:#173f35}.small{font-size:24px;font-weight:600;fill:#425951}</style>
+</defs>
+<rect width="1600" height="900" fill="#f7f1e3"/>
+<text x="80" y="103" class="jp title">引き継ぎ用の一枚に残すこと</text>
+<text x="82" y="154" class="jp sub">接続キーの値ではなく、管理の手掛かりを共有する</text>
+<rect x="80" y="210" width="1440" height="526" rx="27" fill="#fffdf8" stroke="#c8b88e" stroke-width="4"/>
+<path d="M80 238Q80 210 108 210H1492Q1520 210 1520 238V302H80Z" fill="#173f35"/>
+<text x="113" y="271" class="jp head">用途</text>
+<text x="412" y="271" class="jp head">保管場所</text>
+<text x="741" y="271" class="jp head">権限</text>
+<text x="1070" y="271" class="jp head">更新・確認担当</text>
+<path d="M370 302V736M700 302V736M1030 302V736" stroke="#d5c8a6" stroke-width="3"/>
+<path d="M80 446H1520M80 590H1520" stroke="#d5c8a6" stroke-width="3"/>
+<rect x="96" y="322" width="258" height="106" rx="16" fill="#e7efe9"/>
+<rect x="96" y="466" width="258" height="106" rx="16" fill="#e7efe9"/>
+<rect x="96" y="610" width="258" height="106" rx="16" fill="#e7efe9"/>
+<text x="114" y="384" class="jp cell">Webhook確認</text>
+<text x="114" y="528" class="jp cell">LINE送信</text>
+<text x="114" y="672" class="jp cell">業務システム登録</text>
+<text x="405" y="386" class="jp cell">保管先を記録</text>
+<text x="405" y="530" class="jp cell">保管先を記録</text>
+<text x="405" y="674" class="jp cell">保管先を記録</text>
+<text x="735" y="386" class="jp cell">検証に必要な範囲</text>
+<text x="735" y="530" class="jp cell">送信に必要な範囲</text>
+<text x="735" y="674" class="jp cell">登録に必要な範囲</text>
+<text x="1065" y="386" class="jp cell">担当者・代行者</text>
+<text x="1065" y="530" class="jp cell">担当者・代行者</text>
+<text x="1065" y="674" class="jp cell">担当者・代行者</text>
+<rect x="80" y="766" width="1440" height="79" rx="18" fill="#e4eee8"/>
+<circle cx="117" cy="805" r="18" fill="#b89445"/>
+<text x="154" y="816" class="jp cell">交換時に止まる機能と、切り替え後の確認方法も書く</text>
+<text x="1518" y="879" text-anchor="end" class="jp small">※記入例</text>
+</svg>
