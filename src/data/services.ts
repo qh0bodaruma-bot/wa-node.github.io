@@ -5,7 +5,7 @@ import { MULTILANG_PAGES } from '../i18n/navigation';
 export type SiteLanguage = 'ja' | 'en' | 'fr';
 export const consultationMinutes = 30;
 export const servicePrices = {
-  lineSheets: 100000, lineHubspot: 200000, lineKintone: 250000, lineSalesforce: 400000,
+  lineSheets: 100000, lineHubspot: 170000, lineKintone: 210000, lineSalesforce: 340000,
   businessApp: 800000, customerApp: 1500000, storeSupport: 150000,
   lpReview: 15000, lp: 64000, website: 120000, webSystem: 80000,
 };
