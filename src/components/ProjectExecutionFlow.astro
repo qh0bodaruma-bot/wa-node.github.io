@@ -555,7 +555,7 @@ const t = f[lang];
   function initFlowTabs() {
     const tabButtons = document.querySelectorAll('.flow-tab-btn');
     const flowContents = document.querySelectorAll('.flow-content');
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduceMotion = (window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduce');
 
     function playFlowMotion(content) {
       if (!content || reduceMotion) return;

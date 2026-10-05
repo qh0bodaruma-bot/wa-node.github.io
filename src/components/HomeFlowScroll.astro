@@ -147,6 +147,10 @@ const icons = ['forum', 'sync_alt', 'inventory_2', 'notifications_active'];
   .flow-step h3{font-size:1.06rem}
 }
 
+/* サイト上の「動きを控えめに」でも、端末の設定と同じく線を引き終えた状態にする */
+:global(html[data-motion="reduce"]) .flow-link-fill{transform:none}
+:global(html[data-motion="reduce"]) .flow-packet{opacity:0}
+
 @media (prefers-reduced-motion: reduce){
   .flow-node,.flow-node-icon,.flow-step-marker{transition:none}
   .flow-link-fill{animation:none;transform:none}

@@ -63,6 +63,11 @@ function isCurrentPage(path: string) {
         <a href={getLocalizedLink('/about')} class:list={{ 'nav-active': isCurrentPage('/about') }} aria-current={isCurrentPage('/about') ? 'page' : undefined}>{t.nav.about[lang]}</a>
         <a href={getLocalizedLink('/contact')} class="nav-cta">{t.nav.cta[lang]}</a>
         <LanguageSwitcher lang={lang} />
+        <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="false">
+          <span class="motion-switch" aria-hidden="true"></span>
+          <span class="motion-label">{lang === 'ja' ? '動きを控えめに' : lang === 'en' ? 'Less motion' : 'Moins d’animations'}</span>
+        </button>
+        <span class="motion-toggle-note" id="motion-toggle-note" hidden>{lang === 'ja' ? '端末の設定で、動きは控えめになっています。' : lang === 'en' ? 'Motion is already reduced by your device settings.' : 'Les animations sont déjà réduites par les réglages de votre appareil.'}</span>
       </div>
     </nav>
   </div>
@@ -175,6 +180,52 @@ function isCurrentPage(path: string) {
   .nav-cta:hover {
     background: var(--action-strong, #b62f29);
     opacity: 1;
+  }
+
+  /* 動きの量の切替。端末の設定で控えめになっている場合は押せない状態で「オン」を示す */
+  .motion-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 4px;
+    border: 0;
+    background: none;
+    color: #2b241f;
+    font: inherit;
+    font-size: .8125rem;
+    font-weight: 700;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .motion-switch {
+    position: relative;
+    flex-shrink: 0;
+    width: 34px;
+    height: 20px;
+    border: 1px solid #8a7d72;
+    border-radius: 999px;
+    background: #fff;
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .motion-switch::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #6d6259;
+    transition: transform .2s ease, background .2s ease;
+  }
+  .motion-toggle[aria-pressed="true"] .motion-switch { background: #164f4d; border-color: #164f4d; }
+  .motion-toggle[aria-pressed="true"] .motion-switch::after { transform: translateX(14px); background: #fff; }
+  .motion-toggle[aria-disabled="true"] { cursor: default; color: #6d6259; }
+  .motion-toggle:focus-visible { outline: 3px solid #9b4c12; outline-offset: 2px; border-radius: 6px; }
+  /* PCでナビが折り返す幅（821〜1200px）では、ヘッダーから外してフッターの切替だけにする */
+  @media (820px < width <= 1200px) {
+    .motion-toggle { display: none; }
   }
 
   /* Hamburger Menu */
@@ -296,8 +347,51 @@ function isCurrentPage(path: string) {
       });
     }
 
+    // 動きの量の切替。選択は html[data-motion] と localStorage（wa-motion）に保持し、wa:motion-change で各部品へ知らせる
+    var reduceQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // ヘッダーとフッターの両方に置くため、[data-motion-toggle] をすべて同じ状態にそろえる
+    function syncMotionToggle() {
+      var note = document.getElementById('motion-toggle-note');
+      var system = reduceQuery.matches;
+      var user = document.documentElement.dataset.motion === 'reduce';
+      document.querySelectorAll('[data-motion-toggle]').forEach(function (button) {
+        button.setAttribute('aria-pressed', String(system || user));
+        if (system) {
+          button.setAttribute('aria-disabled', 'true');
+          button.setAttribute('aria-describedby', 'motion-toggle-note');
+          if (note) button.title = note.textContent;
+        } else {
+          button.removeAttribute('aria-disabled');
+          button.removeAttribute('aria-describedby');
+          button.removeAttribute('title');
+        }
+      });
+    }
+    function initMotionToggle() {
+      document.querySelectorAll('[data-motion-toggle]').forEach(function (button) {
+      if (button.dataset.initialized) return;
+      button.dataset.initialized = 'true';
+      button.addEventListener('click', function () {
+        if (reduceQuery.matches) return;
+        var next = document.documentElement.dataset.motion !== 'reduce';
+        if (next) document.documentElement.dataset.motion = 'reduce';
+        else delete document.documentElement.dataset.motion;
+        try {
+          if (next) localStorage.setItem('wa-motion', 'reduce');
+          else localStorage.removeItem('wa-motion');
+        } catch (e) { /* 保存できない環境では、このページを開いている間だけ有効 */ }
+        syncMotionToggle();
+        document.dispatchEvent(new CustomEvent('wa:motion-change'));
+      });
+      });
+      syncMotionToggle();
+    }
+    reduceQuery.addEventListener('change', syncMotionToggle);
+
     initHeader();
+    initMotionToggle();
     // Initial load and Astro page transitions
     document.addEventListener('astro:page-load', initHeader);
+    document.addEventListener('astro:page-load', initMotionToggle);
   })();
 </script>
