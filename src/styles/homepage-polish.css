@@ -238,3 +238,100 @@
   #main.home-refresh .home-hero .record-field { grid-template-columns: 5.5em minmax(0, 1fr); gap: 8px; padding: 5px 0; }
   #main.home-refresh .home-hero .record-field dd { overflow-wrap: normal; word-break: keep-all; }
 }
+
+/* 触れるヒーローデモ：見本の文を選ぶか入力すると、項目の取り出しから登録までをこの画面の中だけで再生する。 */
+#main.home-refresh .home-hero .demo-try {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px dashed var(--rule);
+}
+#main.home-refresh .home-hero .demo-try-label {
+  margin: 0 0 10px;
+  font-size: .8125rem;
+  color: var(--ink);
+}
+#main.home-refresh .home-hero .demo-try-samples { display: flex; flex-wrap: wrap; gap: 8px; }
+#main.home-refresh .home-hero .demo-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid #b9cdc7;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--deep);
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--motion-ui, 160ms) ease-out, border-color var(--motion-ui, 160ms) ease-out;
+}
+#main.home-refresh .home-hero .demo-chip .material-symbols-rounded { font-size: 18px; }
+#main.home-refresh .home-hero .demo-chip[aria-expanded="true"] { background: #edf2ee; border-color: var(--deep); }
+@media (hover: hover) and (pointer: fine) {
+  #main.home-refresh .home-hero .demo-chip:hover { background: #edf2ee; border-color: var(--deep); }
+}
+#main.home-refresh .home-hero .demo-chip:focus-visible,
+#main.home-refresh .home-hero .demo-send:focus-visible,
+#main.home-refresh .home-hero .demo-try-row input:focus-visible { outline: 3px solid #9b4c12; outline-offset: 2px; }
+#main.home-refresh .home-hero .demo-try-form { margin-top: 12px; }
+#main.home-refresh .home-hero .demo-try-form label { display: block; margin-bottom: 6px; font-size: .75rem; color: var(--quiet); }
+#main.home-refresh .home-hero .demo-try-row { display: flex; gap: 8px; }
+#main.home-refresh .home-hero .demo-try-row input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid #9fb5ae;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+  font: inherit;
+  font-size: 1rem; /* iOSで入力時に画面が拡大されないよう16px以上にする */
+}
+#main.home-refresh .home-hero .demo-send {
+  flex-shrink: 0;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--deep);
+  border-radius: 6px;
+  background: var(--deep);
+  color: #fff;
+  font: inherit;
+  font-size: .8125rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+#main.home-refresh .home-hero .demo-try-note { margin: 10px 0 0; font-size: .75rem; line-height: 1.7; color: var(--quiet); }
+#main.home-refresh .home-hero .demo-live {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* 操作後の再生。自動再生（.is-playing）とは別の状態として扱う */
+#main.home-refresh .home-hero .is-live .record-field dd {
+  clip-path: inset(0 100% 0 0);
+  opacity: 0;
+  transition: clip-path 360ms var(--motion-ease, ease-out), opacity 200ms ease-out;
+}
+#main.home-refresh .home-hero .is-live .record-field.is-filled dd { clip-path: inset(0 0 0 0); opacity: 1; }
+#main.home-refresh .home-hero .is-live .record-field.is-missing dd { color: #a8322d; }
+#main.home-refresh .home-hero .is-live .record-status .status-done { opacity: 0; transition: opacity 200ms ease-out; }
+#main.home-refresh .home-hero .is-live .record-status[data-state="wait"] .status-wait { visibility: visible; }
+#main.home-refresh .home-hero .is-live .record-status[data-state="done"] .status-done { opacity: 1; }
+#main.home-refresh .home-hero .is-live .connection-target { transition: box-shadow 300ms ease-out; }
+#main.home-refresh .home-hero .is-live .record-status[data-state="done"] { color: var(--deep); }
+
+@media (max-width: 560px) {
+  #main.home-refresh .home-hero .demo-try { margin-top: 12px; padding-top: 10px; }
+  #main.home-refresh .home-hero .demo-try-label { margin-bottom: 8px; font-size: .75rem; }
+  #main.home-refresh .home-hero .demo-chip { padding: 0 12px; font-size: .75rem; }
+  #main.home-refresh .home-hero .demo-try-row { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #main.home-refresh .home-hero .is-live .record-field dd,
+  #main.home-refresh .home-hero .is-live .record-status .status-done,
+  #main.home-refresh .home-hero .demo-chip { transition: none; }
+}
