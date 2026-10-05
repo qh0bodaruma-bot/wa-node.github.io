@@ -1,5 +1,6 @@
 ---
 import MaterialIcon from './MaterialIcon.astro';
+import HomeFlowScroll from './HomeFlowScroll.astro';
 import { localizedPath, servicePrices, startingPrice, serviceLabels, type SiteLanguage } from '../data/services';
 import '../styles/service-pages.css';
 import '../styles/homepage-polish.css';
@@ -127,6 +128,7 @@ const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', ser
     </div>
   </section>
   <div class="trust-strip s-shell">{c.trust.map(([value, label]) => <div><strong>{value}</strong><span>{label}</span></div>)}</div>
+  <HomeFlowScroll lang={lang} />
   <section class="s-section" id="services"><div class="s-shell">
     <div class="s-section-head" data-motion-enter="heading" data-motion-id="services-heading"><div><h2>{c.servicesTitle}</h2><p class="s-intro">{c.servicesLead}</p></div></div>
     <div class="s-grid-two service-choices">
