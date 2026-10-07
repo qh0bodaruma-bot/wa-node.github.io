@@ -16,6 +16,8 @@ const activeService = services.find((s) => currentPath.startsWith(s.href));
 const isRecruit = currentPath === routes.recruit;
 const phone = activeService?.id === 'short-stay' ? shortStayTel : activeService?.id === 'housing' || isRecruit ? corp.tel : null;
 const phoneLabel = isRecruit ? '採用' : activeService?.id === 'short-stay' ? 'Ⅲ' : 'Ⅰ・Ⅱ';
+// 計測用のサービス識別子（どのページのCTAから相談に進んだか）
+const ctaService = isRecruit ? 'recruit' : activeService?.id;
 const contactHref = isRecruit ? `${routes.recruit}#application` : activeService ? `${routes.contact}?service=${activeService.id}` : routes.contact;
 
 // フッターの電話窓口。番号が確認できている窓口だけを並べ、他のサービスはお問い合わせページの案内へ送る。
@@ -215,7 +217,7 @@ const footNavGroups = [
                 <span class="pl-sr">フォーム</span>
               </span>
               <span class="pl-foot-desk-scope">その他のサービス・見学のご相談<small>訪問介護・訪問看護・居宅介護支援・<br />福祉用具など</small></span>
-              <a class="pl-foot-desk-action pl-btn pl-btn-sm pl-btn-deep" href={contactHref}>フォームで相談する</a>
+              <a class="pl-foot-desk-action pl-btn pl-btn-sm pl-btn-deep" href={contactHref} data-pl-gtag="contact_click" data-pl-service={ctaService} data-pl-cta="footer_contact">フォームで相談する</a>
             </li>
           </ul>
         </section>
@@ -259,7 +261,7 @@ const footNavGroups = [
           <span class="pl-float-seg-icon" aria-hidden="true"><svg><use href="#pl-i-phone" /></svg></span>
           電話窓口を確認
         </a>}
-      <a class="pl-float-seg pl-float-seg-main" href={contactHref}>
+      <a class="pl-float-seg pl-float-seg-main" href={contactHref} data-pl-gtag="contact_click" data-pl-service={ctaService} data-pl-cta="sticky_contact">
         <span class="pl-float-seg-icon" aria-hidden="true"><svg><use href="#pl-i-calendar" /></svg></span>
         {isRecruit ? '応募方法を見る' : '見学・ご相談'}
       </a>

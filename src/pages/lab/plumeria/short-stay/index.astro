@@ -53,7 +53,13 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
   ]}
   flowNotes={shortStayUseNotes}
   contactCategory="short-stay"
-  faqs={genericFaqs.slice(0, 2)}
+  faqs={[
+    genericFaqs[0],
+    {
+      q: '費用はどのくらいかかりますか？',
+      a: '介護保険の自己負担分に、滞在費（2,500円／日）と食費（1,850円／日）などが加わります。所得区分による減額もあります。内訳は「費用の目安」をご覧ください。',
+    },
+  ]}
 >
   <Fragment slot="extra">
     <section class="pl-sec pl-sec-beige" id="facility">

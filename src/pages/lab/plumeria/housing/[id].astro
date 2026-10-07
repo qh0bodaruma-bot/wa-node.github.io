@@ -9,6 +9,14 @@ export function getStaticPaths() {
 
 const { unit } = Astro.props;
 const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
+// 費用の質問は、このサイトに載っている料金表と同じ内容で答える（「個別にご説明」だと料金表と食い違うため）
+const faqs = [
+  genericFaqs[0],
+  {
+    q: '費用はどのくらいかかりますか？',
+    a: `${unit.name}の月額基本料金は${unit.priceFrom.replace('月額 ', '')}で、入居時に${unit.deposit}が必要です。このほか、食費や介護保険の自己負担分などが別途かかります。内訳は「料金の内訳を見る」からご確認ください。`,
+  },
+];
 ---
 <PlumeriaLayout
   title={`${unit.name}｜プルメリア（修正版ラフ）`}
@@ -111,7 +119,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
     <div class="pl-wrap">
       <h2 class="pl-h2">よくあるご質問</h2>
       <div class="pl-faq-list">
-        {genericFaqs.slice(0, 2).map((f) => (
+        {faqs.map((f) => (
           <details><summary>{f.q}</summary><p>{f.a}</p></details>
         ))}
       </div>
@@ -122,7 +130,7 @@ const contactHref = `${routes.contact}?service=housing&unit=${unit.id}`;
     <div class="pl-wrap">
       <h2 class="pl-h2" style="justify-content:center">{unit.name}を見学・相談する</h2>
       <div class="pl-btn-row" style="justify-content:center">
-        <a class="pl-btn pl-btn-main" href={contactHref}>{unit.name}について相談する</a>
+        <a class="pl-btn pl-btn-main" href={contactHref} data-pl-gtag="contact_click" data-pl-service="housing" data-pl-cta="page_cta">{unit.name}について相談する</a>
         <a class="pl-btn pl-btn-outline" href={routes.housing}>他の住宅と比較する</a>
       </div>
     </div>

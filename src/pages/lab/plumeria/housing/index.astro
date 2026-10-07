@@ -1,5 +1,6 @@
 ---
 import PlumeriaLayout from '../../../../layouts/PlumeriaLayout.astro';
+import PlumeriaVacancyStatus from '../../../../components/plumeria/PlumeriaVacancyStatus.astro';
 import {
   routes, housingUnits, corp,
   housingFeeTable, housingAdmissionConditions, housingAdmissionCautions, housingAdmissionFlow,
@@ -61,7 +62,7 @@ const day = [
                 <td>{u.kind}<br />対象：{u.target}</td>
                 <td>{u.roomType}<br />{u.roomSize}</td>
                 <td>{u.priceFrom}</td>
-                <td><span class="pl-pending-note">確認中</span></td>
+                <td><PlumeriaVacancyStatus facilityId={`plumeria-${u.id}`} /></td>
                 <td><a class="pl-more" href={routes.housingUnit(u.id)}>{u.name}を見る</a></td>
               </tr>
             ))}
@@ -150,7 +151,7 @@ const day = [
     </div>
   </section>
 
-  <section class="pl-sec pl-sec-beige">
+  <section class="pl-sec">
     <div class="pl-wrap">
       <h2 class="pl-h2">一日の流れ（参考）</h2>
       <p class="pl-sec-lead">サービス付き高齢者向け住宅での過ごし方の一例です。実際の時間は住宅ごとに確認中です。</p>
@@ -170,7 +171,7 @@ const day = [
     </div>
   </section>
 
-  <section class="pl-sec">
+  <section class="pl-sec pl-sec-beige">
     <div class="pl-wrap">
       <h2 class="pl-h2">基礎サービス</h2>
       <p class="pl-sec-lead">全入居者にご利用いただけるサービスです。ご利用料金はサービス管理費に含まれます。</p>
@@ -197,7 +198,7 @@ const day = [
     </div>
   </section>
 
-  <section class="pl-sec pl-sec-beige" id="safety">
+  <section class="pl-sec" id="safety">
     <div class="pl-wrap">
       <h2 class="pl-h2">安全への取り組み</h2>
       <ul class="pl-auto-grid pl-auto-grid-4">
@@ -206,7 +207,7 @@ const day = [
     </div>
   </section>
 
-  <section class="pl-sec" id="access">
+  <section class="pl-sec pl-sec-beige" id="access">
     <div class="pl-wrap pl-reading">
       <h2 class="pl-h2">所在地・周辺環境</h2>
       <p class="pl-body">{corp.address}</p>
@@ -220,7 +221,7 @@ const day = [
     </div>
   </section>
 
-  <section class="pl-sec pl-sec-beige">
+  <section class="pl-sec">
     <div class="pl-wrap pl-reading">
       <h2 class="pl-h2">見学で確かめたいこと</h2>
       <ul class="pl-body pl-check-list">
@@ -232,11 +233,11 @@ const day = [
     </div>
   </section>
 
-  <section class="pl-sec" style="text-align:center">
+  <section class="pl-sec pl-sec-beige" style="text-align:center">
     <div class="pl-wrap">
       <h2 class="pl-h2" style="justify-content:center">見学・入居のご相談</h2>
       <div class="pl-btn-row" style="justify-content:center">
-        <a class="pl-btn pl-btn-main" href={`${routes.contact}?service=housing`}>住宅について相談する</a>
+        <a class="pl-btn pl-btn-main" href={`${routes.contact}?service=housing`} data-pl-gtag="contact_click" data-pl-service="housing" data-pl-cta="page_cta">住宅について相談する</a>
       </div>
     </div>
   </section>

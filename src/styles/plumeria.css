@@ -1343,6 +1343,11 @@
 .pl :is(section[id], div[id], main[id]) { scroll-margin-top: 120px; }
 .pl-head { z-index: 50; }
 .pl-head-inner { max-width: calc(100% - 24px); gap: 10px; }
+/* アイランド内のブランドは文字だけにする（ナビのアイコンが白抜きになり、丸いマークだけが浮くため）。
+   フッターとFVのブランドカードはマークを残す。
+   左の余白は右端の「採用情報」ボタンと島の縁の間（padding-right 18px）にそろえる。 */
+.pl-head .pl-brand-mark { display: none; }
+.pl-head-inner { padding-left: 18px; }
 /* ラベルが内寸より広いと、その項目だけグリッドの列が広がってアイコンが中心からずれる。
    実測で「ショートステイ」が101px あり、88px 幅（内寸80px）では中心が約10pxずれていた。
    ① 最長ラベルが収まる幅にする ② 列幅を内寸に固定して、長いラベルが列を広げられないようにする
@@ -1350,7 +1355,11 @@
 .pl-nav a { width: 112px; color: inherit; grid-template-columns: 100%; overflow: hidden; }
 .pl-nav-label { overflow: hidden; text-overflow: ellipsis; }
 .pl-nav a:last-child { display: none; }
-.pl-nav a[aria-current="page"] { background: var(--mint); color: var(--green-deep); }
+/* アイランドの中では白抜きのまま、背面より一段濃いピルで今いるページを示す（iOSのタブバーと同じ見せ方）。
+   ミントの地にすると、アイコンの丸を外した後は項目だけが浮いて見えるため使わない。 */
+.pl-nav a { border-radius: 999px; padding: 7px 4px 6px; gap: 3px; }
+.pl-nav a:hover { background: color-mix(in srgb, var(--bg) 12%, transparent); color: inherit; }
+.pl-nav a[aria-current="page"] { background: color-mix(in srgb, var(--ink) 60%, transparent); color: inherit; }
 .pl-head-recruit { color: var(--ink); background: var(--accent); border-radius: 999px; padding: 9px 16px; text-decoration: none; white-space: nowrap; font-size: 14px; font-weight: 700; }
 .pl-menu[open] .pl-menu-list { max-height: calc(100dvh - 180px); overflow-y: auto; max-width: calc(100vw - 36px); min-width: min(290px, calc(100vw - 36px)); }
 .pl-menu-list a { white-space: normal; }
@@ -1683,6 +1692,17 @@
 .pl [data-pl-service='welfare-equipment'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ddf0e4; color: #20704a; }
 .pl [data-pl-service='recruit'] :is(.pl-tile-icon, .pl-nav-icon) { background: #fdf0cf; color: #8a6413; }
 .pl [data-pl-service='important-matters'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e7ecef; color: #4b5c66; }
+/* ヘッダーのアイランド内だけは丸と色分けを外し、白い線のアイコンにする。
+   暗い半透明の地に色付きの丸が並ぶと、アイコンより丸が目立って項目の区切りが読みにくい。
+   丸を外した分アイコンを 18px → 30px に上げ（線画は viewBox 内に余白があり、見た目はラベル約1.5倍）、ラベル（14px）とのバランスを取る。
+   スマホのメニュー一覧は明るい地なので、色分けの丸をそのまま残す。 */
+.pl .pl-head .pl-nav .pl-nav-icon {
+  width: 30px; height: 30px;
+  border-radius: 0;
+  background: none;
+  color: inherit;
+}
+.pl .pl-head .pl-nav .pl-nav-icon svg { width: 30px; height: 30px; stroke-width: 1.9; }
 
 /* ══════════════════════════════════════════════════════════
    操作要素の最小サイズ（2026-09-15 デザイン点検）
@@ -1715,7 +1735,7 @@
    ══════════════════════════════════════════════════════════ */
 
 /* 文中のリンク・パンくず：下線を太くし、薄い面を敷く */
-.pl a:not([class]):not(:is(.pl-foot-links, .pl-menu-list) a),
+.pl a:not([class]):not(:is(.pl-foot-links, .pl-menu-list, .pl-nav) a),
 .pl .pl-breadcrumb a {
   text-decoration-line: underline;
   text-decoration-thickness: 1px;
@@ -1723,7 +1743,7 @@
   border-radius: 4px;
   transition: background-color 0.2s, color 0.2s, text-decoration-thickness 0.2s;
 }
-.pl a:not([class]):not(:is(.pl-foot-links, .pl-menu-list) a):hover,
+.pl a:not([class]):not(:is(.pl-foot-links, .pl-menu-list, .pl-nav) a):hover,
 .pl .pl-breadcrumb a:hover {
   color: var(--green-deep);
   background-color: color-mix(in srgb, var(--mint) 80%, var(--surface));

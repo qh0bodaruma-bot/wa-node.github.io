@@ -57,7 +57,7 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
     </div>
   </section>
 
-  <section class="pl-sec" id="support">
+  <section class="pl-sec" id="fit">
     <div class="pl-wrap">
       <h2 class="pl-h2">こんなときにご相談ください</h2>
       <ul class={cols(fitFor.length)}>
@@ -66,7 +66,7 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
     </div>
   </section>
 
-  <section class="pl-sec pl-sec-beige">
+  <section class="pl-sec pl-sec-beige" id="support">
     <div class="pl-wrap">
       <h2 class="pl-h2">提供内容</h2>
       <div class="pl-grid-3">
@@ -135,11 +135,11 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
     </div>
   </section>
 
-  <section class="pl-sec" style="text-align:center">
+  <section class="pl-sec pl-sec-beige" style="text-align:center">
     <div class="pl-wrap">
       <h2 class="pl-h2" style="justify-content:center">ご利用を検討されている方へ</h2>
       <div class="pl-btn-row" style="justify-content:center">
-        <a class="pl-btn pl-btn-main" href={contactHref}>{breadcrumbLabel}について相談する</a>
+        <a class="pl-btn pl-btn-main" href={contactHref} data-pl-gtag="contact_click" data-pl-service={contactCategory} data-pl-cta="page_cta">{breadcrumbLabel}について相談する</a>
       </div>
     </div>
   </section>

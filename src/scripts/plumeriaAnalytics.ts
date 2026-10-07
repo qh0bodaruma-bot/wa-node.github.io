@@ -6,7 +6,8 @@
 type PlumeriaEventName =
   | 'service_select'
   | 'phone_click'
-  | 'recruit_click';
+  | 'recruit_click'
+  | 'contact_click';
 
 declare global {
   interface Window {
@@ -17,11 +18,11 @@ declare global {
 export function trackPlumeriaEvent(name: PlumeriaEventName, params: Record<string, string> = {}) {
   if (typeof window === 'undefined') return;
   if (typeof window.gtag !== 'function') return;
-  const events = ['service_select', 'phone_click', 'recruit_click'];
+  const events = ['service_select', 'phone_click', 'recruit_click', 'contact_click'];
   if (!events.includes(name)) return;
   const allowed: Record<string, string[]> = {
-    service_type: ['housing', 'short-stay', 'home-care', 'home-nursing', 'care-management', 'welfare-equipment', 'recruit', 'important-matters'],
-    cta_location: ['header_nav', 'header_recruit', 'mobile_menu', 'hero_tile', 'top_recruit_banner', 'service_intro_card', 'services_list', 'purpose_guide', 'contact_desk', 'recruit_desk', 'floating', 'footer_contact'],
+    service_type: ['housing', 'short-stay', 'home-care', 'home-nursing', 'care-management', 'welfare-equipment', 'recruit', 'important-matters', 'undecided'],
+    cta_location: ['header_nav', 'header_recruit', 'mobile_menu', 'hero_tile', 'hero_desk', 'top_recruit_banner', 'service_intro_card', 'services_list', 'purpose_guide', 'contact_desk', 'recruit_desk', 'sticky_contact', 'footer_contact', 'page_cta'],
     facility_id: ['1', '2', '3'],
   };
   const safe = Object.fromEntries(Object.entries(params).filter(([key, value]) => allowed[key]?.includes(value)));
