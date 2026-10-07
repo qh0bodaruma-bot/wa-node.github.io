@@ -1,0 +1,62 @@
+---
+// ヤシの葉の影（ショートステイⅢ専用の装飾）。
+// Ⅲは公式サイトでも「ハワイアンリゾートのような滞在」をうたうため、リゾート寄せはこのページだけに置く。
+// 葉は曲線の葉軸に沿って小葉を並べて生成する。画像を持たないので軽く、色はCSSで変えられる。
+
+type Pt = [number, number];
+
+// 葉軸（2次ベジェ）上の点と接線
+const at = (p0: Pt, c: Pt, p2: Pt, t: number): Pt => [
+  (1 - t) ** 2 * p0[0] + 2 * (1 - t) * t * c[0] + t ** 2 * p2[0],
+  (1 - t) ** 2 * p0[1] + 2 * (1 - t) * t * c[1] + t ** 2 * p2[1],
+];
+const tangent = (p0: Pt, c: Pt, p2: Pt, t: number): Pt => {
+  const x = 2 * (1 - t) * (c[0] - p0[0]) + 2 * t * (p2[0] - c[0]);
+  const y = 2 * (1 - t) * (c[1] - p0[1]) + 2 * t * (p2[1] - c[1]);
+  const len = Math.hypot(x, y);
+  return [x / len, y / len];
+};
+const f = (n: number) => n.toFixed(1);
+
+function frond(p0: Pt, c: Pt, p2: Pt, maxLen: number) {
+  // 葉軸は線、小葉は塗りで描く（開いた曲線を塗ると弦との間まで塗られるため分ける）
+  const rachis = `M${f(p0[0])} ${f(p0[1])}Q${f(c[0])} ${f(c[1])} ${f(p2[0])} ${f(p2[1])}`;
+  const parts: string[] = [];
+  for (let t = 0.07; t < 0.97; t += 0.042) {
+    const p = at(p0, c, p2, t);
+    const [tx, ty] = tangent(p0, c, p2, t);
+    // 先端ほど短く、根元も少し短い
+    const len = maxLen * Math.sin(Math.PI * Math.min(t + 0.08, 1)) ** 0.7 + 8;
+    for (const side of [1, -1]) {
+      const a = (side * 58 * Math.PI) / 180;
+      // 接線を回転させ、先へ向かって流れる向きの小葉にする
+      const dx = tx * Math.cos(a) - ty * Math.sin(a);
+      const dy = tx * Math.sin(a) + ty * Math.cos(a);
+      const nx = -dy, ny = dx;
+      const w = 4.2;
+      const tip: Pt = [p[0] + dx * len, p[1] + dy * len + len * 0.18]; // 小葉の先は少し垂れる
+      const mid: Pt = [p[0] + dx * len * 0.5, p[1] + dy * len * 0.5];
+      parts.push(
+        `M${f(p[0])} ${f(p[1])}Q${f(mid[0] + nx * w)} ${f(mid[1] + ny * w)} ${f(tip[0])} ${f(tip[1])}` +
+        `Q${f(mid[0] - nx * w)} ${f(mid[1] - ny * w)} ${f(p[0])} ${f(p[1])}Z`,
+      );
+    }
+  }
+  return { rachis, leaves: parts.join('') };
+}
+
+const fronds = [
+  frond([400, 0], [250, 10], [40, 170], 62),
+  frond([400, 0], [330, 60], [230, 270], 54),
+];
+---
+<div class="pl-palm-shade" aria-hidden="true">
+  <svg viewBox="0 0 400 300" focusable="false">
+    {fronds.map((fr, i) => (
+      <g class={`pl-palm-frond pl-palm-frond-${i + 1}`}>
+        <path class="pl-palm-rachis" d={fr.rachis} />
+        <path class="pl-palm-leaves" d={fr.leaves} />
+      </g>
+    ))}
+  </svg>
+</div>

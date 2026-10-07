@@ -1,5 +1,6 @@
 ---
 import PlumeriaServicePage from '../../../../components/plumeria/PlumeriaServicePage.astro';
+import PlumeriaPalmShade from '../../../../components/plumeria/PlumeriaPalmShade.astro';
 import {
   routes, shortStayTel, genericFaqs, plImg,
   shortStayFacilities, shortStayMedicalCare, shortStayNotAccepted,
@@ -62,7 +63,8 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
   ]}
 >
   <Fragment slot="extra">
-    <section class="pl-sec pl-sec-beige" id="facility">
+    <section class="pl-sec pl-sec-beige pl-sec-palm" id="facility">
+      <PlumeriaPalmShade />
       <div class="pl-wrap">
         <h2 class="pl-h2">施設・設備</h2>
         <p class="pl-sec-lead">短期間の滞在でも落ち着いてお過ごしいただけるよう、広さと設備に配慮しています。</p>

@@ -1843,3 +1843,116 @@
   .pl .pl-foot-links a::after,
   .pl :is(.pl-recruit-strip, .pl-recruit-strip > span:last-child, .pl-head-recruit) { transform: none !important; }
 }
+
+/* ══════════════════════════════════════════════════════════
+   内容を説明する動き（2026-10-08）
+   飾りではなく、手順の順番・選んだ項目・空室の有無を伝えるための動きだけを置く。
+   どれも `prefers-reduced-motion: reduce` では止まり、止まった状態でも情報は欠けない。
+   ══════════════════════════════════════════════════════════ */
+
+/* ── 利用・入居までの流れ：ステップ番号から次へ向かう線 ──
+   線は最初から描いておき、スクロール連動に対応したブラウザだけ「伸びる」動きを足す。
+   JSも監視も使わないので、発火せずに線が消えたままになることはない。 */
+.pl-flow-card { position: relative; }
+.pl-flow-card:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 36px;                         /* 内側余白 20px ＋ 番号の丸 34px の中心 */
+  left: 66px;                        /* 内側余白 20px ＋ 丸 34px ＋ 間 12px */
+  right: 20px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--green) 60%, transparent), color-mix(in srgb, var(--green) 15%, transparent));
+  transform-origin: left center;
+}
+@keyframes pl-flow-line { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* PC・タブレットは同じ行のカードが同時に見えるため、リスト全体の見え方を基準に
+       ステップ順へ少しずつずらして伸ばす */
+    .pl ol:has(> .pl-flow-card) { view-timeline: --pl-flow block; }
+    .pl-flow-card:nth-child(2) { --pl-step: 1; }
+    .pl-flow-card:nth-child(3) { --pl-step: 2; }
+    .pl-flow-card:nth-child(4) { --pl-step: 3; }
+    .pl-flow-card:nth-child(5) { --pl-step: 4; }
+    .pl-flow-card:nth-child(6) { --pl-step: 5; }
+    .pl-flow-card:not(:last-child)::after {
+      animation: pl-flow-line linear both;
+      animation-timeline: --pl-flow;
+      animation-range: cover calc(14% + var(--pl-step, 0) * 5%) cover calc(30% + var(--pl-step, 0) * 5%);
+    }
+    /* スマホは1列でカードが順に画面へ入るので、カードごとの見え方で伸ばす */
+    @media (max-width: 720px) {
+      .pl-flow-card:not(:last-child)::after {
+        animation-timeline: view();
+        animation-range: entry 60% cover 45%;
+      }
+    }
+  }
+}
+
+/* ── サービスのアイコン：選んだときに一筆で描き直す ──
+   ヘッダーのアイランドとトップのサービスタイルで同じ動きにそろえる。
+   `stroke-dasharray` は継承されるため、<use> の中の線にも届く。
+   アイコンの各線には pathLength="100"（PlumeriaLayout の symbol）を付けてあり、
+   長い線も短い線も同じ時間で描き終わる。 */
+@keyframes pl-icon-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
+@media (prefers-reduced-motion: no-preference) {
+  .pl :is(.pl-nav a, .pl-tile):is(:hover, :focus-visible) :is(.pl-nav-icon, .pl-tile-icon) svg {
+    stroke-dasharray: 100;
+    animation: pl-icon-draw 0.8s cubic-bezier(0.3, 0.7, 0.4, 1) both;
+  }
+}
+
+/* ── 空室状況：「空きあり」の印だけをゆっくり脈打たせる ──
+   残りわずか・満室・確認中は動かさない。動いているのは空いているところだけ、という合図。
+   疑似要素には `.pl *` の一括停止が届かないため、動き自体を no-preference の中に置く。 */
+.pl .pl-vacancy-available { display: inline-flex; align-items: center; gap: 6px; }
+.pl .pl-vacancy-available::before {
+  content: "";
+  flex: none;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: currentColor;
+}
+@keyframes pl-vacancy-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, #1c6b43 45%, transparent); }
+  70%, 100% { box-shadow: 0 0 0 7px color-mix(in srgb, #1c6b43 0%, transparent); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pl .pl-vacancy-available::before { animation: pl-vacancy-pulse 2.8s ease-out infinite; }
+}
+
+/* ── ショートステイ（Ⅲ）：ヤシの葉の影 ──
+   Ⅲだけがリゾート寄せのため、このページの「施設・設備」にだけ置く。Ⅰ・Ⅱには使わない。
+   影は本文の後ろに薄く敷き、文字のコントラストには影響しない濃さ（8%）にとどめる。 */
+.pl .pl-sec-palm { overflow: hidden; }
+.pl .pl-sec-palm > .pl-wrap { position: relative; z-index: 1; }
+.pl .pl-palm-shade {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: clamp(240px, 36vw, 520px);
+  color: var(--green-deep);
+  opacity: 0.08;
+  filter: blur(1.5px);
+  pointer-events: none;
+}
+.pl .pl-palm-shade svg { display: block; width: 100%; height: auto; overflow: visible; }
+.pl .pl-palm-rachis { fill: none; stroke: currentColor; stroke-width: 2.4; }
+.pl .pl-palm-leaves { fill: currentColor; stroke: none; }
+.pl .pl-palm-frond { transform-box: view-box; transform-origin: 100% 0; }
+@keyframes pl-palm-sway {
+  from { transform: rotate(-1.6deg); }
+  to   { transform: rotate(1.8deg) translateY(4px); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .pl .pl-palm-frond-1 { animation: pl-palm-sway 9s ease-in-out infinite alternate; }
+  .pl .pl-palm-frond-2 { animation: pl-palm-sway 12s ease-in-out -5s infinite alternate; }
+}
+@media (max-width: 720px) {
+  .pl .pl-palm-shade { opacity: 0.06; }
+}
+@media print {
+  .pl .pl-palm-shade { display: none; }
+}
