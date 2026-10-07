@@ -2,7 +2,7 @@
 import PlumeriaServicePage from '../../../../components/plumeria/PlumeriaServicePage.astro';
 import PlumeriaPalmShade from '../../../../components/plumeria/PlumeriaPalmShade.astro';
 import {
-  routes, shortStayTel, genericFaqs, plImg,
+  routes, genericFaqs, plImg,
   shortStayFacilities, shortStayMedicalCare, shortStayNotAccepted,
   shortStayReducedFees, shortStayOptionalFees, shortStayUseNotes,
 } from '../../../../data/plumeria';
@@ -35,7 +35,6 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
     { label: '対象となる方', body: '要支援1・2、要介護1〜5の認定を受けている方' },
     { label: '定員・居室', body: '定員40名・40室' },
     { label: '所在地', body: '岐阜県可児郡御嵩町上恵土951-1。名鉄広見線 明智駅から徒歩15分、可児御嵩ICから車で約5分' },
-    { label: '専用のお問い合わせ先', body: `${shortStayTel}（平日 10:00〜17:00）` },
   ]}
   costInfo="費用は、介護保険の自己負担分と、滞在費・食費などの合計です。負担割合や利用日数によって変わるため、ご希望の日程に合わせた総額をご確認ください。"
   costDetails={[
