@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">LINE連携で使う接続キーの役割</title>
+  <desc id="desc">LINEプラットフォーム、連携サーバー、業務システムの間で使うキーを、通信の向きとともに示す概念図</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0 0 12 6 0 12Z" fill="#b89445"/></marker>
+    <style>.jp{font-family:'Noto Sans JP','Yu Gothic',sans-serif}.heading{font-size:54px;font-weight:800;fill:#173f35}.label{font-size:34px;font-weight:800;fill:#173f35}.body{font-size:27px;font-weight:600;fill:#243c36}.small{font-size:23px;font-weight:600;fill:#425951}.key{font-size:27px;font-weight:800;fill:#173f35}</style>
+  </defs>
+  <rect width="1600" height="900" fill="#f7f1e3"/>
+  <text x="800" y="96" text-anchor="middle" class="jp heading">接続キーは、用途ごとに分けて管理する</text>
+  <rect x="64" y="192" width="405" height="454" rx="28" fill="#fffdf8" stroke="#c5b489" stroke-width="4"/>
+  <rect x="597" y="192" width="406" height="454" rx="28" fill="#e5f0ea" stroke="#173f35" stroke-width="4"/>
+  <rect x="1131" y="192" width="405" height="454" rx="28" fill="#fffdf8" stroke="#c5b489" stroke-width="4"/>
+  <text x="266" y="274" text-anchor="middle" class="jp label">LINE</text>
+  <text x="266" y="318" text-anchor="middle" class="jp body">プラットフォーム</text>
+  <text x="800" y="274" text-anchor="middle" class="jp label">連携サーバー</text>
+  <text x="800" y="325" text-anchor="middle" class="jp small">秘密情報をサーバー側で保管</text>
+  <text x="1334" y="274" text-anchor="middle" class="jp label">業務システム</text>
+  <text x="1334" y="321" text-anchor="middle" class="jp small">Salesforce・kintone・HubSpot等</text>
+  <rect x="650" y="394" width="300" height="164" rx="22" fill="#fffdf8" stroke="#b89445" stroke-width="3"/>
+  <text x="800" y="444" text-anchor="middle" class="jp body">用途別に保管</text>
+  <text x="800" y="491" text-anchor="middle" class="jp small">値を画面に出さない</text>
+  <text x="800" y="531" text-anchor="middle" class="jp small">権限と更新者を記録</text>
+  <path d="M474 385H572" stroke="#b89445" stroke-width="7" marker-end="url(#arrow)"/>
+  <path d="M592 516H494" stroke="#b89445" stroke-width="7" marker-end="url(#arrow)"/>
+  <path d="M1008 449H1106" stroke="#b89445" stroke-width="7" marker-end="url(#arrow)"/>
+  <rect x="65" y="678" width="1470" height="142" rx="24" fill="#173f35"/>
+  <text x="95" y="724" class="jp key" fill="#fffdf8" style="fill:#fffdf8">確認用：チャネルシークレット　／　送信用：チャネルアクセストークン</text>
+  <text x="95" y="773" class="jp key" fill="#fffdf8" style="fill:#fffdf8">登録用：連携専用ユーザー・APIトークンなど</text>
+  <text x="527" y="349" text-anchor="middle" class="jp small">Webhook</text>
+  <text x="534" y="568" text-anchor="middle" class="jp small">LINEへ送信</text>
+  <text x="1060" y="416" text-anchor="middle" class="jp small">登録</text>
+  <text x="1480" y="858" text-anchor="end" class="jp small">※イメージ</text>
+</svg>

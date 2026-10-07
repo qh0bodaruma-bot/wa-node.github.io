@@ -278,7 +278,7 @@ const structuredData = [
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reduceMotion = (window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduce');
     const nodes = [
       { x: 0.18, y: 0.28, r: 13, color: '#0f4c5c' },
       { x: 0.45, y: 0.18, r: 15, color: '#8c6b1f' },

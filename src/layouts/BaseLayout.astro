@@ -88,6 +88,19 @@ const getLocalizedHref = (l: string) => {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <script is:inline>
+      // 「動きを控えめに」の選択を描画前に反映する。ページ遷移でhtmlの属性が入れ替わるため、遷移後にも付け直す。
+      (function () {
+        function applyMotionPref() {
+          try {
+            if (localStorage.getItem('wa-motion') === 'reduce') document.documentElement.dataset.motion = 'reduce';
+            else delete document.documentElement.dataset.motion;
+          } catch (e) { /* 保存領域が使えない環境では端末の設定だけに従う */ }
+        }
+        applyMotionPref();
+        document.addEventListener('astro:after-swap', applyMotionPref);
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="google-site-verification" content="0rBuRrl1I5-_XMfRp59rq2vD-BPOFfAWnCJEf2KOzbI" />

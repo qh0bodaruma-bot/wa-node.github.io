@@ -631,7 +631,7 @@ const description = 'ペット健康手帳とサブスク管理アプリFlowの�
 
     // 目的から選ぶタスク
     function focusPhone() {
-      document.querySelector('.phone')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'center' });
+      document.querySelector('.phone')?.scrollIntoView({ behavior: (window.matchMedia('(prefers-reduced-motion: reduce)').matches || document.documentElement.dataset.motion === 'reduce') ? 'auto' : 'smooth', block: 'center' });
     }
     function selectNearestFlowDay() {
       const eventDays = flowSubscriptions.map((item) => item.day).sort((a, b) => a - b);

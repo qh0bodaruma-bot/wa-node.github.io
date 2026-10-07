@@ -1,5 +1,6 @@
 ---
 import MaterialIcon from './MaterialIcon.astro';
+import HomeFlowScroll from './HomeFlowScroll.astro';
 import { localizedPath, servicePrices, startingPrice, serviceLabels, type SiteLanguage } from '../data/services';
 import '../styles/service-pages.css';
 import '../styles/homepage-polish.css';
@@ -15,6 +16,10 @@ const c = {
     view: '動く制作例を見る', assurance: '構想段階でも大丈夫です。まずは目的と必要な範囲から。',
     preview: '自動登録の流れ', sample: 'サンプル画面・外部送信なし', received: 'LINEで問い合わせ', message: '見積りについて相談したいです。', record: '顧客管理に登録', waiting: 'フォームの内容を連携中…', done: '登録・担当通知が完了', fullLine: 'LINE × kintoneのデモへ',
     fields: [['会社名', 'サンプル商事'], ['ご用件', '見積りの相談'], ['返信方法', 'LINEで返信']], pause: '動きを止める', play: '動きを再開',
+    tryLabel: '文章を選ぶか入力すると、登録の流れを試せます。', tryOwn: '自分で入力する', inputLabel: '問い合わせの文章', placeholder: '例：〇〇株式会社です。見積りを相談したいです。', send: '送信して試す',
+    tryNote: '入力した文章は送信・保存されません。この画面の中だけで処理します。',
+    samples: [['見積りの相談', 'サンプル工業株式会社です。見積りについて相談したいです。お電話でご連絡ください。'], ['予約の変更', '来週の予約を変更したいです。'], ['資料の請求', '資料をメールで送ってほしいです。サンプル商事'] ],
+    rules: { company: '[^\\s、。,.！？!?]{1,20}?(?:株式会社|有限会社|合同会社)|(?:株式会社|有限会社|合同会社)\\s*[^\\s、。,.！？!?]{1,20}|[^\\s、。,.！？!?]{1,20}?(?:商事|工業|製作所)', companyTrim: '(?:です|と申します|の)$', purposes: [['見積', '見積りの相談'], ['予約', '予約の変更・確認'], ['資料', '資料の請求'], ['解約|キャンセル', '解約・キャンセル'], ['不具合|エラー|動かない', '不具合の報告']], defaultPurpose: 'その他のお問い合わせ', replies: [['電話', '電話で返信'], ['メール', 'メールで返信']], defaultReply: 'LINEで返信', missing: '未記入（担当者が確認）', doneMissing: '登録完了・会社名の確認を担当に通知', live: '登録しました。' },
     trust: [['20年以上', 'IT・開発の現場経験'], ['LINE連携の専門', '業務システム4種に対応'], ['相談から公開まで', '同じ窓口で対応']],
     servicesTitle: '対応サービスと料金の目安', servicesLead: '手段がまだ決まっていなくても、今の業務や使う人に合わせて整理します。',
     lineTitle: 'LINEの情報を、日々の業務へ。', lineDesc: '申込・問い合わせを受け付け、必要な情報を管理システムへ自動登録。転記や確認の往復を減らします。', lineFit: 'Salesforce / kintone / HubSpot / Google Sheets',
@@ -43,6 +48,10 @@ const c = {
     view: 'Explore working demos', assurance: 'An early idea is enough. Start with your goals and the scope you need.',
     preview: 'How automatic registration works', sample: 'Sample interface · no data sent', received: 'A LINE inquiry arrives', message: 'I would like to discuss a quote.', record: 'Add to customer management', waiting: 'Transferring the form details…', done: 'Record added · team notified', fullLine: 'Explore the LINE × kintone demo',
     fields: [['Company', 'Sample Co.'], ['Request', 'Quote inquiry'], ['Reply via', 'LINE']], pause: 'Pause animation', play: 'Play animation',
+    tryLabel: 'Pick a message or type your own to try the flow.', tryOwn: 'Type my own', inputLabel: 'Inquiry message', placeholder: 'e.g. This is Example Ltd. We would like a quote.', send: 'Send to try',
+    tryNote: 'Your text is not sent or stored. It is processed only on this screen.',
+    samples: [['Request a quote', 'This is Sample Industries Ltd. We would like a quote. Please call us.'], ['Change a booking', 'I would like to change my booking for next week.'], ['Ask for a brochure', 'Please email us your brochure. Sample Trading Co.']],
+    rules: { company: '[A-Z][A-Za-z0-9&\\-]*(?:\\s[A-Z][A-Za-z0-9&\\-]*){0,3}\\s(?:Inc|Ltd|LLC|Co|Corp)\\.?', companyTrim: '', purposes: [['quote|estimate', 'Quote inquiry'], ['booking|reservation|appointment', 'Booking change'], ['brochure|document|catalog', 'Brochure request'], ['cancel', 'Cancellation'], ['error|bug|not working', 'Problem report']], defaultPurpose: 'Other inquiry', replies: [['phone|call', 'Phone'], ['e-?mail', 'Email']], defaultReply: 'LINE', missing: 'Missing (team will check)', doneMissing: 'Record added · team asked to confirm company', live: 'Record added. ' },
     trust: [['20+ years', 'Experience in IT & development'], ['LINE specialist', '4 business systems supported'], ['From idea to launch', 'One point of contact']],
     servicesTitle: 'Start with what you want to do.', servicesLead: 'No need to choose a technology first. We clarify what fits your workflow and users.',
     lineTitle: 'Connect LINE to everyday work.', lineDesc: 'Capture requests and inquiries, then register the relevant details in your business system. Reduce repeated entry and back-and-forth checks.', lineFit: 'Salesforce / kintone / HubSpot / Google Sheets',
@@ -71,6 +80,10 @@ const c = {
     view: 'Essayer les démonstrations', assurance: 'Une première idée suffit. Partons de vos objectifs et du périmètre nécessaire.',
     preview: 'Le parcours d’enregistrement', sample: 'Interface fictive · aucun envoi', received: 'Une demande arrive sur LINE', message: 'Je souhaite discuter d’un devis.', record: 'Ajout à la gestion clients', waiting: 'Transfert des informations…', done: 'Fiche créée · équipe informée', fullLine: 'Voir la démo LINE × kintone',
     fields: [['Entreprise', 'Exemple SA'], ['Objet', 'Devis'], ['Réponse', 'Par LINE']], pause: 'Mettre en pause', play: 'Relancer l’animation',
+    tryLabel: 'Choisissez un message ou écrivez le vôtre pour tester le parcours.', tryOwn: 'Écrire mon message', inputLabel: 'Message de la demande', placeholder: 'Ex. : Ici Exemple SARL. Nous souhaitons un devis.', send: 'Envoyer pour tester',
+    tryNote: 'Votre texte n’est ni envoyé ni conservé. Il est traité uniquement sur cet écran.',
+    samples: [['Demande de devis', 'Bonjour, ici Exemple Industrie SARL. Nous souhaitons un devis. Merci de nous appeler.'], ['Modifier une réservation', 'Je voudrais modifier ma réservation de la semaine prochaine.'], ['Demande de brochure', 'Pouvez-vous nous envoyer votre brochure par e-mail ? Exemple Commerce SA']],
+    rules: { company: '[A-ZÀ-Ý][\\wÀ-ÿ&\\-]*(?:\\s[A-ZÀ-Ý][\\wÀ-ÿ&\\-]*){0,3}\\s(?:SARL|SAS|SA|EURL)\\b', companyTrim: '', purposes: [['devis', 'Devis'], ['réservation|rendez-vous', 'Modification de réservation'], ['brochure|documentation|catalogue', 'Demande de brochure'], ['annul|résili', 'Annulation'], ['erreur|bug|panne|fonctionne pas', 'Signalement de problème']], defaultPurpose: 'Autre demande', replies: [['téléphone|appeler|appel', 'Par téléphone'], ['e-?mail|courriel', 'Par e-mail']], defaultReply: 'Par LINE', missing: 'Manquant (vérification par l’équipe)', doneMissing: 'Fiche créée · vérification de l’entreprise demandée', live: 'Fiche créée. ' },
     trust: [['Plus de 20 ans', 'D’expérience en informatique'], ['Spécialiste LINE', '4 outils métier pris en charge'], ['De l’idée au lancement', 'Un interlocuteur unique']],
     servicesTitle: 'Partons de ce que vous voulez faire.', servicesLead: 'Inutile de choisir la technologie au départ. Nous clarifions les besoins de votre activité et de vos utilisateurs.',
     lineTitle: 'Relier LINE à votre activité.', lineDesc: 'Recevez les demandes et inscrivez les informations utiles dans votre système de gestion pour limiter les doubles saisies et les vérifications répétées.', lineFit: 'Salesforce / kintone / HubSpot / Google Sheets',
@@ -110,7 +123,7 @@ const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', ser
         <div class="s-actions"><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-link hero-secondary" href="#selected-works">{c.view}<MaterialIcon name="arrow_forward" /></a></div>
         <p class="s-note">{c.assurance}</p>
       </div>
-      <div class="hero-demo" data-home-demo>
+      <div class="hero-demo" data-home-demo data-rules={JSON.stringify(c.rules)}>
         <div class="demo-title"><span>{c.preview}</span><button type="button" class="demo-toggle" data-demo-toggle aria-pressed="false" data-pause={c.pause} data-play={c.play} hidden><MaterialIcon name="pause" /><span data-demo-toggle-label>{c.pause}</span></button></div>
         <div class="preview-panel">
           <div class="connection-source"><span class="source-icon"><img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" /></span><div class="line-bubble"><strong>{c.received}</strong><p>{c.message}</p></div></div>
@@ -122,11 +135,25 @@ const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', ser
           </div>
           <a class="preview-detail" href={href(workLinks[0])}>{c.fullLine} <span aria-hidden="true">↗</span></a>
         </div>
+        <div class="demo-try" data-demo-try hidden>
+          <p class="demo-try-label" id={`demo-try-label-${lang}`}>{c.tryLabel}</p>
+          <div class="demo-try-samples" role="group" aria-labelledby={`demo-try-label-${lang}`}>
+            {c.samples.map(([label, text]) => <button type="button" class="demo-chip" data-sample={text}>{label}</button>)}
+            <button type="button" class="demo-chip demo-chip-own" data-demo-own aria-expanded="false" aria-controls={`demo-try-form-${lang}`}><MaterialIcon name="edit_note" />{c.tryOwn}</button>
+          </div>
+          <form class="demo-try-form" id={`demo-try-form-${lang}`} data-demo-form hidden>
+            <label for={`demo-try-input-${lang}`}>{c.inputLabel}</label>
+            <div class="demo-try-row"><input id={`demo-try-input-${lang}`} type="text" maxlength="120" autocomplete="off" placeholder={c.placeholder} required /><button type="submit" class="demo-send">{c.send}</button></div>
+          </form>
+          <p class="demo-try-note">{c.tryNote}</p>
+        </div>
+        <p class="demo-live" aria-live="polite" data-demo-live></p>
         <p class="demo-disclosure">{c.sample}</p>
       </div>
     </div>
   </section>
   <div class="trust-strip s-shell">{c.trust.map(([value, label]) => <div><strong>{value}</strong><span>{label}</span></div>)}</div>
+  <HomeFlowScroll lang={lang} />
   <section class="s-section" id="services"><div class="s-shell">
     <div class="s-section-head" data-motion-enter="heading" data-motion-id="services-heading"><div><h2>{c.servicesTitle}</h2><p class="s-intro">{c.servicesLead}</p></div></div>
     <div class="s-grid-two service-choices">
@@ -195,6 +222,8 @@ const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', ser
 @media(max-width:820px){.why-checks{grid-template-columns:1fr}.why-list-title{margin-top:30px}.why-checks li{padding:18px 0;gap:16px}}
 </style>
 <script>
+import { isReducedMotion, onReducedMotionChange } from '../scripts/motion-pref';
+
 function initHomeDemo() {
   const demo = document.querySelector<HTMLElement>('[data-home-demo]');
   if (!demo || demo.dataset.initialized) return;
@@ -202,22 +231,111 @@ function initHomeDemo() {
   const toggle = demo.querySelector<HTMLButtonElement>('[data-demo-toggle]');
   const label = demo.querySelector<HTMLElement>('[data-demo-toggle-label]');
   const icon = toggle?.querySelector<HTMLElement>('.material-symbols-rounded');
-  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
   // JSが動かない・動きを減らす設定・タブが非表示の場合は、完成した状態のまま表示する
   // （非表示のタブではCSSアニメーションが開始位置で止まり、項目が空に見えるため。TRB-202609-045）
   function apply() {
-    const play = !reduced.matches && document.visibilityState === 'visible';
+    // 触れるデモを操作した後は、自動再生に戻さない
+    const live = demo!.classList.contains('is-live');
+    const play = !live && !isReducedMotion() && document.visibilityState === 'visible';
     demo!.classList.toggle('is-playing', play);
-    if (toggle) toggle.hidden = reduced.matches;
+    if (toggle) toggle.hidden = live || isReducedMotion();
   }
   apply();
-  reduced.addEventListener('change', apply);
+  onReducedMotionChange(apply);
   document.addEventListener('visibilitychange', apply);
   toggle?.addEventListener('click', () => {
     const paused = demo.classList.toggle('is-paused');
     toggle.setAttribute('aria-pressed', String(paused));
     if (label) label.textContent = paused ? toggle.dataset.play! : toggle.dataset.pause!;
     if (icon) icon.textContent = paused ? 'play_arrow' : 'pause';
+  });
+  initTry(demo);
+}
+
+// 触れるデモ：選んだ文・入力した文から項目を取り出し、登録までの流れをこの画面の中だけで再生する。
+// 文章はどこにも送信・保存しない。JSが動かない環境では操作部を出さず、自動再生のデモだけを表示する。
+interface DemoRules {
+  company: string; companyTrim: string;
+  purposes: [string, string][]; defaultPurpose: string;
+  replies: [string, string][]; defaultReply: string;
+  missing: string; doneMissing: string; live: string;
+}
+function initTry(demo: HTMLElement) {
+  const panel = demo.querySelector<HTMLElement>('[data-demo-try]');
+  if (!panel || !demo.dataset.rules) return;
+  const rules = JSON.parse(demo.dataset.rules) as DemoRules;
+  const form = panel.querySelector<HTMLFormElement>('[data-demo-form]');
+  const input = form?.querySelector<HTMLInputElement>('input');
+  const own = panel.querySelector<HTMLButtonElement>('[data-demo-own]');
+  const message = demo.querySelector<HTMLElement>('.line-bubble p');
+  const fields = [...demo.querySelectorAll<HTMLElement>('.record-field')];
+  const status = demo.querySelector<HTMLElement>('.record-status');
+  const done = demo.querySelector<HTMLElement>('.status-done');
+  const live = demo.querySelector<HTMLElement>('[data-demo-live]');
+  const toggle = demo.querySelector<HTMLButtonElement>('[data-demo-toggle]');
+  const doneText = done?.lastChild?.textContent ?? '';
+  let timers: number[] = [];
+  panel.hidden = false;
+
+  const pick = (text: string, list: [string, string][], fallback: string) =>
+    list.find(([pattern]) => new RegExp(pattern, 'i').test(text))?.[1] ?? fallback;
+
+  function extract(text: string) {
+    let company = text.match(new RegExp(rules.company))?.[0]?.trim() ?? '';
+    if (company && rules.companyTrim) company = company.replace(new RegExp(rules.companyTrim), '');
+    return {
+      company,
+      purpose: pick(text, rules.purposes, rules.defaultPurpose),
+      reply: pick(text, rules.replies, rules.defaultReply),
+    };
+  }
+
+  function run(text: string) {
+    const value = text.trim().slice(0, 120);
+    if (!value || !message || !status) return;
+    timers.forEach((t) => clearTimeout(t));
+    timers = [];
+    // 自動再生を止め、操作した結果だけを表示する
+    demo.classList.remove('is-playing', 'is-paused');
+    demo.classList.add('is-live');
+    if (toggle) toggle.hidden = true;
+    const result = extract(value);
+    const values = [result.company || rules.missing, result.purpose, result.reply];
+    message.textContent = value;
+    fields.forEach((field, i) => {
+      field.classList.remove('is-filled');
+      field.classList.toggle('is-missing', i === 0 && !result.company);
+      const dd = field.querySelector('dd');
+      if (dd) dd.textContent = values[i];
+    });
+    if (done?.lastChild) done.lastChild.textContent = result.company ? doneText : rules.doneMissing;
+    const finish = () => {
+      status.dataset.state = 'done';
+      if (live) live.textContent = `${rules.live}${fields.map((f, i) => `${f.querySelector('dt')?.textContent}: ${values[i]}`).join(' / ')}`;
+    };
+    if (isReducedMotion()) {
+      fields.forEach((f) => f.classList.add('is-filled'));
+      finish();
+      return;
+    }
+    status.dataset.state = 'wait';
+    fields.forEach((f, i) => timers.push(window.setTimeout(() => f.classList.add('is-filled'), 500 + i * 300)));
+    timers.push(window.setTimeout(finish, 500 + fields.length * 300 + 200));
+  }
+
+  panel.querySelectorAll<HTMLButtonElement>('[data-sample]').forEach((button) => {
+    button.addEventListener('click', () => run(button.dataset.sample!));
+  });
+  own?.addEventListener('click', () => {
+    if (!form) return;
+    const open = form.hidden;
+    form.hidden = !open;
+    own.setAttribute('aria-expanded', String(open));
+    if (open) input?.focus();
+  });
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    if (input) run(input.value);
   });
 }
 initHomeDemo();

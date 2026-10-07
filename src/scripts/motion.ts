@@ -1,9 +1,11 @@
 // 和-Node モーション制御（アニメーション設計書 v1 準拠）
 // M01登場の対象登録・再生・破棄を担当する。低減設定・IO非対応ではフェイルオープンで即時表示にする。
 
+import { isReducedMotion as isReducedMotionPref, onReducedMotionChange } from './motion-pref';
+
 const playedKeys = new Set<string>();
 let reduced = false;
-let mql: MediaQueryList | null = null;
+let watching = false;
 
 function motionKey(el: Element): string {
   const dataset = (el as HTMLElement).dataset;
@@ -63,13 +65,13 @@ export function initMotion(root: ParentNode = document): () => void {
   return () => io.disconnect();
 }
 
-// ページ内で1つだけ保持するべきグローバル監視。低減設定へ変わった時点で登場演出をcancelする。
+// ページ内で1つだけ保持するべきグローバル監視。端末の設定・サイト上の切替のどちらかで控えめになった時点で登場演出をcancelする。
 export function watchReducedMotion(onChange?: (reduced: boolean) => void) {
-  if (mql) return;
-  mql = window.matchMedia('(prefers-reduced-motion: reduce)');
-  reduced = mql.matches;
-  mql.addEventListener('change', (event) => {
-    reduced = event.matches;
+  if (watching) return;
+  watching = true;
+  reduced = isReducedMotionPref();
+  onReducedMotionChange((next) => {
+    reduced = next;
     if (reduced) {
       document.querySelectorAll('[data-motion-enter]').forEach((el) => el.classList.add('is-visible'));
     }

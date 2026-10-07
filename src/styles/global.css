@@ -338,6 +338,26 @@ html:not(.reveal-ready) .reveal {
   }
 }
 
+/* サイト上の「動きを控えめに」（html[data-motion="reduce"]）。
+   端末の設定と同じく、動きを止めて完成した状態を表示する。個別の部品で隠れた初期状態を持つものは、各部品側でも解除する。 */
+html[data-motion="reduce"] { scroll-behavior: auto; }
+html[data-motion="reduce"] *,
+html[data-motion="reduce"] *::before,
+html[data-motion="reduce"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+html[data-motion="reduce"]::view-transition-group(*),
+html[data-motion="reduce"]::view-transition-old(*),
+html[data-motion="reduce"]::view-transition-new(*) {
+  animation: none !important;
+}
+html[data-motion="reduce"] .reveal,
+html[data-motion="reduce"] [data-motion-enter] {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
 /* --- Global Progress Bar for View Transitions --- */
 .global-progress-bar {
   position: fixed;
