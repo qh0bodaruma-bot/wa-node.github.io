@@ -410,7 +410,7 @@ export const companyProfile = {
       name: 'アカシクリニック',
       address: '可児郡御嵩町上恵土1285-1',
       tel: '0574-66-6611',
-      url: 'http://www.akashi-clinic.org/',
+      url: 'https://akashi-clinic.org/',
     },
     {
       name: '岐阜健康管理センター',
