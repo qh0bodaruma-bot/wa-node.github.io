@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import MaterialIcon from '../../components/MaterialIcon.astro';
+import { consultationMinutes } from '../../data/services';
 ---
 
 <BaseLayout noindex={true} lang="en" title="Thank You for Your Inquiry | Wa-Node" description="Your inquiry has been successfully sent. We will review your message and reply as soon as possible.">
@@ -12,23 +13,22 @@ import MaterialIcon from '../../components/MaterialIcon.astro';
         </div>
         <h1>Message Received.</h1>
         <p class="desc">
-          Thank you very much for taking the step and reaching out to us.<br/>
-          Our representative, Takano, will carefully read and review your message.<br/>
-          We will get back to you within 2 business days. Please rest assured.
+          Your inquiry has been received.<br/>
+          We will review it and usually reply by email within 2 business days.
         </p>
 
         <div class="thanks-flow" style="margin-bottom: 50px;">
-          <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--accent-dark); margin-bottom: 24px; font-family: 'Shippori Mincho', serif;"><MaterialIcon name="outgoing_mail" /> Process After Submission</h3>
+          <h2 style="font-size: 1.25rem; font-weight: 800; color: var(--accent-dark); margin-bottom: 24px; font-family: 'Shippori Mincho', serif;"><MaterialIcon name="outgoing_mail" /> What happens next</h2>
           <div class="flow-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: left;">
             <div class="flow-card" style="background: rgba(197, 160, 89, 0.03); border: 1px solid var(--line); border-radius: 16px; padding: 20px; position: relative;">
               <span style="font-size: 0.75rem; font-weight: 800; color: var(--accent); display: block; margin-bottom: 6px;">STEP 1</span>
               <strong style="display: block; font-size: 0.95rem; margin-bottom: 6px; color: #2c2c2c;">Scheduling</strong>
-              <p style="font-size: 0.8rem; color: #666; margin: 0; line-height: 1.5;">Within 2 business days, we will send you an online consultation link (Google Meet, etc.) based on your preferred dates.</p>
+              <p style="font-size: 0.8rem; color: #666; margin: 0; line-height: 1.5;">We will confirm your inquiry, preferred meeting method and dates by email. If these are undecided, we can arrange them after our reply.</p>
             </div>
             <div class="flow-card" style="background: rgba(197, 160, 89, 0.03); border: 1px solid var(--line); border-radius: 16px; padding: 20px; position: relative;">
               <span style="font-size: 0.75rem; font-weight: 800; color: var(--accent); display: block; margin-bottom: 6px;">STEP 2</span>
-              <strong style="display: block; font-size: 0.95rem; margin-bottom: 6px; color: #2c2c2c;">Free Consultation (Max 60m)</strong>
-              <p style="font-size: 0.8rem; color: #666; margin: 0; line-height: 1.5;">We will listen to your challenges and wishes carefully, organizing the direction and steps for resolution together.</p>
+              <strong style="display: block; font-size: 0.95rem; margin-bottom: 6px; color: #2c2c2c;">Free consultation ({consultationMinutes} minutes)</strong>
+              <p style="font-size: 0.8rem; color: #666; margin: 0; line-height: 1.5;">We will discuss your workflow and goals, and clarify the integration scope together.</p>
             </div>
             <div class="flow-card" style="background: rgba(197, 160, 89, 0.03); border: 1px solid var(--line); border-radius: 16px; padding: 20px; position: relative;">
               <span style="font-size: 0.75rem; font-weight: 800; color: var(--accent); display: block; margin-bottom: 6px;">STEP 3</span>
@@ -40,8 +40,8 @@ import MaterialIcon from '../../components/MaterialIcon.astro';
 
         <div class="next-steps">
           <div class="step-card">
-            <h3>Need urgent assistance?</h3>
-            <p>You can also contact us via our official LINE account.<br/>We can communicate more smoothly.</p>
+            <h2>Have something to add?</h2>
+            <p>You can send additional details through our official LINE account.</p>
             <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="line-btn">Message us on LINE</a>
           </div>
 
@@ -70,14 +70,14 @@ import MaterialIcon from '../../components/MaterialIcon.astro';
 
   .next-steps { border-top: 1px solid var(--line); padding-top: 48px; }
   .step-card { background: #fdfaf7; border-radius: 24px; padding: 32px; margin-bottom: 40px; border: 1px solid var(--line); }
-  .step-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; }
+  .step-card h2 { font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; }
   .step-card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; }
 
   .line-btn {
-    display: inline-block; background: #06C755; color: #fff; text-decoration: none;
+    display: inline-block; background: #23754e; color: #fff; text-decoration: none;
     padding: 14px 40px; border-radius: 999px; font-weight: 800; transition: 0.3s;
   }
-  .line-btn:hover { background: #05b34c; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(6, 199, 85, 0.2); }
+  .line-btn:hover { background: #19593b; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(6, 199, 85, 0.2); }
 
   .links { display: flex; gap: 16px; justify-content: center; }
   .btn-home, .btn-works { padding: 16px 32px; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: 0.95rem; transition: 0.3s; }

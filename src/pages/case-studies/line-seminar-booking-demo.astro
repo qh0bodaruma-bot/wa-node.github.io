@@ -16,13 +16,14 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
 
 <BaseLayout title={title} description={description} structuredData={structuredData}>
   <main id="main" class="ucase uc-seminar" data-glossary-skip>
-    <section class="uc-hero"><div class="uc-container">
+    <section class="uc-hero" transition:name="case-seminar-booking-visual"><div class="uc-container">
       <a href="/works/" class="uc-back"><span aria-hidden="true">←</span> 制作例・デモ一覧</a>
       <p class="uc-eyebrow">業務ごとのデモ｜セミナー予約</p>
-      <h1><span class="ph">セミナーの予約を、</span><span class="ph">LINEからHubSpotへ。</span></h1>
+      <h1 transition:name="case-seminar-booking-title"><span class="ph">セミナーの予約を、</span><span class="ph">LINEからHubSpotへ。</span></h1>
       <p class="uc-lead">申込みの一覧と顧客情報が別々だと、参加後に誰へ何を案内するか迷いがちです。LINEで開く入力画面から予約を受け、開催回ごとの参加状況を顧客情報につなげる流れを試せます。</p>
       <div class="uc-chips"><span class="uc-line-mark"><img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" class="uc-line-icon" /></span><span class="uc-route"><span class="uc-chip">LINE公式アカウント</span><span aria-hidden="true">→</span><span class="uc-chip">HubSpot</span></span></div>
-    </div></section>
+    </div><nav class="uc-container uc-jumps" aria-label="このデモで確認すること"><a href="#demo">デモを試す</a><a href="#cost">費用と対応範囲を見る</a></nav>
+    </section>
 
     <div class="uc-disclaimer"><div class="uc-container"><p><strong>自主制作・架空データのデモです。</strong>入力内容はこの画面内だけで使い、LINE・HubSpotへの登録やメッセージ送信は行いません。実際の個人情報は入力しないでください。</p></div></div>
 
@@ -80,15 +81,23 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
       </div>
     </section>
 
-    <section class="uc-section"><div class="uc-container uc-two">
-      <div><h2>顧客と参加記録を分けて残す。</h2><p>氏名やメールアドレスは顧客情報として、申込み・参加は開催回ごとの記録として扱います。別の日程にも申し込んだとき、前の参加履歴を上書きしない設計です。</p><p>HubSpotのMarketing Events APIには、イベントに対するコンタクトの登録・参加・キャンセルを記録する仕組みがあります。このデモでは、その連携の考え方を独自の画面で示しています。</p></div>
-      <div><h2>満席と二重受付を防ぐ仕組み。</h2><p>予約の正本は連携側で管理し、同じ参加者・同じ開催回の重複を確認してから枠を確保する想定です。満席なら、希望した人だけをキャンセル待ちにします。</p><p>実運用では、同時申込みによる定員超過を防ぐ処理と、HubSpotへの記録に失敗した場合の再実行も必要です。このブラウザ内デモは、その通信や同時処理を検証するものではありません。</p></div>
-    </div></section>
-    <LineCaseSetup config={seminarBookingSetup} />
-    <section class="uc-section"><div class="uc-container uc-two">
+    <section class="uc-section" id="cost"><div class="uc-container uc-two">
       <div><h2>必要な範囲から相談できます。</h2><p>開催回数、定員管理、キャンセル対応、今お使いのHubSpotのプランを伺い、連携方法と費用をご案内します。HubSpotやLINEの利用料と、連携の制作費は分けて確認します。</p><a href="/pricing/#line" class="uc-link">料金と対応範囲を見る<span aria-hidden="true">→</span></a></div>
       <div><h2>ほかのデモ。</h2><ul class="uc-related"><li><a href="/case-studies/line-hubspot-demo/">LINE × HubSpot コンタクト管理</a></li><li><a href="/case-studies/line-field-report-demo/">協力会社の現場報告（LINE × kintone）</a></li><li><a href="/case-studies/line-partner-visit-demo/">代理店の訪問報告（LINE × Salesforce）</a></li></ul></div>
     </div></section>
+
+    <LineCaseSetup config={seminarBookingSetup} />
+
+    <div class="uc-container">
+      <details class="uc-technical">
+        <summary>技術担当者向け：HubSpotへの記録の仕組みを見る</summary>
+        <section class="uc-section"><div class="uc-container uc-two">
+      <div><h2>顧客と参加記録を分けて残す。</h2><p>氏名やメールアドレスは顧客情報として、申込み・参加は開催回ごとの記録として扱います。別の日程にも申し込んだとき、前の参加履歴を上書きしない設計です。</p><p>HubSpotのMarketing Events APIには、イベントに対するコンタクトの登録・参加・キャンセルを記録する仕組みがあります。このデモでは、その連携の考え方を独自の画面で示しています。</p></div>
+      <div><h2>満席と二重受付を防ぐ仕組み。</h2><p>予約の正本は連携側で管理し、同じ参加者・同じ開催回の重複を確認してから枠を確保する想定です。満席なら、希望した人だけをキャンセル待ちにします。</p><p>実運用では、同時申込みによる定員超過を防ぐ処理と、HubSpotへの記録に失敗した場合の再実行も必要です。このブラウザ内デモは、その通信や同時処理を検証するものではありません。</p></div>
+        </div></section>
+      </details>
+    </div>
+
     <section class="uc-cta"><div class="uc-container"><h2>申込みの受付と、その後の対応を一緒に整理します。</h2><p>現在の予約方法とHubSpotの使い方を伺い、必要な連携の範囲と費用の目安をお伝えします。</p><a href="/contact/?source=seminar_booking_demo&category=line_hubspot" class="uc-button">初回30分・無料相談<span aria-hidden="true">→</span></a></div></section>
   </main>
 </BaseLayout>

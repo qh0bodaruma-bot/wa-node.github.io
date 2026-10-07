@@ -26,11 +26,11 @@ function getLangPath(targetLang: string) {
   return `/${targetLang}/`;
 }
 ---
-<div class="lang-switch-capsule" aria-label="Language Selector">
+<div class="lang-switch-capsule" role="group" aria-label={lang === 'ja' ? '表示言語' : lang === 'fr' ? 'Langue d’affichage' : 'Display language'}>
   <div class={`switch-bg lang-${lang}`}></div>
-  <a href={getLangPath('ja')} class={lang === 'ja' ? 'active' : ''} aria-label="日本語">JA</a>
-  <a href={getLangPath('en')} class={lang === 'en' ? 'active' : ''} aria-label="English">EN</a>
-  <a href={getLangPath('fr')} class={lang === 'fr' ? 'active' : ''} aria-label="Français">FR</a>
+  <a href={getLangPath('ja')} class={lang === 'ja' ? 'active' : ''} aria-label="日本語" lang="ja" aria-current={lang === 'ja' ? 'true' : undefined}>JA</a>
+  <a href={getLangPath('en')} class={lang === 'en' ? 'active' : ''} aria-label="English" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
+  <a href={getLangPath('fr')} class={lang === 'fr' ? 'active' : ''} aria-label="Français" lang="fr" aria-current={lang === 'fr' ? 'true' : undefined}>FR</a>
 </div>
 
 <style>
@@ -68,6 +68,21 @@ function getLangPath(targetLang: string) {
 
   .lang-switch-capsule a.active {
     color: #fff;
+  }
+
+  .lang-switch-capsule a:focus-visible {
+    outline: 2px solid #0f4c5c;
+    outline-offset: 2px;
+  }
+
+  @media (forced-colors: active) {
+    .switch-bg { display: none; }
+    .lang-switch-capsule a[aria-current="true"] {
+      text-decoration: underline !important;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+    }
+    .lang-switch-capsule a:focus-visible { outline-color: Highlight; }
   }
 
   .switch-bg {

@@ -233,6 +233,21 @@ const getLocalizedHref = (l: string) => {
     </script>
     <script>
       import { initMotion, watchReducedMotion } from '../scripts/motion';
+      function initSkipLink() {
+        const skip = document.querySelector<HTMLAnchorElement>('.skip-link');
+        if (!skip || skip.dataset.initialized) return;
+        skip.dataset.initialized = 'true';
+        skip.addEventListener('click', event => {
+          const main = document.getElementById('main');
+          if (!main) return;
+          event.preventDefault();
+          if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+          main.focus({ preventScroll: true });
+          main.scrollIntoView({ block: 'start', behavior: 'instant' });
+        });
+      }
+      document.addEventListener('DOMContentLoaded', initSkipLink);
+      document.addEventListener('astro:page-load', initSkipLink);
       watchReducedMotion();
       let disposeMotion: (() => void) | null = null;
       function runMotion() {

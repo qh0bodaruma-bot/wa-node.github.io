@@ -1,5 +1,6 @@
 ---
 // src/components/ConsultationFlow.astro
+import { consultationMinutes, serviceLabels } from '../data/services';
 interface Props {
   id?: string;
   background?: string;
@@ -19,57 +20,57 @@ const t = {
   ja: {
     kicker: "Consultation Flow",
     title: "ご相談の流れ",
-    lead: "まずは無料相談（最大60分）で、あなたのビジネスの現状と理想を整理します。",
+    lead: `初回${consultationMinutes}分の無料相談で、LINEとお使いの業務システムをどうつなぐか、現在の状況から整理します。`,
     step1_title: "無料相談",
     step1_desc: "オンラインにて課題をヒアリング。今やるべきことを整理します。",
     step2_title: "方向性整理・ご提案",
-    step2_desc: "必要に応じて簡易メモ・概要案を添え、最適なプランを提示します。",
-    step3_title: "スマートな開発とサポート",
-    step3_desc: "内容にご納得いただければ、Web制作やビジネスの副操縦士としての各種支援をスタートします。",
+    step2_desc: "調査が必要な点を確認し、連携の範囲・費用・期間をご案内します。",
+    step3_title: "合意してから契約・着手",
+    step3_desc: "内容と費用に合意してから、LINE連携の構築を開始します。相談後に契約する義務はありません。",
     note1: "※無理な勧誘は一切行いません。まずは「壁打ち相手」としてお気軽にご活用ください。",
     note2: "※無料相談後にお渡しする場合がある資料は、方向性を確認するための簡易メモ・概要案です。詳細な構成案、設計書、原稿整理、デザイン作成は、ご契約後の正式な制作工程として扱います。",
-    micro_copy: "※専門的なIT知識や難しい言葉は一切不要です。「何から相談していいか分からない」状態でも、私たちの『副操縦士』が優しく状況を整理しますので、どうぞご安心ください。",
-    btn_line: "LINEで相談予約（最大60分）",
+    micro_copy: "今お使いのシステムと、手作業で困っていることを分かる範囲でお知らせください。連携の仕様が未定でも相談できます。フォームには通常2営業日以内にメールで返信します。",
+    btn_line: `LINEで相談する（初回${consultationMinutes}分無料）`,
     btn_form: "フォームから申し込む",
     form_link: "/contact/"
   },
   en: {
     kicker: "Consultation Flow",
     title: "Consultation Flow",
-    lead: "We clarify your current business challenges and goals during a free consultation (up to 60 minutes).",
+    lead: `In a free ${consultationMinutes}-minute first consultation, we discuss how LINE could connect to the business system you already use.`,
     step1_title: "Free Consultation",
     step1_desc: "We clarify your challenges online and outline your immediate priorities.",
     step2_title: "Proposal & Strategy",
-    step2_desc: "We present the most optimized plan, accompanied by a brief draft mockup if needed.",
-    step3_title: "Smart Development & Support",
-    step3_desc: "Once satisfied with the proposal, we launch the website production or ongoing partnership.",
+    step2_desc: "We review any open questions before proposing the integration scope, cost and timing.",
+    step3_title: "Agree before work begins",
+    step3_desc: "LINE integration work starts after agreement and contract. The consultation creates no obligation to order.",
     note1: "*Absolutely no high-pressure sales. Feel free to use this session simply to bounce ideas off us.",
     note2: "*The materials provided after the free consultation are basic drafts to confirm direction. Detailed structures, blueprints, copywriting, and final design work will be handled as part of the formal development process post-contract.",
-    micro_copy: "*No professional IT knowledge or complex jargon is required. Even if you don't know where to start, our 'Co-pilot' will gently guide you through the process.",
-    btn_line: "Book via LINE (Max 60 min)",
+    micro_copy: "Tell us which system you use and which manual tasks cause difficulties. You do not need a finished specification. Form inquiries normally receive an email reply within two business days.",
+    btn_line: `Ask via LINE (first ${consultationMinutes} min free)`,
     btn_form: "Book via Web Form",
     form_link: "/en/contact/"
   },
   fr: {
     kicker: "Déroulement",
     title: "Déroulement de la Consultation",
-    lead: "Nous clarifions vos défis actuels et vos objectifs lors d'une consultation gratuite (jusqu'à 60 minutes).",
+    lead: `Lors d’un premier échange gratuit de ${consultationMinutes} minutes, nous étudions comment relier LINE à l’outil métier que vous utilisez déjà.`,
     step1_title: "Consultation Gratuite",
     step1_desc: "Nous analysons vos besoins en ligne et définissons vos priorités immédiates.",
     step2_title: "Proposition & Orientation",
-    step2_desc: "Nous présentons l'offre la plus adaptée, accompagnée d'une ébauche de maquette si nécessaire.",
-    step3_title: "Développement & Support",
-    step3_desc: "Dès que l'offre vous convient, nous lançons la création web ou notre partenariat de co-pilotage.",
+    step2_desc: "Nous vérifions les questions ouvertes avant de préciser le périmètre, le coût et le délai.",
+    step3_title: "Accord avant le démarrage",
+    step3_desc: "L’intégration LINE commence après accord et contrat. La consultation ne vous oblige pas à commander.",
     note1: "*Aucune pression commerciale. Profitez simplement de cet échange pour clarifier vos idées.",
     note2: "*Les documents fournis après la consultation gratuite sont des ébauches destinées à valider l'orientation. La structure détaillée, le cahier des charges, la rédaction et le design final font partie du processus officiel après signature.",
-    micro_copy: "*Aucune compétence technique ou jargon complexe n'est requis. Même si vous hésitez sur le point de départ, notre « Co-pilote » clarifiera la situation en douceur.",
-    btn_line: "Réserver via LINE (Max 60 min)",
+    micro_copy: "Indiquez votre outil actuel et les tâches manuelles qui posent problème. Le cahier des charges peut rester à définir. Une réponse par e-mail est normalement envoyée sous deux jours ouvrés après le formulaire.",
+    btn_line: `Échanger via LINE (${consultationMinutes} min gratuites)`,
     btn_form: "Réserver via Formulaire",
     form_link: "/fr/contact/"
   }
 };
 
-const curT = t[lang];
+const curT = { ...t[lang], step1_title: serviceLabels[lang].consultation };
 ---
 
 <section id={id} class="consultation-section" style={border ? 'border-top: 1px solid var(--line);' : ''}>

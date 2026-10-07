@@ -7,11 +7,19 @@ interface Props {
 }
 
 const {
-  eyebrow = "Brand Movie",
-  title = "伝わるサイトは、見た目だけでは決まらない。",
-  body = "和-Nodeでは、心理学・Web制作・ICTの視点から、相談につながる導線を整えます。",
+  eyebrow = "",
+  title = "LINEの問い合わせが、登録されるまで",
+  body = "LINEで届いた問い合わせの内容を確かめ、kintone・Salesforce・HubSpot・Googleスプレッドシートへ登録し、担当者に知らせるまでの流れを24秒の動画にしました。音声はなく、説明は画面の字幕で表示します。",
   compact = false,
 } = Astro.props;
+// 新しい紹介動画の字幕。動画に焼き込んだ字幕と同じ文を、文字でも読めるように並べる
+const captions = [
+  "LINEで届いた問い合わせ、毎回手で書き写していませんか。",
+  "和-Nodeが、LINEと業務システムをつなぎます。",
+  "届いた内容を確かめてから、決めた項目へ自動で登録。",
+  "kintone・Salesforce・HubSpot・スプレッドシートに対応。",
+  "登録が済んだら担当者へ通知。転記と対応漏れを減らします。",
+];
 ---
 
 <section class:list={["brand-movie-section", "section", { compact }]}>
@@ -21,12 +29,41 @@ const {
         {eyebrow && <span class="brand-movie-eyebrow">{eyebrow}</span>}
         <h2>{title}</h2>
         <p>{body}</p>
+        <a class="current-services" href="/pricing/">料金と対応範囲を見る</a>
       </div>
-      <div class="brand-movie-frame" aria-label="和-Nodeのブランドムービー">
-        <video controls muted playsinline preload="metadata" poster="/videos/wa-node-brand-movie-poster.jpg">
-          <source src="/videos/wa-node-brand-movie.mp4" type="video/mp4" />
-          お使いのブラウザは動画の再生に対応していません。
-        </video>
+      <div class="brand-movie-main">
+        <div class="brand-movie-frame">
+          <video controls muted playsinline preload="none" poster="/videos/wa-node-line-integration-poster.jpg" aria-label="LINEの問い合わせが業務システムへ登録されるまでの紹介動画（24秒・音声なし・字幕あり）">
+            <source src="/videos/wa-node-line-integration.mp4" type="video/mp4" />
+            お使いのブラウザは動画の再生に対応していません。
+          </video>
+        </div>
+        <details class="brand-movie-archive">
+          <summary>字幕を文字で読む</summary>
+          <ol class="movie-captions">
+            {captions.map((line) => <li>{line}</li>)}
+          </ol>
+          <p class="archive-caption">画面はサンプルです。会社名・内容は架空のものです。</p>
+        </details>
+        <details class="brand-movie-archive">
+          <summary>以前の紹介動画を見る（Web制作・ICT支援）</summary>
+          <p class="archive-caption">動画内のHP/LP制作・サイト改善は過去の案内です。音声はありません。</p>
+          <div class="brand-movie-frame" aria-label="和-Nodeのブランドムービー">
+            <video controls muted playsinline preload="none" poster="/videos/wa-node-brand-movie-poster.jpg" aria-label="以前のWeb制作・ICT支援の紹介動画">
+              <source src="/videos/wa-node-brand-movie.mp4" type="video/mp4" />
+              お使いのブラウザは動画の再生に対応していません。
+            </video>
+          </div>
+          <div class="movie-text">
+            <h3>動画で紹介している内容</h3>
+            <ul>
+              <li>見た目に加えて、伝わり方や相談までの流れを整える考え方。</li>
+              <li>心理学・Web制作・ICTの視点から、情報や業務の流れを整理すること。</li>
+              <li>当時の対応サービス：HP/LP制作、既存サイト改善、AI/ICT相談、広告からつながるLPとフォームの改善。</li>
+              <li>料金の目安、相談の流れ、できないことを明確にし、無料相談を案内すること。</li>
+            </ul>
+          </div>
+        </details>
       </div>
     </div>
   </div>
@@ -52,6 +89,10 @@ const {
   .brand-movie-copy {
     min-width: 0;
   }
+  .brand-movie-main { display: grid; gap: 14px; min-width: 0; }
+  .brand-movie-archive .brand-movie-frame { margin-bottom: 4px; }
+  .movie-captions { margin: 12px 0 0; padding-left: 1.4em; color: var(--muted); font-size: .9rem; line-height: 1.8; }
+  .movie-captions li + li { margin-top: 6px; }
   .brand-movie-eyebrow {
     display: inline-block;
     margin-bottom: 14px;
@@ -74,6 +115,16 @@ const {
     font-size: 1.02rem;
     line-height: 1.9;
   }
+  .current-services { display: inline-block; margin-top: 16px; padding-block: 10px; color: var(--trust, #0f4c5c); text-underline-offset: 4px; font-weight: 700; }
+  .brand-movie-archive { min-width: 0; padding: 20px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+  .brand-movie-archive summary { min-height: 44px; align-content: center; cursor: pointer; color: var(--trust, #0f4c5c); line-height: 1.7; font-weight: 700; }
+  .brand-movie-archive summary::marker { color: var(--trust, #0f4c5c); }
+  .brand-movie-section :is(summary, a):focus-visible { outline: 3px solid var(--trust, #0f4c5c); outline-offset: 4px; }
+  .archive-caption, .movie-text { color: var(--muted); font-size: .9rem; line-height: 1.8; }
+  .archive-caption { margin: 12px 0 16px; }
+  .movie-text h3 { margin: 24px 0 12px; font-size: 1rem; }
+  .movie-text ul { margin: 0; padding-left: 1.3em; }
+  .movie-text li + li { margin-top: 8px; }
   .brand-movie-frame {
     position: relative;
     overflow: hidden;

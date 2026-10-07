@@ -47,11 +47,11 @@ const fields = [
 <BaseLayout title={title} description={description} structuredData={structuredData}>
   <main id="main" class="ucase" data-glossary-skip>
 
-    <section class="uc-hero">
+    <section class="uc-hero" transition:name="case-field-report-visual">
       <div class="uc-container">
         <a href="/works/" class="uc-back"><MaterialIcon name="arrow_back" /> 制作例・デモ一覧</a>
         <p class="uc-eyebrow">業務ごとのデモ｜現場報告</p>
-        <h1><span class="ph">協力会社の現場報告を、</span><span class="ph">LINEからkintoneへ。</span></h1>
+        <h1 transition:name="case-field-report-title"><span class="ph">協力会社の現場報告を、</span><span class="ph">LINEからkintoneへ。</span></h1>
         <p class="uc-lead">点検や日報を、紙やメッセージの写真で受け取って事務所で転記していませんか。kintoneのアカウントを持たない協力会社やパートの方でも、LINEで開く入力画面から報告でき、事務所ではkintoneの一覧で確認できます。</p>
         <div class="uc-chips">
           <span class="uc-line-mark">
@@ -64,6 +64,7 @@ const fields = [
           </span>
         </div>
       </div>
+    <nav class="uc-container uc-jumps" aria-label="このデモで確認すること"><a href="#demo">デモを試す</a><a href="#cost">費用と対応範囲を見る</a></nav>
     </section>
 
     <div class="uc-disclaimer">
@@ -169,21 +170,7 @@ const fields = [
       </div>
     </section>
 
-    <section class="uc-section">
-      <div class="uc-container">
-        <h2>kintoneに登録される項目。</h2>
-        <div class="uc-table-wrap" tabindex="0" role="region" aria-label="kintoneに登録される項目（横にスクロールできます）">
-          <table class="uc-table uc-fields">
-            <thead><tr><th scope="col">項目</th><th scope="col">内容</th><th scope="col">例（架空）</th></tr></thead>
-            <tbody>{fields.map(([name, text, sample]) => <tr><th scope="row">{name}</th><td>{text}</td><td>{sample}</td></tr>)}</tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <LineCaseSetup config={fieldReportSetup} />
-
-    <section class="uc-section">
+    <section class="uc-section" id="cost">
       <div class="uc-container uc-two">
         <div>
           <h2>この形で作る場合の費用。</h2>
@@ -201,6 +188,25 @@ const fields = [
         </div>
       </div>
     </section>
+
+    <LineCaseSetup config={fieldReportSetup} />
+
+    <div class="uc-container">
+      <details class="uc-technical">
+        <summary>技術担当者向け：kintoneへの記録の仕組みを見る</summary>
+        <section class="uc-section">
+      <div class="uc-container">
+        <h2>kintoneに登録される項目。</h2>
+        <div class="uc-table-wrap" tabindex="0" role="region" aria-label="kintoneに登録される項目（横にスクロールできます）">
+          <table class="uc-table uc-fields">
+            <thead><tr><th scope="col">項目</th><th scope="col">内容</th><th scope="col">例（架空）</th></tr></thead>
+            <tbody>{fields.map(([name, text, sample]) => <tr><th scope="row">{name}</th><td>{text}</td><td>{sample}</td></tr>)}</tbody>
+          </table>
+        </div>
+      </div>
+        </section>
+      </details>
+    </div>
 
     <section class="uc-cta">
       <div class="uc-container">

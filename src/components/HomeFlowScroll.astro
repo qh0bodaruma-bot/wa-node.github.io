@@ -4,8 +4,8 @@
 // どちらも使えない環境・動きを減らす設定では、完成した図を静止表示する。
 import MaterialIcon from './MaterialIcon.astro';
 import type { SiteLanguage } from '../data/services';
-interface Props { lang?: SiteLanguage }
-const { lang = 'ja' } = Astro.props;
+interface Props { lang?: SiteLanguage; compact?: boolean }
+const { lang = 'ja', compact = false } = Astro.props;
 const c = {
   ja: {
     eyebrow: '連携の流れ',
@@ -13,11 +13,11 @@ const c = {
     lead: 'LINEで受けた内容が、どこを通って業務システムに入るのか。4つの段階に分けて説明します。',
     steps: [
       ['LINEで受け付ける', '友だち追加やLINEの中で開くフォームから、申込・問い合わせを受け取ります。お客様はいつものLINEのまま送れます。'],
-      ['中継で整える', '和-Nodeが作る中継の仕組みが、必要な項目を取り出します。足りない情報や、同じ内容の二重送信がないかもここで確かめます。'],
+      ['入力内容を確かめる', '和-Nodeが作る中継の仕組みが、必要な項目を取り出します。足りない情報や、同じ内容の二重送信がないかもここで確かめます。'],
       ['業務システムへ登録する', 'Salesforce・kintone・HubSpot・Googleスプレッドシートへ、事前に決めた項目の形で自動登録します。'],
       ['担当者に知らせる', '登録が済んだら担当者へ通知します。転記の手間と、対応の漏れを減らします。'],
     ],
-    nodes: [['LINE公式アカウント', '申込・問い合わせ'], ['中継（Webhook / API）', '項目の取り出し・確認'], ['業務システム', 'Salesforce / kintone など'], ['担当者への通知', '対応の開始']],
+    nodes: [['LINE公式アカウント', '申込・問い合わせ'], ['内容を確認する仕組み', '項目の取り出し・確認'], ['業務システム', 'Salesforce / kintone など'], ['担当者への通知', '対応の開始']],
   },
   en: {
     eyebrow: 'How the integration works',
@@ -25,7 +25,7 @@ const c = {
     lead: 'Where does a message received on LINE go before it reaches your business system? Here are the four stages.',
     steps: [
       ['Receive on LINE', 'Requests and inquiries arrive through a follow or a form opened inside LINE. Customers keep using the LINE app they already know.'],
-      ['Prepare in the relay', 'The relay built by Wa-Node extracts the fields you need. It also checks for missing details and duplicate submissions.'],
+      ['Check the details', 'The relay built by Wa-Node extracts the fields you need. It also checks for missing details and duplicate submissions.'],
       ['Register in your system', 'The details are registered automatically in Salesforce, kintone, HubSpot or Google Sheets, in the fields agreed in advance.'],
       ['Notify the right person', 'Once registered, the person in charge is notified. Less copying, fewer missed follow-ups.'],
     ],
@@ -37,7 +37,7 @@ const c = {
     lead: 'Par où passe un message reçu sur LINE avant d’arriver dans votre outil métier ? Voici les quatre étapes.',
     steps: [
       ['Recevoir sur LINE', 'Les demandes arrivent via un ajout en ami ou un formulaire ouvert dans LINE. Vos clients restent dans l’application qu’ils connaissent.'],
-      ['Préparer dans le relais', 'Le relais conçu par Wa-Node extrait les champs utiles. Il vérifie aussi les informations manquantes et les envois en double.'],
+      ['Vérifier les informations', 'Le relais conçu par Wa-Node extrait les champs utiles. Il vérifie aussi les informations manquantes et les envois en double.'],
       ['Enregistrer dans votre outil', 'Les informations sont enregistrées automatiquement dans Salesforce, kintone, HubSpot ou Google Sheets, selon les champs convenus.'],
       ['Informer la bonne personne', 'Une fois la fiche créée, la personne responsable est avertie. Moins de ressaisies, moins d’oublis.'],
     ],
@@ -45,8 +45,13 @@ const c = {
   },
 }[lang];
 const icons = ['forum', 'sync_alt', 'inventory_2', 'notifications_active'];
+const brief = {
+  ja: ['LINEの中で開く入力画面から、申込・問い合わせを受け付けます。', '必要な情報がそろっているか、同じ内容が二重に届いていないかを確かめます。', '今お使いのシステムへ、あらかじめ決めた項目を登録します。', '登録後に担当者へ通知し、次の対応につなげます。'],
+  en: ['Receive requests through a form opened inside LINE.', 'Check for missing information and duplicate submissions.', 'Register the agreed fields in the system you already use.', 'Notify the person in charge so they can follow up.'],
+  fr: ['Recevoir les demandes via un formulaire ouvert dans LINE.', 'Vérifier les informations manquantes et les doublons.', 'Enregistrer les champs convenus dans votre outil actuel.', 'Informer la personne responsable pour permettre le suivi.'],
+}[lang];
 ---
-<section class="s-section flow-scroll" id="flow" aria-labelledby="flow-title" data-flow-scroll data-active-step="0">
+<section class:list={["s-section", "flow-scroll", { "is-compact": compact }]} id="flow" aria-labelledby="flow-title" data-flow-scroll={compact ? undefined : ""} data-active-step="0">
   <div class="s-shell">
     <div class="flow-head" data-motion-enter="heading" data-motion-id="flow-heading">
       <p class="s-eyebrow">{c.eyebrow}</p>
@@ -70,7 +75,7 @@ const icons = ['forum', 'sync_alt', 'inventory_2', 'notifications_active'];
       <ol class="flow-steps">
         {c.steps.map(([title, desc], i) => <li class="flow-step" data-step={i}>
           <span class="flow-step-marker" aria-hidden="true"><MaterialIcon name={icons[i]} /></span>
-          <div><span class="s-number">0{i + 1}</span><h3>{title}</h3><p>{desc}</p></div>
+          <div><span class="s-number">0{i + 1}</span><h3>{title}</h3><p>{compact ? brief[i] : desc}</p></div>
         </li>)}
       </ol>
     </div>
@@ -156,6 +161,17 @@ const icons = ['forum', 'sync_alt', 'inventory_2', 'notifications_active'];
   .flow-link-fill{animation:none;transform:none}
   .flow-packet{animation:none;opacity:0}
 }
+/* 概要ではスクロールの演出を使わず、全段階をまとめて読む。 */
+.flow-scroll.is-compact .flow-layout{display:block}
+.flow-scroll.is-compact .flow-visual{display:none}
+.flow-scroll.is-compact .flow-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:24px}
+.flow-scroll.is-compact .flow-steps::before{display:none}
+.flow-scroll.is-compact .flow-step{min-height:0;display:block;padding:20px 0 0;border-top:2px solid var(--rule);align-items:start;view-timeline-name:none}
+.flow-scroll.is-compact .flow-step-marker{display:none}
+.flow-scroll.is-compact .flow-step h3{font-size:1.05rem;line-height:1.6}
+.flow-scroll.is-compact .flow-step p{line-height:1.85}
+@media(max-width:1100px){.flow-scroll.is-compact .flow-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.flow-scroll.is-compact .flow-steps{grid-template-columns:1fr;gap:18px}.flow-scroll.is-compact .flow-step{padding-top:14px}}
 </style>
 <script>
 function initFlowScroll() {

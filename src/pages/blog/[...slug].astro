@@ -2,7 +2,8 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ConsultationFlow from '../../components/ConsultationFlow.astro';
 import { getBlogs, getBlogDetail } from '../../library/microcms';
-import { cleanBlogContent, cleanBlogTitle, createBlogExcerpt } from '../../library/blogPresentation';
+import { presentBlog } from '../../library/blogPresentation';
+import { blogTopics } from '../../data/blogReadingGuides';
 import { createBlogPostingSchema } from '../../data/structuredData';
 
 export async function getStaticPaths() {
@@ -16,17 +17,18 @@ export async function getStaticPaths() {
 const OFF_TOPIC_POSTS = ['xmt4y_gy-tei', 'z6zhzfpun', 'ekemcay7yl', 'lupuzniwy', 'zvl3xdhsb'];
 
 const { slug } = Astro.params;
-const post = await getBlogDetail(slug);
-const displayTitle = cleanBlogTitle(post.title);
-const cleanedContent = cleanBlogContent(post.content);
-const description = post.description?.trim() || createBlogExcerpt(cleanedContent, 150);
+const post = presentBlog(await getBlogDetail(slug));
+const displayTitle = post.title;
+const cleanedContent = post.content;
+const description = post.description;
+const topic = blogTopics.find(topic => topic.id === post.topic);
 const articlePath = `/blog/${slug}/`;
 const structuredData = createBlogPostingSchema({
   title: displayTitle,
   description,
   path: articlePath,
   datePublished: post.publishedAt,
-  dateModified: post.updatedAt || post.revisedAt,
+  dateModified: post.dateModified,
   image: post.eyecatch?.url,
 });
 ---
@@ -42,19 +44,38 @@ const structuredData = createBlogPostingSchema({
               year: 'numeric',
               month: 'long',
               day: 'numeric',
+              timeZone: 'Asia/Tokyo',
             })}
           </time>
-          {post.tags && post.tags.length > 0 && (
+          <a href={`/blog/#topic-${post.topic}`}>{topic?.label}</a>
+          {post.topic !== 'web' && post.tags && post.tags.length > 0 && (
             <div class="tags">
               {post.tags.map(tag => <span>#{tag}</span>)}
             </div>
           )}
         </div>
-        <h1>{displayTitle}</h1>
+        <h1>{displayTitle.split('｜').map((part, index) => <span class:list={{ 'title-detail': index > 0 }}>{index > 0 && ' '}{part}</span>)}</h1>
       </div>
     </div>
 
-    <div class="post-hero">
+    {post.guide && (
+      <div class="container-narrow">
+        {post.topic === 'web' && (
+          <aside class="archive-note" aria-label="過去記事について">
+            <p>Web制作を主なテーマとしていた時期の記事です。現在のサービス内容は<a href="/pricing/">料金と対応範囲</a>をご覧ください。</p>
+            {post.guide.revisedAt && <p>内容の見直し：<time datetime={post.guide.revisedAt}>{new Date(post.guide.revisedAt).toLocaleDateString('ja-JP', { timeZone: 'Asia/Tokyo' })}</time></p>}
+          </aside>
+        )}
+        <section class="reading-guide" aria-labelledby="reading-guide-title">
+          <p class="guide-audience">{post.guide.audience}</p>
+          <h2 id="reading-guide-title">{post.topic === 'web' ? 'この記事の要点' : '発注・導入前に確認すること'}</h2>
+          <ul>{post.guide.points.map(point => <li>{point}</li>)}</ul>
+          <a href="#article-body">詳しい説明を読む <span aria-hidden="true">↓</span></a>
+        </section>
+      </div>
+    )}
+
+    {post.eyecatch && <div class="post-hero">
       <div class="container-narrow">
         {post.eyecatch && (
           <img
@@ -67,9 +88,9 @@ const structuredData = createBlogPostingSchema({
           />
         )}
       </div>
-    </div>
+    </div>}
 
-    <div class="post-body">
+    <div class="post-body" id="article-body">
       <div class="container-narrow">
         <div class="content-wrap">
           <div set:html={cleanedContent} />
@@ -96,6 +117,23 @@ const structuredData = createBlogPostingSchema({
   .tags span { color: var(--accent); font-weight: 800; }
   
   .post-header h1 { font-size: clamp(1.8rem, 5vw, 2.8rem); font-weight: 900; line-height: 1.3; color: var(--text); }
+  .post-header h1 { word-break: auto-phrase; }
+  .title-detail { display: block; margin-top: 12px; font-size: .7em; line-height: 1.7; color: #526563; }
+
+  .post-meta a, .reading-guide a, .archive-note a { color: var(--trust, #0f4c5c); text-underline-offset: 4px; }
+  .archive-note a, .content-wrap :global(a) { text-decoration: underline; text-underline-offset: 4px; overflow-wrap: anywhere; }
+  .tags { flex-wrap: wrap; }
+  .reading-guide { margin: 0 0 40px; padding: 24px 28px; background: #fff; border: 1px solid var(--line); border-left: 5px solid var(--trust, #0f4c5c); border-radius: 12px; }
+  .guide-audience { margin: 0 0 10px; font-size: .9rem; line-height: 1.7; color: var(--muted); }
+  .reading-guide h2 { margin: 0 0 16px; font-size: 1.25rem; line-height: 1.5; }
+  .reading-guide ul { padding-left: 1.3em; margin: 0 0 18px; line-height: 1.8; }
+  .reading-guide li + li { margin-top: 8px; }
+  .reading-guide a { font-weight: 700; }
+  .archive-note { margin: 0 0 24px; padding: 16px 20px; background: #f5f2eb; border-radius: 8px; font-size: .9rem; line-height: 1.8; }
+  .archive-note p { margin: 0; }
+  .archive-note p + p { margin-top: 8px; }
+  .post-body { scroll-margin-top: 100px; }
+  .post-single a:focus-visible { outline: 3px solid var(--trust, #0f4c5c); outline-offset: 4px; }
 
   .post-hero { margin-bottom: 60px; }
   .hero-image { width: 100%; border-radius: 32px; box-shadow: var(--shadow); border: 1px solid var(--line); }
@@ -119,10 +157,12 @@ const structuredData = createBlogPostingSchema({
   .post-footer { background: #fffdf9; border-top: 1px solid var(--line); }
 
   @media (max-width: 768px) {
-    .post-header { padding: 60px 0 30px; }
+    .post-header { padding: 40px 0 30px; }
     .content-wrap { font-size: 1rem; }
     .content-wrap :global(h2) { font-size: 1.5rem; margin-top: 40px; }
     .content-wrap :global(figure) { margin: 36px 0; }
     .content-wrap :global(figure img) { border-radius: 16px; }
+    .reading-guide { padding: 20px; }
+    .post-header h1 { font-size: 1.6rem; line-height: 1.5; }
   }
 </style>

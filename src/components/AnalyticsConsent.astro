@@ -23,22 +23,22 @@ const {
 
 const copy = {
   ja: {
-    title: 'アクセス解析の設定',
-    body: 'サイト改善のため、Google AnalyticsとMicrosoft Clarityを利用します。「許可する」を選ぶまで解析ツールは読み込みません。',
+    title: 'アクセス解析',
+    body: 'サイト改善用のGoogle Analytics・Microsoft Clarityは、許可後のみ読み込みます。',
     allow: '解析を許可する',
     deny: '許可しない',
     policy: '詳しく見る',
   },
   en: {
     title: 'Analytics settings',
-    body: 'We use Google Analytics and Microsoft Clarity to improve this site. Analytics tools are not loaded until you select “Allow analytics”.',
+    body: 'Google Analytics and Microsoft Clarity help improve this site. They load only with your permission.',
     allow: 'Allow analytics',
     deny: 'Do not allow',
     policy: 'Learn more (Japanese)',
   },
   fr: {
-    title: 'Paramètres de mesure d’audience',
-    body: 'Nous utilisons Google Analytics et Microsoft Clarity pour améliorer ce site. Ces outils ne sont pas chargés avant votre autorisation.',
+    title: 'Mesure d’audience',
+    body: 'Google Analytics et Microsoft Clarity aident à améliorer ce site. Ils sont chargés uniquement avec votre accord.',
     allow: 'Autoriser la mesure',
     deny: 'Ne pas autoriser',
     policy: 'En savoir plus (japonais)',
@@ -72,10 +72,12 @@ const copy = {
 <style>
   .analytics-consent { position: fixed; inset: auto 16px 16px; z-index: 10000; max-width: 920px; margin: 0 auto; padding: 20px; color: #1d211d; background: #fffefa; border: 1px solid #abb5a8; border-radius: 10px; box-shadow: 0 12px 40px rgba(0,0,0,.2); }
   .analytics-consent[hidden] { display: none; }
+  .analytics-consent { max-height: calc(100svh - 24px); overflow-y: auto; }
+  .analytics-consent :is(a, button):focus-visible { outline: 3px solid #315f48; outline-offset: 3px; }
   .analytics-consent-inner { display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 24px; align-items: center; }
   .analytics-consent h2 { margin: 0 0 6px; font-family: inherit; font-size: 1rem; }
   .analytics-consent p { margin: 0; font-size: .78rem; line-height: 1.7; }
-  .analytics-consent a { text-decoration: underline; text-underline-offset: 3px; }
+  .analytics-consent a { display: inline-block; text-decoration: underline; text-underline-offset: 3px; }
   .analytics-consent-actions { display: flex; gap: 10px; }
   .analytics-consent button { min-height: 44px; padding: 9px 15px; border: 1px solid #315f48; border-radius: 5px; font: inherit; font-size: .76rem; font-weight: 700; cursor: pointer; }
   .consent-deny { color: #315f48; background: #fff; }
@@ -88,6 +90,7 @@ const copy = {
   .analytics-consent[data-theme="wa-node"] button { padding: 8px 14px; font-size: .8125rem; }
   @media (max-width: 680px) {
     .analytics-consent[data-theme="wa-node"] { inset: auto 8px 8px; padding: 10px 12px; }
+    .analytics-consent[data-theme="wa-node"] h2 { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
     .analytics-consent[data-theme="wa-node"] .analytics-consent-inner { gap: 8px; }
     .analytics-consent[data-theme="wa-node"] p { line-height: 1.55; }
     .analytics-consent[data-theme="wa-node"] .analytics-consent-actions { gap: 8px; }
@@ -170,6 +173,7 @@ const copy = {
       const root = document.getElementById('analytics-consent');
       if (!root || root.dataset.initialized === 'true') return;
       root.dataset.initialized = 'true';
+      let returnFocus = null;
 
       let choice = null;
       try { choice = localStorage.getItem(STORAGE_KEY); } catch {}
@@ -182,11 +186,22 @@ const copy = {
           const analyticsWasLoaded = Boolean(document.getElementById('wa-node-ga') || document.getElementById('wa-node-clarity'));
           try { localStorage.setItem(STORAGE_KEY, next); } catch {}
           applyChoice(root, next);
+          const target = returnFocus?.isConnected ? returnFocus : document.getElementById('main');
+          if (target) {
+            if (target.id === 'main' && !target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+            target.focus({ preventScroll: true });
+          }
           if (next === 'denied' && analyticsWasLoaded) window.location.reload();
         });
       });
 
-      document.addEventListener('wa-node:open-consent', () => { root.hidden = false; });
+      const openSettings = () => {
+        returnFocus = document.activeElement;
+        root.hidden = false;
+        root.querySelector('[data-consent="denied"]').focus({ preventScroll: true });
+      };
+      document.addEventListener('wa-node:open-consent', openSettings);
+      document.addEventListener('astro:before-swap', () => document.removeEventListener('wa-node:open-consent', openSettings), { once: true });
     }
 
     initAnalyticsConsent();

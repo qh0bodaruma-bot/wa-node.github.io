@@ -30,6 +30,20 @@
 }
 
 #main.home-refresh .home-hero .hero-copy { min-width: 0; }
+#main.home-refresh .home-hero .hero-reading {
+  padding: 20px;
+  background: #fff;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+}
+#main.home-refresh .home-hero .hero-reading > :first-child { margin-top: 0; }
+#main.home-refresh .home-hero .hero-reading > :last-child { margin-bottom: 0; }
+#main.home-refresh .home-hero .demo-scope {
+  margin: 0 0 18px;
+  color: var(--quiet);
+  font-size: .875rem;
+  line-height: 1.8;
+}
 #main.home-refresh .home-hero .hero-copy h1 {
   /* 上限は、1行目「LINEの問い合わせを」が左列（最大約540px）に収まる大きさ */
   font-size: clamp(2.25rem, 3.5vw, 3.2rem);
@@ -118,6 +132,7 @@
 }
 #main.home-refresh .home-hero .target-head { margin-bottom: 14px; }
 #main.home-refresh .home-hero .record-field { padding: 10px 0; }
+#main.home-refresh .home-hero .record-field dt { min-width: 0; overflow-wrap: anywhere; }
 #main.home-refresh .home-hero .record-field dd {
   min-width: 0;
   overflow-wrap: anywhere;
@@ -140,6 +155,8 @@
 #main.home-refresh .trust-strip strong { font-weight: 700; }
 #main.home-refresh .service-choice,
 #main.home-refresh .scope-col {
+  min-width: 0;
+  overflow-wrap: anywhere;
   background: #fff;
   border-color: var(--rule);
   border-radius: 6px;

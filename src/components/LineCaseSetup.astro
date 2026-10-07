@@ -10,7 +10,19 @@ const { config } = Astro.props;
 <section class="setup-section">
   <div class="setup-container">
     <h2><span class="nw">{config.vendorName}と</span><span class="nw">つなぐときに、</span><span class="nw">先に決めること。</span></h2>
-    <p class="setup-lead">画面が動くことと、業務で使い続けられることは別です。{config.vendorName}との連携で、着手前に確認している点をまとめました。</p>
+    <p class="setup-lead">今の業務に合うかを、以下の条件から確認できます。契約プラン・利用権限・必要な追加費用も、構築前に確認します。詳細な確認項目は下から開けます。</p>
+    <div class="setup-fit">
+      <div>
+        <h3>{config.vendorName}との連携が向いているケース</h3>
+        <ul>{config.fitCases.map((item) => <li>{item}</li>)}</ul>
+      </div>
+      <div>
+        <h3>別の方法も検討したいケース</h3>
+        <ul>{config.otherCases.map((item) => <li>{item}</li>)}</ul>
+      </div>
+    </div>
+    <details class="setup-details">
+      <summary>導入前の確認項目を詳しく読む（技術担当者向け）</summary>
     <ol class="setup-list">
       {config.setupPoints.map((point, i) => (
         <li>
@@ -22,16 +34,7 @@ const { config } = Astro.props;
         </li>
       ))}
     </ol>
-    <div class="setup-fit">
-      <div>
-        <h3>{config.vendorName}との連携が向いているケース</h3>
-        <ul>{config.fitCases.map((item) => <li>{item}</li>)}</ul>
-      </div>
-      <div>
-        <h3>別の方法も検討したいケース</h3>
-        <ul>{config.otherCases.map((item) => <li>{item}</li>)}</ul>
-      </div>
-    </div>
+    </details>
     <div class="setup-sources">
       <p>仕様は2026年9月時点の公開資料にもとづきます。契約プランや設定によって異なる場合があります。</p>
       <ul>{config.sources.map((source) => <li><a href={source.url} target="_blank" rel="noopener">{source.label}</a></li>)}</ul>
@@ -40,6 +43,11 @@ const { config } = Astro.props;
 </section>
 
 <style>
+  .setup-details{border:1px solid var(--trust-line, rgba(15,76,92,.18));border-radius:8px;margin-bottom:24px;background:#fff}
+  .setup-details summary{padding:18px 22px;min-height:44px;cursor:pointer;color:var(--trust,#0f4c5c);font-weight:700;line-height:1.8}
+  .setup-details summary:focus-visible{outline:3px solid var(--trust,#0f4c5c);outline-offset:3px}
+  .setup-details .setup-list{padding:0 18px 18px;margin:0}
+
   .setup-section { padding: 72px 0; border-top: 1px solid var(--trust-line, rgba(15, 76, 92, 0.18)); }
   .setup-container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
   .setup-section h2 { font-size: clamp(1.3rem, 5.6vw, 2.1rem); font-weight: 900; line-height: 1.4; margin-bottom: 16px; color: #1a1a1a; }
