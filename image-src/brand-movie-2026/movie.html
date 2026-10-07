@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<title>和-Node 紹介動画（LINE×業務システム連携）</title>
+<!--
+  紹介動画の原本。1920×1080 の画面を、時刻 t（秒）を渡す seek(t) で決定的に描く。
+  render.cjs が 30fps でコマ撮りし、ffmpeg で public/videos/ の MP4 に書き出す。
+  ブラウザで直接開くと、確認用に通常速度で再生する（URL に ?still=秒 を付けるとその時刻で止まる）。
+  他社のロゴは使わず、システム名は文字で示す。画面内の会社名・内容はすべて架空。
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Outfit:wght@500;700&family=Shippori+Mincho:wght@600;700&display=block" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,500,1,0&display=block" rel="stylesheet">
+<style>
+  :root {
+    --paper: #fbf9f4; --ink: #222e2b; --quiet: #59645f; --rule: #dddcd1;
+    --deep: #164f4d; --deep-soft: #e6eeeb; --vermillion: #b9322d; --gold: #8c6b1f;
+    --line-green: #1f9d55;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--paper); }
+  body { font-family: 'Outfit', 'Noto Sans JP', sans-serif; color: var(--ink); }
+  .icon { font-family: 'Material Symbols Rounded'; font-weight: normal; font-style: normal; line-height: 1; letter-spacing: normal; text-transform: none; white-space: nowrap; font-feature-settings: 'liga'; -webkit-font-smoothing: antialiased; }
+  #stage { position: relative; width: 1920px; height: 1080px; overflow: hidden;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(140,107,31,.06), transparent 40%),
+      radial-gradient(circle at 88% 82%, rgba(22,79,77,.07), transparent 45%),
+      var(--paper); }
+  .abs { position: absolute; }
+
+  /* 左上の屋号 */
+  #brand { left: 72px; top: 56px; display: flex; align-items: center; gap: 18px; }
+  #brand strong { font-family: 'Shippori Mincho', serif; font-size: 40px; color: var(--ink); }
+  #brand span { padding: 6px 16px; border-radius: 999px; background: #efe7d8; font: 700 20px 'Noto Sans JP', sans-serif; color: #5a4a2c; }
+  #sample-note { right: 72px; top: 66px; font: 500 20px 'Noto Sans JP', sans-serif; color: var(--quiet); }
+
+  /* 字幕（音声がないため、画面の説明はすべて字幕で伝える） */
+  #caption { left: 0; right: 0; bottom: 64px; text-align: center; }
+  #caption p { display: inline-block; padding: 18px 40px; border-radius: 12px; background: rgba(34,46,43,.92); color: #fff;
+    font: 700 46px/1.45 'Noto Sans JP', sans-serif; letter-spacing: .02em; }
+
+  /* LINEの会話 */
+  #chat { left: 150px; top: 270px; width: 520px; height: 460px; border-radius: 28px; background: #fff; border: 2px solid #d7e2dd; overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(22,79,77,.35); }
+  #chat header { display: flex; align-items: center; gap: 14px; padding: 22px 26px; background: var(--line-green); color: #fff; font: 700 26px 'Noto Sans JP', sans-serif; }
+  #chat header .icon { font-size: 34px; }
+  #chat .msgs { padding: 28px 26px; display: flex; flex-direction: column; gap: 18px; }
+  .bubble { max-width: 100%; padding: 16px 22px; border-radius: 20px 20px 20px 6px; background: #eef3f0; font: 500 26px/1.5 'Noto Sans JP', sans-serif; color: var(--ink); }
+  .bubble small { display: block; font-size: 18px; color: var(--quiet); margin-bottom: 4px; }
+
+  /* 手入力の表 */
+  #sheet { left: 800px; top: 230px; width: 960px; border-radius: 18px; background: #fff; border: 2px solid var(--rule); overflow: hidden; }
+  #sheet h3 { display: flex; align-items: center; gap: 12px; padding: 22px 28px; font: 700 28px 'Noto Sans JP', sans-serif; border-bottom: 2px solid var(--rule); color: var(--quiet); }
+  #sheet table { width: 100%; border-collapse: collapse; font: 500 26px 'Noto Sans JP', sans-serif; }
+  #sheet th, #sheet td { text-align: left; padding: 18px 28px; border-bottom: 1px solid var(--rule); height: 72px; }
+  #sheet th { font-size: 20px; color: var(--quiet); font-weight: 700; background: #f7f6f1; height: auto; }
+  #sheet td { position: relative; }
+  .cursor { display: inline-block; width: 3px; height: 30px; background: var(--ink); vertical-align: middle; margin-left: 2px; }
+  .flag { position: absolute; right: 24px; top: 50%; transform: translateY(-50%); display: flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 999px;
+    background: #fbe9e7; color: var(--vermillion); font: 700 20px 'Noto Sans JP', sans-serif; border: 2px solid #efc2bd; }
+
+  /* つなぐ線と中継 */
+  #wires { left: 0; top: 0; }
+  #relay { left: 790px; top: 330px; width: 340px; padding: 28px 28px 24px; border-radius: 24px; background: var(--deep); color: #fff; text-align: center;
+    box-shadow: 0 30px 60px -30px rgba(22,79,77,.6); }
+  #relay .icon { font-size: 52px; }
+  #relay h4 { font: 700 28px 'Noto Sans JP', sans-serif; margin: 8px 0 18px; }
+  #relay ul { list-style: none; text-align: left; display: grid; gap: 10px; }
+  #relay li { display: flex; align-items: center; gap: 10px; font: 500 22px 'Noto Sans JP', sans-serif; padding: 10px 14px; border-radius: 10px; background: rgba(255,255,255,.1); }
+  #relay li .icon { font-size: 28px; color: #9fe0bb; }
+
+  /* 登録先 */
+  #record { left: 1250px; top: 250px; width: 540px; border-radius: 24px; background: #fff; border: 2px solid #cddcd8; overflow: hidden;
+    box-shadow: 0 30px 60px -30px rgba(22,79,77,.35); }
+  #tabs { display: flex; gap: 6px; padding: 10px; background: #f4f7f5; border-bottom: 2px solid #e1e8e5; }
+  #tabs span { flex: 1 1 auto; text-align: center; padding: 10px 8px; border-radius: 8px; font: 700 19px 'Noto Sans JP', sans-serif; color: var(--deep); white-space: nowrap; }
+  #tabs span.on { background: var(--deep); color: #fff; }
+  #record .head { display: flex; align-items: center; gap: 14px; padding: 22px 28px 12px; }
+  #record .head .icon { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 12px; background: var(--deep-soft); color: var(--deep); font-size: 32px; }
+  #record .head strong { font: 700 28px 'Noto Sans JP', sans-serif; }
+  #record dl { padding: 0 28px; }
+  #record dl div { display: grid; grid-template-columns: 150px 1fr; gap: 16px; align-items: baseline; padding: 14px 0; border-top: 1px solid var(--rule); }
+  #record dt { font: 500 21px 'Noto Sans JP', sans-serif; color: var(--quiet); }
+  #record dd { font: 700 25px 'Noto Sans JP', sans-serif; min-height: 36px; }
+  #record .status { display: flex; align-items: center; gap: 10px; margin: 6px 28px 24px; padding-top: 16px; border-top: 1px solid var(--rule);
+    font: 700 24px 'Noto Sans JP', sans-serif; color: var(--vermillion); }
+  #record .status .icon { font-size: 30px; }
+
+  /* 流れるデータ */
+  #packet { display: flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 999px; background: #fff; border: 2px solid var(--deep);
+    color: var(--deep); font: 700 22px 'Noto Sans JP', sans-serif; box-shadow: 0 10px 24px -10px rgba(22,79,77,.5); white-space: nowrap; }
+  #packet .icon { font-size: 26px; }
+
+  /* 担当者への通知 */
+  #notify { left: 1210px; top: 128px; width: 620px; display: flex; align-items: center; gap: 18px; padding: 20px 26px; border-radius: 18px; background: var(--ink); color: #fff;
+    box-shadow: 0 24px 50px -20px rgba(0,0,0,.45); }
+  #notify .icon { font-size: 40px; color: #f3c969; }
+  #notify b { display: block; font: 700 24px 'Noto Sans JP', sans-serif; }
+  #notify small { display: block; font: 500 20px 'Noto Sans JP', sans-serif; color: #cfd8d5; margin-top: 2px; }
+
+  /* 最後の画面 */
+  #end { inset: 0; background: var(--deep); color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+  #end .mark { width: 72px; height: 4px; background: var(--vermillion); margin-bottom: 40px; }
+  #end h1 { font: 700 150px/1.1 'Shippori Mincho', serif; letter-spacing: .04em; }
+  #end h2 { font: 700 46px 'Noto Sans JP', sans-serif; margin-top: 30px; letter-spacing: .06em; }
+  #end p { font: 500 30px 'Noto Sans JP', sans-serif; color: #cfe0db; margin-top: 22px; }
+  #end .url { margin-top: 56px; padding: 14px 40px; border: 2px solid rgba(255,255,255,.5); border-radius: 999px; font: 700 34px 'Outfit', sans-serif; letter-spacing: .06em; color: #fff; }
+  #end small { position: absolute; bottom: 56px; font: 500 20px 'Noto Sans JP', sans-serif; color: #a9c4bd; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <svg id="wires" class="abs" width="1920" height="1080" viewBox="0 0 1920 1080">
+    <path id="wire1" d="M 670 500 C 730 500, 730 500, 790 500" fill="none" stroke="#164f4d" stroke-width="5" stroke-linecap="round"/>
+    <path id="wire2" d="M 1130 500 C 1190 500, 1190 500, 1250 500" fill="none" stroke="#164f4d" stroke-width="5" stroke-linecap="round"/>
+  </svg>
+
+  <div id="brand" class="abs"><strong>和-Node</strong><span>LINE × 業務システム連携</span></div>
+  <div id="sample-note" class="abs">サンプル画面・架空のデータ</div>
+
+  <section id="chat" class="abs">
+    <header><span class="icon">chat</span>LINE公式アカウント</header>
+    <div class="msgs">
+      <div class="bubble" id="b1"><small>サンプル商事</small>見積りについて相談したいです。</div>
+      <div class="bubble" id="b2"><small>山田さま</small>来週の予約を変更できますか？</div>
+      <div class="bubble" id="b3"><small>佐藤さま</small>資料をメールで送ってください。</div>
+    </div>
+  </section>
+
+  <section id="sheet" class="abs">
+    <h3><span class="icon">edit_note</span>顧客一覧（手入力）</h3>
+    <table>
+      <thead><tr><th style="width:34%">会社名・お名前</th><th>ご用件</th></tr></thead>
+      <tbody>
+        <tr><td id="s1a"></td><td id="s1b"></td></tr>
+        <tr><td id="s2a"></td><td id="s2b"><span class="flag" id="f1"><span class="icon">error</span>転記漏れ</span></td></tr>
+        <tr><td id="s3a"></td><td id="s3b"><span id="s3bt"></span><span class="flag" id="f2"><span class="icon">content_copy</span>二重入力</span></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="relay" class="abs">
+    <span class="icon">sync_alt</span>
+    <h4>内容を確かめる仕組み</h4>
+    <ul>
+      <li id="c1"><span class="icon">check_circle</span>必要な項目がそろう</li>
+      <li id="c2"><span class="icon">check_circle</span>二重送信がない</li>
+    </ul>
+  </section>
+
+  <section id="record" class="abs">
+    <div id="tabs"><span data-t="0">kintone</span><span data-t="1">Salesforce</span><span data-t="2">HubSpot</span><span data-t="3">スプレッドシート</span></div>
+    <div class="head"><span class="icon">inventory_2</span><strong id="rec-title">顧客管理アプリに登録</strong></div>
+    <dl>
+      <div><dt id="d1t">会社名</dt><dd id="d1"></dd></div>
+      <div><dt id="d2t">ご用件</dt><dd id="d2"></dd></div>
+      <div><dt id="d3t">返信方法</dt><dd id="d3"></dd></div>
+    </dl>
+    <p class="status" id="status"><span class="icon">check_circle</span><span id="status-text">登録・担当通知が完了</span></p>
+  </section>
+
+  <div id="packet" class="abs"><span class="icon">mail</span>見積りの相談</div>
+
+  <div id="notify" class="abs"><span class="icon">notifications_active</span><div><b>担当者に通知しました</b><small>新しい問い合わせ：サンプル商事（見積りの相談）</small></div></div>
+
+  <div id="caption" class="abs"><p id="caption-text"></p></div>
+
+  <section id="end" class="abs">
+    <div class="mark"></div>
+    <h1>和-Node</h1>
+    <h2>LINE × 業務システム連携</h2>
+    <p>LINEの問い合わせを、今お使いの業務システムへ自動で登録</p>
+    <div class="url">www.wa-node.com</div>
+    <small>画面はサンプルです。会社名・内容は架空のものです。</small>
+  </section>
+</div>
+
+<script>
+  const DURATION = 24;
+  const $ = (id) => document.getElementById(id);
+  const clamp = (x) => Math.min(1, Math.max(0, x));
+  const prog = (t, start, dur) => clamp((t - start) / dur);
+  const easeOut = (x) => 1 - Math.pow(1 - x, 3);
+  const easeInOut = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+  const lerp = (a, b, x) => a + (b - a) * x;
+
+  // 表示区間 [inAt, outAt) に入るときと出るときにフェードし、入るときは下から dy だけ持ち上げる
+  function show(el, t, inAt, outAt, { fade = 0.45, dy = 24, dx = 0 } = {}) {
+    const a = easeOut(prog(t, inAt, fade));
+    const b = outAt == null ? 0 : prog(t, outAt, fade);
+    el.style.opacity = String(a * (1 - b));
+    el.style.transform = `translate(${(1 - a) * dx}px, ${(1 - a) * dy}px)`;
+    el.style.visibility = a * (1 - b) <= 0.001 ? 'hidden' : 'visible';
+  }
+  const typed = (text, t, start, cps = 9) => text.slice(0, Math.max(0, Math.floor((t - start) * cps)));
+
+  function wire(path, t, start, dur) {
+    const len = path.getTotalLength();
+    path.style.strokeDasharray = `${len}`;
+    path.style.strokeDashoffset = String(len * (1 - easeInOut(prog(t, start, dur))));
+  }
+
+  const TARGETS = [
+    { title: '顧客管理アプリに登録', fields: ['会社名', 'ご用件', '返信方法'], done: '登録・担当通知が完了' },
+    { title: 'リードとして登録', fields: ['会社名', '内容', '連絡方法'], done: 'リード登録・担当通知が完了' },
+    { title: 'コンタクトとして登録', fields: ['会社名', '問い合わせ', '連絡方法'], done: 'コンタクト登録・担当通知が完了' },
+    { title: 'シートに1行追加', fields: ['会社名', '用件', '返信方法'], done: '行の追加・担当通知が完了' },
+  ];
+  // ?lock=0〜3 で登録先を1つに固定する（ランサーズのパッケージ用GIF。パッケージごとに対象システムだけを見せる）
+  const LOCK = (() => { const v = new URLSearchParams(location.search).get('lock'); return v == null ? null : Number(v); })();
+  const NAMES = ['kintone', 'Salesforce', 'HubSpot', 'Googleスプレッドシート'];
+  const CAPTIONS = [
+    [0.4, 4.6, 'LINEで届いた問い合わせ、毎回手で書き写していませんか。'],
+    [5.0, 9.3, '和-Nodeが、LINEと業務システムをつなぎます。'],
+    [9.5, 12.9, '届いた内容を確かめてから、決めた項目へ自動で登録。'],
+    [13.1, 16.6, LOCK == null ? 'kintone・Salesforce・HubSpot・スプレッドシートに対応。' : `${NAMES[LOCK]}へ、決めた項目の形で登録します。`],
+    [16.9, 20.2, '登録が済んだら担当者へ通知。転記と対応漏れを減らします。'],
+  ];
+
+  function seek(t) {
+    // 冒頭：紙の色からフェードイン
+    $('stage').style.opacity = String(easeOut(prog(t, 0, 0.4)));
+    show($('brand'), t, 0.1, 20.2, { dy: 0 });
+    show($('sample-note'), t, 0.1, 20.2, { dy: 0 });
+
+    // 1. 手作業（0〜4.8秒）：会話が届き、表へ手で書き写す。漏れと二重入力が出る
+    show($('chat'), t, 0.2, null, { dy: 30 });
+    show($('b1'), t, 0.4, null, { dy: 16 });
+    show($('b2'), t, 0.9, null, { dy: 16 });
+    show($('b3'), t, 1.4, null, { dy: 16 });
+    show($('sheet'), t, 0.6, 4.6, { dy: 30 });
+    const cur = '<span class="cursor"></span>';
+    const blink = Math.floor(t * 2.5) % 2 === 0;
+    const r1a = typed('サンプル商事', t, 1.0), r1b = typed('見積りの相談', t, 1.8);
+    const r2a = typed('山田さま', t, 2.6);
+    const r3a = typed('サンプル商事', t, 3.1), r3b = typed('見積りの相談', t, 3.8);
+    $('s1a').innerHTML = r1a + (t > 1.0 && t < 1.8 && blink ? cur : '');
+    $('s1b').textContent = r1b;
+    $('s2a').innerHTML = r2a + (t > 2.6 && t < 3.1 && blink ? cur : '');
+    $('s3a').innerHTML = r3a + (t > 3.1 && t < 3.8 && blink ? cur : '');
+    $('s3bt').textContent = r3b;
+    show($('f1'), t, 3.2, null, { dy: 0, dx: 12 });
+    show($('f2'), t, 4.0, null, { dy: 0, dx: 12 });
+    $('f1').style.transform += ' translateY(-50%)';
+    $('f2').style.transform += ' translateY(-50%)';
+
+    // 2. つなぐ（5〜9.4秒）：会話を残したまま、中継と登録先を置き、線でつなぐ
+    // 会話は後半で残り2件を薄くし、1件目（見積り）に注目させる
+    const focus = easeOut(prog(t, 8.6, 0.6));
+    $('b2').style.opacity = String(Number($('b2').style.opacity) * (1 - 0.65 * focus));
+    $('b3').style.opacity = String(Number($('b3').style.opacity) * (1 - 0.65 * focus));
+    $('b1').style.background = focus > 0 ? `rgba(31,157,85,${0.12 + 0.1 * focus})` : '';
+    show($('relay'), t, 5.4, null, { dy: 30 });
+    show($('record'), t, 6.3, null, { dy: 30 });
+    wire($('wire1'), t, 5.8, 0.8);
+    wire($('wire2'), t, 6.7, 0.8);
+    $('wires').style.opacity = String(easeOut(prog(t, 5.6, 0.3)));
+
+    // 3. 確かめて登録（9.5〜16.6秒）
+    show($('c1'), t, 10.6, null, { dy: 0, dx: -14 });
+    show($('c2'), t, 11.1, null, { dy: 0, dx: -14 });
+    const p = $('packet');
+    const leg1 = easeInOut(prog(t, 9.7, 0.9)), leg2 = easeInOut(prog(t, 11.6, 0.9));
+    const x = t < 11.6 ? lerp(560, 860, leg1) : lerp(860, 1180, leg2);
+    const y = 478;
+    p.style.left = `${x}px`; p.style.top = `${y}px`;
+    const pin = prog(t, 9.6, 0.25), pout = prog(t, 12.3, 0.2);
+    const atRelay = t > 10.6 && t < 11.6;
+    p.style.opacity = String(clamp(pin - pout) * (atRelay ? 0 : 1));
+    p.style.visibility = Number(p.style.opacity) > 0 ? 'visible' : 'hidden';
+    // 中継に入っている間は、中継の枠を光らせる
+    const glow = t > 10.5 && t < 11.7 ? 1 : 0;
+    $('relay').style.boxShadow = `0 30px 60px -30px rgba(22,79,77,.6), 0 0 0 ${glow * 8}px rgba(159,224,187,.45)`;
+
+    const fill = [['サンプル商事', 12.5], ['見積りの相談', 12.8], ['LINEで返信', 13.1]];
+    ['d1', 'd2', 'd3'].forEach((id, i) => {
+      const el = $(id);
+      const a = easeOut(prog(t, fill[i][1], 0.3));
+      el.textContent = a > 0 ? fill[i][0] : '';
+      el.style.clipPath = `inset(0 ${100 - a * 100}% 0 0)`;
+    });
+    // 登録先の切替：13.7秒から0.95秒ごとに切り替え、最後はスプレッドシートのまま
+    const idx = LOCK != null ? LOCK : t < 13.7 ? 0 : Math.min(3, 1 + Math.floor((t - 13.7) / 0.95));
+    const target = TARGETS[idx];
+    document.querySelectorAll('#tabs span').forEach((s, i) => s.classList.toggle('on', i === idx));
+    $('rec-title').textContent = target.title;
+    ['d1t', 'd2t', 'd3t'].forEach((id, i) => { $(id).textContent = target.fields[i]; });
+    $('status-text').textContent = target.done;
+    show($('status'), t, 13.3, null, { dy: 8 });
+    // 切り替えた瞬間だけ、登録先の枠を軽く光らせる
+    const switchAge = t < 13.7 ? 9 : (t - 13.7) % 0.95;
+    const flash = LOCK == null && idx > 0 && t < 13.7 + 0.95 * 3 + 0.4 ? clamp(1 - switchAge / 0.4) : 0;
+    $('record').style.borderColor = flash > 0 ? `rgba(185,50,45,${0.25 + 0.5 * flash})` : '#cddcd8';
+
+    // 4. 通知（16.9〜20.2秒）
+    show($('notify'), t, 17.0, null, { dy: -30 });
+
+    // 字幕
+    const cap = CAPTIONS.find(([a, b]) => t >= a - 0.01 && t < b + 0.35);
+    const capEl = $('caption');
+    if (cap) {
+      $('caption-text').textContent = cap[2];
+      show(capEl, t, cap[0], cap[1], { fade: 0.3, dy: 10 });
+    } else {
+      capEl.style.opacity = '0';
+      capEl.style.visibility = 'hidden';
+    }
+
+    // 5. 最後の画面（20.2〜24秒）
+    show($('end'), t, 20.2, null, { fade: 0.7, dy: 0 });
+    const endIn = easeOut(prog(t, 20.6, 0.8));
+    $('end').querySelector('h1').style.transform = `translateY(${(1 - endIn) * 20}px)`;
+    $('end').querySelector('.mark').style.width = `${72 * easeOut(prog(t, 20.4, 0.8))}px`;
+  }
+
+  window.seek = seek;
+  window.DURATION = DURATION;
+  window.ready = document.fonts.ready.then(() => document.fonts.load('24px "Material Symbols Rounded"'));
+
+  // 直接開いたときの確認用の再生
+  if (!navigator.webdriver) {
+    const still = new URLSearchParams(location.search).get('still');
+    window.ready.then(() => {
+      if (still != null) { seek(Number(still)); return; }
+      const t0 = performance.now();
+      const loop = (now) => { seek(((now - t0) / 1000) % DURATION); requestAnimationFrame(loop); };
+      requestAnimationFrame(loop);
+    });
+  }
+</script>
+</body>
+</html>
