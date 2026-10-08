@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import MaterialIcon from '../../components/MaterialIcon.astro';
 import LineCaseDemo from '../../components/LineCaseDemo.astro';
 import LineCaseSetup from '../../components/LineCaseSetup.astro';
+import LineCaseSwimlane, { type SwimlaneStep } from '../../components/LineCaseSwimlane.astro';
 import { getLineCase } from '../../data/lineCaseCatalog';
 import { createBreadcrumbSchema, createWebPageSchema, organizationSchema } from '../../data/structuredData';
 
@@ -29,11 +30,11 @@ const specs = [
   ['デモ仕様', 'ブラウザ内完結（外部API未使用）'],
 ];
 
-const flow = [
-  { step: '01', title: 'LINEから問い合わせ受信', desc: '顧客がLINE公式アカウントにメッセージを送信。内容・LINE IDを自動取得。' },
-  { step: '02', title: 'HubSpotにコンタクト登録', desc: 'Webhookでリアルタイム転送。内容・受信時刻が自動入力される。' },
-  { step: '03', title: '担当者が内容を確認', desc: '自動登録されたコンタクトを担当者が確認。重複統合やステージの妥当性を判断する。' },
-  { step: '04', title: 'スコアリング・MA配信連動', desc: '問い合わせ内容に応じてスコアを加算。HubSpotのワークフローと連動してフォローアップを配信。' },
+const flow: SwimlaneStep[] = [
+  { step: '01', lane: 'customer', title: 'LINEから問い合わせ受信', desc: '顧客がLINE公式アカウントにメッセージを送信。内容・LINE IDを自動取得。' },
+  { step: '02', lane: 'auto', title: 'HubSpotにコンタクト登録', desc: 'Webhookでリアルタイム転送。内容・受信時刻が自動入力される。' },
+  { step: '03', lane: 'staff', title: '担当者が内容を確認', desc: '自動登録されたコンタクトを担当者が確認。重複統合やステージの妥当性を判断する。' },
+  { step: '04', lane: 'auto', title: 'スコアリング・MA配信連動', desc: '問い合わせ内容に応じてスコアを加算。HubSpotのワークフローと連動してフォローアップを配信。' },
 ];
 
 const designPoints = [
@@ -67,21 +68,8 @@ const designPoints = [
       </div>
     </section>
 
-    <!-- Flow -->
-    <section class="case-section flow-section">
-      <div class="container">
-        <h2>4ステップで完結する<br/>コンタクト対応フロー。</h2>
-        <div class="flow-grid">
-          {flow.map((item) => (
-            <div class="flow-card">
-              <span class="flow-step">{item.step}</span>
-              <h3>{item.title}</h3>
-              <p>{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    <!-- Flow：役割で分けた流れ図 -->
+    <LineCaseSwimlane config={kase} steps={flow} />
 
     <!-- Design Points -->
     <section class="case-section design-points-section">
@@ -206,13 +194,6 @@ const designPoints = [
   .specs-list dd { margin: 0; font-size: 0.9rem; font-weight: 700; color: var(--text-deep); }
   @media (max-width: 560px) { .specs-list > div { grid-template-columns: 1fr; gap: 8px; } }
 
-  .flow-section { background: rgba(15, 76, 92, 0.03); }
-  .flow-section h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; color: var(--text-deep); margin-bottom: 36px; }
-  .flow-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; position: relative; }
-  .flow-card { padding: 28px 24px; border: 1px solid var(--trust-line); border-radius: 20px; background: #fff; box-shadow: 0 8px 24px rgba(15, 76, 92, 0.05); position: relative; }
-  .flow-step { display: inline-flex; width: 40px; height: 40px; align-items: center; justify-content: center; border-radius: 50%; background: var(--trust); color: #fff; font-size: 0.875rem; font-weight: 900; margin-bottom: 16px; }
-  .flow-card h3 { font-size: 1rem; font-weight: 900; color: var(--text-deep); margin-bottom: 10px; }
-  .flow-card p { font-size: 0.9375rem; color: #666; line-height: 1.8; margin: 0; }
 
   .design-points-section h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; color: var(--text-deep); margin-bottom: 36px; }
   .design-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
@@ -258,13 +239,11 @@ const designPoints = [
 
   @media (max-width: 768px) {
     .case-two-col { grid-template-columns: 1fr; }
-    .flow-grid { grid-template-columns: 1fr 1fr; }
     .design-grid { grid-template-columns: 1fr; }
     .scope-inner { grid-template-columns: 1fr; }
     .scope-cards { grid-template-columns: 1fr; }
     .related-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 480px) {
-    .flow-grid { grid-template-columns: 1fr; }
   }
 </style>

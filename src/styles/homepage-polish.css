@@ -151,8 +151,6 @@
 }
 
 /* 本文も同じ文字・罫線・面の扱いに揃える。 */
-#main.home-refresh .trust-strip { padding-block: 28px; }
-#main.home-refresh .trust-strip strong { font-weight: 700; }
 #main.home-refresh .service-choice,
 #main.home-refresh .scope-col {
   min-width: 0;

@@ -1,0 +1,63 @@
+---
+// デモページ「公開後の運用について」：うまくいかなかったときに、どこへ残り、どう戻るかを示す流れ図。
+// 上の段が通常の流れ、下の段が「登録できなかった」「通知だけ失敗した」ときの分岐。
+// 幅が狭い場所では、分岐を元の手順のすぐ下に差し込んだ縦の流れにする。
+import MaterialIcon from './MaterialIcon.astro';
+interface Props { vendorName: string }
+const { vendorName } = Astro.props;
+const main = [
+  { icon: 'forum', title: 'LINEで受け付け' },
+  { icon: 'inventory_2', title: `${vendorName}へ登録` },
+  { icon: 'notifications_active', title: '担当者へ通知' },
+  { icon: 'task_alt', title: '担当者が確認' },
+];
+const branches = [
+  { at: 1, label: '登録できなかった', steps: ['未処理一覧に残す', '重複の有無を確認してから再登録'], back: '登録をやり直す' },
+  { at: 2, label: '通知だけ失敗した', steps: ['未処理一覧に残す（登録済みのデータは保持）', '通知だけを再実行'], back: '通知をやり直す' },
+];
+---
+<figure class="ops-flow" aria-label="公開後に処理がうまくいかなかったときの流れ">
+  <ol class="of-grid">
+    {main.map((m, i) => (
+      <>
+        <li class="of-main" style={`--col:${i + 1};--row:1`}>
+          <span class="of-icon" aria-hidden="true"><MaterialIcon name={m.icon} /></span>
+          <span class="of-title">{m.title}</span>
+        </li>
+        {branches.filter((b) => b.at === i).map((b) => (
+          <li class="of-branch" style={`--col:${b.at + 1};--row:2`}>
+            <p class="of-branch-label"><MaterialIcon name="error_outline" />{b.label}</p>
+            <ol>{b.steps.map((step) => <li>{step}</li>)}</ol>
+            <p class="of-back"><MaterialIcon name="replay" />{b.back}</p>
+          </li>
+        ))}
+      </>
+    ))}
+  </ol>
+  <figcaption>登録できなかった処理と、通知だけ失敗した処理を分けて未処理一覧へ残します。通知経路が不調でも、一覧から確認できる設計です。</figcaption>
+</figure>
+
+<style>
+  .ops-flow { container-type: inline-size; margin: 24px 0 28px; }
+  .of-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .of-main { position: relative; display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 14px; background: #fff; border: 1px solid var(--trust-line, rgba(15, 76, 92, .18)); font-weight: 800; color: var(--text-deep, #1a1a1a); }
+  .of-icon { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: #e1ecef; color: var(--trust, #0f4c5c); flex-shrink: 0; }
+  .of-icon :global(.material-symbols-rounded) { font-size: 22px; }
+  .of-branch { margin-left: 26px; padding: 14px 16px; border: 2px dashed #e0a59f; border-radius: 14px; background: #fff8f6; }
+  .of-branch-label { display: flex; align-items: center; gap: 6px; margin: 0 0 8px; color: #a8312b; font-weight: 800; font-size: .9375rem; }
+  .of-branch-label :global(.material-symbols-rounded) { font-size: 20px; }
+  .of-branch ol { margin: 0; padding: 0 0 0 1.4em; color: #333; font-size: .9375rem; line-height: 1.8; }
+  .of-back { display: flex; align-items: center; gap: 6px; margin: 8px 0 0; color: var(--trust, #0f4c5c); font-weight: 800; font-size: .875rem; }
+  .of-back :global(.material-symbols-rounded) { font-size: 18px; }
+  .ops-flow figcaption { margin-top: 14px; color: #555; font-size: .9375rem; line-height: 1.8; }
+
+  /* 横並び：上の段に通常の流れを矢印でつなぎ、失敗したときの分岐を真下に置く */
+  @container (min-width: 760px) {
+    .of-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 28px; }
+    .of-main, .of-branch { grid-column: var(--col); grid-row: var(--row); }
+    .of-main::after { content: ""; position: absolute; right: -22px; top: 50%; width: 14px; height: 14px; border-top: 2px solid var(--trust, #0f4c5c); border-right: 2px solid var(--trust, #0f4c5c); transform: translateY(-50%) rotate(45deg); }
+    .of-grid > .of-main:last-of-type::after { display: none; }
+    .of-branch { position: relative; margin: 34px 0 0; }
+    .of-branch::before { content: ""; position: absolute; left: 50%; top: -36px; height: 34px; border-left: 2px dashed #d27d74; }
+  }
+</style>

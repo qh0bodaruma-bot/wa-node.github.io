@@ -7,6 +7,14 @@ import type { LineCaseConfig } from '../data/lineCaseCatalog';
 type SetupConfig = Pick<LineCaseConfig, 'vendorName' | 'setupPoints' | 'fitCases' | 'otherCases' | 'sources'>;
 interface Props { config: SetupConfig }
 const { config } = Astro.props;
+// 「別の方法」の文中に出てくる連携先へ、そのデモページへの道しるべを出す（このページの連携先は除く）
+const otherDemos = [
+  { key: /kintone/, name: 'kintone', path: '/case-studies/line-kintone-demo/' },
+  { key: /Salesforce/, name: 'Salesforce', path: '/case-studies/line-salesforce-demo/' },
+  { key: /HubSpot/, name: 'HubSpot', path: '/case-studies/line-hubspot-demo/' },
+  { key: /スプレッドシート/, name: 'スプレッドシート', path: '/case-studies/line-spreadsheet-demo/' },
+];
+const linksFor = (text: string) => otherDemos.filter((d) => d.key.test(text) && !d.key.test(config.vendorName));
 ---
 <section class="setup-section">
   <div class="setup-container">
@@ -19,7 +27,11 @@ const { config } = Astro.props;
       </div>
       <div>
         <h3><MaterialIcon name="signpost" class="ic-inline" />別の方法も検討したいケース</h3>
-        <ul>{config.otherCases.map((item) => <li>{item}</li>)}</ul>
+        <ul class="setup-other">{config.otherCases.map((item) => (
+          <li>{item}{linksFor(item).length > 0 && (
+            <span class="setup-routes">{linksFor(item).map((d) => <a href={d.path}><MaterialIcon name="arrow_forward" />LINE × {d.name}のデモ</a>)}</span>
+          )}</li>
+        ))}</ul>
       </div>
     </div>
     <details class="setup-details">
@@ -66,6 +78,11 @@ const { config } = Astro.props;
   .setup-fit h3 { font-size: 0.98rem; font-weight: 900; margin: 0 0 12px; color: var(--trust, #0f4c5c); }
   .setup-fit ul { margin: 0; padding-left: 1.2em; }
   .setup-fit li { color: #444; font-size: 0.92rem; line-height: 1.85; margin-bottom: 6px; }
+  .setup-routes { display: flex; flex-wrap: wrap; gap: 6px 10px; margin-top: 6px; }
+  .setup-routes a { display: inline-flex; align-items: center; gap: 4px; min-height: 36px; padding: 0 12px; border: 1px solid #d8c9ac; border-radius: 999px; background: #fff; color: var(--trust, #0f4c5c); font-size: .875rem; font-weight: 800; text-decoration: none; }
+  .setup-routes a:hover { border-color: var(--trust, #0f4c5c); }
+  .setup-routes a:focus-visible { outline: 3px solid var(--trust, #0f4c5c); outline-offset: 2px; }
+  .setup-routes :global(.material-symbols-rounded) { font-size: 18px; }
   .setup-sources { font-size: 0.875rem; color: #666; }
   .setup-sources p { margin: 0 0 6px; }
   .setup-sources ul { margin: 0; padding-left: 1.2em; }
