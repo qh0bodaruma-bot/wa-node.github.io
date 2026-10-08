@@ -118,6 +118,8 @@ const workTargets = ['kintone', 'Salesforce', 'HubSpot'];
 // 事例ページと共有するページ遷移の名前（カードの画像→事例ページの見出し部分、カードの題→事例ページのh1）
 const workSlugs = ['field-report', 'partner-visit', 'seminar-booking'];
 const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', servicePrices.lineHubspot], ['kintone', servicePrices.lineKintone], ['Salesforce', servicePrices.lineSalesforce]] as const;
+// FVの連携先カードから開く、各システムのデモページ
+const connectorDemo: Record<string, string> = { 'Google Sheets': '/case-studies/line-spreadsheet-demo/', HubSpot: '/case-studies/line-hubspot-demo/', kintone: '/case-studies/line-kintone-demo/', Salesforce: '/case-studies/line-salesforce-demo/' };
 // ヒーローのデモで切り替える登録先。fields の順番（会社名・用件・返信方法）は、触れるデモの抽出結果と対応させる。
 interface DemoTarget { name: string; track: string; record: string; fields: [string, string, string]; done: string; link: string; path: string }
 const demoTargets = {
@@ -159,6 +161,11 @@ const targetData = demoTargets.items.map((t) => ({ ...t, href: href(t.path) }));
         <div class="s-actions"><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-link hero-secondary" href="#selected-works">{c.view}<MaterialIcon name="arrow_forward" /></a></div>
         <p class="s-note">{c.assurance}</p>
         </div>
+        <nav class="hero-prices" aria-label={c.connectorsTitle}>
+          <p class="hero-prices-title">{c.connectorsTitle}</p>
+          <ul>{connectors.map(([name, amount]) => <li><a href={href(connectorDemo[name])}><span class="hp-name">{name}</span><span class="hp-price">{startingPrice(amount, lang)}</span><MaterialIcon name="arrow_forward" /></a></li>)}</ul>
+          <p class="hero-prices-note">{labels.tax}</p>
+        </nav>
       </div>
       <div class="hero-demo" data-home-demo data-rules={JSON.stringify(c.rules)} data-targets={JSON.stringify(targetData)} data-target-switched={demoTargets.switched}>
         <div class="demo-title"><span>{c.preview}</span><button type="button" class="demo-toggle" data-demo-toggle aria-pressed="false" data-pause={c.pause} data-play={c.play} hidden><MaterialIcon name="pause" /><span data-demo-toggle-label>{c.pause}</span></button></div>
