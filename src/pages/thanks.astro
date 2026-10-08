@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import MaterialIcon from '../components/MaterialIcon.astro';
+import { consultationMinutes } from '../data/services';
 ---
 
 <BaseLayout noindex={true} title="お問い合わせありがとうございます｜和-Node" description="お問い合わせの送信が完了しました。内容を確認し、担当者より折り返しご連絡いたします。">
@@ -12,9 +13,8 @@ import MaterialIcon from '../components/MaterialIcon.astro';
         </div>
         <h1>送信ありがとうございました。</h1>
         <p class="desc">
-          勇気を出してメッセージを送ってくださり、ありがとうございます。<br/>
-          お預かりした言葉は、代表の高野が大切に拝読させていただきます。<br/>
-          通常2営業日以内に折り返しご連絡いたしますので、どうぞ安心してお待ちください。
+          お問い合わせを受け付けました。<br/>
+          内容を確認し、通常2営業日以内にメールでご連絡します。
         </p>
 
         <div class="assurance-note">
@@ -23,17 +23,17 @@ import MaterialIcon from '../components/MaterialIcon.astro';
         </div>
 
         <div class="thanks-flow">
-          <h3>送信完了後の流れ</h3>
+          <h2>送信完了後の流れ</h2>
           <div class="flow-grid">
             <div class="flow-card">
               <span>STEP 1</span>
               <strong>内容確認・日程調整</strong>
-              <p>通常2営業日以内に、ご希望の日時に基づいてオンライン相談用のリンク（Google Meet等）をお送りします。</p>
+              <p>メールで内容と希望の相談方法・日時を確認します。未定の場合は、返信後に調整します。</p>
             </div>
             <div class="flow-card">
               <span>STEP 2</span>
-              <strong>無料相談（最大60分）</strong>
-              <p>現在のお悩みや課題、想いを丁寧にお聞きし、方向性や解決のステップを一緒に整理します。</p>
+              <strong>無料相談（{consultationMinutes}分）</strong>
+              <p>今の業務と、できるようにしたいことを伺い、必要な連携の範囲を一緒に整理します。</p>
             </div>
             <div class="flow-card">
               <span>STEP 3</span>
@@ -45,8 +45,8 @@ import MaterialIcon from '../components/MaterialIcon.astro';
 
         <div class="next-steps">
           <div class="step-card">
-            <h3>お急ぎの場合は</h3>
-            <p>公式LINEからもお問い合わせいただけます。<br/>よりスムーズなやり取りが可能です。</p>
+            <h2>追加で伝えたいことがある場合</h2>
+            <p>公式LINEから追加のご連絡もいただけます。</p>
             <a href="https://lin.ee/o5QFPwc" target="_blank" rel="noopener" class="line-btn">LINEで追加の連絡をする</a>
           </div>
 
@@ -93,7 +93,7 @@ import MaterialIcon from '../components/MaterialIcon.astro';
     line-height: 1.7;
   }
   .thanks-flow { margin-bottom: 50px; }
-  .thanks-flow h3 {
+  .thanks-flow h2 {
     font-size: 1.25rem;
     font-weight: 800;
     color: #0f4c5c;
@@ -134,14 +134,14 @@ import MaterialIcon from '../components/MaterialIcon.astro';
 
   .next-steps { border-top: 1px solid var(--line); padding-top: 48px; }
   .step-card { background: #fdfaf7; border-radius: 24px; padding: 32px; margin-bottom: 40px; border: 1px solid var(--line); }
-  .step-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; }
+  .step-card h2 { font-size: 1.2rem; font-weight: 800; margin-bottom: 12px; }
   .step-card p { font-size: 0.95rem; color: var(--muted); margin-bottom: 20px; }
 
   .line-btn {
-    display: inline-block; background: #06C755; color: #fff; text-decoration: none;
+    display: inline-block; background: #23754e; color: #fff; text-decoration: none;
     padding: 14px 40px; border-radius: 999px; font-weight: 800; transition: 0.3s;
   }
-  .line-btn:hover { background: #05b34c; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(6, 199, 85, 0.2); }
+  .line-btn:hover { background: #19593b; transform: translateY(-2px); box-shadow: 0 10px 20px rgba(6, 199, 85, 0.2); }
 
   .links { display: flex; gap: 16px; justify-content: center; }
   .btn-home, .btn-works { padding: 16px 32px; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: 0.95rem; transition: 0.3s; }

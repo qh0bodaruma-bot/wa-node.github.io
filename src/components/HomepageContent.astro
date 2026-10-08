@@ -11,12 +11,13 @@ const labels = serviceLabels[lang];
 const c = {
   ja: {
     eyebrow: 'LINE連携構築', title: ['LINEの|問い合わせを', '業務システムへ', '自動で登録。'],
-    lead: 'LINE公式アカウントで受けた申込・問い合わせを、Salesforce・kintone・HubSpot・Googleスプレッドシートへ自動で登録します。転記や二重入力を減らす仕組みを、要件整理から公開まで一緒につくります。連携の先に専用アプリが必要な場合もご相談いただけます。',
-    leadShort: 'LINE公式アカウントの申込・問い合わせを、Salesforce・kintone・HubSpot・Googleスプレッドシートへ自動で登録します。',
-    view: '動く制作例を見る', assurance: '構想段階でも大丈夫です。まずは目的と必要な範囲から。',
-    preview: '自動登録の流れ', sample: 'サンプル画面・外部送信なし', received: 'LINEで問い合わせ', message: '見積りについて相談したいです。', record: '顧客管理に登録', waiting: 'フォームの内容を連携中…', done: '登録・担当通知が完了', fullLine: 'LINE × kintoneのデモへ',
+    lead: 'LINEで受けた申込・問い合わせや現場報告を、今お使いの業務システムへ自動で登録。転記や二重入力を減らす仕組みを、要件整理から運用の引き継ぎまで一緒につくります。',
+    leadShort: 'LINEで受けた申込・問い合わせや現場報告を、自動で登録。転記や二重入力を減らします。',
+    view: '動く制作例を見る', assurance: '連携の仕様が未定でも相談できます。相談後の契約義務はありません。',
+    preview: '自動登録の流れ', sample: 'サンプル画面・外部送信なし', received: 'LINEで問い合わせ', message: '見積りについて相談したいです。', waiting: 'フォームの内容を連携中…',
     fields: [['会社名', 'サンプル商事'], ['ご用件', '見積りの相談'], ['返信方法', 'LINEで返信']], pause: '動きを止める', play: '動きを再開',
     tryLabel: '文章を選ぶか入力すると、登録の流れを試せます。', tryOwn: '自分で入力する', inputLabel: '問い合わせの文章', placeholder: '例：〇〇株式会社です。見積りを相談したいです。', send: '送信して試す',
+    demoScope: '決めた言葉だけを読み取って項目に分ける簡易デモです。実際の連携では、入力方法と登録内容を事前に決めます。',
     tryNote: '入力した文章は送信・保存されません。この画面の中だけで処理します。',
     samples: [['見積りの相談', 'サンプル工業株式会社です。見積りについて相談したいです。お電話でご連絡ください。'], ['予約の変更', '来週の予約を変更したいです。'], ['資料の請求', '資料をメールで送ってほしいです。サンプル商事'] ],
     rules: { company: '[^\\s、。,.！？!?]{1,20}?(?:株式会社|有限会社|合同会社)|(?:株式会社|有限会社|合同会社)\\s*[^\\s、。,.！？!?]{1,20}|[^\\s、。,.！？!?]{1,20}?(?:商事|工業|製作所)', companyTrim: '(?:です|と申します|の)$', purposes: [['見積', '見積りの相談'], ['予約', '予約の変更・確認'], ['資料', '資料の請求'], ['解約|キャンセル', '解約・キャンセル'], ['不具合|エラー|動かない', '不具合の報告']], defaultPurpose: 'その他のお問い合わせ', replies: [['電話', '電話で返信'], ['メール', 'メールで返信']], defaultReply: 'LINEで返信', missing: '未記入（担当者が確認）', doneMissing: '登録完了・会社名の確認を担当に通知', live: '登録しました。' },
@@ -27,28 +28,29 @@ const c = {
     worksTitle: 'あなたの業務に近いデモを試す', worksLead: '自主制作デモを操作した画面です。データは架空で、実在のお客様の導入実績や成果数値ではありません。', allWorks: 'すべての制作例', demo: '自主制作デモ', tryDemo: 'このデモを試す', demoLanguage: '',
     works: [['協力会社の現場報告', '点検結果を一覧にまとめ、未提出と要対応を確認。送信失敗からの再送も試せます。'], ['代理店の訪問報告', '訪問内容と次の予定を共有。商談の段階を変える前に、自社の担当者が確認する流れを試せます。'], ['セミナー予約', '申込みと参加状況を顧客情報につなげます。満席・重複への対応や、参加後のフォローを試せます。']],
     connectorsTitle: '連携先ごとの開始価格', appNote: '連携の先に、現場で使う専用アプリが必要な場合もご相談いただけます（アプリ開発',
-    whyEyebrow: 'AIの時代に、和-Nodeに頼む意味',
-    whyTitle: ['AIで作ったシステムが', '本当に正しいか、見分けられますか？'],
-    whyLead: 'いまは、LINEと業務システムをつなぐ仕組みもAIで形にできます。和-Nodeも、作業を速めるためにAIを使います。ただ、画面が動くことと、業務で安心して使い続けられることは別の話です。',
+    whyEyebrow: '納品前に確認すること',
+    whyTitle: ['業務で使い続けるために、', '確認してからお渡しします。'],
+    whyLead: '登録漏れや二重登録、個人情報の扱い、引き継ぎまで。AIを使って作った部分も含め、運用に必要な点を人が確認します。',
     whyListTitle: '連携が動いたあとに、確かめること',
     whyChecks: [['登録漏れ・二重登録', '通信が途切れたときや、同じ問い合わせが2回届いたときに、記録が消えたり重なったりしないか。'], ['個人情報の扱い', 'LINEから受け取った氏名や連絡先を、必要な範囲だけ、決めた場所に保存しているか。'], ['接続キーと権限', '接続用のキーが画面やコードに露出していないか。必要以上の権限を持たせていないか。'], ['仕様の変更', 'LINEや業務システムの仕様が変わったとき、どこを直せばよいか分かる作りになっているか。'], ['引き継ぎ', '担当者が替わっても、仕組みと運用の手順を追える形で残っているか。']],
     whyClose: 'IT・開発の現場で20年以上積み重ねた知識をもとに、AIが作った部分も含めて、人が一つずつ確認してからお渡しします。',
     approachTitle: '和-Nodeの進め方', approachLead: '技術を選ぶ前に、誰が、いつ、何のために使うのか。いまの業務の流れから、登録する項目と通知の順番を組み立てます。', about: '和-Nodeについて',
     steps: [['整理する', '現状と目的を伺い、必要な機能と優先順位を確認。'], ['見える形にする', '画面・連携範囲・費用・期間を具体化してから着手。'], ['確かめて、届ける', '操作と連携を確認し、公開・運用の引継ぎまで対応。']],
-    scopeTitle: 'ご相談をお受けする範囲', scopeLead: '最初に線引きをお伝えします。合わないご相談に、お互いの時間を使わないためです。',
-    scopeYes: '向いているご相談', scopeNo: 'お受けしていないこと',
+    scopeTitle: 'ご相談をお受けする範囲', scopeLead: '既にお使いの業務システムとLINEをつなぐご相談をお受けします。必要な機能が決まっていなくても、現状から一緒に整理できます。',
+    scopeYes: '向いているご相談', scopeNo: '今回の対応範囲に含まれないこと',
     scopeFor: ['LINEと業務システムを別々に運用していて、転記や二重入力が発生している', 'Salesforce・kintone・HubSpot・Googleスプレッドシートのいずれかを既に使っている', '社内に相談できるIT担当がいない、または手が足りていない'],
-    scopeNot: ['連携先となる業務システムを、まだ導入していない', 'LINE公式アカウントの構築だけを希望している'],
+    scopeNot: ['業務システムの新規導入支援（連携先のシステムを導入してからご相談ください）', 'LINE公式アカウントの設定・構築だけのご依頼'],
     finalTitle: '構想段階からご相談いただけます', finalDesc: '必要なことも、まだ決まっていないことも。そのまま聞かせてください。',
   },
   en: {
     eyebrow: 'LINE integration', title: ['LINE inquiries,', 'registered in your', 'business system.'],
     leadShort: 'Inquiries from your LINE Official Account, registered automatically in Salesforce, kintone, HubSpot or Google Sheets.',
     lead: 'Requests and inquiries received on your LINE Official Account are registered automatically in Salesforce, kintone, HubSpot or Google Sheets. We build the integration with you, from requirements to launch, to reduce copying and double entry. If you also need a dedicated app, we can discuss that too.',
-    view: 'Explore working demos', assurance: 'An early idea is enough. Start with your goals and the scope you need.',
-    preview: 'How automatic registration works', sample: 'Sample interface · no data sent', received: 'A LINE inquiry arrives', message: 'I would like to discuss a quote.', record: 'Add to customer management', waiting: 'Transferring the form details…', done: 'Record added · team notified', fullLine: 'Explore the LINE × kintone demo',
+    view: 'Explore working demos', assurance: 'Your integration requirements can be undecided. There is no obligation to order after the consultation.',
+    preview: 'How automatic registration works', sample: 'Sample interface · no data sent', received: 'A LINE inquiry arrives', message: 'I would like to discuss a quote.', waiting: 'Transferring the form details…',
     fields: [['Company', 'Sample Co.'], ['Request', 'Quote inquiry'], ['Reply via', 'LINE']], pause: 'Pause animation', play: 'Play animation',
     tryLabel: 'Pick a message or type your own to try the flow.', tryOwn: 'Type my own', inputLabel: 'Inquiry message', placeholder: 'e.g. This is Example Ltd. We would like a quote.', send: 'Send to try',
+    demoScope: 'This simple demo matches predefined words to fields. For a real integration, we agree on the input method and records in advance.',
     tryNote: 'Your text is not sent or stored. It is processed only on this screen.',
     samples: [['Request a quote', 'This is Sample Industries Ltd. We would like a quote. Please call us.'], ['Change a booking', 'I would like to change my booking for next week.'], ['Ask for a brochure', 'Please email us your brochure. Sample Trading Co.']],
     rules: { company: '[A-Z][A-Za-z0-9&\\-]*(?:\\s[A-Z][A-Za-z0-9&\\-]*){0,3}\\s(?:Inc|Ltd|LLC|Co|Corp)\\.?', companyTrim: '', purposes: [['quote|estimate', 'Quote inquiry'], ['booking|reservation|appointment', 'Booking change'], ['brochure|document|catalog', 'Brochure request'], ['cancel', 'Cancellation'], ['error|bug|not working', 'Problem report']], defaultPurpose: 'Other inquiry', replies: [['phone|call', 'Phone'], ['e-?mail', 'Email']], defaultReply: 'LINE', missing: 'Missing (team will check)', doneMissing: 'Record added · team asked to confirm company', live: 'Record added. ' },
@@ -59,28 +61,29 @@ const c = {
     worksTitle: 'Try a demo that fits your workflow', worksLead: 'Screenshots of our working demos with fictional data, not client deployments or measured business results.', allWorks: 'All projects & demos', demo: 'Independent demo', tryDemo: 'Try this demo', demoLanguage: 'Demo in Japanese',
     works: [['Contractor field reports', 'Collect inspection results, identify missing reports and issues, and try resending after a failed submission.'], ['Partner visit reports', 'Share visit notes and next steps. Try internal approval before changing an opportunity stage.'], ['Seminar booking', 'Connect bookings and attendance to contact records. Try full sessions, duplicate prevention and follow-up.']],
     connectorsTitle: 'Starting price by integration target', appNote: 'If you also need a dedicated app for your team beyond the integration, we can discuss that too (app development',
-    whyEyebrow: 'Why work with Wa-Node when AI can build it?',
-    whyTitle: ['AI can build a system.', 'Can you tell whether it is really correct?'],
-    whyLead: 'Today, AI can put together an integration between LINE and your business system. Wa-Node uses AI too, to work faster. But a screen that runs is not the same as a system your team can rely on every day.',
+    whyEyebrow: 'Checks before handover',
+    whyTitle: ['Reviewed before delivery,', 'with everyday use in mind.'],
+    whyLead: 'From missing or duplicate records to personal data and handover, we review the points needed for operation, including parts built with AI.',
     whyListTitle: 'What we check once the integration runs',
     whyChecks: [['Missing or duplicate records', 'Records are not lost or duplicated when a connection drops or the same inquiry arrives twice.'], ['Personal data', 'Names and contact details from LINE are stored only as needed, and only where agreed.'], ['Keys and permissions', 'Connection keys are not exposed in screens or code, and no account has more access than it needs.'], ['Specification changes', 'When LINE or your business system changes, it is clear what needs to be updated.'], ['Handover', 'If the person in charge changes, the setup and operating steps can still be followed.']],
     whyClose: 'Drawing on more than 20 years in IT and development, we review every part by hand, including anything AI produced, before handing it over.',
     approachTitle: 'Begin with how people will use it.', approachLead: 'Who uses it, when, and why? We start from your current workflow to decide which fields to register and when to notify.', about: 'About Wa-Node',
     steps: [['Understand', 'Clarify the current situation, goals and priorities.'], ['Make it concrete', 'Agree on screens, scope, cost and timing before work begins.'], ['Check and deliver', 'Verify interactions and integrations, then support launch and handover.']],
-    scopeTitle: 'What fits, and what we do not take on.', scopeLead: 'We state the boundary up front, so neither of us spends time on a poor match.',
+    scopeTitle: 'What fits, and what we do not take on.', scopeLead: 'We connect LINE to a business system you already use. The required features can be clarified during the consultation.',
     scopeYes: 'A good fit', scopeNo: 'Not a fit',
     scopeFor: ['LINE and your business system run separately, causing re-entry and duplicate work', 'You already use Salesforce, kintone, HubSpot or Google Sheets', 'You have no in-house IT contact, or not enough hands'],
     scopeNot: ['The business system to connect to is not in place yet', 'You only want a LINE official account set up'],
     finalTitle: 'Start with “could this work?”', finalDesc: 'Tell us what you know and what you are still figuring out.',
   },
   fr: {
-    eyebrow: 'Intégration LINE', title: ['Demandes LINE,', 'enregistrées dans', 'votre outil métier.'],
+    eyebrow: 'Intégration LINE', title: ['Demandes LINE,', 'enregistrées dans', 'votre outil métier.'],
     leadShort: 'Les demandes reçues sur LINE, enregistrées automatiquement dans Salesforce, kintone, HubSpot ou Google Sheets.',
     lead: 'Les demandes reçues sur votre compte officiel LINE sont enregistrées automatiquement dans Salesforce, kintone, HubSpot ou Google Sheets. Nous construisons l’intégration avec vous, des besoins au lancement, pour limiter les ressaisies. Une application dédiée peut aussi être envisagée si nécessaire.',
-    view: 'Essayer les démonstrations', assurance: 'Une première idée suffit. Partons de vos objectifs et du périmètre nécessaire.',
-    preview: 'Le parcours d’enregistrement', sample: 'Interface fictive · aucun envoi', received: 'Une demande arrive sur LINE', message: 'Je souhaite discuter d’un devis.', record: 'Ajout à la gestion clients', waiting: 'Transfert des informations…', done: 'Fiche créée · équipe informée', fullLine: 'Voir la démo LINE × kintone',
+    view: 'Essayer les démonstrations', assurance: 'Le périmètre peut rester à définir. La consultation ne vous oblige pas à commander.',
+    preview: 'Le parcours d’enregistrement', sample: 'Interface fictive · aucun envoi', received: 'Une demande arrive sur LINE', message: 'Je souhaite discuter d’un devis.', waiting: 'Transfert des informations…',
     fields: [['Entreprise', 'Exemple SA'], ['Objet', 'Devis'], ['Réponse', 'Par LINE']], pause: 'Mettre en pause', play: 'Relancer l’animation',
     tryLabel: 'Choisissez un message ou écrivez le vôtre pour tester le parcours.', tryOwn: 'Écrire mon message', inputLabel: 'Message de la demande', placeholder: 'Ex. : Ici Exemple SARL. Nous souhaitons un devis.', send: 'Envoyer pour tester',
+    demoScope: 'Cette démo associe des mots prédéfinis à des champs. Pour une intégration réelle, le mode de saisie et les données à enregistrer sont définis à l’avance.',
     tryNote: 'Votre texte n’est ni envoyé ni conservé. Il est traité uniquement sur cet écran.',
     samples: [['Demande de devis', 'Bonjour, ici Exemple Industrie SARL. Nous souhaitons un devis. Merci de nous appeler.'], ['Modifier une réservation', 'Je voudrais modifier ma réservation de la semaine prochaine.'], ['Demande de brochure', 'Pouvez-vous nous envoyer votre brochure par e-mail ? Exemple Commerce SA']],
     rules: { company: '[A-ZÀ-Ý][\\wÀ-ÿ&\\-]*(?:\\s[A-ZÀ-Ý][\\wÀ-ÿ&\\-]*){0,3}\\s(?:SARL|SAS|SA|EURL)\\b', companyTrim: '', purposes: [['devis', 'Devis'], ['réservation|rendez-vous', 'Modification de réservation'], ['brochure|documentation|catalogue', 'Demande de brochure'], ['annul|résili', 'Annulation'], ['erreur|bug|panne|fonctionne pas', 'Signalement de problème']], defaultPurpose: 'Autre demande', replies: [['téléphone|appeler|appel', 'Par téléphone'], ['e-?mail|courriel', 'Par e-mail']], defaultReply: 'Par LINE', missing: 'Manquant (vérification par l’équipe)', doneMissing: 'Fiche créée · vérification de l’entreprise demandée', live: 'Fiche créée. ' },
@@ -91,26 +94,57 @@ const c = {
     worksTitle: 'Une démo proche de votre activité', worksLead: 'Captures de nos démos en fonctionnement, avec des données fictives. Il ne s’agit pas de déploiements ni de résultats clients.', allWorks: 'Toutes les créations', demo: 'Démo indépendante', tryDemo: 'Essayer cette démo', demoLanguage: 'Démo en japonais',
     works: [['Rapports d’intervention', 'Rassembler les résultats des contrôles, repérer les rapports manquants et les anomalies, puis tester le renvoi après un échec.'], ['Rapports de visite des partenaires', 'Partager les visites et les prochaines étapes. Tester la validation interne avant de modifier une étape commerciale.'], ['Réservation de séminaire', 'Relier les réservations et la présence aux fiches contacts. Tester les sessions complètes, les doublons et le suivi.']],
     connectorsTitle: 'Prix de départ par système connecté', appNote: 'Si une application dédiée est aussi nécessaire en complément de l’intégration, nous pouvons en discuter (application',
-    whyEyebrow: 'Pourquoi Wa-Node, quand l’IA peut le faire ?',
-    whyTitle: ['Un système créé avec l’IA :', 'savez-vous dire s’il est vraiment correct ?'],
-    whyLead: 'Aujourd’hui, l’IA peut assembler une intégration entre LINE et votre outil métier. Wa-Node utilise aussi l’IA pour travailler plus vite. Mais un écran qui fonctionne n’est pas encore un système fiable au quotidien.',
+    whyEyebrow: 'Vérifications avant livraison',
+    whyTitle: ['Vérifier avant de livrer,', 'en pensant à l’usage quotidien.'],
+    whyLead: 'Enregistrements manquants ou en double, données personnelles, transmission : nous vérifions les points nécessaires au fonctionnement, y compris les éléments créés avec l’IA.',
     whyListTitle: 'Ce que nous vérifions une fois l’intégration en marche',
     whyChecks: [['Fiches perdues ou en double', 'Aucune fiche perdue ou dupliquée si la connexion coupe ou si la même demande arrive deux fois.'], ['Données personnelles', 'Les noms et coordonnées reçus via LINE sont conservés au strict nécessaire, à l’endroit convenu.'], ['Clés et droits d’accès', 'Les clés de connexion ne sont pas exposées dans les écrans ou le code, et aucun compte n’a plus de droits que nécessaire.'], ['Évolutions des services', 'Si LINE ou votre outil métier évolue, on sait clairement quoi mettre à jour.'], ['Transmission', 'Si l’interlocuteur change, le fonctionnement et les procédures restent faciles à suivre.']],
     whyClose: 'Forts de plus de 20 ans d’expérience en informatique et en développement, nous vérifions chaque élément à la main, y compris ce que l’IA a produit, avant de vous le livrer.',
     approachTitle: 'Penser aux usages avant de développer.', approachLead: 'Qui l’utilise, quand et pourquoi ? Nous partons de votre fonctionnement actuel pour définir les champs à enregistrer et le moment des notifications.', about: 'À propos de Wa-Node',
     steps: [['Comprendre', 'Clarifier la situation, les objectifs et les priorités.'], ['Concrétiser', 'Définir les écrans, le périmètre, le coût et les délais avant de commencer.'], ['Vérifier et livrer', 'Vérifier les interactions, puis accompagner le lancement et la prise en main.']],
-    scopeTitle: 'Ce qui correspond, et ce que nous ne prenons pas.', scopeLead: 'Nous posons la limite dès le départ, pour ne pas perdre votre temps ni le nôtre.',
+    scopeTitle: 'Ce qui correspond, et ce que nous ne prenons pas.', scopeLead: 'Nous relions LINE à votre outil métier existant. Les fonctions nécessaires peuvent être précisées lors de la consultation.',
     scopeYes: 'Demandes adaptées', scopeNo: 'Hors périmètre',
     scopeFor: ['LINE et votre système de gestion fonctionnent séparément, avec des ressaisies', 'Vous utilisez déjà Salesforce, kintone, HubSpot ou Google Sheets', 'Vous n’avez pas d’interlocuteur informatique en interne, ou pas assez de moyens'],
     scopeNot: ['Le système de gestion à relier n’est pas encore en place', 'Vous souhaitez uniquement la création d’un compte officiel LINE'],
     finalTitle: 'Commençons par votre idée.', finalDesc: 'Dites-nous ce qui est défini et ce qui reste à préciser.',
   },
 }[lang];
+const audience = {
+  ja: 'Salesforce・kintone・HubSpot・Googleスプレッドシートをご利用中の事業者向けです。',
+  en: 'For businesses already using Salesforce, kintone, HubSpot or Google Sheets.',
+  fr: 'Pour les entreprises utilisant déjà Salesforce, kintone, HubSpot ou Google Sheets.',
+}[lang];
 const workLinks = ['/case-studies/line-field-report-demo/', '/case-studies/line-partner-visit-demo/', '/case-studies/line-seminar-booking-demo/'];
 const workImages = ['usecase-field-report.webp', 'usecase-partner-visit.webp', 'usecase-seminar-booking.webp'];
 const workImageHeights = [597, 569, 796];
 const workTargets = ['kintone', 'Salesforce', 'HubSpot'];
+// 事例ページと共有するページ遷移の名前（カードの画像→事例ページの見出し部分、カードの題→事例ページのh1）
+const workSlugs = ['field-report', 'partner-visit', 'seminar-booking'];
 const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', servicePrices.lineHubspot], ['kintone', servicePrices.lineKintone], ['Salesforce', servicePrices.lineSalesforce]] as const;
+// ヒーローのデモで切り替える登録先。fields の順番（会社名・用件・返信方法）は、触れるデモの抽出結果と対応させる。
+interface DemoTarget { name: string; track: string; record: string; fields: [string, string, string]; done: string; link: string; path: string }
+const demoTargets = {
+  ja: { label: '登録先を選ぶ', switched: '登録先：', items: [
+    { name: 'kintone', track: 'LINE → kintone', record: '顧客管理アプリに登録', fields: ['会社名', 'ご用件', '返信方法'], done: '登録・担当通知が完了', link: 'LINE × kintoneのデモへ', path: '/case-studies/line-kintone-demo/' },
+    { name: 'Salesforce', track: 'LINE → Salesforce', record: 'リードとして登録', fields: ['会社名', '内容', '連絡方法'], done: 'リード登録・担当通知が完了', link: 'LINE × Salesforceのデモへ', path: '/case-studies/line-salesforce-demo/' },
+    { name: 'HubSpot', track: 'LINE → HubSpot', record: 'コンタクトとして登録', fields: ['会社名', '問い合わせ', '連絡方法'], done: 'コンタクト登録・担当通知が完了', link: 'LINE × HubSpotのデモへ', path: '/case-studies/line-hubspot-demo/' },
+    { name: 'スプレッドシート', track: 'LINE → Googleスプレッドシート', record: 'シートに1行追加', fields: ['会社名', '用件', '返信方法'], done: '行の追加・担当通知が完了', link: 'LINE × スプレッドシートのデモへ', path: '/case-studies/line-spreadsheet-demo/' },
+  ] as DemoTarget[] },
+  en: { label: 'Choose a destination', switched: 'Destination: ', items: [
+    { name: 'kintone', track: 'LINE → kintone', record: 'Add a kintone record', fields: ['Company', 'Request', 'Reply via'], done: 'Record added · team notified', link: 'Explore the LINE × kintone demo', path: '/case-studies/line-kintone-demo/' },
+    { name: 'Salesforce', track: 'LINE → Salesforce', record: 'Create a lead', fields: ['Company', 'Description', 'Contact via'], done: 'Lead created · team notified', link: 'Explore the LINE × Salesforce demo', path: '/case-studies/line-salesforce-demo/' },
+    { name: 'HubSpot', track: 'LINE → HubSpot', record: 'Create a contact', fields: ['Company', 'Inquiry', 'Contact via'], done: 'Contact created · team notified', link: 'Explore the LINE × HubSpot demo', path: '/case-studies/line-hubspot-demo/' },
+    { name: 'Google Sheets', track: 'LINE → Google Sheets', record: 'Add a row to the sheet', fields: ['Company', 'Request', 'Reply via'], done: 'Row added · team notified', link: 'Explore the LINE × Google Sheets demo', path: '/case-studies/line-spreadsheet-demo/' },
+  ] as DemoTarget[] },
+  fr: { label: 'Choisir la destination', switched: 'Destination : ', items: [
+    { name: 'kintone', track: 'LINE → kintone', record: 'Ajouter une fiche kintone', fields: ['Entreprise', 'Objet', 'Réponse'], done: 'Fiche créée · équipe informée', link: 'Voir la démo LINE × kintone', path: '/case-studies/line-kintone-demo/' },
+    { name: 'Salesforce', track: 'LINE → Salesforce', record: 'Créer une piste', fields: ['Entreprise', 'Description', 'Contact'], done: 'Piste créée · équipe informée', link: 'Voir la démo LINE × Salesforce', path: '/case-studies/line-salesforce-demo/' },
+    { name: 'HubSpot', track: 'LINE → HubSpot', record: 'Créer un contact', fields: ['Entreprise', 'Demande', 'Contact'], done: 'Contact créé · équipe informée', link: 'Voir la démo LINE × HubSpot', path: '/case-studies/line-hubspot-demo/' },
+    { name: 'Google Sheets', track: 'LINE → Google Sheets', record: 'Ajouter une ligne', fields: ['Entreprise', 'Objet', 'Réponse'], done: 'Ligne ajoutée · équipe informée', link: 'Voir la démo LINE × Google Sheets', path: '/case-studies/line-spreadsheet-demo/' },
+  ] as DemoTarget[] },
+}[lang];
+const firstTarget = demoTargets.items[0];
+const targetData = demoTargets.items.map((t) => ({ ...t, href: href(t.path) }));
 ---
 <main id="main" class="service-page home-refresh" data-glossary-skip data-reveal="off">
   <section class="home-hero">
@@ -118,22 +152,27 @@ const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', ser
       <div class="hero-copy">
         <p class="s-eyebrow">{c.eyebrow}</p>
         <h1 class:list={{ 'is-ja': lang === 'ja' }}>{c.title.map((line, i) => <>{i > 0 && lang !== 'ja' && ' '}<span>{line.split('|').map((phrase) => <span class="phrase">{phrase}</span>)}</span></>)}</h1>
+        <div class="hero-reading">
         <p class="s-intro hero-lead">{c.lead}</p>
         <p class="s-intro hero-lead-short">{c.leadShort}</p>
+        <p class="hero-audience">{audience}</p>
         <div class="s-actions"><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-link hero-secondary" href="#selected-works">{c.view}<MaterialIcon name="arrow_forward" /></a></div>
         <p class="s-note">{c.assurance}</p>
+        </div>
       </div>
-      <div class="hero-demo" data-home-demo data-rules={JSON.stringify(c.rules)}>
+      <div class="hero-demo" data-home-demo data-rules={JSON.stringify(c.rules)} data-targets={JSON.stringify(targetData)} data-target-switched={demoTargets.switched}>
         <div class="demo-title"><span>{c.preview}</span><button type="button" class="demo-toggle" data-demo-toggle aria-pressed="false" data-pause={c.pause} data-play={c.play} hidden><MaterialIcon name="pause" /><span data-demo-toggle-label>{c.pause}</span></button></div>
+        <p class="demo-scope">{c.demoScope}</p>
+        <div class="demo-targets" role="group" aria-label={demoTargets.label} data-demo-targets hidden>{demoTargets.items.map((t, i) => <button type="button" class="demo-target" data-target={i} aria-pressed={i === 0 ? 'true' : 'false'}>{t.name}</button>)}</div>
         <div class="preview-panel">
           <div class="connection-source"><span class="source-icon"><img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" /></span><div class="line-bubble"><strong>{c.received}</strong><p>{c.message}</p></div></div>
-          <div class="connection-track" aria-hidden="true"><MaterialIcon name="south" /><span>LINE → kintone</span></div>
+          <div class="connection-track" aria-hidden="true"><MaterialIcon name="south" /><span data-demo-track>{firstTarget.track}</span></div>
           <div class="connection-target">
-            <div class="target-head"><span class="target-icon"><MaterialIcon name="inventory_2" /></span><strong>{c.record}</strong></div>
-            <dl class="record-fields">{c.fields.map(([term, value], i) => <div class:list={['record-field', `record-field-${i + 1}`]}><dt>{term}</dt><dd>{value}</dd></div>)}</dl>
-            <p class="record-status"><span class="status-wait" aria-hidden="true">{c.waiting}</span><span class="status-done"><MaterialIcon name="check_circle" />{c.done}</span></p>
+            <div class="target-head"><span class="target-icon"><MaterialIcon name="inventory_2" /></span><strong data-demo-record>{firstTarget.record}</strong></div>
+            <dl class="record-fields">{c.fields.map(([, value], i) => <div class:list={['record-field', `record-field-${i + 1}`]}><dt>{firstTarget.fields[i]}</dt><dd>{value}</dd></div>)}</dl>
+            <p class="record-status"><span class="status-wait" aria-hidden="true">{c.waiting}</span><span class="status-done"><MaterialIcon name="check_circle" /><span data-demo-done>{firstTarget.done}</span></span></p>
           </div>
-          <a class="preview-detail" href={href(workLinks[0])}>{c.fullLine} <span aria-hidden="true">↗</span></a>
+          <a class="preview-detail" href={href(firstTarget.path)} data-demo-detail><span data-demo-detail-label>{firstTarget.link}</span> <span aria-hidden="true">↗</span></a>
         </div>
         <div class="demo-try" data-demo-try hidden>
           <p class="demo-try-label" id={`demo-try-label-${lang}`}>{c.tryLabel}</p>
@@ -153,7 +192,6 @@ const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', ser
     </div>
   </section>
   <div class="trust-strip s-shell">{c.trust.map(([value, label]) => <div><strong>{value}</strong><span>{label}</span></div>)}</div>
-  <HomeFlowScroll lang={lang} />
   <section class="s-section" id="services"><div class="s-shell">
     <div class="s-section-head" data-motion-enter="heading" data-motion-id="services-heading"><div><h2>{c.servicesTitle}</h2><p class="s-intro">{c.servicesLead}</p></div></div>
     <div class="s-grid-two service-choices">
@@ -170,12 +208,13 @@ const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', ser
       <div class="scope-col scope-col-no"><h3><MaterialIcon name="do_not_disturb_on"/>{c.scopeNo}</h3><ul>{c.scopeNot.map(t => <li>{t}</li>)}</ul></div>
     </div>
   </div></section>
+  <HomeFlowScroll lang={lang} compact />
   <section class="s-section works-section" id="selected-works"><div class="s-shell">
     <div class="s-section-head" data-motion-enter="heading" data-motion-id="works-heading"><div><h2>{c.worksTitle}</h2></div><a class="s-link" href={href('/works/')}>{c.allWorks}<span aria-hidden="true">→</span></a></div>
     <p class="s-note usecase-disclosure">{c.worksLead}</p>
     <div class="usecase-showcase">{c.works.map(([title,desc],i) => <a class="selected-work" href={href(workLinks[i])}>
-      <div class="work-preview"><img src={`/images/works/captures/${workImages[i]}`} alt="" width="736" height={workImageHeights[i]} loading="lazy" decoding="async" /></div>
-      <div class="work-caption"><span>{c.demo}</span><h3>{title}</h3><p class="work-system">LINE × {workTargets[i]}</p><p>{desc}</p><span class="work-action">{c.tryDemo}<span aria-hidden="true">→</span></span>{c.demoLanguage && <small class="work-language">{c.demoLanguage}</small>}</div>
+      <div class="work-preview" transition:name={`case-${workSlugs[i]}-visual`}><img src={`/images/works/captures/${workImages[i]}`} alt="" width="736" height={workImageHeights[i]} loading="lazy" decoding="async" /></div>
+      <div class="work-caption"><span>{c.demo}</span><h3 transition:name={`case-${workSlugs[i]}-title`}>{title}</h3><p class="work-system">LINE × {workTargets[i]}</p><p>{desc}</p><span class="work-action">{c.tryDemo}<span aria-hidden="true">→</span></span>{c.demoLanguage && <small class="work-language">{c.demoLanguage}</small>}</div>
     </a>)}</div>
   </div></section>
   <section class="s-section why-section" id="why-wa-node" aria-labelledby="why-title"><div class="s-shell">
@@ -192,11 +231,22 @@ const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', ser
   <section class="s-contact-band"><div class="s-shell"><div><h2>{c.finalTitle}</h2><p>{c.finalDesc}</p></div><a class="s-button" href={href('/contact/?source=top')}>{labels.consultation}<MaterialIcon name="arrow_forward"/></a></div></section>
 </main>
 <style>
+.hero-audience{font-size:.9375rem;line-height:1.8;color:var(--ink);margin:0 0 20px;padding-left:12px;border-left:2px solid var(--deep)}
+@media(max-width:820px){.home-refresh .hero-copy{margin-bottom:24px}.home-refresh .hero-lead-short{margin-bottom:12px!important}.home-refresh .hero-audience{font-size:.875rem;margin-bottom:18px}}
 .home-refresh .home-hero{padding:76px 0 56px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%238c6b1f' stroke-width='1.5' stroke-opacity='0.07'%3E%3Ccircle cx='0' cy='0' r='40'/%3E%3Ccircle cx='80' cy='0' r='40'/%3E%3Ccircle cx='0' cy='80' r='40'/%3E%3Ccircle cx='80' cy='80' r='40'/%3E%3Ccircle cx='40' cy='40' r='40'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(135deg,#fdfcf9 0%,#f7f1e6 100%);background-size:80px 80px,auto}.hero-layout{display:grid;grid-template-columns:1.12fr 1fr;gap:64px;align-items:center}.hero-copy h1>span{display:block}.hero-copy h1.is-ja .phrase{display:inline-block;white-space:nowrap}.hero-copy h1.is-ja>span{display:block!important}.hero-copy h1>span:last-child{color:var(--deep)}.hero-demo{min-width:0;background:var(--deep);padding:24px;border-radius:12px;color:#fff;box-shadow:16px 18px 0 #e4e9df}.demo-title{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:32px;margin-bottom:14px;font-size:.8125rem;letter-spacing:.06em}.preview-panel{background:#f7f8f1;color:var(--ink);border-radius:6px;padding:24px 22px}.connection-source,.connection-target{display:flex;align-items:center;gap:12px}.source-icon{display:block;flex-shrink:0;margin:0 2px}.source-icon img{display:block;width:40px;height:auto}.connection-source strong,.connection-target strong{font-size:.875rem}.connection-source p{font-size:.8125rem;margin:3px 0 0;color:var(--quiet)}.connection-track{display:flex;gap:14px;align-items:center;color:#658075;font-size:.75rem;letter-spacing:.1em;padding:16px 0 16px 9px}.target-icon{display:grid;place-items:center;background:#e9e5c6;border-radius:8px;width:42px;height:42px;flex-shrink:0;color:#635828}.connection-target{display:block;padding:14px 16px 12px;background:#ecefe5;border:1px solid #d9dfd1;border-radius:6px}.preview-detail{display:flex;align-items:center;min-height:44px;justify-content:space-between;gap:10px;color:var(--deep);text-decoration:none;font-size:.75rem;font-weight:700;margin-top:18px;padding-top:14px;border-top:1px solid #d5ddcf}.demo-disclosure{text-align:center;font-size:.75rem;color:#d3e3d8;margin:14px 0 0!important}.trust-strip{display:grid;grid-template-columns:repeat(3,1fr);padding:30px 0 36px;gap:24px}.trust-strip>div{border-left:1px solid #d2d6ca;padding-left:24px;display:grid;gap:4px}.trust-strip strong{font-size:1rem;font-weight:600}.trust-strip span{font-size:.75rem;color:var(--quiet)}.service-choice{padding:30px;border:1px solid var(--rule);border-radius:8px;background:#fffefa;display:flex;flex-direction:column}.choice-label{display:flex;gap:12px;align-items:center;color:var(--deep);font-size:.8125rem;font-weight:700;margin-bottom:26px}.choice-label .s-number{margin-right:auto}.service-choice h3{font-size:1.4rem;font-family:'Shippori Mincho',serif}.service-choice>p{font-size:.9375rem;color:var(--quiet);margin-bottom:20px}.service-choice .service-fit{font-size:.75rem;line-height:1.8;border-top:1px solid var(--rule);padding-top:18px;margin-top:auto}.service-choice-foot{display:flex;gap:16px;justify-content:space-between;align-items:center;flex-wrap:wrap}.service-choice-foot strong{font-size:1.35rem}.service-choice-foot a{font-size:.8125rem}.connector-prices dl{margin:18px 0 0;border-top:2px solid var(--deep)}.connector-prices dl>div{display:flex;justify-content:space-between;gap:16px;padding:14px 0;border-bottom:1px solid var(--rule)}.connector-prices dt{font-size:.9375rem;font-weight:600}.connector-prices dd{margin:0;font-weight:700;white-space:nowrap}.app-note{font-size:.9375rem;color:var(--quiet);margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}.app-note .s-link{font-size:.8125rem}.web-option{display:flex;justify-content:space-between;align-items:center;gap:24px;margin-top:26px;padding:24px 0;border-bottom:1px solid var(--rule)}.web-option h3{font-size:1rem;margin-bottom:6px}.web-option p{font-size:.9375rem;color:var(--quiet);margin-bottom:0}.web-option a{font-size:.8125rem;flex-shrink:0}.works-section{background:#f2f3eb}.selected-work{text-decoration:none}.work-preview{aspect-ratio:1.7;background:#e3ece0;display:flex;align-items:center;justify-content:center;gap:16px;position:relative;border-radius:6px;overflow:hidden;border:1px solid #d8dfd1}.work-preview>small{position:absolute;bottom:20px;font-size:.75rem;letter-spacing:.13em;color:#52755e}.mini-line,.mini-crm{display:grid;place-items:center;min-height:60px;min-width:75px;padding:12px;background:white;border-radius:12px;font-size:.9375rem;font-weight:700}.mini-line{background:#23754e;color:#fff}.mini-crm{background:#f0df97;color:#494225}.work-preview img{width:100%;height:100%;object-fit:cover}.work-caption{padding:20px 0 0}.work-caption>span{font-size:.75rem;color:var(--quiet)}.work-caption h3{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:1.06rem;margin:6px 0 10px}.work-caption p{font-size:.8125rem;color:var(--quiet);margin:0}.selected-work:hover .work-caption h3{color:var(--vermillion)}.approach-layout{display:grid;grid-template-columns:1fr 1fr;gap:70px}.approach-steps{list-style:none;margin:0;padding:0}.approach-steps li{display:flex;gap:24px;border-top:1px solid var(--rule);padding:22px 0}.approach-steps h3{font-size:1.06rem;margin-bottom:7px}.approach-steps p{color:var(--quiet);font-size:.9375rem;margin:0}.demo-toggle{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin:-6px -10px -6px 0;padding:0 10px;background:transparent;border:0;border-radius:6px;color:#d3e3d8;font:inherit;font-size:.75rem;letter-spacing:0;cursor:pointer}.demo-toggle:hover{color:#fff;background:rgba(255,255,255,.08)}.demo-toggle:focus-visible{outline:2px solid #fff;outline-offset:2px}.demo-toggle[hidden]{display:none}.demo-toggle :global(.material-symbols-rounded){font-size:18px}.line-bubble{background:#fff;border:1px solid #d9dfd1;border-radius:8px;padding:10px 14px}.target-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}.record-fields{margin:0}.record-field{display:grid;grid-template-columns:6.5em minmax(0,1fr);gap:12px;align-items:baseline;padding:8px 2px;border-top:1px solid #d9dfd1}.record-field dt{color:var(--quiet);font-size:.8125rem}.record-field dd{margin:0;font-size:.875rem;font-weight:600;color:var(--ink)}.record-status{display:grid;margin:4px 0 0!important;padding-top:10px;border-top:1px solid #d9dfd1;font-size:.875rem}.record-status>span{grid-area:1/1;display:flex;align-items:center;gap:8px;min-height:24px}.status-wait{visibility:hidden;color:var(--quiet)}.status-done{color:var(--action,#c7352f);font-weight:700}.status-done :global(.material-symbols-rounded){font-size:20px}.hero-lead-short{display:none}@keyframes hd-source{0%{opacity:0;transform:translateY(10px)}7%,88%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}@keyframes hd-track{0%,9%{opacity:.2}15%,88%{opacity:1}96%,100%{opacity:.2}}@keyframes hd-field-1{0%,18%{opacity:0;clip-path:inset(0 100% 0 0)}26%,88%{opacity:1;clip-path:inset(0 0 0 0)}96%,100%{opacity:0;clip-path:inset(0 0 0 0)}}@keyframes hd-field-2{0%,30%{opacity:0;clip-path:inset(0 100% 0 0)}38%,88%{opacity:1;clip-path:inset(0 0 0 0)}96%,100%{opacity:0;clip-path:inset(0 0 0 0)}}@keyframes hd-field-3{0%,42%{opacity:0;clip-path:inset(0 100% 0 0)}50%,88%{opacity:1;clip-path:inset(0 0 0 0)}96%,100%{opacity:0;clip-path:inset(0 0 0 0)}}@keyframes hd-wait{0%,14%{opacity:0}20%,54%{opacity:1}58%,100%{opacity:0}}@keyframes hd-done{0%,56%{opacity:0;transform:translateY(4px)}62%,88%{opacity:1;transform:none}96%,100%{opacity:0;transform:none}}@keyframes hd-target{0%,56%{border-color:#d9dfd1;box-shadow:0 0 0 0 rgba(199,53,47,0)}62%{border-color:#d9a19c;box-shadow:0 0 0 4px rgba(199,53,47,.16)}74%,88%{border-color:#d9a19c;box-shadow:0 0 0 0 rgba(199,53,47,0)}96%,100%{border-color:#d9dfd1}}.is-playing .connection-source .line-bubble{animation:hd-source 9s ease-out infinite}.is-playing .connection-track{animation:hd-track 9s ease-out infinite}.is-playing .record-field-1 dd{animation:hd-field-1 9s linear infinite}.is-playing .record-field-2 dd{animation:hd-field-2 9s linear infinite}.is-playing .record-field-3 dd{animation:hd-field-3 9s linear infinite}.is-playing .status-wait{visibility:visible;animation:hd-wait 9s ease-out infinite}.is-playing .status-done{animation:hd-done 9s ease-out infinite}.is-playing .connection-target{animation:hd-target 9s ease-out infinite}.is-paused .preview-panel *,.is-playing .preview-panel:hover *,.is-paused .preview-panel,.is-playing .preview-panel:hover{animation-play-state:paused!important}@media(prefers-reduced-motion:reduce){.is-playing .preview-panel *{animation:none!important}.is-playing .status-wait{visibility:hidden}}
 @media(min-width:821px){.hero-copy .s-actions .s-button{padding:12px 16px;font-size:.8125rem}.hero-copy h1{font-size:clamp(2.4rem,3.5vw,3.45rem)}}
 @media(max-width:1000px){.hero-layout{gap:32px}.hero-demo{padding:18px}.preview-panel{padding:18px 16px}.hero-copy h1{font-size:2.6rem}.approach-layout{gap:35px}}
-@media(max-width:820px){.home-refresh .home-hero{padding:20px 0 40px}.hero-layout{grid-template-columns:1fr;gap:0}.hero-copy{display:contents}.hero-copy .s-eyebrow{order:1;margin-bottom:10px}.hero-copy h1{order:2;margin-bottom:14px}.hero-demo{order:3;margin-bottom:16px}.hero-copy .s-actions{order:4}.hero-copy .s-note{order:5;margin-bottom:18px}.hero-lead{display:none}.hero-lead-short{display:block;order:6;margin-bottom:0}.hero-copy h1>span:nth-child(2),.hero-copy h1>span:last-child{display:inline}.hero-copy h1{font-size:clamp(2.2rem,5.8vw,3.2rem)}.hero-demo{width:100%;max-width:520px;margin-inline:auto}.trust-strip{gap:12px}.trust-strip>div{padding-left:14px}.trust-strip strong{font-size:.9375rem}.trust-strip span{font-size:.75rem}.approach-layout{grid-template-columns:1fr}.selected-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px}.work-preview{gap:6px}.mini-line,.mini-crm{min-width:48px;min-height:45px;font-size:.75rem}.work-preview>small{display:none}.work-caption h3{font-size:.9375rem}}
+@media(max-width:820px){.home-refresh .home-hero{padding:20px 0 40px}.hero-layout{grid-template-columns:1fr;gap:0}.hero-copy{display:block}.hero-copy .s-eyebrow{order:1;margin-bottom:10px}.hero-copy h1{order:2;margin-bottom:14px}.hero-demo{order:3;margin-bottom:16px}.hero-copy .s-actions{order:4}.hero-copy .s-note{order:5;margin-bottom:18px}.hero-lead{display:none}.hero-lead-short{display:block;order:6;margin-bottom:0}.hero-copy h1>span:nth-child(2),.hero-copy h1>span:last-child{display:inline}.hero-copy h1{font-size:clamp(2.2rem,5.8vw,3.2rem)}.hero-demo{width:100%;max-width:520px;margin-inline:auto}.trust-strip{gap:12px}.trust-strip>div{padding-left:14px}.trust-strip strong{font-size:.9375rem}.trust-strip span{font-size:.75rem}.approach-layout{grid-template-columns:1fr}.selected-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px}.work-preview{gap:6px}.mini-line,.mini-crm{min-width:48px;min-height:45px;font-size:.75rem}.work-preview>small{display:none}.work-caption h3{font-size:.9375rem}}
 @media(max-width:560px){.hero-copy h1>span{display:inline!important}.hero-copy h1>span:first-child{display:block!important}.hero-copy h1{font-size:2rem}.hero-demo{padding:12px;box-shadow:6px 7px 0 #e4e9df}.demo-title{min-height:28px;margin-bottom:8px;font-size:.75rem}.preview-panel{padding:12px}.line-bubble strong{display:none}.line-bubble{padding:8px 12px}.line-bubble p{margin:0}.connection-track{display:none}.connection-source{margin-bottom:10px}.connection-target{padding:8px 12px 8px}.target-head{margin-bottom:4px}.target-icon{display:none}.record-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.record-field{grid-template-columns:1fr;gap:0;padding:6px 0}.record-field dt{font-size:.75rem}.record-field dd{font-size:.8125rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.record-status{padding-top:6px;font-size:.8125rem}.preview-detail{display:none}.demo-disclosure{margin-top:8px!important}.trust-strip{grid-template-columns:1fr;padding:22px 0;gap:16px}.trust-strip>div{grid-template-columns:1fr 1.2fr;gap:8px}.service-choice{padding:24px}.web-option{align-items:start;flex-direction:column;gap:16px}.selected-grid{grid-template-columns:1fr!important;gap:30px}.work-preview{aspect-ratio:1.8}.mini-line,.mini-crm{min-width:82px;min-height:65px;font-size:.9375rem}.work-preview>small{display:block}.work-caption{padding-top:14px}}
+/* 登録先の切替：4つを1本の枠にまとめ、選択中だけ塗りつぶして区別する */
+.demo-targets{display:flex;gap:4px;margin:0 0 18px;padding:4px;border:1px solid #cddcd8;border-radius:8px;background:#f4f7f5}
+.demo-targets[hidden]{display:none}
+.demo-target{flex:1 1 auto;min-height:40px;padding:0 10px;border:0;border-radius:5px;background:transparent;color:var(--deep);font:inherit;font-size:.8125rem;font-weight:700;white-space:nowrap;cursor:pointer;transition:background-color var(--motion-ui,160ms) ease-out,color var(--motion-ui,160ms) ease-out}
+@media(hover:hover) and (pointer:fine){.demo-target[aria-pressed="false"]:hover{background:#e3ebe7}}
+.demo-target[aria-pressed="true"]{background:var(--deep);color:#fff}
+.demo-target:focus-visible{outline:3px solid #9b4c12;outline-offset:2px}
+@media(max-width:560px){.demo-targets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:12px}.demo-target{min-height:36px;font-size:.75rem}}
+@media(prefers-reduced-motion:reduce){.demo-target{transition:none}}
 .scope-split{align-items:start}
 .scope-col{padding:28px;border:1px solid var(--rule);border-radius:8px;background:#fffefa}
 .scope-col-no{background:#f6f5f0}
@@ -249,7 +299,48 @@ function initHomeDemo() {
     if (label) label.textContent = paused ? toggle.dataset.play! : toggle.dataset.pause!;
     if (icon) icon.textContent = paused ? 'play_arrow' : 'pause';
   });
-  initTry(demo);
+  const rerun = initTry(demo);
+  initTargets(demo, rerun);
+}
+
+// 登録先の切替：見出し・項目名・完了表示・詳しいデモへのリンクを、選んだシステムのものに差し替える。
+// JSが動かない環境では切替ボタンを出さず、最初の登録先（kintone）のまま表示する。
+interface DemoTarget { name: string; track: string; record: string; fields: string[]; done: string; link: string; href: string }
+function initTargets(demo: HTMLElement, rerun: (() => boolean) | undefined) {
+  const group = demo.querySelector<HTMLElement>('[data-demo-targets]');
+  if (!group || !demo.dataset.targets) return;
+  const targets = JSON.parse(demo.dataset.targets) as DemoTarget[];
+  const buttons = [...group.querySelectorAll<HTMLButtonElement>('[data-target]')];
+  const set = (selector: string, text: string) => { const el = demo.querySelector<HTMLElement>(selector); if (el) el.textContent = text; };
+  const terms = [...demo.querySelectorAll<HTMLElement>('.record-field dt')];
+  const detail = demo.querySelector<HTMLAnchorElement>('[data-demo-detail]');
+  const live = demo.querySelector<HTMLElement>('[data-demo-live]');
+  group.hidden = false;
+
+  function select(index: number) {
+    const target = targets[index];
+    if (!target) return;
+    buttons.forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+    set('[data-demo-track]', target.track);
+    set('[data-demo-record]', target.record);
+    terms.forEach((dt, i) => { dt.textContent = target.fields[i] ?? dt.textContent; });
+    demo.dataset.doneText = target.done;
+    // 会社名が読み取れなかった場合の完了表示は、触れるデモ側で差し替えるため、ここでは通常の完了表示だけを入れる
+    if (!demo.classList.contains('is-live')) set('[data-demo-done]', target.done);
+    if (detail) {
+      detail.href = target.href;
+      set('[data-demo-detail-label]', target.link);
+    }
+    // 触れるデモの操作後は、同じ文章で登録をやり直す。自動再生中は最初から再生し直す
+    if (rerun?.()) return;
+    if (demo.classList.contains('is-playing')) {
+      demo.classList.remove('is-playing');
+      void demo.offsetWidth;
+      demo.classList.add('is-playing');
+    }
+    if (live) live.textContent = `${demo.dataset.targetSwitched ?? ''}${target.name}`;
+  }
+  buttons.forEach((button) => button.addEventListener('click', () => select(Number(button.dataset.target))));
 }
 
 // 触れるデモ：選んだ文・入力した文から項目を取り出し、登録までの流れをこの画面の中だけで再生する。
@@ -260,7 +351,7 @@ interface DemoRules {
   replies: [string, string][]; defaultReply: string;
   missing: string; doneMissing: string; live: string;
 }
-function initTry(demo: HTMLElement) {
+function initTry(demo: HTMLElement): (() => boolean) | undefined {
   const panel = demo.querySelector<HTMLElement>('[data-demo-try]');
   if (!panel || !demo.dataset.rules) return;
   const rules = JSON.parse(demo.dataset.rules) as DemoRules;
@@ -270,10 +361,11 @@ function initTry(demo: HTMLElement) {
   const message = demo.querySelector<HTMLElement>('.line-bubble p');
   const fields = [...demo.querySelectorAll<HTMLElement>('.record-field')];
   const status = demo.querySelector<HTMLElement>('.record-status');
-  const done = demo.querySelector<HTMLElement>('.status-done');
+  const done = demo.querySelector<HTMLElement>('[data-demo-done]');
   const live = demo.querySelector<HTMLElement>('[data-demo-live]');
   const toggle = demo.querySelector<HTMLButtonElement>('[data-demo-toggle]');
-  const doneText = done?.lastChild?.textContent ?? '';
+  const initialDone = done?.textContent ?? '';
+  let lastText = '';
   let timers: number[] = [];
   panel.hidden = false;
 
@@ -293,6 +385,7 @@ function initTry(demo: HTMLElement) {
   function run(text: string) {
     const value = text.trim().slice(0, 120);
     if (!value || !message || !status) return;
+    lastText = value;
     timers.forEach((t) => clearTimeout(t));
     timers = [];
     // 自動再生を止め、操作した結果だけを表示する
@@ -308,7 +401,7 @@ function initTry(demo: HTMLElement) {
       const dd = field.querySelector('dd');
       if (dd) dd.textContent = values[i];
     });
-    if (done?.lastChild) done.lastChild.textContent = result.company ? doneText : rules.doneMissing;
+    if (done) done.textContent = result.company ? (demo.dataset.doneText ?? initialDone) : rules.doneMissing;
     const finish = () => {
       status.dataset.state = 'done';
       if (live) live.textContent = `${rules.live}${fields.map((f, i) => `${f.querySelector('dt')?.textContent}: ${values[i]}`).join(' / ')}`;
@@ -337,6 +430,12 @@ function initTry(demo: HTMLElement) {
     event.preventDefault();
     if (input) run(input.value);
   });
+  // 登録先を切り替えたときに、操作済みなら同じ文章で再実行する（実行したら true）
+  return () => {
+    if (!lastText) return false;
+    run(lastText);
+    return true;
+  };
 }
 initHomeDemo();
 document.addEventListener('astro:page-load', initHomeDemo);

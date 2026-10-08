@@ -6,7 +6,7 @@ export default defineConfig({
   site: 'https://www.wa-node.com',
   trailingSlash: 'always',
   output: 'hybrid',
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: 'passthrough' }),
   image: {
     service: passthroughImageService()
   },

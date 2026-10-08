@@ -8,15 +8,15 @@
   .uc-back { display: inline-flex; align-items: center; gap: 6px; color: var(--trust, #0f4c5c); font-size: .875rem; font-weight: 700; text-decoration: none; margin-bottom: 20px; }
   .uc-eyebrow { color: var(--trust, #0f4c5c); font-size: .8125rem; font-weight: 700; letter-spacing: .08em; margin: 0 0 12px; }
   .uc-hero h1 { font-size: clamp(1.375rem, 6.4vw, 2.6rem); line-height: 1.45; margin: 0 0 16px; }
-  /* 見出しはどの幅でも「協力会社の現場報告を、／LINEからkintoneへ。」の2行にそろえる */
-  .uc-hero h1 .ph { display: block; white-space: nowrap; }
+  /* 主題と連携先を分け、文字拡大時には各行の中でも折り返す */
+  .uc-hero h1 .ph { display: block; overflow-wrap: anywhere; }
   .uc-lead { max-width: 44em; line-height: 1.9; color: var(--muted, #524a44); margin: 0 0 24px; }
   .uc-chips { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
   /* 公式アイコンは加工せず、周囲に余白をとって単独で置く */
   .uc-line-mark { display: inline-flex; padding: 10px; background: #fff; border-radius: 8px; }
   /* 原本は1001×1000px。縦横比を変えないよう高さは自動にする */
   .uc-line-icon { width: 40px; height: auto; display: block; }
-  .uc-route { display: inline-flex; align-items: center; gap: 10px; white-space: nowrap; }
+  .uc-route { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 10px; max-width: 100%; }
   .uc-chip { display: inline-flex; align-items: center; min-height: 36px; padding: 4px 14px; border: 1px solid var(--line, #dce5e1); border-radius: 999px; background: #fff; font-size: .875rem; font-weight: 700; }
   .uc-chip-vendor { border-color: #0f4c81; color: #0f4c81; }
   .uc-disclaimer { background: rgba(15, 76, 92, .05); border-bottom: 1px solid var(--line, #dce5e1); }
@@ -75,7 +75,7 @@
   .uc-badge.ng { background: #fbebe6; color: #8b2925; }
   .uc-state-btn { min-height: 32px; padding: 2px 10px; border: 1px solid var(--trust, #0f4c5c); border-radius: 6px; background: #fff; color: var(--trust, #0f4c5c); font: inherit; font-size: .75rem; font-weight: 700; cursor: pointer; white-space: nowrap; }
   .uc-pending { margin: 0; padding-left: 1.2em; font-size: .875rem; line-height: 1.9; }
-  .uc-pending li.is-done { color: #8a948e; text-decoration: line-through; }
+  .uc-pending li.is-done { color: #59665f; text-decoration: line-through; }
   .uc-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .uc-log { margin: 0; padding-left: 1.4em; font-size: .8125rem; line-height: 1.9; color: var(--muted, #524a44); }
   .uc-log li.is-warn { color: #8b2925; font-weight: 700; }
@@ -127,3 +127,12 @@
 .uc-approvals li.uc-empty { border-style: dashed; border-color: var(--line, #dce5e1); background: transparent; color: var(--muted, #524a44); }
 .uc-done-note { font-size: .8125rem; }
 .uc-state-btn:disabled { opacity: .6; cursor: default; border-color: var(--line, #dce5e1); color: #5d6a63; }
+
+/* 概要からデモ・費用へ進め、技術の詳細は必要に応じて開く。 */
+.uc-jumps{display:flex;flex-wrap:wrap;gap:12px 24px;margin-top:20px!important}
+.uc-jumps a{display:inline-flex;align-items:center;min-height:44px;color:var(--trust,#0f4c5c);font-weight:700;text-underline-offset:4px}
+#cost{scroll-margin-top:100px}
+.uc-technical{border:1px solid var(--trust-line,rgba(15,76,92,.18));border-radius:8px;margin:24px 0 48px;background:#fff}
+.uc-technical summary{cursor:pointer;padding:18px 22px;min-height:44px;font-weight:700;color:var(--trust,#0f4c5c);line-height:1.8}
+.uc-technical summary:focus-visible{outline:3px solid var(--trust,#0f4c5c);outline-offset:3px}
+.uc-technical .uc-section{padding-top:24px;padding-bottom:24px}

@@ -379,6 +379,35 @@ html[data-motion="reduce"] [data-motion-enter] {
   transition: width 0.3s ease, opacity 0.3s ease;
 }
 
+/* 事例カード→事例ページの見出し部分。縦横比が違うため、切り抜いて広げる */
+::view-transition-old(case-field-report-visual),
+::view-transition-new(case-field-report-visual),
+::view-transition-old(case-partner-visit-visual),
+::view-transition-new(case-partner-visit-visual),
+::view-transition-old(case-seminar-booking-visual),
+::view-transition-new(case-seminar-booking-visual) {
+  height: 100%;
+  object-fit: cover;
+  overflow: clip;
+}
+::view-transition-group(case-field-report-visual),
+::view-transition-group(case-partner-visit-visual),
+::view-transition-group(case-seminar-booking-visual),
+::view-transition-group(case-field-report-title),
+::view-transition-group(case-partner-visit-title),
+::view-transition-group(case-seminar-booking-title) {
+  animation-duration: .45s;
+  animation-timing-function: cubic-bezier(.2, 0, 0, 1);
+}
+/* 端末の「視差効果を減らす」でも、ページ遷移の動きを止める */
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 /* --- Custom View Transitions Anim --- */
 ::view-transition-old(root) {
   animation: fade-out 0.3s cubic-bezier(0.4, 0, 0.2, 1) both;
