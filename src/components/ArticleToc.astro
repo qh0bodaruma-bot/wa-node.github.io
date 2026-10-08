@@ -41,10 +41,16 @@ function initArticleToc() {
   };
   const observer = new IntersectionObserver(update, { rootMargin: '-100px 0px -60% 0px', threshold: 0 });
   headings.forEach(heading => observer.observe(heading));
+  // なめらかな移動が交差領域の途中で止まっても、表示中の節に現在地を合わせる。
+  let frame = 0;
+  const onScroll = () => {
+    if (!frame) frame = requestAnimationFrame(() => { frame = 0; update(); });
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
   links.forEach(link => link.addEventListener('click', () => mark(link.dataset.headingId!)));
   wide.addEventListener('change', layout);
   layout(); update();
-  document.addEventListener('astro:before-swap', () => { observer.disconnect(); wide.removeEventListener('change', layout); }, { once: true });
+  document.addEventListener('astro:before-swap', () => { observer.disconnect(); wide.removeEventListener('change', layout); document.removeEventListener('scroll', onScroll); cancelAnimationFrame(frame); }, { once: true });
 }
 initArticleToc(); document.addEventListener('astro:page-load', initArticleToc);
 </script>

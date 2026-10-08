@@ -165,7 +165,7 @@ const targetData = demoTargets.items.map((t, i) => ({ ...t, href: href(t.path), 
           <p class="hero-prices-app">{c.appNote} {startingPrice(servicePrices.businessApp, lang)}{lang==='ja'?'）':')'} <a class="s-link" href={href('/pricing/#app')}>{c.scope}<MaterialIcon name="arrow_forward" /></a></p>
         </nav>
       </div>
-      <div class="hero-demo" data-home-demo data-analytics-system="kintone" data-analytics-surface="home" data-rules={JSON.stringify(c.rules)} data-targets={JSON.stringify(targetData)} data-target-switched={demoTargets.switched}>
+      <div class="hero-demo" data-home-demo data-clarity-mask="true" data-analytics-system="kintone" data-analytics-surface="home" data-rules={JSON.stringify(c.rules)} data-targets={JSON.stringify(targetData)} data-target-switched={demoTargets.switched}>
         <div class="demo-title"><span>{c.preview}</span><button type="button" class="demo-toggle" data-demo-toggle aria-pressed="false" data-pause={c.pause} data-play={c.play} data-replay={replayLabel} hidden><MaterialIcon name="pause" /><span data-demo-toggle-label>{c.pause}</span></button></div>
         <p class="demo-scope">{c.demoScope}</p>
         <div class="demo-targets" role="group" aria-label={demoTargets.label} data-demo-targets hidden>{demoTargets.items.map((t, i) => <button type="button" class="demo-target" data-target={i} aria-pressed={i === 0 ? 'true' : 'false'}>{t.name}</button>)}</div>
