@@ -86,9 +86,10 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
       <div class="pl-wrap">
         <h2 class="pl-h2">医療行為の受け入れ</h2>
         <p class="pl-sec-lead">ケアマネジャー・ご家族の方が、ご利用の可否を判断する際の目安です。</p>
+        <p class="pl-table-caption" aria-hidden="true">医療行為ごとの受け入れ可否（横にスクロールできます）</p>
         <div class="pl-compare-table-wrap">
           <table class="pl-compare-table">
-            <caption>医療行為ごとの受け入れ可否（横にスクロールできます）</caption>
+            <caption class="pl-sr-only">医療行為ごとの受け入れ可否（横にスクロールできます）</caption>
             <thead>
               <tr>
                 <th scope="col">項目</th>

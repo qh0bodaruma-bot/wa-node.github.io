@@ -15,7 +15,8 @@ const navEntries = [...services, recruitEntry];
 const activeService = services.find((s) => currentPath.startsWith(s.href));
 const isRecruit = currentPath === routes.recruit;
 const phone = activeService?.id === 'short-stay' ? shortStayTel : activeService?.id === 'housing' || isRecruit ? corp.tel : null;
-const phoneLabel = isRecruit ? '採用' : activeService?.id === 'short-stay' ? 'Ⅲ' : 'Ⅰ・Ⅱ';
+// 初めての人にも何の番号か分かるよう、窓口名で示す（ファーストビューの電話窓口と同じ表記）
+const phoneLabel = isRecruit ? '採用' : activeService?.id === 'short-stay' ? 'ショートステイ（Ⅲ）' : '住まい（Ⅰ・Ⅱ）';
 // 計測用のサービス識別子（どのページのCTAから相談に進んだか）
 const ctaService = isRecruit ? 'recruit' : activeService?.id;
 const contactHref = isRecruit ? `${routes.recruit}#application` : activeService ? `${routes.contact}?service=${activeService.id}` : routes.contact;
@@ -302,9 +303,12 @@ const footNavGroups = [
       frame = 0;
       const rect = block.getBoundingClientRect();
       const vh = window.innerHeight || document.documentElement.clientHeight;
-      const fullyVisible = rect.top >= 0 && rect.bottom <= vh;
+      // 窓口ブロックの下端が画面内に入ったら、その先（フッター最下部まで）は消したままにする。
+      // 「全部見えている間だけ」だと、スマホでフッターのメニューが長いとき、最下部で
+      // ブロックが画面の上へ流れてCTAが戻り、詰めた余白の上で最終行を隠していた。
+      const reached = rect.bottom <= vh;
       const coversViewport = rect.height > vh && rect.top <= 0 && rect.bottom >= vh;
-      cta.classList.toggle('is-away', fullyVisible || coversViewport);
+      cta.classList.toggle('is-away', reached || coversViewport);
     };
     const schedule = () => { if (!frame) frame = requestAnimationFrame(measure); };
 

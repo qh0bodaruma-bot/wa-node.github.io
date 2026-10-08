@@ -1563,7 +1563,17 @@
 .pl-float-cta .pl-btn-tel-no { font-size: 19px; }
 .pl-print-tools { padding-block: 18px; text-align: right; }
 .pl-print-button { padding: 10px 16px; border: 1px solid var(--line); border-radius: var(--radius-sm); background: white; color: var(--ink); font: inherit; cursor: pointer; }
-.pl-compare-table caption { text-align: left; padding: 8px 14px; color: var(--muted); }
+/* 表の見出しは横スクロールの外に置く（表の中に置くと表の幅で1行になり、スマホで途中から見えなくなる）。
+   表の中の caption は読み上げ用に残し、画面には出さない。 */
+.pl-table-caption { margin: 0 0 4px; padding: 0 14px; color: var(--muted); font-size: 0.88rem; }
+.pl-sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+/* 見出しセルは語の途中で折らない（「受け入／れ」「プルメ／リア／Ⅰ」のような折れを防ぐ）。
+   全体に掛かる overflow-wrap: anywhere を打ち消さないと keep-all が効かない。
+   括弧や読点の位置では折れるので、長い項目名でも列が広がりすぎない。 */
+.pl .pl-compare-table th { word-break: keep-all; overflow-wrap: normal; }
 @media (max-width: 1100px) {
   .pl-nav, .pl-head.is-js.is-condensed .pl-nav { display: none; }
   .pl-menu { display: block; }
@@ -1575,7 +1585,8 @@
   .pl-hero-media { height: 260px; }
   .pl-hero-copy { padding: 20px; }
   .pl-hero-lead br { display: none; }
-  .pl-head-inner { padding: 6px 10px; width: calc(100% - 24px); }
+  /* 左はブランド文字が丸い縁に寄って見えないよう、右より広く取る */
+  .pl-head-inner { padding: 6px 10px 6px 18px; width: calc(100% - 24px); }
   .pl-brand-name { font-size: 16px; }
   .pl-brand { gap: 6px; }
   .pl-head-recruit { margin-left: auto; padding: 9px 12px; font-size: 14px; }
