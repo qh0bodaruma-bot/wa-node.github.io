@@ -151,6 +151,7 @@ const fields = [
               </label>
               <button type="submit" class="uc-submit" data-pv-submit disabled>報告を送る</button>
               <div class="uc-form-result" data-pv-result hidden></div>
+              <p class="uc-demo-consult"><a href="/contact/?source=partner_visit_demo&category=line_sf" data-consult-cta data-analytics-system="salesforce" data-analytics-surface="partner_visit">この訪問報告の連携について相談する <span aria-hidden="true">→</span></a></p>
             </form>
           </div>
 
@@ -226,6 +227,7 @@ const fields = [
 </BaseLayout>
 
 <script>
+  import { trackSiteEvent } from '../../scripts/site-analytics';
   type Scenario = 'normal' | 'unknown' | 'quote';
 
   function initPartnerVisitDemo() {
@@ -266,6 +268,7 @@ const fields = [
       result.hidden = false;
       result.className = 'uc-form-result is-ok';
       result.textContent = message;
+      trackSiteEvent('demo_complete', 'salesforce', 'partner_visit');
     };
     const clearEmpty = () => approvals.querySelector('.uc-empty')?.remove();
 

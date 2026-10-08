@@ -58,6 +58,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
               <p class="uc-hint">予約確認・開催前の案内・参加資料の送付は申込みに伴う連絡として扱う想定です。上の希望とは分けて記録します。</p>
               <button type="submit" class="uc-submit" data-sb-submit disabled>申し込む（デモ）</button>
               <div class="uc-form-result" data-sb-result hidden tabindex="-1"><p data-sb-message id="sb-result-message"></p><button type="button" data-sb-waitlist aria-describedby="sb-result-message" hidden>キャンセル待ちを希望する</button></div>
+              <p class="uc-demo-consult"><a href="/contact/?source=seminar_booking_demo&category=line_hubspot" data-consult-cta data-analytics-system="hubspot" data-analytics-surface="seminar_booking">この予約受付の連携について相談する <span aria-hidden="true">→</span></a></p>
             </form>
           </div>
           <div class="uc-system">
@@ -121,6 +122,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
 </style>
 
 <script>
+  import { trackSiteEvent } from '../../scripts/site-analytics';
   type SessionId = 'morning' | 'afternoon';
   type Booking = { state: 'reserved' | 'waiting' | 'attended'; reminder: boolean; followed: boolean };
   // 販促案内の希望は申込みごとではなく顧客ごとに持ち、送る時点の最新の値で判定する
@@ -219,6 +221,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
       } else {
         addLog(`販促案内：${data.marketing ? '希望あり' : '希望なし'}。予約に必要な連絡とは分けて、顧客ごとに記録しました。`);
       }
+      trackSiteEvent('demo_complete', 'hubspot', 'seminar_booking');
       render();
       showResult(full ? 'キャンセル待ちを受け付けました。予約はまだ確定していません。' : '予約を受け付けました。管理側のボタンで、開催前後の対応を試せます。');
     };

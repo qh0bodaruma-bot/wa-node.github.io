@@ -141,6 +141,7 @@ const fields = [
               </label>
               <button type="submit" class="uc-submit" data-fr-submit disabled>報告を送る</button>
               <div class="uc-form-result" data-fr-result hidden></div>
+              <p class="uc-demo-consult"><a href="/contact/?source=field_report_demo&category=line_kintone" data-consult-cta data-analytics-system="kintone" data-analytics-surface="field_report">この現場報告の連携について相談する <span aria-hidden="true">→</span></a></p>
             </form>
           </div>
 
@@ -219,6 +220,7 @@ const fields = [
 </BaseLayout>
 
 <script>
+  import { trackSiteEvent } from '../../scripts/site-analytics';
   type Scenario = 'normal' | 'network' | 'double';
 
   function initFieldReportDemo() {
@@ -348,6 +350,7 @@ const fields = [
       addRow(reportId, report.siteId, report.siteName, report.ng);
       await wait(250);
       addLog(report.ng.length ? '「要対応」があるため、事務所の担当者に通知しました。' : '異常がないため、通知は送っていません。');
+      trackSiteEvent('demo_complete', 'kintone', 'field_report');
       return true;
     };
 

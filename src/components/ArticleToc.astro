@@ -1,0 +1,50 @@
+---
+import type { BlogHeading } from '../library/blogContents';
+interface Props { headings: BlogHeading[] }
+const { headings } = Astro.props;
+---
+<aside class="article-toc" data-article-toc>
+  <details>
+    <summary>この記事の目次</summary>
+    <nav aria-label="この記事の目次">
+      <ol>{headings.map(heading => <li class:list={{ subheading: heading.level === 3 }}><a href={`#${encodeURIComponent(heading.id)}`} data-heading-id={heading.id}>{heading.text}</a></li>)}</ol>
+    </nav>
+  </details>
+</aside>
+<style>
+  .article-toc{align-self:start;min-width:0;padding:0 20px;margin-bottom:28px}
+  details{border:1px solid #cbd8d3;border-radius:8px;background:#fff}
+  summary{padding:16px;font-weight:700;color:#164f4d;cursor:pointer;line-height:1.7}
+  nav{padding:0 12px 12px;max-height:55vh;overflow-y:auto}
+  ol{list-style:none;padding:0;margin:0}li+li{margin-top:4px}
+  a{display:block;padding:10px 12px;border-left:3px solid transparent;color:#526563;font-size:.875rem;line-height:1.6;text-decoration:none;overflow-wrap:anywhere}
+  .subheading a{padding-left:24px;font-size:.8125rem}
+  a[aria-current="location"]{border-color:#164f4d;background:#eaf3f0;color:#164f4d;font-weight:700}
+  a:hover{text-decoration:underline}a:focus-visible,summary:focus-visible{outline:3px solid #9b4c12;outline-offset:2px}
+  @media(min-width:1100px){.article-toc{position:sticky;top:100px;padding:0}nav{max-height:calc(100svh - 190px)}}
+</style>
+<script>
+function initArticleToc() {
+  const root = document.querySelector<HTMLElement>('[data-article-toc]');
+  if (!root || root.dataset.initialized) return;
+  root.dataset.initialized = 'true';
+  const details = root.querySelector('details')!;
+  const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-heading-id]')];
+  const headings = links.map(link => document.getElementById(link.dataset.headingId!)).filter((heading): heading is HTMLElement => !!heading);
+  const wide = matchMedia('(min-width: 1100px)');
+  const layout = () => { details.open = wide.matches; };
+  const mark = (id: string) => links.forEach(link => { if (link.dataset.headingId === id) link.setAttribute('aria-current', 'location'); else link.removeAttribute('aria-current'); });
+  const update = () => {
+    const passed = headings.filter(heading => heading.getBoundingClientRect().top <= 160);
+    const active = passed[passed.length - 1] ?? headings[0];
+    if (active) mark(active.id);
+  };
+  const observer = new IntersectionObserver(update, { rootMargin: '-100px 0px -60% 0px', threshold: 0 });
+  headings.forEach(heading => observer.observe(heading));
+  links.forEach(link => link.addEventListener('click', () => mark(link.dataset.headingId!)));
+  wide.addEventListener('change', layout);
+  layout(); update();
+  document.addEventListener('astro:before-swap', () => { observer.disconnect(); wide.removeEventListener('change', layout); }, { once: true });
+}
+initArticleToc(); document.addEventListener('astro:page-load', initArticleToc);
+</script>

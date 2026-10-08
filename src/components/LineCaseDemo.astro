@@ -6,6 +6,7 @@ import type { LineCaseConfig } from '../data/lineCaseCatalog';
 interface Props { config: LineCaseConfig }
 const { config } = Astro.props;
 const c = config;
+const vendorInk = { kintone: '#0f4c81', salesforce: '#00638a', hubspot: '#9a3e24', sheets: '#12653c' }[c.id];
 ---
 <section class="case-hero lc-hero">
   <div class="hero-badge-row">
@@ -18,7 +19,7 @@ const c = config;
       <span class="lc-line-mark"><img src="/images/brand/line/LINE_Brand_icon.png" alt="LINE" width="40" height="40" /></span>
       <span class="chip-line">LINE公式アカウント</span>
       <MaterialIcon name="sync_alt" />
-      <span class="chip-vendor" style={`border-color:${c.vendorColor};color:${c.vendorColorDark}`}>{c.vendorName}</span>
+      <span class="chip-vendor" style={`border-color:${c.vendorColor};color:${vendorInk}`}>{c.vendorName}</span>
     </div>
   </div>
 </section>
@@ -32,7 +33,7 @@ const c = config;
   </div>
 </section>
 
-<section class="demo-section" id="demo" data-lc-root>
+<section class="demo-section" id="demo" data-lc-root data-analytics-system={c.id} data-analytics-surface="system_demo">
   <div class="container">
     <div class="demo-header">
       <h2>連携の流れを体験する</h2>
@@ -40,10 +41,14 @@ const c = config;
     </div>
 
     <div class="scenario-selector" role="group" aria-label="体験するシナリオを選ぶ">
-      <button type="button" class="scenario-btn is-active" data-scenario="normal">通常の流れ</button>
-      <button type="button" class="scenario-btn" data-scenario="fail_register">登録に失敗した場合</button>
-      <button type="button" class="scenario-btn" data-scenario="fail_notify">通知だけ失敗した場合</button>
+      <button type="button" class="scenario-btn is-active" data-scenario="normal" aria-pressed="true">通常の流れ</button>
+      <button type="button" class="scenario-btn" data-scenario="fail_register" aria-pressed="false">登録に失敗した場合</button>
+      <button type="button" class="scenario-btn" data-scenario="fail_notify" aria-pressed="false">通知だけ失敗した場合</button>
     </div>
+
+    <ol class="demo-progress" aria-label="この問い合わせの処理状況">
+      {['受付', `${c.vendorName}へ登録`, '担当者へ通知', '担当者が確認'].map((title) => <li data-lc-step data-state="waiting"><strong>{title}</strong><span>未処理</span></li>)}
+    </ol>
 
     <div class="demo-stage">
       <div class="demo-panel demo-panel--line">
@@ -79,7 +84,7 @@ const c = config;
         </div>
       </div>
 
-      <div class="demo-panel demo-panel--vendor" style={`--vendor-color:${c.vendorColor}`}>
+      <div class="demo-panel demo-panel--vendor" style={`--vendor-color:${c.vendorColor};--vendor-ink:${vendorInk}`}>
         <div class="demo-panel-header demo-header-vendor">
           <span class="demo-dot"></span>
           <span>{c.vendorName} {c.recordLabel}管理</span>
@@ -99,10 +104,10 @@ const c = config;
           <div class="vendor-tbody" data-lc-tbody>
             {c.seedRecords.map((rec) => (
               <div class="vendor-tr">
-                <span><span class={`v-badge ${rec.badge}`}>{rec.badge === 'done' ? '完了' : '対応中'}</span></span>
-                <span>{rec.content}</span>
-                <span>{rec.time}</span>
-                <span>{rec.assignee}</span>
+                <span><span class="v-label">{c.columns.status}</span><span class={`v-badge ${rec.badge}`}>{rec.badge === 'done' ? '完了' : '対応中'}</span></span>
+                <span><span class="v-label">{c.columns.content}</span>{rec.content}</span>
+                <span><span class="v-label">{c.columns.time}</span>{rec.time}</span>
+                <span><span class="v-label">{c.columns.assignee}</span>{rec.assignee}</span>
               </div>
             ))}
           </div>
@@ -110,13 +115,15 @@ const c = config;
       </div>
     </div>
 
-    <p class="demo-status-bar" role="status" aria-live="polite" data-lc-status>例文を選んで、登録までの流れを試せます。</p>
+    <p class="demo-status-bar" role="status" aria-live="polite" tabindex="-1" data-lc-status>例文を選んで、登録までの流れを試せます。</p>
 
     <div class="demo-actions" data-lc-actions>
       <button type="button" class="demo-action-btn" data-lc-action="retry_register" hidden>{c.recordLabel}の登録を再試行</button>
       <button type="button" class="demo-action-btn" data-lc-action="retry_notify" hidden>担当者への通知を再試行</button>
       <button type="button" class="demo-action-btn demo-action-btn--primary" data-lc-action="confirm" hidden>担当者が内容を確認する</button>
     </div>
+
+    <p class="demo-consult"><a href={`/contact/?source=${c.contactSource}&category=${c.contactCategory}`} data-consult-cta data-analytics-system={c.id} data-analytics-surface="system_demo">この{c.vendorName}連携について相談する <span aria-hidden="true">→</span></a></p>
 
     <div class="demo-controls">
       <button type="button" class="demo-reset-btn" data-lc-reset>
@@ -145,8 +152,9 @@ const c = config;
   assignedBadge: c.assignedBadge,
   autoReply: c.autoReply,
   recordLabel: c.recordLabel,
+  columns: c.columns,
   seedCount: c.seedRecords.length,
-  seedHtml: c.seedRecords.map((rec) => `<div class="vendor-tr"><span><span class="v-badge ${rec.badge}">${rec.badge === 'done' ? '完了' : '対応中'}</span></span><span>${rec.content}</span><span>${rec.time}</span><span>${rec.assignee}</span></div>`).join(''),
+  seedHtml: c.seedRecords.map((rec) => `<div class="vendor-tr"><span><span class="v-label">${c.columns.status}</span><span class="v-badge ${rec.badge}">${rec.badge === 'done' ? '完了' : '対応中'}</span></span><span><span class="v-label">${c.columns.content}</span>${rec.content}</span><span><span class="v-label">${c.columns.time}</span>${rec.time}</span><span><span class="v-label">${c.columns.assignee}</span>${rec.assignee}</span></div>`).join(''),
   initialMessageHtml: `<div class="demo-msg demo-msg--sent"><div class="msg-bubble sent">こんにちは。<br/>${c.vendorName}連携について相談したいのですが。</div><span class="msg-time">10:23</span></div>`,
 }}>
 (function () {
@@ -188,7 +196,7 @@ const c = config;
       timers.delete(id);
       if (current !== runId) return;
       action();
-    }, delay);
+    }, document.documentElement.dataset.motion === 'reduce' || matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : delay);
     timers.add(id);
   }
 
@@ -212,13 +220,32 @@ const c = config;
 
   function setPhase(next) {
     phase = next;
+    root.dataset.phase = next;
     updateActions();
+    const registered = !!tbodyEl.querySelector(`[data-event-id="${eventId}"]`);
+    const states = {
+      idle: ['waiting', 'waiting', 'waiting', 'waiting'],
+      selected: ['waiting', 'waiting', 'waiting', 'waiting'],
+      processing: registered ? ['done', 'done', 'current', 'waiting'] : ['done', 'current', 'waiting', 'waiting'],
+      registered: ['done', 'done', 'current', 'waiting'],
+      failed_register: ['done', 'failed', 'waiting', 'waiting'],
+      failed_notify: ['done', 'done', 'failed', 'waiting'],
+      awaiting_review: ['done', 'done', 'done', 'current'],
+      completed: ['done', 'done', 'done', 'done'],
+    }[next];
+    root.querySelectorAll('[data-lc-step]').forEach((step, i) => {
+      step.dataset.state = states[i];
+      step.querySelector('span').textContent = states[i] === 'current' && i === 3 ? '確認待ち' : { waiting: '未処理', current: '処理中', done: '完了', failed: '再試行が必要' }[states[i]];
+      if (states[i] === 'current' || states[i] === 'failed') step.setAttribute('aria-current', 'step');
+      else step.removeAttribute('aria-current');
+    });
+    if (next === 'completed') root.dispatchEvent(new CustomEvent('wa:demo-complete', { bubbles: true }));
   }
 
   scenarioBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       if (phase === 'processing') return;
-      scenarioBtns.forEach((b) => b.classList.toggle('is-active', b === btn));
+      scenarioBtns.forEach((b) => { b.classList.toggle('is-active', b === btn); b.setAttribute('aria-pressed', String(b === btn)); });
       scenario = btn.dataset.scenario;
     });
   });
@@ -254,7 +281,9 @@ const c = config;
     setStatus('問い合わせを受け付け、登録しています。');
 
     const msgDiv = document.createElement('div');
-    msgDiv.className = 'demo-msg demo-msg--me';
+    root.querySelectorAll('.is-related').forEach((el) => el.classList.remove('is-related'));
+    msgDiv.className = 'demo-msg demo-msg--me is-related';
+    msgDiv.dataset.eventId = String(currentEventId);
     msgDiv.innerHTML = `<div class="msg-bubble me-bubble">${selectedMessage}</div><span class="msg-time">${timeNow()}</span>`;
     messagesEl.appendChild(msgDiv);
     messagesEl.scrollTop = messagesEl.scrollHeight;
@@ -278,11 +307,12 @@ const c = config;
   }
 
   function addRecord(currentEventId) {
-    const shortMsg = selectedMessage.length > 16 ? selectedMessage.slice(0, 16) + '…' : selectedMessage;
+    if (tbodyEl.querySelector(`[data-event-id="${currentEventId}"]`)) return;
     const tr = document.createElement('div');
-    tr.className = 'vendor-tr new-entry';
+    tr.className = 'vendor-tr new-entry is-related';
     tr.dataset.eventId = String(currentEventId);
-    tr.innerHTML = `<span><span class="v-badge new">${newBadge}</span></span><span data-cell="content">${shortMsg}</span><span data-cell="time">${timeNow()}</span><span data-cell="assignee">—</span>`;
+    tr.innerHTML = `<span><span class="v-label">${columns.status}</span><span class="v-badge new">${newBadge}</span></span><span><span class="v-label">${columns.content}</span><span data-cell="content"></span></span><span><span class="v-label">${columns.time}</span>${timeNow()}</span><span><span class="v-label">${columns.assignee}</span><span data-cell="assignee">—</span></span>`;
+    tr.querySelector('[data-cell="content"]').textContent = selectedMessage;
     tbodyEl.insertBefore(tr, tbodyEl.firstChild);
     countEl.textContent = String(tbodyEl.querySelectorAll('.vendor-tr').length);
   }
@@ -325,11 +355,12 @@ const c = config;
     setControlsEnabled(false);
     setPhase('processing');
     setStatus('再登録しています。');
+    statusEl.focus({ preventScroll: true });
     schedule(1000, () => {
       addRecord(eventId);
       setPhase('registered');
       runNotify(eventId);
-      setStatus('再試行が完了しました。同じ問い合わせは追加登録していません。');
+      setStatus('登録が完了しました。担当者へ通知しています。');
     });
   });
 
@@ -338,6 +369,7 @@ const c = config;
     setControlsEnabled(false);
     setPhase('processing');
     setStatus('通知を再試行しています。');
+    statusEl.focus({ preventScroll: true });
     const currentEventId = eventId;
     schedule(1000, () => {
       markRowAssigned(currentEventId);
@@ -363,6 +395,7 @@ const c = config;
     }
     setPhase('completed');
     setStatus(`確認しました。${recordLabel}を確認済みにしました。`);
+    statusEl.focus({ preventScroll: true });
   });
 
   function resetDemo() {
@@ -371,9 +404,8 @@ const c = config;
     selectedMessage = '';
     registerAttempted = false;
     notifyAttempted = false;
-    phase = 'idle';
-    updateActions();
-    scenarioBtns.forEach((b) => b.classList.toggle('is-active', b.dataset.scenario === 'normal'));
+    setPhase('idle');
+    scenarioBtns.forEach((b) => { b.classList.toggle('is-active', b.dataset.scenario === 'normal'); b.setAttribute('aria-pressed', String(b.dataset.scenario === 'normal')); });
     presetBtns.forEach((b) => b.classList.remove('selected'));
     inputEl.textContent = 'メッセージを選択してください';
     inputEl.classList.remove('has-text');
@@ -419,8 +451,8 @@ const c = config;
   .demo-header { text-align: center; margin-bottom: 32px; }
   .demo-header h2 { font-size: clamp(1.55rem, 3vw, 2.2rem); font-weight: 900; color: var(--text-deep); margin-bottom: 12px; }
   .demo-header p { color: #666; line-height: 1.8; }
-  .demo-stage { display: grid; grid-template-columns: 1fr 64px 1fr; gap: 0; align-items: stretch; margin-bottom: 20px; border: 1px solid var(--trust-line); border-radius: 24px; overflow: hidden; box-shadow: var(--card-shadow); background: #fff; }
-  .demo-panel { display: flex; flex-direction: column; min-height: 420px; }
+  .demo-stage { display: grid; grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr); gap: 0; align-items: stretch; margin-bottom: 20px; border: 1px solid var(--trust-line); border-radius: 24px; overflow: hidden; box-shadow: var(--card-shadow); background: #fff; }
+  .demo-panel { display: flex; flex-direction: column; min-height: 420px; min-width: 0; }
   .demo-panel-header { display: flex; align-items: center; gap: 8px; padding: 12px 16px; font-size: 0.875rem; font-weight: 900; color: #fff; }
   .demo-header-line { background: #fff; color: #1a1a1a; border-bottom: 1px solid var(--trust-line); gap: 14px; padding: 12px 14px; line-height: 1.6; }
   /* 公式アイコンは加工せず、動かさず、周囲に余白をとる */
@@ -438,7 +470,7 @@ const c = config;
   .msg-bubble { max-width: 85%; padding: 10px 14px; border-radius: 8px; font-size: 0.9375rem; line-height: 1.65; }
   .msg-bubble.sent, .msg-bubble.received { background: #fff; border: 1px solid #dce5e1; color: #333; }
   .msg-bubble.me-bubble { background: #eef5f2; border: 1px solid #c9dcd4; color: #1a1a1a; }
-  .msg-time { font-size: 0.65rem; color: #999; margin-top: 4px; padding: 0 4px; }
+  .msg-time { font-size: 0.8125rem; color: #526563; margin-top: 4px; padding: 0 4px; }
   .demo-input-area { padding: 12px; background: #fff; border-top: 1px solid #e5e5e5; }
   .demo-input-options { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
   .demo-preset { padding: 6px 12px; border: 1px solid var(--trust); border-radius: 999px; background: #eef5f2; color: var(--trust); font-size: 0.8125rem; font-weight: 800; cursor: pointer; transition: 0.2s; }
@@ -455,7 +487,7 @@ const c = config;
   .connector-arrow { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--trust); font-size: 0.8125rem; font-weight: 900; opacity: 0.5; transform: translateX(0); transition: opacity var(--motion-trace,240ms) ease-out, color var(--motion-trace,240ms) ease-out, transform var(--motion-trace,240ms) var(--motion-ease,ease-out); }
   .connector-arrow.active { opacity: 1; color: var(--trust); transform: translateX(6px); }
   @media (prefers-reduced-motion: reduce) { .connector-arrow { transition: opacity 1ms, color 1ms; transform: none !important; } }
-  .demo-note { text-align: center; font-size: 0.875rem; color: #999; font-weight: 700; }
+  .demo-note { text-align: center; font-size: 0.875rem; color: #526563; font-weight: 500; line-height: 1.8; }
   .demo-reset-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border: 1px solid var(--trust-line); border-radius: 999px; background: #fff; color: #777; font-size: 0.875rem; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
   .demo-reset-btn:hover { border-color: var(--trust); color: var(--trust); }
 
@@ -494,6 +526,30 @@ const c = config;
   .demo-action-btn--primary { border-color: var(--trust); background: var(--trust); color: #fff; }
   .demo-controls { display: flex; justify-content: center; margin-bottom: 12px; }
 
+  [data-lc-root] .demo-input-field { min-width: 0; color: #626b69; border-radius: 14px; overflow-wrap: anywhere; }
+  [data-lc-root] .demo-preset, [data-lc-root] .demo-reset-btn { min-height: 44px; }
+  [data-lc-root] .demo-send-btn { width: 44px; height: 44px; }
+  [data-lc-root] :is(button, a):focus-visible { outline: 3px solid #9b4c12; outline-offset: 3px; }
+  [data-lc-root] .vendor-tr > span { min-width: 0; overflow-wrap: anywhere; }
+  [data-lc-root] .v-badge { font-size: .8125rem; white-space: normal; display: inline-block; }
+  [data-lc-root] .v-badge.new { background: #e0eee7; color: #155c3a; }
+  [data-lc-root] .v-badge.inprogress { background: #fff0d7; color: #804600; }
+  [data-lc-root] .vendor-filter { opacity: 1; color: #526563; }
+  [data-lc-root] .demo-header-vendor { background: var(--vendor-ink); }
+  [data-lc-root] :is(.vendor-toolbar, .vendor-count strong, .vendor-thead, .v-badge.assigned) { color: var(--vendor-ink); }
+  [data-lc-root] .v-label { display: none; }
+  [data-lc-root] .vendor-tr.is-related, [data-lc-root] .is-related .me-bubble { background: #eaf3f0; border-left: 3px solid #23665d; }
+  .demo-progress { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; list-style: none; padding: 0; margin: 0 0 24px; }
+  .demo-progress li { min-width: 0; padding: 12px; border-top: 3px solid #bfcfca; background: #fff; border-radius: 4px; }
+  .demo-progress strong, .demo-progress span { display: block; font-size: .875rem; line-height: 1.6; }
+  .demo-progress span { color: #526563; margin-top: 4px; }
+  .demo-progress [data-state="done"] { border-color: #23665d; background: #eaf3f0; }
+  .demo-progress [data-state="current"] { border-color: #0f4c5c; outline: 2px solid #0f4c5c; outline-offset: -2px; }
+  .demo-progress [data-state="failed"] { border-color: #a8312b; background: #fff3f0; }
+  .demo-progress [data-state="failed"] span { color: #a8312b; font-weight: 700; }
+  .demo-consult { text-align: center; margin: 20px 0; }
+  .demo-consult a { display: inline-flex; align-items: center; justify-content: center; gap: 12px; min-height: 48px; padding: 12px 20px; border-radius: 8px; background: #0f4c5c; color: #fff; font-weight: 700; text-decoration: none; line-height: 1.7; }
+
 
   .ops-section { background: rgba(15,76,92,0.03); }
   .ops-lead { color: #555; line-height: 1.9; max-width: 46em; margin: 0; }
@@ -514,5 +570,12 @@ const c = config;
     .connector-arrow .material-symbols-rounded { transform: rotate(90deg); }
     .connector-arrow.active { transform: translateY(3px); }
     .vendor-thead, .vendor-tr { grid-template-columns: 62px minmax(0, 1fr) 58px 44px; gap: 6px; padding-inline: 12px; }
+  }
+  @media (max-width: 560px) {
+    .demo-progress { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    [data-lc-root] .vendor-thead { display: none; }
+    [data-lc-root] .vendor-tr { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; margin: 10px; padding: 14px; border: 1px solid #dce5e1; border-radius: 8px; }
+    [data-lc-root] .vendor-tr > span:nth-child(2) { grid-column: 1 / -1; grid-row: 1; }
+    [data-lc-root] .v-label { display: block; color: #526563; font-size: .8125rem; margin-bottom: 3px; font-weight: 600; }
   }
 </style>

@@ -21,7 +21,12 @@ export function isReducedMotion(): boolean {
 }
 
 // 端末の設定変更とサイト上の切替の両方を受け取る。登録した関数には現在の判定結果を渡す。
-export function onReducedMotionChange(callback: (reduced: boolean) => void): void {
-  mql.addEventListener('change', () => callback(isReducedMotion()));
-  document.addEventListener(MOTION_CHANGE_EVENT, () => callback(isReducedMotion()));
+export function onReducedMotionChange(callback: (reduced: boolean) => void): () => void {
+  const notify = () => callback(isReducedMotion());
+  mql.addEventListener('change', notify);
+  document.addEventListener(MOTION_CHANGE_EVENT, notify);
+  return () => {
+    mql.removeEventListener('change', notify);
+    document.removeEventListener(MOTION_CHANGE_EVENT, notify);
+  };
 }

@@ -136,3 +136,7 @@
 .uc-technical summary{cursor:pointer;padding:18px 22px;min-height:44px;font-weight:700;color:var(--trust,#0f4c5c);line-height:1.8}
 .uc-technical summary:focus-visible{outline:3px solid var(--trust,#0f4c5c);outline-offset:3px}
 .uc-technical .uc-section{padding-top:24px;padding-bottom:24px}
+/* 操作結果から、試した業務の相談へ進む導線。 */
+.uc-demo-consult { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid #cbd8d3; }
+.uc-demo-consult a { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: #0f4c5c; font-size: .9375rem; font-weight: 700; line-height: 1.8; text-underline-offset: 4px; }
+.uc-demo-consult a:focus-visible { outline: 3px solid #9b4c12; outline-offset: 3px; }
