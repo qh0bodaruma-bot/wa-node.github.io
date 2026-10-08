@@ -38,7 +38,7 @@ const unavailable = lang === 'fr'
  <header class="contact-heading s-shell"><h1>{c.title}</h1><p class="s-intro">{c.lead}</p></header>
  <div class="s-shell contact-layout">
   <section class="contact-form-panel" aria-labelledby="form-title"><div class="contact-form-heading"><h2 id="form-title">{c.formTitle}</h2><span>{labels.consultation}</span><div class="contact-before-input"><p><strong>{c.steps[0][0]}</strong><br/>{c.steps[0][1]}</p><p>{c.reassurance}</p></div></div>
-    {formAvailable ? <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" data-lang={lang} data-thanks={href('/thanks/')} data-error={c.error}>
+    {formAvailable ? <form action="https://formspree.io/f/xojrldrq" method="POST" class="contact-form" data-clarity-mask="true" data-lang={lang} data-thanks={href('/thanks/')} data-error={c.error}>
      <input type="hidden" name="_next" value={new URL(href('/thanks/'),Astro.url).href}/><input type="hidden" name="legal_version" value="2026-09-13"/><input type="hidden" id="landing_url" name="landing_url" value=""/><input type="hidden" id="referrer_url" name="referrer_url" value=""/><input type="hidden" id="seen_source" name="seen_source" value=""/>
     <div class="contact-fields-two">
      <div class="form-group"><label for="name">{c.name}<span class="field-required">{c.required}</span></label><input type="text" id="name" name="name" autocomplete="name" placeholder={c.nameExample} required maxlength="200"/></div>
