@@ -26,10 +26,17 @@
 #main.home-refresh .home-hero .hero-layout {
   grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
   gap: clamp(32px, 5vw, 72px);
-  align-items: center;
+  align-items: start;
 }
 
 #main.home-refresh .home-hero .hero-copy { min-width: 0; }
+/* PC：見出しの上端を右のデモ枠の上端にそろえる。小見出し（LINE連携構築）は見出しの上の余白に置く */
+@media (min-width: 821px) {
+  #main.home-refresh .home-hero .hero-copy { position: relative; }
+  #main.home-refresh .home-hero .hero-copy .s-eyebrow { position: absolute; left: 0; bottom: 100%; margin: 0 0 14px; }
+  /* 行間の上半分を差し引き、文字の上端を枠の上端に合わせる */
+  #main.home-refresh .home-hero .hero-copy h1 { margin-top: calc((1em - 1lh) / 2); }
+}
 #main.home-refresh .home-hero .hero-reading {
   padding: 20px;
   background: #fff;
