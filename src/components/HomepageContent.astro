@@ -1,7 +1,7 @@
 ---
 import MaterialIcon from './MaterialIcon.astro';
 import HomeFlowScroll from './HomeFlowScroll.astro';
-import { localizedPath, servicePrices, startingPrice, serviceLabels, type SiteLanguage } from '../data/services';
+import { localizedPath, servicePrices, startingPrice, serviceLabels, lineTierText, type SiteLanguage } from '../data/services';
 import '../styles/service-pages.css';
 import '../styles/homepage-polish.css';
 interface Props { lang?: SiteLanguage }
@@ -160,7 +160,7 @@ const targetData = demoTargets.items.map((t, i) => ({ ...t, href: href(t.path), 
         </div>
         <nav class="hero-prices" aria-label={c.connectorsTitle}>
           <p class="hero-prices-title">{c.connectorsTitle}</p>
-          <ul>{connectors.map(([name, amount]) => <li><a href={href(connectorDemo[name])}><span class="hp-name">{name}</span><span class="hp-price work-open">{startingPrice(amount, lang)}<MaterialIcon name="arrow_forward" /></span></a></li>)}</ul>
+          <ul>{connectors.map(([name, amount]) => <li><a href={href(connectorDemo[name])}><span class="hp-name">{name}{name==='Google Sheets'&&<span class="hp-badge">{lineTierText[lang].badge}</span>}</span><span class="hp-price work-open">{startingPrice(amount, lang)}<MaterialIcon name="arrow_forward" /></span></a></li>)}</ul>
           <p class="hero-prices-note">{labels.tax}</p>
           <p class="hero-prices-app">{c.appNote} {startingPrice(servicePrices.businessApp, lang)}{lang==='ja'?'）':')'} <a class="s-link" href={href('/pricing/#app')}>{c.scope}<MaterialIcon name="arrow_forward" /></a></p>
         </nav>

@@ -44,6 +44,8 @@
 #main.home-refresh .home-hero .hero-prices ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
 #main.home-refresh .home-hero .hero-prices li > a { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; color: var(--ink); text-decoration: none; transition: border-color var(--motion-ui, 160ms) ease-out, background-color var(--motion-ui, 160ms) ease-out; }
 #main.home-refresh .home-hero .hero-prices .hp-name { color: var(--quiet); font-size: .875rem; font-weight: 600; }
+#main.home-refresh .home-hero .hero-prices .hp-name { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
+#main.home-refresh .home-hero .hero-prices .hp-badge { padding: 1px 8px; border-radius: 999px; background: #b9322d; color: #fff; font-size: .75rem; font-weight: 700; }
 #main.home-refresh .home-hero .hero-prices .hp-price { display: inline-flex; align-items: center; gap: 8px; font-size: 1.2rem; font-weight: 700; line-height: 1.5; }
 #main.home-refresh .home-hero .hero-prices .hp-price .material-symbols-rounded { color: var(--deep); font-size: 20px; }
 @media (hover: hover) and (pointer: fine) {
@@ -64,10 +66,11 @@
 @media (prefers-reduced-motion: reduce) {
   #main.home-refresh .home-hero .hero-prices li > a { transition: none; }
 }
+/* 説明文の枠は淡い青緑で塗り、白地の価格カード（押せるリンク）と見分けられるようにする */
 #main.home-refresh .home-hero .hero-reading {
   padding: 20px;
-  background: #fff;
-  border: 1px solid var(--rule);
+  background: #eaf3f0;
+  border: 1px solid #c6dbd5;
   border-radius: 8px;
 }
 #main.home-refresh .home-hero .hero-reading > :first-child { margin-top: 0; }
