@@ -1,6 +1,7 @@
 ---
 import t from '../i18n/translations.json';
 import { MULTILANG_PAGES } from '../i18n/navigation';
+import LanguageSwitcher from './LanguageSwitcher.astro';
 
 interface Props {
   lang?: 'ja' | 'en' | 'fr';
@@ -151,6 +152,7 @@ const copy = {
         <img src="/images/security-action-one-star.webp" alt="SECURITY ACTION 一つ星" width="160" height="160" loading="lazy" decoding="async">
         <span>{copy.securityNote}</span>
       </a>
+      <div class="footer-lang"><LanguageSwitcher lang={lang} variant="links" /></div>
       <button type="button" class="footer-motion" data-motion-toggle aria-pressed="false">
         <span class="footer-motion-switch" aria-hidden="true"></span>
         <span>{lang === 'ja' ? '動きを控えめに' : lang === 'en' ? 'Less motion' : 'Moins d’animations'}</span>
@@ -414,6 +416,7 @@ const copy = {
     text-decoration: none;
   }
   .footer-badge:hover span { color: #fff; }
+  .footer-lang { margin-left: auto; color: var(--footer-muted); }
   .footer-badge img {
     /* 320x320の正方形バッジ。flex内では width:auto が0に潰れるため実寸で指定する */
     width: 52px;
@@ -494,6 +497,7 @@ const copy = {
       text-align: center;
     }
     .footer-motion { margin-left: 0; }
+    .footer-lang { margin-left: 0; }
   }
   @media (max-width: 480px) {
     .footer-grid {

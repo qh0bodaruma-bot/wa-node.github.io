@@ -42,27 +42,27 @@
 #main.home-refresh .home-hero .hero-prices { margin-top: 28px; }
 #main.home-refresh .home-hero .hero-prices-title { margin: 0 0 10px; color: var(--deep); font-size: .875rem; font-weight: 700; letter-spacing: .04em; }
 #main.home-refresh .home-hero .hero-prices ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-#main.home-refresh .home-hero .hero-prices a { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto auto; column-gap: 8px; align-items: center; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; color: var(--ink); text-decoration: none; transition: border-color var(--motion-ui, 160ms) ease-out, background-color var(--motion-ui, 160ms) ease-out; }
-#main.home-refresh .home-hero .hero-prices .hp-name { grid-column: 1; color: var(--quiet); font-size: .875rem; font-weight: 600; }
-#main.home-refresh .home-hero .hero-prices .hp-price { grid-column: 1; font-size: 1.2rem; font-weight: 700; line-height: 1.5; }
-#main.home-refresh .home-hero .hero-prices a .material-symbols-rounded { grid-column: 2; grid-row: 1 / 3; color: var(--deep); font-size: 20px; }
+#main.home-refresh .home-hero .hero-prices li > a { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; color: var(--ink); text-decoration: none; transition: border-color var(--motion-ui, 160ms) ease-out, background-color var(--motion-ui, 160ms) ease-out; }
+#main.home-refresh .home-hero .hero-prices .hp-name { color: var(--quiet); font-size: .875rem; font-weight: 600; }
+#main.home-refresh .home-hero .hero-prices .hp-price { display: inline-flex; align-items: center; gap: 8px; font-size: 1.2rem; font-weight: 700; line-height: 1.5; }
+#main.home-refresh .home-hero .hero-prices .hp-price .material-symbols-rounded { color: var(--deep); font-size: 20px; }
 @media (hover: hover) and (pointer: fine) {
-  #main.home-refresh .home-hero .hero-prices a:hover { border-color: var(--deep); background: #f4f8f6; }
+  #main.home-refresh .home-hero .hero-prices li > a:hover { border-color: var(--deep); background: #f4f8f6; }
 }
-#main.home-refresh .home-hero .hero-prices a:focus-visible { outline: 3px solid #9b4c12; outline-offset: 2px; }
+#main.home-refresh .home-hero .hero-prices li > a:focus-visible { outline: 3px solid #9b4c12; outline-offset: 2px; }
 #main.home-refresh .home-hero .hero-prices-note { margin: 10px 0 0; color: var(--quiet); font-size: .8125rem; line-height: 1.7; }
 #main.home-refresh .home-hero .hero-prices-app { margin: 8px 0 0; color: var(--quiet); font-size: .875rem; line-height: 1.8; }
-#main.home-refresh .home-hero .hero-prices-app a { display: inline-flex; align-items: center; gap: 4px; min-height: 44px; color: var(--deep); font-weight: 700; text-decoration: underline; text-decoration-color: #abbfb8; text-underline-offset: 5px; }
+#main.home-refresh .home-hero .hero-prices-app a { gap: 6px; font-size: .875rem; }
 #main.home-refresh .home-hero .hero-prices-app a .material-symbols-rounded { font-size: 18px; }
 /* スマホ：FVの下の料金セクションをなくしたため、価格カードはスマホでも出す。カードの余白と文字を少し詰める */
 @media (max-width: 820px) {
   #main.home-refresh .home-hero .hero-prices { margin: 20px 0 24px; }
-  #main.home-refresh .home-hero .hero-prices a { padding: 12px; }
+  #main.home-refresh .home-hero .hero-prices li > a { padding: 12px; }
   #main.home-refresh .home-hero .hero-prices .hp-name { font-size: .8125rem; }
   #main.home-refresh .home-hero .hero-prices .hp-price { font-size: 1.05rem; }
 }
 @media (prefers-reduced-motion: reduce) {
-  #main.home-refresh .home-hero .hero-prices a { transition: none; }
+  #main.home-refresh .home-hero .hero-prices li > a { transition: none; }
 }
 #main.home-refresh .home-hero .hero-reading {
   padding: 20px;
