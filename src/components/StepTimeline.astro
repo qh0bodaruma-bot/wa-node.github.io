@@ -1,0 +1,69 @@
+---
+// 手順を1本の線でつなぐ流れ図。相談ページの「送信したあとは」と、料金ページの「お見積りまで」で共用する。
+// 置き場所の幅で向きを切り替える（コンテナクエリ）。狭い場所・非対応ブラウザでは縦に並べる。
+// bracket で「ご依頼の前」などの区間をくくり、optional の手順は点線で「任意」と分かるようにする。
+import MaterialIcon from './MaterialIcon.astro';
+export interface TimelineStep { title: string; desc: string; icon: string; badge?: string; optional?: boolean; current?: string }
+interface Props {
+  steps: TimelineStep[];
+  bracket?: { from: number; to: number; label: string };
+  label: string;
+}
+const { steps, bracket, label } = Astro.props;
+const inBracket = (i: number) => !!bracket && i >= bracket.from && i <= bracket.to;
+---
+<figure class="step-timeline" style={`--steps:${steps.length}`} aria-label={label}>
+  {bracket && <figcaption class="st-bracket"><span style={`grid-column:${bracket.from + 1} / ${bracket.to + 2}`}>{bracket.label}</span></figcaption>}
+  <ol class="st-list">
+    {steps.map((step, i) => (
+      <li class:list={['st-step', { 'is-optional': step.optional, 'is-bracketed': inBracket(i), 'next-optional': steps[i + 1]?.optional, 'bracket-end': bracket && i === bracket.to }]}>
+        <span class="st-node" aria-hidden="true"><MaterialIcon name={step.icon} /></span>
+        <div class="st-body">
+          {step.current && <p class="st-current">{step.current}</p>}
+          <h3>{step.title}{step.badge && <span class="st-badge">{step.badge}</span>}</h3>
+          <p>{step.desc}</p>
+        </div>
+      </li>
+    ))}
+  </ol>
+</figure>
+
+<style>
+  .step-timeline { container-type: inline-size; margin: 24px 0 0; }
+  .st-list { list-style: none; margin: 0; padding: 0; }
+
+  /* 縦並び（既定）：左の線でつなぎ、くくった区間は淡い面で示す */
+  .st-step { position: relative; display: grid; grid-template-columns: 44px minmax(0, 1fr); align-content: start; gap: 14px; padding: 0 0 22px; }
+  .st-step:not(:last-child)::after { content: ""; position: absolute; left: 21px; top: 46px; bottom: 2px; width: 2px; background: var(--deep); }
+  .st-step.next-optional::after { background: repeating-linear-gradient(to bottom, var(--deep) 0 5px, transparent 5px 10px); }
+  .st-node { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: var(--deep); color: #fff; }
+  .st-node :global(.material-symbols-rounded) { font-size: 22px; }
+  .is-optional .st-node { background: #fff; color: var(--deep); border: 2px dashed var(--deep); }
+  .st-body h3 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 9px 0 4px; font-size: .95rem; line-height: 1.6; }
+  .st-body p { margin: 0; color: var(--quiet); font-size: .875rem; line-height: 1.8; }
+  .st-body .st-current { display: inline-block; margin: 0 0 2px; padding: 1px 8px; border-radius: 999px; background: var(--vermillion); color: #fff; font-size: .8125rem; font-weight: 700; }
+  .st-badge { padding: 1px 8px; border-radius: 4px; background: #f5e8e3; color: #923528; font-size: .8125rem; font-weight: 700; }
+  .is-optional .st-body h3 { color: var(--quiet); }
+
+  .st-bracket { display: block; margin: 0 0 14px; }
+  .st-bracket span { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px; border-radius: 6px; background: #eaf0e5; color: var(--deep); font-size: .875rem; font-weight: 700; line-height: 1.6; }
+  .st-bracket span::before { content: ""; width: 10px; height: 10px; border-radius: 2px; background: #cfe0cf; border: 1px solid #a9c4ad; flex-shrink: 0; }
+  .is-bracketed { background: linear-gradient(to right, transparent 0 21px, #eaf0e5 21px); border-radius: 0 6px 6px 0; }
+  .is-bracketed .st-body { padding: 0 12px 4px 0; }
+
+  /* 横並び：幅に余裕がある場所では、手順を横一列に並べ、区間は上の括弧で示す */
+  @container (min-width: 720px) {
+    .st-bracket { display: grid; grid-template-columns: repeat(var(--steps), minmax(0, 1fr)); gap: 0 20px; margin-bottom: 12px; }
+    .st-bracket span { position: relative; justify-content: center; padding: 6px 12px 12px; background: none; border-top: 2px solid #a9c4ad; border-inline: 2px solid #a9c4ad; border-radius: 8px 8px 0 0; }
+    .st-bracket span::before { display: none; }
+    .st-list { display: grid; grid-template-columns: repeat(var(--steps), minmax(0, 1fr)); gap: 0 20px; }
+    .st-step { grid-template-columns: 1fr; align-content: start; gap: 12px; padding: 0; }
+    /* 「いまここ」は線の上、印の右に置き、見出しの高さをそろえる */
+    .st-body .st-current { position: absolute; top: 10px; left: 54px; z-index: 1; }
+    .st-step:not(:last-child)::after { left: 52px; right: -14px; top: 21px; bottom: auto; width: auto; height: 2px; }
+    .st-step.next-optional::after { background: repeating-linear-gradient(to right, var(--deep) 0 5px, transparent 5px 10px); }
+    .is-bracketed { background: none; }
+    .is-bracketed .st-body { padding: 0; }
+    .st-body h3 { margin-top: 0; }
+  }
+</style>

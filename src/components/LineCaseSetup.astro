@@ -1,4 +1,5 @@
 ---
+import MaterialIcon from './MaterialIcon.astro';
 // 連携先ごとに「つなぐ前に決めること」と向き・不向きを示す。
 // 4つのデモページが同じ文章にならないよう、中身は lineCaseCatalog の連携先別データから出す
 import type { LineCaseConfig } from '../data/lineCaseCatalog';
@@ -13,11 +14,11 @@ const { config } = Astro.props;
     <p class="setup-lead">今の業務に合うかを、以下の条件から確認できます。契約プラン・利用権限・必要な追加費用も、構築前に確認します。詳細な確認項目は下から開けます。</p>
     <div class="setup-fit">
       <div>
-        <h3>{config.vendorName}との連携が向いているケース</h3>
+        <h3><MaterialIcon name="check_circle" class="ic-inline" />{config.vendorName}との連携が向いているケース</h3>
         <ul>{config.fitCases.map((item) => <li>{item}</li>)}</ul>
       </div>
       <div>
-        <h3>別の方法も検討したいケース</h3>
+        <h3><MaterialIcon name="signpost" class="ic-inline" />別の方法も検討したいケース</h3>
         <ul>{config.otherCases.map((item) => <li>{item}</li>)}</ul>
       </div>
     </div>
@@ -65,7 +66,7 @@ const { config } = Astro.props;
   .setup-fit h3 { font-size: 0.98rem; font-weight: 900; margin: 0 0 12px; color: var(--trust, #0f4c5c); }
   .setup-fit ul { margin: 0; padding-left: 1.2em; }
   .setup-fit li { color: #444; font-size: 0.92rem; line-height: 1.85; margin-bottom: 6px; }
-  .setup-sources { font-size: 0.8rem; color: #666; }
+  .setup-sources { font-size: 0.875rem; color: #666; }
   .setup-sources p { margin: 0 0 6px; }
   .setup-sources ul { margin: 0; padding-left: 1.2em; }
   .setup-sources a { color: var(--trust, #0f4c5c); overflow-wrap: anywhere; }

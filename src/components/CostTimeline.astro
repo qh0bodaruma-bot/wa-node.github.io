@@ -1,0 +1,91 @@
+---
+// 料金ページ：費用の種類を「いつ・どの見積りでかかるか」で並べる図。
+// 横軸は「公開まで／公開後」。帯の長さで、かかる時期と続く期間を示す。文言は料金ページの費用の説明と同じ。
+// 幅が狭い場所では、帯を縦に積み、時期は帯の中の文字で示す。
+import type { SiteLanguage } from '../data/services';
+interface Props { lang?: SiteLanguage }
+const { lang = 'ja' } = Astro.props;
+const c = {
+  ja: {
+    label: '費用の種類と、かかる時期',
+    phases: ['公開まで（制作）', '公開後（運用）'], launch: '公開',
+    lanes: [
+      { kind: 'build', lane: '制作の見積り', title: '制作費', desc: '合意した画面・連携の構築と、本番への切り替え・引き継ぎ。', when: '公開まで' },
+      { kind: 'service', lane: '制作費とは別', title: '外部サービスの利用料', desc: 'LINE公式アカウントや連携先、必要なサーバー等の利用料。制作費とは別に確認します。', when: '利用している間' },
+      { kind: 'care', lane: '必要なときに別途見積り', title: '公開後の保守・改修', desc: '監視・更新・機能追加など、必要な範囲と費用を個別にお見積りします。', when: '公開後・必要なとき' },
+    ],
+  },
+  en: {
+    label: 'Types of cost and when they apply',
+    phases: ['Until launch (build)', 'After launch (operation)'], launch: 'Launch',
+    lanes: [
+      { kind: 'build', lane: 'Development quote', title: 'Development', desc: 'Agreed screens and integration, launch and handover.', when: 'Until launch' },
+      { kind: 'service', lane: 'Separate from development', title: 'External services', desc: 'LINE, connected systems and any hosting subscriptions are considered separately.', when: 'While in use' },
+      { kind: 'care', lane: 'Quoted separately when needed', title: 'Ongoing maintenance', desc: 'Monitoring, updates and added features are scoped and quoted separately.', when: 'After launch, when needed' },
+    ],
+  },
+  fr: {
+    label: 'Types de coûts et moment où ils s’appliquent',
+    phases: ['Jusqu’au lancement (création)', 'Après le lancement (fonctionnement)'], launch: 'Lancement',
+    lanes: [
+      { kind: 'build', lane: 'Devis de création', title: 'Création', desc: 'Écrans et intégration convenus, mise en service et transmission.', when: 'Jusqu’au lancement' },
+      { kind: 'service', lane: 'En plus de la création', title: 'Services externes', desc: 'Abonnements LINE, outils connectés et éventuel hébergement, examinés séparément.', when: 'Pendant l’utilisation' },
+      { kind: 'care', lane: 'Devis séparé si nécessaire', title: 'Maintenance', desc: 'Surveillance, mises à jour et fonctions supplémentaires font l’objet d’un devis distinct.', when: 'Après le lancement, si nécessaire' },
+    ],
+  },
+}[lang];
+---
+<figure class="cost-timeline" aria-label={c.label}>
+  <div class="ct-grid">
+    <div class="ct-axis" aria-hidden="true">
+      <span class="ct-phase">{c.phases[0]}</span>
+      <span class="ct-launch">{c.launch}</span>
+      <span class="ct-phase">{c.phases[1]}</span>
+    </div>
+    <ul class="ct-lanes">
+      {c.lanes.map((lane) => (
+        <li class={`ct-lane ct-${lane.kind}`}>
+          <p class="ct-lane-name">{lane.lane}</p>
+          <div class="ct-bar">
+            <p class="ct-when">{lane.when}</p>
+            <h4>{lane.title}</h4>
+            <p>{lane.desc}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+  </div>
+</figure>
+
+<style>
+  .cost-timeline { container-type: inline-size; margin: 0; }
+  .ct-axis { display: none; }
+  .ct-lanes { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .ct-lane-name { margin: 0 0 6px; color: var(--quiet); font-size: .875rem; font-weight: 700; }
+  .ct-bar { padding: 14px 16px; border-radius: 8px; line-height: 1.8; }
+  .ct-bar h4 { margin: 0 0 2px; font-size: .9375rem; color: var(--ink); }
+  .ct-bar p { margin: 0; font-size: .875rem; color: var(--quiet); }
+  .ct-bar .ct-when { display: inline-block; margin-bottom: 6px; padding: 0 8px; border-radius: 999px; background: rgba(255,255,255,.8); color: var(--deep); font-size: .8125rem; font-weight: 700; }
+  /* 制作費：塗り。利用料：斜線（制作費とは別）。保守：点線の枠（必要なときだけ） */
+  .ct-build .ct-bar { background: #dfeae6; border: 1px solid #b9cfc8; border-left: 4px solid var(--deep); }
+  .ct-service .ct-bar { background: repeating-linear-gradient(135deg, #f6efe0 0 10px, #efe4cc 10px 20px); border: 1px solid #dccaa2; border-left: 4px solid var(--gold-muted, #8c6b1f); }
+  .ct-care .ct-bar { background: #fffefa; border: 2px dashed #b9cfc8; }
+
+  @container (min-width: 720px) {
+    .ct-axis, .ct-lane { display: grid; grid-template-columns: 11em minmax(0, 1fr) minmax(0, 1fr); align-items: center; }
+    .ct-axis { position: relative; margin-bottom: 12px; color: var(--deep); font-size: .875rem; font-weight: 700; }
+    .ct-phase { padding: 0 12px 8px; border-bottom: 2px solid var(--deep); text-align: center; }
+    .ct-phase:first-child { grid-column: 2; }
+    .ct-phase:last-child { grid-column: 3; }
+    /* 「公開」の印は、2つの期間の境目に重ねる */
+    .ct-launch { position: absolute; left: calc(11em + (100% - 11em) / 2); bottom: 0; transform: translate(-50%, 50%); padding: 1px 10px; border-radius: 4px; background: var(--vermillion); color: #fff; font-size: .8125rem; white-space: nowrap; }
+    .ct-lane-name { grid-column: 1; margin: 0; padding-right: 14px; }
+    .ct-lanes { position: relative; }
+    .ct-lanes::before { content: ""; position: absolute; top: -6px; bottom: 0; left: calc(11em + (100% - 11em) / 2); border-left: 2px dashed rgba(185, 50, 45, .45); }
+    .ct-bar { position: relative; z-index: 1; }
+    .ct-build .ct-bar { grid-column: 2; margin-right: 6px; }
+    .ct-service .ct-bar { grid-column: 2 / 4; }
+    .ct-care .ct-bar { grid-column: 3; margin-left: 6px; }
+    .ct-bar .ct-when { display: none; }
+  }
+</style>

@@ -1,4 +1,5 @@
 ---
+import MaterialIcon from '../../components/MaterialIcon.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LineCaseSetup from '../../components/LineCaseSetup.astro';
 import { seminarBookingSetup } from '../../data/lineUsecaseCatalog';
@@ -29,7 +30,7 @@ const structuredData = [organizationSchema, createWebPageSchema({ name: title, d
 
     <section class="uc-section"><div class="uc-container uc-two">
       <div><h2>申込みを、次の対応につなげる。</h2><p>LINEで普段からお客様へ案内している企業を想定しています。申込みのために別のアプリを入れてもらわず、参加状況をHubSpotの顧客情報と一緒に確認する構成です。</p><p>予約確認や開催前の案内と、任意の販促案内は分けて扱います。販促案内を希望しなくても、セミナーには申し込めます。</p></div>
-      <dl class="uc-specs"><div><dt>申し込む人</dt><dd>顧客・見込み客</dd></div><div><dt>受け取る側</dt><dd>HubSpotを使う営業・運営担当者</dd></div><div><dt>向いている業務</dt><dd>セミナー・来場予約と参加後の対応</dd></div><div><dt>デモ仕様</dt><dd>ブラウザ内だけで動作。再読み込みで初期化</dd></div></dl>
+      <dl class="uc-specs"><div><dt><MaterialIcon name="person" class="ic-inline" />申し込む人</dt><dd>顧客・見込み客</dd></div><div><dt><MaterialIcon name="groups" class="ic-inline" />受け取る側</dt><dd>HubSpotを使う営業・運営担当者</dd></div><div><dt><MaterialIcon name="work" class="ic-inline" />向いている業務</dt><dd>セミナー・来場予約と参加後の対応</dd></div><div><dt><MaterialIcon name="computer" class="ic-inline" />デモ仕様</dt><dd>ブラウザ内だけで動作。再読み込みで初期化</dd></div></dl>
     </div></section>
 
     <section class="uc-section uc-demo-section" id="demo" data-sb-root data-clarity-mask="true">

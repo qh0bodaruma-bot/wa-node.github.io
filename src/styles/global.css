@@ -75,6 +75,30 @@ a:hover { opacity: 0.7; }
   font-size: 1.25em;
 }
 
+/* 文章だけの項目に添えるアイコン。ic-inline は見出し・項目名の頭に、ic-chip は一覧の行頭に置く */
+.material-icon.ic-inline {
+  display: inline-grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  margin-right: 10px;
+  border-radius: 9px;
+  background: #e6eeeb;
+  color: var(--deep, var(--trust, #164f4d));
+  font-size: 22px;
+  vertical-align: middle;
+}
+.material-icon.ic-chip {
+  display: inline-grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: #e6eeeb;
+  color: var(--deep, var(--trust, #164f4d));
+  font-size: 28px;
+}
+
 /* Global Utilities */
 .section { padding: 80px 0; }
 .section-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 20px; }

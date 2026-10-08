@@ -1,4 +1,5 @@
 ---
+import MaterialIcon from '../components/MaterialIcon.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 // 見出し用の明朝体（Shippori Mincho）を他ページと同じく読み込む
 import '../styles/service-pages.css';
@@ -29,9 +30,9 @@ const structuredData = [
       <div class="section-inner">
         <h1>和-Nodeについて</h1>
         <dl class="about-summary">
-          <div><dt>担当者</dt><dd>代表・高野 紘純。ご相談から構築、運用の引き継ぎまで同じ窓口で対応します。</dd></div>
-          <div><dt>相談できること</dt><dd>LINEと、今お使いのSalesforce・kintone・HubSpot・Googleスプレッドシートの連携。転記や報告の取りまとめを減らす仕組みをつくります。</dd></div>
-          <div><dt>関連する経験</dt><dd>2004年からIT実務に従事。POS保守、サーバー運用、社内システムの整備・業務自動化、Webサービスのデータ管理を経験しています。</dd></div>
+          <div><dt><MaterialIcon name="person" class="ic-inline" />担当者</dt><dd>代表・高野 紘純。ご相談から構築、運用の引き継ぎまで同じ窓口で対応します。</dd></div>
+          <div><dt><MaterialIcon name="forum" class="ic-inline" />相談できること</dt><dd>LINEと、今お使いのSalesforce・kintone・HubSpot・Googleスプレッドシートの連携。転記や報告の取りまとめを減らす仕組みをつくります。</dd></div>
+          <div><dt><MaterialIcon name="history" class="ic-inline" />関連する経験</dt><dd>2004年からIT実務に従事。POS保守、サーバー運用、社内システムの整備・業務自動化、Webサービスのデータ管理を経験しています。</dd></div>
         </dl>
         <a class="about-career-link" href="#experience">経歴と資格を見る</a>
       </div>
@@ -65,9 +66,9 @@ const structuredData = [
 
         <div class="story-box">
           <h3>ご相談から運用までの進め方</h3>
-          <p><strong>現状を整理する。</strong>誰が、いつ、何を入力し、その後に誰が確認するか。現在の業務の流れを伺います。</p>
-          <p><strong>範囲を決める。</strong>画面、登録する項目、通知の条件を整理し、費用・期間をご提示します。内容に合意してから着手します。</p>
-          <p><strong>確かめて引き継ぐ。</strong>操作と連携を確認し、運用の手順をお渡しします。公開後の保守・改修は、必要な範囲と費用を別途確認します。</p>
+          <p><strong><MaterialIcon name="checklist" class="ic-inline" />現状を整理する。</strong>誰が、いつ、何を入力し、その後に誰が確認するか。現在の業務の流れを伺います。</p>
+          <p><strong><MaterialIcon name="preview" class="ic-inline" />範囲を決める。</strong>画面、登録する項目、通知の条件を整理し、費用・期間をご提示します。内容に合意してから着手します。</p>
+          <p><strong><MaterialIcon name="task_alt" class="ic-inline" />確かめて引き継ぐ。</strong>操作と連携を確認し、運用の手順をお渡しします。公開後の保守・改修は、必要な範囲と費用を別途確認します。</p>
         </div>
 
         <div class="career-box" id="experience">
@@ -85,7 +86,7 @@ const structuredData = [
 
         <div class="qual-grid">
           <div class="qual-item highlight-border">
-            <h4>LINE連携構築</h4>
+            <h4><MaterialIcon name="hub" class="ic-inline" />LINE連携構築</h4>
             <ul>
               <li>LINE Messaging API / LIFF（LINE内Webアプリ）</li>
               <li>Salesforce REST API 連携（リード・ケース・取引先）</li>
@@ -96,7 +97,7 @@ const structuredData = [
             </ul>
           </div>
           <div class="qual-item">
-            <h4>ITエンジニア実務</h4>
+            <h4><MaterialIcon name="computer" class="ic-inline" />ITエンジニア実務</h4>
             <ul>
               <li>IT実務 20年以上（2004年〜）</li>
               <li>HTML5 / CSS3 / JavaScript（React, Astro）</li>
@@ -105,7 +106,7 @@ const structuredData = [
             </ul>
           </div>
           <div class="qual-item">
-            <h4>要件定義・業務設計</h4>
+            <h4><MaterialIcon name="account_tree" class="ic-inline" />要件定義・業務設計</h4>
             <ul>
               <li>IT担当者ヒアリング・業務フロー整理</li>
               <li>名寄せ設計・データ連携スキーマ設計</li>
@@ -114,7 +115,7 @@ const structuredData = [
             </ul>
           </div>
           <div class="qual-item">
-            <h4>当事者視点・計数管理</h4>
+            <h4><MaterialIcon name="accessible_forward" class="ic-inline" />当事者視点・計数管理</h4>
             <ul>
               <li>車いすユーザーとして「不便を技術で解消する」動機</li>
               <li>バリアフリー住環境アドバイザー</li>
@@ -237,7 +238,7 @@ const structuredData = [
   .about-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 24px; color: var(--text-deep); }
   .about-summary { max-width: 780px; margin: 28px auto 16px; padding: 8px 24px; text-align: left; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
   .about-summary > div:first-child { border-top: 0; }
-  .about-summary > div { display: grid; grid-template-columns: 8em minmax(0, 1fr); gap: 20px; padding: 16px 0; border-top: 1px solid var(--line); }
+  .about-summary > div { display: grid; grid-template-columns: 10em minmax(0, 1fr); gap: 20px; padding: 16px 0; border-top: 1px solid var(--line); }
   .about-summary dt { font-weight: 700; color: var(--text-deep); }
   .about-summary dd { margin: 0; color: #444; line-height: 1.85; }
   .about-career-link { display: inline-flex; align-items: center; min-height: 44px; text-underline-offset: 4px; }
@@ -330,6 +331,7 @@ const structuredData = [
   .career-list li p { margin: 0; line-height: 1.8; }
   .career-year { font-weight: 700; color: var(--accent); white-space: nowrap; }
   @media (max-width: 560px) { .career-box { padding: 24px 20px; } .career-list li { grid-template-columns: 1fr; gap: 4px; } }
+  .qual-item h4 :global(.ic-inline) { color: inherit; background: #f3ebe0; }
   .qual-item h4 { margin-bottom: 20px; color: var(--accent); border-bottom: 1px solid var(--line); padding-bottom: 10px; font-weight: 800; }
   .qual-item ul { list-style: none; padding: 0; }
   .qual-item li { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 0.95rem; color: #555; }
