@@ -51,4 +51,25 @@ if (committed !== 0) {
   console.log('\n新しくコミットする変更はありません。未 push の分がないか確認します。');
 }
 
+// 別の作業（プルメリアなど）が先に push していると、push は non-fast-forward で断られる。
+// push の前に GitHub の main を取り込み、手元のコミットをその後ろに付け直す。
+// 作業中の未コミットの変更は --autostash で一時退避し、付け直したあとに戻す。
+run('git', [...gitBaseArgs, 'fetch', 'origin', 'main']);
+const behind = Number(
+  spawnSync('git', ['rev-list', '--count', 'HEAD..origin/main'], { encoding: 'utf8' }).stdout.trim() || '0',
+);
+if (behind > 0) {
+  console.log(`\nGitHub 側に、手元に無いコミットが ${behind} 件あります。取り込んでから push します。`);
+  const rebased = run('git', [...gitBaseArgs, 'rebase', '--autostash', 'origin/main'], { allowFailure: true });
+  if (rebased !== 0) {
+    // 同じファイルを両方で変更していて自動で合わせられない場合は、取り込む前の状態に戻して止める
+    const conflicted = spawnSync('git', ['diff', '--name-only', '--diff-filter=U'], { encoding: 'utf8' }).stdout.trim();
+    run('git', [...gitBaseArgs, 'rebase', '--abort'], { allowFailure: true });
+    console.error('\nGitHub 側の変更と、手元の変更が同じ箇所でぶつかりました。push は行っていません。');
+    if (conflicted) console.error(`ぶつかったファイル:\n  ${conflicted.split('\n').join('\n  ')}`);
+    console.error('取り込む前の状態に戻してあります。上のファイルの変更を手で合わせてから、もう一度実行してください。');
+    process.exit(1);
+  }
+}
+
 run('git', [...gitBaseArgs, 'push', 'origin', 'main']);

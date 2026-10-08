@@ -287,6 +287,19 @@
   padding-top: 14px;
   border-top: 1px dashed var(--rule);
 }
+/* 試す部分を開くボタン。開いたら矢印を上向きにする */
+#main.home-refresh .home-hero .demo-try-open { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #b9cdc7; border-radius: 8px; background: #f4f8f6; color: var(--deep); font: inherit; font-size: .9375rem; font-weight: 700; cursor: pointer; transition: background var(--motion-ui, 160ms) ease-out, border-color var(--motion-ui, 160ms) ease-out; }
+#main.home-refresh .home-hero .demo-try-open .material-symbols-rounded { font-size: 20px; }
+#main.home-refresh .home-hero .demo-try-open .demo-try-caret { margin-left: auto; transition: transform var(--motion-ui, 160ms) ease-out; }
+#main.home-refresh .home-hero .demo-try-open[aria-expanded="true"] .demo-try-caret { transform: rotate(180deg); }
+@media (hover: hover) and (pointer: fine) {
+  #main.home-refresh .home-hero .demo-try-open:hover { background: #e9f1ee; border-color: var(--deep); }
+}
+#main.home-refresh .home-hero .demo-try-open:focus-visible { outline: 3px solid #9b4c12; outline-offset: 2px; }
+#main.home-refresh .home-hero .demo-try-body { margin-top: 14px; }
+@media (prefers-reduced-motion: reduce) {
+  #main.home-refresh .home-hero .demo-try-open, #main.home-refresh .home-hero .demo-try-caret { transition: none; }
+}
 #main.home-refresh .home-hero .demo-try-label {
   margin: 0 0 10px;
   font-size: .875rem;
