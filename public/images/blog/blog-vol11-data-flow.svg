@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">LINE連携で保存する項目を選ぶ流れ</title>
+  <desc id="desc">LINEで受けた情報から業務に必要な項目を選び、決めた保存先へ登録する。保存しない情報や、判断が必要な情報は分ける。</desc>
+  <rect width="1600" height="900" fill="#f5f8fb"/>
+  <text x="100" y="105" font-family="Yu Gothic,Meiryo,sans-serif" font-size="48" font-weight="700" fill="#10263f">受信した情報と、残す情報を分ける</text>
+  <text x="100" y="160" font-family="Yu Gothic,Meiryo,sans-serif" font-size="26" fill="#52657a">保存する前に、目的・保存先・閲覧者・削除時の扱いを確認</text>
+  <rect x="95" y="245" width="380" height="400" rx="28" fill="#e7f3ed" stroke="#70ad8a" stroke-width="3"/>
+  <text x="135" y="310" font-family="Yu Gothic,Meiryo,sans-serif" font-size="36" font-weight="700" fill="#184d36">LINEで受信</text>
+  <text x="135" y="385" font-family="Yu Gothic,Meiryo,sans-serif" font-size="29" fill="#18364b">受付日時</text>
+  <text x="135" y="445" font-family="Yu Gothic,Meiryo,sans-serif" font-size="29" fill="#18364b">問い合わせ本文</text>
+  <text x="135" y="505" font-family="Yu Gothic,Meiryo,sans-serif" font-size="29" fill="#18364b">利用者ID</text>
+  <text x="135" y="565" font-family="Yu Gothic,Meiryo,sans-serif" font-size="29" fill="#18364b">添付画像など</text>
+  <path d="M490 440h102" stroke="#d8a942" stroke-width="10" stroke-linecap="round"/>
+  <path d="m570 415 35 25-35 25" fill="none" stroke="#d8a942" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="625" y="245" width="375" height="400" rx="28" fill="#fff6df" stroke="#d8a942" stroke-width="3"/>
+  <text x="665" y="310" font-family="Yu Gothic,Meiryo,sans-serif" font-size="36" font-weight="700" fill="#674a0b">必要性を確認</text>
+  <text x="665" y="388" font-family="Yu Gothic,Meiryo,sans-serif" font-size="28" fill="#18364b">業務の目的は？</text>
+  <text x="665" y="457" font-family="Yu Gothic,Meiryo,sans-serif" font-size="28" fill="#18364b">誰が見る？</text>
+  <text x="665" y="526" font-family="Yu Gothic,Meiryo,sans-serif" font-size="28" fill="#18364b">いつ消す？</text>
+  <path d="M1015 440h102" stroke="#d8a942" stroke-width="10" stroke-linecap="round"/>
+  <path d="m1095 415 35 25-35 25" fill="none" stroke="#d8a942" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="1150" y="245" width="355" height="400" rx="28" fill="#e6eef8" stroke="#6d92b7" stroke-width="3"/>
+  <text x="1190" y="310" font-family="Yu Gothic,Meiryo,sans-serif" font-size="36" font-weight="700" fill="#173d65">保存先を決定</text>
+  <text x="1190" y="390" font-family="Yu Gothic,Meiryo,sans-serif" font-size="28" fill="#18364b">必要な項目だけ登録</text>
+  <text x="1190" y="460" font-family="Yu Gothic,Meiryo,sans-serif" font-size="28" fill="#18364b">不要な情報は保存しない</text>
+  <text x="1190" y="530" font-family="Yu Gothic,Meiryo,sans-serif" font-size="28" fill="#18364b">未決定の項目は保留</text>
+  <rect x="95" y="720" width="1410" height="90" rx="20" fill="#0e2844"/>
+  <text x="135" y="778" font-family="Yu Gothic,Meiryo,sans-serif" font-size="31" fill="#ffffff">確認表に記す：項目 ｜ 目的 ｜ 保存先 ｜ 閲覧者 ｜ 削除時の扱い</text>
+  <text x="1395" y="865" font-family="Yu Gothic,Meiryo,sans-serif" font-size="22" fill="#52657a">※概念図</text>
+</svg>

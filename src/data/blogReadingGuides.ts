@@ -21,6 +21,10 @@ interface ReadingGuide {
 }
 
 export const blogReadingGuides: Record<string, ReadingGuide> = {
+  i74c9v612abs: {
+    topic: 'planning', audience: 'LINEの問い合わせを業務システムへ連携する前に、保存する情報を整理したい方へ',
+    points: ['業務の目的から、連携先に残す項目を選びます。', '項目ごとに保存先・閲覧者・削除時の扱いを確認します。', '未決定の項目は保留し、連携前に担当者へ確認します。'],
+  },
   pz924jznhpq: {
     topic: 'handover', audience: '連携を発注する方、制作・保守担当者から引き継ぐ方へ',
     points: ['接続キーごとに、用途・保管場所・使える操作を確認します。', '更新担当と、交換時に影響する機能・確認手順を決めます。', '共有する台帳には、キーの値やパスワードを書きません。'],
