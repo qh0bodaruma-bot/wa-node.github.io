@@ -9,6 +9,7 @@ import { materialIconsHref } from '../data/materialIconNames';
 import '../styles/global.css';
 import '../styles/motion.css';
 import '../styles/link-flow.css';
+import '../styles/cta-flow.css';
 
 interface Props {
   title?: string;
@@ -232,6 +233,7 @@ const getLocalizedHref = (l: string) => {
     <script>
       import '../scripts/site-analytics';
       import { initMotion, watchReducedMotion } from '../scripts/motion';
+      import { initCtaCue } from '../scripts/cta-cue';
       function initSkipLink() {
         const skip = document.querySelector<HTMLAnchorElement>('.skip-link');
         if (!skip || skip.dataset.initialized) return;
@@ -249,13 +251,16 @@ const getLocalizedHref = (l: string) => {
       document.addEventListener('astro:page-load', initSkipLink);
       watchReducedMotion();
       let disposeMotion: (() => void) | null = null;
+      let disposeCtaCue: (() => void) | null = null;
       function runMotion() {
         disposeMotion?.();
         disposeMotion = initMotion(document);
+        disposeCtaCue?.();
+        disposeCtaCue = initCtaCue(document);
       }
       document.addEventListener('DOMContentLoaded', runMotion);
       document.addEventListener('astro:page-load', runMotion);
-      document.addEventListener('astro:before-swap', () => { disposeMotion?.(); disposeMotion = null; });
+      document.addEventListener('astro:before-swap', () => { disposeMotion?.(); disposeMotion = null; disposeCtaCue?.(); disposeCtaCue = null; });
     </script>
   </head>
   <body>
