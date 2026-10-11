@@ -32,7 +32,7 @@
   .uc-specs dd { margin: 0; font-size: .9375rem; }
   .uc-note { margin: 0 0 16px; }
   .uc-scenarios { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
-  .uc-scenarios button { min-height: 44px; padding: 8px 16px; border: 1px solid #c9d0c3; border-radius: 8px; background: #fff; font: inherit; font-size: .875rem; font-weight: 700; cursor: pointer; }
+  .uc-scenarios button { min-height: 44px; padding: 8px 16px; border: 1px solid #8fa09b; border-radius: 8px; background: #fff; font: inherit; font-size: .875rem; font-weight: 700; cursor: pointer; }
   .uc-scenarios button:disabled, .uc-form-result button:disabled { opacity: .55; cursor: wait; }
   .uc-scenarios button.is-active { background: var(--trust, #0f4c5c); border-color: var(--trust, #0f4c5c); color: #fff; }
   .uc-stage { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 24px; align-items: start; }
@@ -42,11 +42,11 @@
   .uc-form-title { font-size: 1.05rem; font-weight: 800; margin: 0; color: var(--text, #1a1614) !important; }
   .uc-form-who { font-size: .875rem; margin: -8px 0 0; }
   .uc-field { display: grid; gap: 6px; font-size: .875rem; font-weight: 700; }
-  .uc-field select, .uc-field textarea { width: 100%; min-height: 44px; padding: 10px; border: 1px solid #bfc7bd; border-radius: 8px; font: inherit; font-size: 16px; font-weight: 400; background: #fff; }
+  .uc-field select, .uc-field textarea { width: 100%; min-height: 44px; padding: 10px; border: 1px solid #7a8d88; border-radius: 8px; font: inherit; font-size: 16px; font-weight: 400; background: #fff; }
   .uc-checks { border: 0; margin: 0; padding: 0; display: grid; gap: 8px; }
   .uc-checks legend { font-size: .875rem; font-weight: 700; margin-bottom: 6px; }
   .uc-check-row { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: .9375rem; }
-  .uc-seg { display: inline-flex; border: 1px solid #bfc7bd; border-radius: 8px; overflow: hidden; }
+  .uc-seg { display: inline-flex; border: 1px solid #7a8d88; border-radius: 8px; overflow: hidden; }
   .uc-seg label { position: relative; }
   .uc-seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
   .uc-seg span { display: inline-flex; align-items: center; min-height: 40px; padding: 0 12px; font-size: .875rem; font-weight: 700; background: #fff; }
@@ -109,11 +109,11 @@
 
 /* 代理店の訪問報告デモ（Salesforce） */
 .uc-chip-sf { border-color: #0176a3; color: #0176a3; }
-.uc-field input[type="text"] { width: 100%; min-height: 44px; padding: 10px; border: 1px solid #bfc7bd; border-radius: 8px; font: inherit; font-size: 16px; font-weight: 400; }
+.uc-field input[type="text"] { width: 100%; min-height: 44px; padding: 10px; border: 1px solid #7a8d88; border-radius: 8px; font: inherit; font-size: 16px; font-weight: 400; }
 .uc-account-list { display: grid; gap: 6px; }
 .uc-account { position: relative; display: block; }
 .uc-account input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-.uc-account span { display: flex; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid #bfc7bd; border-radius: 8px; font-size: .9375rem; background: #fff; }
+.uc-account span { display: flex; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid #7a8d88; border-radius: 8px; font-size: .9375rem; background: #fff; }
 .uc-account input:checked + span { border-color: var(--trust, #0f4c5c); box-shadow: inset 0 0 0 1px var(--trust, #0f4c5c); background: #eef5f2; font-weight: 700; }
 .uc-account input:focus-visible + span { outline: 3px solid #9b4c12; outline-offset: 2px; }
 .uc-hint { font-size: .875rem; color: var(--muted, #524a44); margin: 4px 0 0; }

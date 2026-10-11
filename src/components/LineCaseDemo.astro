@@ -479,16 +479,16 @@ const vendorInk = { kintone: '#0f4c81', salesforce: '#00638a', hubspot: '#9a3e24
   .demo-send-row { display: flex; gap: 8px; align-items: center; }
   .demo-input-field { flex: 1; padding: 10px 14px; border: 1px solid #ddd; border-radius: 999px; font-size: 0.9375rem; color: #aaa; background: #f9f9f9; min-height: 40px; display: flex; align-items: center; }
   .demo-input-field.has-text { color: #333; background: #fff; }
-  .demo-send-btn { width: 42px; height: 42px; border-radius: 50%; border: none; background: #ccc; color: #fff; cursor: not-allowed; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
+  .demo-send-btn { width: 42px; height: 42px; border-radius: 50%; border: none; background: #8fa09b; color: #fff; cursor: not-allowed; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
   .demo-send-btn.ready { background: var(--trust); cursor: pointer; }
   .demo-send-btn.ready:hover { background: #0b3a46; }
   .demo-connector { display: flex; align-items: center; justify-content: center; background: rgba(15, 76, 92, 0.03); border-left: 1px solid var(--trust-line); border-right: 1px solid var(--trust-line); }
   .connector-line { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-  .connector-arrow { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--trust); font-size: 0.8125rem; font-weight: 900; opacity: 0.5; transform: translateX(0); transition: opacity var(--motion-trace,240ms) ease-out, color var(--motion-trace,240ms) ease-out, transform var(--motion-trace,240ms) var(--motion-ease,ease-out); }
+  .connector-arrow { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--trust); font-size: 0.8125rem; font-weight: 900; opacity: 0.75; transform: translateX(0); transition: opacity var(--motion-trace,240ms) ease-out, color var(--motion-trace,240ms) ease-out, transform var(--motion-trace,240ms) var(--motion-ease,ease-out); }
   .connector-arrow.active { opacity: 1; color: var(--trust); transform: translateX(6px); }
   @media (prefers-reduced-motion: reduce) { .connector-arrow { transition: opacity 1ms, color 1ms; transform: none !important; } }
   .demo-note { text-align: center; font-size: 0.875rem; color: #526563; font-weight: 500; line-height: 1.8; }
-  .demo-reset-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border: 1px solid var(--trust-line); border-radius: 999px; background: #fff; color: #777; font-size: 0.875rem; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
+  .demo-reset-btn { display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px; border: 1px solid #8fa09b; border-radius: 999px; background: #fff; color: #666; font-size: 0.875rem; font-weight: 800; cursor: pointer; transition: 0.2s; white-space: nowrap; }
   .demo-reset-btn:hover { border-color: var(--trust); color: var(--trust); }
 
   .lc-hero { padding-bottom: 36px; }
@@ -499,7 +499,7 @@ const vendorInk = { kintone: '#0f4c81', salesforce: '#00638a', hubspot: '#9a3e24
   .chip-line { border-color: var(--trust-line); color: var(--trust); }
 
   .scenario-selector { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; margin-bottom: 28px; }
-  .scenario-btn { padding: 10px 18px; border: 2px solid var(--trust-line); border-radius: 999px; background: #fff; color: #666; font-size: 0.9375rem; font-weight: 800; cursor: pointer; transition: 0.2s; }
+  .scenario-btn { padding: 10px 18px; border: 2px solid #8fa09b; border-radius: 999px; background: #fff; color: #666; font-size: 0.9375rem; font-weight: 800; cursor: pointer; transition: 0.2s; }
   .scenario-btn.is-active { border-color: var(--trust); color: var(--trust); background: rgba(15,76,92,0.06); }
   .scenario-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 

@@ -42,7 +42,7 @@
 #main.home-refresh .home-hero .hero-prices { margin-top: 28px; }
 #main.home-refresh .home-hero .hero-prices-title { margin: 0 0 10px; color: var(--deep); font-size: .875rem; font-weight: 700; letter-spacing: .04em; }
 #main.home-refresh .home-hero .hero-prices ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-#main.home-refresh .home-hero .hero-prices li > a { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 14px 16px; border: 1px solid var(--rule); border-radius: 8px; background: #fff; color: var(--ink); text-decoration: none; transition: border-color var(--motion-ui, 160ms) ease-out, background-color var(--motion-ui, 160ms) ease-out; }
+#main.home-refresh .home-hero .hero-prices li > a { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 14px 16px; border: 1px solid #8fa09b; border-radius: 8px; background: #fff; color: var(--ink); text-decoration: none; transition: border-color var(--motion-ui, 160ms) ease-out, background-color var(--motion-ui, 160ms) ease-out; }
 #main.home-refresh .home-hero .hero-prices .hp-name { color: var(--quiet); font-size: .875rem; font-weight: 600; }
 #main.home-refresh .home-hero .hero-prices .hp-name { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; }
 #main.home-refresh .home-hero .hero-prices .hp-badge { padding: 1px 8px; border-radius: 999px; background: #b9322d; color: #fff; font-size: .75rem; font-weight: 700; }
@@ -295,7 +295,7 @@
   border-top: 1px dashed var(--rule);
 }
 /* 試す部分を開くボタン。開いたら矢印を上向きにする */
-#main.home-refresh .home-hero .demo-try-open { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #b9cdc7; border-radius: 8px; background: #f4f8f6; color: var(--deep); font: inherit; font-size: .9375rem; font-weight: 700; cursor: pointer; transition: background var(--motion-ui, 160ms) ease-out, border-color var(--motion-ui, 160ms) ease-out; }
+#main.home-refresh .home-hero .demo-try-open { display: flex; align-items: center; gap: 8px; width: 100%; min-height: 48px; padding: 0 14px; border: 1px solid #8fa09b; border-radius: 8px; background: #f4f8f6; color: var(--deep); font: inherit; font-size: .9375rem; font-weight: 700; cursor: pointer; transition: background var(--motion-ui, 160ms) ease-out, border-color var(--motion-ui, 160ms) ease-out; }
 #main.home-refresh .home-hero .demo-try-open .material-symbols-rounded { font-size: 20px; }
 #main.home-refresh .home-hero .demo-try-open .demo-try-caret { margin-left: auto; transition: transform var(--motion-ui, 160ms) ease-out; }
 #main.home-refresh .home-hero .demo-try-open[aria-expanded="true"] .demo-try-caret { transform: rotate(180deg); }
