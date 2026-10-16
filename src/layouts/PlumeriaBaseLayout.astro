@@ -60,6 +60,18 @@ const imageUrl = new URL(image, Astro.url);
     <link rel="canonical" href={url} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script is:inline>
+      // 文字サイズ（標準／大）を描画前に適用する。ページ切替後も html の属性は新しいページ側に差し替わるため、swap 後にも付け直す。
+      (function () {
+        function apply() {
+          var v = 'standard';
+          try { v = localStorage.getItem('pl-text-size') || 'standard'; } catch (e) {}
+          document.documentElement.setAttribute('data-pl-text', v === 'large' ? 'large' : 'standard');
+        }
+        apply();
+        document.addEventListener('astro:after-swap', apply);
+      })();
+    </script>
     <ViewTransitions />
   </head>
   <body>

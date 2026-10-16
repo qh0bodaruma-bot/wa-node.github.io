@@ -37,3 +37,8 @@ a:hover { opacity: 0.7; }
   ::view-transition-old(*),
   ::view-transition-new(*) { animation: none !important; }
 }
+
+/* 文字サイズ切替（標準／大）。font-size は calc(Npx * var(--pl-fs)) で倍率を掛ける。
+   html に付く data-pl-text は <head> のインラインスクリプトが描画前に設定する */
+html { --pl-fs: 1; }
+html[data-pl-text="large"] { --pl-fs: 1.25; }

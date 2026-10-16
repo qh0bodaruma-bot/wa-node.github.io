@@ -47,7 +47,7 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
 
   <section class="pl-sec pl-sec-tight">
     <div class="pl-wrap">
-      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">{heroTitle}</h1>
+      <h1 class="pl-h1" style="font-size:calc(clamp(1.7rem,4vw,2.4rem) * var(--pl-fs))">{heroTitle}</h1>
       <p class="pl-sec-lead">{heroLead}</p>
       <nav class="pl-page-nav" aria-label="このページの内容">
         <a href="#support">できること</a><a href="#conditions">対象・費用</a><a href="#flow">利用の流れ</a><a href="#questions">よくある質問</a>

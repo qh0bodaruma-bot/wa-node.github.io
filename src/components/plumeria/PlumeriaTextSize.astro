@@ -1,0 +1,11 @@
+---
+// 文字サイズ切替（標準／大）。ヘッダーとモバイルメニューの両方に置く（表示の出し分けは CSS）。
+// 状態は html の data-pl-text と localStorage。切替の処理は PlumeriaLayout のスクリプトにある。
+interface Props { class?: string }
+const { class: className = '' } = Astro.props;
+---
+<div class:list={['pl-textsize', className]} role="group" aria-label="文字の大きさ">
+  <span class="pl-textsize-label" aria-hidden="true">文字</span>
+  <button type="button" data-pl-textsize="standard" aria-pressed="true" aria-label="文字の大きさ：標準">標準</button>
+  <button type="button" data-pl-textsize="large" aria-pressed="false" aria-label="文字の大きさ：大">大</button>
+</div>

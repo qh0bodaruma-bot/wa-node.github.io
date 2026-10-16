@@ -35,7 +35,7 @@ const faqs = [
 
   <section class="pl-sec pl-sec-tight">
     <div class="pl-wrap">
-      <h1 class="pl-h1" style="font-size:clamp(1.7rem,4vw,2.4rem)">{unit.name}</h1>
+      <h1 class="pl-h1" style="font-size:calc(clamp(1.7rem,4vw,2.4rem) * var(--pl-fs))">{unit.name}</h1>
       <p class="pl-sec-lead">サービス付き高齢者向け住宅（{unit.kind}）</p>
       <img class="pl-page-photo" src={unit.img} alt={unit.alt} width="1200" height="675" loading="eager" decoding="async" />
       <p class="pl-photo-note">※ 掲載写真はイメージ写真です。実際の施設・スタッフではありません。</p>

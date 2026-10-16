@@ -1,6 +1,7 @@
 ---
 import PlumeriaBaseLayout from './PlumeriaBaseLayout.astro';
 import PlumeriaTelCta from '../components/plumeria/PlumeriaTelCta.astro';
+import PlumeriaTextSize from '../components/plumeria/PlumeriaTextSize.astro';
 import { corp, services, recruitEntry, routes, shortStayTel, parentCompany, plImg } from '../data/plumeria';
 import '../styles/plumeria.css';
 
@@ -159,10 +160,12 @@ const footNavGroups = [
           ))}
         </nav>
 
+        <PlumeriaTextSize class="pl-textsize-head" />
         <a class="pl-head-recruit" href={routes.recruit} data-pl-gtag="recruit_click" data-pl-cta="header_recruit">採用情報</a>
         <details class="pl-menu">
           <summary aria-label="メニューを開く"><span class="pl-menu-bars" aria-hidden="true"></span></summary>
           <nav class="pl-menu-list" aria-label="メニュー（モバイル）">
+            <PlumeriaTextSize class="pl-textsize-menu" />
             <a href={routes.recruit} data-pl-gtag="recruit_click" data-pl-cta="mobile_menu"><span class="pl-nav-icon" aria-hidden="true"><svg><use href="#pl-i-bird" /></svg></span>採用情報</a>
             {services.map((s) => (
               <a href={s.href} aria-current={currentPath === s.href ? 'page' : undefined} data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="mobile_menu">
@@ -330,7 +333,30 @@ const footNavGroups = [
     plFloatCtaCleanup = null;
   });
 
+  // 文字サイズ切替。描画前の適用は PlumeriaBaseLayout の <head> インラインスクリプトが行う。
+  function applyTextSize(size: string, save: boolean) {
+    const value = size === 'large' ? 'large' : 'standard';
+    document.documentElement.dataset.plText = value;
+    document.querySelectorAll<HTMLButtonElement>('[data-pl-textsize]').forEach((button) => {
+      button.setAttribute('aria-pressed', String(button.dataset.plTextsize === value));
+    });
+    if (save) {
+      try { localStorage.setItem('pl-text-size', value); } catch { /* 保存できなくても表示は切り替わる */ }
+    }
+  }
+  function initTextSize() {
+    let saved = 'standard';
+    try { saved = localStorage.getItem('pl-text-size') ?? 'standard'; } catch { /* 読めなければ標準 */ }
+    applyTextSize(saved, false);
+    document.querySelectorAll<HTMLButtonElement>('[data-pl-textsize]').forEach((button) => {
+      if (button.dataset.ready) return;
+      button.dataset.ready = 'true';
+      button.addEventListener('click', () => applyTextSize(button.dataset.plTextsize ?? 'standard', true));
+    });
+  }
+
   function run() {
+    initTextSize();
     initPlumeriaClickTracking(document);
     document.querySelectorAll<HTMLButtonElement>('[data-pl-print]').forEach((button) => {
       if (button.dataset.ready) return;
