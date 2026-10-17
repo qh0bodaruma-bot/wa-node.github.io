@@ -21,6 +21,10 @@ interface ReadingGuide {
 }
 
 export const blogReadingGuides: Record<string, ReadingGuide> = {
+  '6prfqfl4ku': {
+    topic: 'operations', audience: 'LINEと業務システムの連携を運用し、停止時の確認方法を決めたい方へ',
+    points: ['Webhookの受信と、連携先への登録を別々に確認します。', '異常を見る場所と連絡先を担当者ごとに決めます。', '復旧後は受付と登録先の記録を照合します。'],
+  },
   i74c9v612abs: {
     topic: 'planning', audience: 'LINEの問い合わせを業務システムへ連携する前に、保存する情報を整理したい方へ',
     points: ['業務の目的から、連携先に残す項目を選びます。', '項目ごとに保存先・閲覧者・削除時の扱いを確認します。', '未決定の項目は保留し、連携前に担当者へ確認します。'],
