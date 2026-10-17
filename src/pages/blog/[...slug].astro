@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ConsultationFlow from '../../components/ConsultationFlow.astro';
+import ArticleToc from '../../components/ArticleToc.astro';
+import { buildBlogContents } from '../../library/blogContents';
 import { getBlogs, getBlogDetail } from '../../library/microcms';
 import { presentBlog } from '../../library/blogPresentation';
 import { blogTopics } from '../../data/blogReadingGuides';
@@ -19,7 +21,7 @@ const OFF_TOPIC_POSTS = ['xmt4y_gy-tei', 'z6zhzfpun', 'ekemcay7yl', 'lupuzniwy',
 const { slug } = Astro.params;
 const post = presentBlog(await getBlogDetail(slug));
 const displayTitle = post.title;
-const cleanedContent = post.content;
+const { content: cleanedContent, headings } = buildBlogContents(post.content);
 const description = post.description;
 const topic = blogTopics.find(topic => topic.id === post.topic);
 const articlePath = `/blog/${slug}/`;
@@ -75,6 +77,9 @@ const structuredData = createBlogPostingSchema({
       </div>
     )}
 
+    <div class:list={['article-layout', { 'has-toc': headings.length > 1 }]}>
+    {headings.length > 1 && <ArticleToc headings={headings} />}
+    <div class="article-reading">
     {post.eyecatch && <div class="post-hero">
       <div class="container-narrow">
         {post.eyecatch && (
@@ -98,6 +103,8 @@ const structuredData = createBlogPostingSchema({
       </div>
     </div>
 
+    </div>
+    </div>
     <footer class="post-footer">
       <div class="container">
         <ConsultationFlow id="contact" />
@@ -108,6 +115,8 @@ const structuredData = createBlogPostingSchema({
 </BaseLayout>
 
 <style>
+  .article-layout{max-width:1160px;margin:0 auto}.article-reading{min-width:0}.content-wrap :global(h2),.content-wrap :global(h3){scroll-margin-top:35px}
+  @media(min-width:1100px){.article-layout.has-toc{display:grid;grid-template-columns:260px minmax(0,1fr);gap:28px;padding:0 24px}}
   .post-single { padding-bottom: 0; }
   .container-narrow { max-width: 800px; margin: 0 auto; padding: 0 20px; }
   

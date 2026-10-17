@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">連携する情報の確認表の記入例</title>
+  <desc id="desc">受付日時、問い合わせの概要、LINEの利用者ID、添付画像について、目的、保存先、閲覧者、削除時の扱いを確認する表。未決定の箇所は保留して担当者へ確認する。</desc>
+  <rect width="1600" height="900" fill="#f5f8fb"/>
+  <text x="85" y="100" font-family="Yu Gothic,Meiryo,sans-serif" font-size="48" font-weight="700" fill="#10263f">連携候補を一行ずつ確認する</text>
+  <text x="85" y="155" font-family="Yu Gothic,Meiryo,sans-serif" font-size="27" fill="#52657a">実際の顧客名やメッセージ本文は書かない。空欄は無理に埋めず、確認事項にする。</text>
+  <rect x="80" y="220" width="1440" height="520" rx="24" fill="#ffffff" stroke="#bdd0df" stroke-width="3"/>
+  <path d="M80 245q0-25 25-25h1390q25 0 25 25v73H80z" fill="#0e2844"/>
+  <g font-family="Yu Gothic,Meiryo,sans-serif" font-size="27" font-weight="700" fill="#ffffff">
+    <text x="108" y="281">項目</text><text x="382" y="281">目的</text><text x="668" y="281">保存先</text><text x="935" y="281">閲覧者</text><text x="1190" y="281">削除時の扱い</text>
+  </g>
+  <g stroke="#dce6ed" stroke-width="2"><path d="M80 318h1440M80 421h1440M80 524h1440M80 627h1440"/><path d="M350 220v520M635 220v520M900 220v520M1160 220v520"/></g>
+  <rect x="81" y="525" width="1438" height="101" fill="#fff8e8"/>
+  <rect x="81" y="628" width="1438" height="111" fill="#fff8e8"/>
+  <g font-family="Yu Gothic,Meiryo,sans-serif" font-size="26" fill="#17334d">
+    <text x="108" y="380">受付日時</text><text x="382" y="380">対応順を確認</text><text x="668" y="380">CRM</text><text x="935" y="380">担当者</text><text x="1190" y="380">期限を確認</text>
+    <text x="108" y="483">問い合わせ概要</text><text x="382" y="483">引き継ぎ</text><text x="668" y="483">CRM</text><text x="935" y="483">担当者</text><text x="1190" y="483">取消時を確認</text>
+    <text x="108" y="586">LINE利用者ID</text><text x="382" y="586">紐づけ要否</text><text x="668" y="586">未決定</text><text x="935" y="586">未決定</text><text x="1190" y="586">解除時を確認</text>
+    <text x="108" y="689">添付画像</text><text x="382" y="689">必要性を確認</text><text x="668" y="689">未決定</text><text x="935" y="689">未決定</text><text x="1190" y="689">保存前に確認</text>
+  </g>
+  <rect x="80" y="785" width="1440" height="65" rx="18" fill="#e5eff7"/>
+  <text x="105" y="829" font-family="Yu Gothic,Meiryo,sans-serif" font-size="26" fill="#17334d">黄色の行は未決定の例。利用目的と実際の運用に合わせて、保存するかどうかから決める。</text>
+  <text x="1420" y="885" font-family="Yu Gothic,Meiryo,sans-serif" font-size="21" fill="#52657a">※記入例</text>
+</svg>

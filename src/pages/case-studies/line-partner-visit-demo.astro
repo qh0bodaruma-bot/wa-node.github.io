@@ -77,15 +77,15 @@ const fields = [
           <p>LINEで開く入力画面なら、代理店の担当者はアプリを新しく入れずに報告できます。自社の営業は、いつものSalesforceで訪問の状況を確認できます。</p>
         </div>
         <dl class="uc-specs">
-          <div><dt>報告する人</dt><dd>代理店・販売パートナーの担当者</dd></div>
-          <div><dt>受け取る側</dt><dd>自社の営業担当（Salesforce）</dd></div>
-          <div><dt>向いている業務</dt><dd>代理店経由の販売、販売店の訪問・商談の報告</dd></div>
-          <div><dt>デモ仕様</dt><dd>ブラウザ内だけで動作（外部への送信なし）</dd></div>
+          <div><dt><MaterialIcon name="person" class="ic-inline" />報告する人</dt><dd>代理店・販売パートナーの担当者</dd></div>
+          <div><dt><MaterialIcon name="groups" class="ic-inline" />受け取る側</dt><dd>自社の営業担当（Salesforce）</dd></div>
+          <div><dt><MaterialIcon name="work" class="ic-inline" />向いている業務</dt><dd>代理店経由の販売、販売店の訪問・商談の報告</dd></div>
+          <div><dt><MaterialIcon name="computer" class="ic-inline" />デモ仕様</dt><dd>ブラウザ内だけで動作（外部への送信なし）</dd></div>
         </dl>
       </div>
     </section>
 
-    <section class="uc-section uc-demo-section" id="demo" data-pv-root>
+    <section class="uc-section uc-demo-section" id="demo" data-pv-root data-clarity-mask="true">
       <div class="uc-container">
         <h2>報告の流れを試す。</h2>
         <p class="uc-note">場面を選ぶと、入力画面に例が入ります。そのまま、または書き換えて送ってください。結果は業務システム側の一覧と記録に表示されます。</p>
@@ -151,6 +151,7 @@ const fields = [
               </label>
               <button type="submit" class="uc-submit" data-pv-submit disabled>報告を送る</button>
               <div class="uc-form-result" data-pv-result hidden></div>
+              <p class="uc-demo-consult"><a href="/contact/?source=partner_visit_demo&category=line_sf" data-consult-cta data-analytics-system="salesforce" data-analytics-surface="partner_visit">この訪問報告の連携について相談する <span aria-hidden="true">→</span></a></p>
             </form>
           </div>
 
@@ -181,7 +182,7 @@ const fields = [
       <div class="uc-container uc-two">
         <div>
           <h2>この形で作る場合の費用。</h2>
-          <p>LINE × Salesforce連携（34万円〜・税別）の範囲でご案内します。取引先の検索、仮登録と確認の流れ、代理店ごとの表示範囲の設計は、代理店の数と運用を伺ったうえでお見積もりします。Apexによる独自開発は対象外です。</p>
+          <p>LINE × Salesforce連携（33万円〜・税別）の範囲でご案内します。取引先の検索、仮登録と確認の流れ、代理店ごとの表示範囲の設計は、代理店の数と運用を伺ったうえでお見積もりします。Apexによる独自開発は対象外です。</p>
           <a href="/pricing/#line" class="uc-link">料金と対応範囲を見る<span aria-hidden="true">→</span></a>
         </div>
         <div>
@@ -226,6 +227,7 @@ const fields = [
 </BaseLayout>
 
 <script>
+  import { trackSiteEvent } from '../../scripts/site-analytics';
   type Scenario = 'normal' | 'unknown' | 'quote';
 
   function initPartnerVisitDemo() {
@@ -266,6 +268,7 @@ const fields = [
       result.hidden = false;
       result.className = 'uc-form-result is-ok';
       result.textContent = message;
+      trackSiteEvent('demo_complete', 'salesforce', 'partner_visit');
     };
     const clearEmpty = () => approvals.querySelector('.uc-empty')?.remove();
 

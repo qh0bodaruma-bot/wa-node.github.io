@@ -7,6 +7,7 @@ import {
   organizationSchema,
   websiteSchema,
 } from '../data/structuredData';
+import { servicePrices } from '../data/services';
 
 const title = "LINE連携構築｜Salesforce・kintone・HubSpot・スプレッドシート｜和-Node";
 const description = "LINE公式アカウントとSalesforce・kintone・HubSpot・Googleスプレッドシートの連携構築。LINEで受けた申込・問い合わせを業務システムへ自動で登録し、転記や二重入力を減らします。初回30分の無料相談。";
@@ -20,7 +21,7 @@ const structuredData = [
       "LIFF開発・Messaging API・各種システム連携を一気通貫で構築。設計から実装・テストまで1社で対応します。",
     path: "/pricing/",
     serviceType: "LINE LIFF development and CRM/SFA integration",
-    priceFrom: "100000",
+    priceFrom: String(servicePrices.lineSheets),
   }),
 ];
 ---

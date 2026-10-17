@@ -1,5 +1,4 @@
 ---
-import LanguageSwitcher from './LanguageSwitcher.astro';
 import MaterialIcon from './MaterialIcon.astro';
 import t from '../i18n/translations.json';
 import { MULTILANG_PAGES } from '../i18n/navigation';
@@ -62,7 +61,6 @@ function isCurrentPage(path: string) {
         {lang === 'ja' && <a href="/blog/" class:list={{ 'nav-active': isCurrentPage('/blog') }} aria-current={isCurrentPage('/blog') ? 'page' : undefined}>コラム</a>}
         <a href={getLocalizedLink('/about')} class:list={{ 'nav-active': isCurrentPage('/about') }} aria-current={isCurrentPage('/about') ? 'page' : undefined}>{t.nav.about[lang]}</a>
         <a href={getLocalizedLink('/contact')} class="nav-cta">{t.nav.cta[lang]}</a>
-        <LanguageSwitcher lang={lang} />
         <button type="button" class="motion-toggle" data-motion-toggle aria-pressed="false">
           <span class="motion-switch" aria-hidden="true"></span>
           <span class="motion-label">{lang === 'ja' ? '動きを控えめに' : lang === 'en' ? 'Less motion' : 'Moins d’animations'}</span>

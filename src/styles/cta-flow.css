@@ -1,0 +1,102 @@
+/*
+  CTAボタンの共通の動き（矢印リンクの link-flow.css と対になる）
+  カーソルを合わせる・キーボードで選ぶと、ボタンが少し浮いて影が深くなり、矢印が右へ進む。押した瞬間は沈む。
+  最後の相談帯のボタンだけ、画面に入ったときに矢印が一度だけ2回前へ動き、押せる場所を示す（scripts/cta-cue.ts）。
+  繰り返す動き（光が横切る・脈打つ）は入れない。UI_REFERENCES.md「繰り返す動きは1画面に1つまで」と、
+  2026-08-20 にボタンの常時の光沢を外した経緯のため。
+  動きを減らす設定（端末・サイト上の切替）では、色の変化だけにする。
+
+  対象（和-Node本体のCTA。制作例のデモ画面のボタンは対象外）
+  - サービスページのボタン：.service-page .s-button（トップ・料金・制作例・問い合わせ・about）
+  - ヘッダー・フッターの相談ボタン：.nav-cta / .footer-btn-primary
+  - 従来ページのボタン：.btn（規約・404 など）
+  - 事例ページの相談ボタン：.demo-consult a / .uc-button（問い合わせへのリンク）/ .case-cta .btn-primary
+  - 診断ツール・ガイドの相談ボタン：.wanode-cta-box .primary-btn / .main-btn / 問い合わせへの .btn-main
+  矢印は、各ボタンの最後にある aria-hidden="true" の要素（「→」や Material Symbols のアイコン）。
+  LINE のアイコン画像を含むボタンは、アイコンに動きを付けない規定（DESIGN_BASELINE.md）のため浮かせない。
+*/
+:root {
+  --cta-lift: -2px;
+  --cta-shadow-rest: 0 4px 14px rgba(199, 53, 47, 0.18);
+  --cta-shadow-hover: 0 12px 26px rgba(199, 53, 47, 0.28);
+}
+
+:is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]):not(:has(img[src*="line" i])):not(:disabled) {
+  transition:
+    background-color var(--motion-ui, 160ms) ease-out,
+    border-color var(--motion-ui, 160ms) ease-out,
+    color var(--motion-ui, 160ms) ease-out,
+    transform var(--motion-panel, 200ms) var(--motion-ease, ease-out),
+    box-shadow var(--motion-panel, 200ms) ease-out;
+}
+
+/* 普段から、押せる面であることを影で示す（主ボタンだけ。.btn・.nav-cta は既存の影を使う） */
+.service-page .s-button:not(.secondary),
+.footer-btn-primary,
+.uc-button[href*="contact"] {
+  box-shadow: var(--cta-shadow-rest);
+}
+
+:is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]) > [aria-hidden="true"]:last-child {
+  display: inline-block;
+  transition: transform var(--motion-panel, 200ms) var(--motion-ease, ease-out);
+}
+
+/* 発火：浮く・影が深くなる・矢印が進む（マウスはホバー、キーボードはフォーカス） */
+@media (hover: hover) and (pointer: fine) {
+  :is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]):not(:has(img[src*="line" i])):not(:disabled):hover {
+    transform: translateY(var(--cta-lift));
+    box-shadow: var(--cta-shadow-hover);
+    opacity: 1;
+  }
+  :is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]):not(:has(img[src*="line" i])):not(:disabled):hover > [aria-hidden="true"]:last-child {
+    transform: translateX(5px);
+  }
+}
+:is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]):not(:has(img[src*="line" i])):not(:disabled):focus-visible {
+  transform: translateY(var(--cta-lift));
+  box-shadow: var(--cta-shadow-hover);
+}
+:is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]):not(:has(img[src*="line" i])):not(:disabled):focus-visible > [aria-hidden="true"]:last-child {
+  transform: translateX(5px);
+}
+
+/* 副ボタンと、地が濃い色のボタンは、朱色の影ではなく中立の影にする */
+@media (hover: hover) and (pointer: fine) {
+  :is(.service-page .s-button.secondary, .btn.secondary, .demo-consult a):hover {
+    box-shadow: var(--shadow-soft, 0 10px 28px rgba(15, 76, 92, 0.1));
+  }
+}
+:is(.service-page .s-button.secondary, .btn.secondary, .demo-consult a):focus-visible {
+  box-shadow: var(--shadow-soft, 0 10px 28px rgba(15, 76, 92, 0.1));
+}
+
+/* 押した瞬間は沈む */
+:is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]):not(:has(img[src*="line" i])):not(:disabled):active {
+  transform: translateY(0) scale(0.98);
+  box-shadow: none;
+  transition-duration: var(--motion-press, 100ms);
+}
+
+/* 相談帯のボタン：画面に入ったとき一度だけ、矢印が2回前へ動く（cta-cue.ts が .is-cued を付ける） */
+.s-contact-band .s-button.is-cued > [aria-hidden="true"]:last-child {
+  animation: cta-cue 1.2s var(--motion-ease, ease-out) 400ms 1 both;
+}
+@keyframes cta-cue {
+  0%, 40%, 80%, 100% { transform: none; }
+  20% { transform: translateX(6px); }
+  60% { transform: translateX(4px); }
+}
+
+/* 動きを減らす設定：浮く・沈む・矢印の移動をやめ、色の変化だけ残す */
+@media (prefers-reduced-motion: reduce) {
+  :is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]),
+  :is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]) > [aria-hidden="true"]:last-child {
+    transform: none !important;
+    animation: none !important;
+  }
+}
+html[data-motion="reduce"] :is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]),
+html[data-motion="reduce"] :is(.service-page .s-button, .nav-cta, .footer-btn-primary, .btn, .demo-consult a, .uc-button[href*="contact"], .case-cta .btn-primary, .wanode-cta-box .primary-btn, .main-btn, a.btn-main[href^="/contact"]) > [aria-hidden="true"]:last-child {
+  transform: none !important;
+}

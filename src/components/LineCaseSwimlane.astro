@@ -1,0 +1,102 @@
+---
+// デモページ：問い合わせから対応までを「お客様／自動の仕組み／担当者」の3本の帯に分けて示す図。
+// 以前の「4ステップ」と「自動化する範囲と、人が判断する範囲」を1枚にまとめたもの。
+// 帯（行）と手順（列）の格子に置き、幅が狭い場所では手順を縦に並べて、帯の名前を各手順に添える。
+import MaterialIcon from './MaterialIcon.astro';
+import type { LineCaseConfig } from '../data/lineCaseCatalog';
+export interface SwimlaneStep { step: string; title: string; desc: string; lane: 'customer' | 'auto' | 'staff' }
+interface Props { config: Pick<LineCaseConfig, 'vendorName' | 'automatedTasks' | 'humanTasks'>; steps: SwimlaneStep[] }
+const { config, steps } = Astro.props;
+const lanes = {
+  customer: { label: 'お客様', sub: 'LINE公式アカウント', icon: 'forum' },
+  auto: { label: '自動', sub: '和-Nodeが作る連携の仕組み', icon: 'smart_toy' },
+  staff: { label: '担当者', sub: `${config.vendorName}で確認`, icon: 'person' },
+} as const;
+const laneOrder = ['customer', 'auto', 'staff'] as const;
+// 自動化の候補は最初の「自動」の手順に、担当者が判断することは最初の「担当者」の手順に添える
+const firstAuto = steps.findIndex((s) => s.lane === 'auto');
+const firstStaff = steps.findIndex((s) => s.lane === 'staff');
+---
+<section class="case-section swimlane-section">
+  <div class="container">
+    <h2>問い合わせから対応まで、<br />誰が何をするか。</h2>
+    <p class="swimlane-lead">自動で進める部分と、担当者が判断する部分を分けることで、対応漏れと誤登録の両方を防ぎやすくします。</p>
+    <figure class="swimlane" aria-label={`LINEから${config.vendorName}までの流れと役割分担`} style={`--steps:${steps.length}`}>
+      <div class="sl-grid">
+        {laneOrder.map((key, row) => (
+          <div class={`sl-lane sl-lane-${key}`} style={`--row:${row + 1}`} aria-hidden="true">
+            <span class="sl-lane-name"><MaterialIcon name={lanes[key].icon} />{lanes[key].label}</span>
+            <span class="sl-lane-sub">{lanes[key].sub}</span>
+          </div>
+        ))}
+        <ol class="sl-steps">
+          {steps.map((s, i) => (
+            <li class={`sl-step sl-step-${s.lane}`} style={`--row:${laneOrder.indexOf(s.lane) + 1};--col:${i + 2}`}>
+              <p class="sl-who"><MaterialIcon name={lanes[s.lane].icon} />{lanes[s.lane].label}</p>
+              <span class="sl-num">{s.step}</span>
+              <h3>{s.title}</h3>
+              <p>{s.desc}</p>
+              {i === firstAuto && config.automatedTasks.length > 0 && (
+                <div class="sl-tasks"><p>自動化の候補</p><ul>{config.automatedTasks.map((t) => <li>{t}</li>)}</ul></div>
+              )}
+              {i === firstStaff && config.humanTasks.length > 0 && (
+                <div class="sl-tasks"><p>担当者が判断すること</p><ul>{config.humanTasks.map((t) => <li>{t}</li>)}</ul></div>
+              )}
+            </li>
+          ))}
+        </ol>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .swimlane-section { background: rgba(15, 76, 92, 0.03); }
+  .swimlane-section h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 900; color: var(--text-deep); margin-bottom: 14px; line-height: 1.4; }
+  .swimlane-lead { color: #555; line-height: 1.9; max-width: 46em; margin: 0 0 28px; }
+  .swimlane { container-type: inline-size; margin: 0; }
+  .sl-lane { display: none; }
+  .sl-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+
+  /* 縦並び（既定）：各手順に、誰の作業かを色付きの札で示す */
+  .sl-step { position: relative; padding: 18px 20px; border-radius: 14px; background: #fff; border: 1px solid var(--trust-line, rgba(15, 76, 92, .18)); border-left-width: 5px; }
+  .sl-step-customer { border-left-color: #1f9d55; }
+  .sl-step-auto { border-left-color: var(--trust, #0f4c5c); }
+  .sl-step-staff { border-left-color: #b07d2b; }
+  .sl-step:not(:last-child)::after { content: ""; position: absolute; left: 24px; bottom: -14px; width: 2px; height: 14px; background: var(--trust, #0f4c5c); }
+  .sl-who { display: inline-flex; align-items: center; gap: 6px; margin: 0 0 8px; padding: 2px 10px; border-radius: 999px; font-size: .8125rem; font-weight: 800; }
+  .sl-who :global(.material-symbols-rounded) { font-size: 18px; }
+  .sl-step-customer .sl-who { background: #e3f4ea; color: #17703d; }
+  .sl-step-auto .sl-who { background: #e1ecef; color: var(--trust, #0f4c5c); }
+  .sl-step-staff .sl-who { background: #f6ecd8; color: #7d5617; }
+  .sl-num { display: block; font-size: .875rem; font-weight: 900; color: var(--trust, #0f4c5c); }
+  .sl-step h3 { margin: 2px 0 6px; font-size: 1rem; font-weight: 900; color: var(--text-deep, #1a1a1a); line-height: 1.6; }
+  .sl-step > p:not(.sl-who) { margin: 0; color: #555; font-size: .9375rem; line-height: 1.8; }
+  .sl-tasks { margin-top: 12px; padding-top: 12px; border-top: 1px dashed var(--trust-line, rgba(15, 76, 92, .25)); }
+  .sl-tasks p { margin: 0 0 6px; font-size: .875rem; font-weight: 800; color: var(--text-deep, #1a1a1a); }
+  .sl-tasks ul { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 6px; }
+  .sl-tasks li { padding: 3px 10px; border-radius: 6px; background: #f2f5f4; color: #333; font-size: .875rem; line-height: 1.6; }
+
+  /* 横並び：帯（お客様／自動／担当者）を行、手順を列にした格子。手順は階段状に下りていく */
+  @supports (grid-template-rows: subgrid) {
+  @container (min-width: 860px) {
+    .sl-grid { display: grid; grid-template-columns: 10.5em repeat(var(--steps), minmax(0, 1fr)); grid-template-rows: repeat(3, auto); column-gap: 18px; position: relative; }
+    .sl-lane { display: flex; flex-direction: column; justify-content: center; gap: 2px; grid-row: var(--row); grid-column: 1 / -1; padding: 14px 16px; border-radius: 14px; min-height: 96px; }
+    .sl-lane + .sl-lane { margin-top: 10px; }
+    .sl-lane-customer { background: #eef8f1; }
+    .sl-lane-auto { background: #e9f1f3; }
+    .sl-lane-staff { background: #faf3e6; }
+    .sl-lane-name { display: inline-flex; align-items: center; gap: 6px; font-weight: 900; font-size: .9375rem; color: var(--text-deep, #1a1a1a); width: 9.5em; }
+    .sl-lane-name :global(.material-symbols-rounded) { font-size: 20px; }
+    .sl-lane-sub { width: 9.5em; font-size: .8125rem; color: #555; line-height: 1.5; }
+    /* 手順の一覧は、帯と同じ格子（subgrid）に重ねて置く */
+    .sl-steps { grid-column: 1 / -1; grid-row: 1 / -1; display: grid; grid-template-columns: subgrid; grid-template-rows: subgrid; gap: 0 18px; }
+    .sl-step { grid-row: var(--row); grid-column: var(--col); align-self: center; margin: 10px 0; border-left-width: 1px; border-top-width: 4px; }
+    .sl-step-customer { border-top-color: #1f9d55; }
+    .sl-step-auto { border-top-color: var(--trust, #0f4c5c); }
+    .sl-step-staff { border-top-color: #b07d2b; }
+    .sl-who { display: none; }
+    .sl-step:not(:last-child)::after { left: auto; right: -17px; top: 50%; bottom: auto; width: 16px; height: 16px; background: none; border-top: 2px solid var(--trust, #0f4c5c); border-right: 2px solid var(--trust, #0f4c5c); transform: translateY(-50%) rotate(45deg) scale(.6); }
+  }
+  }
+</style>

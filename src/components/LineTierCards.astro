@@ -1,0 +1,44 @@
+---
+// 制作例（デモ）ページの「実装範囲と参考価格」。料金ページと同じ3プランのデータを使う。
+import { lineTierText, lineTierPrice, lineCampaign, startingPrice, type LineConnector } from '../data/services';
+interface Props { connector: LineConnector }
+const { connector } = Astro.props;
+const text = lineTierText.ja;
+---
+<ul class="tier-cards">
+  {text.tiers.map((tier, i) => {
+    const deal = connector === lineCampaign.connector && i === lineCampaign.tier;
+    return (
+      <li class:list={['tier-card', { 'is-deal': deal }]}>
+        <div class="tier-card-head">
+          <span class="tier-card-name">{tier}</span>
+          {deal && <span class="tier-card-badge">{text.badge}</span>}
+        </div>
+        <strong>{startingPrice(lineTierPrice(connector, i))}</strong>
+        {deal && <span class="tier-card-regular">{text.regular} <s>{startingPrice(lineCampaign.regular)}</s></span>}
+        <p>{text.plans[connector][i]}</p>
+      </li>
+    );
+  })}
+</ul>
+{connector === lineCampaign.connector && <p class="tier-card-reason">{text.campaignReason}</p>}
+<p class="tier-card-note">表示価格は税別の開始価格です。<a href="/pricing/#line">料金の詳細へ</a></p>
+<style>
+  .tier-cards { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .tier-card { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: baseline; gap: 4px 16px; padding: 18px 22px; border: 1px solid var(--trust-line, #d5e0e3); border-radius: 16px; background: #fff; }
+  .tier-card-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 8px; }
+  .tier-card-name { display: inline-block; padding: 4px 10px; border-radius: 999px; background: rgba(15, 76, 92, 0.08); color: var(--trust, #0f4c5c); font-size: 0.8125rem; font-weight: 900; letter-spacing: 0.08em; }
+  .tier-card-badge { padding: 3px 10px; border-radius: 999px; background: var(--accent-red, #b9322d); color: #fff; font-size: 0.75rem; font-weight: 900; }
+  .tier-card strong { font-size: 1.4rem; font-weight: 900; color: var(--text-deep, #1c302f); line-height: 1.3; text-align: right; white-space: nowrap; }
+  .tier-card-regular { grid-column: 2; text-align: right; font-size: 0.8125rem; color: #555; }
+  .tier-card p { grid-column: 1 / -1; margin: 6px 0 0; font-size: 0.9375rem; font-weight: 700; color: #444; line-height: 1.6; }
+  .tier-card.is-deal { border: 2px solid var(--accent-red, #b9322d); background: #fdf3f1; }
+  .tier-card.is-deal strong { color: var(--accent-red, #b9322d); }
+  .tier-card-reason { margin: 14px 0 0; font-size: 0.875rem; color: #444; line-height: 1.8; }
+  .tier-card-note { margin: 12px 0 0; font-size: 0.875rem; color: #555; }
+  .tier-card-note a { color: var(--trust, #0f4c5c); font-weight: 700; }
+  @media (max-width: 480px) {
+    .tier-card { grid-template-columns: 1fr; padding: 16px 18px; }
+    .tier-card strong, .tier-card-regular { grid-column: 1; text-align: left; }
+  }
+</style>

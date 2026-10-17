@@ -1,9 +1,10 @@
 /**
  * サイト共通レイアウト（BaseLayout）で読み込む Material Symbols のアイコン名。
- * Google Fonts の icon_names で、ここに挙げたアイコンだけを読み込む（全アイコンは約1.4MB、この一覧で約80KB）。
- * 新しいアイコンを使うときは、この一覧に名前を追加する。追加し忘れると、ビルド後の
- * scripts/check-icons.mjs が止まり、足りない名前を表示する。
- * Google Fonts の指定上、アルファベット順に並べる（読み込み時に並べ替えている）。
+ * ここに挙げたアイコンだけを含む部分フォント（全アイコンは約1.4MB、この一覧で約80KB）を
+ * `npm run fetch-fonts` で Google Fonts から取得し、public/fonts/ から自サイトで配信する。
+ * 新しいアイコンを使うときは、この一覧に名前を追加してから `npm run fetch-fonts` を実行する。
+ * 一覧への追加し忘れと、追加後の取り直し忘れは、ビルド後の scripts/check-icons.mjs が止めて知らせる。
+ * Google Fonts の指定上、アルファベット順に並べる（取得時に並べ替えている）。
  */
 export const materialIconNames = [
   'accessible_forward', 'account_tree', 'add', 'add_circle', 'ads_click', 'analytics', 'architecture',
@@ -38,4 +39,5 @@ export const materialIconNames = [
   'wc', 'web', 'web_traffic', 'width', 'wifi', 'work',
 ] as const;
 
-export const materialIconsHref = `https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0..1,0&icon_names=${[...materialIconNames].sort().join(',')}&display=block`; // swapだと読込前に「arrow_forward」等の文字が一瞬見えるため
+// 取得時の指定は scripts/fetch-fonts.mjs（display=block。swapだと読込前に「arrow_forward」等の文字が一瞬見えるため）
+export const materialIconsHref = '/fonts/material-symbols-rounded.css';

@@ -1,7 +1,8 @@
 ---
 import { MULTILANG_PAGES } from '../i18n/navigation';
 
-const { lang = 'ja' } = Astro.props;
+// variant="links" はフッター用。「日本語 / English / Français」の文字リンクで出す
+const { lang = 'ja', variant = 'capsule' } = Astro.props;
 const currentUrl = Astro.url;
 let pathWithoutLang = currentUrl.pathname.replace(/^\/(en|fr)(\/|$)/, '/');
 if (pathWithoutLang === '') pathWithoutLang = '/';
@@ -26,12 +27,20 @@ function getLangPath(targetLang: string) {
   return `/${targetLang}/`;
 }
 ---
+{variant === 'links' ? (
+<nav class="lang-links" aria-label={lang === 'ja' ? '表示言語' : lang === 'fr' ? 'Langue d’affichage' : 'Display language'}>
+  <a href={getLangPath('ja')} lang="ja" aria-current={lang === 'ja' ? 'true' : undefined}>日本語</a>
+  <a href={getLangPath('en')} lang="en" aria-current={lang === 'en' ? 'true' : undefined}>English</a>
+  <a href={getLangPath('fr')} lang="fr" aria-current={lang === 'fr' ? 'true' : undefined}>Français</a>
+</nav>
+) : (
 <div class="lang-switch-capsule" role="group" aria-label={lang === 'ja' ? '表示言語' : lang === 'fr' ? 'Langue d’affichage' : 'Display language'}>
   <div class={`switch-bg lang-${lang}`}></div>
   <a href={getLangPath('ja')} class={lang === 'ja' ? 'active' : ''} aria-label="日本語" lang="ja" aria-current={lang === 'ja' ? 'true' : undefined}>JA</a>
   <a href={getLangPath('en')} class={lang === 'en' ? 'active' : ''} aria-label="English" lang="en" aria-current={lang === 'en' ? 'true' : undefined}>EN</a>
   <a href={getLangPath('fr')} class={lang === 'fr' ? 'active' : ''} aria-label="Français" lang="fr" aria-current={lang === 'fr' ? 'true' : undefined}>FR</a>
 </div>
+)}
 
 <style>
   .lang-switch-capsule {
@@ -101,4 +110,12 @@ function getLangPath(targetLang: string) {
   .switch-bg.lang-ja { transform: translateX(0); }
   .switch-bg.lang-en { transform: translateX(44px); }
   .switch-bg.lang-fr { transform: translateX(88px); }
+
+  /* フッター用の文字リンク。色はフッターの文字色を引き継ぐ */
+  .lang-links { display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 4px; color: inherit; font-size: .875rem; }
+  .lang-links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 8px; color: inherit; text-decoration: none; opacity: .8; }
+  .lang-links a + a::before { content: "/"; margin-right: 12px; margin-left: -4px; opacity: .5; }
+  .lang-links a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+  .lang-links a[aria-current="true"] { opacity: 1; font-weight: 700; }
+  .lang-links a:focus-visible { outline: 3px solid currentColor; outline-offset: 2px; }
 </style>
