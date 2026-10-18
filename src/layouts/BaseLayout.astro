@@ -133,6 +133,10 @@ const getLocalizedHref = (l: string) => {
         <link rel="alternate" hreflang="x-default" href={getLocalizedHref('ja')} />
       </>
     )}
+    {/* 字体の先読み（初回表示のずれ CLS を防ぐ。ファイル名は scripts/fetch-fonts.mjs・build-mincho-subset.py で作る名前。字体を取り直したら、ここも確認する） */}
+    {loadSiteFonts && <link rel="preload" href="/fonts/material-symbols-rounded/material-symbols-rounded-000.woff2" as="font" type="font/woff2" crossorigin />}
+    {loadSiteFonts && <link rel="preload" href="/fonts/outfit/outfit-001.woff2" as="font" type="font/woff2" crossorigin />}
+    {loadSiteFonts && <link rel="preload" href="/fonts/shippori-mincho-site/shippori-mincho-site-700-00.woff2" as="font" type="font/woff2" crossorigin />}
     {loadSiteFonts && <link href={materialIconsHref} rel="stylesheet" />}
     {loadSiteFonts && <link href="/fonts/outfit.css" rel="stylesheet" />}
     {structuredDataItems.map((item) => (
