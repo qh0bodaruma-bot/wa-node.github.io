@@ -402,3 +402,56 @@
   #main.home-refresh .home-hero .is-live .record-status .status-done,
   #main.home-refresh .home-hero .demo-chip { transition: none; }
 }
+
+/* 2026-10-17 デザイン見直し 段階2：箱を減らし、細線と余白で区切る。 */
+/* FV左列：説明文の塗りつぶしの箱をやめ、上下の細線で区切る（価格カードは白地の枠のまま残り、押せる要素と見分けられる） */
+#main.home-refresh .home-hero .hero-reading {
+  padding: 22px 0;
+  background: transparent;
+  border: 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  border-radius: 0;
+}
+
+/* 相談の範囲：2枚のカードをやめ、1本の縦罫で分けた2列にする */
+#main.home-refresh .scope-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: 0;
+  align-items: start;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+#main.home-refresh .scope-col,
+#main.home-refresh .scope-col-no {
+  padding: 28px 0;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+}
+#main.home-refresh .scope-col-yes { padding-right: clamp(24px, 4vw, 56px); }
+#main.home-refresh .scope-col-no {
+  padding-left: clamp(24px, 4vw, 56px);
+  border-left: 1px solid var(--rule);
+}
+@media (max-width: 820px) {
+  #main.home-refresh .scope-split { grid-template-columns: minmax(0, 1fr); }
+  #main.home-refresh .scope-col-yes { padding-right: 0; }
+  #main.home-refresh .scope-col-no { padding-left: 0; border-left: 0; border-top: 1px solid var(--rule); }
+}
+
+/* 制作例：1件目を大きく見せ、残りを2列に並べて、同じ形の繰り返しを避ける */
+@media (min-width: 681px) {
+  #main.home-refresh .usecase-showcase {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: clamp(24px, 4vw, 56px);
+  }
+  #main.home-refresh .usecase-showcase .selected-work:first-child { grid-column: 1 / -1; }
+  #main.home-refresh .usecase-showcase .selected-work:not(:first-child) {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 22px;
+  }
+  #main.home-refresh .usecase-showcase .selected-work:not(:first-child) h3 { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
+}

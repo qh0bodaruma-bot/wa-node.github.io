@@ -223,7 +223,7 @@ export const workCatalog: WorkItem[] = [
       "fr": "Tester le suivi d’un animal, les agendas, les dépenses d’abonnements et leur analyse."
     },
     "href": "/mobile-app-demo/",
-    "image": "",
+    "image": "/images/works/captures/work-11.webp",
     "id": "work-11",
     "priceKey": "businessApp",
     "featured": false
