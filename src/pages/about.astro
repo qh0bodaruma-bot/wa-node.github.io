@@ -227,6 +227,7 @@ const structuredData = [
 <style>
   /* 見出しの書体を、トップ・料金などのページと同じ明朝体にそろえる（2026-09-15） */
   h1, h2 { font-family: 'Shippori Mincho', 'Yu Mincho', 'YuMincho', 'Hiragino Mincho ProN', serif; font-weight: 700; }
+  .section-title h2 { font-weight: 700; }
   .about-hero {
     background: linear-gradient(135deg, #fdfcf9 0%, #f7f1e6 100%);
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%238c6b1f' stroke-width='1.5' stroke-opacity='0.07'%3E%3Ccircle cx='0' cy='0' r='40'/%3E%3Ccircle cx='80' cy='0' r='40'/%3E%3Ccircle cx='0' cy='80' r='40'/%3E%3Ccircle cx='80' cy='80' r='40'/%3E%3Ccircle cx='40' cy='40' r='40'/%3E%3C/g%3E%3C/svg%3E"), linear-gradient(135deg, #fdfcf9 0%, #f7f1e6 100%);
@@ -277,7 +278,7 @@ const structuredData = [
     color: var(--accent);
     margin-bottom: 24px;
     font-family: 'Shippori Mincho', serif;
-    font-weight: 800;
+    font-weight: 700; /* 明朝の見出しは700にそろえる（800・900だと別の字体ファイルを読む。2026-10-19） */
     line-height: 1.3;
   }
   .message-content p { margin-bottom: 20px; color: #444; font-size: 1.05rem; }
@@ -369,7 +370,7 @@ const structuredData = [
     padding: 80px 60px;
     border-radius: 12px;
   }
-  .reliability-box h2 { color: #f6d88f; margin-bottom: 40px; font-weight: 900; }
+  .reliability-box h2 { color: #f6d88f; margin-bottom: 40px; font-weight: 700; }
   .trust-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 48px; align-items: center; }
   .trust-badge { width: 150px; background: #fff; border-radius: 12px; padding: 10px; box-shadow: 0 12px 28px rgba(0,0,0,0.18); }
   .trust-item p {
