@@ -3,7 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getBlogs } from '../../library/microcms';
 import { presentBlog } from '../../library/blogPresentation';
 import { blogTopics, blogStartPoints } from '../../data/blogReadingGuides';
-import '../../styles/fonts/shippori-mincho.css';
+import '../../styles/fonts/shippori-mincho-site.css';
 
 // microCMSから記事一覧を取得（公開日の降順）
 const response = await getBlogs({ 

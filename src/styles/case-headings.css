@@ -1,10 +1,11 @@
-@import './fonts/shippori-mincho.css';
+@import './fonts/shippori-mincho-site.css';
 
 /* 連携デモ詳細ページの大見出し（h1・h2）を、他ページと同じ明朝にそろえる（2026-10-17 デザイン見直し 段階3）。 */
 main.line-case h1,
 main.line-case h2 {
   font-family: 'Shippori Mincho', 'Yu Mincho', serif;
-  font-weight: 700;
+  /* 部品ごとの太さ指定（800・900）を700にそろえる。明朝の太さの種類が減り、読み込む字体ファイルが半分で済む */
+  font-weight: 700 !important;
 }
 main.line-case h1 { line-height: 1.3; text-wrap: balance; }
 main.line-case h2 { line-height: 1.4; text-wrap: balance; }
