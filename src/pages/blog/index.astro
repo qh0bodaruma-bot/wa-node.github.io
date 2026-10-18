@@ -3,6 +3,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getBlogs } from '../../library/microcms';
 import { presentBlog } from '../../library/blogPresentation';
 import { blogTopics, blogStartPoints } from '../../data/blogReadingGuides';
+import '../../styles/fonts/shippori-mincho.css';
 
 // microCMSから記事一覧を取得（公開日の降順）
 const response = await getBlogs({ 
@@ -73,12 +74,13 @@ const startPoints = blogStartPoints.filter(point => posts.some(post => post.id =
 
 <style>
   .blog-index { padding-bottom: 120px; }
-  .blog-header { padding: 80px 0 48px; text-align: center; }
+  .blog-header { padding: 80px 0 48px; text-align: left; }
   .eyebrow { font-size: 0.85rem; font-weight: 900; color: var(--accent2); letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 16px; display: block; }
-  .blog-header h1 { font-size: clamp(2rem, 6vw, 3.4rem); font-weight: 900; line-height: 1.4; margin-bottom: 24px; }
+  .blog-header h1, .reading-start h2, .topic-section > h2 { font-family: 'Shippori Mincho', 'Yu Mincho', serif; font-weight: 700; }
+  .blog-header h1 { font-size: clamp(2.35rem, 4.3vw, 3.8rem); line-height: 1.3; margin-bottom: 24px; text-wrap: balance; }
   .accent-text { color: var(--trust, #0f4c5c); }
   .accent-text > span { display: inline-block; }
-  .lead { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin: 0 auto; line-height: 1.8; }
+  .lead { font-size: 1.15rem; color: var(--muted); max-width: 700px; margin: 0; line-height: 1.8; }
   .reading-start { padding: 28px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
   .reading-start h2 { font-size: 1.3rem; line-height: 1.6; margin: 0 0 20px; }
   .start-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
