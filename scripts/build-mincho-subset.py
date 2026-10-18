@@ -13,7 +13,7 @@
 
 仕組み:
   - dist の HTML から、明朝で表示される要素（h1・h2、フッターの見出し、ShipporiMincho 等のクラス）の文字を集める。
-  - 主要ページ（トップ→料金→制作例→about→相談→コラム→英語トップ→フランス語トップ）の順に、そのページで新たに必要な文字を1スライスにまとめ、
+  - 主要ページ（トップ→料金→制作例→about→相談→コラム→英語トップ→フランス語トップ→デモ詳細・アプリデモ）の順に、そのページで新たに必要な文字を1スライスにまとめ、
     残りは使うページ数の多い順に60字ずつのスライスにする。
   - 作った CSS（src/styles/fonts/shippori-mincho-site.css）は、Google の分割フォントの「後」に宣言する。
     専用ファイルの範囲にない文字は、従来の分割フォントに自動で切り替わる（表示は崩れず、読み込みが増えるだけ）。
@@ -31,7 +31,9 @@ import sys
 from html.parser import HTMLParser
 
 CORE_PAGES = ['index.html', 'pricing/index.html', 'works/index.html', 'about/index.html', 'contact/index.html', 'blog/index.html',
-              'en/index.html', 'fr/index.html']
+              'en/index.html', 'fr/index.html', 'case-studies/line-kintone-demo/index.html', 'mobile-app-demo/index.html',
+              'case-studies/line-hubspot-demo/index.html', 'case-studies/line-salesforce-demo/index.html',
+              'case-studies/line-spreadsheet-demo/index.html']
 CHUNK = 60
 TAGS = {'h1', 'h2'}
 CLS = ('footer-tagline', 'footer-wordmark', 'ShipporiMincho', 'premium-heading', 'step-title', 'catch-copy')

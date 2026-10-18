@@ -102,6 +102,10 @@ const copy = {
     .analytics-consent[data-theme="wa-node"] .analytics-consent-inner { grid-template-columns: 1fr; gap: 10px; }
     .analytics-consent[data-theme="wa-node"] .analytics-consent-actions { justify-content: flex-end; }
   }
+  /* 1000〜1199pxは左の開始価格カードの右端に近いので、幅を狭めて重ならないようにする */
+  @media (min-width: 1000px) and (max-width: 1199px) {
+    .analytics-consent[data-theme="wa-node"] { max-width: 440px; }
+  }
 </style>
 
 <script is:inline>
