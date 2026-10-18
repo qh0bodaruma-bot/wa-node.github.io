@@ -96,6 +96,12 @@ const copy = {
     .analytics-consent[data-theme="wa-node"] .analytics-consent-actions { gap: 8px; }
   }
   @media (max-width: 680px) { .analytics-consent-inner { grid-template-columns: 1fr; gap: 16px; } .analytics-consent-actions { display: grid; grid-template-columns: 1fr 1fr; } }
+  /* 広い画面では、画面下いっぱいの帯をやめ、右下の小さなカードにする。左の主役（トップの開始価格・本文）を隠さん（2026-10-19） */
+  @media (min-width: 1000px) {
+    .analytics-consent[data-theme="wa-node"] { inset: auto 16px 16px auto; max-width: 520px; margin: 0; padding: 14px 16px; }
+    .analytics-consent[data-theme="wa-node"] .analytics-consent-inner { grid-template-columns: 1fr; gap: 10px; }
+    .analytics-consent[data-theme="wa-node"] .analytics-consent-actions { justify-content: flex-end; }
+  }
 </style>
 
 <script is:inline>
