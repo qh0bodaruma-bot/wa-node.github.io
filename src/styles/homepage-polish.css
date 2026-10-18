@@ -379,10 +379,9 @@
 /* 操作後の再生。自動再生（.is-playing）とは別の状態として扱う */
 #main.home-refresh .home-hero .is-live .record-field dd {
   clip-path: inset(0 100% 0 0);
-  opacity: 0;
-  transition: clip-path 360ms var(--motion-ease, ease-out), opacity 200ms ease-out;
+  transition: clip-path 360ms var(--motion-ease, ease-out);
 }
-#main.home-refresh .home-hero .is-live .record-field.is-filled dd { clip-path: inset(0 0 0 0); opacity: 1; }
+#main.home-refresh .home-hero .is-live .record-field.is-filled dd { clip-path: inset(0 0 0 0); }
 #main.home-refresh .home-hero .is-live .record-field.is-missing dd { color: #a8322d; }
 #main.home-refresh .home-hero .is-live .record-status .status-done { opacity: 0; transition: opacity 200ms ease-out; }
 #main.home-refresh .home-hero .is-live .record-status[data-state="wait"] .status-wait { visibility: visible; }

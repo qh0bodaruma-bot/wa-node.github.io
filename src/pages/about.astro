@@ -312,18 +312,17 @@ const structuredData = [
   .story-box h3 { margin-bottom: 24px; color: var(--accent); font-weight: 800; }
   .story-box p { margin-bottom: 16px; color: #444; line-height: 1.8; }
 
+  /* 4つの箱をやめ、細線で区切った2列の一覧にする（2026-10-19 デザイン見直し）。主軸のLINE連携構築だけ、上の線を太い茶色にして目立たせる */
   .qual-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 32px;
+    gap: 0 clamp(32px, 5vw, 72px);
   }
   .qual-item {
-    background: #fff;
-    padding: 40px;
-    border-radius: 12px;
-    border: 1px solid var(--line);
+    padding: 32px 0 36px;
+    border-top: 1px solid var(--line);
   }
-  .qual-item.highlight-border { border: 2px solid var(--accent); }
+  .qual-item.highlight-border { border-top: 3px solid var(--accent); }
   .career-box { margin: 0 0 48px; padding: 36px 40px; background: #fff; border: 1px solid var(--line); border-radius: 8px; }
   .career-box h3 { margin-bottom: 20px; color: var(--accent); font-weight: 800; }
   .career-list { list-style: none; margin: 0; padding: 0; }
@@ -332,7 +331,7 @@ const structuredData = [
   .career-year { font-weight: 700; color: var(--accent); white-space: nowrap; }
   @media (max-width: 560px) { .career-box { padding: 24px 20px; } .career-list li { grid-template-columns: 1fr; gap: 4px; } }
   .qual-item h4 :global(.ic-inline) { color: inherit; background: #f3ebe0; }
-  .qual-item h4 { margin-bottom: 20px; color: var(--accent); border-bottom: 1px solid var(--line); padding-bottom: 10px; font-weight: 800; }
+  .qual-item h4 { margin-top: 0; margin-bottom: 20px; color: var(--accent); border-bottom: 1px solid var(--line); padding-bottom: 10px; font-weight: 800; }
   .qual-item ul { list-style: none; padding: 0; }
   .qual-item li { position: relative; padding-left: 20px; margin-bottom: 12px; font-size: 0.95rem; color: #555; }
   .qual-item li::before { content: "•"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
