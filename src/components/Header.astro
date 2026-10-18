@@ -147,6 +147,9 @@ function isCurrentPage(path: string) {
   }
 
   .nav-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px; /* 押せる範囲を44px以上にする（2026-10-18） */
     color: #2b241f;
     font-weight: 700;
     font-size: 0.9rem;
@@ -158,7 +161,7 @@ function isCurrentPage(path: string) {
   .nav-links a:not(.nav-cta)::after {
     content: '';
     position: absolute;
-    bottom: -4px;
+    bottom: 8px;
     left: 0;
     width: 0;
     height: 2px;
@@ -181,6 +184,7 @@ function isCurrentPage(path: string) {
     background: var(--action, #c7352f);
     color: #fff !important;
     padding: 8px 22px;
+    justify-content: center;
     border-radius: 6px; /* ボタンの角丸は6pxに統一（2026-09-15） */
     box-shadow: 0 4px 15px rgba(199, 53, 47, 0.2);
     transition: background-color 0.3s ease, box-shadow 0.3s ease;

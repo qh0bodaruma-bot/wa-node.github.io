@@ -547,3 +547,13 @@ html[data-motion="reduce"] [data-motion-enter] {
     opacity: 0;
   }
 }
+
+/* キーボード操作時のフォーカス枠。個別に枠を指定している部品はそちらを優先する（:where で優先度を下げている）。
+   2026-10-18 デザイン見直し: 3px・コントラスト比 4.5:1 以上。暗い背景（フッター）は明るい色にする。 */
+:where(a, button, summary, input, select, textarea, [role="button"], [tabindex]):focus-visible {
+  outline: 3px solid #9b4c12;
+  outline-offset: 2px;
+}
+:where(footer) :where(a, button, summary, [role="button"]):focus-visible {
+  outline-color: #f6d88f;
+}

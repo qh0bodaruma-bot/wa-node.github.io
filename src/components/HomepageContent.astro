@@ -239,7 +239,7 @@ const targetData = demoTargets.items.map((t, i) => ({ ...t, href: href(t.path), 
 /* 登録先の切替：4つを1本の枠にまとめ、選択中だけ塗りつぶして区別する */
 .demo-targets{display:flex;gap:4px;margin:0 0 18px;padding:4px;border:1px solid #cddcd8;border-radius:8px;background:#f4f7f5}
 .demo-targets[hidden]{display:none}
-.demo-target{flex:1 1 auto;min-height:40px;padding:0 10px;border:0;border-radius:5px;background:transparent;color:var(--deep);font:inherit;font-size:.875rem;font-weight:700;white-space:nowrap;cursor:pointer;transition:background-color var(--motion-ui,160ms) ease-out,color var(--motion-ui,160ms) ease-out}
+.demo-target{flex:1 1 auto;min-height:44px;padding:0 10px;border:0;border-radius:5px;background:transparent;color:var(--deep);font:inherit;font-size:.875rem;font-weight:700;white-space:nowrap;cursor:pointer;transition:background-color var(--motion-ui,160ms) ease-out,color var(--motion-ui,160ms) ease-out}
 @media(hover:hover) and (pointer:fine){.demo-target[aria-pressed="false"]:hover{background:#e3ebe7}}
 .demo-target[aria-pressed="true"]{background:var(--deep);color:#fff}
 .demo-target:focus-visible{outline:3px solid #9b4c12;outline-offset:2px}

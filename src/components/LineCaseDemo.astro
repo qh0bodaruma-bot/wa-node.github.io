@@ -441,7 +441,7 @@ const vendorInk = { kintone: '#0f4c81', salesforce: '#00638a', hubspot: '#9a3e24
 
   .case-hero { padding: 48px 0 0; background: linear-gradient(135deg, #f8fbf9 0%, #fff 60%, #f0f7ff 100%); border-bottom: 1px solid var(--trust-line); }
   .hero-badge-row { max-width: 1200px; margin: 0 auto 24px; padding: 0 24px; }
-  .back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--trust); font-size: 0.9375rem; font-weight: 800; text-decoration: none; opacity: 0.8; transition: 0.2s; }
+  .back-link { display: inline-flex; align-items: center; min-height: 44px; gap: 6px; color: var(--trust); font-size: 0.9375rem; font-weight: 800; text-decoration: none; opacity: 0.8; transition: 0.2s; }
   .back-link:hover { opacity: 1; }
   .kicker { font-size: 0.875rem; font-weight: 900; color: var(--trust); letter-spacing: 0.28em; margin-bottom: 16px; }
   .case-disclaimer { background: rgba(15, 76, 92, 0.04); border-bottom: 1px solid var(--trust-line); }
@@ -485,6 +485,7 @@ const vendorInk = { kintone: '#0f4c81', salesforce: '#00638a', hubspot: '#9a3e24
   .demo-connector { display: flex; align-items: center; justify-content: center; background: rgba(15, 76, 92, 0.03); border-left: 1px solid var(--trust-line); border-right: 1px solid var(--trust-line); }
   .connector-line { display: flex; flex-direction: column; align-items: center; gap: 6px; }
   .connector-arrow { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--trust); font-size: 0.8125rem; font-weight: 900; opacity: 0.75; transform: translateX(0); transition: opacity var(--motion-trace,240ms) ease-out, color var(--motion-trace,240ms) ease-out, transform var(--motion-trace,240ms) var(--motion-ease,ease-out); }
+  .connector-arrow small { font-size: 0.75rem; }
   .connector-arrow.active { opacity: 1; color: var(--trust); transform: translateX(6px); }
   @media (prefers-reduced-motion: reduce) { .connector-arrow { transition: opacity 1ms, color 1ms; transform: none !important; } }
   .demo-note { text-align: center; font-size: 0.875rem; color: #526563; font-weight: 500; line-height: 1.8; }
@@ -514,7 +515,7 @@ const vendorInk = { kintone: '#0f4c81', salesforce: '#00638a', hubspot: '#9a3e24
   .vendor-tr.new-entry { background: rgba(6,199,85,0.08); animation: lc-fade-in var(--motion-feedback,180ms) ease-out; }
   @keyframes lc-fade-in { from { opacity: 0; } to { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { .vendor-tr.new-entry { animation: none; } }
-  .v-badge { padding: 3px 7px; border-radius: 999px; font-size: 0.63rem; font-weight: 900; white-space: nowrap; }
+  .v-badge { padding: 3px 7px; border-radius: 999px; font-size: 0.75rem; font-weight: 900; white-space: nowrap; }
   .v-badge.new { background: rgba(6,199,85,0.15); color: #00873a; }
   .v-badge.inprogress { background: rgba(255,165,0,0.15); color: #b86600; }
   .v-badge.assigned { background: rgba(15,76,129,0.12); color: var(--vendor-color, #0f4c81); }
