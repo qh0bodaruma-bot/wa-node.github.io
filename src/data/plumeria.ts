@@ -6,7 +6,6 @@
 
 // ページと画像の置き場所。サイトを移すときは、この2つを変えればリンクと画像が追従する。
 export const PLUMERIA_BASE = '/lab/plumeria';
-export const plMenuIcon = (id: PlumeriaServiceId | 'recruit' | 'important-matters') => `/images/plumeria/menu/${id}.svg`;
 export const PLUMERIA_ASSETS = '/images/plumeria';
 export const plImg = (file: string) => `${PLUMERIA_ASSETS}/${file}`;
 

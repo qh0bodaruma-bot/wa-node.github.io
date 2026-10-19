@@ -1,7 +1,7 @@
 ---
 import PlumeriaLayout from '../../../layouts/PlumeriaLayout.astro';
 import PlumeriaGuideQuiz from '../../../components/plumeria/PlumeriaGuideQuiz.astro';
-import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin, plImg, plMenuIcon } from '../../../data/plumeria';
+import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin, plImg } from '../../../data/plumeria';
 
 // 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
 // services配列やヘッダーのnavEntriesには追加せず、FVの入口タイルにだけ足す。
@@ -112,7 +112,6 @@ const heroSlides = [
             <li><a class="pl-tile" href={s.href}
                  data-pl-gtag={s.id === 'recruit' ? 'recruit_click' : 'service_select'}
                  data-pl-service={s.id} data-pl-cta="hero_tile">
-              <span class="pl-tile-icon pl-menu-art" aria-hidden="true"><img src={plMenuIcon(s.id)} alt="" width="96" height="96" /></span>
               <span class="pl-tile-label">{s.id === 'housing' ? <>サービス付き<br />高齢者向け住宅</> : s.name}</span>
               <span class="pl-tile-sub">{menuHints[s.id]}</span>
             </a></li>

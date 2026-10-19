@@ -2,7 +2,7 @@
 import PlumeriaBaseLayout from './PlumeriaBaseLayout.astro';
 import PlumeriaTelCta from '../components/plumeria/PlumeriaTelCta.astro';
 import PlumeriaTextSize from '../components/plumeria/PlumeriaTextSize.astro';
-import { corp, services, recruitEntry, routes, shortStayTel, parentCompany, plImg, plMenuIcon } from '../data/plumeria';
+import { corp, services, recruitEntry, routes, shortStayTel, parentCompany, plImg } from '../data/plumeria';
 import '../styles/plumeria.css';
 
 interface Props {
@@ -154,7 +154,6 @@ const footNavGroups = [
             <a href={s.href} aria-current={currentPath === s.href ? 'page' : undefined}
                data-pl-gtag={s.id === 'recruit' ? 'recruit_click' : 'service_select'}
                data-pl-service={s.id} data-pl-cta="header_nav">
-              <span class="pl-nav-icon pl-menu-art" aria-hidden="true"><img src={plMenuIcon(s.id)} alt="" width="96" height="96" /></span>
               <span class="pl-nav-label">{s.short}</span>
             </a>
           ))}
@@ -168,14 +167,13 @@ const footNavGroups = [
             <PlumeriaTextSize class="pl-textsize-menu" />
             {services.map((s) => (
               <a href={s.href} aria-current={currentPath === s.href ? 'page' : undefined} data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="mobile_menu">
-                <span class="pl-nav-icon pl-menu-art" aria-hidden="true"><img src={plMenuIcon(s.id)} alt="" width="96" height="96" /></span>
                 {s.name}
               </a>
             ))}
-            <a href={routes.services}><span class="pl-nav-icon" aria-hidden="true"><svg><use href="#pl-i-tree" /></svg></span>サービス一覧</a>
-            <a href={routes.recruit} aria-current={currentPath === routes.recruit ? 'page' : undefined} data-pl-gtag="recruit_click" data-pl-cta="mobile_menu"><span class="pl-nav-icon pl-menu-art" aria-hidden="true"><img src={plMenuIcon('recruit')} alt="" width="96" height="96" /></span>採用情報</a>
-            <a href={routes.importantMatters} aria-current={currentPath === routes.importantMatters ? 'page' : undefined} data-pl-service="important-matters" data-pl-cta="mobile_menu"><span class="pl-nav-icon pl-menu-art" aria-hidden="true"><img src={plMenuIcon('important-matters')} alt="" width="96" height="96" /></span>重要事項説明</a>
-            <a href={routes.contact}><span class="pl-nav-icon" aria-hidden="true"><svg><use href="#pl-i-home" /></svg></span>お問い合わせ・ご相談</a>
+            <a href={routes.services}>サービス一覧</a>
+            <a href={routes.recruit} aria-current={currentPath === routes.recruit ? 'page' : undefined} data-pl-gtag="recruit_click" data-pl-cta="mobile_menu">採用情報</a>
+            <a href={routes.importantMatters} aria-current={currentPath === routes.importantMatters ? 'page' : undefined} data-pl-service="important-matters" data-pl-cta="mobile_menu">重要事項説明</a>
+            <a href={routes.contact}>お問い合わせ・ご相談</a>
           </nav>
         </details>
       </div>

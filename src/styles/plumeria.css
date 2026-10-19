@@ -134,15 +134,14 @@
     color: var(--green-deep);
   }
 
-  /* メニューは右寄せ。各項目は同じ幅にそろえ、
-     ヘッダーCTA「見学のご予約」（実測 116.7×58.5px）より一回り小さく取る。
-     最長ラベル「訪問看護」は実測49.9pxなので 100px 幅に余裕で収まる。 */
+  /* サービス名を文字で読み取れるよう、ヘッダーのリンクを同じ幅にそろえる。 */
   /* 既定はナビ表示。JSが動かなくてもPCでは行き止まりにならない */
   .pl-nav { display: flex; gap: 2px; margin-left: auto; }
   .pl-nav a {
-    display: grid; justify-items: center; gap: 2px;
+    display: grid; place-items: center;
     width: 100px;
-    padding: 5px 4px;
+    min-height: 44px;
+    padding: 8px 4px;
     border-radius: var(--radius-sm);
     /* 文字サイズ切替の対象外。幅固定のアイランド内で、大にすると「ショートステイ」が切れるため */
     font-size: 14px; font-weight: 500;
@@ -150,14 +149,6 @@
     transition: background-color 0.3s, color 0.3s;
   }
   .pl-nav a:hover { background: var(--mint); color: var(--green-deep); }
-  .pl-nav-icon {
-    display: grid; place-items: center;
-    width: 34px; height: 34px;
-    border-radius: 50%;
-    background: var(--mint);
-    color: var(--green-deep);
-  }
-  .pl-nav-icon svg { width: 18px; height: 18px; }
 
   /* ── ボタン ─────────────────────────────── */
   .pl-btn {
@@ -239,7 +230,6 @@
     border-bottom: 1px solid var(--line);
   }
   .pl-menu-list a:last-child { border-bottom: 0; }
-  .pl-menu-list .pl-nav-icon svg { width: 18px; height: 18px; }
 
   /* ── ファーストビュー ───────────────────── */
   .pl-hero { position: relative; }
@@ -593,18 +583,6 @@
     transform: translateY(-2px);
     box-shadow: var(--shadow-lift);
   }
-  .pl-tile-icon {
-    display: grid;
-    place-items: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--mint);
-    color: var(--green-deep);
-    transition: background-color 0.3s;
-  }
-  .pl-tile:hover .pl-tile-icon { background: var(--surface); }
-  .pl-tile-icon svg { width: 22px; height: 22px; }
   .pl-tile-label { font-size: calc(14px * var(--pl-fs)); font-weight: 700; letter-spacing: 0.04em; line-height: 1.45; }
 
   /* 受入状況。色だけに頼らず必ず文字でも示す */
@@ -1041,8 +1019,6 @@
     /* 横に並べる幅がないので、コピーの下にタイルを置く */
     .pl-hero-inner { grid-template-columns: 1fr; gap: 16px; }
     .pl-tile { padding: 16px 10px; }
-    .pl-tile-icon { width: 44px; height: 44px; }
-    .pl-tile-icon svg { width: 24px; height: 24px; }
     .pl-tile-label { font-size: calc(14px * var(--pl-fs)); }
     /* スマホは常にハンバーガー。ナビは幅が足りないので使わない */
     .pl-nav, .pl-head.is-js.is-condensed .pl-nav { display: none; }
@@ -1061,8 +1037,6 @@
     /* スクショと同じ2列。1列にすると縦に伸びすぎて入口として機能しない */
     .pl-tiles { gap: 8px; }
     .pl-tile { padding: 14px 8px; gap: 5px; }
-    .pl-tile-icon { width: 40px; height: 40px; }
-    .pl-tile-icon svg { width: 22px; height: 22px; }
     .pl-tile-label { font-size: calc(14px * var(--pl-fs)); }
     .pl-about-inner { gap: 26px; }
     .pl-day-photo { aspect-ratio: 16 / 10; }
@@ -1389,8 +1363,6 @@
 .pl-slider-ui { bottom: 84px; }
 .pl-hero-inner { grid-template-columns: minmax(0, 1fr) minmax(380px, 0.85fr); }
 .pl-hero-tiles .pl-tile { padding: 12px 10px; gap: 5px; }
-.pl-hero-tiles .pl-tile-icon { width: 51px; height: 51px; }
-.pl-hero-tiles .pl-tile-icon svg { width: 33px; height: 33px; }
 .pl-hero-tiles .pl-tile-label { font-size: calc(14px * var(--pl-fs)); }
 .pl-tile-sub { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
 .pl-hero-copy .pl-more { display: inline-block; margin-top: 18px; }
@@ -1697,41 +1669,6 @@
   }
 }
 
-/* ── サービス別アイコンカラー ─────────────────────────────
-   目的：同じ緑一色だと一覧で見分けがつかないため、サービスごとに色を割り当てる。
-   彩度はアクア（#e2f2f6）・サンド（#fdf4e6）帯に合わせて抑えつつ、南国の明るさを残し、
-   「色で見分けられるが、介護施設のサイトとして落ち着いて見える」範囲に収めている。
-   線の太さも 1.4 → 1.8 に上げ、小さいサイズでの視認性を確保する。 */
-.pl :is(.pl-tile-icon, .pl-nav-icon) svg { stroke-width: 1.8; }
-.pl [data-pl-service='housing'] :is(.pl-tile-icon, .pl-nav-icon) { background: #d8eef4; color: #0f6d85; }
-.pl [data-pl-service='short-stay'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e7e6f6; color: #584f96; }
-.pl [data-pl-service='home-care'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ffe9d6; color: #a2541b; }
-.pl [data-pl-service='home-nursing'] :is(.pl-tile-icon, .pl-nav-icon) { background: #fde2ea; color: #a8355e; }
-.pl [data-pl-service='care-management'] :is(.pl-tile-icon, .pl-nav-icon) { background: #dfeaf7; color: #33608f; }
-.pl [data-pl-service='welfare-equipment'] :is(.pl-tile-icon, .pl-nav-icon) { background: #ddf0e4; color: #20704a; }
-.pl [data-pl-service='recruit'] :is(.pl-tile-icon, .pl-nav-icon) { background: #fdf0cf; color: #8a6413; }
-.pl [data-pl-service='important-matters'] :is(.pl-tile-icon, .pl-nav-icon) { background: #e7ecef; color: #4b5c66; }
-/* ヘッダーのアイランド内だけは丸と色分けを外し、白い線のアイコンにする。
-   暗い半透明の地に色付きの丸が並ぶと、アイコンより丸が目立って項目の区切りが読みにくい。
-   丸を外した分アイコンを 18px → 30px に上げ（線画は viewBox 内に余白があり、見た目はラベル約1.5倍）、ラベル（14px）とのバランスを取る。
-   スマホのメニュー一覧は明るい地なので、色分けの丸をそのまま残す。 */
-.pl .pl-head .pl-nav .pl-nav-icon {
-  width: 30px; height: 30px;
-  border-radius: 0;
-  background: none;
-  color: inherit;
-}
-.pl .pl-head .pl-nav .pl-nav-icon svg { width: 30px; height: 30px; stroke-width: 1.9; }
-
-/* 選定したサービス別イラスト。SVG自身に背景と陰影を持たせる。 */
-.pl [data-pl-service] .pl-menu-art,
-.pl .pl-head .pl-nav .pl-menu-art,
-.pl .pl-tile:hover .pl-menu-art { background: none; border-radius: 0; }
-.pl .pl-menu-art img { display: block; width: 100%; height: 100%; object-fit: contain; }
-.pl .pl-head .pl-nav .pl-menu-art { width: 38px; height: 38px; }
-.pl .pl-hero-tiles .pl-tile-icon.pl-menu-art { width: 51px; height: 51px; }
-.pl .pl-menu-list .pl-menu-art { width: 38px; height: 38px; flex: none; background: none; border-radius: 0; }
-
 /* 入口はサービス名だけでなく、選ぶ理由を短く読める状態にする。 */
 .pl-tiles-heading {
   margin: 0 0 10px;
@@ -1947,19 +1884,6 @@
         animation-range: entry 60% cover 45%;
       }
     }
-  }
-}
-
-/* ── サービスのアイコン：選んだときに一筆で描き直す ──
-   ヘッダーのアイランドとトップのサービスタイルで同じ動きにそろえる。
-   `stroke-dasharray` は継承されるため、<use> の中の線にも届く。
-   アイコンの各線には pathLength="100"（PlumeriaLayout の symbol）を付けてあり、
-   長い線も短い線も同じ時間で描き終わる。 */
-@keyframes pl-icon-draw { from { stroke-dashoffset: 100; } to { stroke-dashoffset: 0; } }
-@media (prefers-reduced-motion: no-preference) {
-  .pl :is(.pl-nav a, .pl-tile):is(:hover, :focus-visible) :is(.pl-nav-icon, .pl-tile-icon) svg {
-    stroke-dasharray: 100;
-    animation: pl-icon-draw 0.8s cubic-bezier(0.3, 0.7, 0.4, 1) both;
   }
 }
 
