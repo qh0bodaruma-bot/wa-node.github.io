@@ -1,7 +1,7 @@
 ---
 import PlumeriaLayout from '../../../layouts/PlumeriaLayout.astro';
 import PlumeriaGuideQuiz from '../../../components/plumeria/PlumeriaGuideQuiz.astro';
-import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin, plImg } from '../../../data/plumeria';
+import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin, plImg, plMenuIcon } from '../../../data/plumeria';
 
 // 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
 // services配列やヘッダーのnavEntriesには追加せず、FVの入口タイルにだけ足す。
@@ -10,6 +10,16 @@ const entrances = [
   recruitEntry,
   { id: 'important-matters', name: '重要事項説明', icon: 'document', href: routes.importantMatters },
 ];
+const menuHints: Record<string, string> = {
+  housing: '見守りのある住まい',
+  'short-stay': '短期間の宿泊',
+  'home-care': '食事・入浴などの生活支援',
+  'home-nursing': '自宅での看護',
+  'care-management': '介護の相談・計画',
+  'welfare-equipment': '歩行器・介護ベッドなど',
+  recruit: '介護職・看護職の募集',
+  'important-matters': '契約前に確認する書類',
+};
 
 const heroSlides = [
   { img: plImg('hero-01.webp'), label: '入居者とスタッフ', alt: '入居者とスタッフが穏やかに話す様子（イメージ）' },
@@ -96,14 +106,15 @@ const heroSlides = [
         </div>
       </div>
       <nav class="pl-hero-tiles" data-pl-tiles aria-label="サービス・採用・重要事項説明">
+        <h2 class="pl-tiles-heading">お探しの内容から選ぶ</h2>
         <ul class="pl-tiles">
           {entrances.map((s) => (
             <li><a class="pl-tile" href={s.href}
                  data-pl-gtag={s.id === 'recruit' ? 'recruit_click' : 'service_select'}
                  data-pl-service={s.id} data-pl-cta="hero_tile">
-              <span class="pl-tile-icon" aria-hidden="true"><svg><use href={`#pl-i-${s.icon}`} /></svg></span>
-              <span class="pl-tile-label">{s.name}</span>
-              {['housing', 'short-stay'].includes(s.id) && <span class="pl-tile-sub">{s.tagline}</span>}
+              <span class="pl-tile-icon pl-menu-art" aria-hidden="true"><img src={plMenuIcon(s.id)} alt="" width="96" height="96" /></span>
+              <span class="pl-tile-label">{s.id === 'housing' ? <>サービス付き<br />高齢者向け住宅</> : s.name}</span>
+              <span class="pl-tile-sub">{menuHints[s.id]}</span>
             </a></li>
           ))}
         </ul>

@@ -1307,9 +1307,16 @@
 .pl-form-error { padding: 14px 16px; border-radius: var(--radius-sm); background: rgba(179,69,58,0.08); color: #b3453a; font-weight: 700; }
 
 .pl-faq-list { border-top: 1px solid rgba(0,0,0,0.1); }
-.pl-faq-list details { border-bottom: 1px solid rgba(0,0,0,0.1); padding: 16px 0; }
-.pl-faq-list summary { cursor: pointer; font-weight: 700; }
-.pl-faq-list p { margin: 12px 0 0; color: var(--muted); }
+.pl-faq-list details { border-bottom: 1px solid rgba(0,0,0,0.1); }
+.pl-faq-list summary { display: flex; align-items: center; justify-content: space-between; gap: 16px; cursor: pointer; font-weight: 700; list-style: none; }
+.pl-faq-list summary::-webkit-details-marker { display: none; }
+.pl-faq-list summary::after { content: ''; flex: none; width: 10px; height: 10px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg); margin: -5px 4px 0 0; }
+.pl-faq-list details[open] summary::after { transform: rotate(225deg); margin-top: 5px; }
+.pl-faq-list summary:focus-visible { outline: 3px solid var(--green-deep); outline-offset: 2px; }
+.pl-faq-list p { margin: 0 0 20px; color: var(--muted); }
+.pl-contact-route { margin-top: 24px; padding: 20px 22px; border: 1px solid rgba(0,0,0,0.1); border-radius: var(--radius-sm); }
+.pl-contact-route h3 { margin: 0 0 8px; font-size: calc(1rem * var(--pl-fs)); }
+.pl-contact-route p { margin: 0; }
 
 @media (max-width: 720px) {
   .pl-service-intro-grid { grid-template-columns: 1fr; }
@@ -1715,6 +1722,46 @@
   color: inherit;
 }
 .pl .pl-head .pl-nav .pl-nav-icon svg { width: 30px; height: 30px; stroke-width: 1.9; }
+
+/* 選定したサービス別イラスト。SVG自身に背景と陰影を持たせる。 */
+.pl [data-pl-service] .pl-menu-art,
+.pl .pl-head .pl-nav .pl-menu-art,
+.pl .pl-tile:hover .pl-menu-art { background: none; border-radius: 0; }
+.pl .pl-menu-art img { display: block; width: 100%; height: 100%; object-fit: contain; }
+.pl .pl-head .pl-nav .pl-menu-art { width: 38px; height: 38px; }
+.pl .pl-hero-tiles .pl-tile-icon.pl-menu-art { width: 51px; height: 51px; }
+.pl .pl-menu-list .pl-menu-art { width: 38px; height: 38px; flex: none; background: none; border-radius: 0; }
+
+/* 入口はサービス名だけでなく、選ぶ理由を短く読める状態にする。 */
+.pl-tiles-heading {
+  margin: 0 0 10px;
+  font-size: calc(16px * var(--pl-fs));
+  font-weight: 700;
+  color: var(--green-deep);
+}
+.pl .pl-hero-tiles .pl-tile { min-height: 132px; }
+.pl .pl-hero-tiles .pl-tile-label {
+  font-size: calc(15px * var(--pl-fs));
+  letter-spacing: 0.01em;
+  line-height: 1.4;
+}
+.pl .pl-hero-tiles .pl-tile-sub {
+  font-size: calc(14px * var(--pl-fs));
+  line-height: 1.4;
+}
+.pl .pl-menu-list a[aria-current="page"] {
+  background: var(--mint);
+  box-shadow: inset 4px 0 var(--green-deep);
+  font-weight: 700;
+}
+.pl .pl-page-nav a { min-height: 44px; display: inline-flex; align-items: center; }
+.pl .pl-page-nav a:hover,
+.pl .pl-purpose-list a:hover { background: var(--mint); color: var(--green-deep); }
+.pl .pl-tile:active,
+.pl .pl-purpose-list a:active { box-shadow: inset 0 0 0 2px var(--green-deep); }
+@media (max-width: 720px) {
+  .pl .pl-hero-tiles .pl-tile { min-height: 126px; }
+}
 
 /* ══════════════════════════════════════════════════════════
    操作要素の最小サイズ（2026-09-15 デザイン点検）
