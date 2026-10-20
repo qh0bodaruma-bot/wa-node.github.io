@@ -2129,3 +2129,10 @@
 @media (max-width: 900px) { .pl-hs-equip-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .pl-hs-equip-list { grid-template-columns: minmax(0, 1fr); } }
 .pl .pl-hs-equip-list { margin-top: 18px; }
+
+/* トップ：右のタイルが縦に長く、左のカードに大きな空きができていたため、デスクトップ幅ではタイルを低くして高さを詰める */
+@media (min-width: 1001px) {
+  .pl .pl-hero-tiles .pl-tile { min-height: 104px; }
+  /* 文字サイズ「大」でも、リンクと電話窓口の区切り線がくっつかないよう最低限の間隔を取る */
+  .pl .pl-hero-copy .pl-more { margin-bottom: 18px; }
+}
