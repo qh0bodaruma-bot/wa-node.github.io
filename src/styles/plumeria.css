@@ -2221,3 +2221,21 @@
 html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 /* 標準を1.0625倍にしたため、「介護対応型居室（2名入居）」が列幅237pxで折り返した。列見出しだけ字を少し小さくし、左右の余白を詰めて1行に収める */
 .pl-compare-table.pl-hs-fee thead tr:not(.pl-hs-fee-group) th[data-tone] { font-size: calc(15px * var(--pl-fs)); padding-inline: 10px; }
+
+/* ── 押せる物だけに小さな丸（ボタン・タイル4px、写真つきの大きなカード3px）を付ける（2026-10-20 ボス指示。最初は2pxで、ボスの質問を受けて4px/3pxに変更）─────────────────────────────
+   全体は四角のまま、ボタンとタイル（押すとページが開く物）だけ角をわずかに丸め、
+   「押せる物」と「情報を示すだけの囲み（ラベル・パネル・表）」を形でも区別する。
+   円形の部品（点・番号・アイコンの丸）は円のまま。 */
+.pl :is(
+  .pl-btn, .pl-btn-sm,
+  .pl-tile, .pl-purpose-list a, .pl-service-intro-card,
+  .pl-hs-jump a, .pl-page-nav a,
+  .pl-desk, .pl-recruit-strip, .pl-head-recruit, .pl-head .pl-brand, .pl-hero-brand-card,
+  .pl-textsize, .pl-textsize button,
+  .pl-job-card > summary, .pl-purpose-guide > summary,
+  .pl-float-cta, .pl-float-seg, .pl-print-button, .pl-foot-desk-action
+) { border-radius: 4px; }
+/* 大きなカード（写真つきのサービスカード）は3px。大きな面では4pxは丸みが目立たず、3pxで十分 */
+.pl .pl-card.pl-service-intro-card { border-radius: 3px; }
+/* クラスの付かないリンクには、文中リンク用の「角を0にする」指定が強く掛かるため、ジャンプ用ボタンはここで上書きする */
+.pl :is(.pl-hs-jump, .pl-page-nav) a:not([class]):not([hidden]) { border-radius: 4px; }
