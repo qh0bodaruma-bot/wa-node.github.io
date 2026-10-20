@@ -2214,3 +2214,10 @@
 /* フッターの下端の余白は、追従ボタンの高さに合わせて詰める（以前は108pxのボタン用に170px） */
 .pl .pl-foot { padding-bottom: 96px; }
 .pl-compare-table.pl-hs-fee tbody td { border-bottom-color: rgba(8, 60, 74, 0.1); }
+
+/* ── 標準の文字サイズを少し上げる（2026-10-20）─────────────────────────────
+   読み手は高齢の方とご家族が多く、「大」を押さなければ標準のままのため、標準を1.0625倍（本文16px→17px）にする。
+   「大」は1.25倍のまま変えない（これまで確認した「大」の配置はそのまま）。管理画面は別のCSSで、この倍率を使わない。 */
+html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
+/* 標準を1.0625倍にしたため、「介護対応型居室（2名入居）」が列幅237pxで折り返した。列見出しだけ字を少し小さくし、左右の余白を詰めて1行に収める */
+.pl-compare-table.pl-hs-fee thead tr:not(.pl-hs-fee-group) th[data-tone] { font-size: calc(15px * var(--pl-fs)); padding-inline: 10px; }
