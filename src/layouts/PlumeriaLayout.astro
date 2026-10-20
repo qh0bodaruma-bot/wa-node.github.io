@@ -227,9 +227,11 @@ const footNavGroups = [
       )}
       <div class="pl-wrap pl-foot-inner">
         <div class="pl-foot-brand">
-          <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>
-          <p class="pl-brand-name pl-foot-name">{corp.name}</p>
-          <p class="pl-brand-en">{corp.nameEn}</p>
+          <div class="pl-foot-badge">
+            <span class="pl-brand-mark" aria-hidden="true"><svg><use href="#pl-i-sprout" /></svg></span>
+            <p class="pl-brand-name pl-foot-name">{corp.name}</p>
+            <p class="pl-brand-en">{corp.nameEn}</p>
+          </div>
           <p class="pl-note">{corp.address ?? '住所：確認中'}</p>
           <p class="pl-note">
             運営法人：<a href={parentCompany.url} data-astro-reload>{corp.groupName ?? parentCompany.name}</a>

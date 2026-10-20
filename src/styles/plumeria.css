@@ -2140,7 +2140,9 @@
 /* ── ヘッダーの「プルメリア」と「採用情報」だけ3Dバッジにする ─────────────────────────────
    上に明るい線・下に暗い線で面の厚みを出し、下へ落とした影でバッジを浮かせる。押すと影の分だけ沈む。
    文字は大きい太字で、白（または濃紺）の文字が地色に対して3:1以上を保つ色だけを使う。 */
-.pl .pl-head .pl-brand {
+.pl .pl-head .pl-brand,
+.pl .pl-hero-brand-card,
+.pl .pl-foot-badge {
   padding: 6px 18px 6px 16px;
   background: linear-gradient(180deg, #1a86a3 0%, #137792 48%, #0d5a6f 100%);
   color: #fff;
@@ -2148,7 +2150,7 @@
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 0 rgba(0, 0, 0, 0.2), 0 4px 0 #07303c, 0 7px 10px rgba(0, 0, 0, 0.28);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
-.pl .pl-head .pl-brand .pl-brand-en { color: #e4f4f8; }
+.pl .pl-head .pl-brand .pl-brand-en, .pl .pl-hero-brand-card .pl-brand-en, .pl .pl-foot-badge .pl-brand-en { color: #e4f4f8; }
 .pl .pl-head .pl-head-recruit {
   background: linear-gradient(180deg, #ffd96e 0%, #f2b437 55%, #e0a01c 100%);
   color: var(--ink);
@@ -2157,14 +2159,29 @@
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 .pl .pl-head .pl-brand:hover,
+.pl .pl-hero-brand-card:hover,
 .pl .pl-head .pl-head-recruit:hover {
   transform: translateY(-1px);
 }
-.pl .pl-head .pl-brand:hover { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -2px 0 rgba(0, 0, 0, 0.2), 0 5px 0 #07303c, 0 9px 12px rgba(0, 0, 0, 0.3); }
+.pl .pl-head .pl-brand:hover, .pl .pl-hero-brand-card:hover { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -2px 0 rgba(0, 0, 0, 0.2), 0 5px 0 #07303c, 0 9px 12px rgba(0, 0, 0, 0.3); }
 .pl .pl-head .pl-head-recruit:hover { background: linear-gradient(180deg, #ffe085 0%, #f7c04a 55%, #e8a924 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 0 rgba(0, 0, 0, 0.14), 0 5px 0 #8f600c, 0 9px 12px rgba(0, 0, 0, 0.3); }
 .pl .pl-head .pl-brand:active,
+.pl .pl-hero-brand-card:active,
 .pl .pl-head .pl-head-recruit:active {
   transform: translateY(3px);
 }
-.pl .pl-head .pl-brand:active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 #07303c, 0 2px 4px rgba(0, 0, 0, 0.25); }
+.pl .pl-head .pl-brand:active, .pl .pl-hero-brand-card:active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 #07303c, 0 2px 4px rgba(0, 0, 0, 0.25); }
 .pl .pl-head .pl-head-recruit:active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.14), 0 1px 0 #8f600c, 0 2px 4px rgba(0, 0, 0, 0.25); }
+
+/* ファーストビューのブランドカードとフッターのロゴも、ヘッダーのバッジと同じ作りにする */
+.pl .pl-hero-brand-card { color: #fff; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 0 rgba(0, 0, 0, 0.2), 0 4px 0 #07303c, 0 7px 10px rgba(0, 0, 0, 0.28); }
+.pl .pl-foot-badge { display: grid; justify-items: start; gap: 2px; padding: 12px 24px 12px 18px; margin-bottom: 10px; color: #fff; }
+.pl .pl-foot-badge p { margin: 0; }
+.pl .pl-foot-badge .pl-brand-mark { margin-bottom: 4px; }
+.pl .pl-foot-badge .pl-brand-name { color: #fff; }
+
+/* ヘッダー（島）の中のバッジの周囲の余白をそろえる：上・左・右を10px、下は影の4pxを含めて10pxに見えるよう14pxにする */
+.pl .pl-head .pl-head-inner { padding: 10px 10px 14px 10px; }
+/* 採用情報のバッジも、ブランドのバッジと同じ高さにして、島の縁までの余白（上・下・右）を10pxにそろえる */
+.pl .pl-head .pl-head-recruit { align-self: stretch; display: inline-flex; align-items: center; }
+.pl .pl-foot-badge .pl-brand-name, .pl .pl-foot-badge .pl-brand-en { line-height: 1.3; }
