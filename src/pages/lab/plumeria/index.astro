@@ -21,6 +21,24 @@ const menuHints: Record<string, string> = {
   'important-matters': '契約前に確認する書類',
 };
 
+// サービスのまとまりはフッターの区分（住まい／在宅サービス）に合わせる。
+const serviceGroups = [
+  { title: '住まい', ids: ['housing', 'short-stay'] },
+  { title: '在宅サービス', ids: ['home-care', 'home-nursing', 'care-management', 'welfare-equipment'] },
+].map((g) => ({ ...g, items: g.ids.map((id) => services.find((s) => s.id === id)!) }));
+
+// 所在地・アクセス。文面は従来の記載のまま、項目ごとに分けて見せる。
+const accessSpots = [
+  {
+    name: 'プルメリアⅠ・Ⅱ', url: 'https://home-plumeria.jp/plumeria0102/',
+    rows: [['所在地', '岐阜県可児市今渡1880番地'], ['電車', '名鉄 日本ライン今渡駅から徒歩3分'], ['お車', '中央道 多治見ICから約20分／東海環状 可児御嵩ICから約10分']],
+  },
+  {
+    name: 'プルメリアⅢ（ショートステイ）', url: 'https://home-plumeria.jp/plumeria03/',
+    rows: [['所在地', '岐阜県可児郡御嵩町上恵土951-1'], ['電車', '名鉄広見線 明智駅から徒歩15分'], ['お車', '東海環状 可児御嵩ICから車で約5分']],
+  },
+];
+
 const heroSlides = [
   { img: plImg('hero-01.webp'), label: '入居者とスタッフ', alt: '入居者とスタッフが穏やかに話す様子（イメージ）' },
   { img: plImg('hero-02.webp'), label: '建物の外観', alt: '植栽に囲まれた建物（イメージ）' },
@@ -154,35 +172,39 @@ const heroSlides = [
 
   <section class="pl-sec" id="services">
     <div class="pl-wrap">
-      <h2 class="pl-h2">暮らしを支える6つのサービス</h2>
+      <h2 class="pl-h2">住まいと在宅の{services.length}つのサービスで、暮らしを支えます</h2>
       <p class="pl-sec-lead">対象となる方・費用・ご相談の流れを、各ページにまとめています。</p>
-      <div class="pl-service-intro-grid">
-        {services.map((s) => (
-          <a class="pl-card pl-service-intro-card" href={s.href} data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="service_intro_card">
-            <img src={s.img} alt={s.alt} width="900" height="675" loading="lazy" decoding="async" />
-            <h3 class="pl-h3">{s.name}</h3>
-            <p class="pl-body">{s.summary}</p>
-            <span class="pl-service-intro-more">くわしく見る →</span>
-          </a>
-        ))}
-      </div>
+      {serviceGroups.map((g) => (
+        <div class="pl-hs-group">
+          <h3 class="pl-hs-group-title">{g.title}</h3>
+          <div class={`pl-hs-svc-grid pl-hs-svc-grid-${g.items.length}`}>
+            {g.items.map((s) => (
+              <a class="pl-card pl-service-intro-card" href={s.href} data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="service_intro_card">
+                <img src={s.img} alt={s.alt} width="900" height="675" loading="lazy" decoding="async" />
+                <h4 class="pl-hs-line-name pl-hs-svc-name">{s.name}</h4>
+                <p class="pl-hs-line-body">{s.summary}</p>
+                <span class="pl-service-intro-more">くわしく見る →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 
   <section class="pl-sec pl-sec-beige" id="access">
     <div class="pl-wrap">
-      <h2 class="pl-h2">所在地・アクセス</h2>
-      <div class="pl-grid-2">
-        <div class="pl-card">
-          <h3 class="pl-h3">プルメリアⅠ・Ⅱ</h3>
-          <p class="pl-body">岐阜県可児市今渡1880番地<br />名鉄 日本ライン今渡駅から徒歩3分<br />中央道 多治見ICから約20分／東海環状 可児御嵩ICから約10分</p>
-          <a class="pl-more" href="https://home-plumeria.jp/plumeria0102/">公式のアクセス案内を見る →</a>
-        </div>
-        <div class="pl-card">
-          <h3 class="pl-h3">プルメリアⅢ（ショートステイ）</h3>
-          <p class="pl-body">岐阜県可児郡御嵩町上恵土951-1<br />名鉄広見線 明智駅から徒歩15分<br />東海環状 可児御嵩ICから車で約5分</p>
-          <a class="pl-more" href="https://home-plumeria.jp/plumeria03/">公式のアクセス案内を見る →</a>
-        </div>
+      <h2 class="pl-h2">Ⅰ・Ⅱは今渡駅から徒歩3分、Ⅲは明智駅から徒歩15分です</h2>
+      <div class="pl-grid-2" style="margin-top:28px">
+        {accessSpots.map((spot) => (
+          <div class="pl-hs-spec pl-hs-spec-sm">
+            <h3 class="pl-hs-line-name" style="margin-top:18px">{spot.name}</h3>
+            <dl class="pl-hs-facts">
+              {spot.rows.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
+            </dl>
+            <p style="margin:0 0 16px"><a class="pl-more" href={spot.url}>公式のアクセス案内を見る →</a></p>
+          </div>
+        ))}
       </div>
       <p class="pl-note" style="margin-top:14px">交通案内は公式サイトを2026年9月9日に確認。見学時は各窓口へ事前にお問い合わせください。</p>
     </div>
@@ -191,7 +213,7 @@ const heroSlides = [
   <section class="pl-sec">
     <div class="pl-wrap pl-reading">
       <h2 class="pl-h2">プルメリアについて</h2>
-      <p class="pl-body">プルメリアは、可児市で住まい・介護・看護を支える6つの事業を運営しています。ご本人の暮らし方や、ご家族の状況に合わせてサービスをご検討いただけます。</p>
+      <p class="pl-hs-lead">プルメリアは、可児市で住まい・介護・看護を支える6つの事業を運営しています。ご本人の暮らし方や、ご家族の状況に合わせてサービスをご検討いただけます。</p>
       <p class="pl-body">{brandOrigin.body}</p>
       <p class="pl-note">運営：{corp.groupName}</p>
       <div class="pl-btn-row" style="margin-top:14px">

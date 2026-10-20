@@ -2090,3 +2090,21 @@
 .pl-hs-st[data-st="no"] { border: 1px solid var(--line); color: var(--muted); background: rgba(8, 60, 74, 0.06); font-weight: 400; }
 .pl-hs-med .pl-hs-med-note { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
 .pl-hs-med .pl-hs-med-note.is-empty { color: rgba(76, 106, 115, 0.5); }
+
+/* ── トップ：サービスを「住まい」「在宅サービス」に分け、項目名と説明の強弱をそろえる ───────────── */
+.pl-hs-group { margin-top: 36px; }
+.pl-hs-group-title { display: flex; align-items: center; gap: 12px; padding-bottom: 10px; border-bottom: 2px solid var(--ink); font-size: calc(20px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
+.pl-hs-svc-grid { margin-top: 22px; display: grid; gap: 22px; }
+.pl-hs-svc-grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.pl-hs-svc-grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+@media (max-width: 1100px) { .pl-hs-svc-grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 640px) { .pl-hs-svc-grid-2, .pl-hs-svc-grid-4 { grid-template-columns: minmax(0, 1fr); } }
+.pl-hs-svc-name { margin-top: 14px; }
+.pl-service-intro-card .pl-hs-line-body { margin-top: 6px; }
+.pl-hs-spec-sm .pl-hs-facts > div { grid-template-columns: 5em minmax(0, 1fr); }
+.pl-hs-lead { font-size: calc(18px * var(--pl-fs)); font-weight: 700; line-height: 1.85; color: var(--ink); }
+.pl-purpose-list a > span { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
+.pl-purpose-list a > strong { font-size: calc(18px * var(--pl-fs)); color: var(--ink); }
+.pl-hs-spec-sm { display: flex; flex-direction: column; }
+.pl-hs-spec-sm > p { margin-top: auto !important; padding-top: 12px; }
+.pl-hs-spec-sm .pl-more { display: inline-block; margin: 0; padding-inline: 0; }
