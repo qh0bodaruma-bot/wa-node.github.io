@@ -2021,7 +2021,9 @@
 .pl-hs-total-unit { justify-self: start; padding: 1px 10px; border-radius: 6px; background: var(--hs-a); font-size: calc(13px * var(--pl-fs)); font-weight: 700; color: #fff; }
 .pl-hs-totals > li[data-tone="b"] .pl-hs-total-unit { background: var(--hs-b); color: var(--ink); }
 .pl-hs-total-label { font-size: calc(16px * var(--pl-fs)); font-weight: 700; color: var(--ink); line-height: 1.5; }
-.pl-compare-table.pl-hs-fee { min-width: 720px; }
+/* 4つの列を同じ幅にそろえる（内容の長さで列幅が変わると、介護対応型居室（2名入居）だけ広がって偏る） */
+.pl-compare-table.pl-hs-fee { min-width: 760px; table-layout: fixed; }
+.pl-compare-table.pl-hs-fee .pl-hs-fee-group td { width: 18%; }
 .pl-compare-table.pl-hs-fee .pl-hs-fee-group th { padding: 7px 14px; text-align: center; font-size: calc(14px * var(--pl-fs)); font-weight: 700; border-bottom: 0; color: #fff; background: var(--hs-a); }
 .pl-compare-table.pl-hs-fee .pl-hs-fee-group th[data-tone="b"] { background: var(--hs-b); color: var(--ink); }
 .pl-compare-table.pl-hs-fee .pl-hs-fee-group td { border-bottom: 0; }
@@ -2040,3 +2042,10 @@
 .pl-compare-table.pl-hs-fee tr.is-total td[data-tone="a"] { background: var(--hs-a-tint-strong); }
 .pl-compare-table.pl-hs-fee tr.is-total td[data-tone="b"] { background: var(--hs-b-tint-strong); }
 .pl-compare-table.pl-hs-fee tbody tr:not(.is-total) td { border-bottom-color: rgba(8, 60, 74, 0.1); }
+/* 帯と表は白いパネルの上に置く。サンド色の地に薄い紺・薄い黄を直接敷くと、くすんで見えるため */
+.pl-hs-feecard { margin-top: 24px; padding-bottom: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+.pl-hs-feecard .pl-hs-totals { margin: 0 0 4px; border-top: 0; }
+.pl-hs-feecard .pl-hs-totals > li { padding-inline: 18px; }
+.pl-hs-feecard .pl-table-caption { margin: 18px 18px 8px; }
+.pl-hs-feecard .pl-compare-table-wrap { padding-bottom: 4px; }
+.pl-hs-feecard .pl-compare-table.pl-hs-fee .pl-hs-fee-group td, .pl-hs-feecard .pl-compare-table.pl-hs-fee tbody th, .pl-hs-feecard .pl-compare-table.pl-hs-fee thead th:first-child { padding-left: 18px; }

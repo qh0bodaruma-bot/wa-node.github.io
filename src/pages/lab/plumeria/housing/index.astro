@@ -95,38 +95,40 @@ const day = [
     <div class="pl-wrap">
       <h2 class="pl-h2">月額の目安は、Ⅰが{feeTotal[0]}、Ⅱが{feeTotal[2]}（1名）です</h2>
       <p class="pl-sec-lead">食費や介護保険の自己負担分は別にかかります。入居時の敷金と、月々の内訳は次のとおりです。</p>
-      <ul class="pl-hs-totals">
-        {housingFeeTable.columns.map((col, i) => (
-          <li data-tone={i < 2 ? 'a' : 'b'}>
-            <span class="pl-hs-total-unit">{i < 2 ? housingUnits[0].name : housingUnits[1].name}</span>
-            <span class="pl-hs-total-label">{col}</span>
-            <strong class="pl-hs-total-num pl-num-face">{feeTotal[i]}</strong>
-          </li>
-        ))}
-      </ul>
-      <p class="pl-table-caption" aria-hidden="true">居室タイプ別の料金（横にスクロールできます）</p>
-      <div class="pl-compare-table-wrap">
-        <table class="pl-compare-table pl-hs-fee">
-          <caption class="pl-sr-only">居室タイプ別の料金（横にスクロールできます）</caption>
-          <thead>
-            <tr class="pl-hs-fee-group">
-              <td></td>
-              {feeGroups.map((g) => <th scope="colgroup" colspan={g.span} data-tone={g.tone}>{g.name}</th>)}
-            </tr>
-            <tr>
-              <th scope="col">項目</th>
-              {housingFeeTable.columns.map((col, i) => <th scope="col" data-tone={i < 2 ? 'a' : 'b'}>{col}</th>)}
-            </tr>
-          </thead>
-          <tbody>
-            {housingFeeTable.rows.map((row) => (
-              <tr class={feeRowClass(row.label)}>
-                <th scope="row">{row.label}</th>
-                {row.values.map((value, i) => <td class="pl-num-face" data-tone={i < 2 ? 'a' : 'b'}>{value}</td>)}
+      <div class="pl-hs-feecard">
+        <ul class="pl-hs-totals">
+          {housingFeeTable.columns.map((col, i) => (
+            <li data-tone={i < 2 ? 'a' : 'b'}>
+              <span class="pl-hs-total-unit">{i < 2 ? housingUnits[0].name : housingUnits[1].name}</span>
+              <span class="pl-hs-total-label">{col}</span>
+              <strong class="pl-hs-total-num pl-num-face">{feeTotal[i]}</strong>
+            </li>
+          ))}
+        </ul>
+        <p class="pl-table-caption" aria-hidden="true">居室タイプ別の料金（横にスクロールできます）</p>
+        <div class="pl-compare-table-wrap">
+          <table class="pl-compare-table pl-hs-fee">
+            <caption class="pl-sr-only">居室タイプ別の料金（横にスクロールできます）</caption>
+            <thead>
+              <tr class="pl-hs-fee-group">
+                <td></td>
+                {feeGroups.map((g) => <th scope="colgroup" colspan={g.span} data-tone={g.tone}>{g.name}</th>)}
               </tr>
-            ))}
-          </tbody>
-        </table>
+              <tr>
+                <th scope="col">項目</th>
+                {housingFeeTable.columns.map((col, i) => <th scope="col" data-tone={i < 2 ? 'a' : 'b'}>{col}</th>)}
+              </tr>
+            </thead>
+            <tbody>
+              {housingFeeTable.rows.map((row) => (
+                <tr class={feeRowClass(row.label)}>
+                  <th scope="row">{row.label}</th>
+                  {row.values.map((value, i) => <td class="pl-num-face" data-tone={i < 2 ? 'a' : 'b'}>{value}</td>)}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
       <ul class="pl-note pl-check-list" style="margin-top:12px">
         {housingFeeTable.notes.map((note) => <li>{note}</li>)}
