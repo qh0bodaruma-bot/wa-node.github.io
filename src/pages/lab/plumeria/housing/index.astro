@@ -15,9 +15,10 @@ const feeGroups = [
   { name: housingUnits[0].name, span: 2, tone: 'a' },
   { name: housingUnits[1].name, span: housingFeeTable.columns.length - 2, tone: 'b' },
 ];
-// 表の中で強弱をつける行。月額合計は最も強く、面積と水道光熱費は補足として弱くする。
-const feeRowClass = (label: string) =>
-  label === '月額合計' ? 'is-total' : (label === '面積' || label === '水道光熱費') ? 'is-minor' : '';
+// 表の中で強弱をつける行。面積と水道光熱費は補足として弱くする。
+// 月額合計の行は、表のすぐ上の「月額合計の帯」と同じ数字のため、表からは外している。
+const feeRowClass = (label: string) => (label === '面積' || label === '水道光熱費') ? 'is-minor' : '';
+const feeRows = housingFeeTable.rows.filter((row) => row.label !== '月額合計');
 
 // 入居までの流れ。公式の6手順を変えずに、3つのまとまりで見せる。
 const flowGroups = [
@@ -120,7 +121,7 @@ const day = [
               </tr>
             </thead>
             <tbody>
-              {housingFeeTable.rows.map((row) => (
+              {feeRows.map((row) => (
                 <tr class={feeRowClass(row.label)}>
                   <th scope="row">{row.label}</th>
                   {row.values.map((value, i) => <td class="pl-num-face" data-tone={i < 2 ? 'a' : 'b'}>{value}</td>)}

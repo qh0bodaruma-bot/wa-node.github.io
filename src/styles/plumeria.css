@@ -1972,17 +1972,11 @@
 .pl-compare-table.pl-hs-fee tbody th { font-size: calc(14px * var(--pl-fs)); font-weight: 700; color: var(--muted); }
 .pl-compare-table.pl-hs-fee tbody td { font-size: calc(16px * var(--pl-fs)); color: var(--ink); }
 .pl-compare-table.pl-hs-fee tr.is-minor th, .pl-compare-table.pl-hs-fee tr.is-minor td { font-size: calc(14px * var(--pl-fs)); font-weight: 400; color: var(--muted); }
-.pl-compare-table.pl-hs-fee tr.is-total th, .pl-compare-table.pl-hs-fee tr.is-total td { padding-block: 16px; background: var(--surface); border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink); }
-.pl-compare-table.pl-hs-fee tr.is-total th { font-size: calc(16px * var(--pl-fs)); color: var(--ink); }
-.pl-compare-table.pl-hs-fee tr.is-total td { font-size: calc(20px * var(--pl-fs)); font-weight: 700; }
 .pl-compare-table.pl-hs-fee th, .pl-compare-table.pl-hs-fee td { vertical-align: middle; }
 #fee .pl-table-caption { margin-top: 18px; }
 /* 表の列：その住宅の薄い地色を敷いて、どちらの住宅の項目かを見た目で伝える */
 .pl-compare-table.pl-hs-fee :is(thead tr:not(.pl-hs-fee-group) th, tbody td)[data-tone="a"] { background: var(--hs-a-tint); }
 .pl-compare-table.pl-hs-fee :is(thead tr:not(.pl-hs-fee-group) th, tbody td)[data-tone="b"] { background: var(--hs-b-tint); }
-.pl-compare-table.pl-hs-fee tr.is-total td[data-tone="a"] { background: var(--hs-a-tint-strong); }
-.pl-compare-table.pl-hs-fee tr.is-total td[data-tone="b"] { background: var(--hs-b-tint-strong); }
-.pl-compare-table.pl-hs-fee tbody tr:not(.is-total) td { border-bottom-color: rgba(8, 60, 74, 0.1); }
 /* 帯と表は白いパネルの上に置く。サンド色の地に薄い紺・薄い黄を直接敷くと、くすんで見えるため */
 .pl-hs-feecard { margin-top: 24px; padding-bottom: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 0; overflow: hidden; }
 .pl-hs-feecard .pl-hs-totals { margin: 0 0 4px; border-top: 0; }
@@ -2219,3 +2213,4 @@
 }
 /* フッターの下端の余白は、追従ボタンの高さに合わせて詰める（以前は108pxのボタン用に170px） */
 .pl .pl-foot { padding-bottom: 96px; }
+.pl-compare-table.pl-hs-fee tbody td { border-bottom-color: rgba(8, 60, 74, 0.1); }
