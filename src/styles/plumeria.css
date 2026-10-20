@@ -2211,3 +2211,26 @@
 /* 住宅Ⅰ・Ⅱの色分けと関係のない一覧（対象・費用、アクセス、会社概要など）では、項目ラベルの地色を中立の薄いグレーにする。
    以前はこの地色の定義がなく、ラベルの囲みが出ていなかった。 */
 .pl-hs-spec { --hs-a-tint: color-mix(in srgb, var(--ink) 9%, #fff); }
+
+/* ── 採用：募集職種のカード。給与は閉じていても見えるようにし、職種名を最も強く、雇用形態はラベルにする ───────────── */
+.pl-job-card { --hs-a-tint: color-mix(in srgb, var(--ink) 9%, #fff); }
+.pl-job-card > summary { gap: 8px; align-items: flex-start; }
+.pl-job-name { display: block; width: 100%; }
+.pl-hs-tag.pl-job-employment { margin: 0; padding: 1px 10px; background: var(--hs-a-tint); font-weight: 700; color: var(--green-deep); }
+.pl-job-pay { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; align-items: baseline; font-size: calc(16px * var(--pl-fs)); font-weight: 700; line-height: 1.7; color: var(--ink); }
+.pl-job-pay-label { padding: 1px 10px; background: var(--hs-a-tint); font-size: calc(13px * var(--pl-fs)); font-weight: 700; color: var(--green-deep); }
+.pl-job-card .pl-job-detail > div { grid-template-columns: 7em minmax(0, 1fr); }
+.pl-job-card .pl-job-detail dd { font-size: calc(15px * var(--pl-fs)); font-weight: 500; }
+/* 長い項目名（「高齢者向け住宅の開設」など）を持つ一覧は、ラベルの列を広げる */
+.pl-hs-spec .pl-hs-facts[style*="--w"] > div { grid-template-columns: var(--w) minmax(0, 1fr); }
+.pl-desk { align-items: center; }
+.pl-desk strong { font-size: calc(26px * var(--pl-fs)); }
+
+/* ── お問い合わせ：電話窓口を2つ並べ、番号を大きくする ───────────── */
+.pl-desk-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; margin-top: 16px; }
+.pl-desk-grid .pl-desk { margin: 0; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 6px; padding: 22px 22px 20px; border: 1px solid var(--line); border-top: 5px solid var(--green-deep); background: var(--surface); }
+.pl-desk-grid .pl-desk > span { font-size: calc(15px * var(--pl-fs)); font-weight: 700; color: var(--muted); }
+.pl-desk-grid .pl-desk strong { font-size: calc(30px * var(--pl-fs)); line-height: 1.3; }
+@media (max-width: 640px) { .pl-desk-grid { grid-template-columns: minmax(0, 1fr); } }
+.pl-contact-route { margin-top: 20px; padding: 4px 0 4px 0; border: 0; }
+.pl-contact-route p { margin: 8px 0 0 17px; }

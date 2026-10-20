@@ -35,26 +35,30 @@ const positions = [
     <div class="pl-wrap">
       <h1 class="pl-h1">プルメリアで働く</h1>
       <p class="pl-sec-lead">介護職・看護職の募集情報をご案内します。</p>
+      <nav class="pl-hs-jump" aria-label="このページの内容">
+        <a href="#positions">募集職種</a>
+        <a href="#application">応募・職場見学</a>
+      </nav>
       <img class="pl-page-photo" src={plImg('recruit-01.webp')} alt="スタッフどうしが会話する様子（イメージ）" width="1200" height="675" decoding="async" />
       <p class="pl-photo-note">写真はイメージです。実際のスタッフとは異なります。</p>
     </div>
   </section>
-  <section class="pl-sec">
+  <section class="pl-sec" id="positions">
     <div class="pl-wrap">
-      <h2 class="pl-h2">募集職種</h2>
+      <h2 class="pl-h2">{positions.map((p) => p.name).join('と')}の、{positions.length}職種を募集しています</h2>
       <p class="pl-sec-lead">現在の公式サイトに掲載されている職種です。クリックすると詳しい条件が開きます。募集状況・勤務条件はご応募前にご確認ください。</p>
       <div class="pl-job-list">
         {positions.map((p) => <details class="pl-purpose-guide pl-job-card">
           <summary>
-            <span class="pl-h3">{p.name}</span>
-            <span class="pl-body pl-job-employment">{p.employment}</span>
+            <span class="pl-hs-line-name pl-job-name">{p.name}</span>
+            <span class="pl-hs-tag pl-job-employment">{p.employment}</span>
+            <span class="pl-job-pay"><span class="pl-job-pay-label">給与</span>{p.pay}</span>
             <span class="pl-job-hint" aria-hidden="true">
               <span class="pl-job-hint-closed">タップして詳しい条件を見る</span>
               <span class="pl-job-hint-open">タップして閉じる</span>
             </span>
           </summary>
-          <dl class="pl-access-list pl-job-detail">
-            <div><dt>給与</dt><dd>{p.pay}</dd></div>
+          <dl class="pl-hs-facts pl-job-detail">
             <div><dt>勤務時間</dt><dd>{p.hours}</dd></div>
             <div><dt>休日</dt><dd>{p.holiday}</dd></div>
             <div><dt>応募資格</dt><dd>{p.requirement}</dd></div>
@@ -71,8 +75,8 @@ const positions = [
   </section>
   <section class="pl-sec pl-sec-beige" id="application">
     <div class="pl-wrap pl-reading">
-      <h2 class="pl-h2">応募・職場見学について</h2>
-      <p class="pl-body">ご希望の職種を添えて、採用窓口へお問い合わせください。</p>
+      <h2 class="pl-h2">応募・職場見学は、採用窓口へお問い合わせください</h2>
+      <p class="pl-note" style="text-align:center">ご希望の職種を添えて、お問い合わせください。</p>
       <a class="pl-desk" href={`tel:${corp.tel?.replaceAll('-', '')}`} data-pl-gtag="phone_click" data-pl-service="recruit" data-pl-cta="recruit_desk"><span>採用窓口</span><strong>{corp.tel}</strong></a>
       <p class="pl-note">受付時間：平日10:00〜17:00</p>
       <details class="pl-purpose-guide">

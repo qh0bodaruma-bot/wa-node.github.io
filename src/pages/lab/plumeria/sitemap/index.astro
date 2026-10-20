@@ -64,11 +64,11 @@ const groups: { title: string; links: { label: string; href: string; children?: 
 
   <section class="pl-sec">
     <div class="pl-wrap">
-      <div class="pl-grid-2">
+      <div class="pl-hs-lines pl-hs-lines-2">
         {groups.map((group) => (
-          <div class="pl-card">
-            <h2 class="pl-h3">{group.title}</h2>
-            <ul class="pl-body pl-check-list">
+          <div class="pl-hs-line">
+            <h2 class="pl-hs-line-name">{group.title}</h2>
+            <ul class="pl-hs-line-body pl-check-list" style="margin-left:17px">
               {group.links.map((link) => (
                 <li>
                   <a href={link.href}>{link.label}</a>

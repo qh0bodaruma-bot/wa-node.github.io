@@ -21,13 +21,13 @@ import { routes, magazineIssues, magazineListUrl } from '../../../../data/plumer
       <p class="pl-sec-lead">
         毎月発行しているプルメリアだよりでは、毎月の行事や暮らしの様子、介護のはなしなどをご紹介しています。
       </p>
-      <p class="pl-body">ショートステイのイベント予定も、プルメリアだよりでご確認いただけます。</p>
+      <p class="pl-hs-lead">ショートステイのイベント予定も、プルメリアだよりでご確認いただけます。</p>
     </div>
   </section>
 
   <section class="pl-sec">
     <div class="pl-wrap pl-reading">
-      <h2 class="pl-h2">バックナンバー</h2>
+      <h2 class="pl-h2">最新号から、{magazineIssues.length}号分のバックナンバーを読めます</h2>
       <ul class="pl-news">
         {magazineIssues.map((issue, i) => (
           <li>
@@ -49,8 +49,7 @@ import { routes, magazineIssues, magazineListUrl } from '../../../../data/plumer
 
   <section class="pl-sec pl-sec-beige">
     <div class="pl-wrap pl-reading">
-      <h2 class="pl-h2">施設からのお知らせ</h2>
-      <p class="pl-body">プルメリアだよりの発行は、トップページのお知らせ欄でもご案内しています。</p>
+      <h2 class="pl-h2">発行のお知らせは、トップページでもご案内しています</h2>
       <a class="pl-more" href={`${routes.top}#news`}>お知らせを見る →</a>
     </div>
   </section>
