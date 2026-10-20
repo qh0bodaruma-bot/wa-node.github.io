@@ -2194,6 +2194,12 @@
 .pl .pl-foot-brand .pl-foot-badge { margin-bottom: 0; }
 .pl .pl-foot-info { display: grid; gap: 4px; }
 .pl .pl-foot-info p { margin: 0; }
+/* メニューは2列（サービス／法人・その他）。列の幅は広げすぎず、リンクの行が長く伸びないようにする */
 @media (min-width: 1001px) {
-  .pl .pl-foot-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 48px; }
+  .pl .pl-foot-nav { grid-template-columns: repeat(2, minmax(0, 480px)); gap: 24px 64px; }
 }
+@media (min-width: 721px) and (max-width: 1000px) {
+  .pl .pl-foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 32px; }
+}
+.pl .pl-foot-subtitle { margin: 14px 0 2px; font-size: calc(13px * var(--pl-fs)); font-weight: 700; letter-spacing: 0.08em; color: var(--muted); }
+.pl .pl-foot-section:first-of-type .pl-foot-subtitle { margin-top: 0; }

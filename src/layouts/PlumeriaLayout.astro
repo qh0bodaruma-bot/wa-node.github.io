@@ -31,9 +31,13 @@ const serviceLink = (id: string) => {
   const s = services.find((item) => item.id === id);
   return s ? { label: s.name, href: s.href } : null;
 };
+// フッターは2列：「サービス」（住まい・在宅サービスの2つの小見出し）と「法人・その他」。
+// 列の高さを近づけるため、住まい（2件）と在宅サービス（4件）を1列にまとめている。
 const footNavGroups = [
-  { title: '住まい', links: [serviceLink('housing'), serviceLink('short-stay')] },
-  { title: '在宅サービス', links: [serviceLink('home-care'), serviceLink('home-nursing'), serviceLink('care-management'), serviceLink('welfare-equipment')] },
+  { title: 'サービス', sections: [
+    { title: '住まい', links: [serviceLink('housing'), serviceLink('short-stay')] },
+    { title: '在宅サービス', links: [serviceLink('home-care'), serviceLink('home-nursing'), serviceLink('care-management'), serviceLink('welfare-equipment')] },
+  ] },
   { title: '法人・その他', links: [
     { label: 'サービス一覧', href: routes.services },
     { label: '会社概要', href: routes.company },
@@ -44,7 +48,14 @@ const footNavGroups = [
     { label: '個人情報の取扱いについて', href: routes.privacy },
     { label: 'サイトマップ', href: routes.sitemap },
   ] },
-].map((group) => ({ ...group, links: group.links.filter((link): link is { label: string; href: string } => link !== null) }));
+].map((group) => {
+  const onlyLinks = (links: ({ label: string; href: string } | null)[]) => links.filter((link): link is { label: string; href: string } => link !== null);
+  return {
+    title: group.title,
+    links: onlyLinks(group.links ?? []),
+    sections: (group.sections ?? []).map((section) => ({ title: section.title, links: onlyLinks(section.links) })),
+  };
+});
 ---
 <PlumeriaBaseLayout
   title={title}
@@ -249,9 +260,19 @@ const footNavGroups = [
           {footNavGroups.map((group) => (
             <div class="pl-foot-group">
               <p class="pl-foot-group-title">{group.title}</p>
-              <ul class="pl-foot-links">
-                {group.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
-              </ul>
+              {group.sections.map((section) => (
+                <div class="pl-foot-section">
+                  <p class="pl-foot-subtitle">{section.title}</p>
+                  <ul class="pl-foot-links">
+                    {section.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+                  </ul>
+                </div>
+              ))}
+              {group.links.length > 0 && (
+                <ul class="pl-foot-links">
+                  {group.links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+                </ul>
+              )}
             </div>
           ))}
         </nav>
