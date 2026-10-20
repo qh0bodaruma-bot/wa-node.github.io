@@ -2207,3 +2207,7 @@
 /* サービス一覧：サービス名の上に、そのサービスの一言（プルメリアⅠ・Ⅱ など）をラベルで添える */
 .pl-hs-tag { margin: 14px 0 0; align-self: flex-start; padding: 1px 10px; background: var(--mint); font-size: calc(13px * var(--pl-fs)); font-weight: 700; color: var(--green-deep); }
 .pl-hs-tag + .pl-hs-svc-name { margin-top: 8px; }
+
+/* 住宅Ⅰ・Ⅱの色分けと関係のない一覧（対象・費用、アクセス、会社概要など）では、項目ラベルの地色を中立の薄いグレーにする。
+   以前はこの地色の定義がなく、ラベルの囲みが出ていなかった。 */
+.pl-hs-spec { --hs-a-tint: color-mix(in srgb, var(--ink) 9%, #fff); }
