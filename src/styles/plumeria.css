@@ -2049,3 +2049,44 @@
 .pl-hs-feecard .pl-table-caption { margin: 18px 18px 8px; }
 .pl-hs-feecard .pl-compare-table-wrap { padding-bottom: 4px; }
 .pl-hs-feecard .pl-compare-table.pl-hs-fee .pl-hs-fee-group td, .pl-hs-feecard .pl-compare-table.pl-hs-fee tbody th, .pl-hs-feecard .pl-compare-table.pl-hs-fee thead th:first-child { padding-left: 18px; }
+
+/* ── サービスページ共通（PlumeriaServicePage）：住まいページと同じ強弱・見せ方 ───────────── */
+.pl-hs-lines-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 900px) { .pl-hs-lines-3 { grid-template-columns: minmax(0, 1fr); } }
+.pl-hs-line-body { margin: 0; }
+.pl-hs-lines-value .pl-hs-line-name { padding-left: 0; border-left: 0; font-size: calc(14px * var(--pl-fs)); font-weight: 700; color: var(--muted); }
+.pl-hs-line-name { margin: 0; }
+.pl-hs-lines-value .pl-hs-line-body { padding-left: 0; font-size: calc(16px * var(--pl-fs)); font-weight: 600; line-height: 1.75; color: var(--ink); white-space: pre-line; }
+
+.pl-hs-spec { margin-top: 24px; padding: 4px 24px; background: var(--surface); border: 1px solid var(--line); border-top: 5px solid var(--green-deep); border-radius: var(--radius); }
+.pl-hs-spec .pl-hs-facts { margin: 0; }
+.pl-hs-spec .pl-hs-facts > div { grid-template-columns: 8em minmax(0, 1fr); }
+.pl-hs-spec .pl-hs-facts > div:first-child { border-top: 0; }
+.pl-hs-spec .pl-hs-facts dd { font-size: calc(16px * var(--pl-fs)); font-weight: 500; }
+
+.pl-hs-cost { margin-top: 36px; }
+.pl-hs-cost-body { margin: 10px 0 0 17px; font-size: calc(16px * var(--pl-fs)); line-height: 1.85; color: var(--ink); }
+.pl-hs-cost .pl-hs-lines { margin-top: 16px; }
+
+.pl-hs-stage-body { margin: 12px 0 0; font-size: calc(14px * var(--pl-fs)); line-height: 1.85; color: var(--muted); }
+.pl-hs-flow-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 64px; }
+@media (max-width: 1000px) {
+  .pl-hs-flow-4 { grid-template-columns: minmax(0, 1fr); gap: 52px; }
+  .pl-hs-flow-4 > .pl-hs-stage + .pl-hs-stage::before { content: '↓'; left: 0; top: -50px; transform: none; }
+}
+.pl-hs-flow-stack { grid-template-columns: minmax(0, 1fr); gap: 52px; }
+.pl-hs-flow-stack > .pl-hs-stage + .pl-hs-stage::before { content: '↓'; left: 0; top: -50px; transform: none; }
+
+/* 医療行為の受け入れ：可否を最も強く、条件は補足として弱くする。色は使わず、太さと枠線で区別する */
+.pl-compare-table.pl-hs-med { table-layout: fixed; min-width: 640px; }
+.pl-hs-med thead th { padding-block: 14px; font-size: calc(16px * var(--pl-fs)); color: var(--ink); border-bottom: 2px solid var(--ink); }
+.pl-hs-med thead th:nth-child(1) { width: 32%; }
+.pl-hs-med thead th:nth-child(2) { width: 16%; }
+.pl-hs-med tbody th { font-size: calc(16px * var(--pl-fs)); font-weight: 700; color: var(--ink); vertical-align: middle; }
+.pl-hs-med tbody td { vertical-align: middle; }
+.pl-hs-st { display: inline-block; min-width: 4.5em; padding: 3px 12px; border-radius: 999px; text-align: center; font-size: calc(15px * var(--pl-fs)); font-weight: 700; line-height: 1.5; }
+.pl-hs-st[data-st="ok"] { border: 2px solid var(--ink); color: var(--ink); background: var(--surface); }
+.pl-hs-st[data-st="ask"] { border: 2px dashed var(--ink); color: var(--ink); background: var(--surface); }
+.pl-hs-st[data-st="no"] { border: 1px solid var(--line); color: var(--muted); background: rgba(8, 60, 74, 0.06); font-weight: 400; }
+.pl-hs-med .pl-hs-med-note { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
+.pl-hs-med .pl-hs-med-note.is-empty { color: rgba(76, 106, 115, 0.5); }

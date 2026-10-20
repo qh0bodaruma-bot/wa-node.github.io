@@ -24,18 +24,25 @@ interface Props {
   flowNotes?: string[];
   faqs?: PlumeriaFaq[];
   contactCategory: string;
+  /** 各セクションの見出し。ページごとに、そのページの内容から言い切りの文で指定する。省略時は汎用の見出し */
+  supportHeading?: string;
+  conditionsHeading?: string;
+  flowHeading?: string;
 }
 
 const {
   title, description, currentPath, breadcrumbLabel,
   heroTitle, heroLead, heroImg, heroAlt, fitFor, content, targetInfo, vacancyFacilityId, costInfo, flowSteps,
   faqs = genericFaqs, contactCategory, costDetails = [], flowNotes = [],
+  supportHeading = '提供内容', conditionsHeading = '対象・利用条件', flowHeading = '利用までの流れ',
 } = Astro.props;
 
 const contactAnchor = contactCategory === 'housing' ? 'housing-desk' : contactCategory === 'short-stay' ? 'short-stay-desk' : contactCategory === 'welfare-equipment' ? 'welfare-equipment-desk' : 'home-service-desk';
 const contactHref = `${routes.contact}?service=${encodeURIComponent(contactCategory)}#${contactAnchor}`;
 // カードの列数は件数から決める。auto-fit は最大幅が固定値だと列数を少なく見積もるため使わない。
 const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1), 4)}`;
+// 手順は4つまでは横一列、5つ以上は縦に積む（5列にすると各手順の文が窮屈になるため）
+const flowClass = flowSteps.length <= 4 ? `pl-hs-flow pl-hs-flow-${flowSteps.length}` : 'pl-hs-flow pl-hs-flow-stack';
 ---
 <PlumeriaLayout title={title} description={description} currentPath={currentPath}>
   <div class="pl-wrap" style="padding-top:28px">
@@ -50,7 +57,7 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
     <div class="pl-wrap">
       <h1 class="pl-h1" style="font-size:calc(clamp(1.7rem,4vw,2.4rem) * var(--pl-fs))">{heroTitle}</h1>
       <p class="pl-sec-lead">{heroLead}</p>
-      <nav class="pl-page-nav" aria-label="このページの内容">
+      <nav class="pl-hs-jump" aria-label="このページの内容">
         <a href="#fit">こんなときに</a><a href="#support">できること</a><a href="#conditions">対象・費用</a><a href="#flow">利用の流れ</a><a href="#questions">よくある質問</a>
       </nav>
       <img class="pl-page-photo" src={heroImg} alt={heroAlt} width="1200" height="675" loading="eager" decoding="async" />
@@ -69,12 +76,12 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
 
   <section class="pl-sec pl-sec-beige" id="support">
     <div class="pl-wrap">
-      <h2 class="pl-h2">提供内容</h2>
-      <div class="pl-grid-3">
+      <h2 class="pl-h2">{supportHeading}</h2>
+      <div class={content.length === 3 ? 'pl-hs-lines pl-hs-lines-3' : 'pl-hs-lines pl-hs-lines-2'}>
         {content.map((c) => (
-          <div class="pl-card">
-            <h3 class="pl-h3">{c.label}</h3>
-            <p class="pl-body">{c.body}</p>
+          <div class="pl-hs-line">
+            <h3 class="pl-hs-line-name">{c.label}</h3>
+            <p class="pl-hs-line-body">{c.body}</p>
           </div>
         ))}
       </div>
@@ -83,20 +90,27 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
 
   <section class="pl-sec" id="conditions">
     <div class="pl-wrap">
-      <h2 class="pl-h2">対象・利用条件</h2>
-      <dl class={cols(targetInfo.length + (vacancyFacilityId ? 1 : 0))}>
-        {vacancyFacilityId && <div class="pl-target-card"><dt>空室状況</dt><dd><PlumeriaVacancyStatus facilityId={vacancyFacilityId} /></dd></div>}
-        {targetInfo.map((t) => (
-          <div class="pl-target-card"><dt>{t.label}</dt><dd>{t.body}</dd></div>
-        ))}
-      </dl>
-      <div class="pl-cost-summary">
-        <h3 class="pl-h3">費用の目安</h3>
-        <p class="pl-body">{costInfo}</p>
+      <h2 class="pl-h2">{conditionsHeading}</h2>
+      <div class="pl-hs-spec">
+        <dl class="pl-hs-facts">
+          {vacancyFacilityId && <div><dt>空室状況</dt><dd><PlumeriaVacancyStatus facilityId={vacancyFacilityId} /></dd></div>}
+          {targetInfo.map((t) => (
+            <div><dt>{t.label}</dt><dd>{t.body}</dd></div>
+          ))}
+        </dl>
+      </div>
+      <div class="pl-hs-cost">
+        <h3 class="pl-hs-line-name">費用の目安</h3>
+        <p class="pl-hs-cost-body">{costInfo}</p>
         {costDetails.length > 0 && (
-          <dl class="pl-cost-list">
-            {costDetails.map((item) => <div><dt>{item.label}</dt><dd>{item.value}</dd></div>)}
-          </dl>
+          <div class="pl-hs-lines pl-hs-lines-2 pl-hs-lines-value">
+            {costDetails.map((item) => (
+              <div class="pl-hs-line">
+                <h4 class="pl-hs-line-name">{item.label}</h4>
+                <p class="pl-hs-line-body">{item.value}</p>
+              </div>
+            ))}
+          </div>
         )}
       </div>
     </div>
@@ -107,13 +121,12 @@ const cols = (n: number) => `pl-auto-grid pl-auto-grid-${Math.min(Math.max(n, 1)
 
   <section class="pl-sec pl-sec-beige" id="flow">
     <div class="pl-wrap">
-      <h2 class="pl-h2">利用までの流れ</h2>
-      <ol class={cols(flowSteps.length)}>
+      <h2 class="pl-h2">{flowHeading}</h2>
+      <ol class={flowClass}>
         {flowSteps.map((step, i) => (
-          <li class="pl-flow-card">
-            <span class="pl-num-face pl-flow-num" aria-hidden="true">{i + 1}</span>
-            <h3 class="pl-flow-title">{step.title}</h3>
-            <p class="pl-flow-body">{step.body}</p>
+          <li class="pl-hs-stage">
+            <ol class="pl-hs-steps" style={`--from:${i}`}><li>{step.title}</li></ol>
+            <p class="pl-hs-stage-body">{step.body}</p>
           </li>
         ))}
       </ol>

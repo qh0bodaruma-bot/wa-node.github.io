@@ -32,16 +32,18 @@ import { routes, homeNursingTasks, homeNursingStrengths, plImg } from '../../../
     { title: 'ご利用開始', body: '訪問スケジュールを調整し、利用を開始します。' },
   ]}
   contactCategory="home-nursing"
+  supportHeading="医療的なケア・健康管理・緊急時の支援の、3つを行います"
+  conditionsHeading="対象は、主治医の指示のもとで訪問看護が必要な方です"
+  flowHeading="ご利用開始まで、3つの手順です"
 >
   <Fragment slot="extra">
     <section class="pl-sec pl-sec-beige" id="tasks">
       <div class="pl-wrap">
-        <h2 class="pl-h2">具体的なサービス内容</h2>
-        <p class="pl-sec-lead">訪問看護には「医療保険サービス」と「介護保険サービス」の2種類があります。</p>
-        <div class="pl-grid-2">
+        <h2 class="pl-h2">訪問看護には、医療保険と介護保険の2種類のサービスがあります</h2>
+        <div class="pl-grid-2" style="margin-top:24px">
           {homeNursingTasks.map((group) => (
             <div class="pl-card">
-              <h3 class="pl-h3">{group.title}</h3>
+              <h3 class="pl-hs-line-name" style="margin-bottom:10px">{group.title}</h3>
               <ul class="pl-body pl-check-list">
                 {group.items.map((item) => <li>{item}</li>)}
               </ul>
@@ -54,12 +56,12 @@ import { routes, homeNursingTasks, homeNursingStrengths, plImg } from '../../../
 
     <section class="pl-sec" id="strengths">
       <div class="pl-wrap">
-        <h2 class="pl-h2">プルメリアの訪問看護の特長</h2>
-        <div class="pl-grid-2">
+        <h2 class="pl-h2">プルメリアの訪問看護には、{homeNursingStrengths.length}つの特長があります</h2>
+        <div class="pl-hs-lines pl-hs-lines-2">
           {homeNursingStrengths.map((item) => (
-            <div class="pl-card">
-              <h3 class="pl-h3">{item.name}</h3>
-              <p class="pl-body">{item.body}</p>
+            <div class="pl-hs-line">
+              <h3 class="pl-hs-line-name">{item.name}</h3>
+              <p class="pl-hs-line-body">{item.body}</p>
             </div>
           ))}
         </div>

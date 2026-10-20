@@ -7,10 +7,10 @@ import {
   shortStayReducedFees, shortStayOptionalFees, shortStayUseNotes,
 } from '../../../../data/plumeria';
 
-// 減額・実費は「費用の目安」に並べる。セクションを増やすと背景色の交互が崩れるため、
+// 減額・実費は「費用の目安」に並べる（項目ごとに改行して表示する）。セクションを増やすと背景色の交互が崩れるため、
 // 費用の情報は1か所にまとめる。
-const reducedFeeLine = shortStayReducedFees.map((f) => `${f.label} ${f.value}`).join('／');
-const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`).join('／');
+const reducedFeeLine = shortStayReducedFees.map((f) => `${f.label} ${f.value}`).join('\n');
+const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`).join('\n');
 ---
 <PlumeriaServicePage
   title="ショートステイ｜プルメリア（修正版ラフ）"
@@ -53,6 +53,9 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
   ]}
   flowNotes={shortStayUseNotes}
   contactCategory="short-stay"
+  supportHeading="居室・生活支援・共用スペースの、3つが基本の内容です"
+  conditionsHeading="対象は、要支援1・2、要介護1〜5の認定を受けている方です"
+  flowHeading="ご利用相談からご利用開始まで、4つの手順です"
   faqs={[
     genericFaqs[0],
     {
@@ -65,13 +68,12 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
     <section class="pl-sec pl-sec-beige pl-sec-palm" id="facility">
       <PlumeriaPalmShade />
       <div class="pl-wrap">
-        <h2 class="pl-h2">施設・設備</h2>
-        <p class="pl-sec-lead">短期間の滞在でも落ち着いてお過ごしいただけるよう、広さと設備に配慮しています。</p>
-        <div class="pl-grid-3">
+        <h2 class="pl-h2">短期間でも落ち着いてお過ごしいただけるよう、広さと設備に配慮しています</h2>
+        <div class="pl-hs-lines pl-hs-lines-2">
           {shortStayFacilities.map((item) => (
-            <div class="pl-card">
-              <h3 class="pl-h3">{item.name}</h3>
-              <p class="pl-body">{item.body}</p>
+            <div class="pl-hs-line">
+              <h3 class="pl-hs-line-name">{item.name}</h3>
+              <p class="pl-hs-line-body">{item.body}</p>
             </div>
           ))}
         </div>
@@ -84,11 +86,11 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
 
     <section class="pl-sec" id="medical">
       <div class="pl-wrap">
-        <h2 class="pl-h2">医療行為の受け入れ</h2>
+        <h2 class="pl-h2">医療行為の受け入れ可否の目安</h2>
         <p class="pl-sec-lead">ケアマネジャー・ご家族の方が、ご利用の可否を判断する際の目安です。</p>
         <p class="pl-table-caption" aria-hidden="true">医療行為ごとの受け入れ可否（横にスクロールできます）</p>
         <div class="pl-compare-table-wrap">
-          <table class="pl-compare-table">
+          <table class="pl-compare-table pl-hs-med">
             <caption class="pl-sr-only">医療行為ごとの受け入れ可否（横にスクロールできます）</caption>
             <thead>
               <tr>
@@ -101,8 +103,8 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
               {shortStayMedicalCare.map((row) => (
                 <tr>
                   <th scope="row">{row.item}</th>
-                  <td>{row.accepted === '○' ? '可' : row.accepted === '×' ? '不可' : '要相談'}</td>
-                  <td>{row.note || '—'}</td>
+                  <td><span class="pl-hs-st" data-st={row.accepted === '○' ? 'ok' : row.accepted === '×' ? 'no' : 'ask'}>{row.accepted === '○' ? '可' : row.accepted === '×' ? '不可' : '要相談'}</span></td>
+                  <td class={row.note ? 'pl-hs-med-note' : 'pl-hs-med-note is-empty'}>{row.note || '—'}</td>
                 </tr>
               ))}
             </tbody>

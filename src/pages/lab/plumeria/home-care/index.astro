@@ -32,15 +32,18 @@ import { routes, homeCareTasks, homeCareStrengths, plImg } from '../../../../dat
     { title: 'ご利用開始', body: '内容にご納得いただいたうえで、利用を開始します。' },
   ]}
   contactCategory="home-care"
+  supportHeading="ご自宅で、身体介護と生活援助を行います"
+  conditionsHeading="対象は、要介護・要支援の認定を受けている方です"
+  flowHeading="ご利用開始まで、3つの手順です"
 >
   <Fragment slot="extra">
     <section class="pl-sec pl-sec-beige" id="tasks">
       <div class="pl-wrap">
-        <h2 class="pl-h2">具体的なサービス内容</h2>
-        <div class="pl-grid-2">
+        <h2 class="pl-h2">身体介護と生活援助の、2種類のサービスがあります</h2>
+        <div class="pl-grid-2" style="margin-top:24px">
           {homeCareTasks.map((group) => (
             <div class="pl-card">
-              <h3 class="pl-h3">{group.title}</h3>
+              <h3 class="pl-hs-line-name" style="margin-bottom:10px">{group.title}</h3>
               <ul class="pl-body pl-check-list">
                 {group.items.map((item) => <li>{item}</li>)}
               </ul>
@@ -53,12 +56,12 @@ import { routes, homeCareTasks, homeCareStrengths, plImg } from '../../../../dat
 
     <section class="pl-sec" id="strengths">
       <div class="pl-wrap">
-        <h2 class="pl-h2">プルメリアの訪問介護の特長</h2>
-        <div class="pl-grid-2">
+        <h2 class="pl-h2">プルメリアの訪問介護には、{homeCareStrengths.length}つの特長があります</h2>
+        <div class="pl-hs-lines pl-hs-lines-2">
           {homeCareStrengths.map((item) => (
-            <div class="pl-card">
-              <h3 class="pl-h3">{item.name}</h3>
-              <p class="pl-body">{item.body}</p>
+            <div class="pl-hs-line">
+              <h3 class="pl-hs-line-name">{item.name}</h3>
+              <p class="pl-hs-line-body">{item.body}</p>
             </div>
           ))}
         </div>
