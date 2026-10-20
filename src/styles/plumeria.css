@@ -2203,3 +2203,7 @@
 }
 .pl .pl-foot-subtitle { margin: 14px 0 2px; font-size: calc(13px * var(--pl-fs)); font-weight: 700; letter-spacing: 0.08em; color: var(--muted); }
 .pl .pl-foot-section:first-of-type .pl-foot-subtitle { margin-top: 0; }
+
+/* サービス一覧：サービス名の上に、そのサービスの一言（プルメリアⅠ・Ⅱ など）をラベルで添える */
+.pl-hs-tag { margin: 14px 0 0; align-self: flex-start; padding: 1px 10px; background: var(--mint); font-size: calc(13px * var(--pl-fs)); font-weight: 700; color: var(--green-deep); }
+.pl-hs-tag + .pl-hs-svc-name { margin-top: 8px; }

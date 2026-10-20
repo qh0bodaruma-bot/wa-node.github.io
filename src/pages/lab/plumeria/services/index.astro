@@ -1,6 +1,13 @@
 ---
 import PlumeriaLayout from '../../../../layouts/PlumeriaLayout.astro';
+import PlumeriaGuideQuiz from '../../../../components/plumeria/PlumeriaGuideQuiz.astro';
 import { routes, services } from '../../../../data/plumeria';
+
+// サービスのまとまりはフッター・トップと同じ区分（住まい／在宅サービス）。
+const serviceGroups = [
+  { title: '住まい', ids: ['housing', 'short-stay'] },
+  { title: '在宅サービス', ids: ['home-care', 'home-nursing', 'care-management', 'welfare-equipment'] },
+].map((g) => ({ ...g, items: g.ids.map((id) => services.find((s) => s.id === id)!) }));
 ---
 <PlumeriaLayout
   title="サービス一覧・選び方｜プルメリア（修正版ラフ）"
@@ -24,19 +31,27 @@ import { routes, services } from '../../../../data/plumeria';
     </div>
   </section>
 
-  <section class="pl-sec">
+  <PlumeriaGuideQuiz />
+
+  <section class="pl-sec" id="list">
     <div class="pl-wrap">
-      <div class="pl-service-intro-grid">
-        {services.map((s) => (
-          <a class="pl-card pl-service-intro-card" href={s.href} data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="services_list">
-            <img src={s.img} alt={s.alt} width="900" height="675" loading="lazy" decoding="async" />
-            <h2 class="pl-h3">{s.name}</h2>
-            <p class="pl-body">{s.tagline}</p>
-            <p class="pl-body">{s.summary}</p>
-            <span class="pl-service-intro-more">くわしく見る →</span>
-          </a>
-        ))}
-      </div>
+      <h2 class="pl-h2">住まいと在宅の{services.length}つのサービスから、お選びいただけます</h2>
+      {serviceGroups.map((g) => (
+        <div class="pl-hs-group">
+          <h3 class="pl-hs-group-title">{g.title}</h3>
+          <div class={`pl-hs-svc-grid pl-hs-svc-grid-${g.items.length}`}>
+            {g.items.map((s) => (
+              <a class="pl-card pl-service-intro-card" href={s.href} data-pl-gtag="service_select" data-pl-service={s.id} data-pl-cta="services_list">
+                <img src={s.img} alt={s.alt} width="900" height="675" loading="lazy" decoding="async" />
+                <p class="pl-hs-tag">{s.tagline}</p>
+                <h4 class="pl-hs-line-name pl-hs-svc-name">{s.name}</h4>
+                <p class="pl-hs-line-body">{s.summary}</p>
+                <span class="pl-service-intro-more">くわしく見る →</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      ))}
     </div>
   </section>
 
