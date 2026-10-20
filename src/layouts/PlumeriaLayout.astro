@@ -232,16 +232,18 @@ const footNavGroups = [
             <p class="pl-brand-name pl-foot-name">{corp.name}</p>
             <p class="pl-brand-en">{corp.nameEn}</p>
           </div>
-          <p class="pl-note">{corp.address ?? '住所：確認中'}</p>
-          <p class="pl-note">
-            運営法人：<a href={parentCompany.url} data-astro-reload>{corp.groupName ?? parentCompany.name}</a>
-          </p>
-          <p class="pl-note">
-            現在の公式サイト：
-            {corp.currentSiteUrl
-              ? <a href={corp.currentSiteUrl}>{corp.currentSiteUrl}</a>
-              : <span class="pl-pending-note">確認中</span>}
-          </p>
+          <div class="pl-foot-info">
+            <p class="pl-note">{corp.address ?? '住所：確認中'}</p>
+            <p class="pl-note">
+              運営法人：<a href={parentCompany.url} data-astro-reload>{corp.groupName ?? parentCompany.name}</a>
+            </p>
+            <p class="pl-note">
+              現在の公式サイト：
+              {corp.currentSiteUrl
+                ? <a href={corp.currentSiteUrl}>{corp.currentSiteUrl}</a>
+                : <span class="pl-pending-note">確認中</span>}
+            </p>
+          </div>
         </div>
         <nav class="pl-foot-nav" aria-label="フッターメニュー">
           {footNavGroups.map((group) => (

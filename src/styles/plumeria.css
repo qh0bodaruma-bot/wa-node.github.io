@@ -2185,3 +2185,15 @@
 /* 採用情報のバッジも、ブランドのバッジと同じ高さにして、島の縁までの余白（上・下・右）を10pxにそろえる */
 .pl .pl-head .pl-head-recruit { align-self: stretch; display: inline-flex; align-items: center; }
 .pl .pl-foot-badge .pl-brand-name, .pl .pl-foot-badge .pl-brand-en { line-height: 1.3; }
+
+/* ── フッター：上段に「バッジ＋住所・法人」、その下にメニューを全幅で3列に並べる ─────────────────────────────
+   以前は左にロゴ、右にメニューを並べていたため、文字サイズ「大」でメニューの列が折り返してずれた。
+   メニューを下段の全幅に置くと、列幅に余裕ができて「大」でも折り返さない。 */
+.pl .pl-foot-inner { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; justify-content: stretch; }
+.pl .pl-foot-brand { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 16px 28px; }
+.pl .pl-foot-brand .pl-foot-badge { margin-bottom: 0; }
+.pl .pl-foot-info { display: grid; gap: 4px; }
+.pl .pl-foot-info p { margin: 0; }
+@media (min-width: 1001px) {
+  .pl .pl-foot-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px 48px; }
+}
