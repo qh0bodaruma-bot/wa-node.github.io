@@ -73,7 +73,7 @@ const day = [
       <h2 class="pl-h2">Ⅰは自立・介護予防向け、Ⅱは介護対応型です</h2>
       <div class="pl-hs-choice">
         {housingUnits.map((u) => (
-          <article class="pl-hs-panel">
+          <article class="pl-hs-panel" data-tone={u.id === '1' ? 'a' : 'b'}>
             <p class="pl-hs-kind">{u.kind}</p>
             <h3 class="pl-hs-name">{u.name}</h3>
             <p class="pl-hs-price pl-num-face">{u.priceFrom}</p>
@@ -115,14 +115,14 @@ const day = [
             </tr>
             <tr>
               <th scope="col">項目</th>
-              {housingFeeTable.columns.map((col) => <th scope="col">{col}</th>)}
+              {housingFeeTable.columns.map((col, i) => <th scope="col" data-tone={i < 2 ? 'a' : 'b'}>{col}</th>)}
             </tr>
           </thead>
           <tbody>
             {housingFeeTable.rows.map((row) => (
               <tr class={feeRowClass(row.label)}>
                 <th scope="row">{row.label}</th>
-                {row.values.map((value) => <td class="pl-num-face">{value}</td>)}
+                {row.values.map((value, i) => <td class="pl-num-face" data-tone={i < 2 ? 'a' : 'b'}>{value}</td>)}
               </tr>
             ))}
           </tbody>
