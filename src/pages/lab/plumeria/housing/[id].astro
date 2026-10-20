@@ -17,6 +17,19 @@ const faqs = [
     a: `${unit.name}の月額基本料金は${unit.priceFrom.replace('月額 ', '')}で、入居時に${unit.deposit}が必要です。このほか、食費や介護保険の自己負担分などが別途かかります。内訳は「料金の内訳を見る」からご確認ください。`,
   },
 ];
+
+// Ⅰは紺、Ⅱは黄の系統（住まいの比較ページと同じ色分け）
+const tone = unit.id === '1' ? 'a' : 'b';
+// 居室タイプで設備が同一なら、1か所にまとめて見せる（データ上、A・B・Cタイプは掲載内容が同一）
+const sharedEquipment = unit.roomTypes.every((r) => JSON.stringify(r.equipment) === JSON.stringify(unit.roomTypes[0].equipment));
+const roomsHeading = unit.id === '1'
+  ? `居室は、生活スタイルに合わせて${unit.roomTypes.length}つのタイプからお選びいただけます`
+  : '居室は、専門の介護スタッフと常駐看護師によるサポートのある居室です';
+const visitSteps = [
+  { title: 'お問い合わせ', body: '相談窓口から、見学したい住宅をお伝えください。' },
+  { title: '見学日程の調整', body: 'ご都合の良い日時を調整します。' },
+  { title: 'ご見学・ご相談', body: '居室・共用部をご案内し、ご不明点にお答えします。' },
+];
 ---
 <PlumeriaLayout
   title={`${unit.name}｜プルメリア（修正版ラフ）`}
@@ -37,85 +50,96 @@ const faqs = [
     <div class="pl-wrap">
       <h1 class="pl-h1" style="font-size:calc(clamp(1.7rem,4vw,2.4rem) * var(--pl-fs))">{unit.name}</h1>
       <p class="pl-sec-lead">サービス付き高齢者向け住宅（{unit.kind}）</p>
+      <nav class="pl-hs-jump" aria-label="このページの内容">
+        <a href="#overview">住宅の概要</a>
+        <a href="#rooms">居室</a>
+        <a href="#common">入居条件・サービス</a>
+        <a href="#visit">見学の流れ</a>
+        <a href="#questions">よくある質問</a>
+      </nav>
       <img class="pl-page-photo" src={unit.img} alt={unit.alt} width="1200" height="675" loading="eager" decoding="async" />
       <p class="pl-photo-note">※ 掲載写真はイメージ写真です。実際の施設・スタッフではありません。</p>
     </div>
   </section>
 
-  <section class="pl-sec">
-    <div class="pl-wrap">
-      <h2 class="pl-h2">住宅の概要</h2>
-      <dl class="pl-spec-list">
-        <div><dt>タイプ</dt><dd>{unit.kind}（対象：{unit.target}）</dd></div>
-        <div><dt>所在地</dt><dd>{corp.address ?? '確認中'}</dd></div>
-        <div><dt>居室</dt><dd>{unit.roomType}／{unit.roomSize}</dd></div>
-        <div><dt>費用</dt><dd>{unit.priceFrom}（{unit.deposit}）</dd></div>
-        <div><dt>空室状況</dt><dd><PlumeriaVacancyStatus facilityId={`plumeria-${unit.id}`} /></dd></div>
-      </dl>
-      <p class="pl-note" style="margin-top:10px">月額基本料金の目安です。食費や介護保険自己負担分などは別途ご確認ください。<a href={`${routes.housing}#fee`}>料金の内訳を見る</a></p>
+  <section class="pl-sec" id="overview">
+    <div class="pl-wrap pl-hs-unit" data-tone={tone}>
+      <h2 class="pl-h2">{unit.name}は、{unit.kind}の住宅です</h2>
+      <div class="pl-hs-panel" data-tone={tone} style="margin-top:28px">
+        <p class="pl-hs-kind">{unit.kind}</p>
+        <p class="pl-hs-price pl-num-face">{unit.priceFrom}</p>
+        <dl class="pl-hs-facts">
+          <div><dt>対象</dt><dd>{unit.target}</dd></div>
+          <div><dt>所在地</dt><dd>{corp.address ?? '確認中'}</dd></div>
+          <div><dt>居室</dt><dd>{unit.roomType}<br />{unit.roomSize}</dd></div>
+          <div><dt>敷金</dt><dd>{unit.deposit.replace('敷金 ', '')}</dd></div>
+          <div><dt>状況</dt><dd><PlumeriaVacancyStatus facilityId={`plumeria-${unit.id}`} /></dd></div>
+        </dl>
+      </div>
+      <p class="pl-note" style="margin:12px auto 0;max-width:860px">月額基本料金の目安です。食費や介護保険自己負担分などは別途ご確認ください。<a href={`${routes.housing}#fee`}>料金の内訳を見る</a></p>
     </div>
   </section>
 
   <section class="pl-sec pl-sec-beige" id="rooms">
-    <div class="pl-wrap">
-      <h2 class="pl-h2">居室のご紹介</h2>
-      <p class="pl-sec-lead">
-        {unit.id === '1'
-          ? '生活スタイルに合わせて3つのタイプからお選びいただけます。'
-          : '専門の介護スタッフと常駐看護師によるサポートのある居室です。'}
-      </p>
-      <div class={unit.roomTypes.length >= 3 ? 'pl-grid-3' : 'pl-grid-2'}>
+    <div class="pl-wrap pl-hs-unit" data-tone={tone}>
+      <h2 class="pl-h2">{roomsHeading}</h2>
+      <div class={`pl-hs-lines pl-hs-room pl-hs-lines-${Math.min(unit.roomTypes.length, 3)}`} style="margin-top:28px">
         {unit.roomTypes.map((room) => (
-          <div class="pl-card">
-            <h3 class="pl-h3">{room.heading}</h3>
-            <dl class="pl-spec-list">
+          <div class="pl-hs-line">
+            <h3 class="pl-hs-line-name">{room.heading}</h3>
+            <dl class="pl-hs-facts" style="margin:8px 0 0 17px">
               <div><dt>居室タイプ</dt><dd>{room.roomLabel}</dd></div>
               <div><dt>間取り</dt><dd>{room.layout}</dd></div>
             </dl>
-            <p class="pl-body" style="margin-top:10px"><strong>設備</strong></p>
-            <ul class="pl-body pl-check-list">
-              {room.equipment.map((e) => <li>{e}</li>)}
-            </ul>
+            {!sharedEquipment && (
+              <ul class="pl-hs-line-body pl-check-list" style="margin-left:17px">
+                {room.equipment.map((e) => <li>{e}</li>)}
+              </ul>
+            )}
           </div>
         ))}
       </div>
+      {sharedEquipment && (
+        <div class="pl-hs-equip">
+          <h3 class="pl-hs-line-name">{unit.roomTypes.length > 1 ? `設備（${unit.roomTypes.length}つのタイプ共通）` : '設備'}</h3>
+          <ul class="pl-hs-equip-list">
+            {unit.roomTypes[0].equipment.map((e) => <li class="pl-fit-item">{e}</li>)}
+          </ul>
+        </div>
+      )}
       <p class="pl-note" style="margin-top:14px"><a href="https://home-plumeria.jp/plumeria0102/facility.html" data-astro-reload>公式の施設・設備紹介を見る</a>（2026年9月16日確認）</p>
     </div>
   </section>
 
-  <section class="pl-sec">
+  <section class="pl-sec" id="common">
     <div class="pl-wrap pl-reading">
-      <h2 class="pl-h2">入居条件・サービス・共用施設</h2>
-      <p class="pl-body">ご入居の条件、入居までの流れ、基礎サービス・希望サービス、共用の施設、安全への取り組みは、住宅Ⅰ・Ⅱ共通のご案内にまとめています。</p>
-      <ul class="pl-body pl-check-list">
-        <li><a href={`${routes.housing}#admission`}>入居条件と入居までの流れ</a></li>
-        <li><a href={`${routes.housing}#fee`}>料金の内訳</a></li>
-        <li><a href={`${routes.housing}#facility`}>共用の施設</a></li>
-        <li><a href={`${routes.housing}#safety`}>安全への取り組み</a></li>
-      </ul>
+      <h2 class="pl-h2">くわしい条件は、住宅Ⅰ・Ⅱ共通のご案内にまとめています</h2>
+      <p class="pl-note" style="text-align:center">ご入居の条件、入居までの流れ、基礎サービス・希望サービス、共用の施設、安全への取り組みは、住宅Ⅰ・Ⅱ共通です。</p>
+      <nav class="pl-hs-jump" aria-label="住宅Ⅰ・Ⅱ共通のご案内">
+        <a href={`${routes.housing}#admission`}>入居条件と入居までの流れ</a>
+        <a href={`${routes.housing}#fee`}>料金の内訳</a>
+        <a href={`${routes.housing}#facility`}>共用の施設</a>
+        <a href={`${routes.housing}#services`}>基礎サービス・希望サービス</a>
+        <a href={`${routes.housing}#safety`}>安全への取り組み</a>
+      </nav>
     </div>
   </section>
 
-  <section class="pl-sec pl-sec-beige">
+  <section class="pl-sec pl-sec-beige" id="visit">
     <div class="pl-wrap">
-      <h2 class="pl-h2">見学の流れ</h2>
-      <ol class="pl-auto-grid pl-auto-grid-3">
-        {[
-          { title: 'お問い合わせ', body: '相談窓口から、見学したい住宅をお伝えください。' },
-          { title: '見学日程の調整', body: 'ご都合の良い日時を調整します。' },
-          { title: 'ご見学・ご相談', body: '居室・共用部をご案内し、ご不明点にお答えします。' },
-        ].map((step, i) => (
-          <li class="pl-flow-card">
-            <span class="pl-num-face pl-flow-num" aria-hidden="true">{i + 1}</span>
-            <h3 class="pl-flow-title">{step.title}</h3>
-            <p class="pl-flow-body">{step.body}</p>
+      <h2 class="pl-h2">見学は、お問い合わせから{visitSteps.length}つの手順です</h2>
+      <ol class={`pl-hs-flow pl-hs-flow-${visitSteps.length}`} style="margin-top:28px">
+        {visitSteps.map((step, i) => (
+          <li class="pl-hs-stage">
+            <ol class="pl-hs-steps" style={`--from:${i}`}><li>{step.title}</li></ol>
+            <p class="pl-hs-stage-body">{step.body}</p>
           </li>
         ))}
       </ol>
     </div>
   </section>
 
-  <section class="pl-sec">
+  <section class="pl-sec" id="questions">
     <div class="pl-wrap">
       <h2 class="pl-h2">よくあるご質問</h2>
       <div class="pl-faq-list">

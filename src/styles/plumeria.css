@@ -2108,3 +2108,24 @@
 .pl-hs-spec-sm { display: flex; flex-direction: column; }
 .pl-hs-spec-sm > p { margin-top: auto !important; padding-top: 12px; }
 .pl-hs-spec-sm .pl-more { display: inline-block; margin: 0; padding-inline: 0; }
+
+/* ── 住まいの各住宅ページ（Ⅰは紺、Ⅱは黄の系統。比較ページと同じ色分け） ───────────── */
+.pl-hs-unit {
+  --hs-a: var(--green-deep);
+  --hs-a-tint: color-mix(in srgb, var(--green-deep) 13%, #fff);
+  --hs-b: var(--accent);
+  --hs-b-tint: color-mix(in srgb, var(--accent) 30%, #fff);
+}
+.pl-hs-unit .pl-hs-panel { max-width: 860px; }
+.pl-hs-lines-1 { grid-template-columns: minmax(0, 760px); }
+.pl-hs-room .pl-hs-facts > div { grid-template-columns: 7em minmax(0, 1fr); }
+.pl-hs-room .pl-hs-facts dd { font-size: calc(15px * var(--pl-fs)); font-weight: 500; }
+.pl-hs-equip { margin-top: 36px; }
+.pl-hs-jump.is-left { justify-content: flex-start; }
+.pl-hs-unit .pl-hs-panel { margin-inline: auto; }
+.pl-hs-unit[data-tone="a"] .pl-hs-line-name { border-left-color: var(--hs-a); }
+.pl-hs-unit[data-tone="b"] .pl-hs-line-name { border-left-color: var(--hs-b); }
+.pl-hs-equip-list { margin: 16px 0 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px 28px; }
+@media (max-width: 900px) { .pl-hs-equip-list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) { .pl-hs-equip-list { grid-template-columns: minmax(0, 1fr); } }
+.pl .pl-hs-equip-list { margin-top: 18px; }
