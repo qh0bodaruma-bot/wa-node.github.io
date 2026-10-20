@@ -7,6 +7,16 @@ import {
   housingCommonAreas, housingBasicServices, housingOptionalServices, housingSafetyItems, housingNeighborhood,
 } from '../../../../data/plumeria';
 
+// 月額合計の行（見出しと大きな数字に使う）。表の値をそのまま引く。
+const feeTotal = housingFeeTable.rows[housingFeeTable.rows.length - 1].values;
+
+// 入居までの流れ。公式の6手順を変えずに、3つのまとまりで見せる。
+const flowGroups = [
+  housingAdmissionFlow.slice(0, 1),
+  housingAdmissionFlow.slice(1, 4),
+  housingAdmissionFlow.slice(4),
+];
+
 // 一日の流れ（参考）。時刻は住宅ごとに確認中のため、公開情報ではなく一般的な一例として示す。
 const day = [
   { time: '7:00', label: '起床・朝食' },
@@ -36,48 +46,54 @@ const day = [
       <p class="pl-sec-lead">
         安否確認と生活相談のある住宅です。自立向けのⅠと、介護対応型のⅡを比較してご案内します。
       </p>
-      <p class="pl-note">※ 短期入所（ショートステイ）をお探しの方は<a href={routes.shortStay}>プルメリアⅢ（ショートステイ）</a>をご覧ください。</p>
+      <nav class="pl-hs-jump" aria-label="このページの内容">
+        <a href="#choice">ⅠとⅡの違い</a>
+        <a href="#fee">料金</a>
+        <a href="#admission">入居の手順</a>
+        <a href="#facility">共用の施設</a>
+        <a href="#services">サービス</a>
+        <a href="#safety">安全</a>
+        <a href="#access">アクセス</a>
+      </nav>
+      <p class="pl-note" style="text-align:center">※ 短期入所（ショートステイ）をお探しの方は<a href={routes.shortStay}>プルメリアⅢ（ショートステイ）</a>をご覧ください。</p>
     </div>
   </section>
 
-  <section class="pl-sec">
+  <section class="pl-sec" id="choice">
     <div class="pl-wrap">
-      <p class="pl-table-caption" aria-hidden="true">住宅Ⅰ・Ⅱの比較（横にスクロールできます）</p>
-      <div class="pl-compare-table-wrap">
-        <table class="pl-compare-table">
-          <caption class="pl-sr-only">住宅Ⅰ・Ⅱの比較（横にスクロールできます）</caption>
-          <thead>
-            <tr>
-              <th scope="col">住宅</th>
-              <th scope="col">タイプ</th>
-              <th scope="col">居室</th>
-              <th scope="col">費用</th>
-              <th scope="col">状況</th>
-              <th scope="col">詳しいご案内</th>
-            </tr>
-          </thead>
-          <tbody>
-            {housingUnits.map((u) => (
-              <tr>
-                <th scope="row">{u.name}</th>
-                <td>{u.kind}<br />対象：{u.target}</td>
-                <td>{u.roomType}<br />{u.roomSize}</td>
-                <td>{u.priceFrom}</td>
-                <td><PlumeriaVacancyStatus facilityId={`plumeria-${u.id}`} /></td>
-                <td><a class="pl-more" href={routes.housingUnit(u.id)}>{u.name}を見る</a></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <h2 class="pl-h2">Ⅰは自立・介護予防向け、Ⅱは介護対応型です</h2>
+      <div class="pl-hs-choice">
+        {housingUnits.map((u) => (
+          <article class="pl-hs-panel">
+            <p class="pl-hs-kind">{u.kind}</p>
+            <h3 class="pl-hs-name">{u.name}</h3>
+            <p class="pl-hs-price pl-num-face">{u.priceFrom}</p>
+            <dl class="pl-hs-facts">
+              <div><dt>対象</dt><dd>{u.target}</dd></div>
+              <div><dt>居室</dt><dd>{u.roomType}<br />{u.roomSize}</dd></div>
+              <div><dt>敷金</dt><dd>{u.deposit.replace('敷金 ', '')}</dd></div>
+              <div><dt>状況</dt><dd><PlumeriaVacancyStatus facilityId={`plumeria-${u.id}`} /></dd></div>
+            </dl>
+            <a class="pl-btn pl-btn-outline" href={routes.housingUnit(u.id)}>{u.name}を見る</a>
+          </article>
+        ))}
       </div>
-      <p class="pl-note" style="margin-top:12px">※ 所在地はいずれも{corp.address}。金額は月額基本料金の目安で、生活費の総額ではありません。食費や介護保険自己負担分など、別途必要な費用をご確認ください。</p>
+      <p class="pl-note" style="margin-top:14px">※ 所在地はいずれも{corp.address}。金額は月額基本料金の目安で、生活費の総額ではありません。食費や介護保険自己負担分など、別途必要な費用をご確認ください。</p>
     </div>
   </section>
 
   <section class="pl-sec pl-sec-beige" id="fee">
     <div class="pl-wrap">
-      <h2 class="pl-h2">料金のご案内</h2>
-      <p class="pl-sec-lead">入居時の敷金と、月々の基本料金の内訳です。</p>
+      <h2 class="pl-h2">月額の目安は、Ⅰが{feeTotal[0]}、Ⅱが{feeTotal[2]}（1名）です</h2>
+      <p class="pl-sec-lead">食費や介護保険の自己負担分は別にかかります。入居時の敷金と、月々の内訳は次のとおりです。</p>
+      <ul class="pl-hs-totals">
+        {housingFeeTable.columns.map((col, i) => (
+          <li>
+            <span class="pl-hs-total-label">{col}</span>
+            <strong class="pl-hs-total-num pl-num-face">{feeTotal[i]}</strong>
+          </li>
+        ))}
+      </ul>
       <p class="pl-table-caption" aria-hidden="true">居室タイプ別の料金（横にスクロールできます）</p>
       <div class="pl-compare-table-wrap">
         <table class="pl-compare-table">
@@ -107,12 +123,23 @@ const day = [
 
   <section class="pl-sec" id="admission">
     <div class="pl-wrap">
-      <h2 class="pl-h2">入居のご案内</h2>
-      <p class="pl-sec-lead">ご入居にあたっては、次の条件を確認させていただきます。</p>
-      <div class="pl-grid-2">
+      <h2 class="pl-h2">入居は、見学から正式入居まで6つの手順です</h2>
+      <p class="pl-sec-lead">見学のお申し込みから正式入居までの流れです。ご不明な点は、見学の際にお尋ねください。</p>
+      <ol class="pl-hs-flow">
+        {flowGroups.map((group, g) => (
+          <li class="pl-hs-stage">
+            <ol class="pl-hs-steps" style={`--from:${flowGroups.slice(0, g).reduce((n, x) => n + x.length, 0)}`}>
+              {group.map((step) => <li>{step}</li>)}
+            </ol>
+          </li>
+        ))}
+      </ol>
+
+      <h3 class="pl-h3" style="margin-top:36px">入居の条件</h3>
+      <div class="pl-grid-2" style="margin-top:12px">
         {housingAdmissionConditions.map((group) => (
           <div class="pl-card">
-            <h3 class="pl-h3">{group.title}</h3>
+            <h4 class="pl-h3">{group.title}</h4>
             <ul class="pl-body pl-check-list">
               {group.items.map((item) => <li>{item}</li>)}
             </ul>
@@ -122,29 +149,17 @@ const day = [
       <ul class="pl-note pl-check-list" style="margin-top:14px">
         {housingAdmissionCautions.map((note) => <li>{note}</li>)}
       </ul>
-
-      <h3 class="pl-h3" style="margin-top:28px">入居までの流れ</h3>
-      <ol class="pl-auto-grid pl-auto-grid-3">
-        {housingAdmissionFlow.map((step, i) => (
-          <li class="pl-flow-card">
-            <span class="pl-num-face pl-flow-num" aria-hidden="true">{i + 1}</span>
-            <h4 class="pl-flow-title">{step}</h4>
-          </li>
-        ))}
-      </ol>
-      <p class="pl-note" style="margin-top:12px">見学のお申し込みから正式入居までの流れです。ご不明な点は、見学の際にお尋ねください。</p>
     </div>
   </section>
 
   <section class="pl-sec pl-sec-beige" id="facility">
     <div class="pl-wrap">
-      <h2 class="pl-h2">共用の施設</h2>
-      <p class="pl-sec-lead">入居者だけでなく、来訪されたご家族・ご友人にもお使いいただけます。</p>
-      <div class="pl-grid-2">
+      <h2 class="pl-h2">共用の施設は、来訪されたご家族・ご友人もお使いいただけます</h2>
+      <div class="pl-hs-lines pl-hs-lines-2">
         {housingCommonAreas.map((area) => (
-          <div class="pl-card">
-            <h3 class="pl-h3">{area.name}</h3>
-            <p class="pl-body">{area.body}</p>
+          <div class="pl-hs-line">
+            <h3 class="pl-hs-line-name">{area.name}</h3>
+            <p class="pl-hs-line-body">{area.body}</p>
           </div>
         ))}
       </div>
@@ -173,26 +188,26 @@ const day = [
     </div>
   </section>
 
-  <section class="pl-sec pl-sec-beige">
+  <section class="pl-sec pl-sec-beige" id="services">
     <div class="pl-wrap">
-      <h2 class="pl-h2">基礎サービス</h2>
-      <p class="pl-sec-lead">全入居者にご利用いただけるサービスです。ご利用料金はサービス管理費に含まれます。</p>
-      <div class="pl-grid-3">
+      <h2 class="pl-h2">基礎サービス{housingBasicServices.length}つは、サービス管理費に含まれます</h2>
+      <p class="pl-sec-lead">全入居者にご利用いただけるサービスです。</p>
+      <div class="pl-hs-lines pl-hs-lines-2">
         {housingBasicServices.map((item) => (
-          <div class="pl-card">
-            <h3 class="pl-h3">{item.name}</h3>
-            <p class="pl-body">{item.body}</p>
+          <div class="pl-hs-line">
+            <h3 class="pl-hs-line-name">{item.name}</h3>
+            <p class="pl-hs-line-body">{item.body}</p>
           </div>
         ))}
       </div>
 
-      <h2 class="pl-h2" style="margin-top:34px">希望サービス</h2>
+      <h2 class="pl-h2" style="margin-top:44px">希望サービスは、必要なときに追加できます</h2>
       <p class="pl-sec-lead">基礎サービスに加えてご利用いただけます。要介護の認定を受けていない方もご相談いただけます。</p>
-      <div class="pl-grid-3">
+      <div class="pl-hs-lines pl-hs-lines-2">
         {housingOptionalServices.map((item) => (
-          <div class="pl-card">
-            <h3 class="pl-h3">{item.name}</h3>
-            <p class="pl-body">{item.body}</p>
+          <div class="pl-hs-line">
+            <h3 class="pl-hs-line-name">{item.name}</h3>
+            <p class="pl-hs-line-body">{item.body}</p>
           </div>
         ))}
       </div>
@@ -202,7 +217,7 @@ const day = [
 
   <section class="pl-sec" id="safety">
     <div class="pl-wrap">
-      <h2 class="pl-h2">安全への取り組み</h2>
+      <h2 class="pl-h2">24時間の緊急対応やAED、防犯カメラなど、{housingSafetyItems.length}つの備えがあります</h2>
       <ul class="pl-auto-grid pl-auto-grid-4">
         {housingSafetyItems.map((item) => <li class="pl-fit-item">{item}</li>)}
       </ul>
@@ -211,7 +226,7 @@ const day = [
 
   <section class="pl-sec pl-sec-beige" id="access">
     <div class="pl-wrap pl-reading">
-      <h2 class="pl-h2">所在地・周辺環境</h2>
+      <h2 class="pl-h2">今渡駅から徒歩3分。周囲に銀行・病院・公共ホールがあります</h2>
       <p class="pl-body">{corp.address}</p>
       <p class="pl-body">{housingNeighborhood}</p>
       <dl class="pl-access-list">
