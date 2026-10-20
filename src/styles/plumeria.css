@@ -2239,3 +2239,61 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl .pl-card.pl-service-intro-card { border-radius: 3px; }
 /* クラスの付かないリンクには、文中リンク用の「角を0にする」指定が強く掛かるため、ジャンプ用ボタンはここで上書きする */
 .pl :is(.pl-hs-jump, .pl-page-nav) a:not([class]):not([hidden]) { border-radius: 4px; }
+
+/* ══════════════════════════════════════════════════════════
+   伝えるための動き（2026-10-20 ボス承認：手順の点灯・移動先のハイライト・押した反応・追従ボタンの退場・文字サイズの選択のスライド）
+
+   装飾だけで動くものは入れない。すべて prefers-reduced-motion: no-preference のときだけ。
+   動かない環境でも、最初から全部見えている（消えたまま戻らない事故を作らない）。
+   ══════════════════════════════════════════════════════════ */
+@media (prefers-reduced-motion: no-preference) {
+
+  /* ① 手順が順に点灯する：スクロールで画面に入るとき、手順（番号と矢印）が淡い状態から濃くなる。
+        対応していないブラウザでは animation-timeline が効かず、最初から濃い状態で見える */
+  @supports (animation-timeline: view()) {
+    @keyframes pl-hs-lit { from { opacity: 0.38; } to { opacity: 1; } }
+    .pl-hs-stage {
+      animation: pl-hs-lit linear both;
+      animation-timeline: view();
+      animation-range: entry 5% entry 55%;
+    }
+    .pl-hs-stage:nth-child(2) { animation-range: entry 15% entry 65%; }
+    .pl-hs-stage:nth-child(3) { animation-range: entry 25% entry 75%; }
+    .pl-hs-stage:nth-child(n+4) { animation-range: entry 30% entry 80%; }
+  }
+
+  /* ② 移動先のハイライト：ジャンプ用ボタンやアンカーで移動したとき、行き先の見出しが1回だけ淡く光る */
+  @keyframes pl-target-glow {
+    0% { text-shadow: 0 0 0 rgba(242, 180, 55, 0); }
+    30% { text-shadow: 0 0 18px rgba(242, 180, 55, 0.95), 0 0 2px rgba(242, 180, 55, 0.9); }
+    100% { text-shadow: 0 0 0 rgba(242, 180, 55, 0); }
+  }
+  .pl [id]:target .pl-h2, .pl .pl-h2:target { animation: pl-target-glow 1.3s ease-out 1; }
+
+  /* ③ 押した反応：押せる物は、押している間だけ1px沈む */
+  .pl :is(.pl-btn, .pl-tile, .pl-service-intro-card, .pl-purpose-list a, .pl-desk, .pl-hs-jump a, .pl-recruit-strip):active {
+    transform: translateY(1px) scale(0.99);
+    transition: transform 0.08s ease-out;
+  }
+
+  /* ⑨ 追従ボタンの退場：フッターの窓口が見えたら、消えるだけでなく下へ静かに引っ込む。
+        登場の動き（pl-float-cta-in）が最後の状態（transform: none）を保持したままだと、
+        引っ込む動きを打ち消すため、登場の動きは「始まる前」の状態だけにする */
+  .pl .pl-float-cta { animation-fill-mode: backwards; transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s; }
+  .pl .pl-float-cta.is-away { transform: translateY(18px); }
+
+  /* ⑩ 文字サイズの選択のスライド：ヘッダーの「標準／大」で、選ばれた面が横にすべる */
+  .pl .pl-textsize-head { position: relative; isolation: isolate; }
+  .pl .pl-textsize-head::before {
+    content: ''; position: absolute; z-index: -1; top: 2px; bottom: 2px; left: 42px; width: 52px;
+    background: var(--bg); border-radius: 4px; transition: transform 0.22s ease;
+  }
+  .pl .pl-textsize-head:has(button[data-pl-textsize="large"][aria-pressed="true"])::before { transform: translateX(54px); }
+  .pl .pl-textsize-head button { transition: color 0.22s ease; }
+}
+/* 文字サイズ切替のレイアウトは、動きの有無にかかわらず同じにする（面の位置を固定幅で計算するため） */
+.pl .pl-textsize-head .pl-textsize-label { width: 38px; padding: 0; text-align: center; box-sizing: border-box; }
+.pl .pl-textsize-head button { width: 52px; min-width: 52px; padding-inline: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .pl .pl-textsize-head button[aria-pressed="true"] { background: transparent; color: var(--ink); }
+}
