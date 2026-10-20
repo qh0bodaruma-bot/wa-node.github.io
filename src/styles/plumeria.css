@@ -2234,3 +2234,22 @@
 @media (max-width: 640px) { .pl-desk-grid { grid-template-columns: minmax(0, 1fr); } }
 .pl-contact-route { margin-top: 20px; padding: 4px 0 4px 0; border: 0; }
 .pl-contact-route p { margin: 8px 0 0 17px; }
+
+/* ── スマホ幅の読みやすさ ─────────────────────────────
+   日本語の折り返しで「ま/り」「し/い」のように1〜2文字だけが次の行へ落ちるのを避ける。
+   auto-phrase は文節の切れ目で折り返す（対応しないブラウザでは従来どおり）。 */
+.pl { word-break: auto-phrase; }
+.pl :is(h1, h2, h3, h4, .pl-sec-lead, .pl-tile-sub, .pl-hs-tag, .pl-hs-line-name) { text-wrap: balance; }
+.pl :is(p, li, dd) { text-wrap: pretty; }
+
+/* ショートステイの医療行為の表：スマホ幅では横にスクロールさせず、項目と可否を1行目、条件を2行目に積む */
+@media (max-width: 640px) {
+  .pl-compare-table.pl-hs-med { min-width: 0; display: block; }
+  .pl-hs-med thead { display: none; }
+  .pl-hs-med tbody { display: block; }
+  .pl-hs-med tbody tr { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 6px 12px; padding: 12px 0; border-bottom: 1px solid rgba(8, 60, 74, 0.1); }
+  .pl-hs-med tbody :is(th, td) { display: block; padding: 0; border: 0; }
+  .pl-hs-med tbody td.pl-hs-med-note { grid-column: 1 / -1; }
+  .pl-hs-med tbody td.pl-hs-med-note.is-empty { display: none; }
+  #medical .pl-table-caption { display: none; }
+}
