@@ -1,6 +1,5 @@
 ---
 import PlumeriaLayout from '../../../layouts/PlumeriaLayout.astro';
-import PlumeriaGuideQuiz from '../../../components/plumeria/PlumeriaGuideQuiz.astro';
 import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin, plImg } from '../../../data/plumeria';
 
 // 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
@@ -99,7 +98,7 @@ const heroSlides = [
         <p class="pl-eyebrow">岐阜県可児市｜介護事業部の総合案内</p>
         <h1 class="pl-h1">これからの暮らしに、<br />必要な支えを。</h1>
         <p class="pl-hero-lead">住まいを探す方も、ご自宅での介護を考える方も。<br />知りたいサービスからご覧ください。</p>
-        <a class="pl-more" href="#guide">どこに相談するか迷ったら →</a>
+        <a class="pl-more" href={`${routes.services}#guide`}>どこに相談するか迷ったら →</a>
         {/* 高さをそろえた分の余白は装飾ではなく実用情報で埋める。番号・受付時間は公式サイトの記載。 */}
         <div class="pl-hero-desks">
           <p class="pl-hero-desks-head">
@@ -167,8 +166,6 @@ const heroSlides = [
       <span>採用情報を見る →</span>
     </a>
   </div>
-
-  <PlumeriaGuideQuiz />
 
   <section class="pl-sec" id="services">
     <div class="pl-wrap">
