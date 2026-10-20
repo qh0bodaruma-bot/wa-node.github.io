@@ -2253,3 +2253,4 @@
   .pl-hs-med tbody td.pl-hs-med-note.is-empty { display: none; }
   #medical .pl-table-caption { display: none; }
 }
+#first .pl-more { display: inline-block; padding-inline: 0; }
