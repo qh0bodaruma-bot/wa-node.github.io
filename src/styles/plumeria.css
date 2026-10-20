@@ -2136,3 +2136,35 @@
   /* 文字サイズ「大」でも、リンクと電話窓口の区切り線がくっつかないよう最低限の間隔を取る */
   .pl .pl-hero-copy .pl-more { margin-bottom: 18px; }
 }
+
+/* ── ヘッダーの「プルメリア」と「採用情報」だけ3Dバッジにする ─────────────────────────────
+   上に明るい線・下に暗い線で面の厚みを出し、下へ落とした影でバッジを浮かせる。押すと影の分だけ沈む。
+   文字は大きい太字で、白（または濃紺）の文字が地色に対して3:1以上を保つ色だけを使う。 */
+.pl .pl-head .pl-brand {
+  padding: 6px 18px 6px 16px;
+  background: linear-gradient(180deg, #1a86a3 0%, #137792 48%, #0d5a6f 100%);
+  color: #fff;
+  border: 1px solid #0a4a5d;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.45), inset 0 -2px 0 rgba(0, 0, 0, 0.2), 0 4px 0 #07303c, 0 7px 10px rgba(0, 0, 0, 0.28);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.pl .pl-head .pl-brand .pl-brand-en { color: #e4f4f8; }
+.pl .pl-head .pl-head-recruit {
+  background: linear-gradient(180deg, #ffd96e 0%, #f2b437 55%, #e0a01c 100%);
+  color: var(--ink);
+  border: 1px solid #b07a14;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.65), inset 0 -2px 0 rgba(0, 0, 0, 0.14), 0 4px 0 #8f600c, 0 7px 10px rgba(0, 0, 0, 0.28);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.pl .pl-head .pl-brand:hover,
+.pl .pl-head .pl-head-recruit:hover {
+  transform: translateY(-1px);
+}
+.pl .pl-head .pl-brand:hover { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -2px 0 rgba(0, 0, 0, 0.2), 0 5px 0 #07303c, 0 9px 12px rgba(0, 0, 0, 0.3); }
+.pl .pl-head .pl-head-recruit:hover { background: linear-gradient(180deg, #ffe085 0%, #f7c04a 55%, #e8a924 100%); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7), inset 0 -2px 0 rgba(0, 0, 0, 0.14), 0 5px 0 #8f600c, 0 9px 12px rgba(0, 0, 0, 0.3); }
+.pl .pl-head .pl-brand:active,
+.pl .pl-head .pl-head-recruit:active {
+  transform: translateY(3px);
+}
+.pl .pl-head .pl-brand:active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), inset 0 -1px 0 rgba(0, 0, 0, 0.2), 0 1px 0 #07303c, 0 2px 4px rgba(0, 0, 0, 0.25); }
+.pl .pl-head .pl-head-recruit:active { box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(0, 0, 0, 0.14), 0 1px 0 #8f600c, 0 2px 4px rgba(0, 0, 0, 0.25); }
