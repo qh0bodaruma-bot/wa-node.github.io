@@ -2239,6 +2239,8 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl .pl-card.pl-service-intro-card { border-radius: 3px; }
 /* ダイナミックアイランド風のヘッダー（浮遊ピル）は6px。幅の広い面で、4pxのボタンより一段だけ大きい丸みにして浮いた印象を出す */
 .pl .pl-head-inner { border-radius: 6px; }
+/* ハンバーガーを開いた一覧もアイランドと同じ6px。一覧は overflow が hidden か auto のため、中のリンクの角も一緒に切れる */
+.pl .pl-menu[open] .pl-menu-list { border-radius: 6px; }
 /* クラスの付かないリンクには、文中リンク用の「角を0にする」指定が強く掛かるため、ジャンプ用ボタンはここで上書きする */
 .pl :is(.pl-hs-jump, .pl-page-nav) a:not([class]):not([hidden]) { border-radius: 4px; }
 
