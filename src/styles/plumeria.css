@@ -2237,6 +2237,11 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 ) { border-radius: 4px; }
 /* 大きなカード（写真つきのサービスカード）は3px。大きな面では4pxは丸みが目立たず、3pxで十分 */
 .pl .pl-card.pl-service-intro-card { border-radius: 3px; }
+/* 写真つきサービスカードは、枠から写真までの余白を16px、写真から見出しまでも16px にする（2026-10-27 ボス指示・A案。
+   これまでは余白が左右23px・上25px、写真〜見出し25px で、幅274pxの4枚カードでは左右の余白が幅の約17%を占めていた）。
+   写真・黄色い棒・「くわしく見る」の左端は同じ位置のまま。見出しの上の余白は gap 11px + 5px = 16px。 */
+.pl .pl-card.pl-service-intro-card { padding: 16px; }
+.pl .pl-service-intro-card .pl-hs-svc-name { margin-top: 5px; }
 /* ダイナミックアイランド風のヘッダー（浮遊ピル）は6px。幅の広い面で、4pxのボタンより一段だけ大きい丸みにして浮いた印象を出す */
 .pl .pl-head-inner { border-radius: 6px; }
 /* ハンバーガーを開いた一覧もアイランドと同じ6px。一覧は overflow が hidden か auto のため、中のリンクの角も一緒に切れる */
