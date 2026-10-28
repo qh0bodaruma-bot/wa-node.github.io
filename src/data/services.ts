@@ -5,14 +5,14 @@ import { MULTILANG_PAGES } from '../i18n/navigation';
 export type SiteLanguage = 'ja' | 'en' | 'fr';
 export const consultationMinutes = 30;
 /** LINE連携の3プラン（ベーシック／スタンダード／プレミアム）。
- * 構成はランサーズのパッケージに合わせ、金額はランサーズの表示価格からシステム手数料16.5%を引き、10,000円単位に丸めた値（2026-10-09）。
+ * 構成はランサーズのパッケージに合わせ、金額はランサーズの表示価格からシステム手数料16.5%を引き、10,000円単位に丸めた値（2026-10-09）。2026-10-28にランサーズ価格を約30%下げたのに合わせて更新（スプレッドシートのベーシックはランサーズの価格がないため通常価格80,000円の約30%減）。
  */
 export type LineConnector = 'sheets' | 'hubspot' | 'kintone' | 'salesforce';
 export const lineTierPrices: Record<LineConnector, readonly [number, number, number]> = {
-  sheets: [80000, 130000, 180000],
-  hubspot: [170000, 250000, 380000],
-  kintone: [210000, 290000, 420000],
-  salesforce: [330000, 460000, 630000],
+  sheets: [60000, 90000, 130000],
+  hubspot: [120000, 180000, 260000],
+  kintone: [150000, 200000, 290000],
+  salesforce: [230000, 320000, 440000],
 };
 /** 実績づくりのための先着限定価格（ランサーズの30,000円から手数料を引いた値）。件数に達したら外して通常価格に戻す。 */
 export const lineCampaign = { connector: 'sheets' as LineConnector, tier: 0, price: 25000, regular: lineTierPrices.sheets[0], slots: 3 };
