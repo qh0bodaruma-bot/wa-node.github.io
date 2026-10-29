@@ -1,5 +1,6 @@
 ---
 import MaterialIcon from '../components/MaterialIcon.astro';
+import StepTimeline from '../components/StepTimeline.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 // 見出し用の明朝体（Shippori Mincho）を他ページと同じく読み込む
 import '../styles/service-pages.css';
@@ -66,9 +67,11 @@ const structuredData = [
 
         <div class="story-box">
           <h3>ご相談から運用までの進め方</h3>
-          <p><strong><MaterialIcon name="checklist" class="ic-inline" />現状を整理する。</strong>誰が、いつ、何を入力し、その後に誰が確認するか。現在の業務の流れを伺います。</p>
-          <p><strong><MaterialIcon name="preview" class="ic-inline" />範囲を決める。</strong>画面、登録する項目、通知の条件を整理し、費用・期間をご提示します。内容に合意してから着手します。</p>
-          <p><strong><MaterialIcon name="task_alt" class="ic-inline" />確かめて引き継ぐ。</strong>操作と連携を確認し、運用の手順をお渡しします。公開後の保守・改修は、必要な範囲と費用を別途確認します。</p>
+          <StepTimeline label="ご相談から運用までの進め方" steps={[
+            { title: '現状を整理する', desc: '誰が、いつ、何を入力し、その後に誰が確認するか。現在の業務の流れを伺います。', icon: 'checklist' },
+            { title: '範囲を決める', desc: '画面、登録する項目、通知の条件を整理し、費用・期間をご提示します。内容に合意してから着手します。', icon: 'preview' },
+            { title: '確かめて引き継ぐ', desc: '操作と連携を確認し、運用の手順をお渡しします。公開後の保守・改修は、必要な範囲と費用を別途確認します。', icon: 'task_alt' },
+          ]} />
         </div>
 
         <div class="career-box" id="experience">
@@ -303,6 +306,8 @@ const structuredData = [
   .name-en { font-size: 0.9rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; }
 
   .story-box {
+    --deep: #164f4d;
+    --quiet: #465952;
     background: var(--soft);
     padding: 48px;
     border-radius: 12px;
@@ -311,6 +316,9 @@ const structuredData = [
   }
   .story-box h3 { margin-bottom: 24px; color: var(--accent); font-weight: 800; }
   .story-box p { margin-bottom: 16px; color: #444; line-height: 1.8; }
+  .story-box :global(.st-body h3) { margin: 0 0 8px; font-size: 1.1rem; color: var(--deep); }
+  .story-box :global(.st-body p) { font-weight: 500; }
+  .about-summary dd, .message-content p, .career-list p { font-weight: 500; line-height: 1.9; }
 
   /* 4つの箱をやめ、細線で区切った2列の一覧にする（2026-10-19 デザイン見直し）。主軸のLINE連携構築だけ、上の線を太い茶色にして目立たせる */
   .qual-grid {

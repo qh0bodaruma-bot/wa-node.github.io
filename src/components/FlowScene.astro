@@ -1,0 +1,50 @@
+---
+// 隣接する見出しと本文を補助する図。文字はHTMLで表示し、図の重複読み上げを避ける。
+interface Props { step: number }
+const { step } = Astro.props;
+---
+<svg class="flow-scene" viewBox="0 0 240 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <path d="M20 132H220" stroke="#b8ccc4" stroke-width="2" />
+  {step === 0 && <>
+    <rect x="62" y="12" width="79" height="120" rx="12" fill="white" stroke="#164f4d" stroke-width="3" />
+    <path d="M88 21H115M95 122H108" stroke="#164f4d" stroke-width="3" stroke-linecap="round" />
+    <rect x="74" y="38" width="56" height="60" rx="5" fill="#e5f0ea" />
+    <path d="M85 52H119M85 63H113M85 74H105" stroke="#52786c" stroke-width="3" stroke-linecap="round" />
+    <path d="M132 49H191A10 10 0 0 1 201 59V85A10 10 0 0 1 191 95H152L139 106V95H132A10 10 0 0 1 122 85V59A10 10 0 0 1 132 49Z" fill="#164f4d" />
+    <path d="M142 68H181M142 79H168" stroke="white" stroke-width="3" stroke-linecap="round" />
+    <path d="M38 90V112M27 101H49" stroke="#b58c4e" stroke-width="2" stroke-linecap="round" />
+  </>}
+  {step === 1 && <>
+    <rect x="49" y="22" width="106" height="110" rx="7" fill="white" stroke="#164f4d" stroke-width="3" />
+    <rect x="77" y="14" width="50" height="18" rx="5" fill="#dcebe4" stroke="#164f4d" stroke-width="2" />
+    {[55, 79, 103].map(y => <>
+      <path d={`M64 ${y}l5 5 9-11`} stroke="#164f4d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+      <path d={`M89 ${y}H136`} stroke="#8ca99e" stroke-width="3" stroke-linecap="round" />
+    </>)}
+    <circle cx="169" cy="84" r="24" fill="#f7edda" stroke="#916b31" stroke-width="3" />
+    <path d="M187 102L210 125" stroke="#916b31" stroke-width="7" stroke-linecap="round" />
+    <path d="M159 84l7 7 13-15" stroke="#916b31" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  </>}
+  {step === 2 && <>
+    <rect x="27" y="25" width="183" height="95" rx="7" fill="white" stroke="#164f4d" stroke-width="3" />
+    <path d="M28 46H209" stroke="#164f4d" stroke-width="2" />
+    <circle cx="40" cy="36" r="3" fill="#164f4d" /><circle cx="51" cy="36" r="3" fill="#8ca99e" />
+    <rect x="41" y="59" width="154" height="19" rx="3" fill="#dcebe4" />
+    <path d="M53 68H73M91 68H121M139 68H181M53 91H73M91 91H121M139 91H181M101 121V132M139 121V132" stroke="#52786c" stroke-width="3" stroke-linecap="round" />
+    <path d="M80 132H160" stroke="#164f4d" stroke-width="3" stroke-linecap="round" />
+    <circle cx="193" cy="105" r="19" fill="#164f4d" />
+    <path d="M184 105l6 6 12-13" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" />
+  </>}
+  {step === 3 && <>
+    <path d="M53 132V117C53 95 70 83 89 83C108 83 125 95 125 117V132" fill="#dcebe4" stroke="#164f4d" stroke-width="3" />
+    <circle cx="89" cy="59" r="23" fill="#f7edda" stroke="#164f4d" stroke-width="3" />
+    <path d="M67 55C67 34 91 28 106 42L112 56C94 54 88 49 84 43C81 51 75 55 67 55Z" fill="#164f4d" />
+    <rect x="108" y="94" width="94" height="38" rx="5" fill="white" stroke="#164f4d" stroke-width="3" />
+    <circle cx="156" cy="113" r="4" fill="#8ca99e" />
+    <path d="M148 20H204A9 9 0 0 1 213 29V58A9 9 0 0 1 204 67H164L152 78V67H148A9 9 0 0 1 139 58V29A9 9 0 0 1 148 20Z" fill="#164f4d" />
+    <path d="M161 45l9 9 18-20" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+  </>}
+</svg>
+<style>
+  .flow-scene { display: block; width: 100%; height: auto; max-width: 240px; margin-inline: auto; }
+</style>

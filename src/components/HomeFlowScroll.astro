@@ -3,6 +3,7 @@
 // 段階の切り替えは IntersectionObserver、線とデータの移動はスクロール駆動アニメーション（animation-timeline）で行う。
 // どちらも使えない環境・動きを減らす設定では、完成した図を静止表示する。
 import MaterialIcon from './MaterialIcon.astro';
+import FlowScene from './FlowScene.astro';
 import type { SiteLanguage } from '../data/services';
 interface Props { lang?: SiteLanguage; compact?: boolean }
 const { lang = 'ja', compact = false } = Astro.props;
@@ -54,7 +55,6 @@ const brief = {
 <section class:list={["s-section", "flow-scroll", { "is-compact": compact }]} id="flow" aria-labelledby="flow-title" data-flow-scroll={compact ? undefined : ""} data-active-step="0">
   <div class="s-shell">
     <div class="flow-head" data-motion-enter="heading" data-motion-id="flow-heading">
-      <p class="s-eyebrow">{c.eyebrow}</p>
       <h2 id="flow-title">{c.title}</h2>
       <p class="s-intro">{c.lead}</p>
     </div>
@@ -74,6 +74,7 @@ const brief = {
       </div>
       <ol class="flow-steps">
         {c.steps.map(([title, desc], i) => <li class="flow-step" data-step={i}>
+          {compact && <div class="flow-picture"><FlowScene step={i} /></div>}
           <span class="flow-step-marker" aria-hidden="true"><MaterialIcon name={icons[i]} /></span>
           <div><span class="s-number">0{i + 1}</span><h3>{title}</h3><p>{compact ? brief[i] : desc}</p></div>
         </li>)}
@@ -166,12 +167,25 @@ const brief = {
 .flow-scroll.is-compact .flow-visual{display:none}
 .flow-scroll.is-compact .flow-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:24px}
 .flow-scroll.is-compact .flow-steps::before{display:none}
-.flow-scroll.is-compact .flow-step{min-height:0;display:block;padding:20px 0 0;border-top:2px solid var(--rule);align-items:start;view-timeline-name:none}
+.flow-scroll.is-compact .flow-step{position:relative;min-height:0;display:block;padding:0;border:0;align-items:start;view-timeline-name:none}
+.flow-picture{position:relative;margin-bottom:20px;padding:16px 8px;background:#edf4f0;border-radius:8px}
+.flow-scroll.is-compact .flow-step:not(:last-child) .flow-picture::after{content:"";position:absolute;right:-16px;top:50%;width:10px;height:10px;border-top:2px solid var(--deep);border-right:2px solid var(--deep);transform:translateY(-50%) rotate(45deg)}
 .flow-scroll.is-compact .flow-step-marker{display:none}
 .flow-scroll.is-compact .flow-step h3{font-size:1.05rem;line-height:1.6}
-.flow-scroll.is-compact .flow-step p{line-height:1.85}
-@media(max-width:1100px){.flow-scroll.is-compact .flow-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:560px){.flow-scroll.is-compact .flow-steps{grid-template-columns:1fr;gap:18px}.flow-scroll.is-compact .flow-step{padding-top:14px}}
+.flow-scroll.is-compact .flow-step p{font-size:1rem;line-height:1.85}
+@media(min-width:561px) and (max-width:1100px){
+  .flow-scroll.is-compact .flow-steps{grid-template-columns:repeat(2,minmax(0,1fr));gap:32px 24px}
+  .flow-scroll.is-compact .flow-step:nth-child(2) .flow-picture::after{display:none}
+}
+@media(max-width:560px){
+  .flow-scroll.is-compact .flow-steps{grid-template-columns:1fr;gap:24px}
+  .flow-scroll.is-compact .flow-step{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:start;padding:0 0 24px;border-bottom:1px solid var(--rule)}
+  .flow-picture{margin:4px 0 0;padding:8px 0}
+  .flow-scroll.is-compact .flow-step:not(:last-child) .flow-picture::after{top:auto;right:calc(50% - 5px);bottom:-25px;transform:rotate(135deg)}
+  .flow-scroll.is-compact .flow-step:last-child{padding-bottom:0;border-bottom:0}
+  .flow-scroll.is-compact .flow-step h3{margin-top:4px}
+}
+@media(max-width:360px){.flow-scroll.is-compact .flow-step{grid-template-columns:72px minmax(0,1fr);gap:12px}}
 </style>
 <script>
 function initFlowScroll() {

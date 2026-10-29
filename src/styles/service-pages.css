@@ -5,3 +5,30 @@
 @media(max-width:560px){.service-page .s-shell{width:calc(100% - 36px)}.service-page .s-grid,.service-page .s-grid-two{grid-template-columns:1fr}.service-page h1{font-size:2.2rem}.service-page .s-actions{align-items:stretch;flex-direction:column}.service-page .s-button{width:100%}.service-page .s-section{padding:44px 0}.service-page .s-contact-band{padding:42px 0}}
 @media(prefers-reduced-motion:reduce){.service-page *{scroll-behavior:auto!important;transition:none!important}}
 .service-page :is(h1, h2, h3) { overflow-wrap: anywhere; }
+
+/* 本文・補足・操作の文字を見分け、どの言語でも同じ読みやすさにそろえる。 */
+.service-page { --quiet: #465952; font-weight: 500; }
+.service-page .s-intro { font-size: 1.0625rem; line-height: 1.9; max-width: 38em; }
+.service-page .s-note { line-height: 1.85; }
+.service-page .s-section-head { margin-bottom: 36px; }
+.service-page .s-button { font-size: 1rem; }
+.service-page .s-faq summary { min-height: 44px; display: list-item; align-content: center; }
+.service-page .s-faq details p { max-width: 42em; }
+.service-page ::selection { background: #cfe3da; color: #163d35; }
+.service-page :is(input, textarea) { caret-color: var(--deep); }
+.service-page a:hover { opacity: 1; }
+
+/* 小さい文字が続く料金表・制作例・相談フォームは、本文を16pxに保つ。 */
+#main.pricing-refresh :is(.tier-plan, .scope-overview dd, .scope-list dd),
+#main.works-refresh :is(.featured-caption p, .entry-copy p, .usecase-entry p),
+#main.contact-refresh :is(.contact-before-input, .form-group > label, .consent-check) {
+  font-size: 1rem;
+  line-height: 1.85;
+}
+#main.works-refresh .entry-copy p { display: block; overflow: visible; }
+#main.works-refresh :is(.featured-caption h3, .entry-copy h3) { font-size: 1.2rem; }
+#main.contact-refresh :is(input, textarea)::placeholder { color: #58675f; }
+@media (max-width: 560px) {
+  .service-page .s-section { padding-block: 56px; }
+  .service-page .s-section-head { margin-bottom: 28px; }
+}

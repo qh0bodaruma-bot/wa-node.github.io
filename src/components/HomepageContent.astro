@@ -144,6 +144,12 @@ const targetCategories = ['line_kintone', 'line_sf', 'line_hubspot', 'line_sheet
 const targetSystems = ['kintone', 'salesforce', 'hubspot', 'sheets'];
 const replayLabel = { ja: 'もう一度見る', en: 'Replay', fr: 'Revoir' }[lang];
 const targetData = demoTargets.items.map((t, i) => ({ ...t, href: href(t.path), system: targetSystems[i], contactHref: href(`/contact/?source=top&category=${targetCategories[i]}`) }));
+const pageGuide = {
+  ja: { label: '知りたいことから見る', links: ['連携の仕組み', '相談できる範囲', '動く制作例', '納品前の確認'] },
+  en: { label: 'Explore this page', links: ['How it works', 'What we connect', 'Working demos', 'Before delivery'] },
+  fr: { label: 'Explorer cette page', links: ['Le fonctionnement', 'Le périmètre', 'Les démonstrations', 'Avant la livraison'] },
+}[lang];
+const pageSections = ['flow', 'scope', 'selected-works', 'why-wa-node'];
 ---
 <main id="main" class="service-page home-refresh" data-glossary-skip data-reveal="off">
   <section class="home-hero">
@@ -199,6 +205,10 @@ const targetData = demoTargets.items.map((t, i) => ({ ...t, href: href(t.path), 
       </div>
     </div>
   </section>
+  <nav class="home-guide s-shell" aria-label={pageGuide.label}>
+    {pageGuide.links.map((label, i) => <a href={`#${pageSections[i]}`}>{label}<MaterialIcon name="south" /></a>)}
+  </nav>
+  <HomeFlowScroll lang={lang} compact />
   <section class="s-section scope-section" id="scope"><div class="s-shell">
     <div class="s-section-head" data-motion-enter="heading" data-motion-id="scope-heading"><div><h2>{c.scopeTitle}</h2><p class="s-intro">{c.scopeLead}</p></div></div>
     <div class="s-grid-two scope-split">
@@ -206,7 +216,6 @@ const targetData = demoTargets.items.map((t, i) => ({ ...t, href: href(t.path), 
       <div class="scope-col scope-col-no"><h3><MaterialIcon name="do_not_disturb_on"/>{c.scopeNo}</h3><ul>{c.scopeNot.map(t => <li>{t}</li>)}</ul></div>
     </div>
   </div></section>
-  <HomeFlowScroll lang={lang} compact />
   <section class="s-section works-section" id="selected-works"><div class="s-shell">
     <div class="s-section-head" data-motion-enter="heading" data-motion-id="works-heading"><div><h2>{c.worksTitle}</h2></div><a class="s-link" href={href('/works/')}>{c.allWorks}<span aria-hidden="true">→</span></a></div>
     <p class="s-note usecase-disclosure">{c.worksLead}</p>
