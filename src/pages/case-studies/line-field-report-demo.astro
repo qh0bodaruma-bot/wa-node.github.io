@@ -39,6 +39,7 @@ const fields = [
   ['報告者', 'LINEの利用者と協力会社の担当者を結び付けた記録から引く', 'サンプル設備サービス 山田'],
   ['現場', '事務所側で管理している現場の一覧から選ぶ', '中央ビル 空調設備'],
   ['点検結果', '項目ごとに「異常なし」「要対応」', '漏れ：要対応'],
+  ['特記事項', '自由に書ける文章の欄（任意）。入力があった報告だけ、kintoneの文字列（複数行）の項目に保存する', '配管の継ぎ目に水滴あり'],
   ['写真', '添付ファイルとして保存', 'サンプル画像 1枚'],
   ['状態', 'プロセス管理で「新着 → 対応中 → 完了」', '新着'],
 ];
@@ -137,7 +138,7 @@ const fields = [
               </div>
               <label class="uc-field">
                 <span>特記事項</span>
-                <textarea name="note" rows="2" data-fr-note placeholder="例：配管の継ぎ目に水滴あり"></textarea>
+                <textarea name="note" rows="2" maxlength="200" data-fr-note placeholder="例：配管の継ぎ目に水滴あり"></textarea>
               </label>
               <button type="submit" class="uc-submit" data-fr-submit disabled>報告を送る</button>
               <div class="uc-form-result" data-fr-result hidden></div>
@@ -290,7 +291,8 @@ const fields = [
     const readForm = () => {
       const data = new FormData(form);
       const ng = ['motion', 'noise', 'leak', 'clean'].filter((key) => data.get(key) === 'ng');
-      return { siteId: site.value, siteName: site.options[site.selectedIndex].text, ng, photo: photoBtn.getAttribute('aria-pressed') === 'true' };
+      const note = String(data.get('note') ?? '').trim();
+      return { siteId: site.value, siteName: site.options[site.selectedIndex].text, ng, photo: photoBtn.getAttribute('aria-pressed') === 'true', note };
     };
 
     const labels: Record<string, string> = { motion: '動作', noise: '異音', leak: '漏れ', clean: '清掃' };
@@ -347,6 +349,7 @@ const fields = [
       }
       registered.add(reportId);
       addLog(`報告ID ${reportId} でkintoneに登録しました。${report.photo ? '写真1枚を添付ファイルとして保存しました。' : ''}`, 'ok');
+      if (report.note) addLog(`特記事項：${report.note}`);
       addRow(reportId, report.siteId, report.siteName, report.ng);
       await wait(250);
       addLog(report.ng.length ? '「要対応」があるため、事務所の担当者に通知しました。' : '異常がないため、通知は送っていません。');

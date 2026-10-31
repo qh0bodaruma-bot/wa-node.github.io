@@ -78,6 +78,7 @@
   .uc-pending li.is-done { color: #59665f; text-decoration: line-through; }
   .uc-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
   .uc-log { margin: 0; padding-left: 1.4em; font-size: .875rem; line-height: 1.9; color: var(--muted, #524a44); }
+  .uc-log li { overflow-wrap: anywhere; }
   .uc-log li.is-warn { color: #8b2925; font-weight: 700; }
   .uc-log li.is-ok { color: #1d5b3a; }
   .uc-fields th[scope="row"] { white-space: nowrap; font-weight: 700; }
@@ -123,6 +124,7 @@
 .uc-seg-3 label:last-child input:checked + span { background: var(--trust, #0f4c5c); }
 .uc-approvals { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; font-size: .875rem; }
 .uc-approvals li { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border: 1px solid #f0d9a8; border-radius: 8px; background: #fff8e6; }
+.uc-approvals li > span { min-width: 0; overflow-wrap: anywhere; }
 .uc-approvals li.is-done { border-color: var(--line, #dce5e1); background: #f4f7f5; color: #5d6a63; }
 .uc-approvals li.uc-empty { border-style: dashed; border-color: var(--line, #dce5e1); background: transparent; color: var(--muted, #524a44); }
 .uc-done-note { font-size: .875rem; }
