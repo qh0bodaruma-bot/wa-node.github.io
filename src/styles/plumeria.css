@@ -803,6 +803,8 @@
   .pl.is-cta-handoff .pl-foot { padding-bottom: 8px; }
   .pl-hill-foot { margin-top: -1px; }
   .pl-hill-foot svg { margin-bottom: -1px; }
+  /* 波形の上下移動によって下端に地色の隙間が露出しないようにする。 */
+  .pl-hill.pl-hill-foot svg { animation: none; }
   .pl-foot-inner {
     display: flex; flex-wrap: wrap; gap: 30px;
     justify-content: space-between; align-items: flex-start;
@@ -2115,8 +2117,8 @@
 .pl .pl-foot-badge .pl-brand-mark { margin-bottom: 4px; }
 .pl .pl-foot-badge .pl-brand-name { color: #fff; }
 
-/* ヘッダー（島）の中のバッジの周囲の余白をそろえる：上・左・右を10px、下は影の4pxを含めて10pxに見えるよう14pxにする */
-.pl .pl-head .pl-head-inner { padding: 10px 10px 14px 10px; }
+/* バッジ周囲は上・右10px、左16px。下は影の4pxを含めて10pxに見えるよう14pxにする。 */
+.pl .pl-head .pl-head-inner { padding: 10px 10px 14px 16px; }
 /* 採用情報のバッジも、ブランドのバッジと同じ高さにして、島の縁までの余白（上・下・右）を10pxにそろえる */
 .pl .pl-head .pl-head-recruit { align-self: stretch; display: inline-flex; align-items: center; }
 .pl .pl-foot-badge .pl-brand-name, .pl .pl-foot-badge .pl-brand-en { line-height: 1.3; }
