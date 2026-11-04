@@ -1,6 +1,13 @@
 ---
 import PlumeriaServicePage from '../../../../components/plumeria/PlumeriaServicePage.astro';
 import { routes, careManagementFlow, plImg } from '../../../../data/plumeria';
+
+// 大きく見せる数字（出典：costInfo・housingOptionalServices の「相談・代行は無料」、careManagementFlow の手順数）
+const keyFacts = [
+  { num: '0', unit: '円', label: 'ケアプラン作成・相談・申請代行の自己負担（介護保険）' },
+  { num: String(careManagementFlow.length), unit: 'つ', label: '申請から見直しまでの手順' },
+  { num: '申請前', unit: '', label: '認定を受ける前から相談できます' },
+];
 ---
 <PlumeriaServicePage
   title="居宅介護支援｜プルメリア（修正版ラフ）"
@@ -27,10 +34,6 @@ import { routes, careManagementFlow, plImg } from '../../../../data/plumeria';
   ]}
   costInfo="介護保険によるケアプラン作成の自己負担はありません。プランに組み込む介護サービスの利用料は別途かかります。"
   flowSteps={careManagementFlow}
-  flowNotes={[
-    '介護保険制度におけるサービス利用手続きの流れです。ケアプランの作成・相談・申請代行に自己負担はありません。',
-    'まずは相談窓口へ、現在お困りのことをお伝えください。',
-  ]}
   contactCategory="care-management"
   supportHeading="ケアプラン作成・申請サポート・相談と調整を行います"
   conditionsHeading="対象は、要支援・要介護の認定を受けている方、これから申請予定の方です"
@@ -39,4 +42,21 @@ import { routes, careManagementFlow, plImg } from '../../../../data/plumeria';
     { q: '認定を受ける前でも相談できますか？', a: 'これから介護保険の認定を申請する方も対象です。現在お困りのことをお伝えください。' },
     { q: '介護サービスもすべて無料ですか？', a: '自己負担がないのは、介護保険によるケアプランの作成です。訪問介護やショートステイなどの利用料は、それぞれ確認が必要です。' },
   ]}
-/>
+>
+  <ul slot="hero-facts" class="pl-stats" aria-label="居宅介護支援の要点">
+    {keyFacts.map((f) => (
+      <li>
+        <span class="pl-stat-num pl-num-face">{f.num}{f.unit && <small>{f.unit}</small>}</span>
+        <span class="pl-stat-label">{f.label}</span>
+      </li>
+    ))}
+  </ul>
+
+  <figure slot="conditions-figure" class="pl-fitmap">
+    <figcaption class="pl-sr-only">介護認定から見た、ご利用の対象</figcaption>
+    <ol class="pl-fitmap-scale" aria-hidden="true">
+      <li>認定なし</li><li>要支援</li><li>要介護</li>
+    </ol>
+    <p class="pl-fitmap-bar pl-fitmap-bar-wide" data-tone="a"><span class="pl-fitmap-ask">これから申請する方</span><span class="pl-fitmap-main"><strong>居宅介護支援</strong>要支援・要介護の認定を受けている方</span></p>
+  </figure>
+</PlumeriaServicePage>

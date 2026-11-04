@@ -2436,3 +2436,7 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl-taskgroup[data-tone="b"] .pl-taskgroup-badge { background: var(--accent); color: var(--ink); }
 .pl .pl-chips { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
 .pl-chips > li { padding: 6px 12px; font-size: calc(15px * var(--pl-fs)); line-height: 1.5; color: var(--ink); background: var(--surface); border: 1px solid var(--line); }
+
+/* 居宅介護支援の対象図：認定前（申請予定）から要介護までの全幅。点線部分が「これから申請する方」 */
+.pl-fitmap-bar.pl-fitmap-bar-wide { grid-column: 1 / 4; }
+.pl-fitmap-bar-wide .pl-fitmap-main { flex: 2; }

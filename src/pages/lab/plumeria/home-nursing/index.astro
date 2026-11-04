@@ -1,6 +1,17 @@
 ---
 import PlumeriaServicePage from '../../../../components/plumeria/PlumeriaServicePage.astro';
 import { routes, homeNursingTasks, homeNursingStrengths, plImg } from '../../../../data/plumeria';
+
+// 大きく見せる数字（出典：homeNursingStrengths の「寄り添う看護」、homeNursingTasks の分類と項目数）
+const taskCount = homeNursingTasks.reduce((n, g) => n + g.items.length, 0);
+const keyFacts = [
+  { num: '24', unit: '時間', label: '365日の緊急時対応' },
+  { num: String(homeNursingTasks.length), unit: '種類', label: homeNursingTasks.map((g) => g.title.replace('サービス', '')).join('と') + 'のサービス' },
+  { num: String(taskCount), unit: '項目', label: '具体的なケアの内容' },
+];
+
+// ケアの内容の2分類を、色分けした枠で見せる（項目は data/plumeria.ts のまま）
+const taskGroups = homeNursingTasks.map((g, i) => ({ ...g, tone: i === 0 ? 'a' : 'b', badge: g.title.replace('サービス', '') }));
 ---
 <PlumeriaServicePage
   title="訪問看護｜プルメリア（修正版ラフ）"
@@ -17,9 +28,9 @@ import { routes, homeNursingTasks, homeNursingStrengths, plImg } from '../../../
     'ご家族が医療面のケアに不安を感じている方',
   ]}
   content={[
-    { label: '医療的なケア', body: '点滴・喀痰吸引・カテーテル管理など、医師の指示に基づく処置を行います。' },
-    { label: '健康管理', body: '体調管理・服薬管理や、療養中の生活面のケアを行います。' },
-    { label: '緊急時の支援', body: '24時間365日の緊急時対応を行っています。利用条件や連絡方法は、ご契約時にご確認ください。' },
+    { label: '医療的なケア', body: '医師の指示に基づく処置を行います。' },
+    { label: '健康管理', body: '体調・服薬の管理と、療養中の生活面のケアです。' },
+    { label: '緊急時の支援', body: '24時間365日対応します。利用条件と連絡方法はご契約時にご確認ください。' },
   ]}
   targetInfo={[
     { label: '対象となる方', body: '主治医の指示のもとで訪問看護が必要な方' },
@@ -28,26 +39,35 @@ import { routes, homeNursingTasks, homeNursingStrengths, plImg } from '../../../
   costInfo="医療保険・介護保険いずれの適用かにより異なります。正式な費用は個別にご案内します。"
   flowSteps={[
     { title: 'お問い合わせ', body: '相談窓口へ、ご希望の支援内容をお伝えください。' },
-    { title: '主治医への確認', body: '主治医の指示書等、必要な手続きをご案内します。' },
-    { title: 'ご利用開始', body: '訪問スケジュールを調整し、利用を開始します。' },
+    { title: '主治医への確認', body: '指示書など、必要な手続きをご案内します。' },
+    { title: 'ご利用開始', body: '訪問の日程を決めて始めます。' },
   ]}
   contactCategory="home-nursing"
   supportHeading="医療的なケア・健康管理・緊急時の支援の、3つを行います"
   conditionsHeading="対象は、主治医の指示のもとで訪問看護が必要な方です"
   flowHeading="ご利用開始まで、3つの手順です"
 >
+  <ul slot="hero-facts" class="pl-stats" aria-label="訪問看護の要点">
+    {keyFacts.map((f) => (
+      <li>
+        <span class="pl-stat-num pl-num-face">{f.num}{f.unit && <small>{f.unit}</small>}</span>
+        <span class="pl-stat-label">{f.label}</span>
+      </li>
+    ))}
+  </ul>
+
   <Fragment slot="extra">
     <section class="pl-sec pl-sec-beige" id="tasks">
       <div class="pl-wrap">
         <h2 class="pl-h2">訪問看護には、医療保険と介護保険の2種類のサービスがあります</h2>
-        <div class="pl-grid-2" style="margin-top:24px">
-          {homeNursingTasks.map((group) => (
-            <div class="pl-card">
-              <h3 class="pl-hs-line-name" style="margin-bottom:10px">{group.title}</h3>
-              <ul class="pl-body pl-check-list">
-                {group.items.map((item) => <li>{item}</li>)}
+        <div class="pl-taskgroups">
+          {taskGroups.map((g) => (
+            <section class="pl-taskgroup" data-tone={g.tone}>
+              <h3 class="pl-taskgroup-head"><span class="pl-taskgroup-badge">{g.badge}</span><span class="pl-med-count">（{g.items.length}項目）</span></h3>
+              <ul class="pl-chips">
+                {g.items.map((item) => <li>{item}</li>)}
               </ul>
-            </div>
+            </section>
           ))}
         </div>
         <p class="pl-note" style="margin-top:14px">どちらの保険が適用されるかは、主治医の指示内容やご本人の状況によって決まります。窓口へご相談ください。</p>
