@@ -19,25 +19,17 @@ const keyFacts = [
   { num: '365', unit: '日', label: 'エントランスにスタッフが常駐' },
 ];
 
-// 1日あたりの費用グラフ（介護保険1割負担・3食の日）。介護度で変わるのは自己負担だけなので、その金額は介護度の横に書き、
-// どの介護度も同じ滞在費・食費・日常生活費・おやつは1本にまとめる。値は data/plumeria.ts の公式掲載額をそのまま足し合わせる。
+// 1日あたりの費用（介護保険1割負担・3食の日）。介護度で変わるのは自己負担だけなので、自己負担だけを棒にして差を見せ、
+// 同じ行に「＋滞在費・食費など（どの介護度も同額）＝1日の合計」を並べて見比べられるようにする。
+// 棒の長さは自己負担の最大額（要介護5）に対する割合。値は data/plumeria.ts の公式掲載額をそのまま足し合わせる。
 const yenText = (n: number) => `${n.toLocaleString('ja-JP')}円`;
 const fixedPerDay = shortStayFixedFeesPerDay.stay + shortStayFixedFeesPerDay.food + shortStayFixedFeesPerDay.daily + shortStayFixedFeesPerDay.snack;
-const dayParts = [
-  { label: '介護保険の自己負担（1割）', legend: '介護保険の自己負担（1割）', tone: 'insurance' },
-  { label: '滞在費・食費・日常生活費・おやつ', legend: `滞在費・食費（3食）・日常生活費・おやつ（どの介護度も${yenText(fixedPerDay)}）`, tone: 'fixed' },
-];
-const dayBarsRaw = shortStayCareFeesPerDay.map((c) => {
-  const values = [c.yen, fixedPerDay];
-  return { level: c.level, values, total: values.reduce((n, v) => n + v, 0) };
-});
-const dayMax = Math.max(...dayBarsRaw.map((b) => b.total));
-const dayBars = dayBarsRaw.map((b) => ({
-  ...b,
-  totalLabel: yenText(b.total),
-  width: `${((b.total * 100) / dayMax).toFixed(2)}%`,
-  careText: yenText(b.values[0]),
-  parts: b.values.map((v, i) => ({ ...dayParts[i], value: v, text: v.toLocaleString('ja-JP'), showValue: dayParts[i].tone === 'fixed' })),
+const careMax = Math.max(...shortStayCareFeesPerDay.map((c) => c.yen));
+const dayRows = shortStayCareFeesPerDay.map((c) => ({
+  level: c.level,
+  care: yenText(c.yen),
+  width: `${((c.yen * 100) / careMax).toFixed(2)}%`,
+  total: yenText(c.yen + fixedPerDay),
 }));
 
 // 医療行為の受け入れ：表の ○・要相談・× ごとにまとめ、「ここからここまで受け入れ可」が一目で分かるように並べる。
@@ -116,30 +108,32 @@ const medGroups = [
     <p class="pl-fitmap-bar" data-tone="a" style="grid-column:2 / 4"><span class="pl-fitmap-main"><strong>プルメリアⅢ</strong>要支援1・2、要介護1〜5の方</span></p>
   </figure>
 
-  <figure slot="cost-figure" class="pl-feechart">
-    <figcaption class="pl-feechart-title">1日あたりの費用の目安（介護保険1割負担・3食の日・円）</figcaption>
-    <ul class="pl-feechart-legend">
-      {dayParts.map((p) => <li><span class="pl-feechart-swatch" data-part={p.tone} aria-hidden="true"></span>{p.legend}</li>)}
-    </ul>
-    <ul class="pl-feechart-rows">
-      {dayBars.map((b) => (
-        <li>
-          <span class="pl-feechart-name">{b.level}<small class="pl-feechart-sub">自己負担 <span class="pl-num-face">{b.careText}</span></small></span>
-          <span class="pl-feechart-track">
-            <span class="pl-feechart-lane"><span class="pl-feechart-bar" style={`width:${b.width}`}>
-              {b.parts.map((p) => (
-                <span class="pl-feechart-seg" data-part={p.tone} style={`flex:${p.value} 1 0`}>
-                  {p.showValue && <span class="pl-feechart-val pl-num-face" aria-hidden="true">{p.text}</span>}
-                </span>
-              ))}
-              <strong class="pl-feechart-total pl-num-face">{b.totalLabel}</strong>
-            </span></span>
-          </span>
-          <span class="pl-sr-only">（内訳：{b.parts.map((p) => `${p.label} ${p.text}円`).join('、')}）</span>
-        </li>
-      ))}
-    </ul>
-    <p class="pl-note">上の項目を足した額です。娯楽費（実費）・送迎などの加算・利用に応じた費用は含みません。所得区分により、滞在費と食費が減額される場合があります。</p>
+  <figure slot="cost-figure" class="pl-daycost">
+    <table class="pl-daycost-table">
+      <caption class="pl-daycost-title">1日あたりの費用の目安（介護保険1割負担・3食の日）</caption>
+      <thead>
+        <tr>
+          <th scope="col">介護度</th>
+          <th scope="col">介護保険の自己負担（1割）</th>
+          <th scope="col" class="pl-daycost-fixed">滞在費・食費など</th>
+          <th scope="col">1日の合計<span class="pl-daycost-th-sub">（自己負担＋{yenText(fixedPerDay)}）</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        {dayRows.map((r) => (
+          <tr>
+            <th scope="row">{r.level}</th>
+            <td class="pl-daycost-care">
+              <span class="pl-daycost-track" aria-hidden="true"><span class="pl-daycost-bar" style={`width:${r.width}`}></span></span>
+              <span class="pl-daycost-care-num pl-num-face">{r.care}</span>
+            </td>
+            <td class="pl-daycost-fixed pl-num-face"><span aria-hidden="true">＋</span>{yenText(fixedPerDay)}</td>
+            <td class="pl-daycost-total pl-num-face"><span aria-hidden="true">＝</span>{r.total}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+    <p class="pl-note">滞在費・食費などは、滞在費{yenText(shortStayFixedFeesPerDay.stay)}・食費{yenText(shortStayFixedFeesPerDay.food)}（3食）・日常生活費{yenText(shortStayFixedFeesPerDay.daily)}・おやつ{yenText(shortStayFixedFeesPerDay.snack)}で、どの介護度も{yenText(fixedPerDay)}です。娯楽費（実費）・送迎などの加算・利用に応じた費用は含みません。所得区分により、滞在費と食費が減額される場合があります。</p>
   </figure>
 
   <Fragment slot="extra">

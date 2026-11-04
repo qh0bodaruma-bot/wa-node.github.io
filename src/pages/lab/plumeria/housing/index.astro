@@ -97,7 +97,7 @@ const day = [
       <ul class="pl-stats" aria-label="この住宅の要点">
         {keyFacts.map((f) => (
           <li>
-            <span class="pl-stat-num pl-num-face">{f.pre && <small>{f.pre}</small>}{f.num}<small>{f.unit}</small></span>
+            <span class:list={['pl-stat-num pl-num-face', f.num.length >= 5 && 'is-long']}>{f.pre && <small>{f.pre}</small>}{f.num}<small>{f.unit}</small></span>
             <span class="pl-stat-label">{f.label}</span>
           </li>
         ))}
@@ -317,7 +317,7 @@ const day = [
       <ul class="pl-stats" aria-label="周辺までの距離">
         {nearbyFacts.map((f) => (
           <li>
-            <span class="pl-stat-num pl-num-face">{f.pre && <small>{f.pre}</small>}{f.num}<small>{f.unit}</small></span>
+            <span class:list={['pl-stat-num pl-num-face', f.num.length >= 5 && 'is-long']}>{f.pre && <small>{f.pre}</small>}{f.num}<small>{f.unit}</small></span>
             <span class="pl-stat-label">{f.label}</span>
           </li>
         ))}

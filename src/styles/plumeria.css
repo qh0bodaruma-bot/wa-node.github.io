@@ -2340,6 +2340,8 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
   font-size: calc(clamp(30px, 4.4vw, 42px) * var(--pl-fs)); font-weight: 600; line-height: 1.1;
   color: var(--green-deep); white-space: nowrap;
 }
+/* 「100〜400」のように桁の多い数字は、カードからはみ出さないよう一回り小さくする */
+.pl-stat-num.is-long { font-size: calc(clamp(22px, 2.9vw, 30px) * var(--pl-fs)); }
 .pl-stat-num small { margin-inline: 2px; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.42em; font-weight: 700; }
 .pl-stat-label { font-size: calc(14px * var(--pl-fs)); line-height: 1.6; color: var(--ink); }
 @media (max-width: 600px) {
@@ -2396,23 +2398,52 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl-feechart-lane { display: block; min-width: 0; padding-right: 9em; }
 .pl-feechart-bar { position: relative; display: flex; gap: 2px; height: 28px; }
 .pl-feechart-seg { display: flex; align-items: center; min-width: 0; padding-left: 8px; border-radius: 4px; }
-/* 帯の中に書く金額は、淡い帯の上だけに置く（濃いティール #083c4a × #cfe9f1 は 9:1 以上） */
-.pl-feechart-val { font-size: calc(14px * var(--pl-fs)); font-weight: 600; line-height: 1; white-space: nowrap; color: var(--ink); }
 .pl-feechart-total { position: absolute; top: 50%; left: 100%; margin-left: 12px; transform: translateY(-50%); font-size: calc(clamp(17px, 2vw, 21px) * var(--pl-fs)); font-weight: 700; color: var(--ink); white-space: nowrap; }
 /* 帯の下の内訳。凡例を見比べなくても、項目名と金額を文字で読めるようにする（スマホでも消さない） */
 .pl .pl-feechart-break { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: calc(14px * var(--pl-fs)); line-height: 1.6; color: var(--ink); }
 .pl-feechart-break > li { display: flex; align-items: center; gap: 6px; }
 .pl-feechart-break .pl-feechart-swatch { width: 12px; height: 12px; }
-.pl-feechart-name small.pl-feechart-sub { font-weight: 500; color: var(--ink); }
 .pl-feechart > .pl-note { margin-top: 12px; }
 @media (max-width: 720px) {
   .pl-feechart-rows > li { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* ショートステイの1日の費用グラフ。介護度で変わるのは自己負担だけなので、そこを濃く、
-   どの介護度も同じ滞在費・食費などは1本にまとめて淡くする（住宅グラフと同じ濃淡の両端） */
-.pl-feechart [data-part="insurance"] { background: var(--green-deep); }
-.pl-feechart [data-part="fixed"] { background: #cfe9f1; box-shadow: inset 0 0 0 1px var(--green); }
+/* ショートステイの1日の費用。介護度で変わるのは自己負担だけなので、自己負担だけを棒にして差を見せ、
+   同じ行に「＋滞在費・食費など＝1日の合計」を並べる。表なので、読み上げでも行と列の関係が伝わる */
+.pl .pl-daycost { margin: 22px 0 26px; padding: 18px 18px 8px; background: var(--surface); border: 1px solid var(--line); }
+.pl-daycost-table { width: 100%; border-collapse: collapse; color: var(--ink); }
+.pl-daycost-title { caption-side: top; padding-bottom: 10px; text-align: left; font-size: calc(16px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
+.pl-daycost-table thead th { padding: 0 10px 8px; text-align: left; font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.5; color: var(--muted); border-bottom: 2px solid var(--line); }
+.pl-daycost-table thead th:nth-child(n + 3) { text-align: right; }
+.pl-daycost-table tbody th, .pl-daycost-table td { padding: 10px; vertical-align: middle; border-bottom: 1px solid var(--line); }
+.pl-daycost-table tbody tr:last-child > * { border-bottom: 0; }
+.pl-daycost-table tbody th { width: 6.5em; text-align: left; white-space: nowrap; font-size: calc(15px * var(--pl-fs)); font-weight: 700; }
+.pl-daycost-care { width: 46%; white-space: nowrap; }
+.pl-daycost-track { display: inline-block; width: calc(100% - 5.2em); vertical-align: middle; }
+.pl-daycost-bar { display: block; height: 20px; background: var(--green-deep); }
+.pl-daycost-care-num { margin-left: 10px; vertical-align: middle; font-size: calc(17px * var(--pl-fs)); font-weight: 700; color: var(--green-deep); }
+.pl-daycost-fixed { text-align: right; white-space: nowrap; font-size: calc(15px * var(--pl-fs)); color: var(--muted); }
+.pl-daycost-total { text-align: right; white-space: nowrap; font-size: calc(18px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
+.pl-daycost-fixed > span, .pl-daycost-total > span { margin-right: 4px; font-weight: 400; color: var(--muted); }
+.pl-daycost > .pl-note { margin-top: 10px; }
+.pl-daycost-th-sub { display: none; }
+@media (max-width: 600px) {
+  /* 幅が狭いときは、どの介護度も同じ額の列を省き（下の注記に記載）、自己負担と合計を並べる */
+  .pl .pl-daycost { padding: 14px 12px 6px; }
+  .pl-daycost-fixed { display: none; }
+  /* 「＋」の列を省くため「＝」も外し、見出しに足し算の中身を書く */
+  .pl-daycost-total > span { display: none; }
+  .pl-daycost-th-sub { display: block; font-weight: 500; }
+  .pl-daycost-table tbody th, .pl-daycost-table td { padding: 10px 6px; }
+  .pl-daycost-table thead th { padding: 0 6px 8px; }
+  .pl-daycost-table tbody th { width: auto; }
+  /* 棒と数字を2段にし、棒がセルの幅いっぱいを使えるようにして差を見せる */
+  .pl-daycost-care { width: auto; white-space: normal; }
+  .pl-daycost-track { display: block; width: 100%; margin-top: 4px; }
+  .pl-daycost-bar { height: 14px; }
+  .pl-daycost-care-num { display: block; margin-left: 0; }
+  .pl-daycost-total { font-size: calc(16px * var(--pl-fs)); }
+}
 
 /* ショートステイの医療行為：可・要相談・不可ごとにまとめる。左の太い線が「ここからここまで」を示す。
    色は使わず、線の太さと実線／点線で区別する（従来の可否バッジと同じ考え方） */
