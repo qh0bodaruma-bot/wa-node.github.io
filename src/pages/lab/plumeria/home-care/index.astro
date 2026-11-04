@@ -1,6 +1,17 @@
 ---
 import PlumeriaServicePage from '../../../../components/plumeria/PlumeriaServicePage.astro';
 import { routes, homeCareTasks, homeCareStrengths, plImg } from '../../../../data/plumeria';
+
+// 大きく見せる数字（出典：homeCareTasks の分類と項目数、homeCareStrengths の「継続的な研修」）
+const taskCount = homeCareTasks.reduce((n, g) => n + g.items.length, 0);
+const keyFacts = [
+  { num: String(homeCareTasks.length), unit: '種類', label: homeCareTasks.map((g) => g.title.replace('サービス', '')).join('と') },
+  { num: String(taskCount), unit: '項目', label: '具体的な支援の内容' },
+  { num: '毎月', unit: '', label: '社内研修で介護技術を向上' },
+];
+
+// 支援内容の2分類を、色分けした枠で見せる（項目は data/plumeria.ts のまま）
+const taskGroups = homeCareTasks.map((g, i) => ({ ...g, tone: i === 0 ? 'a' : 'b', badge: g.title.replace('サービス', '') }));
 ---
 <PlumeriaServicePage
   title="訪問介護｜プルメリア（修正版ラフ）"
@@ -17,9 +28,9 @@ import { routes, homeCareTasks, homeCareStrengths, plImg } from '../../../../dat
     'ご家族の介護負担を減らしたい方',
   ]}
   content={[
-    { label: '身体介護', body: '入浴・排せつ・食事・通院や外出の付き添いなど、体に直接ふれる介助を行います。' },
-    { label: '生活援助', body: '調理・洗濯・掃除・買い物代行などをお手伝いします。' },
-    { label: '専門スタッフ', body: '介護福祉士などの有資格者が担当し、専属の責任者を配置しています。' },
+    { label: '身体介護', body: '入浴・排せつ・食事など、体に直接ふれる介助です。' },
+    { label: '生活援助', body: '調理・洗濯・掃除・買い物などの家事のお手伝いです。' },
+    { label: '専門スタッフ', body: '介護福祉士などの有資格者と、専属の責任者が担当します。' },
   ]}
   targetInfo={[
     { label: '対象となる方', body: '要介護・要支援の認定を受けている方' },
@@ -28,26 +39,43 @@ import { routes, homeCareTasks, homeCareStrengths, plImg } from '../../../../dat
   costInfo="自己負担割合や支援内容によって異なります。保険外の支援は、対応できる内容と料金を事前にご確認ください。"
   flowSteps={[
     { title: 'お問い合わせ', body: '相談窓口へ、ご希望の支援内容をお伝えください。' },
-    { title: 'ご相談・確認', body: '現在の状況、ケアプランの有無等を確認します。' },
-    { title: 'ご利用開始', body: '内容にご納得いただいたうえで、利用を開始します。' },
+    { title: 'ご相談・確認', body: '今の状況とケアプランの有無を確認します。' },
+    { title: 'ご利用開始', body: 'ご納得いただいてから始めます。' },
   ]}
   contactCategory="home-care"
   supportHeading="ご自宅で、身体介護と生活援助を行います"
   conditionsHeading="対象は、要介護・要支援の認定を受けている方です"
   flowHeading="ご利用開始まで、3つの手順です"
 >
+  <ul slot="hero-facts" class="pl-stats" aria-label="訪問介護の要点">
+    {keyFacts.map((f) => (
+      <li>
+        <span class="pl-stat-num pl-num-face">{f.num}{f.unit && <small>{f.unit}</small>}</span>
+        <span class="pl-stat-label">{f.label}</span>
+      </li>
+    ))}
+  </ul>
+
+  <figure slot="conditions-figure" class="pl-fitmap">
+    <figcaption class="pl-sr-only">介護認定から見た、ご利用の対象</figcaption>
+    <ol class="pl-fitmap-scale" aria-hidden="true">
+      <li>認定なし</li><li>要支援</li><li>要介護</li>
+    </ol>
+    <p class="pl-fitmap-bar" data-tone="a" style="grid-column:2 / 4"><span class="pl-fitmap-main"><strong>訪問介護</strong>要支援・要介護の認定を受けている方</span></p>
+  </figure>
+
   <Fragment slot="extra">
     <section class="pl-sec pl-sec-beige" id="tasks">
       <div class="pl-wrap">
         <h2 class="pl-h2">身体介護と生活援助の、2種類のサービスがあります</h2>
-        <div class="pl-grid-2" style="margin-top:24px">
-          {homeCareTasks.map((group) => (
-            <div class="pl-card">
-              <h3 class="pl-hs-line-name" style="margin-bottom:10px">{group.title}</h3>
-              <ul class="pl-body pl-check-list">
-                {group.items.map((item) => <li>{item}</li>)}
+        <div class="pl-taskgroups">
+          {taskGroups.map((g) => (
+            <section class="pl-taskgroup" data-tone={g.tone}>
+              <h3 class="pl-taskgroup-head"><span class="pl-taskgroup-badge">{g.badge}</span><span class="pl-med-count">（{g.items.length}項目）</span></h3>
+              <ul class="pl-chips">
+                {g.items.map((item) => <li>{item}</li>)}
               </ul>
-            </div>
+            </section>
           ))}
         </div>
         <p class="pl-note" style="margin-top:14px">できることは継続していただき、買い物や薬の受け取りの代行など、ご本人・ご家族にとって難しいことをサポートします。</p>

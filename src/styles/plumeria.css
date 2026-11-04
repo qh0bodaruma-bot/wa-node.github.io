@@ -2424,3 +2424,15 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl-med-group[data-st="ok"] .pl-med-list > div { border-top-color: color-mix(in srgb, var(--green) 18%, transparent); }
 .pl-med-group[data-st="ask"] .pl-med-list > div { border-top-color: color-mix(in srgb, #d9971a 25%, transparent); }
 .pl-med-group[data-st="no"] .pl-med-list > div { border-top-color: color-mix(in srgb, #c2406f 20%, transparent); }
+
+/* 訪問介護の支援内容：2分類を色分けした枠にまとめ、項目は読み切りやすい札（チップ）で並べる。
+   色はⅠ／Ⅱと同じ組（ターコイズ・黄）。分類名の文字でも区別する */
+.pl-taskgroups { margin-top: 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
+@media (max-width: 720px) { .pl-taskgroups { grid-template-columns: minmax(0, 1fr); } }
+.pl-taskgroup { padding: 16px 20px 18px; border: 1px solid var(--line); border-left: 8px solid var(--green); background: color-mix(in srgb, var(--green) 6%, #fff); }
+.pl-taskgroup[data-tone="b"] { border-left-color: #d9971a; background: color-mix(in srgb, var(--accent) 12%, #fff); }
+.pl-taskgroup-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: calc(18px * var(--pl-fs)); font-weight: 700; line-height: 1.5; color: var(--ink); }
+.pl-taskgroup-badge { padding: 3px 12px; font-size: calc(15px * var(--pl-fs)); font-weight: 700; background: var(--green); color: #fff; }
+.pl-taskgroup[data-tone="b"] .pl-taskgroup-badge { background: var(--accent); color: var(--ink); }
+.pl .pl-chips { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
+.pl-chips > li { padding: 6px 12px; font-size: calc(15px * var(--pl-fs)); line-height: 1.5; color: var(--ink); background: var(--surface); border: 1px solid var(--line); }
