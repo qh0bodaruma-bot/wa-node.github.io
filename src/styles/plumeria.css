@@ -440,6 +440,22 @@
   .pl-sec-beige {
     background-color: var(--beige);
   }
+  /* 各ページの最初のサンドの帯（ヤシの影がある帯を除く）にだけ、水彩のプルメリアをうっすら敷く。
+     帯ごとに置くと花が多すぎるため1ページ1か所。絵は Canva の画像生成（2026-11-04）で作り、白地を抜いたもの */
+  .pl-sec-beige:not(.pl-sec-palm):not(.pl-sec-beige ~ .pl-sec-beige) { overflow: hidden; }
+  .pl-sec-beige:not(.pl-sec-palm):not(.pl-sec-beige ~ .pl-sec-beige)::before {
+    content: ''; position: absolute; z-index: 0; pointer-events: none;
+    top: -90px; right: -110px; width: clamp(260px, 34vw, 480px); aspect-ratio: 900 / 684;
+    background: url('/images/plumeria/decoration-bg.webp') no-repeat center / contain;
+    opacity: 0.2;
+  }
+  .pl-sec-beige:not(.pl-sec-palm):not(.pl-sec-beige ~ .pl-sec-beige) > .pl-wrap { position: relative; z-index: 1; }
+  @media (max-width: 600px) {
+    .pl-sec-beige:not(.pl-sec-palm):not(.pl-sec-beige ~ .pl-sec-beige)::before { top: -40px; right: -80px; opacity: 0.16; }
+  }
+  @media print {
+    .pl-sec-beige::before { display: none; }
+  }
   .pl-h2 {
     display: grid; justify-items: center; gap: 4px;
     text-align: center;
@@ -2367,7 +2383,7 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl-feechart-title { font-size: calc(16px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
 .pl .pl-feechart-legend { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: calc(14px * var(--pl-fs)); color: var(--ink); }
 .pl-feechart-legend > li { display: flex; align-items: center; gap: 6px; }
-.pl-feechart-swatch { width: 14px; height: 14px; border-radius: 3px; }
+.pl-feechart-swatch { flex: none; width: 14px; height: 14px; border-radius: 3px; }
 .pl-feechart [data-part="rent"] { background: var(--part-rent); }
 .pl-feechart [data-part="common"] { background: var(--part-common); }
 .pl-feechart [data-part="service"] { background: var(--part-service); box-shadow: inset 0 0 0 1px var(--green); }

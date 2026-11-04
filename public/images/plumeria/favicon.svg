@@ -1,12 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- プルメリア提案デモ用の仮アイコン。正式なロゴを受け取ったら差し替える -->
-  <rect width="64" height="64" rx="16" fill="#137792"/>
-  <g transform="translate(32 32)" fill="#ffffff">
-    <ellipse cx="0" cy="-13" rx="8" ry="14"/>
-    <ellipse cx="0" cy="-13" rx="8" ry="14" transform="rotate(72)"/>
-    <ellipse cx="0" cy="-13" rx="8" ry="14" transform="rotate(144)"/>
-    <ellipse cx="0" cy="-13" rx="8" ry="14" transform="rotate(216)"/>
-    <ellipse cx="0" cy="-13" rx="8" ry="14" transform="rotate(288)"/>
+  <!-- プルメリア提案デモ用のアイコン。写真をなぞらず、5枚の花びらが風車状に重なる形を一から描いたもの。
+       正式なロゴを受け取ったら差し替える -->
+  <defs>
+    <radialGradient id="pm-c" cx="0" cy="0" r="46" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f2b437"/>
+      <stop offset="0.2" stop-color="#f5c050"/>
+      <stop offset="0.42" stop-color="#fdf0cf"/>
+      <stop offset="0.56" stop-color="#ffffff"/>
+    </radialGradient>
+    <path id="pm-p" transform="rotate(-10)" d="M0 1C-6-4-17-12-18-26C-19-39-8-47 3-47C14-46 22-37 20-25C18-13 8-3 0 1Z"/>
+    <clipPath id="pm-k"><path d="M0 2L-60-30L-40-60L-2-60Z"/></clipPath>
+  </defs>
+  <rect width="64" height="64" rx="14" fill="#137792"/>
+  <g transform="translate(32 32) scale(0.54)" fill="url(#pm-c)" stroke="#e3d6b4" stroke-width="1.3" stroke-linejoin="round">
+    <use href="#pm-p"/>
+    <use href="#pm-p" transform="rotate(72)"/>
+    <use href="#pm-p" transform="rotate(144)"/>
+    <use href="#pm-p" transform="rotate(216)"/>
+    <use href="#pm-p" transform="rotate(288)"/>
+    <use href="#pm-p" clip-path="url(#pm-k)"/>
   </g>
-  <circle cx="32" cy="32" r="6" fill="#f2b437"/>
 </svg>
