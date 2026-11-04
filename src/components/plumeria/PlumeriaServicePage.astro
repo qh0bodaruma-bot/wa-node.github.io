@@ -57,6 +57,8 @@ const flowClass = flowSteps.length <= 4 ? `pl-hs-flow pl-hs-flow-${flowSteps.len
     <div class="pl-wrap">
       <h1 class="pl-h1" style="font-size:calc(clamp(1.7rem,4vw,2.4rem) * var(--pl-fs))">{heroTitle}</h1>
       <p class="pl-sec-lead">{heroLead}</p>
+      {/* 要点の数字・図など、ページ固有の差し込み。指定がなければ何も出ない */}
+      <slot name="hero-facts" />
       <nav class="pl-hs-jump" aria-label="このページの内容">
         <a href="#fit">こんなときに</a><a href="#support">できること</a><a href="#conditions">対象・費用</a><a href="#flow">利用の流れ</a><a href="#questions">よくある質問</a>
       </nav>
@@ -91,6 +93,7 @@ const flowClass = flowSteps.length <= 4 ? `pl-hs-flow pl-hs-flow-${flowSteps.len
   <section class="pl-sec" id="conditions">
     <div class="pl-wrap">
       <h2 class="pl-h2">{conditionsHeading}</h2>
+      <slot name="conditions-figure" />
       <div class="pl-hs-spec">
         <dl class="pl-hs-facts">
           {vacancyFacilityId && <div><dt>空室状況</dt><dd><PlumeriaVacancyStatus facilityId={vacancyFacilityId} /></dd></div>}
@@ -102,6 +105,7 @@ const flowClass = flowSteps.length <= 4 ? `pl-hs-flow pl-hs-flow-${flowSteps.len
       <div class="pl-hs-cost">
         <h3 class="pl-hs-line-name">費用の目安</h3>
         <p class="pl-hs-cost-body">{costInfo}</p>
+        <slot name="cost-figure" />
         {costDetails.length > 0 && (
           <div class="pl-hs-lines pl-hs-lines-2 pl-hs-lines-value">
             {costDetails.map((item) => (

@@ -2387,3 +2387,40 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
   .pl-feechart-rows > li { grid-template-columns: minmax(0, 1fr); }
   .pl-feechart-val { display: none; }
 }
+
+/* ショートステイの1日の費用グラフ用の配色（4項目。色覚の見分けを検証済み） */
+.pl-feechart [data-part="insurance"] { background: #0a87ad; }
+.pl-feechart [data-part="stay"] { background: #d9971a; }
+.pl-feechart [data-part="food"] { background: #d9497c; }
+.pl-feechart [data-part="misc"] { background: #7a62c9; }
+.pl-feechart-seg[data-part="stay"] .pl-feechart-val { color: #1d1d1b; }
+
+/* ショートステイの医療行為：可・要相談・不可ごとにまとめる。左の太い線が「ここからここまで」を示す。
+   色は使わず、線の太さと実線／点線で区別する（従来の可否バッジと同じ考え方） */
+.pl-med-groups { margin-top: 24px; display: grid; gap: 18px; }
+.pl-med-group { padding: 16px 20px 8px; background: var(--surface); border: 1px solid var(--line); border-left: 8px solid var(--ink); }
+.pl-med-group[data-st="ask"] { border-left: 6px dashed var(--ink); }
+.pl-med-group[data-st="no"] { border-left: 6px solid rgba(8, 60, 74, 0.25); background: rgba(8, 60, 74, 0.03); }
+.pl-med-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: calc(18px * var(--pl-fs)); font-weight: 700; line-height: 1.5; color: var(--ink); }
+.pl-med-count { font-size: calc(15px * var(--pl-fs)); font-weight: 500; color: var(--muted); }
+.pl-med-list { margin: 10px 0 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 32px; }
+.pl-med-list > div { display: grid; gap: 2px; padding: 10px 0; border-top: 1px solid rgba(8, 60, 74, 0.1); }
+.pl-med-list dt { font-size: calc(16px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
+.pl-med-list dd { margin: 0; font-size: calc(14px * var(--pl-fs)); line-height: 1.7; color: var(--muted); }
+.pl-med-list dd.is-empty { color: rgba(76, 106, 115, 0.6); }
+.pl-med-group:not([data-st="ok"]) .pl-med-list { grid-template-columns: minmax(0, 1fr); }
+@media (max-width: 720px) { .pl-med-list { grid-template-columns: minmax(0, 1fr); } }
+
+/* 医療行為の3つの枠に色を付ける。可＝ターコイズ、要相談＝黄、不可＝ピンク（いずれもブランドの色）。
+   色だけに頼らず、バッジの文字と線の種類（実線／点線）も残す。
+   バッジの文字のコントラスト：白×#137792 5.2:1、#083c4a×#f2b437 6.5:1、白×#c2406f 4.9:1 */
+.pl-med-group[data-st="ok"] { border-left-color: var(--green); background: color-mix(in srgb, var(--green) 6%, #fff); }
+.pl-med-group[data-st="ask"] { border-left-color: #d9971a; background: color-mix(in srgb, var(--accent) 12%, #fff); }
+.pl-med-group[data-st="no"] { border-left: 6px solid #c2406f; background: color-mix(in srgb, var(--coral) 9%, #fff); }
+.pl-med-group .pl-hs-st { border: 0; font-weight: 700; }
+.pl-med-group[data-st="ok"] .pl-hs-st { background: var(--green); color: #fff; }
+.pl-med-group[data-st="ask"] .pl-hs-st { background: var(--accent); color: var(--ink); outline: 2px dashed var(--ink); outline-offset: -2px; }
+.pl-med-group[data-st="no"] .pl-hs-st { background: #c2406f; color: #fff; }
+.pl-med-group[data-st="ok"] .pl-med-list > div { border-top-color: color-mix(in srgb, var(--green) 18%, transparent); }
+.pl-med-group[data-st="ask"] .pl-med-list > div { border-top-color: color-mix(in srgb, #d9971a 25%, transparent); }
+.pl-med-group[data-st="no"] .pl-med-list > div { border-top-color: color-mix(in srgb, #c2406f 20%, transparent); }

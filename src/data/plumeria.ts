@@ -491,6 +491,25 @@ export const shortStayReducedFees: { label: string; value: string }[] = [
   { label: '第3段階②', value: '2,670円／日' },
 ];
 
+/** 介護保険自己負担分1割負担（1日あたり）と、1日の定額費用。
+ *  出典：公式サイト 料金案内 https://home-plumeria.jp/plumeria03/fee.html （2026年11月4日確認）。
+ *  娯楽費（実費）・加算・利用回数に応じた費用は含めていない。 */
+export const shortStayCareFeesPerDay: { level: string; yen: number }[] = [
+  { level: '要支援1', yen: 561 },
+  { level: '要支援2', yen: 681 },
+  { level: '要介護1', yen: 746 },
+  { level: '要介護2', yen: 815 },
+  { level: '要介護3', yen: 891 },
+  { level: '要介護4', yen: 959 },
+  { level: '要介護5', yen: 1028 },
+];
+export const shortStayFixedFeesPerDay = {
+  stay: 2500, // 居住・滞在費
+  food: 1850, // 食費（3食分：朝490円・昼710円・夕650円）
+  daily: 100, // 日常生活費
+  snack: 160, // おやつ代
+};
+
 /** 物品・サービスの利用回数に応じた費用（出典：公式サイト 料金案内） */
 export const shortStayOptionalFees: { label: string; value: string }[] = [
   { label: 'カット＆ブロー（理美容代）', value: '2,730円' },

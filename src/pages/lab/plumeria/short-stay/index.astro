@@ -4,13 +4,50 @@ import PlumeriaPalmShade from '../../../../components/plumeria/PlumeriaPalmShade
 import {
   routes, genericFaqs, plImg,
   shortStayFacilities, shortStayMedicalCare, shortStayNotAccepted,
-  shortStayReducedFees, shortStayOptionalFees, shortStayUseNotes,
+  shortStayReducedFees, shortStayOptionalFees,
+  shortStayCareFeesPerDay, shortStayFixedFeesPerDay,
 } from '../../../../data/plumeria';
 
 // 減額・実費は「費用の目安」に並べる（項目ごとに改行して表示する）。セクションを増やすと背景色の交互が崩れるため、
 // 費用の情報は1か所にまとめる。
 const reducedFeeLine = shortStayReducedFees.map((f) => `${f.label} ${f.value}`).join('\n');
 const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`).join('\n');
+// 大きく見せる数字（出典：targetInfo の定員、shortStayUseNotes の受付時期、shortStayFacilities のエントランスホール）
+const keyFacts = [
+  { num: '40', unit: '室', label: '定員40名' },
+  { num: '2', unit: 'か月前', label: 'から予約を受け付け' },
+  { num: '365', unit: '日', label: 'エントランスにスタッフが常駐' },
+];
+
+// 1日あたりの費用グラフ（介護保険1割負担・3食の日）。介護度による差は自己負担の帯にだけ出るため、その金額も帯の中に書く。
+// 値は data/plumeria.ts の公式掲載額をそのまま足し合わせる。
+const yenText = (n: number) => `${n.toLocaleString('ja-JP')}円`;
+const dayParts = [
+  { label: '介護保険の自己負担（1割）', tone: 'insurance' },
+  { label: '滞在費', tone: 'stay' },
+  { label: '食費（3食）', tone: 'food' },
+  { label: '日常生活費・おやつ', tone: 'misc' },
+];
+const dayBarsRaw = shortStayCareFeesPerDay.map((c) => {
+  const values = [c.yen, shortStayFixedFeesPerDay.stay, shortStayFixedFeesPerDay.food, shortStayFixedFeesPerDay.daily + shortStayFixedFeesPerDay.snack];
+  return { level: c.level, values, total: values.reduce((n, v) => n + v, 0) };
+});
+const dayMax = Math.max(...dayBarsRaw.map((b) => b.total));
+const dayBars = dayBarsRaw.map((b) => ({
+  ...b,
+  totalLabel: yenText(b.total),
+  width: `${((b.total * 100) / dayMax).toFixed(2)}%`,
+  parts: b.values.map((v, i) => ({ ...dayParts[i], value: v, text: v.toLocaleString('ja-JP'), showValue: v * 12 >= dayMax })),
+}));
+
+// 医療行為の受け入れ：表の ○・要相談・× ごとにまとめ、「ここからここまで受け入れ可」が一目で分かるように並べる。
+// 項目名と条件は data/plumeria.ts（公式の料金案内）のまま。
+const medGroups = [
+  { st: 'ok', mark: '○', badge: '可', title: '受け入れできます' },
+  { st: 'ask', mark: '要相談', badge: '要相談', title: 'ご相談ください' },
+  { st: 'no', mark: '×', badge: '不可', title: '受け入れできません' },
+].map((g) => ({ ...g, rows: shortStayMedicalCare.filter((r) => r.accepted === g.mark) }))
+  .filter((g) => g.rows.length > 0);
 ---
 <PlumeriaServicePage
   title="ショートステイ｜プルメリア（修正版ラフ）"
@@ -36,9 +73,8 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
     { label: '定員・居室', body: '定員40名・40室' },
     { label: '所在地', body: '岐阜県可児郡御嵩町上恵土951-1。名鉄広見線 明智駅から徒歩15分、可児御嵩ICから車で約5分' },
   ]}
-  costInfo="費用は、介護保険の自己負担分と、滞在費・食費などの合計です。負担割合や利用日数によって変わるため、ご希望の日程に合わせた総額をご確認ください。"
+  costInfo="介護保険の自己負担分に、滞在費・食費などが加わります。負担割合や日数で変わるため、総額はご希望の日程に合わせてご確認ください。"
   costDetails={[
-    { label: '介護保険1割負担（日額）', value: '要支援1 561円／要支援2 681円／要介護1〜5 746〜1,028円' },
     { label: '滞在費', value: '2,500円／日（所得区分により減額あり）' },
     { label: '食費', value: '1,850円／日（朝490円・昼710円・夕650円）' },
     { label: 'その他', value: '日常生活費100円・おやつ160円／日。娯楽費は実費' },
@@ -46,12 +82,11 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
     { label: '利用に応じてかかる費用', value: optionalFeeLine },
   ]}
   flowSteps={[
-    { title: 'ご利用相談', body: 'ご利用の2か月前より受け付けています。お申し込みの前に、担当のケアマネジャーにご相談ください。' },
-    { title: 'お申し込み受付', body: '担当のケアマネジャーを通して「予約申込書」「心身の状況」等の情報をいただき、受け付けます。' },
-    { title: 'ご面談・契約', body: '初回の方にはご本人と在宅の様子をうかがいに訪問し、注意事項を確認のうえ契約を結びます。' },
-    { title: 'ご利用開始', body: '持ち物チェック表を記入してご持参ください。' },
+    { title: 'ご利用相談', body: 'ご利用の2か月前から受け付けます。まず担当のケアマネジャーにご相談ください。' },
+    { title: 'お申し込み受付', body: 'ケアマネジャーを通して「予約申込書」「心身の状況」等をいただきます。' },
+    { title: 'ご面談・契約', body: '初回のみ、ご本人と在宅の様子をうかがいに訪問し、注意事項を確認して契約を結びます。2回目以降の面談は不要です。' },
+    { title: 'ご利用開始', body: '持ち物チェック表を記入してご持参ください。入所の際の送迎もできます（別途費用）。' },
   ]}
-  flowNotes={shortStayUseNotes}
   contactCategory="short-stay"
   supportHeading="居室・生活支援・共用スペースの、3つが基本の内容です"
   conditionsHeading="対象は、要支援1・2、要介護1〜5の認定を受けている方です"
@@ -60,10 +95,53 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
     genericFaqs[0],
     {
       q: '費用はどのくらいかかりますか？',
-      a: '介護保険の自己負担分に、滞在費（2,500円／日）と食費（1,850円／日）などが加わります。所得区分による減額もあります。内訳は「費用の目安」をご覧ください。',
+      a: '介護保険の自己負担分に、滞在費と食費などが加わります。所得区分による減額もあります。1日あたりの目安は「費用の目安」のグラフをご覧ください。',
     },
   ]}
 >
+  <ul slot="hero-facts" class="pl-stats" aria-label="ショートステイの要点">
+    {keyFacts.map((f) => (
+      <li>
+        <span class="pl-stat-num pl-num-face">{f.num}<small>{f.unit}</small></span>
+        <span class="pl-stat-label">{f.label}</span>
+      </li>
+    ))}
+  </ul>
+
+  <figure slot="conditions-figure" class="pl-fitmap">
+    <figcaption class="pl-sr-only">介護認定から見た、ご利用の対象</figcaption>
+    <ol class="pl-fitmap-scale" aria-hidden="true">
+      <li>認定なし</li><li>要支援1・2</li><li>要介護1〜5</li>
+    </ol>
+    <p class="pl-fitmap-bar" data-tone="a" style="grid-column:2 / 4"><span class="pl-fitmap-main"><strong>プルメリアⅢ</strong>要支援1・2、要介護1〜5の方</span></p>
+  </figure>
+
+  <figure slot="cost-figure" class="pl-feechart">
+    <figcaption class="pl-feechart-title">1日あたりの費用の目安（介護保険1割負担・3食の日・円）</figcaption>
+    <ul class="pl-feechart-legend">
+      {dayParts.map((p) => <li><span class="pl-feechart-swatch" data-part={p.tone} aria-hidden="true"></span>{p.label}</li>)}
+    </ul>
+    <ul class="pl-feechart-rows">
+      {dayBars.map((b) => (
+        <li>
+          <span class="pl-feechart-name">{b.level}</span>
+          <span class="pl-feechart-track">
+            <span class="pl-feechart-lane"><span class="pl-feechart-bar" style={`width:${b.width}`}>
+              {b.parts.map((p) => (
+                <span class="pl-feechart-seg" data-part={p.tone} style={`flex:${p.value} 1 0`} title={`${p.label} ${p.text}円`}>
+                  {p.showValue && <span class="pl-feechart-val pl-num-face" aria-hidden="true">{p.text}</span>}
+                </span>
+              ))}
+              <strong class="pl-feechart-total pl-num-face">{b.totalLabel}</strong>
+            </span></span>
+          </span>
+          <span class="pl-sr-only">（内訳：{b.parts.map((p) => `${p.label} ${p.text}円`).join('、')}）</span>
+        </li>
+      ))}
+    </ul>
+    <p class="pl-note">上の項目を足した額です。娯楽費（実費）・送迎などの加算・利用に応じた費用は含みません。所得区分により、滞在費と食費が減額される場合があります。</p>
+  </figure>
+
   <Fragment slot="extra">
     <section class="pl-sec pl-sec-beige pl-sec-palm" id="facility">
       <PlumeriaPalmShade />
@@ -88,27 +166,20 @@ const optionalFeeLine = shortStayOptionalFees.map((f) => `${f.label} ${f.value}`
       <div class="pl-wrap">
         <h2 class="pl-h2">医療行為の受け入れ可否の目安</h2>
         <p class="pl-sec-lead">ケアマネジャー・ご家族の方が、ご利用の可否を判断する際の目安です。</p>
-        <p class="pl-table-caption" aria-hidden="true">医療行為ごとの受け入れ可否（横にスクロールできます）</p>
-        <div class="pl-compare-table-wrap">
-          <table class="pl-compare-table pl-hs-med">
-            <caption class="pl-sr-only">医療行為ごとの受け入れ可否（横にスクロールできます）</caption>
-            <thead>
-              <tr>
-                <th scope="col">項目</th>
-                <th scope="col">受け入れ</th>
-                <th scope="col">条件</th>
-              </tr>
-            </thead>
-            <tbody>
-              {shortStayMedicalCare.map((row) => (
-                <tr>
-                  <th scope="row">{row.item}</th>
-                  <td><span class="pl-hs-st" data-st={row.accepted === '○' ? 'ok' : row.accepted === '×' ? 'no' : 'ask'}>{row.accepted === '○' ? '可' : row.accepted === '×' ? '不可' : '要相談'}</span></td>
-                  <td class={row.note ? 'pl-hs-med-note' : 'pl-hs-med-note is-empty'}>{row.note || '—'}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div class="pl-med-groups">
+          {medGroups.map((g) => (
+            <section class="pl-med-group" data-st={g.st}>
+              <h3 class="pl-med-head"><span class="pl-hs-st" data-st={g.st}>{g.badge}</span>{g.title}<span class="pl-med-count">（{g.rows.length}項目）</span></h3>
+              <dl class="pl-med-list">
+                {g.rows.map((r) => (
+                  <div>
+                    <dt>{r.item}</dt>
+                    <dd class={r.note ? '' : 'is-empty'}>{r.note || '条件の記載なし'}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          ))}
         </div>
         <h3 class="pl-h3" style="margin-top:24px">お受け入れができない場合</h3>
         <ul class="pl-body pl-check-list">
