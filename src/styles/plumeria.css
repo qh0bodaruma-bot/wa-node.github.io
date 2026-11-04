@@ -2308,3 +2308,82 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 @media (prefers-reduced-motion: no-preference) {
   .pl .pl-textsize-head button[aria-pressed="true"] { background: transparent; color: var(--ink); }
 }
+
+/* ── 大きな数字の帯（住宅ページで試行）──────────────────────────
+   要点の数字を先に目に入れ、説明は短い1行にする。数字の値は data/plumeria.ts から取り、丸めない。 */
+.pl .pl-stats {
+  margin: 22px auto 6px; max-width: 900px;
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;
+}
+.pl-stats > li {
+  display: grid; justify-items: center; align-content: start; gap: 4px;
+  padding: 16px 12px 14px; text-align: center;
+  background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--accent);
+}
+.pl-stat-num {
+  font-size: calc(clamp(30px, 4.4vw, 42px) * var(--pl-fs)); font-weight: 600; line-height: 1.1;
+  color: var(--green-deep); white-space: nowrap;
+}
+.pl-stat-num small { margin-inline: 2px; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.42em; font-weight: 700; }
+.pl-stat-label { font-size: calc(14px * var(--pl-fs)); line-height: 1.6; color: var(--ink); }
+@media (max-width: 600px) {
+  .pl .pl-stats { grid-template-columns: minmax(0, 1fr); gap: 8px; }
+  .pl-stats > li { grid-template-columns: auto 1fr; justify-items: start; align-items: center; gap: 14px; padding: 12px 16px; text-align: left; border-top-width: 1px; border-left: 4px solid var(--accent); }
+}
+
+/* ── 住宅ページの図とグラフ ─────────────────────────────────
+   ⅠとⅡの目安図と、料金の内訳グラフ。色はⅠ／Ⅱの区別（--hs-a／--hs-b）と、
+   内訳3項目の配色（色覚の見分けを検証済み：#0a87ad／#d9971a／#d9497c）を使う。
+   色だけに頼らず、凡例・文字・下の表で同じ情報を読めるようにしている。 */
+.pl .pl-fitmap { --hs-a: var(--green-deep); --hs-b: var(--accent); margin: 26px auto 0; max-width: 900px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 4px; }
+.pl .pl-fitmap-scale { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; }
+.pl-fitmap-scale > li {
+  padding: 6px 4px; text-align: center; font-size: calc(14px * var(--pl-fs)); font-weight: 700; color: var(--muted);
+  border-bottom: 2px solid var(--line);
+}
+.pl-fitmap-bar { display: flex; gap: 4px; font-size: calc(15px * var(--pl-fs)); line-height: 1.5; }
+.pl-fitmap-bar[data-tone="a"] { grid-column: 1 / 3; }
+.pl-fitmap-bar[data-tone="b"] { grid-column: 2 / 4; }
+.pl-fitmap-main { flex: 1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 10px; padding: 10px 14px; color: #fff; background: var(--hs-a); }
+.pl-fitmap-bar[data-tone="b"] .pl-fitmap-main { color: var(--ink); background: var(--hs-b); }
+.pl-fitmap-main strong { font-size: calc(17px * var(--pl-fs)); }
+.pl-fitmap-ask {
+  flex: 1; display: grid; place-items: center; padding: 10px 8px; text-align: center;
+  font-size: calc(13px * var(--pl-fs)); font-weight: 700; color: var(--ink);
+  border: 2px dashed var(--hs-b); background: color-mix(in srgb, var(--accent) 12%, #fff);
+}
+.pl-fitmap > .pl-note { grid-column: 1 / -1; margin-top: 4px; text-align: center; }
+@media (max-width: 600px) {
+  /* 幅が狭くても段を組み替えず、物差しの位置（要支援／要介護）とそろえたまま折り返す */
+  .pl-fitmap-main { padding: 8px 10px; }
+  .pl-fitmap-ask { padding: 8px 4px; }
+}
+
+.pl .pl-feechart {
+  --part-rent: #0a87ad; --part-common: #d9971a; --part-service: #d9497c;
+  margin: 22px 0 26px; padding: 18px 18px 14px; background: var(--surface); border: 1px solid var(--line);
+}
+.pl-feechart-title { font-size: calc(16px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
+.pl .pl-feechart-legend { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: calc(14px * var(--pl-fs)); color: var(--ink); }
+.pl-feechart-legend > li { display: flex; align-items: center; gap: 6px; }
+.pl-feechart-swatch { width: 14px; height: 14px; border-radius: 3px; }
+.pl-feechart [data-part="rent"] { background: var(--part-rent); }
+.pl-feechart [data-part="common"] { background: var(--part-common); }
+.pl-feechart [data-part="service"] { background: var(--part-service); }
+.pl .pl-feechart-rows { margin-top: 14px; display: grid; gap: 14px; }
+.pl-feechart-rows > li { display: grid; grid-template-columns: minmax(8em, 11em) minmax(0, 1fr); align-items: center; gap: 4px 14px; }
+.pl-feechart-name { display: grid; font-size: calc(14px * var(--pl-fs)); font-weight: 700; line-height: 1.4; color: var(--ink); }
+.pl-feechart-name small { font-size: calc(12px * var(--pl-fs)); font-weight: 700; color: var(--muted); }
+.pl-feechart-track { display: block; min-width: 0; }
+/* 合計は帯のすぐ右に置く。右側に合計の幅を空けておき、帯の幅（%）はその残りに対して決める */
+.pl-feechart-lane { display: block; min-width: 0; padding-right: 9em; }
+.pl-feechart-bar { position: relative; display: flex; gap: 2px; height: 28px; }
+.pl-feechart-seg { display: flex; align-items: center; min-width: 0; padding-left: 8px; border-radius: 4px; }
+.pl-feechart-val { font-size: calc(13px * var(--pl-fs)); font-weight: 600; line-height: 1; white-space: nowrap; color: #fff; }
+.pl-feechart-seg[data-part="common"] .pl-feechart-val { color: #1d1d1b; }
+.pl-feechart-total { position: absolute; top: 50%; left: 100%; margin-left: 12px; transform: translateY(-50%); font-size: calc(clamp(17px, 2vw, 21px) * var(--pl-fs)); font-weight: 700; color: var(--ink); white-space: nowrap; }
+.pl-feechart > .pl-note { margin-top: 12px; }
+@media (max-width: 720px) {
+  .pl-feechart-rows > li { grid-template-columns: minmax(0, 1fr); }
+  .pl-feechart-val { display: none; }
+}
