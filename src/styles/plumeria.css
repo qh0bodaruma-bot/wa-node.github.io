@@ -2408,41 +2408,28 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
   .pl-feechart-rows > li { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* ショートステイの1日の費用。介護度で変わるのは自己負担だけなので、自己負担だけを棒にして差を見せ、
-   同じ行に「＋滞在費・食費など＝1日の合計」を並べる。表なので、読み上げでも行と列の関係が伝わる */
+/* ショートステイの1日の費用。先に「1日の合計」、その後ろに「うち自己負担」を同じ大きさで並べ、
+   介護度で変わる自己負担の額だけを色（ターコイズ。白地で 5.2:1）で目立たせる。表なので、読み上げでも行と列の関係が伝わる */
 .pl .pl-daycost { margin: 22px 0 26px; padding: 18px 18px 8px; background: var(--surface); border: 1px solid var(--line); }
 .pl-daycost-table { width: 100%; border-collapse: collapse; color: var(--ink); }
 .pl-daycost-title { caption-side: top; padding-bottom: 10px; text-align: left; font-size: calc(16px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
-.pl-daycost-table thead th { padding: 0 10px 8px; text-align: left; font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.5; color: var(--muted); border-bottom: 2px solid var(--line); }
-.pl-daycost-table thead th:nth-child(n + 3) { text-align: right; }
-.pl-daycost-table tbody th, .pl-daycost-table td { padding: 10px; vertical-align: middle; border-bottom: 1px solid var(--line); }
+.pl-daycost-table thead th { padding: 0 12px 8px; text-align: left; font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.5; color: var(--muted); border-bottom: 2px solid var(--line); }
+.pl-daycost-table thead th:is(.pl-daycost-total-h, .pl-daycost-care-h) { text-align: right; }
+.pl-daycost-table thead th.pl-daycost-care-h { color: var(--green); }
+.pl-daycost-table tbody th, .pl-daycost-table td { padding: 10px 12px; vertical-align: middle; border-bottom: 1px solid var(--line); }
 .pl-daycost-table tbody tr:last-child > * { border-bottom: 0; }
-.pl-daycost-table tbody th { width: 6.5em; text-align: left; white-space: nowrap; font-size: calc(15px * var(--pl-fs)); font-weight: 700; }
-.pl-daycost-care { width: 46%; white-space: nowrap; }
-.pl-daycost-track { display: inline-block; width: calc(100% - 5.2em); vertical-align: middle; }
-.pl-daycost-bar { display: block; height: 20px; background: var(--green-deep); }
-.pl-daycost-care-num { margin-left: 10px; vertical-align: middle; font-size: calc(17px * var(--pl-fs)); font-weight: 700; color: var(--green-deep); }
-.pl-daycost-fixed { text-align: right; white-space: nowrap; font-size: calc(15px * var(--pl-fs)); color: var(--muted); }
-.pl-daycost-total { text-align: right; white-space: nowrap; font-size: calc(18px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
-.pl-daycost-fixed > span, .pl-daycost-total > span { margin-right: 4px; font-weight: 400; color: var(--muted); }
+.pl-daycost-table tbody th { width: 30%; text-align: left; white-space: nowrap; font-size: calc(15px * var(--pl-fs)); font-weight: 700; }
+.pl-daycost-total, .pl-daycost-care { width: 35%; text-align: right; white-space: nowrap; font-size: calc(20px * var(--pl-fs)); font-weight: 700; }
+.pl-daycost-total { color: var(--ink); }
+.pl-daycost-care { color: var(--green); }
 .pl-daycost > .pl-note { margin-top: 10px; }
-.pl-daycost-th-sub { display: none; }
 @media (max-width: 600px) {
-  /* 幅が狭いときは、どの介護度も同じ額の列を省き（下の注記に記載）、自己負担と合計を並べる */
   .pl .pl-daycost { padding: 14px 12px 6px; }
-  .pl-daycost-fixed { display: none; }
-  /* 「＋」の列を省くため「＝」も外し、見出しに足し算の中身を書く */
-  .pl-daycost-total > span { display: none; }
-  .pl-daycost-th-sub { display: block; font-weight: 500; }
   .pl-daycost-table tbody th, .pl-daycost-table td { padding: 10px 6px; }
   .pl-daycost-table thead th { padding: 0 6px 8px; }
   .pl-daycost-table tbody th { width: auto; }
-  /* 棒と数字を2段にし、棒がセルの幅いっぱいを使えるようにして差を見せる */
-  .pl-daycost-care { width: auto; white-space: normal; }
-  .pl-daycost-track { display: block; width: 100%; margin-top: 4px; }
-  .pl-daycost-bar { height: 14px; }
-  .pl-daycost-care-num { display: block; margin-left: 0; }
-  .pl-daycost-total { font-size: calc(16px * var(--pl-fs)); }
+  .pl-daycost-table tbody th { font-size: calc(clamp(13px, 3.8vw, 15px) * var(--pl-fs)); }
+  .pl-daycost-total, .pl-daycost-care { width: auto; font-size: calc(clamp(14px, 4.4vw, 17px) * var(--pl-fs)); }
 }
 
 /* ショートステイの医療行為：可・要相談・不可ごとにまとめる。左の太い線が「ここからここまで」を示す。
