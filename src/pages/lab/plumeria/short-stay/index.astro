@@ -19,17 +19,16 @@ const keyFacts = [
   { num: '365', unit: '日', label: 'エントランスにスタッフが常駐' },
 ];
 
-// 1日あたりの費用グラフ（介護保険1割負担・3食の日）。介護度による差は自己負担の帯にだけ出るため、その金額も帯の中に書く。
-// 値は data/plumeria.ts の公式掲載額をそのまま足し合わせる。
+// 1日あたりの費用グラフ（介護保険1割負担・3食の日）。介護度で変わるのは自己負担だけなので、その金額は介護度の横に書き、
+// どの介護度も同じ滞在費・食費・日常生活費・おやつは1本にまとめる。値は data/plumeria.ts の公式掲載額をそのまま足し合わせる。
 const yenText = (n: number) => `${n.toLocaleString('ja-JP')}円`;
+const fixedPerDay = shortStayFixedFeesPerDay.stay + shortStayFixedFeesPerDay.food + shortStayFixedFeesPerDay.daily + shortStayFixedFeesPerDay.snack;
 const dayParts = [
-  { label: '介護保険の自己負担（1割）', tone: 'insurance' },
-  { label: '滞在費', tone: 'stay' },
-  { label: '食費（3食）', tone: 'food' },
-  { label: '日常生活費・おやつ', tone: 'misc' },
+  { label: '介護保険の自己負担（1割）', legend: '介護保険の自己負担（1割）', tone: 'insurance' },
+  { label: '滞在費・食費・日常生活費・おやつ', legend: `滞在費・食費（3食）・日常生活費・おやつ（どの介護度も${yenText(fixedPerDay)}）`, tone: 'fixed' },
 ];
 const dayBarsRaw = shortStayCareFeesPerDay.map((c) => {
-  const values = [c.yen, shortStayFixedFeesPerDay.stay, shortStayFixedFeesPerDay.food, shortStayFixedFeesPerDay.daily + shortStayFixedFeesPerDay.snack];
+  const values = [c.yen, fixedPerDay];
   return { level: c.level, values, total: values.reduce((n, v) => n + v, 0) };
 });
 const dayMax = Math.max(...dayBarsRaw.map((b) => b.total));
@@ -37,15 +36,16 @@ const dayBars = dayBarsRaw.map((b) => ({
   ...b,
   totalLabel: yenText(b.total),
   width: `${((b.total * 100) / dayMax).toFixed(2)}%`,
-  parts: b.values.map((v, i) => ({ ...dayParts[i], value: v, text: v.toLocaleString('ja-JP'), showValue: v * 12 >= dayMax })),
+  careText: yenText(b.values[0]),
+  parts: b.values.map((v, i) => ({ ...dayParts[i], value: v, text: v.toLocaleString('ja-JP'), showValue: dayParts[i].tone === 'fixed' })),
 }));
 
 // 医療行為の受け入れ：表の ○・要相談・× ごとにまとめ、「ここからここまで受け入れ可」が一目で分かるように並べる。
 // 項目名と条件は data/plumeria.ts（公式の料金案内）のまま。
 const medGroups = [
-  { st: 'ok', mark: '○', badge: '可', title: '受け入れできます' },
+  { st: 'ok', mark: '○', badge: '○ 可', title: '受け入れできます' },
   { st: 'ask', mark: '要相談', badge: '要相談', title: 'ご相談ください' },
-  { st: 'no', mark: '×', badge: '不可', title: '受け入れできません' },
+  { st: 'no', mark: '×', badge: '× 不可', title: '受け入れできません' },
 ].map((g) => ({ ...g, rows: shortStayMedicalCare.filter((r) => r.accepted === g.mark) }))
   .filter((g) => g.rows.length > 0);
 ---
@@ -119,16 +119,16 @@ const medGroups = [
   <figure slot="cost-figure" class="pl-feechart">
     <figcaption class="pl-feechart-title">1日あたりの費用の目安（介護保険1割負担・3食の日・円）</figcaption>
     <ul class="pl-feechart-legend">
-      {dayParts.map((p) => <li><span class="pl-feechart-swatch" data-part={p.tone} aria-hidden="true"></span>{p.label}</li>)}
+      {dayParts.map((p) => <li><span class="pl-feechart-swatch" data-part={p.tone} aria-hidden="true"></span>{p.legend}</li>)}
     </ul>
     <ul class="pl-feechart-rows">
       {dayBars.map((b) => (
         <li>
-          <span class="pl-feechart-name">{b.level}</span>
+          <span class="pl-feechart-name">{b.level}<small class="pl-feechart-sub">自己負担 <span class="pl-num-face">{b.careText}</span></small></span>
           <span class="pl-feechart-track">
             <span class="pl-feechart-lane"><span class="pl-feechart-bar" style={`width:${b.width}`}>
               {b.parts.map((p) => (
-                <span class="pl-feechart-seg" data-part={p.tone} style={`flex:${p.value} 1 0`} title={`${p.label} ${p.text}円`}>
+                <span class="pl-feechart-seg" data-part={p.tone} style={`flex:${p.value} 1 0`}>
                   {p.showValue && <span class="pl-feechart-val pl-num-face" aria-hidden="true">{p.text}</span>}
                 </span>
               ))}

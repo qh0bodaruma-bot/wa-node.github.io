@@ -2333,8 +2333,9 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 
 /* ── 住宅ページの図とグラフ ─────────────────────────────────
    ⅠとⅡの目安図と、料金の内訳グラフ。色はⅠ／Ⅱの区別（--hs-a／--hs-b）と、
-   内訳3項目の配色（色覚の見分けを検証済み：#0a87ad／#d9971a／#d9497c）を使う。
-   色だけに頼らず、凡例・文字・下の表で同じ情報を読めるようにしている。 */
+   内訳の濃淡（ターコイズ1色相の3段）を使う。黄・ピンクは医療行為の可否やⅡと意味がぶつかるため、グラフには使わない。
+   濃淡の明るさの比は、濃→中 2.3:1、中→淡 2.7:1。淡い帯は背景に溶けないよう枠線を付ける（--green、白地で 5.2:1）。
+   色だけに頼らず、帯の下の内訳の文字・凡例・下の表で同じ情報を読めるようにしている。 */
 .pl .pl-fitmap { --hs-a: var(--green-deep); --hs-b: var(--accent); margin: 26px auto 0; max-width: 900px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px 4px; }
 .pl .pl-fitmap-scale { grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; }
 .pl-fitmap-scale > li {
@@ -2360,7 +2361,7 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 }
 
 .pl .pl-feechart {
-  --part-rent: #0a87ad; --part-common: #d9971a; --part-service: #d9497c;
+  --part-rent: var(--green-deep); --part-common: #3f97ae; --part-service: #cfe9f1;
   margin: 22px 0 26px; padding: 18px 18px 14px; background: var(--surface); border: 1px solid var(--line);
 }
 .pl-feechart-title { font-size: calc(16px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
@@ -2369,7 +2370,7 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl-feechart-swatch { width: 14px; height: 14px; border-radius: 3px; }
 .pl-feechart [data-part="rent"] { background: var(--part-rent); }
 .pl-feechart [data-part="common"] { background: var(--part-common); }
-.pl-feechart [data-part="service"] { background: var(--part-service); }
+.pl-feechart [data-part="service"] { background: var(--part-service); box-shadow: inset 0 0 0 1px var(--green); }
 .pl .pl-feechart-rows { margin-top: 14px; display: grid; gap: 14px; }
 .pl-feechart-rows > li { display: grid; grid-template-columns: minmax(8em, 11em) minmax(0, 1fr); align-items: center; gap: 4px 14px; }
 .pl-feechart-name { display: grid; font-size: calc(14px * var(--pl-fs)); font-weight: 700; line-height: 1.4; color: var(--ink); }
@@ -2379,21 +2380,23 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl-feechart-lane { display: block; min-width: 0; padding-right: 9em; }
 .pl-feechart-bar { position: relative; display: flex; gap: 2px; height: 28px; }
 .pl-feechart-seg { display: flex; align-items: center; min-width: 0; padding-left: 8px; border-radius: 4px; }
-.pl-feechart-val { font-size: calc(13px * var(--pl-fs)); font-weight: 600; line-height: 1; white-space: nowrap; color: #fff; }
-.pl-feechart-seg[data-part="common"] .pl-feechart-val { color: #1d1d1b; }
+/* 帯の中に書く金額は、淡い帯の上だけに置く（濃いティール #083c4a × #cfe9f1 は 9:1 以上） */
+.pl-feechart-val { font-size: calc(14px * var(--pl-fs)); font-weight: 600; line-height: 1; white-space: nowrap; color: var(--ink); }
 .pl-feechart-total { position: absolute; top: 50%; left: 100%; margin-left: 12px; transform: translateY(-50%); font-size: calc(clamp(17px, 2vw, 21px) * var(--pl-fs)); font-weight: 700; color: var(--ink); white-space: nowrap; }
+/* 帯の下の内訳。凡例を見比べなくても、項目名と金額を文字で読めるようにする（スマホでも消さない） */
+.pl .pl-feechart-break { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 2px 14px; font-size: calc(14px * var(--pl-fs)); line-height: 1.6; color: var(--ink); }
+.pl-feechart-break > li { display: flex; align-items: center; gap: 6px; }
+.pl-feechart-break .pl-feechart-swatch { width: 12px; height: 12px; }
+.pl-feechart-name small.pl-feechart-sub { font-weight: 500; color: var(--ink); }
 .pl-feechart > .pl-note { margin-top: 12px; }
 @media (max-width: 720px) {
   .pl-feechart-rows > li { grid-template-columns: minmax(0, 1fr); }
-  .pl-feechart-val { display: none; }
 }
 
-/* ショートステイの1日の費用グラフ用の配色（4項目。色覚の見分けを検証済み） */
-.pl-feechart [data-part="insurance"] { background: #0a87ad; }
-.pl-feechart [data-part="stay"] { background: #d9971a; }
-.pl-feechart [data-part="food"] { background: #d9497c; }
-.pl-feechart [data-part="misc"] { background: #7a62c9; }
-.pl-feechart-seg[data-part="stay"] .pl-feechart-val { color: #1d1d1b; }
+/* ショートステイの1日の費用グラフ。介護度で変わるのは自己負担だけなので、そこを濃く、
+   どの介護度も同じ滞在費・食費などは1本にまとめて淡くする（住宅グラフと同じ濃淡の両端） */
+.pl-feechart [data-part="insurance"] { background: var(--green-deep); }
+.pl-feechart [data-part="fixed"] { background: #cfe9f1; box-shadow: inset 0 0 0 1px var(--green); }
 
 /* ショートステイの医療行為：可・要相談・不可ごとにまとめる。左の太い線が「ここからここまで」を示す。
    色は使わず、線の太さと実線／点線で区別する（従来の可否バッジと同じ考え方） */
@@ -2412,7 +2415,7 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 @media (max-width: 720px) { .pl-med-list { grid-template-columns: minmax(0, 1fr); } }
 
 /* 医療行為の3つの枠に色を付ける。可＝ターコイズ、要相談＝黄、不可＝ピンク（いずれもブランドの色）。
-   色だけに頼らず、バッジの文字と線の種類（実線／点線）も残す。
+   色だけに頼らず、バッジの文字（○可・×不可）と線の種類（実線／点線）も残す。
    バッジの文字のコントラスト：白×#137792 5.2:1、#083c4a×#f2b437 6.5:1、白×#c2406f 4.9:1 */
 .pl-med-group[data-st="ok"] { border-left-color: var(--green); background: color-mix(in srgb, var(--green) 6%, #fff); }
 .pl-med-group[data-st="ask"] { border-left-color: #d9971a; background: color-mix(in srgb, var(--accent) 12%, #fff); }
@@ -2425,15 +2428,13 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl-med-group[data-st="ask"] .pl-med-list > div { border-top-color: color-mix(in srgb, #d9971a 25%, transparent); }
 .pl-med-group[data-st="no"] .pl-med-list > div { border-top-color: color-mix(in srgb, #c2406f 20%, transparent); }
 
-/* 訪問介護の支援内容：2分類を色分けした枠にまとめ、項目は読み切りやすい札（チップ）で並べる。
-   色はⅠ／Ⅱと同じ組（ターコイズ・黄）。分類名の文字でも区別する */
+/* 訪問介護・訪問看護の支援内容：2分類を枠にまとめ、項目は読み切りやすい札（チップ）で並べる。
+   2分類に優劣はなく、黄は医療行為の「要相談」と意味がぶつかるため、どちらもターコイズにして分類名の札で区別する */
 .pl-taskgroups { margin-top: 24px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: start; }
 @media (max-width: 720px) { .pl-taskgroups { grid-template-columns: minmax(0, 1fr); } }
 .pl-taskgroup { padding: 16px 20px 18px; border: 1px solid var(--line); border-left: 8px solid var(--green); background: color-mix(in srgb, var(--green) 6%, #fff); }
-.pl-taskgroup[data-tone="b"] { border-left-color: #d9971a; background: color-mix(in srgb, var(--accent) 12%, #fff); }
 .pl-taskgroup-head { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; font-size: calc(18px * var(--pl-fs)); font-weight: 700; line-height: 1.5; color: var(--ink); }
 .pl-taskgroup-badge { padding: 3px 12px; font-size: calc(15px * var(--pl-fs)); font-weight: 700; background: var(--green); color: #fff; }
-.pl-taskgroup[data-tone="b"] .pl-taskgroup-badge { background: var(--accent); color: var(--ink); }
 .pl .pl-chips { margin-top: 12px; display: flex; flex-wrap: wrap; gap: 8px; }
 .pl-chips > li { padding: 6px 12px; font-size: calc(15px * var(--pl-fs)); line-height: 1.5; color: var(--ink); background: var(--surface); border: 1px solid var(--line); }
 

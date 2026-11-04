@@ -47,11 +47,10 @@ const feeBars = housingFeeTable.columns.map((col, i) => {
   return { col, unit: i < 2 ? housingUnits[0].name : housingUnits[1].name, tone: i < 2 ? 'a' : 'b', total, totalLabel: feeTotal[i], parts };
 });
 const feeMax = Math.max(...feeBars.map((b) => b.total));
-// 帯の幅（最大の列に対する割合）と、帯の中に金額を書けるだけの幅があるか
+// 帯の幅（最大の列に対する割合）。金額は帯の中ではなく、帯の下の内訳に文字で書く
 const feeBarRows = feeBars.map((b) => ({
   ...b,
   width: `${((b.total * 100) / feeMax).toFixed(2)}%`,
-  parts: b.parts.map((p) => ({ ...p, showValue: p.value * 5 >= feeMax })),
 }));
 
 // 大きく見せる数字。いずれも data/plumeria.ts の掲載内容から取り、値を丸めていない。
@@ -165,14 +164,14 @@ const day = [
                 <span class="pl-feechart-track">
                   <span class="pl-feechart-lane"><span class="pl-feechart-bar" style={`width:${b.width}`}>
                     {b.parts.map((p) => (
-                      <span class="pl-feechart-seg" data-part={p.tone} style={`flex:${p.value} 1 0`} title={`${p.label} ${p.value.toLocaleString('ja-JP')}円`}>
-                        {p.showValue && <span class="pl-feechart-val pl-num-face" aria-hidden="true">{p.text}</span>}
-                      </span>
+                      <span class="pl-feechart-seg" data-part={p.tone} style={`flex:${p.value} 1 0`}></span>
                     ))}
                     <strong class="pl-feechart-total pl-num-face">{b.totalLabel}</strong>
                   </span></span>
+                  <ul class="pl-feechart-break" aria-label="内訳">
+                    {b.parts.map((p) => <li><span class="pl-feechart-swatch" data-part={p.tone} aria-hidden="true"></span><span>{p.label} <span class="pl-num-face">{p.text}</span>円</span></li>)}
+                  </ul>
                 </span>
-                <span class="pl-sr-only">（内訳：{b.parts.map((p) => `${p.label} ${p.value.toLocaleString('ja-JP')}円`).join('、')}）</span>
               </li>
             ))}
           </ul>

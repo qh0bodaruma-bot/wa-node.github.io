@@ -10,8 +10,8 @@ const keyFacts = [
   { num: '毎月', unit: '', label: '社内研修で介護技術を向上' },
 ];
 
-// 支援内容の2分類を、色分けした枠で見せる（項目は data/plumeria.ts のまま）
-const taskGroups = homeCareTasks.map((g, i) => ({ ...g, tone: i === 0 ? 'a' : 'b', badge: g.title.replace('サービス', '') }));
+// 支援内容の2分類を枠で見せる。色は同じにし、分類名の札で区別する（項目は data/plumeria.ts のまま）
+const taskGroups = homeCareTasks.map((g) => ({ ...g, badge: g.title.replace('サービス', '') }));
 ---
 <PlumeriaServicePage
   title="訪問介護｜プルメリア（修正版ラフ）"
@@ -70,7 +70,7 @@ const taskGroups = homeCareTasks.map((g, i) => ({ ...g, tone: i === 0 ? 'a' : 'b
         <h2 class="pl-h2">身体介護と生活援助の、2種類のサービスがあります</h2>
         <div class="pl-taskgroups">
           {taskGroups.map((g) => (
-            <section class="pl-taskgroup" data-tone={g.tone}>
+            <section class="pl-taskgroup">
               <h3 class="pl-taskgroup-head"><span class="pl-taskgroup-badge">{g.badge}</span><span class="pl-med-count">（{g.items.length}項目）</span></h3>
               <ul class="pl-chips">
                 {g.items.map((item) => <li>{item}</li>)}
