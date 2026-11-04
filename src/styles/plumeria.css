@@ -2408,26 +2408,58 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
   .pl-feechart-rows > li { grid-template-columns: minmax(0, 1fr); }
 }
 
-/* ショートステイの1日の費用。先に「1日の合計」、その後ろに「うち自己負担」を同じ大きさで並べ、
+/* ショートステイの1日の費用。下の横棒と位置をそろえ、左に「うち自己負担」、右に「1日の合計」を同じ大きさで並べ、
    介護度で変わる自己負担の額だけを色（ターコイズ。白地で 5.2:1）で目立たせる。表なので、読み上げでも行と列の関係が伝わる */
 .pl .pl-daycost { margin: 22px 0 26px; padding: 18px 18px 8px; background: var(--surface); border: 1px solid var(--line); }
 .pl-daycost-table { width: 100%; border-collapse: collapse; color: var(--ink); }
 .pl-daycost-title { caption-side: top; padding-bottom: 10px; text-align: left; font-size: calc(16px * var(--pl-fs)); font-weight: 700; color: var(--ink); }
 .pl-daycost-table thead th { padding: 0 12px 8px; text-align: left; font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.5; color: var(--muted); border-bottom: 2px solid var(--line); }
-.pl-daycost-table thead th:is(.pl-daycost-total-h, .pl-daycost-care-h) { text-align: right; }
+.pl-daycost-table thead th.pl-daycost-total-h { text-align: right; }
 .pl-daycost-table thead th.pl-daycost-care-h { color: var(--green); }
 .pl-daycost-table tbody th, .pl-daycost-table td { padding: 10px 12px; vertical-align: middle; border-bottom: 1px solid var(--line); }
 .pl-daycost-table tbody tr:last-child > * { border-bottom: 0; }
-.pl-daycost-table tbody th { width: 30%; text-align: left; white-space: nowrap; font-size: calc(15px * var(--pl-fs)); font-weight: 700; }
-.pl-daycost-total, .pl-daycost-care { width: 35%; text-align: right; white-space: nowrap; font-size: calc(20px * var(--pl-fs)); font-weight: 700; }
+.pl-daycost-table tbody th { width: 7.5em; text-align: left; white-space: nowrap; font-size: calc(15px * var(--pl-fs)); font-weight: 700; }
+.pl-daycost-total, .pl-daycost-care { width: auto; text-align: right; white-space: nowrap; font-size: calc(20px * var(--pl-fs)); font-weight: 700; }
 .pl-daycost-total { color: var(--ink); }
-.pl-daycost-care { color: var(--green); }
+.pl-daycost-care { color: var(--green); text-align: left; }
+/* 各行の下の横棒：合計を「自己負担＋滞在費・食費など」に分ける。配色は dataviz の検証スクリプトで確認済み
+   （#0a87ad／#c8874f：明度帯・彩度・色覚の見分けとも合格。白地との対比が3:1未満の砂色は、表の数字で値を読めるため可） */
+.pl-daycost-table tbody tr.pl-daycost-row > * { padding-bottom: 4px; border-bottom: 0; }
+.pl-daycost-barrow td { padding: 0 12px 12px; border-bottom: 1px solid var(--line); }
+.pl-daycost-table tbody tr.pl-daycost-barrow:last-child td { border-bottom: 0; }
+.pl-daycost-bar { display: flex; gap: 2px; height: 14px; }
+.pl-daycost [data-part="care"] { background: #0a87ad; }
+.pl-daycost [data-part="fixed"] { background: #c8874f; }
+.pl-daycost-seg[data-part="fixed"] { border-radius: 0 4px 4px 0; }
+/* 強調は入るときに少しゆっくり（200ms）、戻るときは素早く（120ms）。色の変化だけなので、動きを減らす設定でも残す */
+.pl-daycost-seg, .pl-daycost-swatch, .pl-daycost-care { transition: background-color 120ms ease; }
+.pl-daycost[data-focus="care"] :is(.pl-daycost-seg, .pl-daycost-swatch, .pl-daycost-care) { transition: background-color 200ms cubic-bezier(0.23, 1, 0.32, 1); }
+/* 自己負担に注目している間：自己負担以外の棒を薄いグレーにし、自己負担の欄に淡い色を敷く */
+.pl-daycost[data-focus="care"] [data-part="fixed"] { background: #dfe3e5; }
+.pl-daycost[data-focus="care"] .pl-daycost-care { background: color-mix(in srgb, #0a87ad 8%, #fff); }
+.pl-daycost-toggle {
+  padding: 2px 4px; margin: -2px -4px; font: inherit; font-weight: 700; color: var(--green); text-align: left;
+  background: none; border: 0; cursor: pointer; text-decoration: underline dotted; text-underline-offset: 3px;
+  transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 120ms ease;
+}
+.pl-daycost-toggle:active { transform: scale(0.97); }
+/* 続けて押したときに見出しの文字が選択状態にならないようにする */
+.pl-daycost-toggle { -webkit-user-select: none; user-select: none; touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+.pl-daycost-toggle[aria-pressed="true"] { background: color-mix(in srgb, #0a87ad 12%, #fff); text-decoration-style: solid; }
+.pl-daycost-toggle:focus-visible { outline: 2px solid var(--green); outline-offset: 2px; }
+.pl .pl-daycost-legend { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 4px 18px; font-size: calc(14px * var(--pl-fs)); color: var(--ink); }
+.pl-daycost-legend > li { display: flex; align-items: center; gap: 6px; }
+.pl-daycost-swatch { flex: none; width: 14px; height: 14px; border-radius: 3px; }
+@media (prefers-reduced-motion: reduce) {
+  .pl-daycost-toggle:active { transform: none; }
+}
 .pl-daycost > .pl-note { margin-top: 10px; }
 @media (max-width: 600px) {
   .pl .pl-daycost { padding: 14px 12px 6px; }
   .pl-daycost-table tbody th, .pl-daycost-table td { padding: 10px 6px; }
   .pl-daycost-table thead th { padding: 0 6px 8px; }
   .pl-daycost-table tbody th { width: auto; }
+  .pl-daycost-barrow td { padding: 0 6px 12px; }
   .pl-daycost-table tbody th { font-size: calc(clamp(13px, 3.8vw, 15px) * var(--pl-fs)); }
   .pl-daycost-total, .pl-daycost-care { width: auto; font-size: calc(clamp(14px, 4.4vw, 17px) * var(--pl-fs)); }
 }

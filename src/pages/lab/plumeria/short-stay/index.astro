@@ -19,14 +19,19 @@ const keyFacts = [
   { num: '365', unit: '日', label: 'エントランスにスタッフが常駐' },
 ];
 
-// 1日あたりの費用（介護保険1割負担・3食の日）。先に「1日の合計」を示し、その後ろに「うち自己負担」を同じ大きさで並べる。
+// 1日あたりの費用（介護保険1割負担・3食の日）。下の横棒と位置をそろえるため、左に「うち自己負担」（棒の左端の濃い部分）、右に「1日の合計」（棒の右端）を同じ大きさで並べる。
+// 各行の下に、合計を「自己負担＋滞在費・食費など」に分けた横棒を置く（棒の長さは最大の合計に対する割合）。
+// 自己負担の欄にカーソルを合わせる・押すと、棒の自己負担分だけが目立ち、ほかは薄いグレーになる。
 // 値は data/plumeria.ts の公式掲載額をそのまま足し合わせる。
 const yenText = (n: number) => `${n.toLocaleString('ja-JP')}円`;
 const fixedPerDay = shortStayFixedFeesPerDay.stay + shortStayFixedFeesPerDay.food + shortStayFixedFeesPerDay.daily + shortStayFixedFeesPerDay.snack;
+const dayMax = Math.max(...shortStayCareFeesPerDay.map((c) => c.yen + fixedPerDay));
 const dayRows = shortStayCareFeesPerDay.map((c) => ({
   level: c.level,
+  careYen: c.yen,
   care: yenText(c.yen),
   total: yenText(c.yen + fixedPerDay),
+  width: `${(((c.yen + fixedPerDay) * 100) / dayMax).toFixed(2)}%`,
 }));
 
 // 医療行為の受け入れ：表の ○・要相談・× ごとにまとめ、「ここからここまで受け入れ可」が一目で分かるように並べる。
@@ -111,21 +116,35 @@ const medGroups = [
       <thead>
         <tr>
           <th scope="col">介護度</th>
+          <th scope="col" class="pl-daycost-care-h" data-daycost-care>
+            <button type="button" class="pl-daycost-toggle" aria-pressed="false">うち自己負担（介護保険1割）</button>
+          </th>
           <th scope="col" class="pl-daycost-total-h">1日の合計</th>
-          <th scope="col" class="pl-daycost-care-h">うち自己負担（介護保険1割）</th>
         </tr>
       </thead>
       <tbody>
         {dayRows.map((r) => (
-          <tr>
+          <tr class="pl-daycost-row">
             <th scope="row">{r.level}</th>
+            <td class="pl-daycost-care pl-num-face" data-daycost-care>{r.care}</td>
             <td class="pl-daycost-total pl-num-face">{r.total}</td>
-            <td class="pl-daycost-care pl-num-face">{r.care}</td>
+          </tr>
+          <tr class="pl-daycost-barrow" aria-hidden="true">
+            <td colspan="3">
+              <span class="pl-daycost-bar" style={`width:${r.width}`}>
+                <span class="pl-daycost-seg" data-part="care" style={`flex:${r.careYen} 1 0`}></span>
+                <span class="pl-daycost-seg" data-part="fixed" style={`flex:${fixedPerDay} 1 0`}></span>
+              </span>
+            </td>
           </tr>
         ))}
       </tbody>
     </table>
-    <p class="pl-note">1日の合計は、自己負担に滞在費・食費など{yenText(fixedPerDay)}を足した額です。内訳は滞在費{yenText(shortStayFixedFeesPerDay.stay)}・食費{yenText(shortStayFixedFeesPerDay.food)}（3食）・日常生活費{yenText(shortStayFixedFeesPerDay.daily)}・おやつ{yenText(shortStayFixedFeesPerDay.snack)}で、どの介護度も同じです。娯楽費（実費）・送迎などの加算・利用に応じた費用は含みません。所得区分により、滞在費と食費が減額される場合があります。</p>
+    <ul class="pl-daycost-legend" aria-hidden="true">
+      <li><span class="pl-daycost-swatch" data-part="care"></span>自己負担</li>
+      <li><span class="pl-daycost-swatch" data-part="fixed"></span>滞在費・食費など</li>
+    </ul>
+    <p class="pl-note">「うち自己負担」の欄にカーソルを合わせる（スマホは見出しを押す）と、棒の自己負担分だけが目立ちます。1日の合計は、自己負担に滞在費・食費など{yenText(fixedPerDay)}を足した額です。内訳は滞在費{yenText(shortStayFixedFeesPerDay.stay)}・食費{yenText(shortStayFixedFeesPerDay.food)}（3食）・日常生活費{yenText(shortStayFixedFeesPerDay.daily)}・おやつ{yenText(shortStayFixedFeesPerDay.snack)}で、どの介護度も同じです。娯楽費（実費）・送迎などの加算・利用に応じた費用は含みません。所得区分により、滞在費と食費が減額される場合があります。</p>
   </figure>
 
   <Fragment slot="extra">
@@ -177,3 +196,38 @@ const medGroups = [
     </section>
   </Fragment>
 </PlumeriaServicePage>
+
+<script>
+  // 費用の表：「うち自己負担」の欄にカーソルを合わせる・見出しのボタンを押すと、棒の自己負担分だけを目立たせる。
+  // スクリプトが動かない場合も、棒と表はそのまま全部読める（強調は上乗せの表現だけ）。
+  function initPlumeriaDayCost() {
+    const fig = document.querySelector<HTMLElement>('.pl-daycost');
+    if (!fig || fig.dataset.bound) return;
+    fig.dataset.bound = '1';
+    const toggle = fig.querySelector<HTMLButtonElement>('.pl-daycost-toggle');
+    let pinned = false;
+    let hovering = false;
+    const apply = () => {
+      const on = pinned || hovering;
+      if (on) fig.dataset.focus = 'care'; else delete fig.dataset.focus;
+      toggle?.setAttribute('aria-pressed', String(pinned));
+    };
+    // 行と行のあいだ（棒の段）を通るときに強調が一瞬切れないよう、外れたときだけ少し待ってから戻す
+    let leaveTimer = 0;
+    fig.querySelectorAll<HTMLElement>('[data-daycost-care]').forEach((el) => {
+      el.addEventListener('pointerenter', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        window.clearTimeout(leaveTimer); hovering = true; apply();
+      });
+      el.addEventListener('pointerleave', (e) => {
+        if (e.pointerType !== 'mouse') return;
+        window.clearTimeout(leaveTimer);
+        leaveTimer = window.setTimeout(() => { hovering = false; apply(); }, 90);
+      });
+    });
+    toggle?.addEventListener('click', () => { pinned = !pinned; apply(); });
+    toggle?.addEventListener('focus', () => { hovering = true; apply(); });
+    toggle?.addEventListener('blur', () => { hovering = false; apply(); });
+  }
+  document.addEventListener('astro:page-load', initPlumeriaDayCost);
+</script>
