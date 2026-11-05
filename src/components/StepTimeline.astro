@@ -2,7 +2,7 @@
 // 手順を1本の線でつなぐ流れ図。相談ページの「送信したあとは」と、料金ページの「お見積りまで」で共用する。
 // 置き場所の幅で向きを切り替える（コンテナクエリ）。狭い場所・非対応ブラウザでは縦に並べる。
 // bracket で「ご依頼の前」などの区間をくくり、optional の手順は点線で「任意」と分かるようにする。
-import FlowScene from './FlowScene.astro';
+import MaterialIcon from './MaterialIcon.astro';
 export interface TimelineStep { title: string; desc: string; icon: string; badge?: string; optional?: boolean; current?: string }
 interface Props {
   steps: TimelineStep[];
@@ -11,17 +11,14 @@ interface Props {
 }
 const { steps, bracket, label } = Astro.props;
 const inBracket = (i: number) => !!bracket && i >= bracket.from && i <= bracket.to;
-const scenes: Record<string, number> = { send: 0, mail: 6, forum: 4, receipt_long: 5, handshake: 4, checklist: 1, task_alt: 1, fact_check: 1, check_circle: 1, edit_note: 5, description: 5, construction: 7, rocket_launch: 7 };
-const sceneFor = (icon: string) => scenes[icon] ?? 1;
 ---
 <figure class="step-timeline" style={`--steps:${steps.length}`} aria-label={label}>
   {bracket && <figcaption class="st-bracket"><span style={`grid-column:${bracket.from + 1} / ${bracket.to + 2}`}>{bracket.label}</span></figcaption>}
   <ol class="st-list">
     {steps.map((step, i) => (
       <li class:list={['st-step', { 'is-optional': step.optional, 'is-bracketed': inBracket(i), 'next-optional': steps[i + 1]?.optional, 'bracket-end': bracket && i === bracket.to }]}>
-        <span class="st-node" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+        <span class="st-node" aria-hidden="true"><MaterialIcon name={step.icon} /></span>
         <div class="st-body">
-          <div class="st-picture"><FlowScene step={sceneFor(step.icon)} /></div>
           {step.current && <p class="st-current">{step.current}</p>}
           <h3>{step.title}{step.badge && <span class="st-badge">{step.badge}</span>}</h3>
           <p>{step.desc}</p>
@@ -33,8 +30,6 @@ const sceneFor = (icon: string) => scenes[icon] ?? 1;
 
 <style>
   .step-timeline { container-type: inline-size; margin: 24px 0 0; }
-  .st-picture { width: min(100%, 180px); margin: 0 0 12px; }
-  .st-node { font-variant-numeric: tabular-nums; font-size: .875rem; font-weight: 600; }
   .st-list { list-style: none; margin: 0; padding: 0; }
 
   /* 縦並び（既定）：左の線でつなぎ、くくった区間は淡い面で示す */
