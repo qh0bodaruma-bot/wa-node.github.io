@@ -2340,9 +2340,13 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
   font-size: calc(clamp(30px, 4.4vw, 42px) * var(--pl-fs)); font-weight: 600; line-height: 1.1;
   color: var(--green-deep); white-space: nowrap;
 }
-/* 「100〜400」のように桁の多い数字は、カードからはみ出さないよう一回り小さくする */
-.pl-stat-num.is-long { font-size: calc(clamp(22px, 2.9vw, 30px) * var(--pl-fs)); }
-.pl-stat-num small { margin-inline: 2px; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.42em; font-weight: 700; }
+/* 「100〜400」のように桁の多い数字は、カードからはみ出さないよう一回り小さくする。
+   行の高さは通常の数字と同じにして、隣のカードと説明の位置をそろえる */
+.pl-stat-num.is-long {
+  font-size: calc(clamp(22px, 2.9vw, 30px) * var(--pl-fs));
+  line-height: calc(clamp(30px, 4.4vw, 42px) * var(--pl-fs) * 1.1);
+}
+.pl-stat-num small { margin-inline: 2px; line-height: 1.1; font-family: 'Zen Kaku Gothic New', sans-serif; font-size: 0.42em; font-weight: 700; }
 .pl-stat-label { font-size: calc(14px * var(--pl-fs)); line-height: 1.6; color: var(--ink); }
 @media (max-width: 600px) {
   .pl .pl-stats { grid-template-columns: minmax(0, 1fr); gap: 8px; }
@@ -2370,6 +2374,8 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
   flex: 1; display: grid; place-items: center; padding: 10px 8px; text-align: center;
   font-size: calc(13px * var(--pl-fs)); font-weight: 700; color: var(--ink);
   border: 2px dashed var(--hs-b); background: color-mix(in srgb, var(--accent) 12%, #fff);
+  /* 狭い幅で「方」だけが次の行に回らないよう、マークアップの <wbr> の位置だけで折り返す */
+  word-break: keep-all; overflow-wrap: normal;
 }
 .pl-fitmap > .pl-note { grid-column: 1 / -1; margin-top: 4px; text-align: center; }
 @media (max-width: 600px) {
