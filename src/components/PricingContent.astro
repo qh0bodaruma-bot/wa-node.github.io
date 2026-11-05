@@ -88,7 +88,7 @@ const overview = {
    {section.id==='line'&&<div class="pricing-cost-guide"><h3>{scopeGuide.costs}</h3><CostTimeline lang={lang} /></div>}
    <div class="s-actions"><a class="s-button" href={href(`/contact/?source=pricing_${section.id}${section.category?`&category=${section.category}`:''}`)}>{c.discuss}<MaterialIcon name="arrow_forward"/></a><a class="s-link" href={href(section.demo)}>{c.demo}<MaterialIcon name="north_east"/></a></div>
  </div></section>)}
- <section class="s-section"><div class="s-shell"><h2>{c.processTitle}</h2><StepTimeline label={c.processTitle} steps={c.steps.map(([title,desc,icon,badge],i)=>({title,desc,icon,badge,optional:i===c.steps.length-1}))} bracket={{from:0,to:c.steps.length-2,label:c.stepsBracket}} /></div></section>
+ <section class="s-section"><div class="s-shell"><h2>{c.processTitle}</h2><StepTimeline illustrations="pricing" label={c.processTitle} steps={c.steps.map(([title,desc,icon,badge],i)=>({title,desc,icon,badge,optional:i===c.steps.length-1}))} bracket={{from:0,to:c.steps.length-2,label:c.stepsBracket}} /></div></section>
  <section class="s-section"><div class="s-shell"><h2>{c.faqTitle}</h2><div class="s-faq">{c.faqs.map(([question,answer])=><details><summary>{question}</summary><p>{answer}</p></details>)}</div></div></section>
  <section class="s-contact-band"><div class="s-shell"><div><h2>{c.finalTitle}</h2><p>{c.finalDesc}</p></div><a class="s-button" href={href('/contact/?source=pricing')}>{labels.consultation}<MaterialIcon name="arrow_forward"/></a></div></section>
 </main>

@@ -1,0 +1,9 @@
+---
+// 見出し・本文の意味を補助する図。内容の説明は隣接するHTMLに任せる。
+interface Props { name: string }
+const { name } = Astro.props;
+---
+<img class="explanation-illustration" src={`/images/illustrations/${name}-v03.webp`} alt="" width="400" height="300" loading="lazy" decoding="async" />
+<style>
+  .explanation-illustration { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: contain; mix-blend-mode: multiply; }
+</style>

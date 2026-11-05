@@ -168,7 +168,7 @@ const brief = {
 .flow-scroll.is-compact .flow-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px;margin-top:24px}
 .flow-scroll.is-compact .flow-steps::before{display:none}
 .flow-scroll.is-compact .flow-step{position:relative;min-height:0;display:block;padding:0;border:0;align-items:start;view-timeline-name:none}
-.flow-picture{position:relative;margin-bottom:20px;padding:16px 8px;background:#edf4f0;border-radius:8px}
+.flow-picture{position:relative;margin-bottom:20px;padding:12px 4px;background:#fff;border-radius:8px}
 .flow-scroll.is-compact .flow-step:not(:last-child) .flow-picture::after{content:"";position:absolute;right:-16px;top:50%;width:10px;height:10px;border-top:2px solid var(--deep);border-right:2px solid var(--deep);transform:translateY(-50%) rotate(45deg)}
 .flow-scroll.is-compact .flow-step-marker{display:none}
 .flow-scroll.is-compact .flow-step h3{font-size:1.05rem;line-height:1.6}
@@ -179,13 +179,13 @@ const brief = {
 }
 @media(max-width:560px){
   .flow-scroll.is-compact .flow-steps{grid-template-columns:1fr;gap:24px}
-  .flow-scroll.is-compact .flow-step{display:grid;grid-template-columns:96px minmax(0,1fr);gap:16px;align-items:start;padding:0 0 24px;border-bottom:1px solid var(--rule)}
-  .flow-picture{margin:4px 0 0;padding:8px 0}
-  .flow-scroll.is-compact .flow-step:not(:last-child) .flow-picture::after{top:auto;right:calc(50% - 5px);bottom:-25px;transform:rotate(135deg)}
+  .flow-scroll.is-compact .flow-step{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;align-items:start;padding:0 0 24px;border-bottom:1px solid var(--rule)}
+  .flow-picture{width:min(100%,240px);margin:4px auto 0;padding:8px 0}
+  .flow-scroll.is-compact .flow-step:not(:last-child) .flow-picture::after{display:none}
   .flow-scroll.is-compact .flow-step:last-child{padding-bottom:0;border-bottom:0}
   .flow-scroll.is-compact .flow-step h3{margin-top:4px}
 }
-@media(max-width:360px){.flow-scroll.is-compact .flow-step{grid-template-columns:72px minmax(0,1fr);gap:12px}}
+@media(max-width:360px){.flow-scroll.is-compact .flow-step{gap:10px}}
 </style>
 <script>
 function initFlowScroll() {

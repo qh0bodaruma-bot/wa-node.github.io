@@ -3,14 +3,19 @@
 // 置き場所の幅で向きを切り替える（コンテナクエリ）。狭い場所・非対応ブラウザでは縦に並べる。
 // bracket で「ご依頼の前」などの区間をくくり、optional の手順は点線で「任意」と分かるようにする。
 import MaterialIcon from './MaterialIcon.astro';
+import ExplanationIllustration from './ExplanationIllustration.astro';
 export interface TimelineStep { title: string; desc: string; icon: string; badge?: string; optional?: boolean; current?: string }
 interface Props {
   steps: TimelineStep[];
   bracket?: { from: number; to: number; label: string };
   label: string;
+  illustrations?: 'contact' | 'pricing';
 }
-const { steps, bracket, label } = Astro.props;
+const { steps, bracket, label, illustrations } = Astro.props;
 const inBracket = (i: number) => !!bracket && i >= bracket.from && i <= bracket.to;
+const pictures = illustrations === 'contact'
+  ? ['contact-send', 'contact-reply', 'contact-talk', 'contact-propose', 'contact-start']
+  : illustrations === 'pricing' ? ['pricing-talk', 'pricing-scope', 'pricing-quote', 'pricing-start'] : [];
 ---
 <figure class="step-timeline" style={`--steps:${steps.length}`} aria-label={label}>
   {bracket && <figcaption class="st-bracket"><span style={`grid-column:${bracket.from + 1} / ${bracket.to + 2}`}>{bracket.label}</span></figcaption>}
@@ -19,6 +24,7 @@ const inBracket = (i: number) => !!bracket && i >= bracket.from && i <= bracket.
       <li class:list={['st-step', { 'is-optional': step.optional, 'is-bracketed': inBracket(i), 'next-optional': steps[i + 1]?.optional, 'bracket-end': bracket && i === bracket.to }]}>
         <span class="st-node" aria-hidden="true"><MaterialIcon name={step.icon} /></span>
         <div class="st-body">
+          {pictures[i] && <div class="st-picture"><ExplanationIllustration name={pictures[i]} /></div>}
           {step.current && <p class="st-current">{step.current}</p>}
           <h3>{step.title}{step.badge && <span class="st-badge">{step.badge}</span>}</h3>
           <p>{step.desc}</p>
@@ -30,6 +36,7 @@ const inBracket = (i: number) => !!bracket && i >= bracket.from && i <= bracket.
 
 <style>
   .step-timeline { container-type: inline-size; margin: 24px 0 0; }
+  .st-picture { width: min(100%, 196px); margin: 0 0 12px; }
   .st-list { list-style: none; margin: 0; padding: 0; }
 
   /* 縦並び（既定）：左の線でつなぎ、くくった区間は淡い面で示す */
