@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1000" viewBox="0 0 1200 1000" role="img" aria-labelledby="title desc">
+  <title id="title">変更した入力だけでなく、従来の入力と失敗時も確かめる</title>
+  <desc id="desc">返信方法に電話を追加した際のテスト例。新しい選択肢、必須情報の不足、従来の入力、登録失敗、再実行の場面と期待する結果を示す確認表。</desc>
+  <rect width="1200" height="1000" fill="#f6f9f7"/>
+  <g font-family="'Noto Sans JP','Yu Gothic',Meiryo,sans-serif" fill="#172e34">
+    <text x="60" y="82" font-size="39" font-weight="700">新しい入力・従来の入力・失敗時を試す</text>
+    <text x="60" y="132" font-size="25" fill="#425b61">例：「電話で返信」を追加した後の確認表</text>
+    <rect x="60" y="172" width="1080" height="62" rx="6" fill="#0f4c5c"/>
+    <g font-size="25" font-weight="700" fill="#fff"><text x="85" y="213">場面</text><text x="329" y="213">試す内容</text><text x="720" y="213">期待する結果の例</text></g>
+    <g fill="#fff" stroke="#cadbd5"><rect x="60" y="250" width="1080" height="116" rx="6"/><rect x="60" y="382" width="1080" height="116" rx="6"/><rect x="60" y="514" width="1080" height="116" rx="6"/><rect x="60" y="646" width="1080" height="116" rx="6"/><rect x="60" y="778" width="1080" height="116" rx="6"/></g>
+    <g stroke="#d2dfda"><path d="M304 266V350M694 266V350"/><path d="M304 398V482M694 398V482"/><path d="M304 530V614M694 530V614"/><path d="M304 662V746M694 662V746"/><path d="M304 794V878M694 794V878"/></g>
+    <g font-size="25" font-weight="700" fill="#0f4c5c"><text x="85" y="301">新しい選択肢</text><text x="85" y="433">必須情報の不足</text><text x="85" y="565">従来の入力</text><text x="85" y="697">登録失敗</text><text x="85" y="829">再実行</text></g>
+    <g font-size="26">
+      <text x="329" y="296">電話を選び、番号も入力</text><text x="329" y="338" font-size="23" fill="#425b61">架空のテスト情報を使う</text><text x="720" y="296">登録先と通知の内容が</text><text x="720" y="338">決めた値と一致する</text>
+      <text x="329" y="428">電話を選び、番号は空欄</text><text x="329" y="470" font-size="23" fill="#425b61">番号必須とした場合の例</text><text x="720" y="428">不足を案内し、</text><text x="720" y="470">不完全な登録を防ぐ</text>
+      <text x="329" y="560">従来の「メール」を選ぶ</text><text x="329" y="602" font-size="23" fill="#425b61">追加していない選択肢も試す</text><text x="720" y="560">従来の方法で</text><text x="720" y="602">受付・登録ができる</text>
+      <text x="329" y="692">登録先の失敗を再現する</text><text x="329" y="734" font-size="23" fill="#425b61">検証環境で担当者が実施</text><text x="720" y="692">成功と誤表示せず、</text><text x="720" y="734">確認する人が分かる</text>
+      <text x="329" y="824">失敗後に同じ受付を再処理</text><text x="329" y="866" font-size="23" fill="#425b61">既に登録済みの場合も確認</text><text x="720" y="824">既存の記録と重ならず、</text><text x="720" y="866">処理結果を追える</text>
+    </g>
+    <text x="60" y="946" font-size="24" fill="#425b61">期待する結果と確認者は、実際の仕様に合わせて決めてください。</text>
+    <text x="1140" y="980" text-anchor="end" font-size="19" fill="#425b61">和-Node ｜ ※確認表の例</text>
+  </g>
+</svg>

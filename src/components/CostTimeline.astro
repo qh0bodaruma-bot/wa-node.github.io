@@ -3,6 +3,7 @@
 // 横軸は「公開まで／公開後」。帯の長さで、かかる時期と続く期間を示す。文言は料金ページの費用の説明と同じ。
 // 幅が狭い場所では、帯を縦に積み、時期は帯の中の文字で示す。
 import type { SiteLanguage } from '../data/services';
+import FlowScene from './FlowScene.astro';
 interface Props { lang?: SiteLanguage }
 const { lang = 'ja' } = Astro.props;
 const c = {
@@ -45,7 +46,7 @@ const c = {
     <ul class="ct-lanes">
       {c.lanes.map((lane) => (
         <li class={`ct-lane ct-${lane.kind}`}>
-          <p class="ct-lane-name">{lane.lane}</p>
+          <div class="ct-lane-name"><div class="ct-picture"><FlowScene step={lane.kind === 'build' ? 7 : lane.kind === 'service' ? 2 : 1} /></div>{lane.lane}</div>
           <div class="ct-bar">
             <p class="ct-when">{lane.when}</p>
             <h4>{lane.title}</h4>
@@ -62,6 +63,7 @@ const c = {
   .ct-axis { display: none; }
   .ct-lanes { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
   .ct-lane-name { margin: 0 0 6px; color: var(--quiet); font-size: .875rem; font-weight: 700; }
+  .ct-picture { width: min(100%, 144px); margin-bottom: 6px; }
   .ct-bar { padding: 14px 16px; border-radius: 8px; line-height: 1.8; }
   .ct-bar h4 { margin: 0 0 6px; font-size: 1.0625rem; color: var(--ink); }
   .ct-bar p { margin: 0; font-size: 1rem; color: var(--quiet); }

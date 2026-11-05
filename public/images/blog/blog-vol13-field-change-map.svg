@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-labelledby="title desc">
+  <title id="title">入力項目を変えるときは、情報の行き先まで確認する</title>
+  <desc id="desc">返信方法に電話を追加する架空の例。入力画面、連携処理、登録先、担当者への通知について、変更内容と確認することを対応させています。</desc>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0 0L7 4L0 8" fill="none" stroke="#0f4c5c" stroke-width="1.5"/></marker></defs>
+  <rect width="1200" height="900" fill="#f6f9f7"/>
+  <g font-family="'Noto Sans JP','Yu Gothic',Meiryo,sans-serif" fill="#172e34">
+    <text x="60" y="85" font-size="40" font-weight="700">入力項目を変えたら、行き先まで確認</text>
+    <text x="60" y="133" font-size="25" fill="#425b61">例：「返信方法」に「電話」を追加する場合</text>
+    <rect x="60" y="172" width="1080" height="56" rx="6" fill="#0f4c5c"/>
+    <g fill="#fff" font-size="24" font-weight="700"><text x="88" y="210">情報が通る場所</text><text x="335" y="210">変更内容の例</text><text x="746" y="210">確認すること</text></g>
+    <g font-size="27" font-weight="700" fill="#0f4c5c">
+      <text x="89" y="300">入力画面</text>
+      <text x="89" y="442">連携処理</text>
+      <text x="89" y="584">登録先</text>
+      <text x="89" y="726">担当者へ</text><text x="89" y="764">の通知</text>
+    </g>
+    <g stroke="#0f4c5c" stroke-width="2" marker-end="url(#arrow)"><path d="M175 320V387"/><path d="M175 462V529"/><path d="M175 604V671"/></g>
+    <g fill="#fff" stroke="#cadbd5"><rect x="306" y="250" width="834" height="118" rx="6"/><rect x="306" y="392" width="834" height="118" rx="6"/><rect x="306" y="534" width="834" height="118" rx="6"/><rect x="306" y="676" width="834" height="118" rx="6"/></g>
+    <g stroke="#d2dfda"><path d="M718 266V352"/><path d="M718 408V494"/><path d="M718 550V636"/><path d="M718 692V778"/></g>
+    <g font-size="27">
+      <text x="335" y="296">返信方法に「電話」を追加</text><text x="335" y="337" fill="#425b61" font-size="24">電話番号の入力条件を決める</text>
+      <text x="746" y="296">電話を選べるか</text><text x="746" y="337" fill="#425b61" font-size="24">必要な情報がそろうか</text>
+      <text x="335" y="438">新しい値を受け取る</text><text x="335" y="479" fill="#425b61" font-size="24">登録先に合わせて変換する</text>
+      <text x="746" y="438">値の対応が合っているか</text><text x="746" y="479" fill="#425b61" font-size="24">不足時の扱いは決まったか</text>
+      <text x="335" y="580">返信方法と電話番号を保存</text><text x="335" y="621" fill="#425b61" font-size="24">決めた項目に登録する</text>
+      <text x="746" y="580">実際の記録に入ったか</text><text x="746" y="621" fill="#425b61" font-size="24">別の項目を上書きしないか</text>
+      <text x="335" y="722">担当者へ連絡方法を伝える</text><text x="335" y="763" fill="#425b61" font-size="24">連絡する人と確認場所を決める</text>
+      <text x="746" y="722">次の対応に必要な内容か</text><text x="746" y="763" fill="#425b61" font-size="24">必要な相手だけに届くか</text>
+    </g>
+    <text x="60" y="849" font-size="24" fill="#425b61">すべてを修正するとは限りません。影響する場所を確かめ、必要な箇所を選びます。</text>
+    <text x="1140" y="880" text-anchor="end" font-size="19" fill="#425b61">和-Node ｜ ※概念図・架空の例</text>
+  </g>
+</svg>
