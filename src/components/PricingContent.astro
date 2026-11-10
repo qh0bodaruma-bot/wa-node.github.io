@@ -1,5 +1,6 @@
 ---
 import BusinessSupportOverview from './BusinessSupportOverview.astro';
+import BusinessSupportTerms from './BusinessSupportTerms.astro';
 import MaterialIcon from './MaterialIcon.astro';
 import StepTimeline from './StepTimeline.astro';
 import CostTimeline from './CostTimeline.astro';
@@ -74,6 +75,7 @@ const overview = {
   <nav class="pricing-links" aria-label={c.detail}>{sections.map(section=><a href={`#${section.id}`}>{section.label}<MaterialIcon name="south"/></a>)}</nav>
  </div></div></section>
  <BusinessSupportOverview lang={lang} />
+ <BusinessSupportTerms lang={lang} />
  {sections.map((section,i)=><section class="s-section pricing-service" id={section.id}><div class="s-shell">
   <div class="s-section-head" data-motion-enter="heading" data-motion-id={`pricing-${section.id}-heading`}><div><h2>{section.label}</h2><p class="s-intro">{section.lead}</p></div></div>
   {section.id==='line'&&<>

@@ -1,0 +1,55 @@
+---
+import type { SiteLanguage } from '../data/services';
+interface Props { lang?: SiteLanguage }
+const { lang = 'ja' } = Astro.props;
+const copy = {
+ ja: {
+  title: '業務改善支援の納品物と、納品後の対応',
+  lead: '業務改善・ICT活用支援は、作業範囲を確認して個別にお見積りします。',
+  rows: [
+   ['課題整理・診断でお渡しするもの', '現在の業務の流れ、課題と優先順位、ツールの候補、実装に必要な費用・期間の概算範囲を資料にまとめます。設定・開発・実装は、診断とは別契約とし、範囲と費用を合意してから進めます。'],
+   ['無料相談と診断の違い', '初回の無料相談では状況とご希望を伺い、支援できる範囲を確認します。詳細な調査や診断資料の作成は、事前のお見積りと合意後に行います。診断の別契約が、すべての開発依頼に必要なわけではありません。'],
+   ['実装後の不具合対応', '納品（本番切替）から1か月は、見積書・仕様書どおりに動かない、和-Nodeが構築した部分の不具合を追加費用なしで修正します。月次業務が対象の案件では、必要に応じて見積書で期間を延長します。対応開始日と期間は見積書に記載します。'],
+   ['別途確認する対応', '外部サービスの仕様変更・障害・料金プラン変更、お客様による設定・運用の変更、合意した仕様にない追加・変更は、上記の不具合対応には含みません。影響調査や回避策の検討など、必要な作業を確認し、任意の月額保守または個別のお見積りで対応します。外部事業者による復旧の完了は保証できません。'],
+   ['任意の保守・運用支援', '継続的な点検・相談・小さな修正をご希望の場合にご相談いただけます。対象の仕組み、確認項目、対応時間、費用は個別に見積ります。常時監視や即時の復旧対応は含みません。'],
+  ],
+  note: 'この案内は業務改善・ICT活用支援についてのものです。LINE連携・アプリ開発の料金と含まれる作業は、下の各案内をご確認ください。既存のご契約は、合意済みの条件に従います。',
+ },
+ en: {
+  title: 'Workflow support: deliverables and aftercare',
+  lead: 'Workflow improvement and ICT support are quoted individually after confirming the scope.',
+  rows: [
+   ['Assessment deliverables', 'A document covering your current workflow, issues and priorities, candidate tools, and indicative implementation costs and schedule. Configuration, development and implementation require a separate agreement on scope and fees.'],
+   ['Free consultation and assessment', 'The initial free consultation reviews your situation, goals and the support we can offer. Detailed investigation and assessment documents begin only after a quote and agreement. A separate assessment is not required for every development project.'],
+   ['Defects after implementation', 'For one month from delivery (production switchover), we correct defects in the parts built by Wa-Node that do not meet the agreed quote or specification, at no additional cost. For projects involving monthly workflows, the period may be extended in the quote as needed. The start date and period are specified in the quote.'],
+   ['Work scoped separately', 'Third-party service changes, outages or pricing-plan changes, customer configuration or operating changes, and additions outside the agreed specification are excluded from the defect correction above. Impact investigation and possible workarounds are scoped under optional monthly support or a separate quote. Recovery by a third-party provider cannot be guaranteed.'],
+   ['Optional ongoing support', 'Periodic checks, advice and small changes can be arranged. Covered systems, check items, working hours and fees are quoted individually. Continuous monitoring and immediate recovery are not included.'],
+  ],
+  note: 'These terms describe workflow improvement and ICT support. See the sections below for LINE integration and app development pricing and included work. Existing contracts retain their agreed terms.',
+ },
+ fr: {
+  title: 'Amélioration des processus : livrables et suivi',
+  lead: 'L’amélioration des processus et l’accompagnement TIC font l’objet d’un devis individuel après définition du périmètre.',
+  rows: [
+   ['Livrables du diagnostic', 'Un document présente les processus actuels, les difficultés et priorités, les outils envisageables ainsi qu’une estimation du coût et du calendrier de mise en œuvre. La configuration, le développement et la mise en œuvre nécessitent un contrat distinct précisant le périmètre et le coût.'],
+   ['Consultation gratuite et diagnostic', 'La première consultation gratuite permet de comprendre votre situation, vos objectifs et l’aide possible. L’analyse détaillée et les documents de diagnostic sont réalisés après devis et accord. Un diagnostic distinct n’est pas obligatoire pour chaque projet de développement.'],
+   ['Correction après mise en œuvre', 'Pendant un mois à compter de la livraison (mise en production), les défauts des éléments réalisés par Wa-Node qui ne respectent pas le devis ou les spécifications convenus sont corrigés sans frais supplémentaires. Pour les projets comprenant des processus mensuels, cette période peut être prolongée dans le devis si nécessaire. Le devis précise la date de début et la durée.'],
+   ['Interventions à définir séparément', 'Les changements, pannes ou modifications tarifaires de services tiers, les changements de configuration ou d’utilisation du client et les ajouts hors spécifications sont exclus des corrections ci-dessus. L’analyse des impacts et des solutions de contournement relève d’un suivi mensuel facultatif ou d’un devis distinct. Le rétablissement par un prestataire tiers ne peut être garanti.'],
+   ['Suivi facultatif', 'Des vérifications périodiques, des conseils et de petites modifications peuvent être prévus. Les systèmes concernés, les vérifications, le temps d’intervention et les frais sont définis sur devis individuel. La surveillance continue et le rétablissement immédiat ne sont pas inclus.'],
+  ],
+  note: 'Ces conditions concernent l’amélioration des processus et l’accompagnement TIC. Les tarifs et prestations d’intégration LINE et de développement d’applications figurent ci-dessous. Les contrats existants conservent leurs conditions convenues.',
+ },
+}[lang];
+---
+<section class="s-section business-support-terms" aria-labelledby="support-terms-title" id="support-terms">
+ <div class="s-shell">
+  <h2 id="support-terms-title">{copy.title}</h2>
+  <p class="s-intro">{copy.lead}</p>
+  <dl>{copy.rows.map(([title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
+  <p class="s-note">{copy.note}</p>
+ </div>
+</section>
+<style>
+.business-support-terms dl{margin:28px 0}.business-support-terms dl>div{display:grid;grid-template-columns:minmax(0,13em) minmax(0,1fr);gap:24px;padding:22px 0;border-top:1px solid var(--rule)}.business-support-terms dt{font-weight:700;color:var(--deep);line-height:1.8}.business-support-terms dd{margin:0;line-height:1.9;color:var(--ink)}
+@media(max-width:680px){.business-support-terms dl>div{grid-template-columns:1fr;gap:8px}}
+</style>
