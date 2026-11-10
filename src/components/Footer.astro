@@ -41,9 +41,9 @@ const copy = {
     ctaPrimary: '無料相談を予約する',
     ctaLine: 'LINEで相談する',
     tagline: '技術と人をつなぐ、つなぎ手。',
-    about: 'LINE公式アカウントと、Salesforce・kintone・HubSpot・Googleスプレッドシートをつなぐ連携構築の専門パートナーです。',
+    about: 'AX・DXとICTで、業務の困りごとの整理から仕組みの構築まで。LINE連携・アプリ開発にも対応します。',
     areaLabel: '対応エリア',
-    area: '全国（オンライン完結可）／岐阜・愛知近郊（対面可）',
+    area: '全国・リモート中心（現地の機器・ネットワーク整備は対象外）',
     services: 'サービス',
     resources: 'ご参考',
     policies: '運営・規約',
@@ -56,9 +56,9 @@ const copy = {
     ctaPrimary: 'Book a free consultation',
     ctaLine: 'Contact us on LINE',
     tagline: 'Connecting technology and people.',
-    about: 'A specialist partner for integrating LINE Official Accounts with Salesforce, kintone, HubSpot and Google Sheets.',
+    about: 'Support for workflow improvement with AI and ICT, from clarifying problems to building solutions, including LINE integration and apps.',
     areaLabel: 'Service area',
-    area: 'Online across Japan / In person around Gifu and Aichi',
+    area: 'Primarily remote across Japan; no on-site device or network setup',
     services: 'Services',
     resources: 'Resources',
     policies: 'Policies',
@@ -71,9 +71,9 @@ const copy = {
     ctaPrimary: 'Réserver un échange gratuit',
     ctaLine: 'Nous contacter sur LINE',
     tagline: 'Relier la technologie et les personnes.',
-    about: 'Partenaire spécialisé dans l’intégration des comptes officiels LINE avec Salesforce, kintone, HubSpot et Google Sheets.',
+    about: 'Amélioration des processus avec l’IA et les outils numériques, de la clarification à la réalisation, y compris LINE et les applications.',
     areaLabel: 'Zone',
-    area: 'En ligne dans tout le Japon / En personne autour de Gifu et Aichi',
+    area: 'Principalement à distance au Japon ; sans installation de matériel ou de réseau sur site',
     services: 'Services',
     resources: 'Ressources',
     policies: 'Politiques',
@@ -90,12 +90,12 @@ const copy = {
     <figure class="footer-connect" aria-label={copy.connectLabel}>
       <div class="connect-track" aria-hidden="true"><span class="connect-signal"></span></div>
       <ol>
-        <li class="node node-line"><span class="node-dot"></span>LINE</li>
+        <li class="node node-line"><span class="node-dot"></span>{lang === 'ja' ? '業務の困りごと' : lang === 'en' ? 'Your workflow' : 'Vos besoins'}</li>
         <li class="node node-hub"><span class="node-dot"></span>和-Node</li>
-        <li class="node node-sys"><span class="node-dot"></span>Salesforce</li>
-        <li class="node node-sys"><span class="node-dot"></span>kintone</li>
-        <li class="node node-sys"><span class="node-dot"></span>HubSpot</li>
-        <li class="node node-sys"><span class="node-dot"></span>{copy.sheets}</li>
+        <li class="node node-sys"><span class="node-dot"></span>{lang === 'ja' ? '業務改善' : lang === 'en' ? 'Improvement' : 'Amélioration'}</li>
+        <li class="node node-sys"><span class="node-dot"></span>ICT</li>
+        <li class="node node-sys"><span class="node-dot"></span>LINE</li>
+        <li class="node node-sys"><span class="node-dot"></span>{lang === 'ja' ? 'アプリ' : 'Applications'}</li>
         <li class="node node-sys-summary"><span class="node-dot"></span>{copy.systems}</li>
       </ol>
     </figure>
@@ -118,7 +118,7 @@ const copy = {
       <nav class="footer-col" aria-labelledby="footer-services">
         <h3 id="footer-services">{copy.services}</h3>
         <ul>
-          <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? 'LINE連携構築' : lang === 'en' ? 'LINE Integration' : 'Intégration LINE'}</a></li>
+          <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? '支援内容・料金' : lang === 'en' ? 'Support & Pricing' : 'Services et tarifs'}</a></li>
           <li><a href={getLocalizedLink('/pricing')}>{lang === 'ja' ? '料金・対応範囲' : lang === 'en' ? 'Pricing & Scope' : 'Tarifs & Périmètre'}</a></li>
           <li><a href={getLocalizedLink('/contact')}>{lang === 'ja' ? '無料相談（30分）' : lang === 'en' ? 'Free Consultation' : 'Consultation gratuite'}</a></li>
         </ul>
@@ -164,8 +164,9 @@ const copy = {
 
 <style>
   .footer {
-    --footer-bg: #0f3432;
-    --footer-bg-deep: #0a2624;
+    /* トップFVのグラデーション（#285440系）と同じ色相で、明るさは従来の暗さを保つ */
+    --footer-bg: #183527;
+    --footer-bg-deep: #0f241a;
     --footer-text: #eef3ee;
     --footer-muted: rgba(238, 243, 238, 0.74);
     --footer-rule: rgba(238, 243, 238, 0.14);

@@ -9,17 +9,29 @@ import {
 } from '../data/structuredData';
 import { servicePrices } from '../data/services';
 
-const title = "LINE連携構築｜Salesforce・kintone・HubSpot・スプレッドシート｜和-Node";
-const description = "LINE公式アカウントとSalesforce・kintone・HubSpot・Googleスプレッドシートの連携構築。LINEで受けた申込・問い合わせを業務システムへ自動で登録し、転記や二重入力を減らします。初回30分の無料相談。";
+const title = "AX・DX・ICTによる業務改善支援｜和-Node";
+const description = "業務の困りごとの整理、改善策の提案、仕組みの構築から、決まった改善案の開発・実装まで。AX・DX、ICT活用、LINE連携・アプリ開発をリモート中心で支援します。";
 const structuredData = [
   organizationSchema,
   websiteSchema,
   createWebPageSchema({ name: title, description, path: "/" }),
   createServiceSchema({
+    name: "AX・DXによる業務改善支援",
+    description: "業務の困りごとの整理、改善策の提案、仕組みの構築と、決まった改善案の開発・実装。",
+    path: "/pricing/#business-improvement",
+    serviceType: "Workflow improvement with AI and digital tools",
+  }),
+  createServiceSchema({
+    name: "ICT活用支援",
+    description: "ツール選定・情報共有・データ管理を中心とするリモート支援。",
+    path: "/pricing/#ict-support",
+    serviceType: "ICT support",
+  }),
+  createServiceSchema({
     name: "LINE連携構築（Salesforce・kintone・HubSpot等）",
     description:
       "LIFF開発・Messaging API・各種システム連携を一気通貫で構築。設計から実装・テストまで1社で対応します。",
-    path: "/pricing/",
+    path: "/pricing/#line",
     serviceType: "LINE LIFF development and CRM/SFA integration",
     priceFrom: String(servicePrices.lineSheets),
   }),

@@ -46,7 +46,7 @@ export const organizationSchema = {
   logo: absoluteUrl("/apple-touch-icon.png"),
   image: absoluteUrl("/images/ogp-service.png"),
   description:
-    "和-Nodeは、LINE公式アカウントとSalesforce・kintone・HubSpot・Googleスプレッドシートの連携構築を専門に、要件整理から公開まで支援します。iOS・Androidアプリ開発、Web・LP制作にも対応します。",
+    "和-Nodeは、AX・DXとICTによる業務改善を、困りごとの整理・改善策の提案から仕組みの構築までリモート中心で支援します。決まった改善案の実装、LINE連携・アプリ開発にも対応します。",
   areaServed: "JP",
   founder: { "@id": `${SITE_URL}/about/#person` },
   knowsAbout: [
@@ -87,7 +87,7 @@ export const personSchema = {
   name: "高野 紘純",
   alternateName: "Hirozumi Takano",
   image: absoluteUrl("/images/avatar.webp"),
-  jobTitle: "ITエンジニア（LINE・業務システム連携構築） / 産業カウンセラー",
+  jobTitle: "ITエンジニア（業務改善・システム開発） / 産業カウンセラー",
   worksFor: { "@id": `${SITE_URL}/#organization` },
   knowsAbout: [
     "LINE連携構築",

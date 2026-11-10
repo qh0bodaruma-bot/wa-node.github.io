@@ -1,7 +1,8 @@
 ---
+import BusinessSupportOverview from './BusinessSupportOverview.astro';
 import MaterialIcon from './MaterialIcon.astro';
-import HomeFlowScroll from './HomeFlowScroll.astro';
-import { localizedPath, servicePrices, startingPrice, serviceLabels, lineTierText, type SiteLanguage } from '../data/services';
+import ConsultingPaths from './ConsultingPaths.astro';
+import { localizedPath, serviceLabels, type SiteLanguage } from '../data/services';
 import '../styles/service-pages.css';
 import '../styles/homepage-polish.css';
 interface Props { lang?: SiteLanguage }
@@ -10,10 +11,10 @@ const href = (path: string) => localizedPath(path, lang);
 const labels = serviceLabels[lang];
 const c = {
   ja: {
-    eyebrow: 'LINE連携構築', title: ['LINEの|問い合わせを', '業務システムへ', '自動で登録。'],
-    lead: 'LINEで受けた申込・問い合わせや現場報告を、今お使いの業務システムへ自動で登録。転記や二重入力を減らす仕組みを、要件整理から運用の引き継ぎまで一緒につくります。',
-    leadShort: 'LINEで受けた申込・問い合わせや現場報告を、自動で登録。転記や二重入力を減らします。',
-    view: '動く制作例を見る', assurance: '連携の仕様が未定でも相談できます。相談後の契約義務はありません。',
+    eyebrow: 'AX・DXとICTによる業務改善', title: ['業務の|困りごとを、', '整理する。', '仕組みにする。'],
+    lead: "業務の困りごとを整理し、AIやデジタル技術を使った改善策と仕組みを考えます。改善案が決まっている場合は、開発・実装からもご相談いただけます。",
+    leadShort: "困りごとの整理から仕組みの構築まで。決まった改善案の開発・実装もご相談いただけます。",
+    view: '動く制作例を見る', assurance: "何から改善するか未定でも相談できます。相談後の契約義務はありません。",
     preview: '自動登録の流れ', sample: 'サンプル画面・外部送信なし', received: 'LINEで問い合わせ', message: '見積りについて相談したいです。', waiting: 'フォームの内容を連携中…',
     fields: [['会社名', 'サンプル商事'], ['ご用件', '見積りの相談'], ['返信方法', 'LINEで返信']], pause: '動きを止める', play: '動きを再開',
     tryOpen: '自分の文章で試してみる', tryLabel: '文章を選ぶか入力すると、登録の流れを試せます。', tryOwn: '自分で入力する', inputLabel: '問い合わせの文章', placeholder: '例：〇〇株式会社です。見積りを相談したいです。', send: '送信して試す',
@@ -24,7 +25,7 @@ const c = {
     scope: '費用と対応範囲を見る',
     worksTitle: 'あなたの業務に近いデモを試す', worksLead: '自主制作デモを操作した画面です。データは架空で、実在のお客様の導入実績や成果数値ではありません。', allWorks: 'すべての制作例', demo: '自主制作デモ', tryDemo: 'このデモを試す', demoLanguage: '',
     works: [['協力会社の現場報告', '点検結果を一覧にまとめ、未提出と要対応を確認。送信失敗からの再送も試せます。'], ['代理店の訪問報告', '訪問内容と次の予定を共有。商談の段階を変える前に、自社の担当者が確認する流れを試せます。'], ['セミナー予約', '申込みと参加状況を顧客情報につなげます。満席・重複への対応や、参加後のフォローを試せます。']],
-    connectorsTitle: '連携先ごとの開始価格', appNote: '連携の先に、現場で使う専用アプリが必要な場合もご相談いただけます（アプリ開発',
+    connectorsTitle: "LINE連携・アプリ開発の料金例", appNote: '連携の先に、現場で使う専用アプリが必要な場合もご相談いただけます（アプリ開発',
     whyEyebrow: '納品前に確認すること',
     whyTitle: ['業務で使い続けるために、', '確認してからお渡しします。'],
     whyLead: '登録漏れや二重登録、個人情報の扱い、引き継ぎまで。AIを使って作った部分も含め、運用に必要な点を人が確認します。',
@@ -33,17 +34,17 @@ const c = {
     whyClose: 'IT・開発の現場で20年以上積み重ねた知識をもとに、AIが作った部分も含めて、人が一つずつ確認してからお渡しします。',
     approachTitle: '和-Nodeの進め方', approachLead: '技術を選ぶ前に、誰が、いつ、何のために使うのか。いまの業務の流れから、登録する項目と通知の順番を組み立てます。', about: '和-Nodeについて',
     steps: [['整理する', '現状と目的を伺い、必要な機能と優先順位を確認。'], ['見える形にする', '画面・連携範囲・費用・期間を具体化してから着手。'], ['確かめて、届ける', '操作と連携を確認し、公開・運用の引継ぎまで対応。']],
-    scopeTitle: 'ご相談をお受けする範囲', scopeLead: '既にお使いの業務システムとLINEをつなぐご相談をお受けします。必要な機能が決まっていなくても、現状から一緒に整理できます。',
-    scopeYes: '向いているご相談', scopeNo: '今回の対応範囲に含まれないこと',
-    scopeFor: ['LINEと業務システムを別々に運用していて、転記や二重入力が発生している', 'Salesforce・kintone・HubSpot・Googleスプレッドシートのいずれかを既に使っている', '社内に相談できるIT担当がいない、または手が足りていない'],
-    scopeNot: ['業務システムの新規導入支援（連携先のシステムを導入してからご相談ください）', 'LINE公式アカウントの設定・構築だけのご依頼'],
+    scopeTitle: "ご依頼の前に、範囲を確かめます。", scopeLead: "基本はフルリモートです。現状やご希望を伺い、対応できることと、ご依頼前に決めることを整理します。",
+    scopeYes: "相談できること", scopeNo: "対応方式と事前確認",
+    scopeFor: ["何から改善するか、使うツールから考えたい", "情報共有・データ管理の流れを整理したい", "決まった改善案を開発・実装してほしい"],
+    scopeNot: ["現地でのPC・ネットワーク・端末の環境整備は対象外です", "オンラインでの設定支援は、対象と作業内容を確認して対応可否を判断します", "納品内容・費用・期間・保守は、ご依頼前に合意します"],
     finalTitle: '構想段階からご相談いただけます', finalDesc: '必要なことも、まだ決まっていないことも。そのまま聞かせてください。',
   },
   en: {
-    eyebrow: 'LINE integration', title: ['LINE inquiries,', 'registered in your', 'business system.'],
-    leadShort: 'Inquiries from your LINE Official Account, registered automatically in Salesforce, kintone, HubSpot or Google Sheets.',
-    lead: 'Requests and inquiries received on your LINE Official Account are registered automatically in Salesforce, kintone, HubSpot or Google Sheets. We build the integration with you, from requirements to launch, to reduce copying and double entry. If you also need a dedicated app, we can discuss that too.',
-    view: 'Explore working demos', assurance: 'Your integration requirements can be undecided. There is no obligation to order after the consultation.',
+    eyebrow: "AI, digital transformation and ICT", title: ["Clarify the problem.", "Improve the workflow.", "Build the solution."],
+    leadShort: "From clarifying problems to building solutions, including implementation of plans you have already defined.",
+    lead: "We help clarify operational problems, propose improvements using AI and digital tools, and build solutions. If you already have an improvement plan, we can discuss development and implementation.",
+    view: 'Explore working demos', assurance: "You can consult us before deciding what to improve. There is no obligation to order.",
     preview: 'How automatic registration works', sample: 'Sample interface · no data sent', received: 'A LINE inquiry arrives', message: 'I would like to discuss a quote.', waiting: 'Transferring the form details…',
     fields: [['Company', 'Sample Co.'], ['Request', 'Quote inquiry'], ['Reply via', 'LINE']], pause: 'Pause animation', play: 'Play animation',
     tryOpen: 'Try it with your own message', tryLabel: 'Pick a message or type your own to try the flow.', tryOwn: 'Type my own', inputLabel: 'Inquiry message', placeholder: 'e.g. This is Example Ltd. We would like a quote.', send: 'Send to try',
@@ -54,7 +55,7 @@ const c = {
     scope: 'View scope and pricing',
     worksTitle: 'Try a demo that fits your workflow', worksLead: 'Screenshots of our working demos with fictional data, not client deployments or measured business results.', allWorks: 'All projects & demos', demo: 'Independent demo', tryDemo: 'Try this demo', demoLanguage: 'Demo in Japanese',
     works: [['Contractor field reports', 'Collect inspection results, identify missing reports and issues, and try resending after a failed submission.'], ['Partner visit reports', 'Share visit notes and next steps. Try internal approval before changing an opportunity stage.'], ['Seminar booking', 'Connect bookings and attendance to contact records. Try full sessions, duplicate prevention and follow-up.']],
-    connectorsTitle: 'Starting price by integration target', appNote: 'If you also need a dedicated app for your team beyond the integration, we can discuss that too (app development',
+    connectorsTitle: "LINE integration and app development: price examples", appNote: 'If you also need a dedicated app for your team beyond the integration, we can discuss that too (app development',
     whyEyebrow: 'Checks before handover',
     whyTitle: ['Reviewed before delivery,', 'with everyday use in mind.'],
     whyLead: 'From missing or duplicate records to personal data and handover, we review the points needed for operation, including parts built with AI.',
@@ -63,17 +64,17 @@ const c = {
     whyClose: 'Drawing on more than 20 years in IT and development, we review every part by hand, including anything AI produced, before handing it over.',
     approachTitle: 'Begin with how people will use it.', approachLead: 'Who uses it, when, and why? We start from your current workflow to decide which fields to register and when to notify.', about: 'About Wa-Node',
     steps: [['Understand', 'Clarify the current situation, goals and priorities.'], ['Make it concrete', 'Agree on screens, scope, cost and timing before work begins.'], ['Check and deliver', 'Verify interactions and integrations, then support launch and handover.']],
-    scopeTitle: 'What fits, and what we do not take on.', scopeLead: 'We connect LINE to a business system you already use. The required features can be clarified during the consultation.',
-    scopeYes: 'A good fit', scopeNo: 'Not a fit',
-    scopeFor: ['LINE and your business system run separately, causing re-entry and duplicate work', 'You already use Salesforce, kintone, HubSpot or Google Sheets', 'You have no in-house IT contact, or not enough hands'],
-    scopeNot: ['The business system to connect to is not in place yet', 'You only want a LINE official account set up'],
+    scopeTitle: "Agree on the scope before starting.", scopeLead: "Work is primarily remote. We discuss your situation and confirm what we can support before an order.",
+    scopeYes: "What you can discuss", scopeNo: "Delivery method and scope",
+    scopeFor: ["Work out what to improve and which tools fit", "Review information sharing and data management", "Develop an improvement plan you have already defined"],
+    scopeNot: ["No on-site PC, network or device setup", "Remote setup support depends on the system and tasks, reviewed before agreement", "Agree on deliverables, cost, timing and maintenance before an order"],
     finalTitle: 'Start with “could this work?”', finalDesc: 'Tell us what you know and what you are still figuring out.',
   },
   fr: {
-    eyebrow: 'Intégration LINE', title: ['Demandes LINE,', 'enregistrées dans', 'votre outil métier.'],
-    leadShort: 'Les demandes reçues sur LINE, enregistrées automatiquement dans Salesforce, kintone, HubSpot ou Google Sheets.',
-    lead: 'Les demandes reçues sur votre compte officiel LINE sont enregistrées automatiquement dans Salesforce, kintone, HubSpot ou Google Sheets. Nous construisons l’intégration avec vous, des besoins au lancement, pour limiter les ressaisies. Une application dédiée peut aussi être envisagée si nécessaire.',
-    view: 'Essayer les démonstrations', assurance: 'Le périmètre peut rester à définir. La consultation ne vous oblige pas à commander.',
+    eyebrow: "IA, transformation numérique et outils ICT", title: ["Clarifier les besoins.", "Revoir les processus.", "Créer les solutions."],
+    leadShort: "De la clarification des difficultés à la réalisation, y compris pour les améliorations déjà définies.",
+    lead: "Nous clarifions les difficultés, proposons des améliorations avec l’IA et les outils numériques et construisons les solutions. Si votre plan est déjà défini, nous pouvons intervenir pour le développement et la réalisation.",
+    view: 'Essayer les démonstrations', assurance: "Vous pouvez consulter avant de définir les améliorations. La consultation est sans obligation de commande.",
     preview: 'Le parcours d’enregistrement', sample: 'Interface fictive · aucun envoi', received: 'Une demande arrive sur LINE', message: 'Je souhaite discuter d’un devis.', waiting: 'Transfert des informations…',
     fields: [['Entreprise', 'Exemple SA'], ['Objet', 'Devis'], ['Réponse', 'Par LINE']], pause: 'Mettre en pause', play: 'Relancer l’animation',
     tryOpen: 'Essayer avec votre propre message', tryLabel: 'Choisissez un message ou écrivez le vôtre pour tester le parcours.', tryOwn: 'Écrire mon message', inputLabel: 'Message de la demande', placeholder: 'Ex. : Ici Exemple SARL. Nous souhaitons un devis.', send: 'Envoyer pour tester',
@@ -84,7 +85,7 @@ const c = {
     scope: 'Voir le périmètre et les tarifs',
     worksTitle: 'Une démo proche de votre activité', worksLead: 'Captures de nos démos en fonctionnement, avec des données fictives. Il ne s’agit pas de déploiements ni de résultats clients.', allWorks: 'Toutes les créations', demo: 'Démo indépendante', tryDemo: 'Essayer cette démo', demoLanguage: 'Démo en japonais',
     works: [['Rapports d’intervention', 'Rassembler les résultats des contrôles, repérer les rapports manquants et les anomalies, puis tester le renvoi après un échec.'], ['Rapports de visite des partenaires', 'Partager les visites et les prochaines étapes. Tester la validation interne avant de modifier une étape commerciale.'], ['Réservation de séminaire', 'Relier les réservations et la présence aux fiches contacts. Tester les sessions complètes, les doublons et le suivi.']],
-    connectorsTitle: 'Prix de départ par système connecté', appNote: 'Si une application dédiée est aussi nécessaire en complément de l’intégration, nous pouvons en discuter (application',
+    connectorsTitle: "Exemples de tarifs : intégration LINE et applications", appNote: 'Si une application dédiée est aussi nécessaire en complément de l’intégration, nous pouvons en discuter (application',
     whyEyebrow: 'Vérifications avant livraison',
     whyTitle: ['Vérifier avant de livrer,', 'en pensant à l’usage quotidien.'],
     whyLead: 'Enregistrements manquants ou en double, données personnelles, transmission : nous vérifions les points nécessaires au fonctionnement, y compris les éléments créés avec l’IA.',
@@ -93,17 +94,17 @@ const c = {
     whyClose: 'Forts de plus de 20 ans d’expérience en informatique et en développement, nous vérifions chaque élément à la main, y compris ce que l’IA a produit, avant de vous le livrer.',
     approachTitle: 'Penser aux usages avant de développer.', approachLead: 'Qui l’utilise, quand et pourquoi ? Nous partons de votre fonctionnement actuel pour définir les champs à enregistrer et le moment des notifications.', about: 'À propos de Wa-Node',
     steps: [['Comprendre', 'Clarifier la situation, les objectifs et les priorités.'], ['Concrétiser', 'Définir les écrans, le périmètre, le coût et les délais avant de commencer.'], ['Vérifier et livrer', 'Vérifier les interactions, puis accompagner le lancement et la prise en main.']],
-    scopeTitle: 'Ce qui correspond, et ce que nous ne prenons pas.', scopeLead: 'Nous relions LINE à votre outil métier existant. Les fonctions nécessaires peuvent être précisées lors de la consultation.',
-    scopeYes: 'Demandes adaptées', scopeNo: 'Hors périmètre',
-    scopeFor: ['LINE et votre système de gestion fonctionnent séparément, avec des ressaisies', 'Vous utilisez déjà Salesforce, kintone, HubSpot ou Google Sheets', 'Vous n’avez pas d’interlocuteur informatique en interne, ou pas assez de moyens'],
-    scopeNot: ['Le système de gestion à relier n’est pas encore en place', 'Vous souhaitez uniquement la création d’un compte officiel LINE'],
+    scopeTitle: "Préciser le périmètre avant de commencer.", scopeLead: "Nous travaillons principalement à distance. Nous examinons votre situation et le périmètre possible avant la commande.",
+    scopeYes: "Sujets de consultation", scopeNo: "Modalités et périmètre",
+    scopeFor: ["Définir les améliorations et les outils adaptés", "Revoir le partage d’informations et la gestion des données", "Réaliser un plan d’amélioration déjà défini"],
+    scopeNot: ["Sans installation sur site de PC, réseaux ou appareils", "L’aide à la configuration à distance dépend des outils et des tâches à examiner", "Livrables, coûts, délais et maintenance sont convenus avant la commande"],
     finalTitle: 'Commençons par votre idée.', finalDesc: 'Dites-nous ce qui est défini et ce qui reste à préciser.',
   },
 }[lang];
 const audience = {
-  ja: 'Salesforce・kintone・HubSpot・Googleスプレッドシートをご利用中の事業者向けです。',
-  en: 'For businesses already using Salesforce, kintone, HubSpot or Google Sheets.',
-  fr: 'Pour les entreprises utilisant déjà Salesforce, kintone, HubSpot ou Google Sheets.',
+  ja: '基本フルリモートで、ツール選定・情報共有・データ管理からご相談いただけます。',
+  en: 'Primarily remote support for tool selection, information sharing and data management.',
+  fr: 'Accompagnement principalement à distance : choix des outils, partage d’informations et gestion des données.',
 }[lang];
 const workLinks = ['/case-studies/line-field-report-demo/', '/case-studies/line-partner-visit-demo/', '/case-studies/line-seminar-booking-demo/'];
 const workImages = ['usecase-field-report.webp', 'usecase-partner-visit.webp', 'usecase-seminar-booking.webp'];
@@ -111,11 +112,6 @@ const workImageHeights = [597, 569, 796];
 const workTargets = ['kintone', 'Salesforce', 'HubSpot'];
 // 事例ページと共有するページ遷移の名前（カードの画像→事例ページの見出し部分、カードの題→事例ページのh1）
 const workSlugs = ['field-report', 'partner-visit', 'seminar-booking'];
-const connectors = [['Google Sheets', servicePrices.lineSheets], ['HubSpot', servicePrices.lineHubspot], ['kintone', servicePrices.lineKintone], ['Salesforce', servicePrices.lineSalesforce]] as const;
-// FVの連携先カードから開く、各システムのデモページ
-const connectorDemo: Record<string, string> = { 'Google Sheets': '/case-studies/line-spreadsheet-demo/', HubSpot: '/case-studies/line-hubspot-demo/', kintone: '/case-studies/line-kintone-demo/', Salesforce: '/case-studies/line-salesforce-demo/' };
-// ヒーローのデモで切り替える登録先。fields の順番（会社名・用件・返信方法）は、触れるデモの抽出結果と対応させる。
-interface DemoTarget { name: string; track: string; record: string; fields: [string, string, string]; done: string; link: string; path: string }
 const demoTargets = {
   ja: { label: '登録先を選ぶ', switched: '登録先：', items: [
     { name: 'kintone', track: 'LINE → kintone', record: '顧客管理アプリに登録', fields: ['会社名', 'ご用件', '返信方法'], done: '登録・担当通知が完了', link: 'LINE × kintoneのデモへ', path: '/case-studies/line-kintone-demo/' },
@@ -145,13 +141,14 @@ const targetSystems = ['kintone', 'salesforce', 'hubspot', 'sheets'];
 const replayLabel = { ja: 'もう一度見る', en: 'Replay', fr: 'Revoir' }[lang];
 const targetData = demoTargets.items.map((t, i) => ({ ...t, href: href(t.path), system: targetSystems[i], contactHref: href(`/contact/?source=top&category=${targetCategories[i]}`) }));
 const pageGuide = {
-  ja: { label: '知りたいことから見る', links: ['連携の仕組み', '相談できる範囲', '動く制作例', '納品前の確認'] },
-  en: { label: 'Explore this page', links: ['How it works', 'What we connect', 'Working demos', 'Before delivery'] },
-  fr: { label: 'Explorer cette page', links: ['Le fonctionnement', 'Le périmètre', 'Les démonstrations', 'Avant la livraison'] },
+  ja: { label: '知りたいことから見る', links: ['支援できること', '仕組みの具体例', '動く制作例', '納品前の確認'] },
+  en: { label: 'Explore this page', links: ['Our support', 'An example', 'Working demos', 'Before delivery'] },
+  fr: { label: 'Explorer cette page', links: ['Nos services', 'Un exemple', 'Les démonstrations', 'Avant la livraison'] },
 }[lang];
-const pageSections = ['flow', 'scope', 'selected-works', 'why-wa-node'];
+const pageSections = ['business-support', 'flow', 'selected-works', 'why-wa-node'];
 ---
 <main id="main" class="service-page home-refresh" data-glossary-skip data-reveal="off">
+
   <section class="home-hero">
     <div class="s-shell hero-layout">
       <div class="hero-copy">
@@ -161,17 +158,19 @@ const pageSections = ['flow', 'scope', 'selected-works', 'why-wa-node'];
         <p class="s-intro hero-lead">{c.lead}</p>
         <p class="s-intro hero-lead-short">{c.leadShort}</p>
         <p class="hero-audience">{audience}</p>
-        <div class="s-actions"><a class="s-button" href={targetData[0].contactHref} data-home-consult data-consult-cta data-analytics-system="kintone" data-analytics-surface="home">{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-link hero-secondary" href="#selected-works">{c.view}<MaterialIcon name="arrow_forward" /></a></div>
+        <div class="s-actions"><a class="s-button" href={href('/contact/')} data-consult-cta data-analytics-system="general" data-analytics-surface="home">{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-link hero-secondary" href="#selected-works">{c.view}<MaterialIcon name="arrow_forward" /></a></div>
         <p class="s-note">{c.assurance}</p>
         </div>
-        <nav class="hero-prices" aria-label={c.connectorsTitle}>
-          <p class="hero-prices-title">{c.connectorsTitle}</p>
-          <ul>{connectors.map(([name, amount]) => <li><a href={href(connectorDemo[name])}><span class="hp-name">{name}{name==='Google Sheets'&&<span class="hp-badge">{lineTierText[lang].badge}</span>}</span><span class="hp-price work-open">{startingPrice(amount, lang)}<MaterialIcon name="arrow_forward" /></span></a></li>)}</ul>
-          <p class="hero-prices-note">{labels.tax}</p>
-          <p class="hero-prices-app">{c.appNote} {startingPrice(servicePrices.businessApp, lang)}{lang==='ja'?'）':')'} <a class="s-link" href={href('/pricing/#app')}>{c.scope}<MaterialIcon name="arrow_forward" /></a></p>
-        </nav>
+
       </div>
-      <div class="hero-demo" data-home-demo data-clarity-mask="true" data-analytics-system="kintone" data-analytics-surface="home" data-rules={JSON.stringify(c.rules)} data-targets={JSON.stringify(targetData)} data-target-switched={demoTargets.switched}>
+      <ConsultingPaths lang={lang} />
+    </div>
+  </section>
+  <nav class="home-guide s-shell" aria-label={pageGuide.label}>
+    {pageGuide.links.map((label, i) => <a href={`#${pageSections[i]}`}>{label}<MaterialIcon name="south" /></a>)}
+  </nav>
+  <BusinessSupportOverview lang={lang} />
+  <section class="s-section integration-example" id="flow"><div class="s-shell integration-example-layout"><div><h2>{lang === 'ja' ? '仕組みにすると、どう変わる？' : lang === 'en' ? 'See a workflow take shape.' : 'Voir un processus prendre forme.'}</h2><p class="s-intro">{lang === 'ja' ? 'LINEで受けた情報を業務システムへつなぐ、実装の一例です。転記する作業を仕組みに置き換える流れを、画面で試せます。' : lang === 'en' ? 'An implementation example: connect information received on LINE to a business system. Try the registration flow on screen.' : 'Un exemple de réalisation : transmettre les informations reçues sur LINE à un outil métier. Essayez le parcours à l’écran.'}</p><a class="s-link" href={href('/pricing/')}>{c.scope}<MaterialIcon name="arrow_forward" /></a></div>      <div class="hero-demo" data-home-demo data-clarity-mask="true" data-analytics-system="kintone" data-analytics-surface="home" data-rules={JSON.stringify(c.rules)} data-targets={JSON.stringify(targetData)} data-target-switched={demoTargets.switched}>
         <div class="demo-title"><span>{c.preview}</span><button type="button" class="demo-toggle" data-demo-toggle aria-pressed="false" data-pause={c.pause} data-play={c.play} data-replay={replayLabel} hidden><MaterialIcon name="pause" /><span data-demo-toggle-label>{c.pause}</span></button></div>
         <p class="demo-scope">{c.demoScope}</p>
         <div class="demo-targets" role="group" aria-label={demoTargets.label} data-demo-targets hidden>{demoTargets.items.map((t, i) => <button type="button" class="demo-target" data-target={i} aria-pressed={i === 0 ? 'true' : 'false'}>{t.name}</button>)}</div>
@@ -203,12 +202,7 @@ const pageSections = ['flow', 'scope', 'selected-works', 'why-wa-node'];
         <p class="demo-live" aria-live="polite" data-demo-live></p>
         <p class="demo-disclosure">{c.sample}</p>
       </div>
-    </div>
-  </section>
-  <nav class="home-guide s-shell" aria-label={pageGuide.label}>
-    {pageGuide.links.map((label, i) => <a href={`#${pageSections[i]}`}>{label}<MaterialIcon name="south" /></a>)}
-  </nav>
-  <HomeFlowScroll lang={lang} compact />
+</div></section>
   <section class="s-section scope-section" id="scope"><div class="s-shell">
     <div class="s-section-head" data-motion-enter="heading" data-motion-id="scope-heading"><div><h2>{c.scopeTitle}</h2><p class="s-intro">{c.scopeLead}</p></div></div>
     <div class="s-grid-two scope-split">
@@ -235,9 +229,10 @@ const pageSections = ['flow', 'scope', 'selected-works', 'why-wa-node'];
     <p class="why-close">{c.whyClose}</p>
   </div></section>
   <section class="s-section"><div class="s-shell approach-layout"><div><h2>{c.approachTitle}</h2><p class="s-intro">{c.approachLead}</p><a class="s-link" href={href('/about/')}>{c.about}<span aria-hidden="true">→</span></a></div><ol class="approach-steps">{c.steps.map(([title,desc],i) => <li data-motion-enter="block" data-motion-group="approach"><span class="s-number">0{i+1}</span><div><h3><MaterialIcon name={approachIcons[i]} class="ic-inline" />{title}</h3><p>{desc}</p></div></li>)}</ol></div></section>
-  <section class="s-contact-band"><div class="s-shell"><div><h2>{c.finalTitle}</h2><p>{c.finalDesc}</p></div><a class="s-button" href={targetData[0].contactHref} data-home-consult data-consult-cta data-analytics-system="kintone" data-analytics-surface="home">{labels.consultation}<MaterialIcon name="arrow_forward"/></a></div></section>
+  <section class="s-contact-band"><div class="s-shell"><div><h2>{c.finalTitle}</h2><p>{c.finalDesc}</p></div><a class="s-button" href={href('/contact/')} data-consult-cta data-analytics-system="general" data-analytics-surface="home">{labels.consultation}<MaterialIcon name="arrow_forward"/></a></div></section>
 </main>
 <style>
+.integration-example-layout{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}.integration-example .hero-demo{box-shadow:none}.integration-example .s-intro{max-width:32em}@media(max-width:820px){.integration-example-layout{grid-template-columns:1fr;gap:28px}}
 .hero-audience{font-size:.9375rem;line-height:1.8;color:var(--ink);margin:0 0 20px;padding-left:12px;border-left:2px solid var(--deep)}
 @media(max-width:820px){.home-refresh .hero-copy{margin-bottom:24px}.home-refresh .hero-lead-short{margin-bottom:12px!important}.home-refresh .hero-audience{font-size:.875rem;margin-bottom:18px}}
 .home-refresh .home-hero{padding:76px 0 56px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='none' stroke='%238c6b1f' stroke-width='1.5' stroke-opacity='0.07'%3E%3Ccircle cx='0' cy='0' r='40'/%3E%3Ccircle cx='80' cy='0' r='40'/%3E%3Ccircle cx='0' cy='80' r='40'/%3E%3Ccircle cx='80' cy='80' r='40'/%3E%3Ccircle cx='40' cy='40' r='40'/%3E%3C/g%3E%3C/svg%3E"),linear-gradient(135deg,#fdfcf9 0%,#f7f1e6 100%);background-size:80px 80px,auto}.hero-layout{display:grid;grid-template-columns:1.12fr 1fr;gap:64px;align-items:center}.hero-copy h1>span{display:block}.hero-copy h1.is-ja .phrase{display:inline-block;white-space:nowrap}.hero-copy h1.is-ja>span{display:block!important}.hero-copy h1>span:last-child{color:var(--deep)}.hero-demo{min-width:0;background:var(--deep);padding:24px;border-radius:12px;color:#fff;box-shadow:16px 18px 0 #e4e9df}.demo-title{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:32px;margin-bottom:14px;font-size:.875rem;letter-spacing:.06em}.preview-panel{background:#f7f8f1;color:var(--ink);border-radius:6px;padding:24px 22px}.connection-source,.connection-target{display:flex;align-items:center;gap:12px}.source-icon{display:block;flex-shrink:0;margin:0 2px}.source-icon img{display:block;width:40px;height:auto}.connection-source strong,.connection-target strong{font-size:.875rem}.connection-source p{font-size:.875rem;margin:3px 0 0;color:var(--quiet)}.connection-track{display:flex;gap:14px;align-items:center;color:#658075;font-size:.8125rem;letter-spacing:.1em;padding:16px 0 16px 9px}.target-icon{display:grid;place-items:center;background:#e9e5c6;border-radius:8px;width:42px;height:42px;flex-shrink:0;color:#635828}.connection-target{display:block;padding:14px 16px 12px;background:#ecefe5;border:1px solid #d9dfd1;border-radius:6px}.preview-detail{display:flex;align-items:center;min-height:44px;justify-content:space-between;gap:10px;color:var(--deep);text-decoration:none;font-size:.8125rem;font-weight:700;margin-top:18px;padding-top:14px;border-top:1px solid #d5ddcf}.demo-disclosure{text-align:center;font-size:.8125rem;color:#d3e3d8;margin:14px 0 0!important}.works-section{background:#f2f3eb}.selected-work{text-decoration:none}.work-preview{aspect-ratio:1.7;background:#e3ece0;display:flex;align-items:center;justify-content:center;gap:16px;position:relative;border-radius:6px;overflow:hidden;border:1px solid #d8dfd1}.work-preview>small{position:absolute;bottom:20px;font-size:.8125rem;letter-spacing:.13em;color:#52755e}.mini-line,.mini-crm{display:grid;place-items:center;min-height:60px;min-width:75px;padding:12px;background:white;border-radius:12px;font-size:.9375rem;font-weight:700}.mini-line{background:#23754e;color:#fff}.mini-crm{background:#f0df97;color:#494225}.work-preview img{width:100%;height:100%;object-fit:cover}.work-caption{padding:20px 0 0}.work-caption>span{font-size:.8125rem;color:var(--quiet)}.work-caption h3{display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:1.06rem;margin:6px 0 10px}.work-caption p{font-size:.875rem;color:var(--quiet);margin:0}.selected-work:hover .work-caption h3{color:var(--vermillion)}.approach-layout{display:grid;grid-template-columns:1fr 1fr;gap:70px}.approach-steps{list-style:none;margin:0;padding:0}.approach-steps li{display:flex;gap:24px;border-top:1px solid var(--rule);padding:22px 0}.approach-steps h3{font-size:1.06rem;margin-bottom:7px}.approach-steps p{color:var(--quiet);font-size:.9375rem;margin:0}.demo-toggle{display:inline-flex;align-items:center;gap:6px;min-height:44px;margin:-6px -10px -6px 0;padding:0 10px;background:transparent;border:0;border-radius:6px;color:#d3e3d8;font:inherit;font-size:.8125rem;letter-spacing:0;cursor:pointer}.demo-toggle:hover{color:#fff;background:rgba(255,255,255,.08)}.demo-toggle:focus-visible{outline:2px solid #fff;outline-offset:2px}.service-page .demo-toggle[hidden]{display:inline-flex!important;visibility:hidden}.demo-toggle :global(.material-symbols-rounded){font-size:18px}.line-bubble{background:#fff;border:1px solid #d9dfd1;border-radius:8px;padding:10px 14px}.target-head{display:flex;align-items:center;gap:12px;margin-bottom:8px}.record-fields{margin:0}.record-field{display:grid;grid-template-columns:6.5em minmax(0,1fr);gap:12px;align-items:baseline;padding:8px 2px;border-top:1px solid #d9dfd1}.record-field dt{color:var(--quiet);font-size:.875rem}.record-field dd{margin:0;font-size:.875rem;font-weight:600;color:var(--ink)}.record-status{display:grid;margin:4px 0 0!important;padding-top:10px;border-top:1px solid #d9dfd1;font-size:.875rem}.record-status>span{grid-area:1/1;display:flex;align-items:center;gap:8px;min-height:24px}.status-wait{visibility:hidden;color:var(--quiet)}.status-done{color:var(--action,#c7352f);font-weight:700}.status-done :global(.material-symbols-rounded){font-size:20px}.hero-lead-short{display:none}@keyframes hd-source{0%{opacity:0;transform:translateY(10px)}7%,88%{opacity:1;transform:none}96%,100%{opacity:1;transform:none}}@keyframes hd-track{0%,9%{opacity:.2}15%,88%{opacity:1}96%,100%{opacity:1}}@keyframes hd-field-1{0%,18%{clip-path:inset(0 100% 0 0)}26%,88%{clip-path:inset(0 0 0 0)}96%,100%{clip-path:inset(0 0 0 0)}}@keyframes hd-field-2{0%,30%{clip-path:inset(0 100% 0 0)}38%,88%{clip-path:inset(0 0 0 0)}96%,100%{clip-path:inset(0 0 0 0)}}@keyframes hd-field-3{0%,42%{clip-path:inset(0 100% 0 0)}50%,88%{clip-path:inset(0 0 0 0)}96%,100%{clip-path:inset(0 0 0 0)}}@keyframes hd-wait{0%,14%{opacity:0}20%,54%{opacity:1}58%,100%{opacity:0}}@keyframes hd-done{0%,56%{opacity:0;transform:translateY(4px)}62%,88%{opacity:1;transform:none}96%,100%{opacity:1;transform:none}}@keyframes hd-target{0%,56%{border-color:#d9dfd1;box-shadow:0 0 0 0 rgba(199,53,47,0)}62%{border-color:#d9a19c;box-shadow:0 0 0 4px rgba(199,53,47,.16)}74%,88%{border-color:#d9a19c;box-shadow:0 0 0 0 rgba(199,53,47,0)}96%,100%{border-color:#d9dfd1}}.is-playing .connection-source .line-bubble{animation:hd-source 9s ease-out both}.is-playing .connection-track{animation:hd-track 9s ease-out both}.is-playing .record-field-1 dd{animation:hd-field-1 9s linear both}.is-playing .record-field-2 dd{animation:hd-field-2 9s linear both}.is-playing .record-field-3 dd{animation:hd-field-3 9s linear both}.is-playing .status-wait{visibility:visible;animation:hd-wait 9s ease-out both}.is-playing .status-done{animation:hd-done 9s ease-out both}.is-playing .connection-target{animation:hd-target 9s ease-out both}.is-paused .preview-panel *,.is-paused .preview-panel{animation-play-state:paused!important}@media(prefers-reduced-motion:reduce){.is-playing .preview-panel *{animation:none!important}.is-playing .status-wait{visibility:hidden}}
