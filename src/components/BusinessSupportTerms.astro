@@ -1,10 +1,10 @@
 ---
 import type { SiteLanguage } from '../data/services';
-interface Props { lang?: SiteLanguage }
-const { lang = 'ja' } = Astro.props;
+interface Props { lang?: SiteLanguage; stage?: 'before' | 'after' }
+const { lang = 'ja', stage = 'before' } = Astro.props;
 const copy = {
  ja: {
-  title: '業務改善支援の納品物と、納品後の対応',
+  title: '業務改善支援の納品物と契約',
   lead: '業務改善・ICT活用支援は、作業範囲を確認して個別にお見積りします。',
   rows: [
    ['課題整理・診断でお渡しするもの', '現在の業務の流れ、課題と優先順位、ツールの候補、実装に必要な費用・期間の概算範囲を資料にまとめます。設定・開発・実装は、診断とは別契約とし、範囲と費用を合意してから進めます。'],
@@ -16,7 +16,7 @@ const copy = {
   note: 'この案内は業務改善・ICT活用支援についてのものです。LINE連携・アプリ開発の料金と含まれる作業は、下の各案内をご確認ください。既存のご契約は、合意済みの条件に従います。',
  },
  en: {
-  title: 'Workflow support: deliverables and aftercare',
+  title: 'Workflow support: deliverables and agreement',
   lead: 'Workflow improvement and ICT support are quoted individually after confirming the scope.',
   rows: [
    ['Assessment deliverables', 'A document covering your current workflow, issues and priorities, candidate tools, and indicative implementation costs and schedule. Configuration, development and implementation require a separate agreement on scope and fees.'],
@@ -28,7 +28,7 @@ const copy = {
   note: 'These terms describe workflow improvement and ICT support. See the sections below for LINE integration and app development pricing and included work. Existing contracts retain their agreed terms.',
  },
  fr: {
-  title: 'Amélioration des processus : livrables et suivi',
+  title: 'Amélioration des processus : livrables et contrat',
   lead: 'L’amélioration des processus et l’accompagnement TIC font l’objet d’un devis individuel après définition du périmètre.',
   rows: [
    ['Livrables du diagnostic', 'Un document présente les processus actuels, les difficultés et priorités, les outils envisageables ainsi qu’une estimation du coût et du calendrier de mise en œuvre. La configuration, le développement et la mise en œuvre nécessitent un contrat distinct précisant le périmètre et le coût.'],
@@ -41,12 +41,12 @@ const copy = {
  },
 }[lang];
 ---
-<section class="s-section business-support-terms" aria-labelledby="support-terms-title" id="support-terms">
+<section class="s-section business-support-terms" aria-labelledby={`support-terms-title-${stage}`} id={stage === 'before' ? 'support-terms' : 'support-aftercare'}>
  <div class="s-shell">
-  <h2 id="support-terms-title">{copy.title}</h2>
-  <p class="s-intro">{copy.lead}</p>
-  <dl>{copy.rows.map(([title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
-  <p class="s-note">{copy.note}</p>
+  <h2 id={`support-terms-title-${stage}`}>{stage === 'before' ? copy.title : {ja: '納品後の対応', en: 'After delivery', fr: 'Après la livraison'}[lang]}</h2>
+  {stage === 'before' && <p class="s-intro">{copy.lead}</p>}
+  <dl>{copy.rows.filter((_, i) => stage === 'before' ? i < 2 : i >= 2).map(([title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
+  {stage === 'before' && <p class="s-note">{copy.note}</p>}
  </div>
 </section>
 <style>

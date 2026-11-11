@@ -1,11 +1,17 @@
 ---
 import { localizedPath, type SiteLanguage } from '../data/services';
-interface Props { lang?: SiteLanguage; contactPage?: boolean }
-const { lang = 'ja', contactPage = false } = Astro.props;
+interface Props { lang?: SiteLanguage; contactPage?: boolean; variant?: 'summary' | 'detail' }
+const { lang = 'ja', contactPage = false, variant = 'detail' } = Astro.props;
 const copy = {
  ja: {title:'業務改善のための支援', lead:'困りごとの整理・改善策の提案・仕組みの構築から、すでに決まった改善案の開発・実装までご相談いただけます。', items:[['AX・DXによる業務改善支援','AIやデジタル技術の活用を検討し、業務の流れや手作業を見直します。'],['ICT活用支援','ツール選定・情報共有・データ管理の進め方を整理します。'],['LINE連携・アプリ開発','LINEと業務システムの連携や、業務に合わせたアプリを設計・実装します。']], note:'基本はフルリモートです。現地でのPC・ネットワーク・端末の環境整備は対応範囲に含みません。具体的な作業・納品内容・費用・保守範囲は、ご依頼前に確認します。', action:'業務の困りごとを相談する'},
  en: {title:'Support for improving your operations',lead:'We help clarify problems, propose improvements and build solutions. We also develop and implement improvement plans you have already defined.',items:[['AI and digital transformation','Review workflows and manual tasks, considering AI and digital tools.'],['ICT support','Clarify tool selection, information sharing and data management.'],['LINE integration and app development','Design and implement LINE connections to business systems and apps for your workflows.']],note:'Work is primarily fully remote. On-site PC, network and device setup is outside our scope. Tasks, deliverables, costs and maintenance scope are agreed before an order.',action:'Discuss your workflow'},
  fr: {title:'Accompagner l’amélioration de vos activités',lead:'Nous aidons à clarifier les difficultés, proposer des améliorations et construire des solutions. Nous développons aussi les solutions que vous avez déjà définies.',items:[['Transformation par l’IA et le numérique','Revoir les processus et les tâches manuelles en étudiant les outils numériques et l’IA.'],['Accompagnement aux outils numériques','Clarifier le choix des outils, le partage d’informations et la gestion des données.'],['Intégration LINE et applications','Concevoir et réaliser les connexions LINE et les applications adaptées à vos activités.']],note:'Les prestations sont principalement réalisées à distance. L’installation sur site de PC, réseaux et appareils est exclue. Tâches, livrables, coûts et maintenance sont convenus avant la commande.',action:'Discuter de vos besoins'}
+}[lang];
+const estimate = {ja: '個別見積', en: 'Individual quote', fr: 'Sur devis'}[lang];
+const comparison = {
+ ja: {labels:['相談したいこと','対応内容','費用の決め方','詳しく見る'],needs:['手作業を見直したい','情報やツールを整理したい','連携やアプリをつくりたい'],fees:[estimate,estimate,'開発内容別の開始価格'],links:['納品物と契約','納品物と契約','LINE連携・アプリ開発']},
+ en: {labels:['Your need','Support','Pricing','Details'],needs:['Review manual tasks','Organize information and tools','Build an integration or app'],fees:[estimate,estimate,'Starting prices by scope'],links:['Deliverables and agreement','Deliverables and agreement','LINE integration and apps']},
+ fr: {labels:['Votre besoin','Accompagnement','Tarification','Détails'],needs:['Revoir les tâches manuelles','Organiser informations et outils','Créer une intégration ou application'],fees:[estimate,estimate,'Prix de départ selon le périmètre'],links:['Livrables et contrat','Livrables et contrat','LINE et applications']}
 }[lang];
 const examples = {
  ja: ['「手作業が多い」「AIをどこに使えばよいか分からない」など、今の業務から考えます。','「情報が分散している」「どのツールを選ぶか迷う」など、使い方と管理の流れを整理します。','「LINEの受付をデータにつなげたい」「業務に合う画面をつくりたい」など、必要な仕組みを具体化します。'],
@@ -14,9 +20,11 @@ const examples = {
 }[lang];
 ---
 <section class="s-section" id="business-support"><div class="s-shell">
- <h2>{copy.title}</h2><p class="s-intro">{copy.lead}</p>
- <div class="support-list">{copy.items.map(([title, text], i) => <article id={['business-improvement', 'ict-support', 'line-app-development'][i]}><div class="support-title"><span aria-hidden="true">0{i+1}</span><h3>{title}</h3></div><div><p>{text}</p><p class="support-example">{examples[i]}</p></div></article>)}</div>
- <p>{copy.note}</p><a class="s-button" href={contactPage ? '#form-title' : localizedPath('/contact/', lang)}>{copy.action}</a>
+ <h2>{copy.title}</h2>{variant === 'detail' && <p class="s-intro">{copy.lead}</p>}
+ {variant === 'detail' ? <div class="support-comparison">{copy.items.map(([title,text],i) => <article id={['business-improvement','ict-support','line-app-development'][i]}><h3>{title}</h3><dl><div><dt>{comparison.labels[0]}</dt><dd>{comparison.needs[i]}</dd></div><div><dt>{comparison.labels[1]}</dt><dd>{text}</dd></div><div><dt>{comparison.labels[2]}</dt><dd>{comparison.fees[i]}</dd></div></dl>{i < 2 ? <a href="#support-terms">{comparison.labels[3]}：{comparison.links[i]} →</a> : <div class="support-detail-links"><a href="#line">{lang === 'ja' ? 'LINE連携' : lang === 'en' ? 'LINE integration' : 'Intégration LINE'} →</a><a href="#app">{lang === 'ja' ? 'アプリ開発' : lang === 'en' ? 'App development' : 'Applications'} →</a></div>}</article>)}</div> :
+ <div class="support-list">{copy.items.map(([title, text], i) => <article id={['business-improvement', 'ict-support', 'line-app-development'][i]}><div class="support-title"><span aria-hidden="true">0{i+1}</span><h3>{title}</h3></div><div><p>{examples[i]}</p></div></article>)}</div>}
+
+ {variant === 'detail' && <p>{copy.note}</p>}<a class="s-button" href={contactPage ? '#form-title' : localizedPath('/contact/', lang)}>{copy.action}</a>
 </div></section>
 <style>
 .support-list{margin:36px 0 28px;border-top:1px solid var(--rule)}
@@ -25,4 +33,5 @@ const examples = {
 .support-list h3{font-size:1.35rem;line-height:1.7;margin:0}.support-list p{margin:0 0 12px;max-width:42em}
 .support-list .support-example{font-size:.9375rem;color:var(--quiet);margin:0}
 @media(max-width:760px){.support-list article{grid-template-columns:1fr;gap:14px;padding:26px 0}.support-title{gap:16px}.support-list h3{font-size:1.18rem}}
+.support-comparison{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:32px 0}.support-comparison article{min-width:0;padding:24px;border:1px solid var(--rule);background:#fffefa}.support-comparison h3{font-size:1.15rem;line-height:1.7;margin:0 0 20px}.support-comparison dl{margin:0}.support-comparison dl>div{padding:14px 0;border-top:1px solid var(--rule)}.support-comparison dt{font-size:.8125rem;color:var(--quiet);margin-bottom:6px}.support-comparison dd{margin:0;line-height:1.8;overflow-wrap:anywhere}.support-comparison a{display:flex;align-items:center;min-height:44px;margin-top:12px;text-underline-offset:4px;overflow-wrap:anywhere}@media(max-width:60rem){.support-comparison{grid-template-columns:1fr}}
 </style>

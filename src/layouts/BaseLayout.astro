@@ -1,4 +1,5 @@
 ---
+import PageReadingGuide from '../components/PageReadingGuide.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import GlossaryEnhancer from '../components/GlossaryEnhancer.astro';
@@ -272,6 +273,7 @@ const getLocalizedHref = (l: string) => {
     {showSiteChrome && <a class="skip-link" href="#main">{skipLinkLabel}</a>}
     {showSiteChrome && <Header lang={currentLang} />}
     <slot />
+    {showSiteChrome && ['privacy','terms','terms_miniapp','tokutei','cancel-policy','security-policy','tech-stack','barrier_free','easy-guide','free-guide','docx-accessibility','dx_diagnosis_liff','wasm-diagnosis','seo_check','ad-report-diagnosis'].includes(Astro.url.pathname.replace(/^\/(en|fr)\//, '/').replace(/^\/|\/$/g,'')) && <PageReadingGuide lang={lang} />}
     {showSiteChrome && <Footer lang={currentLang} />}
     <AnalyticsConsent lang={currentLang} gaMeasurementId={gaMeasurementId} gaEnabled={gaEnabled} clarityProjectId={clarityProjectId} clarityEnabled={clarityEnabled} policyHref={analyticsPolicyHref} theme={consentTheme} />
     <GlossaryEnhancer />

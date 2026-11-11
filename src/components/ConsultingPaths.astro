@@ -3,7 +3,7 @@ import { localizedPath, type SiteLanguage } from '../data/services';
 interface Props { lang: SiteLanguage }
 const { lang } = Astro.props;
 const copy = {
- ja: { title:'どちらの段階からでも。', paths:[['困りごとから、一緒に考えたい','現状を整理し、何を変えるか、どんな仕組みが合うかを考えるところから。','課題の整理から相談する'],['つくりたいものが、決まっている','改善案や必要な機能を伺い、開発・実装の範囲を確かめるところから。','開発・実装を相談する']], note:'ツールを決める前のご相談もお受けします。' },
+ ja: { title:'どちらの段階からでも。', paths:[['困りごとから、一緒に考えたい','現状と目的を伺い、改善の方向を整理します。','課題の整理から相談する'],['つくりたいものが、決まっている','必要な機能から、開発・実装の範囲を確かめます。','開発・実装を相談する']], note:'ツールを決める前のご相談もお受けします。' },
  en: { title:'Start from where you are.', paths:[['Help me work out what to change','Clarify the current workflow and consider the improvements and tools that fit.','Discuss a workflow problem'],['I already have a plan to build','Review your improvement plan and features, then agree on the implementation scope.','Discuss development']], note:'You can consult us before choosing a tool.' },
  fr: { title:'Partons de votre situation.', paths:[['Je souhaite clarifier mes besoins','Comprendre le processus actuel et réfléchir aux améliorations et outils adaptés.','Discuter de mes besoins'],['Mon projet est déjà défini','Examiner les fonctions souhaitées et préciser le périmètre de réalisation.','Discuter du développement']], note:'Vous pouvez nous consulter avant de choisir un outil.' },
 }[lang];
@@ -11,7 +11,7 @@ const copy = {
 <aside class="consulting-paths" aria-labelledby="consulting-paths-title">
  <h2 id="consulting-paths-title">{copy.title}</h2>
  {copy.paths.map(([title, text, action], i) => <div class="consulting-path"><span class="path-index" aria-hidden="true">0{i+1}</span><div><h3>{title}</h3><p>{text}</p><a href={localizedPath(`/contact/?category=${i === 0 ? 'business_improvement' : 'consultation'}`, lang)}>{action}<span aria-hidden="true">→</span></a></div></div>)}
- <p class="paths-note">{copy.note}</p>
+
 </aside>
 <style>
 .consulting-paths{background:#285440;background:linear-gradient(115deg,#285440 0%,#3a6b4f 58%,#52735e 100%);color:#fff;padding:36px;min-width:0;border-radius:4px}

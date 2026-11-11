@@ -1,4 +1,5 @@
 ---
+import DeliveryChecks from '../components/DeliveryChecks.astro';
 import MaterialIcon from '../components/MaterialIcon.astro';
 import StepTimeline from '../components/StepTimeline.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -45,8 +46,8 @@ const structuredData = [
           <div class="content-left">
             <h2>代表・高野紘純について</h2>
             <h3 class="catch-copy"><span>業務の困りごとを、</span><span>使い続けられる仕組みに。</span></h3>
-            <p>ITの現場で繰り返し見てきたのが、システムは揃っているのに、人が間に入って転記・コピーし続けている状況です。和-Nodeでは、業務の流れを整理し、AI・デジタル技術やICTの活用、システム連携によって、その手作業を減らすことに取り組んでいます。</p>
-            <p>私自身、車いすユーザーとして生活する中で「不便は工夫で解消できる」という視点を深めてきました。使う人がどこで困るのかを伺い、日々の業務で無理なく使える形を一緒に考えます。</p>
+            <p>システム間の転記やコピーなど、現場に残る手作業。業務の流れを整理し、AI・デジタル技術やシステム連携で改善します。</p>
+            <p>車いすユーザーとしての経験から、使う人の不便を起点に、無理なく使える仕組みを考えます。</p>
           </div>
           <div class="content-right">
             <div class="profile-image-wrap">
@@ -73,6 +74,33 @@ const structuredData = [
             { title: '確かめて引き継ぐ', desc: '操作と連携を確認し、運用の手順をお渡しします。公開後の保守・改修は、必要な範囲と費用を別途確認します。', icon: 'task_alt' },
           ]} />
         </div>
+
+        <div class="reliability">
+
+        <div class="reliability-box" data-motion-enter="block" data-motion-id="about-reliability">
+          <h2>信頼と安全の基盤</h2>
+          <div class="trust-grid">
+            <div class="trust-item">
+              <img src="/images/security-action-one-star.webp" alt="SECURITY ACTION" class="trust-badge" />
+              <p>情報セキュリティ対策に真摯に取り組むことを宣言しています。</p>
+            </div>
+            <div class="trust-content">
+              <ul>
+                <li><strong>連携品質の追求</strong>：要件定義から本番稼働・保守まで、一貫して責任を持って対応します。</li>
+                <li><strong>情報管理の徹底</strong>：APIキー・顧客データ等の機密情報を厳重に管理し、漏洩防止を徹底します。</li>
+                <li><strong>誠実な価格提示</strong>：事前見積りのない追加料金や、不透明な請求は一切行いません。</li>
+              </ul>
+              <div class="policy-links">
+                <a href="/privacy/">プライバシーポリシー</a>
+                <a href="/security-policy/">情報セキュリティ方針</a>
+                <a href="/terms/">利用規約</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+    <DeliveryChecks lang="ja" />
+</div>
 
         <div class="career-box" id="experience">
           <h3>これまでの経歴</h3>
@@ -135,7 +163,7 @@ const structuredData = [
         <div class="section-title" data-motion-enter="heading">
           <h2>事業所概要</h2>
         </div>
-        
+
         <div class="overview-table-wrap">
           <table class="overview-table">
             <tbody>
@@ -176,49 +204,26 @@ const structuredData = [
         <div class="name-origin-hero" data-motion-enter="heading" data-motion-id="about-origin">
           <h2>和-Nodeという名前に込めたもの</h2>
           <p>「和」には、人と人、考えと仕組みのあいだに調和をつくる意味を。「Node」には、情報や技術、人をつなぐ結節点という意味があります。</p>
-          <p>人と技術、日々の業務と仕組みをつなぐ結節点でありたくて、和-Nodeと名付けました。</p>
+
         </div>
       </div>
     </section>
 
     <BrandMovie compact />
 
-    <section class="section reliability">
-      <div class="section-inner">
-        <div class="reliability-box" data-motion-enter="block" data-motion-id="about-reliability">
-          <h2>信頼と安全の基盤</h2>
-          <div class="trust-grid">
-            <div class="trust-item">
-              <img src="/images/security-action-one-star.webp" alt="SECURITY ACTION" class="trust-badge" />
-              <p>情報セキュリティ対策に真摯に取り組むことを宣言しています。</p>
-            </div>
-            <div class="trust-content">
-              <ul>
-                <li><strong>連携品質の追求</strong>：要件定義から本番稼働・保守まで、一貫して責任を持って対応します。</li>
-                <li><strong>情報管理の徹底</strong>：APIキー・顧客データ等の機密情報を厳重に管理し、漏洩防止を徹底します。</li>
-                <li><strong>誠実な価格提示</strong>：事前見積りのない追加料金や、不透明な請求は一切行いません。</li>
-              </ul>
-              <div class="policy-links">
-                <a href="/privacy/">プライバシーポリシー</a>
-                <a href="/security-policy/">情報セキュリティ方針</a>
-                <a href="/terms/">利用規約</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
+
 
     <section class="section contact-teaser">
       <div class="section-inner text-center">
-        <h2>LINEと業務システムの連携、まずは現状を整理しましょう。</h2>
+        <h2>業務の困りごと、まずは現状を整理しましょう。</h2>
         <p>初回無料相談（30分）にて、現在の業務と困りごと、実現したいことを伺います。<br />要件が曖昧な段階でも構いません。</p>
         <div class="btns" style="justify-content: center;">
           <a href="/contact/" class="btn primary">無料相談で業務の困りごとを整理する</a>
         </div>
       </div>
     </section>
-  </main>
+</main>
 </BaseLayout>
 
 <style>
@@ -263,7 +268,7 @@ const structuredData = [
     line-height: 1.9;
   }
   .name-origin-hero p:last-child { margin-bottom: 0; }
-  
+
   .message-content {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -279,7 +284,7 @@ const structuredData = [
     line-height: 1.3;
   }
   .message-content p { margin-bottom: 20px; color: #444; font-size: 1.05rem; }
-  
+
   .profile-image-wrap {
     text-align: center;
     background: #fff;
@@ -383,7 +388,7 @@ const structuredData = [
   .trust-content ul { list-style: none; padding: 0; margin-bottom: 32px; }
   .trust-content li { margin-bottom: 16px; font-size: 0.98rem; color: rgba(248, 251, 252, 0.9); line-height: 1.75; }
   .trust-content strong { color: #f6d88f; }
-  
+
   .policy-links { display: flex; gap: 12px; flex-wrap: wrap; }
   .policy-links a {
     display: inline-flex;
@@ -415,4 +420,5 @@ const structuredData = [
     .reliability-box { padding: 40px 20px; border-radius: 12px; }
     .policy-links a { width: 100%; }
   }
+.reliability{margin-bottom:48px}.reliability :global(.delivery-checks){margin-block:24px}
 </style>

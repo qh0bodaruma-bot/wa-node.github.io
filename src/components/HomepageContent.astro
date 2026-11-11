@@ -155,9 +155,9 @@ const pageSections = ['business-support', 'flow', 'selected-works', 'why-wa-node
         <p class="s-eyebrow">{c.eyebrow}</p>
         <h1 class:list={{ 'is-ja': lang === 'ja' }}>{c.title.map((line, i) => <>{i > 0 && lang !== 'ja' && ' '}<span>{line.split('|').map((phrase) => <span class="phrase">{phrase}</span>)}</span></>)}</h1>
         <div class="hero-reading">
-        <p class="s-intro hero-lead">{c.lead}</p>
+        <p class="s-intro hero-lead">{c.leadShort}</p>
         <p class="s-intro hero-lead-short">{c.leadShort}</p>
-        <p class="hero-audience">{audience}</p>
+
         <div class="s-actions"><a class="s-button" href={href('/contact/')} data-consult-cta data-analytics-system="general" data-analytics-surface="home">{labels.consultation}<MaterialIcon name="arrow_forward" /></a><a class="s-link hero-secondary" href="#selected-works">{c.view}<MaterialIcon name="arrow_forward" /></a></div>
         <p class="s-note">{c.assurance}</p>
         </div>
@@ -169,7 +169,7 @@ const pageSections = ['business-support', 'flow', 'selected-works', 'why-wa-node
   <nav class="home-guide s-shell" aria-label={pageGuide.label}>
     {pageGuide.links.map((label, i) => <a href={`#${pageSections[i]}`}>{label}<MaterialIcon name="south" /></a>)}
   </nav>
-  <BusinessSupportOverview lang={lang} />
+  <BusinessSupportOverview lang={lang} variant="summary" />
   <section class="s-section integration-example" id="flow"><div class="s-shell integration-example-layout"><div><h2>{lang === 'ja' ? '仕組みにすると、どう変わる？' : lang === 'en' ? 'See a workflow take shape.' : 'Voir un processus prendre forme.'}</h2><p class="s-intro">{lang === 'ja' ? 'LINEで受けた情報を業務システムへつなぐ、実装の一例です。転記する作業を仕組みに置き換える流れを、画面で試せます。' : lang === 'en' ? 'An implementation example: connect information received on LINE to a business system. Try the registration flow on screen.' : 'Un exemple de réalisation : transmettre les informations reçues sur LINE à un outil métier. Essayez le parcours à l’écran.'}</p><a class="s-link" href={href('/pricing/')}>{c.scope}<MaterialIcon name="arrow_forward" /></a></div>      <div class="hero-demo" data-home-demo data-clarity-mask="true" data-analytics-system="kintone" data-analytics-surface="home" data-rules={JSON.stringify(c.rules)} data-targets={JSON.stringify(targetData)} data-target-switched={demoTargets.switched}>
         <div class="demo-title"><span>{c.preview}</span><button type="button" class="demo-toggle" data-demo-toggle aria-pressed="false" data-pause={c.pause} data-play={c.play} data-replay={replayLabel} hidden><MaterialIcon name="pause" /><span data-demo-toggle-label>{c.pause}</span></button></div>
         <p class="demo-scope">{c.demoScope}</p>
@@ -203,13 +203,6 @@ const pageSections = ['business-support', 'flow', 'selected-works', 'why-wa-node
         <p class="demo-disclosure">{c.sample}</p>
       </div>
 </div></section>
-  <section class="s-section scope-section" id="scope"><div class="s-shell">
-    <div class="s-section-head" data-motion-enter="heading" data-motion-id="scope-heading"><div><h2>{c.scopeTitle}</h2><p class="s-intro">{c.scopeLead}</p></div></div>
-    <div class="s-grid-two scope-split">
-      <div class="scope-col scope-col-yes"><h3><MaterialIcon name="check_circle"/>{c.scopeYes}</h3><ul>{c.scopeFor.map(t => <li>{t}</li>)}</ul></div>
-      <div class="scope-col scope-col-no"><h3><MaterialIcon name="do_not_disturb_on"/>{c.scopeNo}</h3><ul>{c.scopeNot.map(t => <li>{t}</li>)}</ul></div>
-    </div>
-  </div></section>
   <section class="s-section works-section" id="selected-works"><div class="s-shell">
     <div class="s-section-head" data-motion-enter="heading" data-motion-id="works-heading"><div><h2>{c.worksTitle}</h2></div><a class="s-link" href={href('/works/')}>{c.allWorks}<span aria-hidden="true">→</span></a></div>
     <p class="s-note usecase-disclosure">{c.worksLead}</p>
@@ -225,10 +218,17 @@ const pageSections = ['business-support', 'flow', 'selected-works', 'why-wa-node
       <p class="s-intro">{c.whyLead}</p>
     </div>
     <h3 class="why-list-title">{c.whyListTitle}</h3>
-    <ol class="why-checks">{c.whyChecks.map(([title, desc], i) => <li><MaterialIcon name={whyIcons[i]} class="ic-chip" /><div><h4>{title}</h4><p>{desc}</p></div></li>)}</ol>
-    <p class="why-close">{c.whyClose}</p>
+    <ol class="why-checks">{c.whyChecks.map(([title, desc], i) => <li><MaterialIcon name={whyIcons[i]} class="ic-chip" /><div><h4>{title}</h4></div></li>)}</ol>
+    <a class="s-link" href={href('/about/#delivery-checks')}>{c.about}<span aria-hidden="true">→</span></a>
+    <div class="approach-layout home-process"><div><h3>{c.approachTitle}</h3><a class="s-link" href={href('/about/')}>{c.about}<span aria-hidden="true">→</span></a></div><ol class="approach-steps">{c.steps.map(([title,desc],i) => <li data-motion-enter="block" data-motion-group="approach"><span class="s-number">0{i+1}</span><div><h3><MaterialIcon name={approachIcons[i]} class="ic-inline" />{title}</h3><p>{desc}</p></div></li>)}</ol></div>
   </div></section>
-  <section class="s-section"><div class="s-shell approach-layout"><div><h2>{c.approachTitle}</h2><p class="s-intro">{c.approachLead}</p><a class="s-link" href={href('/about/')}>{c.about}<span aria-hidden="true">→</span></a></div><ol class="approach-steps">{c.steps.map(([title,desc],i) => <li data-motion-enter="block" data-motion-group="approach"><span class="s-number">0{i+1}</span><div><h3><MaterialIcon name={approachIcons[i]} class="ic-inline" />{title}</h3><p>{desc}</p></div></li>)}</ol></div></section>
+  <section class="s-section scope-section" id="scope"><div class="s-shell">
+    <div class="s-section-head" data-motion-enter="heading" data-motion-id="scope-heading"><div><h2>{c.scopeTitle}</h2><p class="s-intro">{c.scopeLead}</p></div></div>
+    <div class="s-grid-two scope-split">
+      <div class="scope-col scope-col-yes"><h3><MaterialIcon name="check_circle"/>{c.scopeYes}</h3><ul>{c.scopeFor.map(t => <li>{t}</li>)}</ul></div>
+      <div class="scope-col scope-col-no"><h3><MaterialIcon name="do_not_disturb_on"/>{c.scopeNo}</h3><ul>{c.scopeNot.map(t => <li>{t}</li>)}</ul></div>
+    </div>
+  </div></section>
   <section class="s-contact-band"><div class="s-shell"><div><h2>{c.finalTitle}</h2><p>{c.finalDesc}</p></div><a class="s-button" href={href('/contact/')} data-consult-cta data-analytics-system="general" data-analytics-surface="home">{labels.consultation}<MaterialIcon name="arrow_forward"/></a></div></section>
 </main>
 <style>
@@ -272,6 +272,8 @@ const pageSections = ['business-support', 'flow', 'selected-works', 'why-wa-node
 .why-close{display:flex;gap:14px;align-items:baseline;max-width:40em;text-wrap:balance;margin:32px 0 0;font-size:1.02rem;line-height:1.9;color:var(--ink);font-weight:600}
 .why-close::before{content:"";flex:0 0 28px;height:2px;background:var(--vermillion);transform:translateY(-.3em)}
 @media(max-width:820px){.why-checks{grid-template-columns:1fr}.why-list-title{margin-top:30px}.why-checks li{padding:18px 0;gap:16px}}
+@media(max-width:35rem){.demo-target{min-width:0;white-space:normal;overflow-wrap:anywhere;padding:8px}.demo-targets{min-width:0}.hero-demo{min-width:0}}
+.home-process{margin-top:40px;padding-top:32px;border-top:1px solid var(--rule)}
 </style>
 <script>
 import { isReducedMotion, onReducedMotionChange } from '../scripts/motion-pref';

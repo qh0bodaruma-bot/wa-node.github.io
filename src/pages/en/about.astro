@@ -1,4 +1,5 @@
 ---
+import DeliveryChecks from '../../components/DeliveryChecks.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = "About Wa-Node (Profile & Business Overview) | Workflow Improvement & ICT Support";
@@ -21,10 +22,10 @@ const description = "Profile and business overview of Wa-Node. Remote support fo
           <div class="content-left">
             <h2>Founder's Message</h2>
             <h3 class="catch-copy">"When systems are not connected,<br class="sp-only"/>people keep doing the copying."</h3>
-            <p>Since 2004 I have worked in IT for more than 20 years, from POS system maintenance and server operations to in-house systems, workflow automation and data management for web services. One situation came up again and again: <strong>"The systems are in place, yet people still sit between them, copying and pasting."</strong></p>
-            <p>Living as a wheelchair user has taught me that inconvenience can be solved with ingenuity. The manual wall between LINE and your business system disappears when the integration is designed properly. That conviction guides how I approach workflow improvement.</p>
-            <p>Wa-Node helps clarify workflow problems and build practical solutions with AI, digital tools and ICT. We also implement plans that customers have already defined, including LINE integration and apps.</p>
-          </div>
+
+
+
+          <p>Manual copying often remains even when systems are in place. We review workflows and improve them with AI, digital tools and system integration.</p><p>Living as a wheelchair user has shaped my approach: start with the difficulties people face and build tools they can use comfortably.</p></div>
           <div class="content-right">
             <div class="profile-image-wrap">
               <img src="/images/avatar.webp" alt="Wa-Node founder Hirozumi Takano" />
@@ -43,12 +44,34 @@ const description = "Profile and business overview of Wa-Node. Remote support fo
           <h2>A partner for people and workflows</h2>
         </div>
 
-        <div class="story-box reveal">
-          <h3>Start with the way work is done</h3>
-          <p>Working in IT, I kept seeing people re-typing information even after a system was introduced: LINE inquiries copied by hand into customer management, or LINE applications tracked separately from everything else. The more systems there are, the more manual work there is.</p>
-          <p>A LINE Official Account is a powerful point of contact, but it rarely works on its own. Only when LINE and your business system are properly connected do automated responses, a single source of customer data and fewer missed inquiries become possible.</p>
-          <p>Wa-Node supports problem clarification, improvement proposals and implementation. Deliverables and maintenance scope are agreed before an order.</p>
+        <div class="story-box"><h3>From understanding to handover</h3><ol><li>Clarify your workflow and goals.</li><li>Agree on scope, cost and timing before work starts.</li><li>Check the solution and hand over operating instructions. Ongoing support is scoped separately.</li></ol></div>
+
+        <div class="reliability">
+
+        <div class="reliability-box reveal">
+          <h2>Foundation of Trust & Security</h2>
+          <div class="trust-grid">
+            <div class="trust-item">
+              <img src="/images/security-action-one-star.webp" alt="SECURITY ACTION Badge" class="trust-badge" />
+              <p>We have declared our commitment to information security measures.</p>
+            </div>
+            <div class="trust-content">
+              <ul>
+                <li><strong>Integration quality</strong>: We take responsibility from requirements through launch and maintenance.</li>
+                <li><strong>Information management</strong>: API keys, customer data and other confidential information are strictly managed to prevent leaks.</li>
+                <li><strong>Transparent pricing</strong>: No unexpected charges or opaque billing without a prior quote.</li>
+              </ul>
+              <div class="policy-links">
+                <a href="/privacy/">Privacy Policy (Japanese)</a>
+                <a href="/security-policy/">Information Security Policy (Japanese)</a>
+                <a href="/terms/">Terms of Service (Japanese)</a>
+              </div>
+            </div>
+          </div>
         </div>
+
+    <DeliveryChecks lang="en" />
+</div>
 
         <div class="career-box">
           <h3>Career</h3>
@@ -148,42 +171,19 @@ const description = "Profile and business overview of Wa-Node. Remote support fo
       </div>
     </section>
 
-    <section class="section reliability">
-      <div class="section-inner">
-        <div class="reliability-box reveal">
-          <h2>Foundation of Trust & Security</h2>
-          <div class="trust-grid">
-            <div class="trust-item">
-              <img src="/images/security-action-one-star.webp" alt="SECURITY ACTION Badge" class="trust-badge" />
-              <p>We have declared our commitment to information security measures.</p>
-            </div>
-            <div class="trust-content">
-              <ul>
-                <li><strong>Integration quality</strong>: We take responsibility from requirements through launch and maintenance.</li>
-                <li><strong>Information management</strong>: API keys, customer data and other confidential information are strictly managed to prevent leaks.</li>
-                <li><strong>Transparent pricing</strong>: No unexpected charges or opaque billing without a prior quote.</li>
-              </ul>
-              <div class="policy-links">
-                <a href="/privacy/">Privacy Policy (Japanese)</a>
-                <a href="/security-policy/">Information Security Policy (Japanese)</a>
-                <a href="/terms/">Terms of Service (Japanese)</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
+
 
     <section class="section contact-teaser">
       <div class="section-inner text-center">
-        <h2 class="reveal">Start by mapping your LINE and business system setup.</h2>
-        <p class="reveal">In the free first consultation (30 min), we review your current LINE and system setup and what you want to connect.<br />An early idea is enough.</p>
+        <h2 class="reveal">Start with your workflow challenges.</h2>
+        <p class="reveal">In the free first consultation (30 min), we discuss your workflow, challenges and goals.<br />An early idea is enough.</p>
         <div class="btns reveal" style="justify-content: center;">
           <a href="/en/contact/" class="btn primary">Discuss your workflow</a>
         </div>
       </div>
     </section>
-  </main>
+</main>
 </BaseLayout>
 
 <style>
@@ -194,7 +194,7 @@ const description = "Profile and business overview of Wa-Node. Remote support fo
     border-bottom: 1px solid var(--line);
   }
   .about-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 24px; color: var(--text-deep); }
-  
+
   .message-content {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -210,7 +210,7 @@ const description = "Profile and business overview of Wa-Node. Remote support fo
     line-height: 1.3;
   }
   .message-content p { margin-bottom: 20px; color: #444; font-size: 1.05rem; }
-  
+
   .profile-image-wrap {
     text-align: center;
     background: #fff;
@@ -303,7 +303,7 @@ const description = "Profile and business overview of Wa-Node. Remote support fo
   .trust-content ul { list-style: none; padding: 0; margin-bottom: 32px; }
   .trust-content li { margin-bottom: 16px; font-size: 0.95rem; color: rgba(255,255,255,0.8); }
   .trust-content strong { color: var(--accent); }
-  
+
   .policy-links { display: flex; gap: 24px; flex-wrap: wrap; }
   .policy-links a { color: #fff; text-decoration: underline; font-size: 0.9rem; opacity: 0.7; transition: 0.3s; }
   .policy-links a:hover { opacity: 1; color: var(--accent); }
@@ -318,4 +318,5 @@ const description = "Profile and business overview of Wa-Node. Remote support fo
     .overview-table td { padding: 15px; font-size: 0.9rem; }
     .reliability-box { padding: 40px 20px; }
   }
+.reliability{margin-bottom:48px}.reliability :global(.delivery-checks){margin-block:24px}
 </style>

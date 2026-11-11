@@ -1,4 +1,5 @@
 ---
+import DeliveryChecks from '../../components/DeliveryChecks.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const title = "À propos de Wa-Node (profil et présentation) | Amélioration des processus et outils numériques";
@@ -21,10 +22,10 @@ const description = "Profil et présentation de Wa-Node. Accompagnement à dista
           <div class="content-left">
             <h2>Message du fondateur</h2>
             <h3 class="catch-copy">« Quand les systèmes ne sont pas reliés,<br class="sp-only"/>ce sont les personnes qui recopient. »</h3>
-            <p>Depuis 2004, je travaille dans l’informatique depuis plus de 20 ans : maintenance de systèmes de caisse, exploitation de serveurs, systèmes internes, automatisation des tâches et gestion de données pour des services web. Une situation revenait sans cesse : <strong>« Les systèmes sont en place, mais des personnes recopient encore les informations de l’un à l’autre. »</strong></p>
-            <p>Ma vie en fauteuil roulant m’a appris que les difficultés se résolvent avec de l’ingéniosité. Le mur de ressaisie entre LINE et votre outil métier disparaît lorsque l’intégration est bien conçue. C’est pourquoi je me consacre à l’intégration LINE.</p>
-            <p>Wa-Node aide à clarifier les difficultés et à construire des solutions avec l’IA et les outils numériques. Nous réalisons aussi les plans déjà définis, y compris les intégrations LINE et les applications.</p>
-          </div>
+
+
+
+          <p>Même avec des systèmes en place, la ressaisie manuelle persiste. Nous examinons les processus pour les améliorer avec l’IA, les outils numériques et les intégrations.</p><p>Mon expérience en fauteuil roulant guide mon approche : partir des difficultés des utilisateurs pour créer des outils faciles à utiliser.</p></div>
           <div class="content-right">
             <div class="profile-image-wrap">
               <img src="/images/avatar.webp" alt="Hirozumi Takano, fondateur de Wa-Node" />
@@ -43,12 +44,34 @@ const description = "Profil et présentation de Wa-Node. Accompagnement à dista
           <h2>Un partenaire pour les personnes et les processus</h2>
         </div>
 
-        <div class="story-box reveal">
-          <h3>Partir du travail quotidien</h3>
-          <p>Dans l’informatique, j’ai souvent vu des équipes ressaisir des informations même après l’arrivée d’un nouvel outil : demandes LINE recopiées à la main dans la gestion clients, inscriptions LINE suivies à part. Plus il y a d’outils, plus il y a de travail manuel.</p>
-          <p>Un compte officiel LINE est un point de contact puissant, mais il fonctionne rarement seul. C’est en reliant correctement LINE et votre outil métier que l’on automatise les réponses, centralise les données clients et évite les oublis.</p>
-          <p>Wa-Node accompagne la clarification, les propositions d’amélioration et leur réalisation. Les livrables et la maintenance sont convenus avant la commande.</p>
+        <div class="story-box"><h3>Comprendre, réaliser et transmettre</h3><ol><li>Clarifier vos processus et vos objectifs.</li><li>Convenir du périmètre, du coût et du calendrier avant de commencer.</li><li>Vérifier la solution et transmettre les procédures. Le suivi est défini séparément.</li></ol></div>
+
+        <div class="reliability">
+
+        <div class="reliability-box reveal">
+          <h2>Confiance et sécurité</h2>
+          <div class="trust-grid">
+            <div class="trust-item">
+              <img src="/images/security-action-one-star.webp" alt="Badge SECURITY ACTION" class="trust-badge" />
+              <p>Nous avons déclaré notre engagement en matière de sécurité de l’information.</p>
+            </div>
+            <div class="trust-content">
+              <ul>
+                <li><strong>Qualité de l’intégration</strong> : nous assumons le projet, des besoins au lancement et à la maintenance.</li>
+                <li><strong>Gestion de l’information</strong> : les clés d’API, les données clients et autres informations confidentielles sont gérées rigoureusement pour éviter toute fuite.</li>
+                <li><strong>Tarifs transparents</strong> : aucun supplément ni facturation opaque sans devis préalable.</li>
+              </ul>
+              <div class="policy-links">
+                <a href="/privacy/">Politique de confidentialité (en japonais)</a>
+                <a href="/security-policy/">Politique de sécurité de l’information (en japonais)</a>
+                <a href="/terms/">Conditions d’utilisation (en japonais)</a>
+              </div>
+            </div>
+          </div>
         </div>
+
+    <DeliveryChecks lang="fr" />
+</div>
 
         <div class="career-box">
           <h3>Parcours</h3>
@@ -135,13 +158,8 @@ const description = "Profil et présentation de Wa-Node. Accompagnement à dista
               <tr>
                 <th>Prestations</th>
                 <td>
-                  <ul>
-                    <li><strong>Intégration LINE × Salesforce</strong> : à partir de 330 000 ¥ HT</li>
-                    <li><strong>Intégration LINE × kintone</strong> : à partir de 210 000 ¥ HT</li>
-                    <li><strong>Intégration LINE × HubSpot</strong> : à partir de 170 000 ¥ HT</li>
-                    <li><strong>Intégration LINE × Google Sheets</strong> : à partir de 25 000 ¥ HT (3 premières commandes, prix normal dès 80 000 ¥)</li>
-                    <li><strong>Maintenance et évolutions</strong> : accompagnement après le lancement</li>
-                  </ul>
+                  <ul><li>Amélioration des processus par l’IA et les outils numériques</li><li>Accompagnement TIC : choix des outils, partage d’informations et gestion des données</li><li>Intégration LINE et développement d’applications</li></ul>
+                  <a href="/fr/pricing/">Voir les services et les tarifs</a>
                 </td>
               </tr>
               <tr>
@@ -154,42 +172,19 @@ const description = "Profil et présentation de Wa-Node. Accompagnement à dista
       </div>
     </section>
 
-    <section class="section reliability">
-      <div class="section-inner">
-        <div class="reliability-box reveal">
-          <h2>Confiance et sécurité</h2>
-          <div class="trust-grid">
-            <div class="trust-item">
-              <img src="/images/security-action-one-star.webp" alt="Badge SECURITY ACTION" class="trust-badge" />
-              <p>Nous avons déclaré notre engagement en matière de sécurité de l’information.</p>
-            </div>
-            <div class="trust-content">
-              <ul>
-                <li><strong>Qualité de l’intégration</strong> : nous assumons le projet, des besoins au lancement et à la maintenance.</li>
-                <li><strong>Gestion de l’information</strong> : les clés d’API, les données clients et autres informations confidentielles sont gérées rigoureusement pour éviter toute fuite.</li>
-                <li><strong>Tarifs transparents</strong> : aucun supplément ni facturation opaque sans devis préalable.</li>
-              </ul>
-              <div class="policy-links">
-                <a href="/privacy/">Politique de confidentialité (en japonais)</a>
-                <a href="/security-policy/">Politique de sécurité de l’information (en japonais)</a>
-                <a href="/terms/">Conditions d’utilisation (en japonais)</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
+
 
     <section class="section contact-teaser">
       <div class="section-inner text-center">
-        <h2 class="reveal">Commençons par faire le point sur LINE et votre outil métier.</h2>
-        <p class="reveal">Lors du premier échange gratuit (30 min), nous examinons votre configuration LINE et vos outils, ainsi que ce que vous souhaitez relier.<br />Une première idée suffit.</p>
+        <h2 class="reveal">Commençons par vos besoins métier.</h2>
+        <p class="reveal">Lors du premier échange gratuit (30 min), nous examinons votre fonctionnement, vos difficultés et vos objectifs.<br />Une première idée suffit.</p>
         <div class="btns reveal" style="justify-content: center;">
-          <a href="/fr/contact/" class="btn primary">Parler de votre intégration LINE</a>
+          <a href="/fr/contact/" class="btn primary">Parler de vos besoins</a>
         </div>
       </div>
     </section>
-  </main>
+</main>
 </BaseLayout>
 
 <style>
@@ -200,7 +195,7 @@ const description = "Profil et présentation de Wa-Node. Accompagnement à dista
     border-bottom: 1px solid var(--line);
   }
   .about-hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 24px; color: var(--text-deep); }
-  
+
   .message-content {
     display: grid;
     grid-template-columns: 1.2fr 1fr;
@@ -216,7 +211,7 @@ const description = "Profil et présentation de Wa-Node. Accompagnement à dista
     line-height: 1.3;
   }
   .message-content p { margin-bottom: 20px; color: #444; font-size: 1.05rem; }
-  
+
   .profile-image-wrap {
     text-align: center;
     background: #fff;
@@ -309,7 +304,7 @@ const description = "Profil et présentation de Wa-Node. Accompagnement à dista
   .trust-content ul { list-style: none; padding: 0; margin-bottom: 32px; }
   .trust-content li { margin-bottom: 16px; font-size: 0.95rem; color: rgba(255,255,255,0.8); }
   .trust-content strong { color: var(--accent); }
-  
+
   .policy-links { display: flex; gap: 24px; flex-wrap: wrap; }
   .policy-links a { color: #fff; text-decoration: underline; font-size: 0.9rem; opacity: 0.7; transition: 0.3s; }
   .policy-links a:hover { opacity: 1; color: var(--accent); }
@@ -324,4 +319,5 @@ const description = "Profil et présentation de Wa-Node. Accompagnement à dista
     .overview-table td { padding: 15px; font-size: 0.9rem; }
     .reliability-box { padding: 40px 20px; }
   }
+.reliability{margin-bottom:48px}.reliability :global(.delivery-checks){margin-block:24px}
 </style>

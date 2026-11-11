@@ -1,0 +1,26 @@
+---
+interface Props { lang?: 'ja' | 'en' | 'fr' }
+const { lang = 'ja' } = Astro.props;
+const c = {
+ja: {
+  whyEyebrow: '納品前に確認すること',
+  whyLead: '登録漏れや二重登録、個人情報の扱い、引き継ぎまで。AIを使って作った部分も含め、運用に必要な点を人が確認します。',
+  whyChecks: [['登録漏れ・二重登録', '通信が途切れたときや、同じ問い合わせが2回届いたときに、記録が消えたり重なったりしないか。'], ['個人情報の扱い', 'LINEから受け取った氏名や連絡先を、必要な範囲だけ、決めた場所に保存しているか。'], ['接続キーと権限', '接続用のキーが画面やコードに露出していないか。必要以上の権限を持たせていないか。'], ['仕様の変更', 'LINEや業務システムの仕様が変わったとき、どこを直せばよいか分かる作りになっているか。'], ['引き継ぎ', '担当者が替わっても、仕組みと運用の手順を追える形で残っているか。']],
+  whyClose: 'IT・開発の現場で20年以上積み重ねた知識をもとに、AIが作った部分も含めて、人が一つずつ確認してからお渡しします。',
+},
+en: {
+  whyEyebrow: 'Checks before handover',
+  whyLead: 'From missing or duplicate records to personal data and handover, we review the points needed for operation, including parts built with AI.',
+  whyChecks: [['Missing or duplicate records', 'Records are not lost or duplicated when a connection drops or the same inquiry arrives twice.'], ['Personal data', 'Names and contact details from LINE are stored only as needed, and only where agreed.'], ['Keys and permissions', 'Connection keys are not exposed in screens or code, and no account has more access than it needs.'], ['Specification changes', 'When LINE or your business system changes, it is clear what needs to be updated.'], ['Handover', 'If the person in charge changes, the setup and operating steps can still be followed.']],
+  whyClose: 'Drawing on more than 20 years in IT and development, we review every part by hand, including anything AI produced, before handing it over.',
+},
+fr: {
+  whyEyebrow: 'Vérifications avant livraison',
+  whyLead: 'Enregistrements manquants ou en double, données personnelles, transmission : nous vérifions les points nécessaires au fonctionnement, y compris les éléments créés avec l’IA.',
+  whyChecks: [['Fiches perdues ou en double', 'Aucune fiche perdue ou dupliquée si la connexion coupe ou si la même demande arrive deux fois.'], ['Données personnelles', 'Les noms et coordonnées reçus via LINE sont conservés au strict nécessaire, à l’endroit convenu.'], ['Clés et droits d’accès', 'Les clés de connexion ne sont pas exposées dans les écrans ou le code, et aucun compte n’a plus de droits que nécessaire.'], ['Évolutions des services', 'Si LINE ou votre outil métier évolue, on sait clairement quoi mettre à jour.'], ['Transmission', 'Si l’interlocuteur change, le fonctionnement et les procédures restent faciles à suivre.']],
+  whyClose: 'Forts de plus de 20 ans d’expérience en informatique et en développement, nous vérifions chaque élément à la main, y compris ce que l’IA a produit, avant de vous le livrer.',
+}
+}[lang];
+---
+<section id="delivery-checks" class="delivery-checks"><h2>{c.whyEyebrow}</h2><p>{c.whyLead}</p><dl>{c.whyChecks.map(([title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl><p>{c.whyClose}</p></section>
+<style>.delivery-checks{margin-block:3rem;scroll-margin-top:7rem}.delivery-checks dl>div{padding:1rem 0;border-top:1px solid var(--rule,#ddd)}.delivery-checks dt{font-weight:700}.delivery-checks dd{margin:.5rem 0 0;line-height:1.9}</style>

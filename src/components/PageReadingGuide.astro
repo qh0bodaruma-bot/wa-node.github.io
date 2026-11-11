@@ -1,0 +1,31 @@
+---
+interface Props { lang?: 'ja' | 'en' | 'fr' }
+const {lang = 'ja'} = Astro.props;
+const label = {ja:'知りたい項目へ',en:'On this page',fr:'Sur cette page'}[lang];
+---
+<nav class="page-reading-guide" aria-label={label} data-reading-guide hidden><strong>{label}</strong><ul></ul></nav>
+<style is:global>
+.page-reading-guide{max-width:1100px;margin:24px auto;padding:24px clamp(18px,4vw,40px);background:#f2f3ec;border-block:1px solid #d4dcd4;color:#183f35}
+.page-reading-guide[hidden]{display:none}.page-reading-guide ul{display:flex;flex-wrap:wrap;gap:8px 24px;list-style:none;padding:0;margin:12px 0 0}.page-reading-guide a{display:inline-flex;min-height:44px;align-items:center;text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}.page-reading-guide a:focus-visible{outline:3px solid #9b4c12;outline-offset:3px}main .reading-guide-target{scroll-margin-top:110px}@media(max-width:560px){.page-reading-guide ul{display:block}.page-reading-guide li+li{border-top:1px solid #d4dcd4}}
+</style>
+<script>
+function initReadingGuide(){
+ const guide=document.querySelector<HTMLElement>('[data-reading-guide]');
+ const main=document.querySelector('main');
+ if(!guide||!main||guide.dataset.ready)return;
+ guide.dataset.ready='true';
+ const headings=[...main.querySelectorAll<HTMLHeadingElement>('h2')].filter(h=>!h.closest('aside,nav,[hidden]'));
+ if(headings.length<2)return;
+ const list=guide.querySelector('ul')!;
+ headings.forEach((heading,i)=>{
+  heading.classList.add('reading-guide-target');
+  if(!heading.id){let id=`reading-section-${i+1}`;while(document.getElementById(id))id+='-item';heading.id=id;}
+  const item=document.createElement('li');const link=document.createElement('a');
+  link.href=`#${heading.id}`;const clone=heading.cloneNode(true) as HTMLElement;clone.querySelectorAll('.material-symbols-rounded,[aria-hidden="true"]').forEach(n=>n.remove());link.textContent=clone.textContent?.trim()||heading.textContent;item.append(link);list.append(item);
+ });
+ main.querySelector('h1')?.closest('header')?.after(guide);
+ if(!main.contains(guide)){const first=main.querySelector('h1');if(first)first.after(guide);else main.prepend(guide);}
+ guide.hidden=false;
+}
+initReadingGuide();document.addEventListener('astro:page-load',initReadingGuide);
+</script>
