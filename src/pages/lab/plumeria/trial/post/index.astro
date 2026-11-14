@@ -84,6 +84,12 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
       </div>
     </div>
   </section>
+  <dialog class="pt-dialog" data-pt-done aria-labelledby="pt-done-title">
+    <p class="pt-dialog-icon" aria-hidden="true">✓</p>
+    <h2 class="pt-dialog-title" id="pt-done-title" data-pt-done-title></h2>
+    <p class="pt-dialog-text" data-pt-done-text></p>
+    <button type="button" class="pa-btn pt-dialog-ok" data-pt-done-ok>OK（新しい入力画面にする）</button>
+  </dialog>
 </PlumeriaTrialLayout>
 
 <script>
@@ -91,6 +97,28 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
   import { trialRoutes, postCategories } from '../../../../../data/plumeriaTrial';
 
   let editingId: number | null = null;
+
+  // 保存のあとは、確認のポップアップを出してから空の入力画面に戻す（入力したままの画面で二重に送るのを防ぐ）
+  const doneText: Record<string, { title: string; text: string }> = {
+    draft: { title: '下書きとして保存しました', text: '入力した内容はこのまま残っています。続けて書けます。' },
+    pending: { title: '最終確認へ送りました', text: '公開の権限をお持ちの方が確認すると、ホームページに表示されます。' },
+    publish: { title: '公開しました', text: 'ホームページのお試し表示に出ます（公開日が先の場合は、その日から）。' },
+  };
+  function showDone(mode: string) {
+    const d = document.querySelector<HTMLDialogElement>('[data-pt-done]');
+    const t = doneText[mode] ?? doneText.draft;
+    const keep = mode === 'draft';
+    const reset = () => { if (!keep) location.href = trialRoutes.post; };
+    if (!d || typeof d.showModal !== 'function') { alert(`${t.title}。${t.text}`); reset(); return; }
+    if (d.open) d.close();
+    d.querySelector('[data-pt-done-title]')!.textContent = t.title;
+    d.querySelector('[data-pt-done-text]')!.textContent = t.text;
+    d.querySelector('[data-pt-done-ok]')!.textContent = keep ? 'OK（続けて書く）' : 'OK（新しい入力画面にする）';
+    d.querySelector('[data-pt-done-ok]')!.addEventListener('click', () => d.close(), { once: true });
+    d.addEventListener('close', reset, { once: true });
+    d.showModal();
+    d.querySelector<HTMLButtonElement>('[data-pt-done-ok]')!.focus();
+  }
   let attachments: Attachment[] = [];
   let uploading = 0;
 
@@ -224,20 +252,24 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
         if (mode === 'publish') {
           await api(`posts?id=eq.${rowId}`, { method: 'PATCH', body: { status: 'published' }, prefer: 'return=minimal' });
         }
-        location.href = `${trialRoutes.post}?id=${rowId}&done=${mode}`;
+        if (mode === 'draft') {
+          // 下書きは入力したまま残す。以後の保存は同じ下書きの上書きになるよう、この下書きを開いた状態にする
+          editingId = rowId;
+          history.replaceState(null, '', `${trialRoutes.post}?id=${rowId}`);
+          const badge = form.querySelector<HTMLElement>('[data-pt-state]')!;
+          badge.textContent = statusLabel.draft.t; badge.className = `pa-badge pa-badge-${statusLabel.draft.badge}`;
+          form.querySelector('[data-pt-mode]')!.textContent = 'EDIT';
+          form.querySelector('[data-pt-heading]')!.textContent = 'お知らせを直す';
+          buttons.forEach((b) => (b.disabled = false));
+          renderMine(profile.id);
+        }
+        showDone(mode);
       } catch (e) {
         handleError(e, (m) => showMsg(m, true));
         buttons.forEach((b) => (b.disabled = false));
       }
     }));
 
-    const doneText: Record<string, string> = {
-      draft: '下書きとして保存しました。',
-      pending: '最終確認へ送りました。',
-      publish: '公開しました。ホームページのお試し表示に出ます（公開日が先の場合は、その日から）。',
-    };
-    const done = doneText[params.get('done') ?? ''];
-    if (done) showMsg(done);
     renderMine(profile.id);
   }
   document.addEventListener('astro:page-load', init, { once: true });
