@@ -113,6 +113,13 @@ const nav = [
   .pt-msg.is-error { background: #fdecea; color: #8a1f12; }
   .pt .pa-seg button[disabled], .pt .pa-quick-seg button[disabled] { opacity: .55; cursor: wait; }
   .pt .pa-seg button, .pt .pa-quick-seg button { cursor: pointer; }
+  /* お知らせの保存ボタン：下書き（灰）・最終確認へ送る（橙）・このまま公開する（青緑）で見分ける */
+  .pt .pt-btn-draft { background: #fff; color: #4a5a60; border-color: #b8c4c8; cursor: pointer; }
+  .pt .pt-btn-draft:hover { background: #f2f5f6; }
+  .pt .pt-btn-send { background: #a35f00; border-color: #a35f00; color: #fff; cursor: pointer; }
+  .pt .pt-btn-send:hover { background: #8a5000; border-color: #8a5000; }
+  .pt .pt-btn-publish { background: var(--green); border-color: var(--green); color: #fff; cursor: pointer; }
+  .pt .pt-btn-publish:hover { filter: brightness(.92); }
   .pt-empty { color: #587680; font-size: 14px; padding: 8px 0; }
   .pa-badge-warn { background: #fdecea; color: #8a1f12; }
   .pt-reason { margin-top: 6px; padding: 8px 10px; border-radius: 8px; background: #fdecea; color: #8a1f12; font-size: 13px; }
