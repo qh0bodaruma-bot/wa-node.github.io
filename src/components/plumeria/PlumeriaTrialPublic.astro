@@ -19,6 +19,12 @@ import { PLUMERIA_TRIAL_ENABLED } from '../../data/plumeriaTrial';
 
 <style is:global>
   .pt-public[hidden] { display: none !important; }
+  .pt-att { margin-top: 10px; }
+  .pt-att-imgs { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+  .pt-att-imgs a { display: block; border-radius: 8px; overflow: hidden; background: #eef3f5; aspect-ratio: 4 / 3; }
+  .pt-att-imgs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pt-att-pdfs { list-style: none; padding: 0; margin: 8px 0 0; display: grid; gap: 4px; }
+  .pt-att-pdfs a { font-weight: 700; overflow-wrap: anywhere; }
   .pt-public-band { margin: 0 0 18px; padding: 12px 16px; border-radius: 10px; background: #fff4e5; color: #6b4200; border: 1px dashed #d9a441; line-height: 1.7; }
   .pt-public-vac { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
   .pt-public-vac li { padding: 12px 14px; border-radius: 10px; background: #fff; border: 1px solid #dbe7ea; }
@@ -31,7 +37,7 @@ import { PLUMERIA_TRIAL_ENABLED } from '../../data/plumeriaTrial';
 </style>
 
 <script>
-  import { api, h, fmtDateTime, fmtDate } from '../../lib/plumeriaTrial';
+  import { api, h, fmtDateTime, fmtDate, renderAttachments } from '../../lib/plumeriaTrial';
 
   async function load() {
     const root = document.querySelector<HTMLElement>('[data-pt-public]');
@@ -40,7 +46,7 @@ import { PLUMERIA_TRIAL_ENABLED } from '../../data/plumeriaTrial';
     try {
       const [vac, posts] = await Promise.all([
         api<any[]>('vacancies?select=name,sub,state,updated_at&order=sort', { anon: true }),
-        api<any[]>('posts?select=id,category,title,body,targets,publish_on&order=publish_on.desc,id.desc&limit=10', { anon: true }),
+        api<any[]>('posts?select=id,category,title,body,targets,publish_on,attachments&order=publish_on.desc,id.desc&limit=10', { anon: true }),
       ]);
       const cls: Record<string, string> = { '残りわずか': 'is-few', '満室': 'is-full' };
       root.querySelector('[data-pt-public-vac]')!.replaceChildren(...vac.map((v) => h('li', {},
@@ -51,7 +57,7 @@ import { PLUMERIA_TRIAL_ENABLED } from '../../data/plumeriaTrial';
       news.replaceChildren(...(posts.length ? posts.map((p) => h('li', {},
         h('span', { class: 'pl-num-face pl-news-date' }, fmtDate(p.publish_on)),
         h('span', { class: 'pl-cat pl-cat-accent' }, p.category),
-        h('span', { class: 'pl-news-text' }, p.title, h('span', { class: 'pt-public-body' }, p.body)))) : [h('li', {}, h('span', { class: 'pl-news-text' }, 'お試しで公開されたお知らせは、まだありません。'))]));
+        h('span', { class: 'pl-news-text' }, p.title, h('span', { class: 'pt-public-body' }, p.body), renderAttachments(p.attachments)))) : [h('li', {}, h('span', { class: 'pl-news-text' }, 'お試しで公開されたお知らせは、まだありません。'))]));
       root.hidden = false;
     } catch {
       // 読み込めない場合は、お試し表示ごと出さない（本来のページ表示には影響させない）

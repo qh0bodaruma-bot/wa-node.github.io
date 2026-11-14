@@ -40,10 +40,10 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
 </PlumeriaTrialLayout>
 
 <script>
-  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, fmtDate, statusLabel } from '../../../../../lib/plumeriaTrial';
+  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, fmtDate, statusLabel, renderAttachments } from '../../../../../lib/plumeriaTrial';
   import { trialRoutes } from '../../../../../data/plumeriaTrial';
 
-  const SEL = 'id,category,title,body,targets,publish_on,status,updated_at,published_at,author:profiles!posts_author_id_fkey(display_name),approver:profiles!posts_approver_id_fkey(display_name)';
+  const SEL = 'id,category,title,body,targets,publish_on,status,attachments,updated_at,published_at,author:profiles!posts_author_id_fkey(display_name),approver:profiles!posts_approver_id_fkey(display_name)';
   let isApprover = false;
 
   async function update(id: number, body: Record<string, unknown>, done: string) {
@@ -58,7 +58,8 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
   function pendingCard(p: any) {
     const detail = h('div', { hidden: true },
       h('p', { class: 'pa-hint' }, `掲載先：${p.targets.length ? p.targets.join('・') : '全事業所'} ／ 公開日：${fmtDate(p.publish_on)}`),
-      h('p', { class: 'pt-body' }, p.body));
+      h('p', { class: 'pt-body' }, p.body),
+      renderAttachments(p.attachments));
     const reason = h('textarea', { class: 'pa-textarea', rows: 3, maxlength: 500, placeholder: '差し戻す理由（例：日付をもう一度確認してください）', 'aria-label': '差し戻す理由' }) as HTMLTextAreaElement;
     const returnForm = h('div', { class: 'pt-inline-form', hidden: true }, reason,
       h('div', { class: 'pa-btn-row' },

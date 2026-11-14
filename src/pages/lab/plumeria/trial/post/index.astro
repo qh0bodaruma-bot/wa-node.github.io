@@ -41,7 +41,14 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
       </div>
       <div class="pa-field">
         <span class="pa-label">写真・PDF</span>
-        <div class="pa-drop">お試し版では、写真とPDFの添付はできません。</div>
+        <label class="pa-drop pt-drop" for="pt-files">
+          ここを押して、写真かPDFを選んでください（10個まで）<br />
+          <span class="pa-hint">写真は自動で軽くしてから送ります。PDFは5MBまでです。</span>
+        </label>
+        <input id="pt-files" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif,application/pdf" multiple class="pt-file-input" data-pt-files />
+        <p class="pa-hint" data-pt-upload-status role="status" aria-live="polite"></p>
+        <ul class="pt-att-edit" data-pt-att-list></ul>
+        <p class="pa-hint" style="color:#8a1f12"><strong>入居者さまのお顔・お名前・書類が写った写真は載せないでください。</strong>公開すると、見本ページでどなたでも見られます。</p>
       </div>
       <div class="pa-field">
         <label class="pa-label" for="pt-date">公開日</label>
@@ -80,10 +87,47 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
 </PlumeriaTrialLayout>
 
 <script>
-  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, todayJst, statusLabel } from '../../../../../lib/plumeriaTrial';
+  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, todayJst, statusLabel, uploadAttachment, isSafeAttachment, mediaUrl, MAX_ATTACHMENTS, type Attachment } from '../../../../../lib/plumeriaTrial';
   import { trialRoutes, postCategories } from '../../../../../data/plumeriaTrial';
 
   let editingId: number | null = null;
+  let attachments: Attachment[] = [];
+  let uploading = 0;
+
+  function renderAttList(editable: boolean) {
+    const ul = document.querySelector<HTMLElement>('[data-pt-att-list]');
+    if (!ul) return;
+    ul.replaceChildren(...attachments.map((a, i) => h('li', {},
+      a.type === 'image'
+        ? h('img', { src: mediaUrl(a.path), alt: '', width: 72, height: 72 })
+        : h('span', { class: 'pt-att-pdficon', 'aria-hidden': 'true' }, 'PDF'),
+      h('a', { href: mediaUrl(a.path), target: '_blank', rel: 'noopener', class: 'pt-att-name' }, a.name),
+      editable && h('button', { type: 'button', class: 'pa-btn pa-btn-warn', onclick: () => { attachments.splice(i, 1); renderAttList(true); } }, '外す'))));
+  }
+
+  function setupUpload(form: HTMLFormElement) {
+    const input = form.querySelector<HTMLInputElement>('[data-pt-files]')!;
+    const status = form.querySelector<HTMLElement>('[data-pt-upload-status]')!;
+    input.addEventListener('change', async () => {
+      const files = [...(input.files ?? [])];
+      input.value = '';
+      if (!files.length) return;
+      if (attachments.length + files.length > MAX_ATTACHMENTS) { showMsg(`添付は${MAX_ATTACHMENTS}個までです。`, true); return; }
+      for (const f of files) {
+        uploading++;
+        status.textContent = `送っています…（${f.name}）`;
+        try {
+          attachments.push(await uploadAttachment(f));
+          renderAttList(true);
+        } catch (e) {
+          handleError(e, (m) => showMsg(`${f.name}：${m}`, true));
+        } finally {
+          uploading--;
+        }
+      }
+      status.textContent = uploading ? '送っています…' : '';
+    });
+  }
 
   function formValues(form: HTMLFormElement) {
     const fd = new FormData(form);
@@ -93,6 +137,7 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
       body: String(fd.get('body') || '').trim(),
       targets: fd.getAll('targets').map(String),
       publish_on: String(fd.get('publish_on') || '') || todayJst(),
+      attachments,
     };
   }
 
@@ -128,7 +173,7 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
     const id = Number(params.get('id'));
     if (id) {
       try {
-        const rows = await api<any[]>(`posts?select=id,category,title,body,targets,publish_on,status,return_reason,author_id&id=eq.${id}`);
+        const rows = await api<any[]>(`posts?select=id,category,title,body,targets,publish_on,status,return_reason,author_id,attachments&id=eq.${id}`);
         const p = rows[0];
         if (!p) { showMsg('このお知らせは見つかりませんでした。', true); return; }
         editingId = p.id;
@@ -137,6 +182,7 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
         (form.elements.namedItem('body') as HTMLTextAreaElement).value = p.body;
         (form.elements.namedItem('publish_on') as HTMLInputElement).value = p.publish_on;
         form.querySelectorAll<HTMLInputElement>('input[name=targets]').forEach((c) => (c.checked = p.targets.includes(c.value)));
+        attachments = (Array.isArray(p.attachments) ? p.attachments : []).filter(isSafeAttachment);
         const st = statusLabel[p.status] ?? { t: p.status, badge: 'off' };
         const badge = form.querySelector<HTMLElement>('[data-pt-state]')!;
         badge.textContent = st.t; badge.className = `pa-badge pa-badge-${st.badge}`;
@@ -154,10 +200,13 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
           lock.textContent = p.status === 'pending' ? '最終確認まちのため、直せません。差し戻されると直せるようになります。' : 'この状態のお知らせは、公開の権限をお持ちの方だけが直せます。';
           lock.hidden = false;
         }
+        renderAttList(editable);
       } catch (e) { handleError(e, (m) => showMsg(m, true)); return; }
     }
 
+    setupUpload(form);
     form.querySelectorAll<HTMLButtonElement>('[data-pt-save]').forEach((btn) => btn.addEventListener('click', async () => {
+      if (uploading) { showMsg('写真・PDFを送っている途中です。終わってからもう一度押してください。', true); return; }
       const v = formValues(form);
       if (!v.title || !v.body) { showMsg('タイトルと本文を入力してください。', true); return; }
       const mode = btn.dataset.ptSave!;

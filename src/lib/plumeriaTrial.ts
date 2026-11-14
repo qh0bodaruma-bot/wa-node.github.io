@@ -210,6 +210,81 @@ export const statusLabel: Record<string, { t: string; badge: string }> = {
   hidden: { t: '非公開', badge: 'off' },
 };
 
+// ---------- 添付（写真・PDF） ----------
+export const MEDIA_BUCKET = 'trial-media';
+export const MAX_ATTACHMENTS = 10;
+export const MAX_PDF_BYTES = 5 * 1024 * 1024;
+const IMAGE_MAX_SIDE = 1600;
+
+export interface Attachment { path: string; name: string; type: 'image' | 'pdf' }
+
+const SAFE_PATH = /^posts\/[0-9a-f-]{36}\/[A-Za-z0-9._-]{1,80}$/;
+export function isSafeAttachment(a: any): a is Attachment {
+  return !!a && typeof a.path === 'string' && SAFE_PATH.test(a.path) && (a.type === 'image' || a.type === 'pdf') && typeof a.name === 'string';
+}
+export const mediaUrl = (path: string) => `${URL_BASE}/storage/v1/object/public/${MEDIA_BUCKET}/${path.split('/').map(encodeURIComponent).join('/')}`;
+
+// 写真は送る前にブラウザで縮める（長い辺 1600px・JPEG）。読めない形式（HEIC など）はエラーにする
+async function shrinkImage(file: File): Promise<Blob> {
+  let bitmap: ImageBitmap;
+  try { bitmap = await createImageBitmap(file); }
+  catch { throw new ApiError('この写真の形式は読み込めませんでした。JPEG か PNG の写真を選んでください。', 400); }
+  const scale = Math.min(1, IMAGE_MAX_SIDE / Math.max(bitmap.width, bitmap.height));
+  const w = Math.round(bitmap.width * scale);
+  const hgt = Math.round(bitmap.height * scale);
+  const canvas = document.createElement('canvas');
+  canvas.width = w; canvas.height = hgt;
+  const ctx = canvas.getContext('2d')!;
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, w, hgt);
+  ctx.drawImage(bitmap, 0, 0, w, hgt);
+  bitmap.close?.();
+  const blob = await new Promise<Blob | null>((res) => canvas.toBlob(res, 'image/jpeg', 0.85));
+  if (!blob) throw new ApiError('写真の変換に失敗しました。別の写真でお試しください。', 400);
+  return blob;
+}
+
+export async function uploadAttachment(file: File): Promise<Attachment> {
+  const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
+  const isImage = file.type.startsWith('image/') || /\.(jpe?g|png|webp|heic|heif)$/i.test(file.name);
+  if (!isPdf && !isImage) throw new ApiError('添付できるのは写真とPDFだけです。', 400);
+  if (isPdf && file.size > MAX_PDF_BYTES) throw new ApiError('PDFは5MBまでです。ページを分けるなどして小さくしてください。', 400);
+
+  const body: Blob = isPdf ? file : await shrinkImage(file);
+  const contentType = isPdf ? 'application/pdf' : 'image/jpeg';
+  const s = await freshSession();
+  const id = (crypto.randomUUID?.() ?? `${Date.now()}-${Math.random().toString(16).slice(2)}`).replace(/[^A-Za-z0-9-]/g, '');
+  const path = `posts/${s.user.id}/${id}.${isPdf ? 'pdf' : 'jpg'}`;
+  const put = (token: string) => fetch(`${URL_BASE}/storage/v1/object/${MEDIA_BUCKET}/${path}`, {
+    method: 'POST',
+    headers: { apikey: KEY, Authorization: `Bearer ${token}`, 'Content-Type': contentType, 'x-upsert': 'false' },
+    body,
+  });
+  let res = await put(s.access_token);
+  if (res.status === 401) res = await put((await refresh(s)).access_token);
+  if (!res.ok) {
+    if (res.status === 413) throw new ApiError('ファイルが大きすぎます（5MBまで）。', 413);
+    if (res.status === 401 || res.status === 403) throw new ApiError('ファイルを置く権限がありません。', res.status);
+    throw new ApiError('ファイルを送れませんでした。電波の状態を確認して、もう一度お試しください。', res.status);
+  }
+  const name = file.name.slice(0, 100) || (isPdf ? '資料.pdf' : '写真.jpg');
+  return { path, name, type: isPdf ? 'pdf' : 'image' };
+}
+
+// 添付の表示（管理画面・公開側で共用）
+export function renderAttachments(list: unknown): HTMLElement | null {
+  const items = Array.isArray(list) ? list.filter(isSafeAttachment) : [];
+  if (!items.length) return null;
+  const images = items.filter((a) => a.type === 'image');
+  const pdfs = items.filter((a) => a.type === 'pdf');
+  return h('div', { class: 'pt-att' },
+    images.length ? h('div', { class: 'pt-att-imgs' }, ...images.map((a) =>
+      h('a', { href: mediaUrl(a.path), target: '_blank', rel: 'noopener' },
+        h('img', { src: mediaUrl(a.path), alt: a.name, loading: 'lazy', decoding: 'async' })))) : null,
+    pdfs.length ? h('ul', { class: 'pt-att-pdfs' }, ...pdfs.map((a) =>
+      h('li', {}, h('a', { href: mediaUrl(a.path), target: '_blank', rel: 'noopener' }, `PDFを開く：${a.name}`)))) : null);
+}
+
 // ---------- 空室 ----------
 export interface Vacancy { facility: string; name: string; sub: string; sort: number; state: string; updated_at: string; updater?: { display_name: string } | null }
 
