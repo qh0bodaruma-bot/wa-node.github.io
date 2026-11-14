@@ -17,7 +17,6 @@ const nav = [
   { href: trialRoutes.home, ico: '⌂', t: 'ホーム', s: 'DASHBOARD' },
   { href: trialRoutes.vacancy, ico: '空', t: '空室情報', s: 'VACANCY' },
   { href: trialRoutes.post, ico: '知', t: 'お知らせ・通知', s: 'POSTS' },
-  { href: trialRoutes.approve, ico: '認', t: '最終確認', s: 'APPROVAL' },
   { href: `${trialRoutes.home}#analytics`, ico: '析', t: 'アクセス分析', s: 'ANALYTICS' },
 ];
 ---
@@ -47,21 +46,24 @@ const nav = [
           <button type="button" class="pt-logout" data-trial-logout>ログアウト</button>
         </div>
 
-        <a class="pt-status" href={trialRoutes.approve} data-astro-reload aria-label="いまの状況（最終確認の画面を開く）">
-          <div class="pa-side-h">いまの状況<span class="pt-status-go" aria-hidden="true">最終確認へ →</span></div>
-          <div class="pa-stat"><span class="pa-dot pa-dot-warn"></span>最終確認まち<span class="pa-stat-v" data-trial-count="pending">—</span></div>
-          <div class="pa-stat"><span class="pa-dot pa-dot-ok"></span>公開中<span class="pa-stat-v" data-trial-count="published">—</span></div>
-        </a>
-
         <nav class="pa-nav" aria-label="管理メニュー">
-          {nav.map((n) => (
-            <a href={n.href} data-astro-reload aria-current={currentPath === n.href ? 'page' : undefined}>
-              <span class="pa-ico" aria-hidden="true">{n.ico}</span>
-              <span>
-                <span class="pa-nav-t">{n.t}</span>
-                <span class="pa-nav-s">{n.s}</span>
-              </span>
-            </a>
+          {nav.map((n, i) => (
+            <>
+              <a href={n.href} data-astro-reload aria-current={currentPath === n.href ? 'page' : undefined}>
+                <span class="pa-ico" aria-hidden="true">{n.ico}</span>
+                <span>
+                  <span class="pa-nav-t">{n.t}</span>
+                  <span class="pa-nav-s">{n.s}</span>
+                </span>
+              </a>
+              {i === 0 && (
+                <a class="pt-status" href={trialRoutes.approve} data-astro-reload aria-current={currentPath === trialRoutes.approve ? 'page' : undefined}>
+                  <span class="pa-side-h">いまの状況<span class="pt-status-go" aria-hidden="true">開く →</span></span>
+                  <span class="pa-stat"><span class="pa-dot pa-dot-warn"></span>確認まち<span class="pa-stat-v" data-trial-count="pending">—</span></span>
+                  <span class="pa-stat"><span class="pa-dot pa-dot-ok"></span>公開中<span class="pa-stat-v" data-trial-count="published">—</span></span>
+                </a>
+              )}
+            </>
           ))}
         </nav>
 
@@ -102,8 +104,10 @@ const nav = [
   .pt-user-name { font-weight: 700; }
   .pt-user-role { color: #587680; font-size: 12px; }
   .pt-logout { justify-self: start; margin-top: 4px; background: none; border: 1px solid #b9cdd3; border-radius: 999px; padding: 3px 12px; font: inherit; font-size: 12px; cursor: pointer; }
-  .pt-status { margin: 0 0 14px; padding: 12px 14px; border-radius: 12px; background: #fff; border: 1px solid #dbe7ea; box-shadow: 0 1px 3px rgba(8, 60, 74, .06); }
-  a.pt-status { display: block; color: inherit; text-decoration: none; transition: border-color .15s, box-shadow .15s; }
+  .pt-status { padding: 12px 14px; border-radius: 12px; background: #fff; border: 1px solid #dbe7ea; box-shadow: 0 1px 3px rgba(8, 60, 74, .06); }
+  .pa-nav a.pt-status { display: block; margin: 4px 0 6px; color: inherit; text-decoration: none; transition: border-color .15s, box-shadow .15s, background .15s; }
+  .pa-nav a.pt-status[aria-current="page"] { border-color: #137792; background: #eef7f9; }
+  .pt-status .pa-side-h, .pt-status .pa-stat { display: flex; }
   a.pt-status:hover { border-color: #137792; box-shadow: 0 2px 8px rgba(8, 60, 74, .12); }
   a.pt-status:focus-visible { outline: 3px solid #137792; outline-offset: 2px; }
   .pt-status .pa-side-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; }
