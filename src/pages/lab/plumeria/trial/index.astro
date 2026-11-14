@@ -1,0 +1,130 @@
+---
+import PlumeriaTrialLayout from '../../../../layouts/PlumeriaTrialLayout.astro';
+import { trialRoutes, postCategories } from '../../../../data/plumeriaTrial';
+
+// アクセス分析はお試し版では仮の数字（本番では Looker Studio などの実データにつなぐ予定）
+const months = ['4月', '5月', '6月', '7月', '8月', '9月'];
+const visits = [62, 78, 91, 85, 104, 128];
+const reached = [21, 30, 38, 33, 47, 61];
+const max = 140;
+const chartH = 230;
+const slot = 100;
+const barW = 30;
+const chartW = slot * months.length;
+const catDesc: Record<string, string> = {
+  'お知らせ': '行事の報告、施設からのご案内',
+  '事業課からの通知': '加算、料金改定、制度変更',
+  '採用情報': '募集職種の追加・募集終了',
+  'コンプライアンス掲示': '重要事項説明、指定事業所番号',
+};
+---
+<PlumeriaTrialLayout title="ホーム" currentPath={trialRoutes.home} hello="こんにちは">
+  <section class="pa-sec">
+    <div class="pa-kpis">
+      <div class="pa-kpi"><p class="pa-kpi-t">最終確認まち</p><div><span class="pa-kpi-v" data-pt-kpi="pending">—</span><span class="pa-kpi-u">件</span></div><div class="pa-kpi-sub"><a href={trialRoutes.approve} data-astro-reload>最終確認を開く →</a></div></div>
+      <div class="pa-kpi"><p class="pa-kpi-t">公開中のお知らせ</p><div><span class="pa-kpi-v" data-pt-kpi="published">—</span><span class="pa-kpi-u">件</span></div><div class="pa-kpi-sub"><span>ホームページのお試し表示に出ています</span></div></div>
+      <div class="pa-kpi"><p class="pa-kpi-t">自分の下書き・差し戻し</p><div><span class="pa-kpi-v" data-pt-kpi="mine">—</span><span class="pa-kpi-u">件</span></div><div class="pa-kpi-sub"><span>書きかけ・直しが必要なもの</span></div></div>
+      <div class="pa-kpi"><p class="pa-kpi-t">空室情報の最終更新</p><div><span class="pa-kpi-v" style="font-size:22px" data-pt-kpi="vacancy">—</span></div><div class="pa-kpi-sub"><a href={trialRoutes.vacancy} data-astro-reload>空室情報を開く →</a></div></div>
+    </div>
+  </section>
+
+  <section class="pa-sec pa-grid2">
+    <div class="pa-card">
+      <div class="pa-eyebrow">MY POSTS</div>
+      <h2 class="pa-h2">自分が書いたもの</h2>
+      <p class="pa-lead" style="margin-bottom:14px">下書き・確認まち・公開中をまとめて確認できます。タイトルを押すと開きます。</p>
+      <table class="pa-table">
+        <thead><tr><th>タイトル</th><th>種類</th><th>状態</th></tr></thead>
+        <tbody data-pt-mine><tr><td colspan="3" class="pt-empty">読み込み中…</td></tr></tbody>
+      </table>
+      <div class="pa-note"><strong>「削除」はありません。</strong>掲載を終えるときは「非公開にする」ため、誤って操作しても元に戻せます。</div>
+    </div>
+    <div class="pa-card">
+      <div class="pa-eyebrow">NEW</div>
+      <h2 class="pa-h2">新しく書く</h2>
+      <p class="pa-lead" style="margin-bottom:14px">種類を選ぶと、その種類を選んだ状態で入力画面が開きます。</p>
+      <div class="pa-new" style="grid-template-columns:1fr">
+        {postCategories.map((c) => (
+          <a href={`${trialRoutes.post}?cat=${encodeURIComponent(c)}`} data-astro-reload>
+            <span class="pa-new-t">{c}</span>
+            <span class="pa-new-d">{catDesc[c]}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="pa-sec" id="analytics">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">ANALYTICS · 仮データ</div>
+          <h2 class="pa-h2">アクセス分析（お試し版では仮の数字）</h2>
+          <p class="pa-lead">本番では、ホームページの実際の訪問数を表示する予定です。お試し版では、画面の見え方だけをご確認ください。</p>
+        </div>
+        <div class="pa-legend">
+          <span><i style="background:#137792"></i>訪問数</span>
+          <span><i style="background:#a8d3e0"></i>空室情報まで</span>
+        </div>
+      </div>
+      <svg class="pa-chart" viewBox={`0 0 ${chartW} ${chartH + 40}`} role="img" aria-label="訪問数と空室情報到達数の6か月推移（仮データ）">
+        {[0, 0.25, 0.5, 0.75, 1].map((r) => (
+          <line x1="0" x2={chartW} y1={chartH - chartH * r} y2={chartH - chartH * r} stroke="#e6eef1" stroke-width="1" />
+        ))}
+        {months.map((m, i) => {
+          const cx = i * slot + slot / 2;
+          const hv = (visits[i] / max) * chartH;
+          const hr = (reached[i] / max) * chartH;
+          return (
+            <g>
+              <rect x={cx - barW - 3} y={chartH - hv} width={barW} height={hv} rx="5" fill="#137792" />
+              <rect x={cx + 3} y={chartH - hr} width={barW} height={hr} rx="5" fill="#a8d3e0" />
+              <text x={cx - barW / 2 - 3} y={chartH - hv - 8} text-anchor="middle" font-size="12.5" fill="#083c4a" font-weight="700">{visits[i]}</text>
+              <text x={cx + barW / 2 + 3} y={chartH - hr - 8} text-anchor="middle" font-size="12.5" fill="#587680">{reached[i]}</text>
+              <text x={cx} y={chartH + 24} text-anchor="middle" font-size="13" fill="#587680">{m}</text>
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  </section>
+</PlumeriaTrialLayout>
+
+<script>
+  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, statusLabel } from '../../../../lib/plumeriaTrial';
+  import { trialRoutes } from '../../../../data/plumeriaTrial';
+
+  function setKpi(k: string, v: string) {
+    const el = document.querySelector(`[data-pt-kpi="${k}"]`);
+    if (el) el.textContent = v;
+  }
+
+  async function render() {
+    const profile = await currentProfile();
+    if (!profile) return;
+    const counts = await api<{ status: string }[]>('posts?select=status&status=in.(pending,published)');
+    setKpi('pending', String(counts.filter((c) => c.status === 'pending').length));
+    setKpi('published', String(counts.filter((c) => c.status === 'published').length));
+    const vac = await api<{ updated_at: string }[]>('vacancies?select=updated_at&order=updated_at.desc&limit=1');
+    setKpi('vacancy', vac[0] ? fmtDateTime(vac[0].updated_at) : '—');
+
+    const mine = await api<any[]>(`posts?select=id,title,category,status,updated_at&author_id=eq.${profile.id}&order=updated_at.desc&limit=10`);
+    setKpi('mine', String(mine.filter((m) => m.status === 'draft' || m.status === 'returned').length));
+    const tbody = document.querySelector<HTMLElement>('[data-pt-mine]')!;
+    if (!mine.length) { tbody.replaceChildren(h('tr', {}, h('td', { colspan: 3, class: 'pt-empty' }, 'まだありません。右の「新しく書く」から始めてください。'))); return; }
+    tbody.replaceChildren(...mine.map((r) => {
+      const st = statusLabel[r.status] ?? { t: r.status, badge: 'off' };
+      return h('tr', {},
+        h('td', { class: 'pa-ttl' }, h('a', { href: `${trialRoutes.post}?id=${r.id}`, 'data-astro-reload': true }, r.title), h('span', { class: 'pa-sub' }, fmtDateTime(r.updated_at))),
+        h('td', {}, r.category),
+        h('td', {}, h('span', { class: `pa-badge pa-badge-${st.badge}` }, st.t)));
+    }));
+  }
+
+  async function init() {
+    if (!document.querySelector('[data-pt-kpi]') || !loadSession()) return;
+    try { await render(); } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+    document.addEventListener('pt:vacancy-changed', () => render().catch(() => {}));
+  }
+  document.addEventListener('astro:page-load', init, { once: true });
+</script>

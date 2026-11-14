@@ -1,5 +1,6 @@
 ---
 import PlumeriaLayout from '../../../layouts/PlumeriaLayout.astro';
+import PlumeriaTrialPublic from '../../../components/plumeria/PlumeriaTrialPublic.astro';
 import { services, recruitEntry, routes, corp, shortStayTel, news, newsListUrl, brandOrigin, plImg, careManagementFlow, housingUnits } from '../../../data/plumeria';
 
 // 重要事項説明は「サービス」でも「ヘッダーの常設メニュー」でもないため、
@@ -140,6 +141,8 @@ const heroSlides = [
       </nav>
     </div>
   </section>
+
+  <PlumeriaTrialPublic />
 
   <section class="pl-sec pl-sec-tight" id="news">
     <div class="pl-wrap">

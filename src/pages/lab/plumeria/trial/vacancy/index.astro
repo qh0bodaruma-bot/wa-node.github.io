@@ -1,0 +1,90 @@
+---
+import PlumeriaTrialLayout from '../../../../../layouts/PlumeriaTrialLayout.astro';
+import { trialRoutes } from '../../../../../data/plumeriaTrial';
+---
+<PlumeriaTrialLayout title="空室情報" currentPath={trialRoutes.vacancy} hello="空室情報を更新する">
+  <section class="pa-sec">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">DAILY · 10 SECONDS</div>
+          <h2 class="pa-h2">空室情報</h2>
+          <p class="pa-lead">3つから選ぶだけです。押した瞬間に保存され、ホームページのお試し表示が変わります。</p>
+        </div>
+        <span class="pa-badge pa-badge-now">最終確認は不要</span>
+      </div>
+      <div class="pa-vac" data-pt-vac><p class="pt-empty">読み込み中…</p></div>
+    </div>
+  </section>
+
+  <section class="pa-sec">
+    <div class="pa-card">
+      <div class="pa-eyebrow">HISTORY</div>
+      <h2 class="pa-h2">変更の記録</h2>
+      <p class="pa-lead" style="margin-bottom:14px">いつ・誰が・どう変えたかが残ります（新しい順に20件）。この記録は画面から書き換えられません。</p>
+      <table class="pa-table">
+        <thead><tr><th>日時</th><th>担当</th><th>対象</th><th>変更</th></tr></thead>
+        <tbody data-pt-log><tr><td colspan="4" class="pt-empty">読み込み中…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</PlumeriaTrialLayout>
+
+<script>
+  import { loadSession, loadVacancies, setVacancy, api, h, handleError, showMsg, fmtDateTime } from '../../../../../lib/plumeriaTrial';
+  import { vacancyStates } from '../../../../../data/plumeriaTrial';
+
+  const facilityName: Record<string, string> = {};
+
+  async function renderCards() {
+    const box = document.querySelector<HTMLElement>('[data-pt-vac]')!;
+    try {
+      const list = await loadVacancies();
+      list.forEach((v) => (facilityName[v.facility] = v.name));
+      box.replaceChildren(...list.map((v) => {
+        const seg = h('div', { class: 'pa-seg', role: 'group', 'aria-label': `${v.name}の空室状況` },
+          ...vacancyStates.map((s) => h('button', {
+            type: 'button', 'aria-pressed': v.state === s ? 'true' : 'false',
+            onclick: async () => {
+              if (v.state === s) return;
+              seg.querySelectorAll('button').forEach((b) => (b.disabled = true));
+              try {
+                await setVacancy(v.facility, s);
+                showMsg(`${v.name}を「${s}」にしました。`);
+                document.dispatchEvent(new CustomEvent('pt:vacancy-changed'));
+              } catch (e) {
+                handleError(e, (m) => showMsg(m, true));
+                seg.querySelectorAll('button').forEach((b) => (b.disabled = false));
+              }
+            },
+          }, s)));
+        return h('div', { class: 'pa-vac-card' },
+          h('p', { class: 'pa-vac-name' }, v.name),
+          h('p', { class: 'pa-vac-sub' }, v.sub),
+          seg,
+          h('p', { class: 'pa-vac-meta' }, `最終更新：${fmtDateTime(v.updated_at)}${v.updater ? ` ${v.updater.display_name}` : ''}`));
+      }));
+    } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+  }
+
+  async function renderLog() {
+    const tbody = document.querySelector<HTMLElement>('[data-pt-log]')!;
+    try {
+      const rows = await api<any[]>('vacancy_log?select=facility,from_state,to_state,changed_at,who:profiles(display_name)&order=changed_at.desc&limit=20');
+      if (!rows.length) { tbody.replaceChildren(h('tr', {}, h('td', { colspan: 4, class: 'pt-empty' }, 'まだ変更はありません。'))); return; }
+      tbody.replaceChildren(...rows.map((r) => h('tr', {},
+        h('td', {}, fmtDateTime(r.changed_at)),
+        h('td', {}, r.who?.display_name ?? '—'),
+        h('td', { class: 'pa-ttl' }, facilityName[r.facility] ?? r.facility),
+        h('td', {}, `${r.from_state ?? '—'} → `, h('strong', {}, r.to_state)))));
+    } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+  }
+
+  async function init() {
+    if (!document.querySelector('[data-pt-vac]') || !loadSession()) return;
+    await renderCards();
+    await renderLog();
+    document.addEventListener('pt:vacancy-changed', async () => { await renderCards(); await renderLog(); });
+  }
+  document.addEventListener('astro:page-load', init, { once: true });
+</script>

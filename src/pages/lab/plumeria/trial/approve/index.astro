@@ -1,0 +1,115 @@
+---
+import PlumeriaTrialLayout from '../../../../../layouts/PlumeriaTrialLayout.astro';
+import { trialRoutes } from '../../../../../data/plumeriaTrial';
+---
+<PlumeriaTrialLayout title="最終確認" currentPath={trialRoutes.approve} hello="最終確認">
+  <p class="pa-note" data-pt-writer hidden>
+    <strong>この画面の操作は、公開の権限をお持ちの方だけができます。</strong>
+    確認まちの一覧は見ることができます。
+  </p>
+
+  <section class="pa-sec">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">APPROVAL</div>
+          <h2 class="pa-h2">確認まち</h2>
+          <p class="pa-lead">「公開する」を押すと、ホームページのお試し表示に出ます。差し戻すときは理由を書いてお返しします。</p>
+        </div>
+        <span class="pa-badge pa-badge-wait" data-pt-pending-count>—</span>
+      </div>
+      <div data-pt-pending><p class="pt-empty">読み込み中…</p></div>
+    </div>
+  </section>
+
+  <section class="pa-sec">
+    <div class="pa-card">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">PUBLISHED</div>
+          <h2 class="pa-h2">いま公開されているもの・非公開にしたもの</h2>
+          <p class="pa-lead">掲載を終える場合は「非公開にする」を押します。消えるのではなく、見えなくなるだけです。</p>
+        </div>
+      </div>
+      <table class="pa-table">
+        <thead><tr><th>タイトル</th><th>種類</th><th>公開日</th><th>状態</th><th>操作</th></tr></thead>
+        <tbody data-pt-live><tr><td colspan="5" class="pt-empty">読み込み中…</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+</PlumeriaTrialLayout>
+
+<script>
+  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, fmtDate, statusLabel } from '../../../../../lib/plumeriaTrial';
+  import { trialRoutes } from '../../../../../data/plumeriaTrial';
+
+  const SEL = 'id,category,title,body,targets,publish_on,status,updated_at,published_at,author:profiles!posts_author_id_fkey(display_name),approver:profiles!posts_approver_id_fkey(display_name)';
+  let isApprover = false;
+
+  async function update(id: number, body: Record<string, unknown>, done: string) {
+    try {
+      await api(`posts?id=eq.${id}`, { method: 'PATCH', body, prefer: 'return=minimal' });
+      showMsg(done);
+      document.dispatchEvent(new CustomEvent('pt:posts-changed'));
+      await render();
+    } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+  }
+
+  function pendingCard(p: any) {
+    const detail = h('div', { hidden: true },
+      h('p', { class: 'pa-hint' }, `掲載先：${p.targets.length ? p.targets.join('・') : '全事業所'} ／ 公開日：${fmtDate(p.publish_on)}`),
+      h('p', { class: 'pt-body' }, p.body));
+    const reason = h('textarea', { class: 'pa-textarea', rows: 3, maxlength: 500, placeholder: '差し戻す理由（例：日付をもう一度確認してください）', 'aria-label': '差し戻す理由' }) as HTMLTextAreaElement;
+    const returnForm = h('div', { class: 'pt-inline-form', hidden: true }, reason,
+      h('div', { class: 'pa-btn-row' },
+        h('button', { type: 'button', class: 'pa-btn pa-btn-warn', onclick: () => {
+          if (!reason.value.trim()) { showMsg('差し戻す理由を入力してください。', true); reason.focus(); return; }
+          update(p.id, { status: 'returned', return_reason: reason.value.trim() }, `「${p.title}」を差し戻しました。`);
+        } }, '理由を付けて差し戻す'),
+        h('button', { type: 'button', class: 'pa-btn pa-btn-ghost', onclick: () => (returnForm.hidden = true) }, 'やめる')));
+    const actions = h('div', { class: 'pa-btn-row' },
+      h('button', { type: 'button', class: 'pa-btn pa-btn-ghost', onclick: () => (detail.hidden = !detail.hidden) }, '内容を見る'),
+      isApprover && h('button', { type: 'button', class: 'pa-btn', onclick: () => update(p.id, { status: 'published' }, `「${p.title}」を公開しました。`) }, '公開する'),
+      isApprover && h('button', { type: 'button', class: 'pa-btn pa-btn-warn', onclick: () => { returnForm.hidden = false; reason.focus(); } }, '差し戻す'));
+    return h('div', { class: 'pa-card', style: 'margin-top:12px;box-shadow:none;border:1px solid #dbe7ea' },
+      h('p', { class: 'pa-ttl', style: 'margin:0;font-weight:700' }, p.title),
+      h('p', { class: 'pa-hint', style: 'margin:4px 0 8px' }, `${p.category} ／ ${p.author?.display_name ?? '—'} さん ／ ${fmtDateTime(p.updated_at)} 送信`),
+      actions, detail, returnForm);
+  }
+
+  async function render() {
+    const rows = await api<any[]>(`posts?select=${SEL}&status=in.(pending,published,hidden)&order=updated_at.desc&limit=50`);
+    const pending = rows.filter((r) => r.status === 'pending');
+    const live = rows.filter((r) => r.status !== 'pending');
+    document.querySelector('[data-pt-pending-count]')!.textContent = `${pending.length}件`;
+    const pbox = document.querySelector<HTMLElement>('[data-pt-pending]')!;
+    pbox.replaceChildren(...(pending.length ? pending.map(pendingCard) : [h('p', { class: 'pt-empty' }, '確認まちはありません。')]));
+
+    const tbody = document.querySelector<HTMLElement>('[data-pt-live]')!;
+    if (!live.length) { tbody.replaceChildren(h('tr', {}, h('td', { colspan: 5, class: 'pt-empty' }, 'まだありません。'))); return; }
+    tbody.replaceChildren(...live.map((p) => {
+      const st = statusLabel[p.status];
+      return h('tr', {},
+        h('td', { class: 'pa-ttl' }, p.title, h('span', { class: 'pa-sub' }, `作成：${p.author?.display_name ?? '—'}${p.approver ? ` ／ 公開：${p.approver.display_name}` : ''}`)),
+        h('td', {}, p.category),
+        h('td', {}, fmtDate(p.publish_on)),
+        h('td', {}, h('span', { class: `pa-badge pa-badge-${st.badge}` }, st.t)),
+        h('td', {}, h('div', { class: 'pa-btn-row' },
+          isApprover && h('a', { class: 'pa-btn pa-btn-ghost', href: `${trialRoutes.post}?id=${p.id}`, 'data-astro-reload': true }, '編集'),
+          isApprover && p.status === 'published' && h('button', { type: 'button', class: 'pa-btn pa-btn-warn', onclick: () => update(p.id, { status: 'hidden' }, `「${p.title}」を非公開にしました。`) }, '非公開にする'),
+          isApprover && p.status === 'hidden' && h('button', { type: 'button', class: 'pa-btn', onclick: () => update(p.id, { status: 'published' }, `「${p.title}」をもう一度公開しました。`) }, 'もう一度公開する'))));
+    }));
+  }
+
+  async function init() {
+    if (!document.querySelector('[data-pt-pending]') || !loadSession()) return;
+    try {
+      const profile = await currentProfile();
+      if (!profile) return;
+      isApprover = profile.role === 'approver';
+      document.querySelector<HTMLElement>('[data-pt-writer]')!.hidden = isApprover;
+      await render();
+    } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+  }
+  document.addEventListener('astro:page-load', init, { once: true });
+</script>

@@ -1,0 +1,60 @@
+---
+// 管理画面お試し版の内容を、公開側に「お試し表示」として出す（期間限定）。
+// 本番の空室表示（PlumeriaVacancyStatus・Cloudflare の公開API）とは別物。PLUMERIA_TRIAL_ENABLED=false で出なくなる。
+import { PLUMERIA_TRIAL_ENABLED } from '../../data/plumeriaTrial';
+---
+{PLUMERIA_TRIAL_ENABLED && (
+  <section class="pl-sec pl-sec-tight pt-public" data-pt-public hidden>
+    <div class="pl-wrap">
+      <p class="pt-public-band">
+        <strong>お試し表示</strong>　管理画面のお試し中です。ここに出ている内容は試験用の仮のもので、実際のご案内ではありません。
+      </p>
+      <h2 class="pl-h2">空室状況（お試し表示）</h2>
+      <ul class="pt-public-vac" data-pt-public-vac></ul>
+      <h2 class="pl-h2" style="margin-top:28px">お知らせ（お試し表示）</h2>
+      <ul class="pl-news" data-pt-public-news></ul>
+    </div>
+  </section>
+)}
+
+<style is:global>
+  .pt-public-band { margin: 0 0 18px; padding: 12px 16px; border-radius: 10px; background: #fff4e5; color: #6b4200; border: 1px dashed #d9a441; line-height: 1.7; }
+  .pt-public-vac { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); }
+  .pt-public-vac li { padding: 12px 14px; border-radius: 10px; background: #fff; border: 1px solid #dbe7ea; }
+  .pt-public-vac b { display: block; }
+  .pt-public-vac small { color: #587680; }
+  .pt-public-state { display: inline-block; margin-top: 6px; padding: 2px 10px; border-radius: 999px; font-weight: 700; background: #e7f4ec; color: #1f5a37; }
+  .pt-public-state.is-few { background: #fff4e5; color: #6b4200; }
+  .pt-public-state.is-full { background: #f1f1f1; color: #555; }
+  .pt-public-body { display: block; margin-top: 4px; color: #3d5a63; font-size: .95em; white-space: pre-wrap; }
+</style>
+
+<script>
+  import { api, h, fmtDateTime, fmtDate } from '../../lib/plumeriaTrial';
+
+  async function load() {
+    const root = document.querySelector<HTMLElement>('[data-pt-public]');
+    if (!root || root.dataset.loaded) return;
+    root.dataset.loaded = '1';
+    try {
+      const [vac, posts] = await Promise.all([
+        api<any[]>('vacancies?select=name,sub,state,updated_at&order=sort', { anon: true }),
+        api<any[]>('posts?select=id,category,title,body,targets,publish_on&order=publish_on.desc,id.desc&limit=10', { anon: true }),
+      ]);
+      const cls: Record<string, string> = { '残りわずか': 'is-few', '満室': 'is-full' };
+      root.querySelector('[data-pt-public-vac]')!.replaceChildren(...vac.map((v) => h('li', {},
+        h('b', {}, v.name), h('small', {}, v.sub), h('br'),
+        h('span', { class: `pt-public-state ${cls[v.state] ?? ''}` }, v.state),
+        h('small', { style: 'margin-left:8px' }, `${fmtDateTime(v.updated_at)} 時点`))));
+      const news = root.querySelector('[data-pt-public-news]')!;
+      news.replaceChildren(...(posts.length ? posts.map((p) => h('li', {},
+        h('span', { class: 'pl-num-face pl-news-date' }, fmtDate(p.publish_on)),
+        h('span', { class: 'pl-cat pl-cat-accent' }, p.category),
+        h('span', { class: 'pl-news-text' }, p.title, h('span', { class: 'pt-public-body' }, p.body)))) : [h('li', {}, h('span', { class: 'pl-news-text' }, 'お試しで公開されたお知らせは、まだありません。'))]));
+      root.hidden = false;
+    } catch {
+      // 読み込めない場合は、お試し表示ごと出さない（本来のページ表示には影響させない）
+    }
+  }
+  document.addEventListener('astro:page-load', load);
+</script>

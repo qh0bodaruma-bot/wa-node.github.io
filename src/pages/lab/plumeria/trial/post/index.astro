@@ -1,0 +1,195 @@
+---
+import PlumeriaTrialLayout from '../../../../../layouts/PlumeriaTrialLayout.astro';
+import { trialRoutes, postCategories, postTargets } from '../../../../../data/plumeriaTrial';
+---
+<PlumeriaTrialLayout title="お知らせを書く" currentPath={trialRoutes.post} hello="お知らせを書く">
+  <section class="pa-sec pa-grid2">
+    <form class="pa-card" data-pt-form novalidate>
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow" data-pt-mode>NEW POST</div>
+          <h2 class="pa-h2" data-pt-heading>お知らせを書く</h2>
+          <p class="pa-lead">書き終えたら「最終確認へ送る」を押します。公開の権限をお持ちの方は、そのまま公開もできます。</p>
+        </div>
+        <span class="pa-badge pa-badge-wait" data-pt-state>新規</span>
+      </div>
+      <div class="pt-reason" data-pt-reason hidden></div>
+
+      <div class="pa-field">
+        <label class="pa-label" for="pt-cat">種類</label>
+        <select class="pa-select" id="pt-cat" name="category">
+          {postCategories.map((c) => <option value={c}>{c}</option>)}
+        </select>
+        <p class="pa-hint">種類ごとに、ホームページ上の掲載場所が変わります（お試し版では、お知らせ欄にまとめて表示します）。</p>
+      </div>
+      <div class="pa-field">
+        <label class="pa-label" for="pt-title">タイトル<span class="pa-req">必須</span></label>
+        <input class="pa-input" id="pt-title" name="title" type="text" maxlength="100" required />
+      </div>
+      <div class="pa-field">
+        <span class="pa-label">どの事業所のお知らせですか</span>
+        <div class="pa-checks">
+          {postTargets.map((t) => (
+            <label class="pa-check"><input type="checkbox" name="targets" value={t} />{t}</label>
+          ))}
+        </div>
+        <p class="pa-hint">何も選ばない場合は「全事業所」として扱います。</p>
+      </div>
+      <div class="pa-field">
+        <label class="pa-label" for="pt-body">本文<span class="pa-req">必須</span></label>
+        <textarea class="pa-textarea" id="pt-body" name="body" maxlength="5000" rows="8" required></textarea>
+      </div>
+      <div class="pa-field">
+        <span class="pa-label">写真・PDF</span>
+        <div class="pa-drop">お試し版では、写真とPDFの添付はできません。</div>
+      </div>
+      <div class="pa-field">
+        <label class="pa-label" for="pt-date">公開日</label>
+        <input class="pa-input" id="pt-date" name="publish_on" type="date" required />
+        <p class="pa-hint">先の日付にすると、その日になってからホームページに表示されます。</p>
+      </div>
+      <div class="pa-actions" data-pt-actions>
+        <button type="button" class="pa-btn pa-btn-ghost" data-pt-save="draft">下書きとして保存</button>
+        <button type="button" class="pa-btn" data-pt-save="pending">最終確認へ送る</button>
+        <button type="button" class="pa-btn" data-pt-save="publish" hidden>このまま公開する</button>
+      </div>
+      <p class="pa-hint" data-pt-locked hidden></p>
+    </form>
+
+    <div>
+      <div class="pa-card">
+        <div class="pa-eyebrow">FLOW</div>
+        <h2 class="pa-h2">公開までの流れ</h2>
+        <div class="pa-insight" style="margin-top:14px">
+          <p style="margin:0"><strong>1. 書く</strong>（下書きとして保存できます）</p>
+          <p style="margin:6px 0 0"><strong>2. 最終確認へ送る</strong></p>
+          <p style="margin:6px 0 0"><strong>3. 公開の権限をお持ちの方が公開する</strong></p>
+          <p style="margin:10px 0 0">公開の権限をお持ちの方は、「このまま公開する」で2と3をまとめて行えます。誰が書き、誰が公開したかは記録に残ります。</p>
+        </div>
+      </div>
+      <div class="pa-card" style="margin-top:16px">
+        <div class="pa-eyebrow">MY POSTS</div>
+        <h2 class="pa-h2">自分が書いたもの</h2>
+        <table class="pa-table" style="margin-top:12px">
+          <thead><tr><th>タイトル</th><th>状態</th></tr></thead>
+          <tbody data-pt-mine><tr><td colspan="2" class="pt-empty">読み込み中…</td></tr></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</PlumeriaTrialLayout>
+
+<script>
+  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, todayJst, statusLabel } from '../../../../../lib/plumeriaTrial';
+  import { trialRoutes, postCategories } from '../../../../../data/plumeriaTrial';
+
+  let editingId: number | null = null;
+
+  function formValues(form: HTMLFormElement) {
+    const fd = new FormData(form);
+    return {
+      category: String(fd.get('category') || ''),
+      title: String(fd.get('title') || '').trim(),
+      body: String(fd.get('body') || '').trim(),
+      targets: fd.getAll('targets').map(String),
+      publish_on: String(fd.get('publish_on') || '') || todayJst(),
+    };
+  }
+
+  async function renderMine(uid: string) {
+    const tbody = document.querySelector<HTMLElement>('[data-pt-mine]')!;
+    try {
+      const rows = await api<any[]>(`posts?select=id,title,status,updated_at&author_id=eq.${uid}&order=updated_at.desc&limit=20`);
+      if (!rows.length) { tbody.replaceChildren(h('tr', {}, h('td', { colspan: 2, class: 'pt-empty' }, 'まだありません。'))); return; }
+      tbody.replaceChildren(...rows.map((r) => {
+        const st = statusLabel[r.status] ?? { t: r.status, badge: 'off' };
+        return h('tr', {},
+          h('td', { class: 'pa-ttl' }, h('a', { href: `${trialRoutes.post}?id=${r.id}`, 'data-astro-reload': true }, r.title), h('span', { class: 'pa-sub' }, fmtDateTime(r.updated_at))),
+          h('td', {}, h('span', { class: `pa-badge pa-badge-${st.badge}` }, st.t)));
+      }));
+    } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+  }
+
+  async function init() {
+    const form = document.querySelector<HTMLFormElement>('[data-pt-form]');
+    if (!form || !loadSession()) return;
+    const params = new URLSearchParams(location.search);
+    (form.elements.namedItem('publish_on') as HTMLInputElement).value = todayJst();
+    const cat = params.get('cat');
+    if (cat && (postCategories as readonly string[]).includes(cat)) (form.elements.namedItem('category') as HTMLSelectElement).value = cat;
+
+    let profile;
+    try { profile = await currentProfile(); } catch (e) { handleError(e, (m) => showMsg(m, true)); return; }
+    if (!profile) return;
+    const isApprover = profile.role === 'approver';
+    const publishBtn = form.querySelector<HTMLButtonElement>('[data-pt-save="publish"]')!;
+    publishBtn.hidden = !isApprover;
+
+    const id = Number(params.get('id'));
+    if (id) {
+      try {
+        const rows = await api<any[]>(`posts?select=id,category,title,body,targets,publish_on,status,return_reason,author_id&id=eq.${id}`);
+        const p = rows[0];
+        if (!p) { showMsg('このお知らせは見つかりませんでした。', true); return; }
+        editingId = p.id;
+        (form.elements.namedItem('category') as HTMLSelectElement).value = p.category;
+        (form.elements.namedItem('title') as HTMLInputElement).value = p.title;
+        (form.elements.namedItem('body') as HTMLTextAreaElement).value = p.body;
+        (form.elements.namedItem('publish_on') as HTMLInputElement).value = p.publish_on;
+        form.querySelectorAll<HTMLInputElement>('input[name=targets]').forEach((c) => (c.checked = p.targets.includes(c.value)));
+        const st = statusLabel[p.status] ?? { t: p.status, badge: 'off' };
+        const badge = form.querySelector<HTMLElement>('[data-pt-state]')!;
+        badge.textContent = st.t; badge.className = `pa-badge pa-badge-${st.badge}`;
+        form.querySelector('[data-pt-mode]')!.textContent = 'EDIT';
+        form.querySelector('[data-pt-heading]')!.textContent = 'お知らせを直す';
+        if (p.status === 'returned' && p.return_reason) {
+          const r = form.querySelector<HTMLElement>('[data-pt-reason]')!;
+          r.textContent = `差し戻しの理由：${p.return_reason}`; r.hidden = false;
+        }
+        // 確認まち・公開中・非公開は、書いた方の画面では直せない（公開の権限をお持ちの方は直せる）
+        const editable = isApprover || (p.author_id === profile.id && ['draft', 'returned'].includes(p.status));
+        if (!editable) {
+          form.querySelectorAll<HTMLElement>('input,select,textarea,button').forEach((el) => ((el as HTMLInputElement).disabled = true));
+          const lock = form.querySelector<HTMLElement>('[data-pt-locked]')!;
+          lock.textContent = p.status === 'pending' ? '最終確認まちのため、直せません。差し戻されると直せるようになります。' : 'この状態のお知らせは、公開の権限をお持ちの方だけが直せます。';
+          lock.hidden = false;
+        }
+      } catch (e) { handleError(e, (m) => showMsg(m, true)); return; }
+    }
+
+    form.querySelectorAll<HTMLButtonElement>('[data-pt-save]').forEach((btn) => btn.addEventListener('click', async () => {
+      const v = formValues(form);
+      if (!v.title || !v.body) { showMsg('タイトルと本文を入力してください。', true); return; }
+      const mode = btn.dataset.ptSave!;
+      const status = mode === 'draft' ? 'draft' : 'pending';
+      const buttons = form.querySelectorAll<HTMLButtonElement>('[data-pt-save]');
+      buttons.forEach((b) => (b.disabled = true));
+      try {
+        let rowId = editingId;
+        if (rowId) {
+          await api(`posts?id=eq.${rowId}`, { method: 'PATCH', body: { ...v, status }, prefer: 'return=minimal' });
+        } else {
+          const created = await api<any[]>('posts?select=id', { method: 'POST', body: { ...v, status }, prefer: 'return=representation' });
+          rowId = created[0].id;
+        }
+        if (mode === 'publish') {
+          await api(`posts?id=eq.${rowId}`, { method: 'PATCH', body: { status: 'published' }, prefer: 'return=minimal' });
+        }
+        location.href = `${trialRoutes.post}?id=${rowId}&done=${mode}`;
+      } catch (e) {
+        handleError(e, (m) => showMsg(m, true));
+        buttons.forEach((b) => (b.disabled = false));
+      }
+    }));
+
+    const doneText: Record<string, string> = {
+      draft: '下書きとして保存しました。',
+      pending: '最終確認へ送りました。',
+      publish: '公開しました。ホームページのお試し表示に出ます（公開日が先の場合は、その日から）。',
+    };
+    const done = doneText[params.get('done') ?? ''];
+    if (done) showMsg(done);
+    renderMine(profile.id);
+  }
+  document.addEventListener('astro:page-load', init, { once: true });
+</script>

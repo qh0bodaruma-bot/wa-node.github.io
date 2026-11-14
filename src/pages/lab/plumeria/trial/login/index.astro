@@ -1,0 +1,73 @@
+---
+// お試し版のログイン画面（メールアドレス＋パスワード）。
+// 本番予定の Cloudflare Access（メールで番号を受け取る方式）とは異なる。お試し期間だけの方式。
+import PlumeriaBaseLayout from '../../../../../layouts/PlumeriaBaseLayout.astro';
+import '../../../../../styles/plumeria-admin.css';
+---
+<PlumeriaBaseLayout
+  title="ログイン｜プルメリア 管理画面 お試し版"
+  description="プルメリア様の責任者の方に操作をお試しいただくための管理画面のログインです（期間限定）。"
+  siteName="プルメリア 管理画面（お試し版）"
+>
+  <div class="pa" data-reveal="off">
+    <p class="pa-notice" style="background:#fff4e5;color:#6b4200">
+      <strong>お試し版です。</strong>和-Nodeからお渡ししたメールアドレスとパスワードでログインしてください。
+    </p>
+    <div class="pa-auth-page">
+      <div class="pa-auth">
+        <form class="pa-auth-card" data-trial-login novalidate>
+          <div class="pa-auth-brand">PLUMERIA</div>
+          <div class="pa-auth-name">ホームページ管理（お試し版）</div>
+          <h2>ログイン</h2>
+          <div class="pa-field">
+            <label class="pa-label" for="pt-email">メールアドレス</label>
+            <input class="pa-input" id="pt-email" name="email" type="email" autocomplete="username" inputmode="email" required />
+          </div>
+          <div class="pa-field">
+            <label class="pa-label" for="pt-pass">パスワード</label>
+            <input class="pa-input" id="pt-pass" name="password" type="password" autocomplete="current-password" required />
+          </div>
+          <p class="pa-auth-note" data-trial-login-msg role="alert" style="color:#8a1f12" hidden></p>
+          <button type="submit" class="pa-btn" style="width:100%">ログインする</button>
+          <p class="pa-auth-note">パスワードを忘れた場合は、和-Nodeまでご連絡ください。</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</PlumeriaBaseLayout>
+
+<script>
+  import { signIn, loadSession } from '../../../../../lib/plumeriaTrial';
+  import { trialRoutes, trialBase } from '../../../../../data/plumeriaTrial';
+
+  function nextUrl() {
+    const n = new URLSearchParams(location.search).get('next') || '';
+    // 戻り先はお試し版の画面の中だけに限る（外部への移動に使われないように）
+    return n.startsWith(trialBase) && !n.startsWith('//') && !n.startsWith(trialRoutes.login) ? n : trialRoutes.home;
+  }
+
+  function init() {
+    const form = document.querySelector<HTMLFormElement>('[data-trial-login]');
+    if (!form) return;
+    if (loadSession()) { location.replace(nextUrl()); return; }
+    const msg = form.querySelector<HTMLElement>('[data-trial-login-msg]')!;
+    form.addEventListener('submit', async (ev) => {
+      ev.preventDefault();
+      const fd = new FormData(form);
+      const email = String(fd.get('email') || '').trim();
+      const password = String(fd.get('password') || '');
+      if (!email || !password) { msg.textContent = 'メールアドレスとパスワードを入力してください。'; msg.hidden = false; return; }
+      const btn = form.querySelector<HTMLButtonElement>('button[type=submit]')!;
+      btn.disabled = true; btn.textContent = '確認しています…';
+      try {
+        await signIn(email, password);
+        location.replace(nextUrl());
+      } catch (e) {
+        msg.textContent = e instanceof Error ? e.message : 'ログインできませんでした。';
+        msg.hidden = false;
+        btn.disabled = false; btn.textContent = 'ログインする';
+      }
+    });
+  }
+  document.addEventListener('astro:page-load', init, { once: true });
+</script>

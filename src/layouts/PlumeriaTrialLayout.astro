@@ -1,0 +1,186 @@
+---
+// プルメリア管理画面 お試し版のレイアウト（Supabase につながる・期間限定）。
+// 見た目は管理画面モック（PlumeriaAdminLayout）を引き継ぐ。モック自体は提案用として残す。
+// ログインしていない場合は、ブラウザ側でログイン画面へ移す（データの保護はデータベース側の権限で行う）。
+import PlumeriaBaseLayout from './PlumeriaBaseLayout.astro';
+import '../styles/plumeria-admin.css';
+import { trialRoutes } from '../data/plumeriaTrial';
+
+interface Props {
+  title: string;
+  currentPath?: string;
+  hello: string;
+}
+const { title, currentPath = '', hello } = Astro.props;
+
+const nav = [
+  { href: trialRoutes.home, ico: '⌂', t: 'ホーム', s: 'DASHBOARD' },
+  { href: trialRoutes.vacancy, ico: '空', t: '空室情報', s: 'VACANCY' },
+  { href: trialRoutes.post, ico: '知', t: 'お知らせ・通知', s: 'POSTS' },
+  { href: trialRoutes.approve, ico: '認', t: '最終確認', s: 'APPROVAL' },
+  { href: `${trialRoutes.post}?cat=${encodeURIComponent('採用情報')}`, ico: '採', t: '採用情報', s: 'RECRUIT' },
+  { href: `${trialRoutes.post}?cat=${encodeURIComponent('コンプライアンス掲示')}`, ico: '掲', t: 'コンプライアンス掲示', s: 'NOTICES' },
+  { href: `${trialRoutes.home}#analytics`, ico: '析', t: 'アクセス分析', s: 'ANALYTICS' },
+];
+---
+<PlumeriaBaseLayout
+  title={`${title}｜プルメリア 管理画面 お試し版`}
+  description="プルメリア様の責任者の方に操作をお試しいただくための管理画面です（期間限定）。"
+  siteName="プルメリア 管理画面（お試し版）"
+>
+  <div class="pa pt" data-reveal="off" data-trial-shell>
+    <p class="pa-notice pt-notice">
+      <strong>お試し版です。</strong>仮の内容だけで試してください（入居者さまのお名前など本物の情報は入れないでください）。
+      公開した内容は、お試し表示としてホームページに出ます。
+    </p>
+
+    <div class="pa-shell">
+      <aside class="pa-side">
+        <div class="pa-brand">
+          <div class="pa-brand-eyebrow">PLUMERIA</div>
+          <div class="pa-brand-name">ホームページ管理</div>
+        </div>
+
+        <span class="pa-demo-badge">お試し版</span>
+
+        <div class="pt-user" data-trial-user hidden>
+          <span class="pt-user-name" data-trial-user-name></span>
+          <span class="pt-user-role" data-trial-user-role></span>
+          <button type="button" class="pt-logout" data-trial-logout>ログアウト</button>
+        </div>
+
+        <nav class="pa-nav" aria-label="管理メニュー">
+          {nav.map((n) => (
+            <a href={n.href} data-astro-reload aria-current={currentPath === n.href ? 'page' : undefined}>
+              <span class="pa-ico" aria-hidden="true">{n.ico}</span>
+              <span>
+                <span class="pa-nav-t">{n.t}</span>
+                <span class="pa-nav-s">{n.s}</span>
+              </span>
+            </a>
+          ))}
+        </nav>
+
+        <div class="pa-quick">
+          <div class="pa-quick-h">
+            <div class="pa-side-h">空室情報をすぐ変える</div>
+            <a href={trialRoutes.vacancy} data-astro-reload>詳細</a>
+          </div>
+          <div data-trial-quick><p class="pa-quick-note">読み込み中…</p></div>
+          <p class="pa-quick-note">押すとすぐ保存され、ホームページのお試し表示に反映されます。</p>
+        </div>
+
+        <div class="pa-side-sec">
+          <div class="pa-side-h">いまの状況</div>
+          <div class="pa-stat"><span class="pa-dot pa-dot-warn"></span>最終確認まち<span class="pa-stat-v" data-trial-count="pending">—</span></div>
+          <div class="pa-stat"><span class="pa-dot pa-dot-ok"></span>公開中<span class="pa-stat-v" data-trial-count="published">—</span></div>
+        </div>
+
+        <div class="pa-side-card">
+          <b>うまく動かないときは</b>
+          <p>画面を開き直してください。それでも直らない場合は、和-Nodeまでご連絡ください。</p>
+        </div>
+      </aside>
+
+      <main class="pa-main">
+        <div class="pa-top">
+          <div>
+            <h1 class="pa-hello">{hello}</h1>
+            <p class="pa-date" data-trial-today></p>
+          </div>
+        </div>
+        <p class="pt-msg" data-trial-msg role="status" aria-live="polite" hidden></p>
+        <slot />
+      </main>
+    </div>
+  </div>
+</PlumeriaBaseLayout>
+
+<style is:global>
+  .pt-notice { background: #fff4e5; color: #6b4200; }
+  .pt-user { display: grid; gap: 2px; margin: 10px 0 14px; padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.6); font-size: 13px; }
+  .pt-user-name { font-weight: 700; }
+  .pt-user-role { color: #587680; font-size: 12px; }
+  .pt-logout { justify-self: start; margin-top: 4px; background: none; border: 1px solid #b9cdd3; border-radius: 999px; padding: 3px 12px; font: inherit; font-size: 12px; cursor: pointer; }
+  .pt-msg { margin: 0 0 16px; padding: 10px 14px; border-radius: 10px; background: #e7f4ec; color: #1f5a37; font-weight: 600; }
+  .pt-msg.is-error { background: #fdecea; color: #8a1f12; }
+  .pt .pa-seg button[disabled], .pt .pa-quick-seg button[disabled] { opacity: .55; cursor: wait; }
+  .pt .pa-seg button, .pt .pa-quick-seg button { cursor: pointer; }
+  .pt-empty { color: #587680; font-size: 14px; padding: 8px 0; }
+  .pa-badge-warn { background: #fdecea; color: #8a1f12; }
+  .pt-reason { margin-top: 6px; padding: 8px 10px; border-radius: 8px; background: #fdecea; color: #8a1f12; font-size: 13px; }
+  .pt-body { white-space: pre-wrap; margin: 8px 0 0; padding: 10px 12px; border-radius: 8px; background: #f4f8f9; font-size: 14px; }
+  .pt .pa-input, .pt .pa-select, .pt .pa-textarea { font: inherit; }
+  .pt-inline-form { display: grid; gap: 8px; margin-top: 8px; }
+</style>
+
+<script>
+  import { loadSession, currentProfile, signOut, goLogin, handleError, loadVacancies, setVacancy, api, h, showMsg } from '../lib/plumeriaTrial';
+  import { vacancyStates, trialRoutes } from '../data/plumeriaTrial';
+
+  async function refreshCounts() {
+    try {
+      for (const st of ['pending', 'published']) {
+        const rows = await api<{ id: number }[]>(`posts?select=id&status=eq.${st}`);
+        const el = document.querySelector<HTMLElement>(`[data-trial-count="${st}"]`);
+        if (el) el.textContent = `${rows.length}件`;
+      }
+    } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+  }
+
+  async function renderQuick() {
+    const box = document.querySelector<HTMLElement>('[data-trial-quick]');
+    if (!box) return;
+    try {
+      const list = await loadVacancies();
+      box.replaceChildren(...list.map((v) => {
+        const seg = h('div', { class: 'pa-quick-seg', role: 'group', 'aria-label': `${v.name}の空室状況` },
+          ...vacancyStates.map((s) => h('button', {
+            type: 'button', 'aria-pressed': v.state === s ? 'true' : 'false',
+            onclick: async (ev: Event) => {
+              const btns = seg.querySelectorAll('button');
+              btns.forEach((b) => (b.disabled = true));
+              try {
+                await setVacancy(v.facility, s);
+                showMsg(`${v.name}を「${s}」にしました。`);
+                document.dispatchEvent(new CustomEvent('pt:vacancy-changed'));
+              } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+              finally { btns.forEach((b) => (b.disabled = false)); }
+            },
+          }, s)));
+        return h('div', { class: 'pa-quick-item' }, h('p', { class: 'pa-quick-name' }, v.name), seg);
+      }));
+    } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+  }
+
+  async function init() {
+    if (!document.querySelector('[data-trial-shell]')) return;
+    if (!loadSession()) { goLogin(); return; }
+    const today = document.querySelector('[data-trial-today]');
+    if (today) today.textContent = new Intl.DateTimeFormat('ja-JP', { timeZone: 'Asia/Tokyo', dateStyle: 'full' }).format(new Date());
+    try {
+      const p = await currentProfile();
+      if (!p) {
+        showMsg('このアカウントには、まだ表示名と権限が登録されていません。和-Nodeまでご連絡ください。', true);
+        return;
+      }
+      const box = document.querySelector<HTMLElement>('[data-trial-user]');
+      if (box) {
+        box.querySelector('[data-trial-user-name]')!.textContent = `${p.display_name} さん`;
+        box.querySelector('[data-trial-user-role]')!.textContent = p.role === 'approver' ? '公開まで操作できます' : '最終確認へ送るまで操作できます';
+        box.hidden = false;
+      }
+    } catch (e) { handleError(e, (m) => showMsg(m, true)); return; }
+    document.querySelector('[data-trial-logout]')?.addEventListener('click', async () => {
+      await signOut();
+      location.href = trialRoutes.login;
+    });
+    renderQuick();
+    refreshCounts();
+    document.addEventListener('pt:vacancy-changed', renderQuick);
+    document.addEventListener('pt:posts-changed', refreshCounts);
+  }
+
+  // 画面内のリンクは data-astro-reload で読み直すため、ページごとに1回だけ動く
+  document.addEventListener('astro:page-load', init, { once: true });
+</script>
