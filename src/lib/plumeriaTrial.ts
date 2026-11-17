@@ -208,7 +208,22 @@ export const statusLabel: Record<string, { t: string; badge: string }> = {
   published: { t: '公開中', badge: 'live' },
   returned: { t: '差し戻し', badge: 'warn' },
   hidden: { t: '非公開', badge: 'off' },
+  trashed: { t: 'ゴミ箱', badge: 'off' },
 };
+
+// ゴミ箱に移せるか（最終の判定はデータベース側。ここでは押せるボタンの出し分けだけ）
+export function canTrash(p: { status: string; author_id?: string }, profile: Profile): boolean {
+  if (p.status === 'trashed') return false;
+  return profile.role === 'approver' || (p.author_id === profile.id && ['draft', 'returned'].includes(p.status));
+}
+
+// ゴミ箱に移す（公開中のものは、ホームページから消えることを確かめてから）
+export async function moveToTrash(p: { id: number; title: string; status: string }): Promise<boolean> {
+  const note = p.status === 'published' ? '\nホームページからも見えなくなります。' : '';
+  if (!confirm(`「${p.title}」をゴミ箱に移しますか？${note}\nゴミ箱からいつでも元に戻せます。`)) return false;
+  await api(`posts?id=eq.${p.id}`, { method: 'PATCH', body: { status: 'trashed' }, prefer: 'return=minimal' });
+  return true;
+}
 
 // ---------- 添付（写真・PDF） ----------
 export const MEDIA_BUCKET = 'trial-media';

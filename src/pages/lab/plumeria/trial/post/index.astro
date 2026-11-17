@@ -59,6 +59,7 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
         <button type="button" class="pa-btn pt-btn-draft" data-pt-save="draft">下書きとして保存</button>
         <button type="button" class="pa-btn pt-btn-send" data-pt-save="pending">最終確認へ送る</button>
         <button type="button" class="pa-btn pt-btn-publish" data-pt-save="publish" hidden>このまま公開する</button>
+        <button type="button" class="pa-btn pa-btn-ghost" data-pt-trash hidden>ゴミ箱に移す</button>
       </div>
       <p class="pa-hint" data-pt-locked hidden></p>
     </form>
@@ -93,16 +94,18 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
 </PlumeriaTrialLayout>
 
 <script>
-  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, todayJst, statusLabel, uploadAttachment, isSafeAttachment, mediaUrl, MAX_ATTACHMENTS, type Attachment } from '../../../../../lib/plumeriaTrial';
+  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, todayJst, statusLabel, uploadAttachment, isSafeAttachment, mediaUrl, MAX_ATTACHMENTS, canTrash, moveToTrash, type Attachment } from '../../../../../lib/plumeriaTrial';
   import { trialRoutes, postCategories } from '../../../../../data/plumeriaTrial';
 
   let editingId: number | null = null;
+  let current: { id: number; title: string; status: string; author_id: string } | null = null;
 
   // 保存のあとは、確認のポップアップを出してから空の入力画面に戻す（入力したままの画面で二重に送るのを防ぐ）
   const doneText: Record<string, { title: string; text: string }> = {
     draft: { title: '下書きとして保存しました', text: '入力した内容はこのまま残っています。続けて書けます。' },
     pending: { title: '最終確認へ送りました', text: '公開の権限をお持ちの方が確認すると、ホームページに表示されます。' },
     publish: { title: '公開しました', text: 'ホームページのお試し表示に出ます（公開日が先の場合は、その日から）。' },
+    trash: { title: 'ゴミ箱に移しました', text: '左のメニューの「ゴミ箱」から、いつでも元に戻せます。' },
   };
   function showDone(mode: string) {
     const d = document.querySelector<HTMLDialogElement>('[data-pt-done]');
@@ -172,7 +175,7 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
   async function renderMine(uid: string) {
     const tbody = document.querySelector<HTMLElement>('[data-pt-mine]')!;
     try {
-      const rows = await api<any[]>(`posts?select=id,title,status,updated_at&author_id=eq.${uid}&order=updated_at.desc&limit=20`);
+      const rows = await api<any[]>(`posts?select=id,title,status,updated_at&author_id=eq.${uid}&status=neq.trashed&order=updated_at.desc&limit=20`);
       if (!rows.length) { tbody.replaceChildren(h('tr', {}, h('td', { colspan: 2, class: 'pt-empty' }, 'まだありません。'))); return; }
       tbody.replaceChildren(...rows.map((r) => {
         const st = statusLabel[r.status] ?? { t: r.status, badge: 'off' };
@@ -221,16 +224,31 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
           r.textContent = `差し戻しの理由：${p.return_reason}`; r.hidden = false;
         }
         // 確認まち・公開中・非公開は、書いた方の画面では直せない（公開の権限をお持ちの方は直せる）
-        const editable = isApprover || (p.author_id === profile.id && ['draft', 'returned'].includes(p.status));
+        const editable = p.status !== 'trashed' && (isApprover || (p.author_id === profile.id && ['draft', 'returned'].includes(p.status)));
+        current = { id: p.id, title: p.title, status: p.status, author_id: p.author_id };
         if (!editable) {
           form.querySelectorAll<HTMLElement>('input,select,textarea,button').forEach((el) => ((el as HTMLInputElement).disabled = true));
           const lock = form.querySelector<HTMLElement>('[data-pt-locked]')!;
-          lock.textContent = p.status === 'pending' ? '最終確認まちのため、直せません。差し戻されると直せるようになります。' : 'この状態のお知らせは、公開の権限をお持ちの方だけが直せます。';
+          lock.textContent = p.status === 'trashed' ? 'ゴミ箱の中のお知らせです。左のメニューの「ゴミ箱」で戻すと、直せるようになります。'
+            : p.status === 'pending' ? '最終確認まちのため、直せません。差し戻されると直せるようになります。' : 'この状態のお知らせは、公開の権限をお持ちの方だけが直せます。';
           lock.hidden = false;
         }
         renderAttList(editable);
       } catch (e) { handleError(e, (m) => showMsg(m, true)); return; }
     }
+
+    // ゴミ箱に移す（開いているお知らせが、自分で移せる状態のときだけ出す）
+    const trashBtn = form.querySelector<HTMLButtonElement>('[data-pt-trash]')!;
+    const syncTrash = () => { trashBtn.hidden = !(current && canTrash(current, profile)); };
+    syncTrash();
+    trashBtn.addEventListener('click', async () => {
+      if (!current || uploading) return;
+      trashBtn.disabled = true;
+      try {
+        if (await moveToTrash(current)) { showDone('trash'); return; }
+      } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+      trashBtn.disabled = false;
+    });
 
     setupUpload(form);
     form.querySelectorAll<HTMLButtonElement>('[data-pt-save]').forEach((btn) => btn.addEventListener('click', async () => {
@@ -255,6 +273,8 @@ import { trialRoutes, postCategories, postTargets } from '../../../../../data/pl
         if (mode === 'draft') {
           // 下書きは入力したまま残す。以後の保存は同じ下書きの上書きになるよう、この下書きを開いた状態にする
           editingId = rowId;
+          current = { id: rowId!, title: v.title, status: 'draft', author_id: profile.id };
+          syncTrash();
           history.replaceState(null, '', `${trialRoutes.post}?id=${rowId}`);
           const badge = form.querySelector<HTMLElement>('[data-pt-state]')!;
           badge.textContent = statusLabel.draft.t; badge.className = `pa-badge pa-badge-${statusLabel.draft.badge}`;

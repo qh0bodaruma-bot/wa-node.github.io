@@ -37,7 +37,7 @@ const catDesc: Record<string, string> = {
         <thead><tr><th>タイトル</th><th>種類</th><th>状態</th></tr></thead>
         <tbody data-pt-mine><tr><td colspan="3" class="pt-empty">読み込み中…</td></tr></tbody>
       </table>
-      <div class="pa-note"><strong>「削除」はありません。</strong>掲載を終えるときは「非公開にする」ため、誤って操作しても元に戻せます。</div>
+      <div class="pa-note"><strong>いらなくなったものは「ゴミ箱に移す」で一覧から外せます。</strong>ゴミ箱からいつでも元に戻せます。</div>
     </div>
     <div class="pa-card">
       <div class="pa-eyebrow">NEW</div>
@@ -108,7 +108,7 @@ const catDesc: Record<string, string> = {
     const vac = await api<{ updated_at: string }[]>('vacancies?select=updated_at&order=updated_at.desc&limit=1');
     setKpi('vacancy', vac[0] ? fmtDateTime(vac[0].updated_at) : '—');
 
-    const mine = await api<any[]>(`posts?select=id,title,category,status,updated_at&author_id=eq.${profile.id}&order=updated_at.desc&limit=10`);
+    const mine = await api<any[]>(`posts?select=id,title,category,status,updated_at&author_id=eq.${profile.id}&status=neq.trashed&order=updated_at.desc&limit=10`);
     setKpi('mine', String(mine.filter((m) => m.status === 'draft' || m.status === 'returned').length));
     const tbody = document.querySelector<HTMLElement>('[data-pt-mine]')!;
     if (!mine.length) { tbody.replaceChildren(h('tr', {}, h('td', { colspan: 3, class: 'pt-empty' }, 'まだありません。右の「新しく書く」から始めてください。'))); return; }

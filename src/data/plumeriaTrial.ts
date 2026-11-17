@@ -19,6 +19,7 @@ export const trialRoutes = {
   vacancy: `${trialBase}vacancy/`,
   post: `${trialBase}post/`,
   approve: `${trialBase}approve/`,
+  trash: `${trialBase}trash/`,
 };
 
 export const vacancyStates = ['空きあり', '残りわずか', '満室'] as const;
