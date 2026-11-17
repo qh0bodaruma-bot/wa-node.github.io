@@ -32,9 +32,6 @@ const nav = [
   { href: base, ico: 'home', t: 'ホーム', s: 'DASHBOARD' },
   { href: `${base}vacancy/`, ico: '空', t: '空室情報', s: 'VACANCY' },
   { href: `${base}post/`, ico: '知', t: 'お知らせ・通知', s: 'POSTS' },
-  { href: `${base}approve/`, ico: '認', t: '最終確認', s: 'APPROVAL' },
-  { href: `${base}post/`, ico: '採', t: '採用情報', s: 'RECRUIT' },
-  { href: `${base}post/`, ico: '掲', t: 'コンプライアンス掲示', s: 'NOTICES' },
   { href: base, ico: '析', t: 'アクセス分析', s: 'ANALYTICS' },
 ];
 ---
@@ -56,14 +53,24 @@ const nav = [
         <span class="pa-demo-badge">DEMO DATA</span>
 
         <nav class="pa-nav" aria-label="管理メニュー">
-          {nav.map((n) => (
-            <a href={n.href} aria-current={currentPath === n.href && n.s !== 'VACANCY' && n.s !== 'ANALYTICS' && n.s !== 'RECRUIT' && n.s !== 'NOTICES' ? 'page' : undefined}>
-              <span class="pa-ico" aria-hidden="true">{n.ico === 'home' ? '⌂' : n.ico}</span>
-              <span>
-                <span class="pa-nav-t">{n.t}</span>
-                <span class="pa-nav-s">{n.s}</span>
-              </span>
-            </a>
+          {nav.map((n, i) => (
+            <>
+              <a href={n.href} aria-current={currentPath === n.href && n.s !== 'VACANCY' && n.s !== 'ANALYTICS' ? 'page' : undefined}>
+                <span class="pa-ico" aria-hidden="true">{n.ico === 'home' ? '⌂' : n.ico}</span>
+                <span>
+                  <span class="pa-nav-t">{n.t}</span>
+                  <span class="pa-nav-s">{n.s}</span>
+                </span>
+              </a>
+              {i === 0 && (
+                <a class="pa-status-link" href={`${base}approve/`} aria-current={currentPath === `${base}approve/` ? 'page' : undefined}>
+                  <span class="pa-side-h">いまの状況<span class="pa-status-go" aria-hidden="true">開く →</span></span>
+                  <span class="pa-stat"><span class="pa-dot pa-dot-warn"></span>最終確認まち<span class="pa-stat-v">2件</span></span>
+                  <span class="pa-stat"><span class="pa-dot pa-dot-ok"></span>公開中<span class="pa-stat-v">3件</span></span>
+                  <span class="pa-stat"><span class="pa-dot pa-dot-ok"></span>空室情報の更新<span class="pa-stat-v">本日済</span></span>
+                </a>
+              )}
+            </>
           ))}
         </nav>
 
@@ -83,13 +90,6 @@ const nav = [
             </div>
           ))}
           <p class="pa-quick-note">どの画面からでも変更できます。押した瞬間に反映されます。</p>
-        </div>
-
-        <div class="pa-side-sec">
-          <div class="pa-side-h">いまの状況</div>
-          <div class="pa-stat"><span class="pa-dot pa-dot-warn"></span>最終確認まち<span class="pa-stat-v">2件</span></div>
-          <div class="pa-stat"><span class="pa-dot pa-dot-ok"></span>公開中<span class="pa-stat-v">3件</span></div>
-          <div class="pa-stat"><span class="pa-dot pa-dot-ok"></span>空室情報の更新<span class="pa-stat-v">本日済</span></div>
         </div>
 
         <div class="pa-side-card">
@@ -122,3 +122,15 @@ const nav = [
     </div>
   </div>
 </PlumeriaBaseLayout>
+
+<style is:global>
+  /* 「いまの状況」をホームの下に置き、最終確認の画面へのリンクにする（お試し版と同じ並び） */
+  .pa-nav a.pa-status-link { display: block; margin: 4px 0 6px; padding: 12px 14px; border-radius: 12px; background: #fff; border: 1px solid #dbe7ea; box-shadow: 0 1px 3px rgba(8, 60, 74, .06); color: inherit; text-decoration: none; transition: border-color .15s, box-shadow .15s, background .15s; }
+  .pa-nav a.pa-status-link[aria-current="page"] { border-color: #137792; background: #eef7f9; }
+  .pa-nav a.pa-status-link:hover { border-color: #137792; box-shadow: 0 2px 8px rgba(8, 60, 74, .12); }
+  .pa-nav a.pa-status-link:focus-visible { outline: 3px solid #137792; outline-offset: 2px; }
+  .pa-status-link .pa-side-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; }
+  .pa-status-link .pa-stat { display: flex; }
+  .pa-status-link .pa-stat:last-child { margin-bottom: 0; }
+  .pa-status-go { font-size: 11px; font-weight: 700; color: #137792; white-space: nowrap; }
+</style>
