@@ -82,7 +82,7 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
       isApprover && h('button', { type: 'button', class: 'pa-btn', onclick: () => update(p.id, { status: 'published' }, `「${p.title}」を公開しました。`) }, '公開する'),
       isApprover && h('button', { type: 'button', class: 'pa-btn pa-btn-warn', onclick: () => { returnForm.hidden = false; reason.focus(); } }, '差し戻す'),
       isApprover && h('button', { type: 'button', class: 'pa-btn pa-btn-ghost', onclick: () => trash(p) }, 'ゴミ箱に移す'));
-    return h('div', { class: 'pa-card', style: 'margin-top:12px;box-shadow:none;border:1px solid #dbe7ea' },
+    return h('div', { class: 'pa-card', id: `pt-post-${p.id}`, style: 'margin-top:12px;box-shadow:none;border:1px solid #dbe7ea' },
       h('p', { class: 'pa-ttl', style: 'margin:0;font-weight:700' }, p.title),
       h('p', { class: 'pa-hint', style: 'margin:4px 0 8px' }, `${p.category} ／ ${p.author?.display_name ?? '—'} さん ／ ${fmtDateTime(p.updated_at)} 送信`),
       actions, detail, returnForm);
@@ -121,7 +121,20 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
       isApprover = profile.role === 'approver';
       document.querySelector<HTMLElement>('[data-pt-writer]')!.hidden = isApprover;
       await render();
+      openFromHash();
     } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+  }
+
+  // ホームの「確認する」から来たとき（#pt-post-ID）は、その記事の内容を開いて画面をそこへ移す
+  function openFromHash() {
+    const m = /^#pt-post-(\d+)$/.exec(location.hash);
+    if (!m) return;
+    const card = document.getElementById(`pt-post-${m[1]}`);
+    if (!card) { showMsg('その記事は、すでに確認が済んでいるか、一覧にありません。'); return; }
+    const detail = card.querySelector<HTMLElement>(':scope > div[hidden]:not(.pt-inline-form)');
+    if (detail) detail.hidden = false;
+    card.style.borderColor = '#137792';
+    card.scrollIntoView({ block: 'start' });
   }
   document.addEventListener('astro:page-load', init, { once: true });
 </script>

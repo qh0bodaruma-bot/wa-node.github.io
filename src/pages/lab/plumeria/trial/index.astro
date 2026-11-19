@@ -21,10 +21,25 @@ const catDesc: Record<string, string> = {
 <PlumeriaTrialLayout title="ホーム" currentPath={trialRoutes.home} hello="こんにちは">
   <section class="pa-sec">
     <div class="pa-kpis">
-      <div class="pa-kpi"><p class="pa-kpi-t">最終確認まち</p><div><span class="pa-kpi-v" data-pt-kpi="pending">—</span><span class="pa-kpi-u">件</span></div><div class="pa-kpi-sub"><a href={trialRoutes.approve} data-astro-reload>最終確認を開く →</a></div></div>
-      <div class="pa-kpi"><p class="pa-kpi-t">公開中のお知らせ</p><div><span class="pa-kpi-v" data-pt-kpi="published">—</span><span class="pa-kpi-u">件</span></div><div class="pa-kpi-sub"><span>ホームページのお試し表示に出ています</span></div></div>
-      <div class="pa-kpi"><p class="pa-kpi-t">自分の下書き・差し戻し</p><div><span class="pa-kpi-v" data-pt-kpi="mine">—</span><span class="pa-kpi-u">件</span></div><div class="pa-kpi-sub"><span>書きかけ・直しが必要なもの</span></div></div>
-      <div class="pa-kpi"><p class="pa-kpi-t">空室情報の最終更新</p><div><span class="pa-kpi-v" style="font-size:22px" data-pt-kpi="vacancy">—</span></div><div class="pa-kpi-sub"><a href={trialRoutes.vacancy} data-astro-reload>空室情報を開く →</a></div></div>
+      <div class="pa-kpi" data-pt-kpi-card="pending"><p class="pa-kpi-t">最終確認まち</p><div><span class="pa-kpi-v" data-pt-kpi="pending">—</span><span class="pa-kpi-u">件</span></div><p class="pt-kpi-note" data-pt-note="pending"></p><div class="pa-kpi-sub"><a href={trialRoutes.approve} data-astro-reload>最終確認を開く →</a></div></div>
+      <div class="pa-kpi"><p class="pa-kpi-t">公開中のお知らせ</p><div><span class="pa-kpi-v" data-pt-kpi="published">—</span><span class="pa-kpi-u">件</span></div><p class="pt-kpi-note" data-pt-note="published"></p><div class="pa-kpi-sub"><span>ホームページのお試し表示に出ています</span></div></div>
+      <div class="pa-kpi"><p class="pa-kpi-t">自分の下書き・差し戻し</p><div><span class="pa-kpi-v" data-pt-kpi="mine">—</span><span class="pa-kpi-u">件</span></div><p class="pt-kpi-note" data-pt-note="mine"></p><div class="pa-kpi-sub"><span>書きかけ・直しが必要なもの</span></div></div>
+      <div class="pa-kpi"><p class="pa-kpi-t">空室情報の最終更新</p><div><span class="pa-kpi-v" style="font-size:22px" data-pt-kpi="vacancy">—</span></div><p class="pt-kpi-note" data-pt-note="vacancy"></p><div class="pa-kpi-sub"><a href={trialRoutes.vacancy} data-astro-reload>空室情報を開く →</a></div></div>
+    </div>
+  </section>
+
+  <section class="pa-sec" data-pt-queue hidden>
+    <div class="pa-card pt-queue">
+      <div class="pa-card-head">
+        <div>
+          <div class="pa-eyebrow">WAITING</div>
+          <h2 class="pa-h2">最終確認を待っているもの</h2>
+          <p class="pa-lead" data-pt-queue-lead></p>
+        </div>
+        <span class="pa-badge pa-badge-wait" data-pt-queue-count>—</span>
+      </div>
+      <ul class="pt-queue-list" data-pt-queue-list></ul>
+      <p class="pt-queue-more" data-pt-queue-more hidden><a href={trialRoutes.approve} data-astro-reload>すべての確認まちを見る →</a></p>
     </div>
   </section>
 
@@ -99,17 +114,90 @@ const catDesc: Record<string, string> = {
     if (el) el.textContent = v;
   }
 
+  // 数字の下に添える一文。warn のときだけ橙にして「手を付けてほしい」ことを示す
+  function setNote(k: string, text: string, warn = false) {
+    const el = document.querySelector<HTMLElement>(`[data-pt-note="${k}"]`);
+    if (!el) return;
+    el.textContent = text;
+    el.classList.toggle('is-warn', warn);
+  }
+
+  // 経過時間を「3日」「5時間」「30分」の形にする
+  function elapsed(iso: string): { text: string; days: number } {
+    const min = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 60000));
+    const days = Math.floor(min / 1440);
+    if (days >= 1) return { text: `${days}日`, days };
+    if (min >= 60) return { text: `${Math.floor(min / 60)}時間`, days: 0 };
+    return { text: `${min}分`, days: 0 };
+  }
+
+  // 確認まちがこの日数を超えたら、補足の文を橙にする
+  const PENDING_WARN_DAYS = 3;
+  // 空室情報がこの日数更新されていなければ、補足の文を橙にする
+  const VACANCY_WARN_DAYS = 14;
+  // ホームに並べる確認まちの件数（残りは「すべて見る」から）
+  const QUEUE_MAX = 3;
+
+  function renderQueue(pending: any[], isApprover: boolean) {
+    const sec = document.querySelector<HTMLElement>('[data-pt-queue]');
+    if (!sec) return;
+    sec.hidden = pending.length === 0;
+    if (!pending.length) return;
+    document.querySelector('[data-pt-queue-count]')!.textContent = `${pending.length}件`;
+    document.querySelector('[data-pt-queue-lead]')!.textContent = isApprover
+      ? '古いものから順に並んでいます。「確認する」を押すと、最終確認の画面でその記事が開きます。'
+      : '公開の権限をお持ちの方の確認を待っています。古いものから順に並んでいます。';
+    const list = document.querySelector<HTMLElement>('[data-pt-queue-list]')!;
+    list.replaceChildren(...pending.slice(0, QUEUE_MAX).map((p) => {
+      const e = elapsed(p.updated_at);
+      return h('li', { class: 'pt-queue-item' },
+        h('div', { class: 'pt-queue-main' },
+          h('p', { class: 'pt-queue-title' }, p.title),
+          h('p', { class: 'pt-queue-meta' }, `${p.category} ／ ${p.author?.display_name ?? '—'} さん ／ ${fmtDateTime(p.updated_at)} 送信`)),
+        h('span', { class: `pt-queue-age${e.days >= PENDING_WARN_DAYS ? ' is-warn' : ''}` }, `${e.text}まち`),
+        h('a', { class: `pa-btn${isApprover ? '' : ' pa-btn-ghost'}`, href: `${trialRoutes.approve}#pt-post-${p.id}`, 'data-astro-reload': true }, isApprover ? '確認する' : '内容を見る'));
+    }));
+    document.querySelector<HTMLElement>('[data-pt-queue-more]')!.hidden = pending.length <= QUEUE_MAX;
+  }
+
   async function render() {
     const profile = await currentProfile();
     if (!profile) return;
-    const counts = await api<{ status: string }[]>('posts?select=status&status=in.(pending,published)');
-    setKpi('pending', String(counts.filter((c) => c.status === 'pending').length));
-    setKpi('published', String(counts.filter((c) => c.status === 'published').length));
+    const isApprover = profile.role === 'approver';
+    const rows = await api<any[]>('posts?select=id,title,category,status,updated_at,published_at,author:profiles!posts_author_id_fkey(display_name)&status=in.(pending,published)&order=updated_at.asc');
+    const pending = rows.filter((r) => r.status === 'pending');
+    const published = rows.filter((r) => r.status === 'published');
+
+    setKpi('pending', String(pending.length));
+    const card = document.querySelector<HTMLElement>('[data-pt-kpi-card="pending"]');
+    if (pending.length) {
+      const oldest = elapsed(pending[0].updated_at);
+      setNote('pending', `いちばん古いもので${oldest.text}まち`, oldest.days >= PENDING_WARN_DAYS);
+      // 点滅は付けたときに一度だけ始まる（付けたままの間は再描画しても繰り返さない）
+      card?.classList.add('is-alert');
+    } else {
+      setNote('pending', '確認まちはありません');
+      card?.classList.remove('is-alert');
+    }
+    renderQueue(pending, isApprover);
+
+    setKpi('published', String(published.length));
+    const latest = published.map((r) => r.published_at).filter(Boolean).sort().pop();
+    setNote('published', latest ? `最新の公開：${fmtDateTime(latest)}` : 'まだ公開したものはありません');
+
     const vac = await api<{ updated_at: string }[]>('vacancies?select=updated_at&order=updated_at.desc&limit=1');
     setKpi('vacancy', vac[0] ? fmtDateTime(vac[0].updated_at) : '—');
+    if (vac[0]) {
+      const e = elapsed(vac[0].updated_at);
+      setNote('vacancy', e.days >= 1 ? `最終更新から${e.text}たっています` : '今日更新されています', e.days >= VACANCY_WARN_DAYS);
+    } else setNote('vacancy', '');
 
     const mine = await api<any[]>(`posts?select=id,title,category,status,updated_at&author_id=eq.${profile.id}&status=neq.trashed&order=updated_at.desc&limit=10`);
     setKpi('mine', String(mine.filter((m) => m.status === 'draft' || m.status === 'returned').length));
+    const returned = mine.filter((m) => m.status === 'returned').length;
+    const drafts = mine.filter((m) => m.status === 'draft').length;
+    if (returned) setNote('mine', `差し戻し${returned}件・下書き${drafts}件`, true);
+    else setNote('mine', drafts ? `下書き${drafts}件` : '書きかけのものはありません');
     const tbody = document.querySelector<HTMLElement>('[data-pt-mine]')!;
     if (!mine.length) { tbody.replaceChildren(h('tr', {}, h('td', { colspan: 3, class: 'pt-empty' }, 'まだありません。右の「新しく書く」から始めてください。'))); return; }
     tbody.replaceChildren(...mine.map((r) => {
@@ -128,3 +216,38 @@ const catDesc: Record<string, string> = {
   }
   document.addEventListener('astro:page-load', init, { once: true });
 </script>
+
+<style is:global>
+  .pt-kpi-note { margin: 8px 0 0; font-size: 13px; line-height: 1.5; color: var(--muted); min-height: 1.5em; }
+  .pt-kpi-note.is-warn { color: #a35f00; font-weight: 700; }
+
+  /* 確認まちがあるときの強調：橙の枠と背景で常に目立たせ、最初の数秒だけ点滅させる。
+     点滅は約5秒で止める（5秒を超えて自動で点滅し続ける表示には、止める手段が要るため）。
+     動きを減らす設定の端末では点滅させず、枠と背景だけで示す。 */
+  .pa-kpi.is-alert { border-color: #a35f00; background: #fff6ea; box-shadow: 0 0 0 1px #a35f00, var(--shadow); }
+  .pa-kpi.is-alert .pa-kpi-v { color: #a35f00; }
+  @media (prefers-reduced-motion: no-preference) {
+    .pa-kpi.is-alert { animation: pt-blink 1.2s ease-in-out 4; }
+  }
+  @keyframes pt-blink {
+    0%, 100% { background: #fff6ea; box-shadow: 0 0 0 1px #a35f00, var(--shadow); }
+    50% { background: #ffdcae; box-shadow: 0 0 0 4px rgba(163, 95, 0, .35), var(--shadow); }
+  }
+
+  .pt-queue { border-left: 4px solid #a35f00; }
+  .pt-queue-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }
+  .pt-queue-item { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--line); border-radius: 12px; background: #fff; }
+  .pt-queue-main { flex: 1; min-width: 0; }
+  .pt-queue-title { margin: 0; font-weight: 700; overflow-wrap: anywhere; }
+  .pt-queue-meta { margin: 2px 0 0; font-size: 12.5px; color: var(--muted); }
+  .pt-queue-age { font-size: 12.5px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+  .pt-queue-age.is-warn { color: #a35f00; }
+  .pt-queue-item .pa-btn { text-decoration: none; white-space: nowrap; cursor: pointer; color: #fff; }
+  .pt-queue-item .pa-btn.pa-btn-ghost { color: var(--green-deep); }
+  .pt-queue-item .pa-btn:focus-visible { outline: 3px solid #137792; outline-offset: 2px; }
+  .pt-queue-more { margin: 12px 0 0; font-size: 13px; font-weight: 700; }
+  @media (max-width: 560px) {
+    .pt-queue-item { flex-wrap: wrap; }
+    .pt-queue-main { flex-basis: 100%; }
+  }
+</style>

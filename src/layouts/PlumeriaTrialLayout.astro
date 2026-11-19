@@ -114,6 +114,17 @@ const nav = [
   .pt-status .pa-side-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; }
   .pt-status-go { font-size: 11px; font-weight: 700; color: #137792; white-space: nowrap; }
   .pt-status .pa-stat:last-child { margin-bottom: 0; }
+  /* 確認まちがあるとき：橙の枠と背景で示し、最初の約5秒だけ点滅させる（ホームの「最終確認まち」と同じ考え方）。
+     動きを減らす設定の端末では点滅させない。 */
+  .pa-nav a.pt-status.is-alert { border-color: #a35f00; background: #fff6ea; box-shadow: 0 0 0 1px #a35f00; }
+  .pa-nav a.pt-status.is-alert .pa-stat:nth-child(2) { color: #a35f00; font-weight: 700; }
+  @media (prefers-reduced-motion: no-preference) {
+    .pa-nav a.pt-status.is-alert { animation: pt-status-blink 1.2s ease-in-out 4; }
+  }
+  @keyframes pt-status-blink {
+    0%, 100% { background: #fff6ea; box-shadow: 0 0 0 1px #a35f00; }
+    50% { background: #ffdcae; box-shadow: 0 0 0 4px rgba(163, 95, 0, .35); }
+  }
   .pt-msg { margin: 0 0 16px; padding: 10px 14px; border-radius: 10px; background: #e7f4ec; color: #1f5a37; font-weight: 600; }
   .pt-msg.is-error { background: #fdecea; color: #8a1f12; }
   .pt .pa-seg button[disabled], .pt .pa-quick-seg button[disabled] { opacity: .55; cursor: wait; }
@@ -163,6 +174,8 @@ const nav = [
         const rows = await api<{ id: number }[]>(`posts?select=id&status=eq.${st}`);
         const el = document.querySelector<HTMLElement>(`[data-trial-count="${st}"]`);
         if (el) el.textContent = `${rows.length}件`;
+        // 確認まちがあるときは、サイドメニューの「いまの状況」カードを橙で強調する（点滅は付けたときに一度だけ）
+        if (st === 'pending') document.querySelector('.pt-status')?.classList.toggle('is-alert', rows.length > 0);
       }
     } catch (e) { handleError(e, (m) => showMsg(m, true)); }
   }
