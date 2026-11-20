@@ -50,7 +50,7 @@ const mine = [
   <section class="pa-sec">
     <div class="pa-kpis">
       {kpis.map((k) => (
-        <div class="pa-kpi">
+        <div class={k.warn ? 'pa-kpi is-alert' : 'pa-kpi'}>
           <p class="pa-kpi-t">{k.t}</p>
           <div><span class="pa-kpi-v">{k.v}</span><span class="pa-kpi-u">{k.u}</span></div>
           <div class="pa-kpi-sub">

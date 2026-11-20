@@ -45,9 +45,13 @@ const nav = [
 
     <div class="pa-shell">
       <aside class="pa-side">
-        <div class="pa-brand">
-          <div class="pa-brand-eyebrow">PLUMERIA</div>
-          <div class="pa-brand-name">ホームページ管理</div>
+        <!-- お試し版と同じく、先頭にログインしている人の名前とログアウトを置く（画面イメージのため固定の名前・動かないボタン） -->
+        <div class="pt-user-slot">
+          <div class="pt-user">
+            <span class="pt-user-name">プルメリア 管理者 さん</span>
+            <span class="pt-user-role">公開まで操作できます</span>
+            <button type="button" class="pt-logout">ログアウト</button>
+          </div>
         </div>
 
         <span class="pa-demo-badge">DEMO DATA</span>
@@ -63,7 +67,7 @@ const nav = [
                 </span>
               </a>
               {i === 0 && (
-                <a class="pa-status-link" href={`${base}approve/`} aria-current={currentPath === `${base}approve/` ? 'page' : undefined}>
+                <a class="pa-status-link is-alert" href={`${base}approve/`} aria-current={currentPath === `${base}approve/` ? 'page' : undefined}>
                   <span class="pa-side-h">いまの状況<span class="pa-status-go" aria-hidden="true">開く →</span></span>
                   <span class="pa-stat"><span class="pa-dot pa-dot-warn"></span>最終確認まち<span class="pa-stat-v">2件</span></span>
                   <span class="pa-stat"><span class="pa-dot pa-dot-ok"></span>公開中<span class="pa-stat-v">3件</span></span>
