@@ -34,18 +34,16 @@ const nav = [
 
     <div class="pa-shell">
       <aside class="pa-side">
-        <div class="pa-brand">
-          <div class="pa-brand-eyebrow">PLUMERIA</div>
-          <div class="pa-brand-name">ホームページ管理</div>
+        <!-- サイドメニューの先頭には、ログインしている人の名前とログアウトを置く（読み込むまでは場所だけ確保する） -->
+        <div class="pt-user-slot">
+          <div class="pt-user" data-trial-user hidden>
+            <span class="pt-user-name" data-trial-user-name></span>
+            <span class="pt-user-role" data-trial-user-role></span>
+            <button type="button" class="pt-logout" data-trial-logout>ログアウト</button>
+          </div>
         </div>
 
         <span class="pa-demo-badge">お試し版</span>
-
-        <div class="pt-user" data-trial-user hidden>
-          <span class="pt-user-name" data-trial-user-name></span>
-          <span class="pt-user-role" data-trial-user-role></span>
-          <button type="button" class="pt-logout" data-trial-logout>ログアウト</button>
-        </div>
 
         <nav class="pa-nav" aria-label="管理メニュー">
           {nav.map((n, i) => (
@@ -99,7 +97,9 @@ const nav = [
 
 <style is:global>
   .pt-notice { background: #fff4e5; color: #6b4200; }
-  .pt-user { display: grid; gap: 2px; margin: 10px 0 14px; padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.6); font-size: 13px; }
+  .pt-user-slot { min-height: 86px; padding: 0 8px 16px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+  .pt-user { display: grid; gap: 2px; font-size: 13px; }
+  .pt-user-name { font-size: 18px; letter-spacing: .02em; }
   /* display を指定した部品でも hidden 属性で確実に隠す */
   .pt [hidden] { display: none !important; }
   .pt-user-name { font-weight: 700; }
@@ -144,10 +144,10 @@ const nav = [
   .pa-nav a.pt-status.is-alert .pa-stat:nth-child(2) { color: #a3172b; font-weight: 700; }
   .pa-nav a.pt-status.is-alert .pa-dot-warn { background: #d42a45; }
   @media (prefers-reduced-motion: no-preference) {
-    /* チカチカ点滅：1秒に2回、明るい赤と通常の色を段差で切り替える（9回＝約4.5秒）。
-       光の点滅は1秒に3回を超えると発作を起こすおそれがあるため、2回にとどめる。 */
-    .pa-kpi.is-alert, .pa-nav a.pt-status.is-alert { animation: pt-glass-flash .5s steps(1, end) 9; }
-    .pa-kpi.is-alert::after, .pa-nav a.pt-status.is-alert::after { animation: pt-glass-sheen 1.5s ease-in-out 3; }
+    /* チカチカ点滅：0.8秒に1回、明るい赤と通常の色を段差で切り替える（6回＝約4.8秒）。
+       光の点滅は1秒に3回を超えると発作を起こすおそれがあるため、それより十分遅くする。 */
+    .pa-kpi.is-alert, .pa-nav a.pt-status.is-alert { animation: pt-glass-flash .8s steps(1, end) 6; }
+    .pa-kpi.is-alert::after, .pa-nav a.pt-status.is-alert::after { animation: pt-glass-sheen 1.6s ease-in-out 3; }
   }
   @keyframes pt-glass-flash {
     0% {
