@@ -221,18 +221,9 @@ const catDesc: Record<string, string> = {
   .pt-kpi-note { margin: 8px 0 0; font-size: 13px; line-height: 1.5; color: var(--muted); min-height: 1.5em; }
   .pt-kpi-note.is-warn { color: #a35f00; font-weight: 700; }
 
-  /* 確認まちがあるときの強調：橙の枠と背景で常に目立たせ、最初の数秒だけ点滅させる。
-     点滅は約5秒で止める（5秒を超えて自動で点滅し続ける表示には、止める手段が要るため）。
-     動きを減らす設定の端末では点滅させず、枠と背景だけで示す。 */
-  .pa-kpi.is-alert { border-color: #a35f00; background: #fff6ea; box-shadow: 0 0 0 1px #a35f00, var(--shadow); }
-  .pa-kpi.is-alert .pa-kpi-v { color: #a35f00; }
-  @media (prefers-reduced-motion: no-preference) {
-    .pa-kpi.is-alert { animation: pt-blink 1.2s ease-in-out 4; }
-  }
-  @keyframes pt-blink {
-    0%, 100% { background: #fff6ea; box-shadow: 0 0 0 1px #a35f00, var(--shadow); }
-    50% { background: #ffdcae; box-shadow: 0 0 0 4px rgba(163, 95, 0, .35), var(--shadow); }
-  }
+  /* 確認まちがあるときの「最終確認まち」の強調は、サイドメニューと共通で PlumeriaTrialLayout.astro に置く */
+  .pa-kpi.is-alert .pa-kpi-v { color: #a3172b; }
+  .pa-kpi.is-alert .pt-kpi-note.is-warn { color: #a3172b; }
 
   .pt-queue { border-left: 4px solid #a35f00; }
   .pt-queue-list { list-style: none; margin: 14px 0 0; padding: 0; display: grid; gap: 8px; }

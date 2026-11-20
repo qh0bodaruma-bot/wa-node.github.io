@@ -114,16 +114,58 @@ const nav = [
   .pt-status .pa-side-h { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 6px; }
   .pt-status-go { font-size: 11px; font-weight: 700; color: #137792; white-space: nowrap; }
   .pt-status .pa-stat:last-child { margin-bottom: 0; }
-  /* 確認まちがあるとき：橙の枠と背景で示し、最初の約5秒だけ点滅させる（ホームの「最終確認まち」と同じ考え方）。
-     動きを減らす設定の端末では点滅させない。 */
-  .pa-nav a.pt-status.is-alert { border-color: #a35f00; background: #fff6ea; box-shadow: 0 0 0 1px #a35f00; }
-  .pa-nav a.pt-status.is-alert .pa-stat:nth-child(2) { color: #a35f00; font-weight: 700; }
-  @media (prefers-reduced-motion: no-preference) {
-    .pa-nav a.pt-status.is-alert { animation: pt-status-blink 1.2s ease-in-out 4; }
+  /* 確認まちがあるときの強調（ホームの「最終確認まち」とサイドメニューの「いまの状況」で共通）。
+     透明感のある赤い色ガラス：薄い赤の重ね塗り＋上半分の照り返し（::before）＋光の筋（::after）。
+     最初の約5秒だけ、赤くチカチカ点滅し、光の筋がガラスの上を横切る。止まったあとも色ガラスの見た目は残す。
+     5秒で止めるのは、5秒を超えて自動で動き続ける表示には止める手段が要るため。動きを減らす設定の端末では動かさない。 */
+  .pa-kpi.is-alert, .pa-nav a.pt-status.is-alert {
+    position: relative; isolation: isolate; overflow: hidden;
+    border-color: rgba(196, 30, 52, .55);
+    background:
+      linear-gradient(160deg, rgba(255, 130, 140, .30) 0%, rgba(230, 50, 70, .16) 48%, rgba(175, 15, 40, .26) 100%),
+      #fff4f5;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, .95),
+      inset 0 -12px 22px -6px rgba(190, 20, 45, .20),
+      0 0 0 1px rgba(196, 30, 52, .35),
+      0 10px 24px -10px rgba(196, 30, 52, .55);
   }
-  @keyframes pt-status-blink {
-    0%, 100% { background: #fff6ea; box-shadow: 0 0 0 1px #a35f00; }
-    50% { background: #ffdcae; box-shadow: 0 0 0 4px rgba(163, 95, 0, .35); }
+  .pa-kpi.is-alert::before, .pa-nav a.pt-status.is-alert::before {
+    content: ""; position: absolute; inset: 0 0 52% 0; z-index: -1; pointer-events: none;
+    border-radius: inherit;
+    background: linear-gradient(180deg, rgba(255, 255, 255, .75) 0%, rgba(255, 255, 255, .18) 70%, rgba(255, 255, 255, 0) 100%);
+  }
+  .pa-kpi.is-alert::after, .pa-nav a.pt-status.is-alert::after {
+    content: ""; position: absolute; top: -20%; bottom: -20%; left: 0; width: 38%; z-index: -1; pointer-events: none;
+    background: linear-gradient(100deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, .75) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: translateX(-160%) skewX(-18deg);
+    opacity: 0;
+  }
+  .pa-nav a.pt-status.is-alert .pa-stat:nth-child(2) { color: #a3172b; font-weight: 700; }
+  .pa-nav a.pt-status.is-alert .pa-dot-warn { background: #d42a45; }
+  @media (prefers-reduced-motion: no-preference) {
+    /* チカチカ点滅：1秒に2回、明るい赤と通常の色を段差で切り替える（9回＝約4.5秒）。
+       光の点滅は1秒に3回を超えると発作を起こすおそれがあるため、2回にとどめる。 */
+    .pa-kpi.is-alert, .pa-nav a.pt-status.is-alert { animation: pt-glass-flash .5s steps(1, end) 9; }
+    .pa-kpi.is-alert::after, .pa-nav a.pt-status.is-alert::after { animation: pt-glass-sheen 1.5s ease-in-out 3; }
+  }
+  @keyframes pt-glass-flash {
+    0% {
+      background-color: #ffc2cb;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 1), inset 0 -14px 26px -6px rgba(190, 20, 45, .38),
+        0 0 0 3px rgba(220, 40, 60, .45), 0 0 28px 4px rgba(225, 35, 60, .55);
+    }
+    50%, 100% {
+      background-color: #fff4f5;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .95), inset 0 -12px 22px -6px rgba(190, 20, 45, .20),
+        0 0 0 1px rgba(196, 30, 52, .35), 0 10px 24px -10px rgba(196, 30, 52, .55);
+    }
+  }
+  @keyframes pt-glass-sheen {
+    0% { transform: translateX(-160%) skewX(-18deg); opacity: 0; }
+    15% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { transform: translateX(330%) skewX(-18deg); opacity: 0; }
   }
   .pt-msg { margin: 0 0 16px; padding: 10px 14px; border-radius: 10px; background: #e7f4ec; color: #1f5a37; font-weight: 600; }
   .pt-msg.is-error { background: #fdecea; color: #8a1f12; }
