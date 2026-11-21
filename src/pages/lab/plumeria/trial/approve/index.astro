@@ -14,7 +14,7 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
         <div>
           <div class="pa-eyebrow">APPROVAL</div>
           <h2 class="pa-h2">確認まち</h2>
-          <p class="pa-lead">「公開する」を押すと、ホームページのお試し表示に出ます。差し戻すときは理由を書いてお返しします。</p>
+          <p class="pa-lead">「公開する」を押すと、ホームページのお試し表示に出ます。差し戻すときは、直してほしいところを理由に書くと伝わりやすくなります（書かなくても差し戻せます）。</p>
         </div>
         <span class="pa-badge pa-badge-wait" data-pt-pending-count>—</span>
       </div>
@@ -69,13 +69,14 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
       h('p', { class: 'pa-hint' }, `掲載先：${p.targets.length ? p.targets.join('・') : '全事業所'} ／ 公開日：${fmtDate(p.publish_on)}`),
       h('p', { class: 'pt-body' }, p.body),
       renderAttachments(p.attachments));
-    const reason = h('textarea', { class: 'pa-textarea', rows: 3, maxlength: 500, placeholder: '差し戻す理由（例：日付をもう一度確認してください）', 'aria-label': '差し戻す理由' }) as HTMLTextAreaElement;
+    // 差し戻しの理由は任意（空欄でも差し戻せる。データベース側は 007 で必須をやめた）
+    const reason = h('textarea', { class: 'pa-textarea', rows: 3, maxlength: 500, placeholder: '差し戻す理由（書かなくても差し戻せます。例：日付をもう一度確認してください）', 'aria-label': '差し戻す理由（任意）' }) as HTMLTextAreaElement;
     const returnForm = h('div', { class: 'pt-inline-form', hidden: true }, reason,
       h('div', { class: 'pa-btn-row' },
         h('button', { type: 'button', class: 'pa-btn pa-btn-warn', onclick: () => {
-          if (!reason.value.trim()) { showMsg('差し戻す理由を入力してください。', true); reason.focus(); return; }
-          update(p.id, { status: 'returned', return_reason: reason.value.trim() }, `「${p.title}」を差し戻しました。`);
-        } }, '理由を付けて差し戻す'),
+          const text = reason.value.trim();
+          update(p.id, { status: 'returned', return_reason: text || null }, `「${p.title}」を差し戻しました。`);
+        } }, '差し戻す'),
         h('button', { type: 'button', class: 'pa-btn pa-btn-ghost', onclick: () => (returnForm.hidden = true) }, 'やめる')));
     const actions = h('div', { class: 'pa-btn-row' },
       h('button', { type: 'button', class: 'pa-btn pa-btn-ghost', onclick: () => (detail.hidden = !detail.hidden) }, '内容を見る'),
