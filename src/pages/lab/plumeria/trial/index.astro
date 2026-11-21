@@ -192,7 +192,7 @@ const catDesc: Record<string, string> = {
       setNote('vacancy', e.days >= 1 ? `最終更新から${e.text}たっています` : '今日更新されています', e.days >= VACANCY_WARN_DAYS);
     } else setNote('vacancy', '');
 
-    const mine = await api<any[]>(`posts?select=id,title,category,status,updated_at&author_id=eq.${profile.id}&status=neq.trashed&order=updated_at.desc&limit=10`);
+    const mine = await api<any[]>(`posts?select=id,title,category,status,updated_at,return_reason&author_id=eq.${profile.id}&status=neq.trashed&order=updated_at.desc&limit=10`);
     setKpi('mine', String(mine.filter((m) => m.status === 'draft' || m.status === 'returned').length));
     const returned = mine.filter((m) => m.status === 'returned').length;
     const drafts = mine.filter((m) => m.status === 'draft').length;
@@ -200,12 +200,18 @@ const catDesc: Record<string, string> = {
     else setNote('mine', drafts ? `下書き${drafts}件` : '書きかけのものはありません');
     const tbody = document.querySelector<HTMLElement>('[data-pt-mine]')!;
     if (!mine.length) { tbody.replaceChildren(h('tr', {}, h('td', { colspan: 3, class: 'pt-empty' }, 'まだありません。右の「新しく書く」から始めてください。'))); return; }
-    tbody.replaceChildren(...mine.map((r) => {
+    tbody.replaceChildren(...mine.flatMap((r) => {
       const st = statusLabel[r.status] ?? { t: r.status, badge: 'off' };
-      return h('tr', {},
+      const hasReason = r.status === 'returned' && r.return_reason;
+      const row = h('tr', { class: hasReason ? 'pt-has-reason' : undefined },
         h('td', { class: 'pa-ttl' }, h('a', { href: `${trialRoutes.post}?id=${r.id}`, 'data-astro-reload': true }, r.title), h('span', { class: 'pa-sub' }, fmtDateTime(r.updated_at))),
         h('td', {}, r.category),
         h('td', {}, h('span', { class: `pa-badge pa-badge-${st.badge}` }, st.t)));
+      if (!hasReason) return [row];
+      // 差し戻されたものは、理由を一覧でも読めるようにする（編集画面と同じ表示）。
+      // 表の幅いっぱいの行に出して、スマホでもタイトルの列を細くしない
+      return [row, h('tr', { class: 'pt-reason-row' },
+        h('td', { colspan: 3 }, h('p', { class: 'pt-reason' }, `差し戻しの理由：${r.return_reason}`)))];
     }));
   }
 
@@ -222,6 +228,10 @@ const catDesc: Record<string, string> = {
   .pt-kpi-note.is-warn { color: #a35f00; font-weight: 700; }
 
   /* 確認まちがあるときの「最終確認まち」の強調は、サイドメニューと共通で PlumeriaTrialLayout.astro に置く */
+  /* 「自分が書いたもの」の差し戻しの理由：投稿の行のすぐ下に、表の幅いっぱいで出す */
+  [data-pt-mine] tr.pt-has-reason td { border-bottom: none; padding-bottom: 4px; }
+  [data-pt-mine] tr.pt-reason-row td { padding-top: 0; }
+  [data-pt-mine] .pt-reason { margin: 0; font-weight: 400; line-height: 1.6; overflow-wrap: anywhere; }
   .pa-kpi.is-alert .pt-kpi-note.is-warn { color: #a3172b; }
 
   .pt-queue { border-left: 4px solid #a35f00; }
