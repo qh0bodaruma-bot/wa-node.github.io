@@ -10,6 +10,7 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
           <div class="pa-eyebrow">TRASH</div>
           <h2 class="pa-h2">ゴミ箱に移したお知らせ</h2>
           <p class="pa-lead">ここにあるお知らせは、ホームページにも一覧にも出ません。「元に戻す」を押すと、移す前の状態に戻ります。公開中だったものは、念のため「非公開」で戻ります。</p>
+          <p class="pa-lead" data-pt-approver hidden>いらないものは「完全に削除」で消せます。添付した写真・PDFも一緒に消え、元に戻せません。</p>
         </div>
         <span class="pa-badge pa-badge-off" data-pt-trash-count>—</span>
       </div>
@@ -23,9 +24,9 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
 </PlumeriaTrialLayout>
 
 <script>
-  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, statusLabel, type Profile } from '../../../../../lib/plumeriaTrial';
+  import { loadSession, currentProfile, api, h, handleError, showMsg, fmtDateTime, statusLabel, deletePostForever, type Profile } from '../../../../../lib/plumeriaTrial';
 
-  const SEL = 'id,category,title,trashed_from,trashed_at,author_id,author:profiles!posts_author_id_fkey(display_name),trasher:profiles!posts_trashed_by_fkey(display_name)';
+  const SEL = 'id,category,title,trashed_from,trashed_at,author_id,attachments,author:profiles!posts_author_id_fkey(display_name),trasher:profiles!posts_trashed_by_fkey(display_name)';
   let profile: Profile;
 
   const canRestore = (p: any) => profile.role === 'approver' || (p.author_id === profile.id && ['draft', 'returned'].includes(p.trashed_from));
@@ -37,6 +38,18 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
         ? `「${p.title}」を「非公開」で戻しました。ホームページに出すときは「いまの状況」の画面で「もう一度公開する」を押してください。`
         : `「${p.title}」を元に戻しました（${statusLabel[p.trashed_from]?.t ?? ''}）。`);
       document.dispatchEvent(new CustomEvent('pt:posts-changed'));
+      await render();
+    } catch (e) { handleError(e, (m) => showMsg(m, true)); }
+  }
+
+  // 完全に削除（公開の権限がある人だけ。添付ファイルも消す）
+  async function removeForever(p: any) {
+    try {
+      const r = await deletePostForever(p);
+      if (!r.deleted) return;
+      showMsg(r.filesLeft
+        ? `「${p.title}」を完全に削除しました。ただし添付ファイルのうち${r.filesLeft}件を消せませんでした。和-Nodeまでご連絡ください。`
+        : `「${p.title}」を完全に削除しました。`, r.filesLeft > 0);
       await render();
     } catch (e) { handleError(e, (m) => showMsg(m, true)); }
   }
@@ -53,7 +66,11 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
         h('td', {}, p.category),
         h('td', {}, h('span', { class: `pa-badge pa-badge-${st.badge}` }, st.t)),
         h('td', {}, fmtDateTime(p.trashed_at), h('span', { class: 'pa-sub' }, `移した人：${p.trasher?.display_name ?? '—'}`)),
-        h('td', {}, canRestore(p) ? h('button', { type: 'button', class: 'pa-btn', onclick: () => restore(p) }, '元に戻す') : '—'));
+        h('td', {}, canRestore(p) || profile.role === 'approver'
+          ? h('div', { class: 'pa-btn-row' },
+              canRestore(p) && h('button', { type: 'button', class: 'pa-btn', onclick: () => restore(p) }, '元に戻す'),
+              profile.role === 'approver' && h('button', { type: 'button', class: 'pa-btn pa-btn-warn', onclick: () => removeForever(p) }, '完全に削除'))
+          : '—'));
     }));
   }
 
@@ -64,6 +81,7 @@ import { trialRoutes } from '../../../../../data/plumeriaTrial';
       if (!p) return;
       profile = p;
       document.querySelector<HTMLElement>('[data-pt-writer]')!.hidden = profile.role === 'approver';
+      document.querySelector<HTMLElement>('[data-pt-approver]')!.hidden = profile.role !== 'approver';
       await render();
     } catch (e) { handleError(e, (m) => showMsg(m, true)); }
   }

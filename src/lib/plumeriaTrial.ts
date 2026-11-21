@@ -286,6 +286,33 @@ export async function uploadAttachment(file: File): Promise<Attachment> {
   return { path, name, type: isPdf ? 'pdf' : 'image' };
 }
 
+// 添付ファイルを Storage の API で消す（008 で approver だけに許可）。消せた件数を返す
+async function removeAttachments(paths: string[]): Promise<number> {
+  if (!paths.length) return 0;
+  const s = await freshSession();
+  const del = (token: string) => fetch(`${URL_BASE}/storage/v1/object/${MEDIA_BUCKET}`, {
+    method: 'DELETE',
+    headers: { apikey: KEY, Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prefixes: paths }),
+  });
+  let res = await del(s.access_token);
+  if (res.status === 401) res = await del((await refresh(s)).access_token);
+  if (!res.ok) return 0;
+  const removed = await res.json().catch(() => []);
+  return Array.isArray(removed) ? removed.length : 0;
+}
+
+// ゴミ箱のお知らせを完全に削除する（approver だけ。最終の判定はデータベース側）。
+// 先にお知らせを消し、消せたときだけ添付ファイルを消す（逆の順だと、お知らせが残ったまま添付だけ消えることがあるため）
+export async function deletePostForever(p: { id: number; title: string; attachments?: unknown }): Promise<{ deleted: boolean; filesLeft: number }> {
+  if (!confirm(`「${p.title}」を完全に削除しますか？\n添付した写真・PDFも一緒に消えます。\n削除すると元に戻せません。`)) return { deleted: false, filesLeft: 0 };
+  const rows = await api<any[]>(`posts?id=eq.${p.id}&status=eq.trashed`, { method: 'DELETE', prefer: 'return=representation' });
+  if (!rows?.length) throw new ApiError('削除できませんでした。公開の権限があるか、ゴミ箱の中にあるかを確認してください。', 403);
+  const paths = (Array.isArray(p.attachments) ? p.attachments : []).filter(isSafeAttachment).map((a) => a.path);
+  const removed = await removeAttachments(paths).catch(() => 0);
+  return { deleted: true, filesLeft: Math.max(0, paths.length - removed) };
+}
+
 // 添付の表示（管理画面・公開側で共用）
 export function renderAttachments(list: unknown): HTMLElement | null {
   const items = Array.isArray(list) ? list.filter(isSafeAttachment) : [];
