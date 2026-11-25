@@ -4,7 +4,7 @@
     /* ── 配色（現行サイト https://home-plumeria.jp/ 準拠）──────────
        施設名の由来である南国の花プルメリアと、現行サイトのターコイズ／ピンクを基準にする。
        生成り・深緑・木の実色といった和のトーンは、施設のブランドと合わないため使わない。 */
-    --bg: #f4fafc;          /* ごく淡い水色。水辺の抜け感を地色にする */
+    --bg: #fafdfe;          /* ほぼ白に、ごくわずかな水色。清涼感・透明感のため白に寄せた（2026-11-25。以前は #f4fafc） */
     --surface: #ffffff;     /* 白 */
     --mint: #e2f2f6;        /* 淡いアクア */
     --beige: #fdf4e6;       /* 淡いサンド。アクアと対にして浜辺の印象をつくる */
@@ -2528,3 +2528,31 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 /* 居宅介護支援の対象図：認定前（申請予定）から要介護までの全幅。点線部分が「これから申請する方」 */
 .pl-fitmap-bar.pl-fitmap-bar-wide { grid-column: 1 / 4; }
 .pl-fitmap-bar-wide .pl-fitmap-main { flex: 2; }
+
+/* ── 清涼感・透明感の方針（2026-11-25 ボス指示）─────────────────
+   ① 地を白に寄せる（--bg を #fafdfe に）。
+   ② セクションごとの色の帯（サンド・ミントの面）を減らす。帯は余白で区切り、色の面はフッターだけに残す。
+   ③ ターコイズの面はボタンと見出しの印にしぼる（ヒーローの写真の下のミントのグラデーションをやめる）。
+   ④ 写真の上に乗る文字の面（トップのヒーローのカード・右のタイル）に、すりガラスの半透明を足す。
+   元に戻すときは、このブロックを消し、--bg を #f4fafc に戻す。 */
+.pl .pl-sec-beige { background-color: transparent; }
+.pl .pl-hero-media { background: var(--bg); }
+.pl .pl-foot {
+  background-color: #f1f8fa;
+  background-image: linear-gradient(180deg, #f1f8fa 0%, #e6f2f5 100%);
+}
+.pl .pl-hill-foot { color: #f1f8fa; }
+/* すりガラス：白を 72% 残し、後ろの写真をぼかして透かす。背面が暗い写真でも、
+   濃いティールの文字は 6:1 以上（白 72% の面の上での計算値）。
+   backdrop-filter が効かない環境では、透けた分だけ読みにくくなるため不透明に近い白へ戻す。 */
+.pl .pl-hero-copy,
+.pl .pl-hero-tiles .pl-tile {
+  background: color-mix(in srgb, var(--surface) 72%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .pl .pl-hero-copy,
+  .pl .pl-hero-tiles .pl-tile { background: color-mix(in srgb, var(--surface) 96%, transparent); }
+}
