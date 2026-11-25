@@ -57,7 +57,7 @@ const kindLabel = Object.fromEntries(kinds.map((k) => [k.id, k.short]));
         <ul class="gj-bars">
           {kinds.map((k) => (
             <li class={`gj-kind gj-kind-${k.id}`} style={`grid-row:${k.rows}`}>
-              <svg aria-hidden="true" focusable="false"><use href={`#pl-i-${k.icon}`} /></svg>{k.label}
+              <span class="gj-kind-icon" aria-hidden="true"><svg focusable="false"><use href={`#pl-i-${k.icon}`} /></svg></span>{k.label}
             </li>
           ))}
           {bars.map((b) => (
@@ -120,14 +120,19 @@ const kindLabel = Object.fromEntries(kinds.map((k) => [k.id, k.short]));
   }
   .gj-stage strong { font-size: calc(19px * var(--pl-fs)); }
   .gj-stage > span:last-child { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
-  .gj-bars { grid-row: 2; row-gap: 10px; padding: 0 0 24px; }
+  .gj-bars { grid-row: 2; row-gap: 14px; padding: 0 0 24px; }
   .gj-bars > li { padding-inline: 10px; }
   /* 種類の見出し。同じ段の帯と色をそろえ、横にたどって種類が分かるようにする */
   .gj-bars > .gj-kind {
     grid-column: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-    padding: 0 6px; margin-right: 10px; color: white; font-weight: 700; font-size: calc(16px * var(--pl-fs)); text-align: center; line-height: 1.4;
+    padding: 0 4px; margin-right: 10px; color: var(--ink); font-weight: 700; font-size: calc(16px * var(--pl-fs)); text-align: center; line-height: 1.4;
   }
-  .gj-kind svg { width: 26px; height: 26px; }
+  /* 分類の見出しは、色の丸いアイコン＋濃い文字（白地）。色の面を小さくして重く見せない（ボス選択 2026-11-25 案C） */
+  .gj-kind-icon {
+    display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 2px;
+    border-radius: 50%; background: var(--kind); color: var(--kind-ink);
+  }
+  .gj-kind svg { width: 24px; height: 24px; stroke-width: 1.7; }
   /* 分類の色はプルメリアのブランドから取る：花芯の黄・ロゴのハイビスカスピンク・海のターコイズ・葉の緑。
      ピンク・ターコイズ・緑は白文字で 4.5:1 以上。黄は白文字が読めないため濃いティールの文字にする（6.47:1）。
      背景が白なので、帯は各色の淡い地にする（文字は --ink / --muted） */
@@ -139,7 +144,6 @@ const kindLabel = Object.fromEntries(kinds.map((k) => [k.id, k.short]));
   .gj-kind-home { --kind: #cc3f70; --kind-ink: white; }
   .gj-kind-talk { --kind: #11809e; --kind-ink: white; }
   .gj-kind-med  { --kind: #2b7a4b; --kind-ink: white; }
-  .gj-bars > .gj-kind { background: var(--kind); color: var(--kind-ink); }
   .gj-bar { box-shadow: inset 0 -5px 0 var(--kind, transparent); }
   .gj-bar .gj-tag {
     display: inline-block; margin-right: 8px; padding: 0 8px; vertical-align: 2px;
