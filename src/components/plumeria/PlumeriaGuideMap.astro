@@ -1,0 +1,103 @@
+---
+// 試作（案2）：「どこで × どのくらい」の地図。PC版のみ。
+// 横に暮らす場所、縦に必要な支えをとり、サービスを置く。ショートステイは「住まい」と「自宅」の間の列に置き、
+// 両方をつなぐ役であることを位置で伝える。居宅介護支援は全体の下に帯で置く。
+import { routes } from '../../data/plumeria';
+
+type Cell = { name: string; sub: string; href: string; id: string; col: string; row: string };
+const cells: Cell[] = [
+  { name: 'プルメリアⅠ', sub: '自立・介護予防向けの住まい', href: routes.housingUnit('1'), id: 'housing', col: '2', row: '2' },
+  { name: 'プルメリアⅡ', sub: '介護対応型の住まい（要介護1以上）', href: routes.housingUnit('2'), id: 'housing', col: '2', row: '3' },
+  { name: 'プルメリアⅢ', sub: 'ショートステイ。ご家族が休む間などに、短期間泊まれます', href: routes.shortStay, id: 'short-stay', col: '3', row: '2 / span 2' },
+  { name: '訪問介護', sub: '入浴・食事・家事をご自宅で手伝います', href: routes.homeCare, id: 'home-care', col: '4', row: '2 / span 2' },
+  { name: '福祉用具', sub: '歩行器や介護ベッドを選ぶ相談', href: routes.welfareEquipment, id: 'welfare-equipment', col: '5', row: '2 / span 2' },
+  { name: '訪問看護', sub: '看護師がご自宅で体調を確認します', href: routes.homeNursing, id: 'home-nursing', col: '4 / span 2', row: '4' },
+];
+---
+<section class="pl-sec pl-sec-tight" id="guide">
+  <div class="pl-wrap">
+    <h2 class="pl-h2">どこで、どんな支えが要るかで選ぶ</h2>
+    <p class="pl-sec-lead">横はお住まいの場所、縦は必要な支えです。今の状況に近いところをご覧ください。</p>
+
+    <div class="gm" role="group" aria-label="サービスの地図">
+      <div class="gm-corner" aria-hidden="true"></div>
+      <p class="gm-col gm-col-stay" style="grid-column:2">
+        <svg aria-hidden="true" focusable="false"><use href="#pl-i-home" /></svg>住まいを移す
+      </p>
+      <p class="gm-col gm-col-short" style="grid-column:3">
+        <svg aria-hidden="true" focusable="false"><use href="#pl-i-bed" /></svg>短期間だけ泊まる
+      </p>
+      <p class="gm-col gm-col-home" style="grid-column:4 / span 2">
+        <svg aria-hidden="true" focusable="false"><use href="#pl-i-staff" /></svg>自宅で暮らす
+      </p>
+
+      <p class="gm-row" style="grid-row:2">暮らしの<br />手助け</p>
+      <p class="gm-row" style="grid-row:3">介護が<br />必要</p>
+      <p class="gm-row" style="grid-row:4">医療の<br />ケア</p>
+
+      <!-- 列ごとの地の色（住まい・泊まる・自宅）。セルの後ろに敷く -->
+      <div class="gm-band gm-band-stay" style="grid-column:2; grid-row:2 / span 3" aria-hidden="true"></div>
+      <div class="gm-band gm-band-short" style="grid-column:3; grid-row:2 / span 3" aria-hidden="true"></div>
+      <div class="gm-band gm-band-home" style="grid-column:4 / span 2; grid-row:2 / span 3" aria-hidden="true"></div>
+
+      {cells.map((c) => (
+        <a class="gm-cell" href={c.href} style={`grid-column:${c.col}; grid-row:${c.row}`}
+          data-pl-gtag="service_select" data-pl-service={c.id} data-pl-cta="guide_map">
+          <strong>{c.name}</strong>
+          <span>{c.sub}</span>
+        </a>
+      ))}
+
+      <a class="gm-base" href={routes.careManagement} style="grid-column:2 / span 4; grid-row:5"
+        data-pl-gtag="service_select" data-pl-service="care-management" data-pl-cta="guide_map">
+        <svg aria-hidden="true" focusable="false"><use href="#pl-i-clipboard" /></svg>
+        <span><strong>居宅介護支援</strong>　どの場合も、ケアマネジャーに何から始めるかを相談できます</span>
+      </a>
+    </div>
+    <p class="pl-note">表は主な使い方の目安です。組み合わせや利用条件は、各窓口でご確認ください。</p>
+  </div>
+</section>
+
+<style>
+  .gm {
+    display: grid;
+    grid-template-columns: 120px 1fr 1fr 1fr 1fr;
+    grid-template-rows: auto repeat(3, minmax(120px, auto)) auto;
+    gap: 10px;
+    margin-block: 28px 14px;
+  }
+  .gm-col {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    padding: 14px 8px; font-weight: 700; font-size: calc(17px * var(--pl-fs));
+    color: white; background: var(--green);
+  }
+  .gm-col-short { background: #2f8fa8; }
+  .gm-col-home { background: var(--green-deep); }
+  .gm-col svg { width: 26px; height: 26px; }
+  .gm-row {
+    grid-column: 1; display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 6px; text-align: right; font-weight: 700; line-height: 1.5;
+    border-right: 3px solid var(--green);
+  }
+  .gm-band { z-index: 0; margin: -5px; }
+  .gm-band-stay { background: var(--mint); }
+  .gm-band-short { background: #eef7f9; }
+  .gm-band-home { background: var(--beige); }
+  .gm-cell {
+    position: relative; z-index: 1;
+    display: flex; flex-direction: column; justify-content: center; gap: 6px;
+    padding: 16px 18px; background: var(--surface); color: var(--ink);
+    text-decoration: none; line-height: 1.6;
+    transition: background-color 0.2s;
+  }
+  .gm-cell strong { font-size: calc(19px * var(--pl-fs)); }
+  .gm-cell span { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
+  .gm-cell:hover strong, .gm-base:hover strong { text-decoration: underline; text-underline-offset: 4px; }
+  .gm-cell:focus-visible, .gm-base:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+  .gm-base {
+    display: flex; align-items: center; gap: 14px; margin-top: 8px;
+    padding: 16px 20px; background: var(--ink); color: white; text-decoration: none;
+  }
+  .gm-base svg { width: 28px; height: 28px; flex: none; }
+  .gm-base strong { font-size: calc(18px * var(--pl-fs)); }
+</style>
