@@ -129,18 +129,20 @@ const kindLabel = Object.fromEntries(kinds.map((k) => [k.id, k.label]));
     padding: 0; margin-right: 10px; color: white; font-weight: 700; font-size: calc(16px * var(--pl-fs));
   }
   .gj-kind svg { width: 26px; height: 26px; }
-  .gj-kind-live { background: var(--green); }
-  .gj-kind-home { background: #9e5525; }
-  .gj-kind-stay { background: #4f4a9a; }
-  .gj-live .gj-bar { box-shadow: inset 0 -4px 0 var(--green); }
-  .gj-home .gj-bar { box-shadow: inset 0 -4px 0 #9e5525; }
-  .gj-stay .gj-bar { box-shadow: inset 0 -4px 0 #4f4a9a; }
+  /* 種類の色はプルメリアのブランドから取る：ターコイズ（海）・ロゴのハイビスカスピンク・花芯の黄。
+     ターコイズとピンクは白文字で 4.5:1 以上、黄は白文字が読めないため濃いティールの文字にする（6.47:1） */
+  .gj-live { --kind: #11809e; --kind-ink: white; }
+  .gj-home { --kind: #cc3f70; --kind-ink: white; }
+  .gj-stay { --kind: #f2b437; --kind-ink: var(--ink); }
+  .gj-kind-live { --kind: #11809e; --kind-ink: white; }
+  .gj-kind-home { --kind: #cc3f70; --kind-ink: white; }
+  .gj-kind-stay { --kind: #f2b437; --kind-ink: var(--ink); }
+  .gj-bars > .gj-kind { background: var(--kind); color: var(--kind-ink); }
+  .gj-bar { box-shadow: inset 0 -5px 0 var(--kind, transparent); }
   .gj-bar .gj-tag {
     display: inline-block; margin-right: 8px; padding: 0 8px; vertical-align: 2px;
-    font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.7; color: white; background: var(--green);
+    font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.7; color: var(--kind-ink); background: var(--kind);
   }
-  .gj-home .gj-bar .gj-tag { background: #9e5525; }
-  .gj-stay .gj-bar .gj-tag { background: #4f4a9a; }
   .gj-bar {
     display: flex; flex-direction: column; justify-content: center; gap: 2px; height: 100%;
     padding: 12px 18px; background: var(--surface); color: var(--ink); text-decoration: none; line-height: 1.6;
