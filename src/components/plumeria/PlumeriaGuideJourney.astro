@@ -1,8 +1,8 @@
 ---
 // サービス一覧の「選び方」（#guide）。暮らしの段階に沿った道のりだけで見せる（ボス判断 2026-11-25：表示を2つにすると目移りするため1つに絞る）。
 // 一目で分かるように、見る手順を「自分の段階の列を見つけて、下へたどる」の1つにする。
-// PC：4つの段階を縦の列（地の色の帯）にし、各サービスを使える段階の幅の帯で置く。行の見出しは置かない。
-// スマホ：段階を縦に並べ、その段階で使えるサービスを並べる（同じサービスが複数の段階に出る）。
+// PC：4つの段階を縦の列（地の色の帯）にし、各サービスを使える段階の幅の帯で置く。左に種類（住まい・自宅で・泊まる）の見出しを置く（ボス指示 2026-11-25）。
+// スマホ：段階を縦に並べ、その段階で使えるサービスを並べる（同じサービスが複数の段階に出る）。種類はサービス名の前の札で示す。
 // 段階と帯の幅は目安で、先方に未確認（作業ログ 2026-11-25）。
 import { routes } from '../../data/plumeria';
 
@@ -14,15 +14,23 @@ const stages = [
 ];
 
 // from・to は段階の番号（1〜4）。lane は PC で置く段（上から1〜4）
-type Bar = { name: string; sub: string; href: string; id: string; from: number; to: number; lane: number };
+type Kind = 'live' | 'home' | 'stay';
+type Bar = { name: string; sub: string; href: string; id: string; from: number; to: number; lane: number; kind: Kind };
 const bars: Bar[] = [
-  { name: 'プルメリアⅠ', sub: '住まい｜自立・介護予防向け', href: routes.housingUnit('1'), id: 'housing', from: 1, to: 2, lane: 1 },
-  { name: 'プルメリアⅡ', sub: '住まい｜要介護1以上', href: routes.housingUnit('2'), id: 'housing', from: 3, to: 4, lane: 1 },
-  { name: '訪問介護', sub: 'ご自宅へ｜入浴・食事・家事の手伝い', href: routes.homeCare, id: 'home-care', from: 2, to: 3, lane: 2 },
-  { name: '訪問看護', sub: 'ご自宅へ｜看護師が体調を確認', href: routes.homeNursing, id: 'home-nursing', from: 4, to: 4, lane: 2 },
-  { name: '福祉用具', sub: '歩行器・介護ベッドの相談', href: routes.welfareEquipment, id: 'welfare-equipment', from: 2, to: 3, lane: 3 },
-  { name: 'プルメリアⅢ（ショートステイ）', sub: '泊まる｜ご家族が休む間などに', href: routes.shortStay, id: 'short-stay', from: 2, to: 4, lane: 4 },
+  { name: 'プルメリアⅠ', sub: '自立・介護予防向け', href: routes.housingUnit('1'), id: 'housing', from: 1, to: 2, lane: 1, kind: 'live' },
+  { name: 'プルメリアⅡ', sub: '介護対応型（要介護1以上）', href: routes.housingUnit('2'), id: 'housing', from: 3, to: 4, lane: 1, kind: 'live' },
+  { name: '訪問介護', sub: '入浴・食事・家事の手伝い', href: routes.homeCare, id: 'home-care', from: 2, to: 3, lane: 2, kind: 'home' },
+  { name: '訪問看護', sub: '看護師が体調を確認', href: routes.homeNursing, id: 'home-nursing', from: 4, to: 4, lane: 2, kind: 'home' },
+  { name: '福祉用具', sub: '歩行器・介護ベッドの相談', href: routes.welfareEquipment, id: 'welfare-equipment', from: 2, to: 3, lane: 3, kind: 'home' },
+  { name: 'プルメリアⅢ（ショートステイ）', sub: 'ご家族が休む間などに', href: routes.shortStay, id: 'short-stay', from: 2, to: 4, lane: 4, kind: 'stay' },
 ];
+// 種類の見出し。rows は PC の段（bars の lane と合わせる）
+const kinds: { id: Kind; label: string; icon: string; rows: string }[] = [
+  { id: 'live', label: '住まい', icon: 'home', rows: '1' },
+  { id: 'home', label: '自宅で', icon: 'staff', rows: '2 / span 2' },
+  { id: 'stay', label: '泊まる', icon: 'bed', rows: '4' },
+];
+const kindLabel = Object.fromEntries(kinds.map((k) => [k.id, k.label]));
 ---
 <section class="pl-sec pl-sec-tight" id="guide">
   <div class="pl-wrap">
@@ -32,11 +40,11 @@ const bars: Bar[] = [
     <div class="gj">
       <div class="gj-pc">
         {stages.map((_, i) => (
-          <div class={`gj-col ${i % 2 ? 'gj-col-even' : ''}`} style={`grid-column:${i + 1}`} aria-hidden="true"></div>
+          <div class={`gj-col ${i % 2 ? 'gj-col-even' : ''}`} style={`grid-column:${i + 2}`} aria-hidden="true"></div>
         ))}
         <ol class="gj-road">
           {stages.map((s, i) => (
-            <li class="gj-stage" style={`grid-column:${i + 1}`}>
+            <li class="gj-stage" style={`grid-column:${i + 2}`}>
               <span class="gj-dot pl-num-face" aria-hidden="true">{i + 1}</span>
               <strong>{s.title}</strong>
               <span>{s.note}</span>
@@ -44,8 +52,13 @@ const bars: Bar[] = [
           ))}
         </ol>
         <ul class="gj-bars">
+          {kinds.map((k) => (
+            <li class={`gj-kind gj-kind-${k.id}`} style={`grid-row:${k.rows}`}>
+              <svg aria-hidden="true" focusable="false"><use href={`#pl-i-${k.icon}`} /></svg>{k.label}
+            </li>
+          ))}
           {bars.map((b) => (
-            <li style={`grid-column:${b.from} / ${b.to + 1}; grid-row:${b.lane}`}>
+            <li class={`gj-${b.kind}`} style={`grid-column:${b.from + 1} / ${b.to + 2}; grid-row:${b.lane}`}>
               <a class="gj-bar" href={b.href} data-pl-gtag="service_select" data-pl-service={b.id} data-pl-cta="guide_journey">
                 <strong>{b.name}</strong>
                 <span>{b.sub}</span>
@@ -64,9 +77,9 @@ const bars: Bar[] = [
             </p>
             <ul class="gj-sp-list">
               {bars.filter((b) => b.from <= i + 1 && i + 1 <= b.to).map((b) => (
-                <li>
+                <li class={`gj-${b.kind}`}>
                   <a class="gj-bar" href={b.href} data-pl-gtag="service_select" data-pl-service={b.id} data-pl-cta="guide_journey">
-                    <strong>{b.name}</strong>
+                    <strong><span class="gj-tag">{kindLabel[b.kind]}</span>{b.name}</strong>
                     <span>{b.sub}</span>
                   </a>
                 </li>
@@ -89,7 +102,7 @@ const bars: Bar[] = [
   .gj { margin-block: 28px 14px; }
   /* 段階ごとの列を地の色の帯にして、上から下へ1列でたどれるようにする */
   .gj-pc {
-    display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: auto auto;
+    display: grid; grid-template-columns: 96px repeat(4, 1fr); grid-template-rows: auto auto;
   }
   .gj-col { grid-row: 1 / 3; background: var(--mint); }
   .gj-col-even { background: #edf7f9; }
@@ -99,7 +112,7 @@ const bars: Bar[] = [
   .gj-road { grid-row: 1; padding-block: 24px 20px; }
   /* 段階を結ぶ道 */
   .gj-road::before {
-    content: ''; position: absolute; left: 12.5%; right: 12.5%; top: 45px; height: 4px; background: var(--green);
+    content: ''; position: absolute; left: calc(96px + (100% - 96px) / 8); right: calc((100% - 96px) / 8); top: 45px; height: 4px; background: var(--green);
   }
   .gj-stage { position: relative; display: grid; justify-items: center; gap: 4px; padding-inline: 8px; text-align: center; line-height: 1.6; }
   .gj-dot {
@@ -110,6 +123,24 @@ const bars: Bar[] = [
   .gj-stage > span:last-child { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
   .gj-bars { grid-row: 2; row-gap: 10px; padding: 0 0 24px; }
   .gj-bars > li { padding-inline: 10px; }
+  /* 種類の見出し。同じ段の帯と色をそろえ、横にたどって種類が分かるようにする */
+  .gj-bars > .gj-kind {
+    grid-column: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    padding: 0; margin-right: 10px; color: white; font-weight: 700; font-size: calc(16px * var(--pl-fs));
+  }
+  .gj-kind svg { width: 26px; height: 26px; }
+  .gj-kind-live { background: var(--green); }
+  .gj-kind-home { background: #9e5525; }
+  .gj-kind-stay { background: #a8456b; }
+  .gj-live .gj-bar { box-shadow: inset 0 -4px 0 var(--green); }
+  .gj-home .gj-bar { box-shadow: inset 0 -4px 0 #9e5525; }
+  .gj-stay .gj-bar { box-shadow: inset 0 -4px 0 #a8456b; }
+  .gj-bar .gj-tag {
+    display: inline-block; margin-right: 8px; padding: 0 8px; vertical-align: 2px;
+    font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.7; color: white; background: var(--green);
+  }
+  .gj-home .gj-bar .gj-tag { background: #9e5525; }
+  .gj-stay .gj-bar .gj-tag { background: #a8456b; }
   .gj-bar {
     display: flex; flex-direction: column; justify-content: center; gap: 2px; height: 100%;
     padding: 12px 18px; background: var(--surface); color: var(--ink); text-decoration: none; line-height: 1.6;
