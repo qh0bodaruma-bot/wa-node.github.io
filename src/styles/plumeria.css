@@ -97,14 +97,15 @@
     border-radius: 0;
     /* 地色は 25%。後ろのコンテンツが透けるが、`backdrop-filter` の brightness で
        透けてくる側を暗く落としているため、白文字のコントラストは保たれる。
-       最も明るい背面（白）でも 4.8:1 で、AA の 4.5:1 を満たす。
-       ── ここが透過の限界。地色を 25% より下げるか brightness を 0.53 より上げると
-       白い写真の上で 4.5:1 を割る。数値を動かすときは両方を同時に見ること。
+       最も明るい背面（白）でも白文字 6.98:1。2026-11-25 にメニューの項目を少し暗くする（不透明度 0.72）
+       ことになり、その文字でも 4.55:1 を保つため brightness を 0.53 から 0.4 に下げた。
+       ── ここが透過の限界。地色を 25% より下げるか brightness を 0.4 より上げると、暗くした項目が
+       白い写真の上で 4.5:1 を割る。数値を動かすときは、地色・brightness・項目の不透明度を同時に見ること。
        ぼかしは 6px。大きくすると背面が溶けて「透けている」ように見えず、ただの濃い
        ピルに見える。透過を感じさせるのは透過率よりぼかしの弱さ。 */
     background: color-mix(in srgb, var(--ink) 25%, transparent);
-    backdrop-filter: blur(6px) brightness(0.53) saturate(1.25);
-    -webkit-backdrop-filter: blur(6px) brightness(0.53) saturate(1.25);
+    backdrop-filter: blur(6px) brightness(0.4) saturate(1.25);
+    -webkit-backdrop-filter: blur(6px) brightness(0.4) saturate(1.25);
     color: var(--bg);
     box-shadow: var(--shadow-md);
     transition: padding 0.3s ease, gap 0.3s ease;
@@ -1306,6 +1307,16 @@
 .pl-nav a { border-radius: 0; padding: 7px 4px 6px; gap: 3px; }
 .pl-nav a:hover { background: color-mix(in srgb, var(--bg) 12%, transparent); color: inherit; }
 .pl-nav a[aria-current="page"] { background: color-mix(in srgb, var(--ink) 60%, transparent); color: inherit; }
+/* 今いるページの項目だけを明るく残し、ほかの項目は少しだけ暗くする（ボス指示 2026-11-25）。
+   今いるページがメニューにない（トップ・サービス一覧など）ときは、どれも暗くしない。
+   暗くした項目も、マウスを乗せる・キーボードで選ぶと元の明るさに戻す。
+   不透明度 0.72 は、背面が白いときでも 4.55:1 を保つ下限（.pl-head-inner の brightness 0.4 と組み合わせた計算値）。 */
+.pl-nav a { transition: background-color 0.3s, color 0.3s, opacity 0.2s; }
+.pl-nav a[aria-current="page"] { color: white; font-weight: 700; }
+.pl-nav:has(a[aria-current="page"]) a:not([aria-current="page"]) { opacity: 0.72; }
+.pl-nav:has(a[aria-current="page"]) a:not([aria-current="page"]):is(:hover, :focus-visible) { opacity: 1; }
+/* マウスを乗せたときの囲みは楕円にする */
+.pl-nav a:hover { border-radius: 50%; }
 .pl-head-recruit { color: var(--ink); background: var(--accent); border-radius: 0; padding: 9px 16px; text-decoration: none; white-space: nowrap; font-size: calc(14px * var(--pl-fs)); font-weight: 700; }
 .pl-menu[open] .pl-menu-list { max-height: calc(100dvh - 180px); overflow-y: auto; max-width: calc(100vw - 36px); min-width: min(290px, calc(100vw - 36px)); }
 .pl-menu-list a { white-space: normal; }
