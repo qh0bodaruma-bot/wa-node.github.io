@@ -1,25 +1,28 @@
 ---
-// 試作（案2）：「どこで × どのくらい」の地図。PC版のみ。
+// 「どこで × どのくらい」の地図。PlumeriaGuideJourney の「一覧で見る」の中に置く。
+// スマホでは表を、場所ごとの一覧に組み替える。
 // 横に暮らす場所、縦に必要な支えをとり、サービスを置く。ショートステイは「住まい」と「自宅」の間の列に置き、
 // 両方をつなぐ役であることを位置で伝える。居宅介護支援は全体の下に帯で置く。
 import { routes } from '../../data/plumeria';
 
-type Cell = { name: string; sub: string; href: string; id: string; col: string; row: string };
+type Cell = { name: string; sub: string; href: string; id: string; col: string; row: string; place: string; need: string };
 const cells: Cell[] = [
-  { name: 'プルメリアⅠ', sub: '自立・介護予防向けの住まい', href: routes.housingUnit('1'), id: 'housing', col: '2', row: '2' },
-  { name: 'プルメリアⅡ', sub: '介護対応型の住まい（要介護1以上）', href: routes.housingUnit('2'), id: 'housing', col: '2', row: '3' },
-  { name: 'プルメリアⅢ', sub: 'ショートステイ。ご家族が休む間などに、短期間泊まれます', href: routes.shortStay, id: 'short-stay', col: '3', row: '2 / span 2' },
-  { name: '訪問介護', sub: '入浴・食事・家事をご自宅で手伝います', href: routes.homeCare, id: 'home-care', col: '4', row: '2 / span 2' },
-  { name: '福祉用具', sub: '歩行器や介護ベッドを選ぶ相談', href: routes.welfareEquipment, id: 'welfare-equipment', col: '5', row: '2 / span 2' },
-  { name: '訪問看護', sub: '看護師がご自宅で体調を確認します', href: routes.homeNursing, id: 'home-nursing', col: '4 / span 2', row: '4' },
+  { name: 'プルメリアⅠ', sub: '自立・介護予防向けの住まい', href: routes.housingUnit('1'), id: 'housing', col: '2', row: '2', place: 'stay', need: '暮らしの手助け' },
+  { name: 'プルメリアⅡ', sub: '介護対応型の住まい（要介護1以上）', href: routes.housingUnit('2'), id: 'housing', col: '2', row: '3', place: 'stay', need: '介護が必要' },
+  { name: 'プルメリアⅢ', sub: 'ショートステイ。ご家族が休む間などに、短期間泊まれます', href: routes.shortStay, id: 'short-stay', col: '3', row: '2 / span 2', place: 'short', need: '暮らしの手助け・介護が必要' },
+  { name: '訪問介護', sub: '入浴・食事・家事をご自宅で手伝います', href: routes.homeCare, id: 'home-care', col: '4', row: '2 / span 2', place: 'home', need: '暮らしの手助け・介護が必要' },
+  { name: '福祉用具', sub: '歩行器や介護ベッドを選ぶ相談', href: routes.welfareEquipment, id: 'welfare-equipment', col: '5', row: '2 / span 2', place: 'home', need: '暮らしの手助け・介護が必要' },
+  { name: '訪問看護', sub: '看護師がご自宅で体調を確認します', href: routes.homeNursing, id: 'home-nursing', col: '4 / span 2', row: '4', place: 'home', need: '医療のケア' },
+];
+const places = [
+  { id: 'stay', icon: 'home', label: '住まいを移す' },
+  { id: 'short', icon: 'bed', label: '短期間だけ泊まる' },
+  { id: 'home', icon: 'staff', label: '自宅で暮らす' },
 ];
 ---
-<section class="pl-sec pl-sec-tight" id="guide">
-  <div class="pl-wrap">
-    <h2 class="pl-h2">どこで、どんな支えが要るかで選ぶ</h2>
-    <p class="pl-sec-lead">横はお住まいの場所、縦は必要な支えです。今の状況に近いところをご覧ください。</p>
-
-    <div class="gm" role="group" aria-label="サービスの地図">
+<div class="gm-wrap">
+    <p class="pl-note gm-lead">横はお住まいの場所、縦は必要な支えです。</p>
+    <div class="gm" role="group" aria-label="サービスの一覧（場所と支えの地図）">
       <div class="gm-corner" aria-hidden="true"></div>
       <p class="gm-col gm-col-stay" style="grid-column:2">
         <svg aria-hidden="true" focusable="false"><use href="#pl-i-home" /></svg>住まいを移す
@@ -54,9 +57,32 @@ const cells: Cell[] = [
         <span><strong>居宅介護支援</strong>　どの場合も、ケアマネジャーに何から始めるかを相談できます</span>
       </a>
     </div>
+
+    <div class="gm-sp">
+      {places.map((pl) => (
+        <div class="gm-sp-group">
+          <p class={`gm-col gm-col-${pl.id}`}>
+            <svg aria-hidden="true" focusable="false"><use href={`#pl-i-${pl.icon}`} /></svg>{pl.label}
+          </p>
+          <ul>
+            {cells.filter((c) => c.place === pl.id).map((c) => (
+              <li>
+                <a class="gm-cell" href={c.href} data-pl-gtag="service_select" data-pl-service={c.id} data-pl-cta="guide_map">
+                  <strong>{c.name}</strong>
+                  <span>{c.need}｜{c.sub}</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+      <a class="gm-base" href={routes.careManagement} data-pl-gtag="service_select" data-pl-service="care-management" data-pl-cta="guide_map">
+        <svg aria-hidden="true" focusable="false"><use href="#pl-i-clipboard" /></svg>
+        <span><strong>居宅介護支援</strong>　どの場合も、ケアマネジャーに何から始めるかを相談できます</span>
+      </a>
+    </div>
     <p class="pl-note">表は主な使い方の目安です。組み合わせや利用条件は、各窓口でご確認ください。</p>
-  </div>
-</section>
+</div>
 
 <style>
   .gm {
@@ -100,4 +126,15 @@ const cells: Cell[] = [
   }
   .gm-base svg { width: 28px; height: 28px; flex: none; }
   .gm-base strong { font-size: calc(18px * var(--pl-fs)); }
+  .gm-lead { margin-top: 12px; }
+  .gm-sp { display: none; }
+  @media (max-width: 720px) {
+    .gm { display: none; }
+    .gm-sp { display: grid; gap: 18px; margin-block: 16px 12px; }
+    .gm-sp-group ul { display: grid; gap: 6px; margin-top: 6px; }
+    .gm-sp .gm-col { justify-content: flex-start; }
+    .gm-sp .gm-cell { background: var(--mint); }
+    .gm-sp .gm-base { margin-top: 0; align-items: flex-start; }
+    .gm-sp .gm-base span { line-height: 1.7; }
+  }
 </style>

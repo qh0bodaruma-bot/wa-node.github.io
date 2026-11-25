@@ -1,8 +1,11 @@
 ---
-// 試作（案3）：暮らしの段階に沿った道のり。PC版のみ。
-// 4つの段階を横の道に並べ、各サービスを「使える段階の幅」の帯で置く。
-// 1点に決めつけず幅で見せることで、段階どおりに進まない人にも当てはめやすくする。
+// サービス一覧の「選び方」（#guide）。暮らしの段階に沿った道のりを主役にし、
+// 下の「一覧で見る」に「どこで × どのくらい」の地図（PlumeriaGuideMap）を置く。
+// PC：4つの段階を横の道に並べ、各サービスを「使える段階の幅」の帯で置く。1点に決めつけず幅で見せる。
+// スマホ：段階を縦に並べ、その段階で使えるサービスを段階ごとに並べる（同じサービスが複数の段階に出る）。
+// 段階と帯の幅は目安で、先方に未確認（作業ログ 2026-11-25）。
 import { routes } from '../../data/plumeria';
+import PlumeriaGuideMap from './PlumeriaGuideMap.astro';
 
 const stages = [
   { title: '元気なうち', note: '身の回りのことは自分でできる' },
@@ -29,6 +32,7 @@ const kindLabel = { live: '住まい', home: '自宅で', stay: '泊まる' };
     <p class="pl-sec-lead">今の状態に近い段階を探して、その下の帯をご覧ください。段階が変わっても、続けてご相談いただけます。</p>
 
     <div class="gj">
+      <div class="gj-pc">
       <ol class="gj-road">
         {stages.map((s, i) => (
           <li class="gj-stage" style={`grid-column:${i + 2}`}>
@@ -52,6 +56,28 @@ const kindLabel = { live: '住まい', home: '自宅で', stay: '泊まる' };
           </li>
         ))}
       </ul>
+      </div>
+
+      <ol class="gj-sp">
+        {stages.map((s, i) => (
+          <li>
+            <p class="gj-sp-stage">
+              <span class="gj-dot pl-num-face" aria-hidden="true">{i + 1}</span>
+              <span><strong>{s.title}</strong><span>{s.note}</span></span>
+            </p>
+            <ul class="gj-sp-list">
+              {bars.filter((b) => b.from <= i + 1 && i + 1 <= b.to).map((b) => (
+                <li class={`gj-${b.kind}`}>
+                  <a class="gj-bar" href={b.href} data-pl-gtag="service_select" data-pl-service={b.id} data-pl-cta="guide_journey">
+                    <strong>{b.name}</strong>
+                    <span>{b.sub}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
 
       <a class="gj-base" href={routes.careManagement} data-pl-gtag="service_select" data-pl-service="care-management" data-pl-cta="guide_journey">
         <svg aria-hidden="true" focusable="false"><use href="#pl-i-clipboard" /></svg>
@@ -59,6 +85,11 @@ const kindLabel = { live: '住まい', home: '自宅で', stay: '泊まる' };
       </a>
     </div>
     <p class="pl-note">段階と帯の幅は目安です。要介護度などの利用条件は、各窓口でご確認ください。</p>
+
+    <details class="pl-purpose-guide gj-more">
+      <summary>一覧で見る（どこで × どんな支えか）</summary>
+      <PlumeriaGuideMap />
+    </details>
   </div>
 </section>
 
@@ -107,4 +138,21 @@ const kindLabel = { live: '住まい', home: '自宅で', stay: '泊まる' };
   }
   .gj-base svg { width: 28px; height: 28px; flex: none; }
   .gj-base strong { font-size: calc(18px * var(--pl-fs)); }
+  .gj-more { margin-top: 28px; }
+  .gj-sp { display: none; }
+  @media (max-width: 720px) {
+    .gj-pc { display: none; }
+    .gj-sp { display: grid; gap: 22px; position: relative; }
+    /* 段階をつなぐ縦の道 */
+    .gj-sp::before { content: ''; position: absolute; left: 22px; top: 23px; bottom: 23px; width: 4px; background: var(--green); }
+    .gj-sp > li { position: relative; display: grid; gap: 10px; }
+    .gj-sp-stage { display: flex; align-items: center; gap: 14px; line-height: 1.5; }
+    .gj-sp-stage .gj-dot { margin: 0; flex: none; }
+    .gj-sp-stage > span:last-child { display: grid; }
+    .gj-sp-stage strong { font-size: calc(18px * var(--pl-fs)); }
+    .gj-sp-stage > span:last-child > span { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
+    .gj-sp-list { display: grid; gap: 8px; padding-left: 60px; }
+    .gj-base { margin: 22px 0 0; align-items: flex-start; }
+    .gj-base span { line-height: 1.7; }
+  }
 </style>
