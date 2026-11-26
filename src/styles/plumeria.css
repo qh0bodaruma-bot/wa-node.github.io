@@ -102,7 +102,9 @@
        ── ここが透過の限界。地色を 25% より下げるか brightness を 0.4 より上げると、暗くした項目が
        白い写真の上で 4.5:1 を割る。数値を動かすときは、地色・brightness・項目の不透明度を同時に見ること。
        ぼかしは 6px。大きくすると背面が溶けて「透けている」ように見えず、ただの濃い
-       ピルに見える。透過を感じさせるのは透過率よりぼかしの弱さ。 */
+       ピルに見える。透過を感じさせるのは透過率よりぼかしの弱さ。
+       ※ 2026-11-27 に台紙を透明なガラスへ変え、読みやすさは文字の縁取りで守る方式に切り替えた。
+       実際に効いている値は、ファイル後半の「アイランドの台紙を透明なリキッドグラスにする」のブロックを参照。 */
     background: color-mix(in srgb, var(--ink) 25%, transparent);
     backdrop-filter: blur(6px) brightness(0.4) saturate(1.25);
     -webkit-backdrop-filter: blur(6px) brightness(0.4) saturate(1.25);
@@ -2277,17 +2279,19 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl .pl-service-intro-card .pl-hs-svc-name { margin-top: 5px; }
 /* ダイナミックアイランド風のヘッダー（浮遊ピル）は6px。幅の広い面で、4pxのボタンより一段だけ大きい丸みにして浮いた印象を出す */
 .pl .pl-head-inner { border-radius: 6px; }
-/* ── アイランドの台紙をリキッドグラス風にする（2026-11-27 ボス指示）─────────────────────────────
+/* ── アイランドの台紙を透明なリキッドグラスにする（2026-11-27 ボス指示。白っぽいガラスではなく透明に）─────────────
+   台紙は背面を暗くせず、ほぼ素通しにする（地色は ink 6%、brightness なし、ぼかし 4px）。
+   そのぶん白い背面の上では白い文字が読めなくなるため、読みやすさは「文字の縁取り」で守る（ボス選択）。
+   縁取りは濃いティールの実線で、文字の周りの色が常に縁取りの色になる。文字色と縁取りの比は 8:1 以上。
    ガラスの厚みは「縁の光」と「上端の照り」で出す。背面を歪める SVG フィルター（backdrop-filter: url()）は
-   Chromium 以外で宣言ごと無効になり、ぼかしと brightness まで消えて白い文字が読めなくなるため使わない。
-   地色 25%・brightness 0.4 は変えない（白い背面でも暗くした項目 4.55:1 を保つ組み合わせ。上の .pl-head-inner の注記を参照）。
-   光を足すのは縁の 1px と上端 8px だけにし、メニューの文字の背面（上端から約17px より下）は明るくしない。 */
+   Chromium 以外で宣言ごと無効になり、ぼかしまで消えるため使わない。 */
 .pl .pl-head-inner {
   position: relative;
   isolation: isolate;
+  background: color-mix(in srgb, var(--ink) 6%, transparent);
   /* 彩度を上げて、透けてくる写真の色がガラス越しに少し濃く見えるようにする */
-  backdrop-filter: blur(6px) brightness(0.4) saturate(1.7);
-  -webkit-backdrop-filter: blur(6px) brightness(0.4) saturate(1.7);
+  backdrop-filter: blur(4px) saturate(1.6);
+  -webkit-backdrop-filter: blur(4px) saturate(1.6);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.42),   /* 上の縁に当たる光 */
     inset 0 -1px 0 rgba(255, 255, 255, 0.10),  /* 下の縁の照り返し */
@@ -2322,6 +2326,26 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0) 8px);
   pointer-events: none;
 }
+/* 文字の縁取り：濃いティールの小さなにじみを3重に重ねて文字の周りを塗りつぶし、外側に広いにじみを足す。
+   1px の実線を8方向に重ねる方法は、画数の多い漢字（「護」「援」など）の隙間が埋まって潰れたため使わない。
+   文字は太字にして、縁取りに負けないようにする（撮影して比べた結果、2026-11-27） */
+.pl .pl-head .pl-nav a {
+  overflow: visible;   /* 縁取りが項目の箱で四角く切れないようにする。列幅は grid-template-columns で固定済み */
+  font-weight: 700;
+  text-shadow:
+    0 0 2px var(--ink), 0 0 2px var(--ink), 0 0 3px var(--ink),
+    0 0 6px rgba(8, 60, 74, 0.85), 0 1px 10px rgba(8, 60, 74, 0.6);
+}
+/* ラベルは省略記号のために overflow: hidden。内側に余白を取り、同じ分だけ外へ広げて、縁取りが切れない範囲を確保する */
+.pl .pl-head .pl-nav-label { padding: 6px 10px; margin: -6px -10px; }
+/* 今いるページ以外の項目は、不透明度ではなく文字の色で少し暗くする。
+   不透明度で下げると縁取りまで薄くなり、白い背面で読めなくなるため。#d8e7eb は縁取りの ink に対して 9:1 以上 */
+.pl .pl-head .pl-nav:has(a[aria-current="page"]) a:not([aria-current="page"]) { opacity: 1; color: #d8e7eb; }
+.pl .pl-head .pl-nav:has(a[aria-current="page"]) a:not([aria-current="page"]):is(:hover, :focus-visible) { color: #fff; }
+/* 文字サイズの切替は小さい項目が並ぶため、縁取りでなく地を濃くした面にする。ink 70% は白い背面でも白文字 4.8:1 */
+.pl .pl-head .pl-textsize { background: color-mix(in srgb, var(--ink) 70%, transparent); }
+/* スマホのメニューボタンも、透明な台紙の上で線が消えないよう、濃い丸の面にする */
+.pl .pl-head .pl-menu > summary { background: color-mix(in srgb, var(--ink) 70%, transparent); }
 /* ハンバーガーを開いた一覧もアイランドと同じ6px。一覧は overflow が hidden か auto のため、中のリンクの角も一緒に切れる */
 .pl .pl-menu[open] .pl-menu-list { border-radius: 6px; }
 /* クラスの付かないリンクには、文中リンク用の「角を0にする」指定が強く掛かるため、ジャンプ用ボタンはここで上書きする */
