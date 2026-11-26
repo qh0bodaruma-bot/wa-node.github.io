@@ -1,175 +1,205 @@
 ---
-// サービス一覧の「選び方」（#guide）。暮らしの段階に沿った道のりだけで見せる（ボス判断 2026-11-25：表示を2つにすると目移りするため1つに絞る）。
-// 一目で分かるように、見る手順を「自分の段階の列を見つけて、下へたどる」の1つにする。
-// PC：4つの段階を縦の列にし、各サービスを使える段階の幅の帯で置く。左に、現行サイトの図と同じ4つのお悩みの分類
-//     （住まいや施設で・自宅で介護・介護の相談・医療的ケア）の見出しを置く。背景は白（ボス指示 2026-11-25）。
-// スマホ：段階を縦に並べ、その段階で使えるサービスを並べる（同じサービスが複数の段階に出る）。分類はサービス名の前の札で示す。
-// 段階と帯の幅は目安で、先方に未確認（作業ログ 2026-11-25）。
+// サービス一覧の「選び方」（#guide）。質問に答えながらたどる分岐フロー（ボス判断 2026-11-27）。
+// 動きは決定会議（AI-Company projects/プルメリア/作業中/20261127_決定会議_選び方の図の動き_評決_V01.md）の
+// 案D（動きなしの図）を土台に、PCだけ「マウスを乗せた・キーボードで選んだ項目までの道筋」を目立たせる（ボス選択）。
+// - 図は入れ子の箇条書き（ul/li）1つだけで作る。PCでは横に広がる分岐図、狭い幅では字下げの一覧として見せる。
+//   読み上げ・文字サイズ「大」・JSなしでも同じ内容を読める。図と文章を二重に持たない（直す場所は下の tree だけ）。
+// - 目立たせ方は CSS の :hover / :focus-visible だけ（JSなし）。ほかの道筋は薄くしない（組み合わせて使うサービスが
+//   「使えない」と読まれるのを避けるため）。スマホは目立たせず、タップはサービスのページへの移動だけ。
+// - 入口に「ここから」と、迷ったときの相談先（居宅介護支援）を置く。
+// - 分かれ道の条件は「要介護1以上」（プルメリアⅡ）以外は制作者の推測で、先方に未確認（2026-11-27 時点）。
+//   公開している文言は「目安」とし、確認が取れたらこのコメントを更新する。
 import { routes } from '../../data/plumeria';
 
-const stages = [
-  { title: '元気なうち', note: '身の回りのことは自分でできる' },
-  { title: '少し手助けが要る', note: '家事や外出に不安が出てきた' },
-  { title: '介護が必要', note: '入浴や食事に介助が要る' },
-  { title: '医療のケアも必要', note: '体調の管理や処置が要る' },
-];
-
-// from・to は段階の番号（1〜4）。lane は PC で置く段（上から1〜6）
 type Kind = 'stay' | 'home' | 'talk' | 'med';
-type Bar = { name: string; sub: string; href: string; id: string; from: number; to: number; lane: number; kind: Kind };
-const bars: Bar[] = [
-  { name: 'プルメリアⅠ', sub: '住まい｜自立・介護予防向け', href: routes.housingUnit('1'), id: 'housing', from: 1, to: 2, lane: 1, kind: 'stay' },
-  { name: 'プルメリアⅡ', sub: '住まい｜介護対応型（要介護1以上）', href: routes.housingUnit('2'), id: 'housing', from: 3, to: 4, lane: 1, kind: 'stay' },
-  { name: 'プルメリアⅢ（ショートステイ）', sub: '短期間の宿泊｜ご家族が休む間などに', href: routes.shortStay, id: 'short-stay', from: 2, to: 4, lane: 2, kind: 'stay' },
-  { name: '訪問介護', sub: '入浴・食事・家事の手伝い', href: routes.homeCare, id: 'home-care', from: 2, to: 3, lane: 3, kind: 'home' },
-  { name: '福祉用具', sub: '歩行器・介護ベッドの相談', href: routes.welfareEquipment, id: 'welfare-equipment', from: 2, to: 3, lane: 4, kind: 'home' },
-  { name: '居宅介護支援', sub: 'ケアマネジャーが、何から始めるかを一緒に考えます', href: routes.careManagement, id: 'care-management', from: 1, to: 4, lane: 5, kind: 'talk' },
-  { name: '訪問看護', sub: '看護師が体調を確認', href: routes.homeNursing, id: 'home-nursing', from: 4, to: 4, lane: 6, kind: 'med' },
-];
-// 分類の見出し（現行サイトの図の4つ）。rows は PC の段（bars の lane と合わせる）。short はスマホの札
-const kinds: { id: Kind; label: string; short: string; icon: string; rows: string }[] = [
-  { id: 'stay', label: '住まいや施設で', short: '施設', icon: 'building', rows: '1 / span 2' },
-  { id: 'home', label: '自宅で介護', short: '自宅', icon: 'home', rows: '3 / span 2' },
-  { id: 'talk', label: '介護の相談', short: '相談', icon: 'people', rows: '5' },
-  { id: 'med', label: '医療的ケア', short: '医療', icon: 'heart', rows: '6' },
-];
-const kindLabel = Object.fromEntries(kinds.map((k) => [k.id, k.short]));
+type Result = { answer: string; name: string; sub: string; href: string; id: string; kind: Kind };
+type Question = { answer?: string; q: string; note?: string; children: Node[] };
+type Node = Result | Question;
+
+const tree: Question = {
+  q: '住まいを移って暮らしたいですか？',
+  children: [
+    {
+      answer: 'はい',
+      q: '介護が必要ですか？',
+      note: '要介護1以上の認定',
+      children: [
+        { answer: 'いいえ', name: 'プルメリアⅠ', sub: '住まい｜自立・介護予防向け', href: routes.housingUnit('1'), id: 'housing', kind: 'stay' },
+        { answer: 'はい', name: 'プルメリアⅡ', sub: '住まい｜介護対応型（要介護1以上）', href: routes.housingUnit('2'), id: 'housing', kind: 'stay' },
+      ],
+    },
+    { answer: 'しばらくの間だけ泊まりたい', name: 'ショートステイ', sub: 'プルメリアⅢ｜ご家族が休む間などに', href: routes.shortStay, id: 'short-stay', kind: 'stay' },
+    {
+      answer: 'いいえ、自宅で暮らしたい',
+      q: '看護師による体調の確認や処置が必要ですか？',
+      children: [
+        { answer: 'はい', name: '訪問看護', sub: '看護師がご自宅で体調を確認', href: routes.homeNursing, id: 'home-nursing', kind: 'med' },
+        {
+          answer: 'いいえ',
+          q: 'どんな手助けがほしいですか？',
+          children: [
+            { answer: '入浴・食事・家事の手伝い', name: '訪問介護', sub: 'ヘルパーがご自宅で手伝います', href: routes.homeCare, id: 'home-care', kind: 'home' },
+            { answer: '歩行器・介護ベッドなどの道具', name: '福祉用具', sub: '選び方と借り方のご相談', href: routes.welfareEquipment, id: 'welfare-equipment', kind: 'home' },
+          ],
+        },
+      ],
+    },
+  ],
+};
+
+const isResult = (n: Node): n is Result => 'href' in n;
 ---
-<section class="pl-sec pl-sec-tight gj-sec" id="guide">
+<section class="pl-sec pl-sec-tight gf-sec" id="guide">
   <div class="pl-wrap">
     <h2 class="pl-h2">生活スタイルから選ぶ</h2>
-    <p class="pl-sec-lead">今の状態に近い段階を見つけて、その下をご覧ください。</p>
+    <p class="pl-sec-lead">「ここから」の質問に答えながら、線をたどってください。</p>
 
-    <div class="gj">
-      <div class="gj-pc">
-        {stages.map((_, i) => (
-          <div class="gj-col" style={`grid-column:${i + 2}`} aria-hidden="true"></div>
-        ))}
-        <ol class="gj-road">
-          {stages.map((s, i) => (
-            <li class="gj-stage" style={`grid-column:${i + 2}`}>
-              <span class="gj-dot pl-num-face" aria-hidden="true">{i + 1}</span>
-              <strong>{s.title}</strong>
-              <span>{s.note}</span>
-            </li>
-          ))}
-        </ol>
-        <ul class="gj-bars">
-          {kinds.map((k) => (
-            <li class={`gj-kind gj-kind-${k.id}`} style={`grid-row:${k.rows}`}>
-              <span class="gj-kind-icon" aria-hidden="true"><svg focusable="false"><use href={`#pl-i-${k.icon}`} /></svg></span>{k.label}
-            </li>
-          ))}
-          {bars.map((b) => (
-            <li class={`gj-${b.kind}`} style={`grid-column:${b.from + 1} / ${b.to + 2}; grid-row:${b.lane}`}>
-              <a class="gj-bar" href={b.href} data-pl-gtag="service_select" data-pl-service={b.id} data-pl-cta="guide_journey">
-                <strong>{b.name}</strong>
-                <span>{b.sub}</span>
-              </a>
-            </li>
-          ))}
+    <div class="gf">
+      <a class="gf-consult gj-talk" href={routes.careManagement} data-pl-gtag="service_select" data-pl-service="care-management" data-pl-cta="guide_journey">
+        <span class="gf-consult-lead">分からないとき・迷ったときは</span>
+        <strong>居宅介護支援</strong>
+        <span>ケアマネジャーが、何から始めるかを一緒に考えます</span>
+      </a>
+
+      <div class="gf-scroll">
+        <p class="gf-here" aria-hidden="true">ここから</p>
+        <ul class="gf-tree">
+          {(() => {
+            // 入れ子の箇条書きを再帰で組み立てる。結果はサービスへのリンク、質問はその下に答えごとの枝を持つ
+            const render = (n: Node, depth: number): any => (
+              <li class="gf-node">
+                {isResult(n) ? (
+                  <a class={`gf-box gf-res gj-${n.kind}`} href={n.href} data-pl-gtag="service_select" data-pl-service={n.id} data-pl-cta="guide_journey">
+                    {n.answer && <span class="gf-ans">{n.answer}</span>}
+                    <strong>{n.name}</strong>
+                    <span class="gf-sub">{n.sub}</span>
+                  </a>
+                ) : (
+                  <div class={`gf-box gf-q${depth === 0 ? ' gf-q-root' : ''}`}>
+                    {n.answer && <span class="gf-ans">{n.answer}</span>}
+                    <strong>{n.q}</strong>
+                    {n.note && <span class="gf-sub">{n.note}</span>}
+                  </div>
+                )}
+                {!isResult(n) && (
+                  <ul class="gf-kids">
+                    {n.children.map((c) => render(c, depth + 1))}
+                  </ul>
+                )}
+              </li>
+            );
+            return render(tree, 0);
+          })()}
         </ul>
       </div>
-
-      <ol class="gj-sp">
-        {stages.map((s, i) => (
-          <li>
-            <p class="gj-sp-stage">
-              <span class="gj-dot pl-num-face" aria-hidden="true">{i + 1}</span>
-              <span><strong>{s.title}</strong><span>{s.note}</span></span>
-            </p>
-            <ul class="gj-sp-list">
-              {bars.filter((b) => b.from <= i + 1 && i + 1 <= b.to).map((b) => (
-                <li class={`gj-${b.kind}`}>
-                  <a class="gj-bar" href={b.href} data-pl-gtag="service_select" data-pl-service={b.id} data-pl-cta="guide_journey">
-                    <strong><span class="gj-tag">{kindLabel[b.kind]}</span>{b.name}</strong>
-                    <span>{b.sub}</span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </li>
-        ))}
-      </ol>
-
     </div>
-    <p class="pl-note">段階と帯の幅は目安です。要介護度などの利用条件は、各窓口でご確認ください。</p>
+    <p class="pl-note">分かれ道は目安です。サービスは組み合わせて使えます（例：訪問介護＋福祉用具＋訪問看護）。要介護度などの利用条件は、各窓口でご確認ください。</p>
   </div>
 </section>
 
 <style>
-  .gj-sec { background: var(--surface); }
-  .gj { margin-block: 28px 14px; }
-  /* 段階ごとの列を細い区切り線で分け、上から下へ1列でたどれるようにする（背景は白） */
-  .gj-pc {
-    display: grid; grid-template-columns: 112px repeat(4, 1fr); grid-template-rows: auto auto;
+  .gf-sec { background: var(--surface); }
+  .gf { margin-block: 28px 14px; display: grid; gap: 18px; }
+
+  /* 分類の色（以前の図と同じ。プルメリアのブランドの黄・ピンク・ターコイズ・緑）。
+     結果の箱は各色の淡い地＋下の色の帯。文字は --ink / --muted */
+  .gj-stay { --kind: #f2b437; --kind-tint: #fdf3df; }
+  .gj-home { --kind: #cc3f70; --kind-tint: #fbe9ef; }
+  .gj-talk { --kind: #11809e; --kind-tint: #e2f2f6; }
+  .gj-med  { --kind: #2b7a4b; --kind-tint: #e6f3ea; }
+
+  /* 迷ったときの相談先。点線の枠で「どこからでも戻れる先」を表す */
+  .gf-consult {
+    justify-self: start; display: grid; gap: 2px; max-width: 100%;
+    padding: 12px 18px; border: 2px dashed var(--kind); background: var(--kind-tint);
+    color: var(--ink); text-decoration: none; line-height: 1.6;
   }
-  .gj-col { grid-row: 1 / 3; border-left: 1px dashed var(--line); }
-  .gj-road, .gj-bars {
-    grid-column: 1 / -1; display: grid; grid-template-columns: subgrid; position: relative; z-index: 1;
+  .gf-consult-lead { font-size: calc(14px * var(--pl-fs)); font-weight: 700; color: var(--green-deep); }
+  .gf-consult strong { font-size: calc(18px * var(--pl-fs)); }
+  .gf-consult > span:last-child { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
+  .gf-consult:hover strong { text-decoration: underline; text-underline-offset: 4px; }
+
+  .gf-here {
+    display: inline-block; margin-bottom: 8px; padding: 2px 12px;
+    background: var(--green-deep); color: #fff; font-size: calc(14px * var(--pl-fs)); font-weight: 700; line-height: 1.7;
   }
-  .gj-road { grid-row: 1; padding-block: 24px 20px; }
-  /* 段階を結ぶ道 */
-  .gj-road::before {
-    content: ''; position: absolute; left: calc(112px + (100% - 112px) / 8); right: calc((100% - 112px) / 8); top: 45px; height: 4px; background: var(--green);
+
+  /* 箱：質問は白地＋線、結果は色の淡い地。答えは箱の1行目に小さな札で出す */
+  .gf-box {
+    position: relative; display: grid; gap: 2px; align-content: center;
+    padding: 10px 14px; border: 1.5px solid var(--line); background: var(--surface);
+    color: var(--ink); text-decoration: none; line-height: 1.55;
+    transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .gj-stage { position: relative; display: grid; justify-items: center; gap: 4px; padding-inline: 8px; text-align: center; line-height: 1.6; }
-  .gj-dot {
-    display: grid; place-items: center; width: 46px; height: 46px; margin-bottom: 6px;
-    border-radius: 50%; background: var(--green); color: white; font-size: calc(20px * var(--pl-fs));
+  .gf-box strong { font-size: calc(16px * var(--pl-fs)); }
+  .gf-q-root strong { font-size: calc(18px * var(--pl-fs)); }
+  .gf-q { border-color: color-mix(in srgb, var(--ink) 45%, transparent); }
+  .gf-sub { font-size: calc(13px * var(--pl-fs)); color: var(--muted); }
+  .gf-res { background: var(--kind-tint); border-color: transparent; box-shadow: inset 0 -5px 0 var(--kind); }
+  .gf-res strong { font-size: calc(18px * var(--pl-fs)); }
+  .gf-res:hover strong { text-decoration: underline; text-underline-offset: 4px; }
+  .gf-ans {
+    justify-self: start; margin-bottom: 2px; padding: 0 8px;
+    background: var(--mint); color: var(--green-deep); font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.7;
   }
-  .gj-stage strong { font-size: calc(19px * var(--pl-fs)); }
-  .gj-stage > span:last-child { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
-  .gj-bars { grid-row: 2; row-gap: 14px; padding: 0 0 24px; }
-  .gj-bars > li { padding-inline: 10px; }
-  /* 種類の見出し。同じ段の帯と色をそろえ、横にたどって種類が分かるようにする */
-  .gj-bars > .gj-kind {
-    grid-column: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
-    padding: 0 4px; margin-right: 10px; color: var(--ink); font-weight: 700; font-size: calc(16px * var(--pl-fs)); text-align: center; line-height: 1.4;
+  .gf :is(a):focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+
+  /* ── 狭い幅（1199px以下）：字下げの一覧。左の線で親子をつなぐ ── */
+  .gf-tree, .gf-kids { display: grid; gap: 10px; }
+  .gf-kids { margin: 10px 0 0 14px; padding-left: 18px; border-left: 2px solid color-mix(in srgb, var(--ink) 25%, transparent); }
+  .gf-kids > .gf-node { position: relative; }
+  .gf-kids > .gf-node::before {
+    content: ''; position: absolute; left: -18px; top: 24px; width: 14px; border-top: 2px solid color-mix(in srgb, var(--ink) 25%, transparent);
   }
-  /* 分類の見出しは、色の丸いアイコン＋濃い文字（白地）。色の面を小さくして重く見せない（ボス選択 2026-11-25 案C） */
-  .gj-kind-icon {
-    display: grid; place-items: center; width: 44px; height: 44px; margin-bottom: 2px;
-    border-radius: 50%; background: var(--kind); color: var(--kind-ink);
+
+  /* ── 広い幅：左から右へ広がる分岐図 ──
+     4段の箱（206px×文字倍率）と線で、文字サイズ「大」では約1140px になる。これが横に収まる 1200px 以上だけ図にする */
+  @media (min-width: 1200px) {
+    .gf-consult { justify-self: end; margin-bottom: -6px; }
+    /* 箱は上そろえにする（中央そろえだと入口の質問が図の縦の中ほどに沈み、「ここから」から離れるため）。
+       線は箱の上から --gf-y の高さでつなぐ */
+    .gf { --gf-y: 30px; }
+    .gf-node { display: flex; align-items: flex-start; }
+    .gf-box { flex: none; width: calc(206px * var(--pl-fs)); }
+    .gf-tree, .gf-kids { display: flex; flex-direction: column; gap: 14px; }
+    /* 親の箱から子の列へ：横の線（18px）→ 縦の背骨 → 子への横の線（18px） */
+    .gf-kids { position: relative; margin: 0; padding-left: 36px; border-left: 0; }
+    /* 子の横の線（::before の下の枠線）は箱の上から --gf-y の手前2pxに引かれるため、親からの線も2px上げてそろえる */
+    .gf-kids::before { content: ''; position: absolute; left: 0; top: calc(var(--gf-y) - 2px); width: 18px; border-top: 2px solid var(--gf-line); }
+    /* 各子の線は2つに分ける。
+       ::before ＝ 上から来る縦線（2番目以降の子だけ）＋子への横の線。
+       ::after  ＝ 次の子へ続く縦線（最後の子以外）。
+       こう分けると、目立たせるときに「入口からその子まで」の縦線だけを濃くできる */
+    .gf-kids > .gf-node::before {
+      left: -18px; top: 0; width: 16px; height: var(--gf-y);
+      border-top: 0; border-bottom: 2px solid var(--gf-line); border-left: 2px solid var(--gf-line);
+    }
+    .gf-kids > .gf-node:first-child::before { border-left: 0; }
+    .gf-kids > .gf-node:not(:last-child)::after {
+      content: ''; position: absolute; left: -18px; top: var(--gf-y); bottom: -14px; border-left: 2px solid var(--gf-line);
+    }
+    .gf { --gf-line: color-mix(in srgb, var(--ink) 28%, transparent); }
+
+    /* 道筋を目立たせる（PCのみ）。:hover は、乗せた項目を含む枝（入口からそこまで）のすべての li に掛かる。
+       その枝の箱と、入口からそこまでの線（横・縦）を濃くする。縦の線は、乗せた子より上の兄弟の「続きの縦線」と、
+       乗せた子自身の「上から来る縦線」だけを濃くする。ほかの道筋は薄くしない */
+    @media (hover: hover) and (pointer: fine) {
+      .gf-node:hover > .gf-box { border-color: var(--gf-on); box-shadow: 0 0 0 2px var(--gf-on); }
+      .gf-node:hover > .gf-res { box-shadow: inset 0 -5px 0 var(--kind), 0 0 0 2px var(--gf-on); }
+      .gf-node:hover > .gf-kids:has(> .gf-node:hover)::before,
+      .gf-kids > .gf-node:hover::before,
+      .gf-kids > .gf-node:has(~ .gf-node:hover)::after { border-color: var(--gf-on); }
+    }
+    /* キーボードで選んだときも同じ道筋を目立たせる（マウスのない環境でも同じ情報を得られるように） */
+    .gf-node:has(:focus-visible) > .gf-box { border-color: var(--gf-on); box-shadow: 0 0 0 2px var(--gf-on); }
+    .gf-node:has(:focus-visible) > .gf-res { box-shadow: inset 0 -5px 0 var(--kind), 0 0 0 2px var(--gf-on); }
+    .gf-node:has(:focus-visible) > .gf-kids::before,
+    .gf-kids > .gf-node:has(:focus-visible)::before,
+    .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { border-color: var(--gf-on); }
+    .gf { --gf-on: var(--green-deep); }
   }
-  .gj-kind svg { width: 24px; height: 24px; stroke-width: 1.7; }
-  /* 分類の色はプルメリアのブランドから取る：花芯の黄・ロゴのハイビスカスピンク・海のターコイズ・葉の緑。
-     ピンク・ターコイズ・緑は白文字で 4.5:1 以上。黄は白文字が読めないため濃いティールの文字にする（6.47:1）。
-     背景が白なので、帯は各色の淡い地にする（文字は --ink / --muted） */
-  .gj-stay { --kind: #f2b437; --kind-ink: var(--ink); --kind-tint: #fdf3df; }
-  .gj-home { --kind: #cc3f70; --kind-ink: white; --kind-tint: #fbe9ef; }
-  .gj-talk { --kind: #11809e; --kind-ink: white; --kind-tint: #e2f2f6; }
-  .gj-med  { --kind: #2b7a4b; --kind-ink: white; --kind-tint: #e6f3ea; }
-  .gj-kind-stay { --kind: #f2b437; --kind-ink: var(--ink); }
-  .gj-kind-home { --kind: #cc3f70; --kind-ink: white; }
-  .gj-kind-talk { --kind: #11809e; --kind-ink: white; }
-  .gj-kind-med  { --kind: #2b7a4b; --kind-ink: white; }
-  .gj-bar { box-shadow: inset 0 -5px 0 var(--kind, transparent); }
-  .gj-bar .gj-tag {
-    display: inline-block; margin-right: 8px; padding: 0 8px; vertical-align: 2px;
-    font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.7; color: var(--kind-ink); background: var(--kind);
-  }
-  .gj-bar {
-    display: flex; flex-direction: column; justify-content: center; gap: 2px; height: 100%;
-    padding: 12px 18px; background: var(--kind-tint, var(--mint)); color: var(--ink); text-decoration: none; line-height: 1.6;
-  }
-  .gj-bar strong { font-size: calc(18px * var(--pl-fs)); }
-  .gj-bar span { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
-  .gj-bar:hover strong { text-decoration: underline; text-underline-offset: 4px; }
-  .gj-bar:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
-  .gj-sp { display: none; }
-  @media (max-width: 720px) {
-    .gj-pc { display: none; }
-    .gj-sp { display: grid; gap: 22px; position: relative; }
-    /* 段階をつなぐ縦の道 */
-    .gj-sp::before { content: ''; position: absolute; left: 21px; top: 23px; bottom: 23px; width: 4px; background: var(--green); }
-    .gj-sp > li { position: relative; display: grid; gap: 10px; }
-    .gj-sp-stage { display: flex; align-items: center; gap: 14px; line-height: 1.5; }
-    .gj-sp-stage .gj-dot { margin: 0; flex: none; }
-    .gj-sp-stage > span:last-child { display: grid; }
-    .gj-sp-stage strong { font-size: calc(18px * var(--pl-fs)); }
-    .gj-sp-stage > span:last-child > span { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
-    .gj-sp-list { display: grid; gap: 6px; padding-left: 60px; }
-    .gj-sp .gj-bar { padding: 10px 14px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gf-box { transition: none; }
   }
 </style>
