@@ -2277,6 +2277,51 @@ html:not([data-pl-text="large"]) { --pl-fs: 1.0625; }
 .pl .pl-service-intro-card .pl-hs-svc-name { margin-top: 5px; }
 /* ダイナミックアイランド風のヘッダー（浮遊ピル）は6px。幅の広い面で、4pxのボタンより一段だけ大きい丸みにして浮いた印象を出す */
 .pl .pl-head-inner { border-radius: 6px; }
+/* ── アイランドの台紙をリキッドグラス風にする（2026-11-27 ボス指示）─────────────────────────────
+   ガラスの厚みは「縁の光」と「上端の照り」で出す。背面を歪める SVG フィルター（backdrop-filter: url()）は
+   Chromium 以外で宣言ごと無効になり、ぼかしと brightness まで消えて白い文字が読めなくなるため使わない。
+   地色 25%・brightness 0.4 は変えない（白い背面でも暗くした項目 4.55:1 を保つ組み合わせ。上の .pl-head-inner の注記を参照）。
+   光を足すのは縁の 1px と上端 8px だけにし、メニューの文字の背面（上端から約17px より下）は明るくしない。 */
+.pl .pl-head-inner {
+  position: relative;
+  isolation: isolate;
+  /* 彩度を上げて、透けてくる写真の色がガラス越しに少し濃く見えるようにする */
+  backdrop-filter: blur(6px) brightness(0.4) saturate(1.7);
+  -webkit-backdrop-filter: blur(6px) brightness(0.4) saturate(1.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.42),   /* 上の縁に当たる光 */
+    inset 0 -1px 0 rgba(255, 255, 255, 0.10),  /* 下の縁の照り返し */
+    0 10px 30px rgba(4, 37, 47, 0.28),
+    0 2px 6px rgba(4, 37, 47, 0.18);
+}
+/* 縁の光：左上と右下が明るく、側面は淡い 1px の輪郭。中身はくり抜いて縁だけを残す */
+.pl .pl-head-inner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(135deg,
+    rgba(255, 255, 255, 0.75) 0%,
+    rgba(255, 255, 255, 0.14) 28%,
+    rgba(255, 255, 255, 0.06) 62%,
+    rgba(255, 255, 255, 0.50) 100%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
+}
+/* 上端の照り：ガラスの表面に映り込む光。上から 8px で消えるため、メニューの文字の背面には掛からない */
+.pl .pl-head-inner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.16) 0, rgba(255, 255, 255, 0) 8px);
+  pointer-events: none;
+}
 /* ハンバーガーを開いた一覧もアイランドと同じ6px。一覧は overflow が hidden か auto のため、中のリンクの角も一緒に切れる */
 .pl .pl-menu[open] .pl-menu-list { border-radius: 6px; }
 /* クラスの付かないリンクには、文中リンク用の「角を0にする」指定が強く掛かるため、ジャンプ用ボタンはここで上書きする */
