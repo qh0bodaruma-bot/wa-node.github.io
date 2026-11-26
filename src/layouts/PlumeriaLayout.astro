@@ -70,6 +70,21 @@ const footNavGroups = [
     <a class="pl-skip" href="#top">本文へ進む</a>
     <svg class="pl-defs" aria-hidden="true" focusable="false">
       <defs>
+        <!--
+          ヘッダーのガラスのレンズ。縁の近くだけ背面を内側へ引き寄せ、ガラスの厚みで光が曲がって見えるようにする。
+          赤（横のずれ）と緑（縦のずれ）の濃淡で、どちらへどれだけずらすかを決める。128 がずれなし。
+          左端は赤を上げて右から、右端は赤を下げて左から背面を拾う。上下も同じ考え方で緑を使う。
+          大きさは px で指定する。割合（objectBoundingBox）で指定すると、backdrop-filter では Chrome が中央まで波打たせたため。
+          幅と高さはヘッダーの大きさに合わせて JS（initGlassLens）が書き換える。
+        -->
+        <filter id="pl-glass-lens" x="0" y="0" width="1200" height="80" filterUnits="userSpaceOnUse" primitiveUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+          <feImage x="0" y="0" width="1200" height="80" preserveAspectRatio="none" result="mapX"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 10' preserveAspectRatio='none'%3E%3ClinearGradient id='g'%3E%3Cstop offset='0' stop-color='rgb(255,0,0)'/%3E%3Cstop offset='.03' stop-color='rgb(128,0,0)'/%3E%3Cstop offset='.97' stop-color='rgb(128,0,0)'/%3E%3Cstop offset='1' stop-color='rgb(0,0,0)'/%3E%3C/linearGradient%3E%3Crect width='100' height='10' fill='url(%23g)'/%3E%3C/svg%3E" />
+          <feImage x="0" y="0" width="1200" height="80" preserveAspectRatio="none" result="mapY"
+            href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 100' preserveAspectRatio='none'%3E%3ClinearGradient id='g' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='rgb(0,255,0)'/%3E%3Cstop offset='.22' stop-color='rgb(0,128,0)'/%3E%3Cstop offset='.78' stop-color='rgb(0,128,0)'/%3E%3Cstop offset='1' stop-color='rgb(0,0,0)'/%3E%3C/linearGradient%3E%3Crect width='10' height='100' fill='url(%23g)'/%3E%3C/svg%3E" />
+          <feComposite in="mapX" in2="mapY" operator="arithmetic" k2="1" k3="1" result="map" />
+          <feDisplacementMap in="SourceGraphic" in2="map" scale="40" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
         <clipPath id="pl-hero-clip" clipPathUnits="objectBoundingBox">
           <path d="M0,0 H1 V0.90 C0.70,1 0.35,0.92 0,1 Z" />
         </clipPath>
@@ -389,7 +404,42 @@ const footNavGroups = [
     });
   }
 
+  /*
+    ヘッダーのガラスの縁で背面がゆがむ表現（レンズ）は、SVG フィルターを backdrop-filter に使う。
+    これに対応するのは Chromium 系（Chrome・Edge など）だけで、ほかのブラウザでは宣言ごと無効になり、
+    ぼかしまで消えてしまう。そのため Chromium 系と確かめられたときだけ is-lens を付け、CSS 側で切り替える。
+    navigator.userAgentData は Chromium 系にしかない。
+    フィルターの大きさは px のため、ヘッダーの大きさが変わるたび（画面幅・縮んだ表示への切り替え）に合わせる。
+  */
+  let plLensObserver: ResizeObserver | null = null;
+  function initGlassLens() {
+    plLensObserver?.disconnect();
+    plLensObserver = null;
+    const brands = (navigator as Navigator & { userAgentData?: { brands?: { brand: string }[] } }).userAgentData?.brands ?? [];
+    const isChromium = brands.some((b) => /Chromium/.test(b.brand));
+    const head = document.querySelector('.pl-head');
+    const inner = document.querySelector<HTMLElement>('.pl-head-inner');
+    const filter = document.getElementById('pl-glass-lens');
+    if (!head || !inner || !filter || !isChromium || typeof ResizeObserver === 'undefined') {
+      head?.classList.remove('is-lens');
+      return;
+    }
+    const fit = () => {
+      const w = String(Math.max(1, Math.round(inner.offsetWidth)));
+      const h = String(Math.max(1, Math.round(inner.offsetHeight)));
+      [filter, ...filter.querySelectorAll('feImage')].forEach((el) => {
+        el.setAttribute('width', w);
+        el.setAttribute('height', h);
+      });
+    };
+    fit();
+    plLensObserver = new ResizeObserver(fit);
+    plLensObserver.observe(inner);
+    head.classList.add('is-lens');
+  }
+
   function run() {
+    initGlassLens();
     initTextSize();
     initPlumeriaClickTracking(document);
     document.querySelectorAll<HTMLButtonElement>('[data-pl-print]').forEach((button) => {
