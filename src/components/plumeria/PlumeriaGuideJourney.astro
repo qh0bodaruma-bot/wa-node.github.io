@@ -204,15 +204,18 @@ const isResult = (n: Node): n is Result => 'href' in n;
     /* 線の色は不透明にする（半透明だと、線の重なる角だけ色が濃くなるため） */
     --gf-line: color-mix(in srgb, var(--ink) 32%, white);
     --gf-on: var(--green-deep);
-    --gf-s: 70px; --gf-y: 26px; --gf-gap: 10px;
+    --gf-s: 66px; --gf-y: 26px; --gf-gap: 10px;
+    /* 線の終点の矢印：長さ --gf-a、高さ --gf-ah（線の太さより上下に 8px ずつ大きい） */
+    --gf-a: 14px; --gf-ah: calc(var(--gf-w) + 16px);
   }
   .gf-node { --gf-c: var(--gf-line); }
   .gf-yes { --gf-c: var(--gf-yes); }
   .gf-no { --gf-c: var(--gf-no); }
   .gf-yn {
-    /* 横の線のうち、背骨に隠れない部分（背骨の右端から箱まで）の真ん中に置く */
-    position: absolute; z-index: 1; left: calc((var(--gf-s) - var(--gf-w) / 2) / -2); top: var(--gf-y); transform: translate(-50%, -50%);
-    padding: 0 8px; border-radius: 4px; background: var(--gf-c); color: #fff;
+    /* 狭い幅：札の左端を背骨の左端にそろえ、背骨から横の線への曲がり角に乗せる（字下げを浅く保つため）。
+       矢印にかからないよう、--gf-s を 66px にし、札の左右の余白を 6px に詰めている（広い幅では 8px） */
+    position: absolute; z-index: 1; left: calc(-1 * var(--gf-s) - var(--gf-w) / 2); top: var(--gf-y); transform: translateY(-50%);
+    padding: 0 6px; border-radius: 4px; background: var(--gf-c); color: #fff;
     font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.6; white-space: nowrap;
     box-shadow: 0 0 0 2px var(--surface);  /* 線との境目を白で縁取り、札を線から浮かせる */
   }
@@ -227,11 +230,16 @@ const isResult = (n: Node): n is Result => 'href' in n;
   .gf-kids { position: relative; margin: 10px 0 0 calc(var(--gf-w) / 2); padding-left: var(--gf-s); }
   .gf-kids > .gf-node { position: relative; }
   .gf-kids > .gf-node::before, .gf-kids > .gf-node::after, .gf-kids::before { content: ''; position: absolute; pointer-events: none; }
-  /* 背骨から自分への横の線 */
+  /* 背骨から自分への横の線。終点（箱の手前）は矢印にする（ボス指示 2026-11-27：線の流れが分かるように）。
+     帯の高さを矢印の高さにし、clip-path で「太さ --gf-w の線＋先端の三角」の形に切り抜く */
   .gf-kids > .gf-node::before {
     left: calc(-1 * var(--gf-s) - var(--gf-w) / 2); width: calc(var(--gf-s) + var(--gf-w) / 2);
-    top: calc(var(--gf-y) - var(--gf-w) / 2); height: var(--gf-w);
+    top: calc(var(--gf-y) - var(--gf-ah) / 2); height: var(--gf-ah);
     background: var(--gf-line);
+    clip-path: polygon(
+      0 calc(50% - var(--gf-w) / 2), calc(100% - var(--gf-a)) calc(50% - var(--gf-w) / 2),
+      calc(100% - var(--gf-a)) 0, 100% 50%, calc(100% - var(--gf-a)) 100%,
+      calc(100% - var(--gf-a)) calc(50% + var(--gf-w) / 2), 0 calc(50% + var(--gf-w) / 2));
   }
   /* 自分の高さから次の子の高さまでの縦線 */
   .gf-kids > .gf-node:not(:last-child)::after {
@@ -249,16 +257,18 @@ const isResult = (n: Node): n is Result => 'href' in n;
   }
 
   /* ── 広い幅：左から右へ広がる分岐図 ──
-     4段の箱（最大206px）と線（親から背骨まで18px＋背骨から箱まで80px）で、全体は約1120px になる。
+     4段の箱（最大200px）と線（親から背骨まで18px＋背骨から箱まで90px）で、全体は約1125px になる。
      これが横に収まる 1200px 以上だけ図にする */
   @media (min-width: 1200px) {
     .gf-consult { justify-self: end; margin-bottom: -6px; }
     /* 箱は上そろえにする（中央そろえだと入口の質問が図の縦の中ほどに沈み、「ここから」から離れるため）。
        線は箱の上から --gf-y の高さでつなぐ */
-    .gf { --gf-s: 80px; --gf-y: 30px; --gf-gap: 14px; }
+    .gf { --gf-s: 90px; --gf-y: 30px; --gf-gap: 14px; }
+    /* 広い幅：札は横の線のうち、背骨の右端から矢印の手前までの真ん中に置く */
+    .gf-yn { left: calc((var(--gf-s) - var(--gf-w) / 2 + var(--gf-a)) / -2); transform: translate(-50%, -50%); padding: 0 8px; }
     .gf-node { display: flex; align-items: flex-start; }
-    /* 箱の幅は文字の倍率に合わせて広げるが、206px で止める（文字サイズ「大」でも横に収めるため） */
-    .gf-box { flex: none; width: min(calc(196px * var(--pl-fs)), 206px); }
+    /* 箱の幅は文字の倍率に合わせて広げるが、200px で止める（図に切り替わる幅 1200px・文字サイズ「大」でも横に収めるため） */
+    .gf-box { flex: none; width: min(calc(196px * var(--pl-fs)), 200px); }
     .gf-tree, .gf-kids { display: flex; flex-direction: column; gap: var(--gf-gap); }
     .gf-kids { margin: 0; padding-left: calc(18px + var(--gf-s)); }
     /* 親の箱から背骨までの横の線。背骨の中心（左から18px）を越えて、背骨の右端まで塗る */
