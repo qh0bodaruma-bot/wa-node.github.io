@@ -109,15 +109,16 @@ const isResult = (n: Node): n is Result => 'href' in n;
   .gj-med  { --kind: #2b7a4b; }
 
   /* ── カードのレンガ調（ボス指示 2026-11-27。同日に入れたガラス感はボス指示で外した）──
-     分類の色ごとのレンガにする。色は地の色（--brick）で、目地の白い線と、レンガごとの下の影・明るさの差は
-     1枚の小さな模様（40×32px、2段で半分ずらし）を繰り返して描く。模様は色を持たないため、どの分類にも使える。
-     地の色は分類の色を白に 26% 混ぜた淡い色。文字はすべて --ink にする（--muted だと淡いピンクの地で 4.5:1 を割るため） */
+     積み上げた壁の模様ではなく、レンガ1枚の焼き物の表面にする（ボス指示：なめらかではない表情）。
+     地の色は分類の色を白に 26% 混ぜた淡い色。その上に、色を持たない質感を1枚の SVG（220px 四方、継ぎ目なしで繰り返す）で重ねる：
+     ① 大きな色むら（低い周波数のノイズを黒で薄く）② 細かい粒の暗い点 ③ 細かい粒の明るい点。
+     縁は内側の影で少し焼き締まった感じを出す。文字はすべて --ink にする（--muted だと淡いピンクの地で 4.5:1 を割るため） */
   /* .gf-box の白い地（後に書いてある）に負けないよう、.gf-box.gf-res で指定する */
   .gf-box.gf-res, .gf-consult {
     --brick: color-mix(in srgb, var(--kind) 26%, white);
     background-color: var(--brick);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='32'%3E%3Cg fill='%23fff' fill-opacity='.75'%3E%3Crect y='14' width='40' height='2'/%3E%3Crect y='30' width='40' height='2'/%3E%3Crect width='2' height='14'/%3E%3Crect x='20' y='16' width='2' height='14'/%3E%3C/g%3E%3Cg fill='%23000' fill-opacity='.05'%3E%3Crect x='2' y='12' width='38' height='2'/%3E%3Crect y='28' width='20' height='2'/%3E%3Crect x='22' y='28' width='18' height='2'/%3E%3C/g%3E%3Crect x='22' y='16' width='18' height='12' fill='%23fff' fill-opacity='.14'/%3E%3C/svg%3E");
-    background-size: 40px 32px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='g' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2.4 0 0 0 -1.15'/%3E%3C/filter%3E%3Cfilter id='w' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 -2.4 0 0 0 1.0'/%3E%3C/filter%3E%3Cfilter id='m' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.025' numOctaves='3' seed='5' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1.6 0 0 0 -0.65'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url%28%23m%29' opacity='.16'/%3E%3Crect width='220' height='220' filter='url%28%23g%29' opacity='.28'/%3E%3Crect width='220' height='220' filter='url%28%23w%29' opacity='.45'/%3E%3C/svg%3E");
+    background-size: 220px 220px;
   }
 
   /* 迷ったときの相談先。点線の枠で「どこからでも戻れる先」を表す */
@@ -150,7 +151,8 @@ const isResult = (n: Node): n is Result => 'href' in n;
   .gf-res .gf-sub { color: var(--ink); }
   .gf-res {
     border-color: color-mix(in srgb, var(--kind) 45%, transparent);
-    box-shadow: inset 0 -4px 0 var(--kind);
+    /* 下の色の帯と、縁の内側の影（焼き締まった縁） */
+    box-shadow: inset 0 -4px 0 var(--kind), inset 0 0 10px color-mix(in srgb, var(--kind) 22%, transparent);
   }
   .gf-res strong { font-size: calc(18px * var(--pl-fs)); }
   .gf-res:hover strong { text-decoration: underline; text-underline-offset: 4px; }
@@ -201,14 +203,14 @@ const isResult = (n: Node): n is Result => 'href' in n;
        乗せた子自身の「上から来る縦線」だけを濃くする。ほかの道筋は薄くしない */
     @media (hover: hover) and (pointer: fine) {
       .gf-node:hover > .gf-box { border-color: var(--gf-on); box-shadow: 0 0 0 2px var(--gf-on); }
-      .gf-node:hover > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), 0 0 0 2px var(--gf-on); }
+      .gf-node:hover > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), inset 0 0 10px color-mix(in srgb, var(--kind) 22%, transparent), 0 0 0 2px var(--gf-on); }
       .gf-node:hover > .gf-kids:has(> .gf-node:hover)::before,
       .gf-kids > .gf-node:hover::before,
       .gf-kids > .gf-node:has(~ .gf-node:hover)::after { border-color: var(--gf-on); }
     }
     /* キーボードで選んだときも同じ道筋を目立たせる（マウスのない環境でも同じ情報を得られるように） */
     .gf-node:has(:focus-visible) > .gf-box { border-color: var(--gf-on); box-shadow: 0 0 0 2px var(--gf-on); }
-    .gf-node:has(:focus-visible) > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), 0 0 0 2px var(--gf-on); }
+    .gf-node:has(:focus-visible) > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), inset 0 0 10px color-mix(in srgb, var(--kind) 22%, transparent), 0 0 0 2px var(--gf-on); }
     .gf-node:has(:focus-visible) > .gf-kids::before,
     .gf-kids > .gf-node:has(:focus-visible)::before,
     .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { border-color: var(--gf-on); }
