@@ -214,7 +214,7 @@ const isResult = (n: Node): n is Result => 'href' in n;
   .gf-yn {
     /* 狭い幅：札の左端を背骨の左端にそろえ、背骨から横の線への曲がり角に乗せる（字下げを浅く保つため）。
        矢印にかからないよう、--gf-s を 66px にし、札の左右の余白を 6px に詰めている（広い幅では 8px） */
-    position: absolute; z-index: 1; left: calc(-1 * var(--gf-s) - var(--gf-w) / 2); top: var(--gf-y); transform: translateY(-50%);
+    position: absolute; z-index: 2; left: calc(-1 * var(--gf-s) - var(--gf-w) / 2); top: var(--gf-y); transform: translateY(-50%);
     padding: 0 6px; border-radius: 4px; background: var(--gf-c); color: #fff;
     font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.6; white-space: nowrap;
     box-shadow: 0 0 0 2px var(--surface);  /* 線との境目を白で縁取り、札を線から浮かせる */
@@ -231,9 +231,12 @@ const isResult = (n: Node): n is Result => 'href' in n;
   .gf-kids > .gf-node { position: relative; }
   .gf-kids > .gf-node::before, .gf-kids > .gf-node::after, .gf-kids::before { content: ''; position: absolute; pointer-events: none; }
   /* 背骨から自分への横の線。終点（箱の手前）は矢印にする（ボス指示 2026-11-27：線の流れが分かるように）。
-     帯の高さを矢印の高さにし、clip-path で「太さ --gf-w の線＋先端の三角」の形に切り抜く */
+     帯の高さを矢印の高さにし、clip-path で「太さ --gf-w の線＋先端の三角」の形に切り抜く。
+     横の線は背骨の右端から描き始め、背骨の下にもぐらせない（もぐらせると、道筋を濃くしたとき
+     濃い背骨の縁のぼかしから下の灰色が透け、細い線やにじみに見えたため。ボス指摘 2026-11-27）。
+     ただし接する境目が端数の位置だと両方の縁がぼかされて白いすき間に見えるため、1px だけ背骨に重ねる */
   .gf-kids > .gf-node::before {
-    left: calc(-1 * var(--gf-s) - var(--gf-w) / 2); width: calc(var(--gf-s) + var(--gf-w) / 2);
+    left: calc(-1 * var(--gf-s) + var(--gf-w) / 2 - 1px); width: calc(var(--gf-s) - var(--gf-w) / 2 + 1px);
     top: calc(var(--gf-y) - var(--gf-ah) / 2); height: var(--gf-ah);
     background: var(--gf-line);
     clip-path: polygon(
@@ -284,16 +287,17 @@ const isResult = (n: Node): n is Result => 'href' in n;
     @media (hover: hover) and (pointer: fine) {
       .gf-node:hover > .gf-box { border-color: var(--gf-on); box-shadow: var(--gf-glass), 0 0 0 2px var(--gf-on); }
       .gf-node:hover > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), var(--gf-glass), 0 0 0 2px var(--gf-on); }
+      /* 濃くした線は灰色の線より手前に描く（重なりの縁から灰色が見えないように） */
       .gf-node:hover > .gf-kids:has(> .gf-node:hover)::before,
       .gf-kids > .gf-node:hover::before,
-      .gf-kids > .gf-node:has(~ .gf-node:hover)::after { background: var(--gf-on); }
+      .gf-kids > .gf-node:has(~ .gf-node:hover)::after { background: var(--gf-on); z-index: 1; }
     }
     /* キーボードで選んだときも同じ道筋を目立たせる（マウスのない環境でも同じ情報を得られるように） */
     .gf-node:has(:focus-visible) > .gf-box { border-color: var(--gf-on); box-shadow: var(--gf-glass), 0 0 0 2px var(--gf-on); }
     .gf-node:has(:focus-visible) > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), var(--gf-glass), 0 0 0 2px var(--gf-on); }
     .gf-node:has(:focus-visible) > .gf-kids::before,
     .gf-kids > .gf-node:has(:focus-visible)::before,
-    .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { background: var(--gf-on); }
+    .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { background: var(--gf-on); z-index: 1; }
   }
 
   @media (prefers-reduced-motion: reduce) {
