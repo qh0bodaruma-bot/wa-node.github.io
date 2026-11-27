@@ -102,22 +102,33 @@ const isResult = (n: Node): n is Result => 'href' in n;
   .gf { margin-block: 28px 14px; display: grid; gap: 18px; }
 
   /* 分類の色（以前の図と同じ。プルメリアのブランドの黄・ピンク・ターコイズ・緑）。
-     結果の箱は各色の淡い地＋下の色の帯。文字は --ink / --muted */
-  .gj-stay { --kind: #f2b437; --kind-tint: #fdf3df; }
-  .gj-home { --kind: #cc3f70; --kind-tint: #fbe9ef; }
-  .gj-talk { --kind: #11809e; --kind-tint: #e2f2f6; }
-  .gj-med  { --kind: #2b7a4b; --kind-tint: #e6f3ea; }
+     結果の箱は各色のレンガ＋下の色の帯。文字は --ink */
+  .gj-stay { --kind: #f2b437; }
+  .gj-home { --kind: #cc3f70; }
+  .gj-talk { --kind: #11809e; }
+  .gj-med  { --kind: #2b7a4b; }
+
+  /* ── カードのレンガ調（ボス指示 2026-11-27。同日に入れたガラス感はボス指示で外した）──
+     分類の色ごとのレンガにする。色は地の色（--brick）で、目地の白い線と、レンガごとの下の影・明るさの差は
+     1枚の小さな模様（40×32px、2段で半分ずらし）を繰り返して描く。模様は色を持たないため、どの分類にも使える。
+     地の色は分類の色を白に 26% 混ぜた淡い色。文字はすべて --ink にする（--muted だと淡いピンクの地で 4.5:1 を割るため） */
+  /* .gf-box の白い地（後に書いてある）に負けないよう、.gf-box.gf-res で指定する */
+  .gf-box.gf-res, .gf-consult {
+    --brick: color-mix(in srgb, var(--kind) 26%, white);
+    background-color: var(--brick);
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='32'%3E%3Cg fill='%23fff' fill-opacity='.75'%3E%3Crect y='14' width='40' height='2'/%3E%3Crect y='30' width='40' height='2'/%3E%3Crect width='2' height='14'/%3E%3Crect x='20' y='16' width='2' height='14'/%3E%3C/g%3E%3Cg fill='%23000' fill-opacity='.05'%3E%3Crect x='2' y='12' width='38' height='2'/%3E%3Crect y='28' width='20' height='2'/%3E%3Crect x='22' y='28' width='18' height='2'/%3E%3C/g%3E%3Crect x='22' y='16' width='18' height='12' fill='%23fff' fill-opacity='.14'/%3E%3C/svg%3E");
+    background-size: 40px 32px;
+  }
 
   /* 迷ったときの相談先。点線の枠で「どこからでも戻れる先」を表す */
   .gf-consult {
     position: relative; justify-self: start; display: grid; gap: 2px; max-width: 100%;
-    padding: 12px 18px; border: 2px dashed var(--kind); box-shadow: var(--gf-glass);
-    background: linear-gradient(170deg, color-mix(in srgb, var(--kind-tint) 40%, white) 0%, color-mix(in srgb, var(--kind-tint) 75%, white) 100%);
+    padding: 12px 18px; border: 2px dashed var(--kind);
     color: var(--ink); text-decoration: none; line-height: 1.6;
   }
   .gf-consult-lead { font-size: calc(14px * var(--pl-fs)); font-weight: 700; color: var(--green-deep); }
   .gf-consult strong { font-size: calc(18px * var(--pl-fs)); }
-  .gf-consult > span:last-child { font-size: calc(14px * var(--pl-fs)); color: var(--muted); }
+  .gf-consult > span:last-child { font-size: calc(14px * var(--pl-fs)); color: var(--ink); }
   .gf-consult:hover strong { text-decoration: underline; text-underline-offset: 4px; }
 
   .gf-here {
@@ -125,10 +136,10 @@ const isResult = (n: Node): n is Result => 'href' in n;
     background: var(--green-deep); color: #fff; font-size: calc(14px * var(--pl-fs)); font-weight: 700; line-height: 1.7;
   }
 
-  /* 箱：質問は白地＋線、結果は色の淡い地。答えは箱の1行目に小さな札で出す */
+  /* 箱：質問は白地＋線、結果は分類の色のレンガ。答えは箱の1行目に小さな札で出す */
   .gf-box {
     position: relative; display: grid; gap: 2px; align-content: center;
-    padding: 10px 14px; border: 1.5px solid var(--line); background: var(--surface);
+    padding: 10px 14px; border: 1.5px solid var(--line); background-color: var(--surface);
     color: var(--ink); text-decoration: none; line-height: 1.55;
     transition: border-color 0.2s, box-shadow 0.2s;
   }
@@ -136,44 +147,10 @@ const isResult = (n: Node): n is Result => 'href' in n;
   .gf-q-root strong { font-size: calc(18px * var(--pl-fs)); }
   .gf-q { border-color: color-mix(in srgb, var(--ink) 45%, transparent); }
   .gf-sub { font-size: calc(13px * var(--pl-fs)); color: var(--muted); }
+  .gf-res .gf-sub { color: var(--ink); }
   .gf-res {
-    /* 地の色は分類の淡い色をさらに白に寄せ、上ほど明るいグラデーションにする（ボス指示 2026-11-27：透明感を高める） */
-    background: linear-gradient(170deg,
-      color-mix(in srgb, var(--kind-tint) 40%, white) 0%,
-      color-mix(in srgb, var(--kind-tint) 75%, white) 100%);
-    border-color: color-mix(in srgb, var(--kind) 28%, transparent);
-    box-shadow: inset 0 -4px 0 var(--kind), var(--gf-glass);
-  }
-
-  /* ── カードのガラス感（ヘッダーのリキッドグラスと同じ作り：縁の光・内側の照り返し・表面の照り）──
-     白地のセクションの上なので、背面を透かす backdrop-filter は使わない（透けて見えるものがないため）。
-     光はすべて文字の下（z-index: -1）に置き、文字の読みやすさは地の色だけで決まるようにする */
-  .gf-box, .gf-consult {
-    isolation: isolate;
-    --gf-glass:
-      inset 0 1px 0 rgba(255, 255, 255, 0.95),
-      inset 0 0 14px rgba(255, 255, 255, 0.6),
-      0 6px 18px rgba(8, 60, 74, 0.08);
-  }
-  /* 質問の箱の影（結果の箱は .gf-res で色の帯と合わせて指定済み。.gf-box に書くと後勝ちで色の帯が消えるため分ける） */
-  .gf-q { box-shadow: var(--gf-glass); }
-  .gf-q { background: linear-gradient(170deg, #ffffff 0%, color-mix(in srgb, var(--mint) 35%, white) 100%); }
-  /* 縁の光：左上と右下が明るい 1.5px の輪郭 */
-  .gf-box::before, .gf-consult::before {
-    content: ''; position: absolute; inset: 0; z-index: -1; padding: 1.5px; pointer-events: none;
-    background: linear-gradient(135deg,
-      rgba(255, 255, 255, 0.95) 0%, rgba(255, 255, 255, 0.25) 30%,
-      rgba(255, 255, 255, 0.10) 60%, rgba(255, 255, 255, 0.75) 100%);
-    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
-  }
-  /* 表面の照り：上の方に淡い光と、左寄りの斜めの細い光 */
-  .gf-box::after, .gf-consult::after {
-    content: ''; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-    background:
-      linear-gradient(115deg, transparent 14%, rgba(255, 255, 255, 0.45) 19%, transparent 25%),
-      linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0, rgba(255, 255, 255, 0.12) 42%, rgba(255, 255, 255, 0) 55%);
+    border-color: color-mix(in srgb, var(--kind) 45%, transparent);
+    box-shadow: inset 0 -4px 0 var(--kind);
   }
   .gf-res strong { font-size: calc(18px * var(--pl-fs)); }
   .gf-res:hover strong { text-decoration: underline; text-underline-offset: 4px; }
@@ -223,15 +200,15 @@ const isResult = (n: Node): n is Result => 'href' in n;
        その枝の箱と、入口からそこまでの線（横・縦）を濃くする。縦の線は、乗せた子より上の兄弟の「続きの縦線」と、
        乗せた子自身の「上から来る縦線」だけを濃くする。ほかの道筋は薄くしない */
     @media (hover: hover) and (pointer: fine) {
-      .gf-node:hover > .gf-box { border-color: var(--gf-on); box-shadow: var(--gf-glass), 0 0 0 2px var(--gf-on); }
-      .gf-node:hover > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), var(--gf-glass), 0 0 0 2px var(--gf-on); }
+      .gf-node:hover > .gf-box { border-color: var(--gf-on); box-shadow: 0 0 0 2px var(--gf-on); }
+      .gf-node:hover > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), 0 0 0 2px var(--gf-on); }
       .gf-node:hover > .gf-kids:has(> .gf-node:hover)::before,
       .gf-kids > .gf-node:hover::before,
       .gf-kids > .gf-node:has(~ .gf-node:hover)::after { border-color: var(--gf-on); }
     }
     /* キーボードで選んだときも同じ道筋を目立たせる（マウスのない環境でも同じ情報を得られるように） */
-    .gf-node:has(:focus-visible) > .gf-box { border-color: var(--gf-on); box-shadow: var(--gf-glass), 0 0 0 2px var(--gf-on); }
-    .gf-node:has(:focus-visible) > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), var(--gf-glass), 0 0 0 2px var(--gf-on); }
+    .gf-node:has(:focus-visible) > .gf-box { border-color: var(--gf-on); box-shadow: 0 0 0 2px var(--gf-on); }
+    .gf-node:has(:focus-visible) > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), 0 0 0 2px var(--gf-on); }
     .gf-node:has(:focus-visible) > .gf-kids::before,
     .gf-kids > .gf-node:has(:focus-visible)::before,
     .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { border-color: var(--gf-on); }
