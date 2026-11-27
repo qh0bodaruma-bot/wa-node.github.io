@@ -274,11 +274,15 @@ const isResult = (n: Node): n is Result => 'href' in n;
     .gf-box { flex: none; width: min(calc(196px * var(--pl-fs)), 200px); }
     .gf-tree, .gf-kids { display: flex; flex-direction: column; gap: var(--gf-gap); }
     .gf-kids { margin: 0; padding-left: calc(18px + var(--gf-s)); }
-    /* 親の箱から背骨までの横の線。背骨の中心（左から18px）を越えて、背骨の右端まで塗る */
+    /* 親の箱から背骨までの横の線。背骨の中心（左から18px）を越えて、背骨の右端まで塗る。
+       子への横の線（矢印つき。clip-path で切り抜く）と同じ描き方にそろえる：帯の高さを矢印の高さにして、
+       clip-path で線の太さだけ切り抜く。四角の帯のままだと画素の位置にそろえて描かれ、
+       切り抜いた線（端数の位置でぼかして描かれる）と上下の縁が半画素ずれて見えたため（ボス指摘 2026-11-27） */
     .gf-kids::before {
       left: 0; width: calc(18px + var(--gf-w) / 2);
-      top: calc(var(--gf-y) - var(--gf-w) / 2); height: var(--gf-w);
+      top: calc(var(--gf-y) - var(--gf-ah) / 2); height: var(--gf-ah);
       background: var(--gf-line);
+      clip-path: polygon(0 calc(50% - var(--gf-w) / 2), 100% calc(50% - var(--gf-w) / 2), 100% calc(50% + var(--gf-w) / 2), 0 calc(50% + var(--gf-w) / 2));
     }
 
     /* 道筋を目立たせる（PCのみ）。:hover は、乗せた項目を含む枝（入口からそこまで）のすべての li に掛かる。
