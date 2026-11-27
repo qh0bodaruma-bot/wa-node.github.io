@@ -188,27 +188,30 @@ const isResult = (n: Node): n is Result => 'href' in n;
   .gf :is(a):focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 
   /* ── 線と「はい／いいえ」（ボス指示 2026-11-27：区別しやすく、線を太く、線の上に色と文字を乗せる）──
-     線の太さは --gf-w。はいの枝はターコイズ、いいえの枝は焼けたオレンジ、どちらでもない枝は灰色。
-     札（.gf-yn）は子への横の線の真ん中に乗せる。色だけに頼らず、必ず「はい」「いいえ」の文字を出す。
+     線の太さは --gf-w（18px。ボス指示で 6px の3倍）。線の色はすべて同じ灰色にそろえる（ボス指示）。
+     はい・いいえの区別は札（.gf-yn）の色で示す：はいはターコイズ、いいえは焼けたオレンジ。
+     札は子への横の線の真ん中に乗せる。色だけに頼らず、必ず「はい」「いいえ」の文字を出す。
      白い文字との比：はい #137792 は 5.2:1、いいえ #b3541b は約 5.0:1（計算値）。
      線の組み立て（各子 li に対して）：
-       ::before ＝ 背骨から自分への横の線。色はその子の答えの色。
-       ::after  ＝ 自分の高さから次の子の高さまでの縦線（最後の子以外）。色は次の子の答えの色。
+       ::before ＝ 背骨から自分への横の線。
+       ::after  ＝ 自分の高さから次の子の高さまでの縦線（最後の子以外）。
        縦線を「次の子の高さまで」1本で引くと、目立たせるときに途中の兄弟の中で線の色が切れない。
      --gf-s は背骨から箱までの横の線の長さ、--gf-y は箱の上から線の中心までの高さ、--gf-gap は兄弟の間 */
   .gf {
-    --gf-w: 6px;
+    --gf-w: 18px;
     --gf-yes: #137792;
     --gf-no: #b3541b;
-    --gf-line: color-mix(in srgb, var(--ink) 32%, transparent);
+    /* 線の色は不透明にする（半透明だと、線の重なる角だけ色が濃くなるため） */
+    --gf-line: color-mix(in srgb, var(--ink) 32%, white);
     --gf-on: var(--green-deep);
-    --gf-s: 60px; --gf-y: 26px; --gf-gap: 10px;
+    --gf-s: 70px; --gf-y: 26px; --gf-gap: 10px;
   }
   .gf-node { --gf-c: var(--gf-line); }
   .gf-yes { --gf-c: var(--gf-yes); }
   .gf-no { --gf-c: var(--gf-no); }
   .gf-yn {
-    position: absolute; z-index: 1; left: calc(var(--gf-s) / -2); top: var(--gf-y); transform: translate(-50%, -50%);
+    /* 横の線のうち、背骨に隠れない部分（背骨の右端から箱まで）の真ん中に置く */
+    position: absolute; z-index: 1; left: calc((var(--gf-s) - var(--gf-w) / 2) / -2); top: var(--gf-y); transform: translate(-50%, -50%);
     padding: 0 8px; border-radius: 4px; background: var(--gf-c); color: #fff;
     font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.6; white-space: nowrap;
     box-shadow: 0 0 0 2px var(--surface);  /* 線との境目を白で縁取り、札を線から浮かせる */
@@ -220,42 +223,39 @@ const isResult = (n: Node): n is Result => 'href' in n;
 
   /* ── 狭い幅（1199px以下）：字下げの一覧。左の背骨から各箱へ横の線を出し、その上に札を乗せる ── */
   .gf-tree, .gf-kids { display: grid; gap: var(--gf-gap); }
-  .gf-kids { position: relative; margin: 10px 0 0 14px; padding-left: var(--gf-s); }
+  /* 左の余白は背骨の太さの半分（背骨が枠の外にはみ出さず、字下げをなるべく浅くするため） */
+  .gf-kids { position: relative; margin: 10px 0 0 calc(var(--gf-w) / 2); padding-left: var(--gf-s); }
   .gf-kids > .gf-node { position: relative; }
   .gf-kids > .gf-node::before, .gf-kids > .gf-node::after, .gf-kids::before { content: ''; position: absolute; pointer-events: none; }
-  /* 背骨から自分への横の線（その子の答えの色） */
+  /* 背骨から自分への横の線 */
   .gf-kids > .gf-node::before {
     left: calc(-1 * var(--gf-s) - var(--gf-w) / 2); width: calc(var(--gf-s) + var(--gf-w) / 2);
     top: calc(var(--gf-y) - var(--gf-w) / 2); height: var(--gf-w);
-    background: var(--gf-c);
+    background: var(--gf-line);
   }
-  /* 自分の高さから次の子の高さまでの縦線（次の子の答えの色） */
+  /* 自分の高さから次の子の高さまでの縦線 */
   .gf-kids > .gf-node:not(:last-child)::after {
     left: calc(-1 * var(--gf-s) - var(--gf-w) / 2); width: var(--gf-w);
     top: calc(var(--gf-y) - var(--gf-w) / 2); bottom: calc(-1 * (var(--gf-gap) + var(--gf-y)) - var(--gf-w) / 2);
     background: var(--gf-line);
   }
-  .gf-kids > .gf-node:has(+ .gf-yes)::after { background: var(--gf-yes); }
-  .gf-kids > .gf-node:has(+ .gf-no)::after { background: var(--gf-no); }
-  /* 親の箱の下から最初の子の高さまでの縦線（狭い幅だけ。最初の子の答えの色） */
+  /* 親の箱の下から最初の子の高さまでの縦線（狭い幅だけ） */
   @media (max-width: 1199px) {
     .gf-kids::before {
       left: calc(var(--gf-w) / -2); width: var(--gf-w);
       top: -10px; height: calc(10px + var(--gf-y) + var(--gf-w) / 2);
       background: var(--gf-line);
     }
-    .gf-kids:has(> .gf-yes:first-child)::before { background: var(--gf-yes); }
-    .gf-kids:has(> .gf-no:first-child)::before { background: var(--gf-no); }
   }
 
   /* ── 広い幅：左から右へ広がる分岐図 ──
-     4段の箱（最大206px）と線（親から背骨まで18px＋背骨から箱まで64px）で、全体は約1070px になる。
+     4段の箱（最大206px）と線（親から背骨まで18px＋背骨から箱まで80px）で、全体は約1120px になる。
      これが横に収まる 1200px 以上だけ図にする */
   @media (min-width: 1200px) {
     .gf-consult { justify-self: end; margin-bottom: -6px; }
     /* 箱は上そろえにする（中央そろえだと入口の質問が図の縦の中ほどに沈み、「ここから」から離れるため）。
        線は箱の上から --gf-y の高さでつなぐ */
-    .gf { --gf-s: 64px; --gf-y: 30px; --gf-gap: 14px; }
+    .gf { --gf-s: 80px; --gf-y: 30px; --gf-gap: 14px; }
     .gf-node { display: flex; align-items: flex-start; }
     /* 箱の幅は文字の倍率に合わせて広げるが、206px で止める（文字サイズ「大」でも横に収めるため） */
     .gf-box { flex: none; width: min(calc(196px * var(--pl-fs)), 206px); }
@@ -269,28 +269,21 @@ const isResult = (n: Node): n is Result => 'href' in n;
     }
 
     /* 道筋を目立たせる（PCのみ）。:hover は、乗せた項目を含む枝（入口からそこまで）のすべての li に掛かる。
-       その枝の箱を濃い枠で囲み、入口からそこまでの線を太くする（色は はい／いいえ のまま。灰色の線は濃くする）。
+       その枝の箱を濃い枠で囲み、入口からそこまでの線を濃い色にする（太さは変えない）。
        縦の線は、乗せた子より上の兄弟の「次の子までの縦線」だけ。ほかの道筋は薄くしない */
     @media (hover: hover) and (pointer: fine) {
       .gf-node:hover > .gf-box { border-color: var(--gf-on); box-shadow: var(--gf-glass), 0 0 0 2px var(--gf-on); }
       .gf-node:hover > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), var(--gf-glass), 0 0 0 2px var(--gf-on); }
-      .gf-node:hover > .gf-kids:has(> .gf-node:hover)::before { --gf-w: 9px; background: var(--ink); }
-      .gf-kids > .gf-node:hover::before { --gf-w: 9px; }
-      .gf-kids > .gf-node:not(.gf-yes, .gf-no):hover::before { background: var(--ink); }
-      /* 上の兄弟の「次の子までの縦線」は、乗せた子へ向かう線なので、乗せた子の答えの色にする（灰色の枝なら濃い色） */
-      .gf-kids > .gf-node:has(~ .gf-node:hover)::after { --gf-w: 9px; background: var(--ink); }
-      .gf-kids > .gf-node:has(~ .gf-yes:hover)::after { background: var(--gf-yes); }
-      .gf-kids > .gf-node:has(~ .gf-no:hover)::after { background: var(--gf-no); }
+      .gf-node:hover > .gf-kids:has(> .gf-node:hover)::before,
+      .gf-kids > .gf-node:hover::before,
+      .gf-kids > .gf-node:has(~ .gf-node:hover)::after { background: var(--gf-on); }
     }
     /* キーボードで選んだときも同じ道筋を目立たせる（マウスのない環境でも同じ情報を得られるように） */
     .gf-node:has(:focus-visible) > .gf-box { border-color: var(--gf-on); box-shadow: var(--gf-glass), 0 0 0 2px var(--gf-on); }
     .gf-node:has(:focus-visible) > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), var(--gf-glass), 0 0 0 2px var(--gf-on); }
-    .gf-node:has(:focus-visible) > .gf-kids::before { --gf-w: 9px; background: var(--ink); }
-    .gf-kids > .gf-node:has(:focus-visible)::before { --gf-w: 9px; }
-    .gf-kids > .gf-node:not(.gf-yes, .gf-no):has(:focus-visible)::before { background: var(--ink); }
-    .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { --gf-w: 9px; background: var(--ink); }
-    .gf-kids > .gf-node:has(~ .gf-yes :focus-visible)::after { background: var(--gf-yes); }
-    .gf-kids > .gf-node:has(~ .gf-no :focus-visible)::after { background: var(--gf-no); }
+    .gf-node:has(:focus-visible) > .gf-kids::before,
+    .gf-kids > .gf-node:has(:focus-visible)::before,
+    .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { background: var(--gf-on); }
   }
 
   @media (prefers-reduced-motion: reduce) {
