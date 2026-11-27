@@ -12,8 +12,10 @@
 import { routes } from '../../data/plumeria';
 
 type Kind = 'stay' | 'home' | 'talk' | 'med';
-type Result = { answer: string; name: string; sub: string; href: string; id: string; kind: Kind };
-type Question = { answer?: string; q: string; note?: string; children: Node[] };
+// answer：線の上に乗せる「はい／いいえ」（色で区別）。choice：はい・いいえで言えない選び方の答えで、箱の1行目に札で出す
+type YN = 'はい' | 'いいえ';
+type Result = { answer?: YN; choice?: string; name: string; sub: string; href: string; id: string; kind: Kind };
+type Question = { answer?: YN; choice?: string; q: string; note?: string; children: Node[] };
 type Node = Result | Question;
 
 const tree: Question = {
@@ -28,9 +30,10 @@ const tree: Question = {
         { answer: 'はい', name: 'プルメリアⅡ', sub: '住まい｜介護対応型（要介護1以上）', href: routes.housingUnit('2'), id: 'housing', kind: 'stay' },
       ],
     },
-    { answer: 'しばらくの間だけ泊まりたい', name: 'ショートステイ', sub: 'プルメリアⅢ｜ご家族が休む間などに', href: routes.shortStay, id: 'short-stay', kind: 'stay' },
+    { choice: 'しばらくの間だけ泊まりたい', name: 'ショートステイ', sub: 'プルメリアⅢ｜ご家族が休む間などに', href: routes.shortStay, id: 'short-stay', kind: 'stay' },
     {
-      answer: 'いいえ、自宅で暮らしたい',
+      answer: 'いいえ',
+      choice: '自宅で暮らしたい',
       q: '看護師による体調の確認や処置が必要ですか？',
       children: [
         { answer: 'はい', name: '訪問看護', sub: '看護師がご自宅で体調を確認', href: routes.homeNursing, id: 'home-nursing', kind: 'med' },
@@ -38,8 +41,8 @@ const tree: Question = {
           answer: 'いいえ',
           q: 'どんな手助けがほしいですか？',
           children: [
-            { answer: '入浴・食事・家事の手伝い', name: '訪問介護', sub: 'ヘルパーがご自宅で手伝います', href: routes.homeCare, id: 'home-care', kind: 'home' },
-            { answer: '歩行器・介護ベッドなどの道具', name: '福祉用具', sub: '選び方と借り方のご相談', href: routes.welfareEquipment, id: 'welfare-equipment', kind: 'home' },
+            { choice: '入浴・食事・家事の手伝い', name: '訪問介護', sub: 'ヘルパーがご自宅で手伝います', href: routes.homeCare, id: 'home-care', kind: 'home' },
+            { choice: '歩行器・介護ベッドなどの道具', name: '福祉用具', sub: '選び方と借り方のご相談', href: routes.welfareEquipment, id: 'welfare-equipment', kind: 'home' },
           ],
         },
       ],
@@ -52,7 +55,6 @@ const isResult = (n: Node): n is Result => 'href' in n;
 <section class="pl-sec pl-sec-tight gf-sec" id="guide">
   <div class="pl-wrap">
     <h2 class="pl-h2">生活スタイルから選ぶ</h2>
-    <p class="pl-sec-lead">「ここから」の質問に答えながら、線をたどってください。</p>
 
     <div class="gf">
       <a class="gf-consult gj-talk" href={routes.careManagement} data-pl-gtag="service_select" data-pl-service="care-management" data-pl-cta="guide_journey">
@@ -67,16 +69,17 @@ const isResult = (n: Node): n is Result => 'href' in n;
           {(() => {
             // 入れ子の箇条書きを再帰で組み立てる。結果はサービスへのリンク、質問はその下に答えごとの枝を持つ
             const render = (n: Node, depth: number): any => (
-              <li class="gf-node">
+              <li class={`gf-node${n.answer === 'はい' ? ' gf-yes' : n.answer === 'いいえ' ? ' gf-no' : ''}`}>
+                {n.answer && <span class="gf-yn">{n.answer}</span>}
                 {isResult(n) ? (
                   <a class={`gf-box gf-res gj-${n.kind}`} href={n.href} data-pl-gtag="service_select" data-pl-service={n.id} data-pl-cta="guide_journey">
-                    {n.answer && <span class="gf-ans">{n.answer}</span>}
+                    {n.choice && <span class="gf-ans">{n.choice}</span>}
                     <strong>{n.name}</strong>
                     <span class="gf-sub">{n.sub}</span>
                   </a>
                 ) : (
                   <div class={`gf-box gf-q${depth === 0 ? ' gf-q-root' : ''}`}>
-                    {n.answer && <span class="gf-ans">{n.answer}</span>}
+                    {n.choice && <span class="gf-ans">{n.choice}</span>}
                     <strong>{n.q}</strong>
                     {n.note && <span class="gf-sub">{n.note}</span>}
                   </div>
@@ -125,15 +128,16 @@ const isResult = (n: Node): n is Result => 'href' in n;
     background: var(--green-deep); color: #fff; font-size: calc(14px * var(--pl-fs)); font-weight: 700; line-height: 1.7;
   }
 
-  /* 箱：質問は白地＋線、結果は色の淡い地。答えは箱の1行目に小さな札で出す */
+  /* 箱：質問は白地＋線、結果は色の淡い地。はい・いいえで言えない答え（choice）は箱の1行目に小さな札で出す */
   .gf-box {
     position: relative; display: grid; gap: 2px; align-content: center;
     padding: 10px 14px; border: 1.5px solid var(--line); background: var(--surface);
     color: var(--ink); text-decoration: none; line-height: 1.55;
     transition: border-color 0.2s, box-shadow 0.2s;
   }
-  .gf-box strong { font-size: calc(16px * var(--pl-fs)); }
-  .gf-q-root strong { font-size: calc(18px * var(--pl-fs)); }
+  .gf-box strong { font-size: calc(16px * var(--pl-fs)); text-wrap: balance; }
+  /* 入口の質問は「住まいを移って／暮らしたいですか？」の2行に収まる大きさにする（18pxだと「か？」だけが3行目に落ちた） */
+  .gf-q-root strong { font-size: calc(17px * var(--pl-fs)); }
   .gf-q { border-color: color-mix(in srgb, var(--ink) 45%, transparent); }
   .gf-sub { font-size: calc(13px * var(--pl-fs)); color: var(--muted); }
   .gf-res {
@@ -183,59 +187,105 @@ const isResult = (n: Node): n is Result => 'href' in n;
   }
   .gf :is(a):focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
 
-  /* ── 狭い幅（1199px以下）：字下げの一覧。左の線で親子をつなぐ ── */
-  .gf-tree, .gf-kids { display: grid; gap: 10px; }
-  .gf-kids { margin: 10px 0 0 14px; padding-left: 18px; border-left: 2px solid color-mix(in srgb, var(--ink) 25%, transparent); }
-  .gf-kids > .gf-node { position: relative; }
-  .gf-kids > .gf-node::before {
-    content: ''; position: absolute; left: -18px; top: 24px; width: 14px; border-top: 2px solid color-mix(in srgb, var(--ink) 25%, transparent);
+  /* ── 線と「はい／いいえ」（ボス指示 2026-11-27：区別しやすく、線を太く、線の上に色と文字を乗せる）──
+     線の太さは --gf-w。はいの枝はターコイズ、いいえの枝は焼けたオレンジ、どちらでもない枝は灰色。
+     札（.gf-yn）は子への横の線の真ん中に乗せる。色だけに頼らず、必ず「はい」「いいえ」の文字を出す。
+     白い文字との比：はい #137792 は 5.2:1、いいえ #b3541b は約 5.0:1（計算値）。
+     線の組み立て（各子 li に対して）：
+       ::before ＝ 背骨から自分への横の線。色はその子の答えの色。
+       ::after  ＝ 自分の高さから次の子の高さまでの縦線（最後の子以外）。色は次の子の答えの色。
+       縦線を「次の子の高さまで」1本で引くと、目立たせるときに途中の兄弟の中で線の色が切れない。
+     --gf-s は背骨から箱までの横の線の長さ、--gf-y は箱の上から線までの高さ、--gf-t0 は ::before の上端、--gf-gap は兄弟の間 */
+  .gf {
+    --gf-w: 6px;
+    --gf-yes: #137792;
+    --gf-no: #b3541b;
+    --gf-line: color-mix(in srgb, var(--ink) 32%, transparent);
+    --gf-on: var(--green-deep);
+    --gf-s: 60px; --gf-y: 26px; --gf-t0: -10px; --gf-gap: 10px;
+  }
+  .gf-node { --gf-c: var(--gf-line); }
+  .gf-yes { --gf-c: var(--gf-yes); }
+  .gf-no { --gf-c: var(--gf-no); }
+  .gf-yn {
+    position: absolute; z-index: 1; left: calc(var(--gf-s) / -2); top: var(--gf-y); transform: translate(-50%, -50%);
+    padding: 0 8px; border-radius: 4px; background: var(--gf-c); color: #fff;
+    font-size: calc(13px * var(--pl-fs)); font-weight: 700; line-height: 1.6; white-space: nowrap;
+    box-shadow: 0 0 0 2px var(--surface);  /* 線との境目を白で縁取り、札を線から浮かせる */
   }
 
+  /* ── 狭い幅（1199px以下）：字下げの一覧。左の背骨から各箱へ横の線を出し、その上に札を乗せる ── */
+  .gf-tree, .gf-kids { display: grid; gap: var(--gf-gap); }
+  .gf-kids { margin: 10px 0 0 14px; padding-left: var(--gf-s); }
+  .gf-kids > .gf-node { position: relative; }
+  /* 線の位置は枠線の太さ込みで計算している。サイト全体の box-sizing: border-box は ::before / ::after に掛からないため、
+     ここで指定する（指定がないと横の線が枠線の太さ分だけ下にずれ、親からの線と段差ができる） */
+  .gf-kids > .gf-node::before, .gf-kids > .gf-node::after, .gf-kids::before { box-sizing: border-box; }
+  .gf-kids > .gf-node::before {
+    content: ''; position: absolute; pointer-events: none;
+    left: calc(-1 * var(--gf-s) - var(--gf-w) / 2); width: calc(var(--gf-s) + var(--gf-w) / 2);
+    top: var(--gf-t0); height: calc(var(--gf-y) - var(--gf-t0) + var(--gf-w) / 2);
+    border-bottom: var(--gf-w) solid var(--gf-c);
+  }
+  /* 狭い幅では親の箱が上にあるため、最初の子だけ親から下りてくる縦線を持つ */
+  .gf-kids > .gf-node:first-child::before { border-left: var(--gf-w) solid var(--gf-c); }
+  .gf-kids > .gf-node:not(:last-child)::after {
+    content: ''; position: absolute; pointer-events: none;
+    left: calc(-1 * var(--gf-s) - var(--gf-w) / 2);
+    top: calc(var(--gf-y) - var(--gf-w) / 2); bottom: calc(-1 * (var(--gf-gap) + var(--gf-y)) - var(--gf-w) / 2);
+    border-left: var(--gf-w) solid var(--gf-line);
+  }
+  .gf-kids > .gf-node:has(+ .gf-yes)::after { border-left-color: var(--gf-yes); }
+  .gf-kids > .gf-node:has(+ .gf-no)::after { border-left-color: var(--gf-no); }
+
   /* ── 広い幅：左から右へ広がる分岐図 ──
-     4段の箱（206px×文字倍率）と線で、文字サイズ「大」では約1140px になる。これが横に収まる 1200px 以上だけ図にする */
+     4段の箱（最大206px）と線（親から背骨まで18px＋背骨から箱まで64px）で、全体は約1070px になる。
+     これが横に収まる 1200px 以上だけ図にする */
   @media (min-width: 1200px) {
     .gf-consult { justify-self: end; margin-bottom: -6px; }
     /* 箱は上そろえにする（中央そろえだと入口の質問が図の縦の中ほどに沈み、「ここから」から離れるため）。
        線は箱の上から --gf-y の高さでつなぐ */
-    .gf { --gf-y: 30px; }
+    .gf { --gf-s: 64px; --gf-y: 30px; --gf-t0: 0px; --gf-gap: 14px; }
     .gf-node { display: flex; align-items: flex-start; }
-    .gf-box { flex: none; width: calc(206px * var(--pl-fs)); }
-    .gf-tree, .gf-kids { display: flex; flex-direction: column; gap: 14px; }
-    /* 親の箱から子の列へ：横の線（18px）→ 縦の背骨 → 子への横の線（18px） */
-    .gf-kids { position: relative; margin: 0; padding-left: 36px; border-left: 0; }
-    /* 子の横の線（::before の下の枠線）は箱の上から --gf-y の手前2pxに引かれるため、親からの線も2px上げてそろえる */
-    .gf-kids::before { content: ''; position: absolute; left: 0; top: calc(var(--gf-y) - 2px); width: 18px; border-top: 2px solid var(--gf-line); }
-    /* 各子の線は2つに分ける。
-       ::before ＝ 上から来る縦線（2番目以降の子だけ）＋子への横の線。
-       ::after  ＝ 次の子へ続く縦線（最後の子以外）。
-       こう分けると、目立たせるときに「入口からその子まで」の縦線だけを濃くできる */
-    .gf-kids > .gf-node::before {
-      left: -18px; top: 0; width: 16px; height: var(--gf-y);
-      border-top: 0; border-bottom: 2px solid var(--gf-line); border-left: 2px solid var(--gf-line);
+    /* 箱の幅は文字の倍率に合わせて広げるが、206px で止める（文字サイズ「大」でも横に収めるため） */
+    .gf-box { flex: none; width: min(calc(196px * var(--pl-fs)), 206px); }
+    .gf-tree, .gf-kids { display: flex; flex-direction: column; gap: var(--gf-gap); }
+    .gf-kids { position: relative; margin: 0; padding-left: calc(18px + var(--gf-s)); }
+    /* 親の箱から背骨までの横の線 */
+    .gf-kids::before {
+      content: ''; position: absolute; pointer-events: none; left: 0; top: calc(var(--gf-y) - var(--gf-w) / 2);
+      width: calc(18px + var(--gf-w) / 2); border-top: var(--gf-w) solid var(--gf-line);
     }
+    /* 最初の子は、親からの線と同じ高さで背骨に入るため、上から来る縦線は要らない */
     .gf-kids > .gf-node:first-child::before { border-left: 0; }
-    .gf-kids > .gf-node:not(:last-child)::after {
-      content: ''; position: absolute; left: -18px; top: var(--gf-y); bottom: -14px; border-left: 2px solid var(--gf-line);
-    }
-    .gf { --gf-line: color-mix(in srgb, var(--ink) 28%, transparent); }
 
     /* 道筋を目立たせる（PCのみ）。:hover は、乗せた項目を含む枝（入口からそこまで）のすべての li に掛かる。
-       その枝の箱と、入口からそこまでの線（横・縦）を濃くする。縦の線は、乗せた子より上の兄弟の「続きの縦線」と、
-       乗せた子自身の「上から来る縦線」だけを濃くする。ほかの道筋は薄くしない */
+       その枝の箱を濃い枠で囲み、入口からそこまでの線を太くする（色は はい／いいえ のまま。灰色の線は濃くする）。
+       縦の線は、乗せた子より上の兄弟の「次の子までの縦線」だけ。ほかの道筋は薄くしない */
     @media (hover: hover) and (pointer: fine) {
       .gf-node:hover > .gf-box { border-color: var(--gf-on); box-shadow: var(--gf-glass), 0 0 0 2px var(--gf-on); }
       .gf-node:hover > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), var(--gf-glass), 0 0 0 2px var(--gf-on); }
       .gf-node:hover > .gf-kids:has(> .gf-node:hover)::before,
       .gf-kids > .gf-node:hover::before,
-      .gf-kids > .gf-node:has(~ .gf-node:hover)::after { border-color: var(--gf-on); }
+      .gf-kids > .gf-node:has(~ .gf-node:hover)::after { --gf-w: 9px; }
+      .gf-node:hover > .gf-kids:has(> .gf-node:hover)::before { border-top-color: var(--ink); }
+      .gf-kids > .gf-node:not(.gf-yes, .gf-no):hover::before { border-color: var(--ink); }
+      /* 上の兄弟の「続きの縦線」は、乗せた子へ向かう線なので、乗せた子の答えの色にする（灰色の枝なら濃い色） */
+      .gf-kids > .gf-node:has(~ .gf-node:hover)::after { border-left-color: var(--ink); }
+      .gf-kids > .gf-node:has(~ .gf-yes:hover)::after { border-left-color: var(--gf-yes); }
+      .gf-kids > .gf-node:has(~ .gf-no:hover)::after { border-left-color: var(--gf-no); }
     }
     /* キーボードで選んだときも同じ道筋を目立たせる（マウスのない環境でも同じ情報を得られるように） */
     .gf-node:has(:focus-visible) > .gf-box { border-color: var(--gf-on); box-shadow: var(--gf-glass), 0 0 0 2px var(--gf-on); }
     .gf-node:has(:focus-visible) > .gf-res { box-shadow: inset 0 -4px 0 var(--kind), var(--gf-glass), 0 0 0 2px var(--gf-on); }
     .gf-node:has(:focus-visible) > .gf-kids::before,
     .gf-kids > .gf-node:has(:focus-visible)::before,
-    .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { border-color: var(--gf-on); }
-    .gf { --gf-on: var(--green-deep); }
+    .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { --gf-w: 9px; }
+    .gf-node:has(:focus-visible) > .gf-kids::before { border-top-color: var(--ink); }
+    .gf-kids > .gf-node:not(.gf-yes, .gf-no):has(:focus-visible)::before { border-color: var(--ink); }
+    .gf-kids > .gf-node:has(~ .gf-node :focus-visible)::after { border-left-color: var(--ink); }
+    .gf-kids > .gf-node:has(~ .gf-yes :focus-visible)::after { border-left-color: var(--gf-yes); }
+    .gf-kids > .gf-node:has(~ .gf-no :focus-visible)::after { border-left-color: var(--gf-no); }
   }
 
   @media (prefers-reduced-motion: reduce) {
